@@ -1,9 +1,9 @@
 //-----------------------------------------------------------------------------
-// wxd/Samples - Minimal.d
+// wxD/Samples - Minimal.d
 // based on
-// NET/Samples - Minimal.cs
+// wx.NET/Samples - Minimal.cs
 //
-// A NET version of the wxWidgets "minimal" sample.
+// A wx.NET version of the wxWidgets "minimal" sample.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
@@ -16,7 +16,7 @@ import wx.wx;
 
 	public class MyFrame : Frame
 	{
-		enum Cmd { About, Quit, Dialog }
+		enum Cmd { About = 1, Quit = 2, Dialog = 3 }
 
 		//---------------------------------------------------------------------
 
@@ -30,7 +30,7 @@ import wx.wx;
 			// Set up a menu
 
 			Menu fileMenu = new Menu();
-			//fileMenu.Append(Cmd.Dialog, "&Show dialog\tAlt-D", "Show test dialog");
+			fileMenu.Append(Cmd.Dialog, "&Show dialog\tAlt-D", "Show test dialog");
 			fileMenu.Append(Cmd.Quit, "E&xit\tAlt-X", "Quit this program");
 
 			Menu helpMenu = new Menu();
@@ -92,7 +92,7 @@ import wx.wx;
 
 		public void OnAbout(Object sender, Event e)
 		{
-			string msg = "This is the About dialog of the minimal sample.";
+			string msg = "This is the About dialog of the minimal sample.\nWelcome to " ~ wxVERSION_STRING;
 			MessageBox(this, msg, "About Minimal", Dialog.wxOK | Dialog.wxICON_INFORMATION);
 		}
 

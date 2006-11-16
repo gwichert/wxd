@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - window.cxx
+// wxD - window.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - window.cxx
@@ -28,13 +28,21 @@ int wxWindow_EVT_TRANSFERDATAFROMWINDOW()
     return wxEVT_TRANSFERDATAFROMWINDOW;
 }
 
+DEFINE_EVENT_TYPE(wxEVT_TRANSFERDATATOWINDOW)
+
+extern "C" WXEXPORT
+int wxWindow_EVT_TRANSFERDATATOWINDOW()
+{
+    return wxEVT_TRANSFERDATATOWINDOW;
+}
+
 //-----------------------------------------------------------------------------
 // The proxy class
 
 class _Window : public wxWindow
 {
 public:
-	_Window(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style, const wxString& name)
+	_Window(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style, const wxChar* name)
 		: wxWindow(parent, id, pos, size, style, name)
 	{
 	}
@@ -47,7 +55,6 @@ public:
 //-----------------------------------------------------------------------------
 // C stubs for class methods
 
-#include <string.h>
 extern "C" WXEXPORT
 wxWindow* wxWindow_ctor(wxWindow *parent, wxWindowID id, const wxPoint* pos,
 					const wxSize* size, int style, dstr name)
@@ -59,7 +66,7 @@ wxWindow* wxWindow_ctor(wxWindow *parent, wxWindowID id, const wxPoint* pos,
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr(wxPanelNameStr,strlen(wxPanelNameStr));
+		name = dstr(wxPanelNameStr);
 
 	return new _Window(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
 }

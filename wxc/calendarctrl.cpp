@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - calendarctrl.cxx
+// wxD - calendarctrl.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - calendarctrl.cxx
@@ -49,7 +49,7 @@ bool wxCalendarCtrl_Create(wxCalendarCtrl* self, wxWindow* parent, wxWindowID id
 		size = &wxDefaultSize;
 
     if (name.data==NULL)
-        name = dstr("calendarCtrl",sizeof("calendarCtrl")-1);
+        name = dstr("calendarCtrl");
 
     return self->Create(parent, id, *date, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }

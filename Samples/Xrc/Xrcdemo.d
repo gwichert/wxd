@@ -265,7 +265,8 @@ import wx.wx;
 		
 		public void SetColumnWidths()
 		{
-			int leftmostColumnWidth = Size.Width;
+			//int leftmostColumnWidth = Size.Width;
+			int leftmostColumnWidth = Width;
 			
 			leftmostColumnWidth -= GetColumnWidth( COL.ACTION_COLUMN );
 			leftmostColumnWidth -= GetColumnWidth( COL.PRIORITY_COLUMN );

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - ncpaintevent.cxx
+// wxD - ncpaintevent.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - ncpaintevent.cxx

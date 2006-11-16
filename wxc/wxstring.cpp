@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - wxstring.cxx
+// wxD - wxstring.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - wxstring.cxx
@@ -18,14 +18,13 @@
 class _wxString : public wxString
 {
 public:
-    _wxString(const char* psz, wxMBConv& conv)
+    _wxString(const char *psz, wxMBConv& conv)
         : wxString(psz, conv) { }
     _wxString(const char* psz, wxMBConv& conv,size_t length)
         : wxString(psz, conv, length) { }
 };
 
 //-----------------------------------------------------------------------------
-
 
 extern "C" WXEXPORT
 wxString* wxString_ctor(const char* str)
@@ -50,9 +49,13 @@ void wxString_dtor(wxString *self)
 
 /*
 extern "C" WXEXPORT
-dstrret wxString_mb_str(wxString* self)
+const char* wxString_mb_str(wxString* self)
 {
-	return dstr_ret((const char*)self->mb_str(wxConvUTF8),self->length());
+#if wxUSE_UNICODE
+	return self->mb_str(wxConvUTF8).data();
+#else // ANSI
+	return self->data();
+#endif
 }
 */
 
@@ -77,7 +80,11 @@ int wxString_CharAtInt(wxString* self, size_t i)
 extern "C" WXEXPORT
 const char* wxString_c_str(wxString* self, size_t i)
 {
-	return self->c_str();
+#if wxUSE_UNICODE
+	return self->mb_str(wxConvUTF8).data();
+#else // ANSI
+	return self->data();
+#endif
 }
 
 extern "C" WXEXPORT

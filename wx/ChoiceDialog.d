@@ -1,11 +1,13 @@
 //-----------------------------------------------------------------------------
 // wxD - ChoiceDialog.d
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
+// wx.NET - ChoiceDialog.cs
 //
 // The wxChoiceDialog wrapper classes.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2003 Alexander Olk
-// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$

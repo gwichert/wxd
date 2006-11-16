@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - boxsizer.cxx
+// wxD - boxsizer.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - boxsizer.cxx

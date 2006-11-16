@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - windowcreateevent.cxx
+// wxD - windowcreateevent.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - windowcreateevent.cxx

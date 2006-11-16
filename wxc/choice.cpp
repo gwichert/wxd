@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - choice.cxx
+// wxD - choice.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - choice.cxx
@@ -51,7 +51,7 @@ bool wxChoice_Create(wxChoice* self, wxWindow* parent, int id, const wxPoint* po
         validator = &wxDefaultValidator;
 
     if (name.data==NULL)
-        name = dstr("choice",sizeof("choice")-1);
+        name = dstr("choice");
 
     wxString* strings = new wxString[n];
     for (i = 0; i < n; ++i)

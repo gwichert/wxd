@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - SizerItem.cs
+// wxD - SizerItem.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - SizerItem.cs
@@ -9,6 +9,8 @@
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
+//
+// $Id$
 //-----------------------------------------------------------------------------
 
 module wx.SizerItem;
@@ -26,7 +28,7 @@ import wx.Window;
         static extern (C) void   wxSizerItem_SetDimension(IntPtr self, inout Point pos, inout Size size);
         static extern (C) void   wxSizerItem_GetMinSize(IntPtr self, inout Size size);
         static extern (C) void   wxSizerItem_SetInitSize(IntPtr self, int x, int y);
-        static extern (C) void   wxSizerItem_SetRatioSize(IntPtr self, int width, int height);
+        static extern (C) void   wxSizerItem_SetRatio(IntPtr self, int width, int height);
         static extern (C) void   wxSizerItem_SetRatioFloat(IntPtr self, float ratio);
         static extern (C) float  wxSizerItem_GetRatioFloat(IntPtr self);
         static extern (C) bool   wxSizerItem_IsWindow(IntPtr self);
@@ -126,7 +128,7 @@ import wx.Window;
        
         public void SetRatio(int width, int height)
         {
-            wxSizerItem_SetRatioSize(wxobj, width, height);
+            wxSizerItem_SetRatio(wxobj, width, height);
         }
 
         public void Ratio(float value) { wxSizerItem_SetRatioFloat(wxobj, value); }

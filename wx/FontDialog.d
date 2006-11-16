@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - Fontdlg.cs
+// wxD - FontDialog.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - Fontdlg.cs

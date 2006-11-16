@@ -205,7 +205,7 @@ alias std.string.find indexOf;
 				m_notebook.Images = m_imageList;
 			}
 			
-			if ( notebook !== null )
+			if ( notebook )
 			{
 				int sel = notebook.Selection;
 				
@@ -219,7 +219,7 @@ alias std.string.find indexOf;
 					m_notebook.AddPage( page, str, false, m_notebook.IconIndex );
 				}
 				
-				if ( m_sizerNotebook !== null )
+				if ( m_sizerNotebook )
 				{
 					m_sizerTop.Remove( m_sizerNotebook );
 				}
@@ -430,7 +430,7 @@ alias std.string.find indexOf;
 		
 		public int IconIndex()
 		{
-				if ( Images !== null )
+				if ( Images )
 				{
 					int nImages = Images.ImageCount;
 					if ( nImages > 0 )

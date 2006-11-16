@@ -1,8 +1,8 @@
 //-----------------------------------------------------------------------------
-// wxD - scrolbar.h
+// wxD - scrollbar.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
-// wx.NET - scrolbar.h
+// wx.NET - scrollbar.cxx
 // 
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
@@ -45,7 +45,7 @@ bool wxScrollBar_Create(wxScrollBar* self, wxWindow* parent, wxWindowID id, cons
 		validator = &wxDefaultValidator;
 
 	if (name.data==NULL)
-		name = dstr("scrollbar",sizeof("scrollbar")-1);
+		name = dstr("scrollbar");
 		
     return self->Create(parent, id, *pos, *size, style, *validator, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }

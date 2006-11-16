@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - ListBox.cs
+// wxD - ListBox.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - ListBox.cs
@@ -17,6 +17,9 @@ module wx.ListBox;
 import wx.common;
 import wx.Control;
 import wx.ClientData;
+
+// this is bogus, but better than nothing
+version (darwin) { version = __WXMAC__; }
 
 		static extern (C) IntPtr wxListBox_ctor();
 		static extern (C) void   wxListBox_dtor(IntPtr self);

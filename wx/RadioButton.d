@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - RadioButton.cs
+// wxD - RadioButton.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - RadioButton.cs

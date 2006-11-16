@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - staticline.cxx
+// wxD - staticline.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - staticline.cxx
@@ -48,7 +48,7 @@ bool wxStaticLine_Create(wxStaticLine *self, wxWindow* parent, wxWindowID id, co
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("staticLine",sizeof("staticLine")-1);
+		name = dstr("staticLine");
 
 	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }

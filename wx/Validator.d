@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - Validator.cs
+// wxD - Validator.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - Validator.cs

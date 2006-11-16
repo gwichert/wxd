@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - tabctrl.cxx
+// wxD - tabctrl.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - tabctrl.cxx
@@ -53,7 +53,7 @@ wxTabCtrl* wxTabCtrl_ctor2(wxWindow *parent, wxWindowID id, const wxPoint* pos, 
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("tabctrl",sizeof("tabctrl")-1);
+		name = dstr("tabctrl");
 
 	return new _TabCtrl(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
 }
@@ -71,7 +71,7 @@ bool wxTabCtrl_Create(wxTabCtrl* self, wxWindow *parent, wxWindowID id, const wx
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("tabctrl",sizeof("tabctrl")-1);
+		name = dstr("tabctrl");
 
 	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - DateTime.cs
+// wxD - DateTime.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - DateTime.cs

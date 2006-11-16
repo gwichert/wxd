@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - slider.cxx
+// wxD - slider.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - slider.cxx
@@ -46,7 +46,7 @@ bool wxSlider_Create(wxSlider* self, wxWindow *parent, wxWindowID id, int value,
 		size = &wxDefaultSize;
 		
 	if (name.data==NULL)
-		name = dstr("slider",sizeof("slider")-1);
+		name = dstr("slider");
 
 	if (validator == NULL)
 	{

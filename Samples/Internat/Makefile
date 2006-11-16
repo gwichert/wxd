@@ -1,6 +1,6 @@
 NAME=Internat
 OBJECTS=$(NAME).obj
-TARGET=..\$(NAME).exe
+TARGET=..\..\bin\$(NAME).exe
 TOPDIR=..\..
 DFLAGS=-g
 

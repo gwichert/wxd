@@ -1,11 +1,11 @@
 # from samples
 
-#include $(WXDIR)/build/msw/config.dmc
+include $(WXDIR)/build/msw/config.dmc
 CXX = dmc
 DMD = dmd
 DFLAGS =$(DFLAGS) -I$(TOPDIR) -g
 
-WX_RELEASE_NODOT = 25
+WX_RELEASE_NODOT = 26
 OBJS = dmc_mswd$(CFG)
 LIBDIRNAME = $(WXDIR)\lib\dmc_lib$(CFG)
 SETUPHDIR = $(LIBDIRNAME)\mswd
@@ -17,7 +17,7 @@ CXXFLAGS = -g -o+none -D__WXMSW__ -D__WXDEBUG__ -I$(WXDIR)\include \
 	$(CXX) -mn -c $(CXXFLAGS) $< -o$@
 
 .d.obj:
-	dmd -c $(DFLAGS) $<
+	$(DMD) -c $(DFLAGS) $<
 
 WXLIBS = \
 	$(LIBDIRNAME)\wxbase$(WX_RELEASE_NODOT)d$(WX_LIB_FLAVOUR).lib \

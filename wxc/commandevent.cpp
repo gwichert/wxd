@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - commandevent.cxx
+// wxD - commandevent.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - commandevent.cxx

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - MDI.cs
+// wxD - MDI.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - MDI.cs

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - Dnd.cs
+// wxD - Dnd.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - Dnd.cs

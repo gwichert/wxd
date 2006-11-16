@@ -1,5 +1,3 @@
-DFLAGS=-I..
-
 LIBTARGET = ..\wxd.lib
 
 OBJECTS = \
@@ -147,28 +145,36 @@ OBJECTS = \
 	WindowCreateEvent.obj \
 	WindowDestroyEvent.obj \
 	Wizard.obj \
+	WizardPage.obj \
+	WizardPageSimple.obj \
 	wxDateTime.obj \
 	wxObject.obj \
 	wxString.obj \
+	wxVersion.obj \
 	Grid.obj \
 	GridCtrl.obj \
 	common.obj \
 	NumberDialog.obj \
 	ArrayInt.obj \
 	ArrayString.obj \
-	NotifyEvent.obj \
 	XmlResource.obj \
-
+	
 #	DbGrid.obj \
+#	NotifyEvent.obj \
+
+DMD=dmd
+
+DFLAGS=-I..
 
 $(LIBTARGET): $(OBJECTS)
 	lib -p512 -c -n $@ $(OBJECTS)
 
-.d.obj:
-	dmd -c $(DFLAGS) $<
 
+.d.obj:
+	$(DMD) -c $(DFLAGS) $<
 
 clean:
 	-del *.obj
 	-del $(LIBTARGET)
+
 

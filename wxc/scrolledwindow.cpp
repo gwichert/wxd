@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - scrolledwindow.cxx
+// wxD - scrolledwindow.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - scrolledwindow.cxx
@@ -28,6 +28,8 @@ public:
 		: wxScrolledWindow(parent, id, pos, size, style, name) { }
 
     DECLARE_OBJECTDELETED(_ScrolledWindow)
+    
+#include "panel.inc"
 };
 
 //-----------------------------------------------------------------------------
@@ -44,7 +46,7 @@ wxScrolledWindow* wxScrollWnd_ctor(wxWindow *parent, wxWindowID id, const wxPoin
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("scrolled",sizeof("scrolled")-1);
+		name = dstr("scrolled");
 
 	return new _ScrolledWindow(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
 }

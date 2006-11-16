@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - splitterwindow.cxx
+// wxD - splitterwindow.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - splitterwindow.cxx
@@ -63,7 +63,6 @@ public:
 //-----------------------------------------------------------------------------
 // C stubs for class methods
 
-#include <string.h> //for strlen
 extern "C" WXEXPORT
 wxSplitterWindow* wxSplitWnd_ctor(wxWindow *parent, wxWindowID id, const wxPoint* pos,
 					const wxSize* size, long style, dstr name)
@@ -74,8 +73,8 @@ wxSplitterWindow* wxSplitWnd_ctor(wxWindow *parent, wxWindowID id, const wxPoint
 	if (size == NULL)
 		size = &wxDefaultSize;
 
-	if (name.data == NULL)
-		name = dstr(wxPanelNameStr,strlen(wxPanelNameStr));
+	if (name.data==NULL)
+		name = dstr(wxPanelNameStr);
 
 	return new _SplitterWindow(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
 }

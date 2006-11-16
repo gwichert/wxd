@@ -1,6 +1,0 @@
-NAME=ListCtrl
-OBJECTS=$(NAME).o
-TARGET=../../bin/$(NAME)
-TOPDIR=../..
-
-include $(TOPDIR)/config.linux

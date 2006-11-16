@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - xmlresource.cxx
+// wxD - xmlresource.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - xmlresource.cxx
@@ -17,6 +17,7 @@
 #include "common.h"
 #include <wx/xrc/xmlres.h>
 #include <wx/fontenum.h>
+#include <wx/fs_mem.h>
 #include "local_events.h"
 
 //-----------------------------------------------------------------------------
@@ -30,7 +31,7 @@ public:
     XmlSubclassFactoryCS() { }
 
     wxObject *Create(const wxString& className)
-        { return m_create(className); }
+        { return m_create(dstr(className)); }
 
     void RegisterVirtual(XmlSubclassCreate create)
         { m_create = create; }
@@ -75,6 +76,19 @@ extern "C" WXEXPORT
 bool wxXmlResource_Load(wxXmlResource* self, dstr filemask)
 {
 	return self->Load(wxString(filemask.data, wxConvUTF8, filemask.length))?1:0;
+}
+
+//-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT
+bool wxXmlResource_LoadFromByteArray(wxXmlResource* self, dstr filemask, char* data, size_t length)
+{
+	wxFileSystem::AddHandler(new wxMemoryFSHandler());
+	wxMemoryFSHandler::AddFile(wxString(filemask.data, wxConvUTF8, filemask.length), data, length);
+
+	wxString mem_name = wxString("memory:", wxConvUTF8) + wxString(filemask.data, wxConvUTF8, filemask.length) ;
+
+	return self->Load(mem_name)?1:0;
 }
 
 //-----------------------------------------------------------------------------

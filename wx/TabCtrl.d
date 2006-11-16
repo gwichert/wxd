@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - TabCtrl.cs
+// wxD - TabCtrl.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - TabCtrl.cs

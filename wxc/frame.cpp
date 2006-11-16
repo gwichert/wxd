@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - frame.cxx
+// wxD - frame.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - frame.cxx
@@ -23,6 +23,8 @@ class _Frame : public wxFrame
 {
 public:
     DECLARE_OBJECTDELETED(_Frame)
+    
+#include "panel.inc"
 };
 
 //-----------------------------------------------------------------------------
@@ -136,7 +138,7 @@ extern "C" WXEXPORT
 wxToolBar* wxFrame_CreateToolBar(wxFrame* self, unsigned int style, wxWindowID id, dstr name)
 {
     if (name.data==NULL)
-        name = dstr("toolBar",sizeof("toolBar")-1);
+        name = dstr("toolBar");
 
     return self->CreateToolBar(style, id, wxString(name.data, wxConvUTF8, name.length));
 }

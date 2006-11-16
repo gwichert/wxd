@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - styledtextctrl.h
+// wxD - styledtextctrl.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - styledtextctrl.h
@@ -70,7 +70,7 @@ extern "C" WXEXPORT
 wxStyledTextCtrl* wxStyledTextCtrl_ctor(wxWindow* parent, wxWindowID id, wxPoint* pos, wxSize* size, long style, dstr name)
 {
     if (name.data==NULL)
-        name = dstr("styledtextctrl",sizeof("styledtextctrl")-1);
+        name = dstr("styledtextctrl");
 
     return new _StyledTextCtrl(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
 }
@@ -1977,7 +1977,7 @@ bool wxStyledTextCtrl_GetUseVerticalScrollBar(wxStyledTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_AppendText(wxStyledTextCtrl* self, int length, dstr text)
+void wxStyledTextCtrl_AppendText(wxStyledTextCtrl* self, dstr text)
 {
     self->AppendText(length, wxString(text.data, wxConvUTF8, text.length));
 }

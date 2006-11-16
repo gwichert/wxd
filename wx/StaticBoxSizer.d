@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - StaticBoxSizer.cs
+// wxD - StaticBoxSizer.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - StaticBoxSizer.cs

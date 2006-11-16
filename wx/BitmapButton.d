@@ -1,11 +1,13 @@
 //-----------------------------------------------------------------------------
 // wxD - BitmapButton.d
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
+// wx.NET - BitMapButton.cs
 //
 // The wxBitmapButton wrapper class.
 //
 // Written by Robert Roebling
 // (C) 2003 Robert Roebling
-// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
@@ -46,8 +48,12 @@ import wx.Control;
 		
 		static extern (C) void wxBitmapButton_OnSetBitmap(IntPtr self);
 		
-		static extern (C) void wxBitmapButton_ApplyParentThemeBackground(IntPtr self, IntPtr colour);
+		//static extern (C) void wxBitmapButton_ApplyParentThemeBackground(IntPtr self, IntPtr colour);
 
+		//---------------------------------------------------------------------
+		
+		public const int wxBU_AUTODRAW      =  0x0004;
+		
 		//---------------------------------------------------------------------
 		
 	public class BitmapButton : Control
@@ -177,8 +183,8 @@ import wx.Control;
 		
 		//---------------------------------------------------------------------
 		
-		public /+virtual+/ void ApplyParentThemeBackground(Colour bg)
+		/*public /+virtual+/ void ApplyParentThemeBackground(Colour bg)
 		{
 			wxBitmapButton_ApplyParentThemeBackground(wxobj, wxObject.SafePtr(bg));
-		}
+		}*/
 	}

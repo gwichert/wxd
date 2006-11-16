@@ -1,11 +1,13 @@
 //-----------------------------------------------------------------------------
-// wxD - Sizer.d
+// wxD - BoxSizer.d
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
+// wx.NET - BoxSizer.cs
 //
 // The wxBoxSizer wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
-// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$

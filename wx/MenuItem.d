@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - MenuItem.cs
+// wxD - MenuItem.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - MenuItem.cs

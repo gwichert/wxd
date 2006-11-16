@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - closeevent.cxx
+// wxD - closeevent.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - closeevent.cxx

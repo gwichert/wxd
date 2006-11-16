@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - radiobutton.cxx
+// wxD - radiobutton.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - radiobutton.cxx
@@ -52,7 +52,7 @@ bool wxRadioButton_Create(wxRadioButton* self, wxWindow* parent, int id,
 		val = &wxDefaultValidator;
 
 	if (name.data==NULL)
-		name = dstr("radioButton",sizeof("radioButton")-1);
+		name = dstr("radioButton");
 
 	return self->Create(parent, id, wxString(label.data, wxConvUTF8, label.length), *pos, *size, style,
 	                    *val, wxString(name.data, wxConvUTF8, name.length))?1:0;

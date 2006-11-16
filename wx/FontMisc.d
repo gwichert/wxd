@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - FontMapper.cs
+// wxD - FontMisc.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - FontMapper.cs

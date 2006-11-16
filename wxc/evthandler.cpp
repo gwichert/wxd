@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - evthandler.cxx
+// wxD - evthandler.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - evthandler.cxx
@@ -24,7 +24,7 @@ typedef void (CALLBACK* EventListener)(dobj obj,wxEvent* event, int iListener);
 //-----------------------------------------------------------------------------
 
 struct clientdata {
-	EventListener listner;
+	EventListener listener;
 	dobj obj;
 };
 
@@ -41,7 +41,7 @@ public:
 		wxProxyData* data = (wxProxyData*)event.m_callbackUserData;
 
 		clientdata *u = (clientdata*)GetClientData();
-		u->listner(u->obj,&event, data->iListener);
+		u->listener(u->obj,&event, data->iListener);
 	}
 };
 
@@ -60,7 +60,7 @@ void wxEvtHandler_Connect(wxEvtHandler* self, int evtType, int id, int lastId, i
 {
 	wxProxyData* data = new wxProxyData;
 	data->iListener = iListener;
-
+	
 	self->Connect(id, lastId, evtType, (wxObjectEventFunction)&wxEvtProxy::ForwardEvent, data);
 }
 

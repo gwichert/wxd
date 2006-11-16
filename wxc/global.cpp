@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - global.cxx
+// wxD - global.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - global.cxx

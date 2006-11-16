@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - event.cxx
+// wxD - event.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - event.cxx
@@ -159,10 +159,9 @@ extern "C" WXEXPORT int wxEvent_EVT_COMMAND_RIGHT_DCLICK()          { return wxE
 extern "C" WXEXPORT int wxEvent_EVT_COMMAND_SET_FOCUS()             { return wxEVT_COMMAND_SET_FOCUS; }
 extern "C" WXEXPORT int wxEvent_EVT_COMMAND_KILL_FOCUS()            { return wxEVT_COMMAND_KILL_FOCUS; }
 extern "C" WXEXPORT int wxEvent_EVT_COMMAND_ENTER()                 { return wxEVT_COMMAND_ENTER; }
-
 extern "C" WXEXPORT int wxEvent_EVT_HELP()                          { return wxEVT_HELP; }
 extern "C" WXEXPORT int wxEvent_EVT_DETAILED_HELP()                 { return wxEVT_DETAILED_HELP; }
-
+//extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TOGGLEBUTTON_CLICKED()  { return wxEVT_COMMAND_TOGGLEBUTTON_CLICKED; }
 extern "C" WXEXPORT int wxEvent_EVT_OBJECTDELETED()                 { return wxEVT_OBJECTDELETED; }
 
 

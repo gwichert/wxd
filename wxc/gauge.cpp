@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - gauge.cxx
+// wxD - gauge.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - gauge.cxx
@@ -57,7 +57,7 @@ bool wxGauge_Create(wxGauge* self, wxWindow *parent, wxWindowID id, int range, c
 		validator = &wxDefaultValidator;
 
 	if (name.data==NULL)
-		name = dstr("gauge",sizeof("gauge")-1);
+		name = dstr("gauge");
 
 	return self->Create(parent, id, range, *pos, *size, style, *validator, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }

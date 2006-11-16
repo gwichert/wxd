@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - mousecapturechangedevent.cxx
+// wxD - mousecapturechangedevent.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - mousecapturechangedevent.cxx

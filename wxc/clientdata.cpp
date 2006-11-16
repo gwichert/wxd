@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - clientdata.cxx
+// wxD - clientdata.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - clientdata.cxx

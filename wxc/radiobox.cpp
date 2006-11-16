@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - radiobox.cxx
+// wxD - radiobox.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - radiobox.cxx
@@ -53,7 +53,7 @@ bool wxRadioBox_Create(wxRadioBox* self, wxWindow* parent, int id, dstr label,
 		val = &wxDefaultValidator;
 
 	if (name.data==NULL)
-		name = dstr("radioBox",sizeof("radioBox")-1);
+		name = dstr("radioBox");
 
 	wxString* strings = new wxString[n];
 	for (i = 0; i < n; ++i)

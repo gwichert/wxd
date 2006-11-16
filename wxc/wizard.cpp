@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - wizard.cxx
+// wxD - wizard.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - wizard.cxx
@@ -83,7 +83,8 @@ public:
 extern "C" WXEXPORT
 wxWizardPageSimple* wxWizardPageSimple_ctor(wxWizard* parent, wxWizardPage* prev, wxWizardPage* next, const wxBitmap* bitmap, const char* resource)
 {
-	return new _WizardPageSimple(parent, prev, next, *bitmap, resource);
+	wxString wxresource = wxString(resource, wxConvUTF8);
+	return new _WizardPageSimple(parent, prev, next, *bitmap, wxresource.c_str());
 }
 
 //-----------------------------------------------------------------------------

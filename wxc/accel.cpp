@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - accel.cxx
+// wxD - accel.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - accel.cxx

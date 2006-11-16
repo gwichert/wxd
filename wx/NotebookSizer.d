@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - NotebookSizer.cs
+// wxD - NotebookSizer.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - NotebookSizer.cs

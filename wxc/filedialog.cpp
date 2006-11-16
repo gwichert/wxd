@@ -1,6 +1,7 @@
 //-----------------------------------------------------------------------------
-// wxD - filedialog.cxx
+// wxD - filedialog.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
+// (C) 2005 afb <afb.sourceforge.net>
 // based on
 // wx.NET - filedialog.cxx
 //
@@ -181,54 +182,82 @@ wxArrayString* wxFileDialog_GetFilenames(wxFileDialog* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxFileSelector_func(const char *message,
-               const char *default_path,
-               const char *default_filename,
-               const char *default_extension,
-               const char *wildcard,
+dstrret wxFileSelector_func(dstr message,
+               dstr default_path,
+               dstr default_filename,
+               dstr default_extension,
+               dstr wildcard,
                int flags,
                wxWindow *parent,
                int x, int y)
 {
-	if (message ==NULL) message =wxFileSelectorPromptStr;
-	if (wildcard==NULL) wildcard=wxFileSelectorDefaultWildcardStr;
-	return dstr_ret(wxFileSelector(message,default_path,default_filename,default_extension,wildcard,
-			flags,parent,x,y));
+	wxString wxmessage, wxwildcard;
+	if (message.data==NULL)
+		wxmessage = wxString(wxFileSelectorPromptStr);
+	else
+		wxmessage = wxString(message.data, wxConvUTF8, message.length);
+	if (wildcard.data==NULL)
+		wxwildcard = wxString(wxFileSelectorDefaultWildcardStr);
+	else
+		wxwildcard = wxString(wildcard.data, wxConvUTF8, wildcard.length);
+	return dstr_ret(wxFileSelector(wxmessage,
+	    wxString(default_path.data, wxConvUTF8, default_path.length),
+	    wxString(default_filename.data, wxConvUTF8, default_filename.length),
+	    wxString(default_extension.data, wxConvUTF8, default_extension.length),
+	    wxwildcard,
+	    flags, parent, x, y));
 }
 
 extern "C" WXEXPORT
-dstrret wxFileSelectorEx_func(const char *message,
-               const char *default_path,
-               const char *default_filename,
+dstrret wxFileSelectorEx_func(dstr message,
+               dstr default_path,
+               dstr default_filename,
                int *indexDefaultExtension,
-               const char *wildcard,
+               dstr wildcard,
                int flags,
                wxWindow *parent,
                int x, int y)
 {
-	if (message ==NULL) message  = wxFileSelectorPromptStr;
-	if (wildcard==NULL) wildcard = wxFileSelectorDefaultWildcardStr;
-	return dstr_ret(wxFileSelectorEx(message,default_path,default_filename,indexDefaultExtension,wildcard,
-			flags,parent,x,y));
+	wxString wxmessage, wxwildcard;
+	if (message.data==NULL)
+		wxmessage = wxString(wxFileSelectorPromptStr);
+	else
+		wxmessage = wxString(message.data, wxConvUTF8, message.length);
+	if (wildcard.data==NULL)
+		wxwildcard = wxString(wxFileSelectorDefaultWildcardStr);
+	else
+		wxwildcard = wxString(wildcard.data, wxConvUTF8, wildcard.length);
+	return dstr_ret(wxFileSelectorEx(wxmessage,
+	    wxString(default_path.data, wxConvUTF8, default_path.length),
+	    wxString(default_filename.data, wxConvUTF8, default_filename.length),
+	    indexDefaultExtension,
+	    wxwildcard,
+	    flags, parent, x, y));
 }
 	
 	
 // Ask for filename to load
 extern "C" WXEXPORT
-dstrret wxLoadFileSelector_func(const char *what,
-                   const char *extension,
-                   const char *default_name,
+dstrret wxLoadFileSelector_func(dstr what,
+                   dstr extension,
+                   dstr default_name,
                    wxWindow *parent)
 {
-	return dstr_ret(wxLoadFileSelector(what,extension,default_name,parent));
+	return dstr_ret(wxLoadFileSelector(wxString(what.data, wxConvUTF8, what.length),
+	    wxString(extension.data, wxConvUTF8, extension.length),
+	    wxString(default_name.data, wxConvUTF8, default_name.length),
+	    parent));
 }
 
 // Ask for filename to save
 extern "C" WXEXPORT
-dstrret wxSaveFileSelector_func(const char *what,
-                   const char *extension,
-                   const char *default_name,
+dstrret wxSaveFileSelector_func(dstr what,
+                   dstr extension,
+                   dstr default_name,
                    wxWindow *parent)
 {
-	return dstr_ret(wxSaveFileSelector(what,extension,default_name,parent));
+	return dstr_ret(wxSaveFileSelector(wxString(what.data, wxConvUTF8, what.length),
+	    wxString(extension.data, wxConvUTF8, extension.length),
+	    wxString(default_name.data, wxConvUTF8, default_name.length),
+	    parent));
 }

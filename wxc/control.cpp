@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - control.cxx
+// wxD - control.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - control.cxx

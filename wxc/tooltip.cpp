@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - tooltip.cxx
+// wxD - tooltip.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - tooltip.cxx
@@ -71,7 +71,9 @@ wxWindow* wxToolTip_GetWindow(wxToolTip* self)
 extern "C" WXEXPORT
 void wxToolTip_SetWindow(wxToolTip* self,wxWindow* win)
 {
+#ifndef __WXGTK__
 	return self->SetWindow(win);
+#endif
 }
 
 //-----------------------------------------------------------------------------

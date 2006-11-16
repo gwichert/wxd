@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - MouseEvent.cs
+// wxD - MouseEvent.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - MouseEvent.cs
@@ -16,7 +16,8 @@
 module wx.MouseEvent;
 import wx.common;
 import wx.Event;
-import wx.DC;
+
+import wx.DC;
 
         static extern (C) IntPtr wxMouseEvent_ctor(int mouseType);
         static extern (C) bool   wxMouseEvent_IsButton(IntPtr self);

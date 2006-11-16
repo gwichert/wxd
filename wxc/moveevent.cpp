@@ -1,8 +1,8 @@
 //-----------------------------------------------------------------------------
-// wxD - MoveEvent.cs
+// wxD - moveevent.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
-// wx.NET - MoveEvent.cs
+// wx.NET - moveevent.cxx
 //
 // The wxMoveEvent wrapper class.
 //

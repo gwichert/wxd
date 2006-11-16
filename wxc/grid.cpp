@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - grid.cxx
+// wxD - grid.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - grid.cxx
@@ -1838,9 +1838,6 @@ wxWindow* wxGrid_GetGridCornerLabelWindow(wxGrid* self)
 extern "C" WXEXPORT
 wxGrid* wxGrid_ctor(wxWindow* parent, int x, int y, int w, int h, int style, dstr name)
 {
-    if (name.data==NULL)
-    name = dstr(,sizeof()-1);
-
     return new wxGrid(parent, x, y, w, h, style, wxString(name.data, wxConvUTF8, name.length));
 }
 #endif

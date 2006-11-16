@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - windowdestroyevent.cxx
+// wxD - windowdestroyevent.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - windowdestroyevent.cxx

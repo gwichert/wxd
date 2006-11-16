@@ -1,6 +1,6 @@
 
 //-----------------------------------------------------------------------------
-// wxD - treectrl.cxx
+// wxD - treectrl.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - treectrl.cxx
@@ -140,7 +140,7 @@ bool wxTreeCtrl_Create(wxTreeCtrl* self, wxWindow* parent, int id, const wxPoint
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("treectrl",sizeof("treectrl")-1);
+		name = dstr("treectrl");
 
     if (val == NULL)
         val = &wxDefaultValidator;

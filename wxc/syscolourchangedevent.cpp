@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - syscolourchangedevent.cxx
+// wxD - syscolourchangedevent.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - syscolourchangedevent.cxx

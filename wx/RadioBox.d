@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - RadioBox.cs
+// wxD - RadioBox.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - RadioBox.cs

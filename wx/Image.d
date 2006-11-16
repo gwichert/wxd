@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - Image.cs
+// wxD - Image.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - Image.cs
@@ -24,6 +24,7 @@ import wx.Colour;
 		static extern (C) IntPtr wxImage_ctorByName(string name, BitmapType type);
 		static extern (C) IntPtr wxImage_ctorintintbool(int width, int height, bool clear);
 		static extern (C) IntPtr wxImage_ctorByImage(IntPtr image);
+		static extern (C) IntPtr wxImage_ctorByByteArray(IntPtr data, int length, BitmapType type);
 		static extern (C) void   wxImage_dtor(IntPtr self);
 		
 		static extern (C) void   wxImage_Destroy(IntPtr self);
@@ -143,9 +144,12 @@ import wx.Colour;
 		public this(int width, int height)
 			{ this(width, height, true);}
 		
+		public this(byte[] data, BitmapType type)
+			{ /* this(wxImage_ctorByByteArray(data.ptr, data.length, type)); */ assert(0); this(wxImage_ctor()); }
+			
 		public this(int width, int height, bool clear)
 			{ this(wxImage_ctorintintbool(width, height, clear));}
-			
+
 		public this(Image image)
 			{ this(wxImage_ctorByImage(wxObject.SafePtr(image)));}
 		

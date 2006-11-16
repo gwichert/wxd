@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - wxdatetime.cxx
+// wxD - wxdatetime.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - wxdatetime.cxx

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - region.cxx
+// wxD - region.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - region.cxx

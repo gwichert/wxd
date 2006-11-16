@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - messagedialog.cxx
+// wxD - messagedialog.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - messagedialog.cxx
@@ -44,7 +44,7 @@ extern "C" WXEXPORT
 wxMessageDialog* wxMessageDialog_ctor(wxWindow *parent, dstr message, dstr caption, int style, const wxPoint* pos)
 {
     wxString cptn;
-	if (caption.data == NULL)
+	if (caption.data==NULL)
         cptn = wxMessageBoxCaptionStr;
     else 
         cptn = wxString(caption.data, wxConvUTF8, caption.length);

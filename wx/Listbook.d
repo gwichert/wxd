@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - Listbook.cs
+// wxD - Listbook.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - Listbook.cs
@@ -213,7 +213,7 @@ import wx.ImageList;
 		//	return cast(Window)FindObject(wxListbook_GetPage(wxobj, n), &Window.New);
 			IntPtr ptr = wxListbook_GetPage(wxobj, n);
 			wxObject o = FindObject(ptr);
-			if (o !== null) return cast(Window)o;
+			if (o) return cast(Window)o;
 			else return new Window(ptr);
 		}
 		

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - printdata.cxx
+// wxD - printdata.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - printdata.cxx

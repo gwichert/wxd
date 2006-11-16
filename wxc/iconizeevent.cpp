@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - iconizeevent.cxx
+// wxD - iconizeevent.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - iconizeevent.cxx

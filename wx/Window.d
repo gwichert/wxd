@@ -1,11 +1,13 @@
 //-----------------------------------------------------------------------------
 // wxD - Window.d
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
+// wx.NET - Window.cs
 //
 // The wxWindow wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
-// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
@@ -147,6 +149,7 @@ import wx.ToolTip;
 		static extern (C) bool   wxWindow_IsEnabled(IntPtr self);
 
 		static extern (C) int    wxWindow_EVT_TRANSFERDATAFROMWINDOW();
+		static extern (C) int    wxWindow_EVT_TRANSFERDATATOWINDOW();
 
 		//static extern (C) bool wxWindow_LoadFromResource(IntPtr self, IntPtr parent, string resourceName, IntPtr table);
 		//static extern (C) IntPtr wxWindow_CreateItem(IntPtr self, IntPtr childResource, IntPtr parentResource, IntPtr table);
@@ -400,6 +403,7 @@ import wx.ToolTip;
 		public this(IntPtr wxobj) 
 		{
 			super(wxobj);
+			AddEventListener(wxWindow_EVT_TRANSFERDATATOWINDOW(), &OnTransferDataToWindow);
 			AddEventListener(wxWindow_EVT_TRANSFERDATAFROMWINDOW(), &OnTransferDataFromWindow);
 		}
 		
@@ -408,6 +412,7 @@ import wx.ToolTip;
 			super(wxobj);
 			this.memOwn = memOwn;
 			
+			AddEventListener(wxWindow_EVT_TRANSFERDATATOWINDOW(), &OnTransferDataToWindow);
 			AddEventListener(wxWindow_EVT_TRANSFERDATAFROMWINDOW(), &OnTransferDataFromWindow);
 		}
 
@@ -550,6 +555,14 @@ import wx.ToolTip;
 		private void OnTransferDataFromWindow(Object sender, Event e)
 		{
 			if (!TransferDataFromWindow())
+				e.Skip();
+		}
+
+		//---------------------------------------------------------------------
+
+		private void OnTransferDataToWindow(Object sender, Event e)
+		{
+			if (!TransferDataToWindow())
 				e.Skip();
 		}
 
@@ -1023,7 +1036,7 @@ import wx.ToolTip;
 		{
 			IntPtr ptr = wxWindow_GetEventHandler(wxobj);
 			wxObject o = FindObject(ptr);
-			if (o !== null) return cast(EvtHandler)o;
+			if (o) return cast(EvtHandler)o;
 			else return new EvtHandler(ptr);
 		//	return cast(EvtHandler)FindObject(wxWindow_GetEventHandler(wxobj),&EvtHandler.New);
 		}
@@ -1043,7 +1056,7 @@ import wx.ToolTip;
 		{
 			IntPtr ptr = wxWindow_PopEventHandler(wxobj, deleteHandler);
 			wxObject o = FindObject(ptr);
-			if (o !== null) return cast(EvtHandler)o;
+			if (o) return cast(EvtHandler)o;
 			else return new EvtHandler(ptr);
 		//	return cast(EvtHandler)FindObject(wxWindow_PopEventHandler(wxobj, deleteHandler),&EvtHandler.New);
 		}

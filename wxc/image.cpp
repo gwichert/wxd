@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - image.cxx
+// wxD - image.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - image.cxx
@@ -16,6 +16,7 @@
 #include <wx/wx.h>
 #include "common.h"
 #include <wx/image.h>
+#include <wx/mstream.h>
 
 //-----------------------------------------------------------------------------
 
@@ -29,6 +30,16 @@ extern "C" WXEXPORT
 wxImage* wxImage_ctorByName(dstr name, int type)
 {
 	return new wxImage(wxString(name.data, wxConvUTF8, name.length), type);
+}
+
+extern "C" WXEXPORT
+wxImage* wxImage_ctorByByteArray(const char* data, int length, int type)
+{
+	wxMemoryInputStream* image_stream;
+	
+	image_stream = new wxMemoryInputStream(data, length);
+
+	return new wxImage(*image_stream, type);
 }
 
 extern "C" WXEXPORT

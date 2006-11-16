@@ -17,6 +17,7 @@
 
 import wx.wx;
 import std.string;
+import std.stdio;
 
     //-------------------------------------------------------------------------
     // Application entry class
@@ -676,7 +677,7 @@ import std.string;
 	
 	public void OnClicked2( Object sender, Event e )
 	{
-		stdout.writeLine( "OnClicked2");
+		writefln( "OnClicked2");
 	}
 
         //---------------------------------------------------------------------
@@ -721,7 +722,7 @@ import std.string;
             switch(e.ID)
             {
             case ID_LISTBOX_SEL_NUM:
-	    	stdout.writeLine( "OnListBoxButtons");
+	    	writefln( "OnListBoxButtons");
                 listbox.Selection = 2;
                 listboxSorted.Selection = 2;
                 break;
@@ -914,7 +915,7 @@ import std.string;
         {
             CommandEvent ce = cast(CommandEvent)e;
 
-	    	stdout.writeLine( ce.String );
+	    	writefln( ce.String );
 
             Log.LogMessage( "Text in the combobox changed: now is '{0}'", ce.String);
         }

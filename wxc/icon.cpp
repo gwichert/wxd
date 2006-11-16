@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - icon.cxx
+// wxD - icon.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - icon.cxx

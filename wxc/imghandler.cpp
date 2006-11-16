@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - imghandler.cxx
+// wxD - imghandler.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - imghandler.cxx

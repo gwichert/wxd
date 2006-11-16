@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - sashwindow.cxx
+// wxD - sashwindow.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - sashwindow.cxx
@@ -89,7 +89,7 @@ bool wxSashWindow_Create(wxSashWindow* self, wxWindow* parent, wxWindowID id, co
 		size = &wxDefaultSize;
 		
 	if (name.data==NULL)
-		name = dstr("sashwindow",sizeof("sashwindow")-1);
+		name = dstr("sashwindow");
 		
 	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }

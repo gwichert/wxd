@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - listbox.cxx
+// wxD - listbox.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - listbox.cxx
@@ -63,7 +63,7 @@ bool wxListBox_Create(wxListBox* self, wxWindow *parent, wxWindowID id,
 		validator = &wxDefaultValidator;
 
 	if (name.data==NULL)
-		name = dstr("listbox",sizeof("listbox")-1);
+		name = dstr("listbox");
 
 	wxString* strings = NULL;
 
@@ -353,7 +353,7 @@ wxCheckListBox* wxCheckListBox_ctor2(wxWindow* parent, wxWindowID id, const wxPo
 		validator = &wxDefaultValidator;
 
 	if (name.data==NULL)
-		name = dstr("checklistbox",sizeof("checklistbox")-1);
+		name = dstr("checklistbox");
 
 	wxString* strings = NULL;
 

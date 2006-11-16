@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - MiniFrame.cs
+// wxD - MiniFrame.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - MiniFrame.cs

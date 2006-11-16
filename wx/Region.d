@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - Region.cs
+// wxD - Region.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - Region.cs
@@ -17,6 +17,9 @@ import wx.common;
 import wx.GDIObject;
 import wx.Bitmap;
 import wx.Colour;
+
+// this is bogus, but better than nothing
+version (darwin) { version = __WXMAC__; }
 
     public enum RegionContain {
         wxOutRegion = 0,
@@ -83,6 +86,7 @@ import wx.Colour;
         public this(Rectangle rect)
             { this(wxRegion_ctorByRect(rect)); }
 
+        version(__WXMAC__) {} else
         public this(Point[] points, int fillStyle)
             { this(wxRegion_ctorByPoly(points.length, points, fillStyle)); }
 
@@ -99,6 +103,7 @@ import wx.Colour;
             wxRegion_Clear(wxobj);
         }
 
+        version(__WXMAC__) {} else
         public bool Offset(int x, int y)
         {
             return wxRegion_Offset(wxobj, x, y);

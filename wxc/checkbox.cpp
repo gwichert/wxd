@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - checkbox.cxx
+// wxD - checkbox.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - checkbox.cxx
@@ -52,7 +52,7 @@ bool wxCheckBox_Create(wxCheckBox* self, wxWindow* parent, int id,
         val = &wxDefaultValidator;
 	
    	if (name.data==NULL)
-		name = dstr("checkbox",sizeof("checkbox")-1);
+		name = dstr("checkbox");
 
 
     return self->Create(parent, id, wxString(label.data, wxConvUTF8, label.length), *pos, *size, style,

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - locale.cxx
+// wxD - locale.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - locale.cxx

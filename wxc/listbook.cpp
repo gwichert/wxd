@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - listbook.cxx
+// wxD - listbook.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - listbook.cxx
@@ -46,7 +46,7 @@ bool wxListbook_Create(wxListbook *self, wxWindow* parent, wxWindowID id, const 
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("listbook",sizeof("listbook")-1);
+		name = dstr("listbook");
 
 	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }

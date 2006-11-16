@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - DirDialog.cs
+// wxD - DirDialog.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - DirDialog.cs

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - splashscreen.cxx
+// wxD - splashscreen.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - splashscreen.cxx

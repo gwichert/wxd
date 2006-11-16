@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - htmlhelpctrl.cxx
+// wxD - htmlhelpctrl.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - htmlhelpctrl.cxx

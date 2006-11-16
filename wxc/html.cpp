@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - html.cxx
+// wxD - html.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - html.cxx
@@ -1069,7 +1069,8 @@ bool wxHtmlTag_GetParamAsInt(wxHtmlTag* self, dstr par, int* clr)
 extern "C" WXEXPORT
 int wxHtmlTag_ScanParam(wxHtmlTag* self, dstr par, const char* format, void* param)
 {
-    return self->ScanParam(wxString(par.data, wxConvUTF8, par.length), format, param);
+	wxString wxformat = wxString(format, wxConvUTF8);
+    return self->ScanParam(wxString(par.data, wxConvUTF8, par.length), wxformat.c_str(), param);
 }
 
 //-----------------------------------------------------------------------------
@@ -1913,11 +1914,11 @@ bool wxHtmlEasyPrinting_PrintText(wxHtmlEasyPrinting* self, dstr htmltext, dstr 
 
 //-----------------------------------------------------------------------------
 
-extern "C" WXEXPORT
+/*extern "C" WXEXPORT
 void wxHtmlEasyPrinting_PrinterSetup(wxHtmlEasyPrinting* self)
 {
 	self->PrinterSetup();
-}
+}*/
 
 //-----------------------------------------------------------------------------
 

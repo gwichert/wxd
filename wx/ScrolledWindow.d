@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - ScrolledWindow.cs
+// wxD - ScrolledWindow.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - ScrolledWindow.cs

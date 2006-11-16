@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - button.cxx
+// wxD - button.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - button.cxx
@@ -49,7 +49,7 @@ bool wxButton_Create(wxButton *self, wxWindow* parent, wxWindowID id, dstr label
 		validator = &wxDefaultValidator;
 
 	if (name.data==NULL)
-		name = dstr("button",sizeof("button")-1);
+		name = dstr("button");
 
 	return self->Create(parent, id, wxString(label.data, wxConvUTF8, label.length), *pos, *size, style, *validator, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }

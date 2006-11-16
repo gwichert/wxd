@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - printer.cxx
+// wxD - printer.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - printer.cxx
@@ -152,8 +152,8 @@ private:
 extern "C" WXEXPORT
 wxPrintout* wxPrintout_ctor(dstr title)
 {
-    if (title.data == NULL)
-        title = dstr("Printout",sizeof("Printout")-1);
+    if (title.data==NULL)
+        title = dstr("Printout");
 
     return new _Printout(wxString(title.data, wxConvUTF8, title.length));
 }

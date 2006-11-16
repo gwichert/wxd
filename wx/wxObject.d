@@ -1,11 +1,13 @@
 //-----------------------------------------------------------------------------
 // wxD - wxObject.d
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
+// wx.NET - wxObject.cs
 //
 // The wxobj wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
-// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
@@ -13,11 +15,6 @@
 
 module wx.wxObject;
 import wx.common;
-
-	struct c_obj;
-	typedef c_obj* IntPtr;
-
-	alias char[] string;
 
 		extern (C) {
 		alias void function(IntPtr ptr) Virtual_Dispose;
@@ -90,7 +87,7 @@ import wx.common;
 
 		public static IntPtr SafePtr(wxObject obj)
 		{
-			return (obj !== null) ? obj.wxobj : IntPtr.init;
+			return obj ? obj.wxobj : IntPtr.init;
 		}
 		
 		//---------------------------------------------------------------------
@@ -139,7 +136,7 @@ import wx.common;
 		//	if (type != null && (o == null || o.GetType() != type)) {
 		//		o = (wxObject)Activator.CreateInstance(type, new object[]{ptr});
 		//	}
-			if (o === null) {
+			if (o is null) {
 				o = New(ptr);
 			}
 
@@ -172,7 +169,7 @@ import wx.common;
 			if (ptr != IntPtr.init)
 			{
 				if(ptr in objects) {
-					delete objects[ptr];
+					objects.remove(ptr);
 					retval = true;
 				}
 			}

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - MoveEvent.cs
+// wxD - MoveEvent.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - MoveEvent.cs

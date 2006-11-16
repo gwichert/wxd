@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - gdiobject.cxx
+// wxD - gdiobject.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - gdiobject.cxx

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - sizeritem.cxx
+// wxD - sizeritem.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - sizeritem.cxx
@@ -96,7 +96,7 @@ void wxSizerItem_SetInitSize(wxSizerItem* self, int x, int y)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxSizerItem_SetRatioSize(wxSizerItem* self, int width, int height)
+void wxSizerItem_SetRatio(wxSizerItem* self, int width, int height)
 {
     self->SetRatio(width, height);
 }

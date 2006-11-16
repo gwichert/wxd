@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - showevent.cxx
+// wxD - showevent.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - showevent.cxx

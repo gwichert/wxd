@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - dirdialog.cxx
+// wxD - dirdialog.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - dirdialog.cxx

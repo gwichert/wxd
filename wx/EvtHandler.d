@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - EvtHandler.cs
+// wxD - EvtHandler.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - EvtHandler.cs
@@ -54,6 +54,13 @@ import wx.Event;
 			wxObject obj;
 		};
 		
+//		extern (C) {
+//		alias void function() ObjectDeletedHandler;
+//		}
+//
+//		public ObjectDeletedHandler ObjectDeleted;
+
+
 		static extern (C) void wxEvtHandler_proxy(IntPtr self, clientdata* data);
 		static extern (C) void wxEvtHandler_Connect(IntPtr self, int evtType, int id, int lastId, int iListener);
 		
@@ -139,7 +146,7 @@ import wx.Event;
 			// if found, just set active to true and return
 			foreach( SListener sl;listeners )
 			{
-				if ( sl.owner === owner && sl.listener == listener && sl.eventType == eventType )
+				if ( sl.owner is owner && sl.listener == listener && sl.eventType == eventType )
 				{
 					sl.active = true;
 				}
@@ -189,7 +196,7 @@ import wx.Event;
 		{
 			foreach( SListener sl;listeners )
 			{
-				if ( sl.listener == listener && sl.owner === owner && sl.active )
+				if ( sl.listener == listener && sl.owner is owner && sl.active )
 				{
 					sl.active = false;
 					return true;
@@ -230,7 +237,7 @@ import wx.Event;
 			// Only the new event system can handle more then one EventListener
 			// because the EventListener gets connected via its owner and not
 			// via a Frame, Dialog, etc...
-			if ( listener.owner !== null )
+			if ( listener.owner )
 			{
 				int i = 0;
 				foreach ( SListener sl;listeners )
@@ -240,9 +247,9 @@ import wx.Event;
 				
 					// if there is the same object in the list with the same
 					// EventType then call its listener also
-					if ( sl.owner !== null )
+					if ( sl.owner )
 					{
-						if ( sl.owner === listener.owner && sl.eventType == listener.eventType )
+						if ( sl.owner is listener.owner && sl.eventType == listener.eventType )
 						{
 							if ( sl.active ) sl.listener(this, e);
 						}
@@ -260,6 +267,11 @@ import wx.Event;
 
 		private /*static*/ void OnObjectDeleted(Object sender, Event evt)
 		{
+			EvtHandler evthandler = cast(EvtHandler) sender;
+
+//			if ( evthandler.ObjectDeleted )
+//				evthandler.ObjectDeleted();
+
 			RemoveEvtHandler(evt.EventIntPtr);
 		}
 
@@ -277,7 +289,7 @@ import wx.Event;
 		{
 			if ( ptr != IntPtr.init)
 			{
-				delete evtHandlers[ptr];
+				evtHandlers.remove(ptr);
 				RemoveObject(ptr);
 				ptr = IntPtr.init;
 			}

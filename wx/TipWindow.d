@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - tipwin.h
+// wxD - TipWindow.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - tipwin.h

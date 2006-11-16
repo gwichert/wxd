@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - ListCtrl.cs
+// wxD - ListCtrl.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - ListCtrl.cs

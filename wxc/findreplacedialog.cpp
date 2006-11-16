@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - findreplacedialog.cxx
+// wxD - findreplacedialog.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - findreplacedialog.cxx

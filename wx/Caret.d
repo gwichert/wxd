@@ -1,11 +1,13 @@
 //-----------------------------------------------------------------------------
 // wxD - Caret.d
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
+// wx.NET - Caret.cs
 //
 // The wxCaret wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 by Bryan Bulten
-// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$

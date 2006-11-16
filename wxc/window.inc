@@ -17,3 +17,9 @@ virtual bool TransferDataFromWindow()
 	return (!e.GetSkipped());
 }
 
+virtual bool TransferDataToWindow()
+{
+	FunctionEvent e(wxEVT_TRANSFERDATATOWINDOW);
+	ProcessEvent(e);
+	return (!e.GetSkipped());
+}

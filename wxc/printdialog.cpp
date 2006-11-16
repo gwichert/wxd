@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - printdialog.cxx
+// wxD - printdialog.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - printdialog.cxx
@@ -16,23 +16,23 @@
 #include <wx/wx.h>
 #include "common.h"
 #include <wx/printdlg.h>
-#include "local_events.h"
+//#include "local_events.h"
 
-class _PageSetupDialog : public wxPageSetupDialog 
+/*class _PageSetupDialog : public wxPageSetupDialog 
 {
 public:
 	_PageSetupDialog(wxWindow* parent, wxPageSetupDialogData* data)
 		: wxPageSetupDialog(parent, data) {}
 
 	DECLARE_OBJECTDELETED(_PageSetupDialog)
-};
+};*/
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
 wxPageSetupDialog* wxPageSetupDialog_ctor(wxWindow* parent, wxPageSetupData* data)
 {
-    return new _PageSetupDialog(parent, data);
+    return new wxPageSetupDialog(parent, data);
 }
 
 //-----------------------------------------------------------------------------
@@ -46,19 +46,19 @@ wxPageSetupData* wxPageSetupDialog_GetPageSetupData(wxPageSetupDialog* self)
 //-----------------------------------------------------------------------------
 // wxPrintDialog
 
-class _PrintDialog : public wxPrintDialog 
+/*class _PrintDialog : public wxPrintDialog 
 {
 public:
 	_PrintDialog(wxWindow* parent, wxPrintDialogData* data)
 		: wxPrintDialog(parent, data) {}
 
 	DECLARE_OBJECTDELETED(_PrintDialog)
-};
+};*/
 
 extern "C" WXEXPORT
 wxPrintDialog* wxPrintDialog_ctor(wxWindow* parent, wxPrintDialogData* data)
 {
-    return new _PrintDialog(parent, data);
+    return new wxPrintDialog(parent, data);
 }
 
 //-----------------------------------------------------------------------------

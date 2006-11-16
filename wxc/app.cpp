@@ -1,6 +1,7 @@
 //-----------------------------------------------------------------------------
-// wxD - app.cxx
+// wxD - app.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
+// (C) 2005 afb <afb.sourceforge.net>
 // based on
 // wx.NET - app.cxx
 //
@@ -19,7 +20,7 @@
 
 #include <stdio.h>
 
-typedef bool (CALLBACK* Virtual_Initialize) (dobj obj,int *argc,char** argv);
+typedef bool (CALLBACK* Virtual_Initialize) (dobj obj,int* argc,char** argv);
 typedef bool (CALLBACK* Virtual_OnInit) (dobj obj);
 typedef int (CALLBACK* Virtual_OnExit) (dobj obj);
 
@@ -31,7 +32,15 @@ class _App : public wxApp
 public:
 	bool Initialize(int& argc, wxChar **argv)
 	{
-		return m_Initialize(m_dobj,&argc,argv); 
+		const char* cargv[argc];
+		for (int i=0; i < argc; i++)
+		#if wxUSE_UNICODE
+			cargv[i] = wxString(argv[i],wxConvUTF8).mb_str(wxConvUTF8).data();
+		#else // ANSI
+			cargv[i] = wxString(argv[i]).data();
+		#endif
+
+		return m_Initialize(m_dobj,&argc,(char**)cargv); 
 	}
 
 	bool OnInit()
@@ -40,7 +49,7 @@ public:
 	int OnExit()
 	{ return m_OnExit(m_dobj); }
 	
-	void RegisterVirtual(dobj obj, Virtual_OnInit onInit, Virtual_OnExit onExit,Virtual_Initialize initialize)
+	void RegisterVirtual(dobj obj, Virtual_OnInit onInit, Virtual_OnExit onExit, Virtual_Initialize initialize)
 	{
 		m_dobj = obj;
 		m_OnInit = onInit;
@@ -84,14 +93,6 @@ void wxApp_RegisterVirtual(_App* self, dobj obj, Virtual_OnInit onInit, Virtual_
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxApp_Initialize(_App* self,int& argc, wxChar **argv)
-{
-	return self->wxApp::Initialize(argc,argv)?1:0;
-}
-
-//-----------------------------------------------------------------------------
-
-extern "C" WXEXPORT
 bool wxApp_OnInit(_App* self)
 {
 	return self->wxApp::OnInit()?1:0;
@@ -107,9 +108,21 @@ int wxApp_OnExit(_App* self)
 
 //-----------------------------------------------------------------------------
 
+extern "C" WXEXPORT
+bool wxApp_Initialize(_App* self,int& argc, char **argv)
+{
+	const wxChar* wargv[argc];
+        for (int i=0; i < argc; i++)
+           wargv[i] = wxString(argv[i],*wxConvCurrent).c_str();
+
+	return self->wxApp::Initialize(argc,(wxChar**)wargv)?1:0;
+}
+
+//-----------------------------------------------------------------------------
+
 #if defined(__WXMSW__)
 
-	extern "C" WXEXPORT
+	extern "C" WXEXPORT 
 	void wxApp_Run(int argc, char* argv[])
 	{
 		wxEntry(GetModuleHandle(NULL), NULL, (char*)GetCommandLineW(), SW_SHOWNORMAL);

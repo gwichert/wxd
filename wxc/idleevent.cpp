@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - idleevent.cxx
+// wxD - idleevent.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - idleevent.cxx

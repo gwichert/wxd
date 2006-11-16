@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - colourdialog.cxx
+// wxD - colourdialog.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - colourdialog.cxx
@@ -63,7 +63,7 @@ int wxColourDialog_ShowModal(wxColourDialog* self)
 extern "C" WXEXPORT
 wxColour* wxColourDialog_GetColourFromUser(wxWindow* parent, const wxColour* colInit)
 {
-	if (colInit==NULL) colInit= &wxNullColour;
+	if (colInit==NULL) colInit= &wxNullColour; // wxD paranoia
 	return new wxColour(wxGetColourFromUser(parent, *colInit));
 }
 

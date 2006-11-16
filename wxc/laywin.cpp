@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - laywin.cxx
+// wxD - laywin.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - laywin.cxx
@@ -49,7 +49,7 @@ bool wxSashLayoutWindow_Create(wxSashLayoutWindow* self, wxWindow* parent, wxWin
 		size = &wxDefaultSize;
 		
 	if (name.data==NULL)
-		name = dstr("sashlayoutwindow",sizeof("sashlayoutwindow")-1);
+		name = dstr("sashlayoutwindow");
 		
 	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }

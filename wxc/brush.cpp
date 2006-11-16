@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - brush.cxx
+// wxD - brush.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - brush.cxx

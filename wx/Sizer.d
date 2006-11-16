@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - Sizer.cs
+// wxD - Sizer.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - Sizer.cs

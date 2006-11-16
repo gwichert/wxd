@@ -12,6 +12,7 @@
 //-----------------------------------------------------------------------------
 
 import wx.wx;
+import std.stdio;
 
 	public enum Cmd
 	{
@@ -359,7 +360,7 @@ import wx.wx;
 				break;
 
 				default:
-					stdout.writeLine("unknown listctrl mode");
+					writefln("unknown listctrl mode");
 				break;
 			}
 
@@ -883,7 +884,7 @@ import wx.wx;
 				}
 				else
 				{
-					stdout.writeLine("wxListCtrl::GetItem() failed");
+					writefln("wxListCtrl::GetItem() failed");
 				}
 			}
 		}

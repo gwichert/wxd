@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - miniframe.cxx
+// wxD - miniframe.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - miniframe.cxx
@@ -46,7 +46,7 @@ bool wxMiniFrame_Create(wxMiniFrame* self, wxWindow* parent, wxWindowID id, dstr
         size = &wxDefaultSize;
 
     if (name.data==NULL)
-        name = dstr("miniFrame",sizeof("miniFrame")-1);
+        name = dstr("miniFrame");
 
     return self->Create(parent, id, wxString(title.data, wxConvUTF8, title.length), *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }

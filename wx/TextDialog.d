@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - TextDialog.cs
+// wxD - TextDialog.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - TextDialog.cs

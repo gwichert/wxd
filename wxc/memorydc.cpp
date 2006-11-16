@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - memorydc.cxx
+// wxD - memorydc.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - memorydc.cxx

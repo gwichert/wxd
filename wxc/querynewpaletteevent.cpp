@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - querynewpaletteevent.cxx
+// wxD - querynewpaletteevent.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - querynewpaletteevent.cxx
@@ -22,6 +22,12 @@ extern "C" WXEXPORT
 wxQueryNewPaletteEvent* wxQueryNewPaletteEvent_ctor(wxWindowID winid)
 {
     return new wxQueryNewPaletteEvent(winid);
+}
+
+extern "C" WXEXPORT
+wxQueryNewPaletteEvent* wxQueryNewPaletteEvent_ctor2(wxEventType type)
+{
+    return new wxQueryNewPaletteEvent(type);
 }
 
 extern "C" WXEXPORT

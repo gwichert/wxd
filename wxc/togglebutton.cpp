@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - togglebutton.cxx
+// wxD - togglebutton.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - togglebutton.cxx
@@ -48,7 +48,7 @@ bool wxToggleButton_Create(wxToggleButton *self, wxWindow* parent, wxWindowID id
 		validator = &wxDefaultValidator;
 
 	if (name.data==NULL)
-		name = dstr("check",sizeof("check")-1);
+		name = dstr("check");
 
 	return self->Create(parent, id, wxString(label.data, wxConvUTF8, label.length), *pos, *size, style, *validator, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }

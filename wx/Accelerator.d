@@ -1,11 +1,13 @@
 //-----------------------------------------------------------------------------
 // wxD - Accelerator.d
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
+// wx.NET - Accelerator.cs
 //
 // The wxAccelerator* interfaces
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2004 by Alexander Olk
-// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
@@ -114,9 +116,9 @@ import wx.MenuItem;
 		//static extern (C) IntPtr wxAcceleratorTable_GetMenuItem(IntPtr self, IntPtr evt);
 		//static extern (C) int    wxAcceleratorTable_GetCommand(IntPtr self, IntPtr evt);
 		//static extern (C) IntPtr wxAcceleratorTable_GetEntry(IntPtr self, IntPtr evt);
-		
+
 		//-----------------------------------------------------------------------------
-		
+
 	public class AcceleratorTable : wxObject
 	{
 		public this(IntPtr wxobj)
@@ -128,43 +130,43 @@ import wx.MenuItem;
 		version(__WXMAC__) {
 		} else {
 		//-----------------------------------------------------------------------------
-		
+
 		/*public void Add(AcceleratorEntry entry)
 		{
 			wxAcceleratorTable_Add(wxobj, wxObject.SafePtr(entry));
 		}*/
-		
+
 		//-----------------------------------------------------------------------------
-		
+
 		/*public void Remove(AcceleratorEntry entry)
 		{
 			wxAcceleratorTable_Remove(wxobj, wxObject.SafePtr(entry));
 		}*/
-		
+
 		//-----------------------------------------------------------------------------
-		
+
 		/*public MenuItem GetMenuItem(KeyEvent evt)
 		{
 			return cast(MenuItem)FindObject(wxAcceleratorTable_GetMenuItem(wxobj, wxObject.SafePtr(evt)),&MenuItem.New);
 		}*/
-		
+
 		//-----------------------------------------------------------------------------
-		
+
 		/*public AcceleratorEntry GetEntry(KeyEvent evt)
 		{
 			return cast(AcceleratorEntry)FindObject(wxAcceleratorTable_GetEntry(wxobj, wxObject.SafePtr(evt)),&AcceleratorEntry.New);
 		}*/
 		} // version()
-		
+
 		//-----------------------------------------------------------------------------
-		
+
 		/*public int GetCommand(KeyEvent evt)
 		{
 			return wxAcceleratorTable_GetCommand(wxobj, wxObject.SafePtr(evt));
 		}*/
-		
+
 		//-----------------------------------------------------------------------------
-		
+
 		public bool Ok() { return wxAcceleratorTable_Ok(wxobj); }
 
 		public static wxObject New(IntPtr ptr) { return new AcceleratorTable(ptr); }

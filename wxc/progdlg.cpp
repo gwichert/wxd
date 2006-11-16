@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - progdlg.cxx
+// wxD - progdlg.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - progdlg.cxx

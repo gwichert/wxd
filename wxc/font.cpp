@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - font.cxx
+// wxD - font.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - font.cxx

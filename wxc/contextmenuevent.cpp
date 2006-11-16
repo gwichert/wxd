@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - contextmenuevent.cxx
+// wxD - contextmenuevent.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - contextmenuevent.cxx

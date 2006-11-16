@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - caret.cxx
+// wxD - caret.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - caret.cxx

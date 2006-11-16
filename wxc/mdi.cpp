@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - mdi.cxx
+// wxD - mdi.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - mdi.cxx
@@ -76,7 +76,7 @@ bool wxMDIParentFrame_Create(_MDIParentFrame* self, wxWindow* parent, wxWindowID
         size = &wxDefaultSize;
 
     if (name.data==NULL)
-        name = dstr("mdiParentFrame",sizeof("mdiParentFrame")-1);
+        name = dstr("mdiParentFrame");
 
     return self->Create(parent, id, wxString(title.data, wxConvUTF8, title.length), *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }
@@ -188,7 +188,7 @@ bool wxMDIChildFrame_Create(wxMDIChildFrame* self, wxMDIParentFrame* parent, wxW
         size = &wxDefaultSize;
 
     if (name.data==NULL)
-        name = dstr("mdiChildFrame",sizeof("mdiChildFrame")-1);
+        name = dstr("mdiChildFrame");
 
     return self->Create(parent, id, wxString(title.data, wxConvUTF8, title.length), *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }

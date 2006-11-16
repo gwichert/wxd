@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - listctrl.cxx
+// wxD - listctrl.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - listctrl.cxx
@@ -46,7 +46,7 @@ bool wxListCtrl_Create(wxListCtrl *self, wxWindow *parent, wxWindowID id, const 
         validator = &wxDefaultValidator;
 
     if (name.data==NULL)
-        name = dstr("listctrl",sizeof("listctrl")-1);
+        name = dstr("listctrl");
 
     return self->Create(parent, id, *pos, *size, style, *validator, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }
@@ -948,7 +948,7 @@ bool wxListView_Create(wxListCtrl *self, wxWindow *parent, wxWindowID id, const 
         validator = &wxDefaultValidator;
 
     if (name.data==NULL)
-        name = dstr("listview",sizeof("listview")-1);
+        name = dstr("listview");
 
     return self->Create(parent, id, *pos, *size, style, *validator, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - displaychangedevent.cxx
+// wxD - displaychangedevent.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - displaychangedevent.cxx

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - vscroll.cxx
+// wxD - vscroll.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - vscroll.cxx
@@ -70,7 +70,7 @@ wxVScrolledWindow* wxVScrolledWindow_ctor2(wxWindow *parent, wxWindowID id, cons
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("vscrolled",sizeof("vscrolled")-1);
+		name = dstr("vscrolled");
 
 	return new _VScrolledWindow(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
 }
@@ -94,7 +94,7 @@ bool wxVScrolledWindow_Create(_VScrolledWindow* self, wxWindow *parent, wxWindow
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("vscrolled",sizeof("vscrolled")-1);
+		name = dstr("vscrolled");
 			
 	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }

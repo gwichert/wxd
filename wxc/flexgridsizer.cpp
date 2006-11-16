@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - flexgridsizer.cxx
+// wxD - flexgridsizer.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - flexgridsizer.cxx

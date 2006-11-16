@@ -1,11 +1,14 @@
 //-----------------------------------------------------------------------------
 // wxD - App.d
+// (C) 2005 bero <berobero.sourceforge.net>
+// (C) 2005 afb <afb.sourceforge.net>
+// based on
+// wx.NET - App.cs
 //
 // The wxApp wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
-// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgtes license, see LICENSE.txt for details.
 //
 // $Id$
@@ -16,6 +19,8 @@ import wx.common;
 import wx.EvtHandler;
 import wx.Window;
 import wx.GdiCommon;
+
+import std.string;
 
 	extern (C) {
 	alias bool function(App o) Virtual_OnInit;
@@ -95,8 +100,18 @@ import wx.GdiCommon;
 
         public void Run()
         {
-            //string[] args; // = Environment.GetCommandLineArgs();
-            wxApp_Run(0, null);
+            string[] args; // = Environment.GetCommandLineArgs();
+            args.length = 1;
+            Run(args);
+        }
+
+        public void Run(string[] args)
+        {
+			char*[] c_args = new char*[args.length];
+			foreach (int i, char[] arg; args)
+				c_args[i] = toStringz(arg);
+			
+            wxApp_Run(c_args.length, c_args.ptr);
         }
 
         //---------------------------------------------------------------------

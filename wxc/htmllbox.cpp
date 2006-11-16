@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - htmllbox.cxx
+// wxD - htmllbox.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - htmllbox.cxx
@@ -157,7 +157,7 @@ wxHtmlListBox* wxHtmlListBox_ctor2(wxWindow* parent, wxWindowID id, const wxPoin
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("htmllistbox",sizeof("htmllistbox")-1);
+		name = dstr("htmllistbox");
 		
 	return new _HtmlListBox(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
 }

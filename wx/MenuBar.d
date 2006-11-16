@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - MenuBar.cs
+// wxD - MenuBar.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - MenuBar.cs
@@ -101,7 +101,7 @@ import wx.Menu;
 		public MenuItem FindItem(int id, inout Menu menu)
 		{
 			IntPtr menuRef = IntPtr.init;
-			if (menu !== null) 
+			if (menu) 
 			{
 				menuRef = wxObject.SafePtr(menu);
 			}

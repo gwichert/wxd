@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - DbGrid
+// wxD - DbGrid.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - DbGrid

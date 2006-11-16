@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - vlbox.cxx
+// wxD - vlbox.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - vlbox.cxx
@@ -102,7 +102,7 @@ wxVListBox* wxVListBox_ctor(wxWindow *parent, wxWindowID id, const wxPoint* pos,
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("vlistbox",sizeof("vlistbox")-1);
+		name = dstr("vlistbox");
 
 	return new _VListBox(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
 }
@@ -133,7 +133,7 @@ bool wxVListBox_Create(_VListBox* self, wxWindow *parent, wxWindowID id, const w
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("vlistbox",sizeof("vlistbox")-1);
+		name = dstr("vlistbox");
 			
 	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }

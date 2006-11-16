@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - tipdialog.cxx
+// wxD - tipdialog.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - tipdialog.cxx

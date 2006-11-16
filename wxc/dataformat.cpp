@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - dataformat.cxx
+// wxD - dataformat.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - dataformat.cxx

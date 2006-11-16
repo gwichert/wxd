@@ -1,5 +1,5 @@
 // //-----------------------------------------------------------------------------
-// wxD - textctrl.cxx
+// wxD - textctrl.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - textctrl.cxx
@@ -417,9 +417,6 @@ bool wxTextCtrl_LoadFile(wxTextCtrl* self, dstr file)
 extern "C" WXEXPORT
 bool wxTextCtrl_SaveFile(wxTextCtrl* self, dstr file)
 {
-//	if (file == NULL)
-//		file = "";
-
 	return self->SaveFile(wxString(file.data, wxConvUTF8, file.length))?1:0;
 }
 
@@ -692,9 +689,6 @@ wxTextCtrl* wxTextCtrl_ctor()
 extern "C" WXEXPORT
 bool wxTextCtrl_Create(wxTextCtrl* self, wxWindow *parent, wxWindowID id, dstr value, const wxPoint *pos, const wxSize *size, long style, const wxValidator* validator, dstr name)
 {
-//	if (value == NULL)
-//		value = "";
-
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
 
@@ -703,9 +697,6 @@ bool wxTextCtrl_Create(wxTextCtrl* self, wxWindow *parent, wxWindowID id, dstr v
 
 	if (validator == NULL)
 		validator = &wxDefaultValidator;
-
-//	if (name == NULL)
-//		name = "";
 
 	return self->Create(parent, id, wxString(value.data, wxConvUTF8, value.length), *pos, *size, style, *validator, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }

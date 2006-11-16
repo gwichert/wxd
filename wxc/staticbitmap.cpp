@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - statbmp.cxx
+// wxD - statbmp.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - statbmp.cxx
@@ -42,7 +42,7 @@ bool wxStaticBitmap_Create(wxStaticBitmap* self, wxWindow *parent, wxWindowID id
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("staticbitmap",sizeof("staticbitmap")-1);
+		name = dstr("staticbitmap");
 
 	return self->Create(parent, id, *bitmap, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }

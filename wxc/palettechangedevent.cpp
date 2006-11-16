@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - palettechangedevent.cxx
+// wxD - palettechangedevent.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - palettechangedevent.cxx
@@ -22,6 +22,12 @@ extern "C" WXEXPORT
 wxPaletteChangedEvent* wxPaletteChangedEvent_ctor(wxWindowID winid)
 {
     return new wxPaletteChangedEvent(winid);
+}
+
+extern "C" WXEXPORT
+wxPaletteChangedEvent* wxPaletteChangedEvent_ctor2(wxEventType type)
+{
+    return new wxPaletteChangedEvent(type);
 }
 
 extern "C" WXEXPORT

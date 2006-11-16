@@ -46,7 +46,7 @@ bool wxSpinButton_Create(wxSpinButton* self, wxWindow *parent, wxWindowID id, co
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("spinbutton",sizeof("spinbutton")-1);
+		name = dstr("spinbutton");
 
 	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }

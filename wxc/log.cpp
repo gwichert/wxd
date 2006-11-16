@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - log.cxx
+// wxD - log.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - log.cxx

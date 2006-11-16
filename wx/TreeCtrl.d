@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - TreeCtrl.cs
+// wxD - TreeCtrl.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - TreeCtrl.cs
@@ -195,10 +195,10 @@ import wx.KeyEvent;
 
 		public override int opEquals(Object o)
 		{
-			if (o === null) return false;
+			if (o is null) return false;
 			TreeItemId id = cast(TreeItemId)o;
-			if (id === null) return false;
-			if (id === this || wxobj == id.wxobj) return true;
+			if (id is null) return false;
+			if (id is this || wxobj == id.wxobj) return true;
 			return wxTreeItemId_Equal(wxobj, id.wxobj);
 		}
 		

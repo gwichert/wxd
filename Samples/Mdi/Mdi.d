@@ -12,6 +12,7 @@
 //-----------------------------------------------------------------------------
 
 import wx.wx;
+import std.stdio;
 
 struct ArrayList /* for .NET compatibility */
 {
@@ -25,7 +26,7 @@ struct ArrayList /* for .NET compatibility */
 	{
 		uint i;
 		for(i=0;i<array.length;i++) {
-			if (array[i]===o) break;
+			if (array[i] is o) break;
 		}
 		if (i==array.length) return;
 		for(i++;i<array.length;i++) {
@@ -107,7 +108,7 @@ struct ArrayList /* for .NET compatibility */
 		
 		public void OnNewWindow( Object sender, Event e )
 		{
-			stdout.writeLine( "MyFrame: OnNewWindow");
+			writefln( "MyFrame: OnNewWindow");
 			MyChild subframe = new MyChild( this, "Canvas Frame", new_Point( -1, -1 ),
 					new_Size( -1, -1 ), wxDEFAULT_FRAME_STYLE );
 
@@ -118,7 +119,7 @@ struct ArrayList /* for .NET compatibility */
 
 		public void OnQuit( Object sender, Event e )
 		{
-			stdout.writeLine( "MyFrame: OnQuit" );
+			writefln( "MyFrame: OnQuit" );
 			Close();
 		}
 
@@ -126,7 +127,7 @@ struct ArrayList /* for .NET compatibility */
 
 		public void OnClose( Object sender, Event e )
 		{
-			stdout.writeLine( "MyFrame: OnClose" );
+			writefln( "MyFrame: OnClose" );
 			CloseEvent ce = cast(CloseEvent) e;
 			
 			if ( ce.CanVeto && MyFrame.gs_nFrames > 0 )
@@ -361,7 +362,7 @@ struct ArrayList /* for .NET compatibility */
 		
 		public void OnQuit( Object sender, Event e )
 		{
-			stdout.writeLine( "MyChild: OnQuit" );
+			writefln( "MyChild: OnQuit" );
 			MyFrame.my_children.Remove( this );
 			Close( true );
 		}
@@ -433,7 +434,7 @@ struct ArrayList /* for .NET compatibility */
 		
 		public void OnClose( Object sender, Event e )
 		{
-			stdout.writeLine( "MyChild: OnClose" );
+			writefln( "MyChild: OnClose" );
 			CloseEvent ce = cast(CloseEvent) e;
 
 			if ( canvas != null && canvas.IsDirty )

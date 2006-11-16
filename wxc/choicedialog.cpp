@@ -1,8 +1,8 @@
 //-----------------------------------------------------------------------------
-// wxD - choicedialog.h
+// wxD - choicedialog.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
-// wx.NET - choicedialog.h
+// wx.NET - choicedialog.cxx
 //
 // The wxXChoiceDialog proxy interfaces.
 //

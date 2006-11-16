@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - keyevent.cxx
+// wxD - keyevent.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - keyevent.cxx

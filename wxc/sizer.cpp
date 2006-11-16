@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - sizer.cxx
+// wxD - sizer.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - sizer.cxx

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - combobox.cxx
+// wxD - combobox.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - combobox.cxx
@@ -53,7 +53,7 @@ bool wxComboBox_Create(wxComboBox* self, wxWindow* window, int id,
         validator = &wxDefaultValidator;
 
     if (name.data==NULL)
-        name = dstr("comboBox",sizeof("comboBox")-1);
+        name = dstr("comboBox");
 
     wxString* strings = new wxString[n];
     for (i = 0; i < n; ++i)

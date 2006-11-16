@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - SystemSettings.cs
+// wxD - SystemSettings.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - SystemSettings.cs

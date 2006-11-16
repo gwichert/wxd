@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - notebook.cxx
+// wxD - notebook.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - notebook.cxx
@@ -59,7 +59,7 @@ bool wxNotebook_Create(wxNotebook* self, wxWindow* parent, int id, const wxPoint
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("notebook",sizeof("notebook")-1);
+		name = dstr("notebook");
 
 	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }

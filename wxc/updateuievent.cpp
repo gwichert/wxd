@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - updateuievent.cxx
+// wxD - updateuievent.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - updateuievent.cxx

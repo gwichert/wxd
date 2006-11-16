@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - Document.cs
+// wxD - Document.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - Document.cs
@@ -32,8 +32,8 @@ version(NOT_READY_YET){
         static extern (C) bool   wxDocument_Save(IntPtr self);
         static extern (C) bool   wxDocument_SaveAs(IntPtr self);
         static extern (C) bool   wxDocument_Revert(IntPtr self);
-        static extern (C) IntPtr wxDocument_SaveObject(IntPtr self, IntPtr stream);
-        static extern (C) IntPtr wxDocument_LoadObject(IntPtr self, IntPtr stream);
+        //static extern (C) IntPtr wxDocument_SaveObject(IntPtr self, IntPtr stream);
+        //static extern (C) IntPtr wxDocument_LoadObject(IntPtr self, IntPtr stream);
         static extern (C) IntPtr wxDocument_GetCommandProcessor(IntPtr self);
         static extern (C) void   wxDocument_SetCommandProcessor(IntPtr self, IntPtr proc);
         static extern (C) bool   wxDocument_DeleteContents(IntPtr self);

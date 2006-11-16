@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - dialog.cxx
+// wxD - dialog.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - dialog.cxx
@@ -24,6 +24,8 @@ class _Dialog : public wxDialog
 {
 public:
     DECLARE_OBJECTDELETED(_Dialog)
+    
+#include "panel.inc"
 };
 
 //-----------------------------------------------------------------------------
@@ -52,7 +54,7 @@ bool wxDialog_Create(wxDialog* self, wxWindow* parent, int id,
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("dialogBox",sizeof("dialogBox")-1);
+		name = dstr("dialogBox");
 
 	return self->Create(parent, id, wxString(title.data, wxConvUTF8, title.length), *pos,
 					    *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;

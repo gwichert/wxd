@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - Wizard.cs
+// wxD - Wizard.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - Wizard.cs
@@ -17,49 +17,8 @@ module wx.Wizard;
 import wx.common;
 import wx.Dialog;
 import wx.Panel;
-import wx.NotifyEvent;
-
-	public class WizardPage : Panel
-	{
-		//---------------------------------------------------------------------
-
-		public this(IntPtr wxobj) 
-		{
-			super(wxobj);
-		}
-
-		static wxObject New(IntPtr ptr) { return new WizardPage(ptr); }
-		//---------------------------------------------------------------------
-	}
-
-		static extern (C) IntPtr wxWizardPageSimple_ctor(IntPtr parent, IntPtr prev, IntPtr next, IntPtr bitmap, char* resource);
-		static extern (C) void   wxWizardPageSimple_Chain(IntPtr first, IntPtr second);
-
-		//---------------------------------------------------------------------
-
-	public class WizardPageSimple : WizardPage
-	{
-		public this(Wizard parent, WizardPage prev = null, WizardPage next = null, Bitmap bitmap = Bitmap.wxNullBitmap, char* resource = null)
-		{
-			super(wxWizardPageSimple_ctor(wxObject.SafePtr(parent),
-						wxObject.SafePtr(prev),wxObject.SafePtr(next),
-						wxObject.SafePtr(bitmap),resource));
-		}
-
-		public this(IntPtr wxobj) 
-		{
-			super(wxobj);
-		}
-
-		//---------------------------------------------------------------------
-
-		public static void Chain(WizardPageSimple first, WizardPageSimple second)
-		{
-			wxWizardPageSimple_Chain(wxObject.SafePtr(first), wxObject.SafePtr(second));
-		}
-
-		//---------------------------------------------------------------------
-	}
+//import wx.NotifyEvent;
+import wx.WizardPage;
 
 		static extern (C) IntPtr wxWizard_ctor(IntPtr parent, int id, string title, IntPtr bitmap, inout Point pos, int style);
 		static extern (C) bool   wxWizard_RunWizard(IntPtr self, IntPtr firstPage);
@@ -79,7 +38,7 @@ import wx.NotifyEvent;
 
 		public bool RunWizard(WizardPage firstPage)
 		{
-			if (firstPage === null)
+			if (firstPage is null)
 				throw new ArgumentNullException("firstPage");
 
 			return wxWizard_RunWizard(wxobj, firstPage.wxobj);
@@ -100,6 +59,7 @@ import wx.NotifyEvent;
 		static extern (C) EventType wxEvent_WIZARD_HELP();
 		static extern (C) EventType wxEvent_WIZARD_FINISHED();
 
+/+
 	public class WizardEvent : NotifyEvent
 	{
 		static EventType wxEVT_WIZARD_PAGE_CHANGED;
@@ -142,4 +102,4 @@ import wx.NotifyEvent;
 			return cast(WizardPage)FindObject(wxWizardEvent_GetPage(wxobj),&WizardPage.New);
 		}
 	}
-
++/

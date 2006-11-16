@@ -320,7 +320,7 @@ import wx.wx;
 			{
 				TextDataObject textData = new TextDataObject( m_strText );
 				
-				if (textData === null) 
+				if (textData is null) 
 				{
 					return;
 				}

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - PrintDialog.cs
+// wxD - PrintDialog.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - PrintDialog.cs

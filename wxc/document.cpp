@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - document.cxx
+// wxD - document.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - document.cxx
@@ -123,7 +123,7 @@ bool wxDocument_Revert(wxDocument* self)
 
 //-----------------------------------------------------------------------------
 
-extern "C" WXEXPORT
+/*extern "C" WXEXPORT
 wxOutputStream* wxDocument_SaveObject(wxDocument* self, wxOutputStream* stream)
 {
     return &(self->SaveObject(*stream));
@@ -133,7 +133,7 @@ extern "C" WXEXPORT
 wxInputStream* wxDocument_LoadObject(wxDocument* self, wxInputStream* stream)
 {
     return &(self->LoadObject(*stream));
-}
+}*/
 
 //-----------------------------------------------------------------------------
 

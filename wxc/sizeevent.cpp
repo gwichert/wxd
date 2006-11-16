@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - sizeevent.cxx
+// wxD - sizeevent.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - sizeevent.cxx

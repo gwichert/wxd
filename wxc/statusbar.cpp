@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - statusbar.cxx
+// wxD - statusbar.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - statusbar.cxx

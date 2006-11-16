@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - palette.cxx
+// wxD - palette.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - palette.cxx

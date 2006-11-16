@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - Menu.cs
+// wxD - Menu.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - Menu.cs
@@ -384,7 +384,7 @@ import wx.MenuBar;
 		public MenuItem FindItem(int itemid, inout Menu menu)
 		{
 			IntPtr menuRef = IntPtr.init;
-			if (menu !== null) 
+			if (menu) 
 			{
 				menuRef = wxObject.SafePtr(menu);
 			}
@@ -452,7 +452,7 @@ import wx.MenuBar;
 		//	return cast(EvtHandler)FindObject(wxMenuBase_GetEventHandler(wxobj), &EvtHandler.New);
 			IntPtr ptr = wxMenuBase_GetEventHandler(wxobj);
 			wxObject o = FindObject(ptr);
-			if (o !== null) return cast(EvtHandler)o;
+			if (o) return cast(EvtHandler)o;
 			else new EvtHandler(ptr);
 		}
 		public void EventHandler(EvtHandler value) { wxMenuBase_SetEventHandler(wxobj, wxObject.SafePtr(value)); }

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - gridsizer.cxx
+// wxD - gridsizer.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - gridsizer.cxx

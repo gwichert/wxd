@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - staticbox.cxx
+// wxD - staticbox.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - staticbox.cxx
@@ -55,7 +55,7 @@ bool wxStaticBox_Create(wxStaticBox* self, wxWindow* parent, wxWindowID id,
         size = &wxDefaultSize;
 
     if (name.data==NULL)
-        name = dstr("staticBox",sizeof("staticBox")-1);
+        name = dstr("staticBox");
 
     return self->Create(parent, id, wxString(label.data, wxConvUTF8, label.length),
                         *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;

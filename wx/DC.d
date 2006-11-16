@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - DC.cs
+// wxD - DC.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - DC.cs

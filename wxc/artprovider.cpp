@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - artprovider.cxx
+// wxD - artprovider.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - artprovider.cxx

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - childfocusevent.cxx
+// wxD - childfocusevent.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - childfocusevent.cxx

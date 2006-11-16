@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - Notebook.cs
+// wxD - Notebook.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - Notebook.cs

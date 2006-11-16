@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - HTML.cs
+// wxD - HTML.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - HTML.cs
@@ -1366,7 +1366,7 @@ import wx.MouseEvent;
 		static extern (C) bool   wxHtmlEasyPrinting_PreviewText(IntPtr self, string htmltext, string basepath);
 		static extern (C) bool   wxHtmlEasyPrinting_PrintFile(IntPtr self, string htmlfile);
 		static extern (C) bool   wxHtmlEasyPrinting_PrintText(IntPtr self, string htmltext, string basepath);
-		static extern (C) void   wxHtmlEasyPrinting_PrinterSetup(IntPtr self);
+		//static extern (C) void   wxHtmlEasyPrinting_PrinterSetup(IntPtr self);
 		static extern (C) void   wxHtmlEasyPrinting_PageSetup(IntPtr self);
 		static extern (C) void   wxHtmlEasyPrinting_SetHeader(IntPtr self, string header, int pg);
 		static extern (C) void   wxHtmlEasyPrinting_SetFooter(IntPtr self, string footer, int pg);
@@ -1437,10 +1437,10 @@ import wx.MouseEvent;
 		
 		//-----------------------------------------------------------------------------
 		
-		public void PrinterSetup()
+		/*public void PrinterSetup()
 		{
 			wxHtmlEasyPrinting_PrinterSetup(wxobj);
-		}
+		}*/
 		
 		//-----------------------------------------------------------------------------
 		

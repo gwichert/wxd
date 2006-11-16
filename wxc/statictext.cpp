@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - statictext.cxx
+// wxD - statictext.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - statictext.cxx
@@ -52,7 +52,7 @@ bool wxStaticText_Create(wxStaticText *self, wxWindow* parent, wxWindowID id, ds
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("staticText",sizeof("staticText")-1);
+		name = dstr("staticText");
 
 	return self->Create(parent, id, wxString(label.data, wxConvUTF8, label.length), *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }

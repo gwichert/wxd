@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - mouseevent.cxx
+// wxD - mouseevent.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - mouseevent.cxx

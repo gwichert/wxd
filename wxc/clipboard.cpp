@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - clipboard.cxx
+// wxD - clipboard.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - clipboard.cxx
@@ -107,6 +107,14 @@ void wxClipboard_UsePrimarySelection(wxClipboard* self, bool primary)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
+wxClipboard* wxTheClipboard_static()
+{
+	return wxTheClipboard;
+}
+
+//-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT
 wxClipboard* wxClipboard_Get()
 {
 	return wxClipboard::Get();
@@ -115,7 +123,7 @@ wxClipboard* wxClipboard_Get()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxClipboardLocker* wxClipboardLocker_ctor(wxClipboard* clipboard)
+wxClipboardLocker* wxClipBoardLocker_ctor(wxClipboard* clipboard)
 {
 	return new wxClipboardLocker(clipboard);
 }
@@ -123,7 +131,7 @@ wxClipboardLocker* wxClipboardLocker_ctor(wxClipboard* clipboard)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxClipboardLocker_dtor(wxClipboardLocker* self)
+void wxClipBoardLocker_dtor(wxClipboardLocker* self)
 {
 	if (self != NULL)
 		delete self;

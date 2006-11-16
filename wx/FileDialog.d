@@ -1,6 +1,7 @@
 //-----------------------------------------------------------------------------
-// wxD - FileDialog.cs
+// wxD - FileDialog.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
+// (C) 2005 afb <afb@users.sourceforge.net>
 // based on
 // wx.NET - FileDialog.cs
 //
@@ -112,15 +113,10 @@ import std.string;
         public string[] Filenames() { return (new ArrayString(wxFileDialog_GetFilenames(wxobj), true)).toArray(); }
     }
 
-	static extern (C) string wxFileSelector_func(char* message, char* default_path,char* default_filename,char* default_extension, char* wildcard, int flags, IntPtr parent, int x, int y);
-	static extern (C) string wxFileSelectorEx_func(char* message, char* default_path,char* default_filename,int *indexDefaultExtension, char* wildcard, int flags, IntPtr parent, int x, int y);
-	static extern (C) string wxLoadFileSelector_func(char* what, char* extension, char* default_name, IntPtr parent);
-	static extern (C) string wxSaveFileSelector_func(char* what, char* extension, char* default_name, IntPtr parent);
-
-private char* c_str(char[] str)
-{
-	return str?.toStringz(str):null;
-}
+	static extern (C) string wxFileSelector_func(char[] message, char[] default_path,char[] default_filename,char[] default_extension, char[] wildcard, int flags, IntPtr parent, int x, int y);
+	static extern (C) string wxFileSelectorEx_func(char[] message, char[] default_path,char[] default_filename,int *indexDefaultExtension, char[] wildcard, int flags, IntPtr parent, int x, int y);
+	static extern (C) string wxLoadFileSelector_func(char[] what, char[] extension, char[] default_name, IntPtr parent);
+	static extern (C) string wxSaveFileSelector_func(char[] what, char[] extension, char[] default_name, IntPtr parent);
 
 string FileSelector(
 	string message = FileDialog.wxFileSelectorPromptStr,
@@ -132,11 +128,11 @@ string FileSelector(
 	Window parent = null, int x = -1, int y = -1)
 {
 	return wxFileSelector_func(
-		c_str(message),
-		c_str(default_path),
-		c_str(default_filename),
-		c_str(default_extension),
-		c_str(wildcard),
+		message,
+		default_path,
+		default_filename,
+		default_extension,
+		wildcard,
 		flags,
 		wxObject.SafePtr(parent),x,y);
 }
@@ -151,11 +147,11 @@ string FileSelectorEx(
 	Window parent = null, int x = -1, int y = -1)
 {
 	return wxFileSelectorEx_func(
-		c_str(message),
-		c_str(default_path),
-		c_str(default_filename),
+		message,
+		default_path,
+		default_filename,
 		indexDefaultExtension,
-		c_str(wildcard),
+		wildcard,
 		flags,
 		wxObject.SafePtr(parent),x,y);
 }
@@ -167,9 +163,9 @@ string LoadFileSelector(
 	Window parent = null)
 {
 	return wxLoadFileSelector_func(
-		c_str(what),
-		c_str(extension),
-		c_str(default_name),
+		what,
+		extension,
+		default_name,
 		wxObject.SafePtr(parent));
 }
 
@@ -180,9 +176,9 @@ string SaveFileSelector(
 	Window parent = null)
 {
 	return wxSaveFileSelector_func(
-		c_str(what),
-		c_str(extension),
-		c_str(default_name),
+		what,
+		extension,
+		default_name,
 		wxObject.SafePtr(parent));
 }
 

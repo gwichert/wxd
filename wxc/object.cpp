@@ -1,8 +1,8 @@
 //-----------------------------------------------------------------------------
-// wxD - Object.cs
+// wxD - object.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
-// wx.NET - Object.cs
+// wx.NET - object.cxx
 //
 // The wxObject wrapper class.
 //

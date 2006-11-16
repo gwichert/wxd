@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - SplashScreen.cs
+// wxD - SplashScreen.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - SplashScreen.cs

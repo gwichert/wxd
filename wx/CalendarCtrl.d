@@ -1,11 +1,13 @@
 //-----------------------------------------------------------------------------
 // wxD - CalendarCtrl.d
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
+// wx.NET - CalendarCtrl.cs
 // 
 // The wxCalendarCtrl wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
-// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
@@ -71,23 +73,23 @@ import wx.CommandEvent;
         {
             // show Sunday as the first day of the week (default)
             wxCAL_SUNDAY_FIRST               = 0x0000,
-        
-            // show Monder as the first day of the week
+
+            // show Monday as the first day of the week
             wxCAL_MONDAY_FIRST               = 0x0001,
-        
+
             // highlight holidays
             wxCAL_SHOW_HOLIDAYS              = 0x0002,
-        
+
             // disable the year change control, show only the month change one
             wxCAL_NO_YEAR_CHANGE             = 0x0004,
-        
+
             // don't allow changing neither month nor year (implies
             // wxCAL_NO_YEAR_CHANGE)
             wxCAL_NO_MONTH_CHANGE            = 0x000c,
-        
+
             // use MS-style month-selection instead of combo-spin combination
             wxCAL_SEQUENTIAL_MONTH_SELECTION = 0x0010,
-        
+
             // show the neighbouring weeks in the previous and next month
             wxCAL_SHOW_SURROUNDING_WEEKS     = 0x0020
         }

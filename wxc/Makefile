@@ -1,4 +1,5 @@
 LIBTARGET=..\wxc.lib
+
 OBJECTS = \
 	accel.obj \
 	activateevent.obj \
@@ -146,19 +147,19 @@ OBJECTS = \
 	wizard.obj \
 	wxdatetime.obj \
 	wxstring.obj \
+	wxversion.obj \
 	xmlresource.obj \
-	numdialog.obj \
-	notifyevent.obj
+	numdialog.obj
 	
-all:  $(LIBTARGET) 
+#	notifyevent.obj
+	
 
-#include ../config.dmc
-#include $(WXDIR)\src\makelib.sc
+all:  $(LIBTARGET) 
 
-#include $(WXDIR)/build/msw/config.dmc
+include $(WXDIR)/build/msw/config.dmc
 CXX = dmc
 
-WX_RELEASE_NODOT = 25
+WX_RELEASE_NODOT = 26
 OBJS = dmc_mswd$(CFG)
 LIBDIRNAME = $(WXDIR)\lib\dmc_lib$(CFG)
 SETUPHDIR = $(LIBDIRNAME)\mswd

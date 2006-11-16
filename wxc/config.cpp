@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - config.cxx
+// wxD - config.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - config.cxx

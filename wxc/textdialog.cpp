@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - textdialog.cxx
+// wxD - textdialog.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - textdialog.cxx

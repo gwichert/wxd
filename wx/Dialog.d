@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - Dialog.cs
+// wxD - Dialog.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - Dialog.cs

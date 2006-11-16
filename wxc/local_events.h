@@ -35,6 +35,7 @@ public:
 
 DECLARE_EVENT_TYPE(wxEVT_APPINIT, 0)
 DECLARE_EVENT_TYPE(wxEVT_TRANSFERDATAFROMWINDOW, 0)
+DECLARE_EVENT_TYPE(wxEVT_TRANSFERDATATOWINDOW, 0)
 DECLARE_EVENT_TYPE(wxEVT_OBJECTDELETED, 0)
 
 // Short-cut for virtual destructors
@@ -63,6 +64,6 @@ typedef void (CALLBACK* Virtual_Dispose)(void* obj);
     void RegisterDispose(Virtual_Dispose onDispose) { m_onDispose = onDispose; } \
     virtual ~name() { m_onDispose(this); } \
     Virtual_Dispose m_onDispose;
-
+    
 #endif
 

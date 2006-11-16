@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - PrintPreview.cs
+// wxD - PrintPreview.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - PrintPreview.cs

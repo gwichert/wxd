@@ -1,8 +1,8 @@
 //-----------------------------------------------------------------------------
-// wxD - Tbarbase.cs
+// wxD - ToolBar.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
-// wx.NET - Tbarbase.cs
+// wx.NET - ToolBar.cs
 // 
 // The wxToolBar wrapper class.
 //

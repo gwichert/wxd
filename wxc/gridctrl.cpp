@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - gridctrl.cxx
+// wxD - gridctrl.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - gridctrl.cxx

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - eraseevent.cxx
+// wxD - eraseevent.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - eraseevent.cxx
@@ -22,6 +22,12 @@ extern "C" WXEXPORT
 wxEraseEvent* wxEraseEvent_ctor(int Id, wxDC *dc)
 {
     return new wxEraseEvent(Id,dc);
+}
+
+extern "C" WXEXPORT
+wxEraseEvent* wxEraseEvent_ctor2(wxEventType type)
+{
+    return new wxEraseEvent(type);
 }
 
 extern "C" WXEXPORT

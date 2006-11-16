@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - ToolTip.cs
+// wxD - ToolTip.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - ToolTip.cs

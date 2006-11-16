@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - gridbagsizer.cxx
+// wxD - gridbagsizer.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - gridbagsizer.cxx

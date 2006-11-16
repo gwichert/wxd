@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - validator.cxx
+// wxD - validator.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - validator.cxx

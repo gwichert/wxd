@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - CommandEvent.cs
+// wxD - CommandEvent.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - CommandEvent.cs
@@ -16,7 +16,8 @@
 module wx.CommandEvent;
 import wx.common;
 import wx.Event;
-import wx.ClientData;
+
+import wx.ClientData;
 
 		static extern (C) IntPtr wxCommandEvent_ctor(int type,int winid);
 		static extern (C) int    wxCommandEvent_GetSelection(IntPtr self);

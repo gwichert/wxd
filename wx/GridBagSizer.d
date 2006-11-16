@@ -1,10 +1,11 @@
 //-----------------------------------------------------------------------------
-// wxD - gbsizer.h
+// wxD - GridBadSizer.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - gbsizer.h
 // 
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
+// $Id$
 //-----------------------------------------------------------------------------
 
 module wx.GridBagSizer;

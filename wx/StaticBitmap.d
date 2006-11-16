@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - StaticBitmap.cs
+// wxD - StaticBitmap.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - StaticBitmap.cs

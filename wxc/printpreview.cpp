@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - printpreview.cxx
+// wxD - printpreview.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - printpreview.cxx
@@ -208,7 +208,7 @@ extern "C" WXEXPORT
 wxPreviewFrame* wxPreviewFrame_ctor(wxPrintPreviewBase* preview, wxFrame* parent, dstr title, wxPoint* pos, wxSize* size, int style, dstr name)
 {
     if (name.data==NULL)
-        name = dstr("PreviewFrame",sizeof("PreviewFrame")-1);
+        name = dstr("PreviewFrame");
 
     return new wxPreviewFrame(preview, parent, wxString(title.data, wxConvUTF8, title.length), *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
 }
@@ -243,7 +243,7 @@ extern "C" WXEXPORT
 wxPreviewCanvas* wxPreviewCanvas_ctor(wxPrintPreviewBase* preview, wxWindow* parent, wxPoint* pos, wxSize* size, int style, dstr name)
 {
     if (name.data==NULL)
-        name = dstr("PreviewCanvas",sizeof("PreviewCanvas")-1);
+        name = dstr("PreviewCanvas");
 
     return new wxPreviewCanvas(preview, parent, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
 }

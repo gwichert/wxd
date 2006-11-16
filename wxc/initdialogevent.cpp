@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - initdialogevent.cxx
+// wxD - initdialogevent.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - initdialogevent.cxx

@@ -1,11 +1,13 @@
 //-----------------------------------------------------------------------------
 // wxD - Cursor.d
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
+// wx.NET - Cursor.cs
 //
 // The wxCursor wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
-// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$

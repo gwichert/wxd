@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - systemsettings.cxx
+// wxD - systemsettings.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - systemsettings.cxx

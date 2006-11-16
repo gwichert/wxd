@@ -1,11 +1,14 @@
 //-----------------------------------------------------------------------------
 // wxD - Clipboard.d
+// (C) 2005 bero <berobero.sourceforge.net>
+// (C) 2005 afb <afb.sourceforge.net>
+// based on
+// wx.NET - Clipboard.cs
 //
 // The wxClipboard wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
-// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
@@ -33,12 +36,13 @@ import wx.DataObject;
 		
 	public class Clipboard : wxObject
 	{
-		static Clipboard TheClipboard;
+		static Clipboard TheClipboard = null;
 
-		static this()
+		// this crashes in GTK+, since it needs a valid context first
+		/*static this()
 		{
 			TheClipboard = new Clipboard(wxClipboard_Get());
-		}
+		}*/
 
 		public this(IntPtr wxobj)
 			{ super(wxobj);}
@@ -122,7 +126,17 @@ import wx.DataObject;
 	{
 		public this(Clipboard clipboard = null)
 		{
-			m_clipboard = clipboard? clipboard : Clipboard.TheClipboard;
+			if (clipboard is null)
+			{
+				if (Clipboard.TheClipboard is null)
+					Clipboard.TheClipboard = new Clipboard(wxClipboard_Get());
+			
+				m_clipboard = Clipboard.TheClipboard;
+			}
+			else
+			{
+			    m_clipboard = clipboard;
+			}
 			if (m_clipboard) {
 				m_clipboard.Open();
 			}

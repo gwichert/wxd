@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - bmpbuttn.cxx
+// wxD - bmpbuttn.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - bmpbuttn.cxx
@@ -80,7 +80,7 @@ bool wxBitmapButton_Create(_BitmapButton* self, wxWindow *parent, wxWindowID id,
 		validator = &wxDefaultValidator;
 
 	if (name.data==NULL)
-		name = dstr("bitmapbutton",sizeof("bitmapbutton")-1);
+		name = dstr("bitmapbutton");
 
 	return self->Create(parent, id, *bitmap, *pos, *size, style, *validator, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }
@@ -204,8 +204,8 @@ int wxBitmapButton_GetMarginY(_BitmapButton* self)
 
 //-----------------------------------------------------------------------------
 
-extern "C" WXEXPORT
+/*extern "C" WXEXPORT
 void wxBitmapButton_ApplyParentThemeBackground(_BitmapButton* self, wxColour* colour)
 {
 	self->ApplyParentThemeBackground(*colour);
-}
+}*/

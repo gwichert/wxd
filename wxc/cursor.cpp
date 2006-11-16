@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - cursor.cxx
+// wxD - cursor.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - cursor.cxx

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - spinctl.cxx
+// wxD - spinctl.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - spinctl.cxx
@@ -49,7 +49,7 @@ bool wxSpinCtrl_Create(wxSpinCtrl* self, wxWindow *parent, wxWindowID id, dstr v
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("spinctrl",sizeof("spinctrl")-1);
+		name = dstr("spinctrl");
 
 	return self->Create(parent, id, wxString(value.data, wxConvUTF8, value.length), *pos, *size, style, min, max, initial, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }

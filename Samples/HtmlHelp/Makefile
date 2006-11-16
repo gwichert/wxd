@@ -1,6 +1,6 @@
 NAME=HtmlHelp
 OBJECTS=$(NAME).obj
-TARGET=..\$(NAME).exe
+TARGET=..\..\bin\$(NAME).exe
 TOPDIR=..\..
 
 include $(TOPDIR)\config.mak

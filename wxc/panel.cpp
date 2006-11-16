@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - panel.cxx
+// wxD - panel.cpp
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - panel.cxx
@@ -35,6 +35,8 @@ public:
 	    	: wxPanel(parent, winid, pos, size, style) {} //, name) {}
 
     DECLARE_OBJECTDELETED(_Panel)
+    
+#include "panel.inc"
 };
 
 //-----------------------------------------------------------------------------
@@ -57,7 +59,7 @@ wxPanel* wxPanel_ctor2(wxWindow *parent, wxWindowID id, const wxPoint* pos,
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("panel",sizeof("panel")-1);
+		name = dstr("panel");
 
 	return new _Panel(parent, id, *pos, *size, style);//, wxString(name.data, wxConvUTF8, name.length));
 }
@@ -75,7 +77,7 @@ bool wxPanel_Create(wxPanel* self, wxWindow *parent, wxWindowID id, const wxPoin
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("panel",sizeof("panel")-1);
+		name = dstr("panel");
 
 	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }

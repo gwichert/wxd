@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - SplitterWindow.cs
+// wxD - SplitterWindow.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - SplitterWindow.cs

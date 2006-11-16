@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD - Icon.cs
+// wxD - Icon.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - Icon.cs
@@ -40,6 +40,8 @@ import wx.Bitmap;
 		public this(string name, BitmapType type)
 		{
 			this();
+//			if (type == BitmapType.wxBITMAP_TYPE_RESOURCE)
+//			else
 			if (!wxIcon_LoadFile(wxobj, name, type))
 				throw new ArgumentException("file '" ~ name ~ "' can't load");
 		}
