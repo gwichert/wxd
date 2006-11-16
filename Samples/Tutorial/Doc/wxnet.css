@@ -1,0 +1,13 @@
+
+a#toc {
+	color: #FFFFFF;
+	font-family: helvetica;
+	font-weight: bold;
+}
+
+a#toc:hover {
+	text-decoration: none;
+	color: #FFBA1C;
+	font-family: helvetica;
+	font-weight: bold;
+}

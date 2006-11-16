@@ -1,0 +1,1092 @@
+//-----------------------------------------------------------------------------
+// wx.NET/Samples - ListCtrl.cs
+//
+// A wx.NET version of the wxWidgets "listctrl" sample.
+//
+// Written by Alexander Olk (xenomorph2@onlinehome.de)
+// (C) 2004 Alexander Olk
+// Licensed under the wxWidgets license, see LICENSE.txt for details.
+//
+// $Id$
+//-----------------------------------------------------------------------------
+
+using System;
+using System.Drawing;
+
+namespace wx.Samples
+{
+	public enum Cmd
+	{
+		LIST_ABOUT,
+		LIST_QUIT,
+		
+		LIST_LIST_VIEW,
+		LIST_ICON_VIEW,
+		LIST_ICON_TEXT_VIEW,
+		LIST_SMALL_ICON_VIEW,
+		LIST_SMALL_ICON_TEXT_VIEW,
+		LIST_REPORT_VIEW,
+		LIST_VIRTUAL_VIEW,
+		
+		LIST_DESELECT_ALL,
+		LIST_SELECT_ALL,
+		LIST_DELETE_ALL,
+		LIST_DELETE,
+		LIST_ADD,
+		LIST_EDIT,
+		LIST_SORT,
+		LIST_SET_FG_COL,
+		LIST_SET_BG_COL,
+		LIST_TOGGLE_MULTI_SEL,
+		LIST_TOGGLE_FIRST,
+		LIST_SHOW_COL_INFO,
+		LIST_SHOW_SEL_INFO,
+		LIST_FOCUS_LAST,
+		LIST_FREEZE,
+		LIST_THAW,
+		LIST_TOGGLE_LINES,
+		
+		LIST_CTRL                   = 1000
+	};
+	
+	//---------------------------------------------------------------------
+
+	public class MyFrame : Frame
+	{
+		public ImageList m_imageListNormal;
+		public ImageList m_imageListSmall;
+
+		public TextCtrl m_logWindow;
+		public MyListCtrl m_listCtrl;
+		public Panel m_panel;
+		
+		public static int NUM_ITEMS = 30;
+		
+		public static int NUM_ICONS = 9;
+
+		//---------------------------------------------------------------------
+
+		public MyFrame(string title, Point pos, Size size)
+			: base(title, pos, size)
+		{
+			// Set the window icon and status bar
+
+			Icon = new wx.Icon("../Samples/ListCtrl/mondrian.png");
+			
+			// Make an image list containing large icons
+			m_imageListNormal = new ImageList(32, 32, true);
+			m_imageListSmall = new ImageList(16, 16, true);
+			
+			Bitmap bmp = new Bitmap( "../Samples/ListCtrl/bitmaps/toolbrai.xpm" );
+			m_imageListNormal.Add( bmp );
+			bmp = new Bitmap( "../Samples/ListCtrl/bitmaps/toolchar.xpm" );
+			m_imageListNormal.Add( bmp );
+			bmp = new Bitmap( "../Samples/ListCtrl/bitmaps/tooldata.xpm" );
+			m_imageListNormal.Add( bmp );
+			bmp = new Bitmap( "../Samples/ListCtrl/bitmaps/toolnote.xpm" );
+			m_imageListNormal.Add( bmp );
+			bmp = new Bitmap( "../Samples/ListCtrl/bitmaps/tooltodo.xpm" );
+			m_imageListNormal.Add( bmp );
+			bmp = new Bitmap( "../Samples/ListCtrl/bitmaps/toolchec.xpm" );
+			m_imageListNormal.Add( bmp );
+			bmp = new Bitmap( "../Samples/ListCtrl/bitmaps/toolgame.xpm" );
+			m_imageListNormal.Add( bmp );
+			bmp = new Bitmap( "../Samples/ListCtrl/bitmaps/tooltime.xpm" );
+			m_imageListNormal.Add( bmp );
+			bmp = new Bitmap( "../Samples/ListCtrl/bitmaps/toolword.xpm" );
+			m_imageListNormal.Add( bmp );
+			
+			bmp = new Bitmap( "../Samples/ListCtrl/bitmaps/small1.xpm" );
+			m_imageListSmall.Add( bmp );
+
+			// Make a menubar
+			Menu menuFile = new Menu();
+			menuFile.Append((int)Cmd.LIST_ABOUT, _("&About"));
+			menuFile.AppendSeparator();
+			menuFile.Append((int)Cmd.LIST_QUIT, _("E&xit\tAlt-X"));
+
+			Menu menuView = new Menu();
+			menuView.Append((int)Cmd.LIST_LIST_VIEW, _("&List view\tF1"));
+			menuView.Append((int)Cmd.LIST_REPORT_VIEW, _("&Report view\tF2"));
+			menuView.Append((int)Cmd.LIST_ICON_VIEW, _("&Icon view\tF3"));
+			menuView.Append((int)Cmd.LIST_ICON_TEXT_VIEW, _("Icon view with &text\tF4"));
+			menuView.Append((int)Cmd.LIST_SMALL_ICON_VIEW, _("&Small icon view\tF5"));
+			menuView.Append((int)Cmd.LIST_SMALL_ICON_TEXT_VIEW, _("Small icon &view with text\tF6"));
+			menuView.Append((int)Cmd.LIST_VIRTUAL_VIEW, _("Virtual view\tF7"));
+
+			Menu menuList = new Menu();
+			menuList.Append((int)Cmd.LIST_FOCUS_LAST, _("&Make last item current\tCtrl-L"));
+			menuList.Append((int)Cmd.LIST_TOGGLE_FIRST, _("To&ggle first item\tCtrl-G"));
+			menuList.Append((int)Cmd.LIST_DESELECT_ALL, _("&Deselect All\tCtrl-D"));
+			menuList.Append((int)Cmd.LIST_SELECT_ALL, _("S&elect All\tCtrl-A"));
+			menuList.AppendSeparator();
+			menuList.Append((int)Cmd.LIST_SHOW_COL_INFO, _("Show &column info\tCtrl-C"));
+			menuList.Append((int)Cmd.LIST_SHOW_SEL_INFO, _("Show &selected items\tCtrl-S"));
+			menuList.AppendSeparator();
+			menuList.Append((int)Cmd.LIST_SORT, _("&Sort\tCtrl-S"));
+			menuList.AppendSeparator();
+			menuList.Append((int)Cmd.LIST_ADD, _("&Append an item\tCtrl-P"));
+			menuList.Append((int)Cmd.LIST_EDIT, _("&Edit the item\tCtrl-E"));
+			menuList.Append((int)Cmd.LIST_DELETE, _("&Delete first item\tCtrl-X"));
+			menuList.Append((int)Cmd.LIST_DELETE_ALL, _("Delete &all items"));
+			menuList.AppendSeparator();
+			menuList.Append((int)Cmd.LIST_FREEZE, _("Free&ze\tCtrl-Z"));
+			menuList.Append((int)Cmd.LIST_THAW, _("Tha&w\tCtrl-W"));
+			menuList.AppendSeparator();
+			menuList.AppendCheckItem((int)Cmd.LIST_TOGGLE_LINES, _("Toggle &lines\tCtrl-I"));
+			menuList.AppendCheckItem((int)Cmd.LIST_TOGGLE_MULTI_SEL, _("&Multiple selection\tCtrl-M"), _("Toggle multiple selection"));
+
+			Menu menuCol = new Menu();
+			menuCol.Append((int)Cmd.LIST_SET_FG_COL, _("&Foreground colour..."));
+			menuCol.Append((int)Cmd.LIST_SET_BG_COL, _("&Background colour..."));
+
+			MenuBar menubar = new MenuBar();
+			menubar.Append(menuFile, _("&File"));
+			menubar.Append(menuView, _("&View"));
+			menubar.Append(menuList, _("&List"));
+			menubar.Append(menuCol, _("&Colour"));
+			
+			MenuBar = menubar;
+
+			m_panel = new Panel(this, wxID_ANY);
+			m_logWindow = new TextCtrl(m_panel, wxID_ANY, "",
+					wxDefaultPosition, wxDefaultSize,
+					TextCtrl.wxTE_MULTILINE | Window.wxSUNKEN_BORDER);
+
+			Log.SetActiveTarget(m_logWindow);
+
+			RecreateList(ListCtrl.wxLC_REPORT | ListCtrl.wxLC_SINGLE_SEL);
+
+			CreateStatusBar(3);
+			
+			EVT_SIZE(new EventListener(OnSize));
+
+			EVT_MENU((int)Cmd.LIST_QUIT, new EventListener(OnQuit));
+			EVT_MENU((int)Cmd.LIST_ABOUT, new EventListener(OnAbout));
+			EVT_MENU((int)Cmd.LIST_LIST_VIEW, new EventListener(OnListView));
+			EVT_MENU((int)Cmd.LIST_REPORT_VIEW, new EventListener(OnReportView));
+			EVT_MENU((int)Cmd.LIST_ICON_VIEW, new EventListener(OnIconView));
+			EVT_MENU((int)Cmd.LIST_ICON_TEXT_VIEW, new EventListener(OnIconTextView));
+			EVT_MENU((int)Cmd.LIST_SMALL_ICON_VIEW, new EventListener(OnSmallIconView));
+			EVT_MENU((int)Cmd.LIST_SMALL_ICON_TEXT_VIEW, new EventListener(OnSmallIconTextView));
+			EVT_MENU((int)Cmd.LIST_VIRTUAL_VIEW, new EventListener(OnVirtualView));
+			
+			EVT_MENU((int)Cmd.LIST_FOCUS_LAST, new EventListener(OnFocusLast));
+			EVT_MENU((int)Cmd.LIST_TOGGLE_FIRST, new EventListener(OnToggleFirstSel));
+			EVT_MENU((int)Cmd.LIST_DESELECT_ALL, new EventListener(OnDeselectAll));
+			EVT_MENU((int)Cmd.LIST_SELECT_ALL, new EventListener(OnSelectAll));
+			EVT_MENU((int)Cmd.LIST_DELETE, new EventListener(OnDelete));
+			EVT_MENU((int)Cmd.LIST_ADD, new EventListener(OnAdd));
+			EVT_MENU((int)Cmd.LIST_EDIT, new EventListener(OnEdit));
+			EVT_MENU((int)Cmd.LIST_DELETE_ALL, new EventListener(OnDeleteAll));
+			EVT_MENU((int)Cmd.LIST_SORT, new EventListener(OnSort));
+			EVT_MENU((int)Cmd.LIST_SET_FG_COL, new EventListener(OnSetFgColour));
+			EVT_MENU((int)Cmd.LIST_SET_BG_COL, new EventListener(OnSetBgColour));
+			EVT_MENU((int)Cmd.LIST_TOGGLE_MULTI_SEL, new EventListener(OnToggleMultiSel));
+			EVT_MENU((int)Cmd.LIST_SHOW_COL_INFO, new EventListener(OnShowColInfo));
+			EVT_MENU((int)Cmd.LIST_SHOW_SEL_INFO, new EventListener(OnShowSelInfo));
+			EVT_MENU((int)Cmd.LIST_FREEZE, new EventListener(OnFreeze));
+			EVT_MENU((int)Cmd.LIST_THAW, new EventListener(OnThaw));
+			EVT_MENU((int)Cmd.LIST_TOGGLE_LINES, new EventListener(OnToggleLines));
+			
+			EVT_UPDATE_UI((int)Cmd.LIST_SHOW_COL_INFO, new EventListener(OnUpdateShowColInfo));
+			EVT_UPDATE_UI((int)Cmd.LIST_TOGGLE_MULTI_SEL, new EventListener(OnUpdateToggleMultiSel));
+			
+			Closing += new EventListener(OnClosing);
+		}
+		
+		//---------------------------------------------------------------------	
+		
+		public void OnClosing(object sender, Event e)
+		{
+			Log.SetActiveTarget(null);
+			e.Skip();
+		}
+
+		//---------------------------------------------------------------------	
+
+		public void OnAbout( object sender, Event e )
+		{
+			MessageDialog.MessageBox( "List test sample\nJulian Smart (c) 1997\nPorted to wx.NET by Alexander Olk", "About",
+				Dialog.wxOK | Dialog.wxICON_INFORMATION );
+		}
+
+		//---------------------------------------------------------------------	
+
+		public void OnQuit( object sender, Event e )
+		{
+			Close();
+		}
+		
+		//---------------------------------------------------------------------	
+		
+		public void OnSize( object sender, Event e )
+		{
+			DoSize();
+
+			e.Skip();
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void DoSize()
+		{
+			if ( m_logWindow == null ) return;
+
+			Size size = ClientSize;
+			int y = (2*size.Height)/3;
+			m_listCtrl.SetSize(0, 0, size.Width, y);
+			m_logWindow.SetSize(0, y + 1, size.Width, size.Height - y);
+		}
+		
+		//---------------------------------------------------------------------	
+		
+		public void OnFreeze( object sender, Event e )
+		{
+			Log.LogMessage(_("Freezing the control"));
+
+			m_listCtrl.Freeze();
+		}
+
+		//---------------------------------------------------------------------	
+
+		public void OnThaw( object sender, Event e )
+		{
+			Log.LogMessage(_("Thawing the control"));
+
+			m_listCtrl.Thaw();
+		}
+
+		//---------------------------------------------------------------------	
+
+		public void OnToggleLines( object sender, Event e )
+		{
+			CommandEvent ce = e as CommandEvent;
+		
+			m_listCtrl.SetSingleStyle(ListCtrl.wxLC_HRULES | ListCtrl.wxLC_VRULES, ce.IsChecked);
+		}
+
+		//---------------------------------------------------------------------	
+
+		public void OnFocusLast( object sender, Event e )
+		{
+			long index = m_listCtrl.ItemCount - 1;
+			if ( index == -1 )
+			{
+				return;
+			}
+
+			m_listCtrl.SetItemState((int)index, (int)ListCtrl.wxLIST_STATE_FOCUSED, (int)ListCtrl.wxLIST_STATE_FOCUSED);
+			m_listCtrl.EnsureVisible((int)index);
+		}
+
+		//---------------------------------------------------------------------	
+
+		public void OnToggleFirstSel( object sender, Event e )
+		{
+			m_listCtrl.SetItemState(0, (~m_listCtrl.GetItemState(0, (int)ListCtrl.wxLIST_STATE_SELECTED) ) & (int)ListCtrl.wxLIST_STATE_SELECTED, (int)ListCtrl.wxLIST_STATE_SELECTED);
+		}
+
+		//---------------------------------------------------------------------	
+
+		public void OnDeselectAll( object sender, Event e )
+		{
+			if ( !CheckNonVirtual() )
+				return;
+
+			int n = m_listCtrl.ItemCount;
+			for (int i = 0; i < n; i++)
+				m_listCtrl.SetItemState(i,0,(int)ListCtrl.wxLIST_STATE_SELECTED);
+		}
+
+		//---------------------------------------------------------------------	
+
+		public void OnSelectAll( object sender, Event e )
+		{
+			if ( !CheckNonVirtual() )
+				return;
+
+			int n = m_listCtrl.ItemCount;
+			for (int i = 0; i < n; i++)
+				m_listCtrl.SetItemState(i,(int)ListCtrl.wxLIST_STATE_SELECTED, (int)ListCtrl.wxLIST_STATE_SELECTED);
+		}
+
+		//---------------------------------------------------------------------	
+
+		public bool CheckNonVirtual()
+		{
+			if ( !m_listCtrl.HasFlag((int)ListCtrl.wxLC_VIRTUAL) )
+				return true;
+
+			Log.LogWarning("Can't do this in virtual view, sorry.");
+
+			return false;
+		}
+		
+		//---------------------------------------------------------------------	
+		
+		public void RecreateList(long flags)
+		{
+			RecreateList(flags, true);
+		}
+		
+		public void RecreateList(long flags, bool withText)
+		{
+			//delete m_listCtrl;
+
+			m_listCtrl = new MyListCtrl(m_panel, (int)Cmd.LIST_CTRL,
+					wxDefaultPosition, wxDefaultSize,
+					flags |
+					wxSUNKEN_BORDER | ListCtrl.wxLC_EDIT_LABELS);
+
+			switch ( flags & ListCtrl.wxLC_MASK_TYPE )
+			{
+				case ListCtrl.wxLC_LIST:
+					InitWithListItems();
+				break;
+
+				case ListCtrl.wxLC_ICON:
+					InitWithIconItems(withText);
+				break;
+
+				case ListCtrl.wxLC_SMALL_ICON:
+					InitWithIconItems(withText, true);
+				break;
+
+				case ListCtrl.wxLC_REPORT:
+					if ( (flags & ListCtrl.wxLC_VIRTUAL) > 0 )
+						InitWithVirtualItems();
+					else
+						InitWithReportItems();
+				break;
+
+				default:
+					Console.WriteLine("unknown listctrl mode");
+				break;
+			}
+
+			DoSize();
+
+			m_logWindow.Clear();
+		}
+		
+		//---------------------------------------------------------------------	
+		
+		public void OnListView(object sender, Event e)
+		{
+			RecreateList(ListCtrl.wxLC_LIST);
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void InitWithListItems()
+		{
+			for ( int i = 0; i < NUM_ITEMS; i++ )
+			{
+				m_listCtrl.InsertItem(i, "Item " + i);
+			}
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnReportView(object sender, Event e)
+		{
+			RecreateList(ListCtrl.wxLC_REPORT);
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void InitWithReportItems()
+		{
+			m_listCtrl.SetImageList(m_imageListSmall, (int)wxImageList.wxIMAGE_LIST_SMALL);
+
+			ListItem itemCol = new ListItem();
+			itemCol.Text = "Column 1";
+			itemCol.Image = -1;
+			m_listCtrl.InsertColumn(0, itemCol);
+			
+			itemCol.Text = "Column 2";
+			itemCol.Align = ListCtrl.wxLIST_FORMAT_CENTRE;
+			m_listCtrl.InsertColumn(1, itemCol);
+			
+			itemCol.Text = "Column 3";
+			itemCol.Align = ListCtrl.wxLIST_FORMAT_RIGHT;
+			m_listCtrl.InsertColumn(2, itemCol);
+			
+			m_listCtrl.Hide();
+			
+			for ( int i = 0; i < NUM_ITEMS; i++ )
+			{
+				m_listCtrl.InsertItemInReportView(i);
+			}
+			
+			m_logWindow.WriteText(NUM_ITEMS + " items inserted");
+			m_listCtrl.Show();
+			
+			ListItem item = new ListItem();
+			item.Id = 0;
+			item.TextColour = Colour.wxRED;
+			m_listCtrl.SetItem( item );
+			
+			item.Id = 2;
+			item.TextColour = Colour.wxGREEN;
+			m_listCtrl.SetItem( item );
+			item.Id = 4;
+			item.TextColour = Colour.wxLIGHT_GREY;
+			item.Font = Font.wxITALIC_FONT;
+			item.BackgroundColour = Colour.wxRED;
+			m_listCtrl.SetItem( item );
+			
+			m_listCtrl.TextColour = Colour.wxBLUE;
+			m_listCtrl.BackgroundColour = Colour.wxLIGHT_GREY;
+			
+			m_listCtrl.SetColumnWidth( 0, ListCtrl.wxLIST_AUTOSIZE );
+			m_listCtrl.SetColumnWidth( 1, ListCtrl.wxLIST_AUTOSIZE );
+			m_listCtrl.SetColumnWidth( 2, ListCtrl.wxLIST_AUTOSIZE );
+		}
+		
+		//---------------------------------------------------------------------	
+		
+		public void InitWithIconItems(bool withText)
+		{
+			InitWithIconItems(withText, false);
+		}
+
+		public void InitWithIconItems(bool withText, bool sameIcon)
+		{
+			m_listCtrl.SetImageList(m_imageListNormal, (int)wxImageList.wxIMAGE_LIST_NORMAL);
+			m_listCtrl.SetImageList(m_imageListSmall, (int)wxImageList.wxIMAGE_LIST_SMALL);
+
+			for ( int i = 0; i < NUM_ICONS; i++ )
+			{
+				int image = sameIcon ? 0 : i;
+
+				if ( withText )
+				{
+					m_listCtrl.InsertItem(i, "Label " + i, image);
+				}
+				else
+				{
+					m_listCtrl.InsertItem(i, image);
+				}
+			}
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnIconView(object sender, Event e)
+		{
+			RecreateList(ListCtrl.wxLC_ICON, false);
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnIconTextView(object sender, Event e)
+		{
+			RecreateList(ListCtrl.wxLC_ICON);
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnSmallIconView(object sender, Event e)
+		{
+			RecreateList(ListCtrl.wxLC_SMALL_ICON, false);
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnSmallIconTextView(object sender, Event e)
+		{
+			RecreateList(ListCtrl.wxLC_SMALL_ICON);
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnVirtualView(object sender, Event e)
+		{
+			RecreateList(ListCtrl.wxLC_REPORT | ListCtrl.wxLC_VIRTUAL);
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void InitWithVirtualItems()
+		{
+			m_listCtrl.SetImageList(m_imageListSmall, (int)wxImageList.wxIMAGE_LIST_SMALL);
+
+			m_listCtrl.InsertColumn(0, _("First Column"));
+			m_listCtrl.InsertColumn(1, _("Second Column"));
+			m_listCtrl.SetColumnWidth(0, 150);
+			m_listCtrl.SetColumnWidth(1, 150);
+
+			m_listCtrl.ItemCount = 1000000;
+		}
+		
+		//---------------------------------------------------------------------	
+		
+		public int MyCompareFunction(long item1, long item2, long sortData)
+		{
+			// inverse the order
+			if (item1 < item2)
+				return -1;
+			if (item1 > item2)
+				return 1;
+
+			return 0;
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnSort(object sender, Event e)
+		{
+			m_listCtrl.SortItems(new ListCtrl.wxListCtrlCompare(MyCompareFunction), 0);
+ 
+			m_logWindow.WriteText("Sorting " + m_listCtrl.ItemCount + " items");
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnShowSelInfo(object sender, Event e)
+		{
+			int selCount = m_listCtrl.SelectedItemCount;
+			Log.LogMessage(selCount +" items selected:");
+
+			int shownCount = 0;
+
+			int item = m_listCtrl.GetNextItem(-1, ListCtrl.wxLIST_NEXT_ALL,
+						ListCtrl.wxLIST_STATE_SELECTED);
+			while ( item != -1 )
+			{
+				Log.LogMessage("\t" + item + "d (" + m_listCtrl.GetItemText(item) + ")");
+
+				if ( ++shownCount > 10 )
+				{
+					Log.LogMessage(_("\t... more selected items snipped..."));
+					break;
+				}
+
+				item = m_listCtrl.GetNextItem(item, ListCtrl.wxLIST_NEXT_ALL,
+					ListCtrl.wxLIST_STATE_SELECTED);
+			}
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnShowColInfo(object sender, Event e)
+		{
+			int count = m_listCtrl.ColumnCount;
+			Log.LogMessage(count + " columns:");
+			for ( int c = 0; c < count; c++ )
+			{
+				Log.LogMessage("\tcolumn " + c + " has width " + m_listCtrl.GetColumnWidth(c));
+			}
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnUpdateShowColInfo(object sender, Event e)
+		{
+			UpdateUIEvent ue = e as UpdateUIEvent;
+		
+			ue.Enabled =(m_listCtrl.StyleFlags & ListCtrl.wxLC_REPORT) != 0;
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnToggleMultiSel(object sender, Event e)
+		{
+			long flags = m_listCtrl.StyleFlags;
+			if ( (flags & ListCtrl.wxLC_SINGLE_SEL) > 0 )
+				flags &= ~ListCtrl.wxLC_SINGLE_SEL;
+			else
+				flags |= ListCtrl.wxLC_SINGLE_SEL;
+
+			m_logWindow.WriteText("Current selection mode: " + 
+				( ( (flags & ListCtrl.wxLC_SINGLE_SEL) > 0 ) ? "sing" : "multip" ) + "le\n");
+
+			RecreateList(flags);
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnUpdateToggleMultiSel(object sender, Event e)
+		{
+			UpdateUIEvent ue = e as UpdateUIEvent;
+			
+			ue.Check = (m_listCtrl.StyleFlags & ListCtrl.wxLC_SINGLE_SEL) == 0;
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnSetFgColour(object sender, Event e)
+		{
+			m_listCtrl.ForegroundColour = ColourDialog.GetColourFromUser(this);
+			m_listCtrl.Refresh();
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnSetBgColour(object sender, Event e)
+		{
+			m_listCtrl.BackgroundColour = ColourDialog.GetColourFromUser(this);
+			m_listCtrl.Refresh();
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnAdd(object sender, Event e)
+		{
+			m_listCtrl.InsertItem(m_listCtrl.ItemCount, _("Appended item"));
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnEdit(object sender, Event e)
+		{
+			int itemCur = m_listCtrl.GetNextItem(-1, ListCtrl.wxLIST_NEXT_ALL,
+						ListCtrl.wxLIST_STATE_FOCUSED);
+
+			if ( itemCur != -1 )
+			{
+				m_listCtrl.EditLabel(itemCur);
+			}
+			else
+			{
+				m_logWindow.WriteText(_("No item to edit"));
+			}
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnDelete(object sender, Event e)
+		{
+			if ( m_listCtrl.ItemCount > 0 )
+			{
+				m_listCtrl.DeleteItem(0);
+			}
+			else
+			{
+				m_logWindow.WriteText(_("Nothing to delete"));
+			}
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnDeleteAll(object sender, Event e)
+		{
+
+			m_listCtrl.DeleteAllItems();
+
+			m_logWindow.WriteText("Deleted " + m_listCtrl.ItemCount + " items\n");
+		}
+	}   
+	
+	//---------------------------------------------------------------------	
+	
+	public class MyListCtrl : ListCtrl
+	{
+		private ListItemAttr m_attr;
+		
+		//---------------------------------------------------------------------
+		
+		public MyListCtrl( Window parent, int id, Point pos, Size size, long style )
+			: base( parent, id, pos, size, style )
+		{
+			EVT_LIST_BEGIN_DRAG((int)Cmd.LIST_CTRL, new EventListener(OnBeginDrag));
+			EVT_LIST_BEGIN_RDRAG((int)Cmd.LIST_CTRL, new EventListener(OnBeginRDrag));
+			EVT_LIST_BEGIN_LABEL_EDIT((int)Cmd.LIST_CTRL, new EventListener(OnBeginLabelEdit));
+			EVT_LIST_END_LABEL_EDIT((int)Cmd.LIST_CTRL, new EventListener(OnEndLabelEdit));
+			EVT_LIST_DELETE_ITEM((int)Cmd.LIST_CTRL, new EventListener(OnDeleteItem));
+			EVT_LIST_DELETE_ALL_ITEMS((int)Cmd.LIST_CTRL, new EventListener(OnDeleteAllItems));
+			EVT_LIST_ITEM_SELECTED((int)Cmd.LIST_CTRL, new EventListener(OnSelected));
+			EVT_LIST_ITEM_DESELECTED((int)Cmd.LIST_CTRL, new EventListener(OnDeselected));
+			EVT_LIST_KEY_DOWN((int)Cmd.LIST_CTRL, new EventListener(OnListKeyDown));
+			EVT_LIST_ITEM_ACTIVATED((int)Cmd.LIST_CTRL, new EventListener(OnActivated));
+			EVT_LIST_ITEM_FOCUSED((int)Cmd.LIST_CTRL, new EventListener(OnFocused));
+			
+			EVT_LIST_COL_CLICK((int)Cmd.LIST_CTRL, new EventListener(OnColClick));
+			EVT_LIST_COL_RIGHT_CLICK((int)Cmd.LIST_CTRL, new EventListener(OnColRightClick));
+			EVT_LIST_COL_BEGIN_DRAG((int)Cmd.LIST_CTRL, new EventListener(OnColBeginDrag));
+			EVT_LIST_COL_DRAGGING((int)Cmd.LIST_CTRL, new EventListener(OnColDragging));
+			EVT_LIST_COL_END_DRAG((int)Cmd.LIST_CTRL, new EventListener(OnColEndDrag));
+			
+			EVT_LIST_CACHE_HINT((int)Cmd.LIST_CTRL, new EventListener(OnCacheHint));
+			
+			EVT_CHAR(new EventListener(OnChar));
+		}
+		
+		//---------------------------------------------------------------------	
+		
+		public void OnCacheHint(object sender, Event e)
+		{
+			ListEvent le = e as ListEvent;
+			
+			Log.LogMessage( "OnCacheHint: cache items " + le.CacheFrom + ".." + le.CacheTo );
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void SetColumnImage(int col, int image)
+		{
+			ListItem item = new ListItem();
+			item.Mask = ListCtrl.wxLIST_MASK_IMAGE;
+			item.Image = image;
+			SetColumn(col, item);
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnColClick(object sender, Event e)
+		{
+			ListEvent le = e as ListEvent;
+			
+			int col = le.Column;
+			SetColumnImage(col, 0);
+
+			Log.LogMessage( "OnColumnClick at " + col + "." );
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnColRightClick(object sender, Event e)
+		{
+			ListEvent le = e as ListEvent;
+		
+			int col = le.Column;
+			if ( col != -1 )
+			{
+				SetColumnImage(col, -1);
+			}
+
+			Menu menu = new Menu("Test");
+			menu.Append((int)Cmd.LIST_ABOUT, _("&About"));
+			PopupMenu(menu, le.Point); 
+
+			Log.LogMessage( "OnColumnRightClick at " + le.Column + "." );
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void LogColEvent(object sender, Event e, string name)
+		{
+			ListEvent le = e as ListEvent;
+		
+			int col = le.Column;
+			
+			string msg = name + ": column ";
+			msg += col + "(width = ";
+			msg += le.Item.Width + " or ";
+			msg += GetColumnWidth(col) + ".";
+
+			Log.LogMessage( msg );
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnColBeginDrag(object sender, Event e)
+		{
+			LogColEvent( sender, e, "OnColBeginDrag" );
+			
+			ListEvent le = e as ListEvent;
+
+			if ( le.Column == 0 )
+			{
+				Log.LogMessage("Resizing this column shouldn't work.");
+
+				le.Veto();
+			}
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnColDragging(object sender, Event e)
+		{
+			LogColEvent( sender, e, "OnColDragging" );
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnColEndDrag(object sender, Event e)
+		{
+			LogColEvent( sender, e, "OnColEndDrag" );
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnBeginDrag(object sender, Event e)
+		{
+			ListEvent le = e as ListEvent;
+		
+			Point pt = le.Point;
+
+			int flags = 0;
+			Log.LogMessage( "OnBeginDrag at (" + pt.X + ", " + pt.Y + "), item " + HitTest(pt, flags) + ".");
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnBeginRDrag(object sender, Event e)
+		{
+			ListEvent le = e as ListEvent;
+		
+			Log.LogMessage( "OnBeginRDrag at " + le.Point.X + "," + le.Point.Y + ".");
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnBeginLabelEdit(object sender, Event e)
+		{
+			ListEvent le = e as ListEvent;
+				
+			Log.LogMessage( "OnBeginLabelEdit: " + le.Item.Text);
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnEndLabelEdit(object sender, Event e)
+		{
+			ListEvent le = e as ListEvent;
+		
+			Log.LogMessage( "OnEndLabelEdit: " +
+				(le.EditCancelled ? "[cancelled]" : le.Item.Text) );
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnDeleteItem(object sender, Event e)
+		{
+			LogEvent(sender, e, "OnDeleteItem");
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnDeleteAllItems(object sender, Event e)
+		{
+			LogEvent(sender, e, "OnDeleteAllItems");
+		}
+	
+		//---------------------------------------------------------------------	
+
+		public void OnSelected(object sender, Event e)
+		{
+			LogEvent(sender, e, "OnSelected");
+			
+			ListEvent le = e as ListEvent;
+
+			if ( (StyleFlags & ListCtrl.wxLC_REPORT) > 0 )
+			{
+				ListItem info = new ListItem();
+				info.Id = le.Index;
+				info.Column = 1;
+				info.Mask = ListCtrl.wxLIST_MASK_TEXT;
+				if ( GetItem(ref info) )
+				{
+					Log.LogMessage("Value of the 2nd field of the selected item: " +
+						info.Text);
+				}
+				else
+				{
+					Console.WriteLine("wxListCtrl::GetItem() failed");
+				}
+			}
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnDeselected(object sender, Event e)
+		{
+			LogEvent(sender, e, "OnDeselected");
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnActivated(object sender, Event e)
+		{
+			LogEvent(sender, e, "OnActivated");
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnFocused(object sender, Event e)
+		{
+			LogEvent(sender, e, "OnFocused");
+
+			e.Skip();
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnListKeyDown(object sender, Event e)
+		{
+			ListEvent le = e as ListEvent;
+		
+			switch ( le.KeyCode )
+			{
+				case 'c': // colorize
+				case 'C':
+				{
+					ListItem info = new ListItem();
+					info.Id = le.Index;
+					GetItem(ref info);
+
+					ListItemAttr attr = info.Attributes;
+					if ( attr == null || !attr.HasTextColour )
+					{
+						info.TextColour = Colour.wxCYAN;
+
+						SetItem(info);
+
+						RefreshItem(info.Id);
+					}
+				}
+				break;
+
+				case 'n': // next
+				case 'N':
+				{
+					int item = GetNextItem(-1,
+						ListCtrl.wxLIST_NEXT_ALL, ListCtrl.wxLIST_STATE_FOCUSED);
+					if ( item++ == ItemCount - 1 )
+					{
+						item = 0;
+					}
+
+					Log.LogMessage("Focusing item " + item);
+
+					SetItemState(item, ListCtrl.wxLIST_STATE_FOCUSED, ListCtrl.wxLIST_STATE_FOCUSED);
+					EnsureVisible(item);
+				}
+				break;
+
+				case (int)KeyCode.WXK_DELETE:
+				{
+					int item = GetNextItem(-1,
+						ListCtrl.wxLIST_NEXT_ALL, ListCtrl.wxLIST_STATE_SELECTED);
+					while ( item != -1 )
+					{
+						DeleteItem(item);
+
+						Log.LogMessage("Item " + item + " deleted");
+
+						// -1 because the indices were shifted by DeleteItem()
+						item = GetNextItem(item - 1,
+							ListCtrl.wxLIST_NEXT_ALL, ListCtrl.wxLIST_STATE_SELECTED);
+					}
+				}
+				break;
+
+				case (int)KeyCode.WXK_INSERT:
+					if ( (StyleFlags & ListCtrl.wxLC_REPORT) > 0 )
+					{
+						if ( (StyleFlags & ListCtrl.wxLC_VIRTUAL) > 0 )
+						{
+							ItemCount = ItemCount + 1;
+						}
+						else // !virtual
+						{
+							InsertItemInReportView(le.Index);
+						}
+					}
+					//else: fall through
+				break; //???
+
+				default:
+					LogEvent(sender, e, "OnListKeyDown");
+
+					le.Skip();
+				break;
+			}
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public void OnChar(object sender, Event e)
+		{
+			KeyEvent ke = e as KeyEvent;
+		
+			Log.LogMessage("Got char event.");
+	
+			switch ( ke.KeyCode )
+			{
+				case 'n':
+				case 'N':
+				case 'c':
+				case 'C':
+				// these are the keys we process ourselves
+				break;
+
+				default:
+					e.Skip();
+				break;
+			}
+		}
+	
+		//---------------------------------------------------------------------	
+
+		public void LogEvent(object sender, Event e, string eventName)
+		{
+			ListEvent le = e as ListEvent;
+		
+			Log.LogMessage("Item " + le.Index + ": " + eventName + " (item text = " + le.Text +
+				 ", data = " + le.Data + ")");
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public string OnGetItemText(long item, long column)
+		{
+			string s = "Column " + column + " of item " + item;
+			return s;
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public int OnGetItemImage(long item)
+		{
+			return 0;
+		}
+		
+		//---------------------------------------------------------------------	
+
+		public ListItemAttr OnGetItemAttr(long item)
+		{
+			return (item % 2) > 0 ? null : m_attr;
+		}
+		
+		//---------------------------------------------------------------------	
+		
+		public void InsertItemInReportView(int i)
+		{
+			string buf = "This is item " + i;
+			int tmp = InsertItem(i, buf, 0);
+			SetItemData(tmp, i);
+
+			buf = "Col 1, item " + i;
+			SetItem(i, 1, buf);
+
+			buf = "Item " + i + " in column 2";
+			SetItem(i, 2, buf);
+		}
+	}
+	
+	//---------------------------------------------------------------------	
+
+	public class ListCtrlApp : wx.App
+	{
+		public override bool OnInit()
+		{
+			MyFrame frame = new MyFrame("ListCtrl Test", new Point(50, 50), new Size(450,340));
+			frame.Show(true);
+
+			return true;
+		}
+
+		//---------------------------------------------------------------------
+
+		[STAThread]
+		static void Main()
+		{
+			ListCtrlApp app = new ListCtrlApp();
+			app.Run();
+		}
+	}
+}

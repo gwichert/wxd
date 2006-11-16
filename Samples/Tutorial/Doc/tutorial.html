@@ -1,0 +1,918 @@
+
+<html>
+<head>
+    <link REL="stylesheet" HREF="wxnet.css" TYPE="text/css"></link>
+    <style type="text/css">
+    .S0 {
+        color: #808080;
+    }
+    .S2 {
+        font-family: monospace;
+        color: #007F00;
+        font-size: 12pt;
+    }
+    .S3 {
+        font-family: monospace;
+        color: #3F703F;
+        font-size: 12pt;
+    }
+    .S4 {
+        color: #007F7F;
+    }
+    .S5 {
+        font-weight: bold;
+        color: #00007F;
+    }
+    .S6 {
+        color: #7F007F;
+    }
+    .S10 {
+        font-weight: bold;
+        color: #000000;
+    }
+    span {
+        font-family: monospace;
+        font-size: 12pt;
+    }
+    </style>
+</head>
+
+<body bgcolor="white" leftmargin="20" topmargin="20" marginheight="20"
+	  marginwidth="20">
+
+<h3 align="center">wx.NET ImageViewer Tutorial</h3>
+
+<p>In this tutorial, we will create a simple image viewer using wx.NET.
+You can download the source and this tutorial, 
+<a href="http://wxnet.sourceforge.net/tutorial/wxnet-tut-0.2.tar.gz">here</a>.
+<a href="http://premake.sourceforge.net/">Premake</a> build files are
+also included, to help you get everything going more quickly.</p>
+
+<div align="center"><img src="tutorial.jpg" /></div>
+
+<p>The viewer isn't designed to be state-of-the-art, and could be improved
+enormously.  However, the point of this tutorial is to give an introduction
+to several wxWidgets concepts.  After reading, you should know enough to
+get started in creating your own applications.</p>
+
+<h3>Prerequisites</h3>
+
+To get started, you should have a working wx.NET and .NET installation.
+See the 
+<a href="http://sourceforge.net/project/showfiles.php?group_id=72362">downloads</a>
+and <a href="http://wxnet.sourceforge.net/build.html">building</a> pages
+for more details.</p>
+
+<p><b>NOTE:</b> At the time of writing (wx.NET version 0.2), a CVS version
+of wx.NET is required.  See the 
+<a href="http://wxnet.sourceforge.net/latest.html">latest sources</a> page
+to download an up-to-date copy.</p>
+
+<p>Throughout the tutorial, I assume that you have a basic understanding
+of GUI programming, as well as the basic elements of a GUI (e.g. frames,
+menus, status bars, etc.)  I also assume that you are somewhat familiar
+with C# programming.  No advanced C# features are used, and only a
+very little of the .NET Framework is accessed.</p>
+
+<h3>Getting Started - Creating the Application</h3>
+
+<p>At the heart of every wxWidgets application, there is a wx.App
+instance.</p>
+
+<p>In our application, we create a class named ImageViewApp, derived from
+wx.App.  We then override the OnInit method.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S3">/**<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* This is the application.<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S5">class</span><span class="S0"> </span><span class="S11">ImageViewApp</span><span class="S0"> </span><span class="S10">:</span><span class="S0"> </span><span class="S11">App</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S3">/**<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* The overrided OnInit is where the main form should be created and<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* shown.&nbsp;&nbsp;Application start-up logic can also be placed here.<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S5">override</span><span class="S0"> </span><span class="S5">bool</span><span class="S0"> </span><span class="S11">OnInit</span><span class="S10">()</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Return true, to indicate that everything was initialized </span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// properly.</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">return</span><span class="S0"> </span><span class="S5">true</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>Then to start the application, we create an instance of the application
+object, and call its Run() method.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">[</span><span class="S11">STAThread</span><span class="S10">]</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S5">static</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span><span class="S11">Main</span><span class="S10">()</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Create an instance of our application class</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">ImageViewApp</span><span class="S0"> </span><span class="S11">app</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S5">new</span><span class="S0"> </span><span class="S11">ImageViewApp</span><span class="S10">();</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Run the application</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">app</span><span class="S10">.</span><span class="S11">Run</span><span class="S10">();</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>At this point, the application will just sit there - nothing interesting
+will happen.  So we will now create a wx.Frame class, and get down to
+business.</p>
+
+<h3>Frame, Menus, and a Status Bar</h3>
+
+<p>For our main frame, we create the ImageViewFrame class, derived from
+wx.Frame.  In the constructor of this class, we initialize the base
+class with the title of the frame, as well as a default position, and an initial size.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S3">/**<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* This is the main frame.&nbsp;&nbsp;All user interaction will start here.<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S5">class</span><span class="S0"> </span><span class="S11">ImageViewFrame</span><span class="S0"> </span><span class="S10">:</span><span class="S0"> </span><span class="S11">Frame</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S3">/**<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* The base class is passed the title of the frame, the default <br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* position for its position, and an arbitrary size.<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* All the components inside the frame are created and initialized <br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* here.<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S11">ImageViewFrame</span><span class="S10">()</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">:</span><span class="S0"> </span><span class="S5">base</span><span class="S10">(</span><span class="S6">"ImageView"</span><span class="S10">,</span><span class="S0"> </span><span class="S11">wxDefaultPosition</span><span class="S10">,</span><span class="S0"> </span><span class="S5">new</span><span class="S0"> </span><span class="S11">Size</span><span class="S10">(</span><span class="S4">500</span><span class="S10">,</span><span class="S0"> </span><span class="S4">500</span><span class="S10">))</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">{</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>To add the newly created frame class, we add the following to our
+application's OnInit method:</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Create the main frame</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">ImageViewFrame</span><span class="S0"> </span><span class="S11">frame</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S5">new</span><span class="S0"> </span><span class="S11">ImageViewFrame</span><span class="S10">();</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Show it</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">frame</span><span class="S10">.</span><span class="S11">Show</span><span class="S10">(</span><span class="S5">true</span><span class="S10">);</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>After an instance of the frame is created, and Show() is called, the
+empty frame will be displayed.  It's now time to add a few menus.</p>
+
+<p>In the frame class, we also define several integer ID's which will be used when handling 
+events generated by the menus, which we will create next.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Every control that we want to handle events for will need an </span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// integer ID, these IDs are listed below.</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// File menu IDs</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">private</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span><span class="S11">ID_FileOpenDir</span><span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">private</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span><span class="S11">ID_FileExit</span><span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">=</span><span class="S0"> </span><span class="S4">1</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Help menu IDs</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">private</span><span class="S0"> </span><span class="S5">const</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span><span class="S11">ID_HelpAbout</span><span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">=</span><span class="S0"> </span><span class="S4">2</span><span class="S10">;</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>We then begin by creating a wx.MenuBar in the frame's constructor.  
+The menu bar class is portion of the menu where all sub-menus are
+attached.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// The menu bar is the bar where all the menus will be attached </span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// to.</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">MenuBar</span><span class="S0"> </span><span class="S11">menuBar</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S5">new</span><span class="S0"> </span><span class="S11">MenuBar</span><span class="S10">();</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>The first menu that we create will be the File menu.  The ID's we 
+declared here are passed to the Append() method, so that wxWidgets 
+will be able to associate actions on the items with the event handlers
+that we declare.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// The File menu</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">Menu</span><span class="S0"> </span><span class="S11">fileMenu</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S5">new</span><span class="S0"> </span><span class="S11">Menu</span><span class="S10">();</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// The first item we append is the "Open" command.&nbsp;&nbsp;The ID for </span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// the menu item is passed, as well as two strings.</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">//</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// The first string is the menu item text.&nbsp;&nbsp;The stuff after '\t'</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// tells wxWidgets to use this as a short-cut key for the item.</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// An '&amp;' will underline the next character on the menu, for </span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// easy access.</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">//</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// The second string is the help text for the menu item.&nbsp;&nbsp;When a</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// users mouse hovers over the item, the status bar text will</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// change to this.</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">fileMenu</span><span class="S10">.</span><span class="S11">Append</span><span class="S10">(</span><span class="S11">ID_FileOpenDir</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"&amp;Open Directory...\tCtrl+O"</span><span class="S10">,</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S6">"Open a directory with images"</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Append a menu seperator.</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">fileMenu</span><span class="S10">.</span><span class="S11">AppendSeparator</span><span class="S10">();</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Exit menu item.</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">fileMenu</span><span class="S10">.</span><span class="S11">Append</span><span class="S10">(</span><span class="S11">ID_FileExit</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"E&amp;xit\tCtrl+Shift+W"</span><span class="S10">,</span><span class="S0"> <br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S6">"Exit this fine application"</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Attach the file menu to the menu bar</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">menuBar</span><span class="S10">.</span><span class="S11">Append</span><span class="S10">(</span><span class="S11">fileMenu</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"&amp;File"</span><span class="S10">);</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>The next menu is the Help menu, with one item.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// The Help menu</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">Menu</span><span class="S0"> </span><span class="S11">helpMenu</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S5">new</span><span class="S0"> </span><span class="S11">Menu</span><span class="S10">();</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">helpMenu</span><span class="S10">.</span><span class="S11">Append</span><span class="S10">(</span><span class="S11">ID_HelpAbout</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"&amp;About..."</span><span class="S10">,</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S6">"About this application"</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">menuBar</span><span class="S10">.</span><span class="S11">Append</span><span class="S10">(</span><span class="S11">helpMenu</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"&amp;Help"</span><span class="S10">);</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>To get our frame to use the menu bar that we've created, we set
+the MenuBar property.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Next we tell the frame to use the menu bar that we've created, </span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// using the Frame.MenuBar property.</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">this</span><span class="S10">.</span><span class="S11">MenuBar</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S11">menuBar</span><span class="S10">;</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>Our menu is now complete.  It's time for a status bar.  Our status bar
+will have two fields (even though we're only using one.)  The status 
+bar's text is then set with some welcome text using the StatusText 
+property.</p>
+
+<p>When using the StatusText property, the first field in the status bar
+will be set.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Create a status bar with 2 fields</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">CreateStatusBar</span><span class="S10">(</span><span class="S4">2</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Set the initial status bar text, this will set the text in the </span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// first status bar field.</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">StatusText</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S6">"Welcome to ImageView!"</span><span class="S10">;</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>Our frame now has a menu bar, and a status bar, but it still doesn't 
+do anything useful.  Next we'll set up some event handlers, and do a
+little 'real' work.</p>
+
+<h3>Handling Events</h3>
+
+<p><b>NOTE:</b> The current version of wx.NET uses a macro-like system, similar to
+that used in wxWidgets C++, for
+handling events.  Support for handling events using the prefered C#
+delegates is on our TODO list.</p>
+
+<p>Attaching an event handler to an event, such as a mouse click, is a 
+fairly straight forward process.</p>
+
+<p>We've already created several menu items, and each has its own unique
+integer ID.  We call the appropriate EVT_* method to attach the event
+to a method.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Set some event handlers using the IDs of the controls we </span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// wish to handle events for.</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">EVT_MENU</span><span class="S10">(</span><span class="S11">ID_FileExit</span><span class="S10">,</span><span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">new</span><span class="S0"> </span><span class="S11">EventListener</span><span class="S10">(</span><span class="S11">OnFileExit</span><span class="S10">));</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">EVT_MENU</span><span class="S10">(</span><span class="S11">ID_FileOpenDir</span><span class="S10">,</span><span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">new</span><span class="S0"> </span><span class="S11">EventListener</span><span class="S10">(</span><span class="S11">OnFileOpenDir</span><span class="S10">));</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">EVT_MENU</span><span class="S10">(</span><span class="S11">ID_HelpAbout</span><span class="S10">,</span><span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">new</span><span class="S0"> </span><span class="S11">EventListener</span><span class="S10">(</span><span class="S11">OnHelpAbout</span><span class="S10">));</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Handle when the frame is closed</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">EVT_CLOSE</span><span class="S10">(</span><span class="S5">new</span><span class="S0"> </span><span class="S11">EventListener</span><span class="S10">(</span><span class="S11">OnClose</span><span class="S10">));</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>The EVT_MENU calls are for handling menu events.  The last call, with
+EVT_CLOSE, is an event for handling when the frame is closed.  When an
+event occurs, wxWidgets will look-up the appropriate handler in the 
+Frame instance, and call it.</p>
+
+<p>We now define the event handlers.</p>
+
+<p>Our first handler is for the Exit menu option.  Here we just call
+Close() on the frame.  This will trigger an event that will call our
+OnClose() handler.  The important parameter for the event handler is
+the Event instance.  With the Event class, we can find out more about
+the nature of the event, as well as who created and sent the event to 
+us.  We will use this later on in the application.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S3">/**<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Exit event handler<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">protected</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span><span class="S11">OnFileExit</span><span class="S10">(</span><span class="S5">object</span><span class="S0"> </span><span class="S11">sender</span><span class="S10">,</span><span class="S0"> </span><span class="S11">Event</span><span class="S0"> </span><span class="S11">evt</span><span class="S10">)</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Close the frame.&nbsp;&nbsp;Since this is the last (only) frame in the</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// application, the application will exit when it is closed.</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">Close</span><span class="S10">();</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>We save the logic for the OnFileOpenDir() handler until later.  For now
+it will just sit empty.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S3">/**<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Open Directory event handler<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">protected</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span><span class="S11">OnFileOpenDir</span><span class="S10">(</span><span class="S5">object</span><span class="S0"> </span><span class="S11">sender</span><span class="S10">,</span><span class="S0"> </span><span class="S11">Event</span><span class="S0"> </span><span class="S11">evt</span><span class="S10">)</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>In the Help event handler, all we want to do is display a simple
+message box with some information about the application.  The static
+method, MessageBox.ShowModal() is used for this.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S3">/**<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* About event handler<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">protected</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span><span class="S11">OnHelpAbout</span><span class="S10">(</span><span class="S5">object</span><span class="S0"> </span><span class="S11">sender</span><span class="S10">,</span><span class="S0"> </span><span class="S11">Event</span><span class="S0"> </span><span class="S11">evt</span><span class="S10">)</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Message for our about dialog.</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">string</span><span class="S0"> </span><span class="S11">msg</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S6">"ImageView!\n\nAn application for viewing images."</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Display a message box.&nbsp;&nbsp;The message box will have an OK button</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// (wxOK), and an information icon (wxICON_INFORMATION)</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">MessageDialog</span><span class="S10">.</span><span class="S11">ShowModal</span><span class="S10">(</span><span class="S5">this</span><span class="S10">,</span><span class="S0"> </span><span class="S11">msg</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"About ImageView"</span><span class="S10">,</span><span class="S0"> <br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">Dialog</span><span class="S10">.</span><span class="S11">wxOK</span><span class="S0"> </span><span class="S10">|</span><span class="S0"> </span><span class="S11">Dialog</span><span class="S10">.</span><span class="S11">wxICON_INFORMATION</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>In the OnClose() handler, we can prevent the user from closing the 
+application by not calling Event.Skip().  How does this work?  When 
+Event.Skip() is called, the event is treated as 'unhandled', and the 
+base wxWidgets event handler is called.  In this case the base handler
+will close the frame for good.</p>
+
+<p>In the case that Event.Skip() is <i>not</i> called, the event is
+treated as 'handled'; the wxWidgets handler will not be called, and the
+frame won't be closed.</p>
+
+<p>In this method, we use another message box.  This time we capture the
+return value from ShowModal(), which will indicate what option the user
+has selected, so that we can act accordingly.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">protected</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span><span class="S11">OnClose</span><span class="S10">(</span><span class="S5">object</span><span class="S0"> </span><span class="S11">sender</span><span class="S10">,</span><span class="S0"> </span><span class="S11">Event</span><span class="S0"> </span><span class="S11">evt</span><span class="S10">)</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// We can ask the user whether or not it is OK to close the frame,</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// then act appropriately.</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">string</span><span class="S0"> </span><span class="S11">msg</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S6">"Are you sure you'd like to exit?"</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">int</span><span class="S0"> </span><span class="S11">result</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S11">MessageDialog</span><span class="S10">.</span><span class="S11">ShowModal</span><span class="S10">(</span><span class="S5">this</span><span class="S10">,</span><span class="S0"> </span><span class="S11">msg</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"Exit ImageView"</span><span class="S10">,</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">Dialog</span><span class="S10">.</span><span class="S11">wxYES_NO</span><span class="S0"> </span><span class="S10">|</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">Dialog</span><span class="S10">.</span><span class="S11">wxICON_QUESTION</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Did the user click yes?</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">if</span><span class="S0"> </span><span class="S10">(</span><span class="S11">result</span><span class="S0"> </span><span class="S10">==</span><span class="S0"> </span><span class="S11">Dialog</span><span class="S10">.</span><span class="S11">wxYES</span><span class="S10">)</span><span class="S0"> </span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// They did, we tell wxWidgets to take care of closing the</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// application</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">evt</span><span class="S10">.</span><span class="S11">Skip</span><span class="S10">();</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>Our frame's menus now handle some events, and perform a couple of useful
+actions.  Next we'll move to another portion of the application before
+enhancing the frame more.</p>
+
+<h3>Custom Controls</h3>
+
+<p>We now look into the mechanism with which we will list the images in a
+directory.  Each image will be on its own 'tile', consisting of a button with
+an image on it (BitmapButton), as well as a text label (StaticText).</p>
+
+<p>This control will be in a class called Thumbnail, and will inherit from
+wx.Panel.  The Panel class is ideal for laying out forms and creating new types
+of controls.</p>
+
+<p>Thumbnail will have several members to store information about the image
+that it's displaying.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S3">/**<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Class to display a thumbnail image.<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S5">class</span><span class="S0"> </span><span class="S11">Thumbnail</span><span class="S0"> </span><span class="S10">:</span><span class="S0"> </span><span class="S11">Panel</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Delegate to handle thumnail events</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S5">delegate</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span><span class="S11">ThumbnailClick</span><span class="S10">(</span><span class="S5">string</span><span class="S0"> </span><span class="S11">file</span><span class="S10">,</span><span class="S0"> </span><span class="S11">wx</span><span class="S10">.</span><span class="S11">Bitmap</span><span class="S0"> </span><span class="S11">bmp</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Delegate for external classes to hook into click events</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S11">ThumbnailClick</span><span class="S0"> </span><span class="S11">ThumbnailClicked</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// The bitmap on this thumbnail</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">private</span><span class="S0"> </span><span class="S11">wx</span><span class="S10">.</span><span class="S11">Bitmap</span><span class="S0"> </span><span class="S11">m_bitmap</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Filename of the bitmap to use</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">private</span><span class="S0"> </span><span class="S5">string</span><span class="S0"> </span><span class="S11">m_fileName</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// A bitmap button used to display the image</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">private</span><span class="S0"> </span><span class="S11">BitmapButton</span><span class="S0"> </span><span class="S11">m_bitmapBtn</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// A text label for the file name</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">private</span><span class="S0"> </span><span class="S11">StaticText</span><span class="S0"> </span><span class="S11">m_label</span><span class="S10">;</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>The constructor will use these elements to construct a bitmap and display
+the bitmap with the file name as a label.</p>
+
+<blockquote>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S11">Thumbnail</span><span class="S10">(</span><span class="S11">Window</span><span class="S0"> </span><span class="S11">parent</span><span class="S10">,</span><span class="S0"> </span><span class="S5">string</span><span class="S0"> </span><span class="S11">fileName</span><span class="S10">)</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">:</span><span class="S0"> </span><span class="S5">base</span><span class="S10">(</span><span class="S11">parent</span><span class="S10">)</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">m_fileName</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S11">fileName</span><span class="S10">;</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>When developing cross-platform applications, it can be tedious to position
+each control in such a way that the GUI will look 'natural' on each platform.
+wxWidgets provides an easy to use solution for this: sizers.</p>
+
+<p>Sizers are used to arrange controls in a variety of formats.  The BoxSizer,
+for example, arranges controls in a line.  A GridSizer arranges controls in a
+grid.  There is also a FlexGridSizer, StaticBoxSizer, and a NotebookSizer.</p>
+
+<p>Our thumbnail control will use a BoxSizer to arrange the image and text
+label in a vertical line.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// A box sizer to arrange the controls vertically </span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">BoxSizer</span><span class="S0"> </span><span class="S11">sizer</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S5">new</span><span class="S0"> </span><span class="S11">BoxSizer</span><span class="S10">(</span><span class="S11">Orientation</span><span class="S10">.</span><span class="S11">wxVERTICAL</span><span class="S10">);</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>We now load the image file that was passed through the constructor.  The 
+image is loaded using the wx.Image class, then stored in a wx.Bitmap for later
+use.</p>
+
+<p>wx.Image can be used to easily manipulate images, and is used here to resize
+the image for the thumbnail.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// The bitmap constructor can load the image files directly</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">wx</span><span class="S10">.</span><span class="S11">Image</span><span class="S0"> </span><span class="S11">image</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S5">new</span><span class="S0"> </span><span class="S11">wx</span><span class="S10">.</span><span class="S11">Image</span><span class="S10">(</span><span class="S11">m_fileName</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">m_bitmap</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S5">new</span><span class="S0"> </span><span class="S11">wx</span><span class="S10">.</span><span class="S11">Bitmap</span><span class="S10">(</span><span class="S11">image</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">wx</span><span class="S10">.</span><span class="S11">Bitmap</span><span class="S0"> </span><span class="S11">smallBmp</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S11">m_bitmap</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Scale the bitmap to icon size, retaining the aspec ratio</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">int</span><span class="S0"> </span><span class="S11">max</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S11">Math</span><span class="S10">.</span><span class="S11">Max</span><span class="S10">(</span><span class="S11">m_bitmap</span><span class="S10">.</span><span class="S11">Width</span><span class="S10">,</span><span class="S0"> </span><span class="S11">m_bitmap</span><span class="S10">.</span><span class="S11">Height</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">if</span><span class="S0"> </span><span class="S10">(</span><span class="S11">max</span><span class="S0"> </span><span class="S10">&gt;</span><span class="S0"> </span><span class="S4">100</span><span class="S10">)</span><span class="S0"> </span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">double</span><span class="S0"> </span><span class="S11">scale</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">100.0</span><span class="S0"> </span><span class="S10">/</span><span class="S0"> </span><span class="S10">(</span><span class="S5">double</span><span class="S10">)</span><span class="S11">max</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">int</span><span class="S0"> </span><span class="S11">width</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S10">(</span><span class="S5">int</span><span class="S10">)((</span><span class="S5">double</span><span class="S10">)</span><span class="S11">m_bitmap</span><span class="S10">.</span><span class="S11">Width</span><span class="S0"> </span><span class="S10">*</span><span class="S0"> </span><span class="S11">scale</span><span class="S10">),</span><span class="S0"> <br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">height</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S10">(</span><span class="S5">int</span><span class="S10">)((</span><span class="S5">double</span><span class="S10">)</span><span class="S11">m_bitmap</span><span class="S10">.</span><span class="S11">Height</span><span class="S0"> </span><span class="S10">*</span><span class="S0"> </span><span class="S11">scale</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">wx</span><span class="S10">.</span><span class="S11">Image</span><span class="S0"> </span><span class="S11">img</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S11">m_bitmap</span><span class="S10">.</span><span class="S11">ConvertToImage</span><span class="S10">();</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">img</span><span class="S10">.</span><span class="S11">Rescale</span><span class="S10">(</span><span class="S11">width</span><span class="S10">,</span><span class="S0"> </span><span class="S11">height</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">smallBmp</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S5">new</span><span class="S0"> </span><span class="S11">wx</span><span class="S10">.</span><span class="S11">Bitmap</span><span class="S10">(</span><span class="S11">img</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>The image is now ready for use, and the BitmapButton is created, then
+added to our sizer.</p>
+
+<p>When a control is added to a sizer, the sizer will take control of 
+positioning and laying out the control.</p>
+
+<p>The first parameter of Sizer.Add(), is our control.  Then second is the
+proportion of this control with respect to the other controls that will be
+added to the sizer.  The third parameter is a set of flags.
+Alignment.wxALIGN_CENTRE will ensure that the control is centered.
+Direction.wxALL will give the control a border around all edges.  The fourth
+parameter defines how large that border will be, in this case, 3.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Create the bitmap button with the small bitmap</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">m_bitmapBtn</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S5">new</span><span class="S0"> </span><span class="S11">BitmapButton</span><span class="S10">(</span><span class="S5">this</span><span class="S10">,</span><span class="S0"> </span><span class="S10">-</span><span class="S4">1</span><span class="S10">,</span><span class="S0"> </span><span class="S11">smallBmp</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Add it to the sizer, centered, with a small border</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">sizer</span><span class="S10">.</span><span class="S11">Add</span><span class="S10">(</span><span class="S11">m_bitmapBtn</span><span class="S10">,</span><span class="S0"> </span><span class="S4">1</span><span class="S10">,</span><span class="S0"> </span><span class="S11">Alignment</span><span class="S10">.</span><span class="S11">wxALIGN_CENTRE</span><span class="S0"> </span><span class="S10">|</span><span class="S0"> <br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">Direction</span><span class="S10">.</span><span class="S11">wxALL</span><span class="S10">,</span><span class="S0"> </span><span class="S4">3</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Create our static text label with the file name as the label</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">m_label</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S5">new</span><span class="S0"> </span><span class="S11">StaticText</span><span class="S10">(</span><span class="S5">this</span><span class="S10">,</span><span class="S0"> </span><span class="S10">-</span><span class="S4">1</span><span class="S10">,</span><span class="S0"> </span><span class="S6">""</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">string</span><span class="S0"> </span><span class="S11">lbl</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S11">m_fileName</span><span class="S10">.</span><span class="S11">Substring</span><span class="S10">(</span><span class="S11">m_fileName</span><span class="S10">.</span><span class="S11">LastIndexOf</span><span class="S10">(</span><span class="S7">'/'</span><span class="S10">)</span><span class="S0"> </span><span class="S10">+</span><span class="S0"> </span><span class="S4">1</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">lbl</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S11">lbl</span><span class="S10">.</span><span class="S11">Substring</span><span class="S10">(</span><span class="S4">0</span><span class="S10">,</span><span class="S0"> </span><span class="S11">lbl</span><span class="S10">.</span><span class="S11">LastIndexOf</span><span class="S10">(</span><span class="S7">'.'</span><span class="S10">));</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">m_label</span><span class="S10">.</span><span class="S11">Label</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S11">lbl</span><span class="S10">;</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>Next, we create the label that will be displaying the file name. It is also
+added to the sizer.  Since our sizer has a vertical orientation, it will be
+below (or after) the BitmapButton.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Add the label to the sizer, centered, with a small border</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">sizer</span><span class="S10">.</span><span class="S11">Add</span><span class="S10">(</span><span class="S11">m_label</span><span class="S10">,</span><span class="S0"> </span><span class="S4">0</span><span class="S10">,</span><span class="S0"> </span><span class="S11">Alignment</span><span class="S10">.</span><span class="S11">wxALIGN_CENTRE</span><span class="S0"> </span><span class="S10">|</span><span class="S0"> <br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">Direction</span><span class="S10">.</span><span class="S11">wxALL</span><span class="S10">,</span><span class="S0"> </span><span class="S4">3</span><span class="S10">);</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>The sizer is now assigned to the Panel.  Sizer.SetSizeHints() is used to
+tell the sizer to ensure that the minimum size of the Thumbnail panel is large
+enough to fit its contents.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Set the sizer</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">Sizer</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S11">sizer</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">sizer</span><span class="S10">.</span><span class="S11">SetSizeHints</span><span class="S10">(</span><span class="S5">this</span><span class="S10">);</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>The Thumbnail control has all its GUI elements defined.  So we'll do a
+little event handling for the BitmapButton.  The event handler is tied in 
+using a call to EVT_BUTTON, which operates like EVT_MENU.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Catch the bitmap button click event, a '-1' is used, since our</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// panel control has only one bitmap button, so the event can only</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// come from one place.</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">EVT_BUTTON</span><span class="S10">(-</span><span class="S4">1</span><span class="S10">,</span><span class="S0"> </span><span class="S5">new</span><span class="S0"> </span><span class="S11">EventListener</span><span class="S10">(</span><span class="S11">OnBitmapButtonClicked</span><span class="S10">));</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>Our Thumbnail class will use a delegate to transfer events to anything
+that's listening.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">protected</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span><span class="S11">OnBitmapButtonClicked</span><span class="S10">(</span><span class="S5">object</span><span class="S0"> </span><span class="S11">sender</span><span class="S10">,</span><span class="S0"> </span><span class="S11">Event</span><span class="S0"> </span><span class="S11">evt</span><span class="S10">)</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Notify our listeners</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">if</span><span class="S0"> </span><span class="S10">(</span><span class="S11">ThumbnailClicked</span><span class="S0"> </span><span class="S10">!=</span><span class="S0"> </span><span class="S5">null</span><span class="S10">)</span><span class="S0"> </span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">ThumbnailClicked</span><span class="S10">(</span><span class="S11">m_fileName</span><span class="S10">,</span><span class="S0"> </span><span class="S11">m_bitmap</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>That's it.  The Thumbnail class is ready to start displaying images, and 
+passing events on to listeners.  We'll now need a mechanism for displaying
+the bitmaps in their full form.</p>
+
+<h3>Scrolling a Window</h3>
+
+<p>To display large images, we will need a window that can be used to scroll
+its contents.  wxWidgets provides the wx.ScrolledWindow class to do this.</p>
+
+<p>Here is the start of our ImageViewer class.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S3">/**<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* A class to view an image.<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* A scrolled window is used so that large images can be viewed.<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S5">class</span><span class="S0"> </span><span class="S11">ImageViewer</span><span class="S0"> </span><span class="S10">:</span><span class="S0"> </span><span class="S11">ScrolledWindow</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">private</span><span class="S0"> </span><span class="S11">wx</span><span class="S10">.</span><span class="S11">Bitmap</span><span class="S0"> </span><span class="S11">m_bitmap</span><span class="S10">,</span><span class="S0"> </span><span class="S11">m_defaultBmp</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S11">ImageViewer</span><span class="S10">(</span><span class="S11">Window</span><span class="S0"> </span><span class="S11">parent</span><span class="S10">)</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">:</span><span class="S0"> </span><span class="S5">base</span><span class="S10">(</span><span class="S11">parent</span><span class="S10">)</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Load a default image (logo)</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">m_defaultBmp</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S5">new</span><span class="S0"> </span><span class="S11">wx</span><span class="S10">.</span><span class="S11">Bitmap</span><span class="S10">(</span><span class="S6">"ImageView.bmp"</span><span class="S10">,</span><span class="S0"> <br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">BitmapType</span><span class="S10">.</span><span class="S11">wxBITMAP_TYPE_BMP</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Our panel will have a white background, the colour contructor</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// accepts strings for several common colours.</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">BackgroundColour</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S5">new</span><span class="S0"> </span><span class="S11">Colour</span><span class="S10">(</span><span class="S6">"White"</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Set our bitmap</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">Bitmap</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S11">m_defaultBmp</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>The ImageViewer class will be reusable, so it has a bitmap property.</p>
+
+<p>Every time a new bitmap is set, the scrollbars are also set with the
+bitmap's width and height.  No furthur work is required - that is all we have
+to do to ensure that the window's contents are scrollable.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S3">/**<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* The bitmap to be displayed.<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S11">wx</span><span class="S10">.</span><span class="S11">Bitmap</span><span class="S0"> </span><span class="S11">Bitmap</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">set</span><span class="S0"> </span><span class="S10">{</span><span class="S0"> <br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">if</span><span class="S0"> </span><span class="S10">(</span><span class="S11">value</span><span class="S0"> </span><span class="S10">==</span><span class="S0"> </span><span class="S5">null</span><span class="S10">)</span><span class="S0"> </span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Use the default</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">m_bitmap</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S11">m_defaultBmp</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">else</span><span class="S0"> </span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">m_bitmap</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S11">value</span><span class="S10">;</span><span class="S0"> <br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Initialize the scrollbars</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">SetScrollbars</span><span class="S10">(</span><span class="S4">1</span><span class="S10">,</span><span class="S0"> </span><span class="S4">1</span><span class="S10">,</span><span class="S0"> </span><span class="S11">m_bitmap</span><span class="S10">.</span><span class="S11">Width</span><span class="S10">,</span><span class="S0"> </span><span class="S11">m_bitmap</span><span class="S10">.</span><span class="S11">Height</span><span class="S10">,</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">0</span><span class="S10">,</span><span class="S0"> </span><span class="S4">0</span><span class="S10">,</span><span class="S0"> </span><span class="S5">true</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Redraw the window</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">Refresh</span><span class="S10">();</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>To display the image, we will use a Device Context (DC).  A DC is used to
+access a graphics device directly (well, almost), and perform basic drawing
+routines.  In this case, we override the ScrolledWindow's OnDraw method,
+and use the DC provided to display our image.  OnDraw will be called 
+by wxWidgets each time a portion of the window needs to be refreshed.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S3">/**<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Override the OnDraw method so we can draw the bitmap.<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S5">override</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span><span class="S11">OnDraw</span><span class="S10">(</span><span class="S11">DC</span><span class="S0"> </span><span class="S11">dc</span><span class="S10">)</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Draw the bitmap onto the device context</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">dc</span><span class="S10">.</span><span class="S11">DrawBitmap</span><span class="S10">(</span><span class="S11">m_bitmap</span><span class="S10">,</span><span class="S0"> </span><span class="S4">0</span><span class="S10">,</span><span class="S0"> </span><span class="S4">0</span><span class="S0"> </span><span class="S10">,</span><span class="S0"> </span><span class="S5">false</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>We now have a class for displaying and scrolling an image, and are now 
+almost ready to put everything together.</p>
+
+<h3>Scrolling a Window with Sizers Inside</h3>
+
+<p>We still need a mechanism for listing the images with the Thumbnail class
+created earlier.</p>
+
+<p>Once again we will use a wx.ScrolledWindow, but we won't be setting the
+scrollbars manually this time.  Instead, we will give the ScrolledWindow a
+sizer, then let the sizer set the scrollbars for us.</p>
+
+<p>Here is the start of our ImageList class.  The class holds a reference to a
+ImageViewer, so that when a thumbnail is clicked, the image can be displayed.
+</p>
+
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S3">/**<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Class to display a list of images.&nbsp;&nbsp;The scrolled window helps us with<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* managing scrollbars when the window's contents are too large to be<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* displayed.<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S5">class</span><span class="S0"> </span><span class="S11">ImageList</span><span class="S0"> </span><span class="S10">:</span><span class="S0"> </span><span class="S11">ScrolledWindow</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">private</span><span class="S0"> </span><span class="S11">ImageViewer</span><span class="S0"> </span><span class="S11">m_viewer</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S3">/**<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Sets up the image list.<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* The base class is initialized with a default window position,<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* and a static size of width = 150, The '-1' for height means that<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* the height of the window is unconstrained.<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S11">ImageList</span><span class="S10">(</span><span class="S11">Window</span><span class="S0"> </span><span class="S11">parent</span><span class="S10">,</span><span class="S0"> </span><span class="S11">ImageViewer</span><span class="S0"> </span><span class="S11">viewer</span><span class="S10">)</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">:</span><span class="S0"> </span><span class="S5">base</span><span class="S10">(</span><span class="S11">parent</span><span class="S10">,</span><span class="S0"> </span><span class="S10">-</span><span class="S4">1</span><span class="S10">,</span><span class="S0"> </span><span class="S11">wxDefaultPosition</span><span class="S10">,</span><span class="S0"> </span><span class="S5">new</span><span class="S0"> </span><span class="S11">Size</span><span class="S10">(</span><span class="S4">140</span><span class="S10">,</span><span class="S0"> </span><span class="S10">-</span><span class="S4">1</span><span class="S10">))</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">m_viewer</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S11">viewer</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// A flex grid sizer will be used to align the images horizontally.</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// This is used, because the flex grid allows for entries to be</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// of various sizes.</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">FlexGridSizer</span><span class="S0"> </span><span class="S11">sizer</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S5">new</span><span class="S0"> </span><span class="S11">FlexGridSizer</span><span class="S10">(</span><span class="S4">1</span><span class="S10">,</span><span class="S0"> </span><span class="S4">0</span><span class="S10">,</span><span class="S0"> </span><span class="S4">0</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// For now, our sizer will remain empty until images are loaded.</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">Sizer</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S11">sizer</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Initialize the scrollbars</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">SetScrollbars</span><span class="S10">(</span><span class="S4">0</span><span class="S10">,</span><span class="S0"> </span><span class="S4">1</span><span class="S10">,</span><span class="S0"> </span><span class="S4">0</span><span class="S10">,</span><span class="S0"> </span><span class="S4">0</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>Even though the images will be listed vertically, we use a FlexGridSizer 
+here to enable the thumbnails to vary in size.</p>
+
+<p>We now provide a mechanism for listing all the images.  The ListImages()
+method takes an array of images, then creates Thumbnail objects to display
+the images.</p>
+
+<p>The Thumbnail delegate is tied to a method in the class, and the Thumbnails
+are added to the FlexGridSizer.  In addition to this, a StaticLine is used to
+help create a small visual gap between each Thumbnail.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S3">/**<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Lists the images in the given list of image file names.<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span><span class="S11">ListImages</span><span class="S10">(</span><span class="S5">string</span><span class="S10">[]</span><span class="S0"> </span><span class="S11">images</span><span class="S10">)</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Clear our list</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">ClearImages</span><span class="S10">();</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Add the images</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">foreach</span><span class="S10">(</span><span class="S5">string</span><span class="S0"> </span><span class="S11">imageFile</span><span class="S0"> </span><span class="S5">in</span><span class="S0"> </span><span class="S11">images</span><span class="S10">)</span><span class="S0"> </span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Create a thumbnail will display the image</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">Thumbnail</span><span class="S0"> </span><span class="S11">thumb</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S5">new</span><span class="S0"> </span><span class="S11">Thumbnail</span><span class="S10">(</span><span class="S5">this</span><span class="S10">,</span><span class="S0"> </span><span class="S11">imageFile</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Hook in our event handler</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">thumb</span><span class="S10">.</span><span class="S11">ThumbnailClicked</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> <br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">new</span><span class="S0"> </span><span class="S11">Thumbnail</span><span class="S10">.</span><span class="S11">ThumbnailClick</span><span class="S10">(</span><span class="S11">OnThumbnailClicked</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Add the bitmap button to the sizer.</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">Sizer</span><span class="S10">.</span><span class="S11">Add</span><span class="S10">(</span><span class="S11">thumb</span><span class="S10">,</span><span class="S0"> </span><span class="S4">1</span><span class="S10">,</span><span class="S0"> </span><span class="S11">Stretch</span><span class="S10">.</span><span class="S11">wxEXPAND</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// A horizontal static line is used to help seperate the </span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// images in the list.</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">StaticLine</span><span class="S0"> </span><span class="S11">line</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S5">new</span><span class="S0"> </span><span class="S11">StaticLine</span><span class="S10">(</span><span class="S5">this</span><span class="S10">,</span><span class="S0"> </span><span class="S10">-</span><span class="S4">1</span><span class="S10">,</span><span class="S0"> </span><span class="S11">wxDefaultPosition</span><span class="S10">,</span><span class="S0"> <br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">wxDefaultSize</span><span class="S10">,</span><span class="S0"> <br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">StaticLine</span><span class="S10">.</span><span class="S11">wxLI_HORIZONTAL</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// The static line is added with a small border on the bottom</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">Sizer</span><span class="S10">.</span><span class="S11">Add</span><span class="S10">(</span><span class="S11">line</span><span class="S10">,</span><span class="S0"> </span><span class="S4">0</span><span class="S10">,</span><span class="S0"> </span><span class="S11">Stretch</span><span class="S10">.</span><span class="S11">wxEXPAND</span><span class="S0"> </span><span class="S10">|</span><span class="S0"> </span><span class="S11">Direction</span><span class="S10">.</span><span class="S11">wxBOTTOM</span><span class="S10">,</span><span class="S0"> </span><span class="S4">3</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Fit inside tells the scrolled window to reset the scrollbars,</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// so that the entire window's contents can be scrolled.</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">FitInside</span><span class="S10">();</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">m_viewer</span><span class="S10">.</span><span class="S11">Bitmap</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S5">null</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+</blockquote>
+
+    <p>The magic behind getting the scrollbars set correctly using the sizer
+    also happens here.  When we call FitInside(), the scrolled window knows
+    that the sizer's contents may be larger than the window, and the scrollbars
+    are set appropriately.</p>
+
+    <p>Before listing the images, we also cleared the list.  The Sizer.Remove
+    method is used for this.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S3">/**<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Clear all the images in the list.<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">private</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span><span class="S11">ClearImages</span><span class="S10">()</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// This will remove all the windows (images) that are in the sizer.</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// </span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// The 'true' parameter tells the sizer to delete the windows as</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// well.&nbsp;&nbsp;If 'false' were given, we would have to manually do </span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// this.</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">Sizer</span><span class="S10">.</span><span class="S11">Clear</span><span class="S10">(</span><span class="S5">true</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>Finally, we define the event handler for when a Thumbnail is clicked.  Here,
+we simply give the Thumbnail's image to the ImageViewer, and give the main
+frame a new title.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span><span class="S11">OnThumbnailClicked</span><span class="S10">(</span><span class="S5">string</span><span class="S0"> </span><span class="S11">fileName</span><span class="S10">,</span><span class="S0"> </span><span class="S11">wx</span><span class="S10">.</span><span class="S11">Bitmap</span><span class="S0"> </span><span class="S11">bmp</span><span class="S10">)</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">m_viewer</span><span class="S10">.</span><span class="S11">Bitmap</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S11">bmp</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Set the main frame's title</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">Parent</span><span class="S10">.</span><span class="S11">Parent</span><span class="S10">.</span><span class="S11">Title</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S11">fileName</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>Now we have everything we need to start listing and displaying images.  Next,
+we put everything together in our main frame.</p>
+
+<h3>Splitters for Splitting a Window</h3>
+
+<p>A wx.SplitterWindow is ideal for displaying the contents of two windows
+with a resize bar between them.  In our main frame, we want to have both
+the ImageList and ImageViewer displayed beside each other; a SplitterWindow
+will be used to do this.  
+
+<p>First we add a few more members to the frame, so that we can display
+images.</p>
+
+<blockquote>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// String to hold the directory we're browsing</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">private</span><span class="S0"> </span><span class="S5">string</span><span class="S0"> </span><span class="S11">m_directory</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S6">""</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// The image list</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">private</span><span class="S0"> </span><span class="S11">ImageList</span><span class="S0"> </span><span class="S11">m_list</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// The image viewer</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">private</span><span class="S0"> </span><span class="S11">ImageViewer</span><span class="S0"> </span><span class="S11">m_viewer</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+</blockquote>
+
+<p>Inside the ImageViewFrame constructor, we add the code to create the
+controls, and split them.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// The splitter window allows two child windows to be displayed</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// with a bar between them.</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">//</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// When there is only one child in a Frame, the child will fill</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// that frame, hence we don't need a sizer in this frame.</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">SplitterWindow</span><span class="S0"> </span><span class="S11">split</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S5">new</span><span class="S0"> </span><span class="S11">SplitterWindow</span><span class="S10">(</span><span class="S5">this</span><span class="S10">,</span><span class="S0"> </span><span class="S10">-</span><span class="S4">1</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Create the image viewing control</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">m_viewer</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S5">new</span><span class="S0"> </span><span class="S11">ImageViewer</span><span class="S10">(</span><span class="S11">split</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Create our image list</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">m_list</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S5">new</span><span class="S0"> </span><span class="S11">ImageList</span><span class="S10">(</span><span class="S11">split</span><span class="S10">,</span><span class="S0"> </span><span class="S11">m_viewer</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// We now split the window with the two children</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">split</span><span class="S10">.</span><span class="S11">SplitVertically</span><span class="S10">(</span><span class="S11">m_list</span><span class="S10">,</span><span class="S0"> </span><span class="S11">m_viewer</span><span class="S10">,</span><span class="S0"> </span><span class="S4">150</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+</blockquote>
+
+<p>Not too difficult at all.  The SplitterWindow is created, and the windows
+that we want to split up use the SplitterWindow as a parent.
+SplitterWindow.Split() is then called with the two windows we want to split up,
+and a third parameter specifying the initial position of the resize bar that
+divides the windows.</p>
+
+<p>Earlier, the ImageList set the frame's title when a new image was selected.
+This behavior would normally overwrite the frame's title, and the application's
+name wouldn't be visible.  To avoid this, we override the frame's Title
+property, and add some additional logic.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S3">/**<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Override the base Title, since we want to add some more intelligent<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* behaviour.<br /></span>
+    <span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S5">override</span><span class="S0"> </span><span class="S5">string</span><span class="S0"> </span><span class="S11">Title</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">get</span><span class="S0"> </span><span class="S10">{</span><span class="S0"> </span><span class="S5">return</span><span class="S0"> </span><span class="S5">base</span><span class="S10">.</span><span class="S11">Title</span><span class="S10">;</span><span class="S0"> </span><span class="S10">}</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">set</span><span class="S0"> </span><span class="S10">{</span><span class="S0"> <br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">string</span><span class="S0"> </span><span class="S11">title</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S6">"ImageView"</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">if</span><span class="S0"> </span><span class="S10">(</span><span class="S11">value</span><span class="S0"> </span><span class="S10">!=</span><span class="S0"> </span><span class="S6">""</span><span class="S10">)</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">title</span><span class="S0"> </span><span class="S10">+=</span><span class="S0"> </span><span class="S6">" ("</span><span class="S0"> </span><span class="S10">+</span><span class="S0"> </span><span class="S11">value</span><span class="S0"> </span><span class="S10">+</span><span class="S0"> </span><span class="S6">")"</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">base</span><span class="S10">.</span><span class="S11">Title</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S11">title</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+    <span class="S10">}</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0"></span></span>
+</blockquote>
+
+<p>Now, what are we missing?  Right, we're still not displaying any images.  
+Just one final touch.</p>
+
+<h3>Selecting a Directory</h3>
+
+<p>wxWidgets provides several dialog box classes, known as 'Common Dialogs'. 
+The common dialogs are used for opening/saving files, choosing fonts and
+colors, and a variety of other tasks, including selecting a directory.</p>
+
+<p>Not only do these dialogs make several tasks much easier, they also provide
+the user with a consistent interface, no matter what the application.</p>
+
+<p>We will be using the wx.DirDialog to ask the user for a directory, then
+grab a list of image files in that directory to be passed to the ImageList for
+listing.</p>
+
+<blockquote>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">DirDialog</span><span class="S0"> </span><span class="S11">dlg</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S5">new</span><span class="S0"> </span><span class="S11">DirDialog</span><span class="S10">(</span><span class="S5">this</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"Choose an image directory"</span><span class="S10">,</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">m_directory</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">if</span><span class="S0"> </span><span class="S10">(</span><span class="S11">dlg</span><span class="S10">.</span><span class="S11">ShowModal</span><span class="S10">()</span><span class="S0"> </span><span class="S10">==</span><span class="S0"> </span><span class="S11">Dialog</span><span class="S10">.</span><span class="S11">wxID_OK</span><span class="S10">)</span><span class="S0"> </span><span class="S10">{</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">m_directory</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S11">dlg</span><span class="S10">.</span><span class="S11">Path</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// List the images</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">string</span><span class="S10">[]</span><span class="S0"> </span><span class="S11">files</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S11">Directory</span><span class="S10">.</span><span class="S11">GetFiles</span><span class="S10">(</span><span class="S11">m_directory</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"*.jpg"</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">m_list</span><span class="S10">.</span><span class="S11">ListImages</span><span class="S10">(</span><span class="S11">files</span><span class="S10">);</span><span class="S0"><br /></span>
+    <span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S11">Title</span><span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S11">dlg</span><span class="S10">.</span><span class="S11">Path</span><span class="S10">;</span><span class="S0"><br /></span>
+    <span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"><br /></span>
+</blockquote>
+
+<p>By calling ShowModal() on our dialog, the dialog will be displayed in such
+a way that no other window in our application can interact with the user.  
+When the user clicks 'OK' or 'Cancel' in the dialog, ShowModal() will return,
+and return Dialog.wxID_CANCEL or Dialog.wxID_OK, depending on what the user
+clicked.</p>
+
+<h3>Conclusion</h3>
+
+<p>We now have an application for listing and displaying images in a 
+directory.  There are several enhancements that would still need to be made
+if this were to be widely distributed, but I leave that for a more advanced
+tutorial, or as an excerise for the reader.</p>
+
+<p>If you have any questions, comments, or suggestions about this tutorial or
+wx.NET, please <a href="mailto:bbulten AT telus.net">contact me</a>.</p>
+
+<p>&nbsp;</p>
+<blockquote>Bryan Bulten</blockquote>
+
+<div align="right">
+    <small>Copyright &copy; 2003 Bryan Bulten</small>
+</div>
+
+</body>
+</html>
+
