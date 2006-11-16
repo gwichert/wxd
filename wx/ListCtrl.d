@@ -371,25 +371,7 @@ import wx.ImageList;
 		public this()
 			{ super(wxListCtrl_ctor()); }
 
-		public this(Window parent)
-			{ this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, wxLC_ICON, null, null); }
-
-		public this(Window parent, int id)
-			{ this(parent, id, wxDefaultPosition, wxDefaultSize, wxLC_ICON, null, null); }
-
-		public this(Window parent, int id, Point pos)
-			{ this(parent, id, pos, wxDefaultSize, wxLC_ICON, null, null); }
-
-		public this(Window parent, int id, Point pos, Size size)
-			{ this(parent, id, pos, size, wxLC_ICON, null, null); }
-
-		public this(Window parent, int id, Point pos, Size size, int style)
-			{ this(parent, id, pos, size, style, null, null); }
-
-		public this(Window parent, int id, Point pos, Size size, int style, Validator validator)
-			{ this(parent, id, pos, size, style, validator, null); }
-
-		public this(Window parent, int id, Point pos, Size size, int style, Validator validator, string name)
+		public this(Window parent, int id /*= wxID_ANY*/, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = wxLC_ICON, Validator validator = null, string name = "ListCtrl")
 		{
 			super(wxListCtrl_ctor());
 			if (!Create(parent, id, pos, size, style, validator, name))
@@ -401,19 +383,7 @@ import wx.ImageList;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 	
-		public this(Window parent, Point pos)
-			{ this(parent, Window.UniqueID, pos, wxDefaultSize, wxLC_ICON, null, null); }
-
-		public this(Window parent, Point pos, Size size)
-			{ this(parent, Window.UniqueID, pos, size, wxLC_ICON, null, null); }
-
-		public this(Window parent, Point pos, Size size, int style)
-			{ this(parent, Window.UniqueID, pos, size, style, null, null); }
-
-		public this(Window parent, Point pos, Size size, int style, Validator validator)
-			{ this(parent, Window.UniqueID, pos, size, style, validator, null); }
-
-		public this(Window parent, Point pos, Size size, int style, Validator validator, string name)
+		public this(Window parent, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = wxLC_ICON, Validator validator = null, string name = "ListCtrl")
 			{ this(parent, Window.UniqueID, pos, size, style, validator, name);}
 	
 		//---------------------------------------------------------------------
@@ -949,6 +919,7 @@ import wx.ImageList;
 		public this(int commandType, int id)
 			{ super(wxListEvent_ctor(commandType, id)); }
 
+		static Event New(IntPtr ptr) { return new ListEvent(ptr); }
 		//-----------------------------------------------------------------------------
 
 		public string Label() { return wxListEvent_GetLabel(wxobj).dup; }
@@ -1023,6 +994,57 @@ import wx.ImageList;
 		//-----------------------------------------------------------------------------
 		
 		public bool Allowed() { return wxListEvent_IsAllowed(wxobj); }
+
+		static this()
+		{
+			
+
+			wxEVT_COMMAND_LIST_BEGIN_DRAG = wxEvent_EVT_COMMAND_LIST_BEGIN_DRAG();
+			wxEVT_COMMAND_LIST_BEGIN_RDRAG = wxEvent_EVT_COMMAND_LIST_BEGIN_RDRAG();
+			wxEVT_COMMAND_LIST_BEGIN_LABEL_EDIT = wxEvent_EVT_COMMAND_LIST_BEGIN_LABEL_EDIT();
+			wxEVT_COMMAND_LIST_END_LABEL_EDIT = wxEvent_EVT_COMMAND_LIST_END_LABEL_EDIT();
+			wxEVT_COMMAND_LIST_DELETE_ITEM = wxEvent_EVT_COMMAND_LIST_DELETE_ITEM();
+			wxEVT_COMMAND_LIST_DELETE_ALL_ITEMS = wxEvent_EVT_COMMAND_LIST_DELETE_ALL_ITEMS();
+			wxEVT_COMMAND_LIST_GET_INFO = wxEvent_EVT_COMMAND_LIST_GET_INFO();
+			wxEVT_COMMAND_LIST_SET_INFO = wxEvent_EVT_COMMAND_LIST_SET_INFO();
+			wxEVT_COMMAND_LIST_ITEM_SELECTED = wxEvent_EVT_COMMAND_LIST_ITEM_SELECTED();
+			wxEVT_COMMAND_LIST_ITEM_DESELECTED = wxEvent_EVT_COMMAND_LIST_ITEM_DESELECTED();
+			wxEVT_COMMAND_LIST_ITEM_ACTIVATED = wxEvent_EVT_COMMAND_LIST_ITEM_ACTIVATED();
+			wxEVT_COMMAND_LIST_ITEM_FOCUSED = wxEvent_EVT_COMMAND_LIST_ITEM_FOCUSED();
+			wxEVT_COMMAND_LIST_ITEM_MIDDLE_CLICK = wxEvent_EVT_COMMAND_LIST_ITEM_MIDDLE_CLICK();
+			wxEVT_COMMAND_LIST_ITEM_RIGHT_CLICK = wxEvent_EVT_COMMAND_LIST_ITEM_RIGHT_CLICK();
+			wxEVT_COMMAND_LIST_KEY_DOWN = wxEvent_EVT_COMMAND_LIST_KEY_DOWN();
+			wxEVT_COMMAND_LIST_INSERT_ITEM = wxEvent_EVT_COMMAND_LIST_INSERT_ITEM();
+			wxEVT_COMMAND_LIST_COL_CLICK = wxEvent_EVT_COMMAND_LIST_COL_CLICK();
+			wxEVT_COMMAND_LIST_COL_RIGHT_CLICK = wxEvent_EVT_COMMAND_LIST_COL_RIGHT_CLICK();
+			wxEVT_COMMAND_LIST_COL_BEGIN_DRAG = wxEvent_EVT_COMMAND_LIST_COL_BEGIN_DRAG();
+			wxEVT_COMMAND_LIST_COL_DRAGGING = wxEvent_EVT_COMMAND_LIST_COL_DRAGGING();
+			wxEVT_COMMAND_LIST_COL_END_DRAG = wxEvent_EVT_COMMAND_LIST_COL_END_DRAG();
+			wxEVT_COMMAND_LIST_CACHE_HINT = wxEvent_EVT_COMMAND_LIST_CACHE_HINT();
+		
+			AddEventType(wxEVT_COMMAND_LIST_BEGIN_DRAG,	&ListEvent.New);
+			AddEventType(wxEVT_COMMAND_LIST_BEGIN_RDRAG,	&ListEvent.New);
+			AddEventType(wxEVT_COMMAND_LIST_BEGIN_LABEL_EDIT,	&ListEvent.New);
+			AddEventType(wxEVT_COMMAND_LIST_END_LABEL_EDIT,	&ListEvent.New);
+			AddEventType(wxEVT_COMMAND_LIST_DELETE_ITEM,	&ListEvent.New);
+			AddEventType(wxEVT_COMMAND_LIST_DELETE_ALL_ITEMS,	&ListEvent.New);
+			AddEventType(wxEVT_COMMAND_LIST_GET_INFO,	&ListEvent.New);
+			AddEventType(wxEVT_COMMAND_LIST_SET_INFO,	&ListEvent.New);
+			AddEventType(wxEVT_COMMAND_LIST_ITEM_SELECTED,	&ListEvent.New);
+			AddEventType(wxEVT_COMMAND_LIST_ITEM_DESELECTED,	&ListEvent.New);
+			AddEventType(wxEVT_COMMAND_LIST_ITEM_ACTIVATED,	&ListEvent.New);
+			AddEventType(wxEVT_COMMAND_LIST_ITEM_FOCUSED,	&ListEvent.New);
+			AddEventType(wxEVT_COMMAND_LIST_ITEM_MIDDLE_CLICK,	&ListEvent.New);
+			AddEventType(wxEVT_COMMAND_LIST_ITEM_RIGHT_CLICK,	&ListEvent.New);
+			AddEventType(wxEVT_COMMAND_LIST_KEY_DOWN,	&ListEvent.New);
+			AddEventType(wxEVT_COMMAND_LIST_INSERT_ITEM,	&ListEvent.New);
+			AddEventType(wxEVT_COMMAND_LIST_COL_CLICK,	&ListEvent.New);
+			AddEventType(wxEVT_COMMAND_LIST_COL_RIGHT_CLICK,	&ListEvent.New);
+			AddEventType(wxEVT_COMMAND_LIST_COL_BEGIN_DRAG,	&ListEvent.New);
+			AddEventType(wxEVT_COMMAND_LIST_COL_DRAGGING,	&ListEvent.New);
+			AddEventType(wxEVT_COMMAND_LIST_COL_END_DRAG,	&ListEvent.New);
+			AddEventType(wxEVT_COMMAND_LIST_CACHE_HINT,	&ListEvent.New);
+		}
 	}
 
 	//-----------------------------------------------------------------------------

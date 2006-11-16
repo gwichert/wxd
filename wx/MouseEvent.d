@@ -61,7 +61,7 @@ import wx.Event;
 		public this(IntPtr wxobj) 
             { super(wxobj); }
 
-        public this(int mouseType)
+        public this(EventType mouseType)
             { super(wxMouseEvent_ctor(mouseType)); }
 
 		//----------------------------------------------------------------------------

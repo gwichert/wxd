@@ -34,31 +34,17 @@ import wx.Dialog;
 
     public class DirDialog : Dialog
     {
-	public const int wxDD_DEFAULT_STYLE = 0; //(Dialog.wxDEFAULT_DIALOG_STYLE | Dialog.wxRESIZE_BORDER | wxDD_NEW_DIR_BUTTON);
-    
+	enum {  wxDD_NEW_DIR_BUTTON  = 0x0080 }
+	enum {  wxDD_DEFAULT_STYLE = (wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER | wxDD_NEW_DIR_BUTTON) }
+
+	public const string wxDirSelectorPromptStr = "Select a directory";
+	public const string wxDirDialogNameStr = "DirDialog";
+	
         public this(IntPtr wxobj) 
             { super(wxobj); }
 
-        public this(Window parent)
-            { this(parent, "Choose a directory", "", wxDD_DEFAULT_STYLE, wxDefaultPosition, wxDefaultSize, "DirDialog"); }
-
-        public this(Window parent, string message)
-            { this(parent, message, "", wxDD_DEFAULT_STYLE, wxDefaultPosition, wxDefaultSize, "DirDialog"); }
-
-        public this(Window parent, string message, string defaultPath)
-            { this(parent, message, defaultPath, wxDD_DEFAULT_STYLE, wxDefaultPosition, wxDefaultSize, "DirDialog"); }
-
-        public this(Window parent, string message, string defaultPath, int style)
-            { this(parent, message, defaultPath, style, wxDefaultPosition, wxDefaultSize, "DirDialog"); }
-
-        public this(Window parent, string message, string defaultPath, int style, Point pos)
-            { this(parent, message, defaultPath, style, pos, wxDefaultSize, "DirDialog"); }
-
-        public this(Window parent, string message, string defaultPath, int style, Point pos, Size size)
-            { this(parent, message, defaultPath, style, pos, size, "DirDialog"); }
-
-        public this(Window parent, string message, string defaultPath, int style, Point pos, Size size, string name)
-            { this(wxDirDialog_ctor(wxObject.SafePtr(parent), message, defaultPath, cast(uint)style, pos, size, name)); }
+        public this(Window parent, string title = wxDirSelectorPromptStr, string defaultPath = "", int style = wxDD_DEFAULT_STYLE, Point pos = wxDefaultPosition, Size size = wxDefaultSize, string name = wxDirDialogNameStr)
+            { this(wxDirDialog_ctor(wxObject.SafePtr(parent), title, defaultPath, style, pos, size, name)); }
 
         //-----------------------------------------------------------------------------
 

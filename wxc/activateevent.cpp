@@ -19,9 +19,9 @@
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxActivateEvent* wxActivateEvent_ctor(wxEventType type)
+wxActivateEvent* wxActivateEvent_ctor(wxEventType type, bool active, int Id)
 {
-    return new wxActivateEvent(type);
+    return new wxActivateEvent(type,active,Id);
 }
 
 extern "C" WXEXPORT

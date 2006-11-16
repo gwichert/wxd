@@ -43,7 +43,7 @@ import wx.Event;
         public this(IntPtr wxobj) 
             { super(wxobj); }
 
-        public this(int type)
+        public this(EventType type = wxEVT_NULL)
             { this(wxKeyEvent_ctor(type)); }
 
         //-----------------------------------------------------------------------------

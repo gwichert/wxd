@@ -106,19 +106,7 @@ import wx.KeyEvent;
 			this.memOwn = memOwn;
 		}
 
-		public this()
-			{ this(wxTextAttr_ctor2(), true); }
-
-		public this(Colour colText)
-			{ this(colText, null, null, TextAttrAlignment.wxTEXT_ALIGNMENT_DEFAULT);}
-			
-		public this(Colour colText, Colour colBack)
-			{ this(colText, colBack, null, TextAttrAlignment.wxTEXT_ALIGNMENT_DEFAULT);}
-			
-		public this(Colour colText, Colour colBack, Font font)
-			{ this(colText, colBack, font, TextAttrAlignment.wxTEXT_ALIGNMENT_DEFAULT);}
-			
-	        public this(Colour colText, Colour colBack, Font font, TextAttrAlignment alignment)
+	        public this(Colour colText, Colour colBack=null, Font font=null, TextAttrAlignment alignment = TextAttrAlignment.wxTEXT_ALIGNMENT_DEFAULT)
         		{ this(wxTextAttr_ctor(wxObject.SafePtr(colText), wxObject.SafePtr(colBack), wxObject.SafePtr(font), cast(int)alignment), true); }
 			
 		//---------------------------------------------------------------------
@@ -316,27 +304,14 @@ import wx.KeyEvent;
 		public const int wxTE_WORDWRAP         = 0x0000;
 		public const int wxTE_RICH2            = 0x8000;
 
+
+		public const string wxTextCtrlNameStr = "text";
 		//---------------------------------------------------------------------
 
 		public this(IntPtr wxobj)
 			{ super(wxobj); }
 
-		public this(Window parent)
-			{ this(parent, Window.UniqueID, "", wxDefaultPosition, wxDefaultSize, 0, null, ""); }
-
-		public this(Window parent, int id)
-			{ this(parent, id, "", wxDefaultPosition, wxDefaultSize, 0, null, ""); }
-
-		public this(Window parent, int id, string value)
-			{ this(parent, id, value, wxDefaultPosition, wxDefaultSize, 0, null, ""); }
-
-		public this(Window parent, int id, string value, Point pos, Size size, int style)
-			{ this(parent, id, value, pos, size, style, null, ""); }
-
-		public this(Window parent, int id, string value, Point pos, Size size)
-			{ this(parent, id, value, pos, size, 0, null, ""); }
-
-		public this(Window parent, int id, string value, Point pos, Size size, int style, Validator validator, string name)
+		public this(Window parent, int id, string value="", Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, Validator validator = null, string name = wxTextCtrlNameStr)
 		{
 			this(wxTextCtrl_ctor());
 			if (!wxTextCtrl_Create(wxobj, wxObject.SafePtr(parent), id, value, pos, size, cast(uint)style, wxObject.SafePtr(validator), name))
@@ -348,16 +323,7 @@ import wx.KeyEvent;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent, string value)
-			{ this(parent, Window.UniqueID, value, wxDefaultPosition, wxDefaultSize, 0, null, ""); }
-	
-		public this(Window parent, string value, Point pos, Size size, int style)
-			{ this(parent, Window.UniqueID, value, pos, size, style, null, ""); }
-	
-		public this(Window parent, string value, Point pos, Size size)
-			{ this(parent, Window.UniqueID, value, pos, size, 0, null, ""); }
-	
-		public this(Window parent, string value, Point pos, Size size, int style, Validator validator, string name)
+		public this(Window parent, string value="", Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, Validator validator = null, string name = wxTextCtrlNameStr)
 			{ this(parent, Window.UniqueID, value, pos, size, 0, validator, name);}
 	
 		//---------------------------------------------------------------------

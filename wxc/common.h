@@ -37,4 +37,14 @@ struct dstr {
 
 typedef void* dobj;
 
+typedef unsigned long long dstrret;
+#if __WXMAC__
+static inline dstrret dstr_ret(const wxString& str) { return (str.length()<<32) | ((dstrret)str.data()); }
+static inline dstrret dstr_ret(const wxString* str) { return (str->length()<<32) | ((dstrret)str->data()); }
+#else
+static inline dstrret dstr_ret(const wxString& str) { return str.length() | ((dstrret)str.data()<<32); }
+static inline dstrret dstr_ret(const wxString* str) { return str->length() | ((dstrret)str->data()<<32); }
+#endif
+
+
 #endif

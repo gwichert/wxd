@@ -128,9 +128,9 @@ int wxApp_OnExit(_App* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT 
-dstr wxApp_GetVendorName(wxApp* self)
+dstrret wxApp_GetVendorName(wxApp* self)
 {
-    return dstr(self->GetVendorName());
+    return dstr_ret(self->GetVendorName());
 }
 
 extern "C" WXEXPORT 
@@ -142,9 +142,9 @@ void wxApp_SetVendorName(wxApp* self, dstr name)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT 
-dstr wxApp_GetAppName(wxApp* self)
+dstrret wxApp_GetAppName(wxApp* self)
 {
-    return dstr(self->GetAppName());
+    return dstr_ret(self->GetAppName());
 }
 
 extern "C" WXEXPORT 

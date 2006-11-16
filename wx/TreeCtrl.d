@@ -145,7 +145,7 @@ import wx.KeyEvent;
 	//-----------------------------------------------------------------------------
 
 		static extern (C) IntPtr wxTreeItemId_ctor();
-		static extern (C) IntPtr wxTreeItemId_ctor2(IntPtr pItem);
+		static extern (C) IntPtr wxTreeItemId_ctor2(void* pItem);
 		static extern (C) void   wxTreeItemId_dtor(IntPtr self);
 		static extern (C) void   wxTreeItemId_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
 		static extern (C) bool   wxTreeItemId_Equal(IntPtr item1, IntPtr item2);
@@ -173,9 +173,9 @@ import wx.KeyEvent;
 			this(wxTreeItemId_ctor(), true);
 		}
 		
-		public this(ClientData pItem)
+		public this(/*ClientData*/void* pItem)
 		{
-			this(wxTreeItemId_ctor2(wxObject.SafePtr(pItem)), true);
+			this(wxTreeItemId_ctor2(pItem), true);
 		}
 		
 		//---------------------------------------------------------------------
@@ -196,10 +196,10 @@ import wx.KeyEvent;
 		public override int opEquals(Object o)
 		{
 			if (o === null) return false;
-			if (o === cast(Object)this) return true;
-
-			return this.wxobj == (cast(TreeItemId)o).wxobj;
-		//	return wxTreeItemId_Equal(wxobj, wxObject.SafePtr(id2));
+			TreeItemId id = cast(TreeItemId)o;
+			if (id === null) return false;
+			if (id === this || wxobj == id.wxobj) return true;
+			return wxTreeItemId_Equal(wxobj, id.wxobj);
 		}
 		
 		//-----------------------------------------------------------------------------
@@ -208,18 +208,6 @@ import wx.KeyEvent;
 		{
 			return cast(uint)wxobj;
 		}
-
-		//-----------------------------------------------------------------------------
-
-		/*public static bool operator == (TreeItemId i1, TreeItemId i2)
-		{
-			// Ensure id's are not null
-			object o1 = i1, o2 = i2;
-			if (o1 === null && o2 === null) return true;
-			if (o1 === null || o2 === null) return false;
-
-			return i1.Equals(i2);
-		}*/
 		
 		//-----------------------------------------------------------------------------
 
@@ -402,6 +390,7 @@ import wx.KeyEvent;
 
 		public const int wxTREE_HITTEST_ONITEM = wxTREE_HITTEST_ONITEMICON | wxTREE_HITTEST_ONITEMLABEL;
 		
+		public const string wxTreeCtrlNameStr = "treeCtrl";
 		//-----------------------------------------------------------------------------
 		
 		public this(IntPtr wxobj)
@@ -413,22 +402,7 @@ import wx.KeyEvent;
 			wxTreeCtrl_RegisterVirtual(wxobj, this, &staticDoOnCompareItems);
 		}
 
-		public this(Window parent, int id)
-			{ this(parent, id, wxDefaultPosition, wxDefaultSize, wxTR_HAS_BUTTONS, null, "treectrl"); }
-			
-		public this(Window parent, int id, Point pos)
-			{ this(parent, id, pos, wxDefaultSize, wxTR_HAS_BUTTONS, null, "treectrl"); }
-			
-		public this(Window parent, int id, Point pos, Size size)
-			{ this(parent, id, pos, size, wxTR_HAS_BUTTONS, null, "treectrl"); }
-			
-		public this(Window parent, int id, Point pos, Size size, int style)
-			{ this(parent, id, pos, size, style, null, "treectrl"); }
-			
-		public this(Window parent, int id, Point pos, Size size, int style, Validator val)
-			{ this(parent, id, pos, size, style, val, "treectrl"); }
-
-		public this(Window parent, int id, Point pos, Size size, int style, Validator val, string name)
+		public this(Window parent, int id /*= wxID_ANY*/, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = wxTR_HAS_BUTTONS | wxTR_LINES_AT_ROOT, Validator val = null, string name = wxTreeCtrlNameStr)
 		{
 			this();
 			if (!Create(parent, id, pos, size, style, val, name)) 
@@ -440,27 +414,12 @@ import wx.KeyEvent;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent)
-			{ this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, wxTR_HAS_BUTTONS, null, "treectrl"); }
-			
-		public this(Window parent, Point pos)
-			{ this(parent, Window.UniqueID, pos, wxDefaultSize, wxTR_HAS_BUTTONS, null, "treectrl"); }
-			
-		public this(Window parent, Point pos, Size size)
-			{ this(parent, Window.UniqueID, pos, size, wxTR_HAS_BUTTONS, null, "treectrl"); }
-			
-		public this(Window parent, Point pos, Size size, int style)
-			{ this(parent, Window.UniqueID, pos, size, style, null, "treectrl"); }
-			
-		public this(Window parent, Point pos, Size size, int style, Validator val)
-			{ this(parent, Window.UniqueID, pos, size, style, val, "treectrl"); }
-
-		public this(Window parent, Point pos, Size size, int style, Validator val, string name)
+		public this(Window parent, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = wxTR_HAS_BUTTONS | wxTR_LINES_AT_ROOT, Validator val = null, string name = wxTreeCtrlNameStr)
 			{ this(parent, Window.UniqueID, pos, size, style, val, name);}
 		
 		//---------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, Point pos, Size size, int style, Validator val, string name)
+		public bool Create(Window parent, int id, inout Point pos, inout Size size, int style, Validator val, string name)
 		{
 			return wxTreeCtrl_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, cast(uint)style, wxObject.SafePtr(val), name);
 		}
@@ -1260,6 +1219,25 @@ import wx.KeyEvent;
 
 		static this()
 		{
+			wxEVT_COMMAND_TREE_BEGIN_DRAG = wxEvent_EVT_COMMAND_TREE_BEGIN_DRAG();
+			wxEVT_COMMAND_TREE_BEGIN_RDRAG = wxEvent_EVT_COMMAND_TREE_BEGIN_RDRAG();
+			wxEVT_COMMAND_TREE_BEGIN_LABEL_EDIT = wxEvent_EVT_COMMAND_TREE_BEGIN_LABEL_EDIT();
+			wxEVT_COMMAND_TREE_END_LABEL_EDIT = wxEvent_EVT_COMMAND_TREE_END_LABEL_EDIT();
+			wxEVT_COMMAND_TREE_DELETE_ITEM = wxEvent_EVT_COMMAND_TREE_DELETE_ITEM();
+			wxEVT_COMMAND_TREE_GET_INFO = wxEvent_EVT_COMMAND_TREE_GET_INFO();
+			wxEVT_COMMAND_TREE_SET_INFO = wxEvent_EVT_COMMAND_TREE_SET_INFO();
+			wxEVT_COMMAND_TREE_ITEM_EXPANDED = wxEvent_EVT_COMMAND_TREE_ITEM_EXPANDED();
+			wxEVT_COMMAND_TREE_ITEM_EXPANDING = wxEvent_EVT_COMMAND_TREE_ITEM_EXPANDING();
+			wxEVT_COMMAND_TREE_ITEM_COLLAPSED = wxEvent_EVT_COMMAND_TREE_ITEM_COLLAPSED();
+			wxEVT_COMMAND_TREE_ITEM_COLLAPSING = wxEvent_EVT_COMMAND_TREE_ITEM_COLLAPSING();
+			wxEVT_COMMAND_TREE_SEL_CHANGED = wxEvent_EVT_COMMAND_TREE_SEL_CHANGED();
+			wxEVT_COMMAND_TREE_SEL_CHANGING = wxEvent_EVT_COMMAND_TREE_SEL_CHANGING();
+			wxEVT_COMMAND_TREE_KEY_DOWN = wxEvent_EVT_COMMAND_TREE_KEY_DOWN();
+			wxEVT_COMMAND_TREE_ITEM_ACTIVATED = wxEvent_EVT_COMMAND_TREE_ITEM_ACTIVATED();
+			wxEVT_COMMAND_TREE_ITEM_RIGHT_CLICK = wxEvent_EVT_COMMAND_TREE_ITEM_RIGHT_CLICK();
+			wxEVT_COMMAND_TREE_ITEM_MIDDLE_CLICK = wxEvent_EVT_COMMAND_TREE_ITEM_MIDDLE_CLICK();
+			wxEVT_COMMAND_TREE_END_DRAG = wxEvent_EVT_COMMAND_TREE_END_DRAG();
+
 			AddEventType(wxEVT_COMMAND_TREE_BEGIN_DRAG,         &TreeEvent.New);
 			AddEventType(wxEVT_COMMAND_TREE_BEGIN_RDRAG,        &TreeEvent.New);
 			AddEventType(wxEVT_COMMAND_TREE_BEGIN_LABEL_EDIT,   &TreeEvent.New);

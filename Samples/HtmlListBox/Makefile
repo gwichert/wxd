@@ -1,4 +1,4 @@
-NAME=HtmlListbox
+NAME=HtmlListBox
 OBJECTS=$(NAME).obj
 TARGET=..\$(NAME).exe
 TOPDIR=..\..

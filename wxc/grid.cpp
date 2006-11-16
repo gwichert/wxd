@@ -889,17 +889,17 @@ void wxGrid_GetColLabelAlignment(wxGrid* self, int* horiz, int* vert)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxGrid_GetRowLabelValue(wxGrid* self, int row)
+dstrret wxGrid_GetRowLabelValue(wxGrid* self, int row)
 {
-    return dstr(self->GetRowLabelValue(row).c_str());
+    return dstr_ret(self->GetRowLabelValue(row).c_str());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxGrid_GetColLabelValue(wxGrid* self, int col)
+dstrret wxGrid_GetColLabelValue(wxGrid* self, int col)
 {
-    return dstr(self->GetColLabelValue(col).c_str());
+    return dstr_ret(self->GetColLabelValue(col).c_str());
 }
 
 //-----------------------------------------------------------------------------
@@ -1561,9 +1561,9 @@ wxGridCellEditor* wxGrid_GetCellEditor(wxGrid* self, int row, int col)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxGrid_GetCellValue(wxGrid* self, int row, int col)
+dstrret wxGrid_GetCellValue(wxGrid* self, int row, int col)
 {
-    return dstr(self->GetCellValue(row, col));
+    return dstr_ret(self->GetCellValue(row, col));
 }
 
 //-----------------------------------------------------------------------------
@@ -1998,9 +1998,9 @@ void wxGrid_SetLabelValue(wxGrid* self, int orientation, dstr val, int pos)
 }
 
 extern "C" WXEXPORT
-dstr wxGrid_GetLabelValue(wxGrid* self, int orientation, int pos)
+dstrret wxGrid_GetLabelValue(wxGrid* self, int orientation, int pos)
 {
-    return dstr(self->GetLabelValue(orientation, pos));
+    return dstr_ret(self->GetLabelValue(orientation, pos));
 }
 
 //-----------------------------------------------------------------------------
@@ -2778,7 +2778,7 @@ wxGridCellEditor * wxGridCellEditor_Destroy(_GridCellEditor* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxGridCellEditor_Destroy(_GridCellEditor* self)
+dstrret wxGridCellEditor_Destroy(_GridCellEditor* self)
 {
     dstr(self->GetValue());
 }
@@ -3100,9 +3100,9 @@ void wxGridTableBase_RegisterVirtual(_GridTableBase* self, dobj obj,
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxGridTableBase_GetTypeName(_GridTableBase* self, int row, int col)
+dstrret wxGridTableBase_GetTypeName(_GridTableBase* self, int row, int col)
 {
-    return dstr(self->wxGridTableBase::GetTypeName(row, col).c_str());
+    return dstr_ret(self->wxGridTableBase::GetTypeName(row, col).c_str());
 }
 
 //-----------------------------------------------------------------------------
@@ -3260,17 +3260,17 @@ bool wxGridTableBase_DeleteCols(_GridTableBase* self, int pos, int numCols)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxGridTableBase_GetRowLabelValue(_GridTableBase* self, int row)
+dstrret wxGridTableBase_GetRowLabelValue(_GridTableBase* self, int row)
 {
-    return dstr(self->wxGridTableBase::GetRowLabelValue(row).c_str());
+    return dstr_ret(self->wxGridTableBase::GetRowLabelValue(row).c_str());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxGridTableBase_GetColLabelValue(_GridTableBase* self, int col)
+dstrret wxGridTableBase_GetColLabelValue(_GridTableBase* self, int col)
 {
-    return dstr(self->wxGridTableBase::GetColLabelValue(col).c_str());
+    return dstr_ret(self->wxGridTableBase::GetColLabelValue(col).c_str());
 }
 
 //-----------------------------------------------------------------------------
@@ -3422,9 +3422,9 @@ wxGridCellEditor* wxGridCellTextEditor_Clone(wxGridCellTextEditor* self)
 }
 
 extern "C" WXEXPORT
-dstr wxGridCellTextEditor_GetValue(wxGridCellTextEditor* self)
+dstrret wxGridCellTextEditor_GetValue(wxGridCellTextEditor* self)
 {
-    return dstr(self->GetValue());
+    return dstr_ret(self->GetValue());
 }
 
 //-----------------------------------------------------------------------------
@@ -3607,9 +3607,9 @@ wxGridCellEditor* wxGridCellNumberEditor_Clone(wxGridCellNumberEditor* self)
 }
 
 extern "C" WXEXPORT
-dstr wxGridCellNumberEditor_GetValue(wxGridCellNumberEditor* self)
+dstrret wxGridCellNumberEditor_GetValue(wxGridCellNumberEditor* self)
 {
-    return dstr(self->GetValue());
+    return dstr_ret(self->GetValue());
 }
 
 //-----------------------------------------------------------------------------
@@ -3677,9 +3677,9 @@ wxGridCellEditor* wxGridCellFloatEditor_Clone(wxGridCellFloatEditor* self)
 }
 
 extern "C" WXEXPORT
-dstr wxGridCellFloatEditor_GetValue(wxGridCellFloatEditor* self)
+dstrret wxGridCellFloatEditor_GetValue(wxGridCellFloatEditor* self)
 {
-    return dstr(self->GetValue());
+    return dstr_ret(self->GetValue());
 }
 
 //-----------------------------------------------------------------------------
@@ -3762,9 +3762,9 @@ wxGridCellEditor* wxGridCellBoolEditor_Clone(wxGridCellBoolEditor* self)
 }
 
 extern "C" WXEXPORT
-dstr wxGridCellBoolEditor_GetValue(wxGridCellBoolEditor* self)
+dstrret wxGridCellBoolEditor_GetValue(wxGridCellBoolEditor* self)
 {
-    return dstr(self->GetValue());
+    return dstr_ret(self->GetValue());
 }
 
 //-----------------------------------------------------------------------------
@@ -3847,9 +3847,9 @@ wxGridCellEditor* wxGridCellChoiceEditor_Clone(wxGridCellChoiceEditor* self)
 }
 
 extern "C" WXEXPORT
-dstr wxGridCellChoiceEditor_GetValue(wxGridCellChoiceEditor* self)
+dstrret wxGridCellChoiceEditor_GetValue(wxGridCellChoiceEditor* self)
 {
-    return dstr(self->GetValue());
+    return dstr_ret(self->GetValue());
 }
 
 //-----------------------------------------------------------------------------
@@ -4116,3 +4116,20 @@ void wxGridCellRenderer_RegisterVirtual(_GridCellRenderer* self,
 {
     self->RegisterVirtual(draw, getBestSize, clone);
 }
+
+extern "C" WXEXPORT int wxEvent_EVT_GRID_CELL_LEFT_CLICK() 		{ return wxEVT_GRID_CELL_LEFT_CLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_CELL_RIGHT_CLICK() 		{ return wxEVT_GRID_CELL_RIGHT_CLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_CELL_LEFT_DCLICK() 		{ return wxEVT_GRID_CELL_LEFT_DCLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_CELL_RIGHT_DCLICK() 		{ return wxEVT_GRID_CELL_RIGHT_DCLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_LABEL_LEFT_CLICK()		{ return wxEVT_GRID_LABEL_LEFT_CLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_LABEL_RIGHT_CLICK()		{ return wxEVT_GRID_LABEL_RIGHT_CLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_LABEL_LEFT_DCLICK()		{ return wxEVT_GRID_LABEL_LEFT_DCLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_LABEL_RIGHT_DCLICK()		{ return wxEVT_GRID_LABEL_RIGHT_DCLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_ROW_SIZE()			{ return wxEVT_GRID_ROW_SIZE; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_COL_SIZE()			{ return wxEVT_GRID_COL_SIZE; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_RANGE_SELECT()			{ return wxEVT_GRID_RANGE_SELECT; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_CELL_CHANGE()			{ return wxEVT_GRID_CELL_CHANGE; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_SELECT_CELL()			{ return wxEVT_GRID_SELECT_CELL; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_EDITOR_SHOWN()			{ return wxEVT_GRID_EDITOR_SHOWN; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_EDITOR_HIDDEN()		{ return wxEVT_GRID_EDITOR_HIDDEN; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_EDITOR_CREATED()		{ return wxEVT_GRID_EDITOR_CREATED; }

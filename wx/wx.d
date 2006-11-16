@@ -147,8 +147,6 @@ import wx.Window;
 import wx.WindowCreateEvent;
 import wx.WindowDestroyEvent;
 import wx.Wizard;
-import wx.WizardPage;
-import wx.WizardPageSimple;
 import wx.XmlResource;
 import wx.wxDateTime;
 import wx.wxObject;

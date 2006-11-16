@@ -331,9 +331,9 @@ void wxMenuBase_SetLabel(wxMenuBase* self, int itemid, dstr label)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxMenuBase_GetLabel(wxMenuBase* self, int itemid)
+dstrret wxMenuBase_GetLabel(wxMenuBase* self, int itemid)
 {
-	return dstr(self->GetLabel(itemid));
+	return dstr_ret(self->GetLabel(itemid));
 }
 
 //-----------------------------------------------------------------------------
@@ -347,9 +347,9 @@ void wxMenuBase_SetHelpString(wxMenuBase* self, int itemid, dstr helpString)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxMenuBase_GetHelpString(wxMenuBase* self, int itemid)
+dstrret wxMenuBase_GetHelpString(wxMenuBase* self, int itemid)
 {
-	return dstr(self->GetHelpString(itemid));
+	return dstr_ret(self->GetHelpString(itemid));
 }
 
 //-----------------------------------------------------------------------------
@@ -363,9 +363,9 @@ void wxMenuBase_SetTitle(wxMenuBase* self, dstr title)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxMenuBase_GetTitle(wxMenuBase* self)
+dstrret wxMenuBase_GetTitle(wxMenuBase* self)
 {
-	return dstr(self->GetTitle());
+	return dstr_ret(self->GetTitle());
 }
 
 //-----------------------------------------------------------------------------

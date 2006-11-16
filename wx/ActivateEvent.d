@@ -17,7 +17,7 @@ module wx.ActivateEvent;
 import wx.common;
 import wx.Event;
 
-		static extern (C) IntPtr wxActivateEvent_ctor(int type);
+		static extern (C) IntPtr wxActivateEvent_ctor(int type, bool active,int Id);
 		static extern (C) bool wxActivateEvent_GetActive(IntPtr self);
 		
 		//-----------------------------------------------------------------------------
@@ -27,8 +27,8 @@ import wx.Event;
 		public this(IntPtr wxobj) 
 			{ super(wxobj); }
 
-		public this(int type)
-			{ this(wxActivateEvent_ctor(type)); }
+		public this(EventType type = wxEVT_NULL, bool active = true, int Id = 0)
+			{ this(wxActivateEvent_ctor(type,true,Id)); }
 
 		//-----------------------------------------------------------------------------	
 		

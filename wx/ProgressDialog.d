@@ -34,23 +34,12 @@ import wx.Dialog;
         public const int wxPD_ESTIMATED_TIME = 0x0010;
         public const int wxPD_REMAINING_TIME = 0x0040;
 	
-	private bool xdisposed = false;
-
 		//---------------------------------------------------------------------
 
         public this(IntPtr wxobj)
             { super(wxobj);}
 
-        public this(string title, string message)
-            { this(title, message, 100, null, wxPD_APP_MODAL | wxPD_AUTO_HIDE);}
-
-        public this(string title, string message, int maximum)
-            { this(title, message, maximum, null, wxPD_APP_MODAL | wxPD_AUTO_HIDE);}
-
-        public this(string title, string message, int maximum, Window parent)
-            { this(title, message, maximum, parent, wxPD_APP_MODAL | wxPD_AUTO_HIDE);}
-
-        public this(string title, string message, int maximum, Window parent, int style)
+        public this(string title, string message, int maximum = 100, Window parent = null, int style = wxPD_APP_MODAL | wxPD_AUTO_HIDE)
             { this(wxProgressDialog_ctor(title, message, maximum, wxObject.SafePtr(parent), cast(uint)style));}
 
         //-----------------------------------------------------------------------------
@@ -76,34 +65,13 @@ import wx.Dialog;
 
 		//---------------------------------------------------------------------
 
-        public override bool Show()
-        {
-            return wxProgressDialog_Show(wxobj, true);
-        }
-
-		//---------------------------------------------------------------------
-
-        public bool Show(bool show)
+        public override bool Show(bool show=true)
         {
             return wxProgressDialog_Show(wxobj, show);
         }
 	
 	//---------------------------------------------------------------------
 	
-	public void Dispose()
-        {
-            XDispose(true);
-        }
-	
-	//---------------------------------------------------------------------
-
-        public void XDispose(bool disposing)
-        {
-            if (!disposed)
-            {
-                wxProgressDialog_dtor(wxobj);
-            }
-            xdisposed = true;
-        }
+	override private void dtor() { wxProgressDialog_dtor(wxobj); }
     }
 

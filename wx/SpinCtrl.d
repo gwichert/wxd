@@ -44,22 +44,14 @@ import wx.Control;
 		public this()
 			{ super(wxSpinCtrl_ctor()); }
 
-		public this(Window parent, int id)
-			{ this(parent, id, "", wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 100, 0, null ); }
-
-		public this(Window parent, int id, string value)
-			{ this(parent, id, value, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 100, 0, null ); }
-
-		public this(Window parent, int id, string value, Point pos, Size size)
-			{ this(parent, id, value, pos, size, wxSP_ARROW_KEYS, 0, 100, 0, null ); }
-
-		public this(Window parent, int id, string value, Point pos, Size size, int style)
-			{ this(parent, id, value, pos, size, style, 0, 100, 0, null ); }
-
-		public this(Window parent, int id, string value, Point pos, Size size, int style, int min, int max, int initial)
-			{ this(parent, id, value, pos, size, style, min, max, initial, null ); }
-
-		public this(Window parent, int id, string value, Point pos, Size size, int style, int min, int max, int initial, string name)
+		public this(Window parent,
+			int id /*= wxID_ANY*/,
+			string value = "",
+			Point pos = wxDefaultPosition,
+			Size size = wxDefaultSize,
+			int style = wxSP_ARROW_KEYS,
+			int min = 0, int max = 100, int initial = 0,
+			string name = "SpinCtrl")
 		{
 			super(wxSpinCtrl_ctor());
 			if(!Create(parent, id, value, pos, size, style, min, max, initial, name))
@@ -71,22 +63,13 @@ import wx.Control;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent)
-			{ this(parent, Window.UniqueID, "", wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 100, 0, null ); }
-
-		public this(Window parent, string value)
-			{ this(parent, Window.UniqueID, value, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 100, 0, null ); }
-
-		public this(Window parent, string value, Point pos, Size size)
-			{ this(parent, Window.UniqueID, value, pos, size, wxSP_ARROW_KEYS, 0, 100, 0, null ); }
-
-		public this(Window parent, string value, Point pos, Size size, int style)
-			{ this(parent, Window.UniqueID, value, pos, size, style, 0, 100, 0, null ); }
-
-		public this(Window parent, string value, Point pos, Size size, int style, int min, int max, int initial)
-			{ this(parent, Window.UniqueID, value, pos, size, style, min, max, initial, null ); }
-
-		public this(Window parent, string value, Point pos, Size size, int style, int min, int max, int initial, string name)
+		public this(Window parent,
+			string value = "",
+			Point pos = wxDefaultPosition,
+			Size size = wxDefaultSize,
+			int style = wxSP_ARROW_KEYS,
+			int min = 0, int max = 100, int initial = 0,
+			string name = "SpinCtrl")
 			{ this(parent, Window.UniqueID, value, pos, size, style, min, max, initial, name);}
 		
 		//---------------------------------------------------------------------

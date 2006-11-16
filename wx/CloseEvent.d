@@ -17,7 +17,7 @@ module wx.CloseEvent;
 import wx.common;
 import wx.Event;
 
-		static extern (C) IntPtr wxCloseEvent_ctor(int type);
+		static extern (C) IntPtr wxCloseEvent_ctor(int type,int winid);
 		static extern (C) void wxCloseEvent_SetLoggingOff(IntPtr self, bool logOff);
 		static extern (C) bool wxCloseEvent_GetLoggingOff(IntPtr self);
 		static extern (C) void wxCloseEvent_Veto(IntPtr self, bool veto);
@@ -32,8 +32,8 @@ import wx.Event;
 		public this(IntPtr wxobj) 
 			{ super(wxobj); }
 
-		public this(int type)
-			{ this(wxCloseEvent_ctor(type)); }
+		public this(EventType type = wxEVT_NULL, int winid = 0)
+			{ this(wxCloseEvent_ctor(type,winid)); }
 
 		//-----------------------------------------------------------------------------
 		

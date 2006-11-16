@@ -227,7 +227,7 @@ struct ArrayList /* for .NET compatibility */
 			dc.DrawLine( 50, 230, 200, 230 );
 			dc.DrawText( "This is a test string", 50, 230 );
 			
-			Point[] points = new Point[3];
+			Point[3] points;
 			points[0].X = 200; points[0].Y = 300;
 			points[1].X = 100; points[1].Y = 400;
 			points[2].X = 300; points[2].Y = 400;
@@ -242,12 +242,12 @@ struct ArrayList /* for .NET compatibility */
 		{
 			MouseEvent me = cast(MouseEvent) e;
 
-			if ( e.EventType == Event.wxEVT_LEFT_DOWN )
+			if ( e.eventType == Event.wxEVT_LEFT_DOWN )
 			{
 				drawing = true;
 			}
 
-			if ( e.EventType == Event.wxEVT_LEFT_UP )
+			if ( e.eventType == Event.wxEVT_LEFT_UP )
 			{
 				drawing = false;
 			}

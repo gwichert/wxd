@@ -205,7 +205,7 @@ alias std.string.find indexOf;
 				m_notebook.Images = m_imageList;
 			}
 			
-			if ( notebook != null )
+			if ( notebook !== null )
 			{
 				int sel = notebook.Selection;
 				
@@ -219,7 +219,7 @@ alias std.string.find indexOf;
 					m_notebook.AddPage( page, str, false, m_notebook.IconIndex );
 				}
 				
-				if ( m_sizerNotebook != null )
+				if ( m_sizerNotebook !== null )
 				{
 					m_sizerTop.Remove( m_sizerNotebook );
 				}
@@ -297,7 +297,7 @@ alias std.string.find indexOf;
 			
 			NotebookEvent ne = cast(NotebookEvent) e;
 			
-			int eventType = ne.EventType;
+			int eventType = ne.eventType;
 			
 			if ( eventType == Event.wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED )
 			{
@@ -430,7 +430,7 @@ alias std.string.find indexOf;
 		
 		public int IconIndex()
 		{
-				if ( Images != null )
+				if ( Images !== null )
 				{
 					int nImages = Images.ImageCount;
 					if ( nImages > 0 )

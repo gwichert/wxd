@@ -56,7 +56,7 @@ import wx.ClientData;
         public this(IntPtr wxobj) 
             { super(wxobj); }
 
-        public this(ToolBar tbar, int toolid, string label, Bitmap bmpNormal, Bitmap bmpDisabled, ItemKind kind, ClientData clientData, string shortHelpString, string longHelpString)
+        public this(ToolBar tbar = null, int toolid = wxID_SEPARATOR, string label = "", Bitmap bmpNormal = Bitmap.wxNullBitmap, Bitmap bmpDisabled = Bitmap.wxNullBitmap, ItemKind kind = ItemKind.wxITEM_NORMAL, ClientData clientData = null, string shortHelpString = "", string longHelpString = "")
             { this(wxToolBarToolBase_ctor(wxObject.SafePtr(tbar), toolid, label, wxObject.SafePtr(bmpNormal), wxObject.SafePtr(bmpDisabled), cast(int)kind, wxObject.SafePtr(clientData), shortHelpString, longHelpString)); }
 
         public this(ToolBar tbar, Control control)
@@ -188,46 +188,30 @@ import wx.ClientData;
 
 	public class ToolBar : Control
 	{
-		public const int wxTB_HORIZONTAL   = Orientation.wxHORIZONTAL;
-		public const int wxTB_VERTICAL     = Orientation.wxVERTICAL;
-		public const int wxTB_3DBUTTONS    = 0x0010;
-		public const int wxTB_FLAT         = 0x0020;
-		public const int wxTB_DOCKABLE     = 0x0040;
-		public const int wxTB_NOICONS      = 0x0080;
-		public const int wxTB_TEXT         = 0x0100;
-		public const int wxTB_NODIVIDER    = 0x0200;
-		public const int wxTB_NOALIGN      = 0x0400;
+		enum {
+			wxTB_HORIZONTAL   = Orientation.wxHORIZONTAL,
+			wxTB_VERTICAL     = Orientation.wxVERTICAL,
+			wxTB_3DBUTTONS    = 0x0010,
+			wxTB_FLAT         = 0x0020,
+			wxTB_DOCKABLE     = 0x0040,
+			wxTB_NOICONS      = 0x0080,
+			wxTB_TEXT         = 0x0100,
+			wxTB_NODIVIDER    = 0x0200,
+			wxTB_NOALIGN      = 0x0400,
+		}
 	
 		//---------------------------------------------------------------------
 
         public this(IntPtr wxobj) 
             { super(wxobj); }
 
-        public this(Window parent, int id)
-            { this(parent, id, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL | /*Border.*/wxNO_BORDER); }
-
-        public this(Window parent, int id, Point pos)
-            { this(parent, id, pos, wxDefaultSize, wxTB_HORIZONTAL | /*Border.*/wxNO_BORDER); }
-
-        public this(Window parent, int id, Point pos, Size size)
-            { this(parent, id, pos, size, wxTB_HORIZONTAL | /*Border.*/wxNO_BORDER); }
-
-        public this(Window parent, int id, Point pos, Size size, int style)
-            { this(wxToolBar_ctor(wxObject.SafePtr(parent), id, pos, size, cast(uint)style)); }
+        public this(Window parent, int id, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = wxNO_BORDER|wxTB_HORIZONTAL)
+            { this(wxToolBar_ctor(wxObject.SafePtr(parent), id, pos, size, style)); }
 	    
 	//---------------------------------------------------------------------
 	// ctors with self created id
 	    
-	public this(Window parent)
-            { this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL | /*Border.*/wxNO_BORDER); }
-
-        public this(Window parent, Point pos)
-            { this(parent, Window.UniqueID, pos, wxDefaultSize, wxTB_HORIZONTAL | /*Border.*/wxNO_BORDER); }
-
-        public this(Window parent, Point pos, Size size)
-            { this(parent, Window.UniqueID, pos, size, wxTB_HORIZONTAL | /*Border.*/wxNO_BORDER); }
-
-        public this(Window parent, Point pos, Size size, int style)
+        public this(Window parent, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = wxNO_BORDER|wxTB_HORIZONTAL)
 	    { this(parent, Window.UniqueID, pos, size, style);}
 
         //---------------------------------------------------------------------

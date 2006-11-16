@@ -19,9 +19,9 @@
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxHelpEvent* wxHelpEvent_ctor(wxEventType type)
+wxHelpEvent* wxHelpEvent_ctor(wxEventType type, int winid , wxPoint *pos)
 {
-    return new wxHelpEvent(type);
+    return new wxHelpEvent(type,winid,*pos);
 }
 
 //-----------------------------------------------------------------------------
@@ -43,9 +43,9 @@ void wxHelpEvent_SetPosition(wxHelpEvent* self, wxPoint* pos)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxHelpEvent_GetLink(wxHelpEvent* self)
+dstrret wxHelpEvent_GetLink(wxHelpEvent* self)
 {
-	return dstr(self->GetLink());
+	return dstr_ret(self->GetLink());
 }
 
 //-----------------------------------------------------------------------------
@@ -59,9 +59,9 @@ void wxHelpEvent_SetLink(wxHelpEvent* self, dstr link)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxHelpEvent_GetTarget(wxHelpEvent* self)
+dstrret wxHelpEvent_GetTarget(wxHelpEvent* self)
 {
-	return dstr(self->GetTarget());
+	return dstr_ret(self->GetTarget());
 }
 
 //-----------------------------------------------------------------------------

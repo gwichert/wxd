@@ -37,8 +37,11 @@ wxCalendarCtrl* wxCalendarCtrl_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxCalendarCtrl_Create(wxCalendarCtrl* self, wxWindow* parent, wxWindowID id, wxDateTime* date, const wxPoint* pos, const wxSize* size, int style, dstr name)
+bool wxCalendarCtrl_Create(wxCalendarCtrl* self, wxWindow* parent, wxWindowID id, const wxDateTime* date, const wxPoint* pos, const wxSize* size, int style, dstr name)
 {
+	if (date == NULL)
+		date = &wxDefaultDateTime;
+
     	if (pos == NULL)
 		pos = &wxDefaultPosition;
 
@@ -250,6 +253,15 @@ class _CalendarDateAttr : public wxCalendarDateAttr
 public:
 	_CalendarDateAttr()
 		: wxCalendarDateAttr() {}
+	_CalendarDateAttr(const wxColour& colText,
+                       const wxColour& colBack = wxNullColour,
+                       const wxColour& colBorder = wxNullColour,
+                       const wxFont& font = wxNullFont,
+                       wxCalendarDateBorder border = wxCAL_BORDER_NONE)
+		:  wxCalendarDateAttr(colText,colBack,colBorder,font,border) {}
+	_CalendarDateAttr(wxCalendarDateBorder border,
+                       const wxColour& colBorder = wxNullColour)
+                : wxCalendarDateAttr(border, colBorder) {}
 
 	DECLARE_DISPOSABLE(_CalendarDateAttr)
 };
@@ -273,26 +285,31 @@ void wxCalendarDateAttr_RegisterDisposable(_CalendarDateAttr* self, Virtual_Disp
 	self->RegisterDispose(onDispose);
 }
 
-#if 0
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxCalendarDateAttr* wxCalendarDateAttr_ctor(wxColour* colText, wxColour* colBack, wxColour* colBorder, wxFont* font, wxCalendarDateBorder border)
+wxCalendarDateAttr* wxCalendarDateAttr_ctor2(wxColour* colText, wxColour* colBack, wxColour* colBorder, wxFont* font, wxCalendarDateBorder border)
 {
-    return new wxCalendarDateAttr(*colText, *colBack, *colBorder, *font, border);
+    if (colBack == NULL)
+        colBack = &wxNullColour;
+    if (colBorder == NULL)
+        colBorder = &wxNullColour;
+    if (font == NULL)
+        font = &wxNullFont;
+
+    return new _CalendarDateAttr(*colText, *colBack, *colBorder, *font, border);
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxCalendarDateAttr* wxCalendarDateAttr_ctor(wxCalendarDateBorder border, wxColour* colBorder)
+wxCalendarDateAttr* wxCalendarDateAttr_ctor3(wxCalendarDateBorder border, wxColour* colBorder)
 {
     if (colBorder == NULL)
         colBorder = &wxNullColour;
 
-    return new wxCalendarDateAttr(border, *colBorder);
+    return new _CalendarDateAttr(border, *colBorder);
 }
-#endif
 
 //-----------------------------------------------------------------------------
 
@@ -433,7 +450,15 @@ wxCalendarDateBorder wxCalendarDateAttr_GetBorder(wxCalendarDateAttr* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxCalendarEvent* wxCalendarEvent_ctor(wxCalendarCtrl* cal, wxEventType type)
+wxCalendarEvent* wxCalendarEvent_ctor()
+{
+    return new wxCalendarEvent();
+}
+
+//-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT
+wxCalendarEvent* wxCalendarEvent_ctor2(wxCalendarCtrl* cal, wxEventType type)
 {
     return new wxCalendarEvent(cal, type);
 }
@@ -455,4 +480,11 @@ wxDateTime::WeekDay wxCalendarEvent_GetWeekDay(wxCalendarEvent* self)
 }
 
 //-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT int wxEvent_EVT_CALENDAR_SEL_CHANGED()          { return wxEVT_CALENDAR_SEL_CHANGED; }
+extern "C" WXEXPORT int wxEvent_EVT_CALENDAR_DAY_CHANGED()          { return wxEVT_CALENDAR_DAY_CHANGED; }
+extern "C" WXEXPORT int wxEvent_EVT_CALENDAR_MONTH_CHANGED()        { return wxEVT_CALENDAR_MONTH_CHANGED; }
+extern "C" WXEXPORT int wxEvent_EVT_CALENDAR_YEAR_CHANGED()         { return wxEVT_CALENDAR_YEAR_CHANGED; }
+extern "C" WXEXPORT int wxEvent_EVT_CALENDAR_DOUBLECLICKED()        { return wxEVT_CALENDAR_DOUBLECLICKED; }
+extern "C" WXEXPORT int wxEvent_EVT_CALENDAR_WEEKDAY_CLICKED()      { return wxEVT_CALENDAR_WEEKDAY_CLICKED; }
 

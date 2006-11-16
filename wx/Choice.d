@@ -71,26 +71,15 @@ import wx.ArrayString;
 		
 	public class Choice : Control , IControlWithItems
 	{
+		public const string wxChoiceNameStr = "choice";
+	
 		public this(IntPtr wxobj) 
 			{ super(wxobj);}
 
 		public this()
 			{ super(wxChoice_ctor()); }
 
-		public this(Window parent, int id)
-			{ this(parent, id, wxDefaultPosition, wxDefaultSize, null, 0, null, null); }
-
-		public this(Window parent, int id, Point pos, Size size, string[] choices)
-			{ this(parent, id, pos, size, choices, 0, null, null); }
-
-		public this(Window parent, int id, Point pos, Size size, string[] choices, uint style)
-			{ this(parent, id, pos, size, choices, style, null, null); }
-
-		public this(Window parent, int id, Point pos, Size size, string[] choices, uint style, Validator val)
-			{ this(parent, id, pos, size, choices, style, val, null); }
-
-		public this(Window parent, int id, Point pos, Size size, 
-					  string[] choices, uint style, Validator validator, string name)
+		public this(Window parent, int id, Point pos, Size size, string[] choices = null, int style = 0, Validator val = null,string name = wxChoiceNameStr)
 		{
 			super(wxChoice_ctor());
 			if(!wxChoice_Create(wxobj, wxObject.SafePtr(parent), id, pos,
@@ -104,24 +93,12 @@ import wx.ArrayString;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent)
-			{ this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize,null, 0, null, null); }
-
-		public this(Window parent, Point pos, Size size, string[] choices)
-			{ this(parent, Window.UniqueID, pos, size, choices, 0, null, null); }
-
-		public this(Window parent, Point pos, Size size, string[] choices, int style)
-			{ this(parent, Window.UniqueID, pos, size, choices, style, null, null); }
-
-		public this(Window parent, Point pos, Size size, string[] choices, int style, Validator val)
-			{ this(parent, Window.UniqueID, pos, size, choices, style, val, null); }
-
-		public this(Window parent, Point pos, Size size, string[] choices, int style, Validator validator, string name)
+		public this(Window parent, Point pos, Size size, string[] choices = null, int style = 0, Validator val = null,string name = wxChoiceNameStr)
 			{ this(parent, Window.UniqueID, pos, size, choices, style, validator, name);}
 		
 		//---------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, Point pos, Size size,
+		public bool Create(Window parent, int id, inout Point pos, inout Size size,
 						   string[] choices, int style, Validator validator,
 						   string name)
 		{

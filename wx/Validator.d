@@ -18,11 +18,18 @@ import wx.common;
 import wx.EvtHandler;
 
 		static extern (C) IntPtr wxValidator_ctor();
+		static extern (C) IntPtr wxDefaultValidator_Get();
 		
 		//---------------------------------------------------------------------
 		
 	public class Validator : EvtHandler
 	{
+		static Validator wxDefaultValidator;
+		static this()
+		{
+			wxDefaultValidator = new Validator(wxDefaultValidator_Get());
+		}
+	
 		public this()
 			{ super(wxValidator_ctor());}
 

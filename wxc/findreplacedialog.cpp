@@ -77,17 +77,17 @@ int wxFindDialogEvent_GetFlags(wxFindDialogEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxFindDialogEvent_GetFindString(wxFindDialogEvent* self)
+dstrret wxFindDialogEvent_GetFindString(wxFindDialogEvent* self)
 {
-    return dstr(self->GetFindString());
+    return dstr_ret(self->GetFindString());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxFindDialogEvent_GetReplaceString(wxFindDialogEvent* self)
+dstrret wxFindDialogEvent_GetReplaceString(wxFindDialogEvent* self)
 {
-    return dstr(self->GetReplaceString());
+    return dstr_ret(self->GetReplaceString());
 }
 
 //-----------------------------------------------------------------------------
@@ -133,17 +133,17 @@ wxFindReplaceData* wxFindReplaceData_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxFindReplaceData_GetFindString(wxFindReplaceData* self)
+dstrret wxFindReplaceData_GetFindString(wxFindReplaceData* self)
 {
-    return dstr(self->GetFindString());
+    return dstr_ret(self->GetFindString());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxFindReplaceData_GetReplaceString(wxFindReplaceData* self)
+dstrret wxFindReplaceData_GetReplaceString(wxFindReplaceData* self)
 {
-    return dstr(self->GetReplaceString());
+    return dstr_ret(self->GetReplaceString());
 }
 
 //-----------------------------------------------------------------------------
@@ -179,4 +179,10 @@ void wxFindReplaceData_SetReplaceString(wxFindReplaceData* self, dstr str)
 }
 
 //-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_FIND()                  { return wxEVT_COMMAND_FIND; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_FIND_NEXT()             { return wxEVT_COMMAND_FIND_NEXT; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_FIND_REPLACE()          { return wxEVT_COMMAND_FIND_REPLACE; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_FIND_REPLACE_ALL()      { return wxEVT_COMMAND_FIND_REPLACE_ALL; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_FIND_CLOSE()            { return wxEVT_COMMAND_FIND_CLOSE; }
 

@@ -107,9 +107,9 @@ bool wxNotebook_SetPageText(wxNotebook* self, int nPage, dstr strText)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxNotebook_GetPageText(wxNotebook* self, int nPage)
+dstrret wxNotebook_GetPageText(wxNotebook* self, int nPage)
 {
-	return dstr(self->GetPageText(nPage).c_str());;
+	return dstr_ret(self->GetPageText(nPage).c_str());;
 }
 
 //-----------------------------------------------------------------------------
@@ -277,3 +277,7 @@ bool wxNotebookEvent_IsAllowed(wxNotebookEvent* self)
 {
     return self->IsAllowed()?1:0;
 }
+
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_NOTEBOOK_PAGE_CHANGED()       { return wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_NOTEBOOK_PAGE_CHANGING()      { return wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGING; }
+

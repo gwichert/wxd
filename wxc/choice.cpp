@@ -78,15 +78,15 @@ void wxChoice_SetString(wxChoice* self, int n, dstr text)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxChoice_GetStringSelection(wxChoice* self)
+dstrret wxChoice_GetStringSelection(wxChoice* self)
 {
-    return dstr(self->GetStringSelection());
+    return dstr_ret(self->GetStringSelection());
 }
 
 extern "C" WXEXPORT
-dstr wxChoice_GetString(wxChoice* self, int n)
+dstrret wxChoice_GetString(wxChoice* self, int n)
 {
-    return dstr(self->GetString(n));
+    return dstr_ret(self->GetString(n));
 }
 
 extern "C" WXEXPORT

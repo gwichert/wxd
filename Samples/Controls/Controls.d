@@ -329,10 +329,10 @@ import std.string;
 
             listbox = new ListBox(panel, ID_LISTBOX,
                                   new_Point(10, 10), new_Size(120, 70),
-                                  5, choices, ListBox.wxLB_ALWAYS_SB);
+                                  choices, ListBox.wxLB_ALWAYS_SB);
             listboxSorted = new ListBox(panel, ID_LISTBOX_SORTED,
                                         new_Point(10, 90), new_Size(120, 70),
-                                        5, choices, ListBox.wxLB_SORT);
+                                        choices, ListBox.wxLB_SORT);
 
             // TODO: Add in ClientData
 

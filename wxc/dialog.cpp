@@ -75,9 +75,9 @@ int wxDialog_GetReturnCode(wxDialog* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxDialog_GetTitle(wxDialog* self)
+dstrret wxDialog_GetTitle(wxDialog* self)
 {
-	return dstr(self->GetTitle());
+	return dstr_ret(self->GetTitle());
 }
 
 extern "C" WXEXPORT

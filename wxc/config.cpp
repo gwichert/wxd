@@ -60,9 +60,9 @@ void wxConfigBase_SetPath(wxConfigBase* self, dstr strPath)
 }
 
 extern "C" WXEXPORT
-dstr wxConfigBase_GetPath(wxConfigBase* self)
+dstrret wxConfigBase_GetPath(wxConfigBase* self)
 {
-    return dstr(self->GetPath());
+    return dstr_ret(self->GetPath());
 }
 
 //-----------------------------------------------------------------------------
@@ -196,9 +196,9 @@ bool wxConfigBase_ReadBoolDef(wxConfigBase* self, dstr key, bool* val, bool defV
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxConfigBase_ReadStrRet(wxConfigBase* self, dstr key, dstr defVal)
+dstrret wxConfigBase_ReadStrRet(wxConfigBase* self, dstr key, dstr defVal)
 {
-    return dstr(self->Read(wxString(key.data, wxConvUTF8, key.length), wxString(defVal.data, wxConvUTF8, defVal.length)));
+    return dstr_ret(self->Read(wxString(key.data, wxConvUTF8, key.length), wxString(defVal.data, wxConvUTF8, defVal.length)));
 }
 
 extern "C" WXEXPORT
@@ -290,9 +290,9 @@ void wxConfigBase_SetExpandEnvVars(wxConfigBase* self, bool bDoIt)
 }
 
 extern "C" WXEXPORT
-dstr wxConfigBase_ExpandEnvVars(wxConfigBase* self, dstr str)
+dstrret wxConfigBase_ExpandEnvVars(wxConfigBase* self, dstr str)
 {
-    return dstr(self->ExpandEnvVars(wxString(str.data, wxConvUTF8, str.length)));
+    return dstr_ret(self->ExpandEnvVars(wxString(str.data, wxConvUTF8, str.length)));
 }
 
 //-----------------------------------------------------------------------------
@@ -312,9 +312,9 @@ bool wxConfigBase_IsRecordingDefaults(wxConfigBase* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxConfigBase_GetAppName(wxConfigBase* self)
+dstrret wxConfigBase_GetAppName(wxConfigBase* self)
 {
-    return dstr(self->GetAppName());
+    return dstr_ret(self->GetAppName());
 }
 
 extern "C" WXEXPORT
@@ -326,9 +326,9 @@ void wxConfigBase_SetAppName(wxConfigBase* self, dstr appName)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxConfigBase_GetVendorName(wxConfigBase* self)
+dstrret wxConfigBase_GetVendorName(wxConfigBase* self)
 {
-    return dstr(self->GetVendorName());
+    return dstr_ret(self->GetVendorName());
 }
 
 extern "C" WXEXPORT

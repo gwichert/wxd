@@ -19,9 +19,9 @@
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxShowEvent* wxShowEvent_ctor(wxEventType type)
+wxShowEvent* wxShowEvent_ctor(int winid, bool show)
 {
-    return new wxShowEvent(type);
+    return new wxShowEvent(winid,show);
 }
 
 extern "C" WXEXPORT

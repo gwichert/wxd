@@ -616,9 +616,9 @@ bool wxPrintData_Ok(wxPrintData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxPrintData_GetPrinterName(wxPrintData* self)
+dstrret wxPrintData_GetPrinterName(wxPrintData* self)
 {
-    return dstr(self->GetPrinterName());
+    return dstr_ret(self->GetPrinterName());
 }
 
 //-----------------------------------------------------------------------------
@@ -736,41 +736,41 @@ void wxPrintData_SetQuality(wxPrintData* self, wxPrintQuality quality)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxPrintData_GetPrinterCommand(wxPrintData* self)
+dstrret wxPrintData_GetPrinterCommand(wxPrintData* self)
 {
-    return dstr(self->GetPrinterCommand());
+    return dstr_ret(self->GetPrinterCommand());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxPrintData_GetPrinterOptions(wxPrintData* self)
+dstrret wxPrintData_GetPrinterOptions(wxPrintData* self)
 {
-    return dstr(self->GetPrinterOptions());
+    return dstr_ret(self->GetPrinterOptions());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxPrintData_GetPreviewCommand(wxPrintData* self)
+dstrret wxPrintData_GetPreviewCommand(wxPrintData* self)
 {
-    return dstr(self->GetPreviewCommand());
+    return dstr_ret(self->GetPreviewCommand());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxPrintData_GetFilename(wxPrintData* self)
+dstrret wxPrintData_GetFilename(wxPrintData* self)
 {
-    return dstr(self->GetFilename());
+    return dstr_ret(self->GetFilename());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxPrintData_GetFontMetricPath(wxPrintData* self)
+dstrret wxPrintData_GetFontMetricPath(wxPrintData* self)
 {
-    return dstr(self->GetFontMetricPath());
+    return dstr_ret(self->GetFontMetricPath());
 }
 
 //-----------------------------------------------------------------------------

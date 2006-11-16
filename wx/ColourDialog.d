@@ -93,10 +93,7 @@ import wx.Dialog;
 		public this()
 			{ super(wxColourDialog_ctor()); }
 	
-		public this(Window parent)
-			{ this(parent, null); }
-	
-		public this(Window parent, ColourData data)
+		public this(Window parent, ColourData data = null)
 		{
 			super(wxColourDialog_ctor());
 			if (!Create(parent, data)) 
@@ -105,7 +102,7 @@ import wx.Dialog;
 			}
 		}
 	
-		public bool Create(Window parent, ColourData data)
+		public bool Create(Window parent, ColourData data = null)
 		{
 			return wxColourDialog_Create(wxobj, wxObject.SafePtr(parent),
 							wxObject.SafePtr(data));

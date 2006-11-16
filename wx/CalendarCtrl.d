@@ -67,14 +67,32 @@ import wx.CommandEvent;
 
     public class CalendarCtrl : Control
     {
-        public const int wxCAL_SUNDAY_FIRST               = 0x0000;
-        public const int wxCAL_MONDAY_FIRST               = 0x0001;
-        public const int wxCAL_SHOW_HOLIDAYS              = 0x0002;
-        public const int wxCAL_NO_YEAR_CHANGE             = 0x0004;
-        public const int wxCAL_NO_MONTH_CHANGE            = 0x000c;
-        public const int wxCAL_SEQUENTIAL_MONTH_SELECTION = 0x0010;
-        public const int wxCAL_SHOW_SURROUNDING_WEEKS     = 0x0020;
-
+        enum
+        {
+            // show Sunday as the first day of the week (default)
+            wxCAL_SUNDAY_FIRST               = 0x0000,
+        
+            // show Monder as the first day of the week
+            wxCAL_MONDAY_FIRST               = 0x0001,
+        
+            // highlight holidays
+            wxCAL_SHOW_HOLIDAYS              = 0x0002,
+        
+            // disable the year change control, show only the month change one
+            wxCAL_NO_YEAR_CHANGE             = 0x0004,
+        
+            // don't allow changing neither month nor year (implies
+            // wxCAL_NO_YEAR_CHANGE)
+            wxCAL_NO_MONTH_CHANGE            = 0x000c,
+        
+            // use MS-style month-selection instead of combo-spin combination
+            wxCAL_SEQUENTIAL_MONTH_SELECTION = 0x0010,
+        
+            // show the neighbouring weeks in the previous and next month
+            wxCAL_SHOW_SURROUNDING_WEEKS     = 0x0020
+        }
+        
+	public const string wxCalendarNameStr  = "CalendarCtrl";
         //-----------------------------------------------------------------------------
 
         public this(IntPtr wxobj)
@@ -83,22 +101,7 @@ import wx.CommandEvent;
         public this()
             { this(wxCalendarCtrl_ctor()); }
 
-        public this(Window parent, int id)
-            { this(parent, id, DateTime.Now, wxDefaultPosition, wxDefaultSize, wxCAL_SHOW_HOLIDAYS, "calendarCtrl"); }
-	    
-        public this(Window parent, int id, DateTime date)
-            { this(parent, id, date, wxDefaultPosition, wxDefaultSize, wxCAL_SHOW_HOLIDAYS, "calendarCtrl"); }
-	    
-        public this(Window parent, int id, DateTime date, Point pos)
-            { this(parent, id, date, pos, wxDefaultSize, wxCAL_SHOW_HOLIDAYS, "calendarCtrl"); }
-	    
-        public this(Window parent, int id, DateTime date, Point pos, Size size)
-            { this(parent, id, date, pos, size, wxCAL_SHOW_HOLIDAYS, "calendarCtrl"); }
-	    
-        public this(Window parent, int id, DateTime date, Point pos, Size size, int style)
-            { this(parent, id, date, pos, size, style, "calendarCtrl"); }
-
-        public this(Window parent, int id, DateTime date, Point pos, Size size, int style, string name)
+        public this(Window parent, int id, wxDateTime date = null /*wxDefaultDateTime*/, Point pos = wxDefaultPosition, Size size =wxDefaultSize , int style = wxCAL_SHOW_HOLIDAYS | wxWANTS_CHARS, string name = wxCalendarNameStr)
         {
         	this(wxCalendarCtrl_ctor());
             if (!Create(parent, id, date, pos, size, style, name))
@@ -110,29 +113,14 @@ import wx.CommandEvent;
 	//-----------------------------------------------------------------------------
 	// ctors with self created id
 	
-	public this(Window parent)
-            { this(parent, Window.UniqueID, DateTime.Now, wxDefaultPosition, wxDefaultSize, wxCAL_SHOW_HOLIDAYS, "calendarCtrl"); }
-	    
-        public this(Window parent, DateTime date)
-            { this(parent, Window.UniqueID, date, wxDefaultPosition, wxDefaultSize, wxCAL_SHOW_HOLIDAYS, "calendarCtrl"); }
-	    
-        public this(Window parent, DateTime date, Point pos)
-            { this(parent, Window.UniqueID, date, pos, wxDefaultSize, wxCAL_SHOW_HOLIDAYS, "calendarCtrl"); }
-	    
-        public this(Window parent, DateTime date, Point pos, Size size)
-            { this(parent, Window.UniqueID, date, pos, size, wxCAL_SHOW_HOLIDAYS, "calendarCtrl"); }
-	    
-        public this(Window parent, DateTime date, Point pos, Size size, int style)
-            { this(parent, Window.UniqueID, date, pos, size, style, "calendarCtrl"); }
-
-        public this(Window parent, DateTime date, Point pos, Size size, int style, string name)
+        public this(Window parent, DateTime date = null, Point pos = wxDefaultPosition, Size size =wxDefaultSize , int style = wxCAL_SHOW_HOLIDAYS | wxWANTS_CHARS, string name = wxCalendarNameStr)
 		{ this(parent, Window.UniqueID, date, pos, size, style, name);}
 		
 	//-----------------------------------------------------------------------------
 
-        public bool Create(Window parent, int id, DateTime date, Point pos, Size size, int style, string name)
+        public bool Create(Window parent, int id, wxDateTime date, inout Point pos, inout Size size, int style, string name)
         {
-            return wxCalendarCtrl_Create(wxobj, wxObject.SafePtr(parent), id, wxObject.SafePtr(cast(wxDateTime)date), pos, size, cast(uint)style, name);
+            return wxCalendarCtrl_Create(wxobj, wxObject.SafePtr(parent), id, wxObject.SafePtr(date), pos, size, cast(uint)style, name);
         }
 
         //-----------------------------------------------------------------------------
@@ -255,8 +243,8 @@ import wx.CommandEvent;
     }
 
         static extern (C) IntPtr wxCalendarDateAttr_ctor();
-        //static extern (C) IntPtr wxCalendarDateAttr_ctor(IntPtr colText, IntPtr colBack, IntPtr colBorder, IntPtr font, wxCalendarDateBorder border);
-        //static extern (C) IntPtr wxCalendarDateAttr_ctor(wxCalendarDateBorder border, IntPtr colBorder);
+        static extern (C) IntPtr wxCalendarDateAttr_ctor2(IntPtr colText, IntPtr colBack, IntPtr colBorder, IntPtr font, CalendarDateBorder border);
+        static extern (C) IntPtr wxCalendarDateAttr_ctor3(CalendarDateBorder border, IntPtr colBorder);
 	static extern (C) void   wxCalendarDateAttr_dtor(IntPtr self);
 	static extern (C) void   wxCalendarDateAttr_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
         static extern (C) void   wxCalendarDateAttr_SetTextColour(IntPtr self, IntPtr colText);
@@ -298,11 +286,17 @@ import wx.CommandEvent;
 		wxCalendarDateAttr_RegisterDisposable(wxobj, &VirtualDispose);
 	}
 
-        //public this(Colour colText, Colour colBack, Colour colBorder, Font font, CalendarDateBorder border)
-        //    { super(wxCalendarDateAttr_ctor(wxObject.SafePtr(colText), wxObject.SafePtr(colBack), wxObject.SafePtr(colBorder), wxObject.SafePtr(font), border)); }
+        public this(Colour colText, Colour colBack = Colour.wxNullColour, Colour colBorder = Colour.wxNullColour, Font font = Font.wxNullFont, CalendarDateBorder border = CalendarDateBorder.wxCAL_BORDER_NONE)
+        {
+        	this(wxCalendarDateAttr_ctor2(wxObject.SafePtr(colText), wxObject.SafePtr(colBack), wxObject.SafePtr(colBorder), wxObject.SafePtr(font), border),true);
+		wxCalendarDateAttr_RegisterDisposable(wxobj, &VirtualDispose);
+        }
 
-        //public  this(CalendarDateBorder border, Colour colBorder)
-        //    { super(wxCalendarDateAttr_ctor(wxObject.SafePtr(border), wxObject.SafePtr(colBorder))); }
+        public  this(CalendarDateBorder border, Colour colBorder)
+        {
+        	this(wxCalendarDateAttr_ctor3(border, wxObject.SafePtr(colBorder)),true);
+		wxCalendarDateAttr_RegisterDisposable(wxobj, &VirtualDispose);
+        }
 	
 	//---------------------------------------------------------------------
 				
@@ -356,7 +350,7 @@ import wx.CommandEvent;
     }
 
         static extern (C) IntPtr wxCalendarEvent_ctor();
-        //static extern (C) IntPtr wxCalendarEvent_ctor(IntPtr cal, wxEventType type);
+        static extern (C) IntPtr wxCalendarEvent_ctor2(IntPtr cal, int type);
         static extern (C) IntPtr wxCalendarEvent_GetDate(IntPtr self);
         static extern (C) int    wxCalendarEvent_GetWeekDay(IntPtr self);
 
@@ -368,12 +362,12 @@ import wx.CommandEvent;
 		{ super(wxobj);}
 
         public this()
-            { this(wxCalendarEvent_ctor()); }
+            { super(wxCalendarEvent_ctor()); }
 
         //-----------------------------------------------------------------------------
 
-        //public this(CalendarCtrl cal, EventType type)
-        //    { super(wxCalendarEvent_ctor(wxObject.SafePtr(cal), wxObject.SafePtr(type))); }
+        public this(CalendarCtrl cal, EventType type)
+            { super(wxCalendarEvent_ctor2(wxObject.SafePtr(cal), type)); }
 
         //-----------------------------------------------------------------------------
 
@@ -385,6 +379,13 @@ import wx.CommandEvent;
 
 		static this()
 		{
+			wxEVT_CALENDAR_SEL_CHANGED = wxEvent_EVT_CALENDAR_SEL_CHANGED();
+			wxEVT_CALENDAR_DAY_CHANGED = wxEvent_EVT_CALENDAR_DAY_CHANGED();
+			wxEVT_CALENDAR_MONTH_CHANGED = wxEvent_EVT_CALENDAR_MONTH_CHANGED();
+			wxEVT_CALENDAR_YEAR_CHANGED = wxEvent_EVT_CALENDAR_YEAR_CHANGED();
+			wxEVT_CALENDAR_DOUBLECLICKED = wxEvent_EVT_CALENDAR_DOUBLECLICKED();
+			wxEVT_CALENDAR_WEEKDAY_CLICKED = wxEvent_EVT_CALENDAR_WEEKDAY_CLICKED();
+	
 			AddEventType(wxEVT_CALENDAR_SEL_CHANGED,            &CalendarEvent.New);
 			AddEventType(wxEVT_CALENDAR_DAY_CHANGED,            &CalendarEvent.New);
 			AddEventType(wxEVT_CALENDAR_MONTH_CHANGED,          &CalendarEvent.New);

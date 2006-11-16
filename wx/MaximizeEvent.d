@@ -26,10 +26,7 @@ import wx.common;
 		public this(IntPtr wxobj) 
 			{ super(wxobj); }
 			
-		public this()
-			{ super(wxMaximizeEvent_ctor(0));}
-
-		public this(int Id)
+		public this(int Id = 0)
 			{ this(wxMaximizeEvent_ctor(Id)); }
 
 		private static Event New(IntPtr obj) { return new MaximizeEvent(obj); }

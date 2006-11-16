@@ -19,9 +19,9 @@
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxSetCursorEvent* wxSetCursorEvent_ctor(wxEventType type)
+wxSetCursorEvent* wxSetCursorEvent_ctor(wxCoord x, wxCoord y)
 {
-    return new wxSetCursorEvent(type);
+    return new wxSetCursorEvent(x,y);
 }
 
 //-----------------------------------------------------------------------------

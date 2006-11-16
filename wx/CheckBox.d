@@ -42,6 +42,7 @@ import wx.Control;
 		public const int wxCHK_2STATE           = 0x0000;
 		public const int wxCHK_3STATE           = 0x1000;
 		public const int wxCHK_ALLOW_3RD_STATE_FOR_USER           = 0x2000;
+		public const string wxCheckBoxNameStr = "checkbox";
 	
 		public this(IntPtr wxobj) 
 			{ super(wxobj);}
@@ -49,22 +50,7 @@ import wx.Control;
 		public this()
 			{ this(wxCheckBox_ctor()); }
 
-		public this(Window parent, int id, string label)
-			{ this(parent, id, label, wxDefaultPosition, wxDefaultSize, 0, null, null); }
-
-		public this(Window parent, int id, string label, Point pos)
-        		{ this(parent, id, label, pos, wxDefaultSize, 0, null, null); }
-
-		public this(Window parent, int id, string label, Point pos, Size size)
-        		{ this(parent, id, label, pos, size, 0, null, null); }
-
-		public this(Window parent, int id, string label, Point pos, Size size, int style)
-        		{ this(parent, id, label, pos, size, style, null, null); }
-
-		public this(Window parent, int id, string label, Point pos, Size size, int style, Validator val)
-        		{ this(parent, id, label, pos, size, style, val, null); }
-
-		public this(Window parent, int id, string label, Point pos, Size size, int style, Validator val, string name)
+		public this(Window parent, int id, string label, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style =0, Validator val=null, string name = wxCheckBoxNameStr)
 		{
 			this(wxCheckBox_ctor());
 			if (!wxCheckBox_Create(wxobj, wxObject.SafePtr(parent), id,
@@ -77,27 +63,12 @@ import wx.Control;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent, string label)
-			{ this(parent, Window.UniqueID, label, wxDefaultPosition, wxDefaultSize, 0, null, null); }
-
-		public this(Window parent, string label, Point pos)
-        		{ this(parent, Window.UniqueID, label, pos, wxDefaultSize, 0, null, null); }
-
-		public this(Window parent, string label, Point pos, Size size)
-        		{ this(parent, Window.UniqueID, label, pos, size, 0, null, null); }
-
-		public this(Window parent, string label, Point pos, Size size, int style)
-        		{ this(parent, Window.UniqueID, label, pos, size, style, null, null); }
-
-		public this(Window parent, string label, Point pos, Size size, int style, Validator val)
-        		{ this(parent, Window.UniqueID, label, pos, size, style, val, null); }
-
-		public this(Window parent, string label, Point pos, Size size, int style, Validator val, string name)
+		public this(Window parent, string label, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style =0, Validator val=null, string name = wxCheckBoxNameStr)
 			{ this(parent, Window.UniqueID, label, pos, size, style, val, name);}
 		
 		//---------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, string label, Point pos, Size size,
+		public bool Create(Window parent, int id, string label, inout Point pos, inout Size size,
 			int style, Validator val, string name)
 		{
 			return wxCheckBox_Create(wxobj, wxObject.SafePtr(parent), id,

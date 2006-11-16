@@ -147,8 +147,6 @@ OBJECTS = \
 	WindowCreateEvent.obj \
 	WindowDestroyEvent.obj \
 	Wizard.obj \
-	WizardPage.obj \
-	WizardPageSimple.obj \
 	wxDateTime.obj \
 	wxObject.obj \
 	wxString.obj \
@@ -158,6 +156,7 @@ OBJECTS = \
 	NumberDialog.obj \
 	ArrayInt.obj \
 	ArrayString.obj \
+	NotifyEvent.obj \
 	XmlResource.obj \
 
 #	DbGrid.obj \

@@ -288,4 +288,4 @@ wxSashDragStatus wxSashEvent_GetDragStatus(wxSashEvent* self)
 }
 
 
-
+extern "C" WXEXPORT int wxEvent_EVT_SASH_DRAGGED()			{ return wxEVT_SASH_DRAGGED; }

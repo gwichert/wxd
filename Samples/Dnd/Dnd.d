@@ -132,9 +132,9 @@ import wx.wx;
 	    const string[]  strFile = ["Drop files here!"];
 	    const string[]  strText = ["Drop text on me"];
 			
-	    m_ctrlFile = new ListBox(this, -1, wxDefaultPosition, asize, 1, strFile, ListBox.wxLB_HSCROLL | ListBox.wxLB_ALWAYS_SB);
+	    m_ctrlFile = new ListBox(this, -1, wxDefaultPosition, asize, strFile, ListBox.wxLB_HSCROLL | ListBox.wxLB_ALWAYS_SB);
 			
-	    m_ctrlText = new ListBox(this, -1, wxDefaultPosition, asize, 1, strText, ListBox.wxLB_HSCROLL | ListBox.wxLB_ALWAYS_SB);
+	    m_ctrlText = new ListBox(this, -1, wxDefaultPosition, asize, strText, ListBox.wxLB_HSCROLL | ListBox.wxLB_ALWAYS_SB);
 			
 	    m_ctrlLog = new TextCtrl(this, -1, "", wxDefaultPosition, bsize, TextCtrl.wxTE_MULTILINE | TextCtrl.wxTE_READONLY | TextCtrl.wxSUNKEN_BORDER );
 			
@@ -320,7 +320,7 @@ import wx.wx;
 			{
 				TextDataObject textData = new TextDataObject( m_strText );
 				
-				if (textData == null) 
+				if (textData === null) 
 				{
 					return;
 				}
@@ -381,7 +381,7 @@ import wx.wx;
 			}
 			else
 			{
-				Log.LogMessage("Text '{0}' put on the clipboard", m_strText);
+				Log.LogMessage("Text '%s' put on the clipboard", m_strText);
 			}
 			
 			Clipboard.TheClipboard.Close();
@@ -411,7 +411,7 @@ import wx.wx;
 			}
 			else
 			{
-				Log.LogMessage("Text '{0}' pasted from the clipboard", text.Text);
+				Log.LogMessage("Text '%s' pasted from the clipboard", text.Text);
 			}
 			
 			Clipboard.TheClipboard.Close();

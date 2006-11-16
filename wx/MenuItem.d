@@ -59,35 +59,23 @@ import wx.EvtHandler;
 		public this(IntPtr wxobj) 
 			{ super(wxobj); }
 
-		public  this()
-			{ this(null, -1, "", "", ItemKind.wxITEM_NORMAL, null); }
-		public  this(Menu parentMenu)
-			{ this(parentMenu, -1, "", "", ItemKind.wxITEM_NORMAL, null); }
-		public  this(Menu parentMenu, int id)
-			{ this(parentMenu, id, "", "", ItemKind.wxITEM_NORMAL, null); }
-		public  this(Menu parentMenu, int id, string text)
-			{ this(parentMenu, id, text, "", ItemKind.wxITEM_NORMAL, null); }
-		public  this(Menu parentMenu, int id, string text, string help)
-			{ this(parentMenu, id, text, help, ItemKind.wxITEM_NORMAL, null); }
-		public  this(Menu parentMenu, int id, string text, string help, ItemKind kind)
-			{ this(parentMenu, id, text, help, kind, null); }
-		public  this(Menu parentMenu, int id, string text, string help, ItemKind kind, Menu subMenu)
+		public  this(Menu parentMenu = null, int id =  wxID_SEPARATOR, string text = "", string help = "", ItemKind kind = ItemKind.wxITEM_NORMAL, Menu subMenu = null)
 			{ this(wxMenuItem_ctor(wxObject.SafePtr(parentMenu), id, text, help, cast(int)kind, wxObject.SafePtr(subMenu))); }
 			
 		public static wxObject New2(IntPtr ptr) { return new MenuItem(ptr); }
 		//-----------------------------------------------------------------------------
 
-		public static MenuItem New(Menu parentMenu, int id, string text, string help, ItemKind kind, Menu subMenu)
+		public static MenuItem New(Menu parentMenu = null, int id = wxID_SEPARATOR, string text = "", string help = "", ItemKind kind=ItemKind.wxITEM_NORMAL, Menu subMenu = null)
 		{
 			return new MenuItem(wxMenuItem_New(wxObject.SafePtr(parentMenu), id, text, help, cast(int)kind, wxObject.SafePtr(subMenu)));
 		}
-	
+	/* OLD API
 		public static MenuItem New(Menu parentMenu, int id, string text, string help, bool isCheckable, Menu subMenu)
 		{
 			return new MenuItem(wxMenuItem_NewCheck(wxObject.SafePtr(parentMenu), id, text, help, isCheckable, wxObject.SafePtr(subMenu)));
 		}
 
-		//-----------------------------------------------------------------------------
+	*/	//-----------------------------------------------------------------------------
 
 		public Menu menu() { return cast(Menu)FindObject(wxMenuItem_GetMenu(wxobj), &Menu.New); }
 		public void menu(Menu value) { wxMenuItem_SetMenu(wxobj, wxObject.SafePtr(value)); }

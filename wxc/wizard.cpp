@@ -24,8 +24,8 @@ class _Wizard : public wxWizard
 {
 public:
 	_Wizard(wxWindow* parent, wxWindowID id, const wxString& title,
-			const wxBitmap& bitmap, const wxPoint& pos)
-		: wxWizard(parent, id, title, bitmap, pos) { }
+			const wxBitmap& bitmap, const wxPoint& pos, long style)
+		: wxWizard(parent, id, title, bitmap, pos, style) { }
 
     DECLARE_OBJECTDELETED(_Wizard)
 };
@@ -34,7 +34,7 @@ public:
 // C stubs for class methods
 
 extern "C" WXEXPORT
-wxWizard* wxWizard_ctor(wxWindow* parent, int id, dstr title, const wxBitmap* bitmap, const wxPoint* pos)
+wxWizard* wxWizard_ctor(wxWindow* parent, int id, dstr title, const wxBitmap* bitmap, const wxPoint* pos, long style)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -42,7 +42,7 @@ wxWizard* wxWizard_ctor(wxWindow* parent, int id, dstr title, const wxBitmap* bi
 	if (bitmap == NULL)
 		bitmap = &wxNullBitmap;
 
-	return new _Wizard(parent, id, wxString(title.data, wxConvUTF8, title.length), *bitmap, *pos);
+	return new _Wizard(parent, id, wxString(title.data, wxConvUTF8, title.length), *bitmap, *pos, style);
 }
 
 //-----------------------------------------------------------------------------
@@ -61,3 +61,60 @@ void wxWizard_SetPageSize(wxWizard* self, const wxSize* size)
 	self->SetPageSize(*size);
 }
 
+//-----------------------------------------------------------------------------
+// The proxy class
+
+class _WizardPageSimple : public wxWizardPageSimple
+{
+public:
+	_WizardPageSimple(wxWizard* parent, wxWizardPage* prev, wxWizardPage* next,const wxBitmap& bitmap,const wxChar* resource)
+		: wxWizardPageSimple(parent, prev, next, bitmap, resource)
+	{
+	}
+
+	DECLARE_OBJECTDELETED(_WizardPageSimple)
+
+#include "panel.inc"
+};
+
+//-----------------------------------------------------------------------------
+// C stubs for class methods
+
+extern "C" WXEXPORT
+wxWizardPageSimple* wxWizardPageSimple_ctor(wxWizard* parent, wxWizardPage* prev, wxWizardPage* next, const wxBitmap* bitmap, const char* resource)
+{
+	return new _WizardPageSimple(parent, prev, next, *bitmap, resource);
+}
+
+//-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT
+void wxWizardPageSimple_Chain(wxWizardPageSimple* page1, wxWizardPageSimple* page2)
+{
+	wxWizardPageSimple::Chain(page1, page2);
+}
+
+
+extern "C" WXEXPORT
+wxWizardEvent* wxWizardEvent_ctor(wxEventType type,int id,bool direction, wxWizardPage* page)
+{
+	return new wxWizardEvent(type,id,direction,page);
+}
+
+extern "C" WXEXPORT
+bool wxWizardEvent_GetDirection(wxWizardEvent* self)
+{
+	return self->GetDirection();
+}
+
+extern "C" WXEXPORT
+wxWizardPage* wxWizardEvent_GetPage(wxWizardEvent* self)
+{
+	return self->GetPage();
+}
+
+extern "C" WXEXPORT int wxEvent_WIZARD_PAGE_CHANGED() { return wxEVT_WIZARD_PAGE_CHANGED; }
+extern "C" WXEXPORT int wxEvent_WIZARD_PAGE_CHANGING() { return wxEVT_WIZARD_PAGE_CHANGING; }
+extern "C" WXEXPORT int wxEvent_WIZARD_CANCEL() { return wxEVT_WIZARD_CANCEL; }
+extern "C" WXEXPORT int wxEvent_WIZARD_HELP() { return wxEVT_WIZARD_HELP; }
+extern "C" WXEXPORT int wxEvent_WIZARD_FINISHED() { return wxEVT_WIZARD_FINISHED; }

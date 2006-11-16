@@ -35,13 +35,16 @@ import wx.Control;
 		
 	public class Gauge :  Control
 	{
-		public const int wxGA_HORIZONTAL       = Orientation.wxHORIZONTAL;
-		public const int wxGA_VERTICAL         = Orientation.wxVERTICAL;
-		public const int wxGA_PROGRESSBAR      = 0x0010;
+		enum {
+			wxGA_HORIZONTAL       = Orientation.wxHORIZONTAL,
+			wxGA_VERTICAL         = Orientation.wxVERTICAL,
+			wxGA_PROGRESSBAR      = 0x0010,
+		}
 	
 		// Windows only
 		public const int wxGA_SMOOTH           = 0x0020;
 	
+		public const string wxGaugeNameStr = "gauge";
 		//---------------------------------------------------------------------
 		
 		public this(IntPtr wxobj) 
@@ -50,17 +53,8 @@ import wx.Control;
 		public this()
 			{ super(wxGauge_ctor()); }
 
-		public this(Window parent, int id, int range, Point pos, Size size)
-			{ this(parent, id, range, pos, size, 0, null, null); }
-
-		public this(Window parent, int id, int range, Point pos, Size size, int style)
-			{ this(parent, id, range, pos, size, style, null, null); }
-
-		public this(Window parent, int id, int range, Point pos, Size size, int style, Validator val)
-			{ this(parent, id, range, pos, size, style, val, null); }
-
-		public this(Window parent, int id, int range, Point pos, Size size, 
-				int style, Validator validator, string name)
+		public this(Window parent, int id, int range, Point pos = wxDefaultPosition, Size size = wxDefaultSize, 
+				int style = wxGA_HORIZONTAL, Validator validator = null, string name = wxGaugeNameStr)
 		{	
 			super(wxGauge_ctor());
 			if (!Create(parent, id, range, pos, size, style, validator, name)) 
@@ -72,23 +66,14 @@ import wx.Control;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent, int range, Point pos, Size size)
-			{ this(parent, Window.UniqueID, range, pos, size, 0, null, null); }
-
-		public this(Window parent, int range, Point pos, Size size, int style)
-			{ this(parent, Window.UniqueID, range, pos, size, style, null, null); }
-
-		public this(Window parent, int range, Point pos, Size size, int style, Validator val)
-			{ this(parent, Window.UniqueID, range, pos, size, style, val, null); }
-
-		public this(Window parent, int range, Point pos, Size size, 
-				int style, Validator validator, string name)
+		public this(Window parent, int range, Point pos = wxDefaultPosition, Size size = wxDefaultSize, 
+				int style = wxGA_HORIZONTAL, Validator validator = null, string name = wxGaugeNameStr)
 			{ this(parent, Window.UniqueID, range, pos, size, style, validator, name);}
 		
 		//---------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, int range, Point pos, 
-				Size size, int style, Validator validator, 
+		public bool Create(Window parent, int id, int range, inout Point pos, 
+				inout Size size, int style, Validator validator, 
 				string name)
 		{
 			return wxGauge_Create(wxobj, wxObject.SafePtr(parent), id, range, 

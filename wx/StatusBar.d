@@ -48,15 +48,9 @@ import wx.Window;
 			{ super(wxobj); }
 
 		public this()
-			{ this(wxStatusBar_ctor()); }
-/+
-		public this(Window parent, int id)
-			{ this(parent, id, wxST_SIZEGRIP, "statusBar"); }
-+/			
-		public this(Window parent, int id, int style)
-			{ this(parent, id, style, "statusBar"); }
+			{ super(wxStatusBar_ctor()); }
 
-		public this(Window parent, int id, int style, string name)
+		public this(Window parent, int id /*= wxID_ANY*/, int style = wxST_SIZEGRIP, string name="")
 		{
 			this();
 			if (!Create(parent, id, style, name))
@@ -68,13 +62,7 @@ import wx.Window;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent)
-			{ this(parent, Window.UniqueID, wxST_SIZEGRIP, "statusBar"); }
-			
-		public this(Window parent, int style)
-			{ this(parent, Window.UniqueID, style, "statusBar"); }
-
-		public this(Window parent, int style, string name)
+		public this(Window parent, int style = wxST_SIZEGRIP, string name="")
 			{ this(parent, Window.UniqueID, style, name);}
 		
 		//-----------------------------------------------------------------------------

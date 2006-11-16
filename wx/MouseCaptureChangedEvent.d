@@ -18,7 +18,7 @@ import wx.common;
 import wx.Event;
 import wx.Window;
 
-		static extern (C) IntPtr wxMouseCaptureChangedEvent_ctor(int type);
+		static extern (C) IntPtr wxMouseCaptureChangedEvent_ctor(int winid,IntPtr gainedCapture);
 		static extern (C) IntPtr wxMouseCaptureChangedEvent_GetCapturedWindow(IntPtr self);
 		
 		//-----------------------------------------------------------------------------
@@ -28,8 +28,8 @@ import wx.common;
 		public this(IntPtr wxobj) 
 			{ super(wxobj); }
 
-		public this(int type)
-			{ this(wxMouseCaptureChangedEvent_ctor(type)); }
+		public this(int winid = 0, Window gainedCapture = null)
+			{ this(wxMouseCaptureChangedEvent_ctor(winid,wxObject.SafePtr(gainedCapture))); }
 
 		//-----------------------------------------------------------------------------	
 		

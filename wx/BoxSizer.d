@@ -17,7 +17,7 @@ import wx.Sizer;
 
 		extern(C) {
 		alias void function(BoxSizer obj) Virtual_voidvoid;
-		alias Size function(BoxSizer obj) Virtual_wxSizevoid;
+		alias void function(BoxSizer obj,out Size size) Virtual_wxSizevoid;
 		}
 		
 		static extern (C) void wxBoxSizer_RegisterVirtual(IntPtr self, BoxSizer obj, Virtual_voidvoid recalcSizes, Virtual_wxSizevoid calcMin);	
@@ -25,7 +25,7 @@ import wx.Sizer;
 	
 		static extern (C) IntPtr wxBoxSizer_ctor(int orient);
 		static extern (C) void wxBoxSizer_RecalcSizes(IntPtr self);
-		static extern (C) Size wxBoxSizer_CalcMin(IntPtr self);
+		static extern (C) void wxBoxSizer_CalcMin(IntPtr self,out Size size);
 		static extern (C) int wxBoxSizer_GetOrientation(IntPtr self);
 		static extern (C) void wxBoxSizer_SetOrientation(IntPtr self, int orient);
 
@@ -45,7 +45,7 @@ import wx.Sizer;
 			
 		//---------------------------------------------------------------------
 		extern(C) private static void staticRecalcSizes(BoxSizer obj) { return obj.RecalcSizes(); }
-		extern(C) private static Size staticCalcMin(BoxSizer obj) { return obj.CalcMin(); }
+		extern(C) private static void staticCalcMin(BoxSizer obj,out Size size) { size = obj.CalcMin(); }
 
 		public override void RecalcSizes()
 		{
@@ -55,7 +55,9 @@ import wx.Sizer;
 		//---------------------------------------------------------------------
 		public override Size CalcMin()
 		{
-			return wxBoxSizer_CalcMin(wxobj);
+			Size size;
+			wxBoxSizer_CalcMin(wxobj,size);
+			return size;
 		}
 		
 		//---------------------------------------------------------------------

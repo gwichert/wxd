@@ -74,6 +74,7 @@ import wx.Window;
 
 	public class BusyCursor : IDisposable
 	{
+		private bool disposed = false;
 		public this()
 		{
 			BeginBusyCursor();
@@ -86,7 +87,10 @@ import wx.Window;
 	
 		public void Dispose()
 		{
-			EndBusyCursor();
+			if (!disposed) {
+				disposed = true;
+				EndBusyCursor();
+			}
 		}
 	}
 	

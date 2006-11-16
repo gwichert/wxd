@@ -29,10 +29,8 @@ import wx.wx;
 
 		public this(string title, Point pos, Size size)
 		{
-			printf("this\n");
 			super(title, pos, size);
 			// Set the window icon and status bar
-			printf("this\n");
 
 			this.icon = new Icon("../Samples/ListView/mondrian.png");
 
@@ -155,20 +153,12 @@ import wx.wx;
 	{
 		public override bool OnInit()
 		{
-			printf("OnInit\n");
 			ListViewFrame frame = new ListViewFrame("ListView wxWidgets Sample", new_Point(10, 100), new_Size(650,340));
-			printf("OnInit mid\n");
 			frame.Show(true);
-			printf("OnInit end\n");
 
 			return true;
 		}
 
-		public override int OnExit()
-		{
-			printf("OnExit called");
-			return 0;
-		}
 		//---------------------------------------------------------------------
 
 		

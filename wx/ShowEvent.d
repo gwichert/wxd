@@ -17,7 +17,7 @@ module wx.ShowEvent;
 import wx.common;
 import wx.Event;
 
-		static extern (C) IntPtr wxShowEvent_ctor(int type);
+		static extern (C) IntPtr wxShowEvent_ctor(int winid, bool show);
 		static extern (C) bool wxShowEvent_GetShow(IntPtr self);
 		static extern (C) void wxShowEvent_SetShow(IntPtr self, bool show);
 		
@@ -28,8 +28,8 @@ import wx.common;
 		public this(IntPtr wxobj) 
 			{ super(wxobj); }
 
-		public this(int type)
-			{ this(wxShowEvent_ctor(type)); }
+		public this(int winid = 0, bool show = false)
+			{ this(wxShowEvent_ctor(winid,show)); }
 
 		//-----------------------------------------------------------------------------	
 		

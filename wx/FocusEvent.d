@@ -18,7 +18,7 @@ import wx.common;
 import wx.Window;
 import wx.Event;
 
-		static extern (C) IntPtr wxFocusEvent_ctor(int type);
+		static extern (C) IntPtr wxFocusEvent_ctor(int type,int winid);
 		static extern (C) IntPtr wxFocusEvent_GetWindow(IntPtr self);
 		static extern (C) void   wxFocusEvent_SetWindow(IntPtr self, IntPtr win);
 		
@@ -29,8 +29,8 @@ import wx.Event;
 		public this(IntPtr wxobj) 
 			{ super(wxobj); }
 
-		public this(int type)
-			{ this(wxFocusEvent_ctor(type)); }
+		public this(EventType type = wxEVT_NULL, int winid = 0)
+			{ this(wxFocusEvent_ctor(type,winid)); }
 
 		//-----------------------------------------------------------------------------	
 		

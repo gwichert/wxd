@@ -18,7 +18,7 @@ import wx.common;
 import wx.Event;
 import wx.DC;
 
-		static extern (C) IntPtr wxEraseEvent_ctor(int type);
+		static extern (C) IntPtr wxEraseEvent_ctor(int id, IntPtr dc);
 		static extern (C) IntPtr wxEraseEvent_GetDC(IntPtr self);
 		
 		//-----------------------------------------------------------------------------
@@ -28,8 +28,8 @@ import wx.DC;
 		public this(IntPtr wxobj) 
 			{ super(wxobj); }
 
-		public this(int type)
-			{ this(wxEraseEvent_ctor(type)); }
+		public this(int id=0, DC dc = null)
+			{ this(wxEraseEvent_ctor(id,wxObject.SafePtr(dc))); }
 
 		//-----------------------------------------------------------------------------	
 		

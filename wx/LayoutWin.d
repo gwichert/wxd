@@ -57,22 +57,7 @@ import wx.MDI;
 		public this()
 			{ super(wxSashLayoutWindow_ctor());}
 			
-		public this(Window parent)
-			{ this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, wxSW_3D|wxCLIP_CHILDREN, "layoutWindow");}
-			
-		public this(Window parent, int id)
-			{ this(parent, id, wxDefaultPosition, wxDefaultSize, wxSW_3D|wxCLIP_CHILDREN, "layoutWindow");}
-			
-		public this(Window parent, int id, Point pos)
-			{ this(parent, id, pos, wxDefaultSize, wxSW_3D|wxCLIP_CHILDREN, "layoutWindow");}
-			
-		public this(Window parent, int id, Point pos, Size size)
-			{ this(parent, id, pos, size, wxSW_3D|wxCLIP_CHILDREN, "layoutWindow");}
-			
-		public this(Window parent, int id, Point pos, Size size, int style)
-			{ this(parent, id, pos, size, style, "layoutWindow");}
-			
-		public this(Window parent, int id, Point pos, Size size, int style, string name)
+		public this(Window parent, int id /*= wxID_ANY*/, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style=wxSW_3D|wxCLIP_CHILDREN, string name = "layoutWindow")
 		{
 			super(wxSashLayoutWindow_ctor());
 			if (!Create(parent, id, pos, size, style, name)) 
@@ -84,21 +69,12 @@ import wx.MDI;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent, Point pos)
-			{ this(parent, Window.UniqueID, pos, wxDefaultSize, wxSW_3D|wxCLIP_CHILDREN, "layoutWindow");}
-			
-		public this(Window parent, Point pos, Size size)
-			{ this(parent, Window.UniqueID, pos, size, wxSW_3D|wxCLIP_CHILDREN, "layoutWindow");}
-			
-		public this(Window parent, Point pos, Size size, int style)
-			{ this(parent, Window.UniqueID, pos, size, style, "layoutWindow");}
-			
-		public this(Window parent, Point pos, Size size, int style, string name)
+		public this(Window parent, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style=wxSW_3D|wxCLIP_CHILDREN, string name = "layoutWindow")
 			{ this(parent, Window.UniqueID, pos, size, style, name);}
 		
 		//-----------------------------------------------------------------------------
 		
-		public bool Create(Window parent, int id, Point pos, Size size, int style, string name)
+		public bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
 		{
 			return wxSashLayoutWindow_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name);
 		}
@@ -234,6 +210,8 @@ import wx.MDI;
 
 		static this()
 		{
+			wxEVT_QUERY_LAYOUT_INFO = wxEvent_EVT_QUERY_LAYOUT_INFO();
+
 			AddEventType(wxEVT_QUERY_LAYOUT_INFO,               &QueryLayoutInfoEvent.New);
 		}
 	}
@@ -278,6 +256,8 @@ import wx.MDI;
 
 		static this()
 		{
+			wxEVT_CALCULATE_LAYOUT = wxEvent_EVT_CALCULATE_LAYOUT();
+
 			AddEventType(wxEVT_CALCULATE_LAYOUT,                &CalculateLayoutEvent.New);
 		}
 	}

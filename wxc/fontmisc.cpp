@@ -58,9 +58,9 @@ wxFontEncoding wxFontMapper_GetEncoding(size_t n)
 }
 
 extern "C" WXEXPORT
-dstr wxFontMapper_GetEncodingName(wxFontEncoding encoding)
+dstrret wxFontMapper_GetEncodingName(wxFontEncoding encoding)
 {
-	return dstr(wxFontMapper::GetEncodingName(encoding));
+	return dstr_ret(wxFontMapper::GetEncodingName(encoding));
 }
 
 extern "C" WXEXPORT
@@ -88,9 +88,9 @@ bool wxFontMapper_GetAltForEncoding(wxFontMapper* self, wxFontEncoding encoding,
 }
 
 extern "C" WXEXPORT
-dstr wxFontMapper_GetEncodingDescription(wxFontEncoding encoding)
+dstrret wxFontMapper_GetEncodingDescription(wxFontEncoding encoding)
 {
-	return dstr(wxFontMapper::GetEncodingDescription(encoding));
+	return dstr_ret(wxFontMapper::GetEncodingDescription(encoding));
 }
 
 extern "C" WXEXPORT
@@ -120,9 +120,9 @@ bool wxEncodingConverter_Init(wxEncodingConverter* self, wxFontEncoding input_en
 }
 
 extern "C" WXEXPORT
-dstr wxEncodingConverter_Convert(wxEncodingConverter* self, dstr input)
+dstrret wxEncodingConverter_Convert(wxEncodingConverter* self, dstr input)
 {
-	return dstr(self->Convert(wxString(input.data, wxConvUTF8, input.length)));
+	return dstr_ret(self->Convert(wxString(input.data, wxConvUTF8, input.length)));
 }
 
 //-----------------------------------------------------------------------------

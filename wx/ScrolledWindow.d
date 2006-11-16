@@ -34,25 +34,22 @@ import wx.Panel;
 
 	public class ScrolledWindow : Panel
 	{
+		enum {
+			wxScrolledWindowStyle = (wxHSCROLL | wxVSCROLL),
+		}
+	
 		public this(IntPtr wxobj) 
 			{ super(wxobj); }
 
-		public this(Window parent)
-			{ this(parent, -1, wxDefaultPosition, wxDefaultSize, wxHSCROLL | wxVSCROLL); }
-			
-		public this(Window parent, int id)
-			{ this(parent, id, wxDefaultPosition, wxDefaultSize, wxHSCROLL | wxVSCROLL); }
-			
-		public this(Window parent, int id, Point pos)
-			{ this(parent, id, pos, wxDefaultSize, wxHSCROLL | wxVSCROLL); }
-			
-		public this(Window parent, int id, Point pos, Size size)
-			{ this(parent, id, pos, size, wxHSCROLL | wxVSCROLL); }
-			
-		public this(Window parent, int id, Point pos, Size size, int style)
+		public this(Window parent, int id /*= wxID_ANY*/, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = wxScrolledWindowStyle, string name = wxPanelNameStr)
 		{
-			super(wxScrollWnd_ctor(wxObject.SafePtr(parent), id, pos, size, cast(uint)style, null));
+			super(wxScrollWnd_ctor(wxObject.SafePtr(parent), id, pos, size, style, name));
 			EVT_PAINT(&OnPaint);
+		}
+
+		public this(Window parent, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = wxScrolledWindowStyle, string name = wxPanelNameStr)
+		{
+			this(parent,Window.UniqueID,pos,size,style,name);
 		}
 
 		//---------------------------------------------------------------------

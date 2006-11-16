@@ -325,9 +325,9 @@ void wxTreeCtrl_SetItemText(wxTreeCtrl* self, wxTreeItemId* item, dstr text)
 }
 
 extern "C" WXEXPORT
-dstr wxTreeCtrl_GetItemText(wxTreeCtrl* self, wxTreeItemId* item)
+dstrret wxTreeCtrl_GetItemText(wxTreeCtrl* self, wxTreeItemId* item)
 {
-    return dstr(self->GetItemText(*item));
+    return dstr_ret(self->GetItemText(*item));
 }
 
 //-----------------------------------------------------------------------------
@@ -811,9 +811,9 @@ void wxTreeEvent_SetKeyEvent(wxTreeEvent* self, wxKeyEvent* evt)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxTreeEvent_GetLabel(wxTreeEvent* self)
+dstrret wxTreeEvent_GetLabel(wxTreeEvent* self)
 {
-    return dstr(self->GetLabel());
+    return dstr_ret(self->GetLabel());
 }
 
 //-----------------------------------------------------------------------------
@@ -1087,4 +1087,23 @@ int wxArrayTreeItemIds_GetCount(wxArrayTreeItemIds* self)
 {
 	return self->GetCount();
 }
+
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_BEGIN_DRAG()             { return wxEVT_COMMAND_TREE_BEGIN_DRAG; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_BEGIN_RDRAG()            { return wxEVT_COMMAND_TREE_BEGIN_RDRAG; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_BEGIN_LABEL_EDIT()       { return wxEVT_COMMAND_TREE_BEGIN_LABEL_EDIT; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_END_LABEL_EDIT()         { return wxEVT_COMMAND_TREE_END_LABEL_EDIT; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_DELETE_ITEM()            { return wxEVT_COMMAND_TREE_DELETE_ITEM; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_GET_INFO()               { return wxEVT_COMMAND_TREE_GET_INFO; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_SET_INFO()               { return wxEVT_COMMAND_TREE_SET_INFO; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_ITEM_EXPANDED()          { return wxEVT_COMMAND_TREE_ITEM_EXPANDED; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_ITEM_EXPANDING()         { return wxEVT_COMMAND_TREE_ITEM_EXPANDING; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_ITEM_COLLAPSED()         { return wxEVT_COMMAND_TREE_ITEM_COLLAPSED; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_ITEM_COLLAPSING()        { return wxEVT_COMMAND_TREE_ITEM_COLLAPSING; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_SEL_CHANGED()            { return wxEVT_COMMAND_TREE_SEL_CHANGED; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_SEL_CHANGING()           { return wxEVT_COMMAND_TREE_SEL_CHANGING; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_KEY_DOWN()               { return wxEVT_COMMAND_TREE_KEY_DOWN; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_ITEM_ACTIVATED()         { return wxEVT_COMMAND_TREE_ITEM_ACTIVATED; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_ITEM_RIGHT_CLICK()       { return wxEVT_COMMAND_TREE_ITEM_RIGHT_CLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_ITEM_MIDDLE_CLICK()      { return wxEVT_COMMAND_TREE_ITEM_MIDDLE_CLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_END_DRAG()               { return wxEVT_COMMAND_TREE_END_DRAG; }
 

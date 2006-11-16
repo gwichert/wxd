@@ -58,13 +58,7 @@ import wx.DC;
 		
 		//---------------------------------------------------------------------
 	
-		public this(int width, int height)
-			{ this(width, height, true, 1);}
-			
-		public this(int width, int height, bool mask)
-			{ this(width, height, mask, 1);}
-
-		public this(int width, int height, bool mask, int initialCount)
+		public this(int width, int height, bool mask = true, int initialCount=1)
 			{ super(wxImageList_ctor(width, height, mask, initialCount));}
 
 		public this(IntPtr wxobj) 

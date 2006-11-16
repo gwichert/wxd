@@ -26,7 +26,7 @@ import wx.common;
 		public this(IntPtr wxobj) 
 			{ super(wxobj); }
 
-		public this(int Id)
+		public this(int Id=0)
 			{ this(wxNcPaintEvent_ctor(Id)); }
 
 		private static Event New(IntPtr obj) { return new NCPaintEvent(obj); }

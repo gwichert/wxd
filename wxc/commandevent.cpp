@@ -16,6 +16,13 @@
 #include <wx/wx.h>
 #include "common.h"
 
+
+extern "C" WXEXPORT
+wxCommandEvent* wxCommandEvent_ctor(wxEventType type, int winid)
+{
+    return new wxCommandEvent(type,winid);
+}
+
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
@@ -27,9 +34,9 @@ int wxCommandEvent_GetSelection(wxCommandEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxCommandEvent_GetString(wxCommandEvent* self)
+dstrret wxCommandEvent_GetString(wxCommandEvent* self)
 {
-	return dstr(self->GetString());
+	return dstr_ret(self->GetString());
 }
 
 extern "C" WXEXPORT

@@ -59,29 +59,16 @@ import wx.Window;
 
 	public class SplitterWindow : Window
 	{
-		public const int wxSP_3DBORDER		= 0x00000200;
-		public const int wxSP_LIVE_UPDATE	= 0x00000080;
-		public const int wxSP_3D			= (wxSP_3DBORDER | wxSP_3DSASH);
-		public const int wxSP_3DSASH		= 0x00000100;
+		enum {
+			wxSP_3DBORDER		= 0x00000200,
+			wxSP_LIVE_UPDATE	= 0x00000080,
+			wxSP_3DSASH		= 0x00000100,
+			wxSP_3D			= (wxSP_3DBORDER | wxSP_3DSASH),
+		}
 		
 		//---------------------------------------------------------------------
 
-		public this(Window parent)
-			{ this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, wxSP_3D, null); }
-
-		public this(Window parent, int id)
-			{ this(parent, id, wxDefaultPosition, wxDefaultSize, wxSP_3D, null); }
-
-		public this(Window parent, int id, Point pos)
-			{ this(parent, id, pos, wxDefaultSize, wxSP_3D, null); }
-
-		public this(Window parent, int id, Point pos, Size size)
-			{ this(parent, id, pos, size, wxSP_3D, null); }
-
-		public this(Window parent, int id, Point pos, Size size, int style)
-			{ this(parent, id, pos, size, style, null); }
-
-		public this(Window parent, int id, Point pos, Size size, int style, string name)
+		public this(Window parent, int id /*= wxID_ANY*/, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = wxSP_3D, string name="splitter")
 		{ 
 			super(wxSplitWnd_ctor(wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name));
 			
@@ -91,16 +78,7 @@ import wx.Window;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 			
-		public this(Window parent, Point pos)
-			{ this(parent, Window.UniqueID, pos, wxDefaultSize, wxSP_3D, null); }
-
-		public this(Window parent, Point pos, Size size)
-			{ this(parent, Window.UniqueID, pos, size, wxSP_3D, null); }
-
-		public this(Window parent, Point pos, Size size, int style)
-			{ this(parent, Window.UniqueID, pos, size, style, null); }
-
-		public this(Window parent, Point pos, Size size, int style, string name)
+		public this(Window parent, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=wxSP_3D, string name="splitter")
 			{ this(parent, Window.UniqueID, pos, size, style, name);}
 
 		//---------------------------------------------------------------------
@@ -143,12 +121,7 @@ import wx.Window;
 
 		//---------------------------------------------------------------------
 
-		public bool SplitHorizontally(Window wnd1, Window wnd2)
-		{
-			return this.SplitHorizontally(wnd1, wnd2, 0);
-		}
-
-		public bool SplitHorizontally(Window wnd1, Window wnd2, int sashPos)
+		public bool SplitHorizontally(Window wnd1, Window wnd2, int sashPos=0)
 		{
 			return wxSplitWnd_SplitHorizontally(wxobj, wxObject.SafePtr(wnd1), wxObject.SafePtr(wnd2), sashPos);
 		}
@@ -160,24 +133,14 @@ import wx.Window;
 
 		//---------------------------------------------------------------------
 
-		public bool SplitVertically(Window wnd1, Window wnd2)
-		{
-			return this.SplitVertically(wnd1, wnd2, 0);
-		}
-
-		public bool SplitVertically(Window wnd1, Window wnd2, int sashPos)
+		public bool SplitVertically(Window wnd1, Window wnd2, int sashPos=0)
 		{
 			return wxSplitWnd_SplitVertically(wxobj, wxObject.SafePtr(wnd1), wxObject.SafePtr(wnd2), sashPos);
 		}
 
 		//---------------------------------------------------------------------
 
-		public bool Unsplit()
-		{
-			return this.Unsplit(null);
-		}
-
-		public bool Unsplit(Window toRemove)
+		public bool Unsplit(Window toRemove=null)
 		{
 			return wxSplitWnd_Unsplit(wxobj, wxObject.SafePtr(toRemove));
 		}
@@ -187,7 +150,7 @@ import wx.Window;
 		public void SashPosition(int value) { SetSashPosition(value, true); }
 		public int SashPosition() { return wxSplitWnd_GetSashPosition(wxobj); }
 
-		public void SetSashPosition(int position, bool redraw)
+		public void SetSashPosition(int position, bool redraw=true)
 		{
 			wxSplitWnd_SetSashPosition(wxobj, position, redraw);
 		}
@@ -200,11 +163,11 @@ import wx.Window;
 		//---------------------------------------------------------------------
 		
 		public static wxObject myNew(IntPtr ptr) { return new Window(ptr); }
-		public Window Window1() { return cast(Window)FindObject(wxSplitWnd_GetWindow1(wxobj), &SplitterWindow.myNew); }
+		public Window Window1() { return cast(Window)FindObject(wxSplitWnd_GetWindow1(wxobj), &myNew); }
 		
 		//---------------------------------------------------------------------
 		
-		public Window Window2() { return cast(Window)FindObject(wxSplitWnd_GetWindow2(wxobj), &SplitterWindow.myNew); }
+		public Window Window2() { return cast(Window)FindObject(wxSplitWnd_GetWindow2(wxobj), &myNew); }
 		
 		//---------------------------------------------------------------------
 		

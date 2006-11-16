@@ -104,15 +104,18 @@ import wx.CommandEvent;
 		
 	public class SashWindow : Window
 	{
-		public const int wxSW_NOBORDER	= 0x0000;
-		public const int wxSW_BORDER	= 0x0020;
-		public const int wxSW_3DSASH	= 0x0040;
-		public const int wxSW_3DBORDER	= 0x0080;
-		public const int wxSW_3D	= wxSW_3DSASH | wxSW_3DBORDER;
-		
-		public const int wxSASH_DRAG_NONE	= 0;
-		public const int wxSASH_DRAG_DRAGGING	= 1;
-		public const int wxSASH_DRAG_LEFT_DOWN	= 2;
+		enum {
+			wxSW_NOBORDER	= 0x0000,
+			wxSW_BORDER	= 0x0020,
+			wxSW_3DSASH	= 0x0040,
+			wxSW_3DBORDER	= 0x0080,
+			wxSW_3D	= wxSW_3DSASH | wxSW_3DBORDER,
+		}
+		enum {
+			wxSASH_DRAG_NONE	= 0,
+			wxSASH_DRAG_DRAGGING	= 1,
+			wxSASH_DRAG_LEFT_DOWN	= 2,
+		}
 
 		//-----------------------------------------------------------------------------
 	
@@ -122,22 +125,7 @@ import wx.CommandEvent;
 		public this()
 			{ super(wxSashWindow_ctor());}
 			
-		public this(Window parent)
-			{ this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, wxSW_3D|wxCLIP_CHILDREN, "sashWindow");}
-			
-		public this(Window parent, int id)
-			{ this(parent, id, wxDefaultPosition, wxDefaultSize, wxSW_3D|wxCLIP_CHILDREN, "sashWindow");}
-			
-		public this(Window parent, int id, Point pos)
-			{ this(parent, id, pos, wxDefaultSize, wxSW_3D|wxCLIP_CHILDREN, "sashWindow");}
-			
-		public this(Window parent, int id, Point pos, Size size)
-			{ this(parent, id, pos, size, wxSW_3D|wxCLIP_CHILDREN, "sashWindow");}
-			
-		public this(Window parent, int id, Point pos, Size size, int style)
-			{ this(parent, id, pos, size, style, "sashWindow");}
-			
-		public this(Window parent, int id, Point pos, Size size, int style, string name)
+		public this(Window parent, int id /*= wxID_ANY*/, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=wxSW_3D|wxCLIP_CHILDREN, string name="sashWindow")
 		{
 			super(wxSashWindow_ctor());
 			if (!Create(parent, id, pos, size, style, name)) 
@@ -149,23 +137,14 @@ import wx.CommandEvent;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent, Point pos)
-			{ this(parent, Window.UniqueID, pos, wxDefaultSize, wxSW_3D|wxCLIP_CHILDREN, "sashWindow");}
-			
-		public this(Window parent, Point pos, Size size)
-			{ this(parent, Window.UniqueID, pos, size, wxSW_3D|wxCLIP_CHILDREN, "sashWindow");}
-			
-		public this(Window parent, Point pos, Size size, int style)
-			{ this(parent, Window.UniqueID, pos, size, style, "sashWindow");}
-			
-		public this(Window parent, Point pos, Size size, int style, string name)
+		public this(Window parent, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=wxSW_3D|wxCLIP_CHILDREN, string name="sashWindow")
 			{ this(parent, Window.UniqueID, pos, size, style, name);}
 		
 		//-----------------------------------------------------------------------------
 		
-		public bool Create(Window parent, int id, Point pos, Size size, int style, string name)
+		public bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
 		{
-			return wxSashWindow_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name);
+			return wxSashWindow_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, style, name);
 		}
 		
 		//-----------------------------------------------------------------------------
@@ -274,6 +253,8 @@ import wx.CommandEvent;
 
 		static this()
 		{
+			wxEVT_SASH_DRAGGED = wxEvent_EVT_SASH_DRAGGED();
+
 			AddEventType(wxEVT_SASH_DRAGGED,                    &SashEvent.New);
 		}
 	}

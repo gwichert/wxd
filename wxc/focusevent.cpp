@@ -19,7 +19,7 @@
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxFocusEvent* wxFocusEvent_ctor(wxEventType type)
+wxFocusEvent* wxFocusEvent_ctor(wxEventType type,int winid)
 {
     return new wxFocusEvent(type);
 }

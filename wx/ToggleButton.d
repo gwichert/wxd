@@ -34,22 +34,7 @@ import wx.Control;
 		public this()
 			{ super(wxToggleButton_ctor()); }
 
-		public this(Window parent, int id, string label)
-			{ this(parent, id, label, wxDefaultPosition, wxDefaultSize, 0, null, null); }
-
-		public this(Window parent, int id, string label, Point pos)
-			{ this(parent, id, label, pos, wxDefaultSize, 0, null, null); }
-
-		public this(Window parent, int id, string label, Point pos, Size size)
-			{ this(parent, id, label, pos, size, 0, null, null); }
-
-		public this(Window parent, int id, string label, Point pos, Size size, int style)
-			{ this(parent, id, label, pos, size, style, null, null); }
-
-		public this(Window parent, int id, string label, Point pos, Size size, int style, Validator validator)
-			{ this(parent, id, label, pos, size, style, validator, null); }
-
-		public this(Window parent, int id, string label, Point pos, Size size, int style, Validator validator, string name)
+		public this(Window parent, int id, string label, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, Validator validator = null, string name = "checkbox")
 		{
 			super(wxToggleButton_ctor());
 			if (!Create(parent, id, label, pos, size, style, validator, name))
@@ -60,27 +45,12 @@ import wx.Control;
 		
 		//---------------------------------------------------------------------
 		
-		public this(Window parent, string label)
-			{ this(parent, Window.UniqueID, label, wxDefaultPosition, wxDefaultSize, 0, null, null); }
-
-		public this(Window parent, string label, Point pos)
-			{ this(parent, Window.UniqueID, label, pos, wxDefaultSize, 0, null, null); }
-
-		public this(Window parent, string label, Point pos, Size size)
-			{ this(parent, Window.UniqueID, label, pos, size, 0, null, null); }
-
-		public this(Window parent, string label, Point pos, Size size, int style)
-			{ this(parent, Window.UniqueID, label, pos, size, style, null, null); }
-
-		public this(Window parent, string label, Point pos, Size size, int style, Validator validator)
-			{ this(parent, Window.UniqueID, label, pos, size, style, validator, null); }
-
-		public this(Window parent, string label, Point pos, Size size, int style, Validator validator, string name)
+		public this(Window parent, string label, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, Validator validator = null, string name = "checkbox")
 			{ this(parent, Window.UniqueID, label, pos, size, style, validator, name);}
 		
 		//---------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, string label, Point pos, Size size,
+		public bool Create(Window parent, int id, string label, inout Point pos, inout Size size,
 			int style, Validator validator, string name)
 		{
 			return wxToggleButton_Create(wxobj, wxObject.SafePtr(parent), id, label, pos, size,

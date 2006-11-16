@@ -75,6 +75,7 @@ import wx.Icon;
                     wxFULLSCREEN_NOCAPTION;
 		    
 		//-----------------------------------------------------------------------------
+		const string wxFrameNameStr="frame";
 
 		public this(IntPtr wxobj)
 			{ super(wxobj); }
@@ -82,21 +83,9 @@ import wx.Icon;
 		public this()
 			{ this(wxFrame_ctor());}
 			
-		public this(Window parent, int id, string title)
-			{ this(parent, id, title, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, "frame"); }
-
-		public this(Window parent, int id, string title, Point pos)
-			{ this(parent, id, title, pos, wxDefaultSize, wxDEFAULT_FRAME_STYLE, "frame"); }
-
-		public this(Window parent, int id, string title, Point pos, Size size)
-			{ this(parent, id, title, pos, size, wxDEFAULT_FRAME_STYLE, "frame"); }
-
-		public this(Window parent, int id, string title, Point pos, Size size, int style)
-			{ this(parent, id, title, pos, size, style, "frame"); }
-
-		public this(Window parent, int id, string title, Point pos, Size size, int style, string name)
+		public this(Window parent, int id, string title, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=wxDEFAULT_FRAME_STYLE, string name=wxFrameNameStr)
 		{
-			this();
+			this(wxFrame_ctor());
 			if (!Create(parent, id, title, pos, size, style, name))
 			{
 				throw new InvalidOperationException("Failed to create Frame");
@@ -106,37 +95,21 @@ import wx.Icon;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent, string title)
-			{ this(parent, Window.UniqueID, title, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, "frame"); }
-
-		public this(Window parent, string title, Point pos)
-			{ this(parent, Window.UniqueID, title, pos, wxDefaultSize, wxDEFAULT_FRAME_STYLE, "frame"); }
-
-		public this(Window parent, string title, Point pos, Size size)
-			{ this(parent, Window.UniqueID, title, pos, size, wxDEFAULT_FRAME_STYLE, "frame"); }
-
-		public this(Window parent, string title, Point pos, Size size, int style)
-			{ this(parent, Window.UniqueID, title, pos, size, style, "frame"); }
-
-		public this(Window parent, string title, Point pos, Size size, int style, string name)
+		public this(Window parent, string title, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=wxDEFAULT_FRAME_STYLE, string name=wxFrameNameStr)
 			{ this(parent, Window.UniqueID, title, pos, size, style, name);}
 		
 		//---------------------------------------------------------------------
 
 		public bool Create(Window parent, int id, string title, inout Point pos, inout Size size, int style, string name)
 		{
-			return wxFrame_Create(wxobj, wxObject.SafePtr(parent), id, title, pos, size, cast(uint)style, name);
+			return wxFrame_Create(wxobj, wxObject.SafePtr(parent), id, title, pos, size, style, name);
 		}
 
 		//---------------------------------------------------------------------
         
 		// Helper constructors
 
-		public this(string title)
-			{ this(null, -1, title); }
-		public this(string title, Point pos, Size size)
-			{ this(null, -1, title, pos, size); }
-		public this(string title, Point pos, Size size, int style)
+		public this(string title, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=wxDEFAULT_FRAME_STYLE)
 			{ this(null, -1, title, pos, size, style); }
 
 		//---------------------------------------------------------------------

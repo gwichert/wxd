@@ -22,3 +22,9 @@ wxValidator* wxValidator_ctor()
 {
 	return new wxValidator();
 }
+
+extern "C" WXEXPORT
+const wxValidator* wxDefaultValidator_Get()
+{
+	return &wxDefaultValidator;
+}

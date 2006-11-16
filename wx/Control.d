@@ -26,13 +26,15 @@ import wx.Window;
 
 	public class Control : Window
 	{
+		const string wxControlNameStr = "control";
+	
 		public this(IntPtr wxobj) 
 			{ super(wxobj);}
 
-		public this(Window parent, int id, Point pos, Size size, int style, string name)
+		public this(Window parent, int id, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=0, string name=wxControlNameStr)
 			{ super(parent, id, pos, size, style, name);}
 		
-		public this(Window parent, Point pos, Size size, int style, string name)
+		public this(Window parent, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=0, string name=wxControlNameStr)
 			{ super(parent, Window.UniqueID, pos, size, style, name);}
 
 		//---------------------------------------------------------------------

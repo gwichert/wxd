@@ -127,9 +127,9 @@ int wxTabCtrl_GetRowCount(wxTabCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxTabCtrl_GetItemText(wxTabCtrl* self, int item)
+dstrret wxTabCtrl_GetItemText(wxTabCtrl* self, int item)
 {
-	return dstr(self->GetItemText(item));
+	return dstr_ret(self->GetItemText(item));
 }
 
 //-----------------------------------------------------------------------------
@@ -297,6 +297,9 @@ bool wxTabEvent_IsAllowed(wxTabEvent* self)
 {
     return self->IsAllowed()?1:0;
 }
+
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TAB_SEL_CHANGED()		{ return wxEVT_COMMAND_TAB_SEL_CHANGED; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TAB_SEL_CHANGING()		{ return wxEVT_COMMAND_TAB_SEL_CHANGING; }
 
 #endif
  

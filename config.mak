@@ -3,7 +3,7 @@
 #include $(WXDIR)/build/msw/config.dmc
 CXX = dmc
 DMD = dmd
-DFLAGS =$(DFLAGS) -I$(TOPDIR)
+DFLAGS =$(DFLAGS) -I$(TOPDIR) -g
 
 WX_RELEASE_NODOT = 25
 OBJS = dmc_mswd$(CFG)

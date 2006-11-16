@@ -18,7 +18,7 @@ import wx.common;
 import wx.Event;
 import wx.Cursor;
 
-		static extern (C) IntPtr	wxSetCursorEvent_ctor(int type);
+		static extern (C) IntPtr	wxSetCursorEvent_ctor(int x,int y);
 		static extern (C) int		wxSetCursorEvent_GetX(IntPtr self);
 		static extern (C) int		wxSetCursorEvent_GetY(IntPtr self);
 		static extern (C) void		wxSetCursorEvent_SetCursor(IntPtr self, IntPtr cursor);
@@ -32,8 +32,8 @@ import wx.common;
 		public this(IntPtr wxobj) 
 			{ super(wxobj); }
 
-		public this(int type)
-			{ this(wxSetCursorEvent_ctor(type)); }
+		public this(int x=0,int y=0)
+			{ this(wxSetCursorEvent_ctor(x,y)); }
 
 		//-----------------------------------------------------------------------------	
 		

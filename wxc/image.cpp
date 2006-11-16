@@ -383,9 +383,9 @@ void wxImage_SetOption2(wxImage* self, dstr name, int value)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxImage_GetOption(wxImage* self, dstr name)
+dstrret wxImage_GetOption(wxImage* self, dstr name)
 {
-	return dstr(self->GetOption(wxString(name.data, wxConvUTF8, name.length)));
+	return dstr_ret(self->GetOption(wxString(name.data, wxConvUTF8, name.length)));
 }
 
 //-----------------------------------------------------------------------------
@@ -487,9 +487,9 @@ wxImageHandler* wxImage_FindHandlerMime(dstr mimetype)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxImage_GetImageExtWildcard()
+dstrret wxImage_GetImageExtWildcard()
 {
-	return dstr(wxImage::GetImageExtWildcard());
+	return dstr_ret(wxImage::GetImageExtWildcard());
 }
 
 //-----------------------------------------------------------------------------
@@ -545,17 +545,17 @@ void wxImageHandler_SetMimeType(wxImageHandler* self, dstr type)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxImageHandler_GetName(wxImageHandler* self)
+dstrret wxImageHandler_GetName(wxImageHandler* self)
 {
-	return dstr(self->GetName());
+	return dstr_ret(self->GetName());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxImageHandler_GetExtension(wxImageHandler* self)
+dstrret wxImageHandler_GetExtension(wxImageHandler* self)
 {
-	return dstr(self->GetExtension());
+	return dstr_ret(self->GetExtension());
 }
 
 //-----------------------------------------------------------------------------
@@ -569,9 +569,9 @@ long wxImageHandler_GetType(wxImageHandler* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxImageHandler_GetMimeType(wxImageHandler* self)
+dstrret wxImageHandler_GetMimeType(wxImageHandler* self)
 {
-	return dstr(self->GetMimeType());
+	return dstr_ret(self->GetMimeType());
 }
 
 //-----------------------------------------------------------------------------

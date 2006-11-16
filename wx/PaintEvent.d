@@ -26,6 +26,6 @@ import wx.common;
 		public this(IntPtr wxobj) 
 			{ super(wxobj); }
 
-		public this(int Id)
+		public this(int Id=0)
 			{ this(wxPaintEvent_ctor(Id)); }
 	}

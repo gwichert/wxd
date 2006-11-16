@@ -272,19 +272,19 @@ bool wxSizer_IsShownSizer(wxSizer* self, wxSizer *sizer)
 
 
 extern "C" WXEXPORT
-bool wxSizer_Detach(wxSizer* self, wxWindow* window)
+bool wxSizer_DetachWindow(wxSizer* self, wxWindow* window)
 {
 	return self->Detach(window)?1:0;
 }
 
 extern "C" WXEXPORT
-bool wxSizer_Detach2(wxSizer* self, wxSizer* sizer)
+bool wxSizer_DetachSizer(wxSizer* self, wxSizer* sizer)
 {
 	return self->Detach(sizer)?1:0;
 }
 
 extern "C" WXEXPORT
-bool wxSizer_Detach3(wxSizer* self, int index)
+bool wxSizer_Detach(wxSizer* self, int index)
 {
 	return self->Detach(index)?1:0;
 }

@@ -72,6 +72,9 @@ import wx.Control;
 
 		static this()
 		{
+			wxEVT_COMMAND_TAB_SEL_CHANGED = wxEvent_EVT_COMMAND_TAB_SEL_CHANGED();
+			wxEVT_COMMAND_TAB_SEL_CHANGING = wxEvent_EVT_COMMAND_TAB_SEL_CHANGING();
+
 			AddEventType(wxEVT_COMMAND_TAB_SEL_CHANGED,   &TabEvent.New);
 			AddEventType(wxEVT_COMMAND_TAB_SEL_CHANGING,  &TabEvent.New);
 		}
@@ -113,62 +116,18 @@ import wx.Control;
 		public this()
 			{ super(wxTabCtrl_ctor());}
 
-		public this(Window parent, int id)
-			{ this(parent, id, wxDefaultPosition, wxDefaultSize, 0, "tabCtrl");}
-
-		public this(Window parent, int id, Point pos)
-			{ this(parent, id, pos, wxDefaultSize, 0, "tabCtrl");}
-
-		public this(Window parent, int id, Point pos, Size size)
-			{ this(parent, id, pos, size, 0, "tabCtrl");}
-
-		public this(Window parent, int id, Point pos, Size size, int style)
-			{ this(parent, id, pos, size, style, "tabCtrl");}
-
-		public this(Window parent, int id, Point pos, Size size, int style, string name)
+		public this(Window parent, int id, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style =0, string name = "tabCtrl")
 			{ super(wxTabCtrl_ctor2(wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name));}
 			
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent)
-			{ this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, "tabCtrl");}
-
-		public this(Window parent, Point pos)
-			{ this(parent, Window.UniqueID, pos, wxDefaultSize, 0, "tabCtrl");}
-
-		public this(Window parent, Point pos, Size size)
-			{ this(parent, Window.UniqueID, pos, size, 0, "tabCtrl");}
-
-		public this(Window parent, Point pos, Size size, int style)
-			{ this(parent, Window.UniqueID, pos, size, style, "tabCtrl");}
-
-		public this(Window parent, Point pos, Size size, int style, string name)
+		public this(Window parent, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style =0, string name = "tabCtrl")
 			{ this(parent, Window.UniqueID, pos, size, style, name);}
 
 		//-----------------------------------------------------------------------------
 
-		public bool Create(Window parent, int id)
-		{
-			return Create(parent, id, wxDefaultPosition, wxDefaultSize, 0, "tabCtrl");
-		}
-
-		public bool Create(Window parent, int id, Point pos)
-		{
-			return Create(parent, id, pos, wxDefaultSize, 0, "tabCtrl");
-		}
-
-		public bool Create(Window parent, int id, Point pos, Size size)
-		{
-			return Create(parent, id, pos, size, 0, "tabCtrl");
-		}
-
-		public bool Create(Window parent, int id, Point pos, Size size, int style)
-		{
-			return Create(parent, id, pos, size, style, "tabCtrl");
-		}
-
-		public bool Create(Window parent, int id, Point pos, Size size, int style, string name)
+		public bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
 		{
 			return wxTabCtrl_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name);
 		}

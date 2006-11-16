@@ -52,9 +52,9 @@ void wxToolTip_SetTip(wxToolTip* self, dstr tip)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxToolTip_GetTip(wxToolTip* self)
+dstrret wxToolTip_GetTip(wxToolTip* self)
 {
-	return dstr(self->GetTip());
+	return dstr_ret(self->GetTip());
 }
 
 //-----------------------------------------------------------------------------
@@ -63,6 +63,15 @@ extern "C" WXEXPORT
 wxWindow* wxToolTip_GetWindow(wxToolTip* self)
 {
 	return self->GetWindow();
+}
+
+//-----------------------------------------------------------------------------
+
+
+extern "C" WXEXPORT
+void wxToolTip_SetWindow(wxToolTip* self,wxWindow* win)
+{
+	return self->SetWindow(win);
 }
 
 //-----------------------------------------------------------------------------

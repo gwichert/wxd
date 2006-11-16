@@ -70,6 +70,9 @@ import wx.ImageList;
 
 		static this()
 		{
+			wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED = wxEvent_EVT_COMMAND_NOTEBOOK_PAGE_CHANGED();
+			wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGING = wxEvent_EVT_COMMAND_NOTEBOOK_PAGE_CHANGING();
+
 			AddEventType(wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED,   &NotebookEvent.New);
 			AddEventType(wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGING,  &NotebookEvent.New);
 		}
@@ -110,6 +113,7 @@ import wx.ImageList;
 		public const int wxNB_BOTTOM           = 0x0080;
 		public const int wxNB_MULTILINE        = 0x0100;
 	
+		public const string wxNOTEBOOK_NAME = "notebook";
 		//-----------------------------------------------------------------------------
 
 		public this(IntPtr wxobj) 
@@ -118,22 +122,10 @@ import wx.ImageList;
 		public this()
 			{ super(wxNotebook_ctor()); }
 
-		public this(Window parent)
-			{ this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, null); }
-
-		public this(Window parent, int id)
-			{ this(parent, id, wxDefaultPosition, wxDefaultSize, 0, null); }
-
-		public this(Window parent, int id, Point pos, Size size)
-			{ this(parent, id, pos, size, 0, null); }
-
-		public this(Window parent, int id, Point pos, Size size, int style)
-			{ this(parent, id, pos, size, style, null); }
-
-		public this(Window parent, int id, Point pos, Size size, int style, string name)
+		public this(Window parent, int id, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, string name = wxNOTEBOOK_NAME)
 		{
 			super(wxNotebook_ctor());
-			if (!wxNotebook_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name)) 
+			if (!wxNotebook_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, style, name)) 
 			{
 				throw new InvalidOperationException("Failed to create Notebook");
 			}
@@ -142,13 +134,7 @@ import wx.ImageList;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 			
-		public this(Window parent, Point pos, Size size)
-			{ this(parent, Window.UniqueID, pos, size, 0, null); }
-
-		public this(Window parent, Point pos, Size size, int style)
-			{ this(parent, Window.UniqueID, pos, size, style, null); }
-
-		public this(Window parent, Point pos, Size size, int style, string name)
+		public this(Window parent, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, string name = wxNOTEBOOK_NAME)
 			{ this(parent, Window.UniqueID, pos, size, style, name);}
         
 		//---------------------------------------------------------------------

@@ -24,7 +24,8 @@ import wx.SizeEvent;
 
 		//-----------------------------------------------------------------------------
 		
-		static extern (C) IntPtr wxVScrolledWindow_ctor(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
+		static extern (C) IntPtr wxVScrolledWindow_ctor();
+		static extern (C) IntPtr wxVScrolledWindow_ctor2(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
 		static extern (C) void wxVScrolledWindow_RegisterVirtual(IntPtr self, VScrolledWindow obj, Virtual_IntInt onGetLineHeight);
 		static extern (C) bool wxVScrolledWindow_Create(IntPtr self,IntPtr parent, int id, inout Point pos, inout Size size, int style, string name);
 		static extern (C) void wxVScrolledWindow_SetLineCount(IntPtr self, int count);
@@ -48,50 +49,29 @@ import wx.SizeEvent;
 		public this(IntPtr wxobj)
 			{ super(wxobj); }
 			
-		public this()
-			{ this(null, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, "");}
+		public this() {
+			this(wxVScrolledWindow_ctor());
+			wxVScrolledWindow_RegisterVirtual(wxobj, this, &staticOnGetLineHeight);
+		}
 			
-		public this(Window parent, int id)
-			{ this(parent, id, wxDefaultPosition, wxDefaultSize, 0, "");}
-			
-		public this(Window parent, int id, Point pos)
-			{ this(parent, id, pos, wxDefaultSize, 0, "");}
-			
-		public this(Window parent, int id, Point pos, Size size)
-			{ this(parent, id, pos, size, 0, "");}
-			
-		public this(Window parent, int id, Point pos, Size size, int style)
-			{ this(parent, id, pos, size, style, "");}
-		
-		public this(Window parent, int id, Point pos, Size size, int style, string name)
+		public this(Window parent, int id /*= wxID_ANY*/, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style=0, string name = wxPanelNameStr)
 		{
-			this(wxVScrolledWindow_ctor(wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name));
+			this(wxVScrolledWindow_ctor2(wxObject.SafePtr(parent), id, pos, size, style, name));
 			wxVScrolledWindow_RegisterVirtual(wxobj, this, &staticOnGetLineHeight);
 		}
 		
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent)
-			{ this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, "");}
-			
-		public this(Window parent, Point pos)
-			{ this(parent, Window.UniqueID, pos, wxDefaultSize, 0, "");}
-			
-		public this(Window parent, Point pos, Size size)
-			{ this(parent, Window.UniqueID, pos, size, 0, "");}
-			
-		public this(Window parent, Point pos, Size size, int style)
-			{ this(parent, Window.UniqueID, pos, size, style, "");}
-		
-		public this(Window parent, Point pos, Size size, int style, string name)
+		public this(Window parent, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style=0, string name = wxPanelNameStr)
 			{ this(parent, Window.UniqueID, pos, size, style, name);}
 		
 		//-----------------------------------------------------------------------------
 		
-		public bool Create(Window parent, int id, Point pos, Size size, int style, string name)
+		public bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
 		{
 			return wxVScrolledWindow_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, style, name); 
+		//	return super.Create(parent, id, pos, size, style | wxVSCROLL, name);
 		}
 		
 		//-----------------------------------------------------------------------------

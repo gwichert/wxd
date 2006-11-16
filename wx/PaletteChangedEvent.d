@@ -18,7 +18,7 @@ import wx.common;
 import wx.Event;
 import wx.Window;
 
-		static extern (C) IntPtr wxPaletteChangedEvent_ctor(int type);
+		static extern (C) IntPtr wxPaletteChangedEvent_ctor(int winid);
 		static extern (C) void wxPaletteChangedEvent_SetChangedWindow(IntPtr self, IntPtr win);
 		static extern (C) IntPtr wxPaletteChangedEvent_GetChangedWindow(IntPtr self);
 		
@@ -29,8 +29,8 @@ import wx.common;
 		public this(IntPtr wxobj) 
 			{ super(wxobj); }
 
-		public this(int type)
-			{ this(wxPaletteChangedEvent_ctor(type)); }
+		public this(int winid=0)
+			{ this(wxPaletteChangedEvent_ctor(winid)); }
 
 		//-----------------------------------------------------------------------------	
 		

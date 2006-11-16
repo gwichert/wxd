@@ -60,28 +60,17 @@ import std.string;
         public const int wxMULTIPLE          = 0x0020;
         public const int wxCHANGE_DIR        = 0x0040;
 
+	public const string wxFileSelectorPromptStr = "Select a file";
+	version(__WXMSW__) {
+		public const string wxFileSelectorDefaultWildcardStr = "*.*";
+	} else {
+		public const string wxFileSelectorDefaultWildcardStr = "*";
+	}
+
         public this(IntPtr wxobj)
             { super(wxobj); }
 
-        public this(Window parent)
-            { this(parent, "Choose a file", "", "", "*.*", 0, wxDefaultPosition); }
-
-        public this(Window parent, string message)
-            { this(parent, message, "", "", "*.*", 0, wxDefaultPosition); }
-
-        public this(Window parent, string message, string defaultDir)
-            { this(parent, message, defaultDir, "", "*.*", 0, wxDefaultPosition); }
-
-        public this(Window parent, string message, string defaultDir, string defaultFile)
-            { this(parent, message, defaultDir, defaultFile, "*.*", 0, wxDefaultPosition); }
-
-        public this(Window parent, string message, string defaultDir, string defaultFile, string wildcard)
-            { this(parent, message, defaultDir, defaultFile, wildcard, 0, wxDefaultPosition); }
-
-        public this(Window parent, string message, string defaultDir, string defaultFile, string wildcard, int style)
-            { this(parent, message, defaultDir, defaultFile, wildcard, style, wxDefaultPosition); }
-
-        public this(Window parent, string message, string defaultDir, string defaultFile, string wildcard, int style, Point pos)
+        public this(Window parent, string message = wxFileSelectorPromptStr, string defaultDir = "", string defaultFile = "", string wildcard = wxFileSelectorDefaultWildcardStr , int style = 0, Point pos = wxDefaultPosition)
             { this(wxFileDialog_ctor(wxObject.SafePtr(parent), message, defaultDir, defaultFile, wildcard, cast(uint)style, pos)); }
 
         //---------------------------------------------------------------------
@@ -127,41 +116,46 @@ import std.string;
 	static extern (C) string wxFileSelectorEx_func(char* message, char* default_path,char* default_filename,int *indexDefaultExtension, char* wildcard, int flags, IntPtr parent, int x, int y);
 	static extern (C) string wxLoadFileSelector_func(char* what, char* extension, char* default_name, IntPtr parent);
 	static extern (C) string wxSaveFileSelector_func(char* what, char* extension, char* default_name, IntPtr parent);
-	
+
+private char* c_str(char[] str)
+{
+	return str?.toStringz(str):null;
+}
+
 string FileSelector(
-	string message = null,
+	string message = FileDialog.wxFileSelectorPromptStr,
 	string default_path = null,
 	string default_filename = null,
 	string default_extension = null,
-	string wildcard = null,
+	string wildcard = FileDialog.wxFileSelectorDefaultWildcardStr,
 	int flags = 0,
 	Window parent = null, int x = -1, int y = -1)
 {
 	return wxFileSelector_func(
-		message?toStringz(message):null,
-		default_path?toStringz(default_path):null,
-		default_filename?toStringz(default_filename):null,
-		default_extension?toStringz(default_extension):null,
-		wildcard?toStringz(wildcard):null,
+		c_str(message),
+		c_str(default_path),
+		c_str(default_filename),
+		c_str(default_extension),
+		c_str(wildcard),
 		flags,
 		wxObject.SafePtr(parent),x,y);
 }
 
 string FileSelectorEx(
-	string message = null,
+	string message = FileDialog.wxFileSelectorPromptStr,
 	string default_path = null,
 	string default_filename = null,
 	int *indexDefaultExtension = null,
-	string wildcard = null,
+	string wildcard = FileDialog.wxFileSelectorDefaultWildcardStr,
 	int flags = 0,
 	Window parent = null, int x = -1, int y = -1)
 {
 	return wxFileSelectorEx_func(
-		message?toStringz(message):null,
-		default_path?toStringz(default_path):null,
-		default_filename?toStringz(default_filename):null,
+		c_str(message),
+		c_str(default_path),
+		c_str(default_filename),
 		indexDefaultExtension,
-		wildcard?toStringz(wildcard):null,
+		c_str(wildcard),
 		flags,
 		wxObject.SafePtr(parent),x,y);
 }
@@ -173,9 +167,9 @@ string LoadFileSelector(
 	Window parent = null)
 {
 	return wxLoadFileSelector_func(
-		what?toStringz(what):null,
-		extension?toStringz(extension):null,
-		default_name?toStringz(default_name):null,
+		c_str(what),
+		c_str(extension),
+		c_str(default_name),
 		wxObject.SafePtr(parent));
 }
 
@@ -186,9 +180,9 @@ string SaveFileSelector(
 	Window parent = null)
 {
 	return wxSaveFileSelector_func(
-		what?toStringz(what):null,
-		extension?toStringz(extension):null,
-		default_name?toStringz(default_name):null,
+		c_str(what),
+		c_str(extension),
+		c_str(default_name),
 		wxObject.SafePtr(parent));
 }
 

@@ -52,16 +52,19 @@ import wx.ClientData;
 	
 	public class ListBox : Control
 	{
-		public const int wxLB_SORT             = 0x0010;
-		public const int wxLB_SINGLE           = 0x0020;
-		public const int wxLB_MULTIPLE         = 0x0040;
-		public const int wxLB_EXTENDED         = 0x0080;
-		public const int wxLB_OWNERDRAW        = 0x0100;
-		public const int wxLB_NEED_SB          = 0x0200;
-		public const int wxLB_ALWAYS_SB        = 0x0400;
-		public const int wxLB_HSCROLL          = wxHSCROLL;
-		public const int wxLB_INT_HEIGHT       = 0x0800;
+		enum {
+			wxLB_SORT             = 0x0010,
+			wxLB_SINGLE           = 0x0020,
+			wxLB_MULTIPLE         = 0x0040,
+			wxLB_EXTENDED         = 0x0080,
+			wxLB_OWNERDRAW        = 0x0100,
+			wxLB_NEED_SB          = 0x0200,
+			wxLB_ALWAYS_SB        = 0x0400,
+			wxLB_HSCROLL          = wxHSCROLL,
+			wxLB_INT_HEIGHT       = 0x0800,
+		}
 	
+		public const string wxListBoxNameStr = "listBox";
 		//---------------------------------------------------------------------
 		
 		public this(IntPtr wxobj) 
@@ -70,30 +73,12 @@ import wx.ClientData;
 		public this()
 			{ super(wxListBox_ctor()); }
 
-		public this(Window parent, int id)
-			{ this(parent, id, wxDefaultPosition, wxDefaultSize, 0, null, 0, null, null); }
-	
-		public this(Window parent, int id, Point pos)
-			{ this(parent, id, pos, wxDefaultSize, 0, null, 0, null, null); }
-	
-		public this(Window parent, int id, Point pos, Size size)
-			{ this(parent, id, pos, size, 0, null, 0, null, null); }
-	
-		public this(Window parent, int id, Point pos, Size size, int n, string[] choices)
-			{ this(parent, id, pos, size, n, choices, 0, null, null); }
-	
-		public this(Window parent, int id, Point pos, Size size, int n, string[] choices, int style)
-			{ this(parent, id, pos, size, n, choices, style, null, null); }
-	
-		public this(Window parent, int id, Point pos, Size size, int n, string[] choices, int style, Validator val)
-			{ this(parent, id, pos, size, n, choices, style, val, null); }
-	
-		public this(Window parent, int id, Point pos, Size size, int n,
-			string[] choices, int style, Validator validator, string name)
+		public this(Window parent, int id, Point pos = wxDefaultPosition, Size size = wxDefaultSize, 
+			string[] choices = null, int style = 0, Validator validator =null, string name = wxListBoxNameStr)
 		{
 			super(wxListBox_ctor());
 			if(!wxListBox_Create(wxobj, wxObject.SafePtr(parent), id,
-					pos, size, n, choices, cast(uint)style,
+					pos, size, choices.length, choices, cast(uint)style,
 					wxObject.SafePtr(validator), name))
 			{
 				throw new InvalidOperationException("Failed to create ListBox");
@@ -103,31 +88,13 @@ import wx.ClientData;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent)
-			{ this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, null, 0, null, null); }
-	
-		public this(Window parent, Point pos)
-			{ this(parent, Window.UniqueID, pos, wxDefaultSize, 0, null, 0, null, null); }
-	
-		public this(Window parent, Point pos, Size size)
-			{ this(parent, Window.UniqueID, pos, size, 0, null, 0, null, null); }
-	
-		public this(Window parent, Point pos, Size size, int n, string[] choices)
-			{ this(parent, Window.UniqueID, pos, size, n, choices, 0, null, null); }
-	
-		public this(Window parent, Point pos, Size size, int n, string[] choices, int style)
-			{ this(parent, Window.UniqueID, pos, size, n, choices, style, null, null); }
-	
-		public this(Window parent, Point pos, Size size, int n, string[] choices, int style, Validator val)
-			{ this(parent, Window.UniqueID, pos, size, n, choices, style, val, null); }
-	
-		public this(Window parent, Point pos, Size size, int n,
-			string[] choices, int style, Validator validator, string name)
-			{ this( parent, Window.UniqueID, pos, size, n, choices, style, validator, name);}
+		public this(Window parent, Point pos = wxDefaultPosition, Size size = wxDefaultSize, 
+			string[] choices = null, int style = 0, Validator validator = null, string name = wxListBoxNameStr)
+			{ this( parent, Window.UniqueID, pos, size, choices, style, validator, name);}
 		
 		//---------------------------------------------------------------------
 	
-		public bool Create(Window parent, int id, Point pos, Size size, int n,
+		public bool Create(Window parent, int id, inout Point pos, inout Size size, int n,
 				string[] choices, int style, Validator validator, string name)
 		{
 			return wxListBox_Create(wxobj, wxObject.SafePtr(parent), id,
@@ -308,7 +275,7 @@ import wx.ClientData;
 			inout Point pos,
 			inout Size size,
 			int nStrings,
-			string[] choices,
+			string* choices,
 			uint style,
 			IntPtr validator,
 			string name);
@@ -318,6 +285,8 @@ import wx.ClientData;
 		
 	public class CheckListBox : ListBox
 	{
+		const string wxListBoxNameStr = "listBox";
+
 		//---------------------------------------------------------------------
 	
 		public this(IntPtr wxobj)
@@ -326,56 +295,14 @@ import wx.ClientData;
 		public this()
 			{ super(wxCheckListBox_ctor1());}
 			
-		public this(Window parent, int id)
-			{ this(parent, id, wxDefaultPosition, wxDefaultSize, 0, null, 0, null, "");}
-			
-		public this(Window parent, int id, Point pos)
-			{ this(parent, id, pos, wxDefaultSize, 0, null, 0, null, "");}
-			
-		public this(Window parent, int id, Point pos, Size size)
-			{ this(parent, id, pos, size, 0, null, 0, null, "");}
-			
-		public this(Window parent, int id, Point pos, Size size, string[] choices)
-			{ this(parent, id, pos, size, choices.length, choices, 0, null, "");}
-			
-		public this(Window parent, int id, Point pos, Size size, string[] choices, int style)
-			{ this(parent, id, pos, size, choices.length, choices, style, null, "");}
-			
-		public this(Window parent, int id, Point pos, Size size, string[] choices, int style, Validator validator)
-			{ this(parent, id, pos, size, choices.length, choices, style, validator, "");}
-			
-		public this(Window parent, int id, Point pos, Size size, string[] choices, int style, Validator validator, string name)
-			{ this(parent, id, pos, size, choices.length, choices, style, validator, name);}
-			
-		public this(Window parent, int id, Point pos, Size size, int n, string[] choices, int style, Validator validator, string name)
-			{ super(wxCheckListBox_ctor2(wxObject.SafePtr(parent), id, pos, size, n, choices, cast(uint)style, wxObject.SafePtr(validator), name));}
+		public this(Window parent, int id, Point pos = wxDefaultPosition, Size size = wxDefaultSize, string[] choices = null, int style = 0, Validator validator = null, string name = wxListBoxNameStr)
+			{ super(wxCheckListBox_ctor2(wxObject.SafePtr(parent), id, pos, size, choices.length, choices, cast(uint)style, wxObject.SafePtr(validator), name));}
 			
 		//---------------------------------------------------------------------
 		// ctors with self created id
 			
-		public this(Window parent)
-			{ this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, null, 0, null, "");}
-			
-		public this(Window parent, Point pos)
-			{ this(parent, Window.UniqueID, pos, wxDefaultSize, 0, null, 0, null, "");}
-			
-		public this(Window parent, Point pos, Size size)
-			{ this(parent, Window.UniqueID, pos, size, 0, null, 0, null, "");}
-			
-		public this(Window parent, Point pos, Size size, string[] choices)
-			{ this(parent, Window.UniqueID, pos, size, choices.length, choices, 0, null, "");}
-			
-		public this(Window parent, Point pos, Size size, string[] choices, int style)
-			{ this(parent, Window.UniqueID, pos, size, choices.length, choices, style, null, "");}
-			
-		public this(Window parent, Point pos, Size size, string[] choices, int style, Validator validator)
-			{ this(parent, Window.UniqueID, pos, size, choices.length, choices, style, validator, "");}
-			
-		public this(Window parent, Point pos, Size size, string[] choices, int style, Validator validator, string name)
-			{ this(parent, Window.UniqueID, pos, size, choices.length, choices, style, validator, name);}
-			
-		public this(Window parent, Point pos, Size size, int n, string[] choices, int style, Validator validator, string name)
-			{ this(parent, Window.UniqueID, pos, size, n, choices, style, validator, name);}
+		public this(Window parent, Point pos = wxDefaultPosition, Size size = wxDefaultSize, string[] choices = null, int style = 0, Validator validator = null, string name = wxListBoxNameStr)
+			{ this(parent, Window.UniqueID, pos, size, choices, style, validator, name);}
 
 		//--------------------------------------------------------------------
 		

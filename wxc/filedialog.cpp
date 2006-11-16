@@ -65,9 +65,9 @@ int wxFileDialog_ShowModal(wxFileDialog* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxFileDialog_GetDirectory(wxFileDialog* self)
+dstrret wxFileDialog_GetDirectory(wxFileDialog* self)
 {
-    return dstr(self->GetDirectory());
+    return dstr_ret(self->GetDirectory());
 }
 
 extern "C" WXEXPORT
@@ -79,9 +79,9 @@ void wxFileDialog_SetDirectory(wxFileDialog* self, dstr dir)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxFileDialog_GetFilename(wxFileDialog* self)
+dstrret wxFileDialog_GetFilename(wxFileDialog* self)
 {
-    return dstr(self->GetFilename());
+    return dstr_ret(self->GetFilename());
 }
 
 extern "C" WXEXPORT
@@ -93,9 +93,9 @@ void wxFileDialog_SetFilename(wxFileDialog* self, dstr filename)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxFileDialog_GetPath(wxFileDialog* self)
+dstrret wxFileDialog_GetPath(wxFileDialog* self)
 {
-    return dstr(self->GetPath());
+    return dstr_ret(self->GetPath());
 }
 
 extern "C" WXEXPORT
@@ -127,17 +127,17 @@ void wxFileDialog_SetMessage(wxFileDialog *self, dstr message)
 }
 
 extern "C" WXEXPORT
-dstr wxFileDialog_GetMessage(wxFileDialog *self)
+dstrret wxFileDialog_GetMessage(wxFileDialog *self)
 {
-    return dstr(self->GetMessage());
+    return dstr_ret(self->GetMessage());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxFileDialog_GetWildcard(wxFileDialog* self)
+dstrret wxFileDialog_GetWildcard(wxFileDialog* self)
 {
-    return dstr(self->GetWildcard());
+    return dstr_ret(self->GetWildcard());
 }
 
 extern "C" WXEXPORT
@@ -181,7 +181,7 @@ wxArrayString* wxFileDialog_GetFilenames(wxFileDialog* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxFileSelector_func(const char *message,
+dstrret wxFileSelector_func(const char *message,
                const char *default_path,
                const char *default_filename,
                const char *default_extension,
@@ -192,12 +192,12 @@ dstr wxFileSelector_func(const char *message,
 {
 	if (message ==NULL) message =wxFileSelectorPromptStr;
 	if (wildcard==NULL) wildcard=wxFileSelectorDefaultWildcardStr;
-	return dstr(wxFileSelector(message,default_path,default_filename,default_extension,wildcard,
+	return dstr_ret(wxFileSelector(message,default_path,default_filename,default_extension,wildcard,
 			flags,parent,x,y));
 }
 
 extern "C" WXEXPORT
-dstr wxFileSelectorEx_func(const char *message,
+dstrret wxFileSelectorEx_func(const char *message,
                const char *default_path,
                const char *default_filename,
                int *indexDefaultExtension,
@@ -208,27 +208,27 @@ dstr wxFileSelectorEx_func(const char *message,
 {
 	if (message ==NULL) message  = wxFileSelectorPromptStr;
 	if (wildcard==NULL) wildcard = wxFileSelectorDefaultWildcardStr;
-	return dstr(wxFileSelectorEx(message,default_path,default_filename,indexDefaultExtension,wildcard,
+	return dstr_ret(wxFileSelectorEx(message,default_path,default_filename,indexDefaultExtension,wildcard,
 			flags,parent,x,y));
 }
 	
 	
 // Ask for filename to load
 extern "C" WXEXPORT
-dstr wxLoadFileSelector_func(const char *what,
+dstrret wxLoadFileSelector_func(const char *what,
                    const char *extension,
                    const char *default_name,
                    wxWindow *parent)
 {
-	return dstr(wxLoadFileSelector(what,extension,default_name,parent));
+	return dstr_ret(wxLoadFileSelector(what,extension,default_name,parent));
 }
 
 // Ask for filename to save
 extern "C" WXEXPORT
-dstr wxSaveFileSelector_func(const char *what,
+dstrret wxSaveFileSelector_func(const char *what,
                    const char *extension,
                    const char *default_name,
                    wxWindow *parent)
 {
-	return dstr(wxSaveFileSelector(what,extension,default_name,parent));
+	return dstr_ret(wxSaveFileSelector(what,extension,default_name,parent));
 }

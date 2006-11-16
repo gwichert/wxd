@@ -47,7 +47,7 @@ import wx.Frame;
 
 	public class MDIParentFrame : Frame
 	{
-		public const int wxDEFAULT_MDI_FRAME_STYLE = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL;
+		enum { wxDEFAULT_MDI_FRAME_STYLE = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL }
 		
 		//-----------------------------------------------------------------------------
 		
@@ -60,22 +60,9 @@ import wx.Frame;
 			wxMDIParentFrame_RegisterVirtual(wxobj, this, &staticDoOnCreateClient);
 		}
 
-		public this(Window parent, int id, string title)
-			{ this(parent, id, title, wxDefaultPosition, wxDefaultSize, wxDEFAULT_MDI_FRAME_STYLE, "mdiParentFrame"); }
-			
-		public this(Window parent, int id, string title, inout Point pos)
-			{ this(parent, id, title, pos, wxDefaultSize, wxDEFAULT_MDI_FRAME_STYLE, "mdiParentFrame"); }
-			
-		public this(Window parent, int id, string title, inout Point pos, inout Size size)
-			{ this(parent, id, title, pos, size, wxDEFAULT_MDI_FRAME_STYLE, "mdiParentFrame"); }
-			
-		public this(Window parent, int id, string title, inout Point pos, inout Size size, int style)
-			{ this(parent, id, title, pos, size, style, "mdiParentFrame"); }
-
-		public this(Window parent, int id, string title, inout Point pos, inout Size size, int style, string name)
+		public this(Window parent, int id, string title, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=wxDEFAULT_MDI_FRAME_STYLE, string name=wxFrameNameStr)
 		{
-			super(wxMDIParentFrame_ctor());
-			wxMDIParentFrame_RegisterVirtual(wxobj, this,  &staticDoOnCreateClient);
+			this();
 			
 			if (!Create(parent, id, title, pos, size, style, name)) 
 			{
@@ -86,19 +73,7 @@ import wx.Frame;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent, string title)
-			{ this(parent, Window.UniqueID, title, wxDefaultPosition, wxDefaultSize, wxDEFAULT_MDI_FRAME_STYLE, "mdiParentFrame"); }
-			
-		public this(Window parent, string title, inout Point pos)
-			{ this(parent, Window.UniqueID, title, pos, wxDefaultSize, wxDEFAULT_MDI_FRAME_STYLE, "mdiParentFrame"); }
-			
-		public this(Window parent, string title, inout Point pos, inout Size size)
-			{ this(parent, Window.UniqueID, title, pos, size, wxDEFAULT_MDI_FRAME_STYLE, "mdiParentFrame"); }
-			
-		public this(Window parent, string title, inout Point pos, inout Size size, int style)
-			{ this(parent, Window.UniqueID, title, pos, size, style, "mdiParentFrame"); }
-
-		public this(Window parent, string title, inout Point pos, inout Size size, int style, string name)
+		public this(Window parent, string title, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=wxDEFAULT_MDI_FRAME_STYLE, string name=wxFrameNameStr)
 			{ this(parent, Window.UniqueID, title, pos, size, style, name);}
 		
 		//-----------------------------------------------------------------------------
@@ -196,19 +171,7 @@ import wx.Frame;
 		public this()
 			{ super(wxMDIChildFrame_ctor());}
 
-		public this(MDIParentFrame parent, int id, string title)
-			{ this(parent, id, title, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, "mdiChildFrame"); }
-			
-		public this(MDIParentFrame parent, int id, string title, inout Point pos)
-			{ this(parent, id, title, pos, wxDefaultSize, wxDEFAULT_FRAME_STYLE, "mdiChildFrame"); }
-			
-		public this(MDIParentFrame parent, int id, string title, inout Point pos, inout Size size)
-			{ this(parent, id, title, pos, size, wxDEFAULT_FRAME_STYLE, "mdiChildFrame"); }
-			
-		public this(MDIParentFrame parent, int id, string title, inout Point pos, inout Size size, int style)
-			{ this(parent, id, title, pos, size, style, "mdiChildFrame"); }
-
-		public this(MDIParentFrame parent, int id, string title, inout Point pos, inout Size size, int style, string name)
+		public this(MDIParentFrame parent, int id, string title, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style=wxDEFAULT_FRAME_STYLE, string name=wxFrameNameStr)
 		{
 			super(wxMDIChildFrame_ctor());
 			if (!Create(parent, id, title, pos, size, style, name))
@@ -222,26 +185,14 @@ import wx.Frame;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(MDIParentFrame parent, string title)
-			{ this(parent, Window.UniqueID, title, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, "mdiChildFrame"); }
-			
-		public this(MDIParentFrame parent, string title, inout Point pos)
-			{ this(parent, Window.UniqueID, title, pos, wxDefaultSize, wxDEFAULT_FRAME_STYLE, "mdiChildFrame"); }
-			
-		public this(MDIParentFrame parent, string title, inout Point pos, inout Size size)
-			{ this(parent, Window.UniqueID, title, pos, size, wxDEFAULT_FRAME_STYLE, "mdiChildFrame"); }
-			
-		public this(MDIParentFrame parent, string title, inout Point pos, inout Size size, int style)
-			{ this(parent, Window.UniqueID, title, pos, size, style, "mdiChildFrame"); }
-
-		public this(MDIParentFrame parent, string title, inout Point pos, inout Size size, int style, string name)
+		public this(MDIParentFrame parent, string title, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style=wxDEFAULT_FRAME_STYLE, string name=wxFrameNameStr)
 			{ this(parent, Window.UniqueID, title, pos, size, style, name); }
 		
 		//-----------------------------------------------------------------------------
 
 		public bool Create(MDIParentFrame parent, int id, string title, inout Point pos, inout Size size, int style, string name)
 		{
-			bool ret = wxMDIChildFrame_Create(wxobj, wxObject.SafePtr(parent), id, title, pos, size, cast(uint)style, name);
+			bool ret = wxMDIChildFrame_Create(wxobj, wxObject.SafePtr(parent), id, title, pos, size, style, name);
 			version(__WXMAC__){
 				// Bug in wxMac 2.5.2; it always returns FALSE
 				return true;
@@ -291,10 +242,7 @@ import wx.Frame;
 		public  this()
 			{ super(wxMDIClientWindow_ctor()); }
 
-		public this(MDIParentFrame parent)
-			{ this(parent, 0); }
-
-		public this(MDIParentFrame parent, int style)
+		public this(MDIParentFrame parent, int style=0)
 		{
 			super(wxMDIClientWindow_ctor());
 			if (!CreateClient(parent, style))
@@ -307,7 +255,7 @@ import wx.Frame;
 
 		public bool CreateClient(MDIParentFrame parent, int style)
 		{
-			return wxMDIClientWindow_CreateClient(wxobj, wxObject.SafePtr(parent), cast(uint)style);
+			return wxMDIClientWindow_CreateClient(wxobj, wxObject.SafePtr(parent), style);
 		}
 	}
 

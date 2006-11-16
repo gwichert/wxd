@@ -27,32 +27,20 @@ import wx.Dialog;
 
     public class TextEntryDialog : Dialog
     {
-        public const int wxTextEntryDialogStyle = (Dialog.wxOK | Dialog.wxCANCEL | Dialog.wxCENTRE );
+    	enum {
+        wxTextEntryDialogStyle = (wxOK | wxCANCEL | wxCENTRE),
+	}
+	public const string wxGetTextFromUserPromptStr = "Input Text";
 
         public this(IntPtr wxobj)
             { super(wxobj);}
 
-        public this(Window parent)
-            { this(parent, "Enter text", "", "", cast(int)wxTextEntryDialogStyle, wxDefaultPosition);}
-
-        public this(Window parent, string message)
-            { this(parent, message, "", "", cast(int)wxTextEntryDialogStyle, wxDefaultPosition);}
-
-        public this(Window parent, string message, string caption)
-            { this(parent, message, caption, "", cast(int)wxTextEntryDialogStyle, wxDefaultPosition);}
-
-        public this(Window parent, string message, string caption, string value)
-            { this(parent, message, caption, value, cast(int)wxTextEntryDialogStyle, wxDefaultPosition);}
-
-        public this(Window parent, string message, string caption, string value, int style)
-            { this(parent, message, caption, value, cast(int)style, wxDefaultPosition);}
-
-        public  this(Window parent, string message, string caption, string value, int style, Point pos)
+        public  this(Window parent, string message=wxGetTextFromUserPromptStr, string caption="", string value="", int style=wxTextEntryDialogStyle, Point pos=wxDefaultPosition)
             { this(wxTextEntryDialog_ctor(wxObject.SafePtr(parent), message, caption, value, cast(uint)style, pos)); }
 
         //-----------------------------------------------------------------------------
 
-        public string Value() { return wxTextEntryDialog_GetValue(wxobj).dup; }
+        public string Value() { return wxTextEntryDialog_GetValue(wxobj); }
         public void Value(string value) { wxTextEntryDialog_SetValue(wxobj, value); }
 
         //---------------------------------------------------------------------
@@ -66,21 +54,18 @@ import wx.Dialog;
     //-----------------------------------------------------------------------------
 
         static extern (C) string wxGetPasswordFromUser_func(string message, string caption, string defaultValue, IntPtr parent);
-
-        //-----------------------------------------------------------------------------
-
-        public string GetPasswordFromUser(string message, string caption="", string defaultValue="", Window parent=null)
-        {
-            return wxGetPasswordFromUser_func(message, caption, defaultValue, wxObject.SafePtr(parent)).dup;
-        }
-
-    //-----------------------------------------------------------------------------
-
         static extern (C) string wxGetTextFromUser_func(string message, string caption, string defaultValue, IntPtr parent, int x, int y, bool centre);
 
         //-----------------------------------------------------------------------------
 
-        public string GetTextFromUser(string message, string caption="", string defaultValue="", Window parent=null, int x=-1, int y=-1, bool centre=true)
+        public string GetPasswordFromUser(string message, string caption=TextEntryDialog.wxGetTextFromUserPromptStr, string defaultValue="", Window parent=null)
         {
-            return wxGetTextFromUser_func( message, caption, defaultValue, wxObject.SafePtr(parent), x, y, centre).dup;
+            return wxGetPasswordFromUser_func(message, caption, defaultValue, wxObject.SafePtr(parent)).dup;
+        }
+
+        //-----------------------------------------------------------------------------
+
+        public string GetTextFromUser(string message, string caption=TextEntryDialog.wxGetTextFromUserPromptStr, string defaultValue="", Window parent=null, int x=-1, int y=-1, bool centre=true)
+        {
+            return wxGetTextFromUser_func(message, caption, defaultValue, wxObject.SafePtr(parent), x, y, centre).dup;
         }

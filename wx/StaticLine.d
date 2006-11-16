@@ -26,9 +26,12 @@ import wx.Control;
 
 	public class StaticLine : Control
 	{
-		public const int wxLI_HORIZONTAL		= Orientation.wxHORIZONTAL;
-		public const int wxLI_VERTICAL		= Orientation.wxVERTICAL;
+		enum {
+			wxLI_HORIZONTAL	= Orientation.wxHORIZONTAL,
+			wxLI_VERTICAL		= Orientation.wxVERTICAL,
+		}
 		
+		public const string wxStaticTextNameStr = "message";
 		//---------------------------------------------------------------------
 		
 		public this(IntPtr wxobj) 
@@ -37,19 +40,7 @@ import wx.Control;
 		public this()
 			{ super(wxStaticLine_ctor()); }
 
-		public this(Window parent, int id)
-			{ this(parent, id, wxDefaultPosition, wxDefaultSize, 0, null); }
-
-		public this(Window parent, int id, Point pos)
-			{ this(parent, id, pos, wxDefaultSize, 0, null); }
-
-		public this(Window parent, int id, Point pos, Size size)
-			{ this(parent, id, pos, size, 0, null); }
-
-		public this(Window parent, int id, Point pos, Size size, int style)
-			{ this(parent, id, pos, size, style, null); }
-
-		public this(Window parent, int id, Point pos, Size size, int style, string name)
+		public this(Window parent, int id, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = wxLI_HORIZONTAL, string name = wxStaticTextNameStr)
 		{
 			super(wxStaticLine_ctor());
 			if (!Create(parent, id, pos, size, style, name))
@@ -61,24 +52,12 @@ import wx.Control;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent)
-			{ this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, null); }
-
-		public this(Window parent, Point pos)
-			{ this(parent, Window.UniqueID, pos, wxDefaultSize, 0, null); }
-
-		public this(Window parent, Point pos, Size size)
-			{ this(parent, Window.UniqueID, pos, size, 0, null); }
-
-		public this(Window parent, Point pos, Size size, int style)
-			{ this(parent, Window.UniqueID, pos, size, style, null); }
-
-		public this(Window parent, Point pos, Size size, int style, string name)
+		public this(Window parent, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = wxLI_HORIZONTAL, string name = wxStaticTextNameStr)
 			{ this(parent, Window.UniqueID, pos, size, style, name);}
 		
 		//---------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, Point pos, Size size, int style, string name)
+		public bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
 		{
 			return wxStaticLine_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name);
 		}

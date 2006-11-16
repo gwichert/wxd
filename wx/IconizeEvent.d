@@ -17,7 +17,7 @@ module wx.IconizeEvent;
 import wx.common;
 import wx.Event;
 
-		static extern (C) IntPtr wxIconizeEvent_ctor(int type);
+		static extern (C) IntPtr wxIconizeEvent_ctor(int winid,bool iconized);
 		static extern (C) bool wxIconizeEvent_Iconized(IntPtr self);
 		
 		//-----------------------------------------------------------------------------
@@ -27,8 +27,8 @@ import wx.common;
 		public this(IntPtr wxobj) 
 			{ super(wxobj); }
 
-		public this(int type)
-			{ this(wxIconizeEvent_ctor(type)); }
+		public this(int winid = 0, bool iconized = true)
+			{ this(wxIconizeEvent_ctor(winid,iconized)); }
 
 		//-----------------------------------------------------------------------------	
 		

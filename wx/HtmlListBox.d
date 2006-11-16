@@ -67,24 +67,9 @@ import wx.VLBox;
 		public this()
 			{ this(null, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, "");}
 			
-		/*public this(Window parent)
-			{ this(parent, -1, wxDefaultPosition, wxDefaultSize, 0, "") }*/
-
-		public this(Window parent, int id)
-			{ this(parent, id, wxDefaultPosition, wxDefaultSize, 0, "");}
-			
-		public this(Window parent, int id, Point pos)
-			{ this(parent, id, pos, wxDefaultSize, 0, "");}
-			
-		public this(Window parent, int id, Point pos, Size size)
-			{ this(parent, id, pos, size, 0, "");}
-			
-		public this(Window parent, int id, Point pos, Size size, int style)
-			{ this(parent, id, pos, size, style, "");}
-		
-		public this(Window parent, int id, Point pos, Size size, int style, string name)
+		public this(Window parent, int id /*= wxID_ANY*/, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, string name=wxVListBoxNameStr)
 		{
-			this(wxHtmlListBox_ctor2(wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name));
+			this(wxHtmlListBox_ctor2(wxObject.SafePtr(parent), id, pos, size, style, name));
 
 			wxHtmlListBox_RegisterVirtual(wxobj, this,
 				&staticRefreshAll,
@@ -103,24 +88,12 @@ import wx.VLBox;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent)
-			{ this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, "");}
-			
-		public this(Window parent, Point pos)
-			{ this(parent, Window.UniqueID, pos, wxDefaultSize, 0, "");}
-			
-		public this(Window parent, Point pos, Size size)
-			{ this(parent, Window.UniqueID, pos, size, 0, "");}
-			
-		public this(Window parent, Point pos, Size size, int style)
-			{ this(parent, Window.UniqueID, pos, size, style, "");}
-		
-		public this(Window parent, Point pos, Size size, int style, string name)
+		public this(Window parent, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, string name=wxVListBoxNameStr)
 			{ this(parent, Window.UniqueID, pos, size, style, name);}
 		
 		//-----------------------------------------------------------------------------
 		
-		public bool Create(Window parent, int id, Point pos, Size size, int style, string name)
+		public bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
 		{
 			return wxHtmlListBox_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, style, name);
 		}
@@ -140,7 +113,7 @@ import wx.VLBox;
 		
 		static extern(C) private void staticSetItemCount(HtmlListBox obj,int count)
 		{
-			return obj.SetItemCount(count);
+			obj.SetItemCount(count);
 		}
 		public /+virtual+/ void SetItemCount(int count)
 		{

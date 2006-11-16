@@ -101,16 +101,10 @@ import wx.MenuBar;
 		public this(IntPtr wxobj)
 			{ super(wxobj); }
 			
-		public this()
-			{ this(0);}
-			
-		public this(int style)
+		public this(int style = 0)
 			{ this(wxMenuBase_ctor2(cast(uint)style));}
 		
-		public this(string titel)
-			{ this(titel, 0);}
-		
-		public this(string titel, int style)
+		public this(string titel, int style = 0)
 			{ this(wxMenuBase_ctor1(titel, cast(uint)style)); }
 			
 		//---------------------------------------------------------------------

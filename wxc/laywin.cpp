@@ -257,3 +257,5 @@ void wxCalculateLayoutEvent_GetRect(wxCalculateLayoutEvent* self, wxRect* rect)
 	*rect = self->GetRect();
 }
 
+extern "C" WXEXPORT int wxEvent_EVT_QUERY_LAYOUT_INFO()			{ return wxEVT_QUERY_LAYOUT_INFO; }
+extern "C" WXEXPORT int wxEvent_EVT_CALCULATE_LAYOUT()			{ return wxEVT_CALCULATE_LAYOUT; }

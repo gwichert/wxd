@@ -144,11 +144,11 @@ OBJECTS = \
 	windowcreateevent.obj \
 	windowdestroyevent.obj \
 	wizard.obj \
-	wizardpagesimple.obj \
 	wxdatetime.obj \
 	wxstring.obj \
 	xmlresource.obj \
-	numdialog.obj
+	numdialog.obj \
+	notifyevent.obj
 	
 all:  $(LIBTARGET) 
 

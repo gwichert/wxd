@@ -26,25 +26,15 @@ import wx.Control;
 	{
 		public const int wxST_NO_AUTORESIZE = 0x0001;
 	
+		public const string wxStaticTextNameStr = "message";
+	
 		public this(IntPtr wxobj) 
 			{ super(wxobj);}
 
 		public this()
 			{ super(wxStaticText_ctor()); }
 
-		public this(Window parent, int id, string label)
-			{ this(parent, id, label, wxDefaultPosition, wxDefaultSize, 0, null); }
-
-		public this(Window parent, int id, string label, Point pos)
-			{ this(parent, id, label, pos, wxDefaultSize, 0, null); }
-
-		public this(Window parent, int id, string label, Point pos, Size size)
-			{ this(parent, id, label, pos, size, 0, null); }
-
-		public this(Window parent, int id, string label, Point pos, Size size, int style)
-			{ this(parent, id, label, pos, size, style, null); }
-			
-		public this(Window parent, int id, string label, Point pos, Size size, int style, string name)
+		public this(Window parent, int id, string label, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, string name = wxStaticTextNameStr)
 		{
 			super(wxStaticText_ctor());
 			if (!Create(parent, id, label, pos, size, style, name))
@@ -56,24 +46,12 @@ import wx.Control;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent, string label)
-			{ this(parent, Window.UniqueID, label, wxDefaultPosition, wxDefaultSize, 0, null); }
-
-		public this(Window parent, string label, Point pos)
-			{ this(parent, Window.UniqueID, label, pos, wxDefaultSize, 0, null); }
-
-		public this(Window parent, string label, Point pos, Size size)
-			{ this(parent, Window.UniqueID, label, pos, size, 0, null); }
-
-		public this(Window parent, string label, Point pos, Size size, int style)
-			{ this(parent, Window.UniqueID, label, pos, size, style, null); }
-			
-		public this(Window parent, string label, Point pos, Size size, int style, string name)
+		public this(Window parent, string label, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, string name = wxStaticTextNameStr)
 			{ this(parent, Window.UniqueID, label, pos, size, style, name);}
 		
 		//---------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, string label, Point pos, Size size, int style, string name)
+		public bool Create(Window parent, int id, string label, inout Point pos, inout Size size, int style, string name)
 		{
 			return wxStaticText_Create(wxobj, wxObject.SafePtr(parent), id, label, pos, size, cast(uint)style, name);
 		}

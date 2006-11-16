@@ -48,7 +48,7 @@ module wx.Defs;
 		wxBITMAP_TYPE_MACCURSOR,
 		wxBITMAP_TYPE_MACCURSOR_RESOURCE,
 		wxBITMAP_TYPE_ANY                   = 50
-	};
+	}
 
 	/*  Standard menu IDs */
 	public enum MenuIDs
@@ -446,5 +446,13 @@ module wx.Defs;
 		// Send UI update events to windows that have
 		// the wxWS_EX_PROCESS_UI_UPDATES flag specified
 		wxUPDATE_UI_PROCESS_SPECIFIED
+	}
+
+	enum {
+		wxID_ANY = -1
+	}
+
+	enum {
+		wxID_SEPARATOR = -2
 	}
 

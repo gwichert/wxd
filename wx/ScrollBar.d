@@ -31,9 +31,12 @@ import wx.Control;
 
 	public class ScrollBar : Control
 	{
-		public const int wxSB_HORIZONTAL   = Orientation.wxHORIZONTAL;
-		public const int wxSB_VERTICAL     = Orientation.wxVERTICAL;
+		enum {
+			wxSB_HORIZONTAL   = Orientation.wxHORIZONTAL,
+			wxSB_VERTICAL     = Orientation.wxVERTICAL,
+		}
 
+		public const string wxScrollBarNameStr = "scrollBar";
 		//-----------------------------------------------------------------------------
 
 		public this(IntPtr wxobj)
@@ -42,22 +45,7 @@ import wx.Control;
 		public this()
 			{ super(wxScrollBar_ctor()); }
 	    
-		public this(Window parent, int id)
-			{ this (parent, id, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL, null, "" ); }
-			
-		public this(Window parent, int id, Point pos)
-			{ this (parent, id, pos, wxDefaultSize, wxSB_HORIZONTAL, null, "" ); }
-			
-		public this(Window parent, int id, Point pos, Size size)
-			{ this (parent, id, pos, size, wxSB_HORIZONTAL, null, "" ); }
-			
-		public this(Window parent, int id, Point pos, Size size, int style)
-			{ this (parent, id, pos, size, style, null, "" ); }
-			
-		public this(Window parent, int id, Point pos, Size size, int style, Validator validator)
-			{ this (parent, id, pos, size, style, validator, "" ); }
-			
-		public this(Window parent, int id, Point pos, Size size, int style, Validator validator, string name)
+		public this(Window parent, int id, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = wxSB_HORIZONTAL, Validator validator = null, string name = wxScrollBarNameStr)
 		{
 			super (wxScrollBar_ctor() );
 			if (!Create(parent, id, pos, size, style, validator, name)) 
@@ -69,22 +57,7 @@ import wx.Control;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent)
-			{ this (parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL, null, "" ); }
-			
-		public this(Window parent, Point pos)
-			{ this (parent, Window.UniqueID, pos, wxDefaultSize, wxSB_HORIZONTAL, null, "" ); }
-			
-		public this(Window parent, Point pos, Size size)
-			{ this (parent, Window.UniqueID, pos, size, wxSB_HORIZONTAL, null, "" ); }
-			
-		public this(Window parent, Point pos, Size size, int style)
-			{ this (parent, Window.UniqueID, pos, size, style, null, "" ); }
-			
-		public this(Window parent, Point pos, Size size, int style, Validator validator)
-			{ this (parent, Window.UniqueID, pos, size, style, validator, "" ); }
-			
-		public this(Window parent, Point pos, Size size, int style, Validator validator, string name)
+		public this(Window parent, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = wxSB_HORIZONTAL, Validator validator = null, string name = wxScrollBarNameStr)
 			{ this(parent, Window.UniqueID, pos, size, style, validator, name); }
 		
 		//-----------------------------------------------------------------------------

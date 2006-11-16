@@ -57,30 +57,17 @@ import wx.VScroll;
 		
 	public abstract class VListBox : VScrolledWindow
 	{
+		const string wxVListBoxNameStr = "wxVListBox";
+	
 		public this(IntPtr wxobj)
 			{ super(wxobj);}
 			
 		public this()
 			{ this(null, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, "");}
 			
-		public this(Window parent)
-			{ this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, "");}
-			
-		public this(Window parent, int id)
-			{ this(parent, id, wxDefaultPosition, wxDefaultSize, 0, "");}
-			
-		public this(Window parent, int id, Point pos)
-			{ this(parent, id, pos, wxDefaultSize, 0, "");}
-			
-		public this(Window parent, int id, Point pos, Size size)
-			{ this(parent, id, pos, size, 0, "");}
-			
-		public this(Window parent, int id, Point pos, Size size, int style)
-			{ this(parent, id, pos, size, style, "");}
-		
-		public this(Window parent, int id, Point pos, Size size, int style, string name)
+		public this(Window parent, int id /*= wxID_ANY*/, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, string name = wxVListBoxNameStr)
 		{
-			this(wxVListBox_ctor(wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name));
+			this(wxVListBox_ctor(wxObject.SafePtr(parent), id, pos, size, style, name));
 			wxVListBox_RegisterVirtual(wxobj, this,
 				&staticDoOnDrawItem,
 				&staticOnMeasureItem,
@@ -92,21 +79,12 @@ import wx.VScroll;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent, Point pos)
-			{ this(parent, Window.UniqueID, pos, wxDefaultSize, 0, "");}
-			
-		public this(Window parent, Point pos, Size size)
-			{ this(parent, Window.UniqueID, pos, size, 0, "");}
-			
-		public this(Window parent, Point pos, Size size, int style)
-			{ this(parent, Window.UniqueID, pos, size, style, "");}
-		
-		public this(Window parent, Point pos, Size size, int style, string name)
+		public this(Window parent, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, string name = wxVListBoxNameStr)
 			{ this(parent, Window.UniqueID, pos, size, style, name);}
 		
 		//-----------------------------------------------------------------------------
 		
-		public bool Create(Window parent, int id, Point pos, Size size, int style, string name)
+		public bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
 		{
 			return wxVListBox_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, style, name); 
 		}

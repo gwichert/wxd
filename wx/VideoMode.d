@@ -31,19 +31,23 @@ import wx.common;
 import std.string;
 
 //    [StructLayout(LayoutKind.Sequential)]
-    public class VideoMode // : IComparable
-    {
-        public this(int width, int height, int depth, int freq)
+
+        public VideoMode new_VideoMode(int width, int height, int depth, int freq)
         {
-            w = width;
-            h = height;
-            bpp = depth;
-            refresh = freq;
+            VideoMode v;
+            v.w = width;
+            v.h = height;
+            v.bpp = depth;
+            v.refresh = freq;
+            return v;
         }
 
-		public int opCmp(Object obj)
+    public struct VideoMode // : IComparable
+    {
+/+
+		public int opCmp(VideoMode other)
 		{
-			VideoMode other = cast(VideoMode) obj;
+		//	VideoMode other = cast(VideoMode) obj;
 			if (other.w > w)
 				return -1;
 			else if (other.w < w)
@@ -76,7 +80,7 @@ import std.string;
         {
             return w ^ h ^ bpp ^ refresh;
         }
-
++/
         // returns true if this mode matches the other one in the sense that all
         // non zero fields of the other mode have the same value in this one
         // (except for refresh which is allowed to have a greater value)
@@ -103,7 +107,7 @@ import std.string;
         // not implemented -- seems impossible
         // bool IsOk() const { return w && h; }
 
-		public override string toString()
+		public string toString()
 		{
 			string s;
 			s = .toString(w) ~ "x" ~ .toString(h);

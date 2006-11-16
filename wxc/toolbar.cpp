@@ -140,25 +140,25 @@ bool wxToolBarToolBase_CanBeToggled(wxToolBarToolBase* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxToolBarToolBase_GetLabel(wxToolBarToolBase* self)
+dstrret wxToolBarToolBase_GetLabel(wxToolBarToolBase* self)
 {
-	return dstr(self->GetLabel());
+	return dstr_ret(self->GetLabel());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxToolBarToolBase_GetShortHelp(wxToolBarToolBase* self)
+dstrret wxToolBarToolBase_GetShortHelp(wxToolBarToolBase* self)
 {
-	return dstr(self->GetShortHelp());
+	return dstr_ret(self->GetShortHelp());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxToolBarToolBase_GetLongHelp(wxToolBarToolBase* self)
+dstrret wxToolBarToolBase_GetLongHelp(wxToolBarToolBase* self)
 {
-	return dstr(self->GetLongHelp());
+	return dstr_ret(self->GetLongHelp());
 }
 
 //-----------------------------------------------------------------------------
@@ -490,9 +490,9 @@ void wxToolBar_SetToolShortHelp(wxToolBar* self, int toolid, dstr helpString)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxToolBar_GetToolShortHelp(wxToolBar* self, int toolid)
+dstrret wxToolBar_GetToolShortHelp(wxToolBar* self, int toolid)
 {
-	return dstr(self->GetToolShortHelp(toolid).c_str());
+	return dstr_ret(self->GetToolShortHelp(toolid).c_str());
 }
 
 //-----------------------------------------------------------------------------
@@ -506,9 +506,9 @@ void wxToolBar_SetToolLongHelp(wxToolBar* self, int toolid, dstr helpString)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxToolBar_GetToolLongHelp(wxToolBar* self, int toolid)
+dstrret wxToolBar_GetToolLongHelp(wxToolBar* self, int toolid)
 {
-	return dstr(self->GetToolLongHelp(toolid).c_str());
+	return dstr_ret(self->GetToolLongHelp(toolid).c_str());
 }
 
 //-----------------------------------------------------------------------------

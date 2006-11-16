@@ -42,10 +42,7 @@ import wx.Window;
 		public this(IntPtr wxobj) 
 			{ super(wxobj); }
 			
-		public this() 
-			{ this(0); }
-			
-		public this(int commandId) 
+		public this(int commandId = 0) 
 			{ this(wxUpdateUIEvent_ctor(commandId)); }
 
 		//-----------------------------------------------------------------------------

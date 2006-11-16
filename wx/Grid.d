@@ -102,6 +102,20 @@ import wx.ScrolledWindow;
 
 	static this()
 	{
+			wxEVT_GRID_CELL_LEFT_CLICK = wxEvent_EVT_GRID_CELL_LEFT_CLICK();
+			wxEVT_GRID_CELL_RIGHT_CLICK = wxEvent_EVT_GRID_CELL_RIGHT_CLICK();
+			wxEVT_GRID_CELL_LEFT_DCLICK = wxEvent_EVT_GRID_CELL_LEFT_DCLICK();
+			wxEVT_GRID_CELL_RIGHT_DCLICK = wxEvent_EVT_GRID_CELL_RIGHT_DCLICK();
+			wxEVT_GRID_LABEL_LEFT_CLICK = wxEvent_EVT_GRID_LABEL_LEFT_CLICK();
+			wxEVT_GRID_LABEL_RIGHT_CLICK = wxEvent_EVT_GRID_LABEL_RIGHT_CLICK();
+			wxEVT_GRID_LABEL_LEFT_DCLICK = wxEvent_EVT_GRID_LABEL_LEFT_DCLICK();
+			wxEVT_GRID_LABEL_RIGHT_DCLICK = wxEvent_EVT_GRID_LABEL_RIGHT_DCLICK();
+			wxEVT_GRID_CELL_CHANGE = wxEvent_EVT_GRID_CELL_CHANGE();
+			wxEVT_GRID_SELECT_CELL = wxEvent_EVT_GRID_SELECT_CELL();
+			wxEVT_GRID_EDITOR_SHOWN = wxEvent_EVT_GRID_EDITOR_SHOWN();
+			wxEVT_GRID_EDITOR_HIDDEN = wxEvent_EVT_GRID_EDITOR_HIDDEN();
+			wxEVT_GRID_EDITOR_CREATED = wxEvent_EVT_GRID_EDITOR_CREATED();
+
 			AddEventType(wxEVT_GRID_CELL_LEFT_CLICK,            &GridEvent.New);
 			AddEventType(wxEVT_GRID_CELL_RIGHT_CLICK,           &GridEvent.New);
 			AddEventType(wxEVT_GRID_CELL_LEFT_DCLICK,           &GridEvent.New);
@@ -878,6 +892,8 @@ import wx.ScrolledWindow;
 
 	static this()
 	{
+			wxEVT_GRID_RANGE_SELECT = wxEvent_EVT_GRID_RANGE_SELECT();
+
 			AddEventType(wxEVT_GRID_RANGE_SELECT,               &GridRangeSelectEvent.New);
 	}
     }
@@ -2720,6 +2736,9 @@ version(NOT_IMPLEMENTED){
 
 	static this()
 	{
+			wxEVT_GRID_ROW_SIZE = wxEvent_EVT_GRID_ROW_SIZE();
+			wxEVT_GRID_COL_SIZE = wxEvent_EVT_GRID_COL_SIZE();
+
 			AddEventType(wxEVT_GRID_ROW_SIZE,                   &GridSizeEvent.New);
 			AddEventType(wxEVT_GRID_COL_SIZE,                   &GridSizeEvent.New);
 	}

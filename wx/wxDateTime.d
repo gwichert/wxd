@@ -23,6 +23,9 @@ import wx.common;
         Sun, Mon, Tue, Wed, Thu, Fri, Sat, Inv_WeekDay
     };
 
+/* wxDateTime imprementation is class { longlong } */
+
+        static extern (C) IntPtr wxDefaultDateTime_Get();
         static extern (C) IntPtr wxDateTime_ctor();
         static extern (C) IntPtr wxDateTime_Now();
 	static extern (C) void   wxDateTime_dtor(IntPtr self);
@@ -39,6 +42,12 @@ import wx.common;
 
     public class wxDateTime : wxObject
     {
+	static wxDateTime wxDefaultDateTime;
+	static this()
+	{
+		wxDefaultDateTime = new wxDateTime(wxDefaultDateTime_Get());
+	}
+
         public this(IntPtr wxobj)
 	{ 
 		super(wxobj);

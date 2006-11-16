@@ -23,25 +23,15 @@ import wx.Control;
 
 	public class StaticBox : Control
 	{
+		public const string wxStaticBoxNameStr = "groupBox";
+
 		public this()
 			{ super(wxStaticBox_ctor()); }
 
 		public this(IntPtr wxobj)
 			{ super(wxobj); }
 			
-		public this(Window window, int id, string label)
-			{ this(window, id, label, wxDefaultPosition, wxDefaultSize, 0, null); }
-			
-		public this(Window window, int id, string label, Point pos)
-			{ this(window, id, label, pos, wxDefaultSize, 0, null); }
-
-		public this(Window window, int id, string label, Point pos, Size size)
-			{ this(window, id, label, pos, size, 0, null); }
-
-		public this(Window window, int id, string label, Point pos, Size size, int style)
-			{ this(window, id, label, pos, size, style, null); }
-
-		public this(Window window, int id, string label, Point pos, Size size, int style, string name)
+		public this(Window window, int id, string label, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, string name = wxStaticBoxNameStr)
 		{
 			this();
 			if (!Create(window, id, label, pos, size, style, name))
@@ -53,24 +43,12 @@ import wx.Control;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window window, string label)
-			{ this(window, Window.UniqueID, label, wxDefaultPosition, wxDefaultSize, 0, null); }
-			
-		public this(Window window, string label, Point pos)
-			{ this(window, Window.UniqueID, label, pos, wxDefaultSize, 0, null); }
-
-		public this(Window window, string label, Point pos, Size size)
-			{ this(window, Window.UniqueID, label, pos, size, 0, null); }
-
-		public this(Window window, string label, Point pos, Size size, int style)
-			{ this(window, Window.UniqueID, label, pos, size, style, null); }
-
-		public this(Window window, string label, Point pos, Size size, int style, string name)
+		public this(Window window, string label, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, string name = wxStaticBoxNameStr)
 			{ this(window, Window.UniqueID, label, pos, size, style, name);}
 
 		//---------------------------------------------------------------------
 
-		public bool Create(Window window, int id, string label, Point pos, Size size, int style, string name)
+		public bool Create(Window window, int id, string label, inout Point pos, inout Size size, int style, string name)
 		{
 			return wxStaticBox_Create(wxobj, wxObject.SafePtr(window), 
 					id, label, pos, size, 

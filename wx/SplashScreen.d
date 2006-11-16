@@ -26,34 +26,27 @@ import wx.Frame;
 
     public class SplashScreen : Frame
     {
-        public const int wxSPLASH_CENTRE_ON_PARENT   = 0x01;
-        public const int wxSPLASH_CENTRE_ON_SCREEN   = 0x02;
-        public const int wxSPLASH_NO_CENTRE          = 0x00;
-        public const int wxSPLASH_TIMEOUT            = 0x04;
-        public const int wxSPLASH_NO_TIMEOUT         = 0x00;
+	enum {
+        	wxSPLASH_CENTRE_ON_PARENT   = 0x01,
+        	wxSPLASH_CENTRE_ON_SCREEN   = 0x02,
+        	wxSPLASH_NO_CENTRE          = 0x00,
+        	wxSPLASH_TIMEOUT            = 0x04,
+        	wxSPLASH_NO_TIMEOUT         = 0x00,
 
-        public const int wxSPLASH_DEFAULT = /*Border.*/wxSIMPLE_BORDER |
-                                             wxFRAME_NO_TASKBAR | 
-                                             wxSTAY_ON_TOP;
+        	wxSPLASH_DEFAULT =  wxSIMPLE_BORDER | wxFRAME_NO_TASKBAR | wxSTAY_ON_TOP,
+        }
 
         //-----------------------------------------------------------------------------
 
         public this(IntPtr wxobj) 
             { super(wxobj); }
 
-        public this(Bitmap bitmap, int splashStyle, int milliseconds, Window parent, int id)
-            { this(bitmap, splashStyle, milliseconds, parent, id, wxDefaultPosition, wxDefaultSize, wxSPLASH_DEFAULT); }
-        public this(Bitmap bitmap, int splashStyle, int milliseconds, Window parent, int id, Point pos)
-            { this(bitmap, splashStyle, milliseconds, parent, id, pos, wxDefaultSize, wxSPLASH_DEFAULT); }
-        public this(Bitmap bitmap, int splashStyle, int milliseconds, Window parent, int id, Point pos, Size size)
-            { this(bitmap, splashStyle, milliseconds, parent, id, pos, size, wxSPLASH_DEFAULT); }
-
-        public this(Bitmap bitmap, int splashStyle, int milliseconds, Window parent, int id, Point pos, Size size, int style)
-            { super(wxSplashScreen_ctor(wxObject.SafePtr(bitmap), cast(uint)splashStyle, milliseconds, wxObject.SafePtr(parent), id, pos, size, cast(uint)style)); }
+        public this(Bitmap bitmap, int splashStyle, int milliseconds, Window parent, int id, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=wxSPLASH_DEFAULT)
+            { super(wxSplashScreen_ctor(wxObject.SafePtr(bitmap), splashStyle, milliseconds, wxObject.SafePtr(parent), id, pos, size, style)); }
 
         //-----------------------------------------------------------------------------
 
-        public int SplashStyle() { return cast(int)wxSplashScreen_GetSplashStyle(wxobj); }
+        public int SplashStyle() { return wxSplashScreen_GetSplashStyle(wxobj); }
 
         //-----------------------------------------------------------------------------
 
@@ -77,8 +70,8 @@ import wx.Frame;
         public this(IntPtr wxobj) 
             { super(wxobj); }
 
-        public this(Bitmap bitmap, Window parent, int id, Point pos, Size size, int style)
-            { super(wxSplashScreenWindow_ctor(wxObject.SafePtr(bitmap), wxObject.SafePtr(parent), id, pos, size, cast(uint)style)); }
+        public this(Bitmap bitmap, Window parent, int id, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=wxNO_BORDER)
+            { super(wxSplashScreenWindow_ctor(wxObject.SafePtr(bitmap), wxObject.SafePtr(parent), id, pos, size, style)); }
 
         //-----------------------------------------------------------------------------
 

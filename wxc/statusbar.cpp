@@ -69,9 +69,9 @@ int wxStatusBar_GetBorderY(wxStatusBar* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxStatusBar_GetStatusText(wxStatusBar* self, int number)
+dstrret wxStatusBar_GetStatusText(wxStatusBar* self, int number)
 {
-    return dstr(self->GetStatusText(number).c_str());
+    return dstr_ret(self->GetStatusText(number).c_str());
 }
 
 //-----------------------------------------------------------------------------

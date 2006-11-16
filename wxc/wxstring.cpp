@@ -50,9 +50,9 @@ void wxString_dtor(wxString *self)
 
 /*
 extern "C" WXEXPORT
-dstr wxString_mb_str(wxString* self)
+dstrret wxString_mb_str(wxString* self)
 {
-	return dstr((const char*)self->mb_str(wxConvUTF8),self->length());
+	return dstr_ret((const char*)self->mb_str(wxConvUTF8),self->length());
 }
 */
 
@@ -81,9 +81,9 @@ const char* wxString_c_str(wxString* self, size_t i)
 }
 
 extern "C" WXEXPORT
-dstr wxString_d_str(wxString* self, size_t i)
+dstrret wxString_d_str(wxString* self, size_t i)
 {
-	return dstr(self);
+	return dstr_ret(self);
 }
 
 //-----------------------------------------------------------------------------

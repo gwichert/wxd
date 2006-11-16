@@ -532,11 +532,11 @@ alias std.string.rfind LastIndexOf;
 		public void OnFindEvent(Object sender, Event e)
 		{
 			FindDialogEvent fre= cast(FindDialogEvent)e;
-			int etype = fre.EventType;
+			int etype = fre.eventType;
 
 			if ( etype == Event.wxEVT_COMMAND_FIND   || etype == Event.wxEVT_COMMAND_FIND_NEXT )
 			{
-				Log.LogMessage("Find {0}'{1}' (flags: {2})",
+				Log.LogMessage("Find %s'%s' (flags: {%s})",
 					etype == Event.wxEVT_COMMAND_FIND_NEXT ? "next " : "",
 					fre.FindString,
 					DecodeFindDialogEventFlags(fre.Flags));
@@ -544,7 +544,7 @@ alias std.string.rfind LastIndexOf;
 			else if ( etype == Event.wxEVT_COMMAND_FIND_REPLACE ||
 				etype == Event.wxEVT_COMMAND_FIND_REPLACE_ALL )
 			{
-				Log.LogMessage("Replace {0}'{1}' with '{2}' (flags: {3})",
+				Log.LogMessage("Replace %s'%s' with '%s' (flags: %s)",
 					etype == Event.wxEVT_COMMAND_FIND_REPLACE_ALL ? "all " : "",
 					fre.FindString,
 					fre.ReplaceString,
@@ -577,7 +577,7 @@ alias std.string.rfind LastIndexOf;
 					Log.LogError("unexpected event");
 				}
 
-				Log.LogMessage("{0} dialog is being closed.", txt);
+				Log.LogMessage("%s dialog is being closed.", txt);
 
 				if ( idMenu != -1 )
 				{
@@ -771,7 +771,6 @@ alias std.string.rfind LastIndexOf;
 
 		//---------------------------------------------------------------------
 	}
-
 
 void main()
 {

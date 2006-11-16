@@ -34,9 +34,10 @@ import wx.ImageList;
 		public this(IntPtr wxobj)
 			{ super(wxobj); }
 
-		public this(int commandType, int id, int nSel, int nOldSel)
+		public this(EventType commandType, int id, int nSel, int nOldSel)
 			{ super(wxListbookEvent_ctor(commandType, id, nSel, nOldSel)); }
 
+		static Event New(IntPtr ptr) { return new ListbookEvent(ptr); }
 		//-----------------------------------------------------------------------------
 
 		public int Selection() { return wxListbookEvent_GetSelection(wxobj); }
@@ -64,6 +65,15 @@ import wx.ImageList;
 		//-----------------------------------------------------------------------------
 		
 		public bool Allowed() { return wxListbookEvent_IsAllowed(wxobj); }
+
+		static this()
+		{
+			wxEVT_COMMAND_LISTBOOK_PAGE_CHANGED = wxEvent_EVT_COMMAND_LISTBOOK_PAGE_CHANGED();
+			wxEVT_COMMAND_LISTBOOK_PAGE_CHANGING = wxEvent_EVT_COMMAND_LISTBOOK_PAGE_CHANGING();
+
+			AddEventType(wxEVT_COMMAND_LISTBOOK_PAGE_CHANGED,   &ListbookEvent.New);
+			AddEventType(wxEVT_COMMAND_LISTBOOK_PAGE_CHANGING,  &ListbookEvent.New);
+		}
 	}
 	
 	//-----------------------------------------------------------------------------
@@ -110,19 +120,7 @@ import wx.ImageList;
 		public this()
 			{ super(wxListbook_ctor());}
 
-		public this(Window parent, int id)
-			{ this(parent, id, wxDefaultPosition, wxDefaultSize, 0, "");}
-
-		public this(Window parent, int id, Point pos)
-			{ this(parent, id, pos, wxDefaultSize, 0, "");}
-
-		public this(Window parent, int id, Point pos, Size size)
-			{ this(parent, id, pos, size, 0, "");}
-
-		public this(Window parent, int id, Point pos, Size size, int style)
-			{ this(parent, id, pos, size, style, "");}
-
-		public this(Window parent, int id, Point pos, Size size, int style, string name)
+		public this(Window parent, int id, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, string name = "")
 		{
 			super(wxListbook_ctor());
 			wxListbook_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name);
@@ -131,19 +129,7 @@ import wx.ImageList;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent)
-			{ this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, "");}
-
-		public this(Window parent, Point pos)
-			{ this(parent, Window.UniqueID, pos, wxDefaultSize, 0, "");}
-
-		public this(Window parent, Point pos, Size size)
-			{ this(parent, Window.UniqueID, pos, size, 0, "");}
-
-		public this(Window parent, Point pos, Size size, int style)
-			{ this(parent, Window.UniqueID, pos, size, style, "");}
-
-		public this(Window parent, Point pos, Size size, int style, string name)
+		public this(Window parent, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, string name = "")
 			{ this(parent, Window.UniqueID, pos, size, style, name);}
 		
 		//-----------------------------------------------------------------------------

@@ -115,6 +115,7 @@ class _HtmlListBox : public wxHtmlListBox
 				Virtual_OnDrawItem onDrawBackground,
 				Virtual_OnMeasureItem onGetLineHeight)
 			{
+				m_dobj = obj;
 				m_RefreshAll = refreshAll;
 				m_SetItemCount = setItemCount;
 				m_OnGetItem = onGetItem;
@@ -206,9 +207,9 @@ void wxHtmlListBox_SetItemCount(_HtmlListBox* self, int count)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxHtmlListBox_OnGetItemMarkup(_HtmlListBox* self, int n)
+dstrret wxHtmlListBox_OnGetItemMarkup(_HtmlListBox* self, int n)
 {
-    return dstr(self->VPOnGetItemMarkup(n).c_str());
+    return dstr_ret(self->VPOnGetItemMarkup(n).c_str());
 }
 
 //-----------------------------------------------------------------------------

@@ -5,14 +5,26 @@ wxD - wxWidgets bindings for D language
 * About
 
 wxD is wxWidgets bindings for D language.
-it is delivered work from wx.NET bindings.
+wxWidgets is cross-platform GUI toolkit, which supports Windows, Mac OS X, *nix like OSs such as Linux,FreeBSD with X11/Motif/GTK.
+wxD is delivered work from wx.NET bindings 0.6.1.
 
 
 * Status
 
+0.02
+some bug fix and missing C function implement.
+more example works.
+fix event
+change multiple consructor to single constructor with default args
+fix box sizer
+ return struct func to void func(struct*)
+ in my view, D's extern (C) and C++'s extern "C" is not compatible when return struct
+most example work.
+
 0.01
-under development.
-currently only work on Windows platform.
+Under development.
+Currently only checked on Windows platform.
+Some example program crashed.
 
 
 * How to compile
@@ -56,9 +68,35 @@ for convinience, use constructor like function:
  Rect  new_Rect(int x,int y,int w,int h)
 (Rect is alias of Rectangle)
 
+    C++ API passing array and number of element change to passing array only. D array knows number of element.
+    ex:
+
+    wxListBox(wxWindow *parent, wxWindowID id,
+            const wxPoint& pos = wxDefaultPosition,
+            const wxSize& size = wxDefaultSize,
+    --->    int n = 0, const wxString choices[] = NULL,
+            long style = 0,
+            const wxValidator validator = wxDefaultValidator,
+            const wxString& name = wxListBoxNameStr)
+
+    ListBox(Window parent, WindowID id,
+            Point pos = wxDefaultPosition,
+            Size size = wxDefaultSize,
+    -->     string choices[] = null,
+            long style = 0,
+            Validator validator = wxDefaultValidator,
+            string name = wxListBoxNameStr)
+   
+
+* Licence
+
+wxD is licenced under wxWindows Lincence which is LGPL with special exception to allow distirbute static linked binary.
+wxWindows Licence is OSI approved.
+for more infomation, see LICENCE.txt and COPYING.LIB
+
 
 * Acknoredgement
 
 - WxWidgets [http://www.wxwidgets.org/]
 - wx.NET [http://wxnet.sourceforge.net/]
-- D [http://www.digitakmars.com/d/]
+- D [http://www.digitalmars.com/d/]

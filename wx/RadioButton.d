@@ -27,6 +27,7 @@ import wx.Control;
 		public const int wxRB_GROUP     = 0x0004;
 		public const int wxRB_SINGLE    = 0x0008;
 		
+		public const string wxRadioButtonNameStr = "radioButton";
 		//---------------------------------------------------------------------
 	
 		public this(IntPtr wxobj) 
@@ -35,22 +36,7 @@ import wx.Control;
 		public this()
 			{ super (wxRadioButton_ctor()); }
 
-		public this(Window parent, int id, string label)
-			{ this(parent, id, label, wxDefaultPosition, wxDefaultSize, 0, null, null); }
-
-		public this(Window parent, int id, string label, Point pos)
-			{ this(parent, id, label, pos, wxDefaultSize, 0, null, null); }
-
-		public this(Window parent, int id, string label, Point pos, Size size)
-			{ this(parent, id, label, pos, size, 0, null, null); }
-
-		public this(Window parent, int id, string label, Point pos, Size size, int style)
-			{ this(parent, id, label, pos, size, style, null, null); }
-
-		public this(Window parent, int id, string label, Point pos, Size size, int style, Validator val)
-			{ this(parent, id, label, pos, size, style, val, null); }
-
-		public this(Window parent, int id, string label, Point pos, Size size, int style, Validator val, string name)
+		public this(Window parent, int id, string label, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, Validator val = null, string name = wxRadioButtonNameStr)
 		{
 			super(wxRadioButton_ctor());
 			if (!wxRadioButton_Create(wxobj, wxObject.SafePtr(parent), id,
@@ -63,27 +49,12 @@ import wx.Control;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent, string label)
-			{ this(parent, Window.UniqueID, label, wxDefaultPosition, wxDefaultSize, 0, null, null); }
-
-		public this(Window parent, string label, Point pos)
-			{ this(parent, Window.UniqueID, label, pos, wxDefaultSize, 0, null, null); }
-
-		public this(Window parent, string label, Point pos, Size size)
-			{ this(parent, Window.UniqueID, label, pos, size, 0, null, null); }
-
-		public this(Window parent, string label, Point pos, Size size, int style)
-			{ this(parent, Window.UniqueID, label, pos, size, style, null, null); }
-
-		public this(Window parent, string label, Point pos, Size size, int style, Validator val)
-			{ this(parent, Window.UniqueID, label, pos, size, style, val, null); }
-
-		public this(Window parent, string label, Point pos, Size size, int style, Validator val, string name)
+		public this(Window parent, string label, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, Validator val = null, string name = wxRadioButtonNameStr)
 			{ this(parent, Window.UniqueID, label, pos, size, style, val, name);}
 
 		//---------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, string label, Point pos, Size size, int style, Validator val, string name)
+		public bool Create(Window parent, int id, string label, inout Point pos, inout Size size, int style, Validator val, string name)
 		{
 			return wxRadioButton_Create(wxobj, wxObject.SafePtr(parent), id,
 					label, pos, size, cast(uint)style, wxObject.SafePtr(val), name);

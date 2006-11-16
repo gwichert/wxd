@@ -69,9 +69,9 @@ bool wxListbook_SetPageText(wxListbook* self, size_t n, dstr strText)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxListbook_GetPageText(wxListbook* self, size_t n)
+dstrret wxListbook_GetPageText(wxListbook* self, size_t n)
 {
-	return dstr(self->GetPageText(n));
+	return dstr_ret(self->GetPageText(n));
 }
 
 //-----------------------------------------------------------------------------
@@ -263,4 +263,7 @@ bool wxListbookEvent_IsAllowed(wxListbookEvent* self)
 {
     return self->IsAllowed()?1:0;
 }
+
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LISTBOOK_PAGE_CHANGED()       { return wxEVT_COMMAND_LISTBOOK_PAGE_CHANGED; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LISTBOOK_PAGE_CHANGING()      { return wxEVT_COMMAND_LISTBOOK_PAGE_CHANGING; }
 

@@ -160,9 +160,9 @@ bool wxListCtrl_SetItemImage(wxListCtrl* self, int item, int image, int selImage
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxListCtrl_GetItemText(wxListCtrl* self, int item)
+dstrret wxListCtrl_GetItemText(wxListCtrl* self, int item)
 {
-    return dstr(self->GetItemText(item).c_str());
+    return dstr_ret(self->GetItemText(item).c_str());
 }
 
 //-----------------------------------------------------------------------------
@@ -641,9 +641,9 @@ int wxListItem_GetState(wxListItem* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxListItem_GetText(wxListItem* self)
+dstrret wxListItem_GetText(wxListItem* self)
 {
-    return dstr(self->GetText());
+    return dstr_ret(self->GetText());
 }
 
 //-----------------------------------------------------------------------------
@@ -845,9 +845,9 @@ void wxListEvent_SetEditCanceled(wxListEvent* self, bool editCancelled)
 //----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxListEvent_GetLabel(wxListEvent* self)
+dstrret wxListEvent_GetLabel(wxListEvent* self)
 {
-    return dstr(self->GetLabel());
+    return dstr_ret(self->GetLabel());
 }
 
 //-----------------------------------------------------------------------------
@@ -869,9 +869,9 @@ int wxListEvent_GetImage(wxListEvent* self)
 
 
 extern "C" WXEXPORT
-dstr wxListEvent_GetText(wxListEvent* self)
+dstrret wxListEvent_GetText(wxListEvent* self)
 {
-    return dstr(self->GetText());
+    return dstr_ret(self->GetText());
 }
 
 //-----------------------------------------------------------------------------
@@ -1138,4 +1138,27 @@ wxFont* wxListItemAttr_GetFont(wxListItemAttr* self)
 {
 	return new wxFont(self->GetFont());
 }
+
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_BEGIN_DRAG()             { return wxEVT_COMMAND_LIST_BEGIN_DRAG; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_BEGIN_RDRAG()            { return wxEVT_COMMAND_LIST_BEGIN_RDRAG; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_BEGIN_LABEL_EDIT()       { return wxEVT_COMMAND_LIST_BEGIN_LABEL_EDIT; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_END_LABEL_EDIT()         { return wxEVT_COMMAND_LIST_END_LABEL_EDIT; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_DELETE_ITEM()            { return wxEVT_COMMAND_LIST_DELETE_ITEM; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_DELETE_ALL_ITEMS()       { return wxEVT_COMMAND_LIST_DELETE_ALL_ITEMS; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_GET_INFO()			{ return wxEVT_COMMAND_LIST_GET_INFO; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_SET_INFO()			{ return wxEVT_COMMAND_LIST_SET_INFO; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_ITEM_SELECTED()          { return wxEVT_COMMAND_LIST_ITEM_SELECTED; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_ITEM_DESELECTED()        { return wxEVT_COMMAND_LIST_ITEM_DESELECTED; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_ITEM_ACTIVATED()         { return wxEVT_COMMAND_LIST_ITEM_ACTIVATED; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_ITEM_FOCUSED()           { return wxEVT_COMMAND_LIST_ITEM_FOCUSED; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_ITEM_MIDDLE_CLICK()      { return wxEVT_COMMAND_LIST_ITEM_MIDDLE_CLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_ITEM_RIGHT_CLICK()       { return wxEVT_COMMAND_LIST_ITEM_RIGHT_CLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_KEY_DOWN()               { return wxEVT_COMMAND_LIST_KEY_DOWN; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_INSERT_ITEM()            { return wxEVT_COMMAND_LIST_INSERT_ITEM; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_COL_CLICK()              { return wxEVT_COMMAND_LIST_COL_CLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_COL_RIGHT_CLICK()        { return wxEVT_COMMAND_LIST_COL_RIGHT_CLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_COL_BEGIN_DRAG()         { return wxEVT_COMMAND_LIST_COL_BEGIN_DRAG; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_COL_DRAGGING()           { return wxEVT_COMMAND_LIST_COL_DRAGGING; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_COL_END_DRAG()           { return wxEVT_COMMAND_LIST_COL_END_DRAG; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_CACHE_HINT()             { return wxEVT_COMMAND_LIST_CACHE_HINT; }
 

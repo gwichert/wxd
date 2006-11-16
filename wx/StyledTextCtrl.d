@@ -1448,41 +1448,18 @@ import wx.CommandEvent;
         }
 
         //-----------------------------------------------------------------------------
+	public const string wxSTCNameStr = "stcwindow";
 
         public this(IntPtr wxobj) 
             { super (wxobj); }
 
-        public  this(Window parent)
-            { this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, null); }
-
-        public  this(Window parent, int id)
-            { this(parent, id, wxDefaultPosition, wxDefaultSize, 0, null); }
-
-        public  this(Window parent, int id, Point pos)
-            { this(parent, id, pos, wxDefaultSize, 0, null); }
-
-        public  this(Window parent, int id, Point pos, Size size)
-            { this(parent, id, pos, size, 0, null); }
-
-        public  this(Window parent, int id, Point pos, Size size, int style)
-            { this(parent, id, pos, size, style, null); }
-
-        public  this(Window parent, int id, Point pos, Size size, int style, string name)
+        public  this(Window parent, int id /*= wxID_ANY*/, Point pos = wxDefaultPosition, Size size = wxDefaultSiz, int style =0, string name = wxSTCNameStr)
             { this(wxStyledTextCtrl_ctor(wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name)); }
 	    
 	//---------------------------------------------------------------------
 	// ctors with self created id
 	    
-        public  this(Window parent, Point pos)
-            { this(parent, Window.UniqueID, pos, wxDefaultSize, 0, null); }
-
-        public  this(Window parent, Point pos, Size size)
-            { this(parent, Window.UniqueID, pos, size, 0, null); }
-
-        public  this(Window parent, Point pos, Size size, int style)
-            { this(parent, Window.UniqueID, pos, size, style, null); }
-
-        public  this(Window parent, Point pos, Size size, int style, string name)
+        public  this(Window parent, Point pos = wxDefaultPosition, Size size = wxDefaultSiz, int style =0, string name = wxSTCNameStr)
 	    { this(parent, Window.UniqueID, pos, size, style, name);}
 
         //-----------------------------------------------------------------------------

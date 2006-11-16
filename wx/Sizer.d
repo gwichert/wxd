@@ -65,9 +65,9 @@ import wx.Window;
 		static extern (C) bool wxSizer_IsShownWindow(IntPtr self, IntPtr window);
 		static extern (C) bool wxSizer_IsShownSizer(IntPtr self, IntPtr sizer);
 		
-		static extern (C) bool wxSizer_Detach(IntPtr self, IntPtr window);
-		static extern (C) bool wxSizer_Detach2(IntPtr self, IntPtr sizer);
-		static extern (C) bool wxSizer_Detach3(IntPtr self, int index);
+		static extern (C) bool wxSizer_DetachWindow(IntPtr self, IntPtr window);
+		static extern (C) bool wxSizer_DetachSizer(IntPtr self, IntPtr sizer);
+		static extern (C) bool wxSizer_Detach(IntPtr self, int index);
 
 		//---------------------------------------------------------------------
 
@@ -78,35 +78,19 @@ import wx.Window;
 
 		//---------------------------------------------------------------------
 
-		public void Add(Window window)
-		    { Add( window, 0, 0, 0, null); }
-		public void Add(Window window, int proportion, int flag)
-		    { Add( window, proportion, flag, 0, null); }
-		public void Add(Window window, int proportion, int flag, int border)
-		    { Add( window, proportion, flag, border, null); }
-		public void Add(Window window, int proportion, int flag, int border, wxObject userData)
+		public void Add(Window window, int proportion=0, int flag=0, int border=0, wxObject userData=null)
 		{
-			wxSizer_AddWindow(wxobj, wxObject.SafePtr(window), proportion, cast(int)flag,
+			wxSizer_AddWindow(wxobj, wxObject.SafePtr(window), proportion, flag,
 							  border, wxObject.SafePtr(userData));
 		}
 
-		public void Add(Sizer sizer)
-		    { Add( sizer, 0, 0, 0, null); }
-		public void Add(Sizer sizer, int proportion, int flag)
-		    { Add( sizer, proportion, flag, 0, null); }
-		public void Add(Sizer sizer, int proportion, int flag, int border)
-		    { Add( sizer, proportion, flag, border, null); }
-		public void Add(Sizer sizer, int proportion, int flag, int border,	wxObject userData)
+		public void Add(Sizer sizer, int proportion=0, int flag=0, int border=0, wxObject userData=null)
 		{
 			wxSizer_AddSizer(wxobj, wxObject.SafePtr(sizer), proportion, cast(int)flag,
 							 border, wxObject.SafePtr(userData));
 		}
 
-		public void Add(int width, int height)
-		    { Add( width, height, 0, 0, 0, null); }
-		public void Add(int width, int height, int proportion, int flag, int border)
-		    { Add( width, height, proportion, flag, border, null); }
-		public void Add(int width, int height, int proportion, int flag, int border, wxObject userData)
+		public void Add(int width, int height, int proportion=0, int flag=0, int border=0, wxObject userData=null)
 		{
 			wxSizer_Add(wxobj, width, height, proportion, cast(int)flag, border,
 						wxObject.SafePtr(userData));
@@ -133,59 +117,50 @@ import wx.Window;
 
 		//---------------------------------------------------------------------
 
-		public void Insert(int before, Window window, int option, int flag,
-						   int border, wxObject userData)
+		public void Insert(uint index, Window window, int proportion=0, int flag=0,
+						   int border=0, wxObject userData=null)
 		{
-			wxSizer_InsertWindow(wxobj, before, wxObject.SafePtr(window),
-								 option, cast(uint)flag, border,
+			wxSizer_InsertWindow(wxobj, index, wxObject.SafePtr(window),
+								 proportion, flag, border,
 								 wxObject.SafePtr(userData));
 		}
 
-		public void Insert(int before, Sizer sizer, int option, int flag,
-						   int border, wxObject userData)
+		public void Insert(uint index, Sizer sizer, int proportion=0, int flag=0,
+						   int border=0, wxObject userData=null)
 		{
-			wxSizer_InsertSizer(wxobj, before, wxObject.SafePtr(sizer),
-								option, cast(uint)flag, border,
+			wxSizer_InsertSizer(wxobj, index, wxObject.SafePtr(sizer),
+								proportion, flag, border,
 								wxObject.SafePtr(userData));
 		}
 
-		public void Insert(int before, int width, int height, int option,
-						   int flag, int border, wxObject userData)
+		public void Insert(uint index, int width, int height, int proportion=0,
+						   int flag=0, int border=0, wxObject userData=null)
 		{
-			wxSizer_Insert(wxobj, before, width, height, option, cast(uint)flag,
+			wxSizer_Insert(wxobj, index, width, height, proportion, flag,
 						   border, wxObject.SafePtr(userData));
 		}
 
 		//---------------------------------------------------------------------
 
-		public void Prepend(Window window)
-            { Prepend(window, 0, 0, 0, null); }
-		public void Prepend(Window window, int option)
-            { Prepend(window, option, 0, 0, null); }
-		public void Prepend(Window window, int option, int flag)
-            { Prepend(window, option, flag, 0, null); }
-		public void Prepend(Window window, int option, int flag, int border)
-            { Prepend(window, option, flag, border, null); }
-
-		public void Prepend(Window window, int option, int flag, int border,
-							wxObject userData)
+		public void Prepend(Window window, int proportion=0, int flag=0, int border=0,
+							wxObject userData=null)
 		{
-			wxSizer_PrependWindow(wxobj, wxObject.SafePtr(window), option,
-								  cast(uint)flag, border, wxObject.SafePtr(userData));
+			wxSizer_PrependWindow(wxobj, wxObject.SafePtr(window), proportion,
+								flag, border, wxObject.SafePtr(userData));
 		}
 
-		public void Prepend(Sizer sizer, int option, int flag, int border,
-							wxObject userData)
+		public void Prepend(Sizer sizer, int proportion=0, int flag=0, int border=0,
+							wxObject userData=null)
 		{
-			wxSizer_PrependSizer(wxobj, wxObject.SafePtr(sizer), option,
-								 cast(uint)flag, border, wxObject.SafePtr(userData));
+			wxSizer_PrependSizer(wxobj, wxObject.SafePtr(sizer), proportion,
+								 flag, border, wxObject.SafePtr(userData));
 		}
 
-		public void Prepend(int width, int height, int option, int flag,
-						    int border, wxObject userData)
+		public void Prepend(int width, int height, int proportion=0, int flag=0,
+						    int border=0, wxObject userData=null)
 		{
-			wxSizer_Prepend(wxobj, width, height, option,
-							cast(uint)flag, border, wxObject.SafePtr(userData));
+			wxSizer_Prepend(wxobj, width, height, proportion,
+							flag, border, wxObject.SafePtr(userData));
 		}
 
 		//---------------------------------------------------------------------
@@ -344,17 +319,17 @@ import wx.Window;
 		
 		public bool Detach(Window window)
 		{
-			return wxSizer_Detach(wxobj, wxObject.SafePtr(window));
+			return wxSizer_DetachWindow(wxobj, wxObject.SafePtr(window));
 		}
 		
 		public bool Detach(Sizer sizer)
 		{
-			return wxSizer_Detach2(wxobj, wxObject.SafePtr(sizer));
+			return wxSizer_DetachSizer(wxobj, wxObject.SafePtr(sizer));
 		}
 		
 		public bool Detach(int index)
 		{
-			return wxSizer_Detach3(wxobj, index);
+			return wxSizer_Detach(wxobj, index);
 		}
 		
 		//---------------------------------------------------------------------

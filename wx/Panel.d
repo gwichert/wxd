@@ -35,38 +35,20 @@ import wx.Button;
 		public this()
 			{ super(wxPanel_ctor());}
 
-		public this(Window parent)
-			{ this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL|wxNO_BORDER, "panel"); }
-
-		public this(Window parent, int id)
-			{ this(parent, id, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL|wxNO_BORDER, "panel"); }
-
-		public this(Window parent, int id, Point pos, Size size)
-			{ this(parent, id, pos, size, wxTAB_TRAVERSAL|wxNO_BORDER, "panel"); }
-
-		public this(Window parent, int id, Point pos, Size size, int style)
-			{ this(parent, id, pos, size, style, "panel"); }
-
-		public this(Window parent, int id, Point pos, Size size, int style, string name)
-			{ super(wxPanel_ctor2(wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name));}
+		public this(Window parent, int id /*= wxID_ANY*/, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = wxTAB_TRAVERSAL|wxNO_BORDER, string name = wxPanelNameStr)
+			{ super(wxPanel_ctor2(wxObject.SafePtr(parent), id, pos, size, style, name));}
 			
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent, Point pos, Size size)
-			{ this(parent, Window.UniqueID, pos, size, wxTAB_TRAVERSAL|wxNO_BORDER, "panel"); }
-
-		public this(Window parent, Point pos, Size size, int style)
-			{ this(parent, Window.UniqueID, pos, size, style, "panel"); }
-
-		public this(Window parent, Point pos, Size size, int style, string name)
+		public this(Window parent, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=wxTAB_TRAVERSAL|wxNO_BORDER, string name=wxPanelNameStr)
 			{ this(parent, Window.UniqueID, pos, size, style, name);}
 		
 		//---------------------------------------------------------------------
 		
-		public bool Create(Window parent, int id, Point pos, Size size, int style, string name)
+		public bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
 		{
-			return wxPanel_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name);
+			return wxPanel_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, style, name);
 		}
 
 		//---------------------------------------------------------------------

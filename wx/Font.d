@@ -229,14 +229,8 @@ import wx.GDIObject;
 		public this()
 			{ this(wxFont_ctorDef(), true); }
 
-		public this(int pointSize, FontFamily family, FontStyle style, FontWeight weight)
-			{ this(pointSize, family, style, weight, false, "", FontEncoding.wxFONTENCODING_DEFAULT); }
-
-		public this(int pointSize, FontFamily family, FontStyle style, FontWeight weight, bool underline, string faceName)
-			{ this(pointSize, family, style, weight, underline, faceName, FontEncoding.wxFONTENCODING_DEFAULT); }
-
-		public this(int pointSize, FontFamily family, FontStyle style, FontWeight weight, bool underline, string faceName, FontEncoding encoding)
-			{ this(wxFont_ctor(pointSize, cast(int)family, cast(int)style, cast(int)weight, underline, faceName, encoding), true); }
+		public this(int pointSize, FontFamily family, FontStyle style, FontWeight weight, bool underline = false, string face = "", FontEncoding encoding = FontEncoding.wxFONTENCODING_DEFAULT)
+			{ this(wxFont_ctor(pointSize, cast(int)family, cast(int)style, cast(int)weight, underline, face, encoding), true); }
 			
 		~this()
 		{

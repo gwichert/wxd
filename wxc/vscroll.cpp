@@ -25,6 +25,9 @@ typedef int (CALLBACK* Virtual_IntInt) (dobj, int);
 class _VScrolledWindow : public wxVScrolledWindow
 {
 public:
+	_VScrolledWindow()
+		: wxVScrolledWindow() {}
+
 	_VScrolledWindow(wxWindow* parent, wxWindowID id, const wxPoint& pos,
 					const wxSize& size, long style, const wxString& name)
 		: wxVScrolledWindow(parent, id, pos, size, style, name) { }
@@ -51,7 +54,13 @@ public:
 // C stubs for class methods
 
 extern "C" WXEXPORT
-wxVScrolledWindow* wxVScrolledWindow_ctor(wxWindow *parent, wxWindowID id, const wxPoint* pos,
+wxVScrolledWindow* wxVScrolledWindow_ctor()
+{
+	return new _VScrolledWindow();
+}
+
+extern "C" WXEXPORT
+wxVScrolledWindow* wxVScrolledWindow_ctor2(wxWindow *parent, wxWindowID id, const wxPoint* pos,
 					               const wxSize* size, long style, dstr name)
 {
 	if (pos == NULL)

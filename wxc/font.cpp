@@ -103,9 +103,9 @@ bool wxFont_GetUnderlined(wxFont* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxFont_GetFaceName(wxFont* self)
+dstrret wxFont_GetFaceName(wxFont* self)
 {
-	return dstr(self->GetFaceName().c_str());
+	return dstr_ret(self->GetFaceName().c_str());
 }
 
 //-----------------------------------------------------------------------------
@@ -135,17 +135,17 @@ bool wxFont_IsFixedWidth(wxFont* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxFont_GetNativeFontInfoDesc(wxFont* self)
+dstrret wxFont_GetNativeFontInfoDesc(wxFont* self)
 {
-	return dstr(self->GetNativeFontInfoDesc());
+	return dstr_ret(self->GetNativeFontInfoDesc());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxFont_GetNativeFontInfoUserDesc(wxFont* self)
+dstrret wxFont_GetNativeFontInfoUserDesc(wxFont* self)
 {
-	return dstr(self->GetNativeFontInfoUserDesc());
+	return dstr_ret(self->GetNativeFontInfoUserDesc());
 }
 
 //-----------------------------------------------------------------------------
@@ -215,25 +215,25 @@ void wxFont_SetNativeFontInfoUserDesc(wxFont* self, dstr info)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxFont_GetFamilyString(wxFont* self)
+dstrret wxFont_GetFamilyString(wxFont* self)
 {
-	return dstr(self->GetFamilyString());
+	return dstr_ret(self->GetFamilyString());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxFont_GetStyleString(wxFont* self)
+dstrret wxFont_GetStyleString(wxFont* self)
 {
-	return dstr(self->GetStyleString());
+	return dstr_ret(self->GetStyleString());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxFont_GetWeightString(wxFont* self)
+dstrret wxFont_GetWeightString(wxFont* self)
 {
-	return dstr(self->GetWeightString());
+	return dstr_ret(self->GetWeightString());
 }
 
 //-----------------------------------------------------------------------------

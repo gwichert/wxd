@@ -73,6 +73,8 @@ public class ANIHandler : CURHandler
 
 public class PNGHandler : ImageHandler 
 {
+  public this(IntPtr ptr) { super(ptr); }
+
   public this()
   {
   	super(PNGHandler_ctor());
@@ -81,6 +83,8 @@ public class PNGHandler : ImageHandler
 
 public class GIFHandler : ImageHandler 
 {
+  public this(IntPtr ptr) { super(ptr); }
+
   public this()
   {
   	super(GIFHandler_ctor());
@@ -89,6 +93,8 @@ public class GIFHandler : ImageHandler
 
 public class PCXHandler : ImageHandler 
 {
+  public this(IntPtr ptr) { super(ptr); }
+
   public this()
   {
   	super(PCXHandler_ctor());
@@ -97,6 +103,8 @@ public class PCXHandler : ImageHandler
 
 public class JPEGHandler : ImageHandler 
 {
+  public this(IntPtr ptr) { super(ptr); }
+
   public this()
   {
   	super(JPEGHandler_ctor());
@@ -106,6 +114,8 @@ public class JPEGHandler : ImageHandler
 
 public class PNMHandler : ImageHandler 
 {
+  public this(IntPtr ptr) { super(ptr); }
+
   public this()
   {
   	super(PNMHandler_ctor());
@@ -114,6 +124,8 @@ public class PNMHandler : ImageHandler
 
 public class XPMHandler : ImageHandler 
 {
+  public this(IntPtr ptr) { super(ptr); }
+
   public this()
   {
   	super(XPMHandler_ctor());
@@ -122,6 +134,8 @@ public class XPMHandler : ImageHandler
 
 public class TIFFHandler : ImageHandler 
 {
+  public this(IntPtr ptr) { super(ptr); }
+
   public this()
   {
   	super(TIFFHandler_ctor());

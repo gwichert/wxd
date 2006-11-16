@@ -45,10 +45,7 @@ import wx.CommandEvent;
         public this()
             { super(wxFindReplaceDialog_ctor()); }
 
-        public this(Window parent, FindReplaceData data, string title)
-            { this(parent, data, title, 0); }
-
-        public this(Window parent, FindReplaceData data, string title, int style)
+        public this(Window parent, FindReplaceData data, string title, int style = 0)
         {
         	super(wxFindReplaceDialog_ctor());
             if (!Create(parent, data, title, style))
@@ -57,7 +54,7 @@ import wx.CommandEvent;
             }
         }
 
-        public bool Create(Window parent, FindReplaceData data, string title, int style)
+        public bool Create(Window parent, FindReplaceData data, string title, int style = 0)
         {
             return wxFindReplaceDialog_Create(wxobj, wxObject.SafePtr(parent), wxObject.SafePtr(data), title, cast(uint)style);
         }
@@ -104,11 +101,29 @@ import wx.CommandEvent;
 
     public class FindDialogEvent : CommandEvent
     {
+	static this()
+	{
+			wxEVT_COMMAND_FIND = wxEvent_EVT_COMMAND_FIND();
+			wxEVT_COMMAND_FIND_NEXT = wxEvent_EVT_COMMAND_FIND_NEXT();
+			wxEVT_COMMAND_FIND_REPLACE = wxEvent_EVT_COMMAND_FIND_REPLACE();
+			wxEVT_COMMAND_FIND_REPLACE_ALL = wxEvent_EVT_COMMAND_FIND_REPLACE_ALL();
+			wxEVT_COMMAND_FIND_CLOSE = wxEvent_EVT_COMMAND_FIND_CLOSE();
+
+			AddEventType(wxEVT_COMMAND_FIND,	&FindDialogEvent.New);
+			AddEventType(wxEVT_COMMAND_FIND_NEXT,	&FindDialogEvent.New);
+			AddEventType(wxEVT_COMMAND_FIND_REPLACE,	&FindDialogEvent.New);
+			AddEventType(wxEVT_COMMAND_FIND_REPLACE_ALL,	&FindDialogEvent.New);
+			AddEventType(wxEVT_COMMAND_FIND_CLOSE,	&FindDialogEvent.New);
+	
+	}
+
         public this(IntPtr wxobj)
             { super(wxobj); }
 
         public this(int commandType, int id)
             { super(wxFindDialogEvent_ctor(commandType, id)); }
+
+	public static Event New(IntPtr ptr) { return new FindDialogEvent(ptr); }
 
         //-----------------------------------------------------------------------------
 

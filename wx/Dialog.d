@@ -42,35 +42,38 @@ import wx.Window;
 		
 	public class Dialog : Window
 	{
-		public const int wxCENTER		= 0x00000001;
-		public const int wxCENTRE		= 0x00000001;
-		public const int wxYES			= 0x00000002;
-		public const int wxOK			= 0x00000004;
-		public const int wxNO			= 0x00000008;
-		public const int wxCANCEL		= 0x00000010;
-		public const int wxYES_NO		= (wxYES | wxNO);
+		enum {
+		wxCENTER		= 0x00000001,
+		wxCENTRE		= 0x00000001,
+		wxYES			= 0x00000002,
+		wxOK			= 0x00000004,
+		wxNO			= 0x00000008,
+		wxCANCEL		= 0x00000010,
+		wxYES_NO		= (wxYES | wxNO),
 
-		public const int wxYES_DEFAULT		= 0x00000000;
-		public const int wxNO_DEFAULT		= 0x00000080;
+		wxYES_DEFAULT		= 0x00000000,
+		wxNO_DEFAULT		= 0x00000080,
 
-		public const int wxICON_EXCLAMATION 	= 0x00000100;
-		public const int wxICON_HAND		= 0x00000200;
-		public const int wxICON_WARNING	= wxICON_EXCLAMATION;
-		public const int wxICON_ERROR		= wxICON_HAND;
-		public const int wxICON_QUESTION	= 0x00000400;
-		public const int wxICON_INFORMATION	= 0x00000800;
-		public const int wxICON_STOP		= wxICON_HAND;
-		public const int wxICON_ASTERISK	= wxICON_INFORMATION;
-		public const int wxICON_MASK		= (0x00000100|0x00000200|0x00000400|0x00000800);
+		wxICON_EXCLAMATION 	= 0x00000100,
+		wxICON_HAND		= 0x00000200,
+		wxICON_WARNING	= wxICON_EXCLAMATION,
+		wxICON_ERROR		= wxICON_HAND,
+		wxICON_QUESTION	= 0x00000400,
+		wxICON_INFORMATION	= 0x00000800,
+		wxICON_STOP		= wxICON_HAND,
+		wxICON_ASTERISK	= wxICON_INFORMATION,
+		wxICON_MASK		= (0x00000100|0x00000200|0x00000400|0x00000800),
 
-		public const int wxFORWARD		= 0x00001000;
-		public const int wxBACKWARD		= 0x00002000;
-		public const int wxRESET		= 0x00004000;
-		public const int wxHELP		= 0x00008000;
-		public const int wxMORE 		= 0x00010000;
-		public const int wxSETUP		= 0x00020000;
+		wxFORWARD		= 0x00001000,
+		wxBACKWARD		= 0x00002000,
+		wxRESET		= 0x00004000,
+		wxHELP		= 0x00008000,
+		wxMORE 		= 0x00010000,
+		wxSETUP		= 0x00020000,
+		}
 
 		//---------------------------------------------------------------------
+		const string wxDialogNameStr="dialog";
 
 		public this(IntPtr wxobj) 
 			{ super(wxobj);}
@@ -78,22 +81,7 @@ import wx.Window;
 		public this()
 			{ super(wxDialog_ctor()); }
 
-		public this(Window parent, string title)
-			{ this(parent, Window.UniqueID, title, wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, null); }
-
-		public this(Window parent, int id, string title)
-			{ this(parent, id, title, wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, null); }
-
-		public this(Window parent, int id, string title, Point pos)
-			{ this(parent, id, title, pos, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, null); }
-
-		public this(Window parent, int id, string title, Point pos, Size size)
-			{ this(parent, id, title, pos, size, wxDEFAULT_DIALOG_STYLE, null); }
-
-		public this(Window parent, int id, string title, Point pos, Size size, int style)
-			{ this(parent, id, title, pos, size, style, null); }
-
-		public this(Window parent, int id, string title, Point pos, Size size, int style, string name)
+		public this(Window parent, int id, string title, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=wxDEFAULT_DIALOG_STYLE, string name=wxDialogNameStr)
 		{
 			super(wxDialog_ctor());
 			if (!Create(parent, id, title, pos, size, style, name))
@@ -105,22 +93,13 @@ import wx.Window;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent, string title, Point pos)
-			{ this(parent, Window.UniqueID, title, pos, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, null); }
-
-		public this(Window parent, string title, Point pos, Size size)
-			{ this(parent, Window.UniqueID, title, pos, size, wxDEFAULT_DIALOG_STYLE, null); }
-
-		public this(Window parent, string title, Point pos, Size size, int style)
-			{ this(parent, Window.UniqueID, title, pos, size, style, null); }
-
-		public this(Window parent, string title, Point pos, Size size, int style, string name)
+		public this(Window parent, string title, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=wxDEFAULT_DIALOG_STYLE, string name=wxDialogNameStr)
 			{ this(parent, Window.UniqueID, title, pos, size, style, name);}
 		
 		//---------------------------------------------------------------------
 
-		public bool Create(Window window, int id, string title, Point pos,
-						   Size size, int style, string name)
+		public bool Create(Window window, int id, string title, inout Point pos,
+						   inout Size size, int style, string name)
 		{
 			return wxDialog_Create(wxobj, wxObject.SafePtr(window), id, title,
 								   pos, size, cast(uint)style, name);

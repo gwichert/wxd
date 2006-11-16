@@ -23,9 +23,7 @@ import wx.wx;
 
         public this(string title, Point pos, Size size)
         {
-        	printf("this\n");
             super(title, pos, size);
-        	printf("this\n");
             // Set the window icon
 
             this.icon = new Icon("../Samples/HTML/mondrian.png");

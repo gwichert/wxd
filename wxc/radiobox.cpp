@@ -85,9 +85,9 @@ int wxRadioBox_GetSelection(wxRadioBox* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxRadioBox_GetStringSelection(wxRadioBox* self)
+dstrret wxRadioBox_GetStringSelection(wxRadioBox* self)
 {
-	return dstr(self->GetStringSelection().c_str());
+	return dstr_ret(self->GetStringSelection().c_str());
 }
 
 //-----------------------------------------------------------------------------
@@ -117,9 +117,9 @@ int wxRadioBox_FindString(wxRadioBox* self, dstr s)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxRadioBox_GetString(wxRadioBox* self, int n)
+dstrret wxRadioBox_GetString(wxRadioBox* self, int n)
 {
-	return dstr(self->GetString(n).c_str());
+	return dstr_ret(self->GetString(n).c_str());
 }
 
 //-----------------------------------------------------------------------------
@@ -149,9 +149,9 @@ void wxRadioBox_Show(wxRadioBox* self, int n, bool show)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxRadioBox_GetLabel(wxRadioBox* self)
+dstrret wxRadioBox_GetLabel(wxRadioBox* self)
 {
-	return dstr(self->GetLabel());
+	return dstr_ret(self->GetLabel());
 }
 
 //-----------------------------------------------------------------------------

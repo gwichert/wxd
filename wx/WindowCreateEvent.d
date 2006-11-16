@@ -28,7 +28,7 @@ import wx.common;
 		public this(IntPtr wxobj) 
 			{ super(wxobj); }
 
-		public this(Window win)
+		public this(Window win = null)
 			{ this(wxWindowCreateEvent_ctor(wxObject.SafePtr(win))); }
 
 		//-----------------------------------------------------------------------------	

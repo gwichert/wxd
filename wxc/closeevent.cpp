@@ -19,9 +19,9 @@
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxCloseEvent* wxCloseEvent_ctor(wxEventType type)
+wxCloseEvent* wxCloseEvent_ctor(wxEventType type, int winid)
 {
-    return new wxCloseEvent(type);
+    return new wxCloseEvent(type,winid);
 }
 
 extern "C" WXEXPORT

@@ -19,9 +19,9 @@
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxQueryNewPaletteEvent* wxQueryNewPaletteEvent_ctor(wxEventType type)
+wxQueryNewPaletteEvent* wxQueryNewPaletteEvent_ctor(wxWindowID winid)
 {
-    return new wxQueryNewPaletteEvent(type);
+    return new wxQueryNewPaletteEvent(winid);
 }
 
 extern "C" WXEXPORT

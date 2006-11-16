@@ -286,9 +286,9 @@ void wxStyledTextCtrl_SetAnchor(wxStyledTextCtrl* self, int posAnchor)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxStyledTextCtrl_GetCurLine(wxStyledTextCtrl* self, int* linePos)
+dstrret wxStyledTextCtrl_GetCurLine(wxStyledTextCtrl* self, int* linePos)
 {
-    return dstr(self->GetCurLine(linePos));
+    return dstr_ret(self->GetCurLine(linePos));
 }
 
 //-----------------------------------------------------------------------------
@@ -1305,9 +1305,9 @@ int wxStyledTextCtrl_GetFirstVisibleLine(wxStyledTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxStyledTextCtrl_GetLine(wxStyledTextCtrl* self, int line)
+dstrret wxStyledTextCtrl_GetLine(wxStyledTextCtrl* self, int line)
 {
-    return dstr(self->GetLine(line));
+    return dstr_ret(self->GetLine(line));
 }
 
 //-----------------------------------------------------------------------------
@@ -1369,17 +1369,17 @@ void wxStyledTextCtrl_SetSelection(wxStyledTextCtrl* self, int start, int end)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxStyledTextCtrl_GetSelectedText(wxStyledTextCtrl* self)
+dstrret wxStyledTextCtrl_GetSelectedText(wxStyledTextCtrl* self)
 {
-    return dstr(self->GetSelectedText());
+    return dstr_ret(self->GetSelectedText());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxStyledTextCtrl_GetTextRange(wxStyledTextCtrl* self, int startPos, int endPos)
+dstrret wxStyledTextCtrl_GetTextRange(wxStyledTextCtrl* self, int startPos, int endPos)
 {
-    return dstr(self->GetTextRange(startPos, endPos));
+    return dstr_ret(self->GetTextRange(startPos, endPos));
 }
 
 //-----------------------------------------------------------------------------
@@ -1513,9 +1513,9 @@ void wxStyledTextCtrl_SetText(wxStyledTextCtrl* self, dstr text)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxStyledTextCtrl_GetText(wxStyledTextCtrl* self)
+dstrret wxStyledTextCtrl_GetText(wxStyledTextCtrl* self)
 {
-    return dstr(self->GetText());
+    return dstr_ret(self->GetText());
 }
 
 //-----------------------------------------------------------------------------
@@ -2921,9 +2921,9 @@ int wxStyledTextEvent_GetModificationType(wxStyledTextEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxStyledTextEvent_GetText(wxStyledTextEvent* self)
+dstrret wxStyledTextEvent_GetText(wxStyledTextEvent* self)
 {
-    return dstr(self->GetText());
+    return dstr_ret(self->GetText());
 }
 
 //-----------------------------------------------------------------------------
@@ -3025,9 +3025,9 @@ int wxStyledTextEvent_GetY(wxStyledTextEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxStyledTextEvent_GetDragText(wxStyledTextEvent* self)
+dstrret wxStyledTextEvent_GetDragText(wxStyledTextEvent* self)
 {
-    return dstr(self->GetDragText());
+    return dstr_ret(self->GetDragText());
 }
 
 //-----------------------------------------------------------------------------

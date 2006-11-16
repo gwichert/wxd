@@ -86,9 +86,9 @@ const wxLanguageInfo* wxLocale_FindLanguageInfo(dstr locale)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxLocale_GetCanonicalName(wxLocale* self)
+dstrret wxLocale_GetCanonicalName(wxLocale* self)
 {
-	return dstr(self->GetCanonicalName());
+	return dstr_ret(self->GetCanonicalName());
 }
 //-----------------------------------------------------------------------------
 
@@ -109,49 +109,49 @@ const wxLanguageInfo* wxLocale_GetLanguageInfo(int lang)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxLocale_GetLanguageName(int lang)
+dstrret wxLocale_GetLanguageName(int lang)
 {
-	return dstr(wxLocale::GetLanguageName(lang));
+	return dstr_ret(wxLocale::GetLanguageName(lang));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxLocale_GetLocale(wxLocale* self)
+dstrret wxLocale_GetLocale(wxLocale* self)
 {
-	return dstr(self->GetLocale());
+	return dstr_ret(self->GetLocale());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxLocale_GetName(wxLocale* self)
+dstrret wxLocale_GetName(wxLocale* self)
 {
-	return dstr(self->GetName());
+	return dstr_ret(self->GetName());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxLocale_GetString(wxLocale* self, dstr szOrigString, dstr szDomain)
+dstrret wxLocale_GetString(wxLocale* self, dstr szOrigString, dstr szDomain)
 {
-	return dstr(self->GetString(wxString(szOrigString.data, wxConvUTF8, szOrigString.length), wxString(szDomain.data, wxConvUTF8, szDomain.length)));
+	return dstr_ret(self->GetString(wxString(szOrigString.data, wxConvUTF8, szOrigString.length), wxString(szDomain.data, wxConvUTF8, szDomain.length)));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxLocale_GetHeaderValue(wxLocale* self, dstr szHeader, dstr szDomain)
+dstrret wxLocale_GetHeaderValue(wxLocale* self, dstr szHeader, dstr szDomain)
 {
-	return dstr(self->GetHeaderValue(wxString(szHeader.data, wxConvUTF8, szHeader.length), wxString(szDomain.data, wxConvUTF8, szDomain.length)));
+	return dstr_ret(self->GetHeaderValue(wxString(szHeader.data, wxConvUTF8, szHeader.length), wxString(szDomain.data, wxConvUTF8, szDomain.length)));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxLocale_GetSysName(wxLocale* self)
+dstrret wxLocale_GetSysName(wxLocale* self)
 {
-	return dstr(self->GetSysName());
+	return dstr_ret(self->GetSysName());
 }
 
 //-----------------------------------------------------------------------------
@@ -165,9 +165,9 @@ wxFontEncoding wxLocale_GetSystemEncoding()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxLocale_GetSystemEncodingName()
+dstrret wxLocale_GetSystemEncodingName()
 {
-	return dstr(wxLocale::GetSystemEncodingName());
+	return dstr_ret(wxLocale::GetSystemEncodingName());
 }
 
 //-----------------------------------------------------------------------------
@@ -239,9 +239,9 @@ void wxLanguageInfo_SetCanonicalName(wxLanguageInfo* self, dstr name)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxLanguageInfo_GetCanonicalName(wxLanguageInfo* self)
+dstrret wxLanguageInfo_GetCanonicalName(wxLanguageInfo* self)
 {
-	return dstr(self->CanonicalName);
+	return dstr_ret(self->CanonicalName);
 }
 
 //-----------------------------------------------------------------------------
@@ -255,8 +255,8 @@ void wxLanguageInfo_SetDescription(wxLanguageInfo* self, dstr name)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxLanguageInfo_GetDescription(wxLanguageInfo* self)
+dstrret wxLanguageInfo_GetDescription(wxLanguageInfo* self)
 {
-	return dstr(self->Description);
+	return dstr_ret(self->Description);
 }
 

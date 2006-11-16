@@ -17,6 +17,12 @@
 #include "common.h"
 #include <wx/datetime.h>
 
+extern "C" WXEXPORT
+const wxDateTime* wxDefaultDateTime_Get()
+{
+    return &wxDefaultDateTime;
+}
+
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT

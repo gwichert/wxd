@@ -172,9 +172,9 @@ size_t wxTextDataObject_GetTextLength(wxTextDataObject* self)
 }
 
 extern "C" WXEXPORT
-dstr wxTextDataObject_GetText(wxTextDataObject* self)
+dstrret wxTextDataObject_GetText(wxTextDataObject* self)
 {
-	return dstr(self->GetText().c_str());
+	return dstr_ret(self->GetText().c_str());
 }
 
 extern "C" WXEXPORT

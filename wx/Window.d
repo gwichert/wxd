@@ -312,89 +312,89 @@ import wx.ToolTip;
 
 	public class Window : EvtHandler
 	{
-		public const int wxVSCROLL			= cast(int)0x80000000;
-		public const int wxHSCROLL			= 0x40000000;
-		public const int wxCAPTION			= 0x20000000;
+		enum {
+			wxVSCROLL			= cast(int)0x80000000,
+			wxHSCROLL			= 0x40000000,
+			wxCAPTION			= 0x20000000,
 
-		public const int wxDEFAULT_FRAME		= wxSYSTEM_MENU | wxRESIZE_BORDER |
-									wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCAPTION |
-									wxCLIP_CHILDREN | wxCLOSE_BOX;
-		public const int wxDEFAULT_FRAME_STYLE		= wxDEFAULT_FRAME;
+			wxCLIP_CHILDREN			= 0x00400000,
+			wxMINIMIZE_BOX 			= 0x00000400,
+			wxCLOSE_BOX			= 0x1000,
+			wxMAXIMIZE_BOX			= 0x0200,
+			wxNO_3D				= 0x00800000,
+			wxRESIZE_BORDER			= 0x00000040,
+			wxSYSTEM_MENU			= 0x00000800,
+			wxTAB_TRAVERSAL			= 0x00008000,
 
-		public const int wxDEFAULT_DIALOG_STYLE	= wxSYSTEM_MENU | wxCAPTION | wxCLOSE_BOX;
+			wxNO_FULL_REPAINT_ON_RESIZE	= 0x00010000,
 
-		public const int wxCLIP_CHILDREN		= 0x00400000;
-		public const int wxMINIMIZE_BOX 		= 0x00000400;
-		public const int wxCLOSE_BOX			= 0x1000;
-		public const int wxMAXIMIZE_BOX		= 0x0200;
-		public const int wxNO_3D			= 0x00800000;
-		public const int wxRESIZE_BORDER		= 0x00000040;
-		public const int wxSYSTEM_MENU			= 0x00000800;
-		public const int wxTAB_TRAVERSAL		= 0x00008000;
-
-		public const int wxNO_FULL_REPAINT_ON_RESIZE	= 0x00010000;
-
-		public const int  wxID_OK			= 5100;
-		public const int  wxID_CANCEL			= 5101;
-		public const int  wxID_YES			= 5103;
-		public const int  wxID_NO			= 5104;
+			 wxID_OK			= 5100,
+			 wxID_CANCEL			= 5101,
+			 wxID_YES			= 5103,
+			 wxID_NO			= 5104,
 	 
-		public const int wxID_ANY			= -1;
-		public const int wxID_ABOUT			= 5013;
+			wxID_ANY			= -1,
+			wxID_ABOUT			= 5013,
 	
-		public const int wxSTAY_ON_TOP			= 0x8000;
-		public const int wxICONIZE			= 0x4000;
-		public const int wxMINIMIZE			= wxICONIZE;
-		public const int wxMAXIMIZE			= 0x2000;
+			wxSTAY_ON_TOP			= 0x8000,
+			wxICONIZE			= 0x4000,
+			wxMINIMIZE			= wxICONIZE,
+			wxMAXIMIZE			= 0x2000,
 	
-		public const int wxTINY_CAPTION_HORIZ		= 0x0100;
-		public const int wxTINY_CAPTION_VERT		= 0x0080;
+			wxTINY_CAPTION_HORIZ		= 0x0100,
+			wxTINY_CAPTION_VERT		= 0x0080,
 	
-		public const int wxDIALOG_NO_PARENT		= 0x0001;
-		public const int wxFRAME_NO_TASKBAR		= 0x0002;
-		public const int wxFRAME_TOOL_WINDOW		= 0x0004;
-		public const int wxFRAME_FLOAT_ON_PARENT	= 0x0008;
-		public const int wxFRAME_SHAPED		= 0x0010;
-		public const int wxFRAME_EX_CONTEXTHELP	= 0x00000004;
+			wxDIALOG_NO_PARENT		= 0x0001,
+			wxFRAME_NO_TASKBAR		= 0x0002,
+			wxFRAME_TOOL_WINDOW		= 0x0004,
+			wxFRAME_FLOAT_ON_PARENT		= 0x0008,
+			wxFRAME_SHAPED			= 0x0010,
+			wxFRAME_EX_CONTEXTHELP		= 0x00000004,
 
 		//---------------------------------------------------------------------
 	
-		public const int wxBORDER_DEFAULT		= 0x00000000;
-		public const int wxBORDER_NONE			= 0x00200000;
-		public const int wxBORDER_STATIC		= 0x01000000;
-		public const int wxBORDER_SIMPLE		= 0x02000000;
-		public const int wxBORDER_RAISED		= 0x04000000;
-		public const int wxBORDER_SUNKEN		= 0x08000000;
-		public const int wxBORDER_DOUBLE		= 0x10000000;
-		public const int wxBORDER_MASK			= 0x1f200000;
+			wxBORDER_DEFAULT		= 0x00000000,
+			wxBORDER_NONE			= 0x00200000,
+			wxBORDER_STATIC			= 0x01000000,
+			wxBORDER_SIMPLE			= 0x02000000,
+			wxBORDER_RAISED			= 0x04000000,
+			wxBORDER_SUNKEN			= 0x08000000,
+			wxBORDER_DOUBLE			= 0x10000000,
+			wxBORDER_MASK			= 0x1f200000,
 	
 		// Border flags
-		public const int wxDOUBLE_BORDER		= wxBORDER_DOUBLE;
-		public const int wxSUNKEN_BORDER		= wxBORDER_SUNKEN;
-		public const int wxRAISED_BORDER		= wxBORDER_RAISED;
-		public const int wxBORDER			= wxBORDER_SIMPLE;
-		public const int wxSIMPLE_BORDER		= wxBORDER_SIMPLE;
-		public const int wxSTATIC_BORDER		= wxBORDER_STATIC;
-		public const int wxNO_BORDER			= wxBORDER_NONE;
+			wxDOUBLE_BORDER			= wxBORDER_DOUBLE,
+			wxSUNKEN_BORDER			= wxBORDER_SUNKEN,
+			wxRAISED_BORDER			= wxBORDER_RAISED,
+			wxBORDER			= wxBORDER_SIMPLE,
+			wxSIMPLE_BORDER			= wxBORDER_SIMPLE,
+			wxSTATIC_BORDER			= wxBORDER_STATIC,
+			wxNO_BORDER			= wxBORDER_NONE,
 	
-		public const int wxWANTS_CHARS			= 0x00040000;
+			wxWANTS_CHARS			= 0x00040000,
 		
+			wxDEFAULT_FRAME			= wxSYSTEM_MENU | wxRESIZE_BORDER |
+									wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCAPTION |
+									wxCLIP_CHILDREN | wxCLOSE_BOX,
+			wxDEFAULT_FRAME_STYLE		= wxDEFAULT_FRAME,
+
+			wxDEFAULT_DIALOG_STYLE		= wxSYSTEM_MENU | wxCAPTION | wxCLOSE_BOX,
+		}
+
 		private static int uniqueID			= 10000; // start with 10000 to not interfere with the old id system
 
 		//---------------------------------------------------------------------
 
-		public static Point wxDefaultPosition = {X:-1, Y:-1};
-		public static Size  wxDefaultSize     = {Width:-1, Height:-1};
+		public const Point wxDefaultPosition = {X:-1, Y:-1};
+		public const Size  wxDefaultSize     = {Width:-1, Height:-1};
+		const string wxPanelNameStr = "panel";
 
 		//---------------------------------------------------------------------
 
-		public this(Window parent)
-			{ this(parent, -1, wxDefaultPosition, wxDefaultSize, 0, null);}
-
-		public this(Window parent, int id, inout Point pos, Size size, uint style, string name)
+		public this(Window parent, int id, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=0, string name=wxPanelNameStr)
 			{ this(wxWindow_ctor(wxObject.SafePtr(parent), id, pos, size, style, name), true);}
 			
-		public this(Window parent, inout Point pos, Size size, uint style, string name)
+		public this(Window parent, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=0, string name=wxPanelNameStr)
 			{ this(parent, Window.UniqueID, pos, size, style, name);}
 
 		public this(IntPtr wxobj) 
@@ -411,6 +411,8 @@ import wx.ToolTip;
 			AddEventListener(wxWindow_EVT_TRANSFERDATAFROMWINDOW(), &OnTransferDataFromWindow);
 		}
 
+
+		static wxObject New(IntPtr ptr) { return new Window(ptr); }
 		//---------------------------------------------------------------------
 
 		public /+virtual+/ void   BackgroundColour(Colour value)
@@ -520,24 +522,14 @@ import wx.ToolTip;
 
 		//---------------------------------------------------------------------
 
-		public /+virtual+/ void SetSizer(Sizer sizer )
-		{ 
-			SetSizer( sizer, true); 
-		}
-
-		public /+virtual+/ void SetSizer(Sizer sizer, bool deleteOld)
+		public /+virtual+/ void SetSizer(Sizer sizer, bool deleteOld=true)
 		{
 			wxWindow_SetSizer(wxobj, sizer.wxobj, deleteOld);
 		}
 
 		//---------------------------------------------------------------------
 		
-		public /+virtual+/ bool Show()
-		{
-			return Show(true);
-		}
-
-		public /+virtual+/ bool Show(bool show)
+		public /+virtual+/ bool Show(bool show=true)
 		{
 			return wxWindow_Show(wxobj, show);
 		}
@@ -1673,7 +1665,5 @@ import wx.ToolTip;
 
 		public void Resized_Add(EventListener value) { AddCommandListener(Event.wxEVT_SIZE, ID, value, this); }
 		public void Resized_Remove(EventListener value) { RemoveHandler(value, this); }
-
-		public static wxObject New(IntPtr ptr) { return new Window(ptr); }
 	}
 

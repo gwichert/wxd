@@ -158,15 +158,7 @@ import wx.Printer;
         private this(IntPtr wxobj) 
             { super(wxobj); }
 
-        public this(PrintPreview preview, Frame parent, string title)
-            { this(preview, parent, title, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, "PreviewFrame"); }
-        public this(PrintPreview preview, Frame parent, string title, Point pos)
-            { this(preview, parent, title, pos, wxDefaultSize, wxDEFAULT_FRAME_STYLE, "PreviewFrame"); }
-        public this(PrintPreview preview, Frame parent, string title, Point pos, Size size)
-            { this(preview, parent, title, pos, size, wxDEFAULT_FRAME_STYLE, "PreviewFrame"); }
-        public this(PrintPreview preview, Frame parent, string title, Point pos, Size size, int style)
-            { this(preview, parent, title, pos, size, style, "PreviewFrame"); }
-        public this(PrintPreview preview, Frame parent, string title, Point pos, Size size, int style, string name)
+        public this(PrintPreview preview, Window parent, string title = "Print Preview", Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = wxDEFAULT_FRAME_STYLE, string name = "frame")
             { this(wxPreviewFrame_ctor(wxObject.SafePtr(preview), wxObject.SafePtr(parent), title, pos, size, cast(uint)style, name)); }
 
         //-----------------------------------------------------------------------------
@@ -201,18 +193,31 @@ import wx.Printer;
 
     public class PreviewControlBar : Panel
     {
+        const int wxPREVIEW_PRINT       =  1;
+        const int wxPREVIEW_PREVIOUS    =  2;
+        const int wxPREVIEW_NEXT        =  4;
+        const int wxPREVIEW_ZOOM        =  8;
+        const int wxPREVIEW_FIRST       = 16;
+        const int wxPREVIEW_LAST        = 32;
+        const int wxPREVIEW_GOTO        = 64;
+
+        const int wxPREVIEW_DEFAULT     = wxPREVIEW_PREVIOUS|wxPREVIEW_NEXT|wxPREVIEW_ZOOM
+                          |wxPREVIEW_FIRST|wxPREVIEW_GOTO|wxPREVIEW_LAST;
+
+        // Ids for controls
+        const int wxID_PREVIEW_CLOSE      = 1;
+        const int wxID_PREVIEW_NEXT       = 2;
+        const int wxID_PREVIEW_PREVIOUS   = 3;
+        const int wxID_PREVIEW_PRINT      = 4;
+        const int wxID_PREVIEW_ZOOM       = 5;
+        const int wxID_PREVIEW_FIRST      = 6;
+        const int wxID_PREVIEW_LAST       = 7;
+        const int wxID_PREVIEW_GOTO       = 8;
+    
         private this(IntPtr wxobj)
             { super(wxobj); }
 
-        public this(PrintPreview preview, int buttons, Window parent)
-            { this(preview, buttons, parent, wxDefaultPosition, wxDefaultSize, 0, "PreviewControlBar"); }
-        public this(PrintPreview preview, int buttons, Window parent, Point pos)
-            { this(preview, buttons, parent, pos, wxDefaultSize, 0, "PreviewControlBar"); }
-        public this(PrintPreview preview, int buttons, Window parent, Point pos, Size size)
-            { this(preview, buttons, parent, pos, size, 0, "PreviewControlBar"); }
-        public this(PrintPreview preview, int buttons, Window parent, Point pos, Size size, int style)
-            { this(preview, buttons, parent, pos, size, style, "PreviewControlBar"); }
-        public this(PrintPreview preview, int buttons, Window parent, Point pos, Size size, int style, string name)
+        public this(PrintPreview preview, int buttons, Window parent, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=wxTAB_TRAVERSAL, string name="panel")
             { this(wxPreviewControlBar_ctor(wxObject.SafePtr(preview), buttons, wxObject.SafePtr(parent), pos, size, cast(uint)style, name)); }
 
         //-----------------------------------------------------------------------------
@@ -241,12 +246,6 @@ import wx.Printer;
         private this(IntPtr wxobj) 
             { super(wxobj); }
 
-        public this(PrintPreview preview, Window parent)
-            { this(preview, parent, wxDefaultPosition, wxDefaultSize, 0, "PreviewCanvas"); }
-        public this(PrintPreview preview, Window parent, Point pos)
-            { this(preview, parent, pos, wxDefaultSize, 0, "PreviewCanvas"); }
-        public this(PrintPreview preview, Window parent, Point pos, Size size, int style)
-            { this(preview, parent, pos, size, style, "PreviewCanvas"); }
-        public this(PrintPreview preview, Window parent, Point pos, Size size, int style, string name)
+        public this(PrintPreview preview, Window parent, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, string name = "canvas")
             { this(wxPreviewCanvas_ctor(wxObject.SafePtr(preview), wxObject.SafePtr(parent), pos, size, cast(uint)style, name)); }
     }

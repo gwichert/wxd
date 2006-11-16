@@ -74,14 +74,14 @@ struct Rectangle
 }
 
 /* struct constructor */
-Point _Point(int x,int y)
+Point new_Point(int x,int y)
 {
 	Point pt;
 	pt.X = x;
 	pt.Y = y;
 	return pt;
 }
-Size _Size(int w,int h)
+Size new_Size(int w,int h)
 {
 	Size sz;
 	sz.Width = w;
@@ -89,7 +89,7 @@ Size _Size(int w,int h)
 	return sz;
 }
 
-Rectangle _Rectangle(int x,int y,int w,int h)
+Rectangle new_Rectangle(int x,int y,int w,int h)
 {
 	Rectangle rect;
 	rect.X = x;
@@ -100,12 +100,8 @@ Rectangle _Rectangle(int x,int y,int w,int h)
 }
 
 alias Rectangle Rect;
-alias _Rectangle _Rect;
 
-alias _Point new_Point;
-alias _Size new_Size;
-alias _Rectangle new_Rectangle;
-alias _Rect new_Rect;
+alias new_Rectangle new_Rect;
 
 /+
 import wx.GDIObject;

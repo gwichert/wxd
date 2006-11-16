@@ -16,8 +16,9 @@
 module wx.HelpEvent;
 import wx.common;
 import wx.CommandEvent;
+import wx.Window;
 
-		static extern (C) IntPtr wxHelpEvent_ctor(int type);
+		static extern (C) IntPtr wxHelpEvent_ctor(int type,int winid, inout Point pos);
 		static extern (C) void   wxHelpEvent_GetPosition(IntPtr self, inout Point pos);
 		static extern (C) void   wxHelpEvent_SetPosition(IntPtr self, inout Point pos);
 		static extern (C) string wxHelpEvent_GetLink(IntPtr self);
@@ -32,8 +33,8 @@ import wx.CommandEvent;
 		public this(IntPtr wxobj) 
 			{ super(wxobj); }
 
-		public this(int type)
-			{ this(wxHelpEvent_ctor(type)); }
+		public this(EventType type = wxEVT_NULL, int winid = 0, Point pos = Window.wxDefaultPosition)
+			{ this(wxHelpEvent_ctor(type,winid,pos)); }
 
 		//-----------------------------------------------------------------------------	
 		

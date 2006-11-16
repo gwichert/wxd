@@ -19,9 +19,9 @@
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxPaletteChangedEvent* wxPaletteChangedEvent_ctor(wxEventType type)
+wxPaletteChangedEvent* wxPaletteChangedEvent_ctor(wxWindowID winid)
 {
-    return new wxPaletteChangedEvent(type);
+    return new wxPaletteChangedEvent(winid);
 }
 
 extern "C" WXEXPORT

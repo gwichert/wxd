@@ -299,7 +299,7 @@ import wx.wx;
 		
 		public void OnIdle(Object sender, Event e)
 		{
-			if (m_treeCtrl != null)
+			if (m_treeCtrl !== null)
 			{
 				TreeItemId idRoot = m_treeCtrl.RootItem;
 			
@@ -350,7 +350,7 @@ import wx.wx;
 		
 		public void OnSize(Object sender, Event e)
 		{
-			if ( m_treeCtrl != null && m_textCtrl != null )
+			if ( m_treeCtrl !== null && m_textCtrl !== null )
 			{
 				Resize();
 			}
@@ -1107,7 +1107,7 @@ import wx.wx;
 			TreeItemId itemId = te.Item;
 			MyTreeItemData item = cast(MyTreeItemData)GetItemData(itemId);
 
-			if ( item != null )
+			if ( item !== null )
 			{
 				item.ShowInfo(this);
 			}
@@ -1123,12 +1123,12 @@ import wx.wx;
 		
 			int flags = 0;
 			TreeItemId id = HitTest(me.Position, flags);
-			if ( id == null )
+			if ( id === null )
 				Log.LogMessage("No item under mouse");
 			else
 			{
 				MyTreeItemData item = cast(MyTreeItemData)GetItemData(id);
-				if ( item != null )
+				if ( item !== null )
 					Log.LogMessage("Item '" ~ item.Desc ~ "' under mouse");
 			}
 		}
@@ -1137,7 +1137,7 @@ import wx.wx;
 		
 		private bool IsTestItem(TreeItemId item)
 		{
-			return GetItemParent(item) == RootItem && (GetPrevSibling(item) == null);
+			return GetItemParent(item) == RootItem && (GetPrevSibling(item) === null);
 		}
 		
 		//---------------------------------------------------------------------

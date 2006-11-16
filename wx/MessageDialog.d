@@ -29,21 +29,13 @@ import wx.Dialog;
 
 	public class MessageDialog : Dialog
 	{
+		public const string wxMessageBoxCaptionStr = "Message";
 		//---------------------------------------------------------------------
 	
 		private this(IntPtr wxobj) 
 			{ super(wxobj); }
 
-		public this(Window parent, string msg)
-			{ this(parent, msg, "Message box", wxOK | wxCANCEL | wxCENTRE, wxDefaultPosition); }
-
-		public this(Window parent, string msg, string caption)
-			{ this(parent, msg, caption, wxOK | wxCANCEL | wxCENTRE, wxDefaultPosition); }
-
-		public this(Window parent, string msg, string caption, int style)
-			{ this(parent, msg, caption, style, wxDefaultPosition); }
-
-		public this(Window parent, string msg, string caption, int style, Point pos)
+		public this(Window parent, string msg, string caption=wxMessageBoxCaptionStr, int style=wxOK | wxCENTRE, Point pos = wxDefaultPosition)
 			{ this(wxMessageDialog_ctor(wxObject.SafePtr(parent), msg, caption, cast(uint)style, pos)); }
 
 		//---------------------------------------------------------------------
@@ -59,13 +51,13 @@ import wx.Dialog;
 
 		static extern(C) int wxMessageBox_func(string msg, string cap, int style, IntPtr parent,int x, int y);
 
-		static int MessageBox(string msg,string caption="Message",int style=Dialog.wxOK | Dialog.wxCENTRE , Window parent=null, int x=-1, int y=-1)
+		static int MessageBox(string msg,string caption=MessageDialog.wxMessageBoxCaptionStr,int style=Dialog.wxOK | Dialog.wxCENTRE , Window parent=null, int x=-1, int y=-1)
 		{
 			return wxMessageBox_func(msg,caption,style,wxObject.SafePtr(parent),x,y);
 		}
 
 		/* wx.NET compat */
-		static int MessageBox(Window parent,string msg,string caption="Message",int style=Dialog.wxOK | Dialog.wxCENTRE , Point pos=Dialog.wxDefaultPosition)
+		static int MessageBox(Window parent,string msg,string caption=MessageDialog.wxMessageBoxCaptionStr,int style=Dialog.wxOK | Dialog.wxCENTRE , Point pos=Dialog.wxDefaultPosition)
 		{
 			return wxMessageBox_func(msg,caption,style,wxObject.SafePtr(parent),pos.X,pos.Y);
 		}

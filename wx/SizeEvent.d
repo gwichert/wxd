@@ -18,7 +18,11 @@ import wx.common;
 import wx.Event;
 
 		static extern (C) IntPtr wxSizeEvent_ctor();
+		static extern (C) IntPtr wxSizeEvent_ctorSize(inout Size sz,int winid);
+		static extern (C) IntPtr wxSizeEvent_ctorRect(inout Rect sz,int winid);
 		static extern (C) void wxSizeEvent_GetSize(IntPtr self, out Size size);
+		static extern (C) void wxSizeEvent_GetRect(IntPtr self, out Rect rect);
+		static extern (C) void wxSizeEvent_SetRect(IntPtr self, inout Rect rect);
 		
 		//-----------------------------------------------------------------------------
 
@@ -30,13 +34,34 @@ import wx.Event;
 		public this()
 			{ this(wxSizeEvent_ctor()); }
 
+		public this(Size sz,int winid = 0)
+			{ this(wxSizeEvent_ctorSize(sz,winid)); }
+
+		public this(Rectangle rect,int winid = 0)
+			{ this(wxSizeEvent_ctorRect(rect,winid)); }
+
+
 		//-----------------------------------------------------------------------------	
 		
-		public Size size() {
+		public Size size()
+			{
 				Size size;
 				wxSizeEvent_GetSize(wxobj, size);
 				return size;
 			}
+
+		public Rectangle rect()
+			{
+				Rectangle rect;
+				wxSizeEvent_GetRect(wxobj, rect);
+				return rect;
+			}
+
+		public void rect(Rectangle rect)
+			{
+				wxSizeEvent_SetRect(wxobj, rect);
+			}
+
 
 		private static Event New(IntPtr obj) { return new SizeEvent(obj); }
 

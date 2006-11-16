@@ -219,6 +219,7 @@ import wx.Event;
 		private void MarshalEvent(IntPtr wxEvent, int iListener)
 		{
 			// Create an appropriate .NET wrapper for the event object
+			assert(wxEvent!=IntPtr.init);
 			
 			Event e = Event.CreateFrom(wxEvent);
 	

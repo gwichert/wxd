@@ -23,6 +23,7 @@ import wx.Window;
 		static extern (C) void   wxToolTip_SetTip(IntPtr self, string tip);
 		static extern (C) string wxToolTip_GetTip(IntPtr self);
 		static extern (C) IntPtr wxToolTip_GetWindow(IntPtr self);
+		static extern (C) void   wxToolTip_SetWindow(IntPtr self,IntPtr win);
 
         //---------------------------------------------------------------------
 
@@ -64,6 +65,10 @@ import wx.Window;
         public Window window() 
             {
                 return cast(Window)FindObject(wxToolTip_GetWindow(wxobj));
+            }
+        public void window(Window win) 
+            {
+                return wxToolTip_SetWindow(wxobj,wxObject.SafePtr(win));
             }
 
         //---------------------------------------------------------------------

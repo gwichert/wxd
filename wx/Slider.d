@@ -42,20 +42,23 @@ import wx.Control;
 		
     public class Slider : Control
     {
-		public const int wxSL_HORIZONTAL      = Orientation.wxHORIZONTAL;
-		public const int wxSL_VERTICAL        = Orientation.wxVERTICAL;
+		enum {
+			wxSL_HORIZONTAL      = Orientation.wxHORIZONTAL,
+			wxSL_VERTICAL        = Orientation.wxVERTICAL,
 
-		public const int wxSL_NOTIFY_DRAG     = 0x0000;
-		public const int wxSL_TICKS           = 0x0010;
-		public const int wxSL_AUTOTICKS       = wxSL_TICKS;
-		public const int wxSL_LABELS          = 0x0020;
-		public const int wxSL_LEFT            = 0x0040;
-		public const int wxSL_TOP             = 0x0080;
-		public const int wxSL_RIGHT           = 0x0100;
-		public const int wxSL_BOTTOM          = 0x0200;
-		public const int wxSL_BOTH            = 0x0400;
-		public const int wxSL_SELRANGE        = 0x0800;
+			wxSL_NOTIFY_DRAG     = 0x0000,
+			wxSL_TICKS           = 0x0010,
+			wxSL_AUTOTICKS       = wxSL_TICKS,
+			wxSL_LABELS          = 0x0020,
+			wxSL_LEFT            = 0x0040,
+			wxSL_TOP             = 0x0080,
+			wxSL_RIGHT           = 0x0100,
+			wxSL_BOTTOM          = 0x0200,
+			wxSL_BOTH            = 0x0400,
+			wxSL_SELRANGE        = 0x0800,
+		}
 
+		public const string wxSliderNameStr = "slider";
 		//---------------------------------------------------------------------
 
 		public this(IntPtr wxobj) 
@@ -64,22 +67,7 @@ import wx.Control;
 		public this()
 			{ super(wxSlider_ctor()); }
 			
-		public this(Window parent, int id, int value, int minValue, int maxValue)
-			{ this(parent, id, value, minValue, maxValue, wxDefaultPosition, wxDefaultSize, 0, null, "slider" ); }
-			
-		public this(Window parent, int id, int value, int minValue, int maxValue, Point pos)
-			{ this(parent, id, value, minValue, maxValue, pos, wxDefaultSize, 0, null, "slider" ); }
-
-		public this(Window parent, int id, int value, int minValue, int maxValue, Point pos, Size size)
-			{ this(parent, id, value, minValue, maxValue, pos, size, 0, null, "slider" ); }
-			
-		public this(Window parent, int id, int value, int minValue, int maxValue, Point pos, Size size, int style)
-			{ this(parent, id, value, minValue, maxValue, pos, size, style, null, "slider" ); }
-
-		public this(Window parent, int id, int value, int minValue, int maxValue, Point pos, Size size, int style, Validator validator)
-			{ this(parent, id, value, minValue, maxValue, pos, size, style, validator, "slider" ); }
-
-		public this(Window parent, int id, int value, int minValue, int maxValue, Point pos, Size size, int style, Validator validator, string name)
+		public this(Window parent, int id, int value, int minValue, int maxValue, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = wxSL_HORIZONTAL, Validator validator = null, string name = wxSliderNameStr)
 		{
 			super(wxSlider_ctor());
 			if(!Create(parent, id, value, minValue, maxValue, pos, size, style, validator, name))
@@ -91,27 +79,12 @@ import wx.Control;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent, int value, int minValue, int maxValue)
-			{ this(parent, Window.UniqueID, value, minValue, maxValue, wxDefaultPosition, wxDefaultSize, 0, null, "slider" ); }
-			
-		public this(Window parent, int value, int minValue, int maxValue, Point pos)
-			{ this(parent, Window.UniqueID, value, minValue, maxValue, pos, wxDefaultSize, 0, null, "slider" ); }
-
-		public this(Window parent, int value, int minValue, int maxValue, Point pos, Size size)
-			{ this(parent, Window.UniqueID, value, minValue, maxValue, pos, size, 0, null, "slider" ); }
-			
-		public this(Window parent, int value, int minValue, int maxValue, Point pos, Size size, int style)
-			{ this(parent, Window.UniqueID, value, minValue, maxValue, pos, size, style, null, "slider" ); }
-
-		public this(Window parent, int value, int minValue, int maxValue, Point pos, Size size, int style, Validator validator)
-			{ this(parent, Window.UniqueID, value, minValue, maxValue, pos, size, style, validator, "slider" ); }
-
-		public this(Window parent, int value, int minValue, int maxValue, Point pos, Size size, int style, Validator validator, string name)
+		public this(Window parent, int value, int minValue, int maxValue, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = wxSL_HORIZONTAL, Validator validator = null, string name = wxSliderNameStr)
 			{ this(parent, Window.UniqueID, value, minValue, maxValue, pos, size, style, validator, name);}
 		
 		//---------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, int value, int minValue, int maxValue, Point pos, Size size, int style, Validator validator, string name)
+		public bool Create(Window parent, int id, int value, int minValue, int maxValue, inout Point pos, inout Size size, int style, Validator validator, string name)
 		{
 			return wxSlider_Create(wxobj, wxObject.SafePtr(parent), id, value, minValue, maxValue, pos, size, cast(uint)style, wxObject.SafePtr(validator), name);
 		}

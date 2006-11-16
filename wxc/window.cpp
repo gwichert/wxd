@@ -283,9 +283,9 @@ void wxWindow_SetTitle(wxWindow* self, dstr title)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxWindow_GetTitle(wxWindow* self)
+dstrret wxWindow_GetTitle(wxWindow* self)
 {
-	return dstr(self->GetTitle().c_str());
+	return dstr_ret(self->GetTitle().c_str());
 }
 
 //-----------------------------------------------------------------------------
@@ -297,9 +297,9 @@ void wxWindow_SetName(wxWindow* self, dstr name)
 }
 
 extern "C" WXEXPORT
-dstr wxWindow_GetName(wxWindow* self)
+dstrret wxWindow_GetName(wxWindow* self)
 {
-	return dstr(self->GetName().c_str());
+	return dstr_ret(self->GetName().c_str());
 }
 
 //-----------------------------------------------------------------------------
@@ -1169,9 +1169,9 @@ void wxWindow_SetHelpTextForId(wxWindow* self, dstr text)
 }
 
 extern "C" WXEXPORT
-dstr wxWindow_GetHelpText(wxWindow* self)
+dstrret wxWindow_GetHelpText(wxWindow* self)
 {
-	return dstr(self->GetHelpText());
+	return dstr_ret(self->GetHelpText());
 }
 
 //-----------------------------------------------------------------------------
@@ -1187,9 +1187,9 @@ wxToolTip* wxWindow_GetToolTip(wxWindow* self)
 // TODO Not available in OS X
 #if 0
 extern "C" WXEXPORT
-dstr wxWindow_GetToolTipText(wxWindow* self)
+dstrret wxWindow_GetToolTipText(wxWindow* self)
 {
-	return dstr(self->GetToolTipText());
+	return dstr_ret(self->GetToolTipText());
 }
 #endif
 

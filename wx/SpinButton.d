@@ -80,11 +80,14 @@ import wx.Control;
 	public class SpinButton : Control
 	{
 		// These are duplicated in SpinCtrl.cs (for easier access)
-		public const int wxSP_HORIZONTAL       = Orientation.wxHORIZONTAL;
-		public const int wxSP_VERTICAL         = Orientation.wxVERTICAL;
-		public const int wxSP_ARROW_KEYS       = 0x1000;
-		public const int wxSP_WRAP             = 0x2000;
+		enum {
+			wxSP_HORIZONTAL       = Orientation.wxHORIZONTAL,
+			wxSP_VERTICAL         = Orientation.wxVERTICAL,
+			wxSP_ARROW_KEYS       = 0x1000,
+			wxSP_WRAP             = 0x2000,
+		}
 	
+		public const string wxSPIN_BUTTON_NAME = "SpinButton";
 		//---------------------------------------------------------------------
         
 		
@@ -94,19 +97,7 @@ import wx.Control;
 		public this()
 			{ super(wxSpinButton_ctor()); }
 			
-		public this(Window parent, int id)
-			{ this(parent, id, wxDefaultPosition, wxDefaultSize, 0, "spinButton"); }
-			
-		public this(Window parent, int id, Point pos)
-			{ this(parent, id, pos, wxDefaultSize, 0, "spinButton"); }
-			
-		public this(Window parent, int id, Point pos, Size size)
-			{ this(parent, id, pos, size, 0, "spinButton"); }
-
-		public this(Window parent, int id, Point pos, Size size, int style)
-			{ this(parent, id, pos, size, style, "spinButton"); }
-
-		public this(Window parent, int id, Point pos, Size size, int style, string name)
+		public this(Window parent, int id /*= wxID_ANY*/, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = wxSP_VERTICAL | wxSP_ARROW_KEYS, string name = wxSPIN_BUTTON_NAME)
 		{
 			super(wxSpinButton_ctor());
 			if(!Create(parent, id, pos, size, style, name))
@@ -118,24 +109,12 @@ import wx.Control;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent)
-			{ this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, "spinButton"); }
-			
-		public this(Window parent, Point pos)
-			{ this(parent, Window.UniqueID, pos, wxDefaultSize, 0, "spinButton"); }
-			
-		public this(Window parent, Point pos, Size size)
-			{ this(parent, Window.UniqueID, pos, size, 0, "spinButton"); }
-
-		public this(Window parent, Point pos, Size size, int style)
-			{ this(parent, Window.UniqueID, pos, size, style, "spinButton"); }
-
-		public this(Window parent, Point pos, Size size, int style, string name)
+		public this(Window parent, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = wxSP_VERTICAL | wxSP_ARROW_KEYS, string name = wxSPIN_BUTTON_NAME)
 			{ this(parent, Window.UniqueID, pos, size, style, name);}
 		
 		//---------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, Point pos, Size size,  int style, string name)
+		public bool Create(Window parent, int id, inout Point pos, inout Size size,  int style, string name)
 		{
 			return wxSpinButton_Create(wxobj, wxObject.SafePtr(parent), id,
 						pos, size, cast(uint)style, name);

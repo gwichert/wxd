@@ -152,25 +152,25 @@ int wxMenuBar_FindMenuItem(wxMenuBar* self, dstr menustring, dstr itemString)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxMenuBar_GetHelpString(wxMenuBar* self, int id)
+dstrret wxMenuBar_GetHelpString(wxMenuBar* self, int id)
 {
-	return dstr(self->GetHelpString(id));
+	return dstr_ret(self->GetHelpString(id));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxMenuBar_GetLabel(wxMenuBar* self, int id)
+dstrret wxMenuBar_GetLabel(wxMenuBar* self, int id)
 {
-	return dstr(self->GetLabel(id));
+	return dstr_ret(self->GetLabel(id));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxMenuBar_GetLabelTop(wxMenuBar* self, int pos)
+dstrret wxMenuBar_GetLabelTop(wxMenuBar* self, int pos)
 {
-	return dstr(self->GetLabelTop(pos));
+	return dstr_ret(self->GetLabelTop(pos));
 }
 
 //-----------------------------------------------------------------------------

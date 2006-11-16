@@ -1590,19 +1590,7 @@ import wx.MouseEvent;
 		public this()
 			{ super(wxHtmlWindow_ctor()); }
 		
-		public this(Window parent, int id)
-			{ this(parent, id, wxDefaultPosition, wxDefaultSize, wxHW_SCROLLBAR_AUTO, "HtmlWindow"); }
-		
-		public this(Window parent, int id, Point pos)
-			{ this(parent, id, pos, wxDefaultSize, wxHW_SCROLLBAR_AUTO, "HtmlWindow"); }
-		
-		public this(Window parent, int id, Point pos, Size size)
-			{ this(parent, id, pos, size, wxHW_SCROLLBAR_AUTO, "HtmlWindow"); }
-		
-		public this(Window parent, int id, Point pos, Size size, int style)
-			{ this(parent, id, pos, size, style, "HtmlWindow"); }
-		
-		public this(Window parent, int id, Point pos, Size size, int style, string name)
+		public this(Window parent, int id /*= wxID_ANY*/, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = wxHW_SCROLLBAR_AUTO, string name = "htmlWindow")
 		{
 			super(wxHtmlWindow_ctor());
 
@@ -1623,24 +1611,12 @@ import wx.MouseEvent;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent)
-			{ this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, wxHW_SCROLLBAR_AUTO, "HtmlWindow"); }
-		
-		public this(Window parent, Point pos)
-			{ this(parent, Window.UniqueID, pos, wxDefaultSize, wxHW_SCROLLBAR_AUTO, "HtmlWindow"); }
-		
-		public this(Window parent, Point pos, Size size)
-			{ this(parent, Window.UniqueID, pos, size, wxHW_SCROLLBAR_AUTO, "HtmlWindow"); }
-		
-		public this(Window parent, Point pos, Size size, int style)
-			{ this(parent, Window.UniqueID, pos, size, style, "HtmlWindow"); }
-		
-		public this(Window parent, Point pos, Size size, int style, string name)
+		public this(Window parent, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = wxHW_SCROLLBAR_AUTO, string name = "htmlWindow")
 			{ this(parent, Window.UniqueID, pos, size, style, name);}
 
 		//-----------------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, Point pos, Size size, int style, string name)
+		public bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
 		{
 			return wxHtmlWindow_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name);
 		}

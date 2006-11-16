@@ -70,6 +70,7 @@ import wx.ClientData;
 		public const int wxCB_READONLY         = 0x0010;
 		public const int wxCB_DROPDOWN         = 0x0020;
 		
+		public const string wxComboBoxNameStr = "comboBox";
 		//---------------------------------------------------------------------
 
 		public this(IntPtr wxobj) 
@@ -78,22 +79,7 @@ import wx.ClientData;
 		public this()
 			{ super(wxComboBox_ctor()); }
 
-		public this(Window parent, int id)
-			{ this(parent, id, "", wxDefaultPosition, wxDefaultSize, cast(string[])null, 0, null, null); }
-
-		public this(Window parent, int id, string value, Point pos, Size size, string[] choices)
-			{ this(parent, id, value, pos, size, choices, 0, null, null); }
-
-		public this(Window parent, int id, string value, Point pos, Size size, string[] choices, int style)
-			{ this(parent, id, value, pos, size, choices, style, null, null); }
-
-		public this(Window parent, int id, string value, Point pos, Size size, string[] choices, int style, Validator val)
-			{ this(parent, id, value, pos, size, choices, style, val, null); }
-
-		public this(Window parent, int id, 
-				string value, Point pos, Size size, 
-				string[] choices, int style, Validator validator, 
-				string name)
+		public this(Window parent, int id, string value="", Point pos = wxDefaultPosition, Size size = wxDefaultSize, string[] choices = null, int style = 0, Validator val = null, string name = wxComboBoxNameStr)
 		{
 			super(wxComboBox_ctor());
 			if(!wxComboBox_Create(wxobj, wxObject.SafePtr(parent), id, 
@@ -111,19 +97,7 @@ import wx.ClientData;
 		public this(Window parent)
 			{ this(parent, Window.UniqueID, "", wxDefaultPosition, wxDefaultSize, cast(string[])null, 0, null, null); }
 
-		public this(Window parent, string value, Point pos, Size size, string[] choices)
-			{ this(parent, Window.UniqueID, value, pos, size, choices, 0, null, null); }
-
-		public this(Window parent, string value, Point pos, Size size, string[] choices, int style)
-			{ this(parent, Window.UniqueID, value, pos, size, choices, style, null, null); }
-
-		public this(Window parent, string value, Point pos, Size size, string[] choices, int style, Validator val)
-			{ this(parent, Window.UniqueID, value, pos, size, choices, style, val, null); }
-
-		public this(Window parent,  
-				string value, Point pos, Size size, 
-				string[] choices, int style, Validator validator, 
-				string name)
+		public this(Window parent, string value="", Point pos = wxDefaultPosition, Size size = wxDefaultSize, string[] choices = null, int style = 0, Validator val = null, string name = wxComboBoxNameStr)
 			{ this(parent, Window.UniqueID, value, pos, size, choices, style, validator, name);}
 		
 		//---------------------------------------------------------------------

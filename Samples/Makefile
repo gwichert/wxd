@@ -1,4 +1,5 @@
 all:
+	-del *.cached
 	cd Controls
 	make
 	cd ..\Dialogs

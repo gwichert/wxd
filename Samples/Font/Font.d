@@ -624,13 +624,12 @@ alias std.string.find indexOf;
 		protected void DoChangeFont( Font font, Colour col)
 		{
 			m_canvas.TextFont = font;
-			if ( col != null )
+			if ( col !== null )
 				if ( col.Ok() )
 					m_canvas.colour = col;
 			m_canvas.Refresh();
-			
 			m_textctrl.font = font;
-			if ( col != null )
+			if ( col !== null )
 				if ( col.Ok() )
 					m_textctrl.ForegroundColour = col;
 		}

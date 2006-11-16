@@ -26,9 +26,9 @@
 
 // Utility function to grab the C++ typename of a given pointer to a class.
 extern "C" WXEXPORT
-const dstr wxObject_GetTypeName(wxObject* obj)
+const dstrret wxObject_GetTypeName(wxObject* obj)
 {
-	return dstr(obj->GetClassInfo()->GetClassName());
+	return dstr_ret(obj->GetClassInfo()->GetClassName());
 }
 
 //-----------------------------------------------------------------------------
@@ -44,8 +44,8 @@ void wxObject_dtor(wxObject* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxGetTranslation_func(dstr str)
+dstrret wxGetTranslation_func(dstr str)
 {
-	return dstr(wxGetTranslation(wxString(str.data, wxConvUTF8, str.length)));
+	return dstr_ret(wxGetTranslation(wxString(str.data, wxConvUTF8, str.length)));
 }
 

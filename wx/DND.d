@@ -67,7 +67,7 @@ import wx.Window;
 			this.memOwn = memOwn;
 		}
 		
-		public this(Window win)
+		public this(Window win = null)
 		{ 
 			this(wxDropSource_Win_ctor(wxObject.SafePtr(win)), true);
 			m_dataObject = null;
@@ -75,7 +75,7 @@ import wx.Window;
 			wxDropSource_RegisterVirtual( wxobj, this, &staticDoDoDragDrop );
 		}
 
-		public this(DataObject dataObject, Window win)
+		public this(DataObject dataObject, Window win = null)
 		{
 			this(wxDropSource_DataObject_ctor(wxObject.SafePtr(dataObject), wxObject.SafePtr(win)), true);
 			m_dataObject = dataObject;
@@ -136,10 +136,7 @@ import wx.Window;
 
 	public abstract class DropTarget : wxObject
 	{
-		public this()
-			{ this(cast(DataObject)null); }
-		
-		public this(DataObject dataObject)
+		public this(DataObject dataObject = null)
 		{ 
 			this(wxDropTarget_ctor(wxObject.SafePtr(dataObject)), true);
 			m_dataObject = dataObject;

@@ -84,34 +84,8 @@ import wx.VideoMode;
 			{ this(wxDisplay_ctor(mode), true); }
 			
 		//---------------------------------------------------------------------
-				
-		public override void Dispose()
-		{
-			if (!disposed)
-			{
-				if (wxobj != IntPtr.init)
-				{
-					if (memOwn)
-					{
-						wxDisplay_dtor(wxobj);
-						memOwn = false;
-					}
-				}
-				RemoveObject(wxobj);
-				wxobj = IntPtr.init;
-				disposed= true;
-			}
-			
-			super.Dispose();
-			//GC.SuppressFinalize(this);
-		}
-		
-		//---------------------------------------------------------------------
-		
-		~this() 
-		{
-			Dispose();
-		}
+
+		override private void dtor() { wxDisplay_dtor(wxobj); }
 
 		//------------------------------------------------------------------------
 		static int Count() { return wxDisplay_GetCount(); }
@@ -132,7 +106,7 @@ import wx.VideoMode;
 		// An array of available VideoModes for this display.
 		/+virtual+/ public VideoMode[] GetModes()
 		{
-			return GetModes(new VideoMode(0,0,0,0));
+			return GetModes(new_VideoMode(0,0,0,0));
 		}
 
 		// An array of the VideoModes that match mode. A match occurs when

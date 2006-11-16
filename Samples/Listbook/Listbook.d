@@ -66,7 +66,7 @@ import std.string;
 
 		public void OnAbout( Object sender, Event e )
 		{
-			MessageBox( "wxD Listbook sample\n2004 by Alexander Olk", "About",
+			MessageBox( "wxD Listbook sample\n2004 by Alexander Olk\nportred D by BERO", "About",
 				Dialog.wxOK | Dialog.wxICON_INFORMATION);
 		}
 

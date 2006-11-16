@@ -27,7 +27,9 @@ import wx.ArrayInt;
 
     public class SingleChoiceDialog : Dialog
     {
-        public const int wxCHOICEDLG_STYLE	= (wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER | wxOK | wxCANCEL | wxCENTRE);
+        enum {
+            wxCHOICEDLG_STYLE	= (wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER | wxOK | wxCANCEL | wxCENTRE)
+        }
 	public const int wxCHOICE_HEIGHT = 150;
 	public const int wxCHOICE_WIDTH  = 200;
 
@@ -37,17 +39,8 @@ import wx.ArrayInt;
         public this(IntPtr wxobj)
             { super(wxobj);}
 
-        public this(Window parent, string message, string caption, string[] choices)
-            { this(parent, message, caption, choices, null, wxCHOICEDLG_STYLE, wxDefaultPosition);}
-
-        public this(Window parent, string message, string caption, string[] choices, ClientData clientData)
-            { this(parent, message, caption, choices, clientData, wxCHOICEDLG_STYLE, wxDefaultPosition);}
-
-        public this(Window parent, string message, string caption, string[] choices, ClientData clientData, int style)
-            { this(parent, message, caption, choices, clientData, style, wxDefaultPosition);}
-
-        public  this(Window parent, string message, string caption, string[] choices, ClientData clientData, int style, Point pos)
-            { super(wxSingleChoiceDialog_ctor(wxObject.SafePtr(parent), message, caption, choices.length, choices, wxObject.SafePtr(clientData), cast(uint)style, pos));}
+        public  this(Window parent, string message, string caption, string[] choices, ClientData clientData = null, int style =  wxCHOICEDLG_STYLE, Point pos = wxDefaultPosition)
+            { super(wxSingleChoiceDialog_ctor(wxObject.SafePtr(parent), message, caption, choices.length, choices, wxObject.SafePtr(clientData), style, pos));}
 
         //-----------------------------------------------------------------------------
 
@@ -91,14 +84,8 @@ import wx.ArrayInt;
         public this(IntPtr wxobj)
             { super(wxobj);}
 
-        public this(Window parent, string message, string caption, string[] choices)
-            { this(parent, message, caption, choices, SingleChoiceDialog.wxCHOICEDLG_STYLE, wxDefaultPosition);}
-
-        public this(Window parent, string message, string caption, string[] choices, int style)
-            { this(parent, message, caption, choices, style, wxDefaultPosition);}
-
-        public  this(Window parent, string message, string caption, string[] choices, int style, Point pos)
-            { super(wxMultiChoiceDialog_ctor(wxObject.SafePtr(parent), message, caption, choices.length, choices, cast(uint)style, pos));}
+        public  this(Window parent, string message, string caption, string[] choices, int style = SingleChoiceDialog.wxCHOICEDLG_STYLE, Point pos = wxDefaultPosition)
+            { super(wxMultiChoiceDialog_ctor(wxObject.SafePtr(parent), message, caption, choices.length, choices, style, pos));}
 
         //-----------------------------------------------------------------------------
 

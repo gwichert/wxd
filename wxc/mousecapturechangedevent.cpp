@@ -19,9 +19,9 @@
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxMouseCaptureChangedEvent* wxMouseCaptureChangedEvent_ctor(wxEventType type)
+wxMouseCaptureChangedEvent* wxMouseCaptureChangedEvent_ctor(wxWindowID winid, wxWindow* gainedCapture)
 {
-    return new wxMouseCaptureChangedEvent(type);
+    return new wxMouseCaptureChangedEvent(winid,gainedCapture);
 }
 
 extern "C" WXEXPORT

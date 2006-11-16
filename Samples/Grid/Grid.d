@@ -1287,7 +1287,7 @@ import wx.wx;
 
 			if ( ( row % 2 ) > 0 )
 			{
-				if ( attr == null )
+				if ( attr === null )
 				{
 					attr = m_attrForOddRows;
 					attr.IncRef();

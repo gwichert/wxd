@@ -18,6 +18,7 @@ import wx.common;
 import wx.Event;
 import wx.ClientData;
 
+		static extern (C) IntPtr wxCommandEvent_ctor(int type,int winid);
 		static extern (C) int    wxCommandEvent_GetSelection(IntPtr self);
 		static extern (C) string wxCommandEvent_GetString(IntPtr self);
 		static extern (C) void wxCommandEvent_SetString(IntPtr self, string s);
@@ -39,6 +40,9 @@ import wx.Event;
 
 		public this(IntPtr wxobj) 
 			{ super(wxobj); }
+
+		public this(EventType commandType = wxEVT_NULL, int winid = 0)
+			{ super(wxCommandEvent_ctor(commandType,winid)); }
 
 		//-----------------------------------------------------------------------------
 
@@ -94,6 +98,6 @@ import wx.Event;
 
 			AddEventType(wxEVT_COMMAND_TOGGLEBUTTON_CLICKED,    &CommandEvent.New);
 			
-			AddEventType(wxEVT_COMMAND_CHECKLISTBOX_TOGGLED,	&CommandEvent.New);
+			AddEventType(wxEVT_COMMAND_CHECKLISTBOX_TOGGLED,    &CommandEvent.New);
 		}
 	}

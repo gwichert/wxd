@@ -19,9 +19,9 @@
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxContextMenuEvent* wxContextMenuEvent_ctor(wxEventType type)
+wxContextMenuEvent* wxContextMenuEvent_ctor(wxEventType type,wxWindowID winid,const wxPoint* pt)
 {
-    return new wxContextMenuEvent(type);
+    return new wxContextMenuEvent(type,winid,*pt);
 }
 
 extern "C" WXEXPORT

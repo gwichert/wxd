@@ -229,9 +229,9 @@ void wxPrintout_GetPageInfo(_Printout* self, int* minPage, int* maxPage, int* pa
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstr wxPrintout_GetTitle(_Printout* self)
+dstrret wxPrintout_GetTitle(_Printout* self)
 {
-    return dstr(self->GetTitle().c_str());
+    return dstr_ret(self->GetTitle().c_str());
 }
 
 //-----------------------------------------------------------------------------

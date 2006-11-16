@@ -17,7 +17,7 @@ module wx.QueryNewPaletteEvent;
 import wx.common;
 import wx.Event;
 
-		static extern (C) IntPtr wxQueryNewPaletteEvent_ctor(int type);
+		static extern (C) IntPtr wxQueryNewPaletteEvent_ctor(int winid);
 		static extern (C) bool wxQueryNewPaletteEvent_GetPaletteRealized(IntPtr self);
 		static extern (C) void wxQueryNewPaletteEvent_SetPaletteRealized(IntPtr self, bool realized);
 		
@@ -28,8 +28,8 @@ import wx.common;
 		public this(IntPtr wxobj) 
 			{ super(wxobj); }
 
-		public this(int type)
-			{ this(wxQueryNewPaletteEvent_ctor(type)); }
+		public this(int winid=0)
+			{ this(wxQueryNewPaletteEvent_ctor(winid)); }
 
 		//-----------------------------------------------------------------------------	
 		

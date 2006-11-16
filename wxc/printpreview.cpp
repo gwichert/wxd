@@ -301,5 +301,5 @@ int wxPreviewControlBar_GetZoomControl(wxPreviewControlBar* self)
 extern "C" WXEXPORT
 wxPrintPreviewBase* wxPreviewControlBar_GetPrintPreview(wxPreviewControlBar* self)
 {
-    self->GetPrintPreview();
+    return self->GetPrintPreview();
 }

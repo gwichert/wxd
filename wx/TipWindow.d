@@ -13,8 +13,8 @@ module wx.TipWindow;
 import wx.common;
 import wx.Window;
 
-        static extern (C) IntPtr wxTipWindow_ctor(IntPtr parent, string text, int maxLength, inout Rectangle rectBound);
-        static extern (C) IntPtr wxTipWindow_ctorNoRect(IntPtr parent, string text, int maxLength);
+        static extern (C) IntPtr wxTipWindow_ctor(IntPtr parent, string text, int maxLength, Rectangle* rectBound);
+        //static extern (C) IntPtr wxTipWindow_ctorNoRect(IntPtr parent, string text, int maxLength);
         //static extern (C) void   wxTipWindow_SetTipWindowPtr(IntPtr self, IntPtr wxTipWindow* windowPtr);
         static extern (C) void   wxTipWindow_SetBoundingRect(IntPtr self, inout Rectangle rectBound);
         static extern (C) void   wxTipWindow_Close(IntPtr self);
@@ -26,13 +26,11 @@ import wx.Window;
         public this(IntPtr wxobj)
             { super(wxobj); }
 
-        public this(Window parent, string text)
-            { this(parent, text, 100); }
-        public this(Window parent, string text, int maxLength)
-            { this(wxTipWindow_ctorNoRect(wxObject.SafePtr(parent), text, maxLength)); }
+        public this(Window parent, string text, int maxLength = 100)
+            { this(wxTipWindow_ctor(wxObject.SafePtr(parent), text, maxLength,null)); }
 
         public this(Window parent, string text, int maxLength, Rectangle rectBound)
-            { this(wxTipWindow_ctor(wxObject.SafePtr(parent), text, maxLength, rectBound)); }
+            { this(wxTipWindow_ctor(wxObject.SafePtr(parent), text, maxLength, &rectBound)); }
 
         //-----------------------------------------------------------------------------
 

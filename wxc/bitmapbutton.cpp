@@ -101,9 +101,9 @@ void wxBitmapButton_SetLabel(_BitmapButton* self, dstr label)
 }
 
 extern "C" WXEXPORT
-dstr wxBitmapButton_GetLabel(_BitmapButton* self)
+dstrret wxBitmapButton_GetLabel(_BitmapButton* self)
 {
-	return dstr(self->GetLabel());
+	return dstr_ret(self->GetLabel());
 }
 
 //-----------------------------------------------------------------------------

@@ -18,7 +18,7 @@
 #include "local_events.h"
 
 typedef void (CALLBACK* Virtual_voidvoid) (dobj obj);
-typedef wxSize (CALLBACK* Virtual_sizevoid) (dobj obj);
+typedef void (CALLBACK* Virtual_sizevoid) (dobj obj,wxSize* size);
 
 class _BoxSizer : public wxBoxSizer
 {
@@ -37,7 +37,7 @@ public:
 	{ m_RecalcSizes(m_dobj); }
 	
 	wxSize CalcMin()
-	{ return m_CalcMin(m_dobj); }
+	{ wxSize ret; m_CalcMin(m_dobj,&ret); return ret; }
 	
 private:
 	Virtual_voidvoid m_RecalcSizes;
@@ -77,9 +77,9 @@ void wxBoxSizer_RecalcSizes(_BoxSizer* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxSize wxBoxSizer_CalcMin(_BoxSizer* self)
+void wxBoxSizer_CalcMin(_BoxSizer* self,wxSize *size)
 {
-	return self->wxBoxSizer::CalcMin();
+	*size = self->wxBoxSizer::CalcMin();
 }
 
 //-----------------------------------------------------------------------------

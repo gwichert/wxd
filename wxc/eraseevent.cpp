@@ -19,9 +19,9 @@
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxEraseEvent* wxEraseEvent_ctor(wxEventType type)
+wxEraseEvent* wxEraseEvent_ctor(int Id, wxDC *dc)
 {
-    return new wxEraseEvent(type);
+    return new wxEraseEvent(Id,dc);
 }
 
 extern "C" WXEXPORT

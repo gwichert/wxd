@@ -19,9 +19,9 @@
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxIconizeEvent* wxIconizeEvent_ctor(wxEventType type)
+wxIconizeEvent* wxIconizeEvent_ctor(int winid, bool iconized)
 {
-    return new wxIconizeEvent(type);
+    return new wxIconizeEvent(winid,iconized);
 }
 
 extern "C" WXEXPORT
