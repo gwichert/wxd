@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - listbook.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - listbook.cxx
 //
 // The wxListbook proxy interface.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/listbook.h>
 #include "local_events.h"
 
@@ -33,7 +37,7 @@ wxListbook* wxListbook_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxListbook_Create(wxListbook *self, wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, long style, const char* name)
+bool wxListbook_Create(wxListbook *self, wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, long style, dstr name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -41,10 +45,10 @@ bool wxListbook_Create(wxListbook *self, wxWindow* parent, wxWindowID id, const 
 	if (size == NULL)
 		size = &wxDefaultSize;
 
-	if (name == NULL)
-		name = "listbook";
+	if (name.data==NULL)
+		name = dstr("listbook",sizeof("listbook")-1);
 
-	return self->Create(parent, id, *pos, *size, style, wxString(name, wxConvUTF8))?1:0;
+	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }
 //-----------------------------------------------------------------------------
 
@@ -57,17 +61,17 @@ int wxListbook_GetSelection(wxListbook* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxListbook_SetPageText(wxListbook* self, size_t n, const char* strText)
+bool wxListbook_SetPageText(wxListbook* self, size_t n, dstr strText)
 {
-	return self->SetPageText(n, wxString(strText, wxConvUTF8))?1:0;
+	return self->SetPageText(n, wxString(strText.data, wxConvUTF8, strText.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxListbook_GetPageText(wxListbook* self, size_t n)
+dstr wxListbook_GetPageText(wxListbook* self, size_t n)
 {
-	return new wxString(self->GetPageText(n));
+	return dstr(self->GetPageText(n));
 }
 
 //-----------------------------------------------------------------------------
@@ -97,9 +101,9 @@ void wxListbook_CalcSizeFromPage(wxListbook* self, const wxSize* sizePage, wxSiz
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxListbook_InsertPage(wxListbook* self, size_t n, wxWindow* page, const char* text, bool bSelect, int imageId)
+bool wxListbook_InsertPage(wxListbook* self, size_t n, wxWindow* page, dstr text, bool bSelect, int imageId)
 {
-	return self->InsertPage(n, page, wxString(text, wxConvUTF8), bSelect, imageId)?1:0;
+	return self->InsertPage(n, page, wxString(text.data, wxConvUTF8, text.length), bSelect, imageId)?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -193,9 +197,9 @@ bool wxListbook_DeleteAllPages(wxListbook* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxListbook_AddPage(wxListbook* self, wxWindow* page, const char* text, bool bselect, int imageId)
+bool wxListbook_AddPage(wxListbook* self, wxWindow* page, dstr text, bool bselect, int imageId)
 {
-	return self->AddPage(page, wxString(text, wxConvUTF8), bselect, imageId)?1:0;
+	return self->AddPage(page, wxString(text.data, wxConvUTF8, text.length), bselect, imageId)?1:0;
 }
 
 //-----------------------------------------------------------------------------

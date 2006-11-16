@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - font.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - font.cxx
 //
 // The wxFont proxy interface
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/font.h>
 
 //-----------------------------------------------------------------------------
@@ -23,18 +27,21 @@ extern "C" WXEXPORT wxFont* wxFont_SWISS_FONT()		{ return wxSWISS_FONT; }
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
+wxFont* wxFont_ctorFromFont(wxFont* font)
+{
+    return new wxFont(*font);
+}
+
+extern "C" WXEXPORT
 wxFont* wxFont_ctorDef()
 {
     return new wxFont();
 }
 
 extern "C" WXEXPORT
-wxFont* wxFont_ctor(int pointSize, int family, int style, int weight, const bool underline, const char *faceName, wxFontEncoding encoding)
+wxFont* wxFont_ctor(int pointSize, int family, int style, int weight, const bool underline, dstr faceName, wxFontEncoding encoding)
 {
-	if (faceName == NULL)
-		faceName = "";
-
-	return new wxFont(pointSize, family, style, weight, underline, wxString(faceName, wxConvUTF8), encoding);
+	return new wxFont(pointSize, family, style, weight, underline, wxString(faceName.data, wxConvUTF8, faceName.length), encoding);
 }
 
 //-----------------------------------------------------------------------------
@@ -96,9 +103,9 @@ bool wxFont_GetUnderlined(wxFont* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxFont_GetFaceName(wxFont* self)
+dstr wxFont_GetFaceName(wxFont* self)
 {
-	return new wxString(self->GetFaceName().c_str());
+	return dstr(self->GetFaceName().c_str());
 }
 
 //-----------------------------------------------------------------------------
@@ -128,17 +135,17 @@ bool wxFont_IsFixedWidth(wxFont* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxFont_GetNativeFontInfoDesc(wxFont* self)
+dstr wxFont_GetNativeFontInfoDesc(wxFont* self)
 {
-	return new wxString(self->GetNativeFontInfoDesc());
+	return dstr(self->GetNativeFontInfoDesc());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxFont_GetNativeFontInfoUserDesc(wxFont* self)
+dstr wxFont_GetNativeFontInfoUserDesc(wxFont* self)
 {
-	return new wxString(self->GetNativeFontInfoUserDesc());
+	return dstr(self->GetNativeFontInfoUserDesc());
 }
 
 //-----------------------------------------------------------------------------
@@ -176,9 +183,9 @@ void wxFont_SetWeight(wxFont* self, int weight)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxFont_SetFaceName(wxFont* self, const char* faceName)
+void wxFont_SetFaceName(wxFont* self, dstr faceName)
 {
-	self->SetFaceName(wxString(faceName, wxConvUTF8));
+	self->SetFaceName(wxString(faceName.data, wxConvUTF8, faceName.length));
 }
 
 //-----------------------------------------------------------------------------
@@ -200,33 +207,33 @@ void wxFont_SetEncoding(wxFont* self, wxFontEncoding encoding)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxFont_SetNativeFontInfoUserDesc(wxFont* self, const char* info)
+void wxFont_SetNativeFontInfoUserDesc(wxFont* self, dstr info)
 {
-	self->SetNativeFontInfoUserDesc(wxString(info, wxConvUTF8));
+	self->SetNativeFontInfoUserDesc(wxString(info.data, wxConvUTF8, info.length));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxFont_GetFamilyString(wxFont* self)
+dstr wxFont_GetFamilyString(wxFont* self)
 {
-	return new wxString(self->GetFamilyString());
+	return dstr(self->GetFamilyString());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxFont_GetStyleString(wxFont* self)
+dstr wxFont_GetStyleString(wxFont* self)
 {
-	return new wxString(self->GetStyleString());
+	return dstr(self->GetStyleString());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxFont_GetWeightString(wxFont* self)
+dstr wxFont_GetWeightString(wxFont* self)
 {
-	return new wxString(self->GetWeightString());
+	return dstr(self->GetWeightString());
 }
 
 //-----------------------------------------------------------------------------
@@ -264,7 +271,7 @@ void wxFont_SetDefaultEncoding(wxFontEncoding encoding)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxFont* wxFont_New(const char * strNativeFontDesc)
+wxFont* wxFont_New(dstr strNativeFontDesc)
 {
-	return wxFont::New(wxString(strNativeFontDesc, wxConvUTF8));
+	return wxFont::New(wxString(strNativeFontDesc.data, wxConvUTF8, strNativeFontDesc.length));
 }

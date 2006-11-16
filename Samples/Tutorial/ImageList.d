@@ -1,11 +1,6 @@
 
-using wx;
-using System;
-using System.Drawing;
-using System.Collections;
+import wx.wx;
 
-namespace ImageView
-{
     /**
      * Class to display a list of images.  The scrolled window helps us with
      * managing scrollbars when the window's contents are too large to be
@@ -22,9 +17,9 @@ namespace ImageView
          * and a static size of width = 150, The '-1' for height means that
          * the height of the window is unconstrained.
          */
-        public ImageList(Window parent, ImageViewer viewer)
-            : base(parent, -1, wxDefaultPosition, new Size(140, -1))
+        public this(Window parent, ImageViewer viewer)
         {
+            super(parent, -1, wxDefaultPosition, new_Size(140, -1));
             m_viewer = viewer;
 
             // A flex grid sizer will be used to align the images horizontally.
@@ -52,7 +47,7 @@ namespace ImageView
 		    Console.WriteLine("Adding images ...");
             foreach(string imageFile in images) {
 
-				Console.WriteLine("   + " + imageFile);
+				Console.WriteLine("   + " ~ imageFile);
                 // Create a thumbnail will display the image
                 Thumbnail thumb = new Thumbnail(this, imageFile);
                 
@@ -95,7 +90,7 @@ namespace ImageView
             System.GC.Collect();
         }
 
-        public void OnThumbnailClicked(string fileName, wx.Bitmap bmp)
+        public void OnThumbnailClicked(string fileName, Bitmap bmp)
         {
             m_viewer.Bitmap = bmp;
 
@@ -103,5 +98,3 @@ namespace ImageView
             Parent.Parent.Title = fileName;
         }
     }
-}
-

@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - statusbr.h
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - statusbr.h
 // 
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
@@ -6,16 +9,13 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Runtime.InteropServices;
-using System.Drawing;
+module wx.StatusBar;
+import wx.common;
+import wx.Window;
 
-namespace wx
-{
-	public class StatusBar : Window
-	{
-		public const long wxST_SIZEGRIP         = 0x0010;
-		public const long wxST_NO_AUTORESIZE    = 0x0001;
+
+		public const int wxST_SIZEGRIP         = 0x0010;
+		public const int wxST_NO_AUTORESIZE    = 0x0001;
 		
 		public const int wxSB_NORMAL	= 0x000;
 		public const int wxSB_FLAT	= 0x001;
@@ -23,43 +23,42 @@ namespace wx
 	
 		//-----------------------------------------------------------------------------
 	
-		[DllImport("wx-c")] static extern IntPtr wxStatusBar_ctor();
-		[DllImport("wx-c")] static extern bool   wxStatusBar_Create(IntPtr self, IntPtr parent, int id, uint style, string name);
+		static extern (C) IntPtr wxStatusBar_ctor();
+		static extern (C) bool   wxStatusBar_Create(IntPtr self, IntPtr parent, int id, uint style, string name);
 	
-		[DllImport("wx-c")] static extern void   wxStatusBar_SetFieldsCount(IntPtr self, int number, int[] widths);
-		[DllImport("wx-c")] static extern bool   wxStatusBar_GetFieldRect(IntPtr self, int i, ref Rectangle rect);
-		[DllImport("wx-c")] static extern int    wxStatusBar_GetBorderY(IntPtr self);
-		[DllImport("wx-c")] static extern IntPtr wxStatusBar_GetStatusText(IntPtr self, int number);
-		[DllImport("wx-c")] static extern int    wxStatusBar_GetBorderX(IntPtr self);
-		[DllImport("wx-c")] static extern void   wxStatusBar_SetStatusText(IntPtr self, string text, int number);
-		[DllImport("wx-c")] static extern void   wxStatusBar_SetStatusWidths(IntPtr self, int n, int[] widths);
+		static extern (C) void   wxStatusBar_SetFieldsCount(IntPtr self, int number, int* widths);
+		static extern (C) bool   wxStatusBar_GetFieldRect(IntPtr self, int i, inout Rectangle rect);
+		static extern (C) int    wxStatusBar_GetBorderY(IntPtr self);
+		static extern (C) string wxStatusBar_GetStatusText(IntPtr self, int number);
+		static extern (C) int    wxStatusBar_GetBorderX(IntPtr self);
+		static extern (C) void   wxStatusBar_SetStatusText(IntPtr self, string text, int number);
+		static extern (C) void   wxStatusBar_SetStatusWidths(IntPtr self, int n, int* widths);
 		
-		[DllImport("wx-c")] static extern int    wxStatusBar_GetFieldsCount(IntPtr self);
-		[DllImport("wx-c")] static extern void   wxStatusBar_PopStatusText(IntPtr self, int field);
-		[DllImport("wx-c")] static extern void   wxStatusBar_PushStatusText(IntPtr self, string xstring, int field);
-		[DllImport("wx-c")] static extern void   wxStatusBar_SetMinHeight(IntPtr self, int height);
-		[DllImport("wx-c")] static extern void   wxStatusBar_SetStatusStyles(IntPtr self, int n, [In,Out] int[] styles);
+		static extern (C) int    wxStatusBar_GetFieldsCount(IntPtr self);
+		static extern (C) void   wxStatusBar_PopStatusText(IntPtr self, int field);
+		static extern (C) void   wxStatusBar_PushStatusText(IntPtr self, string xstring, int field);
+		static extern (C) void   wxStatusBar_SetMinHeight(IntPtr self, int height);
+		static extern (C) void   wxStatusBar_SetStatusStyles(IntPtr self, int n, int* styles);
 	
 		//-----------------------------------------------------------------------------
 
-		public StatusBar(IntPtr wxObject) 
-			: base(wxObject) { }
+	public class StatusBar : Window
+	{
+		public this(IntPtr wxobj) 
+			{ super(wxobj); }
 
-		public StatusBar()
-			: this(wxStatusBar_ctor()) { }
+		public this()
+			{ this(wxStatusBar_ctor()); }
+/+
+		public this(Window parent, int id)
+			{ this(parent, id, wxST_SIZEGRIP, "statusBar"); }
++/			
+		public this(Window parent, int id, int style)
+			{ this(parent, id, style, "statusBar"); }
 
-		public StatusBar(Window parent)
-			: this(parent, Window.UniqueID, wxST_SIZEGRIP, "statusBar") { }
-			
-		public StatusBar(Window parent, int id)
-			: this(parent, id, wxST_SIZEGRIP, "statusBar") { }
-			
-		public StatusBar(Window parent, int id, long style)
-			: this(parent, id, style, "statusBar") { }
-
-		public StatusBar(Window parent, int id, long style, string name)
-		: this()
+		public this(Window parent, int id, int style, string name)
 		{
+			this();
 			if (!Create(parent, id, style, name))
 			{
 				throw new InvalidOperationException("Failed to create StatusBar");
@@ -69,81 +68,71 @@ namespace wx
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public StatusBar(Window parent, long style)
-			: this(parent, Window.UniqueID, style, "statusBar") { }
+		public this(Window parent)
+			{ this(parent, Window.UniqueID, wxST_SIZEGRIP, "statusBar"); }
+			
+		public this(Window parent, int style)
+			{ this(parent, Window.UniqueID, style, "statusBar"); }
 
-		public StatusBar(Window parent, long style, string name)
-			: this(parent, Window.UniqueID, style, name) {}
+		public this(Window parent, int style, string name)
+			{ this(parent, Window.UniqueID, style, name);}
 		
 		//-----------------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, long style, string name)
+		public bool Create(Window parent, int id, int style, string name)
 		{
-			return wxStatusBar_Create(wxObject, Object.SafePtr(parent), id, (uint)style, name);
+			return wxStatusBar_Create(wxobj, wxObject.SafePtr(parent), id, cast(uint)style, name);
 		}
 
 		//-----------------------------------------------------------------------------
         
 		public void SetFieldsCount(int number, int[] widths)
 		{
-			wxStatusBar_SetFieldsCount(wxObject, number, widths);
+			wxStatusBar_SetFieldsCount(wxobj, number, widths);
 		}
 		
-		public int FieldsCount
+		public int FieldsCount() { return wxStatusBar_GetFieldsCount(wxobj); }
+
+		//-----------------------------------------------------------------------------
+
+		public int BorderY() { return wxStatusBar_GetBorderY(wxobj); }
+
+		public int BorderX() { return wxStatusBar_GetBorderX(wxobj); }
+
+		//-----------------------------------------------------------------------------
+
+		public bool GetFieldRect(int i, inout Rectangle rect)
 		{
-			get { return wxStatusBar_GetFieldsCount(wxObject); }
+			return wxStatusBar_GetFieldRect(wxobj, i, rect);
 		}
 
 		//-----------------------------------------------------------------------------
 
-		public int BorderY
-		{
-			get { return wxStatusBar_GetBorderY(wxObject); }
-		}
+		public void StatusText(string value) { SetStatusText(value); }
+		public string StatusText() { return GetStatusText(0); }
 
-		public int BorderX
-		{
-			get { return wxStatusBar_GetBorderX(wxObject); }
-		}
-
-		//-----------------------------------------------------------------------------
-
-		public bool GetFieldRect(int i, ref Rectangle rect)
-		{
-			return wxStatusBar_GetFieldRect(wxObject, i, ref rect);
-		}
-
-		//-----------------------------------------------------------------------------
-
-		public string StatusText
-		{
-			set { SetStatusText(value); }
-			get { return GetStatusText(0); }
-		}
-
-		public void SetStatusText(string text) 
-		{ SetStatusText(text, 0); }
+		public void SetStatusText(string text) { SetStatusText(text, 0); }
 
 		public void SetStatusText(string text, int number)
 		{
-			wxStatusBar_SetStatusText(wxObject, text, number);
+			wxStatusBar_SetStatusText(wxobj, text, number);
 		}
 
 		public string GetStatusText(int number)
 		{
-			return new wxString(wxStatusBar_GetStatusText(wxObject, number), true);
+			return wxStatusBar_GetStatusText(wxobj, number).dup;
 		}
 
 		//-----------------------------------------------------------------------------
 
-		public int[] StatusWidths
+		public void StatusWidths(int[] value)
 		{
-			set { SetStatusWidths(value.Length, value); }
+			SetStatusWidths(value.length, value);
 		}
 
-		public void SetStatusWidths(int n, int[] widths)
+		public void SetStatusWidths(int n, int* widths)
 		{
-			wxStatusBar_SetStatusWidths(wxObject, n, widths);
+			wxStatusBar_SetStatusWidths(wxobj, n, widths);
 		}
 		
 		//-----------------------------------------------------------------------------
@@ -155,7 +144,7 @@ namespace wx
 		
 		public void PopStatusText(int field)
 		{
-			wxStatusBar_PopStatusText(wxObject, field);
+			wxStatusBar_PopStatusText(wxobj, field);
 		}
 		
 		//-----------------------------------------------------------------------------
@@ -167,22 +156,22 @@ namespace wx
 		
 		public void PushStatusText(string xstring, int field)
 		{
-			wxStatusBar_PushStatusText(wxObject, xstring, field);
+			wxStatusBar_PushStatusText(wxobj, xstring, field);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public new int MinHeight
+		public void MinHeight(int value)
 		{
-			set { wxStatusBar_SetMinHeight(wxObject, value); }
+			wxStatusBar_SetMinHeight(wxobj, value); 
 		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public int[] StatusStyles
+		public void StatusStyles(int[] value)
 		{
-			set { wxStatusBar_SetStatusStyles(wxObject, value.Length, value); }
+			wxStatusBar_SetStatusStyles(wxobj, value.length, value);
 		}
+
 	}
-}
 

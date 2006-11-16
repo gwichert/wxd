@@ -1,120 +1,64 @@
 //-----------------------------------------------------------------------------
-// wx.NET - wxString.cs
+// wxD - wxString.d
 //
 // The wxString wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
+// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Runtime.InteropServices;
+module wx.wxString;
+import wx.common;
 
-namespace wx
-{
-	public class wxString : Object
+		static extern (C) IntPtr wxString_ctor(char* str);
+		static extern (C) IntPtr wxString_ctor2(char[] str);
+		static extern (C) void   wxString_dtor(IntPtr self);
+		static extern (C) string wxString_mb_str(IntPtr self);
+		static extern (C) uint   wxString_Length(IntPtr self);
+		static extern (C) char   wxString_CharAt(IntPtr self, uint i);
+		static extern (C) int    wxString_CharAtInt(IntPtr self, uint i);
+		static extern (C) char*  wxString_c_str(IntPtr self);
+		static extern (C) char[] wxString_d_str(IntPtr self);
+		
+		//---------------------------------------------------------------------
+
+	public class wxString : wxObject
 	{
-		[DllImport("wx-c")] static extern IntPtr wxString_ctor(string str);
-		[DllImport("wx-c")] static extern void   wxString_dtor(IntPtr self);
-		[DllImport("wx-c")] static extern string wxString_mb_str(IntPtr self);
-		[DllImport("wx-c")] static extern uint   wxString_Length(IntPtr self);
-		[DllImport("wx-c")] static extern char   wxString_CharAt(IntPtr self, uint i);
-		[DllImport("wx-c")] static extern int    wxString_CharAtInt(IntPtr self, uint i);
-		
-		//---------------------------------------------------------------------
-
-		public wxString(IntPtr wxObject)
-			: base(wxObject)
+		public this(IntPtr wxobj)
 		{ 
-			this.wxObject = wxObject;
+			super(wxobj);
 		}
 			
-		internal wxString(IntPtr wxObject, bool memOwn)
-			: base(wxObject)
+		private this(IntPtr wxobj, bool memOwn)
 		{ 
+			super(wxobj);
 			this.memOwn = memOwn;
-			this.wxObject = wxObject;
 		}
 
-		public wxString()
-			: this("") { }
+		public this()
+			{ this(""); }
 
-		public wxString(string str)
-			: this(wxString_ctor(str), true) { }
+		public this(string str)
+			{ this(wxString_ctor2(str), true); }
 		
 		//---------------------------------------------------------------------
-				
-		public override void Dispose()
-		{
-			if (!disposed)
-			{
-				if (wxObject != IntPtr.Zero)
-				{
-					if (memOwn)
-					{
-						wxString_dtor(wxObject);
-						memOwn = false;
-					}
-				}
-				RemoveObject(wxObject);
-				wxObject = IntPtr.Zero;
-				disposed= true;
-			}
-			
-			base.Dispose();
-			GC.SuppressFinalize(this);
-		}
-		
-		//---------------------------------------------------------------------
-		
-		~wxString() 
-		{
-			Dispose();
-		}
-
+		override private void dtor() { wxString_dtor(wxobj); }				
 		//---------------------------------------------------------------------
 
-		public static implicit operator string (wxString str)
-		{
-			long len = str.Length;
-			char[] t = new char[len];
-			
-			for(long i = 0; i < len; i++) {
-				t[i] = str[i];
-			}
-			
-			return new String(t);
-		}
+		public uint length() { return wxString_Length(wxobj); }
+		public char* c_str() { return wxString_c_str(wxobj); }
+		public char[] toString() { return wxString_d_str(wxobj).dup; }
+//version(__WXMSW__) {
+		public char opIndex(uint i)
+			{ return wxString_CharAt(wxobj, i); }
+//} else {
+//		public char opIndex(uint i)
+//			{ return System.Convert.ToChar(wxString_CharAtInt(wxobj, i)); }
+//} // version(__WXMSW__)			
 		
-		public static implicit operator wxString (string str) 
-		{
-			return new wxString(str);
-		}
-		
-		//---------------------------------------------------------------------
-
-		public long Length
-		{
-			get { return wxString_Length(wxObject); }
-		}
-
-		public char this[long i]
-		{
-#if __WXMSW__
-			get { return wxString_CharAt(wxObject, (uint)i); }
-#else
-			get {return System.Convert.ToChar(wxString_CharAtInt(wxObject, (uint)i)); }
-#endif			
-		}
-		
-		//---------------------------------------------------------------------
-
-		internal static IntPtr SafePtr(wxString obj)
-		{
-			return (obj == null) ? IntPtr.Zero : obj.wxObject;
-		}
 	}
-}
+

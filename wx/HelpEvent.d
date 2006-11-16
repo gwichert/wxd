@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - HelpEvent.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - HelpEvent.cs
 //
 // The wxHelpEvent wrapper class.
@@ -10,57 +13,54 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.HelpEvent;
+import wx.common;
+import wx.CommandEvent;
 
-namespace wx
-{
-	public class HelpEvent : CommandEvent
-	{
-		[DllImport("wx-c")] static extern IntPtr wxHelpEvent_ctor(int type);
-		[DllImport("wx-c")] static extern void   wxHelpEvent_GetPosition(IntPtr self, ref Point pos);
-		[DllImport("wx-c")] static extern void   wxHelpEvent_SetPosition(IntPtr self, ref Point pos);
-		[DllImport("wx-c")] static extern IntPtr wxHelpEvent_GetLink(IntPtr self);
-		[DllImport("wx-c")] static extern void   wxHelpEvent_SetLink(IntPtr self, string link);
-		[DllImport("wx-c")] static extern IntPtr wxHelpEvent_GetTarget(IntPtr self);
-		[DllImport("wx-c")] static extern void   wxHelpEvent_SetTarget(IntPtr self, string target);
+		static extern (C) IntPtr wxHelpEvent_ctor(int type);
+		static extern (C) void   wxHelpEvent_GetPosition(IntPtr self, inout Point pos);
+		static extern (C) void   wxHelpEvent_SetPosition(IntPtr self, inout Point pos);
+		static extern (C) string wxHelpEvent_GetLink(IntPtr self);
+		static extern (C) void   wxHelpEvent_SetLink(IntPtr self, string link);
+		static extern (C) string wxHelpEvent_GetTarget(IntPtr self);
+		static extern (C) void   wxHelpEvent_SetTarget(IntPtr self, string target);
 		
 		//-----------------------------------------------------------------------------
 
-		public HelpEvent(IntPtr wxObject) 
-			: base(wxObject) { }
+	public class HelpEvent : CommandEvent
+	{
+		public this(IntPtr wxobj) 
+			{ super(wxobj); }
 
-		public HelpEvent(int type)
-			: this(wxHelpEvent_ctor(type)) { }
+		public this(int type)
+			{ this(wxHelpEvent_ctor(type)); }
 
 		//-----------------------------------------------------------------------------	
 		
-		public Point Position
-		{
-			get { 
-				Point p = new Point();
-				wxHelpEvent_GetPosition(wxObject, ref p); 
+		public Point Position() { 
+				Point p;
+				wxHelpEvent_GetPosition(wxobj, p); 
 				return p;
 			}
 			
-			set { wxHelpEvent_SetPosition(wxObject, ref value); }
-		}
+		public void Position(Point value) { wxHelpEvent_SetPosition(wxobj, value); }
 		
 		//-----------------------------------------------------------------------------	
 		
-		public string Link
-		{
-			get { return new wxString(wxHelpEvent_GetLink(wxObject), true); }
-			set { wxHelpEvent_SetLink(wxObject, value); }
-		}
+		public string Link() { return wxHelpEvent_GetLink(wxobj).dup; }
+		public void Link(string value) { wxHelpEvent_SetLink(wxobj, value); }
 		
 		//-----------------------------------------------------------------------------	
 		
-		public string Target
+		public string Target() { return wxHelpEvent_GetTarget(wxobj).dup; }
+		public void Target(string value) { wxHelpEvent_SetTarget(wxobj, value); }
+
+
+		private static Event New(IntPtr obj) { return new HelpEvent(obj); }
+
+		static this()
 		{
-			get { return new wxString(wxHelpEvent_GetTarget(wxObject), true); }
-			set { wxHelpEvent_SetTarget(wxObject, value); }
+			AddEventType(wxEVT_HELP,				&HelpEvent.New);
+			AddEventType(wxEVT_DETAILED_HELP,			&HelpEvent.New);
 		}
 	}
-}

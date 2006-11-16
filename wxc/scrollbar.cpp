@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - scrolbar.h
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - scrolbar.h
 // 
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
@@ -7,6 +10,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/scrolbar.h>
 #include "local_events.h"
 
@@ -29,7 +33,7 @@ wxScrollBar* wxScrollBar_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxScrollBar_Create(wxScrollBar* self, wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, int style, const wxValidator* validator, const char* name)
+bool wxScrollBar_Create(wxScrollBar* self, wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, int style, const wxValidator* validator, dstr name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -40,10 +44,10 @@ bool wxScrollBar_Create(wxScrollBar* self, wxWindow* parent, wxWindowID id, cons
 	if (validator == NULL)
 		validator = &wxDefaultValidator;
 
-	if (name == NULL)
-		name = "scrollbar";
+	if (name.data==NULL)
+		name = dstr("scrollbar",sizeof("scrollbar")-1);
 		
-    return self->Create(parent, id, *pos, *size, style, *validator, wxString(name, wxConvUTF8))?1:0;
+    return self->Create(parent, id, *pos, *size, style, *validator, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------

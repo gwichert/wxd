@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - togglebutton.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - togglebutton.cxx
 //
 // The wxToggleButton proxy interface.
@@ -10,6 +13,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/tglbtn.h>
 #include "local_events.h"
 
@@ -32,7 +36,7 @@ wxToggleButton* wxToggleButton_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxToggleButton_Create(wxToggleButton *self, wxWindow* parent, wxWindowID id, const char* label, const wxPoint* pos, const wxSize* size, long style, const wxValidator* validator, const char* name)
+bool wxToggleButton_Create(wxToggleButton *self, wxWindow* parent, wxWindowID id, dstr label, const wxPoint* pos, const wxSize* size, long style, const wxValidator* validator, dstr name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -43,10 +47,10 @@ bool wxToggleButton_Create(wxToggleButton *self, wxWindow* parent, wxWindowID id
 	if (validator == NULL)
 		validator = &wxDefaultValidator;
 
-	if (name == NULL)
-		name = "check";
+	if (name.data==NULL)
+		name = dstr("check",sizeof("check")-1);
 
-	return self->Create(parent, id, wxString(label, wxConvUTF8), *pos, *size, style, *validator, wxString(name, wxConvUTF8))?1:0;
+	return self->Create(parent, id, wxString(label.data, wxConvUTF8, label.length), *pos, *size, style, *validator, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------

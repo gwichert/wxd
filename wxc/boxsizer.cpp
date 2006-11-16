@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - boxsizer.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - boxsizer.cxx
 //
 // The wxBoxSizer proxy interface.
@@ -11,16 +14,11 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include "local_events.h"
 
-#if defined(_WINDOWS)
-#define CALLBACK __stdcall
-#else
-#define CALLBACK
-#endif
-
-typedef void (CALLBACK* Virtual_voidvoid) ();
-typedef wxSize* (CALLBACK* Virtual_sizevoid) ();
+typedef void (CALLBACK* Virtual_voidvoid) (dobj obj);
+typedef wxSize (CALLBACK* Virtual_sizevoid) (dobj obj);
 
 class _BoxSizer : public wxBoxSizer
 {
@@ -28,30 +26,32 @@ public:
 	_BoxSizer(int orient)
 		: wxBoxSizer(orient) {}
 		
-	void RegisterVirtual(Virtual_voidvoid recalcSizes, Virtual_sizevoid calcMin)
+	void RegisterVirtual(dobj obj, Virtual_voidvoid recalcSizes, Virtual_sizevoid calcMin)
 	{
+		m_dobj = obj;
 		m_RecalcSizes = recalcSizes;
 		m_CalcMin = calcMin;
 	}
 	
 	void RecalcSizes()
-	{ m_RecalcSizes(); }
+	{ m_RecalcSizes(m_dobj); }
 	
 	wxSize CalcMin()
-	{ return wxSize(*m_CalcMin()); }
+	{ return m_CalcMin(m_dobj); }
 	
 private:
 	Virtual_voidvoid m_RecalcSizes;
 	Virtual_sizevoid m_CalcMin;
-	
+	dobj m_dobj;
+
 public:
 	DECLARE_DISPOSABLE(_BoxSizer)
 };
 
 extern "C" WXEXPORT
-void wxBoxSizer_RegisterVirtual(_BoxSizer* self, Virtual_voidvoid recalcSizes, Virtual_sizevoid calcMin)
+void wxBoxSizer_RegisterVirtual(_BoxSizer* self, dobj obj,Virtual_voidvoid recalcSizes, Virtual_sizevoid calcMin)
 {
-	self->RegisterVirtual(recalcSizes, calcMin);
+	self->RegisterVirtual(obj, recalcSizes, calcMin);
 }
 
 extern "C" WXEXPORT
@@ -77,9 +77,9 @@ void wxBoxSizer_RecalcSizes(_BoxSizer* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxSize* wxBoxSizer_CalcMin(_BoxSizer* self)
+wxSize wxBoxSizer_CalcMin(_BoxSizer* self)
 {
-	return new wxSize(self->wxBoxSizer::CalcMin());
+	return self->wxBoxSizer::CalcMin();
 }
 
 //-----------------------------------------------------------------------------

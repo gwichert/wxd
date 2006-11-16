@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - document.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - document.cxx
 //
 // The wxDocument proxy interface.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/docview.h>
 
 //-----------------------------------------------------------------------------
@@ -24,49 +28,49 @@ wxDocument* wxDocument_ctor(wxDocument* parent)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxDocument_SetFilename(wxDocument* self, char* filename, bool notifyViews)
+void wxDocument_SetFilename(wxDocument* self, dstr filename, bool notifyViews)
 {
-    self->SetFilename(wxString(filename, wxConvUTF8), notifyViews);
+    self->SetFilename(wxString(filename.data, wxConvUTF8, filename.length), notifyViews);
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxDocument_GetFilename(wxDocument* self)
+dstr wxDocument_GetFilename(wxDocument* self)
 {
-    return new wxString(self->GetFilename());
+    return dstr(self->GetFilename());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxDocument_SetTitle(wxDocument* self, char* title)
+void wxDocument_SetTitle(wxDocument* self, dstr title)
 {
-    self->SetTitle(wxString(title, wxConvUTF8));
+    self->SetTitle(wxString(title.data, wxConvUTF8, title.length));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxDocument_GetTitle(wxDocument* self)
+dstr wxDocument_GetTitle(wxDocument* self)
 {
-    return new wxString(self->GetTitle());
+    return dstr(self->GetTitle());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxDocument_SetDocumentName(wxDocument* self, char* name)
+void wxDocument_SetDocumentName(wxDocument* self, dstr name)
 {
-    self->SetDocumentName(wxString(name, wxConvUTF8));
+    self->SetDocumentName(wxString(name.data, wxConvUTF8, name.length));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxDocument_GetDocumentName(wxDocument* self)
+dstr wxDocument_GetDocumentName(wxDocument* self)
 {
-    return new wxString(self->GetDocumentName());
+    return dstr(self->GetDocumentName());
 }
 
 //-----------------------------------------------------------------------------

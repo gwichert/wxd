@@ -1,99 +1,101 @@
 //-----------------------------------------------------------------------------
-// wx.NET - Choice.cs
+// wxD - Choice.d
 //
 // The wxChoice wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
+// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.Choice;
+import wx.common;
+import wx.Control;
+import wx.ClientData;
+import wx.IControlWithItems;
+import wx.ArrayString;
 
-namespace wx
-{
-	public class Choice : Control, IControlWithItems
-	{
-		[DllImport("wx-c")] static extern IntPtr wxChoice_ctor();
-		[DllImport("wx-c")] static extern bool   wxChoice_Create(IntPtr self, IntPtr parent, int id, ref Point pos, ref Size size, int n, string[] choices, uint style, IntPtr validator, string name);
-		[DllImport("wx-c")] static extern void   wxChoice_dtor(IntPtr self);
+		static extern (C) IntPtr wxChoice_ctor();
+		static extern (C) bool   wxChoice_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, int n, string* choices, uint style, IntPtr validator, string name);
+		static extern (C) void   wxChoice_dtor(IntPtr self);
 
-		[DllImport("wx-c")] static extern void   wxChoice_SetSelection(IntPtr self, int n);
-		[DllImport("wx-c")] static extern bool   wxChoice_SetStringSelection(IntPtr self, string s);
-		[DllImport("wx-c")] static extern IntPtr wxChoice_GetStringSelection(IntPtr self);
+		static extern (C) void   wxChoice_SetSelection(IntPtr self, int n);
+		static extern (C) bool   wxChoice_SetStringSelection(IntPtr self, string s);
+		static extern (C) string wxChoice_GetStringSelection(IntPtr self);
 
-		[DllImport("wx-c")] static extern void   wxChoice_SetColumns(IntPtr self, int n);
-		[DllImport("wx-c")] static extern int    wxChoice_GetColumns(IntPtr self);
+		static extern (C) void   wxChoice_SetColumns(IntPtr self, int n);
+		static extern (C) int    wxChoice_GetColumns(IntPtr self);
 
-		[DllImport("wx-c")] static extern void   wxChoice_Command(IntPtr self, IntPtr evt);
-		[DllImport("wx-c")] static extern int    wxChoice_GetCount(IntPtr self);
-		[DllImport("wx-c")] static extern IntPtr wxChoice_GetString(IntPtr self, int n);
-		[DllImport("wx-c")] static extern int    wxChoice_GetSelection(IntPtr self);
+		static extern (C) void   wxChoice_Command(IntPtr self, IntPtr evt);
+		static extern (C) int    wxChoice_GetCount(IntPtr self);
+		static extern (C) string wxChoice_GetString(IntPtr self, int n);
+		static extern (C) int    wxChoice_GetSelection(IntPtr self);
 
-		[DllImport("wx-c")] static extern IntPtr wxChoice_GetClientData(IntPtr self, int n);
-		[DllImport("wx-c")] static extern void   wxChoice_SetClientData(IntPtr self, int n, IntPtr data);
+		static extern (C) IntPtr wxChoice_GetClientData(IntPtr self, int n);
+		static extern (C) void   wxChoice_SetClientData(IntPtr self, int n, IntPtr data);
 
-		[DllImport("wx-c")] static extern int    wxChoice_FindString(IntPtr self, string str);
+		static extern (C) int    wxChoice_FindString(IntPtr self, string str);
 		
-		[DllImport("wx-c")] static extern void   wxChoice_Delete(IntPtr self, int n);
-		[DllImport("wx-c")] static extern void   wxChoice_Clear(IntPtr self);
+		static extern (C) void   wxChoice_Delete(IntPtr self, int n);
+		static extern (C) void   wxChoice_Clear(IntPtr self);
 
-		[DllImport("wx-c")] static extern int   wxChoice_Append(IntPtr self, string item);
-		[DllImport("wx-c")] static extern int   wxChoice_AppendData(IntPtr self, string item, IntPtr data);
+		static extern (C) int   wxChoice_Append(IntPtr self, string item);
+		static extern (C) int   wxChoice_AppendData(IntPtr self, string item, IntPtr data);
 		
-		[DllImport("wx-c")] static extern	void wxChoice_AppendString(IntPtr self, string item);
+		static extern (C)	void wxChoice_AppendString(IntPtr self, string item);
 		
-		[DllImport("wx-c")] static extern	void wxChoice_AppendArrayString(IntPtr self, int n, string[] strings);
+		static extern (C)	void wxChoice_AppendArrayString(IntPtr self, int n, string* strings);
 		
-		[DllImport("wx-c")] static extern	int wxChoice_Insert(IntPtr self, string item, int pos);
-		[DllImport("wx-c")] static extern	int wxChoice_InsertClientData(IntPtr self, string item, int pos, IntPtr clientData);
+		static extern (C)	int wxChoice_Insert(IntPtr self, string item, int pos);
+		static extern (C)	int wxChoice_InsertClientData(IntPtr self, string item, int pos, IntPtr clientData);
 		
-		[DllImport("wx-c")] static extern	IntPtr wxChoice_GetStrings(IntPtr self);
+		static extern (C)	IntPtr wxChoice_GetStrings(IntPtr self);
 		
-		[DllImport("wx-c")] static extern	void wxChoice_SetClientObject(IntPtr self, int n, IntPtr clientData);
-		[DllImport("wx-c")] static extern	IntPtr wxChoice_GetClientObject(IntPtr self, int n);
-		[DllImport("wx-c")] static extern	bool wxChoice_HasClientObjectData(IntPtr self);
-		[DllImport("wx-c")] static extern	bool wxChoice_HasClientUntypedData(IntPtr self);
+		static extern (C)	void wxChoice_SetClientObject(IntPtr self, int n, IntPtr clientData);
+		static extern (C)	IntPtr wxChoice_GetClientObject(IntPtr self, int n);
+		static extern (C)	bool wxChoice_HasClientObjectData(IntPtr self);
+		static extern (C)	bool wxChoice_HasClientUntypedData(IntPtr self);
 		
-		[DllImport("wx-c")] static extern void wxChoice_SetString(IntPtr self, int n, string text);
+		static extern (C) void wxChoice_SetString(IntPtr self, int n, string text);
 		
-		[DllImport("wx-c")] static extern void wxChoice_Select(IntPtr self, int n);
+		static extern (C) void wxChoice_Select(IntPtr self, int n);
 		
-		[DllImport("wx-c")] static extern	bool wxChoice_ShouldInheritColours(IntPtr self);
+		static extern (C)	bool wxChoice_ShouldInheritColours(IntPtr self);
 		
-		[DllImport("wx-c")] static extern	bool wxChoice_IsEmpty(IntPtr self);
+		static extern (C)	bool wxChoice_IsEmpty(IntPtr self);
 
 		//---------------------------------------------------------------------
 		
-		public Choice(IntPtr wxObject) 
-			: base(wxObject) {}
+	public class Choice : Control , IControlWithItems
+	{
+		public this(IntPtr wxobj) 
+			{ super(wxobj);}
 
-		public Choice()
-			: base(wxChoice_ctor()) { }
+		public this()
+			{ super(wxChoice_ctor()); }
 
-		public Choice(Window parent, int id)
-			: this(parent, id, wxDefaultPosition, wxDefaultSize, new string[] { }, 0, null, null) { }
+		public this(Window parent, int id)
+			{ this(parent, id, wxDefaultPosition, wxDefaultSize, null, 0, null, null); }
 
-		public Choice(Window parent, int id, Point pos, Size size, string[] choices)
-			: this(parent, id, pos, size, choices, 0, null, null) { }
+		public this(Window parent, int id, Point pos, Size size, string[] choices)
+			{ this(parent, id, pos, size, choices, 0, null, null); }
 
-		public Choice(Window parent, int id, Point pos, Size size, string[] choices, long style)
-			: this(parent, id, pos, size, choices, style, null, null) { }
+		public this(Window parent, int id, Point pos, Size size, string[] choices, uint style)
+			{ this(parent, id, pos, size, choices, style, null, null); }
 
-		public Choice(Window parent, int id, Point pos, Size size, string[] choices, long style, Validator val)
-			: this(parent, id, pos, size, choices, style, val, null) { }
+		public this(Window parent, int id, Point pos, Size size, string[] choices, uint style, Validator val)
+			{ this(parent, id, pos, size, choices, style, val, null); }
 
-		public Choice(Window parent, int id, Point pos, Size size, 
-					  string[] choices, long style, Validator validator, string name)
-			: base(wxChoice_ctor())
+		public this(Window parent, int id, Point pos, Size size, 
+					  string[] choices, uint style, Validator validator, string name)
 		{
-			if(!wxChoice_Create(wxObject, Object.SafePtr(parent), id, ref pos,
-								ref size, choices.Length, choices, (uint)style, 
-								Object.SafePtr(validator), name)) 
+			super(wxChoice_ctor());
+			if(!wxChoice_Create(wxobj, wxObject.SafePtr(parent), id, pos,
+								size, choices.length, choices, style, 
+								wxObject.SafePtr(validator), name)) 
 			{
 				throw new InvalidOperationException("Failed to create ListBox");
 			}
@@ -102,151 +104,139 @@ namespace wx
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public Choice(Window parent)
-			: this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, new string[] { }, 0, null, null) { }
+		public this(Window parent)
+			{ this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize,null, 0, null, null); }
 
-		public Choice(Window parent, Point pos, Size size, string[] choices)
-			: this(parent, Window.UniqueID, pos, size, choices, 0, null, null) { }
+		public this(Window parent, Point pos, Size size, string[] choices)
+			{ this(parent, Window.UniqueID, pos, size, choices, 0, null, null); }
 
-		public Choice(Window parent, Point pos, Size size, string[] choices, long style)
-			: this(parent, Window.UniqueID, pos, size, choices, style, null, null) { }
+		public this(Window parent, Point pos, Size size, string[] choices, int style)
+			{ this(parent, Window.UniqueID, pos, size, choices, style, null, null); }
 
-		public Choice(Window parent, Point pos, Size size, string[] choices, long style, Validator val)
-			: this(parent, Window.UniqueID, pos, size, choices, style, val, null) { }
+		public this(Window parent, Point pos, Size size, string[] choices, int style, Validator val)
+			{ this(parent, Window.UniqueID, pos, size, choices, style, val, null); }
 
-		public Choice(Window parent, Point pos, Size size, string[] choices, long style, Validator validator, string name)
-			: this(parent, Window.UniqueID, pos, size, choices, style, validator, name) {}
+		public this(Window parent, Point pos, Size size, string[] choices, int style, Validator validator, string name)
+			{ this(parent, Window.UniqueID, pos, size, choices, style, validator, name);}
 		
 		//---------------------------------------------------------------------
 
 		public bool Create(Window parent, int id, Point pos, Size size,
-						   string[] choices, long style, Validator validator,
+						   string[] choices, int style, Validator validator,
 						   string name)
 		{
-			return wxChoice_Create(wxObject, Object.SafePtr(parent), id,
-								   ref pos, ref size, choices.Length, choices, 
-								   (uint)style, Object.SafePtr(validator), name);
+			return wxChoice_Create(wxobj, wxObject.SafePtr(parent), id,
+								   pos, size, choices.length, choices, 
+								   cast(uint)style, wxObject.SafePtr(validator), name);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public int Append(string item)
 		{
-			return wxChoice_Append(wxObject, item);
+			return wxChoice_Append(wxobj, item);
 		}
 		
 		public int Append(string item, ClientData clientData)
 		{
-			return wxChoice_AppendData(wxObject, item, Object.SafePtr(clientData));
+			return wxChoice_AppendData(wxobj, item, wxObject.SafePtr(clientData));
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public void AppendString(string item)
 		{
-			wxChoice_AppendString(wxObject, item);
+			wxChoice_AppendString(wxobj, item);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public void Append(string[] strings)
 		{
-			wxChoice_AppendArrayString(wxObject, strings.Length, strings);
+			wxChoice_AppendArrayString(wxobj, strings.length, strings);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public int Insert(string item, int pos)
 		{
-			return wxChoice_Insert(wxObject, item, pos);
+			return wxChoice_Insert(wxobj, item, pos);
 		}
 		
 		public int Insert(string item, int pos, ClientData clientData)
 		{
-			return wxChoice_InsertClientData(wxObject, item, pos, Object.SafePtr(clientData));
+			return wxChoice_InsertClientData(wxobj, item, pos, wxObject.SafePtr(clientData));
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public string[] GetStrings()
 		{
-			return new ArrayString(wxChoice_GetStrings(wxObject), true);
+			return (new ArrayString(wxChoice_GetStrings(wxobj), true)).toArray();
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public void SetClientObject(int n, ClientData clientData)
 		{
-			wxChoice_SetClientObject(wxObject, n, Object.SafePtr(clientData));
+			wxChoice_SetClientObject(wxobj, n, wxObject.SafePtr(clientData));
 		}
 		
 		public ClientData GetClientObject(int n)
 		{
-			return (ClientData)Object.FindObject(wxChoice_GetClientObject(wxObject, n), typeof(ClientData));
+			return cast(ClientData)FindObject(wxChoice_GetClientObject(wxobj, n), &ClientData.New);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public bool HasClientObjectData()
 		{
-			return wxChoice_HasClientObjectData(wxObject);
+			return wxChoice_HasClientObjectData(wxobj);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public bool HasClientUntypedData()
 		{
-			return wxChoice_HasClientUntypedData(wxObject);
+			return wxChoice_HasClientUntypedData(wxobj);
 		}
 
 		//---------------------------------------------------------------------
 		
-		public int Selection
-		{
-			get { return wxChoice_GetSelection(wxObject); }
-			set { wxChoice_SetSelection(wxObject, value); }
-		}
+		public int Selection() { return wxChoice_GetSelection(wxobj); }
+		public void Selection(int value) { wxChoice_SetSelection(wxobj, value); }
 		
 		public int GetSelection()
 		{
-			return wxChoice_GetSelection(wxObject);
+			return wxChoice_GetSelection(wxobj);
 		}
 
 		//---------------------------------------------------------------------
 
-		public string StringSelection
-		{
-			get { return new wxString(wxChoice_GetStringSelection(wxObject), true); }
-			set { wxChoice_SetStringSelection(wxObject, value); }
-		}
+		public string StringSelection() { return wxChoice_GetStringSelection(wxobj).dup; }
+		public void StringSelection(string value) { wxChoice_SetStringSelection(wxobj, value); }
 
 		//---------------------------------------------------------------------
 
-		public int Columns
-		{
-			get { return wxChoice_GetColumns(wxObject); }
-			set { wxChoice_SetColumns(wxObject, value); }
-		}
+		public int Columns() { return wxChoice_GetColumns(wxobj); }
+		public void Columns(int value) { wxChoice_SetColumns(wxobj, value); }
 		
 		//---------------------------------------------------------------------
 
 		public void Command(Event evt)
 		{
-			wxChoice_Command(wxObject, Object.SafePtr(evt));
+			wxChoice_Command(wxobj, wxObject.SafePtr(evt));
 		}
 
 		//---------------------------------------------------------------------
 		
-		public int Count
-		{
-			get { return wxChoice_GetCount(wxObject); }
-		}
+		public int Count() { return wxChoice_GetCount(wxobj); }
 		
 		//---------------------------------------------------------------------
 
 		public string GetString(int n)
 		{
-			return new wxString(wxChoice_GetString(wxObject, n), true);
+			return wxChoice_GetString(wxobj, n).dup;
 		}
 
 		//---------------------------------------------------------------------
@@ -255,69 +245,63 @@ namespace wx
 		
 		public ClientData GetClientData(int n)
 		{
-			return (ClientData)Object.FindObject(wxChoice_GetClientData(wxObject, n));
+			return cast(ClientData)FindObject(wxChoice_GetClientData(wxobj, n));
 		}
 
 		public void SetClientData(int n, ClientData data)
 		{
-			wxChoice_SetClientData(wxObject, n, Object.SafePtr(data));
+			wxChoice_SetClientData(wxobj, n, wxObject.SafePtr(data));
 		}
 
 		//---------------------------------------------------------------------
 
 		public int FindString(string str)
 		{
-			return wxChoice_FindString(wxObject, str);
+			return wxChoice_FindString(wxobj, str);
 		}
 
 		//---------------------------------------------------------------------
 
 		public void Delete(int n)
 		{
-			wxChoice_Delete(wxObject, n);
+			wxChoice_Delete(wxobj, n);
 		}
 		
 		//---------------------------------------------------------------------
 
 		public void Clear()
 		{
-			wxChoice_Clear(wxObject);
+			wxChoice_Clear(wxobj);
 		}
 
 		//---------------------------------------------------------------------
 
 		public void SetString(int n, string str)
 		{
-			wxChoice_SetString(wxObject, n, str);
+			wxChoice_SetString(wxobj, n, str);
 		}
 		
 		//---------------------------------------------------------------------
 		
 		public void Select(int n)
 		{
-			wxChoice_Select(wxObject, n);
+			wxChoice_Select(wxobj, n);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public override bool ShouldInheritColours()
 		{
-			return wxChoice_ShouldInheritColours(wxObject);
+			return wxChoice_ShouldInheritColours(wxobj);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public bool Empty
-		{
-			get { return wxChoice_IsEmpty(wxObject); }
-		}
+		public bool Empty() { return wxChoice_IsEmpty(wxobj); }
 
 		//---------------------------------------------------------------------
-        
-		public event EventListener Selected
-		{
-			add { AddCommandListener(Event.wxEVT_COMMAND_CHOICE_SELECTED, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+
+		public void Selected_Add(EventListener value) { AddCommandListener(Event.wxEVT_COMMAND_CHOICE_SELECTED, ID, value, this); }
+		public void Selected_Remove(EventListener value) { RemoveHandler(value, this); }
+
 	}
-}

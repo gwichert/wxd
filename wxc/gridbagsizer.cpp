@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - gridbagsizer.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - gridbagsizer.cxx
 //
 // The wxGridBagSizer proxy interface
@@ -9,6 +12,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/gbsizer.h>
 
 //-----------------------------------------------------------------------------
@@ -187,7 +191,7 @@ void wxGridBagSizer_GetCellSize(wxGridBagSizer* self, int row, int col, wxSize* 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxGBPosition* wxGridBagSizer_GetItemPosition(wxGridBagSizer* self, wxWindow* window)
+wxGBPosition* wxGridBagSizer_GetItemPositionWindow(wxGridBagSizer* self, wxWindow* window)
 {
     return new wxGBPosition(self->GetItemPosition(window));
 }
@@ -207,7 +211,7 @@ wxGBPosition* wxGridBagSizer_GetItemPositionIndex(wxGridBagSizer* self, int inde
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxGridBagSizer_SetItemPosition(wxGridBagSizer* self, wxWindow* window, wxGBPosition* pos)
+bool wxGridBagSizer_SetItemPositionWindow(wxGridBagSizer* self, wxWindow* window, wxGBPosition* pos)
 {
     return self->SetItemPosition(window, *pos)?1:0;
 }
@@ -227,7 +231,7 @@ bool wxGridBagSizer_SetItemPositionIndex(wxGridBagSizer* self, int index, wxGBPo
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxGBSpan* wxGridBagSizer_GetItemSpan(wxGridBagSizer* self, wxWindow* window)
+wxGBSpan* wxGridBagSizer_GetItemSpanWindow(wxGridBagSizer* self, wxWindow* window)
 {
     return new wxGBSpan(self->GetItemSpan(window));
 }
@@ -245,7 +249,7 @@ wxGBSpan* wxGridBagSizer_GetItemSpanIndex(wxGridBagSizer* self, int index)
 }
 
 extern "C" WXEXPORT
-bool wxGridBagSizer_SetItemSpan(wxGridBagSizer* self, wxWindow* window, wxGBSpan* span)
+bool wxGridBagSizer_SetItemSpanWindow(wxGridBagSizer* self, wxWindow* window, wxGBSpan* span)
 {
     return self->SetItemSpan(window, *span)?1:0;
 }
@@ -265,7 +269,7 @@ bool wxGridBagSizer_SetItemSpanIndex(wxGridBagSizer* self, int index, wxGBSpan* 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxGBSizerItem* wxGridBagSizer_FindItem(wxGridBagSizer* self, wxWindow* window)
+wxGBSizerItem* wxGridBagSizer_FindItemWindow(wxGridBagSizer* self, wxWindow* window)
 {
     return self->FindItem(window);
 }

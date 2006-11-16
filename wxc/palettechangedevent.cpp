@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - palettechangedevent.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - palettechangedevent.cxx
 // 
 // The wxPaletteChangedEvent proxy interface.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 
 //-----------------------------------------------------------------------------
 

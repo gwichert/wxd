@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - tipwin.h
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - tipwin.h
 // 
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
@@ -6,45 +9,39 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.TipWindow;
+import wx.common;
+import wx.Window;
 
-namespace wx
-{
-    public class TipWindow : Window
-    {
-        [DllImport("wx-c")] static extern IntPtr wxTipWindow_ctor(IntPtr parent, string text, int maxLength, ref Rectangle rectBound);
-        [DllImport("wx-c")] static extern IntPtr wxTipWindow_ctorNoRect(IntPtr parent, string text, int maxLength);
-        //[DllImport("wx-c")] static extern void   wxTipWindow_SetTipWindowPtr(IntPtr self, IntPtr wxTipWindow* windowPtr);
-        [DllImport("wx-c")] static extern void   wxTipWindow_SetBoundingRect(IntPtr self, ref Rectangle rectBound);
-        [DllImport("wx-c")] static extern void   wxTipWindow_Close(IntPtr self);
+        static extern (C) IntPtr wxTipWindow_ctor(IntPtr parent, string text, int maxLength, inout Rectangle rectBound);
+        static extern (C) IntPtr wxTipWindow_ctorNoRect(IntPtr parent, string text, int maxLength);
+        //static extern (C) void   wxTipWindow_SetTipWindowPtr(IntPtr self, IntPtr wxTipWindow* windowPtr);
+        static extern (C) void   wxTipWindow_SetBoundingRect(IntPtr self, inout Rectangle rectBound);
+        static extern (C) void   wxTipWindow_Close(IntPtr self);
 
         //-----------------------------------------------------------------------------
 
-        public TipWindow(IntPtr wxObject)
-            : base(wxObject) { }
+    public class TipWindow : Window
+    {
+        public this(IntPtr wxobj)
+            { super(wxobj); }
 
-        public TipWindow(Window parent, string text)
-            : this(parent, text, 100) { }
-        public TipWindow(Window parent, string text, int maxLength)
-            : this(wxTipWindow_ctorNoRect(Object.SafePtr(parent), text, maxLength)) { }
+        public this(Window parent, string text)
+            { this(parent, text, 100); }
+        public this(Window parent, string text, int maxLength)
+            { this(wxTipWindow_ctorNoRect(wxObject.SafePtr(parent), text, maxLength)); }
 
-        public TipWindow(Window parent, string text, int maxLength, Rectangle rectBound)
-            : this(wxTipWindow_ctor(Object.SafePtr(parent), text, maxLength, ref rectBound)) { }
+        public this(Window parent, string text, int maxLength, Rectangle rectBound)
+            { this(wxTipWindow_ctor(wxObject.SafePtr(parent), text, maxLength, rectBound)); }
 
         //-----------------------------------------------------------------------------
 
         /*public void SetTipWindowPtr( TipWindow* windowPtr)
         {
-            wxTipWindow_SetTipWindowPtr(wxObject, Object.SafePtr(TipWindow* windowPtr));
+            wxTipWindow_SetTipWindowPtr(wxobj, wxObject.SafePtr(TipWindow* windowPtr));
         }*/
 
         //-----------------------------------------------------------------------------
 
-        public Rectangle BoundingRect
-        {
-            set { wxTipWindow_SetBoundingRect(wxObject, ref value); }
-        }
+        public void BoundingRect(Rectangle value) { wxTipWindow_SetBoundingRect(wxobj, value); }
     }
-}

@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - WindowCreateEvent.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - WindowCreateEvent.cs
 //
 // The wxWindowCreateEvent wrapper class.
@@ -10,29 +13,32 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Runtime.InteropServices;
+module wx.WindowCreateEvent;
+import wx.common;
+import wx.CommandEvent;
+import wx.Window;
 
-namespace wx
-{
-	public class WindowCreateEvent : CommandEvent
-	{
-		[DllImport("wx-c")] static extern IntPtr wxWindowCreateEvent_ctor(IntPtr type);
-		[DllImport("wx-c")] static extern IntPtr wxWindowCreateEvent_GetWindow(IntPtr self);
+		static extern (C) IntPtr wxWindowCreateEvent_ctor(IntPtr type);
+		static extern (C) IntPtr wxWindowCreateEvent_GetWindow(IntPtr self);
 		
 		//-----------------------------------------------------------------------------
 
-		public WindowCreateEvent(IntPtr wxObject) 
-			: base(wxObject) { }
+	public class WindowCreateEvent : CommandEvent
+	{
+		public this(IntPtr wxobj) 
+			{ super(wxobj); }
 
-		public WindowCreateEvent(Window win)
-			: this(wxWindowCreateEvent_ctor(Object.SafePtr(win))) { }
+		public this(Window win)
+			{ this(wxWindowCreateEvent_ctor(wxObject.SafePtr(win))); }
 
 		//-----------------------------------------------------------------------------	
 		
-		public Window Active
+		public Window Active() { return cast(Window)FindObject(wxWindowCreateEvent_GetWindow(wxobj), &Window.New); }
+
+		private static Event New(IntPtr obj) { return new WindowCreateEvent(obj); }
+
+		static this()
 		{
-			get { return (Window)FindObject(wxWindowCreateEvent_GetWindow(wxObject), typeof(Window)); }
+			AddEventType(wxEVT_CREATE,				&WindowCreateEvent.New);
 		}
 	}
-}

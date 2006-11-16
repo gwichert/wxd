@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - dialog.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - dialog.cxx
 //
 // The wxDialog proxy interface
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/dialog.h>
 #include "local_events.h"
 
@@ -38,8 +42,8 @@ void wxDialog_dtor(wxDialog* self)
 
 extern "C" WXEXPORT
 bool wxDialog_Create(wxDialog* self, wxWindow* parent, int id,
-				     const char* title, const wxPoint* pos, const wxSize* size,
-					 long style, const char* name)
+				     dstr title, const wxPoint* pos, const wxSize* size,
+					 long style, dstr name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -47,11 +51,11 @@ bool wxDialog_Create(wxDialog* self, wxWindow* parent, int id,
 	if (size == NULL)
 		size = &wxDefaultSize;
 
-	if (name == NULL)
-		name = "dialogBox";
+	if (name.data==NULL)
+		name = dstr("dialogBox",sizeof("dialogBox")-1);
 
-	return self->Create(parent, id, wxString(title, wxConvUTF8), *pos,
-					    *size, style, wxString(name, wxConvUTF8))?1:0;
+	return self->Create(parent, id, wxString(title.data, wxConvUTF8, title.length), *pos,
+					    *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -71,15 +75,15 @@ int wxDialog_GetReturnCode(wxDialog* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxDialog_GetTitle(wxDialog* self)
+dstr wxDialog_GetTitle(wxDialog* self)
 {
-	return new wxString(self->GetTitle());
+	return dstr(self->GetTitle());
 }
 
 extern "C" WXEXPORT
-void wxDialog_SetTitle(wxDialog* self, const char* title)
+void wxDialog_SetTitle(wxDialog* self, dstr title)
 {
-	self->SetTitle(wxString(title, wxConvUTF8));
+	self->SetTitle(wxString(title.data, wxConvUTF8, title.length));
 }
 
 //-----------------------------------------------------------------------------

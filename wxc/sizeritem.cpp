@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - sizeritem.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - sizeritem.cxx
 //
 // The wxSizerItem proxy interface.
@@ -9,6 +12,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include "local_events.h"
 
 //-----------------------------------------------------------------------------
@@ -92,7 +96,7 @@ void wxSizerItem_SetInitSize(wxSizerItem* self, int x, int y)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxSizerItem_SetRatio(wxSizerItem* self, int width, int height)
+void wxSizerItem_SetRatioSize(wxSizerItem* self, int width, int height)
 {
     self->SetRatio(width, height);
 }

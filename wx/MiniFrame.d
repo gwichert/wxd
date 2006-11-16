@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - MiniFrame.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - MiniFrame.cs
 // 
 // The wxMiniFrame wrapper class.
@@ -10,40 +13,38 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.MiniFrame;
+import wx.common;
+import wx.Frame;
 
-namespace wx
-{
-    public class MiniFrame : Frame
-    {
-        [DllImport("wx-c")] static extern IntPtr wxMiniFrame_ctor();
-        [DllImport("wx-c")] static extern bool   wxMiniFrame_Create(IntPtr self, IntPtr parent, int id, string title, ref Point pos, ref Size size, uint style, string name);
+        static extern (C) IntPtr wxMiniFrame_ctor();
+        static extern (C) bool   wxMiniFrame_Create(IntPtr self, IntPtr parent, int id, string title, inout Point pos, inout Size size, uint style, string name);
 
         //-----------------------------------------------------------------------------
 
-        public MiniFrame(IntPtr wxObject) 
-            : base(wxObject) { }
+    public class MiniFrame : Frame
+    {
+        public this(IntPtr wxobj) 
+            { super(wxobj); }
 
-        public MiniFrame()
-            : this(wxMiniFrame_ctor()) { }
+        public this()
+            { this(wxMiniFrame_ctor()); }
 
-        public MiniFrame(Window parent, int id, string title)
-            : this(parent, id, title, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, "miniFrame") { }
+        public this(Window parent, int id, string title)
+            { this(parent, id, title, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, "miniFrame"); }
 	    
-        public MiniFrame(Window parent, int id, string title, Point pos)
-            : this(parent, id, title, pos, wxDefaultSize, wxDEFAULT_FRAME_STYLE, "miniFrame") { }
+        public this(Window parent, int id, string title, inout Point pos)
+            { this(parent, id, title, pos, wxDefaultSize, wxDEFAULT_FRAME_STYLE, "miniFrame"); }
 	    
-        public MiniFrame(Window parent, int id, string title, Point pos, Size size)
-            : this(parent, id, title, pos, size, wxDEFAULT_FRAME_STYLE, "miniFrame") { }
+        public this(Window parent, int id, string title, inout Point pos, inout Size size)
+            { this(parent, id, title, pos, size, wxDEFAULT_FRAME_STYLE, "miniFrame"); }
 	    
-        public MiniFrame(Window parent, int id, string title, Point pos, Size size, long style)
-            : this(parent, id, title, pos, size, style, "miniFrame") { }
+        public this(Window parent, int id, string title, inout Point pos, inout Size size, int style)
+            { this(parent, id, title, pos, size, style, "miniFrame"); }
 
-        public MiniFrame(Window parent, int id, string title, Point pos, Size size, long style, string name)
-            : this()
+        public this(Window parent, int id, string title, inout Point pos, inout Size size, int style, string name)
         {
+        	this();
             if (!Create(parent, id, title, pos, size, style, name))
             {
                 throw new InvalidOperationException("Could not create MiniFrame");
@@ -53,40 +54,39 @@ namespace wx
 	//---------------------------------------------------------------------
 		// ctors with self created id
 	
-	public MiniFrame(Window parent, string title)
-            : this(parent, Window.UniqueID, title, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, "miniFrame") { }
+	public this(Window parent, string title)
+            { this(parent, Window.UniqueID, title, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, "miniFrame"); }
 	    
-        public MiniFrame(Window parent, string title, Point pos)
-            : this(parent, Window.UniqueID, title, pos, wxDefaultSize, wxDEFAULT_FRAME_STYLE, "miniFrame") { }
+        public this(Window parent, string title, inout Point pos)
+            { this(parent, Window.UniqueID, title, pos, wxDefaultSize, wxDEFAULT_FRAME_STYLE, "miniFrame"); }
 	    
-        public MiniFrame(Window parent, string title, Point pos, Size size)
-            : this(parent, Window.UniqueID, title, pos, size, wxDEFAULT_FRAME_STYLE, "miniFrame") { }
+        public this(Window parent, string title, inout Point pos, inout Size size)
+            { this(parent, Window.UniqueID, title, pos, size, wxDEFAULT_FRAME_STYLE, "miniFrame"); }
 	    
-        public MiniFrame(Window parent, string title, Point pos, Size size, long style)
-            : this(parent, Window.UniqueID, title, pos, size, style, "miniFrame") { }
+        public this(Window parent, string title, inout Point pos, inout Size size, int style)
+            { this(parent, Window.UniqueID, title, pos, size, style, "miniFrame"); }
 
-        public MiniFrame(Window parent, string title, Point pos, Size size, long style, string name)
-	    : this(parent, Window.UniqueID, title, pos, size, style, name) {}
+        public this(Window parent, string title, inout Point pos, inout Size size, int style, string name)
+	    { this(parent, Window.UniqueID, title, pos, size, style, name);}
 	
 	//-----------------------------------------------------------------------------
 
-        public new bool Create(Window parent, int id, string title, Point pos, Size size, long style, string name)
+        public bool Create(Window parent, int id, string title, inout Point pos, inout Size size, int style, string name)
         {
-            return wxMiniFrame_Create(wxObject, Object.SafePtr(parent), id, title, ref pos, ref size, (uint)style, name);
+            return wxMiniFrame_Create(wxobj, wxObject.SafePtr(parent), id, title, pos, size, cast(uint)style, name);
         }
 
         //-----------------------------------------------------------------------------
 
         // Helper constructors
 
-        public MiniFrame(string title)
-            : this(null, -1, title) { }
-        public MiniFrame(string title, Point pos, Size size)
-            : this(null, -1, title, pos, size) { }
-        public MiniFrame(string title, Point pos, Size size, long style)
-            : this(null, -1, title, pos, size, style) { }
+        public this(string title)
+            { this(null, -1, title); }
+        public this(string title, inout Point pos, inout Size size)
+            { this(null, -1, title, pos, size); }
+        public this(string title, inout Point pos, inout Size size, int style)
+            { this(null, -1, title, pos, size, style); }
 
         //-----------------------------------------------------------------------------
     }
-}
 

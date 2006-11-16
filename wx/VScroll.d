@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - VScroll.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - VScroll.cs
 //
 // The wxVScrolledWindow wrapper class.
@@ -10,153 +13,150 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.VScroll;
+import wx.common;
+import wx.Panel;
+import wx.SizeEvent;
 
-namespace wx
-{
+		extern (C) {
+		alias int function(VScrolledWindow obj, int n) Virtual_IntInt;
+		}
+
+		//-----------------------------------------------------------------------------
+		
+		static extern (C) IntPtr wxVScrolledWindow_ctor(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
+		static extern (C) void wxVScrolledWindow_RegisterVirtual(IntPtr self, VScrolledWindow obj, Virtual_IntInt onGetLineHeight);
+		static extern (C) bool wxVScrolledWindow_Create(IntPtr self,IntPtr parent, int id, inout Point pos, inout Size size, int style, string name);
+		static extern (C) void wxVScrolledWindow_SetLineCount(IntPtr self, int count);
+		static extern (C) bool wxVScrolledWindow_ScrollToLine(IntPtr self, int line);
+		static extern (C) bool wxVScrolledWindow_ScrollLines(IntPtr self, int lines);
+		static extern (C) bool wxVScrolledWindow_ScrollPages(IntPtr self, int pages);
+		static extern (C) void wxVScrolledWindow_RefreshLine(IntPtr self, int line);
+		static extern (C) void wxVScrolledWindow_RefreshLines(IntPtr self, int from, int to);
+		static extern (C) int wxVScrolledWindow_HitTest(IntPtr self, int x, int y);
+		static extern (C) int wxVScrolledWindow_HitTest2(IntPtr self, inout Point pt);
+		static extern (C) void wxVScrolledWindow_RefreshAll(IntPtr self);
+		static extern (C) int wxVScrolledWindow_GetLineCount(IntPtr self);
+		static extern (C) int wxVScrolledWindow_GetFirstVisibleLine(IntPtr self);
+		static extern (C) int wxVScrolledWindow_GetLastVisibleLine(IntPtr self);
+		static extern (C) bool wxVScrolledWindow_IsVisible(IntPtr self, int line);
+		
+		//-----------------------------------------------------------------------------
+		
 	public abstract class VScrolledWindow : Panel
 	{
-		private delegate int Virtual_IntInt(int n);
-
-		private Virtual_IntInt onGetLineHeight;
-		
-		//-----------------------------------------------------------------------------
-		
-		[DllImport("wx-c")] static extern IntPtr wxVScrolledWindow_ctor(IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
-		[DllImport("wx-c")] static extern void wxVScrolledWindow_RegisterVirtual(IntPtr self, Virtual_IntInt onGetLineHeight);
-		[DllImport("wx-c")] static extern bool wxVScrolledWindow_Create(IntPtr self,IntPtr parent, int id, ref Point pos, ref Size size, int style, string name);
-		[DllImport("wx-c")] static extern void wxVScrolledWindow_SetLineCount(IntPtr self, int count);
-		[DllImport("wx-c")] static extern bool wxVScrolledWindow_ScrollToLine(IntPtr self, int line);
-		[DllImport("wx-c")] static extern bool wxVScrolledWindow_ScrollLines(IntPtr self, int lines);
-		[DllImport("wx-c")] static extern bool wxVScrolledWindow_ScrollPages(IntPtr self, int pages);
-		[DllImport("wx-c")] static extern void wxVScrolledWindow_RefreshLine(IntPtr self, int line);
-		[DllImport("wx-c")] static extern void wxVScrolledWindow_RefreshLines(IntPtr self, int from, int to);
-		[DllImport("wx-c")] static extern int wxVScrolledWindow_HitTest(IntPtr self, int x, int y);
-		[DllImport("wx-c")] static extern int wxVScrolledWindow_HitTest2(IntPtr self, ref Point pt);
-		[DllImport("wx-c")] static extern void wxVScrolledWindow_RefreshAll(IntPtr self);
-		[DllImport("wx-c")] static extern int wxVScrolledWindow_GetLineCount(IntPtr self);
-		[DllImport("wx-c")] static extern int wxVScrolledWindow_GetFirstVisibleLine(IntPtr self);
-		[DllImport("wx-c")] static extern int wxVScrolledWindow_GetLastVisibleLine(IntPtr self);
-		[DllImport("wx-c")] static extern bool wxVScrolledWindow_IsVisible(IntPtr self, int line);
-		
-		//-----------------------------------------------------------------------------
-		
-		public VScrolledWindow(IntPtr wxObject)
-			: base(wxObject) { }
+		public this(IntPtr wxobj)
+			{ super(wxobj); }
 			
-		public VScrolledWindow()
-			: this(null, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, "") {}	
+		public this()
+			{ this(null, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, "");}
 			
-		public VScrolledWindow(Window parent, int id)
-			: this(parent, id, wxDefaultPosition, wxDefaultSize, 0, "") {}	
+		public this(Window parent, int id)
+			{ this(parent, id, wxDefaultPosition, wxDefaultSize, 0, "");}
 			
-		public VScrolledWindow(Window parent, int id, Point pos)
-			: this(parent, id, pos, wxDefaultSize, 0, "") {}	
+		public this(Window parent, int id, Point pos)
+			{ this(parent, id, pos, wxDefaultSize, 0, "");}
 			
-		public VScrolledWindow(Window parent, int id, Point pos, Size size)
-			: this(parent, id, pos, size, 0, "") {}	
+		public this(Window parent, int id, Point pos, Size size)
+			{ this(parent, id, pos, size, 0, "");}
 			
-		public VScrolledWindow(Window parent, int id, Point pos, Size size, long style)
-			: this(parent, id, pos, size, style, "") {}	
+		public this(Window parent, int id, Point pos, Size size, int style)
+			{ this(parent, id, pos, size, style, "");}
 		
-		public VScrolledWindow(Window parent, int id, Point pos, Size size, long style, string name)
-			: this(wxVScrolledWindow_ctor(Object.SafePtr(parent), id, ref pos, ref size, (uint)style, name))
+		public this(Window parent, int id, Point pos, Size size, int style, string name)
 		{
-			onGetLineHeight = new Virtual_IntInt(OnGetLineHeight);
-
-			wxVScrolledWindow_RegisterVirtual(wxObject, onGetLineHeight);
+			this(wxVScrolledWindow_ctor(wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name));
+			wxVScrolledWindow_RegisterVirtual(wxobj, this, &staticOnGetLineHeight);
 		}
 		
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public VScrolledWindow(Window parent)
-			: this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, "") {}	
+		public this(Window parent)
+			{ this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, "");}
 			
-		public VScrolledWindow(Window parent, Point pos)
-			: this(parent, Window.UniqueID, pos, wxDefaultSize, 0, "") {}	
+		public this(Window parent, Point pos)
+			{ this(parent, Window.UniqueID, pos, wxDefaultSize, 0, "");}
 			
-		public VScrolledWindow(Window parent, Point pos, Size size)
-			: this(parent, Window.UniqueID, pos, size, 0, "") {}	
+		public this(Window parent, Point pos, Size size)
+			{ this(parent, Window.UniqueID, pos, size, 0, "");}
 			
-		public VScrolledWindow(Window parent, Point pos, Size size, long style)
-			: this(parent, Window.UniqueID, pos, size, style, "") {}	
+		public this(Window parent, Point pos, Size size, int style)
+			{ this(parent, Window.UniqueID, pos, size, style, "");}
 		
-		public VScrolledWindow(Window parent, Point pos, Size size, long style, string name)
-			: this(parent, Window.UniqueID, pos, size, style, name) {}
+		public this(Window parent, Point pos, Size size, int style, string name)
+			{ this(parent, Window.UniqueID, pos, size, style, name);}
 		
 		//-----------------------------------------------------------------------------
 		
 		public bool Create(Window parent, int id, Point pos, Size size, int style, string name)
 		{
-			return wxVScrolledWindow_Create(wxObject, Object.SafePtr(parent), id, ref pos, ref size, style, name); 
+			return wxVScrolledWindow_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, style, name); 
 		}
 		
 		//-----------------------------------------------------------------------------
 		
+		static extern(C) private int staticOnGetLineHeight(VScrolledWindow obj, int n)
+		{
+			return obj.OnGetLineHeight(n);
+		}
 		protected abstract int OnGetLineHeight(int n);
 		
-		public int LineCount
-		{
-			set { wxVScrolledWindow_SetLineCount(wxObject, value); }
-			get { return wxVScrolledWindow_GetLineCount(wxObject); }
-		}
+		public void LineCount(int value) { wxVScrolledWindow_SetLineCount(wxobj, value); }
+		public int LineCount() { return wxVScrolledWindow_GetLineCount(wxobj); }
 		
 		public void ScrollToLine(int line)
 		{
-			wxVScrolledWindow_ScrollToLine(wxObject, line);
+			wxVScrolledWindow_ScrollToLine(wxobj, line);
 		}
 		
 		public override bool ScrollLines(int lines)
 		{
-			return wxVScrolledWindow_ScrollLines(wxObject, lines);
+			return wxVScrolledWindow_ScrollLines(wxobj, lines);
 		}
 		
 		public override bool ScrollPages(int pages)
 		{
-			return wxVScrolledWindow_ScrollPages(wxObject, pages);
+			return wxVScrolledWindow_ScrollPages(wxobj, pages);
 		}
 		
 		public void RefreshLine(int line)
 		{
-			wxVScrolledWindow_RefreshLine(wxObject, line);
+			wxVScrolledWindow_RefreshLine(wxobj, line);
 		}
 		
 		public void RefreshLines(int from, int to)
 		{
-			wxVScrolledWindow_RefreshLines(wxObject, from, to);
+			wxVScrolledWindow_RefreshLines(wxobj, from, to);
 		}
 		
 		public int HitTest(int x, int y)
 		{
-			return wxVScrolledWindow_HitTest(wxObject, x, y);
+			return wxVScrolledWindow_HitTest(wxobj, x, y);
 		}
 		
 		public int HitTest(Point pt)
 		{
-			return wxVScrolledWindow_HitTest2(wxObject, ref pt);
+			return wxVScrolledWindow_HitTest2(wxobj, pt);
 		}
 		
-		public virtual void RefreshAll()
+		public /+virtual+/ void RefreshAll()
 		{
-			wxVScrolledWindow_RefreshAll(wxObject);
+			wxVScrolledWindow_RefreshAll(wxobj);
 		}
 		
 		public int GetFirstVisibleLine()
 		{
-			return wxVScrolledWindow_GetFirstVisibleLine(wxObject);
+			return wxVScrolledWindow_GetFirstVisibleLine(wxobj);
 		}
 		
 		public int GetLastVisibleLine()
 		{
-			return wxVScrolledWindow_GetLastVisibleLine(wxObject);
+			return wxVScrolledWindow_GetLastVisibleLine(wxobj);
 		}	
 		
 		public bool IsVisible(int line)
 		{
-			return wxVScrolledWindow_IsVisible(wxObject, line);
+			return wxVScrolledWindow_IsVisible(wxobj, line);
 		}
 	}
-}

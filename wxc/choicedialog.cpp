@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - choicedialog.h
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - choicedialog.h
 //
 // The wxXChoiceDialog proxy interfaces.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/choicdlg.h>
 #include "local_events.h"
 
@@ -29,8 +33,8 @@ public:
 };
 
 extern "C" WXEXPORT
-wxSingleChoiceDialog* wxSingleChoiceDialog_ctor(wxWindow* parent, char* message,
-        char* caption, int n, char* choices[], void * clientData,
+wxSingleChoiceDialog* wxSingleChoiceDialog_ctor(wxWindow* parent, dstr message,
+        dstr caption, int n, dstr choices[], void * clientData,
         int style, const wxPoint* pos)
 {
     if (pos == NULL)
@@ -39,10 +43,10 @@ wxSingleChoiceDialog* wxSingleChoiceDialog_ctor(wxWindow* parent, char* message,
     wxString *pchoices = new wxString[n];
     for (int i = 0; i < n; ++i)
         {
-            pchoices[i] = wxString(choices[i], wxConvUTF8);
+            pchoices[i] = wxString(choices[i].data, wxConvUTF8, choices[i].length);
         }
 
-    return new _SingleChoiceDialog(parent, wxString(message, wxConvUTF8), wxString(caption, wxConvUTF8), n,
+    return new _SingleChoiceDialog(parent, wxString(message.data, wxConvUTF8, message.length), wxString(caption.data, wxConvUTF8, caption.length), n,
                 pchoices, (char **)clientData, style, *pos);
 }
 
@@ -65,9 +69,9 @@ int wxSingleChoiceDialog_GetSelection(wxSingleChoiceDialog* self)
 }
 
 extern "C" WXEXPORT
-wxString* wxSingleChoiceDialog_GetStringSelection(wxSingleChoiceDialog* self)
+dstr wxSingleChoiceDialog_GetStringSelection(wxSingleChoiceDialog* self)
 {
-    return new wxString(self->GetStringSelection());
+    return dstr(self->GetStringSelection());
 }
 
 extern "C" WXEXPORT
@@ -92,8 +96,8 @@ public:
 };
 
 extern "C" WXEXPORT
-wxMultiChoiceDialog* wxMultiChoiceDialog_ctor(wxWindow* parent, char* message,
-        char* caption, int n, char* choices[],
+wxMultiChoiceDialog* wxMultiChoiceDialog_ctor(wxWindow* parent, dstr message,
+        dstr caption, int n, dstr choices[],
         int style, const wxPoint* pos)
 {
     if (pos == NULL)
@@ -102,9 +106,9 @@ wxMultiChoiceDialog* wxMultiChoiceDialog_ctor(wxWindow* parent, char* message,
     wxString *pchoices = new wxString[n];
     for (int i = 0; i < n; ++i)
         {
-            pchoices[i] = wxString(choices[i], wxConvUTF8);
+            pchoices[i] = wxString(choices[i].data, wxConvUTF8, choices[i].length);
         }
-    return new _MultiChoiceDialog(parent, wxString(message, wxConvUTF8), wxString(caption, wxConvUTF8), n,
+    return new _MultiChoiceDialog(parent, wxString(message.data, wxConvUTF8, message.length), wxString(caption.data, wxConvUTF8, caption.length), n,
                 pchoices, style, *pos);
 }
 
@@ -132,40 +136,79 @@ wxArrayInt* wxMultiChoiceDialog_GetSelections(wxMultiChoiceDialog* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxGetSingleChoice_func(char *message, char *caption, int n, const char* choices[],
+dstr wxGetSingleChoice_func(dstr message, dstr caption, int n, dstr choices[],
                 wxWindow *parent, int x, int y, bool centre,
                 int width, int height)
 {
     wxArrayString was;
+    was.Alloc(n);
     for (int i = 0; i < n; ++i)
         {
-            wxString ts = wxString(choices[i], wxConvUTF8);
+            wxString ts = wxString(choices[i].data, wxConvUTF8, choices[i].length);
             was.Add(ts);
         }
 
-    return new wxString(wxGetSingleChoice(wxString(message, wxConvUTF8),
-                wxString(caption, wxConvUTF8),
+    return dstr(wxGetSingleChoice(wxString(message.data, wxConvUTF8, message.length),
+                wxString(caption.data, wxConvUTF8, caption.length),
                 was, parent, x, y, centre,
                 width, height));
 }
 
 extern "C" WXEXPORT
-int wxGetSingleChoiceIndex_func(char *message, char *caption, int n, const char* choices[],
+int wxGetSingleChoiceIndex_func(dstr message, dstr caption, int n, dstr choices[],
                 wxWindow *parent, int x, int y, bool centre,
                 int width, int height)
 {
     wxArrayString was;
+    was.Alloc(n);
     for (int i = 0; i < n; ++i)
         {
-            wxString ts = wxString(choices[i], wxConvUTF8);
+            wxString ts = wxString(choices[i].data, wxConvUTF8, choices[i].length);
             was.Add(ts);
         }
 
-    return wxGetSingleChoiceIndex(wxString(message, wxConvUTF8),
-                wxString(caption, wxConvUTF8),
+    return wxGetSingleChoiceIndex(wxString(message.data, wxConvUTF8, message.length),
+                wxString(caption.data, wxConvUTF8, caption.length),
                 was, parent, x, y, centre,
                 width, height);
 }
 
+extern "C" WXEXPORT
+void* wxGetSingleChoiceData_func(dstr message, dstr caption, int n, dstr choices[],
+                void** client_data,
+                wxWindow *parent, int x, int y, bool centre,
+                int width, int height)
+{
+    wxArrayString was;
+    was.Alloc(n);
+    for (int i = 0; i < n; ++i)
+        {
+            wxString ts = wxString(choices[i].data, wxConvUTF8, choices[i].length);
+            was.Add(ts);
+        }
 
+    return wxGetSingleChoiceData(wxString(message.data, wxConvUTF8, message.length),
+                wxString(caption.data, wxConvUTF8, caption.length),
+                was, client_data, parent, x, y, centre,
+                width, height);
+}
 
+extern "C" WXEXPORT
+size_t wxGetMultipleChoices_func(wxArrayInt* selections,dstr message, dstr caption, int n, dstr choices[],
+                wxWindow *parent, int x, int y, bool centre,
+                int width, int height)
+{
+    wxArrayString was;
+    was.Alloc(n);
+    for (int i = 0; i < n; ++i)
+        {
+            wxString ts = wxString(choices[i].data, wxConvUTF8, choices[i].length);
+            was.Add(ts);
+        }
+
+    return wxGetMultipleChoices(*selections, wxString(message.data, wxConvUTF8, message.length),
+                wxString(caption.data, wxConvUTF8, caption.length),
+                was, parent, x, y, centre,
+                width, height);
+
+}

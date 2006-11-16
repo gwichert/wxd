@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - QueryNewPaletteEvent.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - QueryNewPaletteEvent.cs
 //
 // The wxQueryNewPaletteEvent wrapper class.
@@ -10,31 +13,33 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Runtime.InteropServices;
+module wx.QueryNewPaletteEvent;
+import wx.common;
+import wx.Event;
 
-namespace wx
-{
-	public class QueryNewPaletteEvent : Event
-	{
-		[DllImport("wx-c")] static extern IntPtr wxQueryNewPaletteEvent_ctor(int type);
-		[DllImport("wx-c")] static extern bool wxQueryNewPaletteEvent_GetPaletteRealized(IntPtr self);
-		[DllImport("wx-c")] static extern void wxQueryNewPaletteEvent_SetPaletteRealized(IntPtr self, bool realized);
+		static extern (C) IntPtr wxQueryNewPaletteEvent_ctor(int type);
+		static extern (C) bool wxQueryNewPaletteEvent_GetPaletteRealized(IntPtr self);
+		static extern (C) void wxQueryNewPaletteEvent_SetPaletteRealized(IntPtr self, bool realized);
 		
 		//-----------------------------------------------------------------------------
 
-		public QueryNewPaletteEvent(IntPtr wxObject) 
-			: base(wxObject) { }
+	public class QueryNewPaletteEvent : Event
+	{
+		public this(IntPtr wxobj) 
+			{ super(wxobj); }
 
-		public QueryNewPaletteEvent(int type)
-			: this(wxQueryNewPaletteEvent_ctor(type)) { }
+		public this(int type)
+			{ this(wxQueryNewPaletteEvent_ctor(type)); }
 
 		//-----------------------------------------------------------------------------	
 		
-		public bool Realized
+		public bool Realized() { return wxQueryNewPaletteEvent_GetPaletteRealized(wxobj); }
+		public void Realized(bool value) { wxQueryNewPaletteEvent_SetPaletteRealized(wxobj, value); }
+
+		private static Event New(IntPtr obj) { return new QueryNewPaletteEvent(obj); }
+
+		static this()
 		{
-			get { return wxQueryNewPaletteEvent_GetPaletteRealized(wxObject); }
-			set { wxQueryNewPaletteEvent_SetPaletteRealized(wxObject, value); }
+			AddEventType(wxEVT_QUERY_NEW_PALETTE,			&QueryNewPaletteEvent.New);
 		}
 	}
-}

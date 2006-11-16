@@ -1,0 +1,24 @@
+# from samples
+
+CXX = dmc
+DMD = dmd
+DFLAGS+= -I$(TOPDIR)
+
+CXXFLAGS =  `wx-config --cflags`
+
+.cpp.o: 
+	$(CXX) -c $(CXXFLAGS) $<
+
+%.o:%.d
+	dmd -c $(DFLAGS) $<
+
+WXLIBS = `wx-config --libs`
+
+$(TARGET) : $(OBJECTS)
+#	dmd -g -of$(TARGET) $(OBJECTS) $(TOPDIR)/libwxd.a $(TOPDIR)/libwxd.a $(WXLIBS)
+	gcc -o $@ $(OBJECTS) -L$(TOPDIR) -lwxd -lwxc -lphobos $(WXLIBS)
+
+clean:
+	-rm *.o
+	-rm $(TARGET)
+

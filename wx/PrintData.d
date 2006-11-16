@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - PrintData.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - PrintData.cs
 //
 // The wxPrint data wrapper classes.
@@ -10,12 +13,9 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.PrintData;
+import wx.common;
 
-namespace wx
-{
     public enum PrintMode
     {
         wxPRINT_MODE_NONE =    0,
@@ -111,608 +111,468 @@ namespace wx
         wxPAPER_A3_EXTRA_TRANSVERSE // A3 Extra Transverse 322 x 445 mm
     }
 
-    public class PageSetupDialogData : Object
+        static extern (C) IntPtr wxPageSetupDialogData_ctor();
+        static extern (C) IntPtr wxPageSetupDialogData_ctorPrintSetup(IntPtr dialogData);
+        static extern (C) IntPtr wxPageSetupDialogData_ctorPrintData(IntPtr printData);
+        static extern (C) void wxPageSetupDialogData_GetPaperSize(IntPtr self, inout Size size);
+        static extern (C) int wxPageSetupDialogData_GetPaperId(IntPtr self);
+        static extern (C) void wxPageSetupDialogData_GetMinMarginTopLeft(IntPtr self, inout Point pt);
+        static extern (C) void wxPageSetupDialogData_GetMinMarginBottomRight(IntPtr self, inout Point pt);
+        static extern (C) void wxPageSetupDialogData_GetMarginTopLeft(IntPtr self, inout Point pt);
+        static extern (C) void wxPageSetupDialogData_GetMarginBottomRight(IntPtr self, inout Point pt);
+        static extern (C) bool wxPageSetupDialogData_GetDefaultMinMargins(IntPtr self);
+        static extern (C) bool wxPageSetupDialogData_GetEnableMargins(IntPtr self);
+        static extern (C) bool wxPageSetupDialogData_GetEnableOrientation(IntPtr self);
+        static extern (C) bool wxPageSetupDialogData_GetEnablePaper(IntPtr self);
+        static extern (C) bool wxPageSetupDialogData_GetEnablePrinter(IntPtr self);
+        static extern (C) bool wxPageSetupDialogData_GetDefaultInfo(IntPtr self);
+        static extern (C) bool wxPageSetupDialogData_GetEnableHelp(IntPtr self);
+        static extern (C) bool wxPageSetupDialogData_Ok(IntPtr self);
+        static extern (C) void wxPageSetupDialogData_SetPaperSize(IntPtr self, inout Size sz);
+        static extern (C) void wxPageSetupDialogData_SetPaperId(IntPtr self, int id);
+        static extern (C) void wxPageSetupDialogData_SetPaperSize(IntPtr self, int id);
+        static extern (C) void wxPageSetupDialogData_SetMinMarginTopLeft(IntPtr self, inout Point pt);
+        static extern (C) void wxPageSetupDialogData_SetMinMarginBottomRight(IntPtr self, inout Point pt);
+        static extern (C) void wxPageSetupDialogData_SetMarginTopLeft(IntPtr self, inout Point pt);
+        static extern (C) void wxPageSetupDialogData_SetMarginBottomRight(IntPtr self, inout Point pt);
+        static extern (C) void wxPageSetupDialogData_SetDefaultMinMargins(IntPtr self, bool flag);
+        static extern (C) void wxPageSetupDialogData_SetDefaultInfo(IntPtr self, bool flag);
+        static extern (C) void wxPageSetupDialogData_EnableMargins(IntPtr self, bool flag);
+        static extern (C) void wxPageSetupDialogData_EnableOrientation(IntPtr self, bool flag);
+        static extern (C) void wxPageSetupDialogData_EnablePaper(IntPtr self, bool flag);
+        static extern (C) void wxPageSetupDialogData_EnablePrinter(IntPtr self, bool flag);
+        static extern (C) void wxPageSetupDialogData_EnableHelp(IntPtr self, bool flag);
+        static extern (C) void wxPageSetupDialogData_CalculateIdFromPaperSize(IntPtr self);
+        static extern (C) void wxPageSetupDialogData_CalculatePaperSizeFromId(IntPtr self);
+        static extern (C) IntPtr wxPageSetupDialogData_GetPrintData(IntPtr self);
+        static extern (C) void wxPageSetupDialogData_SetPrintData(IntPtr self, IntPtr printData);
+
+        //-----------------------------------------------------------------------------
+
+    public class PageSetupDialogData : wxObject
     {
-        [DllImport("wx-c")] static extern IntPtr wxPageSetupDialogData_ctor();
-        [DllImport("wx-c")] static extern IntPtr wxPageSetupDialogData_ctorPrintSetup(IntPtr dialogData);
-        [DllImport("wx-c")] static extern IntPtr wxPageSetupDialogData_ctorPrintData(IntPtr printData);
-        [DllImport("wx-c")] static extern void wxPageSetupDialogData_GetPaperSize(IntPtr self, ref Size size);
-        [DllImport("wx-c")] static extern int wxPageSetupDialogData_GetPaperId(IntPtr self);
-        [DllImport("wx-c")] static extern void wxPageSetupDialogData_GetMinMarginTopLeft(IntPtr self, ref Point pt);
-        [DllImport("wx-c")] static extern void wxPageSetupDialogData_GetMinMarginBottomRight(IntPtr self, ref Point pt);
-        [DllImport("wx-c")] static extern void wxPageSetupDialogData_GetMarginTopLeft(IntPtr self, ref Point pt);
-        [DllImport("wx-c")] static extern void wxPageSetupDialogData_GetMarginBottomRight(IntPtr self, ref Point pt);
-        [DllImport("wx-c")] static extern bool wxPageSetupDialogData_GetDefaultMinMargins(IntPtr self);
-        [DllImport("wx-c")] static extern bool wxPageSetupDialogData_GetEnableMargins(IntPtr self);
-        [DllImport("wx-c")] static extern bool wxPageSetupDialogData_GetEnableOrientation(IntPtr self);
-        [DllImport("wx-c")] static extern bool wxPageSetupDialogData_GetEnablePaper(IntPtr self);
-        [DllImport("wx-c")] static extern bool wxPageSetupDialogData_GetEnablePrinter(IntPtr self);
-        [DllImport("wx-c")] static extern bool wxPageSetupDialogData_GetDefaultInfo(IntPtr self);
-        [DllImport("wx-c")] static extern bool wxPageSetupDialogData_GetEnableHelp(IntPtr self);
-        [DllImport("wx-c")] static extern bool wxPageSetupDialogData_Ok(IntPtr self);
-        [DllImport("wx-c")] static extern void wxPageSetupDialogData_SetPaperSize(IntPtr self, ref Size sz);
-        [DllImport("wx-c")] static extern void wxPageSetupDialogData_SetPaperId(IntPtr self, int id);
-        [DllImport("wx-c")] static extern void wxPageSetupDialogData_SetPaperSize(IntPtr self, int id);
-        [DllImport("wx-c")] static extern void wxPageSetupDialogData_SetMinMarginTopLeft(IntPtr self, ref Point pt);
-        [DllImport("wx-c")] static extern void wxPageSetupDialogData_SetMinMarginBottomRight(IntPtr self, ref Point pt);
-        [DllImport("wx-c")] static extern void wxPageSetupDialogData_SetMarginTopLeft(IntPtr self, ref Point pt);
-        [DllImport("wx-c")] static extern void wxPageSetupDialogData_SetMarginBottomRight(IntPtr self, ref Point pt);
-        [DllImport("wx-c")] static extern void wxPageSetupDialogData_SetDefaultMinMargins(IntPtr self, bool flag);
-        [DllImport("wx-c")] static extern void wxPageSetupDialogData_SetDefaultInfo(IntPtr self, bool flag);
-        [DllImport("wx-c")] static extern void wxPageSetupDialogData_EnableMargins(IntPtr self, bool flag);
-        [DllImport("wx-c")] static extern void wxPageSetupDialogData_EnableOrientation(IntPtr self, bool flag);
-        [DllImport("wx-c")] static extern void wxPageSetupDialogData_EnablePaper(IntPtr self, bool flag);
-        [DllImport("wx-c")] static extern void wxPageSetupDialogData_EnablePrinter(IntPtr self, bool flag);
-        [DllImport("wx-c")] static extern void wxPageSetupDialogData_EnableHelp(IntPtr self, bool flag);
-        [DllImport("wx-c")] static extern void wxPageSetupDialogData_CalculateIdFromPaperSize(IntPtr self);
-        [DllImport("wx-c")] static extern void wxPageSetupDialogData_CalculatePaperSizeFromId(IntPtr self);
-        [DllImport("wx-c")] static extern IntPtr wxPageSetupDialogData_GetPrintData(IntPtr self);
-        [DllImport("wx-c")] static extern void wxPageSetupDialogData_SetPrintData(IntPtr self, IntPtr printData);
+        public this(IntPtr wxobj) 
+            { super(wxobj); }
 
+        public this()
+            { this(wxPageSetupDialogData_ctor()); }
+        public  this(PageSetupDialogData dialogData)
+            { this(wxPageSetupDialogData_ctorPrintSetup(wxObject.SafePtr(dialogData))); }
+        public  this(PrintData printData)
+            { this(wxPageSetupDialogData_ctorPrintData(wxObject.SafePtr(printData))); }
+
+	public static wxObject New(IntPtr ptr) { return new PageSetupDialogData(ptr); }
         //-----------------------------------------------------------------------------
 
-        public PageSetupDialogData(IntPtr wxObject) 
-            : base(wxObject) { }
-
-        public PageSetupDialogData()
-            : this(wxPageSetupDialogData_ctor()) { }
-        public  PageSetupDialogData(PageSetupDialogData dialogData)
-            : this(wxPageSetupDialogData_ctorPrintSetup(Object.SafePtr(dialogData))) { }
-        public  PageSetupDialogData(PrintData printData)
-            : this(wxPageSetupDialogData_ctorPrintData(Object.SafePtr(printData))) { }
-
-        //-----------------------------------------------------------------------------
-
-        public Size PaperSize
-        {
-            get { 
-                Size size = new Size();
-                wxPageSetupDialogData_GetPaperSize(wxObject, ref size);
+        public Size paperSize() { 
+                Size size;
+                wxPageSetupDialogData_GetPaperSize(wxobj, size);
                 return size;
             }
-            set { wxPageSetupDialogData_SetPaperSize(wxObject, ref value); }
-        }
+        public void paperSize(Size value) { wxPageSetupDialogData_SetPaperSize(wxobj, value); }
 
-        public PaperSize PaperId
-        {
-            get { return (PaperSize)wxPageSetupDialogData_GetPaperId(wxObject); }
-            set { wxPageSetupDialogData_SetPaperId(wxObject, (int)value); }
-        }
+        public PaperSize PaperId() { return cast(PaperSize)wxPageSetupDialogData_GetPaperId(wxobj); }
+        public void PaperId(PaperSize value) { wxPageSetupDialogData_SetPaperId(wxobj, cast(int)value); }
 
         //-----------------------------------------------------------------------------
 
-        public Point MinMarginTopLeft
-        {
-            get { 
-                Point pt = new Point();
-                wxPageSetupDialogData_GetMinMarginTopLeft(wxObject, ref pt);
+        public Point MinMarginTopLeft() { 
+                Point pt;
+                wxPageSetupDialogData_GetMinMarginTopLeft(wxobj, pt);
                 return pt;
             }
-            set { wxPageSetupDialogData_SetMinMarginTopLeft(wxObject, ref value); }
-        }
+        public void MinMarginTopLeft(Point value) { wxPageSetupDialogData_SetMinMarginTopLeft(wxobj, value); }
 
-        public Point MinMarginBottomRight
-        {
-            get { 
-                Point pt = new Point();
-                wxPageSetupDialogData_GetMinMarginBottomRight(wxObject, ref pt);
+        public Point MinMarginBottomRight() { 
+                Point pt;
+                wxPageSetupDialogData_GetMinMarginBottomRight(wxobj, pt);
                 return pt;
             }
-            set { wxPageSetupDialogData_SetMinMarginBottomRight(wxObject, ref value); }
-        }
+        public void MinMarginBottomRight(Point value) { wxPageSetupDialogData_SetMinMarginBottomRight(wxobj, value); }
 
-        public Point MarginTopLeft
-        {
-            get { 
-                Point pt = new Point();
-                wxPageSetupDialogData_GetMarginTopLeft(wxObject, ref pt);
+        public Point MarginTopLeft() { 
+                Point pt;
+                wxPageSetupDialogData_GetMarginTopLeft(wxobj, pt);
                 return pt;
             }
-            set { wxPageSetupDialogData_SetMarginTopLeft(wxObject, ref value); }
-        }
+        public void MarginTopLeft(Point value) { wxPageSetupDialogData_SetMarginTopLeft(wxobj, value); }
 
-        public Point MarginBottomRight
-        {
-            get {
-                Point pt = new Point();
-                wxPageSetupDialogData_GetMarginBottomRight(wxObject, ref pt);
+        public Point MarginBottomRight() {
+                Point pt;
+                wxPageSetupDialogData_GetMarginBottomRight(wxobj, pt);
                 return pt;
             } 
-            set { wxPageSetupDialogData_SetMarginBottomRight(wxObject, ref value); }
-        }
+        public void MarginBottomRight(Point value) { wxPageSetupDialogData_SetMarginBottomRight(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public bool DefaultMinMargins
-        {
-            get { return wxPageSetupDialogData_GetDefaultMinMargins(wxObject); }
-            set { wxPageSetupDialogData_SetDefaultMinMargins(wxObject, value); }
-        }
+        public bool DefaultMinMargins() { return wxPageSetupDialogData_GetDefaultMinMargins(wxobj); }
+        public void DefaultMinMargins(bool value) { wxPageSetupDialogData_SetDefaultMinMargins(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public bool EnableOrientation
-        {
-            get { return wxPageSetupDialogData_GetEnableOrientation(wxObject); }
-            set { wxPageSetupDialogData_EnableOrientation(wxObject, value); }
-        }
+        public bool EnableOrientation() { return wxPageSetupDialogData_GetEnableOrientation(wxobj); }
+        public void EnableOrientation(bool value) { wxPageSetupDialogData_EnableOrientation(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public bool EnablePaper
-        {
-            get { return wxPageSetupDialogData_GetEnablePaper(wxObject); }
-            set { wxPageSetupDialogData_EnablePaper(wxObject, value); }
-        }
+        public bool EnablePaper() { return wxPageSetupDialogData_GetEnablePaper(wxobj); }
+        public void EnablePaper(bool value) { wxPageSetupDialogData_EnablePaper(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public bool EnablePrinter
-        {
-            get { return wxPageSetupDialogData_GetEnablePrinter(wxObject); }
-            set { wxPageSetupDialogData_EnablePrinter(wxObject, value); }
-        }
+        public bool EnablePrinter() { return wxPageSetupDialogData_GetEnablePrinter(wxobj); }
+        public void EnablePrinter(bool value) { wxPageSetupDialogData_EnablePrinter(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public bool DefaultInfo
-        {
-            get { return wxPageSetupDialogData_GetDefaultInfo(wxObject); }
-            set { wxPageSetupDialogData_SetDefaultInfo(wxObject, value); }
-        }
+        public bool DefaultInfo() { return wxPageSetupDialogData_GetDefaultInfo(wxobj); }
+        public void DefaultInfo(bool value) { wxPageSetupDialogData_SetDefaultInfo(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public bool EnableHelp
-        {
-            get { return wxPageSetupDialogData_GetEnableHelp(wxObject); }
-            set { wxPageSetupDialogData_EnableHelp(wxObject, value); }
-        }
+        public bool EnableHelp() { return wxPageSetupDialogData_GetEnableHelp(wxobj); }
+        public void EnableHelp(bool value) { wxPageSetupDialogData_EnableHelp(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
         public bool Ok()
         {
-            return wxPageSetupDialogData_Ok(wxObject);
+            return wxPageSetupDialogData_Ok(wxobj);
         }
 
         //-----------------------------------------------------------------------------
 
-        public bool EnableMargins
-        {
-            get { return wxPageSetupDialogData_GetEnableMargins(wxObject); }
-            set { wxPageSetupDialogData_EnableMargins(wxObject, value); }
-        }
+        public bool EnableMargins() { return wxPageSetupDialogData_GetEnableMargins(wxobj); }
+        public void EnableMargins(bool value) { wxPageSetupDialogData_EnableMargins(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
         public void CalculateIdFromPaperSize()
         {
-            wxPageSetupDialogData_CalculateIdFromPaperSize(wxObject);
+            wxPageSetupDialogData_CalculateIdFromPaperSize(wxobj);
         }
 
         //-----------------------------------------------------------------------------
 
         public void CalculatePaperSizeFromId()
         {
-            wxPageSetupDialogData_CalculatePaperSizeFromId(wxObject);
+            wxPageSetupDialogData_CalculatePaperSizeFromId(wxobj);
         }
 
         //-----------------------------------------------------------------------------
 
-        public PrintData PrintData
-        {
-            get { return (PrintData)FindObject(wxPageSetupDialogData_GetPrintData(wxObject), typeof(PrintData)); }
-            set { wxPageSetupDialogData_SetPrintData(wxObject, Object.SafePtr(value)); }
-        }
+        public PrintData printData() { return cast(PrintData)FindObject(wxPageSetupDialogData_GetPrintData(wxobj), &PrintData.New); }
+        public void printData(PrintData value) { wxPageSetupDialogData_SetPrintData(wxobj, wxObject.SafePtr(value)); }
 
         //-----------------------------------------------------------------------------
-
+/+
         public static implicit operator PageSetupDialogData (PrintData data)
         {
-            return new PageSetupDialogData(data);
+            return new this(data);
         }
++/
     }
 
-    public class PrintDialogData : Object
+        static extern (C) IntPtr wxPrintDialogData_ctor();
+        static extern (C) IntPtr wxPrintDialogData_ctorDialogData(IntPtr dialogData);
+        static extern (C) IntPtr wxPrintDialogData_ctorPrintData(IntPtr printData);
+        static extern (C) int wxPrintDialogData_GetFromPage(IntPtr self);
+        static extern (C) int wxPrintDialogData_GetToPage(IntPtr self);
+        static extern (C) int wxPrintDialogData_GetMinPage(IntPtr self);
+        static extern (C) int wxPrintDialogData_GetMaxPage(IntPtr self);
+        static extern (C) int wxPrintDialogData_GetNoCopies(IntPtr self);
+        static extern (C) bool wxPrintDialogData_GetAllPages(IntPtr self);
+        static extern (C) bool wxPrintDialogData_GetSelection(IntPtr self);
+        static extern (C) bool wxPrintDialogData_GetCollate(IntPtr self);
+        static extern (C) bool wxPrintDialogData_GetPrintToFile(IntPtr self);
+        static extern (C) bool wxPrintDialogData_GetSetupDialog(IntPtr self);
+        static extern (C) void wxPrintDialogData_SetFromPage(IntPtr self, int v);
+        static extern (C) void wxPrintDialogData_SetToPage(IntPtr self, int v);
+        static extern (C) void wxPrintDialogData_SetMinPage(IntPtr self, int v);
+        static extern (C) void wxPrintDialogData_SetMaxPage(IntPtr self, int v);
+        static extern (C) void wxPrintDialogData_SetNoCopies(IntPtr self, int v);
+        static extern (C) void wxPrintDialogData_SetAllPages(IntPtr self, bool flag);
+        static extern (C) void wxPrintDialogData_SetSelection(IntPtr self, bool flag);
+        static extern (C) void wxPrintDialogData_SetCollate(IntPtr self, bool flag);
+        static extern (C) void wxPrintDialogData_SetPrintToFile(IntPtr self, bool flag);
+        static extern (C) void wxPrintDialogData_SetSetupDialog(IntPtr self, bool flag);
+        static extern (C) void wxPrintDialogData_EnablePrintToFile(IntPtr self, bool flag);
+        static extern (C) void wxPrintDialogData_EnableSelection(IntPtr self, bool flag);
+        static extern (C) void wxPrintDialogData_EnablePageNumbers(IntPtr self, bool flag);
+        static extern (C) void wxPrintDialogData_EnableHelp(IntPtr self, bool flag);
+        static extern (C) bool wxPrintDialogData_GetEnablePrintToFile(IntPtr self);
+        static extern (C) bool wxPrintDialogData_GetEnableSelection(IntPtr self);
+        static extern (C) bool wxPrintDialogData_GetEnablePageNumbers(IntPtr self);
+        static extern (C) bool wxPrintDialogData_GetEnableHelp(IntPtr self);
+        static extern (C) bool wxPrintDialogData_Ok(IntPtr self);
+        static extern (C) IntPtr wxPrintDialogData_GetPrintData(IntPtr self);
+        static extern (C) void wxPrintDialogData_SetPrintData(IntPtr self, IntPtr printData);
+
+    public class PrintDialogData : wxObject
     {
-        [DllImport("wx-c")] static extern IntPtr wxPrintDialogData_ctor();
-        [DllImport("wx-c")] static extern IntPtr wxPrintDialogData_ctorDialogData(IntPtr dialogData);
-        [DllImport("wx-c")] static extern IntPtr wxPrintDialogData_ctorPrintData(IntPtr printData);
-        [DllImport("wx-c")] static extern int wxPrintDialogData_GetFromPage(IntPtr self);
-        [DllImport("wx-c")] static extern int wxPrintDialogData_GetToPage(IntPtr self);
-        [DllImport("wx-c")] static extern int wxPrintDialogData_GetMinPage(IntPtr self);
-        [DllImport("wx-c")] static extern int wxPrintDialogData_GetMaxPage(IntPtr self);
-        [DllImport("wx-c")] static extern int wxPrintDialogData_GetNoCopies(IntPtr self);
-        [DllImport("wx-c")] static extern bool wxPrintDialogData_GetAllPages(IntPtr self);
-        [DllImport("wx-c")] static extern bool wxPrintDialogData_GetSelection(IntPtr self);
-        [DllImport("wx-c")] static extern bool wxPrintDialogData_GetCollate(IntPtr self);
-        [DllImport("wx-c")] static extern bool wxPrintDialogData_GetPrintToFile(IntPtr self);
-        [DllImport("wx-c")] static extern bool wxPrintDialogData_GetSetupDialog(IntPtr self);
-        [DllImport("wx-c")] static extern void wxPrintDialogData_SetFromPage(IntPtr self, int v);
-        [DllImport("wx-c")] static extern void wxPrintDialogData_SetToPage(IntPtr self, int v);
-        [DllImport("wx-c")] static extern void wxPrintDialogData_SetMinPage(IntPtr self, int v);
-        [DllImport("wx-c")] static extern void wxPrintDialogData_SetMaxPage(IntPtr self, int v);
-        [DllImport("wx-c")] static extern void wxPrintDialogData_SetNoCopies(IntPtr self, int v);
-        [DllImport("wx-c")] static extern void wxPrintDialogData_SetAllPages(IntPtr self, bool flag);
-        [DllImport("wx-c")] static extern void wxPrintDialogData_SetSelection(IntPtr self, bool flag);
-        [DllImport("wx-c")] static extern void wxPrintDialogData_SetCollate(IntPtr self, bool flag);
-        [DllImport("wx-c")] static extern void wxPrintDialogData_SetPrintToFile(IntPtr self, bool flag);
-        [DllImport("wx-c")] static extern void wxPrintDialogData_SetSetupDialog(IntPtr self, bool flag);
-        [DllImport("wx-c")] static extern void wxPrintDialogData_EnablePrintToFile(IntPtr self, bool flag);
-        [DllImport("wx-c")] static extern void wxPrintDialogData_EnableSelection(IntPtr self, bool flag);
-        [DllImport("wx-c")] static extern void wxPrintDialogData_EnablePageNumbers(IntPtr self, bool flag);
-        [DllImport("wx-c")] static extern void wxPrintDialogData_EnableHelp(IntPtr self, bool flag);
-        [DllImport("wx-c")] static extern bool wxPrintDialogData_GetEnablePrintToFile(IntPtr self);
-        [DllImport("wx-c")] static extern bool wxPrintDialogData_GetEnableSelection(IntPtr self);
-        [DllImport("wx-c")] static extern bool wxPrintDialogData_GetEnablePageNumbers(IntPtr self);
-        [DllImport("wx-c")] static extern bool wxPrintDialogData_GetEnableHelp(IntPtr self);
-        [DllImport("wx-c")] static extern bool wxPrintDialogData_Ok(IntPtr self);
-        [DllImport("wx-c")] static extern IntPtr wxPrintDialogData_GetPrintData(IntPtr self);
-        [DllImport("wx-c")] static extern void wxPrintDialogData_SetPrintData(IntPtr self, IntPtr printData);
+        //-----------------------------------------------------------------------------
+
+        public this(IntPtr wxobj)
+            { super(wxobj); }
+
+        public this()
+            { this(wxPrintDialogData_ctor()); }
+        public this(PrintDialogData dialogData)
+            { this(wxPrintDialogData_ctorDialogData(wxObject.SafePtr(dialogData))); }
+        public this(PrintData printData)
+            { this(wxPrintDialogData_ctorPrintData(wxObject.SafePtr(printData))); }
+	public static wxObject New(IntPtr ptr) { return new PrintDialogData(ptr); }
 
         //-----------------------------------------------------------------------------
 
-        public PrintDialogData(IntPtr wxObject)
-            : base(wxObject) { }
+        public int FromPage() { return wxPrintDialogData_GetFromPage(wxobj); }
+        public void FromPage(int value) { wxPrintDialogData_SetFromPage(wxobj, value); }
 
-        public PrintDialogData()
-            : this(wxPrintDialogData_ctor()) { }
-        public PrintDialogData(PrintDialogData dialogData)
-            : this(wxPrintDialogData_ctorDialogData(Object.SafePtr(dialogData))) { }
-        public PrintDialogData(PrintData printData)
-            : this(wxPrintDialogData_ctorPrintData(Object.SafePtr(printData))) { }
+        public int ToPage() { return wxPrintDialogData_GetToPage(wxobj); }
+        public void ToPage(int value) { wxPrintDialogData_SetToPage(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public int FromPage
-        {
-            get { return wxPrintDialogData_GetFromPage(wxObject); }
-            set { wxPrintDialogData_SetFromPage(wxObject, value); }
-        }
+        public int MinPage() { return wxPrintDialogData_GetMinPage(wxobj); }
+        public void MinPage(int value) { wxPrintDialogData_SetMinPage(wxobj, value); }
 
-        public int ToPage
-        {
-            get { return wxPrintDialogData_GetToPage(wxObject); }
-            set { wxPrintDialogData_SetToPage(wxObject, value); }
-        }
+        public int MaxPage() { return wxPrintDialogData_GetMaxPage(wxobj); }
+        public void MaxPage(int value) { wxPrintDialogData_SetMaxPage(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public int MinPage
-        {
-            get { return wxPrintDialogData_GetMinPage(wxObject); }
-            set { wxPrintDialogData_SetMinPage(wxObject, value); }
-        }
-
-        public int MaxPage
-        {
-            get { return wxPrintDialogData_GetMaxPage(wxObject); }
-            set { wxPrintDialogData_SetMaxPage(wxObject, value); }
-        }
+        public int NoCopies() { return wxPrintDialogData_GetNoCopies(wxobj); }
+        public void NoCopies(int value) { wxPrintDialogData_SetNoCopies(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public int NoCopies
-        {
-            get { return wxPrintDialogData_GetNoCopies(wxObject); }
-            set { wxPrintDialogData_SetNoCopies(wxObject, value); }
-        }
+        public bool AllPages() { return wxPrintDialogData_GetAllPages(wxobj); }
+        public void AllPages(bool value) { wxPrintDialogData_SetAllPages(wxobj, value); }
+
+        public bool Selection() { return wxPrintDialogData_GetSelection(wxobj); }
+        public void Selection(bool value) { wxPrintDialogData_SetSelection(wxobj, value); }
+
+        public bool Collate() { return wxPrintDialogData_GetCollate(wxobj); }
+        public void Collate(bool value) { wxPrintDialogData_SetCollate(wxobj, value); }
+
+        public bool PrintToFile() { return wxPrintDialogData_GetPrintToFile(wxobj); }
+        public void PrintToFile(bool value) { wxPrintDialogData_SetPrintToFile(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public bool AllPages
-        {
-            get { return wxPrintDialogData_GetAllPages(wxObject); }
-            set { wxPrintDialogData_SetAllPages(wxObject, value); }
-        }
-
-        public bool Selection
-        {
-            get { return wxPrintDialogData_GetSelection(wxObject); }
-            set { wxPrintDialogData_SetSelection(wxObject, value); }
-        }
-
-        public bool Collate
-        {
-            get { return wxPrintDialogData_GetCollate(wxObject); }
-            set { wxPrintDialogData_SetCollate(wxObject, value); }
-        }
-
-        public bool PrintToFile
-        {
-            get { return wxPrintDialogData_GetPrintToFile(wxObject); }
-            set { wxPrintDialogData_SetPrintToFile(wxObject, value); }
-        }
+        public bool SetupDialog() { return wxPrintDialogData_GetSetupDialog(wxobj); }
+        public void SetupDialog(bool value) { wxPrintDialogData_SetSetupDialog(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public bool SetupDialog
-        {
-            get { return wxPrintDialogData_GetSetupDialog(wxObject); }
-            set { wxPrintDialogData_SetSetupDialog(wxObject, value); }
-        }
+        public void EnablePrintToFile(bool value) { wxPrintDialogData_EnablePrintToFile(wxobj, value); }
+        public bool EnablePrintToFile() { return wxPrintDialogData_GetEnablePrintToFile(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public bool EnablePrintToFile
-        {
-            set { wxPrintDialogData_EnablePrintToFile(wxObject, value); }
-            get { return wxPrintDialogData_GetEnablePrintToFile(wxObject); }
-        }
+        public void EnableSelection(bool value) { wxPrintDialogData_EnableSelection(wxobj, value); }
+        public bool EnableSelection() { return wxPrintDialogData_GetEnableSelection(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public bool EnableSelection
-        {
-            set { wxPrintDialogData_EnableSelection(wxObject, value); }
-            get { return wxPrintDialogData_GetEnableSelection(wxObject); }
-        }
+        public void EnablePageNumbers(bool value) { wxPrintDialogData_EnablePageNumbers(wxobj, value); }
+        public bool EnablePageNumbers() { return wxPrintDialogData_GetEnablePageNumbers(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public bool EnablePageNumbers
-        {
-            set { wxPrintDialogData_EnablePageNumbers(wxObject, value); }
-            get { return wxPrintDialogData_GetEnablePageNumbers(wxObject); }
-        }
-
-        //-----------------------------------------------------------------------------
-
-        public bool EnableHelp
-        {
-            set { wxPrintDialogData_EnableHelp(wxObject, value); }
-            get { return wxPrintDialogData_GetEnableHelp(wxObject); }
-        }
+        public void EnableHelp(bool value) { wxPrintDialogData_EnableHelp(wxobj, value); }
+        public bool EnableHelp() { return wxPrintDialogData_GetEnableHelp(wxobj); }
 
         //-----------------------------------------------------------------------------
 
         public bool Ok()
         {
-            return wxPrintDialogData_Ok(wxObject);
+            return wxPrintDialogData_Ok(wxobj);
         }
 
         //-----------------------------------------------------------------------------
 
-        public PrintData PrintData
-        {
-            get { return (PrintData)FindObject(wxPrintDialogData_GetPrintData(wxObject), typeof(PrintData)); }
-            set { wxPrintDialogData_SetPrintData(wxObject, Object.SafePtr(value)); }
-        }
+        public PrintData printData() { return cast(PrintData)FindObject(wxPrintDialogData_GetPrintData(wxobj), &PrintData.New); }
+        public void printData(PrintData value) { wxPrintDialogData_SetPrintData(wxobj, wxObject.SafePtr(value)); }
     }
 
-    public class PrintData : Object
+        static extern (C) IntPtr wxPrintData_ctor();
+        static extern (C) IntPtr wxPrintData_ctorPrintData(IntPtr printData);
+        static extern (C) int wxPrintData_GetNoCopies(IntPtr self);
+        static extern (C) bool wxPrintData_GetCollate(IntPtr self);
+        static extern (C) int wxPrintData_GetOrientation(IntPtr self);
+        static extern (C) bool wxPrintData_Ok(IntPtr self);
+        static extern (C) string wxPrintData_GetPrinterName(IntPtr self);
+        static extern (C) bool wxPrintData_GetColour(IntPtr self);
+        static extern (C) int wxPrintData_GetDuplex(IntPtr self);
+        static extern (C) int wxPrintData_GetPaperId(IntPtr self);
+        static extern (C) void wxPrintData_GetPaperSize(IntPtr self, inout Size sz);
+        static extern (C) int wxPrintData_GetQuality(IntPtr self);
+        static extern (C) void wxPrintData_SetNoCopies(IntPtr self, int v);
+        static extern (C) void wxPrintData_SetCollate(IntPtr self, bool flag);
+        static extern (C) void wxPrintData_SetOrientation(IntPtr self, int orient);
+        static extern (C) void wxPrintData_SetPrinterName(IntPtr self, string name);
+        static extern (C) void wxPrintData_SetColour(IntPtr self, bool colour);
+        static extern (C) void wxPrintData_SetDuplex(IntPtr self, int duplex);
+        static extern (C) void wxPrintData_SetPaperId(IntPtr self, int sizeId);
+        static extern (C) void wxPrintData_SetPaperSize(IntPtr self, inout Size sz);
+        static extern (C) void wxPrintData_SetQuality(IntPtr self, int quality);
+        static extern (C) string wxPrintData_GetPrinterCommand(IntPtr self);
+        static extern (C) string wxPrintData_GetPrinterOptions(IntPtr self);
+        static extern (C) string wxPrintData_GetPreviewCommand(IntPtr self);
+        static extern (C) string wxPrintData_GetFilename(IntPtr self);
+        static extern (C) string wxPrintData_GetFontMetricPath(IntPtr self);
+        static extern (C) double wxPrintData_GetPrinterScaleX(IntPtr self);
+        static extern (C) double wxPrintData_GetPrinterScaleY(IntPtr self);
+        static extern (C) int wxPrintData_GetPrinterTranslateX(IntPtr self);
+        static extern (C) int wxPrintData_GetPrinterTranslateY(IntPtr self);
+        static extern (C) int wxPrintData_GetPrintMode(IntPtr self);
+        static extern (C) void wxPrintData_SetPrinterCommand(IntPtr self, string command);
+        static extern (C) void wxPrintData_SetPrinterOptions(IntPtr self, string options);
+        static extern (C) void wxPrintData_SetPreviewCommand(IntPtr self, string command);
+        static extern (C) void wxPrintData_SetFilename(IntPtr self, string filename);
+        static extern (C) void wxPrintData_SetFontMetricPath(IntPtr self, string path);
+        static extern (C) void wxPrintData_SetPrinterScaleX(IntPtr self, double x);
+        static extern (C) void wxPrintData_SetPrinterScaleY(IntPtr self, double y);
+        static extern (C) void wxPrintData_SetPrinterScaling(IntPtr self, double x, double y);
+        static extern (C) void wxPrintData_SetPrinterTranslateX(IntPtr self, int x);
+        static extern (C) void wxPrintData_SetPrinterTranslateY(IntPtr self, int y);
+        static extern (C) void wxPrintData_SetPrinterTranslation(IntPtr self, int x, int y);
+        static extern (C) void wxPrintData_SetPrintMode(IntPtr self, int printMode);
+
+        //-----------------------------------------------------------------------------
+
+    public class PrintData : wxObject
     {
-        [DllImport("wx-c")] static extern IntPtr wxPrintData_ctor();
-        [DllImport("wx-c")] static extern IntPtr wxPrintData_ctorPrintData(IntPtr printData);
-        [DllImport("wx-c")] static extern int wxPrintData_GetNoCopies(IntPtr self);
-        [DllImport("wx-c")] static extern bool wxPrintData_GetCollate(IntPtr self);
-        [DllImport("wx-c")] static extern int wxPrintData_GetOrientation(IntPtr self);
-        [DllImport("wx-c")] static extern bool wxPrintData_Ok(IntPtr self);
-        [DllImport("wx-c")] static extern IntPtr wxPrintData_GetPrinterName(IntPtr self);
-        [DllImport("wx-c")] static extern bool wxPrintData_GetColour(IntPtr self);
-        [DllImport("wx-c")] static extern int wxPrintData_GetDuplex(IntPtr self);
-        [DllImport("wx-c")] static extern int wxPrintData_GetPaperId(IntPtr self);
-        [DllImport("wx-c")] static extern void wxPrintData_GetPaperSize(IntPtr self, ref Size sz);
-        [DllImport("wx-c")] static extern int wxPrintData_GetQuality(IntPtr self);
-        [DllImport("wx-c")] static extern void wxPrintData_SetNoCopies(IntPtr self, int v);
-        [DllImport("wx-c")] static extern void wxPrintData_SetCollate(IntPtr self, bool flag);
-        [DllImport("wx-c")] static extern void wxPrintData_SetOrientation(IntPtr self, int orient);
-        [DllImport("wx-c")] static extern void wxPrintData_SetPrinterName(IntPtr self, string name);
-        [DllImport("wx-c")] static extern void wxPrintData_SetColour(IntPtr self, bool colour);
-        [DllImport("wx-c")] static extern void wxPrintData_SetDuplex(IntPtr self, int duplex);
-        [DllImport("wx-c")] static extern void wxPrintData_SetPaperId(IntPtr self, int sizeId);
-        [DllImport("wx-c")] static extern void wxPrintData_SetPaperSize(IntPtr self, ref Size sz);
-        [DllImport("wx-c")] static extern void wxPrintData_SetQuality(IntPtr self, int quality);
-        [DllImport("wx-c")] static extern IntPtr wxPrintData_GetPrinterCommand(IntPtr self);
-        [DllImport("wx-c")] static extern IntPtr wxPrintData_GetPrinterOptions(IntPtr self);
-        [DllImport("wx-c")] static extern IntPtr wxPrintData_GetPreviewCommand(IntPtr self);
-        [DllImport("wx-c")] static extern IntPtr wxPrintData_GetFilename(IntPtr self);
-        [DllImport("wx-c")] static extern IntPtr wxPrintData_GetFontMetricPath(IntPtr self);
-        [DllImport("wx-c")] static extern double wxPrintData_GetPrinterScaleX(IntPtr self);
-        [DllImport("wx-c")] static extern double wxPrintData_GetPrinterScaleY(IntPtr self);
-        [DllImport("wx-c")] static extern int wxPrintData_GetPrinterTranslateX(IntPtr self);
-        [DllImport("wx-c")] static extern int wxPrintData_GetPrinterTranslateY(IntPtr self);
-        [DllImport("wx-c")] static extern int wxPrintData_GetPrintMode(IntPtr self);
-        [DllImport("wx-c")] static extern void wxPrintData_SetPrinterCommand(IntPtr self, string command);
-        [DllImport("wx-c")] static extern void wxPrintData_SetPrinterOptions(IntPtr self, string options);
-        [DllImport("wx-c")] static extern void wxPrintData_SetPreviewCommand(IntPtr self, string command);
-        [DllImport("wx-c")] static extern void wxPrintData_SetFilename(IntPtr self, string filename);
-        [DllImport("wx-c")] static extern void wxPrintData_SetFontMetricPath(IntPtr self, string path);
-        [DllImport("wx-c")] static extern void wxPrintData_SetPrinterScaleX(IntPtr self, double x);
-        [DllImport("wx-c")] static extern void wxPrintData_SetPrinterScaleY(IntPtr self, double y);
-        [DllImport("wx-c")] static extern void wxPrintData_SetPrinterScaling(IntPtr self, double x, double y);
-        [DllImport("wx-c")] static extern void wxPrintData_SetPrinterTranslateX(IntPtr self, int x);
-        [DllImport("wx-c")] static extern void wxPrintData_SetPrinterTranslateY(IntPtr self, int y);
-        [DllImport("wx-c")] static extern void wxPrintData_SetPrinterTranslation(IntPtr self, int x, int y);
-        [DllImport("wx-c")] static extern void wxPrintData_SetPrintMode(IntPtr self, int printMode);
+        public this(IntPtr wxobj) 
+            { super(wxobj); }
+
+        public this()
+            { this(wxPrintData_ctor()); }
+        public this(PrintData printData)
+            { this(wxPrintData_ctorPrintData(wxObject.SafePtr(printData))); }
+
+        public static wxObject New(IntPtr ptr) { return new PrintData(ptr); }
 
         //-----------------------------------------------------------------------------
 
-        public PrintData(IntPtr wxObject) 
-            : base(wxObject) { }
-
-        public PrintData()
-            : this(wxPrintData_ctor()) { }
-        public PrintData(PrintData printData)
-            : this(wxPrintData_ctorPrintData(Object.SafePtr(printData))) { }
+        public int NoCopies() { return wxPrintData_GetNoCopies(wxobj); }
+        public void NoCopies(int value) { wxPrintData_SetNoCopies(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public int NoCopies
-        {
-            get { return wxPrintData_GetNoCopies(wxObject); }
-            set { wxPrintData_SetNoCopies(wxObject, value); }
-        }
+        public bool Collate() { return wxPrintData_GetCollate(wxobj); }
+        public void Collate(bool value) { wxPrintData_SetCollate(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public bool Collate
-        {
-            get { return wxPrintData_GetCollate(wxObject); }
-            set { wxPrintData_SetCollate(wxObject, value); }
-        }
-
-        //-----------------------------------------------------------------------------
-
-        public int Orientation
-        {
-            get { return wxPrintData_GetOrientation(wxObject); }
-            set { wxPrintData_SetOrientation(wxObject, value); }
-        }
+        public int Orientation() { return wxPrintData_GetOrientation(wxobj); }
+        public void Orientation(int value) { wxPrintData_SetOrientation(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
         public bool Ok()
         {
-            return wxPrintData_Ok(wxObject);
+            return wxPrintData_Ok(wxobj);
         }
 
         //-----------------------------------------------------------------------------
 
-        public string PrinterName
-        {
-            get { return new wxString(wxPrintData_GetPrinterName(wxObject), true); }
-            set { wxPrintData_SetPrinterName(wxObject, value); }
-        }
+        public string PrinterName() { return wxPrintData_GetPrinterName(wxobj).dup; }
+        public void PrinterName(string value) { wxPrintData_SetPrinterName(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public bool Colour
-        {
-            get { return wxPrintData_GetColour(wxObject); }
-            set { wxPrintData_SetColour(wxObject, value); }
-        }
+        public bool Colour() { return wxPrintData_GetColour(wxobj); }
+        public void Colour(bool value) { wxPrintData_SetColour(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public DuplexMode Duplex
-        {
-            get { return (DuplexMode)wxPrintData_GetDuplex(wxObject); }
-            set { wxPrintData_SetDuplex(wxObject, (int)value); }
-        }
+        public DuplexMode Duplex() { return cast(DuplexMode)wxPrintData_GetDuplex(wxobj); }
+        public void Duplex(DuplexMode value) { wxPrintData_SetDuplex(wxobj, cast(int)value); }
 
         //-----------------------------------------------------------------------------
 
-        public PaperSize PaperId
-        {
-            get { return (PaperSize)wxPrintData_GetPaperId(wxObject); }
-            set { wxPrintData_SetPaperId(wxObject, (int)value); }
-        }
+        public PaperSize PaperId() { return cast(PaperSize)wxPrintData_GetPaperId(wxobj); }
+        public void PaperId(PaperSize value) { wxPrintData_SetPaperId(wxobj, cast(int)value); }
 
         //-----------------------------------------------------------------------------
 
-        public Size PaperSize
-        {
-            get { 
-                Size sz = new Size();
-                wxPrintData_GetPaperSize(wxObject, ref sz);
+        public Size paperSize() { 
+                Size sz;
+                wxPrintData_GetPaperSize(wxobj, sz);
                 return sz;
             }
-            set { wxPrintData_SetPaperSize(wxObject, ref value); }
-        }
+        public void paperSize(Size value) { wxPrintData_SetPaperSize(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public PrintQuality Quality
-        {
-            get { return (PrintQuality)wxPrintData_GetQuality(wxObject); }
-            set { wxPrintData_SetQuality(wxObject, (int)value); }
-        }
+        public PrintQuality Quality() { return cast(PrintQuality)wxPrintData_GetQuality(wxobj); }
+        public void Quality(PrintQuality value) { wxPrintData_SetQuality(wxobj, cast(int)value); }
 
         //-----------------------------------------------------------------------------
 
-        public string PrinterCommand
-        {
-            get { return new wxString(wxPrintData_GetPrinterCommand(wxObject), true); }
-            set { wxPrintData_SetPrinterCommand(wxObject, value); }
-        }
+        public string PrinterCommand() { return wxPrintData_GetPrinterCommand(wxobj).dup; }
+        public void PrinterCommand(string value) { wxPrintData_SetPrinterCommand(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public string PrinterOptions
-        {
-            get { return new wxString(wxPrintData_GetPrinterOptions(wxObject), true); }
-            set { wxPrintData_SetPrinterOptions(wxObject, value); }
-        }
+        public string PrinterOptions() { return wxPrintData_GetPrinterOptions(wxobj).dup; }
+        public void PrinterOptions(string value) { wxPrintData_SetPrinterOptions(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public string PreviewCommand
-        {
-            get { return new wxString(wxPrintData_GetPreviewCommand(wxObject), true); }
-            set { wxPrintData_SetPreviewCommand(wxObject, value); }
-        }
+        public string PreviewCommand() { return wxPrintData_GetPreviewCommand(wxobj).dup; }
+        public void PreviewCommand(string value) { wxPrintData_SetPreviewCommand(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public string Filename
-        {
-            get { return new wxString(wxPrintData_GetFilename(wxObject), true); }
-            set { wxPrintData_SetFilename(wxObject, value); }
-        }
+        public string Filename() { return wxPrintData_GetFilename(wxobj).dup; }
+        public void Filename(string value) { wxPrintData_SetFilename(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public string FontMetricPath
-        {
-            get { return new wxString(wxPrintData_GetFontMetricPath(wxObject), true); }
-            set { wxPrintData_SetFontMetricPath(wxObject, value); }
-        }
+        public string FontMetricPath() { return wxPrintData_GetFontMetricPath(wxobj).dup; }
+        public void FontMetricPath(string value) { wxPrintData_SetFontMetricPath(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public double PrinterScaleX
-        {
-            get { return wxPrintData_GetPrinterScaleX(wxObject); }
-            set { wxPrintData_SetPrinterScaleX(wxObject, value); }
-        }
+        public double PrinterScaleX() { return wxPrintData_GetPrinterScaleX(wxobj); }
+        public void PrinterScaleX(double value) { wxPrintData_SetPrinterScaleX(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public double PrinterScaleY
-        {
-            get { return wxPrintData_GetPrinterScaleY(wxObject); }
-            set { wxPrintData_SetPrinterScaleY(wxObject, value); }
-        }
+        public double PrinterScaleY() { return wxPrintData_GetPrinterScaleY(wxobj); }
+        public void PrinterScaleY(double value) { wxPrintData_SetPrinterScaleY(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public int PrinterTranslateX
-        {
-            get { return wxPrintData_GetPrinterTranslateX(wxObject); }
-            set { wxPrintData_SetPrinterTranslateX(wxObject, value); }
-        }
+        public int PrinterTranslateX() { return wxPrintData_GetPrinterTranslateX(wxobj); }
+        public void PrinterTranslateX(int value) { wxPrintData_SetPrinterTranslateX(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public int PrinterTranslateY
-        {
-            get { return wxPrintData_GetPrinterTranslateY(wxObject); }
-            set { wxPrintData_SetPrinterTranslateY(wxObject, value); }
-        }
+        public int PrinterTranslateY() { return wxPrintData_GetPrinterTranslateY(wxobj); }
+        public void PrinterTranslateY(int value) { wxPrintData_SetPrinterTranslateY(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public PrintMode PrintMode
-        {
-            get { return (PrintMode)wxPrintData_GetPrintMode(wxObject); }
-            set { wxPrintData_SetPrintMode(wxObject, (int)value); }
-        }
+        public PrintMode printMode() { return cast(PrintMode)wxPrintData_GetPrintMode(wxobj); }
+        public void printMode(PrintMode value) { wxPrintData_SetPrintMode(wxobj, cast(int)value); }
 
         //-----------------------------------------------------------------------------
 
         public void SetPrinterScaling(double x, double y)
         {
-            wxPrintData_SetPrinterScaling(wxObject, x, y);
+            wxPrintData_SetPrinterScaling(wxobj, x, y);
         }
 
         //-----------------------------------------------------------------------------
 
         public void SetPrinterTranslation(int x, int y)
         {
-            wxPrintData_SetPrinterTranslation(wxObject, x, y);
+            wxPrintData_SetPrinterTranslation(wxobj, x, y);
         }
     }
-}
 

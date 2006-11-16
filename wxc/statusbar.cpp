@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - statusbar.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - statusbar.cxx
 // 
 // The wxStatusBar proxy interface.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include "local_events.h"
 
 //-----------------------------------------------------------------------------
@@ -30,12 +34,12 @@ wxStatusBar* wxStatusBar_ctor()
 }
 
 extern "C" WXEXPORT
-bool wxStatusBar_Create(wxStatusBar* self, wxWindow* parent, wxWindowID id, unsigned int style, char* name)
+bool wxStatusBar_Create(wxStatusBar* self, wxWindow* parent, wxWindowID id, unsigned int style, dstr name)
 {
-    if (name == NULL)
-        name = "statusBar";
+    if (name.data==NULL)
+        name = dstr("statusBar",sizeof("statusBar")-1);
 
-    return self->Create(parent, id, style, wxString(name, wxConvUTF8))?1:0;
+    return self->Create(parent, id, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -65,9 +69,9 @@ int wxStatusBar_GetBorderY(wxStatusBar* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxStatusBar_GetStatusText(wxStatusBar* self, int number)
+dstr wxStatusBar_GetStatusText(wxStatusBar* self, int number)
 {
-    return new wxString(self->GetStatusText(number).c_str());
+    return dstr(self->GetStatusText(number).c_str());
 }
 
 //-----------------------------------------------------------------------------
@@ -81,9 +85,9 @@ int wxStatusBar_GetBorderX(wxStatusBar* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStatusBar_SetStatusText(wxStatusBar* self, char* text, int number)
+void wxStatusBar_SetStatusText(wxStatusBar* self, dstr text, int number)
 {
-    self->SetStatusText(wxString(text, wxConvUTF8), number);
+    self->SetStatusText(wxString(text.data, wxConvUTF8, text.length), number);
 }
 
 //-----------------------------------------------------------------------------
@@ -113,9 +117,9 @@ void wxStatusBar_PopStatusText(wxStatusBar* self, int field)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStatusBar_PushStatusText(wxStatusBar* self, const char* xstring, int field)
+void wxStatusBar_PushStatusText(wxStatusBar* self, dstr xstring, int field)
 {
-	self->PushStatusText(wxString(xstring, wxConvUTF8), field);
+	self->PushStatusText(wxString(xstring.data, wxConvUTF8, xstring.length), field);
 }
 
 //-----------------------------------------------------------------------------

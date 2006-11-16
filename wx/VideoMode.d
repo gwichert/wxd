@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - VidMode.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - VidMode.cs
 // 
 // Michael S. Muegel mike _at_ muegel dot org
@@ -23,16 +26,14 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.VideoMode;
+import wx.common;
+import std.string;
 
-namespace wx
-{
-    [StructLayout(LayoutKind.Sequential)]
-    public struct VideoMode : IComparable
+//    [StructLayout(LayoutKind.Sequential)]
+    public class VideoMode // : IComparable
     {
-        public VideoMode(int width, int height, int depth, int freq)
+        public this(int width, int height, int depth, int freq)
         {
             w = width;
             h = height;
@@ -40,9 +41,9 @@ namespace wx
             refresh = freq;
         }
 
-		public int CompareTo(object obj)
+		public int opCmp(Object obj)
 		{
-			VideoMode other = (VideoMode) obj;
+			VideoMode other = cast(VideoMode) obj;
 			if (other.w > w)
 				return -1;
 			else if (other.w < w)
@@ -63,34 +64,18 @@ namespace wx
 				return 0;
 		}
 
-        public override bool Equals(object obj)
+        public override int opEquals(Object obj)
         {
-            if (obj == null) return false;
-            VideoMode otherMode = (VideoMode) obj;
-            return (w == otherMode.w) && (h == otherMode.h) && 
-                (bpp == otherMode.bpp) && (refresh == otherMode.refresh);
+            if (obj === null) return false;
+            VideoMode other = cast(VideoMode) obj;
+            return (w == other.w) && (h == other.h) && 
+                (bpp == other.bpp) && (refresh == other.refresh);
         }
 
-        public override int GetHashCode()
+        public override uint toHash()
         {
-            return w.GetHashCode() ^ h.GetHashCode() ^ 
-                bpp.GetHashCode() ^ refresh.GetHashCode();
+            return w ^ h ^ bpp ^ refresh;
         }
-
-        public static bool operator == (VideoMode mode1, VideoMode mode2)
-        {
-            object obj1 = mode1, obj2 = mode2;
-            if (obj1 == null && obj2 == null) return true;
-            if (obj1 == null || obj2 == null) return false;
-
-            return mode1.Equals(mode2);
-        }
-
-        public static bool operator != (VideoMode mode1, VideoMode mode2)
-        {
-            return ! mode1.Equals(mode2);
-        }
-
 
         // returns true if this mode matches the other one in the sense that all
         // non zero fields of the other mode have the same value in this one
@@ -104,41 +89,29 @@ namespace wx
         }
 
         // trivial accessors
-        public int Width
-        {
-            get { return w; }
-        }
+        public int Width() { return w; }
 
-        public int Height
-        {
-            get { return h; }
-        }
+        public int Height() { return h; }
 
-        public int Depth
-        {
-            get { return bpp; }
-        }
+        public int Depth() { return bpp; }
 
         // This is not defined in vidmode.h
-        public int RefreshFrequency
-        {
-            get { return refresh; }
-        }
+        public int RefreshFrequency() { return refresh; }
 
 
         // returns true if the object has been initialized
         // not implemented -- seems impossible
         // bool IsOk() const { return w && h; }
 
-		public override string ToString()
+		public override string toString()
 		{
 			string s;
-			s = w.ToString() + "x" + h.ToString();
+			s = .toString(w) ~ "x" ~ .toString(h);
 			if ( bpp > 0 )
-				s += ", " + bpp.ToString() + "bpp";
+				s ~= ", " ~ .toString(bpp) ~ "bpp";
 
 			if ( refresh > 0 )
-				s += ", " + refresh.ToString() + "Hz";
+				s ~= ", " ~ .toString(refresh) ~ "Hz";
 
 			return s;
 		}
@@ -152,4 +125,3 @@ namespace wx
         // refresh frequency in Hz, 0 means unspecified/unknown
         private int refresh;
     }
-}

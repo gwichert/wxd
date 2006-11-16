@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - helpevent.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - helpevent.cxx
 // 
 // The wxHelpEvent proxy interface.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 
 //-----------------------------------------------------------------------------
 
@@ -39,32 +43,32 @@ void wxHelpEvent_SetPosition(wxHelpEvent* self, wxPoint* pos)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxHelpEvent_GetLink(wxHelpEvent* self)
+dstr wxHelpEvent_GetLink(wxHelpEvent* self)
 {
-	return new wxString(self->GetLink());
+	return dstr(self->GetLink());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHelpEvent_SetLink(wxHelpEvent* self, const char* link)
+void wxHelpEvent_SetLink(wxHelpEvent* self, dstr link)
 {
-	self->SetLink(wxString(link, wxConvUTF8));
+	self->SetLink(wxString(link.data, wxConvUTF8, link.length));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxHelpEvent_GetTarget(wxHelpEvent* self)
+dstr wxHelpEvent_GetTarget(wxHelpEvent* self)
 {
-	return new wxString(self->GetTarget());
+	return dstr(self->GetTarget());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHelpEvent_SetTarget(wxHelpEvent* self, const char* target)
+void wxHelpEvent_SetTarget(wxHelpEvent* self, dstr target)
 {
-	self->SetTarget(wxString(target, wxConvUTF8));
+	self->SetTarget(wxString(target.data, wxConvUTF8, target.length));
 }
 

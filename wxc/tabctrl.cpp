@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - tabctrl.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - tabctrl.cxx
 // 
 // The wxTabCtrl proxy interface.
@@ -13,6 +16,7 @@
 #ifdef __WXMSW__  
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/tabctrl.h>
 #include "local_events.h"
 
@@ -40,7 +44,7 @@ wxTabCtrl* wxTabCtrl_ctor()
 
 extern "C" WXEXPORT
 wxTabCtrl* wxTabCtrl_ctor2(wxWindow *parent, wxWindowID id, const wxPoint* pos, const wxSize* size,
-            long style, const char* name)
+            long style, dstr name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -48,17 +52,17 @@ wxTabCtrl* wxTabCtrl_ctor2(wxWindow *parent, wxWindowID id, const wxPoint* pos, 
 	if (size == NULL)
 		size = &wxDefaultSize;
 
-	if (name == NULL)
-		name = "tabctrl";
+	if (name.data==NULL)
+		name = dstr("tabctrl",sizeof("tabctrl")-1);
 
-	return new _TabCtrl(parent, id, *pos, *size, style, wxString(name, wxConvUTF8));
+	return new _TabCtrl(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
 bool wxTabCtrl_Create(wxTabCtrl* self, wxWindow *parent, wxWindowID id, const wxPoint* pos, const wxSize* size,
-            long style, const char* name)
+            long style, dstr name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -66,10 +70,10 @@ bool wxTabCtrl_Create(wxTabCtrl* self, wxWindow *parent, wxWindowID id, const wx
 	if (size == NULL)
 		size = &wxDefaultSize;
 
-	if (name == NULL)
-		name = "tabctrl";
+	if (name.data==NULL)
+		name = dstr("tabctrl",sizeof("tabctrl")-1);
 
-	return self->Create(parent, id, *pos, *size, style, wxString(name, wxConvUTF8))?1:0;
+	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -123,9 +127,9 @@ int wxTabCtrl_GetRowCount(wxTabCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxTabCtrl_GetItemText(wxTabCtrl* self, int item)
+dstr wxTabCtrl_GetItemText(wxTabCtrl* self, int item)
 {
-	return new wxString(self->GetItemText(item));
+	return dstr(self->GetItemText(item));
 }
 
 //-----------------------------------------------------------------------------
@@ -163,9 +167,9 @@ void wxTabCtrl_SetImageList(wxTabCtrl* self, wxImageList* imageList)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTabCtrl_SetItemText(wxTabCtrl* self, int item, const char* text)
+bool wxTabCtrl_SetItemText(wxTabCtrl* self, int item, dstr text)
 {
-	return self->SetItemText(item, wxString(text, wxConvUTF8))?1:0;
+	return self->SetItemText(item, wxString(text.data, wxConvUTF8, text.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -227,9 +231,9 @@ int wxTabCtrl_HitTest(wxTabCtrl* self, const wxPoint* pt, long* flags)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTabCtrl_InsertItem(wxTabCtrl* self, int item, const char* text, int imageId, void* data)
+bool wxTabCtrl_InsertItem(wxTabCtrl* self, int item, dstr text, int imageId, void* data)
 {
-	return self->InsertItem(item, wxString(text, wxConvUTF8), imageId, data)?1:0;
+	return self->InsertItem(item, wxString(text.data, wxConvUTF8, text.length), imageId, data)?1:0;
 }
 
 //-----------------------------------------------------------------------------

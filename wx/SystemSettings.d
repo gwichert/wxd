@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - SystemSettings.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - SystemSettings.cs
 //
 // The wxSystemSettings wrapper class.
@@ -10,12 +13,11 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.SystemSettings;
+import wx.common;
+import wx.Colour;
+import wx.Font;
 
-namespace wx
-{
     public enum SystemFont
     {
         wxSYS_OEM_FIXED_FONT = 10,
@@ -128,52 +130,48 @@ namespace wx
         wxSYS_SCREEN_DESKTOP    //   >= 800x600
     }
 
-    public class SystemSettings
-    {
-        [DllImport("wx-c")] static extern int    wxSystemSettings_GetScreenType();
-        [DllImport("wx-c")] static extern void   wxSystemSettings_SetScreenType(int screen);
+        static extern (C) int    wxSystemSettings_GetScreenType();
+        static extern (C) void   wxSystemSettings_SetScreenType(int screen);
 
-        [DllImport("wx-c")] static extern IntPtr wxSystemSettings_GetColour(int index);
-        [DllImport("wx-c")] static extern IntPtr wxSystemSettings_GetFont(int index);
-        [DllImport("wx-c")] static extern int    wxSystemSettings_GetMetric(int index);
-        [DllImport("wx-c")] static extern bool   wxSystemSettings_HasFeature(int index);
+        static extern (C) IntPtr wxSystemSettings_GetColour(int index);
+        static extern (C) IntPtr wxSystemSettings_GetFont(int index);
+        static extern (C) int    wxSystemSettings_GetMetric(int index);
+        static extern (C) bool   wxSystemSettings_HasFeature(int index);
 
         //-----------------------------------------------------------------------------
 
+    public class SystemSettings
+    {
         public static Colour GetColour(SystemColour index)
         {
-            return new Colour(wxSystemSettings_GetColour((int)index), true);
+            return new Colour(wxSystemSettings_GetColour(cast(int)index), true);
         }
 
         //-----------------------------------------------------------------------------
 
         public static Font GetFont(SystemFont index)
         {
-            return new Font(wxSystemSettings_GetFont((int)index));
+            return new Font(wxSystemSettings_GetFont(cast(int)index));
         }
 
         //-----------------------------------------------------------------------------
 
         public static int GetMetric(SystemMetric index)
         {
-            return wxSystemSettings_GetMetric((int)index);
+            return wxSystemSettings_GetMetric(cast(int)index);
         }
 
         //-----------------------------------------------------------------------------
 
         public static bool HasFeature(SystemFeature index)
         {
-            return wxSystemSettings_HasFeature((int)index);
+            return wxSystemSettings_HasFeature(cast(int)index);
         }
 
         //-----------------------------------------------------------------------------
 
-        public static SystemScreenType ScreenType
-        {
-            get { return (SystemScreenType)wxSystemSettings_GetScreenType(); }
-            set { wxSystemSettings_SetScreenType((int)value); }
-        }
+        static SystemScreenType ScreenType() { return cast(SystemScreenType)wxSystemSettings_GetScreenType(); }
+        static void ScreenType(SystemScreenType value) { wxSystemSettings_SetScreenType(cast(int)value); }
 
         //-----------------------------------------------------------------------------
     }
-}

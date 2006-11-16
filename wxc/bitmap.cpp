@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - bitmap.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - bitmap.cxx
 //
 // The wxBitmap proxy interface.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/bitmap.h>
 #include <wx/image.h>
 
@@ -30,9 +34,9 @@ wxBitmap* wxBitmap_ctorByImage(wxImage* image, int depth)
 }
 
 extern "C" WXEXPORT
-wxBitmap* wxBitmap_ctorByName(const char* name, int type)
+wxBitmap* wxBitmap_ctorByName(dstr name, int type)
 {
-    return new wxBitmap(wxString(name, wxConvUTF8), type);
+    return new wxBitmap(wxString(name.data, wxConvUTF8, name.length), type);
 }
 
 extern "C" WXEXPORT
@@ -86,17 +90,17 @@ void wxBitmap_SetWidth(wxBitmap* self, int width)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxBitmap_LoadFile(wxBitmap* self, const char* name, wxBitmapType type)
+bool wxBitmap_LoadFile(wxBitmap* self, dstr name, wxBitmapType type)
 {
-    return self->LoadFile(wxString(name, wxConvUTF8), type)?1:0;
+    return self->LoadFile(wxString(name.data, wxConvUTF8, name.length), type)?1:0;
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxBitmap_SaveFile(wxBitmap* self, const char* name, wxBitmapType type, wxPalette* palette)
+bool wxBitmap_SaveFile(wxBitmap* self, dstr name, wxBitmapType type, wxPalette* palette)
 {
-	return self->SaveFile(wxString(name, wxConvUTF8), type, palette)?1:0;
+	return self->SaveFile(wxString(name.data, wxConvUTF8, name.length), type, palette)?1:0;
 }
 
 //-----------------------------------------------------------------------------

@@ -1,21 +1,35 @@
 //-----------------------------------------------------------------------------
-// wx.NET - Accelerator.cs
+// wxD - Accelerator.d
 //
 // The wxAccelerator* interfaces
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2004 by Alexander Olk
+// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Runtime.InteropServices;
+module wx.Accelerator;
+import wx.common;
+import wx.MenuItem;
 
-namespace wx
-{
-	public class AcceleratorEntry : Object
+		static extern (C) IntPtr wxAcceleratorEntry_ctor(int flags, int keyCode, int cmd, IntPtr item);
+		static extern (C) void   wxAcceleratorEntry_dtor(IntPtr self);
+		static extern (C) void   wxAcceleratorEntry_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
+		static extern (C) void   wxAcceleratorEntry_Set(IntPtr self, int flags, int keyCode, int cmd, IntPtr item);
+		static extern (C) void   wxAcceleratorEntry_SetMenuItem(IntPtr self, IntPtr item);
+		static extern (C) int    wxAcceleratorEntry_GetFlags(IntPtr self);
+		static extern (C) int    wxAcceleratorEntry_GetKeyCode(IntPtr self);
+		static extern (C) int    wxAcceleratorEntry_GetCommand(IntPtr self);
+		static extern (C) IntPtr wxAcceleratorEntry_GetMenuItem(IntPtr self);
+		
+		static extern (C) IntPtr wxAcceleratorEntry_GetAccelFromString(string label);
+		
+		//-----------------------------------------------------------------------------
+
+	public class AcceleratorEntry : wxObject
 	{
 		public const int wxACCEL_NORMAL	= 0x0000;
 		public const int wxACCEL_ALT	= 0x0001;
@@ -23,60 +37,36 @@ namespace wx
 		public const int wxACCEL_SHIFT	= 0x0004;
 		
 		//-----------------------------------------------------------------------------
-	
-		[DllImport("wx-c")] static extern IntPtr wxAcceleratorEntry_ctor(int flags, int keyCode, int cmd, IntPtr item);
-		[DllImport("wx-c")] static extern void   wxAcceleratorEntry_dtor(IntPtr self);
-		[DllImport("wx-c")] static extern void   wxAcceleratorEntry_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
-		[DllImport("wx-c")] static extern void   wxAcceleratorEntry_Set(IntPtr self, int flags, int keyCode, int cmd, IntPtr item);
-		[DllImport("wx-c")] static extern void   wxAcceleratorEntry_SetMenuItem(IntPtr self, IntPtr item);
-		[DllImport("wx-c")] static extern int    wxAcceleratorEntry_GetFlags(IntPtr self);
-		[DllImport("wx-c")] static extern int    wxAcceleratorEntry_GetKeyCode(IntPtr self);
-		[DllImport("wx-c")] static extern int    wxAcceleratorEntry_GetCommand(IntPtr self);
-		[DllImport("wx-c")] static extern IntPtr wxAcceleratorEntry_GetMenuItem(IntPtr self);
 		
-		[DllImport("wx-c")] static extern IntPtr wxAcceleratorEntry_GetAccelFromString(string label);
-		
-		//-----------------------------------------------------------------------------
-		
-		public AcceleratorEntry(IntPtr wxObject)
-			: base(wxObject)
+		public this(IntPtr wxobj)
 		{
-			this.wxObject = wxObject;
+			super(wxobj);
 		}
 			
-		internal AcceleratorEntry(IntPtr wxObject, bool memOwn)
-			: base(wxObject)
+		private this(IntPtr wxobj, bool memOwn)
 		{ 
+			super(wxobj);
 			this.memOwn = memOwn;
-			this.wxObject = wxObject;
 		}
 			
-		public AcceleratorEntry()
-			: this(0, 0, 0, null) {}
+		public this()
+			{ this(0, 0, 0, null);}
 		
-		public AcceleratorEntry(int flags)
-			: this(flags, 0, 0, null) {}
+		public this(int flags)
+			{ this(flags, 0, 0, null);}
 			
-		public AcceleratorEntry(int flags, int keyCode)
-			: this(flags, keyCode, 0, null) {}
+		public this(int flags, int keyCode)
+			{ this(flags, keyCode, 0, null);}
 			
-		public AcceleratorEntry(int flags, int keyCode, int cmd)
-			: this(flags, keyCode, cmd, null) {}
+		public this(int flags, int keyCode, int cmd)
+			{ this(flags, keyCode, cmd, null);}
 			
-		public AcceleratorEntry(int flags, int keyCode, int cmd, MenuItem item)
-			: this(wxAcceleratorEntry_ctor(flags, keyCode, cmd, Object.SafePtr(item)), true) 
+		public this(int flags, int keyCode, int cmd, MenuItem item)
 		{
-			virtual_Dispose = new Virtual_Dispose(VirtualDispose);
-			wxAcceleratorEntry_RegisterDisposable(wxObject, virtual_Dispose);
+			this(wxAcceleratorEntry_ctor(flags, keyCode, cmd, wxObject.SafePtr(item)), true);
+			wxAcceleratorEntry_RegisterDisposable(wxobj, &VirtualDispose);
 		}
 		
-		//---------------------------------------------------------------------
-
-		internal static IntPtr SafePtr(AcceleratorEntry obj)
-		{
-			return (obj == null) ? IntPtr.Zero : obj.wxObject;
-		}
-			
 		//-----------------------------------------------------------------------------
 		
 		public void Set(int flags, int keyCode, int cmd)
@@ -86,140 +76,97 @@ namespace wx
 		
 		public void Set(int flags, int keyCode, int cmd, MenuItem item)
 		{
-			wxAcceleratorEntry_Set(wxObject, flags, keyCode, cmd, Object.SafePtr(item));
+			wxAcceleratorEntry_Set(wxobj, flags, keyCode, cmd, wxObject.SafePtr(item));
 		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public MenuItem MenuItem
-		{
-			set { wxAcceleratorEntry_SetMenuItem(wxObject, Object.SafePtr(value)); }
-			get { return (MenuItem)Object.FindObject(wxAcceleratorEntry_GetMenuItem(wxObject), typeof(MenuItem)); }
-		}
-		
+		public MenuItem menuItem() { return cast(MenuItem)FindObject(wxAcceleratorEntry_GetMenuItem(wxobj), &MenuItem.New2); }		
 		//-----------------------------------------------------------------------------
 		
-		public int Flags
-		{
-			get { return wxAcceleratorEntry_GetFlags(wxObject); }
-		}
-		
+		public int Flags() { return wxAcceleratorEntry_GetFlags(wxobj); }		
 		//-----------------------------------------------------------------------------
 		
-		public int KeyCode
-		{
-			get { return wxAcceleratorEntry_GetKeyCode(wxObject); }
-		}
-		
+		public int KeyCode() { return wxAcceleratorEntry_GetKeyCode(wxobj); }		
 		//-----------------------------------------------------------------------------
 		
-		public int Command
-		{
-			get { return wxAcceleratorEntry_GetCommand(wxObject); }
-		}
-		
-		//---------------------------------------------------------------------
-				
-		public override void Dispose()
-		{
-			if (!disposed)
-			{
-				if (wxObject != IntPtr.Zero)
-				{
-					if (memOwn)
-					{
-						wxAcceleratorEntry_dtor(wxObject);
-						memOwn = false;
-					}
-				}
-				RemoveObject(wxObject);
-				wxObject = IntPtr.Zero;
-				disposed= true;
-			}
-			
-			virtual_Dispose = null;
-			base.Dispose();
-			GC.SuppressFinalize(this);
-		}
-		
+		public int Command() { return wxAcceleratorEntry_GetCommand(wxobj); }		
 		//---------------------------------------------------------------------
 		
-		~AcceleratorEntry() 
-		{
-			Dispose();
-		}
-		
+		override private void dtor() { wxAcceleratorEntry_dtor(wxobj); }
+
 		//---------------------------------------------------------------------
 		
 		public static AcceleratorEntry GetAccelFromString(string label)
 		{
-			return (AcceleratorEntry)Object.FindObject(wxAcceleratorEntry_GetAccelFromString(label), typeof(AcceleratorEntry));
+			return cast(AcceleratorEntry)FindObject(wxAcceleratorEntry_GetAccelFromString(label), &AcceleratorEntry.New);
 		}
+		
+		public static wxObject New(IntPtr ptr) { return new AcceleratorEntry(ptr);}
 	}
 	
 	//-----------------------------------------------------------------------------
 	
-	public class AcceleratorTable : Object
-	{
-		[DllImport("wx-c")] static extern IntPtr wxAcceleratorTable_ctor();
-		[DllImport("wx-c")] static extern bool   wxAcceleratorTable_Ok(IntPtr self);
-		//[DllImport("wx-c")] static extern void   wxAcceleratorTable_Add(IntPtr self, IntPtr entry);
-		//[DllImport("wx-c")] static extern void   wxAcceleratorTable_Remove(IntPtr self, IntPtr entry);
-		//[DllImport("wx-c")] static extern IntPtr wxAcceleratorTable_GetMenuItem(IntPtr self, IntPtr evt);
-		//[DllImport("wx-c")] static extern int    wxAcceleratorTable_GetCommand(IntPtr self, IntPtr evt);
-		//[DllImport("wx-c")] static extern IntPtr wxAcceleratorTable_GetEntry(IntPtr self, IntPtr evt);
+		static extern (C) IntPtr wxAcceleratorTable_ctor();
+		static extern (C) bool   wxAcceleratorTable_Ok(IntPtr self);
+		//static extern (C) void   wxAcceleratorTable_Add(IntPtr self, IntPtr entry);
+		//static extern (C) void   wxAcceleratorTable_Remove(IntPtr self, IntPtr entry);
+		//static extern (C) IntPtr wxAcceleratorTable_GetMenuItem(IntPtr self, IntPtr evt);
+		//static extern (C) int    wxAcceleratorTable_GetCommand(IntPtr self, IntPtr evt);
+		//static extern (C) IntPtr wxAcceleratorTable_GetEntry(IntPtr self, IntPtr evt);
 		
 		//-----------------------------------------------------------------------------
 		
-		public AcceleratorTable(IntPtr wxObject)
-			: base(wxObject) {}
+	public class AcceleratorTable : wxObject
+	{
+		public this(IntPtr wxobj)
+			{ super(wxobj);}
 			
-		public AcceleratorTable()
-			: this(wxAcceleratorTable_ctor()) {}
+		public this()
+			{ this(wxAcceleratorTable_ctor());}
 			
-		#if ! __WXMAC__
+		version(__WXMAC__) {
+		} else {
 		//-----------------------------------------------------------------------------
 		
 		/*public void Add(AcceleratorEntry entry)
 		{
-			wxAcceleratorTable_Add(wxObject, Object.SafePtr(entry));
+			wxAcceleratorTable_Add(wxobj, wxObject.SafePtr(entry));
 		}*/
 		
 		//-----------------------------------------------------------------------------
 		
 		/*public void Remove(AcceleratorEntry entry)
 		{
-			wxAcceleratorTable_Remove(wxObject, Object.SafePtr(entry));
+			wxAcceleratorTable_Remove(wxobj, wxObject.SafePtr(entry));
 		}*/
 		
 		//-----------------------------------------------------------------------------
 		
 		/*public MenuItem GetMenuItem(KeyEvent evt)
 		{
-			return (MenuItem)FindObject(wxAcceleratorTable_GetMenuItem(wxObject, Object.SafePtr(evt)), typeof(MenuItem));
+			return cast(MenuItem)FindObject(wxAcceleratorTable_GetMenuItem(wxobj, wxObject.SafePtr(evt)),&MenuItem.New);
 		}*/
 		
 		//-----------------------------------------------------------------------------
 		
 		/*public AcceleratorEntry GetEntry(KeyEvent evt)
 		{
-			return (AcceleratorEntry)Object.FindObject(wxAcceleratorTable_GetEntry(wxObject, Object.SafePtr(evt)), typeof(AcceleratorEntry));
+			return cast(AcceleratorEntry)FindObject(wxAcceleratorTable_GetEntry(wxobj, wxObject.SafePtr(evt)),&AcceleratorEntry.New);
 		}*/
-		#endif
+		} // version()
 		
 		//-----------------------------------------------------------------------------
 		
 		/*public int GetCommand(KeyEvent evt)
 		{
-			return wxAcceleratorTable_GetCommand(wxObject, Object.SafePtr(evt));
+			return wxAcceleratorTable_GetCommand(wxobj, wxObject.SafePtr(evt));
 		}*/
 		
 		//-----------------------------------------------------------------------------
 		
-		public bool Ok
-		{
-			get { return wxAcceleratorTable_Ok(wxObject); }
-		}
+		public bool Ok() { return wxAcceleratorTable_Ok(wxobj); }
+
+		public static wxObject New(IntPtr ptr) { return new AcceleratorTable(ptr); }
 	}
-}
 

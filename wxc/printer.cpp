@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - printer.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - printer.cxx
 //
 // The wxPrinter proxy interface.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/print.h>
 #include "local_events.h"
 
@@ -33,9 +37,9 @@ wxWindow* wxPrinter_CreateAbortWindow(wxPrinter* self, wxWindow* parent, wxPrint
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrinter_ReportError(wxPrinter* self, wxWindow* parent, wxPrintout* printout, char* message)
+void wxPrinter_ReportError(wxPrinter* self, wxWindow* parent, wxPrintout* printout, dstr message)
 {
-    self->ReportError(parent, printout, wxString(message, wxConvUTF8));
+    self->ReportError(parent, printout, wxString(message.data, wxConvUTF8, message.length));
 }
 
 //-----------------------------------------------------------------------------
@@ -89,10 +93,10 @@ wxDC* wxPrinter_PrintDialog(wxPrinter* self, wxWindow* parent)
 //-----------------------------------------------------------------------------
 
 // Virtual method delegate pointer types
-typedef void (CALLBACK* Virtual_NoParams)();
-typedef bool (CALLBACK* Virtual_ParamsInt)(int);
-typedef bool (CALLBACK* Virtual_OnBeginDocument)(int, int);
-typedef void (CALLBACK* Virtual_GetPageInfo)(int*, int*, int*, int*);
+typedef void (CALLBACK* Virtual_NoParams)(dobj);
+typedef bool (CALLBACK* Virtual_ParamsInt)(dobj, int);
+typedef bool (CALLBACK* Virtual_OnBeginDocument)(dobj, int, int);
+typedef void (CALLBACK* Virtual_GetPageInfo)(dobj, int*, int*, int*, int*);
 
 class _Printout : public wxPrintout
 {
@@ -100,17 +104,17 @@ public:
     _Printout(const wxString& title) 
         : wxPrintout(title) { }
 
-    bool OnBeginDocument(int startPage, int endPage) { return m_onBeginDocument(startPage, endPage); }
-    void OnEndDocument() { m_onEndDocument(); }
-    void OnBeginPrinting() { m_onBeginPrinting(); }
-    void OnEndPrinting() { m_onEndPrinting(); }
-    void OnPreparePrinting() { m_onPreparePrinting(); }
-    bool HasPage(int page) { return m_hasPage(page); }
-    bool OnPrintPage(int pageNum) { return m_onPrintPage(pageNum); }
+    bool OnBeginDocument(int startPage, int endPage) { return m_onBeginDocument(m_dobj, startPage, endPage); }
+    void OnEndDocument() { m_onEndDocument(m_dobj); }
+    void OnBeginPrinting() { m_onBeginPrinting(m_dobj); }
+    void OnEndPrinting() { m_onEndPrinting(m_dobj); }
+    void OnPreparePrinting() { m_onPreparePrinting(m_dobj); }
+    bool HasPage(int page) { return m_hasPage(m_dobj, page); }
+    bool OnPrintPage(int pageNum) { return m_onPrintPage(m_dobj, pageNum); }
     void GetPageInfo(int *minPage, int *maxPage, int *pageFrom, int *pageTo)
-        { m_getPageInfo(minPage, maxPage, pageFrom, pageTo); }
+        { m_getPageInfo(m_dobj, minPage, maxPage, pageFrom, pageTo); }
 
-    void RegisterVirtual(Virtual_OnBeginDocument onBeginDocument,
+    void RegisterVirtual(dobj obj, Virtual_OnBeginDocument onBeginDocument,
                          Virtual_NoParams onEndDocument, 
                          Virtual_NoParams onBeginPrinting,
                          Virtual_NoParams onEndPrinting,
@@ -119,6 +123,8 @@ public:
                          Virtual_ParamsInt onPrintPage,
                          Virtual_GetPageInfo getPageInfo)
     {
+        m_dobj = obj;
+
         m_onBeginDocument   = onBeginDocument;
 
         m_onEndDocument     = onEndDocument;
@@ -138,27 +144,28 @@ private:
     Virtual_ParamsInt m_hasPage, m_onPrintPage;
     Virtual_OnBeginDocument m_onBeginDocument;
     Virtual_GetPageInfo m_getPageInfo;
+    dobj m_dobj;
 };
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxPrintout* wxPrintout_ctor(char* title)
+wxPrintout* wxPrintout_ctor(dstr title)
 {
-    if (title == NULL)
-        title = "Printout";
+    if (title.data == NULL)
+        title = dstr("Printout",sizeof("Printout")-1);
 
-    return new _Printout(wxString(title, wxConvUTF8));
+    return new _Printout(wxString(title.data, wxConvUTF8, title.length));
 }
 
 extern "C" WXEXPORT
-void wxPrintout_RegisterVirtual(_Printout *self,
+void wxPrintout_RegisterVirtual(_Printout *self,dobj obj,
         Virtual_OnBeginDocument onBeginDocument, Virtual_NoParams onEndDocument, 
         Virtual_NoParams onBeginPrinting, Virtual_NoParams onEndPrinting,
         Virtual_NoParams onPreparePrinting, Virtual_ParamsInt hasPage,
         Virtual_ParamsInt onPrintPage, Virtual_GetPageInfo getPageInfo)
 {
-    self->RegisterVirtual(onBeginDocument, onEndDocument, 
+    self->RegisterVirtual(obj, onBeginDocument, onEndDocument, 
                           onBeginPrinting, onEndPrinting, onPreparePrinting,
                           hasPage, onPrintPage, getPageInfo);
 }
@@ -222,9 +229,9 @@ void wxPrintout_GetPageInfo(_Printout* self, int* minPage, int* maxPage, int* pa
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxPrintout_GetTitle(_Printout* self)
+dstr wxPrintout_GetTitle(_Printout* self)
 {
-    return new wxString(self->GetTitle().c_str());
+    return dstr(self->GetTitle().c_str());
 }
 
 //-----------------------------------------------------------------------------

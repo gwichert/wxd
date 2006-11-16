@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - DisplayChangedEvent.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - DisplayChangedEvent.cs
 //
 // The wxDisplayChangedEvent wrapper class.
@@ -10,21 +13,26 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Runtime.InteropServices;
+module wx.DisplayChangedEvent;
+import wx.common;
+import wx.Event;
 
-namespace wx
-{
-	public class DisplayChangedEvent : Event
-	{
-		[DllImport("wx-c")] static extern IntPtr wxDisplayChangedEvent_ctor();
+		static extern (C) IntPtr wxDisplayChangedEvent_ctor();
 		
 		//-----------------------------------------------------------------------------
 
-		public DisplayChangedEvent(IntPtr wxObject) 
-			: base(wxObject) { }
+	public class DisplayChangedEvent : Event
+	{
+		public this(IntPtr wxobj) 
+			{ super(wxobj); }
 
-		public DisplayChangedEvent()
-			: this(wxDisplayChangedEvent_ctor()) { }
+		public this()
+			{ this(wxDisplayChangedEvent_ctor()); }
+
+		private static Event New(IntPtr obj) { return new DisplayChangedEvent(obj); }
+
+		static this()
+		{
+			AddEventType(wxEVT_DISPLAY_CHANGED,			&DisplayChangedEvent.New);
+		}
 	}
-}

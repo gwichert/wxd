@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - StaticLine.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - StaticLine.cs
 //
 // The wxStaticLine wrapper class.
@@ -10,47 +13,45 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.StaticLine;
+import wx.common;
+import wx.Control;
 
-namespace wx
-{
+		static extern (C) IntPtr wxStaticLine_ctor();
+		static extern (C) bool wxStaticLine_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
+		static extern (C) bool wxStaticLine_IsVertical(IntPtr self);
+		static extern (C) int  wxStaticLine_GetDefaultSize(IntPtr self);
+
+		//---------------------------------------------------------------------
+
 	public class StaticLine : Control
 	{
-		[DllImport("wx-c")] static extern IntPtr wxStaticLine_ctor();
-		[DllImport("wx-c")] static extern bool wxStaticLine_Create(IntPtr self, IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
-		[DllImport("wx-c")] static extern bool wxStaticLine_IsVertical(IntPtr self);
-		[DllImport("wx-c")] static extern int  wxStaticLine_GetDefaultSize(IntPtr self);
-
-		//---------------------------------------------------------------------
-
-		public const long wxLI_HORIZONTAL		= Orientation.wxHORIZONTAL;
-		public const long wxLI_VERTICAL		= Orientation.wxVERTICAL;
+		public const int wxLI_HORIZONTAL		= Orientation.wxHORIZONTAL;
+		public const int wxLI_VERTICAL		= Orientation.wxVERTICAL;
 		
 		//---------------------------------------------------------------------
 		
-		public StaticLine(IntPtr wxObject) 
-			: base(wxObject) {}
+		public this(IntPtr wxobj) 
+			{ super(wxobj);}
         
-		public StaticLine()
-			: base(wxStaticLine_ctor())	{ }
+		public this()
+			{ super(wxStaticLine_ctor()); }
 
-		public StaticLine(Window parent, int id)
-			: this(parent, id, wxDefaultPosition, wxDefaultSize, 0, null) { }
+		public this(Window parent, int id)
+			{ this(parent, id, wxDefaultPosition, wxDefaultSize, 0, null); }
 
-		public StaticLine(Window parent, int id, Point pos)
-			: this(parent, id, pos, wxDefaultSize, 0, null) { }
+		public this(Window parent, int id, Point pos)
+			{ this(parent, id, pos, wxDefaultSize, 0, null); }
 
-		public StaticLine(Window parent, int id, Point pos, Size size)
-			: this(parent, id, pos, size, 0, null) { }
+		public this(Window parent, int id, Point pos, Size size)
+			{ this(parent, id, pos, size, 0, null); }
 
-		public StaticLine(Window parent, int id, Point pos, Size size, long style)
-			: this(parent, id, pos, size, style, null) { }
+		public this(Window parent, int id, Point pos, Size size, int style)
+			{ this(parent, id, pos, size, style, null); }
 
-		public StaticLine(Window parent, int id, Point pos, Size size, long style, string name)
-			: base(wxStaticLine_ctor())
+		public this(Window parent, int id, Point pos, Size size, int style, string name)
 		{
+			super(wxStaticLine_ctor());
 			if (!Create(parent, id, pos, size, style, name))
 			{
 				throw new InvalidOperationException("Failed to create StaticText");
@@ -60,40 +61,36 @@ namespace wx
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public StaticLine(Window parent)
-			: this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, null) { }
+		public this(Window parent)
+			{ this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, null); }
 
-		public StaticLine(Window parent, Point pos)
-			: this(parent, Window.UniqueID, pos, wxDefaultSize, 0, null) { }
+		public this(Window parent, Point pos)
+			{ this(parent, Window.UniqueID, pos, wxDefaultSize, 0, null); }
 
-		public StaticLine(Window parent, Point pos, Size size)
-			: this(parent, Window.UniqueID, pos, size, 0, null) { }
+		public this(Window parent, Point pos, Size size)
+			{ this(parent, Window.UniqueID, pos, size, 0, null); }
 
-		public StaticLine(Window parent, Point pos, Size size, long style)
-			: this(parent, Window.UniqueID, pos, size, style, null) { }
+		public this(Window parent, Point pos, Size size, int style)
+			{ this(parent, Window.UniqueID, pos, size, style, null); }
 
-		public StaticLine(Window parent, Point pos, Size size, long style, string name)
-			: this(parent, Window.UniqueID, pos, size, style, name) {}
+		public this(Window parent, Point pos, Size size, int style, string name)
+			{ this(parent, Window.UniqueID, pos, size, style, name);}
 		
 		//---------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, Point pos, Size size, long style, string name)
+		public bool Create(Window parent, int id, Point pos, Size size, int style, string name)
 		{
-			return wxStaticLine_Create(wxObject, Object.SafePtr(parent), id, ref pos, ref size, (uint)style, name);
+			return wxStaticLine_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name);
 		}
 		
 		//---------------------------------------------------------------------
 		
 		public bool IsVertical()
 		{
-			return wxStaticLine_IsVertical(wxObject);
+			return wxStaticLine_IsVertical(wxobj);
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public int DefaultSize
-		{
-			get { return wxStaticLine_GetDefaultSize(wxObject); }
-		}
+		public int DefaultSize() { return wxStaticLine_GetDefaultSize(wxobj); }
 	}
-}

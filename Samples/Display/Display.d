@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------------
-// NET/Samples - Display.cs
+// NET/Samples - Display.d
 //
-// A .NET version of the Widgets "display" sample with improvements.
+// A D version of the Widgets "display" sample with improvements.
 //
 // Ported by Michael S. Muegel mike _at_ muegel dot org
 //
@@ -10,16 +10,13 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using wx;
+import wx.wx;
+import CompareModesDialog;
 
-namespace MyApp
-{
 	// Client data class for the choice	control	containing the video modes
 	public class MyVideoModeClientData : ClientData
 	{
-		public MyVideoModeClientData(VideoMode m)
+		public this(VideoMode m)
 		{
 			mode = m;
 		}
@@ -32,14 +29,14 @@ namespace MyApp
 		public override	bool OnInit()
 		{
 			MyFrame	frame =	new	MyFrame("Display Windows Sample", 
-				new Point(-1, -1), new Size(-1, -1));
+				new_Point(-1, -1), new_Size(-1, -1));
 			frame.Show(true);
 			return true;
 		}
 
 		//---------------------------------------------------------------------
 
-		[STAThread]
+		
 		static void	Main()
 		{
 			MyApp app =	new	MyApp();
@@ -66,9 +63,9 @@ namespace MyApp
 		// used within event handlers
 		Notebook m_notebook;
 
-		public MyFrame(string title, Point pos,	Size size)
-			: base(title, pos, size)
+		public this(string title, Point pos,	Size size)
 		{
+			super(title, pos, size);
 
 			// Set up menus
 			Menu menuDisplay = new Menu();
@@ -116,7 +113,7 @@ namespace MyApp
 				sizer.Add(new StaticText(page, -1, r.Location.ToString()));
 
 				sizer.Add(new StaticText(page, -1, "Size: "));
-				sizer.Add(new StaticText(page, -1, r.Width + "," + r.Height));
+				sizer.Add(new StaticText(page, -1, r.Width + "," ~ r.Height));
 
 
 				sizer.Add(new StaticText(page, -1, "Name: "));
@@ -161,68 +158,68 @@ namespace MyApp
 
 			// Bind	events
 			EVT_MENU(ID_Quit,	new	EventListener(OnQuit));
-			EVT_MENU(ID_FromPoint,	 new EventListener(OnFromPoint));
-			EVT_MENU(ID_FromPointError,	 new EventListener(OnFromPointError));
-			EVT_MENU(ID_VideoModeCompare,	 new EventListener(OnCompareModes));
-			EVT_MENU(ID_FullScreen, new EventListener(OnFullScreen));
+			EVT_MENU(ID_FromPoint,	 &OnFromPoint);
+			EVT_MENU(ID_FromPointError,	 &OnFromPointError);
+			EVT_MENU(ID_VideoModeCompare,	 &OnCompareModes);
+			EVT_MENU(ID_FullScreen, &OnFullScreen);
 			EVT_MENU(ID_About,	new	EventListener(OnAbout));
-			EVT_CHOICE(ID_ChangeMode, new EventListener(OnChangeMode));
-			EVT_BUTTON(ID_ResetMode, new EventListener(OnResetMode));
+			EVT_CHOICE(ID_ChangeMode, &OnChangeMode);
+			EVT_BUTTON(ID_ResetMode, &OnResetMode);
 			EVT_LEFT_UP(new	EventListener(OnLeftClick));
 			EVT_DISPLAY_CHANGED(new	EventListener(OnDisplayChanged));
 
 		} // MyFrame ctor
 
 		// Menu	selection handlers
-		public void	OnQuit(object sender, Event	e)
+		public void	OnQuit(Object sender, Event	e)
 		{
 			Close(true);
 		}
 
-		public void	OnFromPoint(object sender, Event e)
+		public void	OnFromPoint(Object sender, Event e)
 		{
 			SetStatusText("Press the mouse anywhere...");
 			CaptureMouse();
 		}
 
-		public void	OnFromPointError(object sender, Event e)
+		public void	OnFromPointError(Object sender, Event e)
 		{
-			ShowScreenFromPoint(new Point(-9999, -9999));
+			ShowScreenFromPoint(new_Point(-9999, -9999));
 		}
 
-		public void	OnFullScreen(object	sender,	Event e)
+		public void	OnFullScreen(Object	sender,	Event e)
 		{
-			CommandEvent ce = (CommandEvent)e;
+			CommandEvent ce = cast(CommandEvent)e;
 			ShowFullScreen(ce.IsChecked);
 		}
 
-		public void	OnAbout(object sender, Event e)
+		public void	OnAbout(Object sender, Event e)
 		{
 			string msg = "This is the wxWidgets display sample ported to C#. Port by Michael S. Muegel.";
-			wx.MessageDialog.ShowModal(this, msg, "About Display Sample",
+			MessageBox(this, msg, "About Display Sample",
 				Dialog.wxOK);
 		}
 
-		public void	OnChangeMode(object	sender,	Event e)
+		public void	OnChangeMode(Object	sender,	Event e)
 		{
-			CommandEvent ce = (CommandEvent)e;
+			CommandEvent ce = cast(CommandEvent)e;
 			Display	display	= CurrentDisplay();
-			VideoMode mode = (VideoMode) ((MyVideoModeClientData)ce.ClientObject).mode;
+			VideoMode mode = cast(VideoMode) (cast(MyVideoModeClientData)ce.ClientObject).mode;
 			if (! display.ChangeMode(mode))
-				wx.MessageDialog.ShowModal(this, "Changing video mode failed!", 
+				MessageBox(this, "Changing video mode failed!", 
 					"Error", Dialog.wxOK | Dialog.wxICON_WARNING);
 		}
 
-		public void	OnResetMode(object sender, Event e)
+		public void	OnResetMode(Object sender, Event e)
 		{
 			CurrentDisplay().ResetMode();
 		}
 
-		public void	OnLeftClick(object sender, Event e)
+		public void	OnLeftClick(Object sender, Event e)
 		{
 			if ( HasCapture() )
 			{
-				MouseEvent me = (MouseEvent)e;
+				MouseEvent me = cast(MouseEvent)e;
 				// mouse events	are	in client coords, Display works	in screen ones
 				Point ptScreen = ClientToScreen(me.Position);
 				ReleaseMouse();
@@ -235,33 +232,33 @@ namespace MyApp
 			int	dpy	= Display.GetFromPoint(ptScreen);
 
 			if ( dpy ==	Display.wxNOT_FOUND )
-				wx.MessageDialog.ShowModal(this, 
-					"Mouse clicked outside of display at " + ptScreen.ToString(),
+				MessageBox(this, 
+					"Mouse clicked outside of display at " ~ ptScreen.ToString(),
 					"Error", Dialog.wxOK | Dialog.wxICON_WARNING);
 			else
-				wx.MessageDialog.ShowModal(this, "Mouse clicked in display #" +
-					dpy.ToString() + " at " + ptScreen.ToString(), 
+				MessageBox(this, "Mouse clicked in display #" +
+					dpy.ToString() + " at " ~ ptScreen.ToString(), 
 					"Click Result", Dialog.wxOK);
 
 		}
 
-		public void	OnDisplayChanged(object	sender,	Event e)
+		public void	OnDisplayChanged(Object	sender,	Event e)
 		{
 			// update the current mode text
 			for	( int n = 0; n < m_notebook.PageCount; n++ )
 			{
-				StaticText label = (StaticText) m_notebook.GetPage(n).FindWindow(ID_CurrentMode);
+				StaticText label = cast(StaticText) m_notebook.GetPage(n).FindWindow(ID_CurrentMode);
 				if ( label != null)
-					label.Label = new Display(n).CurrentMode.ToString();
+					label.Label = (new Display(n)).CurrentMode.toString();
 			}
 
 
-			wx.MessageDialog.ShowModal(this, "EVT_DISPLAY_CHANGED fired. Display resolution has been changed.", "Resolution Changed", Dialog.wxOK);
+			MessageBox(this, "EVT_DISPLAY_CHANGED fired. Display resolution has been changed.", "Resolution Changed", Dialog.wxOK);
 
 			e.Skip();
 		}
 
-		public void	OnCompareModes(object sender, Event	e)
+		public void	OnCompareModes(Object sender, Event	e)
 		{
 			CompareModesDialog dialog = new CompareModesDialog(this, 
 				-1, CurrentDisplay());
@@ -275,8 +272,6 @@ namespace MyApp
 
 	} // MyFrame
 
-    } // namespace
-
 
 	/*
 	#ifdef __MSW__
@@ -286,3 +281,8 @@ namespace MyApp
 		}
 	#endif // __MSW__
 	*/
+
+void main()
+{
+	MyApp.Main();
+}

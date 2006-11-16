@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - StaticBoxSizer.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - StaticBoxSizer.cs
 //
 // The wxStaticBoxSizer proxy interface.
@@ -9,41 +12,36 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.StaticBoxSizer;
+import wx.common;
+import wx.BoxSizer;
+import wx.StaticBox;
 
-namespace wx
-{
+		static extern (C) IntPtr wxStaticBoxSizer_ctor(IntPtr box, int orient);
+		static extern (C) IntPtr wxStaticBoxSizer_GetStaticBox(IntPtr self);
+
+		//---------------------------------------------------------------------
+
 	public class StaticBoxSizer : BoxSizer
 	{
-		[DllImport("wx-c")] static extern IntPtr wxStaticBoxSizer_ctor(IntPtr box, int orient);
-		[DllImport("wx-c")] static extern IntPtr wxStaticBoxSizer_GetStaticBox(IntPtr self);
-
-		//---------------------------------------------------------------------
-
-		public StaticBoxSizer(IntPtr wxObject)
-			: base(wxObject)
+		public this(IntPtr wxobj)
 		{
+			super(wxobj);
 		}
 
-		public StaticBoxSizer(StaticBox box, int orient)
-			: base(wxStaticBoxSizer_ctor(Object.SafePtr(box), orient))
+		public this(StaticBox box, int orient)
 		{
+			super(wxStaticBoxSizer_ctor(wxObject.SafePtr(box), orient));
 		}
 
 		//---------------------------------------------------------------------
 
-		public StaticBox StaticBox
-		{
-			get
+		public StaticBox staticBox() 
 			{
-				return (StaticBox)FindObject(
-                                    wxStaticBoxSizer_GetStaticBox(wxObject)
+				return cast(StaticBox)FindObject(
+                                    wxStaticBoxSizer_GetStaticBox(wxobj)
                                 );
 			}
-		}
 
 		//---------------------------------------------------------------------
 	}
-}

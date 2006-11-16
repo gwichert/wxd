@@ -1,0 +1,6 @@
+NAME=Dnd
+OBJECTS=$(NAME).o
+TARGET=../../bin/$(NAME)
+TOPDIR=../..
+
+include $(TOPDIR)/config.linux

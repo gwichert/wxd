@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - event.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - event.cxx
 //
 // The wxEvent proxy interface.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/tglbtn.h>
 #include <wx/calctrl.h>
 #include <wx/fdrepdlg.h>

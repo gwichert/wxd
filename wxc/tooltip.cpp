@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - tooltip.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - tooltip.cxx
 //
 // The wxToolTip proxy interface
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/tooltip.h>
 
 //-----------------------------------------------------------------------------
@@ -32,25 +36,25 @@ void wxToolTip_SetDelay(long msecs)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxToolTip* wxToolTip_ctor(const char* tip)
+wxToolTip* wxToolTip_ctor(dstr tip)
 {
-	return new wxToolTip(wxString(tip, wxConvUTF8));
+	return new wxToolTip(wxString(tip.data, wxConvUTF8, tip.length));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxToolTip_SetTip(wxToolTip* self, const char* tip)
+void wxToolTip_SetTip(wxToolTip* self, dstr tip)
 {
-	self->SetTip(wxString(tip, wxConvUTF8));
+	self->SetTip(wxString(tip.data, wxConvUTF8, tip.length));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxToolTip_GetTip(wxToolTip* self)
+dstr wxToolTip_GetTip(wxToolTip* self)
 {
-	return new wxString(self->GetTip());
+	return dstr(self->GetTip());
 }
 
 //-----------------------------------------------------------------------------

@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - wizardpagesimple.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - wizardpagesimple.cxx
 //
 // The wxWizardPageSimple proxy interface.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/wizard.h>
 #include "local_events.h"
 

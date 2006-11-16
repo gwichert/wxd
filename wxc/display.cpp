@@ -11,6 +11,7 @@
 #ifdef WXNET_DISPLAY
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/display.h>
 #include <iostream>
 using namespace std;
@@ -63,9 +64,9 @@ void wxDisplay_GetGeometry(wxDisplay* self,	wxRect*	rect)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxDisplay_GetName(wxDisplay* self)
+dstr wxDisplay_GetName(wxDisplay* self)
 {
-	return new wxString(self->GetName());
+	return dstr(self->GetName());
 }
 
 //-----------------------------------------------------------------------------

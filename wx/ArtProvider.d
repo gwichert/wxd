@@ -1,21 +1,22 @@
 //-----------------------------------------------------------------------------
-// wx.NET - ArtProvider.cs
+// wxD - ArtProvider.d
 //
 // The wxArtProvider wrapper class.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2003 by Alexander Olk
+// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.ArtProvider;
+import wx.common;
+import wx.Bitmap;
+import wx.Icon;
+import wx.Window;
 
-namespace wx
-{	
 	public enum ArtID 
 	{
 		wxART_ADD_BOOKMARK = 1,
@@ -67,13 +68,13 @@ namespace wx
 	
 	//---------------------------------------------------------------------
 	
-	public class ArtProvider
-	{
-		[DllImport("wx-c")] static extern IntPtr wxArtProvider_GetBitmap(int artid, int artclient, ref Size size);
-		[DllImport("wx-c")] static extern IntPtr wxArtProvider_GetIcon(int artid, int artclient, ref Size size);
+		static extern (C) IntPtr wxArtProvider_GetBitmap(int artid, int artclient, inout Size size);
+		static extern (C) IntPtr wxArtProvider_GetIcon(int artid, int artclient, inout Size size);
 		
 		//---------------------------------------------------------------------
 		
+	public class ArtProvider
+	{
 		public static Bitmap GetBitmap(ArtID id)
 		{
 			return GetBitmap(id, ArtClient.wxART_OTHER, Window.wxDefaultSize);
@@ -86,7 +87,7 @@ namespace wx
 		
 		public static Bitmap GetBitmap(ArtID id, ArtClient client, Size size)
 		{
-			return new Bitmap(wxArtProvider_GetBitmap((int)id, (int)client, ref size));
+			return new Bitmap(wxArtProvider_GetBitmap(cast(int)id, cast(int)client, size));
 		}
 		
 		//---------------------------------------------------------------------
@@ -103,7 +104,6 @@ namespace wx
 		
 		public static Icon GetIcon(ArtID id, ArtClient client, Size size)
 		{
-			return new Icon(wxArtProvider_GetIcon((int)id, (int)client, ref size));
+			return new Icon(wxArtProvider_GetIcon(cast(int)id, cast(int)client, size));
 		}
 	}
-}

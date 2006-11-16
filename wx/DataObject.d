@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - Dataobj.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - Dataobj.cs
 //
 // The wxDataObject wrapper class.
@@ -10,12 +13,10 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Runtime.InteropServices;
+module wx.DataObject;
+import wx.common;
 
-namespace wx
-{
-	public abstract class DataObject : Object
+	public abstract class DataObject : wxObject
 	{
 		public enum DataDirection
 		{
@@ -26,260 +27,142 @@ namespace wx
 		
 		//---------------------------------------------------------------------
 
-		public DataObject(IntPtr wxObject)
-			: base(wxObject) 
+		public this(IntPtr wxobj)
 		{
-			this.wxObject = wxObject;
+			super(wxobj);
 		}
 		
-		internal DataObject(IntPtr wxObject, bool memOwn)
-			: base(wxObject)
+		private this(IntPtr wxobj, bool memOwn)
 		{ 
+			super(wxobj);
 			this.memOwn = memOwn;
-			this.wxObject = wxObject;
 		}
 		
 		//---------------------------------------------------------------------
 				
-		public override void Dispose()
-		{
-			if (!disposed)
-			{
-				if (wxObject != IntPtr.Zero)
-				{
-					if (memOwn)
-					{
-						memOwn = false;
-					}
-				}
-				RemoveObject(wxObject);
-				wxObject = IntPtr.Zero;
-				disposed= true;
-			}
-			
-			base.Dispose();
-			GC.SuppressFinalize(this);
-		}
-		
-		//---------------------------------------------------------------------
-		
-		~DataObject() 
-		{
-			Dispose();
-		}
+		override private void dtor() {  }
 	}
 	
 	//---------------------------------------------------------------------
+
+		static extern (C) IntPtr wxDataObjectSimple_ctor(IntPtr format);
+		static extern (C) void wxDataObjectSimple_dtor(IntPtr self);
+		static extern (C) void wxDataObjectSimple_SetFormat(IntPtr self, IntPtr format);
+		static extern (C) uint wxDataObjectSimple_GetDataSize(IntPtr self);
+		static extern (C) bool wxDataObjectSimple_GetDataHere(IntPtr self, IntPtr buf);
+		static extern (C) bool wxDataObjectSimple_SetData(IntPtr self, uint len, IntPtr buf);
+		
+		//---------------------------------------------------------------------
 
 	public class DataObjectSimple : DataObject
 	{
-		[DllImport("wx-c")] static extern IntPtr wxDataObjectSimple_ctor(IntPtr format);
-		[DllImport("wx-c")] static extern void wxDataObjectSimple_dtor(IntPtr self);
-		[DllImport("wx-c")] static extern void wxDataObjectSimple_SetFormat(IntPtr self, IntPtr format);
-		[DllImport("wx-c")] static extern uint wxDataObjectSimple_GetDataSize(IntPtr self);
-		[DllImport("wx-c")] static extern bool wxDataObjectSimple_GetDataHere(IntPtr self, IntPtr buf);
-		[DllImport("wx-c")] static extern bool wxDataObjectSimple_SetData(IntPtr self, uint len, IntPtr buf);
-		
-		//---------------------------------------------------------------------
-
-		public DataObjectSimple(IntPtr wxObject)
-			: base(wxObject)
+		public this(IntPtr wxobj)
 		{
-			this.wxObject = wxObject;
+			super(wxobj);
 		}
 		
-		internal DataObjectSimple(IntPtr wxObject, bool memOwn)
-			: base(wxObject)
+		private this(IntPtr wxobj, bool memOwn)
 		{ 
+			super(wxobj);
 			this.memOwn = memOwn;
-			this.wxObject = wxObject;
 		}
 		
 		//---------------------------------------------------------------------
 				
-		public override void Dispose()
-		{
-			if (!disposed)
-			{
-				if (wxObject != IntPtr.Zero)
-				{
-					if (memOwn)
-					{
-						wxDataObjectSimple_dtor(wxObject);
-						memOwn = false;
-					}
-				}
-				RemoveObject(wxObject);
-				wxObject = IntPtr.Zero;
-				disposed= true;
-			}
-			
-			base.Dispose();
-			GC.SuppressFinalize(this);
-		}
-		
-		//---------------------------------------------------------------------
-		
-		~DataObjectSimple() 
-		{
-			Dispose();
-		}
+		override private void dtor() { wxDataObjectSimple_dtor(wxobj); }
 	}
 	
 	//---------------------------------------------------------------------
+
+		static extern (C) IntPtr wxTextDataObject_ctor(string text);
+		static extern (C) void wxTextDataObject_dtor(IntPtr self);
+		static extern (C) void wxTextDataObject_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
+		static extern (C) int wxTextDataObject_GetTextLength(IntPtr self);
+		static extern (C) string wxTextDataObject_GetText(IntPtr self);
+		static extern (C) void wxTextDataObject_SetText(IntPtr self, string text);
+		
+		//---------------------------------------------------------------------
 
 	public class TextDataObject : DataObjectSimple
 	{
-		[DllImport("wx-c")] static extern IntPtr wxTextDataObject_ctor(string text);
-		[DllImport("wx-c")] static extern void wxTextDataObject_dtor(IntPtr self);
-		[DllImport("wx-c")] static extern void wxTextDataObject_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
-		[DllImport("wx-c")] static extern int wxTextDataObject_GetTextLength(IntPtr self);
-		[DllImport("wx-c")] static extern IntPtr wxTextDataObject_GetText(IntPtr self);
-		[DllImport("wx-c")] static extern void wxTextDataObject_SetText(IntPtr self, string text);
-		
-		//---------------------------------------------------------------------
-
-		public TextDataObject(IntPtr wxObject)
-			: base(wxObject) 
+		public this(IntPtr wxobj)
 		{
-			this.wxObject = wxObject;
+			super(wxobj);
 		}
 			
-		internal TextDataObject(IntPtr wxObject, bool memOwn)
-			: base(wxObject)
+		private this(IntPtr wxobj, bool memOwn)
 		{ 
+			super(wxobj);
 			this.memOwn = memOwn;
-			this.wxObject = wxObject;
 		}
 
-		public TextDataObject()
-			: this("") {}
+		public this()
+			{ this("");}
 
-		public TextDataObject(string text)
-			: this(wxTextDataObject_ctor(text), true) 
+		public this(string text)
 		{
-			virtual_Dispose = new Virtual_Dispose(VirtualDispose);
-			wxTextDataObject_RegisterDisposable(wxObject, virtual_Dispose);
+			this(wxTextDataObject_ctor(text), true);
+			wxTextDataObject_RegisterDisposable(wxobj, &VirtualDispose);
 		}
 			
 		//---------------------------------------------------------------------
 				
-		public override void Dispose()
-		{
-			if (!disposed)
-			{
-				if (wxObject != IntPtr.Zero)
-				{
-					if (memOwn)
-					{
-						wxTextDataObject_dtor(wxObject);
-						memOwn = false;
-					}
-				}
-				RemoveObject(wxObject);
-				wxObject = IntPtr.Zero;
-				disposed= true;
-			}
-			
-			base.Dispose();
-			GC.SuppressFinalize(this);
-		}
-		
-		//---------------------------------------------------------------------
-		
-		~TextDataObject() 
-		{
-			Dispose();
-		}
+		override private void dtor() { wxTextDataObject_dtor(wxobj); }
 			
 		//---------------------------------------------------------------------
 
-		public int TextLength
-		{
-			get { return wxTextDataObject_GetTextLength(wxObject); }
-		}
+		public int TextLength() { return wxTextDataObject_GetTextLength(wxobj); }
 		
 		//---------------------------------------------------------------------
 
-		public string Text
-		{
-			get { return new wxString(wxTextDataObject_GetText(wxObject), true); }
-			set { wxTextDataObject_SetText(wxObject, value); }
-		}
+		public string Text() { return wxTextDataObject_GetText(wxobj).dup; }
+		public void Text(string value) { wxTextDataObject_SetText(wxobj, value); }
 	}
 	
 	//---------------------------------------------------------------------
 
+		static extern (C) IntPtr wxFileDataObject_ctor();
+		static extern (C) void wxFileDataObject_dtor(IntPtr self);
+		static extern (C) void wxFileDataObject_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
+		static extern (C) void wxFileDataObject_AddFile(IntPtr self, string filename);
+		static extern (C) IntPtr wxFileDataObject_GetFilenames(IntPtr self);
+		
+		//---------------------------------------------------------------------
+		
 	public class FileDataObject : DataObjectSimple
 	{
-		[DllImport("wx-c")] static extern IntPtr wxFileDataObject_ctor();
-		[DllImport("wx-c")] static extern void wxFileDataObject_dtor(IntPtr self);
-		[DllImport("wx-c")] static extern void wxFileDataObject_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
-		[DllImport("wx-c")] static extern void wxFileDataObject_AddFile(IntPtr self, string filename);
-		[DllImport("wx-c")] static extern IntPtr wxFileDataObject_GetFilenames(IntPtr self);
-		
-		//---------------------------------------------------------------------
-		
-		public FileDataObject(IntPtr wxObject)
-			: base(wxObject) 
+		public this(IntPtr wxobj)
 		{
-			this.wxObject = wxObject;
+			super(wxobj);
 		}
 			
-		internal FileDataObject(IntPtr wxObject, bool memOwn)
-			: base(wxObject)
+		private this(IntPtr wxobj, bool memOwn)
 		{ 
+			super(wxobj);
 			this.memOwn = memOwn;
-			this.wxObject = wxObject;
 		}
 			
-		public FileDataObject()
-			: this(wxFileDataObject_ctor(), true) 
+		public this()
 		{
-			virtual_Dispose = new Virtual_Dispose(VirtualDispose);
-			wxFileDataObject_RegisterDisposable(wxObject, virtual_Dispose);
-		}
-		
-		//---------------------------------------------------------------------
-				
-		public override void Dispose()
-		{
-			if (!disposed)
-			{
-				if (wxObject != IntPtr.Zero)
-				{
-					if (memOwn)
-					{
-						wxFileDataObject_dtor(wxObject);
-						memOwn = false;
-					}
-				}
-				RemoveObject(wxObject);
-				wxObject = IntPtr.Zero;
-				disposed= true;
-			}
-			
-			base.Dispose();
-			GC.SuppressFinalize(this);
+			this(wxFileDataObject_ctor(), true);
+			wxFileDataObject_RegisterDisposable(wxobj, &VirtualDispose);
 		}
 		
 		//---------------------------------------------------------------------
 		
-		~FileDataObject() 
-		{
-			Dispose();
-		}
+		override private void dtor() { wxFileDataObject_dtor(wxobj); }
 			
 		//---------------------------------------------------------------------
 			
 		public void AddFile(string filename)
 		{
-			wxFileDataObject_AddFile(wxObject, filename);
+			wxFileDataObject_AddFile(wxobj, filename);
 		}
 		
-		public string[] Filenames
+		public string[] Filenames()
 		{
-			get { return new ArrayString(wxFileDataObject_GetFilenames(wxObject), true); }
+		//	return new ArrayString(wxFileDataObject_GetFilenames(wxobj), true);
+			return null;
 		}
+	
 	}
-}

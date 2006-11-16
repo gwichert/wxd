@@ -1,62 +1,104 @@
 //-----------------------------------------------------------------------------
-// wx.NET - Brush.cs
+// wxD - Brush.d
 //
 // The wxBrush wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
+// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Runtime.InteropServices;
+module wx.Brush;
+import wx.common;
+import wx.Bitmap;
 
-namespace wx
-{
-	public class Brush : GDIObject
-	{
-        	[DllImport("wx-c")] static extern IntPtr wxBrush_ctor();
-		[DllImport("wx-c")] static extern bool   wxBrush_Ok(IntPtr self);
-		[DllImport("wx-c")] static extern FillStyle wxBrush_GetStyle(IntPtr self);
-		[DllImport("wx-c")] static extern void   wxBrush_SetStyle(IntPtr self, FillStyle style);
-		[DllImport("wx-c")] static extern IntPtr wxBrush_GetStipple(IntPtr self);
-		[DllImport("wx-c")] static extern void   wxBrush_SetStipple(IntPtr self, IntPtr stipple);
-        	[DllImport("wx-c")] static extern IntPtr wxBrush_GetColour(IntPtr self);
-		[DllImport("wx-c")] static extern void   wxBrush_SetColour(IntPtr self, IntPtr col);
+		static extern (C) IntPtr wxBLUE_BRUSH_Get();
+		static extern (C) IntPtr wxGREEN_BRUSH_Get();
+		static extern (C) IntPtr wxWHITE_BRUSH_Get();
+		static extern (C) IntPtr wxBLACK_BRUSH_Get();
+		static extern (C) IntPtr wxGREY_BRUSH_Get();
+		static extern (C) IntPtr wxMEDIUM_GREY_BRUSH_Get();
+		static extern (C) IntPtr wxLIGHT_GREY_BRUSH_Get();
+		static extern (C) IntPtr wxTRANSPARENT_BRUSH_Get();
+		static extern (C) IntPtr wxCYAN_BRUSH_Get();
+		static extern (C) IntPtr wxRED_BRUSH_Get();
+		
+        	static extern (C) IntPtr wxBrush_ctor();
+		static extern (C) bool   wxBrush_Ok(IntPtr self);
+		static extern (C) FillStyle wxBrush_GetStyle(IntPtr self);
+		static extern (C) void   wxBrush_SetStyle(IntPtr self, FillStyle style);
+		static extern (C) IntPtr wxBrush_GetStipple(IntPtr self);
+		static extern (C) void   wxBrush_SetStipple(IntPtr self, IntPtr stipple);
+        	static extern (C) IntPtr wxBrush_GetColour(IntPtr self);
+		static extern (C) void   wxBrush_SetColour(IntPtr self, IntPtr col);
 
 		//---------------------------------------------------------------------
-        
-		public Brush()
-			: this(wxBrush_ctor()) { }
 
-		public Brush(IntPtr wxObject)
-			: base(wxObject) { }
+	public class Brush : GDIObject
+	{
+		public static Brush wxBLUE_BRUSH;
+		public static Brush wxGREEN_BRUSH;
+		public static Brush wxWHITE_BRUSH;
+		public static Brush wxBLACK_BRUSH;
+		public static Brush wxGREY_BRUSH;
+		public static Brush wxMEDIUM_GREY_BRUSH;
+		public static Brush wxLIGHT_GREY_BRUSH;
+		public static Brush wxTRANSPARENT_BRUSH;
+		public static Brush wxCYAN_BRUSH;
+		public static Brush wxRED_BRUSH;
+		public static Brush wxNullBrush;
 
-		public Brush(Colour colour) 
-			: this(colour, FillStyle.wxSOLID) { }
-			
-		public Brush(Colour colour, FillStyle style)
-			: this()
+/+
+		override public void Dispose()
 		{
-			Colour = colour;
+			if (this !== wxBLUE_BRUSH
+			&&  this !== wxGREEN_BRUSH
+			&&  this !== wxWHITE_BRUSH
+			&&  this !== wxBLACK_BRUSH
+			&&  this !== wxGREY_BRUSH
+			&&  this !== wxMEDIUM_GREY_BRUSH
+			&&  this !== wxLIGHT_GREY_BRUSH
+			&&  this !== wxTRANSPARENT_BRUSH
+			&&  this !== wxCYAN_BRUSH
+			&&  this !== wxRED_BRUSH) {
+				super.Dispose();
+			}
+		}
++/
+		//---------------------------------------------------------------------
+        
+		public this()
+			{ this(wxBrush_ctor()); }
+
+		public this(IntPtr wxobj)
+			{ super(wxobj); }
+
+		public this(Colour colour) 
+			{ this(colour, FillStyle.wxSOLID); }
+			
+		public this(Colour colour, FillStyle style)
+		{
+			this();
+			this.colour = colour;
 			Style = style;
 		}
 
-		public Brush(Bitmap stippleBitmap) 
-			: this()
+		public this(Bitmap stippleBitmap) 
 		{
+			this();
 			Stipple = stippleBitmap;
 		}
 
-		public Brush(string name) 
-			: this(name, FillStyle.wxSOLID) { }
+		public this(string name) 
+			{ this(name, FillStyle.wxSOLID); }
 			
-		public Brush(string name, FillStyle style) 
-			: this() 
-		{ 
-			Colour = new Colour(name);
+		public this(string name, FillStyle style) 
+		{
+			this(); 
+			this.colour = new Colour(name);
 			Style = style;
 		}
 
@@ -64,31 +106,21 @@ namespace wx
 
 		public bool Ok() 
 		{
-			return wxBrush_Ok(wxObject);
+			return wxBrush_Ok(wxobj);
 		}
 
 		//---------------------------------------------------------------------
 
-		public FillStyle Style
-		{
-			get { return wxBrush_GetStyle(wxObject); }
-			set { wxBrush_SetStyle(wxObject, value); }
-		}
+		public FillStyle Style() { return wxBrush_GetStyle(wxobj); }
+		public void Style(FillStyle value) { wxBrush_SetStyle(wxobj, value); }
 
 		//---------------------------------------------------------------------
 
-		public Bitmap Stipple
-		{
-			get { return (Bitmap)FindObject(wxBrush_GetStipple(wxObject), typeof(Bitmap)); }
-			set { wxBrush_SetStipple(wxObject, Object.SafePtr(value)); }
-		}
+		public Bitmap Stipple() { return cast(Bitmap)FindObject(wxBrush_GetStipple(wxobj), &Bitmap.New); }
+		public void Stipple(Bitmap value) { wxBrush_SetStipple(wxobj, wxObject.SafePtr(value)); }
 
 		//---------------------------------------------------------------------
 
-		public Colour Colour
-		{
-			get { return new Colour(wxBrush_GetColour(wxObject), true); }
-			set { wxBrush_SetColour(wxObject, Object.SafePtr(value)); }
-		}
+		public Colour colour() { return new Colour(wxBrush_GetColour(wxobj), true); }
+		public void colour(Colour value){ wxBrush_SetColour(wxobj, wxObject.SafePtr(value)); }
 	}
-}

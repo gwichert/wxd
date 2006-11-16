@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - ImageHandlers.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - ImageHandlers.cs
 //
 // The wxImageHandlers wrapper classes.
@@ -10,153 +13,117 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.ImageHandlers;
+import wx.common;
+import wx.Image;
 
-namespace wx
-{
+  public static extern (C) IntPtr BMPHandler_ctor();
+  public static extern (C) IntPtr ICOHandler_ctor();
+  public static extern (C) IntPtr CURHandler_ctor();
+  public static extern (C) IntPtr ANIHandler_ctor();
+  public static extern (C) IntPtr GIFHandler_ctor();
+  public static extern (C) IntPtr PNGHandler_ctor();
+  public static extern (C) IntPtr PCXHandler_ctor();
+  public static extern (C) IntPtr JPEGHandler_ctor();
+  public static extern (C) IntPtr XPMHandler_ctor();
+  public static extern (C) IntPtr PNMHandler_ctor();
+  public static extern (C) IntPtr TIFFHandler_ctor();
+  
+  
+  
 public class BMPHandler : ImageHandler 
 {
-  [DllImport("wx-c", EntryPoint="CSharp_new_BMPHandler")] public static extern IntPtr new_BMPHandler();
+  public this(IntPtr ptr) { super(ptr); }
   
-  public BMPHandler(IntPtr wxObject) 
-    : base(wxObject) {}
-
-  public BMPHandler()
-    : this(new_BMPHandler())
+  public this()
   {
+  	super(BMPHandler_ctor());
   }
 }
 
 public class ICOHandler : BMPHandler 
 {
-  [DllImport("wx-c", EntryPoint="CSharp_new_ICOHandler")] public static extern IntPtr new_ICOHandler();
-  
-  public ICOHandler(IntPtr wxObject) 
-    : base(wxObject) {}
+  public this(IntPtr ptr) { super(ptr); }
 
-  public ICOHandler()
-    : this(new_ICOHandler())
+  public this()
   {
+  	super(ICOHandler_ctor());
   }
 }
 
 public class CURHandler : ICOHandler 
 {
-  [DllImport("wx-c", EntryPoint="CSharp_new_CURHandler")] public static extern IntPtr new_CURHandler();
-  
-  public CURHandler(IntPtr wxObject) 
-    : base(wxObject) {}
+  public this(IntPtr ptr) { super(ptr); }
 
-  public CURHandler()
-    : this(new_CURHandler())
+  public this()
   {
+  	super(CURHandler_ctor());
   }
 }
 
 public class ANIHandler : CURHandler 
 {
-  [DllImport("wx-c", EntryPoint="CSharp_new_ANIHandler")] public static extern IntPtr new_ANIHandler();
+  public this(IntPtr ptr) { super(ptr); }
 
-  public ANIHandler(IntPtr wxObject) 
-    : base(wxObject) {}
-
-  public ANIHandler()
-    : this(new_ANIHandler())
+  public this()
   {
+  	super(ANIHandler_ctor());
   }
 }
 
 public class PNGHandler : ImageHandler 
 {
-  [DllImport("wx-c", EntryPoint="CSharp_new_PNGHandler")] public static extern IntPtr new_PNGHandler();
-
-  public PNGHandler(IntPtr wxObject) 
-    : base(wxObject) {}
-
-  public PNGHandler()
-    : this(new_PNGHandler())
+  public this()
   {
+  	super(PNGHandler_ctor());
   }
 }
 
 public class GIFHandler : ImageHandler 
 {
-  [DllImport("wx-c", EntryPoint="CSharp_new_GIFHandler")] public static extern IntPtr new_GIFHandler();
-
-  public GIFHandler(IntPtr wxObject) 
-    : base(wxObject) {}
-
-  public GIFHandler()
-    : this(new_GIFHandler())
+  public this()
   {
+  	super(GIFHandler_ctor());
   }
 }
 
 public class PCXHandler : ImageHandler 
 {
-  [DllImport("wx-c", EntryPoint="CSharp_new_PCXHandler")] public static extern IntPtr new_PCXHandler();
-
-  public PCXHandler(IntPtr wxObject) 
-    : base(wxObject) {}
-
-  public PCXHandler()
-    : this(new_PCXHandler())
+  public this()
   {
+  	super(PCXHandler_ctor());
   }
 }
 
 public class JPEGHandler : ImageHandler 
 {
-  [DllImport("wx-c", EntryPoint="CSharp_new_JPEGHandler")] public static extern IntPtr new_JPEGHandler();
-
-  public JPEGHandler(IntPtr wxObject) 
-    : base(wxObject) {}
-
-  public JPEGHandler()
-    : this(new_JPEGHandler())
+  public this()
   {
+  	super(JPEGHandler_ctor());
   }
 }
 
+
 public class PNMHandler : ImageHandler 
 {
-  [DllImport("wx-c", EntryPoint="CSharp_new_PNMHandler")] public static extern IntPtr new_PNMHandler();
-
-  public PNMHandler(IntPtr wxObject) 
-    : base(wxObject) {}
-
-  public PNMHandler()
-    : this(new_PNMHandler())
+  public this()
   {
+  	super(PNMHandler_ctor());
   }
 }
 
 public class XPMHandler : ImageHandler 
 {
-  [DllImport("wx-c", EntryPoint="CSharp_new_XPMHandler")] public static extern IntPtr new_XPMHandler();
-
-  public XPMHandler(IntPtr wxObject) 
-    : base(wxObject) {}
-
-  public XPMHandler()
-    : this(new_XPMHandler())
+  public this()
   {
+  	super(XPMHandler_ctor());
   }
 }
 
 public class TIFFHandler : ImageHandler 
 {
-  [DllImport("wx-c", EntryPoint="CSharp_new_TIFFHandler")] public static extern IntPtr new_TIFFHandler();
-
-  public TIFFHandler(IntPtr wxObject) 
-    : base(wxObject) {}
-
-  public TIFFHandler()
-    : this(new_TIFFHandler())
+  public this()
   {
+  	super(TIFFHandler_ctor());
   }
-}
-
 }

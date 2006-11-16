@@ -1,115 +1,101 @@
 //-----------------------------------------------------------------------------
-// wx.NET - GridSizer.cs
+// wxD - GridSizer.d
 //
 // The wxGridSizer proxy interface.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
+// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.GridSizer;
+import wx.common;
+import wx.Sizer;
 
-namespace wx
-{
-	public class GridSizer : Sizer
-	{
-		[DllImport("wx-c")] static extern IntPtr wxGridSizer_ctor(int rows, int cols, int vgap, int hgap);
-		[DllImport("wx-c")] static extern void wxGridSizer_RecalcSizes(IntPtr self);
-		[DllImport("wx-c")] static extern void wxGridSizer_CalcMin(IntPtr self, ref Size size);
-		[DllImport("wx-c")] static extern void wxGridSizer_SetCols(IntPtr self, int cols);
-		[DllImport("wx-c")] static extern void wxGridSizer_SetRows(IntPtr self, int rows);
-		[DllImport("wx-c")] static extern void wxGridSizer_SetVGap(IntPtr self, int gap);
-		[DllImport("wx-c")] static extern void wxGridSizer_SetHGap(IntPtr self, int gap);
-		[DllImport("wx-c")] static extern int wxGridSizer_GetCols(IntPtr self);
-		[DllImport("wx-c")] static extern int wxGridSizer_GetRows(IntPtr self);
-		[DllImport("wx-c")] static extern int wxGridSizer_GetVGap(IntPtr self);
-		[DllImport("wx-c")] static extern int wxGridSizer_GetHGap(IntPtr self);
+		static extern (C) IntPtr wxGridSizer_ctor(int rows, int cols, int vgap, int hgap);
+		static extern (C) void wxGridSizer_RecalcSizes(IntPtr self);
+		static extern (C) void wxGridSizer_CalcMin(IntPtr self, inout Size size);
+		static extern (C) void wxGridSizer_SetCols(IntPtr self, int cols);
+		static extern (C) void wxGridSizer_SetRows(IntPtr self, int rows);
+		static extern (C) void wxGridSizer_SetVGap(IntPtr self, int gap);
+		static extern (C) void wxGridSizer_SetHGap(IntPtr self, int gap);
+		static extern (C) int wxGridSizer_GetCols(IntPtr self);
+		static extern (C) int wxGridSizer_GetRows(IntPtr self);
+		static extern (C) int wxGridSizer_GetVGap(IntPtr self);
+		static extern (C) int wxGridSizer_GetHGap(IntPtr self);
 
 		//---------------------------------------------------------------------
 
-		public GridSizer(IntPtr wxObject)
-			: base(wxObject)
+	public class GridSizer : Sizer
+	{
+		public this(IntPtr wxobj)
 		{
+			super(wxobj);
 		}
 
-		public GridSizer(int rows, int cols, int vgap, int hgap)
-			: base(wxGridSizer_ctor(rows, cols, vgap, hgap))
+		public this(int rows, int cols, int vgap, int hgap)
 		{
+			super(wxGridSizer_ctor(rows, cols, vgap, hgap));
 		}
 
 		//---------------------------------------------------------------------
 
 		public override void RecalcSizes()
 		{
-			wxGridSizer_RecalcSizes(wxObject);
+			wxGridSizer_RecalcSizes(wxobj);
 		}
 
 		//---------------------------------------------------------------------
 
 		public override Size CalcMin()
 		{
-			Size size = new Size();
-			wxGridSizer_CalcMin(wxObject, ref size);
+			Size size;
+			wxGridSizer_CalcMin(wxobj, size);
 			return size;
 		}
 
 		//---------------------------------------------------------------------
 
-		public int Cols
-		{
-			set
+		public void Cols(int value) 
 			{
-				wxGridSizer_SetCols(wxObject, value);
+				wxGridSizer_SetCols(wxobj, value);
 			}
-			get
+		public int Cols() 
 			{
-				return wxGridSizer_GetCols(wxObject);
+				return wxGridSizer_GetCols(wxobj);
 			}
-		}
 
-		public int Rows
-		{
-			set
+		public void Rows(int value) 
 			{
-				wxGridSizer_SetRows(wxObject, value);
+				wxGridSizer_SetRows(wxobj, value);
 			}
-			get
+		public int Rows() 
 			{
-				return wxGridSizer_GetRows(wxObject);
+				return wxGridSizer_GetRows(wxobj);
 			}
-		}
 
 		//---------------------------------------------------------------------
 
-		public int VGap
-		{
-			set
+		public void VGap(int value) 
 			{
-				wxGridSizer_SetVGap(wxObject, value);
+				wxGridSizer_SetVGap(wxobj, value);
 			}
-			get
+		public int VGap() 
 			{
-				return wxGridSizer_GetVGap(wxObject);
+				return wxGridSizer_GetVGap(wxobj);
 			}
-		}
 
-		public int HGap
-		{
-			set
+		public void HGap(int value) 
 			{
-				wxGridSizer_SetHGap(wxObject, value);
+				wxGridSizer_SetHGap(wxobj, value);
 			}
-			get
+		public int HGap() 
 			{
-				return wxGridSizer_GetHGap(wxObject);
+				return wxGridSizer_GetHGap(wxobj);
 			}
-		}
 
 		//---------------------------------------------------------------------
 	}
-}

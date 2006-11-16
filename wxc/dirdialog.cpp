@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - dirdialog.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - dirdialog.cxx
 // 
 // The wxDirDialog proxy interface
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/dirdlg.h>
 #include "local_events.h"
 
@@ -32,13 +36,13 @@ public:
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxDirDialog* wxDirDialog_ctor(wxWindow* parent,  char* message, 
-                              char* defaultPath, int style, wxPoint* pos, 
-                              wxSize* size, char* name)
+wxDirDialog* wxDirDialog_ctor(wxWindow* parent,  dstr message, 
+                              dstr defaultPath, int style, wxPoint* pos, 
+                              wxSize* size, dstr name)
 {
-    return new _DirDialog(parent, wxString(message, wxConvUTF8), 
-                          wxString(defaultPath, wxConvUTF8), style, *pos, 
-                          *size, wxString(name, wxConvUTF8));
+    return new _DirDialog(parent, wxString(message.data, wxConvUTF8, message.length), 
+                          wxString(defaultPath.data, wxConvUTF8, defaultPath.length), style, *pos, 
+                          *size, wxString(name.data, wxConvUTF8, name.length));
 }
 
 //-----------------------------------------------------------------------------
@@ -58,15 +62,15 @@ void wxDirDialog_SetStyle(wxDirDialog* self, int style)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxDirDialog_SetMessage(wxDirDialog* self, char* message)
+void wxDirDialog_SetMessage(wxDirDialog* self, dstr message)
 {
-    self->SetMessage(wxString(message, wxConvUTF8));
+    self->SetMessage(wxString(message.data, wxConvUTF8, message.length));
 }
 
 extern "C" WXEXPORT
-wxString* wxDirDialog_GetMessage(wxDirDialog* self)
+dstr wxDirDialog_GetMessage(wxDirDialog* self)
 {
-    return new wxString(self->GetMessage());
+    return dstr(self->GetMessage());
 }
 
 //-----------------------------------------------------------------------------
@@ -80,14 +84,29 @@ int wxDirDialog_ShowModal(wxDirDialog* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxDirDialog_SetPath(wxDirDialog* self, char* path)
+void wxDirDialog_SetPath(wxDirDialog* self, dstr path)
 {
-    self->SetPath(wxString(path, wxConvUTF8));
+    self->SetPath(wxString(path.data, wxConvUTF8, path.length));
 }
 
 extern "C" WXEXPORT
-wxString* wxDirDialog_GetPath(wxDirDialog* self)
+dstr wxDirDialog_GetPath(wxDirDialog* self)
 {
-    return new wxString(self->GetPath());
+    return dstr(self->GetPath());
 }
 
+extern "C" WXEXPORT
+dstr wxDirSelector_func(dstr message,
+              dstr defaultPath,
+              long style,
+              wxPoint* pos,
+              wxWindow *parent)
+{
+	return dstr(wxDirSelector(
+		message.length?wxString(message.data, wxConvUTF8, message.length):wxString(wxDirSelectorPromptStr),
+		wxString(defaultPath.data, wxConvUTF8, defaultPath.length),
+		style, 
+		pos?*pos:wxDefaultPosition, 
+		parent
+	));
+}

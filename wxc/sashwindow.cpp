@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - sashwindow.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - sashwindow.cxx
 // 
 // The wxSashWindow proxy interface.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/sashwin.h>
 #include "local_events.h"
 
@@ -76,7 +80,7 @@ wxSashWindow* wxSashWindow_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxSashWindow_Create(wxSashWindow* self, wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, int style, const char* name)
+bool wxSashWindow_Create(wxSashWindow* self, wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, int style, dstr name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -84,10 +88,10 @@ bool wxSashWindow_Create(wxSashWindow* self, wxWindow* parent, wxWindowID id, co
 	if (size == NULL)
 		size = &wxDefaultSize;
 		
-	if (name == NULL)
-		name = "sashwindow";
+	if (name.data==NULL)
+		name = dstr("sashwindow",sizeof("sashwindow")-1);
 		
-	return self->Create(parent, id, *pos, *size, style, wxString(name, wxConvUTF8))?1:0;
+	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------

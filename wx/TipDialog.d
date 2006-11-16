@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - TipDialog.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - TipDialog.cs
 //
 // The wxTipProvider proxy interface.
@@ -10,18 +13,16 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.TipDialog;
+import wx.common;
+import wx.Dialog;
 
-namespace wx
-{
+	static extern (C) IntPtr wxCreateFileTipProvider_func(string filename, int currentTip);
+	static extern (C) bool wxShowTip_func(IntPtr parent, IntPtr tipProvider, bool showAtStartup);
+	static extern (C) int wxTipProvider_GetCurrentTip();
+
     public class TipProvider
     {
-	[DllImport("wx-c")] static extern IntPtr wxCreateFileTipProvider_func(string filename, int currentTip);
-	[DllImport("wx-c")] static extern bool wxShowTip_func(IntPtr parent, IntPtr tipProvider, bool showAtStartup);
-	[DllImport("wx-c")] static extern int wxTipProvider_GetCurrentTip();
-
 	public static IntPtr CreateFileTipProvider(string filename, int currentTip)
 	{
 		return wxCreateFileTipProvider_func(filename, currentTip);
@@ -29,17 +30,13 @@ namespace wx
 
 	public static bool ShowTip(Window parent, IntPtr tipProvider)
 	{
-		return wxShowTip_func(Object.SafePtr(parent), tipProvider, true);
+		return wxShowTip_func(wxObject.SafePtr(parent), tipProvider, true);
 	}
 
 	public static bool ShowTip(Window parent, IntPtr tipProvider, bool showAtStartup)
 	{
-		return wxShowTip_func(Object.SafePtr(parent), tipProvider, showAtStartup);
+		return wxShowTip_func(wxObject.SafePtr(parent), tipProvider, showAtStartup);
 	}
 
-	public static int CurrentTip
-	{
-		get { return wxTipProvider_GetCurrentTip(); }
-	}
+	static int CurrentTip() { return wxTipProvider_GetCurrentTip(); }
     }
-}

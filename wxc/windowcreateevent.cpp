@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - windowcreateevent.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - windowcreateevent.cxx
 // 
 // The wxWindowCreateEvent proxy interface.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 
 //-----------------------------------------------------------------------------
 

@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - systemsettings.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - systemsettings.cxx
 //
 // The wxSystemSettings proxy interface.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/settings.h>
 
 //-----------------------------------------------------------------------------

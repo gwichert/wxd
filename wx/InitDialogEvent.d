@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - InitDialogEvent.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - InitDialogEvent.cs
 //
 // The wxInitDialogEvent wrapper class.
@@ -10,24 +13,29 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Runtime.InteropServices;
+module wx.InitDialogEvent;
+import wx.common;
+import wx.Event;
 
-namespace wx
-{
-	public class InitDialogEvent : Event
-	{
-		[DllImport("wx-c")] static extern IntPtr wxInitDialogEvent_ctor(int Id);
+		static extern (C) IntPtr wxInitDialogEvent_ctor(int Id);
 		
 		//-----------------------------------------------------------------------------
 
-		public InitDialogEvent(IntPtr wxObject) 
-			: base(wxObject) { }
+	public class InitDialogEvent : Event
+	{
+		public this(IntPtr wxobj) 
+			{ super(wxobj); }
 			
-		public InitDialogEvent()
-			: base(wxInitDialogEvent_ctor(0)) {}
+		public this()
+			{ super(wxInitDialogEvent_ctor(0));}
 
-		public InitDialogEvent(int Id)
-			: this(wxInitDialogEvent_ctor(Id)) { }
+		public this(int Id)
+			{ this(wxInitDialogEvent_ctor(Id)); }
+
+		private static Event New(IntPtr obj) { return new InitDialogEvent(obj); }
+
+		static this()
+		{
+			AddEventType(wxEVT_INIT_DIALOG,				&InitDialogEvent.New);
+		}
 	}
-}

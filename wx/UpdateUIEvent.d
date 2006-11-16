@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - UpdateUIEvent.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - UpdateUIEvent.cs
 //
 // The wxUpdateUIEvent wrapper class.
@@ -10,120 +13,93 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Runtime.InteropServices;
+module wx.UpdateUIEvent;
+import wx.common;
+import wx.CommandEvent;
+import wx.Window;
 
-namespace wx
-{
+		static extern (C) IntPtr wxUpdateUIEvent_ctor(int commandId);
+		static extern (C) void   wxUpdUIEvt_Enable(IntPtr self, bool enable);
+		static extern (C) void   wxUpdUIEvt_Check(IntPtr self, bool check);
+		static extern (C) bool   wxUpdateUIEvent_CanUpdate(IntPtr window);
+		static extern (C) bool   wxUpdateUIEvent_GetChecked(IntPtr self);
+		static extern (C) bool   wxUpdateUIEvent_GetEnabled(IntPtr self);
+		static extern (C) bool   wxUpdateUIEvent_GetSetChecked(IntPtr self);
+		static extern (C) bool   wxUpdateUIEvent_GetSetEnabled(IntPtr self);
+		static extern (C) bool   wxUpdateUIEvent_GetSetText(IntPtr self);
+		static extern (C) string wxUpdateUIEvent_GetText(IntPtr self);
+		static extern (C) int    wxUpdateUIEvent_GetMode();
+		static extern (C) uint   wxUpdateUIEvent_GetUpdateInterval();
+		static extern (C) void   wxUpdateUIEvent_ResetUpdateTime();
+		static extern (C) void   wxUpdateUIEvent_SetMode(int mode);
+		static extern (C) void   wxUpdateUIEvent_SetText(IntPtr self, string text);
+		static extern (C) void   wxUpdateUIEvent_SetUpdateInterval(uint updateInterval);
+
+		//-----------------------------------------------------------------------------
+
 	public class UpdateUIEvent : CommandEvent
 	{
-		[DllImport("wx-c")] static extern IntPtr wxUpdateUIEvent_ctor(int commandId);
-		[DllImport("wx-c")] static extern void   wxUpdUIEvt_Enable(IntPtr self, bool enable);
-		[DllImport("wx-c")] static extern void   wxUpdUIEvt_Check(IntPtr self, bool check);
-		[DllImport("wx-c")] static extern bool   wxUpdateUIEvent_CanUpdate(IntPtr window);
-		[DllImport("wx-c")] static extern bool   wxUpdateUIEvent_GetChecked(IntPtr self);
-		[DllImport("wx-c")] static extern bool   wxUpdateUIEvent_GetEnabled(IntPtr self);
-		[DllImport("wx-c")] static extern bool   wxUpdateUIEvent_GetSetChecked(IntPtr self);
-		[DllImport("wx-c")] static extern bool   wxUpdateUIEvent_GetSetEnabled(IntPtr self);
-		[DllImport("wx-c")] static extern bool   wxUpdateUIEvent_GetSetText(IntPtr self);
-		[DllImport("wx-c")] static extern IntPtr wxUpdateUIEvent_GetText(IntPtr self);
-		[DllImport("wx-c")] static extern int    wxUpdateUIEvent_GetMode();
-		[DllImport("wx-c")] static extern uint   wxUpdateUIEvent_GetUpdateInterval();
-		[DllImport("wx-c")] static extern void   wxUpdateUIEvent_ResetUpdateTime();
-		[DllImport("wx-c")] static extern void   wxUpdateUIEvent_SetMode(int mode);
-		[DllImport("wx-c")] static extern void   wxUpdateUIEvent_SetText(IntPtr self, string text);
-		[DllImport("wx-c")] static extern void   wxUpdateUIEvent_SetUpdateInterval(uint updateInterval);
+		public this(IntPtr wxobj) 
+			{ super(wxobj); }
+			
+		public this() 
+			{ this(0); }
+			
+		public this(int commandId) 
+			{ this(wxUpdateUIEvent_ctor(commandId)); }
 
 		//-----------------------------------------------------------------------------
 
-		public UpdateUIEvent(IntPtr wxObject) 
-			: base(wxObject) { }
-			
-		public UpdateUIEvent() 
-			: this(0) { }
-			
-		public UpdateUIEvent(int commandId) 
-			: this(wxUpdateUIEvent_ctor(commandId)) { }
-
-		//-----------------------------------------------------------------------------
-
-		public bool Enabled
-		{
-			set { wxUpdUIEvt_Enable(wxObject, value); }
-		}
+		public void Enabled(bool value) { wxUpdUIEvt_Enable(wxobj, value); }
 
 		//-----------------------------------------------------------------------------
 		
-		public bool Check
-		{
-			set { wxUpdUIEvt_Check(wxObject, value); }
-		}
+		public void Check(bool value) { wxUpdUIEvt_Check(wxobj, value); }
 		
 		//-----------------------------------------------------------------------------
 		
 		public static bool CanUpdate(Window window)
 		{
-			return wxUpdateUIEvent_CanUpdate(Object.SafePtr(window));
+			return wxUpdateUIEvent_CanUpdate(wxObject.SafePtr(window));
 		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public bool Checked
-		{
-			get { return wxUpdateUIEvent_GetChecked(wxObject); }
-		}
+		public bool Checked() { return wxUpdateUIEvent_GetChecked(wxobj); }
 		
 		//-----------------------------------------------------------------------------
 		
 		public bool GetEnabled()
 		{
-			return wxUpdateUIEvent_GetEnabled(wxObject);
+			return wxUpdateUIEvent_GetEnabled(wxobj);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public bool SetChecked
-		{
-			get { return wxUpdateUIEvent_GetSetChecked(wxObject); }
-		}
+		public bool SetChecked() { return wxUpdateUIEvent_GetSetChecked(wxobj); }
 		
 		//-----------------------------------------------------------------------------
 		
-		public bool SetEnabled
-		{
-			get { return wxUpdateUIEvent_GetSetEnabled(wxObject); }
-		}
+		public bool SetEnabled() { return wxUpdateUIEvent_GetSetEnabled(wxobj); }
 		
 		//-----------------------------------------------------------------------------
 		
-		public bool SetText
-		{
-			get { return wxUpdateUIEvent_GetSetText(wxObject); }
-		}
+		public bool SetText() { return wxUpdateUIEvent_GetSetText(wxobj); }
 		
 		//-----------------------------------------------------------------------------
 		
-		public string Text
-		{
-			get { return new wxString(wxUpdateUIEvent_GetText(wxObject), true); }
-			set { wxUpdateUIEvent_SetText(wxObject, value); }
-		}
+		public string Text() { return wxUpdateUIEvent_GetText(wxobj).dup; }
+		public void Text(string value) { wxUpdateUIEvent_SetText(wxobj, value); }
 		
 		//-----------------------------------------------------------------------------
 		
-		public static UpdateUIMode Mode
-		{
-			get { return (UpdateUIMode)wxUpdateUIEvent_GetMode(); }
-			set { wxUpdateUIEvent_SetMode((int)value); }
-		}
+		static UpdateUIMode Mode() { return cast(UpdateUIMode)wxUpdateUIEvent_GetMode(); }
+		static void Mode(UpdateUIMode value) { wxUpdateUIEvent_SetMode(cast(int)value); }
 		
 		//-----------------------------------------------------------------------------
 		
-		public static long UpdateInterval
-		{
-			get { return (long)wxUpdateUIEvent_GetUpdateInterval(); }
-			set { wxUpdateUIEvent_SetUpdateInterval((uint)value); }
-		}
+		static int UpdateInterval() { return cast(int)wxUpdateUIEvent_GetUpdateInterval(); }
+		static void UpdateInterval(int value) { wxUpdateUIEvent_SetUpdateInterval(cast(uint)value); }
 		
 		//-----------------------------------------------------------------------------
 		
@@ -131,5 +107,11 @@ namespace wx
 		{
 			wxUpdateUIEvent_ResetUpdateTime();
 		}
+
+		private static Event New(IntPtr obj) { return new UpdateUIEvent(obj); }
+
+		static this()
+		{
+			AddEventType(wxEVT_UPDATE_UI,                       &UpdateUIEvent.New);
+		}
 	}
-}

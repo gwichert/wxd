@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - validator.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - validator.cxx
 //
 // The wxValidator proxy interface
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/validate.h>
 
 extern "C" WXEXPORT

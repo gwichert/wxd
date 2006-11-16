@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - sizer.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - sizer.cxx
 //
 // The wxSizer proxy interface.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 
 
 extern "C" WXEXPORT

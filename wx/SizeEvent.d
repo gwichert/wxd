@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - SizeEvent.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - SizeEvent.cs
 //
 // The wxSizeEvent wrapper class.
@@ -10,34 +13,35 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.SizeEvent;
+import wx.common;
+import wx.Event;
 
-namespace wx
-{
-	public class SizeEvent : Event
-	{
-		[DllImport("wx-c")] static extern IntPtr wxSizeEvent_ctor();
-		[DllImport("wx-c")] static extern void wxSizeEvent_GetSize(IntPtr self, out Size size);
+		static extern (C) IntPtr wxSizeEvent_ctor();
+		static extern (C) void wxSizeEvent_GetSize(IntPtr self, out Size size);
 		
 		//-----------------------------------------------------------------------------
 
-		public SizeEvent(IntPtr wxObject) 
-			: base(wxObject) { }
+	public class SizeEvent : Event
+	{
+		public this(IntPtr wxobj) 
+			{ super(wxobj); }
 
-		public SizeEvent()
-			: this(wxSizeEvent_ctor()) { }
+		public this()
+			{ this(wxSizeEvent_ctor()); }
 
 		//-----------------------------------------------------------------------------	
 		
-		public Size Size
-		{
-			get {
-				Size size = new Size();
-				wxSizeEvent_GetSize(wxObject, out size);
+		public Size size() {
+				Size size;
+				wxSizeEvent_GetSize(wxobj, size);
 				return size;
 			}
-		}		
+
+		private static Event New(IntPtr obj) { return new SizeEvent(obj); }
+
+		static this()
+		{
+			AddEventType(wxEVT_SIZE,                            &SizeEvent.New);
+		}
 	}
-}

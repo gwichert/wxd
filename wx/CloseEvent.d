@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - CloseEvent.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - CloseEvent.cs
 //
 // The wxCloseEvent wrapper class.
@@ -10,37 +13,32 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Collections;
-using System.Runtime.InteropServices;
+module wx.CloseEvent;
+import wx.common;
+import wx.Event;
 
-namespace wx
-{
+		static extern (C) IntPtr wxCloseEvent_ctor(int type);
+		static extern (C) void wxCloseEvent_SetLoggingOff(IntPtr self, bool logOff);
+		static extern (C) bool wxCloseEvent_GetLoggingOff(IntPtr self);
+		static extern (C) void wxCloseEvent_Veto(IntPtr self, bool veto);
+		static extern (C) void wxCloseEvent_SetCanVeto(IntPtr self, bool canVeto);
+		static extern (C) bool wxCloseEvent_CanVeto(IntPtr self);
+		static extern (C) bool wxCloseEvent_GetVeto(IntPtr self);
+		
+		//-----------------------------------------------------------------------------
+
 	public class CloseEvent : Event
 	{
-		[DllImport("wx-c")] static extern IntPtr wxCloseEvent_ctor(int type);
-		[DllImport("wx-c")] static extern void wxCloseEvent_SetLoggingOff(IntPtr self, bool logOff);
-		[DllImport("wx-c")] static extern bool wxCloseEvent_GetLoggingOff(IntPtr self);
-		[DllImport("wx-c")] static extern void wxCloseEvent_Veto(IntPtr self, bool veto);
-		[DllImport("wx-c")] static extern void wxCloseEvent_SetCanVeto(IntPtr self, bool canVeto);
-		[DllImport("wx-c")] static extern bool wxCloseEvent_CanVeto(IntPtr self);
-		[DllImport("wx-c")] static extern bool wxCloseEvent_GetVeto(IntPtr self);
-		
-		//-----------------------------------------------------------------------------
+		public this(IntPtr wxobj) 
+			{ super(wxobj); }
 
-		public CloseEvent(IntPtr wxObject) 
-			: base(wxObject) { }
-
-		public CloseEvent(int type)
-			: this(wxCloseEvent_ctor(type)) { }
+		public this(int type)
+			{ this(wxCloseEvent_ctor(type)); }
 
 		//-----------------------------------------------------------------------------
 		
-		public bool LoggingOff
-		{
-			get { return wxCloseEvent_GetLoggingOff(wxObject); }
-			set { wxCloseEvent_SetLoggingOff(wxObject, value); } 
-		}
+		public bool LoggingOff() { return wxCloseEvent_GetLoggingOff(wxobj); }
+		public void LoggingOff(bool value) { wxCloseEvent_SetLoggingOff(wxobj, value); } 
 		
 		public void Veto()
 		{
@@ -49,18 +47,20 @@ namespace wx
 		
 		public void Veto(bool veto)
 		{
-			wxCloseEvent_Veto(wxObject, veto);
+			wxCloseEvent_Veto(wxobj, veto);
 		}
 		
-		public bool CanVeto
-		{
-			set { wxCloseEvent_SetCanVeto(wxObject, value); }
-			get { return wxCloseEvent_CanVeto(wxObject); }
-		}
+		public void CanVeto(bool value) { wxCloseEvent_SetCanVeto(wxobj, value); }
+		public bool CanVeto() { return wxCloseEvent_CanVeto(wxobj); }
 		
-		public bool GetVeto
+		public bool GetVeto() { return wxCloseEvent_GetVeto(wxobj); }
+
+		private static Event New(IntPtr obj) { return new CloseEvent(obj); }
+
+		static this()
 		{
-			get { return wxCloseEvent_GetVeto(wxObject); }
+			AddEventType(wxEVT_CLOSE_WINDOW,                    &CloseEvent.New);
+			AddEventType(wxEVT_END_SESSION,                     &CloseEvent.New);
+			AddEventType(wxEVT_QUERY_END_SESSION,               &CloseEvent.New);
 		}
 	}
-}

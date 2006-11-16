@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - miniframe.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - miniframe.cxx
 // 
 // The wxMiniFrame proxy interface.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/minifram.h>
 #include "local_events.h"
 
@@ -33,7 +37,7 @@ wxMiniFrame* wxMiniFrame_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxMiniFrame_Create(wxMiniFrame* self, wxWindow* parent, wxWindowID id, char* title, const wxPoint* pos, const wxSize* size, int style, const char* name)
+bool wxMiniFrame_Create(wxMiniFrame* self, wxWindow* parent, wxWindowID id, dstr title, const wxPoint* pos, const wxSize* size, int style, dstr name)
 {
     if (pos == NULL)
         pos = &wxDefaultPosition;
@@ -41,10 +45,10 @@ bool wxMiniFrame_Create(wxMiniFrame* self, wxWindow* parent, wxWindowID id, char
     if (size == NULL)
         size = &wxDefaultSize;
 
-    if (name == NULL)
-        name = "miniFrame";
+    if (name.data==NULL)
+        name = dstr("miniFrame",sizeof("miniFrame")-1);
 
-    return self->Create(parent, id, wxString(title, wxConvUTF8), *pos, *size, style, wxString(name, wxConvUTF8))?1:0;
+    return self->Create(parent, id, wxString(title.data, wxConvUTF8, title.length), *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------

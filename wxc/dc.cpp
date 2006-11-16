@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - dc.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - dc.cxx
 //
 // The wxDC proxy interface.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 
 //-----------------------------------------------------------------------------
 // wxDC
@@ -56,9 +60,9 @@ void wxDC_DrawRectangle(wxDC* self, wxCoord x1, wxCoord y1, wxCoord x2, wxCoord 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxDC_DrawText(wxDC* self, const char* text, int x, int y)
+void wxDC_DrawText(wxDC* self, dstr text, int x, int y)
 {
-    self->DrawText(wxString(text, wxConvUTF8), x, y);
+    self->DrawText(wxString(text.data, wxConvUTF8, text.length), x, y);
 }
 
 //-----------------------------------------------------------------------------
@@ -180,9 +184,9 @@ void wxDC_SetFont(wxDC* self, wxFont* font)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxDC_GetTextExtent(wxDC* self, const char* string, int *x, int *y, int *descent, int *externalLeading, wxFont *theFont)
+void wxDC_GetTextExtent(wxDC* self, dstr string, int *x, int *y, int *descent, int *externalLeading, wxFont *theFont)
 {
-    self->GetTextExtent(wxString(string, wxConvUTF8), x, y, descent, externalLeading, theFont);
+    self->GetTextExtent(wxString(string.data, wxConvUTF8, string.length), x, y, descent, externalLeading, theFont);
 }
 
 //-----------------------------------------------------------------------------
@@ -340,25 +344,25 @@ void wxDC_DrawIcon(wxDC* self, wxIcon* icon, int x, int y)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxDC_DrawRotatedText(wxDC* self, const char* text, int x, int y, double angle)
+void wxDC_DrawRotatedText(wxDC* self, dstr text, int x, int y, double angle)
 {
-	self->DrawRotatedText(wxString(text, wxConvUTF8), x, y, angle);
+	self->DrawRotatedText(wxString(text.data, wxConvUTF8, text.length), x, y, angle);
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxDC_DrawLabel(wxDC* self, const char* text, wxBitmap* image, wxRect* rect, int alignment, int indexAccel, wxRect* rectBounding)
+void wxDC_DrawLabel(wxDC* self, dstr text, wxBitmap* image, wxRect* rect, int alignment, int indexAccel, wxRect* rectBounding)
 {
-	self->DrawLabel(wxString(text, wxConvUTF8), *image, *rect, alignment, indexAccel, rectBounding);
+	self->DrawLabel(wxString(text.data, wxConvUTF8, text.length), *image, *rect, alignment, indexAccel, rectBounding);
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxDC_DrawLabel2(wxDC* self, const char* text, wxRect* rect, int alignment, int indexAccel)
+void wxDC_DrawLabel2(wxDC* self, dstr text, wxRect* rect, int alignment, int indexAccel)
 {
-	self->DrawLabel(wxString(text, wxConvUTF8), *rect, alignment, indexAccel);
+	self->DrawLabel(wxString(text.data, wxConvUTF8, text.length), *rect, alignment, indexAccel);
 }
 
 //-----------------------------------------------------------------------------
@@ -380,9 +384,9 @@ void wxDC_DrawSpline2(wxDC* self, int n, wxPoint points[])
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxDC_StartDoc(wxDC* self, const char* message)
+bool wxDC_StartDoc(wxDC* self, dstr message)
 {
-	return self->StartDoc(wxString(message, wxConvUTF8));
+	return self->StartDoc(wxString(message.data, wxConvUTF8, message.length));
 }
 
 //-----------------------------------------------------------------------------
@@ -428,17 +432,17 @@ void wxDC_GetClippingBox2(wxDC* self, wxRect* rect)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxDC_GetMultiLineTextExtent(wxDC* self, const char* text, int *width, int *height, int *heightLine, wxFont* font)
+void wxDC_GetMultiLineTextExtent(wxDC* self, dstr text, int *width, int *height, int *heightLine, wxFont* font)
 {
-	self->GetMultiLineTextExtent(wxString(text, wxConvUTF8), width, height, heightLine, font);
+	self->GetMultiLineTextExtent(wxString(text.data, wxConvUTF8, text.length), width, height, heightLine, font);
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxDC_GetPartialTextExtents(wxDC* self, const char* text, wxArrayInt* widths)
+bool wxDC_GetPartialTextExtents(wxDC* self, dstr text, wxArrayInt* widths)
 {
-	return self->GetPartialTextExtents(wxString(text, wxConvUTF8), *widths);
+	return self->GetPartialTextExtents(wxString(text.data, wxConvUTF8, text.length), *widths);
 }
 
 //-----------------------------------------------------------------------------

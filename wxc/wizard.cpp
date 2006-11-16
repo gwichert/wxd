@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - wizard.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - wizard.cxx
 //
 // The wxWizard proxy interface.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/wizard.h>
 #include "local_events.h"
 
@@ -30,7 +34,7 @@ public:
 // C stubs for class methods
 
 extern "C" WXEXPORT
-wxWizard* wxWizard_ctor(wxWindow* parent, int id, const char* title, const wxBitmap* bitmap, const wxPoint* pos)
+wxWizard* wxWizard_ctor(wxWindow* parent, int id, dstr title, const wxBitmap* bitmap, const wxPoint* pos)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -38,7 +42,7 @@ wxWizard* wxWizard_ctor(wxWindow* parent, int id, const char* title, const wxBit
 	if (bitmap == NULL)
 		bitmap = &wxNullBitmap;
 
-	return new _Wizard(parent, id, wxString(title, wxConvUTF8), *bitmap, *pos);
+	return new _Wizard(parent, id, wxString(title.data, wxConvUTF8, title.length), *bitmap, *pos);
 }
 
 //-----------------------------------------------------------------------------

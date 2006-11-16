@@ -1,4 +1,7 @@
 //------------------------------------------------------------------------
+// wxD - Display.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - Display.cs
 // 
 // Michael S. Muegel mike _at_ muegel dot org
@@ -21,35 +24,34 @@
 //      you be expecting them to match.
 //------------------------------------------------------------------------
 
-#if WXNET_DISPLAY
+module wx.Display;
+import wx.common;
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+version(WXNET_DISPLAY){
 
-namespace wx
-{
-	public class Display : Object
-	{
-		[DllImport("wx-c")] static extern IntPtr wxDisplay_ctor(int index);
-		[DllImport("wx-c")] static extern IntPtr wxDisplay_ctor(ref VideoMode mode);
-		[DllImport("wx-c")] static extern int wxDisplay_GetCount();
-		[DllImport("wx-c")] static extern int wxDisplay_GetFromPoint(ref Point pt);
-		[DllImport("wx-c")] static extern int wxDisplay_GetFromWindow(IntPtr window);
-		[DllImport("wx-c")] static extern void wxDisplay_GetGeometry(IntPtr self, out Rectangle rect);
-		[DllImport("wx-c")] static extern IntPtr wxDisplay_GetName(IntPtr self);
-		[DllImport("wx-c")] static extern bool wxDisplay_IsPrimary(IntPtr self);
-		[DllImport("wx-c")] static extern void wxDisplay_GetCurrentMode(IntPtr self, out VideoMode mode);
-		[DllImport("wx-c")] static extern bool wxDisplay_ChangeMode(IntPtr self, VideoMode mode);
+import wx.VideoMode;
+
+		static extern (C) IntPtr wxDisplay_ctor(int index);
+		static extern (C) IntPtr wxDisplay_ctor(inout VideoMode mode);
+		static extern (C) int wxDisplay_GetCount();
+		static extern (C) int wxDisplay_GetFromPoint(inout Point pt);
+		static extern (C) int wxDisplay_GetFromWindow(IntPtr window);
+		static extern (C) void wxDisplay_GetGeometry(IntPtr self, out Rectangle rect);
+		static extern (C) IntPtr wxDisplay_GetName(IntPtr self);
+		static extern (C) bool wxDisplay_IsPrimary(IntPtr self);
+		static extern (C) void wxDisplay_GetCurrentMode(IntPtr self, out VideoMode mode);
+		static extern (C) bool wxDisplay_ChangeMode(IntPtr self, VideoMode mode);
 
 
-		[DllImport("wx-c")] static extern int wxDisplay_GetNumModes(IntPtr self, VideoMode mode);
-		[DllImport("wx-c")] static extern void wxDisplay_GetModes(IntPtr self, VideoMode mode, [In, Out] VideoMode[] modes);
+		static extern (C) int wxDisplay_GetNumModes(IntPtr self, VideoMode mode);
+		static extern (C) void wxDisplay_GetModes(IntPtr self, VideoMode mode, inout VideoMode[] modes);
 
 		
-		[DllImport("wx-c")] static extern void wxDisplay_ResetMode(IntPtr self);
-		[DllImport("wx-c")] static extern void wxDisplay_dtor(IntPtr self);
+		static extern (C) void wxDisplay_ResetMode(IntPtr self);
+		static extern (C) void wxDisplay_dtor(IntPtr self);
 
+	public class Display : wxObject
+	{
 		//------------------------------------------------------------------------
 
 		// Symbolic constant used by all Find()-like functions returning positive
@@ -60,28 +62,26 @@ namespace wx
 		
 		//------------------------------------------------------------------------
 		
-		public Display(IntPtr wxObject)
-			: base(wxObject)
+		public this(IntPtr wxobj)
 		{ 
-			this.wxObject = wxObject;
+			super(wxobj);
 		}
 			
-		internal Display(IntPtr wxObject, bool memOwn)
-			: base(wxObject)
+		private this(IntPtr wxobj, bool memOwn)
 		{ 
+			super(wxobj);
 			this.memOwn = memOwn;
-			this.wxObject = wxObject;
 		}
 
 		//------------------------------------------------------------------------
 
-		public Display(int index)
-			: this(wxDisplay_ctor(index), true) { }
+		public this(int index)
+			{ this(wxDisplay_ctor(index), true); }
 
 		//------------------------------------------------------------------------
 
-		public Display(VideoMode mode)
-			: this(wxDisplay_ctor(ref mode), true) { }
+		public this(VideoMode mode)
+			{ this(wxDisplay_ctor(mode), true); }
 			
 		//---------------------------------------------------------------------
 				
@@ -89,41 +89,39 @@ namespace wx
 		{
 			if (!disposed)
 			{
-				if (wxObject != IntPtr.Zero)
+				if (wxobj != IntPtr.init)
 				{
 					if (memOwn)
 					{
-						wxDisplay_dtor(wxObject);
+						wxDisplay_dtor(wxobj);
 						memOwn = false;
 					}
 				}
-				RemoveObject(wxObject);
-				wxObject = IntPtr.Zero;
+				RemoveObject(wxobj);
+				wxobj = IntPtr.init;
 				disposed= true;
 			}
 			
-			base.Dispose();
-			GC.SuppressFinalize(this);
+			super.Dispose();
+			//GC.SuppressFinalize(this);
 		}
 		
 		//---------------------------------------------------------------------
 		
-		~Display() 
+		~this() 
 		{
 			Dispose();
 		}
 
 		//------------------------------------------------------------------------
-		public static int Count
-		{
-			get { return wxDisplay_GetCount(); }
-		}
+		static int Count() { return wxDisplay_GetCount(); }
 
 		// an array of all Displays indexed by display number
 		public static Display[] GetDisplays()
 		{
-			Display[] displays = new Display[Count];
-			for (int i = 0; i < Count; i++)
+			int count = Count;
+			Display[] displays = new Display[count];
+			for (int i = 0; i < count; i++)
 			{
 				displays[i] = new Display(i);
 			}
@@ -132,7 +130,7 @@ namespace wx
 
 		//------------------------------------------------------------------------
 		// An array of available VideoModes for this display.
-		virtual public VideoMode[] GetModes()
+		/+virtual+/ public VideoMode[] GetModes()
 		{
 			return GetModes(new VideoMode(0,0,0,0));
 		}
@@ -140,11 +138,11 @@ namespace wx
 		// An array of the VideoModes that match mode. A match occurs when
 		// the resolution and depth matches and the refresh frequency in 
 		// equal to or greater than mode.RefreshFrequency.
-		virtual public VideoMode[] GetModes(VideoMode mode)
+		/+virtual+/ public VideoMode[] GetModes(VideoMode mode)
 		{
-			int num_modes = wxDisplay_GetNumModes(wxObject, mode);
+			int num_modes = wxDisplay_GetNumModes(wxobj, mode);
 			VideoMode[] modes = new VideoMode[num_modes];
-			wxDisplay_GetModes(wxObject, mode, modes);
+			wxDisplay_GetModes(wxobj, mode, modes);
 			return modes;
 		}
 
@@ -153,77 +151,65 @@ namespace wx
 
 		public static int GetFromPoint(Point pt)
 		{
-			return wxDisplay_GetFromPoint(ref pt);
+			return wxDisplay_GetFromPoint(pt);
 		}
 
 		//------------------------------------------------------------------------
 
-		virtual public int GetFromWindow(Window window)
+		/+virtual+/ public int GetFromWindow(Window window)
 		{
-			#if __WXMSW__
-				return wxDisplay_GetFromWindow(Object.SafePtr(window));
-			#else
+			version(__WXMSW__){
+				return wxDisplay_GetFromWindow(wxObject.SafePtr(window));
+			} else {
 				throw new ApplicationException("Display.GetFromWindow is only available on WIN32");
-			#endif
+			} // version(__WXMSW__)
 		}
 
 		//------------------------------------------------------------------------
 
-		virtual public Rectangle Geometry
+		/+virtual+/ public Rectangle Geometry()
 		{
-			get 
-			{
-				Rectangle rect = new Rectangle();
-				wxDisplay_GetGeometry(wxObject, out rect);
-				return rect;
-			}
+			Rectangle rect;
+			wxDisplay_GetGeometry(wxobj, rect);
+			return rect;
 		}
 
 		//------------------------------------------------------------------------
 
-		virtual public string Name
+		/+virtual+/ public string Name()
 		{
-			get 
-			{
-				return new wxString(wxDisplay_GetName(wxObject), true);
-			}
+			return wxDisplay_GetName(wxobj).dup;
 		}
 
 		//------------------------------------------------------------------------
 
-		virtual public bool IsPrimary
+		/+virtual+/ public bool IsPrimary()
 		{
-			get 
-			{ 
-				return wxDisplay_IsPrimary(wxObject);
-			}
+			return wxDisplay_IsPrimary(wxobj);
 		}
 
 		//------------------------------------------------------------------------
 
 
-		virtual public VideoMode CurrentMode
+		/+virtual+/ public VideoMode CurrentMode()
 		{
-			get
-			{
-				VideoMode mode;
-				wxDisplay_GetCurrentMode(wxObject, out mode);
-				return mode;
-			}
+			VideoMode mode;
+			wxDisplay_GetCurrentMode(wxobj, mode);
+			return mode;
 		}
 
 		//------------------------------------------------------------------------
 
-		virtual public bool ChangeMode(VideoMode mode)
+		/+virtual+/ public bool ChangeMode(VideoMode mode)
 		{
-			return wxDisplay_ChangeMode(wxObject, mode);
+			return wxDisplay_ChangeMode(wxobj, mode);
 		}
 
 		//------------------------------------------------------------------------
 
-		virtual public void ResetMode()
+		/+virtual+/ public void ResetMode()
 		{
-			wxDisplay_ResetMode(wxObject);
+			wxDisplay_ResetMode(wxobj);
 		}
 
 		//------------------------------------------------------------------------
@@ -231,5 +217,3 @@ namespace wx
 	}
 
 }
-
-#endif

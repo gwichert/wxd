@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - FontMapper.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - FontMapper.cs
 //
 // The wxFontMapper wrapper class.
@@ -10,136 +13,107 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.FontMisc;
+import wx.common;
+import wx.Font;
+import wx.Window;
+import wx.ArrayString;
 
-namespace wx
-{
-	public class FontMapper : Object
+		static extern (C) IntPtr wxFontMapper_ctor();
+		static extern (C) void   wxFontMapper_dtor(IntPtr self);
+		
+		static extern (C) IntPtr wxFontMapper_Get();
+		static extern (C) IntPtr wxFontMapper_Set(IntPtr mapper);
+		static extern (C) int    wxFontMapper_GetSupportedEncodingsCount();
+		static extern (C) int    wxFontMapper_GetEncoding(int n);
+		static extern (C) string wxFontMapper_GetEncodingName(int encoding);
+		static extern (C) string wxFontMapper_GetEncodingDescription(int encoding);
+		static extern (C) int    wxFontMapper_GetEncodingFromName(string name);
+		
+		static extern (C) int    wxFontMapper_CharsetToEncoding(IntPtr self, string charset, bool interactive);
+		static extern (C) bool   wxFontMapper_IsEncodingAvailable(IntPtr self, int encoding, string facename);
+		static extern (C) bool   wxFontMapper_GetAltForEncoding(IntPtr self, int encoding, out int alt_encoding, string facename, bool interactive);
+		
+		static extern (C) void   wxFontMapper_SetDialogParent(IntPtr self, IntPtr parent);
+		static extern (C) void   wxFontMapper_SetDialogTitle(IntPtr self, string title);
+		
+		//---------------------------------------------------------------------
+		
+	public class FontMapper : wxObject
 	{
-		[DllImport("wx-c")] static extern IntPtr wxFontMapper_ctor();
-		[DllImport("wx-c")] static extern void   wxFontMapper_dtor(IntPtr self);
+		private static FontMapper staticFontMapper;
 		
-		[DllImport("wx-c")] static extern IntPtr wxFontMapper_Get();
-		[DllImport("wx-c")] static extern IntPtr wxFontMapper_Set(IntPtr mapper);
-		[DllImport("wx-c")] static extern int    wxFontMapper_GetSupportedEncodingsCount();
-		[DllImport("wx-c")] static extern int    wxFontMapper_GetEncoding(int n);
-		[DllImport("wx-c")] static extern IntPtr wxFontMapper_GetEncodingName(int encoding);
-		[DllImport("wx-c")] static extern IntPtr wxFontMapper_GetEncodingDescription(int encoding);
-		[DllImport("wx-c")] static extern int    wxFontMapper_GetEncodingFromName(string name);
-		
-		[DllImport("wx-c")] static extern int    wxFontMapper_CharsetToEncoding(IntPtr self, string charset, bool interactive);
-		[DllImport("wx-c")] static extern bool   wxFontMapper_IsEncodingAvailable(IntPtr self, int encoding, string facename);
-		[DllImport("wx-c")] static extern bool   wxFontMapper_GetAltForEncoding(IntPtr self, int encoding, out int alt_encoding, string facename, bool interactive);
-		
-		[DllImport("wx-c")] static extern void   wxFontMapper_SetDialogParent(IntPtr self, IntPtr parent);
-		[DllImport("wx-c")] static extern void   wxFontMapper_SetDialogTitle(IntPtr self, string title);
-		
-		//---------------------------------------------------------------------
-		
-		private static FontMapper staticFontMapper = new FontMapper(wxFontMapper_Get());
-		
-		//---------------------------------------------------------------------
-		
-		public FontMapper(IntPtr wxObject)
-			: base(wxObject) 
+		static this()
 		{
-			this.wxObject = wxObject;
+			staticFontMapper = new FontMapper(wxFontMapper_Get());
+		}
+		
+		//---------------------------------------------------------------------
+		
+		public this(IntPtr wxobj)
+		{
+			super(wxobj);
 		}
 			
-		internal FontMapper(IntPtr wxObject, bool memOwn)
-			: base(wxObject)
+		private this(IntPtr wxobj, bool memOwn)
 		{ 
+			super(wxobj);
 			this.memOwn = memOwn;
-			this.wxObject = wxObject;
 		}
 			
-		public FontMapper()
-			: this(wxFontMapper_ctor(), true) {}
+		public this()
+			{ this(wxFontMapper_ctor(), true);}
 			
 		//---------------------------------------------------------------------
 				
-		public override void Dispose()
-		{
-			if (!disposed)
-			{
-				if (wxObject != IntPtr.Zero)
-				{
-					if (memOwn)
-					{
-						wxFontMapper_dtor(wxObject);
-						memOwn = false;
-					}
-				}
-				RemoveObject(wxObject);
-				wxObject = IntPtr.Zero;
-				disposed= true;
-			}
-			
-			base.Dispose();
-			GC.SuppressFinalize(this);
-		}
-		
-		//---------------------------------------------------------------------
-		
-		~FontMapper() 
-		{
-			Dispose();
-		}
+		override private void dtor() { wxFontMapper_dtor(wxobj); }
 			
 		//---------------------------------------------------------------------
 		
-		public static FontMapper Get
-		{
-			get { return staticFontMapper; }
-		}
+		static FontMapper Get() { return staticFontMapper; }
 		
 		//---------------------------------------------------------------------
 		
 		public static FontMapper Set(FontMapper mapper)
 		{
-			return new FontMapper(wxFontMapper_Set(Object.SafePtr(mapper)));
+			return new FontMapper(wxFontMapper_Set(wxObject.SafePtr(mapper)));
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public static int SupportedEncodingsCount
-		{
-			get { return wxFontMapper_GetSupportedEncodingsCount(); }
-		}
+		static int SupportedEncodingsCount() { return wxFontMapper_GetSupportedEncodingsCount(); }
 		
 		//---------------------------------------------------------------------
 		
 		public static FontEncoding GetEncoding(int n)
 		{
-			return (FontEncoding)wxFontMapper_GetEncoding(n);
+			return cast(FontEncoding)wxFontMapper_GetEncoding(n);
 		}
 		
 		//---------------------------------------------------------------------
 		
 		public static string GetEncodingName(FontEncoding encoding)
 		{
-			return new wxString(wxFontMapper_GetEncodingName((int)encoding), true);
+			return wxFontMapper_GetEncodingName(cast(int)encoding).dup;
 		}
 		
 		//---------------------------------------------------------------------
 		
 		public static FontEncoding GetEncodingFromName(string name)
 		{
-			return (FontEncoding)wxFontMapper_GetEncodingFromName(name);
+			return cast(FontEncoding)wxFontMapper_GetEncodingFromName(name);
 		}
 		
 		//---------------------------------------------------------------------
 		
 		public FontEncoding CharsetToEncoding(string charset)
 		{
-			return (FontEncoding)CharsetToEncoding(charset, true);
+			return cast(FontEncoding)CharsetToEncoding(charset, true);
 		}
 		
 		public FontEncoding CharsetToEncoding(string charset, bool interactive)
 		{
-			return (FontEncoding)wxFontMapper_CharsetToEncoding(wxObject, charset, interactive);
+			return cast(FontEncoding)wxFontMapper_CharsetToEncoding(wxobj, charset, interactive);
 		}
 		
 		//---------------------------------------------------------------------
@@ -151,54 +125,57 @@ namespace wx
 		
 		public bool IsEncodingAvailable(FontEncoding encoding, string facename)
 		{
-			return wxFontMapper_IsEncodingAvailable(wxObject, (int)encoding, facename);
+			return wxFontMapper_IsEncodingAvailable(wxobj, cast(int)encoding, facename);
 		}
 		
 		//---------------------------------------------------------------------
 		
 		public bool GetAltForEncoding(FontEncoding encoding, out FontEncoding alt_encoding)
 		{
-			return GetAltForEncoding(encoding, out alt_encoding, "", true);
+			return GetAltForEncoding(encoding, alt_encoding, "", true);
 		}
 		
 		public bool GetAltForEncoding(FontEncoding encoding, out FontEncoding alt_encoding, string facename)
 		{
-			return GetAltForEncoding(encoding, out alt_encoding, facename, true);
+			return GetAltForEncoding(encoding, alt_encoding, facename, true);
 		}
 		
 		public bool GetAltForEncoding(FontEncoding encoding, out FontEncoding alt_encoding, string facename, bool interactive)
 		{
-			int alt_tmp;
-			bool result = wxFontMapper_GetAltForEncoding(wxObject, (int)encoding, out alt_tmp, facename, interactive);
-			alt_encoding = (FontEncoding)alt_tmp;
-			return result;
+			return wxFontMapper_GetAltForEncoding(wxobj, cast(int)encoding, alt_encoding, facename, interactive);
 		}
 		
 		//---------------------------------------------------------------------
 		
 		public static string GetEncodingDescription(FontEncoding encoding)
 		{
-			return new wxString(wxFontMapper_GetEncodingDescription((int)encoding), true);
+			return wxFontMapper_GetEncodingDescription(cast(int)encoding).dup;
 		}
 		
 		//---------------------------------------------------------------------
 		
 		public void SetDialogParent(Window parent)
 		{
-			wxFontMapper_SetDialogParent(wxObject, Object.SafePtr(parent));
+			wxFontMapper_SetDialogParent(wxobj, wxObject.SafePtr(parent));
 		}
 		
 		//---------------------------------------------------------------------
 		
 		public void SetDialogTitle(string title)
 		{
-			wxFontMapper_SetDialogTitle(wxObject, title);
+			wxFontMapper_SetDialogTitle(wxobj, title);
 		}
 	}
 	
 	//---------------------------------------------------------------------
 	
-	public class EncodingConverter : Object
+		static extern (C) IntPtr wxEncodingConverter_ctor();
+		static extern (C) bool wxEncodingConverter_Init(IntPtr self, int input_enc, int output_enc, int method);
+		static extern (C) string wxEncodingConverter_Convert(IntPtr self, string input);
+		
+		//---------------------------------------------------------------------
+		
+	public class EncodingConverter : wxObject
 	{
 		enum CONVERT
 		{
@@ -206,197 +183,155 @@ namespace wx
 			 wxCONVERT_SUBSTITUTE
 		}
 		
-		[DllImport("wx-c")] static extern IntPtr wxEncodingConverter_ctor();
-		[DllImport("wx-c")] static extern bool wxEncodingConverter_Init(IntPtr self, int input_enc, int output_enc, int method);
-		[DllImport("wx-c")] static extern IntPtr wxEncodingConverter_Convert(IntPtr self, string input);
-		
-		//---------------------------------------------------------------------
-		
-		public EncodingConverter(IntPtr wxObject)
-			: base(wxObject) {}
+		public this(IntPtr wxobj)
+			{ super(wxobj);}
 			
-		public EncodingConverter()
-			: base(wxEncodingConverter_ctor()) {}
+		public this()
+			{ super(wxEncodingConverter_ctor());}
 			
 		//---------------------------------------------------------------------
 		
 		public bool Init(FontEncoding input_enc, FontEncoding output_enc)
 		{
-			return Init(input_enc, output_enc, (int)CONVERT.wxCONVERT_STRICT);
+			return Init(input_enc, output_enc, cast(int)CONVERT.wxCONVERT_STRICT);
 		}
 		
 		public bool Init(FontEncoding input_enc, FontEncoding output_enc, int method)
 		{
-			return wxEncodingConverter_Init(wxObject, (int)input_enc, (int)output_enc, method);
+			return wxEncodingConverter_Init(wxobj, cast(int)input_enc, cast(int)output_enc, method);
 		}
 		
 		//---------------------------------------------------------------------
 		
 		public string Convert(string input)
 		{
-			return new wxString(wxEncodingConverter_Convert(wxObject, input), true);
+			return wxEncodingConverter_Convert(wxobj, input).dup;
 		}
 	}
 	
 	//---------------------------------------------------------------------
 	
-	public class FontEnumerator : Object
-	{
-		private delegate bool Virtual_EnumerateFacenames(int encoding, bool fixedWidthOnly);
-		private delegate bool Virtual_EnumerateEncodings(IntPtr facename);
-		private delegate bool Virtual_OnFacename(IntPtr facename);
-		private delegate bool Virtual_OnFontEncoding(IntPtr facename, IntPtr encoding);
+		extern (C) {
+		alias bool function(FontEnumerator obj, int encoding, bool fixedWidthOnly) Virtual_EnumerateFacenames;
+		alias bool function(FontEnumerator obj, string facename) Virtual_EnumerateEncodings;
+		alias bool function(FontEnumerator obj, string facename) Virtual_OnFacename;
+		alias bool function(FontEnumerator obj, string facename, string encoding) Virtual_OnFontEncoding;
+		}
 
-		private Virtual_EnumerateFacenames virtual_EnumerateFacenames;
-		private Virtual_EnumerateEncodings virtual_EnumerateEncodings;
-		private Virtual_OnFacename virtual_OnFacename;
-		private Virtual_OnFontEncoding virtual_OnFontEncoding;
-		
-		[DllImport("wx-c")] static extern IntPtr wxFontEnumerator_ctor();
-		[DllImport("wx-c")] static extern void wxFontEnumerator_dtor(IntPtr self);
-		[DllImport("wx-c")] static extern void wxFontEnumerator_RegisterVirtual(IntPtr self, Virtual_EnumerateFacenames enumerateFacenames, Virtual_EnumerateEncodings enumerateEncodings, Virtual_OnFacename onFacename, Virtual_OnFontEncoding onFontEncoding);
-		[DllImport("wx-c")] static extern IntPtr wxFontEnumerator_GetFacenames(IntPtr self);
-		[DllImport("wx-c")] static extern IntPtr wxFontEnumerator_GetEncodings(IntPtr self);
-		[DllImport("wx-c")] static extern bool wxFontEnumerator_OnFacename(IntPtr self, string facename);
-		[DllImport("wx.c")] static extern bool wxFontEnumerator_OnFontEncoding(IntPtr self, string facename, string encoding);
-		[DllImport("wx-c")] static extern bool wxFontEnumerator_EnumerateFacenames(IntPtr self, int encoding, bool fixedWidthOnly);
-		[DllImport("wx-c")] static extern bool wxFontEnumerator_EnumerateEncodings(IntPtr self, string facename);
+		static extern (C) IntPtr wxFontEnumerator_ctor();
+		static extern (C) void wxFontEnumerator_dtor(IntPtr self);
+		static extern (C) void wxFontEnumerator_RegisterVirtual(IntPtr self, FontEnumerator obj,Virtual_EnumerateFacenames enumerateFacenames, Virtual_EnumerateEncodings enumerateEncodings, Virtual_OnFacename onFacename, Virtual_OnFontEncoding onFontEncoding);
+		static extern (C) IntPtr wxFontEnumerator_GetFacenames(IntPtr self);
+		static extern (C) IntPtr wxFontEnumerator_GetEncodings(IntPtr self);
+		static extern (C) bool wxFontEnumerator_OnFacename(IntPtr self, string facename);
+		static extern (C) bool wxFontEnumerator_OnFontEncoding(IntPtr self, string facename, string encoding);
+		static extern (C) bool wxFontEnumerator_EnumerateFacenames(IntPtr self, int encoding, bool fixedWidthOnly);
+		static extern (C) bool wxFontEnumerator_EnumerateEncodings(IntPtr self, string facename);
 		
 		//---------------------------------------------------------------------
 		
-		public FontEnumerator()
-			: this(wxFontEnumerator_ctor(), true) 
+	public class FontEnumerator : wxObject
+	{
+		public this()
 		{
-			virtual_EnumerateFacenames = new Virtual_EnumerateFacenames(DoEnumerateFacenames);
-			virtual_EnumerateEncodings = new Virtual_EnumerateEncodings(DoEnumerateEncodings);
-			virtual_OnFacename = new Virtual_OnFacename(DoOnFacename);
-			virtual_OnFontEncoding = new Virtual_OnFontEncoding(DoOnFontEncoding);
+			this(wxFontEnumerator_ctor(), true);
 
-			wxFontEnumerator_RegisterVirtual(wxObject,
-				virtual_EnumerateFacenames,
-				virtual_EnumerateEncodings,
-				virtual_OnFacename,
-				virtual_OnFontEncoding);			
+			wxFontEnumerator_RegisterVirtual(wxobj,this,
+				&staticDoEnumerateFacenames,
+				&staticDoEnumerateEncodings,
+				&staticDoOnFacename,
+				&staticDoOnFontEncoding);			
 		}
 		
-		public FontEnumerator(IntPtr wxObject)
-			: base(wxObject) 
+		public this(IntPtr wxobj)
 		{
-			this.wxObject = wxObject;
+			super(wxobj);
 		}
 		
-		internal FontEnumerator(IntPtr wxObject, bool memOwn)
-			: base(wxObject)
+		private this(IntPtr wxobj, bool memOwn)
 		{ 
+			super(wxobj);
 			this.memOwn = memOwn;
-			this.wxObject = wxObject;
 		}
 		
 		//---------------------------------------------------------------------
 				
-		public override void Dispose()
-		{
-			if (!disposed)
-			{
-				if (wxObject != IntPtr.Zero)
-				{
-					if (memOwn)
-					{
-						wxFontEnumerator_dtor(wxObject);
-						memOwn = false;
-					}
-				}
-				RemoveObject(wxObject);
-				wxObject = IntPtr.Zero;
-				disposed= true;
-			}
-			
-			base.Dispose();
-			GC.SuppressFinalize(this);
-		}
-		
-		//---------------------------------------------------------------------
-		
-		~FontEnumerator() 
-		{
-			Dispose();
-		}
+		override private void dtor() { wxFontEnumerator_dtor(wxobj); }
 			
 		//---------------------------------------------------------------------
 		
-		public string[] Facenames
+		public string[] Facenames()
 		{
-			get { return new ArrayString(wxFontEnumerator_GetFacenames(wxObject), true); }
+			return (new ArrayString(wxFontEnumerator_GetFacenames(wxobj), true)).toArray();
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public string[] Encodings
+		public string[] Encodings()
 		{
-			get { return new ArrayString(wxFontEnumerator_GetEncodings(wxObject), true); }
+			return (new ArrayString(wxFontEnumerator_GetEncodings(wxobj), true)).toArray();
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public virtual bool OnFacename(string facename)
+		public /+virtual+/ bool OnFacename(string facename)
 		{
-			return wxFontEnumerator_OnFacename(wxObject, facename);
+			return wxFontEnumerator_OnFacename(wxobj, facename);
 		}
 		
-		private bool DoOnFacename(IntPtr facename)
+		extern(C) private static bool staticDoOnFacename(FontEnumerator obj, string facename)
 		{
-			return OnFacename(new wxString(facename));
-		}
-		
-		//---------------------------------------------------------------------
-		
-		public virtual bool OnFontEncoding(string facename, string encoding)
-		{
-			return wxFontEnumerator_OnFontEncoding(wxObject, facename, encoding);
-		}
-		
-		private bool DoOnFontEncoding(IntPtr facename, IntPtr encoding)
-		{
-			return OnFontEncoding(new wxString(facename), new wxString(encoding));
+			return obj.OnFacename(facename);
 		}
 		
 		//---------------------------------------------------------------------
 		
-		/*public virtual bool EnumerateFacenames()
+		public /+virtual+/ bool OnFontEncoding(string facename, string encoding)
 		{
-			return EnumerateFacenames((int)FontEncoding.wxFONTENCODING_SYSTEM, false);
+			return wxFontEnumerator_OnFontEncoding(wxobj, facename, encoding);
 		}
 		
-		public virtual bool EnumerateFacenames(FontEncoding encoding)
+		extern(C) private static bool staticDoOnFontEncoding(FontEnumerator obj, string facename, string encoding)
 		{
-			return EnumerateFacenames((int)encoding, false);
+			return obj.OnFontEncoding(facename, encoding);
+		}
+		
+		//---------------------------------------------------------------------
+		
+		/*public /+virtual+/ bool EnumerateFacenames()
+		{
+			return EnumerateFacenames(cast(int)FontEncoding.wxFONTENCODING_SYSTEM, false);
+		}
+		
+		public /+virtual+/ bool EnumerateFacenames(FontEncoding encoding)
+		{
+			return EnumerateFacenames(cast(int)encoding, false);
 		}*/
 		
-		public virtual bool EnumerateFacenames(FontEncoding encoding, bool fixedWidthOnly)
+		public /+virtual+/ bool EnumerateFacenames(FontEncoding encoding, bool fixedWidthOnly)
 		{
-			return wxFontEnumerator_EnumerateFacenames(wxObject, (int)encoding, fixedWidthOnly);
+			return wxFontEnumerator_EnumerateFacenames(wxobj, cast(int)encoding, fixedWidthOnly);
 		}
 		
-		private bool DoEnumerateFacenames(int encoding, bool fixedWidthOnly)
+		extern(C) private static bool staticDoEnumerateFacenames(FontEnumerator obj, int encoding, bool fixedWidthOnly)
 		{
-			return EnumerateFacenames((FontEncoding)encoding, fixedWidthOnly);
+			return obj.EnumerateFacenames(cast(FontEncoding)encoding, fixedWidthOnly);
 		}
 		
 		//---------------------------------------------------------------------
 		
-		/*public virtual bool EnumerateEncodings()
+		/*public /+virtual+/ bool EnumerateEncodings()
 		{
-			return EnumerateEncodings(IntPtr.Zero);
+			return EnumerateEncodings(IntPtr.init);
 		}*/
 		
-		public virtual bool EnumerateEncodings(string facename)
+		public /+virtual+/ bool EnumerateEncodings(string facename)
 		{
-			return wxFontEnumerator_EnumerateEncodings(wxObject, facename);
+			return wxFontEnumerator_EnumerateEncodings(wxobj, facename);
 		}
 		
-		private bool DoEnumerateEncodings(IntPtr facename)
+		extern(C) private static bool staticDoEnumerateEncodings(FontEnumerator obj, string facename)
 		{
-			return EnumerateEncodings(new wxString(facename));
+			return obj.EnumerateEncodings(facename);
 		}
 	}
-}

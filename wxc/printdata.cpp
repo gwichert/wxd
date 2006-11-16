@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - printdata.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - printdata.cxx
 //
 // The wxPrint data classes proxy interface.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/cmndata.h>
 
 //-----------------------------------------------------------------------------
@@ -612,9 +616,9 @@ bool wxPrintData_Ok(wxPrintData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxPrintData_GetPrinterName(wxPrintData* self)
+dstr wxPrintData_GetPrinterName(wxPrintData* self)
 {
-    return new wxString(self->GetPrinterName());
+    return dstr(self->GetPrinterName());
 }
 
 //-----------------------------------------------------------------------------
@@ -684,9 +688,9 @@ void wxPrintData_SetOrientation(wxPrintData* self, int orient)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrintData_SetPrinterName(wxPrintData* self, char* name)
+void wxPrintData_SetPrinterName(wxPrintData* self, dstr name)
 {
-    self->SetPrinterName(wxString(name, wxConvUTF8));
+    self->SetPrinterName(wxString(name.data, wxConvUTF8, name.length));
 }
 
 //-----------------------------------------------------------------------------
@@ -732,41 +736,41 @@ void wxPrintData_SetQuality(wxPrintData* self, wxPrintQuality quality)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxPrintData_GetPrinterCommand(wxPrintData* self)
+dstr wxPrintData_GetPrinterCommand(wxPrintData* self)
 {
-    return new wxString(self->GetPrinterCommand());
+    return dstr(self->GetPrinterCommand());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxPrintData_GetPrinterOptions(wxPrintData* self)
+dstr wxPrintData_GetPrinterOptions(wxPrintData* self)
 {
-    return new wxString(self->GetPrinterOptions());
+    return dstr(self->GetPrinterOptions());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxPrintData_GetPreviewCommand(wxPrintData* self)
+dstr wxPrintData_GetPreviewCommand(wxPrintData* self)
 {
-    return new wxString(self->GetPreviewCommand());
+    return dstr(self->GetPreviewCommand());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxPrintData_GetFilename(wxPrintData* self)
+dstr wxPrintData_GetFilename(wxPrintData* self)
 {
-    return new wxString(self->GetFilename());
+    return dstr(self->GetFilename());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxPrintData_GetFontMetricPath(wxPrintData* self)
+dstr wxPrintData_GetFontMetricPath(wxPrintData* self)
 {
-    return new wxString(self->GetFontMetricPath());
+    return dstr(self->GetFontMetricPath());
 }
 
 //-----------------------------------------------------------------------------
@@ -812,41 +816,41 @@ wxPrintMode wxPrintData_GetPrintMode(wxPrintData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrintData_SetPrinterCommand(wxPrintData* self, char* command)
+void wxPrintData_SetPrinterCommand(wxPrintData* self, dstr command)
 {
-    self->SetPrinterCommand(wxString(command, wxConvUTF8));
+    self->SetPrinterCommand(wxString(command.data, wxConvUTF8, command.length));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrintData_SetPrinterOptions(wxPrintData* self, char* options)
+void wxPrintData_SetPrinterOptions(wxPrintData* self, dstr options)
 {
-    self->SetPrinterOptions(wxString(options, wxConvUTF8));
+    self->SetPrinterOptions(wxString(options.data, wxConvUTF8, options.length));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrintData_SetPreviewCommand(wxPrintData* self, char* command)
+void wxPrintData_SetPreviewCommand(wxPrintData* self, dstr command)
 {
-    self->SetPreviewCommand(wxString(command, wxConvUTF8));
+    self->SetPreviewCommand(wxString(command.data, wxConvUTF8, command.length));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrintData_SetFilename(wxPrintData* self, char* filename)
+void wxPrintData_SetFilename(wxPrintData* self, dstr filename)
 {
-    self->SetFilename(wxString(filename, wxConvUTF8));
+    self->SetFilename(wxString(filename.data, wxConvUTF8, filename.length));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrintData_SetFontMetricPath(wxPrintData* self, char* path)
+void wxPrintData_SetFontMetricPath(wxPrintData* self, dstr path)
 {
-    self->SetFontMetricPath(wxString(path, wxConvUTF8));
+    self->SetFontMetricPath(wxString(path.data, wxConvUTF8, path.length));
 }
 
 //-----------------------------------------------------------------------------

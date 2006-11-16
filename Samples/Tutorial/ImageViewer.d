@@ -1,9 +1,6 @@
 
-using wx;
-using System.Drawing;
+import wx.wx;
 
-namespace ImageView
-{
     /**
      * A class to view an image.
      *
@@ -11,13 +8,13 @@ namespace ImageView
      */
     public class ImageViewer : ScrolledWindow
     {
-        private wx.Bitmap m_bitmap, m_defaultBmp;
+        private Bitmap m_bitmap, m_defaultBmp;
 
-        public ImageViewer(Window parent)
-            : base(parent)
+        public this(Window parent)
         {
+            super(parent);
             // Load a default image (logo)
-            m_defaultBmp = new wx.Bitmap("../Samples/Tutorial/ImageView.bmp", 
+            m_defaultBmp = new Bitmap("../Samples/Tutorial/ImageView.bmp", 
                                          BitmapType.wxBITMAP_TYPE_BMP);
 
             // Our panel will have a white background, the colour contructor
@@ -31,9 +28,8 @@ namespace ImageView
         /**
          * The bitmap to be displayed.
          */
-        public wx.Bitmap Bitmap
+        public void bitmap(Bitmap value)
         {
-            set { 
                 if (value == null) {
                     // Use the default
                     m_bitmap = m_defaultBmp;
@@ -48,7 +44,6 @@ namespace ImageView
 
                 // Redraw the window
                 Refresh();
-            }
         }
 
         /**
@@ -60,5 +55,4 @@ namespace ImageView
             dc.DrawBitmap(m_bitmap, 0, 0 , false);
         }
     }
-}
 

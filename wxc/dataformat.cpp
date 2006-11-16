@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - dataformat.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - dataformat.cxx
 // 
 // wxDataFormat proxy interface.
@@ -10,6 +13,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/dataobj.h>
 
 //-----------------------------------------------------------------------------
@@ -34,23 +38,23 @@ wxDataFormat* wxDataFormat_ctorByType(wxDataFormatId type)
 }
 
 extern "C" WXEXPORT
-wxDataFormat* wxDataFormat_ctorById(char* id)
+wxDataFormat* wxDataFormat_ctorById(dstr id)
 {
-    return new wxDataFormat(wxString(id, wxConvUTF8).c_str());
+    return new wxDataFormat(wxString(id.data, wxConvUTF8, id.length).c_str());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxDataFormat_GetId(wxDataFormat* self)
+dstr wxDataFormat_GetId(wxDataFormat* self)
 {
-    return new wxString(self->GetId());
+    return dstr(self->GetId());
 }
 
 extern "C" WXEXPORT
-void wxDataFormat_SetId(wxDataFormat* self, char* id)
+void wxDataFormat_SetId(wxDataFormat* self, dstr id)
 {
-    self->SetId(wxString(id, wxConvUTF8).c_str());
+    self->SetId(wxString(id.data, wxConvUTF8, id.length).c_str());
 }
 
 //-----------------------------------------------------------------------------

@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - calendarctrl.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - calendarctrl.cxx
 //
 // The wxCalendarCtrl proxy interface.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/calctrl.h>
 #include "local_events.h"
 
@@ -33,7 +37,7 @@ wxCalendarCtrl* wxCalendarCtrl_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxCalendarCtrl_Create(wxCalendarCtrl* self, wxWindow* parent, wxWindowID id, wxDateTime* date, const wxPoint* pos, const wxSize* size, int style, char* name)
+bool wxCalendarCtrl_Create(wxCalendarCtrl* self, wxWindow* parent, wxWindowID id, wxDateTime* date, const wxPoint* pos, const wxSize* size, int style, dstr name)
 {
     	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -41,10 +45,10 @@ bool wxCalendarCtrl_Create(wxCalendarCtrl* self, wxWindow* parent, wxWindowID id
 	if (size == NULL)
 		size = &wxDefaultSize;
 
-    if (name == NULL)
-        name = "calendarCtrl";
+    if (name.data==NULL)
+        name = dstr("calendarCtrl",sizeof("calendarCtrl")-1);
 
-    return self->Create(parent, id, *date, *pos, *size, style, wxString(name, wxConvUTF8))?1:0;
+    return self->Create(parent, id, *date, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -445,7 +449,7 @@ wxDateTime* wxCalendarEvent_GetDate(wxCalendarEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxDateTime::WeekDay GetWeekDay(wxCalendarEvent* self)
+wxDateTime::WeekDay wxCalendarEvent_GetWeekDay(wxCalendarEvent* self)
 {
     return self->GetWeekDay();
 }

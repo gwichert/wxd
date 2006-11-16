@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - EvtHandler.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - EvtHandler.cs
 //
 // The wxEvtHandler wrapper class.
@@ -15,24 +18,22 @@
 //		the same position of listeners. This is because of the clientdata
 //		that the event proxy gets...
 
-using System;
-using System.Collections;
-using System.Runtime.InteropServices;
+module wx.EvtHandler;
+import wx.common;
+import wx.Event;
 
-namespace wx
-{
-	public delegate void EventListener(object sender, Event e);
+	alias void delegate(Object sender, Event e) EventListener;
 	
 	//---------------------------------------------------------------------
-    
-	public struct SListener
+
+	public class SListener
 	{
 		public EventListener listener;
-		public Object owner;
+		public wxObject owner;
 		public int eventType;
 		public bool active;
 		
-		public SListener( EventListener listener, Object owner, int eventType )
+		public this( EventListener listener, wxObject owner, int eventType )
 		{
 			this.listener = listener;
 			this.owner = owner;
@@ -43,41 +44,51 @@ namespace wx
 	
 	//---------------------------------------------------------------------
 
-	public class EvtHandler : Object
+
+		extern (C) {
+		alias void function(EvtHandler obj,IntPtr wxEvent, int iListener) EvtMarshalDelegate;
+		}
+
+		struct clientdata {
+			EvtMarshalDelegate listener;
+			wxObject obj;
+		};
+		
+		static extern (C) void wxEvtHandler_proxy(IntPtr self, clientdata* data);
+		static extern (C) void wxEvtHandler_Connect(IntPtr self, int evtType, int id, int lastId, int iListener);
+		
+		static extern (C) bool wxEvtHandler_ProcessEvent(IntPtr self, IntPtr evt);
+		
+		static extern (C) void wxEvtHandler_AddPendingEvent(IntPtr self, IntPtr evt); 
+		
+
+	public class EvtHandler : wxObject
 	{
-		private delegate void EvtMarshalDelegate(IntPtr wxEvent, int iListener);
-		private EvtMarshalDelegate eventMarshal;
+		private SListener[] listeners;
 		
-		private ArrayList listeners;
-		
+		clientdata data;
 		//---------------------------------------------------------------------
 		
 		// We store hard references to event handlers, since wxWidgets will
 		// clean them up.
-		private static Hashtable evtHandlers = new Hashtable();
+		private static EvtHandler[IntPtr] evtHandlers;
 		
 		//---------------------------------------------------------------------
 			
-		[DllImport("wx-c")] static extern void wxEvtHandler_proxy(IntPtr self, EvtMarshalDelegate proxy);
-		[DllImport("wx-c")] static extern void wxEvtHandler_Connect(IntPtr self, int evtType, int id, int lastId, int iListener);
-		
-		[DllImport("wx-c")] static extern bool wxEvtHandler_ProcessEvent(IntPtr self, IntPtr evt);
-		
-		[DllImport("wx-c")] static extern void wxEvtHandler_AddPendingEvent(IntPtr self, IntPtr evt); 
-		
 		//---------------------------------------------------------------------
 
-		internal EvtHandler(IntPtr wxObject) 
-			: base(wxObject)
+		/*private*/public this(IntPtr wxobj) 
 		{
-			lock (typeof(EvtHandler))
+			super(wxobj);
+
+			data.obj = this;
+			data.listener = &staticMarshalEvent;
+
+		//	lock (typeid(EvtHandler))
 			{
-				eventMarshal = new EvtMarshalDelegate(MarshalEvent);
-				wxEvtHandler_proxy(wxObject, eventMarshal);
+				wxEvtHandler_proxy(wxobj, &data);
 				
-				listeners = new ArrayList();
-				
-				AddEventListener(Event.wxEVT_OBJECTDELETED, new EventListener(OnObjectDeleted));
+				AddEventListener(Event.wxEVT_OBJECTDELETED, &OnObjectDeleted);
 			
 				AddEvtHander(this);
 			}
@@ -85,9 +96,9 @@ namespace wx
 	
 		//---------------------------------------------------------------------
         
-		~EvtHandler()
+		~this()
 		{
-			RemoveEvtHandler(wxObject);
+			RemoveEvtHandler(wxobj);
 		}
 	
 		//---------------------------------------------------------------------
@@ -97,7 +108,7 @@ namespace wx
 			AddCommandRangeListener(eventType, id, -1, listener);
 		}
 		
-		public void AddCommandListener(int eventType, int id, EventListener listener, Object owner)
+		public void AddCommandListener(int eventType, int id, EventListener listener, wxObject owner)
 		{
 			AddCommandRangeListener(eventType, id, -1, listener, owner);
 		}
@@ -111,11 +122,11 @@ namespace wx
 			// delegate into C and back (.NET threw a runtime error, Mono
 			// crashed) so I pass the index into the listeners array instead.
 			// Works like a charm so far.
-			listeners.Add( new SListener(listener, null, eventType) );
-			wxEvtHandler_Connect(wxObject, eventType, id, lastId, listeners.Count - 1);
+			listeners ~= new SListener(listener, null, eventType);
+			wxEvtHandler_Connect(wxobj, eventType, id, lastId, listeners.length - 1);
 		}
 		
-		public void AddCommandRangeListener(int eventType, int id, int lastId, EventListener listener, Object owner)
+		public void AddCommandRangeListener(int eventType, int id, int lastId, EventListener listener, wxObject owner)
 		{
 			// I must keep a reference to the listener to prevent it from
 			// being garbage collected. I had trouble passing the listener
@@ -126,20 +137,16 @@ namespace wx
 			// first we check if the listener is already in listeners
 			// this can happen, when RemoveHandler gets called
 			// if found, just set active to true and return
-			foreach( SListener sl in listeners )
+			foreach( SListener sl;listeners )
 			{
-				if ( sl.owner == owner && sl.listener == listener && sl.eventType == eventType )
+				if ( sl.owner === owner && sl.listener == listener && sl.eventType == eventType )
 				{
-					int index = listeners.IndexOf(sl);
-					SListener tmpsl = sl;
-					tmpsl.active = true;
-					listeners[index] = tmpsl;
-					return;
+					sl.active = true;
 				}
 			}
 			
-			listeners.Add( new SListener(listener, owner, eventType) );
-			wxEvtHandler_Connect(wxObject, eventType, id, lastId, listeners.Count - 1);
+			listeners ~= new SListener(listener, owner, eventType);
+			wxEvtHandler_Connect(wxobj, eventType, id, lastId, listeners.length - 1);
 		}
 		
 		//---------------------------------------------------------------------
@@ -149,7 +156,7 @@ namespace wx
 			AddCommandRangeListener(eventType, -1, -1, listener);
 		}
 		
-		public void AddEventListener(int eventType, EventListener listener, Object owner)
+		public void AddEventListener(int eventType, EventListener listener, wxObject owner)
 		{
 			AddCommandRangeListener(eventType, -1, -1, listener, owner);
 		}
@@ -161,7 +168,7 @@ namespace wx
 			AddCommandListener(Event.wxEVT_COMMAND_MENU_SELECTED, id, listener);
 		}
 		
-		public void AddMenuListener(int id, EventListener listener, Object owner)
+		public void AddMenuListener(int id, EventListener listener, wxObject owner)
 		{
 			AddCommandListener(Event.wxEVT_COMMAND_MENU_SELECTED, id, listener, owner);
 		}
@@ -170,7 +177,7 @@ namespace wx
 	
 		public bool ProcessEvent(Event evt) 
 		{
-			return wxEvtHandler_ProcessEvent(wxObject, Object.SafePtr(evt));
+			return wxEvtHandler_ProcessEvent(wxobj, wxObject.SafePtr(evt));
 		}
 		
 		//---------------------------------------------------------------------
@@ -178,16 +185,13 @@ namespace wx
 		// flag to false, if it finds it in listeners.
 		// MarshalEvent then doesn't call the listener
 		
-		public bool RemoveHandler(EventListener listener, Object owner)
+		public bool RemoveHandler(EventListener listener, wxObject owner)
 		{
-			foreach( SListener sl in listeners )
+			foreach( SListener sl;listeners )
 			{
-				if ( sl.listener == listener && sl.owner == owner && sl.active )
+				if ( sl.listener == listener && sl.owner === owner && sl.active )
 				{
-					int index = listeners.IndexOf(sl);
-					SListener tmpsl = sl;
-					tmpsl.active = false;
-					listeners[index] = tmpsl;
+					sl.active = false;
 					return true;
 				}
 			}
@@ -199,7 +203,7 @@ namespace wx
 
 		public void AddPendingEvent(Event evt)
 		{
-			wxEvtHandler_AddPendingEvent(wxObject, Object.SafePtr(evt));
+			wxEvtHandler_AddPendingEvent(wxobj, wxObject.SafePtr(evt));
 		}
 	
 		//---------------------------------------------------------------------
@@ -208,31 +212,36 @@ namespace wx
 		// mapped to an actual Event type, and then the listener EventListener lsnrtion
 		// is called.
 	
+		static extern (C) private void staticMarshalEvent(EvtHandler obj, IntPtr wxEvent, int iListner)
+		{
+			obj.MarshalEvent(wxEvent,iListner);
+		}
 		private void MarshalEvent(IntPtr wxEvent, int iListener)
 		{
 			// Create an appropriate .NET wrapper for the event object
-				
+			
 			Event e = Event.CreateFrom(wxEvent);
 	
 			// Send it off to the registered listener
-			SListener listener = (SListener)listeners[iListener];
+			SListener listener = listeners[iListener];
 		
 			// only iterate through the list if listener.owner != null
 			// Only the new event system can handle more then one EventListener
 			// because the EventListener gets connected via its owner and not
 			// via a Frame, Dialog, etc...
-			if ( listener.owner != null )
+			if ( listener.owner !== null )
 			{
-				foreach ( SListener sl in listeners )
+				int i = 0;
+				foreach ( SListener sl;listeners )
 				{
 					// continue if listener equals sl, because it will be handled below
-					if ( listener.Equals( sl ) ) continue;
+					if ( listener == sl ) continue;
 				
 					// if there is the same object in the list with the same
 					// EventType then call its listener also
-					if ( sl.owner != null )
+					if ( sl.owner !== null )
 					{
-						if ( sl.owner.Equals( listener.owner ) && sl.eventType == listener.eventType )
+						if ( sl.owner === listener.owner && sl.eventType == listener.eventType )
 						{
 							if ( sl.active ) sl.listener(this, e);
 						}
@@ -248,28 +257,28 @@ namespace wx
 		// This handler is called whenever an object's associated C++ instance
 		// is deleted, so that any C# references can be cleaned up.
 
-		internal static void OnObjectDeleted(object sender, Event evt)
+		private /*static*/ void OnObjectDeleted(Object sender, Event evt)
 		{
 			RemoveEvtHandler(evt.EventIntPtr);
 		}
 
 		//---------------------------------------------------------------------
 
-		internal static void AddEvtHander(EvtHandler eh)
+		private static void AddEvtHander(EvtHandler eh)
 		{
-			if (eh.wxObject != IntPtr.Zero && !evtHandlers.ContainsKey(eh.wxObject)) 
+			if (eh.wxobj != IntPtr.init && !(eh.wxobj in evtHandlers)) 
 			{
-				evtHandlers.Add(eh.wxObject, eh);
+				evtHandlers[eh.wxobj] = eh;
 			}
 		}
 
-		internal static void RemoveEvtHandler(IntPtr ptr)
+		private static void RemoveEvtHandler(IntPtr ptr)
 		{
-			if ( ptr != IntPtr.Zero)
+			if ( ptr != IntPtr.init)
 			{
-				evtHandlers.Remove(ptr);
+				delete evtHandlers[ptr];
 				RemoveObject(ptr);
-				ptr = IntPtr.Zero;
+				ptr = IntPtr.init;
 			}
 		}
 
@@ -505,13 +514,12 @@ namespace wx
 		public void EVT_LISTBOOK_PAGE_CHANGING(int id, EventListener lsnr)
 		{ AddCommandListener(Event.wxEVT_COMMAND_LISTBOOK_PAGE_CHANGING, id, lsnr); }
 
-#if __WXMSW__
+version(__WXMSW__){
 		public void EVT_TAB_SEL_CHANGED(int id, EventListener lsnr)
 		{ AddCommandListener(Event.wxEVT_COMMAND_TAB_SEL_CHANGED, id, lsnr); }
 		public void EVT_TAB_SEL_CHANGING(int id, EventListener lsnr)
 		{ AddCommandListener(Event.wxEVT_COMMAND_TAB_SEL_CHANGING, id, lsnr); }
-#endif
-		
+}	
 		public void EVT_GRID_CELL_LEFT_CLICK(EventListener lsnr)
 			{ AddEventListener(Event.wxEVT_GRID_CELL_LEFT_CLICK, lsnr); }
 		public void EVT_GRID_CELL_RIGHT_CLICK(EventListener lsnr)
@@ -592,7 +600,7 @@ namespace wx
 			{ AddCommandListener(Event.wxEVT_DETAILED_HELP, id, lsnr); }
 
 
-#if WXNET_STYLEDTEXTCTRL
+version(WXNET_STYLEDTEXTCTRL){
 
 		// StyledTextCtrl specific events
 		
@@ -655,6 +663,6 @@ namespace wx
 		
 		public void EVT_STC_CALLTIP_CLICK(int id, EventListener lsnr)    
 			{ AddCommandListener(StyledTextCtrl.wxEVT_STC_CALLTIP_CLICK, id, lsnr); }			
-#endif
+} // version(WXNET_STYLEDTEXTCTRL)
+		public static wxObject New(IntPtr ptr) { return new EvtHandler(ptr); }
 	}
-}

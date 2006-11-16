@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - TextDialog.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - TextDialog.cs
 //
 // The wxTextEntryDialog wrapper class.
@@ -10,132 +13,74 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.TextDialog;
+import wx.common;
+import wx.Dialog;
 
-namespace wx
-{
+        static extern (C) IntPtr wxTextEntryDialog_ctor(IntPtr parent, string message, string caption, string value, uint style, inout Point pos);
+        static extern (C) void wxTextEntryDialog_dtor(IntPtr self);
+        static extern (C) void wxTextEntryDialog_SetValue(IntPtr self, string val);
+        static extern (C) string wxTextEntryDialog_GetValue(IntPtr self);
+        static extern (C) int wxTextEntryDialog_ShowModal(IntPtr self);
+
+        //-----------------------------------------------------------------------------
+
     public class TextEntryDialog : Dialog
     {
-        public const long wxTextEntryDialogStyle = (Dialog.wxOK | Dialog.wxCANCEL | Dialog.wxCENTRE );
+        public const int wxTextEntryDialogStyle = (Dialog.wxOK | Dialog.wxCANCEL | Dialog.wxCENTRE );
 
-        [DllImport("wx-c")] static extern IntPtr wxTextEntryDialog_ctor(IntPtr parent, string message, string caption, string value, uint style, ref Point pos);
-        [DllImport("wx-c")] static extern void wxTextEntryDialog_dtor(IntPtr self);
-        [DllImport("wx-c")] static extern void wxTextEntryDialog_SetValue(IntPtr self, string val);
-        [DllImport("wx-c")] static extern IntPtr wxTextEntryDialog_GetValue(IntPtr self);
-        [DllImport("wx-c")] static extern int wxTextEntryDialog_ShowModal(IntPtr self);
+        public this(IntPtr wxobj)
+            { super(wxobj);}
 
-        //-----------------------------------------------------------------------------
+        public this(Window parent)
+            { this(parent, "Enter text", "", "", cast(int)wxTextEntryDialogStyle, wxDefaultPosition);}
 
-        public TextEntryDialog(IntPtr wxObject)
-            : base(wxObject) {}
+        public this(Window parent, string message)
+            { this(parent, message, "", "", cast(int)wxTextEntryDialogStyle, wxDefaultPosition);}
 
-        public TextEntryDialog(Window parent)
-            : this(parent, "Enter text", "", "", (int)wxTextEntryDialogStyle, wxDefaultPosition) {}
+        public this(Window parent, string message, string caption)
+            { this(parent, message, caption, "", cast(int)wxTextEntryDialogStyle, wxDefaultPosition);}
 
-        public TextEntryDialog(Window parent, string message)
-            : this(parent, message, "", "", (int)wxTextEntryDialogStyle, wxDefaultPosition) {}
+        public this(Window parent, string message, string caption, string value)
+            { this(parent, message, caption, value, cast(int)wxTextEntryDialogStyle, wxDefaultPosition);}
 
-        public TextEntryDialog(Window parent, string message, string caption)
-            : this(parent, message, caption, "", (int)wxTextEntryDialogStyle, wxDefaultPosition) {}
+        public this(Window parent, string message, string caption, string value, int style)
+            { this(parent, message, caption, value, cast(int)style, wxDefaultPosition);}
 
-        public TextEntryDialog(Window parent, string message, string caption, string value)
-            : this(parent, message, caption, value, (int)wxTextEntryDialogStyle, wxDefaultPosition) {}
-
-        public TextEntryDialog(Window parent, string message, string caption, string value, long style)
-            : this(parent, message, caption, value, (int)style, wxDefaultPosition) {}
-
-        public  TextEntryDialog(Window parent, string message, string caption, string value, int style, Point pos)
-            : this(wxTextEntryDialog_ctor(Object.SafePtr(parent), message, caption, value, (uint)style, ref pos)) { }
+        public  this(Window parent, string message, string caption, string value, int style, Point pos)
+            { this(wxTextEntryDialog_ctor(wxObject.SafePtr(parent), message, caption, value, cast(uint)style, pos)); }
 
         //-----------------------------------------------------------------------------
 
-        public string Value
-        {
-            get { return new wxString(wxTextEntryDialog_GetValue(wxObject), true); }
-            set { wxTextEntryDialog_SetValue(wxObject, value); }
-        }
+        public string Value() { return wxTextEntryDialog_GetValue(wxobj).dup; }
+        public void Value(string value) { wxTextEntryDialog_SetValue(wxobj, value); }
 
         //---------------------------------------------------------------------
 
         public override int ShowModal()
         {
-            return wxTextEntryDialog_ShowModal(wxObject);
+            return wxTextEntryDialog_ShowModal(wxobj);
         }
     }
 
     //-----------------------------------------------------------------------------
 
-    public class GetPasswordFromUser
-    {
-        private string value = "";
-
-        [DllImport("wx-c")] static extern IntPtr wxGetPasswordFromUser_func(string message, string caption, string defaultValue, IntPtr parent);
+        static extern (C) string wxGetPasswordFromUser_func(string message, string caption, string defaultValue, IntPtr parent);
 
         //-----------------------------------------------------------------------------
 
-        public GetPasswordFromUser(string message)
-            : this(message, "", "",  null) {}
-
-        public GetPasswordFromUser(string message, string caption)
-            : this(message, caption, "", null) {}
-
-        public GetPasswordFromUser(string message, string caption, string defaultValue)
-            : this(message, caption, defaultValue, null) {}
-
-        public GetPasswordFromUser(string message, string caption, string defaultValue, Window parent)
+        public string GetPasswordFromUser(string message, string caption="", string defaultValue="", Window parent=null)
         {
-            value = new wxString(wxGetPasswordFromUser_func(message, caption, defaultValue, Object.SafePtr(parent)), true);
+            return wxGetPasswordFromUser_func(message, caption, defaultValue, wxObject.SafePtr(parent)).dup;
         }
-
-        //-----------------------------------------------------------------------------
-
-        public static implicit operator string(GetPasswordFromUser g)
-        {
-            return g.value;
-        }
-    }
 
     //-----------------------------------------------------------------------------
 
-    public class GetTextFromUser
-    {
-        private string value = "";
-
-        [DllImport("wx-c")] static extern IntPtr wxGetTextFromUser_func(string message, string caption, string defaultValue, IntPtr parent, int x, int y, bool centre);
+        static extern (C) string wxGetTextFromUser_func(string message, string caption, string defaultValue, IntPtr parent, int x, int y, bool centre);
 
         //-----------------------------------------------------------------------------
 
-        public GetTextFromUser(string message)
-            : this(message, "", "",  null, -1, -1, true) {}
-
-        public GetTextFromUser(string message, string caption)
-            : this(message, caption, "", null, -1, -1, true) {}
-
-        public GetTextFromUser(string message, string caption, string defaultValue)
-            : this(message, caption, defaultValue, null, -1, -1, true) {}
-
-        public GetTextFromUser(string message, string caption, string defaultValue, Window parent)
-            : this(message, caption, defaultValue, parent, -1, -1, true) {}
-
-        public GetTextFromUser(string message, string caption, string defaultValue, Window parent, int x)
-            : this(message, caption, defaultValue, parent, x, -1, true) {}
-
-        public GetTextFromUser(string message, string caption, string defaultValue, Window parent, int x, int y)
-            : this(message, caption, defaultValue, parent, x, y, true) {}
-
-        public GetTextFromUser(string message, string caption, string defaultValue, Window parent, int x, int y, bool centre)
+        public string GetTextFromUser(string message, string caption="", string defaultValue="", Window parent=null, int x=-1, int y=-1, bool centre=true)
         {
-            value = new wxString(wxGetTextFromUser_func( message, caption, defaultValue, Object.SafePtr(parent), x, y, centre), true);
+            return wxGetTextFromUser_func( message, caption, defaultValue, wxObject.SafePtr(parent), x, y, centre).dup;
         }
-
-        //-----------------------------------------------------------------------------
-
-        public static implicit operator string(GetTextFromUser g)
-        {
-            return g.value;
-        }
-    }
-}
-

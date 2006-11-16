@@ -1,79 +1,65 @@
 //-----------------------------------------------------------------------------
-// wx.NET - Sizer.cs
+// wxD - Sizer.d
 //
 // The wxBoxSizer wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
+// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.BoxSizer;
+import wx.common;
+import wx.Sizer;
 
-namespace wx
-{
+		extern(C) {
+		alias void function(BoxSizer obj) Virtual_voidvoid;
+		alias Size function(BoxSizer obj) Virtual_wxSizevoid;
+		}
+		
+		static extern (C) void wxBoxSizer_RegisterVirtual(IntPtr self, BoxSizer obj, Virtual_voidvoid recalcSizes, Virtual_wxSizevoid calcMin);	
+		static extern (C) void wxBoxSizer_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
+	
+		static extern (C) IntPtr wxBoxSizer_ctor(int orient);
+		static extern (C) void wxBoxSizer_RecalcSizes(IntPtr self);
+		static extern (C) Size wxBoxSizer_CalcMin(IntPtr self);
+		static extern (C) int wxBoxSizer_GetOrientation(IntPtr self);
+		static extern (C) void wxBoxSizer_SetOrientation(IntPtr self, int orient);
+
+		//---------------------------------------------------------------------
+
 	public class BoxSizer : Sizer
 	{
-		private delegate void Virtual_voidvoid();
-		private delegate IntPtr Virtual_wxSizevoid();
-		
-		private Virtual_voidvoid recalcSizes;
-		private Virtual_wxSizevoid calcMin;
-		
-		[DllImport("wx-c")] static extern void wxBoxSizer_RegisterVirtual(IntPtr self, Virtual_voidvoid recalcSizes, Virtual_wxSizevoid calcMin);	
-		[DllImport("wx-c")] static extern void wxBoxSizer_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
-	
-		[DllImport("wx-c")] static extern IntPtr wxBoxSizer_ctor(int orient);
-		[DllImport("wx-c")] static extern void wxBoxSizer_RecalcSizes(IntPtr self);
-		[DllImport("wx-c")] static extern IntPtr wxBoxSizer_CalcMin(IntPtr self);
-		[DllImport("wx-c")] static extern int wxBoxSizer_GetOrientation(IntPtr self);
-		[DllImport("wx-c")] static extern void wxBoxSizer_SetOrientation(IntPtr self, int orient);
-
-		//---------------------------------------------------------------------
-
-		public BoxSizer(IntPtr wxObject)
-			: base(wxObject) { }
+		public this(IntPtr wxobj)
+			{ super(wxobj); }
 			
-		public BoxSizer(int orient)
-			: this(wxBoxSizer_ctor((int)orient)) 
+		public this(int orient)
 		{ 
-			recalcSizes = new Virtual_voidvoid(RecalcSizes);
-			calcMin = new Virtual_wxSizevoid(DoCalcMin);
-			wxBoxSizer_RegisterVirtual(wxObject, recalcSizes, calcMin);
-			
-			virtual_Dispose = new Virtual_Dispose(VirtualDispose);
-			wxBoxSizer_RegisterDisposable(wxObject, virtual_Dispose);
+			this(wxBoxSizer_ctor(cast(int)orient));
+			wxBoxSizer_RegisterVirtual(wxobj, this, &staticRecalcSizes, &staticCalcMin);
+			wxBoxSizer_RegisterDisposable(wxobj, &VirtualDispose);
 		}
 			
 		//---------------------------------------------------------------------
-		
+		extern(C) private static void staticRecalcSizes(BoxSizer obj) { return obj.RecalcSizes(); }
+		extern(C) private static Size staticCalcMin(BoxSizer obj) { return obj.CalcMin(); }
+
 		public override void RecalcSizes()
 		{
-			wxBoxSizer_RecalcSizes(wxObject);
+			wxBoxSizer_RecalcSizes(wxobj);
 		}
 		
 		//---------------------------------------------------------------------
-		
-		private IntPtr DoCalcMin()
-		{
-			return wxSize.SafePtr(new wxSize(CalcMin()));
-		}
-		
 		public override Size CalcMin()
 		{
-			return new wxSize(wxBoxSizer_CalcMin(wxObject));
+			return wxBoxSizer_CalcMin(wxobj);
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public int Orientation
-		{
-			get { return wxBoxSizer_GetOrientation(wxObject); }
-			set { wxBoxSizer_SetOrientation(wxObject, value); }
-		}
+		public int Orientation() { return wxBoxSizer_GetOrientation(wxobj); }
+		public void Orientation(int value) { wxBoxSizer_SetOrientation(wxobj, value); }
 	}
-}

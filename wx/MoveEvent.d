@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - MoveEvent.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - MoveEvent.cs
 //
 // The wxMoveEvent wrapper class.
@@ -10,34 +13,35 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.MoveEvent;
+import wx.common;
+import wx.Event;
 
-namespace wx
-{
-	public class MoveEvent : Event
-	{
-		[DllImport("wx-c")] static extern IntPtr wxMoveEvent_ctor();
-		[DllImport("wx-c")] static extern IntPtr wxMoveEvent_GetPosition(IntPtr self, out Point point);
+		static extern (C) IntPtr wxMoveEvent_ctor();
+		static extern (C) IntPtr wxMoveEvent_GetPosition(IntPtr self, out Point point);
 		
 		//-----------------------------------------------------------------------------
 
-		public MoveEvent(IntPtr wxObject) 
-			: base(wxObject) { }
+	public class MoveEvent : Event
+	{
+		public this(IntPtr wxobj) 
+			{ super(wxobj); }
 
-		public MoveEvent()
-			: this(wxMoveEvent_ctor()) { }
+		public this()
+			{ this(wxMoveEvent_ctor()); }
 
 		//-----------------------------------------------------------------------------	
 		
-		public Point Position
-		{
-			get {
-				Point point = new Point();
-				wxMoveEvent_GetPosition(wxObject, out point);
+		public Point Position() {
+				Point point;
+				wxMoveEvent_GetPosition(wxobj, point);
 				return point;
 			}
+
+		private static Event New(IntPtr obj) { return new MoveEvent(obj); }
+
+		static this()
+		{
+			AddEventType(wxEVT_MOVE,                            &MoveEvent.New);
 		}
 	}
-}

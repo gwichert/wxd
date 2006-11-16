@@ -1,21 +1,21 @@
 //-----------------------------------------------------------------------------
-// wx.NET/Samples - Notebook.cs
+// wxD/Samples - Notebook.d
 //
-// wx.NET "Notebook" sample.
+// wxD "Notebook" sample.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
+// Modified by BERO <berobero@users.sourceforge.net>
 // (C) 2003 by Alexander Olk
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
+import wx.wx;
+import std.string;
+alias std.string.find indexOf;
 
-namespace wx.Samples
-{ 
-	public class MyFrame : wx.Frame
+	public class MyFrame : Frame
 	{
 		enum ID_CONTROLS 
 		{
@@ -62,10 +62,10 @@ namespace wx.Samples
 		
 		//---------------------------------------------------------------------
 
-		public MyFrame( string title, Point pos, Size size )
-			: base( title, pos, size )
+		public this( string title, Point pos, Size size )
 		{
-			Size imageSize = new Size( 32, 32 );
+			super( title, pos, size );
+			Size imageSize = new_Size( 32, 32 );
 			
 			m_imageList = new ImageList( imageSize.Width, imageSize.Height );
 			
@@ -80,37 +80,37 @@ namespace wx.Samples
 			m_panel = new Panel( this, -1, wxDefaultPosition, wxDefaultSize,
 				wxTAB_TRAVERSAL | wxCLIP_CHILDREN | wxNO_BORDER );
 			
-			string[] strOrientations =
-			{
+			const string[] strOrientations =
+			[
 				"&Top",
 				"&Bottom",
 				"&Left",
 				"&Right"
-			};
+			];
 			
 			m_radioOrient = new RadioBox(
-				m_panel, (int)ID_CONTROLS.ID_RADIO_ORIENT,
+				m_panel, ID_CONTROLS.ID_RADIO_ORIENT,
 				"&Tab orientation",
 				wxDefaultPosition, wxDefaultSize,
 				strOrientations,
 				1, RadioBox.wxRA_SPECIFY_COLS );
 			
-			m_chkShowImages = new CheckBox( m_panel, (int)ID_CONTROLS.ID_CHK_SHOWIMAGES, "&Show images" );
+			m_chkShowImages = new CheckBox( m_panel, ID_CONTROLS.ID_CHK_SHOWIMAGES, "&Show images" );
 			
-			m_btnAddPage = new Button( m_panel, (int)ID_CONTROLS.ID_BTN_ADD_PAGE, "&Add page" );
+			m_btnAddPage = new Button( m_panel, ID_CONTROLS.ID_BTN_ADD_PAGE, "&Add page" );
 			
-			m_btnInsertPage = new Button( m_panel, (int)ID_CONTROLS.ID_BTN_INSERT_PAGE, "&Insert page" );
+			m_btnInsertPage = new Button( m_panel, ID_CONTROLS.ID_BTN_INSERT_PAGE, "&Insert page" );
 			
-			m_btnDeleteCurPage = new Button( m_panel, (int)ID_CONTROLS.ID_BTN_DELETE_CUR_PAGE, "&Delete current page" );
+			m_btnDeleteCurPage = new Button( m_panel, ID_CONTROLS.ID_BTN_DELETE_CUR_PAGE, "&Delete current page" );
 			
-			m_btnDeleteLastPage = new Button( m_panel, (int)ID_CONTROLS.ID_BTN_DELETE_LAST_PAGE, "Delete las&t page" );
+			m_btnDeleteLastPage = new Button( m_panel, ID_CONTROLS.ID_BTN_DELETE_LAST_PAGE, "Delete las&t page" );
 			
-			m_btnNextPage = new Button( m_panel, (int)ID_CONTROLS.ID_BTN_NEXT_PAGE, "&Next page" );
+			m_btnNextPage = new Button( m_panel, ID_CONTROLS.ID_BTN_NEXT_PAGE, "&Next page" );
 			
 			m_btnExit = new Button( m_panel, wxID_OK, "&Exit" );
 			m_btnExit.SetDefault();
 			
-			m_notebook = new MyNotebook( m_panel, (int)ID_CONTROLS.ID_NOTEBOOK );
+			m_notebook = new MyNotebook( m_panel, ID_CONTROLS.ID_NOTEBOOK );
 			
 			m_text = new TextCtrl( m_panel, -1, "", wxDefaultPosition, wxDefaultSize, TextCtrl.wxTE_MULTILINE | TextCtrl.wxTE_READONLY );
 			
@@ -147,7 +147,7 @@ namespace wx.Samples
 			
 			ReInitNotebook();
 			
-			m_panel.Sizer = m_sizerFrame;
+			m_panel.sizer = m_sizerFrame;
 			
 			m_panel.AutoLayout = true;
 			
@@ -155,23 +155,23 @@ namespace wx.Samples
 			
 			Centre( Orientation.wxBOTH );
 			
-			EVT_RADIOBOX( (int)ID_CONTROLS.ID_RADIO_ORIENT, new EventListener( OnCheckOrRadioBox) );
-			EVT_CHECKBOX( (int)ID_CONTROLS.ID_CHK_SHOWIMAGES, new EventListener( OnCheckOrRadioBox ) );
+			EVT_RADIOBOX( ID_CONTROLS.ID_RADIO_ORIENT, & OnCheckOrRadioBox) ;
+			EVT_CHECKBOX( ID_CONTROLS.ID_CHK_SHOWIMAGES, & OnCheckOrRadioBox ) ;
 
-			EVT_BUTTON( (int)ID_CONTROLS.ID_BTN_ADD_PAGE, new EventListener( OnButtonAddPage ) );
-			EVT_BUTTON( (int)ID_CONTROLS.ID_BTN_INSERT_PAGE, new EventListener( OnButtonInsertPage ) );
-			EVT_BUTTON( (int)ID_CONTROLS.ID_BTN_DELETE_CUR_PAGE, new EventListener( OnButtonDeleteCurPage ) );
-			EVT_BUTTON( (int)ID_CONTROLS.ID_BTN_DELETE_LAST_PAGE, new EventListener( OnButtonDeleteLastPage ) );
-			EVT_BUTTON( (int)ID_CONTROLS.ID_BTN_NEXT_PAGE, new EventListener( OnButtonNextPage ) );
-			EVT_BUTTON( wxID_OK, new EventListener( OnButtonExit ) );
+			EVT_BUTTON( ID_CONTROLS.ID_BTN_ADD_PAGE, & OnButtonAddPage ) ;
+			EVT_BUTTON( ID_CONTROLS.ID_BTN_INSERT_PAGE, & OnButtonInsertPage ) ;
+			EVT_BUTTON( ID_CONTROLS.ID_BTN_DELETE_CUR_PAGE, & OnButtonDeleteCurPage ) ;
+			EVT_BUTTON( ID_CONTROLS.ID_BTN_DELETE_LAST_PAGE, & OnButtonDeleteLastPage ) ;
+			EVT_BUTTON( ID_CONTROLS.ID_BTN_NEXT_PAGE, & OnButtonNextPage ) ;
+			EVT_BUTTON( wxID_OK, & OnButtonExit ) ;
 
-			EVT_UPDATE_UI( (int)ID_CONTROLS.ID_BTN_DELETE_CUR_PAGE, new EventListener( OnUpdateUIBtnDeleteCurPage ) );
-			EVT_UPDATE_UI( (int)ID_CONTROLS.ID_BTN_DELETE_LAST_PAGE, new EventListener( OnUpdateUIBtnDeleteLastPage ) );
+			EVT_UPDATE_UI( ID_CONTROLS.ID_BTN_DELETE_CUR_PAGE, & OnUpdateUIBtnDeleteCurPage ) ;
+			EVT_UPDATE_UI( ID_CONTROLS.ID_BTN_DELETE_LAST_PAGE, & OnUpdateUIBtnDeleteLastPage ) ;
 
-			EVT_NOTEBOOK_PAGE_CHANGED( (int)ID_CONTROLS.ID_NOTEBOOK, new EventListener( OnNotebook ) );
-			EVT_NOTEBOOK_PAGE_CHANGING( (int)ID_CONTROLS.ID_NOTEBOOK, new EventListener( OnNotebook ) );
+			EVT_NOTEBOOK_PAGE_CHANGED( ID_CONTROLS.ID_NOTEBOOK, & OnNotebook ) ;
+			EVT_NOTEBOOK_PAGE_CHANGING( ID_CONTROLS.ID_NOTEBOOK, & OnNotebook ) ;
 
-			EVT_IDLE( new EventListener( OnIdle ) );
+			EVT_IDLE( & OnIdle ) ;
 		}
 		
 		public void ReInitNotebook()
@@ -197,7 +197,7 @@ namespace wx.Samples
 			
 			MyNotebook notebook = m_notebook;
 			
-			m_notebook = new MyNotebook( m_panel, (int)ID_CONTROLS.ID_NOTEBOOK,
+			m_notebook = new MyNotebook( m_panel, ID_CONTROLS.ID_NOTEBOOK,
 				wxDefaultPosition, wxDefaultSize, flags );
 			
 			if ( m_chkShowImages.IsChecked )
@@ -238,30 +238,30 @@ namespace wx.Samples
 			m_sizerTop.Layout();
 		}
 		
-		public void OnCheckOrRadioBox( object sender, Event e )
+		public void OnCheckOrRadioBox( Object sender, Event e )
 		{
 			ReInitNotebook();
 		}
 		
-		public void OnButtonAddPage( object sender, Event e )
+		public void OnButtonAddPage( Object sender, Event e )
 		{
 			Panel panel = new Panel( m_notebook, -1 );
-			new Button( panel, -1, "First button", new Point( 10, 10 ), new Size( -1, -1 ) );
-			new Button( panel, -1, "Second button", new Point( 50, 100 ), new Size( -1, -1 ) );
+			new Button( panel, -1, "First button", new_Point( 10, 10 ), new_Size( -1, -1 ) );
+			new Button( panel, -1, "Second button", new_Point( 50, 100 ), new_Size( -1, -1 ) );
 			
-			m_notebook.AddPage( panel, "Added " + ( ++s_pageAdded).ToString(), true, m_notebook.IconIndex );
+			m_notebook.AddPage( panel, "Added " ~ .toString( ++s_pageAdded), true, m_notebook.IconIndex );
 		}
 		
-		public void OnButtonInsertPage( object sender, Event e )
+		public void OnButtonInsertPage( Object sender, Event e )
 		{
 			Panel panel = m_notebook.CreateUserCreatedPage();
 			
-			m_notebook.InsertPage( 0, panel, "Inserted " + ( ++s_pageIns).ToString(), false, m_notebook.IconIndex );
+			m_notebook.InsertPage( 0, panel, "Inserted " ~ .toString( ++s_pageIns), false, m_notebook.IconIndex );
 			
 			m_notebook.Selection = 0;
 		}
 		
-		public void OnButtonDeleteCurPage( object sender, Event e )
+		public void OnButtonDeleteCurPage( Object sender, Event e )
 		{
 			int sel = m_notebook.Selection;
 			
@@ -271,7 +271,7 @@ namespace wx.Samples
 			}
 		}
 		
-		public void OnButtonDeleteLastPage( object sender, Event e )
+		public void OnButtonDeleteLastPage( Object sender, Event e )
 		{
 			int page = m_notebook.PageCount;
 			
@@ -281,21 +281,21 @@ namespace wx.Samples
 			}
 		}
 		
-		public void OnButtonNextPage( object sender, Event e )
+		public void OnButtonNextPage( Object sender, Event e )
 		{
 			m_notebook.AdvanceSelection( true );
 		}
 		
-		public void OnButtonExit( object sender, Event e )
+		public void OnButtonExit( Object sender, Event e )
 		{
 			Close();
 		}
 		
-		public void OnNotebook( object sender, Event e )
+		public void OnNotebook( Object sender, Event e )
 		{
 			string str = "Unknown notebook event";
 			
-			NotebookEvent ne = (NotebookEvent) e;
+			NotebookEvent ne = cast(NotebookEvent) e;
 			
 			int eventType = ne.EventType;
 			
@@ -330,19 +330,19 @@ namespace wx.Samples
 			ne.Skip();
 		}
 		
-		public void OnUpdateUIBtnDeleteCurPage( object sender, Event e )
+		public void OnUpdateUIBtnDeleteCurPage( Object sender, Event e )
 		{
-			UpdateUIEvent ue = (UpdateUIEvent) e;
+			UpdateUIEvent ue = cast(UpdateUIEvent) e;
 			ue.Enabled = m_notebook.Selection != -1;
 		}
 		
-		public void OnUpdateUIBtnDeleteLastPage( object sender, Event e )
+		public void OnUpdateUIBtnDeleteLastPage( Object sender, Event e )
 		{
-			UpdateUIEvent ue = (UpdateUIEvent) e;
+			UpdateUIEvent ue = cast(UpdateUIEvent) e;
 			ue.Enabled = m_notebook.PageCount != 0;
 		}
 		
-		public void OnIdle( object sender, Event e )
+		public void OnIdle( Object sender, Event e )
 		{
 			int nPages = m_notebook.PageCount;
 			int nSel = m_notebook.Selection;
@@ -351,7 +351,7 @@ namespace wx.Samples
 				s_nPages = nPages;
 				s_nSel = nSel;
 				
-				string title = "Notebook (" + nPages + " pages, selection: " + nSel + ")";
+				string title = "Notebook (" ~ .toString(nPages) ~ " pages, selection: " ~ .toString(nSel) ~ ")";
 				
 				Title = title;
 			}
@@ -360,14 +360,14 @@ namespace wx.Samples
 	
 	//---------------------------------------------------------------------
 	
-	public class MyNotebook : wx.Notebook
+	public class MyNotebook : Notebook
 	{
-		public MyNotebook( Window parent, int id )
-			: this( parent, id, wxDefaultPosition, wxDefaultSize, 0 ) {}
+		public this( Window parent, int id )
+			{ this( parent, id, wxDefaultPosition, wxDefaultSize, 0 ); }
 		
-		public MyNotebook( Window parent, int id, Point pos, Size size, long style )
-			: base ( parent, id, pos, size, style )
+		public this( Window parent, int id, Point pos, Size size, long style )
 		{
+			super ( parent, id, pos, size, style );
 		}
 		
 		public void CreateInitialPages()
@@ -391,7 +391,7 @@ namespace wx.Samples
 		
 		public Panel CreatePage( string pageName )
 		{
-			if ( pageName.IndexOf( "Inserted " ) != -1 || pageName.IndexOf( "Added " ) != -1 )
+			if ( pageName.indexOf( "Inserted " ) != -1 || pageName.indexOf( "Added " ) != -1 )
 			{
 				return CreateUserCreatedPage();
 			}
@@ -423,14 +423,13 @@ namespace wx.Samples
 		{
 			Panel panel = new Panel( this );
 			
-			new Button( panel, -1, "Button", new Point( 10, 10 ), new Size( -1, -1 ) );
+			new Button( panel, -1, "Button", new_Point( 10, 10 ), new_Size( -1, -1 ) );
 			
 			return panel;
 		}
 		
-		public int IconIndex
+		public int IconIndex()
 		{
-			get { 
 				if ( Images != null )
 				{
 					int nImages = Images.ImageCount;
@@ -440,7 +439,6 @@ namespace wx.Samples
 					}
 				}
 				return -1; 
-			}
 		}
 		
 		private Panel CreateInsertPage()
@@ -449,7 +447,7 @@ namespace wx.Samples
 			
 			panel.BackgroundColour = new Colour( "MAROON" );
 			
-			new StaticText( panel, -1, "This page has been inserted, not added.", new Point( 10, 10 ) );
+			new StaticText( panel, -1, "This page has been inserted, not added.", new_Point( 10, 10 ) );
 			
 			return panel;
 		}
@@ -458,12 +456,12 @@ namespace wx.Samples
 		{
 			Panel panel = new Panel( this );
 			
-			string[] animals = { "Fox", "Hare", "Rabbit", "Sabre-toothed tiger", "Rex" };
+			const string[] animals = [ "Fox", "Hare", "Rabbit", "Sabre-toothed tiger", "Rex" ];
 			
 			RadioBox radiobox1 = new RadioBox( panel, -1, "Choose one", 
 				wxDefaultPosition, wxDefaultSize, animals, 2, RadioBox.wxRA_SPECIFY_ROWS );
 			
-			string[] computers = { "Amiga", "Commodore 64", "PET", "Another" };
+			const string[] computers = [ "Amiga", "Commodore 64", "PET", "Another" ];
 			
 			RadioBox radiobox2 = new RadioBox( panel, -1, "Choose your favourite",
 				wxDefaultPosition, wxDefaultSize, computers, 0, RadioBox.wxRA_SPECIFY_COLS );
@@ -471,7 +469,7 @@ namespace wx.Samples
 			BoxSizer sizerPanel = new BoxSizer( Orientation.wxVERTICAL );
 			sizerPanel.Add( radiobox1, 2, Stretch.wxEXPAND );
 			sizerPanel.Add( radiobox2, 1, Stretch.wxEXPAND );
-			panel.Sizer = sizerPanel;
+			panel.sizer = sizerPanel;
 			
 			return panel;
 		}
@@ -480,7 +478,7 @@ namespace wx.Samples
 		{
 			Panel panel = new Panel( this );
 			
-			new StaticText( panel, -1, "This page intentionally left blank", new Point( 10, 10 ) );
+			new StaticText( panel, -1, "This page intentionally left blank", new_Point( 10, 10 ) );
 			
 			return panel;
 		}
@@ -489,11 +487,11 @@ namespace wx.Samples
 		{
 			Panel panel = new Panel( this );
 			
-			Button buttonBig = new Button( panel, -1, "Maximized button", new Point( 0, 0 ), new Size( 480, 360 ) );
+			Button buttonBig = new Button( panel, -1, "Maximized button", new_Point( 0, 0 ), new_Size( 480, 360 ) );
 			
 			BoxSizer sizerPanel = new BoxSizer( Orientation.wxVERTICAL );
 			sizerPanel.Add( buttonBig, 1, Stretch.wxEXPAND );
-			panel.Sizer = sizerPanel;
+			panel.sizer = sizerPanel;
 			
 			return panel;
 		}
@@ -501,7 +499,7 @@ namespace wx.Samples
 	
 	//---------------------------------------------------------------------
 
-	public class NOTEBOOK : wx.App
+	public class NOTEBOOK : App
 	{
 		public override bool OnInit()
 		{
@@ -513,11 +511,16 @@ namespace wx.Samples
 
 		//---------------------------------------------------------------------
 
-		[STAThread]
+		
 		static void Main()
 		{
 			NOTEBOOK app = new NOTEBOOK();
 			app.Run();
 		}
 	}
+
+
+void main()
+{
+	NOTEBOOK.Main();
 }

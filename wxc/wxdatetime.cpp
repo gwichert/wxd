@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - wxdatetime.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - wxdatetime.cxx
 //
 // The wxDateTime proxy interface
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/datetime.h>
 
 //-----------------------------------------------------------------------------
@@ -28,6 +32,13 @@ void wxDateTime_dtor(wxDateTime* self)
 		delete self;
 }
 
+//-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT
+wxDateTime* wxDateTime_Now()
+{
+    return new wxDateTime(wxDateTime::Now());
+}
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT

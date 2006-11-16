@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - StyledTextCtrl.h
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - StyledTextCtrl.h
 // 
 // The wxStyledTextCtrl wrapper class.
@@ -10,74 +13,437 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-#if WXNET_STYLEDTEXTCTRL
+module wx.StyledTextCtrl;
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+version(WXNET_STYLEDTEXTCTRL){
 
-namespace wx
-{
+import wx.common;
+import wx.Control;
+import wx.CommandEvent;
+
+        static extern (C) int wxStyledTextCtrl_EVT_STC_CHANGE();
+        static extern (C) int wxStyledTextCtrl_EVT_STC_STYLENEEDED();
+        static extern (C) int wxStyledTextCtrl_EVT_STC_CHARADDED();
+        static extern (C) int wxStyledTextCtrl_EVT_STC_SAVEPOINTREACHED();
+        static extern (C) int wxStyledTextCtrl_EVT_STC_SAVEPOINTLEFT();  
+        static extern (C) int wxStyledTextCtrl_EVT_STC_ROMODIFYATTEMPT();
+        static extern (C) int wxStyledTextCtrl_EVT_STC_KEY();
+        static extern (C) int wxStyledTextCtrl_EVT_STC_DOUBLECLICK();
+        static extern (C) int wxStyledTextCtrl_EVT_STC_UPDATEUI();
+        static extern (C) int wxStyledTextCtrl_EVT_STC_MODIFIED();
+        static extern (C) int wxStyledTextCtrl_EVT_STC_MACRORECORD();
+        static extern (C) int wxStyledTextCtrl_EVT_STC_MARGINCLICK();
+        static extern (C) int wxStyledTextCtrl_EVT_STC_NEEDSHOWN();
+        static extern (C) int wxStyledTextCtrl_EVT_STC_POSCHANGED();
+        static extern (C) int wxStyledTextCtrl_EVT_STC_PAINTED();
+        static extern (C) int wxStyledTextCtrl_EVT_STC_USERLISTSELECTION();
+        static extern (C) int wxStyledTextCtrl_EVT_STC_URIDROPPED();
+        static extern (C) int wxStyledTextCtrl_EVT_STC_DWELLSTART();
+        static extern (C) int wxStyledTextCtrl_EVT_STC_DWELLEND();
+        static extern (C) int wxStyledTextCtrl_EVT_STC_START_DRAG();
+        static extern (C) int wxStyledTextCtrl_EVT_STC_DRAG_OVER();
+        static extern (C) int wxStyledTextCtrl_EVT_STC_DO_DROP();
+        static extern (C) int wxStyledTextCtrl_EVT_STC_ZOOM();
+        static extern (C) int wxStyledTextCtrl_EVT_STC_HOTSPOT_CLICK();
+        static extern (C) int wxStyledTextCtrl_EVT_STC_HOTSPOT_DCLICK();
+        static extern (C) int wxStyledTextCtrl_EVT_STC_CALLTIP_CLICK();
+
+        static extern (C) IntPtr wxStyledTextCtrl_ctor(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
+        static extern (C) void   wxStyledTextCtrl_AddText(IntPtr self, string text);
+        //static extern (C) void   wxStyledTextCtrl_AddStyledText(IntPtr self, IntPtr data);
+        static extern (C) void   wxStyledTextCtrl_InsertText(IntPtr self, int pos, string text);
+        static extern (C) void   wxStyledTextCtrl_ClearAll(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_ClearDocumentStyle(IntPtr self);
+        static extern (C) int    wxStyledTextCtrl_GetLength(IntPtr self);
+        static extern (C) int    wxStyledTextCtrl_GetCharAt(IntPtr self, int pos);
+        static extern (C) int    wxStyledTextCtrl_GetCurrentPos(IntPtr self);
+        static extern (C) int    wxStyledTextCtrl_GetAnchor(IntPtr self);
+        static extern (C) int    wxStyledTextCtrl_GetStyleAt(IntPtr self, int pos);
+        static extern (C) void   wxStyledTextCtrl_Redo(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetUndoCollection(IntPtr self, bool collectUndo);
+        static extern (C) void   wxStyledTextCtrl_SelectAll(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetSavePoint(IntPtr self);
+        //static extern (C) IntPtr wxStyledTextCtrl_GetStyledText(IntPtr self, int startPos, int endPos);
+        static extern (C) bool   wxStyledTextCtrl_CanRedo(IntPtr self);
+        static extern (C) int    wxStyledTextCtrl_MarkerLineFromHandle(IntPtr self, int handle);
+        static extern (C) void   wxStyledTextCtrl_MarkerDeleteHandle(IntPtr self, int handle);
+        static extern (C) bool   wxStyledTextCtrl_GetUndoCollection(IntPtr self);
+        static extern (C) int    wxStyledTextCtrl_GetViewWhiteSpace(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetViewWhiteSpace(IntPtr self, int viewWS);
+        static extern (C) int    wxStyledTextCtrl_PositionFromPoint(IntPtr self, inout Point pt);
+        static extern (C) int    wxStyledTextCtrl_PositionFromPointClose(IntPtr self, int x, int y);
+        static extern (C) void   wxStyledTextCtrl_GotoLine(IntPtr self, int line);
+        static extern (C) void   wxStyledTextCtrl_GotoPos(IntPtr self, int pos);
+        static extern (C) void   wxStyledTextCtrl_SetAnchor(IntPtr self, int posAnchor);
+        static extern (C) string wxStyledTextCtrl_GetCurLine(IntPtr self, inout int linePos);
+        static extern (C) int    wxStyledTextCtrl_GetEndStyled(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_ConvertEOLs(IntPtr self, int eolMode);
+        static extern (C) int    wxStyledTextCtrl_GetEOLMode(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetEOLMode(IntPtr self, int eolMode);
+        static extern (C) void   wxStyledTextCtrl_StartStyling(IntPtr self, int pos, int mask);
+        static extern (C) void   wxStyledTextCtrl_SetStyling(IntPtr self, int length, int style);
+        static extern (C) bool   wxStyledTextCtrl_GetBufferedDraw(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetBufferedDraw(IntPtr self, bool buffered);
+        static extern (C) void   wxStyledTextCtrl_SetTabWidth(IntPtr self, int tabWidth);
+        static extern (C) int    wxStyledTextCtrl_GetTabWidth(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetCodePage(IntPtr self, int codePage);
+        static extern (C) void   wxStyledTextCtrl_MarkerDefine(IntPtr self, int markerNumber, int markerSymbol, IntPtr foreground, IntPtr background);
+        static extern (C) void   wxStyledTextCtrl_MarkerSetForeground(IntPtr self, int markerNumber, IntPtr fore);
+        static extern (C) void   wxStyledTextCtrl_MarkerSetBackground(IntPtr self, int markerNumber, IntPtr back);
+        static extern (C) int    wxStyledTextCtrl_MarkerAdd(IntPtr self, int line, int markerNumber);
+        static extern (C) void   wxStyledTextCtrl_MarkerDelete(IntPtr self, int line, int markerNumber);
+        static extern (C) void   wxStyledTextCtrl_MarkerDeleteAll(IntPtr self, int markerNumber);
+        static extern (C) int    wxStyledTextCtrl_MarkerGet(IntPtr self, int line);
+        static extern (C) int    wxStyledTextCtrl_MarkerNext(IntPtr self, int lineStart, int markerMask);
+        static extern (C) int    wxStyledTextCtrl_MarkerPrevious(IntPtr self, int lineStart, int markerMask);
+        static extern (C) void   wxStyledTextCtrl_MarkerDefineBitmap(IntPtr self, int markerNumber, IntPtr bmp);
+        static extern (C) void   wxStyledTextCtrl_SetMarginType(IntPtr self, int margin, int marginType);
+        static extern (C) int    wxStyledTextCtrl_GetMarginType(IntPtr self, int margin);
+        static extern (C) void   wxStyledTextCtrl_SetMarginWidth(IntPtr self, int margin, int pixelWidth);
+        static extern (C) int    wxStyledTextCtrl_GetMarginWidth(IntPtr self, int margin);
+        static extern (C) void   wxStyledTextCtrl_SetMarginMask(IntPtr self, int margin, int mask);
+        static extern (C) int    wxStyledTextCtrl_GetMarginMask(IntPtr self, int margin);
+        static extern (C) void   wxStyledTextCtrl_SetMarginSensitive(IntPtr self, int margin, bool sensitive);
+        static extern (C) bool   wxStyledTextCtrl_GetMarginSensitive(IntPtr self, int margin);
+        static extern (C) void   wxStyledTextCtrl_StyleClearAll(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_StyleSetForeground(IntPtr self, int style, IntPtr fore);
+        static extern (C) void   wxStyledTextCtrl_StyleSetBackground(IntPtr self, int style, IntPtr back);
+        static extern (C) void   wxStyledTextCtrl_StyleSetBold(IntPtr self, int style, bool bold);
+        static extern (C) void   wxStyledTextCtrl_StyleSetItalic(IntPtr self, int style, bool italic);
+        static extern (C) void   wxStyledTextCtrl_StyleSetSize(IntPtr self, int style, int sizePoints);
+        static extern (C) void   wxStyledTextCtrl_StyleSetFaceName(IntPtr self, int style, string fontName);
+        static extern (C) void   wxStyledTextCtrl_StyleSetEOLFilled(IntPtr self, int style, bool filled);
+        static extern (C) void   wxStyledTextCtrl_StyleResetDefault(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_StyleSetUnderline(IntPtr self, int style, bool underline);
+        static extern (C) void   wxStyledTextCtrl_StyleSetCase(IntPtr self, int style, int caseForce);
+        static extern (C) void   wxStyledTextCtrl_StyleSetCharacterSet(IntPtr self, int style, int characterSet);
+        static extern (C) void   wxStyledTextCtrl_StyleSetHotSpot(IntPtr self, int style, bool hotspot);
+        static extern (C) void   wxStyledTextCtrl_SetSelForeground(IntPtr self, bool useSetting, IntPtr fore);
+        static extern (C) void   wxStyledTextCtrl_SetSelBackground(IntPtr self, bool useSetting, IntPtr back);
+        static extern (C) void   wxStyledTextCtrl_SetCaretForeground(IntPtr self, IntPtr fore);
+        static extern (C) void   wxStyledTextCtrl_CmdKeyAssign(IntPtr self, int key, int modifiers, int cmd);
+        static extern (C) void   wxStyledTextCtrl_CmdKeyClear(IntPtr self, int key, int modifiers);
+        static extern (C) void   wxStyledTextCtrl_CmdKeyClearAll(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetStyleBytes(IntPtr self, int length, ubyte* styleBytes);
+        static extern (C) void   wxStyledTextCtrl_StyleSetVisible(IntPtr self, int style, bool visible);
+        static extern (C) int    wxStyledTextCtrl_GetCaretPeriod(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetCaretPeriod(IntPtr self, int periodMilliseconds);
+        static extern (C) void   wxStyledTextCtrl_SetWordChars(IntPtr self, string characters);
+        static extern (C) void   wxStyledTextCtrl_BeginUndoAction(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_EndUndoAction(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_IndicatorSetStyle(IntPtr self, int indic, int style);
+        static extern (C) int    wxStyledTextCtrl_IndicatorGetStyle(IntPtr self, int indic);
+        static extern (C) void   wxStyledTextCtrl_IndicatorSetForeground(IntPtr self, int indic, IntPtr fore);
+        static extern (C) IntPtr wxStyledTextCtrl_IndicatorGetForeground(IntPtr self, int indic);
+        static extern (C) void   wxStyledTextCtrl_SetWhitespaceForeground(IntPtr self, bool useSetting, IntPtr fore);
+        static extern (C) void   wxStyledTextCtrl_SetWhitespaceBackground(IntPtr self, bool useSetting, IntPtr back);
+        static extern (C) void   wxStyledTextCtrl_SetStyleBits(IntPtr self, int bits);
+        static extern (C) int    wxStyledTextCtrl_GetStyleBits(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetLineState(IntPtr self, int line, int state);
+        static extern (C) int    wxStyledTextCtrl_GetLineState(IntPtr self, int line);
+        static extern (C) int    wxStyledTextCtrl_GetMaxLineState(IntPtr self);
+        static extern (C) bool   wxStyledTextCtrl_GetCaretLineVisible(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetCaretLineVisible(IntPtr self, bool show);
+        static extern (C) IntPtr wxStyledTextCtrl_GetCaretLineBack(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetCaretLineBack(IntPtr self, IntPtr back);
+        static extern (C) void   wxStyledTextCtrl_StyleSetChangeable(IntPtr self, int style, bool changeable);
+        static extern (C) void   wxStyledTextCtrl_AutoCompShow(IntPtr self, int lenEntered, string itemList);
+        static extern (C) void   wxStyledTextCtrl_AutoCompCancel(IntPtr self);
+        static extern (C) bool   wxStyledTextCtrl_AutoCompActive(IntPtr self);
+        static extern (C) int    wxStyledTextCtrl_AutoCompPosStart(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_AutoCompComplete(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_AutoCompStops(IntPtr self, string characterSet);
+        static extern (C) void   wxStyledTextCtrl_AutoCompSetSeparator(IntPtr self, int separatorCharacter);
+        static extern (C) int    wxStyledTextCtrl_AutoCompGetSeparator(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_AutoCompSelect(IntPtr self, string text);
+        static extern (C) void   wxStyledTextCtrl_AutoCompSetCancelAtStart(IntPtr self, bool cancel);
+        static extern (C) bool   wxStyledTextCtrl_AutoCompGetCancelAtStart(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_AutoCompSetFillUps(IntPtr self, string characterSet);
+        static extern (C) void   wxStyledTextCtrl_AutoCompSetChooseSingle(IntPtr self, bool chooseSingle);
+        static extern (C) bool   wxStyledTextCtrl_AutoCompGetChooseSingle(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_AutoCompSetIgnoreCase(IntPtr self, bool ignoreCase);
+        static extern (C) bool   wxStyledTextCtrl_AutoCompGetIgnoreCase(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_UserListShow(IntPtr self, int listType, string itemList);
+        static extern (C) void   wxStyledTextCtrl_AutoCompSetAutoHide(IntPtr self, bool autoHide);
+        static extern (C) bool   wxStyledTextCtrl_AutoCompGetAutoHide(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_AutoCompSetDropRestOfWord(IntPtr self, bool dropRestOfWord);
+        static extern (C) bool   wxStyledTextCtrl_AutoCompGetDropRestOfWord(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_RegisterImage(IntPtr self, int type, IntPtr bmp);
+        static extern (C) void   wxStyledTextCtrl_ClearRegisteredImages(IntPtr self);
+        static extern (C) int    wxStyledTextCtrl_AutoCompGetTypeSeparator(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_AutoCompSetTypeSeparator(IntPtr self, int separatorCharacter);
+        static extern (C) void   wxStyledTextCtrl_SetIndent(IntPtr self, int indentSize);
+        static extern (C) int    wxStyledTextCtrl_GetIndent(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetUseTabs(IntPtr self, bool useTabs);
+        static extern (C) bool   wxStyledTextCtrl_GetUseTabs(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetLineIndentation(IntPtr self, int line, int indentSize);
+        static extern (C) int    wxStyledTextCtrl_GetLineIndentation(IntPtr self, int line);
+        static extern (C) int    wxStyledTextCtrl_GetLineIndentPosition(IntPtr self, int line);
+        static extern (C) int    wxStyledTextCtrl_GetColumn(IntPtr self, int pos);
+        static extern (C) void   wxStyledTextCtrl_SetUseHorizontalScrollBar(IntPtr self, bool show);
+        static extern (C) bool   wxStyledTextCtrl_GetUseHorizontalScrollBar(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetIndentationGuides(IntPtr self, bool show);
+        static extern (C) bool   wxStyledTextCtrl_GetIndentationGuides(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetHighlightGuide(IntPtr self, int column);
+        static extern (C) int    wxStyledTextCtrl_GetHighlightGuide(IntPtr self);
+        static extern (C) int    wxStyledTextCtrl_GetLineEndPosition(IntPtr self, int line);
+        static extern (C) int    wxStyledTextCtrl_GetCodePage(IntPtr self);
+        static extern (C) IntPtr wxStyledTextCtrl_GetCaretForeground(IntPtr self);
+        static extern (C) bool   wxStyledTextCtrl_GetReadOnly(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetCurrentPos(IntPtr self, int pos);
+        static extern (C) void   wxStyledTextCtrl_SetSelectionStart(IntPtr self, int pos);
+        static extern (C) int    wxStyledTextCtrl_GetSelectionStart(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetSelectionEnd(IntPtr self, int pos);
+        static extern (C) int    wxStyledTextCtrl_GetSelectionEnd(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetPrintMagnification(IntPtr self, int magnification);
+        static extern (C) int    wxStyledTextCtrl_GetPrintMagnification(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetPrintColourMode(IntPtr self, int mode);
+        static extern (C) int    wxStyledTextCtrl_GetPrintColourMode(IntPtr self);
+        static extern (C) int    wxStyledTextCtrl_FindText(IntPtr self, int minPos, int maxPos, string text, int flags);
+        static extern (C) int    wxStyledTextCtrl_FormatRange(IntPtr self, bool doDraw, int startPos, int endPos, IntPtr draw, IntPtr target, inout Rectangle renderRect, inout Rectangle pageRect);
+        static extern (C) int    wxStyledTextCtrl_GetFirstVisibleLine(IntPtr self);
+        static extern (C) string wxStyledTextCtrl_GetLine(IntPtr self, int line);
+        static extern (C) int    wxStyledTextCtrl_GetLineCount(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetMarginLeft(IntPtr self, int pixelWidth);
+        static extern (C) int    wxStyledTextCtrl_GetMarginLeft(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetMarginRight(IntPtr self, int pixelWidth);
+        static extern (C) int    wxStyledTextCtrl_GetMarginRight(IntPtr self);
+        static extern (C) bool   wxStyledTextCtrl_GetModify(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetSelection(IntPtr self, int start, int end);
+        static extern (C) string wxStyledTextCtrl_GetSelectedText(IntPtr self);
+        static extern (C) string wxStyledTextCtrl_GetTextRange(IntPtr self, int startPos, int endPos);
+        static extern (C) void   wxStyledTextCtrl_HideSelection(IntPtr self, bool normal);
+        static extern (C) int    wxStyledTextCtrl_LineFromPosition(IntPtr self, int pos);
+        static extern (C) int    wxStyledTextCtrl_PositionFromLine(IntPtr self, int line);
+        static extern (C) void   wxStyledTextCtrl_LineScroll(IntPtr self, int columns, int lines);
+        static extern (C) void   wxStyledTextCtrl_EnsureCaretVisible(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_ReplaceSelection(IntPtr self, string text);
+        static extern (C) void   wxStyledTextCtrl_SetReadOnly(IntPtr self, bool readOnly);
+        static extern (C) bool   wxStyledTextCtrl_CanPaste(IntPtr self);
+        static extern (C) bool   wxStyledTextCtrl_CanUndo(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_EmptyUndoBuffer(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_Undo(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_Cut(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_Copy(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_Paste(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_Clear(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetText(IntPtr self, string text);
+        static extern (C) string wxStyledTextCtrl_GetText(IntPtr self);
+        static extern (C) int    wxStyledTextCtrl_GetTextLength(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetOvertype(IntPtr self, bool overtype);
+        static extern (C) bool   wxStyledTextCtrl_GetOvertype(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetCaretWidth(IntPtr self, int pixelWidth);
+        static extern (C) int    wxStyledTextCtrl_GetCaretWidth(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetTargetStart(IntPtr self, int pos);
+        static extern (C) int    wxStyledTextCtrl_GetTargetStart(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetTargetEnd(IntPtr self, int pos);
+        static extern (C) int    wxStyledTextCtrl_GetTargetEnd(IntPtr self);
+        static extern (C) int    wxStyledTextCtrl_ReplaceTarget(IntPtr self, string text);
+        static extern (C) int    wxStyledTextCtrl_ReplaceTargetRE(IntPtr self, string text);
+        static extern (C) int    wxStyledTextCtrl_SearchInTarget(IntPtr self, string text);
+        static extern (C) void   wxStyledTextCtrl_SetSearchFlags(IntPtr self, int flags);
+        static extern (C) int    wxStyledTextCtrl_GetSearchFlags(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_CallTipShow(IntPtr self, int pos, string definition);
+        static extern (C) void   wxStyledTextCtrl_CallTipCancel(IntPtr self);
+        static extern (C) bool   wxStyledTextCtrl_CallTipActive(IntPtr self);
+        static extern (C) int    wxStyledTextCtrl_CallTipPosAtStart(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_CallTipSetHighlight(IntPtr self, int start, int end);
+        static extern (C) void   wxStyledTextCtrl_CallTipSetBackground(IntPtr self, IntPtr back);
+        static extern (C) void   wxStyledTextCtrl_CallTipSetForeground(IntPtr self, IntPtr fore);
+        static extern (C) void   wxStyledTextCtrl_CallTipSetForegroundHighlight(IntPtr self, IntPtr fore);
+        static extern (C) int    wxStyledTextCtrl_VisibleFromDocLine(IntPtr self, int line);
+        static extern (C) int    wxStyledTextCtrl_DocLineFromVisible(IntPtr self, int lineDisplay);
+        static extern (C) void   wxStyledTextCtrl_SetFoldLevel(IntPtr self, int line, int level);
+        static extern (C) int    wxStyledTextCtrl_GetFoldLevel(IntPtr self, int line);
+        static extern (C) int    wxStyledTextCtrl_GetLastChild(IntPtr self, int line, int level);
+        static extern (C) int    wxStyledTextCtrl_GetFoldParent(IntPtr self, int line);
+        static extern (C) void   wxStyledTextCtrl_ShowLines(IntPtr self, int lineStart, int lineEnd);
+        static extern (C) void   wxStyledTextCtrl_HideLines(IntPtr self, int lineStart, int lineEnd);
+        static extern (C) bool   wxStyledTextCtrl_GetLineVisible(IntPtr self, int line);
+        static extern (C) void   wxStyledTextCtrl_SetFoldExpanded(IntPtr self, int line, bool expanded);
+        static extern (C) bool   wxStyledTextCtrl_GetFoldExpanded(IntPtr self, int line);
+        static extern (C) void   wxStyledTextCtrl_ToggleFold(IntPtr self, int line);
+        static extern (C) void   wxStyledTextCtrl_EnsureVisible(IntPtr self, int line);
+        static extern (C) void   wxStyledTextCtrl_SetFoldFlags(IntPtr self, int flags);
+        static extern (C) void   wxStyledTextCtrl_EnsureVisibleEnforcePolicy(IntPtr self, int line);
+        static extern (C) void   wxStyledTextCtrl_SetTabIndents(IntPtr self, bool tabIndents);
+        static extern (C) bool   wxStyledTextCtrl_GetTabIndents(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetBackSpaceUnIndents(IntPtr self, bool bsUnIndents);
+        static extern (C) bool   wxStyledTextCtrl_GetBackSpaceUnIndents(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetMouseDwellTime(IntPtr self, int periodMilliseconds);
+        static extern (C) int    wxStyledTextCtrl_GetMouseDwellTime(IntPtr self);
+        static extern (C) int    wxStyledTextCtrl_WordStartPosition(IntPtr self, int pos, bool onlyWordCharacters);
+        static extern (C) int    wxStyledTextCtrl_WordEndPosition(IntPtr self, int pos, bool onlyWordCharacters);
+        static extern (C) void   wxStyledTextCtrl_SetWrapMode(IntPtr self, int mode);
+        static extern (C) int    wxStyledTextCtrl_GetWrapMode(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetLayoutCache(IntPtr self, int mode);
+        static extern (C) int    wxStyledTextCtrl_GetLayoutCache(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetScrollWidth(IntPtr self, int pixelWidth);
+        static extern (C) int    wxStyledTextCtrl_GetScrollWidth(IntPtr self);
+        static extern (C) int    wxStyledTextCtrl_TextWidth(IntPtr self, int style, string text);
+        static extern (C) void   wxStyledTextCtrl_SetEndAtLastLine(IntPtr self, bool endAtLastLine);
+        static extern (C) bool   wxStyledTextCtrl_GetEndAtLastLine(IntPtr self);
+        static extern (C) int    wxStyledTextCtrl_TextHeight(IntPtr self, int line);
+        static extern (C) void   wxStyledTextCtrl_SetUseVerticalScrollBar(IntPtr self, bool show);
+        static extern (C) bool   wxStyledTextCtrl_GetUseVerticalScrollBar(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_AppendText(IntPtr self, int length, string text);
+        static extern (C) bool   wxStyledTextCtrl_GetTwoPhaseDraw(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetTwoPhaseDraw(IntPtr self, bool twoPhase);
+        static extern (C) void   wxStyledTextCtrl_TargetFromSelection(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_LinesJoin(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_LinesSplit(IntPtr self, int pixelWidth);
+        static extern (C) void   wxStyledTextCtrl_SetFoldMarginColour(IntPtr self, bool useSetting, IntPtr back);
+        static extern (C) void   wxStyledTextCtrl_SetFoldMarginHiColour(IntPtr self, bool useSetting, IntPtr fore);
+        static extern (C) void   wxStyledTextCtrl_LineDuplicate(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_HomeDisplay(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_HomeDisplayExtend(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_LineEndDisplay(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_LineEndDisplayExtend(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_MoveCaretInsideView(IntPtr self);
+        static extern (C) int    wxStyledTextCtrl_LineLength(IntPtr self, int line);
+        static extern (C) void   wxStyledTextCtrl_BraceHighlight(IntPtr self, int pos1, int pos2);
+        static extern (C) void   wxStyledTextCtrl_BraceBadLight(IntPtr self, int pos);
+        static extern (C) int    wxStyledTextCtrl_BraceMatch(IntPtr self, int pos);
+        static extern (C) bool   wxStyledTextCtrl_GetViewEOL(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetViewEOL(IntPtr self, bool visible);
+        static extern (C) IntPtr wxStyledTextCtrl_GetDocPointer(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetDocPointer(IntPtr self, IntPtr docPointer);
+        static extern (C) void   wxStyledTextCtrl_SetModEventMask(IntPtr self, int mask);
+        static extern (C) int    wxStyledTextCtrl_GetEdgeColumn(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetEdgeColumn(IntPtr self, int column);
+        static extern (C) int    wxStyledTextCtrl_GetEdgeMode(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetEdgeMode(IntPtr self, int mode);
+        static extern (C) IntPtr wxStyledTextCtrl_GetEdgeColour(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetEdgeColour(IntPtr self, IntPtr edgeColour);
+        static extern (C) void   wxStyledTextCtrl_SearchAnchor(IntPtr self);
+        static extern (C) int    wxStyledTextCtrl_SearchNext(IntPtr self, int flags, string text);
+        static extern (C) int    wxStyledTextCtrl_SearchPrev(IntPtr self, int flags, string text);
+        static extern (C) int    wxStyledTextCtrl_LinesOnScreen(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_UsePopUp(IntPtr self, bool allowPopUp);
+        static extern (C) bool   wxStyledTextCtrl_SelectionIsRectangle(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetZoom(IntPtr self, int zoom);
+        static extern (C) int    wxStyledTextCtrl_GetZoom(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_CreateDocument(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_AddRefDocument(IntPtr self, IntPtr docPointer);
+        static extern (C) void   wxStyledTextCtrl_ReleaseDocument(IntPtr self, IntPtr docPointer);
+        static extern (C) int    wxStyledTextCtrl_GetModEventMask(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetSTCFocus(IntPtr self, bool focus);
+        static extern (C) bool   wxStyledTextCtrl_GetSTCFocus(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetStatus(IntPtr self, int statusCode);
+        static extern (C) int    wxStyledTextCtrl_GetStatus(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetMouseDownCaptures(IntPtr self, bool captures);
+        static extern (C) bool   wxStyledTextCtrl_GetMouseDownCaptures(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetSTCCursor(IntPtr self, int cursorType);
+        static extern (C) int    wxStyledTextCtrl_GetSTCCursor(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetControlCharSymbol(IntPtr self, int symbol);
+        static extern (C) int    wxStyledTextCtrl_GetControlCharSymbol(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_WordPartLeft(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_WordPartLeftExtend(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_WordPartRight(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_WordPartRightExtend(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetVisiblePolicy(IntPtr self, int visiblePolicy, int visibleSlop);
+        static extern (C) void   wxStyledTextCtrl_DelLineLeft(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_DelLineRight(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetXOffset(IntPtr self, int newOffset);
+        static extern (C) int    wxStyledTextCtrl_GetXOffset(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_ChooseCaretX(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetXCaretPolicy(IntPtr self, int caretPolicy, int caretSlop);
+        static extern (C) void   wxStyledTextCtrl_SetYCaretPolicy(IntPtr self, int caretPolicy, int caretSlop);
+        static extern (C) void   wxStyledTextCtrl_SetPrintWrapMode(IntPtr self, int mode);
+        static extern (C) int    wxStyledTextCtrl_GetPrintWrapMode(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetHotspotActiveForeground(IntPtr self, bool useSetting, IntPtr fore);
+        static extern (C) void   wxStyledTextCtrl_SetHotspotActiveBackground(IntPtr self, bool useSetting, IntPtr back);
+        static extern (C) void   wxStyledTextCtrl_SetHotspotActiveUnderline(IntPtr self, bool underline);
+        static extern (C) void   wxStyledTextCtrl_StartRecord(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_StopRecord(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetLexer(IntPtr self, int lexer);
+        static extern (C) int    wxStyledTextCtrl_GetLexer(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_Colourise(IntPtr self, int start, int end);
+        static extern (C) void   wxStyledTextCtrl_SetProperty(IntPtr self, string key, string value);
+        static extern (C) void   wxStyledTextCtrl_SetKeyWords(IntPtr self, int keywordSet, string keyWords);
+        static extern (C) void   wxStyledTextCtrl_SetLexerLanguage(IntPtr self, string language);
+        static extern (C) int    wxStyledTextCtrl_GetCurrentLine(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_StyleSetSpec(IntPtr self, int styleNum, string spec);
+        static extern (C) void   wxStyledTextCtrl_StyleSetFont(IntPtr self, int styleNum, IntPtr font);
+        static extern (C) void   wxStyledTextCtrl_StyleSetFontAttr(IntPtr self, int styleNum, int size, string faceName, bool bold, bool italic, bool underline);
+        static extern (C) void   wxStyledTextCtrl_CmdKeyExecute(IntPtr self, int cmd);
+        static extern (C) void   wxStyledTextCtrl_SetMargins(IntPtr self, int left, int right);
+        static extern (C) void   wxStyledTextCtrl_GetSelection(IntPtr self, inout int startPos, inout int endPos);
+        static extern (C) void   wxStyledTextCtrl_PointFromPosition(IntPtr self, int pos, inout Point pt);
+        static extern (C) void   wxStyledTextCtrl_ScrollToLine(IntPtr self, int line);
+        static extern (C) void   wxStyledTextCtrl_ScrollToColumn(IntPtr self, int column);
+        static extern (C) int    wxStyledTextCtrl_SendMsg(IntPtr self, int msg, int wp, int lp);
+        //static extern (C) void   wxStyledTextCtrl_SetVScrollBar(IntPtr self, IntPtr bar);
+        //static extern (C) void   wxStyledTextCtrl_SetHScrollBar(IntPtr self, IntPtr bar);
+        static extern (C) bool   wxStyledTextCtrl_GetLastKeydownProcessed(IntPtr self);
+        static extern (C) void   wxStyledTextCtrl_SetLastKeydownProcessed(IntPtr self, bool val);
+        static extern (C) bool   wxStyledTextCtrl_SaveFile(IntPtr self, string filename);
+        static extern (C) bool   wxStyledTextCtrl_LoadFile(IntPtr self, string filename);
+
+        //-----------------------------------------------------------------------------
+
     public class StyledTextCtrl : Control 
     {
         //-----------------------------------------------------------------------------
 
         // StyledTextCtrl Events
  
-        [DllImport("wx-c")] static extern int wxStyledTextCtrl_EVT_STC_CHANGE();
-        [DllImport("wx-c")] static extern int wxStyledTextCtrl_EVT_STC_STYLENEEDED();
-        [DllImport("wx-c")] static extern int wxStyledTextCtrl_EVT_STC_CHARADDED();
-        [DllImport("wx-c")] static extern int wxStyledTextCtrl_EVT_STC_SAVEPOINTREACHED();
-        [DllImport("wx-c")] static extern int wxStyledTextCtrl_EVT_STC_SAVEPOINTLEFT();  
-        [DllImport("wx-c")] static extern int wxStyledTextCtrl_EVT_STC_ROMODIFYATTEMPT();
-        [DllImport("wx-c")] static extern int wxStyledTextCtrl_EVT_STC_KEY();
-        [DllImport("wx-c")] static extern int wxStyledTextCtrl_EVT_STC_DOUBLECLICK();
-        [DllImport("wx-c")] static extern int wxStyledTextCtrl_EVT_STC_UPDATEUI();
-        [DllImport("wx-c")] static extern int wxStyledTextCtrl_EVT_STC_MODIFIED();
-        [DllImport("wx-c")] static extern int wxStyledTextCtrl_EVT_STC_MACRORECORD();
-        [DllImport("wx-c")] static extern int wxStyledTextCtrl_EVT_STC_MARGINCLICK();
-        [DllImport("wx-c")] static extern int wxStyledTextCtrl_EVT_STC_NEEDSHOWN();
-        [DllImport("wx-c")] static extern int wxStyledTextCtrl_EVT_STC_POSCHANGED();
-        [DllImport("wx-c")] static extern int wxStyledTextCtrl_EVT_STC_PAINTED();
-        [DllImport("wx-c")] static extern int wxStyledTextCtrl_EVT_STC_USERLISTSELECTION();
-        [DllImport("wx-c")] static extern int wxStyledTextCtrl_EVT_STC_URIDROPPED();
-        [DllImport("wx-c")] static extern int wxStyledTextCtrl_EVT_STC_DWELLSTART();
-        [DllImport("wx-c")] static extern int wxStyledTextCtrl_EVT_STC_DWELLEND();
-        [DllImport("wx-c")] static extern int wxStyledTextCtrl_EVT_STC_START_DRAG();
-        [DllImport("wx-c")] static extern int wxStyledTextCtrl_EVT_STC_DRAG_OVER();
-        [DllImport("wx-c")] static extern int wxStyledTextCtrl_EVT_STC_DO_DROP();
-        [DllImport("wx-c")] static extern int wxStyledTextCtrl_EVT_STC_ZOOM();
-        [DllImport("wx-c")] static extern int wxStyledTextCtrl_EVT_STC_HOTSPOT_CLICK();
-        [DllImport("wx-c")] static extern int wxStyledTextCtrl_EVT_STC_HOTSPOT_DCLICK();
-        [DllImport("wx-c")] static extern int wxStyledTextCtrl_EVT_STC_CALLTIP_CLICK();
+        public static /*readonly*/ int wxEVT_STC_CHANGE;
+        public static /*readonly*/ int wxEVT_STC_STYLENEEDED;
+        public static /*readonly*/ int wxEVT_STC_CHARADDED;
+        public static /*readonly*/ int wxEVT_STC_SAVEPOINTREACHED;
+        public static /*readonly*/ int wxEVT_STC_SAVEPOINTLEFT;  
+        public static /*readonly*/ int wxEVT_STC_ROMODIFYATTEMPT;
+        public static /*readonly*/ int wxEVT_STC_KEY;
+        public static /*readonly*/ int wxEVT_STC_DOUBLECLICK;
+        public static /*readonly*/ int wxEVT_STC_UPDATEUI;
+        public static /*readonly*/ int wxEVT_STC_MODIFIED;
+        public static /*readonly*/ int wxEVT_STC_MACRORECORD;
+        public static /*readonly*/ int wxEVT_STC_MARGINCLICK;
+        public static /*readonly*/ int wxEVT_STC_NEEDSHOWN;
+        //public static /*readonly*/ int wxEVT_STC_POSCHANGED;
+        public static /*readonly*/ int wxEVT_STC_PAINTED;
+        public static /*readonly*/ int wxEVT_STC_USERLISTSELECTION;
+        public static /*readonly*/ int wxEVT_STC_URIDROPPED;
+        public static /*readonly*/ int wxEVT_STC_DWELLSTART;
+        public static /*readonly*/ int wxEVT_STC_DWELLEND;
+        public static /*readonly*/ int wxEVT_STC_START_DRAG;
+        public static /*readonly*/ int wxEVT_STC_DRAG_OVER;
+        public static /*readonly*/ int wxEVT_STC_DO_DROP;
+        public static /*readonly*/ int wxEVT_STC_ZOOM;
+        public static /*readonly*/ int wxEVT_STC_HOTSPOT_CLICK;
+        public static /*readonly*/ int wxEVT_STC_HOTSPOT_DCLICK;
+        public static /*readonly*/ int wxEVT_STC_CALLTIP_CLICK;
 
-        public static readonly int wxEVT_STC_CHANGE = wxStyledTextCtrl_EVT_STC_CHANGE();
-        public static readonly int wxEVT_STC_STYLENEEDED = wxStyledTextCtrl_EVT_STC_STYLENEEDED();
-        public static readonly int wxEVT_STC_CHARADDED = wxStyledTextCtrl_EVT_STC_CHARADDED();
-        public static readonly int wxEVT_STC_SAVEPOINTREACHED = wxStyledTextCtrl_EVT_STC_SAVEPOINTREACHED();
-        public static readonly int wxEVT_STC_SAVEPOINTLEFT = wxStyledTextCtrl_EVT_STC_SAVEPOINTLEFT();  
-        public static readonly int wxEVT_STC_ROMODIFYATTEMPT = wxStyledTextCtrl_EVT_STC_ROMODIFYATTEMPT();
-        public static readonly int wxEVT_STC_KEY = wxStyledTextCtrl_EVT_STC_KEY();
-        public static readonly int wxEVT_STC_DOUBLECLICK = wxStyledTextCtrl_EVT_STC_DOUBLECLICK();
-        public static readonly int wxEVT_STC_UPDATEUI = wxStyledTextCtrl_EVT_STC_UPDATEUI();
-        public static readonly int wxEVT_STC_MODIFIED = wxStyledTextCtrl_EVT_STC_MODIFIED();
-        public static readonly int wxEVT_STC_MACRORECORD = wxStyledTextCtrl_EVT_STC_MACRORECORD();
-        public static readonly int wxEVT_STC_MARGINCLICK = wxStyledTextCtrl_EVT_STC_MARGINCLICK();
-        public static readonly int wxEVT_STC_NEEDSHOWN = wxStyledTextCtrl_EVT_STC_NEEDSHOWN();
-        //public static readonly int wxEVT_STC_POSCHANGED = wxStyledTextCtrl_EVT_STC_POSCHANGED();
-        public static readonly int wxEVT_STC_PAINTED = wxStyledTextCtrl_EVT_STC_PAINTED();
-        public static readonly int wxEVT_STC_USERLISTSELECTION = wxStyledTextCtrl_EVT_STC_USERLISTSELECTION();
-        public static readonly int wxEVT_STC_URIDROPPED = wxStyledTextCtrl_EVT_STC_URIDROPPED();
-        public static readonly int wxEVT_STC_DWELLSTART = wxStyledTextCtrl_EVT_STC_DWELLSTART();
-        public static readonly int wxEVT_STC_DWELLEND = wxStyledTextCtrl_EVT_STC_DWELLEND();
-        public static readonly int wxEVT_STC_START_DRAG = wxStyledTextCtrl_EVT_STC_START_DRAG();
-        public static readonly int wxEVT_STC_DRAG_OVER = wxStyledTextCtrl_EVT_STC_DRAG_OVER();
-        public static readonly int wxEVT_STC_DO_DROP = wxStyledTextCtrl_EVT_STC_DO_DROP();
-        public static readonly int wxEVT_STC_ZOOM = wxStyledTextCtrl_EVT_STC_ZOOM();
-        public static readonly int wxEVT_STC_HOTSPOT_CLICK = wxStyledTextCtrl_EVT_STC_HOTSPOT_CLICK();
-        public static readonly int wxEVT_STC_HOTSPOT_DCLICK = wxStyledTextCtrl_EVT_STC_HOTSPOT_DCLICK();
-        public static readonly int wxEVT_STC_CALLTIP_CLICK = wxStyledTextCtrl_EVT_STC_CALLTIP_CLICK();
-
+	static this()
+	{
+        	 wxEVT_STC_CHANGE = wxStyledTextCtrl_EVT_STC_CHANGE();
+        	 wxEVT_STC_STYLENEEDED = wxStyledTextCtrl_EVT_STC_STYLENEEDED();
+        	 wxEVT_STC_CHARADDED = wxStyledTextCtrl_EVT_STC_CHARADDED();
+        	 wxEVT_STC_SAVEPOINTREACHED = wxStyledTextCtrl_EVT_STC_SAVEPOINTREACHED();
+        	 wxEVT_STC_SAVEPOINTLEFT = wxStyledTextCtrl_EVT_STC_SAVEPOINTLEFT();  
+        	 wxEVT_STC_ROMODIFYATTEMPT = wxStyledTextCtrl_EVT_STC_ROMODIFYATTEMPT();
+        	 wxEVT_STC_KEY = wxStyledTextCtrl_EVT_STC_KEY();
+        	 wxEVT_STC_DOUBLECLICK = wxStyledTextCtrl_EVT_STC_DOUBLECLICK();
+        	 wxEVT_STC_UPDATEUI = wxStyledTextCtrl_EVT_STC_UPDATEUI();
+        	 wxEVT_STC_MODIFIED = wxStyledTextCtrl_EVT_STC_MODIFIED();
+        	 wxEVT_STC_MACRORECORD = wxStyledTextCtrl_EVT_STC_MACRORECORD();
+        	 wxEVT_STC_MARGINCLICK = wxStyledTextCtrl_EVT_STC_MARGINCLICK();
+        	 wxEVT_STC_NEEDSHOWN = wxStyledTextCtrl_EVT_STC_NEEDSHOWN();
+        //	 wxEVT_STC_POSCHANGED = wxStyledTextCtrl_EVT_STC_POSCHANGED();
+        	 wxEVT_STC_PAINTED = wxStyledTextCtrl_EVT_STC_PAINTED();
+        	 wxEVT_STC_USERLISTSELECTION = wxStyledTextCtrl_EVT_STC_USERLISTSELECTION();
+        	 wxEVT_STC_URIDROPPED = wxStyledTextCtrl_EVT_STC_URIDROPPED();
+        	 wxEVT_STC_DWELLSTART = wxStyledTextCtrl_EVT_STC_DWELLSTART();
+        	 wxEVT_STC_DWELLEND = wxStyledTextCtrl_EVT_STC_DWELLEND();
+        	 wxEVT_STC_START_DRAG = wxStyledTextCtrl_EVT_STC_START_DRAG();
+        	 wxEVT_STC_DRAG_OVER = wxStyledTextCtrl_EVT_STC_DRAG_OVER();
+        	 wxEVT_STC_DO_DROP = wxStyledTextCtrl_EVT_STC_DO_DROP();
+        	 wxEVT_STC_ZOOM = wxStyledTextCtrl_EVT_STC_ZOOM();
+        	 wxEVT_STC_HOTSPOT_CLICK = wxStyledTextCtrl_EVT_STC_HOTSPOT_CLICK();
+        	 wxEVT_STC_HOTSPOT_DCLICK = wxStyledTextCtrl_EVT_STC_HOTSPOT_DCLICK();
+        	 wxEVT_STC_CALLTIP_CLICK = wxStyledTextCtrl_EVT_STC_CALLTIP_CLICK();
+	}
         //-----------------------------------------------------------------------------
 
         public const int wxSTC_INVALID_POSITION = -1;
@@ -1051,2087 +1417,1473 @@ namespace wx
 
         //-----------------------------------------------------------------------------
 
-        [DllImport("wx-c")] static extern IntPtr wxStyledTextCtrl_ctor(IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_AddText(IntPtr self, string text);
-        //[DllImport("wx-c")] static extern void   wxStyledTextCtrl_AddStyledText(IntPtr self, IntPtr data);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_InsertText(IntPtr self, int pos, string text);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_ClearAll(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_ClearDocumentStyle(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetLength(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetCharAt(IntPtr self, int pos);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetCurrentPos(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetAnchor(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetStyleAt(IntPtr self, int pos);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_Redo(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetUndoCollection(IntPtr self, bool collectUndo);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SelectAll(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetSavePoint(IntPtr self);
-        //[DllImport("wx-c")] static extern IntPtr wxStyledTextCtrl_GetStyledText(IntPtr self, int startPos, int endPos);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_CanRedo(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_MarkerLineFromHandle(IntPtr self, int handle);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_MarkerDeleteHandle(IntPtr self, int handle);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_GetUndoCollection(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetViewWhiteSpace(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetViewWhiteSpace(IntPtr self, int viewWS);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_PositionFromPoint(IntPtr self, ref Point pt);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_PositionFromPointClose(IntPtr self, int x, int y);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_GotoLine(IntPtr self, int line);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_GotoPos(IntPtr self, int pos);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetAnchor(IntPtr self, int posAnchor);
-        [DllImport("wx-c")] static extern IntPtr wxStyledTextCtrl_GetCurLine(IntPtr self, ref int linePos);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetEndStyled(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_ConvertEOLs(IntPtr self, int eolMode);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetEOLMode(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetEOLMode(IntPtr self, int eolMode);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_StartStyling(IntPtr self, int pos, int mask);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetStyling(IntPtr self, int length, int style);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_GetBufferedDraw(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetBufferedDraw(IntPtr self, bool buffered);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetTabWidth(IntPtr self, int tabWidth);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetTabWidth(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetCodePage(IntPtr self, int codePage);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_MarkerDefine(IntPtr self, int markerNumber, int markerSymbol, IntPtr foreground, IntPtr background);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_MarkerSetForeground(IntPtr self, int markerNumber, IntPtr fore);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_MarkerSetBackground(IntPtr self, int markerNumber, IntPtr back);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_MarkerAdd(IntPtr self, int line, int markerNumber);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_MarkerDelete(IntPtr self, int line, int markerNumber);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_MarkerDeleteAll(IntPtr self, int markerNumber);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_MarkerGet(IntPtr self, int line);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_MarkerNext(IntPtr self, int lineStart, int markerMask);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_MarkerPrevious(IntPtr self, int lineStart, int markerMask);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_MarkerDefineBitmap(IntPtr self, int markerNumber, IntPtr bmp);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetMarginType(IntPtr self, int margin, int marginType);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetMarginType(IntPtr self, int margin);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetMarginWidth(IntPtr self, int margin, int pixelWidth);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetMarginWidth(IntPtr self, int margin);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetMarginMask(IntPtr self, int margin, int mask);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetMarginMask(IntPtr self, int margin);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetMarginSensitive(IntPtr self, int margin, bool sensitive);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_GetMarginSensitive(IntPtr self, int margin);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_StyleClearAll(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_StyleSetForeground(IntPtr self, int style, IntPtr fore);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_StyleSetBackground(IntPtr self, int style, IntPtr back);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_StyleSetBold(IntPtr self, int style, bool bold);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_StyleSetItalic(IntPtr self, int style, bool italic);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_StyleSetSize(IntPtr self, int style, int sizePoints);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_StyleSetFaceName(IntPtr self, int style, string fontName);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_StyleSetEOLFilled(IntPtr self, int style, bool filled);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_StyleResetDefault(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_StyleSetUnderline(IntPtr self, int style, bool underline);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_StyleSetCase(IntPtr self, int style, int caseForce);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_StyleSetCharacterSet(IntPtr self, int style, int characterSet);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_StyleSetHotSpot(IntPtr self, int style, bool hotspot);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetSelForeground(IntPtr self, bool useSetting, IntPtr fore);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetSelBackground(IntPtr self, bool useSetting, IntPtr back);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetCaretForeground(IntPtr self, IntPtr fore);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_CmdKeyAssign(IntPtr self, int key, int modifiers, int cmd);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_CmdKeyClear(IntPtr self, int key, int modifiers);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_CmdKeyClearAll(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetStyleBytes(IntPtr self, int length, byte[] styleBytes);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_StyleSetVisible(IntPtr self, int style, bool visible);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetCaretPeriod(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetCaretPeriod(IntPtr self, int periodMilliseconds);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetWordChars(IntPtr self, string characters);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_BeginUndoAction(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_EndUndoAction(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_IndicatorSetStyle(IntPtr self, int indic, int style);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_IndicatorGetStyle(IntPtr self, int indic);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_IndicatorSetForeground(IntPtr self, int indic, IntPtr fore);
-        [DllImport("wx-c")] static extern IntPtr wxStyledTextCtrl_IndicatorGetForeground(IntPtr self, int indic);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetWhitespaceForeground(IntPtr self, bool useSetting, IntPtr fore);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetWhitespaceBackground(IntPtr self, bool useSetting, IntPtr back);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetStyleBits(IntPtr self, int bits);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetStyleBits(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetLineState(IntPtr self, int line, int state);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetLineState(IntPtr self, int line);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetMaxLineState(IntPtr self);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_GetCaretLineVisible(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetCaretLineVisible(IntPtr self, bool show);
-        [DllImport("wx-c")] static extern IntPtr wxStyledTextCtrl_GetCaretLineBack(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetCaretLineBack(IntPtr self, IntPtr back);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_StyleSetChangeable(IntPtr self, int style, bool changeable);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_AutoCompShow(IntPtr self, int lenEntered, string itemList);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_AutoCompCancel(IntPtr self);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_AutoCompActive(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_AutoCompPosStart(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_AutoCompComplete(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_AutoCompStops(IntPtr self, string characterSet);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_AutoCompSetSeparator(IntPtr self, int separatorCharacter);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_AutoCompGetSeparator(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_AutoCompSelect(IntPtr self, string text);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_AutoCompSetCancelAtStart(IntPtr self, bool cancel);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_AutoCompGetCancelAtStart(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_AutoCompSetFillUps(IntPtr self, string characterSet);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_AutoCompSetChooseSingle(IntPtr self, bool chooseSingle);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_AutoCompGetChooseSingle(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_AutoCompSetIgnoreCase(IntPtr self, bool ignoreCase);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_AutoCompGetIgnoreCase(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_UserListShow(IntPtr self, int listType, string itemList);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_AutoCompSetAutoHide(IntPtr self, bool autoHide);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_AutoCompGetAutoHide(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_AutoCompSetDropRestOfWord(IntPtr self, bool dropRestOfWord);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_AutoCompGetDropRestOfWord(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_RegisterImage(IntPtr self, int type, IntPtr bmp);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_ClearRegisteredImages(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_AutoCompGetTypeSeparator(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_AutoCompSetTypeSeparator(IntPtr self, int separatorCharacter);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetIndent(IntPtr self, int indentSize);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetIndent(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetUseTabs(IntPtr self, bool useTabs);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_GetUseTabs(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetLineIndentation(IntPtr self, int line, int indentSize);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetLineIndentation(IntPtr self, int line);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetLineIndentPosition(IntPtr self, int line);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetColumn(IntPtr self, int pos);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetUseHorizontalScrollBar(IntPtr self, bool show);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_GetUseHorizontalScrollBar(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetIndentationGuides(IntPtr self, bool show);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_GetIndentationGuides(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetHighlightGuide(IntPtr self, int column);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetHighlightGuide(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetLineEndPosition(IntPtr self, int line);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetCodePage(IntPtr self);
-        [DllImport("wx-c")] static extern IntPtr wxStyledTextCtrl_GetCaretForeground(IntPtr self);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_GetReadOnly(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetCurrentPos(IntPtr self, int pos);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetSelectionStart(IntPtr self, int pos);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetSelectionStart(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetSelectionEnd(IntPtr self, int pos);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetSelectionEnd(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetPrintMagnification(IntPtr self, int magnification);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetPrintMagnification(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetPrintColourMode(IntPtr self, int mode);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetPrintColourMode(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_FindText(IntPtr self, int minPos, int maxPos, string text, int flags);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_FormatRange(IntPtr self, bool doDraw, int startPos, int endPos, IntPtr draw, IntPtr target, ref Rectangle renderRect, ref Rectangle pageRect);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetFirstVisibleLine(IntPtr self);
-        [DllImport("wx-c")] static extern IntPtr wxStyledTextCtrl_GetLine(IntPtr self, int line);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetLineCount(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetMarginLeft(IntPtr self, int pixelWidth);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetMarginLeft(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetMarginRight(IntPtr self, int pixelWidth);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetMarginRight(IntPtr self);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_GetModify(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetSelection(IntPtr self, int start, int end);
-        [DllImport("wx-c")] static extern IntPtr wxStyledTextCtrl_GetSelectedText(IntPtr self);
-        [DllImport("wx-c")] static extern IntPtr wxStyledTextCtrl_GetTextRange(IntPtr self, int startPos, int endPos);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_HideSelection(IntPtr self, bool normal);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_LineFromPosition(IntPtr self, int pos);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_PositionFromLine(IntPtr self, int line);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_LineScroll(IntPtr self, int columns, int lines);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_EnsureCaretVisible(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_ReplaceSelection(IntPtr self, string text);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetReadOnly(IntPtr self, bool readOnly);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_CanPaste(IntPtr self);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_CanUndo(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_EmptyUndoBuffer(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_Undo(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_Cut(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_Copy(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_Paste(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_Clear(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetText(IntPtr self, string text);
-        [DllImport("wx-c")] static extern IntPtr wxStyledTextCtrl_GetText(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetTextLength(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetOvertype(IntPtr self, bool overtype);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_GetOvertype(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetCaretWidth(IntPtr self, int pixelWidth);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetCaretWidth(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetTargetStart(IntPtr self, int pos);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetTargetStart(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetTargetEnd(IntPtr self, int pos);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetTargetEnd(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_ReplaceTarget(IntPtr self, string text);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_ReplaceTargetRE(IntPtr self, string text);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_SearchInTarget(IntPtr self, string text);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetSearchFlags(IntPtr self, int flags);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetSearchFlags(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_CallTipShow(IntPtr self, int pos, string definition);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_CallTipCancel(IntPtr self);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_CallTipActive(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_CallTipPosAtStart(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_CallTipSetHighlight(IntPtr self, int start, int end);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_CallTipSetBackground(IntPtr self, IntPtr back);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_CallTipSetForeground(IntPtr self, IntPtr fore);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_CallTipSetForegroundHighlight(IntPtr self, IntPtr fore);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_VisibleFromDocLine(IntPtr self, int line);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_DocLineFromVisible(IntPtr self, int lineDisplay);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetFoldLevel(IntPtr self, int line, int level);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetFoldLevel(IntPtr self, int line);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetLastChild(IntPtr self, int line, int level);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetFoldParent(IntPtr self, int line);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_ShowLines(IntPtr self, int lineStart, int lineEnd);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_HideLines(IntPtr self, int lineStart, int lineEnd);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_GetLineVisible(IntPtr self, int line);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetFoldExpanded(IntPtr self, int line, bool expanded);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_GetFoldExpanded(IntPtr self, int line);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_ToggleFold(IntPtr self, int line);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_EnsureVisible(IntPtr self, int line);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetFoldFlags(IntPtr self, int flags);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_EnsureVisibleEnforcePolicy(IntPtr self, int line);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetTabIndents(IntPtr self, bool tabIndents);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_GetTabIndents(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetBackSpaceUnIndents(IntPtr self, bool bsUnIndents);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_GetBackSpaceUnIndents(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetMouseDwellTime(IntPtr self, int periodMilliseconds);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetMouseDwellTime(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_WordStartPosition(IntPtr self, int pos, bool onlyWordCharacters);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_WordEndPosition(IntPtr self, int pos, bool onlyWordCharacters);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetWrapMode(IntPtr self, int mode);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetWrapMode(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetLayoutCache(IntPtr self, int mode);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetLayoutCache(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetScrollWidth(IntPtr self, int pixelWidth);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetScrollWidth(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_TextWidth(IntPtr self, int style, string text);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetEndAtLastLine(IntPtr self, bool endAtLastLine);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_GetEndAtLastLine(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_TextHeight(IntPtr self, int line);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetUseVerticalScrollBar(IntPtr self, bool show);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_GetUseVerticalScrollBar(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_AppendText(IntPtr self, string text);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_GetTwoPhaseDraw(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetTwoPhaseDraw(IntPtr self, bool twoPhase);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_TargetFromSelection(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_LinesJoin(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_LinesSplit(IntPtr self, int pixelWidth);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetFoldMarginColour(IntPtr self, bool useSetting, IntPtr back);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetFoldMarginHiColour(IntPtr self, bool useSetting, IntPtr fore);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_LineDuplicate(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_HomeDisplay(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_HomeDisplayExtend(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_LineEndDisplay(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_LineEndDisplayExtend(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_MoveCaretInsideView(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_LineLength(IntPtr self, int line);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_BraceHighlight(IntPtr self, int pos1, int pos2);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_BraceBadLight(IntPtr self, int pos);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_BraceMatch(IntPtr self, int pos);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_GetViewEOL(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetViewEOL(IntPtr self, bool visible);
-        [DllImport("wx-c")] static extern IntPtr wxStyledTextCtrl_GetDocPointer(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetDocPointer(IntPtr self, IntPtr docPointer);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetModEventMask(IntPtr self, int mask);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetEdgeColumn(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetEdgeColumn(IntPtr self, int column);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetEdgeMode(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetEdgeMode(IntPtr self, int mode);
-        [DllImport("wx-c")] static extern IntPtr wxStyledTextCtrl_GetEdgeColour(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetEdgeColour(IntPtr self, IntPtr edgeColour);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SearchAnchor(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_SearchNext(IntPtr self, int flags, string text);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_SearchPrev(IntPtr self, int flags, string text);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_LinesOnScreen(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_UsePopUp(IntPtr self, bool allowPopUp);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_SelectionIsRectangle(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetZoom(IntPtr self, int zoom);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetZoom(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_CreateDocument(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_AddRefDocument(IntPtr self, IntPtr docPointer);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_ReleaseDocument(IntPtr self, IntPtr docPointer);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetModEventMask(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetSTCFocus(IntPtr self, bool focus);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_GetSTCFocus(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetStatus(IntPtr self, int statusCode);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetStatus(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetMouseDownCaptures(IntPtr self, bool captures);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_GetMouseDownCaptures(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetSTCCursor(IntPtr self, int cursorType);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetSTCCursor(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetControlCharSymbol(IntPtr self, int symbol);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetControlCharSymbol(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_WordPartLeft(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_WordPartLeftExtend(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_WordPartRight(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_WordPartRightExtend(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetVisiblePolicy(IntPtr self, int visiblePolicy, int visibleSlop);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_DelLineLeft(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_DelLineRight(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetXOffset(IntPtr self, int newOffset);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetXOffset(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_ChooseCaretX(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetXCaretPolicy(IntPtr self, int caretPolicy, int caretSlop);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetYCaretPolicy(IntPtr self, int caretPolicy, int caretSlop);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetPrintWrapMode(IntPtr self, int mode);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetPrintWrapMode(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetHotspotActiveForeground(IntPtr self, bool useSetting, IntPtr fore);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetHotspotActiveBackground(IntPtr self, bool useSetting, IntPtr back);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetHotspotActiveUnderline(IntPtr self, bool underline);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_StartRecord(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_StopRecord(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetLexer(IntPtr self, int lexer);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetLexer(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_Colourise(IntPtr self, int start, int end);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetProperty(IntPtr self, string key, string value);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetKeyWords(IntPtr self, int keywordSet, string keyWords);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetLexerLanguage(IntPtr self, string language);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_GetCurrentLine(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_StyleSetSpec(IntPtr self, int styleNum, string spec);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_StyleSetFont(IntPtr self, int styleNum, IntPtr font);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_StyleSetFontAttr(IntPtr self, int styleNum, int size, string faceName, bool bold, bool italic, bool underline);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_CmdKeyExecute(IntPtr self, int cmd);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetMargins(IntPtr self, int left, int right);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_GetSelection(IntPtr self, ref int startPos, ref int endPos);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_PointFromPosition(IntPtr self, int pos, ref Point pt);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_ScrollToLine(IntPtr self, int line);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_ScrollToColumn(IntPtr self, int column);
-        [DllImport("wx-c")] static extern int    wxStyledTextCtrl_SendMsg(IntPtr self, int msg, int wp, int lp);
-        //[DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetVScrollBar(IntPtr self, IntPtr bar);
-        //[DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetHScrollBar(IntPtr self, IntPtr bar);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_GetLastKeydownProcessed(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxStyledTextCtrl_SetLastKeydownProcessed(IntPtr self, bool val);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_SaveFile(IntPtr self, string filename);
-        [DllImport("wx-c")] static extern bool   wxStyledTextCtrl_LoadFile(IntPtr self, string filename);
-
-        //-----------------------------------------------------------------------------
-
-        static StyledTextCtrl()
+        static this()
         {
-            Event.AddEventType(wxEVT_STC_CHANGE,               typeof(StyledTextEvent));
-            Event.AddEventType(wxEVT_STC_STYLENEEDED,          typeof(StyledTextEvent));
-            Event.AddEventType(wxEVT_STC_CHARADDED,            typeof(StyledTextEvent));
-            Event.AddEventType(wxEVT_STC_SAVEPOINTREACHED,     typeof(StyledTextEvent));
-            Event.AddEventType(wxEVT_STC_SAVEPOINTLEFT,        typeof(StyledTextEvent));
-            Event.AddEventType(wxEVT_STC_ROMODIFYATTEMPT,      typeof(StyledTextEvent));
-            Event.AddEventType(wxEVT_STC_KEY,                  typeof(StyledTextEvent));
-            Event.AddEventType(wxEVT_STC_DOUBLECLICK,          typeof(StyledTextEvent));
-            Event.AddEventType(wxEVT_STC_UPDATEUI,             typeof(StyledTextEvent));
-            Event.AddEventType(wxEVT_STC_MODIFIED,             typeof(StyledTextEvent));
-            Event.AddEventType(wxEVT_STC_MACRORECORD,          typeof(StyledTextEvent));
-            Event.AddEventType(wxEVT_STC_MARGINCLICK,          typeof(StyledTextEvent));
-            Event.AddEventType(wxEVT_STC_NEEDSHOWN,            typeof(StyledTextEvent));
-            //Event.AddEventType(wxEVT_STC_POSCHANGED,           typeof(StyledTextEvent));
-            Event.AddEventType(wxEVT_STC_PAINTED,              typeof(StyledTextEvent));
-            Event.AddEventType(wxEVT_STC_USERLISTSELECTION,    typeof(StyledTextEvent));
-            Event.AddEventType(wxEVT_STC_URIDROPPED,           typeof(StyledTextEvent));
-            Event.AddEventType(wxEVT_STC_DWELLSTART,           typeof(StyledTextEvent));
-            Event.AddEventType(wxEVT_STC_DWELLEND,             typeof(StyledTextEvent));
-            Event.AddEventType(wxEVT_STC_START_DRAG,           typeof(StyledTextEvent));
-            Event.AddEventType(wxEVT_STC_DRAG_OVER,            typeof(StyledTextEvent));
-            Event.AddEventType(wxEVT_STC_DO_DROP,              typeof(StyledTextEvent));
-            Event.AddEventType(wxEVT_STC_ZOOM,                 typeof(StyledTextEvent));
-            Event.AddEventType(wxEVT_STC_HOTSPOT_CLICK,        typeof(StyledTextEvent));
-            Event.AddEventType(wxEVT_STC_HOTSPOT_DCLICK,       typeof(StyledTextEvent));
-            Event.AddEventType(wxEVT_STC_CALLTIP_CLICK,        typeof(StyledTextEvent));
+            Event.AddEventType(wxEVT_STC_CHANGE,               &StyledTextEvent.New);
+            Event.AddEventType(wxEVT_STC_STYLENEEDED,          &StyledTextEvent.New);
+            Event.AddEventType(wxEVT_STC_CHARADDED,            &StyledTextEvent.New);
+            Event.AddEventType(wxEVT_STC_SAVEPOINTREACHED,     &StyledTextEvent.New);
+            Event.AddEventType(wxEVT_STC_SAVEPOINTLEFT,        &StyledTextEvent.New);
+            Event.AddEventType(wxEVT_STC_ROMODIFYATTEMPT,      &StyledTextEvent.New);
+            Event.AddEventType(wxEVT_STC_KEY,                  &StyledTextEvent.New);
+            Event.AddEventType(wxEVT_STC_DOUBLECLICK,          &StyledTextEvent.New);
+            Event.AddEventType(wxEVT_STC_UPDATEUI,             &StyledTextEvent.New);
+            Event.AddEventType(wxEVT_STC_MODIFIED,             &StyledTextEvent.New);
+            Event.AddEventType(wxEVT_STC_MACRORECORD,          &StyledTextEvent.New);
+            Event.AddEventType(wxEVT_STC_MARGINCLICK,          &StyledTextEvent.New);
+            Event.AddEventType(wxEVT_STC_NEEDSHOWN,            &StyledTextEvent.New);
+            //Event.AddEventType(wxEVT_STC_POSCHANGED,           &StyledTextEvent.New);
+            Event.AddEventType(wxEVT_STC_PAINTED,              &StyledTextEvent.New);
+            Event.AddEventType(wxEVT_STC_USERLISTSELECTION,    &StyledTextEvent.New);
+            Event.AddEventType(wxEVT_STC_URIDROPPED,           &StyledTextEvent.New);
+            Event.AddEventType(wxEVT_STC_DWELLSTART,           &StyledTextEvent.New);
+            Event.AddEventType(wxEVT_STC_DWELLEND,             &StyledTextEvent.New);
+            Event.AddEventType(wxEVT_STC_START_DRAG,           &StyledTextEvent.New);
+            Event.AddEventType(wxEVT_STC_DRAG_OVER,            &StyledTextEvent.New);
+            Event.AddEventType(wxEVT_STC_DO_DROP,              &StyledTextEvent.New);
+            Event.AddEventType(wxEVT_STC_ZOOM,                 &StyledTextEvent.New);
+            Event.AddEventType(wxEVT_STC_HOTSPOT_CLICK,        &StyledTextEvent.New);
+            Event.AddEventType(wxEVT_STC_HOTSPOT_DCLICK,       &StyledTextEvent.New);
+            Event.AddEventType(wxEVT_STC_CALLTIP_CLICK,        &StyledTextEvent.New);
         }
 
         //-----------------------------------------------------------------------------
 
-        public StyledTextCtrl(IntPtr wxObject) 
-            : base (wxObject) { }
+        public this(IntPtr wxobj) 
+            { super (wxobj); }
 
-        public  StyledTextCtrl(Window parent)
-            : this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, null) { }
+        public  this(Window parent)
+            { this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, null); }
 
-        public  StyledTextCtrl(Window parent, int id)
-            : this(parent, id, wxDefaultPosition, wxDefaultSize, 0, null) { }
+        public  this(Window parent, int id)
+            { this(parent, id, wxDefaultPosition, wxDefaultSize, 0, null); }
 
-        public  StyledTextCtrl(Window parent, int id, Point pos)
-            : this(parent, id, pos, wxDefaultSize, 0, null) { }
+        public  this(Window parent, int id, Point pos)
+            { this(parent, id, pos, wxDefaultSize, 0, null); }
 
-        public  StyledTextCtrl(Window parent, int id, Point pos, Size size)
-            : this(parent, id, pos, size, 0, null) { }
+        public  this(Window parent, int id, Point pos, Size size)
+            { this(parent, id, pos, size, 0, null); }
 
-        public  StyledTextCtrl(Window parent, int id, Point pos, Size size, int style)
-            : this(parent, id, pos, size, style, null) { }
+        public  this(Window parent, int id, Point pos, Size size, int style)
+            { this(parent, id, pos, size, style, null); }
 
-        public  StyledTextCtrl(Window parent, int id, Point pos, Size size, int style, string name)
-            : this(wxStyledTextCtrl_ctor(Object.SafePtr(parent), id, ref pos, ref size, (uint)style, name)) { }
+        public  this(Window parent, int id, Point pos, Size size, int style, string name)
+            { this(wxStyledTextCtrl_ctor(wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name)); }
 	    
 	//---------------------------------------------------------------------
 	// ctors with self created id
 	    
-        public  StyledTextCtrl(Window parent, Point pos)
-            : this(parent, Window.UniqueID, pos, wxDefaultSize, 0, null) { }
+        public  this(Window parent, Point pos)
+            { this(parent, Window.UniqueID, pos, wxDefaultSize, 0, null); }
 
-        public  StyledTextCtrl(Window parent, Point pos, Size size)
-            : this(parent, Window.UniqueID, pos, size, 0, null) { }
+        public  this(Window parent, Point pos, Size size)
+            { this(parent, Window.UniqueID, pos, size, 0, null); }
 
-        public  StyledTextCtrl(Window parent, Point pos, Size size, int style)
-            : this(parent, Window.UniqueID, pos, size, style, null) { }
+        public  this(Window parent, Point pos, Size size, int style)
+            { this(parent, Window.UniqueID, pos, size, style, null); }
 
-        public  StyledTextCtrl(Window parent, Point pos, Size size, int style, string name)
-	    : this(parent, Window.UniqueID, pos, size, style, name) {}
+        public  this(Window parent, Point pos, Size size, int style, string name)
+	    { this(parent, Window.UniqueID, pos, size, style, name);}
 
         //-----------------------------------------------------------------------------
 
         public void AddText(string text)
         {
-            wxStyledTextCtrl_AddText(wxObject, text);
+            wxStyledTextCtrl_AddText(wxobj, text);
         }
 
         /*public void AddStyledText(MemoryBuffer data)
         {
-            wxStyledTextCtrl_AddStyledText(wxObject, Object.SafePtr(data));
+            wxStyledTextCtrl_AddStyledText(wxobj, wxObject.SafePtr(data));
         }*/
 
         public void InsertText(int pos, string text)
         {
-            wxStyledTextCtrl_InsertText(wxObject, pos, text);
+            wxStyledTextCtrl_InsertText(wxobj, pos, text);
         }
 
         //-----------------------------------------------------------------------------
 
         public void ClearAll()
         {
-            wxStyledTextCtrl_ClearAll(wxObject);
+            wxStyledTextCtrl_ClearAll(wxobj);
         }
 
         public void ClearDocumentStyle()
         {
-            wxStyledTextCtrl_ClearDocumentStyle(wxObject);
+            wxStyledTextCtrl_ClearDocumentStyle(wxobj);
         }
 
         //-----------------------------------------------------------------------------
 
-        public int Length
-        {
-            get { return wxStyledTextCtrl_GetLength(wxObject); }
-        }
+        public int Length() { return wxStyledTextCtrl_GetLength(wxobj); }
 
         //-----------------------------------------------------------------------------
 
         public int GetCharAt(int pos)
         {
-            return wxStyledTextCtrl_GetCharAt(wxObject, pos);
+            return wxStyledTextCtrl_GetCharAt(wxobj, pos);
         }
 
         //-----------------------------------------------------------------------------
 
-        public int CurrentPos
-        {
-            get { return wxStyledTextCtrl_GetCurrentPos(wxObject); }
-            set { wxStyledTextCtrl_SetCurrentPos(wxObject, value); }
-        }
+        public int CurrentPos() { return wxStyledTextCtrl_GetCurrentPos(wxobj); }
+        public void CurrentPos(int value) { wxStyledTextCtrl_SetCurrentPos(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public int Anchor
-        {
-            get { return wxStyledTextCtrl_GetAnchor(wxObject); }
-            set { wxStyledTextCtrl_SetAnchor(wxObject, value); }
-        }
+        public int Anchor() { return wxStyledTextCtrl_GetAnchor(wxobj); }
+        public void Anchor(int value) { wxStyledTextCtrl_SetAnchor(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
         public int GetStyleAt(int pos)
         {
-            return wxStyledTextCtrl_GetStyleAt(wxObject, pos);
+            return wxStyledTextCtrl_GetStyleAt(wxobj, pos);
         }
 
         //-----------------------------------------------------------------------------
 
         public void Redo()
         {
-            wxStyledTextCtrl_Redo(wxObject);
+            wxStyledTextCtrl_Redo(wxobj);
         }
 
         //-----------------------------------------------------------------------------
 
-        public bool UndoCollection
-        {
-            get { return wxStyledTextCtrl_GetUndoCollection(wxObject); }
-            set { wxStyledTextCtrl_SetUndoCollection(wxObject, value); }
-        }
+        public bool UndoCollection() { return wxStyledTextCtrl_GetUndoCollection(wxobj); }
+        public void UndoCollection(bool value) { wxStyledTextCtrl_SetUndoCollection(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
         public void SelectAll()
         {
-            wxStyledTextCtrl_SelectAll(wxObject);
+            wxStyledTextCtrl_SelectAll(wxobj);
         }
 
         //-----------------------------------------------------------------------------
 
         public void SetSavePoint()
         {
-            wxStyledTextCtrl_SetSavePoint(wxObject);
+            wxStyledTextCtrl_SetSavePoint(wxobj);
         }
 
         //-----------------------------------------------------------------------------
 
         /*public MemoryBuffer GetStyledText(int startPos, int endPos)
         {
-            return wxStyledTextCtrl_GetStyledText(wxObject, startPos, endPos);
+            return wxStyledTextCtrl_GetStyledText(wxobj, startPos, endPos);
         }*/
 
         //-----------------------------------------------------------------------------
 
-        public bool CanRedo
-        {
-            get { return wxStyledTextCtrl_CanRedo(wxObject); }
-        }
+        public bool CanRedo() { return wxStyledTextCtrl_CanRedo(wxobj); }
 
         //-----------------------------------------------------------------------------
 
         public int MarkerLineFromHandle(int handle)
         {
-            return wxStyledTextCtrl_MarkerLineFromHandle(wxObject, handle);
+            return wxStyledTextCtrl_MarkerLineFromHandle(wxobj, handle);
         }
 
         public void MarkerDeleteHandle(int handle)
         {
-            wxStyledTextCtrl_MarkerDeleteHandle(wxObject, handle);
+            wxStyledTextCtrl_MarkerDeleteHandle(wxobj, handle);
         }
 
         //-----------------------------------------------------------------------------
 
-        public int ViewWhiteSpace
-        {
-            get { return wxStyledTextCtrl_GetViewWhiteSpace(wxObject); }
-            set { wxStyledTextCtrl_SetViewWhiteSpace(wxObject, value); }
-        }
+        public int ViewWhiteSpace() { return wxStyledTextCtrl_GetViewWhiteSpace(wxobj); }
+        public void ViewWhiteSpace(int value) { wxStyledTextCtrl_SetViewWhiteSpace(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
         public int PositionFromPoint(Point pt)
         {
-            return wxStyledTextCtrl_PositionFromPoint(wxObject, ref pt);
+            return wxStyledTextCtrl_PositionFromPoint(wxobj, pt);
         }
 
         public int PositionFromPointClose(int x, int y)
         {
-            return wxStyledTextCtrl_PositionFromPointClose(wxObject, x, y);
+            return wxStyledTextCtrl_PositionFromPointClose(wxobj, x, y);
         }
 
         //-----------------------------------------------------------------------------
 
         public void GotoLine(int line)
         {
-            wxStyledTextCtrl_GotoLine(wxObject, line);
+            wxStyledTextCtrl_GotoLine(wxobj, line);
         }
 
         //-----------------------------------------------------------------------------
 
         public void GotoPos(int pos)
         {
-            wxStyledTextCtrl_GotoPos(wxObject, pos);
+            wxStyledTextCtrl_GotoPos(wxobj, pos);
         }
 
         //-----------------------------------------------------------------------------
 
-        public string CurLine
-        {
-            get {
+        public string CurLine() {
                 int i;
-                return GetCurLine(out i);
+                return GetCurLine(i);
             }
-        }
 
         public string GetCurLine(out int linePos)
         {
-            linePos = new int();
-            return new wxString(wxStyledTextCtrl_GetCurLine(wxObject, ref linePos), true);
+            return wxStyledTextCtrl_GetCurLine(wxobj, linePos).dup;
         }
 
         //-----------------------------------------------------------------------------
 
-        public int EndStyled
-        {
-            get { return wxStyledTextCtrl_GetEndStyled(wxObject); }
-        }
+        public int EndStyled() { return wxStyledTextCtrl_GetEndStyled(wxobj); }
 
         //-----------------------------------------------------------------------------
 
         public void ConvertEOLs(int eolMode)
         {
-            wxStyledTextCtrl_ConvertEOLs(wxObject, eolMode);
+            wxStyledTextCtrl_ConvertEOLs(wxobj, eolMode);
         }
 
         //-----------------------------------------------------------------------------
 
-        public int EOLMode
-        {
-            get { return wxStyledTextCtrl_GetEOLMode(wxObject); }
-            set { wxStyledTextCtrl_SetEOLMode(wxObject, value); }
-        }
+        public int EOLMode() { return wxStyledTextCtrl_GetEOLMode(wxobj); }
+        public void EOLMode(int value) { wxStyledTextCtrl_SetEOLMode(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
         public void StartStyling(int pos, int mask)
         {
-            wxStyledTextCtrl_StartStyling(wxObject, pos, mask);
+            wxStyledTextCtrl_StartStyling(wxobj, pos, mask);
         }
 
         //-----------------------------------------------------------------------------
 
         public void SetStyling(int length, int style)
         {
-            wxStyledTextCtrl_SetStyling(wxObject, length, style);
+            wxStyledTextCtrl_SetStyling(wxobj, length, style);
         }
 
         //-----------------------------------------------------------------------------
 
-        public bool BufferedDraw
-        {
-            get { return wxStyledTextCtrl_GetBufferedDraw(wxObject); }
-            set { wxStyledTextCtrl_SetBufferedDraw(wxObject, value); }
-        }
+        public bool BufferedDraw() { return wxStyledTextCtrl_GetBufferedDraw(wxobj); }
+        public void BufferedDraw(bool value) { wxStyledTextCtrl_SetBufferedDraw(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public int TabWidth
-        {
-            get { return wxStyledTextCtrl_GetTabWidth(wxObject); }
-            set { wxStyledTextCtrl_SetTabWidth(wxObject, value); }
-        }
+        public int TabWidth() { return wxStyledTextCtrl_GetTabWidth(wxobj); }
+        public void TabWidth(int value) { wxStyledTextCtrl_SetTabWidth(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public int CodePage
-        {
-            get { return wxStyledTextCtrl_GetCodePage(wxObject); } 
-            set { wxStyledTextCtrl_SetCodePage(wxObject, value); } 
-        }
+        public int CodePage() { return wxStyledTextCtrl_GetCodePage(wxobj); } 
+        public void CodePage(int value) { wxStyledTextCtrl_SetCodePage(wxobj, value); } 
 
         //-----------------------------------------------------------------------------
 
         public void MarkerDefine(int markerNumber, int markerSymbol, Colour foreground, Colour background)
         {
-            wxStyledTextCtrl_MarkerDefine(wxObject, markerNumber, markerSymbol, Object.SafePtr(foreground), Object.SafePtr(background));
+            wxStyledTextCtrl_MarkerDefine(wxobj, markerNumber, markerSymbol, wxObject.SafePtr(foreground), wxObject.SafePtr(background));
         }
 
         public void MarkerSetForeground(int markerNumber, Colour fore)
         {
-            wxStyledTextCtrl_MarkerSetForeground(wxObject, markerNumber, Object.SafePtr(fore));
+            wxStyledTextCtrl_MarkerSetForeground(wxobj, markerNumber, wxObject.SafePtr(fore));
         }
 
         public void MarkerSetBackground(int markerNumber, Colour back)
         {
-            wxStyledTextCtrl_MarkerSetBackground(wxObject, markerNumber, Object.SafePtr(back));
+            wxStyledTextCtrl_MarkerSetBackground(wxobj, markerNumber, wxObject.SafePtr(back));
         }
 
         public int MarkerAdd(int line, int markerNumber)
         {
-            return wxStyledTextCtrl_MarkerAdd(wxObject, line, markerNumber);
+            return wxStyledTextCtrl_MarkerAdd(wxobj, line, markerNumber);
         }
 
         public void MarkerDelete(int line, int markerNumber)
         {
-            wxStyledTextCtrl_MarkerDelete(wxObject, line, markerNumber);
+            wxStyledTextCtrl_MarkerDelete(wxobj, line, markerNumber);
         }
 
         public void MarkerDeleteAll(int markerNumber)
         {
-            wxStyledTextCtrl_MarkerDeleteAll(wxObject, markerNumber);
+            wxStyledTextCtrl_MarkerDeleteAll(wxobj, markerNumber);
         }
 
         public int MarkerGet(int line)
         {
-            return wxStyledTextCtrl_MarkerGet(wxObject, line);
+            return wxStyledTextCtrl_MarkerGet(wxobj, line);
         }
 
         public int MarkerNext(int lineStart, int markerMask)
         {
-            return wxStyledTextCtrl_MarkerNext(wxObject, lineStart, markerMask);
+            return wxStyledTextCtrl_MarkerNext(wxobj, lineStart, markerMask);
         }
 
         public int MarkerPrevious(int lineStart, int markerMask)
         {
-            return wxStyledTextCtrl_MarkerPrevious(wxObject, lineStart, markerMask);
+            return wxStyledTextCtrl_MarkerPrevious(wxobj, lineStart, markerMask);
         }
 
         public void MarkerDefineBitmap(int markerNumber, Bitmap bmp)
         {
-            wxStyledTextCtrl_MarkerDefineBitmap(wxObject, markerNumber, Object.SafePtr(bmp));
+            wxStyledTextCtrl_MarkerDefineBitmap(wxobj, markerNumber, wxObject.SafePtr(bmp));
         }
 
         //-----------------------------------------------------------------------------
 
         public void SetMarginType(int margin, int marginType)
         {
-            wxStyledTextCtrl_SetMarginType(wxObject, margin, marginType);
+            wxStyledTextCtrl_SetMarginType(wxobj, margin, marginType);
         }
 
         public int GetMarginType(int margin)
         {
-            return wxStyledTextCtrl_GetMarginType(wxObject, margin);
+            return wxStyledTextCtrl_GetMarginType(wxobj, margin);
         }
 
         //-----------------------------------------------------------------------------
 
         public void SetMarginWidth(int margin, int pixelWidth)
         {
-            wxStyledTextCtrl_SetMarginWidth(wxObject, margin, pixelWidth);
+            wxStyledTextCtrl_SetMarginWidth(wxobj, margin, pixelWidth);
         }
 
         public int GetMarginWidth(int margin)
         {
-            return wxStyledTextCtrl_GetMarginWidth(wxObject, margin);
+            return wxStyledTextCtrl_GetMarginWidth(wxobj, margin);
         }
 
         //-----------------------------------------------------------------------------
 
         public void SetMarginMask(int margin, int mask)
         {
-            wxStyledTextCtrl_SetMarginMask(wxObject, margin, mask);
+            wxStyledTextCtrl_SetMarginMask(wxobj, margin, mask);
         }
 
         public int GetMarginMask(int margin)
         {
-            return wxStyledTextCtrl_GetMarginMask(wxObject, margin);
+            return wxStyledTextCtrl_GetMarginMask(wxobj, margin);
         }
 
         //-----------------------------------------------------------------------------
 
         public void SetMarginSensitive(int margin, bool sensitive)
         {
-            wxStyledTextCtrl_SetMarginSensitive(wxObject, margin, sensitive);
+            wxStyledTextCtrl_SetMarginSensitive(wxobj, margin, sensitive);
         }
 
         public bool GetMarginSensitive(int margin)
         {
-            return wxStyledTextCtrl_GetMarginSensitive(wxObject, margin);
+            return wxStyledTextCtrl_GetMarginSensitive(wxobj, margin);
         }
 
         //-----------------------------------------------------------------------------
 
         public void StyleClearAll()
         {
-            wxStyledTextCtrl_StyleClearAll(wxObject);
+            wxStyledTextCtrl_StyleClearAll(wxobj);
         }
 
         public void StyleSetForeground(int style, Colour fore)
         {
-            wxStyledTextCtrl_StyleSetForeground(wxObject, style, Object.SafePtr(fore));
+            wxStyledTextCtrl_StyleSetForeground(wxobj, style, wxObject.SafePtr(fore));
         }
 
         public void StyleSetBackground(int style, Colour back)
         {
-            wxStyledTextCtrl_StyleSetBackground(wxObject, style, Object.SafePtr(back));
+            wxStyledTextCtrl_StyleSetBackground(wxobj, style, wxObject.SafePtr(back));
         }
 
         public void StyleSetBold(int style, bool bold)
         {
-            wxStyledTextCtrl_StyleSetBold(wxObject, style, bold);
+            wxStyledTextCtrl_StyleSetBold(wxobj, style, bold);
         }
 
         public void StyleSetItalic(int style, bool italic)
         {
-            wxStyledTextCtrl_StyleSetItalic(wxObject, style, italic);
+            wxStyledTextCtrl_StyleSetItalic(wxobj, style, italic);
         }
 
         public void StyleSetSize(int style, int sizePoints)
         {
-            wxStyledTextCtrl_StyleSetSize(wxObject, style, sizePoints);
+            wxStyledTextCtrl_StyleSetSize(wxobj, style, sizePoints);
         }
 
         public void StyleSetFaceName(int style, string fontName)
         {
-            wxStyledTextCtrl_StyleSetFaceName(wxObject, style, fontName);
+            wxStyledTextCtrl_StyleSetFaceName(wxobj, style, fontName);
         }
 
         public void StyleSetEOLFilled(int style, bool filled)
         {
-            wxStyledTextCtrl_StyleSetEOLFilled(wxObject, style, filled);
+            wxStyledTextCtrl_StyleSetEOLFilled(wxobj, style, filled);
         }
 
         public void StyleResetDefault()
         {
-            wxStyledTextCtrl_StyleResetDefault(wxObject);
+            wxStyledTextCtrl_StyleResetDefault(wxobj);
         }
 
         public void StyleSetUnderline(int style, bool underline)
         {
-            wxStyledTextCtrl_StyleSetUnderline(wxObject, style, underline);
+            wxStyledTextCtrl_StyleSetUnderline(wxobj, style, underline);
         }
 
         public void StyleSetCase(int style, int caseForce)
         {
-            wxStyledTextCtrl_StyleSetCase(wxObject, style, caseForce);
+            wxStyledTextCtrl_StyleSetCase(wxobj, style, caseForce);
         }
 
         public void StyleSetCharacterSet(int style, int characterSet)
         {
-            wxStyledTextCtrl_StyleSetCharacterSet(wxObject, style, characterSet);
+            wxStyledTextCtrl_StyleSetCharacterSet(wxobj, style, characterSet);
         }
 
         public void StyleSetHotSpot(int style, bool hotspot)
         {
-            wxStyledTextCtrl_StyleSetHotSpot(wxObject, style, hotspot);
+            wxStyledTextCtrl_StyleSetHotSpot(wxobj, style, hotspot);
         }
 
         public void StyleSetVisible(int style, bool visible)
         {
-            wxStyledTextCtrl_StyleSetVisible(wxObject, style, visible);
+            wxStyledTextCtrl_StyleSetVisible(wxobj, style, visible);
         }
 
         public void StyleSetChangeable(int style, bool changeable)
         {
-            wxStyledTextCtrl_StyleSetChangeable(wxObject, style, changeable);
+            wxStyledTextCtrl_StyleSetChangeable(wxobj, style, changeable);
         }
 
         //-----------------------------------------------------------------------------
 
         public void SetSelForeground(bool useSetting, Colour fore)
         {
-            wxStyledTextCtrl_SetSelForeground(wxObject, useSetting, Object.SafePtr(fore));
+            wxStyledTextCtrl_SetSelForeground(wxobj, useSetting, wxObject.SafePtr(fore));
         }
 
         public void SetSelBackground(bool useSetting, Colour back)
         {
-            wxStyledTextCtrl_SetSelBackground(wxObject, useSetting, Object.SafePtr(back));
+            wxStyledTextCtrl_SetSelBackground(wxobj, useSetting, wxObject.SafePtr(back));
         }
 
         //-----------------------------------------------------------------------------
 
-        public Colour CaretForeground
-        {
-            get { return new Colour(wxStyledTextCtrl_GetCaretForeground(wxObject), true); }
-            set { wxStyledTextCtrl_SetCaretForeground(wxObject, Object.SafePtr(value)); } 
-        }
+        public Colour CaretForeground() { return new Colour(wxStyledTextCtrl_GetCaretForeground(wxobj), true); }
+        public void CaretForeground(Colour value) { wxStyledTextCtrl_SetCaretForeground(wxobj, wxObject.SafePtr(value)); } 
 
         //-----------------------------------------------------------------------------
 
         public void CmdKeyAssign(int key, int modifiers, int cmd)
         {
-            wxStyledTextCtrl_CmdKeyAssign(wxObject, key, modifiers, cmd);
+            wxStyledTextCtrl_CmdKeyAssign(wxobj, key, modifiers, cmd);
         }
 
         public void CmdKeyClear(int key, int modifiers)
         {
-            wxStyledTextCtrl_CmdKeyClear(wxObject, key, modifiers);
+            wxStyledTextCtrl_CmdKeyClear(wxobj, key, modifiers);
         }
 
         public void CmdKeyClearAll()
         {
-            wxStyledTextCtrl_CmdKeyClearAll(wxObject);
+            wxStyledTextCtrl_CmdKeyClearAll(wxobj);
         }
 
         //-----------------------------------------------------------------------------
 
-        public void SetStyleBytes(int length, byte[] styleBytes)
+        public void SetStyleBytes(ubyte[] styleBytes)
         {
-            wxStyledTextCtrl_SetStyleBytes(wxObject, length, styleBytes);
+            wxStyledTextCtrl_SetStyleBytes(wxobj, styleBytes.length, styleBytes);
         }
 
         //-----------------------------------------------------------------------------
 
-        public int CaretPeriod
-        {
-            get { return wxStyledTextCtrl_GetCaretPeriod(wxObject); }
-            set { wxStyledTextCtrl_SetCaretPeriod(wxObject, value); } 
-        }
+        public int CaretPeriod() { return wxStyledTextCtrl_GetCaretPeriod(wxobj); }
+        public void CaretPeriod(int value) { wxStyledTextCtrl_SetCaretPeriod(wxobj, value); } 
 
         //-----------------------------------------------------------------------------
 
         public void SetWordChars(string characters)
         {
-            wxStyledTextCtrl_SetWordChars(wxObject, characters);
+            wxStyledTextCtrl_SetWordChars(wxobj, characters);
         }
 
         //-----------------------------------------------------------------------------
 
         public void BeginUndoAction()
         {
-            wxStyledTextCtrl_BeginUndoAction(wxObject);
+            wxStyledTextCtrl_BeginUndoAction(wxobj);
         }
 
         public void EndUndoAction()
         {
-            wxStyledTextCtrl_EndUndoAction(wxObject);
+            wxStyledTextCtrl_EndUndoAction(wxobj);
         }
 
         //-----------------------------------------------------------------------------
 
         public void IndicatorSetStyle(int indic, int style)
         {
-            wxStyledTextCtrl_IndicatorSetStyle(wxObject, indic, style);
+            wxStyledTextCtrl_IndicatorSetStyle(wxobj, indic, style);
         }
 
         public int IndicatorGetStyle(int indic)
         {
-            return wxStyledTextCtrl_IndicatorGetStyle(wxObject, indic);
+            return wxStyledTextCtrl_IndicatorGetStyle(wxobj, indic);
         }
 
         public void IndicatorSetForeground(int indic, Colour fore)
         {
-            wxStyledTextCtrl_IndicatorSetForeground(wxObject, indic, Object.SafePtr(fore));
+            wxStyledTextCtrl_IndicatorSetForeground(wxobj, indic, wxObject.SafePtr(fore));
         }
 
         public Colour IndicatorGetForeground(int indic)
         {
-            return new Colour(wxStyledTextCtrl_IndicatorGetForeground(wxObject, indic), true);
+            return new Colour(wxStyledTextCtrl_IndicatorGetForeground(wxobj, indic), true);
         }
 
         //-----------------------------------------------------------------------------
 
         public void SetWhitespaceForeground(bool useSetting, Colour fore)
         {
-            wxStyledTextCtrl_SetWhitespaceForeground(wxObject, useSetting, Object.SafePtr(fore));
+            wxStyledTextCtrl_SetWhitespaceForeground(wxobj, useSetting, wxObject.SafePtr(fore));
         }
 
         public void SetWhitespaceBackground(bool useSetting, Colour back)
         {
-            wxStyledTextCtrl_SetWhitespaceBackground(wxObject, useSetting, Object.SafePtr(back));
+            wxStyledTextCtrl_SetWhitespaceBackground(wxobj, useSetting, wxObject.SafePtr(back));
         }
 
         //-----------------------------------------------------------------------------
 
-        public int StyleBits
-        {
-            get { return wxStyledTextCtrl_GetStyleBits(wxObject); }
-            set { wxStyledTextCtrl_SetStyleBits(wxObject, value); }
-        }
+        public int StyleBits() { return wxStyledTextCtrl_GetStyleBits(wxobj); }
+        public void StyleBits(int value) { wxStyledTextCtrl_SetStyleBits(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
         public void SetLineState(int line, int state)
         {
-            wxStyledTextCtrl_SetLineState(wxObject, line, state);
+            wxStyledTextCtrl_SetLineState(wxobj, line, state);
         }
 
         public int GetLineState(int line)
         {
-            return wxStyledTextCtrl_GetLineState(wxObject, line);
+            return wxStyledTextCtrl_GetLineState(wxobj, line);
         }
 
         //-----------------------------------------------------------------------------
 
-        public int MaxLineState
-        {
-            get { return wxStyledTextCtrl_GetMaxLineState(wxObject); }
-        }
+        public int MaxLineState() { return wxStyledTextCtrl_GetMaxLineState(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public bool CaretLineVisible
-        {
-            get { return wxStyledTextCtrl_GetCaretLineVisible(wxObject); }
-            set { wxStyledTextCtrl_SetCaretLineVisible(wxObject, value); }
-        }
+        public bool CaretLineVisible() { return wxStyledTextCtrl_GetCaretLineVisible(wxobj); }
+        public void CaretLineVisible(bool value) { wxStyledTextCtrl_SetCaretLineVisible(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public Colour CaretLineBack
-        {
-            get { return new Colour(wxStyledTextCtrl_GetCaretLineBack(wxObject), true); } 
-            set { wxStyledTextCtrl_SetCaretLineBack(wxObject, Object.SafePtr(value)); }
-        }
+        public Colour CaretLineBack() { return new Colour(wxStyledTextCtrl_GetCaretLineBack(wxobj), true); } 
+        public void CaretLineBack(Colour value) { wxStyledTextCtrl_SetCaretLineBack(wxobj, wxObject.SafePtr(value)); }
 
         //-----------------------------------------------------------------------------
 
         public void AutoCompShow(int lenEntered, string itemList)
         {
-            wxStyledTextCtrl_AutoCompShow(wxObject, lenEntered, itemList);
+            wxStyledTextCtrl_AutoCompShow(wxobj, lenEntered, itemList);
         }
 
         public void AutoCompCancel()
         {
-            wxStyledTextCtrl_AutoCompCancel(wxObject);
+            wxStyledTextCtrl_AutoCompCancel(wxobj);
         }
 
-        public bool AutoCompActive
-        {
-            get { return wxStyledTextCtrl_AutoCompActive(wxObject); }
-        }
+        public bool AutoCompActive() { return wxStyledTextCtrl_AutoCompActive(wxobj); }
 
-        public int AutoCompPosStart
-        {
-            get { return wxStyledTextCtrl_AutoCompPosStart(wxObject); } 
-        }
+        public int AutoCompPosStart() { return wxStyledTextCtrl_AutoCompPosStart(wxobj); } 
 
         public void AutoCompComplete()
         {
-            wxStyledTextCtrl_AutoCompComplete(wxObject);
+            wxStyledTextCtrl_AutoCompComplete(wxobj);
         }
 
-        public string AutoCompStops
-        {
-            set { wxStyledTextCtrl_AutoCompStops(wxObject, value); }
-        }
+        public void AutoCompStops(string value) { wxStyledTextCtrl_AutoCompStops(wxobj, value); }
 
-        public char AutoCompSeparator
-        {
-            get { return (char)wxStyledTextCtrl_AutoCompGetSeparator(wxObject); }
-            set { wxStyledTextCtrl_AutoCompSetSeparator(wxObject, (int)value); } 
-        }
+        public char AutoCompSeparator() { return cast(char)wxStyledTextCtrl_AutoCompGetSeparator(wxobj); }
+        public void AutoCompSeparator(char value) { wxStyledTextCtrl_AutoCompSetSeparator(wxobj, cast(int)value); } 
 
         public void AutoCompSelect(string text)
         {
-            wxStyledTextCtrl_AutoCompSelect(wxObject, text);
+            wxStyledTextCtrl_AutoCompSelect(wxobj, text);
         }
 
-        public bool AutoCompCancelAtStart
-        {
-            get { return wxStyledTextCtrl_AutoCompGetCancelAtStart(wxObject); }
-            set { wxStyledTextCtrl_AutoCompSetCancelAtStart(wxObject, value); } 
-        }
+        public bool AutoCompCancelAtStart() { return wxStyledTextCtrl_AutoCompGetCancelAtStart(wxobj); }
+        public void AutoCompCancelAtStart(bool value) { wxStyledTextCtrl_AutoCompSetCancelAtStart(wxobj, value); } 
 
-        public string AutoCompFillUps
-        {
-            set { wxStyledTextCtrl_AutoCompSetFillUps(wxObject, value); }
-        }
+        public void AutoCompFillUps(string value) { wxStyledTextCtrl_AutoCompSetFillUps(wxobj, value); }
 
-        public bool AutoCompChooseSingle
-        {
-            get { return wxStyledTextCtrl_AutoCompGetChooseSingle(wxObject); }
-            set { wxStyledTextCtrl_AutoCompSetChooseSingle(wxObject, value); }
-        }
+        public bool AutoCompChooseSingle() { return wxStyledTextCtrl_AutoCompGetChooseSingle(wxobj); }
+        public void AutoCompChooseSingle(bool value) { wxStyledTextCtrl_AutoCompSetChooseSingle(wxobj, value); }
 
-        public bool AutoCompIgnoreCase
-        {
-            get { return wxStyledTextCtrl_AutoCompGetIgnoreCase(wxObject); }
-            set { wxStyledTextCtrl_AutoCompSetIgnoreCase(wxObject, value); } 
-        }
+        public bool AutoCompIgnoreCase() { return wxStyledTextCtrl_AutoCompGetIgnoreCase(wxobj); }
+        public void AutoCompIgnoreCase(bool value) { wxStyledTextCtrl_AutoCompSetIgnoreCase(wxobj, value); } 
 
-        public bool AutoCompAutoHide
-        {
-            set { wxStyledTextCtrl_AutoCompSetAutoHide(wxObject, value); }
-            get { return wxStyledTextCtrl_AutoCompGetAutoHide(wxObject); }
-        }
+        public void AutoCompAutoHide(bool value) { wxStyledTextCtrl_AutoCompSetAutoHide(wxobj, value); }
+        public bool AutoCompAutoHide() { return wxStyledTextCtrl_AutoCompGetAutoHide(wxobj); }
 
-        public bool AutoCompDropRestOfWord
-        {
-            set { wxStyledTextCtrl_AutoCompSetDropRestOfWord(wxObject, value); }
-            get { return wxStyledTextCtrl_AutoCompGetDropRestOfWord(wxObject); } 
-        }
+        public void AutoCompDropRestOfWord(bool value) { wxStyledTextCtrl_AutoCompSetDropRestOfWord(wxobj, value); }
+        public bool AutoCompDropRestOfWord() { return wxStyledTextCtrl_AutoCompGetDropRestOfWord(wxobj); } 
 
-        public int AutoCompTypeSeparator
-        {
-            get { return wxStyledTextCtrl_AutoCompGetTypeSeparator(wxObject); }
-            set { wxStyledTextCtrl_AutoCompSetTypeSeparator(wxObject, value); }
-        }
+        public int AutoCompTypeSeparator() { return wxStyledTextCtrl_AutoCompGetTypeSeparator(wxobj); }
+        public void AutoCompTypeSeparator(int value) { wxStyledTextCtrl_AutoCompSetTypeSeparator(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
         public void UserListShow(int listType, string itemList)
         {
-            wxStyledTextCtrl_UserListShow(wxObject, listType, itemList);
+            wxStyledTextCtrl_UserListShow(wxobj, listType, itemList);
         }
 
         //-----------------------------------------------------------------------------
 
         public void RegisterImage(int type, Bitmap bmp)
         {
-            wxStyledTextCtrl_RegisterImage(wxObject, type, Object.SafePtr(bmp));
+            wxStyledTextCtrl_RegisterImage(wxobj, type, wxObject.SafePtr(bmp));
         }
 
         public void ClearRegisteredImages()
         {
-            wxStyledTextCtrl_ClearRegisteredImages(wxObject);
+            wxStyledTextCtrl_ClearRegisteredImages(wxobj);
         }
 
         //-----------------------------------------------------------------------------
 
-        public int Indent
-        {
-            get { return wxStyledTextCtrl_GetIndent(wxObject); }
-            set { wxStyledTextCtrl_SetIndent(wxObject, value); }
-        }
+        public int Indent() { return wxStyledTextCtrl_GetIndent(wxobj); }
+        public void Indent(int value) { wxStyledTextCtrl_SetIndent(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public bool UseTabs
-        {
-            get { return wxStyledTextCtrl_GetUseTabs(wxObject); }
-            set { wxStyledTextCtrl_SetUseTabs(wxObject, value); }
-        }
+        public bool UseTabs() { return wxStyledTextCtrl_GetUseTabs(wxobj); }
+        public void UseTabs(bool value) { wxStyledTextCtrl_SetUseTabs(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
         public void SetLineIndentation(int line, int indentSize)
         {
-            wxStyledTextCtrl_SetLineIndentation(wxObject, line, indentSize);
+            wxStyledTextCtrl_SetLineIndentation(wxobj, line, indentSize);
         }
 
         public int GetLineIndentation(int line)
         {
-            return wxStyledTextCtrl_GetLineIndentation(wxObject, line);
+            return wxStyledTextCtrl_GetLineIndentation(wxobj, line);
         }
 
         //-----------------------------------------------------------------------------
 
         public int GetLineIndentPosition(int line)
         {
-            return wxStyledTextCtrl_GetLineIndentPosition(wxObject, line);
+            return wxStyledTextCtrl_GetLineIndentPosition(wxobj, line);
         }
 
         //-----------------------------------------------------------------------------
 
         public int GetColumn(int pos)
         {
-            return wxStyledTextCtrl_GetColumn(wxObject, pos);
+            return wxStyledTextCtrl_GetColumn(wxobj, pos);
         }
 
         //-----------------------------------------------------------------------------
 
-        public bool UseHorizontalScrollBar
-        {
-            set { wxStyledTextCtrl_SetUseHorizontalScrollBar(wxObject, value); }
-            get { return wxStyledTextCtrl_GetUseHorizontalScrollBar(wxObject); }
-        }
+        public void UseHorizontalScrollBar(bool value) { wxStyledTextCtrl_SetUseHorizontalScrollBar(wxobj, value); }
+        public bool UseHorizontalScrollBar() { return wxStyledTextCtrl_GetUseHorizontalScrollBar(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public bool IndentationGuides
-        {
-            set { wxStyledTextCtrl_SetIndentationGuides(wxObject, value); }
-            get { return wxStyledTextCtrl_GetIndentationGuides(wxObject); }
-        }
+        public void IndentationGuides(bool value) { wxStyledTextCtrl_SetIndentationGuides(wxobj, value); }
+        public bool IndentationGuides() { return wxStyledTextCtrl_GetIndentationGuides(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public int HighlightGuide
-        {
-            get { return wxStyledTextCtrl_GetHighlightGuide(wxObject); }
-            set { wxStyledTextCtrl_SetHighlightGuide(wxObject, value); }
-        }
+        public int HighlightGuide() { return wxStyledTextCtrl_GetHighlightGuide(wxobj); }
+        public void HighlightGuide(int value) { wxStyledTextCtrl_SetHighlightGuide(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
         public int GetLineEndPosition(int line)
         {
-            return wxStyledTextCtrl_GetLineEndPosition(wxObject, line);
+            return wxStyledTextCtrl_GetLineEndPosition(wxobj, line);
         }
 
         //-----------------------------------------------------------------------------
 
-        public bool ReadOnly
-        {
-            get { return wxStyledTextCtrl_GetReadOnly(wxObject); }
-            set { wxStyledTextCtrl_SetReadOnly(wxObject, value); }
-        }
+        public bool ReadOnly() { return wxStyledTextCtrl_GetReadOnly(wxobj); }
+        public void ReadOnly(bool value) { wxStyledTextCtrl_SetReadOnly(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public int SelectionStart
-        {
-            get { return wxStyledTextCtrl_GetSelectionStart(wxObject); } 
-            set { wxStyledTextCtrl_SetSelectionStart(wxObject, value); }
-        }
+        public int SelectionStart() { return wxStyledTextCtrl_GetSelectionStart(wxobj); } 
+        public void SelectionStart(int value) { wxStyledTextCtrl_SetSelectionStart(wxobj, value); }
 
-        public int SelectionEnd
-        {
-            get { return wxStyledTextCtrl_GetSelectionEnd(wxObject); }
-            set { wxStyledTextCtrl_SetSelectionEnd(wxObject, value); }
-        }
+        public int SelectionEnd() { return wxStyledTextCtrl_GetSelectionEnd(wxobj); }
+        public void SelectionEnd(int value) { wxStyledTextCtrl_SetSelectionEnd(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public int PrintMagnification
-        {
-            get { return wxStyledTextCtrl_GetPrintMagnification(wxObject); }
-            set { wxStyledTextCtrl_SetPrintMagnification(wxObject, value); }
-        }
+        public int PrintMagnification() { return wxStyledTextCtrl_GetPrintMagnification(wxobj); }
+        public void PrintMagnification(int value) { wxStyledTextCtrl_SetPrintMagnification(wxobj, value); }
 
-        public int PrintColourMode
-        {
-            get { return wxStyledTextCtrl_GetPrintColourMode(wxObject); }
-            set { wxStyledTextCtrl_SetPrintColourMode(wxObject, value); } 
-        }
+        public int PrintColourMode() { return wxStyledTextCtrl_GetPrintColourMode(wxobj); }
+        public void PrintColourMode(int value) { wxStyledTextCtrl_SetPrintColourMode(wxobj, value); } 
 
         //-----------------------------------------------------------------------------
 
         public int FindText(int minPos, int maxPos, string text, int flags)
         {
-            return wxStyledTextCtrl_FindText(wxObject, minPos, maxPos, text, flags);
+            return wxStyledTextCtrl_FindText(wxobj, minPos, maxPos, text, flags);
         }
 
         //-----------------------------------------------------------------------------
 
         public int FormatRange(bool doDraw, int startPos, int endPos, DC draw, DC target, Rectangle renderRect, Rectangle pageRect)
         {
-            return wxStyledTextCtrl_FormatRange(wxObject, doDraw, startPos, endPos, Object.SafePtr(draw), Object.SafePtr(target), ref renderRect, ref pageRect);
+            return wxStyledTextCtrl_FormatRange(wxobj, doDraw, startPos, endPos, wxObject.SafePtr(draw), wxObject.SafePtr(target), renderRect, pageRect);
         }
 
         //-----------------------------------------------------------------------------
 
-        public int FirstVisibleLine
-        {
-            get { return wxStyledTextCtrl_GetFirstVisibleLine(wxObject); }
-        }
+        public int FirstVisibleLine() { return wxStyledTextCtrl_GetFirstVisibleLine(wxobj); }
 
         //-----------------------------------------------------------------------------
 
         public string GetLine(int line)
         {
-            return new wxString(wxStyledTextCtrl_GetLine(wxObject, line), true);
+            return wxStyledTextCtrl_GetLine(wxobj, line).dup;
         }
 
         //-----------------------------------------------------------------------------
 
-        public int LineCount
-        {
-            get { return wxStyledTextCtrl_GetLineCount(wxObject); }
-        }
+        public int LineCount() { return wxStyledTextCtrl_GetLineCount(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public int MarginLeft
-        {
-            get { return wxStyledTextCtrl_GetMarginLeft(wxObject); }
-            set { wxStyledTextCtrl_SetMarginLeft(wxObject, value); }
-        }
+        public int MarginLeft() { return wxStyledTextCtrl_GetMarginLeft(wxobj); }
+        public void MarginLeft(int value) { wxStyledTextCtrl_SetMarginLeft(wxobj, value); }
 
-        public int MarginRight
-        {
-            get { return wxStyledTextCtrl_GetMarginRight(wxObject); }
-            set { wxStyledTextCtrl_SetMarginRight(wxObject, value); }
-        }
+        public int MarginRight() { return wxStyledTextCtrl_GetMarginRight(wxobj); }
+        public void MarginRight(int value) { wxStyledTextCtrl_SetMarginRight(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public bool Modify
-        {
-            get { return wxStyledTextCtrl_GetModify(wxObject); }
-        }
+        public bool Modify() { return wxStyledTextCtrl_GetModify(wxobj); }
 
         //-----------------------------------------------------------------------------
 
         public void SetSelection(int start, int end)
         {
-            wxStyledTextCtrl_SetSelection(wxObject, start, end);
+            wxStyledTextCtrl_SetSelection(wxobj, start, end);
         }
 
-        public string SelectedText
-        {
-            get { return new wxString(wxStyledTextCtrl_GetSelectedText(wxObject), true); }
-        }
+        public string SelectedText() { return wxStyledTextCtrl_GetSelectedText(wxobj).dup; }
 
         //-----------------------------------------------------------------------------
 
         public string GetTextRange(int startPos, int endPos)
         {
-            return new wxString(wxStyledTextCtrl_GetTextRange(wxObject, startPos, endPos), true);
+            return wxStyledTextCtrl_GetTextRange(wxobj, startPos, endPos).dup;
         }
 
         //-----------------------------------------------------------------------------
 
-        public bool HideSelection
-        {
-            set { wxStyledTextCtrl_HideSelection(wxObject, value); } 
-        }
+        public void HideSelection(bool value) { wxStyledTextCtrl_HideSelection(wxobj, value); } 
 
         //-----------------------------------------------------------------------------
 
         public int LineFromPosition(int pos)
         {
-            return wxStyledTextCtrl_LineFromPosition(wxObject, pos);
+            return wxStyledTextCtrl_LineFromPosition(wxobj, pos);
         }
 
         public int PositionFromLine(int line)
         {
-            return wxStyledTextCtrl_PositionFromLine(wxObject, line);
+            return wxStyledTextCtrl_PositionFromLine(wxobj, line);
         }
 
         //-----------------------------------------------------------------------------
 
         public void LineScroll(int columns, int lines)
         {
-            wxStyledTextCtrl_LineScroll(wxObject, columns, lines);
+            wxStyledTextCtrl_LineScroll(wxobj, columns, lines);
         }
 
         //-----------------------------------------------------------------------------
 
         public void EnsureCaretVisible()
         {
-            wxStyledTextCtrl_EnsureCaretVisible(wxObject);
+            wxStyledTextCtrl_EnsureCaretVisible(wxobj);
         }
 
         //-----------------------------------------------------------------------------
 
         public void ReplaceSelection(string text)
         {
-            wxStyledTextCtrl_ReplaceSelection(wxObject, text);
+            wxStyledTextCtrl_ReplaceSelection(wxobj, text);
         }
 
         //-----------------------------------------------------------------------------
 
-        public bool CanPaste
-        {
-            get { return wxStyledTextCtrl_CanPaste(wxObject); } 
-        }
+        public bool CanPaste() { return wxStyledTextCtrl_CanPaste(wxobj); } 
 
-        public bool CanUndo
-        {
-            get { return wxStyledTextCtrl_CanUndo(wxObject); }
-        }
+        public bool CanUndo() { return wxStyledTextCtrl_CanUndo(wxobj); }
 
         //-----------------------------------------------------------------------------
 
         public void EmptyUndoBuffer()
         {
-            wxStyledTextCtrl_EmptyUndoBuffer(wxObject);
+            wxStyledTextCtrl_EmptyUndoBuffer(wxobj);
         }
 
         //-----------------------------------------------------------------------------
 
         public void Undo()
         {
-            wxStyledTextCtrl_Undo(wxObject);
+            wxStyledTextCtrl_Undo(wxobj);
         }
 
         public void Cut()
         {
-            wxStyledTextCtrl_Cut(wxObject);
+            wxStyledTextCtrl_Cut(wxobj);
         }
 
         public void Copy()
         {
-            wxStyledTextCtrl_Copy(wxObject);
+            wxStyledTextCtrl_Copy(wxobj);
         }
 
         public void Paste()
         {
-            wxStyledTextCtrl_Paste(wxObject);
+            wxStyledTextCtrl_Paste(wxobj);
         }
 
         public void Clear()
         {
-            wxStyledTextCtrl_Clear(wxObject);
+            wxStyledTextCtrl_Clear(wxobj);
         }
 
         //-----------------------------------------------------------------------------
 
-        public string Text
-        {
-            set { wxStyledTextCtrl_SetText(wxObject, value); } 
-            get { return new wxString(wxStyledTextCtrl_GetText(wxObject), true); }
-        }
+        public void Text(string value) { wxStyledTextCtrl_SetText(wxobj, value); } 
+        public string Text() { return wxStyledTextCtrl_GetText(wxobj).dup; }
 
         //-----------------------------------------------------------------------------
 
-        public int TextLength
-        {
-            get { return wxStyledTextCtrl_GetTextLength(wxObject); }
-        }
+        public int TextLength() { return wxStyledTextCtrl_GetTextLength(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public bool Overtype
-        {
-            get { return wxStyledTextCtrl_GetOvertype(wxObject); }
-            set { wxStyledTextCtrl_SetOvertype(wxObject, value); }
-        }
+        public bool Overtype() { return wxStyledTextCtrl_GetOvertype(wxobj); }
+        public void Overtype(bool value) { wxStyledTextCtrl_SetOvertype(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public int CaretWidth
-        {
-            get { return wxStyledTextCtrl_GetCaretWidth(wxObject); } 
-            set { wxStyledTextCtrl_SetCaretWidth(wxObject, value); }
-        }
+        public int CaretWidth() { return wxStyledTextCtrl_GetCaretWidth(wxobj); } 
+        public void CaretWidth(int value) { wxStyledTextCtrl_SetCaretWidth(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public int TargetStart
-        {
-            get { return wxStyledTextCtrl_GetTargetStart(wxObject); }
-            set { wxStyledTextCtrl_SetTargetStart(wxObject, value); }
-        }
+        public int TargetStart() { return wxStyledTextCtrl_GetTargetStart(wxobj); }
+        public void TargetStart(int value) { wxStyledTextCtrl_SetTargetStart(wxobj, value); }
 
-        public int TargetEnd
-        {
-            get { return wxStyledTextCtrl_GetTargetEnd(wxObject); }
-            set { wxStyledTextCtrl_SetTargetEnd(wxObject, value); } 
-        }
+        public int TargetEnd() { return wxStyledTextCtrl_GetTargetEnd(wxobj); }
+        public void TargetEnd(int value) { wxStyledTextCtrl_SetTargetEnd(wxobj, value); } 
 
         public int ReplaceTarget(string text)
         {
-            return wxStyledTextCtrl_ReplaceTarget(wxObject, text);
+            return wxStyledTextCtrl_ReplaceTarget(wxobj, text);
         }
 
         public int ReplaceTargetRE(string text)
         {
-            return wxStyledTextCtrl_ReplaceTargetRE(wxObject, text);
+            return wxStyledTextCtrl_ReplaceTargetRE(wxobj, text);
         }
 
         public int SearchInTarget(string text)
         {
-            return wxStyledTextCtrl_SearchInTarget(wxObject, text);
+            return wxStyledTextCtrl_SearchInTarget(wxobj, text);
         }
 
         //-----------------------------------------------------------------------------
 
-        public int SetSearchFlags
-        {
-            get { return wxStyledTextCtrl_GetSearchFlags(wxObject); }
-            set { wxStyledTextCtrl_SetSearchFlags(wxObject, value); }
-        }
+        public int SetSearchFlags() { return wxStyledTextCtrl_GetSearchFlags(wxobj); }
+        public void SetSearchFlags(int value) { wxStyledTextCtrl_SetSearchFlags(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
         public void CallTipShow(int pos, string definition)
         {
-            wxStyledTextCtrl_CallTipShow(wxObject, pos, definition);
+            wxStyledTextCtrl_CallTipShow(wxobj, pos, definition);
         }
 
         public void CallTipCancel()
         {
-            wxStyledTextCtrl_CallTipCancel(wxObject);
+            wxStyledTextCtrl_CallTipCancel(wxobj);
         }
 
-        public bool CallTipActive
-        {
-            get { return wxStyledTextCtrl_CallTipActive(wxObject); }
-        }
+        public bool CallTipActive() { return wxStyledTextCtrl_CallTipActive(wxobj); }
 
-        public int CallTipPosAtStart
-        {
-            get { return wxStyledTextCtrl_CallTipPosAtStart(wxObject); }
-        }
+        public int CallTipPosAtStart() { return wxStyledTextCtrl_CallTipPosAtStart(wxobj); }
 
         public void CallTipSetHighlight(int start, int end)
         {
-            wxStyledTextCtrl_CallTipSetHighlight(wxObject, start, end);
+            wxStyledTextCtrl_CallTipSetHighlight(wxobj, start, end);
         }
 
-        public Colour CallTipBackground
-        {
-            set { wxStyledTextCtrl_CallTipSetBackground(wxObject, Object.SafePtr(value)); }
-        }
+        public void CallTipBackground(Colour value) { wxStyledTextCtrl_CallTipSetBackground(wxobj, wxObject.SafePtr(value)); }
 
-        public Colour CallTipForeground
-        {
-            set { wxStyledTextCtrl_CallTipSetForeground(wxObject, Object.SafePtr(value)); } 
-        }
+        public void CallTipForeground(Colour value) { wxStyledTextCtrl_CallTipSetForeground(wxobj, wxObject.SafePtr(value)); } 
 
-        public Colour CallTipForegroundHighlight
-        {
-            set { wxStyledTextCtrl_CallTipSetForegroundHighlight(wxObject, Object.SafePtr(value)); }
-        }
+        public void CallTipForegroundHighlight(Colour value) { wxStyledTextCtrl_CallTipSetForegroundHighlight(wxobj, wxObject.SafePtr(value)); }
 
         //-----------------------------------------------------------------------------
 
         public int VisibleFromDocLine(int line)
         {
-            return wxStyledTextCtrl_VisibleFromDocLine(wxObject, line);
+            return wxStyledTextCtrl_VisibleFromDocLine(wxobj, line);
         }
 
         public int DocLineFromVisible(int lineDisplay)
         {
-            return wxStyledTextCtrl_DocLineFromVisible(wxObject, lineDisplay);
+            return wxStyledTextCtrl_DocLineFromVisible(wxobj, lineDisplay);
         }
 
         //-----------------------------------------------------------------------------
 
         public void SetFoldLevel(int line, int level)
         {
-            wxStyledTextCtrl_SetFoldLevel(wxObject, line, level);
+            wxStyledTextCtrl_SetFoldLevel(wxobj, line, level);
         }
 
         public int GetFoldLevel(int line)
         {
-            return wxStyledTextCtrl_GetFoldLevel(wxObject, line);
+            return wxStyledTextCtrl_GetFoldLevel(wxobj, line);
         }
 
         public int GetLastChild(int line, int level)
         {
-            return wxStyledTextCtrl_GetLastChild(wxObject, line, level);
+            return wxStyledTextCtrl_GetLastChild(wxobj, line, level);
         }
 
         public int GetFoldParent(int line)
         {
-            return wxStyledTextCtrl_GetFoldParent(wxObject, line);
+            return wxStyledTextCtrl_GetFoldParent(wxobj, line);
         }
 
         //-----------------------------------------------------------------------------
 
         public void ShowLines(int lineStart, int lineEnd)
         {
-            wxStyledTextCtrl_ShowLines(wxObject, lineStart, lineEnd);
+            wxStyledTextCtrl_ShowLines(wxobj, lineStart, lineEnd);
         }
 
         public void HideLines(int lineStart, int lineEnd)
         {
-            wxStyledTextCtrl_HideLines(wxObject, lineStart, lineEnd);
+            wxStyledTextCtrl_HideLines(wxobj, lineStart, lineEnd);
         }
 
         public bool GetLineVisible(int line)
         {
-            return wxStyledTextCtrl_GetLineVisible(wxObject, line);
+            return wxStyledTextCtrl_GetLineVisible(wxobj, line);
         }
 
         //-----------------------------------------------------------------------------
 
         public void SetFoldExpanded(int line, bool expanded)
         {
-            wxStyledTextCtrl_SetFoldExpanded(wxObject, line, expanded);
+            wxStyledTextCtrl_SetFoldExpanded(wxobj, line, expanded);
         }
 
         public bool GetFoldExpanded(int line)
         {
-            return wxStyledTextCtrl_GetFoldExpanded(wxObject, line);
+            return wxStyledTextCtrl_GetFoldExpanded(wxobj, line);
         }
 
         public void ToggleFold(int line)
         {
-            wxStyledTextCtrl_ToggleFold(wxObject, line);
+            wxStyledTextCtrl_ToggleFold(wxobj, line);
         }
 
         public void EnsureVisible(int line)
         {
-            wxStyledTextCtrl_EnsureVisible(wxObject, line);
+            wxStyledTextCtrl_EnsureVisible(wxobj, line);
         }
 
         //-----------------------------------------------------------------------------
 
-        public int FoldFlags
-        {
-            set { wxStyledTextCtrl_SetFoldFlags(wxObject, value); }
-        }
+        public void FoldFlags(int value) { wxStyledTextCtrl_SetFoldFlags(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
         public void EnsureVisibleEnforcePolicy(int line)
         {
-            wxStyledTextCtrl_EnsureVisibleEnforcePolicy(wxObject, line);
+            wxStyledTextCtrl_EnsureVisibleEnforcePolicy(wxobj, line);
         }
 
         //-----------------------------------------------------------------------------
 
-        public bool TabIndents
-        {
-            get { return wxStyledTextCtrl_GetTabIndents(wxObject); }
-            set { wxStyledTextCtrl_SetTabIndents(wxObject, value); }
-        }
+        public bool TabIndents() { return wxStyledTextCtrl_GetTabIndents(wxobj); }
+        public void TabIndents(bool value) { wxStyledTextCtrl_SetTabIndents(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public bool BackSpaceUnIndents
-        {
-            get { return wxStyledTextCtrl_GetBackSpaceUnIndents(wxObject); }
-            set { wxStyledTextCtrl_SetBackSpaceUnIndents(wxObject, value); }
-        }
+        public bool BackSpaceUnIndents() { return wxStyledTextCtrl_GetBackSpaceUnIndents(wxobj); }
+        public void BackSpaceUnIndents(bool value) { wxStyledTextCtrl_SetBackSpaceUnIndents(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public int MouseDwellTime
-        {
-            set { wxStyledTextCtrl_SetMouseDwellTime(wxObject, value); }
-            get { return wxStyledTextCtrl_GetMouseDwellTime(wxObject); }
-        }
+        public void MouseDwellTime(int value) { wxStyledTextCtrl_SetMouseDwellTime(wxobj, value); }
+        public int MouseDwellTime() { return wxStyledTextCtrl_GetMouseDwellTime(wxobj); }
 
         //-----------------------------------------------------------------------------
 
         public int WordStartPosition(int pos, bool onlyWordCharacters)
         {
-            return wxStyledTextCtrl_WordStartPosition(wxObject, pos, onlyWordCharacters);
+            return wxStyledTextCtrl_WordStartPosition(wxobj, pos, onlyWordCharacters);
         }
 
         public int WordEndPosition(int pos, bool onlyWordCharacters)
         {
-            return wxStyledTextCtrl_WordEndPosition(wxObject, pos, onlyWordCharacters);
+            return wxStyledTextCtrl_WordEndPosition(wxobj, pos, onlyWordCharacters);
         }
 
         //-----------------------------------------------------------------------------
 
-        public int WrapMode
-        {
-            get { return wxStyledTextCtrl_GetWrapMode(wxObject); }
-            set { wxStyledTextCtrl_SetWrapMode(wxObject, value); }
-        }
+        public int WrapMode() { return wxStyledTextCtrl_GetWrapMode(wxobj); }
+        public void WrapMode(int value) { wxStyledTextCtrl_SetWrapMode(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public int LayoutCache
-        {
-            set { wxStyledTextCtrl_SetLayoutCache(wxObject, value); }
-            get { return wxStyledTextCtrl_GetLayoutCache(wxObject); }
-        }
+        public void LayoutCache(int value) { wxStyledTextCtrl_SetLayoutCache(wxobj, value); }
+        public int LayoutCache() { return wxStyledTextCtrl_GetLayoutCache(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public int ScrollWidth
-        {
-            get { return wxStyledTextCtrl_GetScrollWidth(wxObject); }
-            set { wxStyledTextCtrl_SetScrollWidth(wxObject, value); }
-        }
+        public int ScrollWidth() { return wxStyledTextCtrl_GetScrollWidth(wxobj); }
+        public void ScrollWidth(int value) { wxStyledTextCtrl_SetScrollWidth(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
         public int TextWidth(int style, string text)
         {
-            return wxStyledTextCtrl_TextWidth(wxObject, style, text);
+            return wxStyledTextCtrl_TextWidth(wxobj, style, text);
         }
 
         //-----------------------------------------------------------------------------
 
-        public bool EndAtLastLine
-        {
-            get { return (bool)wxStyledTextCtrl_GetEndAtLastLine(wxObject); }
-            set { wxStyledTextCtrl_SetEndAtLastLine(wxObject, value); }
-        }
+        public bool EndAtLastLine() { return cast(bool)wxStyledTextCtrl_GetEndAtLastLine(wxobj); }
+        public void EndAtLastLine(bool value) { wxStyledTextCtrl_SetEndAtLastLine(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
         public int TextHeight(int line)
         {
-            return wxStyledTextCtrl_TextHeight(wxObject, line);
+            return wxStyledTextCtrl_TextHeight(wxobj, line);
         }
 
         //-----------------------------------------------------------------------------
 
-        public bool UseVerticalScrollBar
-        {
-            get { return wxStyledTextCtrl_GetUseVerticalScrollBar(wxObject); }
-            set { wxStyledTextCtrl_SetUseVerticalScrollBar(wxObject, value); }
-        }
-
-        //-----------------------------------------------------------------------------
-
-        deprecated public void AppendText(int length, string text)
-        {
-            AppendText(text);
-        }
+        public bool UseVerticalScrollBar() { return wxStyledTextCtrl_GetUseVerticalScrollBar(wxobj); }
+        public void UseVerticalScrollBar(bool value) { wxStyledTextCtrl_SetUseVerticalScrollBar(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
         public void AppendText(int length, string text)
         {
-            wxStyledTextCtrl_AppendText(wxObject, text);
+            wxStyledTextCtrl_AppendText(wxobj, length, text);
         }
 
         //-----------------------------------------------------------------------------
 
-        public bool TwoPhaseDraw
-        {
-            get { return wxStyledTextCtrl_GetTwoPhaseDraw(wxObject); } 
-            set { wxStyledTextCtrl_SetTwoPhaseDraw(wxObject, value); }
-        }
+        public bool TwoPhaseDraw() { return wxStyledTextCtrl_GetTwoPhaseDraw(wxobj); } 
+        public void TwoPhaseDraw(bool value) { wxStyledTextCtrl_SetTwoPhaseDraw(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
         public void TargetFromSelection()
         {
-            wxStyledTextCtrl_TargetFromSelection(wxObject);
+            wxStyledTextCtrl_TargetFromSelection(wxobj);
         }
 
         //-----------------------------------------------------------------------------
 
         public void LinesJoin()
         {
-            wxStyledTextCtrl_LinesJoin(wxObject);
+            wxStyledTextCtrl_LinesJoin(wxobj);
         }
 
         public void LinesSplit(int pixelWidth)
         {
-            wxStyledTextCtrl_LinesSplit(wxObject, pixelWidth);
+            wxStyledTextCtrl_LinesSplit(wxobj, pixelWidth);
         }
 
         //-----------------------------------------------------------------------------
 
         public void SetFoldMarginColour(bool useSetting, Colour back)
         {
-            wxStyledTextCtrl_SetFoldMarginColour(wxObject, useSetting, Object.SafePtr(back));
+            wxStyledTextCtrl_SetFoldMarginColour(wxobj, useSetting, wxObject.SafePtr(back));
         }
 
         public void SetFoldMarginHiColour(bool useSetting, Colour fore)
         {
-            wxStyledTextCtrl_SetFoldMarginHiColour(wxObject, useSetting, Object.SafePtr(fore));
+            wxStyledTextCtrl_SetFoldMarginHiColour(wxobj, useSetting, wxObject.SafePtr(fore));
         }
 
         //-----------------------------------------------------------------------------
 
         public void LineDuplicate()
         {
-            wxStyledTextCtrl_LineDuplicate(wxObject);
+            wxStyledTextCtrl_LineDuplicate(wxobj);
         }
 
         //-----------------------------------------------------------------------------
 
         public void HomeDisplay()
         {
-            wxStyledTextCtrl_HomeDisplay(wxObject);
+            wxStyledTextCtrl_HomeDisplay(wxobj);
         }
 
         public void HomeDisplayExtend()
         {
-            wxStyledTextCtrl_HomeDisplayExtend(wxObject);
+            wxStyledTextCtrl_HomeDisplayExtend(wxobj);
         }
 
         //-----------------------------------------------------------------------------
 
         public void LineEndDisplay()
         {
-            wxStyledTextCtrl_LineEndDisplay(wxObject);
+            wxStyledTextCtrl_LineEndDisplay(wxobj);
         }
 
         public void LineEndDisplayExtend()
         {
-            wxStyledTextCtrl_LineEndDisplayExtend(wxObject);
+            wxStyledTextCtrl_LineEndDisplayExtend(wxobj);
         }
 
         //-----------------------------------------------------------------------------
 
         public void MoveCaretInsideView()
         {
-            wxStyledTextCtrl_MoveCaretInsideView(wxObject);
+            wxStyledTextCtrl_MoveCaretInsideView(wxobj);
         }
 
         //-----------------------------------------------------------------------------
 
         public int LineLength(int line)
         {
-            return wxStyledTextCtrl_LineLength(wxObject, line);
+            return wxStyledTextCtrl_LineLength(wxobj, line);
         }
 
         //-----------------------------------------------------------------------------
 
         public void BraceHighlight(int pos1, int pos2)
         {
-            wxStyledTextCtrl_BraceHighlight(wxObject, pos1, pos2);
+            wxStyledTextCtrl_BraceHighlight(wxobj, pos1, pos2);
         }
 
         public void BraceBadLight(int pos)
         {
-            wxStyledTextCtrl_BraceBadLight(wxObject, pos);
+            wxStyledTextCtrl_BraceBadLight(wxobj, pos);
         }
 
         public int BraceMatch(int pos)
         {
-            return wxStyledTextCtrl_BraceMatch(wxObject, pos);
+            return wxStyledTextCtrl_BraceMatch(wxobj, pos);
         }
 
         //-----------------------------------------------------------------------------
 
-        public bool ViewEOL
-        {
-            get { return wxStyledTextCtrl_GetViewEOL(wxObject); }
-            set { wxStyledTextCtrl_SetViewEOL(wxObject, value); } 
-        }
+        public bool ViewEOL() { return wxStyledTextCtrl_GetViewEOL(wxobj); }
+        public void ViewEOL(bool value) { wxStyledTextCtrl_SetViewEOL(wxobj, value); } 
 
         //-----------------------------------------------------------------------------
 
         // Not really usable yet, unless sharing documents between styled
         // text controls (?)
 
-        public Object DocPointer
-        {
-            get { return FindObject(wxStyledTextCtrl_GetDocPointer(wxObject)); }
-            set { wxStyledTextCtrl_SetDocPointer(wxObject, Object.SafePtr(value)); }
-        }
+        public wxObject DocPointer() { return FindObject(wxStyledTextCtrl_GetDocPointer(wxobj)); }
+        public void DocPointer(wxObject value) { wxStyledTextCtrl_SetDocPointer(wxobj, wxObject.SafePtr(value)); }
 
         //-----------------------------------------------------------------------------
 
-        public int ModEventMask
-        {
-            get { return wxStyledTextCtrl_GetModEventMask(wxObject); } 
-            set { wxStyledTextCtrl_SetModEventMask(wxObject, value); }
-        }
+        public int ModEventMask() { return wxStyledTextCtrl_GetModEventMask(wxobj); } 
+        public void ModEventMask(int value) { wxStyledTextCtrl_SetModEventMask(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public int EdgeColumn
-        {
-            get { return wxStyledTextCtrl_GetEdgeColumn(wxObject); }
-            set { wxStyledTextCtrl_SetEdgeColumn(wxObject, value); }
-        }
+        public int EdgeColumn() { return wxStyledTextCtrl_GetEdgeColumn(wxobj); }
+        public void EdgeColumn(int value) { wxStyledTextCtrl_SetEdgeColumn(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public int EdgeMode
-        {
-            get { return wxStyledTextCtrl_GetEdgeMode(wxObject); } 
-            set { wxStyledTextCtrl_SetEdgeMode(wxObject, value); }
-        }
+        public int EdgeMode() { return wxStyledTextCtrl_GetEdgeMode(wxobj); } 
+        public void EdgeMode(int value) { wxStyledTextCtrl_SetEdgeMode(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public Colour EdgeColour
-        {
-            get { return new Colour(wxStyledTextCtrl_GetEdgeColour(wxObject), true); } 
-            set { wxStyledTextCtrl_SetEdgeColour(wxObject, Object.SafePtr(value)); }
-        }
+        public Colour EdgeColour() { return new Colour(wxStyledTextCtrl_GetEdgeColour(wxobj), true); } 
+        public void EdgeColour(Colour value) { wxStyledTextCtrl_SetEdgeColour(wxobj, wxObject.SafePtr(value)); }
 
         //-----------------------------------------------------------------------------
 
         public void SearchAnchor()
         {
-            wxStyledTextCtrl_SearchAnchor(wxObject);
+            wxStyledTextCtrl_SearchAnchor(wxobj);
         }
 
         public int SearchNext(int flags, string text)
         {
-            return wxStyledTextCtrl_SearchNext(wxObject, flags, text);
+            return wxStyledTextCtrl_SearchNext(wxobj, flags, text);
         }
 
         public int SearchPrev(int flags, string text)
         {
-            return wxStyledTextCtrl_SearchPrev(wxObject, flags, text);
+            return wxStyledTextCtrl_SearchPrev(wxobj, flags, text);
         }
 
         //-----------------------------------------------------------------------------
 
-        public int LinesOnScreen
-        {
-            get { return wxStyledTextCtrl_LinesOnScreen(wxObject); }
-        }
+        public int LinesOnScreen() { return wxStyledTextCtrl_LinesOnScreen(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public bool UsePopUp
-        {
-            set { wxStyledTextCtrl_UsePopUp(wxObject, value); }
-        }
+        public void UsePopUp(bool value) { wxStyledTextCtrl_UsePopUp(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public bool SelectionIsRectangle
-        {
-            get { return wxStyledTextCtrl_SelectionIsRectangle(wxObject); }
-        }
+        public bool SelectionIsRectangle() { return wxStyledTextCtrl_SelectionIsRectangle(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public int Zoom
-        {
-            get { return wxStyledTextCtrl_GetZoom(wxObject); }
-            set { wxStyledTextCtrl_SetZoom(wxObject, value); }
-        }
+        public int Zoom() { return wxStyledTextCtrl_GetZoom(wxobj); }
+        public void Zoom(int value) { wxStyledTextCtrl_SetZoom(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
         public void CreateDocument()
         {
-            wxStyledTextCtrl_CreateDocument(wxObject);
+            wxStyledTextCtrl_CreateDocument(wxobj);
         }
 
-        public void AddRefDocument(Object docPointer)
+        public void AddRefDocument(wxObject docPointer)
         {
-            wxStyledTextCtrl_AddRefDocument(wxObject, Object.SafePtr(docPointer));
+            wxStyledTextCtrl_AddRefDocument(wxobj, wxObject.SafePtr(docPointer));
         }
 
-        public void ReleaseDocument(Object docPointer)
+        public void ReleaseDocument(wxObject docPointer)
         {
-            wxStyledTextCtrl_ReleaseDocument(wxObject, Object.SafePtr(docPointer));
+            wxStyledTextCtrl_ReleaseDocument(wxobj, wxObject.SafePtr(docPointer));
         }
 
         //-----------------------------------------------------------------------------
 
-        public bool STCFocus
-        {
-            get { return wxStyledTextCtrl_GetSTCFocus(wxObject); } 
-            set { wxStyledTextCtrl_SetSTCFocus(wxObject, value); }
-        }
+        public bool STCFocus() { return wxStyledTextCtrl_GetSTCFocus(wxobj); } 
+        public void STCFocus(bool value) { wxStyledTextCtrl_SetSTCFocus(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public int Status
-        {
-            get { return wxStyledTextCtrl_GetStatus(wxObject); }
-            set { wxStyledTextCtrl_SetStatus(wxObject, value); }
-        }
+        public int Status() { return wxStyledTextCtrl_GetStatus(wxobj); }
+        public void Status(int value) { wxStyledTextCtrl_SetStatus(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public bool MouseDownCaptures
-        {
-            get { return wxStyledTextCtrl_GetMouseDownCaptures(wxObject); }
-            set { wxStyledTextCtrl_SetMouseDownCaptures(wxObject, value); }
-        }
+        public bool MouseDownCaptures() { return wxStyledTextCtrl_GetMouseDownCaptures(wxobj); }
+        public void MouseDownCaptures(bool value) { wxStyledTextCtrl_SetMouseDownCaptures(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public int STCCursor
-        {
-            set { wxStyledTextCtrl_SetSTCCursor(wxObject, value); }
-            get { return wxStyledTextCtrl_GetSTCCursor(wxObject); }
-        }
+        public void STCCursor(int value) { wxStyledTextCtrl_SetSTCCursor(wxobj, value); }
+        public int STCCursor() { return wxStyledTextCtrl_GetSTCCursor(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public int ControlCharSymbol
-        {
-            set { wxStyledTextCtrl_SetControlCharSymbol(wxObject, value); }
-            get { return wxStyledTextCtrl_GetControlCharSymbol(wxObject); }
-        }
+        public void ControlCharSymbol(int value) { wxStyledTextCtrl_SetControlCharSymbol(wxobj, value); }
+        public int ControlCharSymbol() { return wxStyledTextCtrl_GetControlCharSymbol(wxobj); }
 
         //-----------------------------------------------------------------------------
 
         public void WordPartLeft()
         {
-            wxStyledTextCtrl_WordPartLeft(wxObject);
+            wxStyledTextCtrl_WordPartLeft(wxobj);
         }
 
         public void WordPartLeftExtend()
         {
-            wxStyledTextCtrl_WordPartLeftExtend(wxObject);
+            wxStyledTextCtrl_WordPartLeftExtend(wxobj);
         }
 
         public void WordPartRight()
         {
-            wxStyledTextCtrl_WordPartRight(wxObject);
+            wxStyledTextCtrl_WordPartRight(wxobj);
         }
 
         public void WordPartRightExtend()
         {
-            wxStyledTextCtrl_WordPartRightExtend(wxObject);
+            wxStyledTextCtrl_WordPartRightExtend(wxobj);
         }
 
         //-----------------------------------------------------------------------------
 
         public void SetVisiblePolicy(int visiblePolicy, int visibleSlop)
         {
-            wxStyledTextCtrl_SetVisiblePolicy(wxObject, visiblePolicy, visibleSlop);
+            wxStyledTextCtrl_SetVisiblePolicy(wxobj, visiblePolicy, visibleSlop);
         }
 
         //-----------------------------------------------------------------------------
 
         public void DelLineLeft()
         {
-            wxStyledTextCtrl_DelLineLeft(wxObject);
+            wxStyledTextCtrl_DelLineLeft(wxobj);
         }
 
         public void DelLineRight()
         {
-            wxStyledTextCtrl_DelLineRight(wxObject);
+            wxStyledTextCtrl_DelLineRight(wxobj);
         }
 
         //-----------------------------------------------------------------------------
 
-        public int XOffset
-        {
-            set { wxStyledTextCtrl_SetXOffset(wxObject, value); }
-            get { return wxStyledTextCtrl_GetXOffset(wxObject); }
-        }
+        public void XOffset(int value) { wxStyledTextCtrl_SetXOffset(wxobj, value); }
+        public int XOffset() { return wxStyledTextCtrl_GetXOffset(wxobj); }
 
         //-----------------------------------------------------------------------------
 
         public void ChooseCaretX()
         {
-            wxStyledTextCtrl_ChooseCaretX(wxObject);
+            wxStyledTextCtrl_ChooseCaretX(wxobj);
         }
 
         //-----------------------------------------------------------------------------
 
         public void SetXCaretPolicy(int caretPolicy, int caretSlop)
         {
-            wxStyledTextCtrl_SetXCaretPolicy(wxObject, caretPolicy, caretSlop);
+            wxStyledTextCtrl_SetXCaretPolicy(wxobj, caretPolicy, caretSlop);
         }
 
         public void SetYCaretPolicy(int caretPolicy, int caretSlop)
         {
-            wxStyledTextCtrl_SetYCaretPolicy(wxObject, caretPolicy, caretSlop);
+            wxStyledTextCtrl_SetYCaretPolicy(wxobj, caretPolicy, caretSlop);
         }
 
         //-----------------------------------------------------------------------------
 
-        public int PrintWrapMode
-        {
-            set { wxStyledTextCtrl_SetPrintWrapMode(wxObject, value); }
-            get { return wxStyledTextCtrl_GetPrintWrapMode(wxObject); }
-        }
+        public void PrintWrapMode(int value) { wxStyledTextCtrl_SetPrintWrapMode(wxobj, value); }
+        public int PrintWrapMode() { return wxStyledTextCtrl_GetPrintWrapMode(wxobj); }
 
         //-----------------------------------------------------------------------------
 
         public void SetHotspotActiveForeground(bool useSetting, Colour fore)
         {
-            wxStyledTextCtrl_SetHotspotActiveForeground(wxObject, useSetting, Object.SafePtr(fore));
+            wxStyledTextCtrl_SetHotspotActiveForeground(wxobj, useSetting, wxObject.SafePtr(fore));
         }
 
         public void SetHotspotActiveBackground(bool useSetting, Colour back)
         {
-            wxStyledTextCtrl_SetHotspotActiveBackground(wxObject, useSetting, Object.SafePtr(back));
+            wxStyledTextCtrl_SetHotspotActiveBackground(wxobj, useSetting, wxObject.SafePtr(back));
         }
 
         public void SetHotspotActiveUnderline(bool underline)
         {
-            wxStyledTextCtrl_SetHotspotActiveUnderline(wxObject, underline);
+            wxStyledTextCtrl_SetHotspotActiveUnderline(wxobj, underline);
         }
 
         //-----------------------------------------------------------------------------
 
         public void StartRecord()
         {
-            wxStyledTextCtrl_StartRecord(wxObject);
+            wxStyledTextCtrl_StartRecord(wxobj);
         }
 
         public void StopRecord()
         {
-            wxStyledTextCtrl_StopRecord(wxObject);
+            wxStyledTextCtrl_StopRecord(wxobj);
         }
 
         //-----------------------------------------------------------------------------
 
-        public int Lexer
-        {
-            set { wxStyledTextCtrl_SetLexer(wxObject, value); }
-            get { return wxStyledTextCtrl_GetLexer(wxObject); }
-        }
+        public void Lexer(int value) { wxStyledTextCtrl_SetLexer(wxobj, value); }
+        public int Lexer() { return wxStyledTextCtrl_GetLexer(wxobj); }
 
         //-----------------------------------------------------------------------------
 
         public void Colourise(int start, int end)
         {
-            wxStyledTextCtrl_Colourise(wxObject, start, end);
+            wxStyledTextCtrl_Colourise(wxobj, start, end);
         }
 
         //-----------------------------------------------------------------------------
 
         public void SetProperty(string key, string value)
         {
-            wxStyledTextCtrl_SetProperty(wxObject, key, value);
+            wxStyledTextCtrl_SetProperty(wxobj, key, value);
         }
 
         //-----------------------------------------------------------------------------
 
         public void SetKeyWords(int keywordSet, string keyWords)
         {
-            wxStyledTextCtrl_SetKeyWords(wxObject, keywordSet, keyWords);
+            wxStyledTextCtrl_SetKeyWords(wxobj, keywordSet, keyWords);
         }
 
         //-----------------------------------------------------------------------------
 
-        public string LexerLanguage
-        {
-            set { wxStyledTextCtrl_SetLexerLanguage(wxObject, value); }
-        }
+        public void LexerLanguage(string value) { wxStyledTextCtrl_SetLexerLanguage(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public int CurrentLine
-        {
-            get { return wxStyledTextCtrl_GetCurrentLine(wxObject); } 
-        }
+        public int CurrentLine() { return wxStyledTextCtrl_GetCurrentLine(wxobj); } 
 
         //-----------------------------------------------------------------------------
 
         public void StyleSetSpec(int styleNum, string spec)
         {
-            wxStyledTextCtrl_StyleSetSpec(wxObject, styleNum, spec);
+            wxStyledTextCtrl_StyleSetSpec(wxobj, styleNum, spec);
         }
 
         public void StyleSetFont(int styleNum, Font font)
         {
-            wxStyledTextCtrl_StyleSetFont(wxObject, styleNum, Object.SafePtr(font));
+            wxStyledTextCtrl_StyleSetFont(wxobj, styleNum, wxObject.SafePtr(font));
         }
 
         public void StyleSetFontAttr(int styleNum, int size, string faceName, bool bold, bool italic, bool underline)
         {
-            wxStyledTextCtrl_StyleSetFontAttr(wxObject, styleNum, size, faceName, bold, italic, underline);
+            wxStyledTextCtrl_StyleSetFontAttr(wxobj, styleNum, size, faceName, bold, italic, underline);
         }
 
         //-----------------------------------------------------------------------------
 
         public void CmdKeyExecute(int cmd)
         {
-            wxStyledTextCtrl_CmdKeyExecute(wxObject, cmd);
+            wxStyledTextCtrl_CmdKeyExecute(wxobj, cmd);
         }
 
         //-----------------------------------------------------------------------------
 
         public void SetMargins(int left, int right)
         {
-            wxStyledTextCtrl_SetMargins(wxObject, left, right);
+            wxStyledTextCtrl_SetMargins(wxobj, left, right);
         }
 
         //-----------------------------------------------------------------------------
 
         public void GetSelection(out int startPos, out int endPos)
         {
-            startPos = new int();
-            endPos = new int();
-            wxStyledTextCtrl_GetSelection(wxObject, ref startPos, ref endPos);
+            wxStyledTextCtrl_GetSelection(wxobj, startPos, endPos);
         }
 
         //-----------------------------------------------------------------------------
 
         public Point PointFromPosition(int pos)
         {
-            Point pt = new Point();
-            wxStyledTextCtrl_PointFromPosition(wxObject, pos, ref pt);
+            Point pt;
+            wxStyledTextCtrl_PointFromPosition(wxobj, pos, pt);
             return pt;
         }
 
@@ -3139,136 +2891,94 @@ namespace wx
 
         public void ScrollToLine(int line)
         {
-            wxStyledTextCtrl_ScrollToLine(wxObject, line);
+            wxStyledTextCtrl_ScrollToLine(wxobj, line);
         }
 
         //-----------------------------------------------------------------------------
 
         public void ScrollToColumn(int column)
         {
-            wxStyledTextCtrl_ScrollToColumn(wxObject, column);
+            wxStyledTextCtrl_ScrollToColumn(wxobj, column);
         }
 
         //-----------------------------------------------------------------------------
 
         /*public int SendMsg(int msg, int wp, int lp)
         {
-            return wxStyledTextCtrl_SendMsg(wxObject, msg, wp, lp);
+            return wxStyledTextCtrl_SendMsg(wxobj, msg, wp, lp);
         }*/
 
         //-----------------------------------------------------------------------------
 
         /*public ScrollBar VScrollBar
         {
-            set { wxStyledTextCtrl_SetVScrollBar(wxObject, Object.SafePtr(value)); }
+            set { wxStyledTextCtrl_SetVScrollBar(wxobj, wxObject.SafePtr(value)); }
         }*/
 
         //-----------------------------------------------------------------------------
 
         /*public ScrollBar SetHScrollBar
         {
-            set { wxStyledTextCtrl_SetHScrollBar(wxObject, Object.SafePtr(value)); }
+            set { wxStyledTextCtrl_SetHScrollBar(wxobj, wxObject.SafePtr(value)); }
         }*/
 
         //-----------------------------------------------------------------------------
 
-        public bool LastKeydownProcessed
-        {
-            get { return wxStyledTextCtrl_GetLastKeydownProcessed(wxObject); }
-            set { wxStyledTextCtrl_SetLastKeydownProcessed(wxObject, value); }
-        }
+        public bool LastKeydownProcessed() { return wxStyledTextCtrl_GetLastKeydownProcessed(wxobj); }
+        public void LastKeydownProcessed(bool value) { wxStyledTextCtrl_SetLastKeydownProcessed(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
         public bool SaveFile(string filename)
         {
-            return wxStyledTextCtrl_SaveFile(wxObject, filename);
+            return wxStyledTextCtrl_SaveFile(wxobj, filename);
         }
 
         public bool LoadFile(string filename)
         {
-            return wxStyledTextCtrl_LoadFile(wxObject, filename);
+            return wxStyledTextCtrl_LoadFile(wxobj, filename);
         }
 
         //-----------------------------------------------------------------------------
 
-		public event EventListener Change
-		{
-			add { AddCommandListener(wxEVT_STC_CHANGE, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+		public void Change_Add(EventListener value) { AddCommandListener(wxEVT_STC_CHANGE, ID, value, this); }
+		public void Change_Remove(EventListener value) { RemoveHandler(value, this); }
 
-		public event EventListener StyleNeeded
-		{
-			add { AddCommandListener(wxEVT_STC_STYLENEEDED, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+		public void StyleNeeded_Add(EventListener value) { AddCommandListener(wxEVT_STC_STYLENEEDED, ID, value, this); }
+		public void StyleNeeded_Remove(EventListener value) { RemoveHandler(value, this); }
 
-		public event EventListener CharAdded
-		{
-			add { AddCommandListener(wxEVT_STC_CHARADDED, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+		public void CharAdded_Add(EventListener value) { AddCommandListener(wxEVT_STC_CHARADDED, ID, value, this); }
+		public void CharAdded_Remove(EventListener value) { RemoveHandler(value, this); }
 
-		public event EventListener SavePointReached
-		{
-			add { AddCommandListener(wxEVT_STC_SAVEPOINTREACHED, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+		public void SavePointReached_Add(EventListener value) { AddCommandListener(wxEVT_STC_SAVEPOINTREACHED, ID, value, this); }
+		public void SavePointReached_Remove(EventListener value) { RemoveHandler(value, this); }
 
-		public event EventListener SavePointLeft
-		{
-			add { AddCommandListener(wxEVT_STC_SAVEPOINTLEFT, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+		public void SavePointLeft_Add(EventListener value) { AddCommandListener(wxEVT_STC_SAVEPOINTLEFT, ID, value, this); }
+		public void SavePointLeft_Remove(EventListener value) { RemoveHandler(value, this); }
 
-		public event EventListener ROModifyAttempt
-		{
-			add { AddCommandListener(wxEVT_STC_ROMODIFYATTEMPT, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+		public void ROModifyAttempt_Add(EventListener value) { AddCommandListener(wxEVT_STC_ROMODIFYATTEMPT, ID, value, this); }
+		public void ROModifyAttempt_Remove(EventListener value) { RemoveHandler(value, this); }
 
-		public event EventListener Key
-		{
-			add { AddCommandListener(wxEVT_STC_KEY, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+		public void Key_Add(EventListener value) { AddCommandListener(wxEVT_STC_KEY, ID, value, this); }
+		public void Key_Remove(EventListener value) { RemoveHandler(value, this); }
 
-		public event EventListener DoubleClick
-		{
-			add { AddCommandListener(wxEVT_STC_DOUBLECLICK, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+		public void DoubleClick_Add(EventListener value) { AddCommandListener(wxEVT_STC_DOUBLECLICK, ID, value, this); }
+		public void DoubleClick_Remove(EventListener value) { RemoveHandler(value, this); }
 
-		public override event EventListener UpdateUI
-		{
-			add { AddCommandListener(wxEVT_STC_UPDATEUI, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+		public void UpdateUI_Add(EventListener value) { AddCommandListener(wxEVT_STC_UPDATEUI, ID, value, this); }
+		public void UpdateUI_Remove(EventListener value) { RemoveHandler(value, this); }
 
-		public event EventListener Modified
-		{
-			add { AddCommandListener(wxEVT_STC_MODIFIED, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+		public void Modified_Add(EventListener value) { AddCommandListener(wxEVT_STC_MODIFIED, ID, value, this); }
+		public void Modified_Remove(EventListener value) { RemoveHandler(value, this); }
 
-		public event EventListener MacroRecord
-		{
-			add { AddCommandListener(wxEVT_STC_MACRORECORD, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+		public void MacroRecord_Add(EventListener value) { AddCommandListener(wxEVT_STC_MACRORECORD, ID, value, this); }
+		public void MacroRecord_Remove(EventListener value) { RemoveHandler(value, this); }
 
-		public event EventListener MarginClick
-		{
-			add { AddCommandListener(wxEVT_STC_MARGINCLICK, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+		public void MarginClick_Add(EventListener value) { AddCommandListener(wxEVT_STC_MARGINCLICK, ID, value, this); }
+		public void MarginClick_Remove(EventListener value) { RemoveHandler(value, this); }
 
-		public event EventListener NeedShown
-		{
-			add { AddCommandListener(wxEVT_STC_NEEDSHOWN, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+		public void NeedShown_Add(EventListener value) { AddCommandListener(wxEVT_STC_NEEDSHOWN, ID, value, this); }
+		public void NeedShown_Remove(EventListener value) { RemoveHandler(value, this); }
 
 		/*public event EventListener PositionChanged
 		{
@@ -3276,310 +2986,206 @@ namespace wx
 			remove { RemoveHandler(value, this); }
 		}*/
 
-		public event EventListener Paint
-		{
-			add { AddCommandListener(wxEVT_STC_PAINTED, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+		public void Paint_Add(EventListener value) { AddCommandListener(wxEVT_STC_PAINTED, ID, value, this); }
+		public void Paint_Remove(EventListener value) { RemoveHandler(value, this); }
 
-		public event EventListener UserListSelection
-		{
-			add { AddCommandListener(wxEVT_STC_USERLISTSELECTION, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+		public void UserListSelection_Add(EventListener value) { AddCommandListener(wxEVT_STC_USERLISTSELECTION, ID, value, this); }
+		public void UserListSelection_Remove(EventListener value) { RemoveHandler(value, this); }
 
-		public event EventListener URIDropped
-		{
-			add { AddCommandListener(wxEVT_STC_URIDROPPED, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+		public void URIDropped_Add(EventListener value) { AddCommandListener(wxEVT_STC_URIDROPPED, ID, value, this); }
+		public void URIDropped_Remove(EventListener value) { RemoveHandler(value, this); }
 
-		public event EventListener DwellStart
-		{
-			add { AddCommandListener(wxEVT_STC_DWELLSTART, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+		public void DwellStart_Add(EventListener value) { AddCommandListener(wxEVT_STC_DWELLSTART, ID, value, this); }
+		public void DwellStart_Remove(EventListener value) { RemoveHandler(value, this); }
 
-		public event EventListener DwellEnd
-		{
-			add { AddCommandListener(wxEVT_STC_DWELLEND, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+		public void DwellEnd_Add(EventListener value) { AddCommandListener(wxEVT_STC_DWELLEND, ID, value, this); }
+		public void DwellEnd_Remove(EventListener value) { RemoveHandler(value, this); }
 
-		public event EventListener StartDrag
-		{
-			add { AddCommandListener(wxEVT_STC_START_DRAG, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+		public void StartDrag_Add(EventListener value) { AddCommandListener(wxEVT_STC_START_DRAG, ID, value, this); }
+		public void StartDrag_Remove(EventListener value) { RemoveHandler(value, this); }
 
-		public event EventListener DragOver
-		{
-			add { AddCommandListener(wxEVT_STC_DRAG_OVER, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+		public void DragOver_Add(EventListener value) { AddCommandListener(wxEVT_STC_DRAG_OVER, ID, value, this); }
+		public void DragOver_Remove(EventListener value) { RemoveHandler(value, this); }
 
-		public event EventListener DoDrop
-		{
-			add { AddCommandListener(wxEVT_STC_DO_DROP, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+		public void DoDrop_Add(EventListener value) { AddCommandListener(wxEVT_STC_DO_DROP, ID, value, this); }
+		public void DoDrop_Remove(EventListener value) { RemoveHandler(value, this); }
 
-		public event EventListener Zoomed
-		{
-			add { AddCommandListener(wxEVT_STC_ZOOM, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+		public void Zoomed_Add(EventListener value) { AddCommandListener(wxEVT_STC_ZOOM, ID, value, this); }
+		public void Zoomed_Remove(EventListener value) { RemoveHandler(value, this); }
 
-		public event EventListener HotspotClick
-		{
-			add { AddCommandListener(wxEVT_STC_HOTSPOT_CLICK, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+		public void HotspotClick_Add(EventListener value) { AddCommandListener(wxEVT_STC_HOTSPOT_CLICK, ID, value, this); }
+		public void HotspotClick_Remove(EventListener value) { RemoveHandler(value, this); }
 
-		public event EventListener HotspotDoubleClick
-		{
-			add { AddCommandListener(wxEVT_STC_HOTSPOT_DCLICK, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+		public void HotspotDoubleClick_Add(EventListener value) { AddCommandListener(wxEVT_STC_HOTSPOT_DCLICK, ID, value, this); }
+		public void HotspotDoubleClick_Remove(EventListener value) { RemoveHandler(value, this); }
 
-		public event EventListener CalltipClick
-		{
-			add { AddCommandListener(wxEVT_STC_CALLTIP_CLICK, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+		public void CalltipClick_Add(EventListener value) { AddCommandListener(wxEVT_STC_CALLTIP_CLICK, ID, value, this); }
+		public void CalltipClick_Remove(EventListener value) { RemoveHandler(value, this); }
     }
+
+        static extern (C) IntPtr wxStyledTextEvent_ctor(int commandType, int id);
+        static extern (C) void   wxStyledTextEvent_SetPosition(IntPtr self, int pos);
+        static extern (C) void   wxStyledTextEvent_SetKey(IntPtr self, int k);
+        static extern (C) void   wxStyledTextEvent_SetModifiers(IntPtr self, int m);
+        static extern (C) void   wxStyledTextEvent_SetModificationType(IntPtr self, int t);
+        static extern (C) void   wxStyledTextEvent_SetText(IntPtr self, string t);
+        static extern (C) void   wxStyledTextEvent_SetLength(IntPtr self, int len);
+        static extern (C) void   wxStyledTextEvent_SetLinesAdded(IntPtr self, int num);
+        static extern (C) void   wxStyledTextEvent_SetLine(IntPtr self, int val);
+        static extern (C) void   wxStyledTextEvent_SetFoldLevelNow(IntPtr self, int val);
+        static extern (C) void   wxStyledTextEvent_SetFoldLevelPrev(IntPtr self, int val);
+        static extern (C) void   wxStyledTextEvent_SetMargin(IntPtr self, int val);
+        static extern (C) void   wxStyledTextEvent_SetMessage(IntPtr self, int val);
+        static extern (C) void   wxStyledTextEvent_SetWParam(IntPtr self, int val);
+        static extern (C) void   wxStyledTextEvent_SetLParam(IntPtr self, int val);
+        static extern (C) void   wxStyledTextEvent_SetListType(IntPtr self, int val);
+        static extern (C) void   wxStyledTextEvent_SetX(IntPtr self, int val);
+        static extern (C) void   wxStyledTextEvent_SetY(IntPtr self, int val);
+        static extern (C) void   wxStyledTextEvent_SetDragText(IntPtr self, string val);
+        static extern (C) void   wxStyledTextEvent_SetDragAllowMove(IntPtr self, bool val);
+        //static extern (C) void   wxStyledTextEvent_SetDragResult(IntPtr self, wxDragResult val);
+        static extern (C) int    wxStyledTextEvent_GetPosition(IntPtr self);
+        static extern (C) int    wxStyledTextEvent_GetKey(IntPtr self);
+        static extern (C) int    wxStyledTextEvent_GetModifiers(IntPtr self);
+        static extern (C) int    wxStyledTextEvent_GetModificationType(IntPtr self);
+        static extern (C) string wxStyledTextEvent_GetText(IntPtr self);
+        static extern (C) int    wxStyledTextEvent_GetLength(IntPtr self);
+        static extern (C) int    wxStyledTextEvent_GetLinesAdded(IntPtr self);
+        static extern (C) int    wxStyledTextEvent_GetLine(IntPtr self);
+        static extern (C) int    wxStyledTextEvent_GetFoldLevelNow(IntPtr self);
+        static extern (C) int    wxStyledTextEvent_GetFoldLevelPrev(IntPtr self);
+        static extern (C) int    wxStyledTextEvent_GetMargin(IntPtr self);
+        static extern (C) int    wxStyledTextEvent_GetMessage(IntPtr self);
+        static extern (C) int    wxStyledTextEvent_GetWParam(IntPtr self);
+        static extern (C) int    wxStyledTextEvent_GetLParam(IntPtr self);
+        static extern (C) int    wxStyledTextEvent_GetListType(IntPtr self);
+        static extern (C) int    wxStyledTextEvent_GetX(IntPtr self);
+        static extern (C) int    wxStyledTextEvent_GetY(IntPtr self);
+        static extern (C) string wxStyledTextEvent_GetDragText(IntPtr self);
+        static extern (C) bool   wxStyledTextEvent_GetDragAllowMove(IntPtr self);
+        //static extern (C) IntPtr wxStyledTextEvent_GetDragResult(IntPtr self);
+        static extern (C) bool   wxStyledTextEvent_GetShift(IntPtr self);
+        static extern (C) bool   wxStyledTextEvent_GetControl(IntPtr self);
+        static extern (C) bool   wxStyledTextEvent_GetAlt(IntPtr self);
+
+        //-----------------------------------------------------------------------------
 
     public class StyledTextEvent : CommandEvent 
     {
-        [DllImport("wx-c")] static extern IntPtr wxStyledTextEvent_ctor(int commandType, int id);
-        [DllImport("wx-c")] static extern void   wxStyledTextEvent_SetPosition(IntPtr self, int pos);
-        [DllImport("wx-c")] static extern void   wxStyledTextEvent_SetKey(IntPtr self, int k);
-        [DllImport("wx-c")] static extern void   wxStyledTextEvent_SetModifiers(IntPtr self, int m);
-        [DllImport("wx-c")] static extern void   wxStyledTextEvent_SetModificationType(IntPtr self, int t);
-        [DllImport("wx-c")] static extern void   wxStyledTextEvent_SetText(IntPtr self, string t);
-        [DllImport("wx-c")] static extern void   wxStyledTextEvent_SetLength(IntPtr self, int len);
-        [DllImport("wx-c")] static extern void   wxStyledTextEvent_SetLinesAdded(IntPtr self, int num);
-        [DllImport("wx-c")] static extern void   wxStyledTextEvent_SetLine(IntPtr self, int val);
-        [DllImport("wx-c")] static extern void   wxStyledTextEvent_SetFoldLevelNow(IntPtr self, int val);
-        [DllImport("wx-c")] static extern void   wxStyledTextEvent_SetFoldLevelPrev(IntPtr self, int val);
-        [DllImport("wx-c")] static extern void   wxStyledTextEvent_SetMargin(IntPtr self, int val);
-        [DllImport("wx-c")] static extern void   wxStyledTextEvent_SetMessage(IntPtr self, int val);
-        [DllImport("wx-c")] static extern void   wxStyledTextEvent_SetWParam(IntPtr self, int val);
-        [DllImport("wx-c")] static extern void   wxStyledTextEvent_SetLParam(IntPtr self, int val);
-        [DllImport("wx-c")] static extern void   wxStyledTextEvent_SetListType(IntPtr self, int val);
-        [DllImport("wx-c")] static extern void   wxStyledTextEvent_SetX(IntPtr self, int val);
-        [DllImport("wx-c")] static extern void   wxStyledTextEvent_SetY(IntPtr self, int val);
-        [DllImport("wx-c")] static extern void   wxStyledTextEvent_SetDragText(IntPtr self, string val);
-        [DllImport("wx-c")] static extern void   wxStyledTextEvent_SetDragAllowMove(IntPtr self, bool val);
-        //[DllImport("wx-c")] static extern void   wxStyledTextEvent_SetDragResult(IntPtr self, wxDragResult val);
-        [DllImport("wx-c")] static extern int    wxStyledTextEvent_GetPosition(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextEvent_GetKey(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextEvent_GetModifiers(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextEvent_GetModificationType(IntPtr self);
-        [DllImport("wx-c")] static extern IntPtr wxStyledTextEvent_GetText(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextEvent_GetLength(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextEvent_GetLinesAdded(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextEvent_GetLine(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextEvent_GetFoldLevelNow(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextEvent_GetFoldLevelPrev(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextEvent_GetMargin(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextEvent_GetMessage(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextEvent_GetWParam(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextEvent_GetLParam(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextEvent_GetListType(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextEvent_GetX(IntPtr self);
-        [DllImport("wx-c")] static extern int    wxStyledTextEvent_GetY(IntPtr self);
-        [DllImport("wx-c")] static extern IntPtr wxStyledTextEvent_GetDragText(IntPtr self);
-        [DllImport("wx-c")] static extern bool   wxStyledTextEvent_GetDragAllowMove(IntPtr self);
-        //[DllImport("wx-c")] static extern IntPtr wxStyledTextEvent_GetDragResult(IntPtr self);
-        [DllImport("wx-c")] static extern bool   wxStyledTextEvent_GetShift(IntPtr self);
-        [DllImport("wx-c")] static extern bool   wxStyledTextEvent_GetControl(IntPtr self);
-        [DllImport("wx-c")] static extern bool   wxStyledTextEvent_GetAlt(IntPtr self);
+		public this(IntPtr wxobj) 
+            { super(wxobj); }
+
+        public  this(int commandType, int id)
+            { super(wxStyledTextEvent_ctor(commandType, id)); }
 
         //-----------------------------------------------------------------------------
 
-		public StyledTextEvent(IntPtr wxObject) 
-            : base(wxObject) { }
-
-        public  StyledTextEvent(int commandType, int id)
-            : base(wxStyledTextEvent_ctor(commandType, id)) { }
+        public int Position() { return wxStyledTextEvent_GetPosition(wxobj); }
+        public void Position(int value) { wxStyledTextEvent_SetPosition(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public int Position
-        {
-            get { return wxStyledTextEvent_GetPosition(wxObject); }
-            set { wxStyledTextEvent_SetPosition(wxObject, value); }
-        }
+        public int Key() { return wxStyledTextEvent_GetKey(wxobj); }
+        public void Key(int value) { wxStyledTextEvent_SetKey(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public int Key
-        {
-            get { return wxStyledTextEvent_GetKey(wxObject); }
-            set { wxStyledTextEvent_SetKey(wxObject, value); }
-        }
+        public void Modifiers(int value) { wxStyledTextEvent_SetModifiers(wxobj, value); }
+        public int Modifiers() { return wxStyledTextEvent_GetModifiers(wxobj); } 
 
         //-----------------------------------------------------------------------------
 
-        public int Modifiers
-        {
-            set { wxStyledTextEvent_SetModifiers(wxObject, value); }
-            get { return wxStyledTextEvent_GetModifiers(wxObject); } 
-        }
+        public void ModificationType(int value) { wxStyledTextEvent_SetModificationType(wxobj, value); }
+        public int ModificationType() { return wxStyledTextEvent_GetModificationType(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public int ModificationType
-        {
-            set { wxStyledTextEvent_SetModificationType(wxObject, value); }
-            get { return wxStyledTextEvent_GetModificationType(wxObject); }
-        }
+        public void Text(string value) { wxStyledTextEvent_SetText(wxobj, value); } 
+        public string Text() { return wxStyledTextEvent_GetText(wxobj).dup; }
 
         //-----------------------------------------------------------------------------
 
-        public string Text
-        {
-            set { wxStyledTextEvent_SetText(wxObject, value); } 
-            get { return new wxString(wxStyledTextEvent_GetText(wxObject), true); }
-        }
+        public void Length(int value) { wxStyledTextEvent_SetLength(wxobj, value); }
+        public int Length() { return wxStyledTextEvent_GetLength(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public int Length
-        {
-            set { wxStyledTextEvent_SetLength(wxObject, value); }
-            get { return wxStyledTextEvent_GetLength(wxObject); }
-        }
+        public void LinesAdded(int value) { wxStyledTextEvent_SetLinesAdded(wxobj, value); } 
+        public int LinesAdded() { return wxStyledTextEvent_GetLinesAdded(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public int LinesAdded
-        {
-            set { wxStyledTextEvent_SetLinesAdded(wxObject, value); } 
-            get { return wxStyledTextEvent_GetLinesAdded(wxObject); }
-        }
+        public void Line(int value) { wxStyledTextEvent_SetLine(wxobj, value); } 
+        public int Line() { return wxStyledTextEvent_GetLine(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public int Line
-        {
-            set { wxStyledTextEvent_SetLine(wxObject, value); } 
-            get { return wxStyledTextEvent_GetLine(wxObject); }
-        }
+        public void FoldLevelNow(int value) { wxStyledTextEvent_SetFoldLevelNow(wxobj, value); }
+        public int FoldLevelNow() { return wxStyledTextEvent_GetFoldLevelNow(wxobj); }
+
+        public void FoldLevelPrev(int value) { wxStyledTextEvent_SetFoldLevelPrev(wxobj, value); }
+        public int FoldLevelPrev() { return wxStyledTextEvent_GetFoldLevelPrev(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public int FoldLevelNow
-        {
-            set { wxStyledTextEvent_SetFoldLevelNow(wxObject, value); }
-            get { return wxStyledTextEvent_GetFoldLevelNow(wxObject); }
-        }
-
-        public int FoldLevelPrev
-        {
-            set { wxStyledTextEvent_SetFoldLevelPrev(wxObject, value); }
-            get { return wxStyledTextEvent_GetFoldLevelPrev(wxObject); }
-        }
+        public void Margin(int value) { wxStyledTextEvent_SetMargin(wxobj, value); }
+        public int Margin() { return wxStyledTextEvent_GetMargin(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public int Margin
-        {
-            set { wxStyledTextEvent_SetMargin(wxObject, value); }
-            get { return wxStyledTextEvent_GetMargin(wxObject); }
-        }
+        public void Message(int value) { wxStyledTextEvent_SetMessage(wxobj, value); } 
+        public int Message() { return wxStyledTextEvent_GetMessage(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public int Message
-        {
-            set { wxStyledTextEvent_SetMessage(wxObject, value); } 
-            get { return wxStyledTextEvent_GetMessage(wxObject); }
-        }
+        public void WParam(int value) { wxStyledTextEvent_SetWParam(wxobj, value); }
+        public int WParam() { return wxStyledTextEvent_GetWParam(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public int WParam
-        {
-            set { wxStyledTextEvent_SetWParam(wxObject, value); }
-            get { return wxStyledTextEvent_GetWParam(wxObject); }
-        }
+        public void LParam(int value) { wxStyledTextEvent_SetLParam(wxobj, value); }
+        public int LParam() { return wxStyledTextEvent_GetLParam(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public int LParam
-        {
-            set { wxStyledTextEvent_SetLParam(wxObject, value); }
-            get { return wxStyledTextEvent_GetLParam(wxObject); }
-        }
+        public void ListType(int value) { wxStyledTextEvent_SetListType(wxobj, value); }
+        public int ListType() { return wxStyledTextEvent_GetListType(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public int ListType
-        {
-            set { wxStyledTextEvent_SetListType(wxObject, value); }
-            get { return wxStyledTextEvent_GetListType(wxObject); }
-        }
+        public void X(int value) { wxStyledTextEvent_SetX(wxobj, value); }
+        public int X() { return wxStyledTextEvent_GetX(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public int X
-        {
-            set { wxStyledTextEvent_SetX(wxObject, value); }
-            get { return wxStyledTextEvent_GetX(wxObject); }
-        }
+        public void Y(int value) { wxStyledTextEvent_SetY(wxobj, value); }
+        public int Y() { return wxStyledTextEvent_GetY(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public int Y
-        {
-            set { wxStyledTextEvent_SetY(wxObject, value); }
-            get { return wxStyledTextEvent_GetY(wxObject); }
-        }
+        public void DragText(string value) { wxStyledTextEvent_SetDragText(wxobj, value); }
+        public string DragText() { return wxStyledTextEvent_GetDragText(wxobj).dup; }
 
         //-----------------------------------------------------------------------------
 
-        public string DragText
-        {
-            set { wxStyledTextEvent_SetDragText(wxObject, value); }
-            get { return new wxString(wxStyledTextEvent_GetDragText(wxObject), true); }
-        }
-
-        //-----------------------------------------------------------------------------
-
-        public bool DragAllowMove
-        {
-            set { wxStyledTextEvent_SetDragAllowMove(wxObject, value); } 
-            get { return wxStyledTextEvent_GetDragAllowMove(wxObject); }
-        }
+        public void DragAllowMove(bool value) { wxStyledTextEvent_SetDragAllowMove(wxobj, value); } 
+        public bool DragAllowMove() { return wxStyledTextEvent_GetDragAllowMove(wxobj); }
 
         //-----------------------------------------------------------------------------
 
         /*public DragResult DragResult
         {
-            set { wxStyledTextEvent_SetDragResult(wxObject, Object.SafePtr(value)); }
-            get { return wxStyledTextEvent_GetDragResult(wxObject); }
+            set { wxStyledTextEvent_SetDragResult(wxobj, wxObject.SafePtr(value)); }
+            get { return wxStyledTextEvent_GetDragResult(wxobj); }
         }*/
 
         //-----------------------------------------------------------------------------
 
-        public bool Shift
-        {
-            get { return wxStyledTextEvent_GetShift(wxObject); }
-        }
+        public bool Shift() { return wxStyledTextEvent_GetShift(wxobj); }
 
-        public bool Control
-        {
-            get { return wxStyledTextEvent_GetControl(wxObject); }
-        }
+        public bool Control() { return wxStyledTextEvent_GetControl(wxobj); }
 
-        public bool Alt
-        {
-            get { return wxStyledTextEvent_GetAlt(wxObject); }
-        }
+        public bool Alt() { return wxStyledTextEvent_GetAlt(wxobj); }
     }
+
 }
-
-#endif 
-

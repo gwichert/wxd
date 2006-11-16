@@ -1,11 +1,7 @@
 
-using wx;
-using System.Drawing;
-using System;
-using System.IO;
+import wx.wx;
+import ImageViewer;
 
-namespace ImageView
-{
     /**
      * This is the application.
      */
@@ -28,7 +24,7 @@ namespace ImageView
             return true;
         }
 
-        [STAThread]
+        
         public static void Main()
         {
             // Create an instance of our application class
@@ -70,9 +66,9 @@ namespace ImageView
          * All the components inside the frame are created and initialized 
          * here.
          */
-        public ImageViewFrame()
-            : base("ImageView", wxDefaultPosition, new Size(500, 500))
+        public this()
         {
+            super("ImageView", wxDefaultPosition, new_Size(500, 500));
             // The menu bar is the bar where all the menus will be attached 
             // to.
             MenuBar menuBar = new MenuBar();
@@ -81,10 +77,10 @@ namespace ImageView
             Menu fileMenu = new Menu();
 
             // The first item we append is the "Open" command.  The ID for 
-            // the menu item is passed, as well as two strings.
+            // the menu item is passed, as cast(two)well strings.
             //
             // The first string is the menu item text.  The stuff after '\t'
-            // tells wxWidgets to use this as a short-cut key for the item.
+            // tells wxWidgets to use cast(a)this short-cut key for the item.
             // An '&' will underline the next character on the menu, for 
             // easy access.
             //
@@ -114,7 +110,7 @@ namespace ImageView
 
             // Next we tell the frame to use the menu bar that we've created, 
             // using the Frame.MenuBar property.
-            this.MenuBar = menuBar;
+            this.menuBar = menuBar;
 
             // Create a status bar with 2 fields
             CreateStatusBar(2);
@@ -141,19 +137,19 @@ namespace ImageView
 
             // Set some event handlers using the IDs of the controls we 
             // wish to handle events for.
-            EVT_MENU(ID_FileExit,           new EventListener(OnFileExit));
-            EVT_MENU(ID_FileOpenDir,        new EventListener(OnFileOpenDir));
+            EVT_MENU(ID_FileExit,           &OnFileExit);
+            EVT_MENU(ID_FileOpenDir,        &OnFileOpenDir);
 
-            EVT_MENU(ID_HelpAbout,          new EventListener(OnHelpAbout));
+            EVT_MENU(ID_HelpAbout,          &OnHelpAbout);
 
             // Handle when the frame is closed
-            EVT_CLOSE(new EventListener(OnClose));
+            EVT_CLOSE(&OnClose);
         }
 
         /**
          * Exit event handler
          */
-        protected void OnFileExit(object sender, Event evt)
+        protected void OnFileExit(Object sender, Event evt)
         {
             // Close the frame.  Since this is the last (only) frame in the
             // application, the application will exit when it is closed.
@@ -161,10 +157,26 @@ namespace ImageView
             Close();
         }
 
+	static string[] GetFiles(string path,string ext)
+	{
+		string[] result;
+	
+		//note: buggy
+		bool listing(char[] filename)
+		{
+			if (std.string.find(filename,ext)>=0)
+				result ~= filename;
+			return true;
+		}
+		
+		std.file.listdir(path,&listing);
+		return result;
+	}
+
         /**
          * Open Directory event handler
          */
-        protected void OnFileOpenDir(object sender, Event evt)
+        protected void OnFileOpenDir(Object sender, Event evt)
         {
             DirDialog dlg = new DirDialog(this, "Choose an image directory",
                                           m_directory);
@@ -175,7 +187,7 @@ namespace ImageView
                 // List the images. GetFiles is not very powerful: it is
 				// limited to a DOS-like wildcard match. So in our case 
 				// this is case sensitive on UN*X.
-                string[] files = Directory.GetFiles(m_directory, "*.jpg");
+                string[] files = GetFiles(m_directory, ".jpg");
                 m_list.ListImages(files);
 
                 Title = dlg.Path;
@@ -185,25 +197,25 @@ namespace ImageView
         /**
          * About event handler
          */
-        protected void OnHelpAbout(object sender, Event evt)
+        protected void OnHelpAbout(Object sender, Event evt)
         {
             // Message for our about dialog.
             string msg = "ImageView!\n\nAn application for viewing images.";
 
             // Display a message box.  The message box will have an OK button
             // (wxOK), and an information icon (wxICON_INFORMATION)
-            MessageDialog.ShowModal(this, msg, "About ImageView", 
+            MessageBoxl(this, msg, "About ImageView", 
                                     Dialog.wxOK | Dialog.wxICON_INFORMATION);
         }
 
-        protected void OnClose(object sender, Event evt)
+        protected void OnClose(Object sender, Event evt)
         {
             // We can ask the user whether or not it is OK to close the frame,
             // then act appropriately.
 
             string msg = "Are you sure you'd like to exit?";
 
-            int result = MessageDialog.ShowModal(this, msg, "Exit ImageView",
+            int result = MessageBox(this, msg, "Exit ImageView",
                                                  Dialog.wxYES_NO |
                                                  Dialog.wxICON_QUESTION);
 
@@ -219,18 +231,19 @@ namespace ImageView
          * Override the base Title, since we want to add some more intelligent
          * behaviour.
          */
-        public override string Title
+        public override void Title(string value)
         {
-            get { return base.Title; }
-            set { 
                 string title = "ImageView";
 
                 if (value != "")
-                    title += " (" + value + ")";
+                    title ~= " (" ~ value + ")";
 
-                base.Title = title;
-            }
+                super.Title = title;
         }
     }
-}
 
+
+void main()
+{
+	ImageViewApp.Main();
+}

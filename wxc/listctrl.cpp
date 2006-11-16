@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - listctrl.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - listctrl.cxx
 //
 // The wxListCtrl proxy interface
@@ -9,6 +12,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/imaglist.h>
 #include <wx/listctrl.h>
 #include "local_events.h"
@@ -30,7 +34,7 @@ wxListCtrl* wxListCtrl_ctor()
 }
 
 extern "C" WXEXPORT
-bool wxListCtrl_Create(wxListCtrl *self, wxWindow *parent, wxWindowID id, const wxPoint* pos, const wxSize* size, int style, const wxValidator* validator, const char* name)
+bool wxListCtrl_Create(wxListCtrl *self, wxWindow *parent, wxWindowID id, const wxPoint* pos, const wxSize* size, int style, const wxValidator* validator, dstr name)
 {
     if (pos == NULL)
         pos = &wxDefaultPosition;
@@ -41,10 +45,10 @@ bool wxListCtrl_Create(wxListCtrl *self, wxWindow *parent, wxWindowID id, const 
     if (validator == NULL)
         validator = &wxDefaultValidator;
 
-    if (name == NULL)
-        name = "listctrl";
+    if (name.data==NULL)
+        name = dstr("listctrl",sizeof("listctrl")-1);
 
-    return self->Create(parent, id, *pos, *size, style, *validator, wxString(name, wxConvUTF8))?1:0;
+    return self->Create(parent, id, *pos, *size, style, *validator, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -115,18 +119,18 @@ bool wxListCtrl_SetItem(wxListCtrl* self, wxListItem* info)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxListCtrl_SetItem_By_Row_Col(wxListCtrl* self, int index, int col, char* label, int imageId)
+int wxListCtrl_SetItem_By_Row_Col(wxListCtrl* self, int index, int col, dstr label, int imageId)
 {
-    return self->SetItem(index, col, wxString(label, wxConvUTF8), imageId);
+    return self->SetItem(index, col, wxString(label.data, wxConvUTF8, label.length), imageId);
 }
 
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxListCtrl_SetTextImageItem(wxListCtrl* self, int index, int col, const char* label, int imageId)
+int wxListCtrl_SetTextImageItem(wxListCtrl* self, int index, int col, dstr label, int imageId)
 {
-    return self->SetItem(index, col, wxString(label, wxConvUTF8), imageId);
+    return self->SetItem(index, col, wxString(label.data, wxConvUTF8, label.length), imageId);
 }
 
 //-----------------------------------------------------------------------------
@@ -156,17 +160,17 @@ bool wxListCtrl_SetItemImage(wxListCtrl* self, int item, int image, int selImage
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxListCtrl_GetItemText(wxListCtrl* self, int item)
+dstr wxListCtrl_GetItemText(wxListCtrl* self, int item)
 {
-    return new wxString(self->GetItemText(item).c_str());
+    return dstr(self->GetItemText(item).c_str());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxListCtrl_SetItemText(wxListCtrl* self, int item, const char* str)
+void wxListCtrl_SetItemText(wxListCtrl* self, int item, dstr str)
 {
-    self->SetItemText(item, wxString(str, wxConvUTF8));
+    self->SetItemText(item, wxString(str.data, wxConvUTF8, str.length));
 }
 
 //-----------------------------------------------------------------------------
@@ -420,9 +424,9 @@ bool wxListCtrl_EnsureVisible(wxListCtrl* self, int item)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxListCtrl_FindItem(wxListCtrl* self, int start, const char* str, bool partial)
+int wxListCtrl_FindItem(wxListCtrl* self, int start, dstr str, bool partial)
 {
-    return self->FindItem(start, wxString(str, wxConvUTF8), partial)?1:0;
+    return self->FindItem(start, wxString(str.data, wxConvUTF8, str.length), partial)?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -460,9 +464,9 @@ int wxListCtrl_InsertItem(wxListCtrl* self, wxListItem* info)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxListCtrl_InsertTextItem(wxListCtrl* self, int index, const char* label)
+int wxListCtrl_InsertTextItem(wxListCtrl* self, int index, dstr label)
 {
-    return self->InsertItem(index, wxString(label, wxConvUTF8));
+    return self->InsertItem(index, wxString(label.data, wxConvUTF8, label.length));
 }
 
 //-----------------------------------------------------------------------------
@@ -476,9 +480,9 @@ int wxListCtrl_InsertImageItem(wxListCtrl* self, int index, int imageIndex)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxListCtrl_InsertTextImageItem(wxListCtrl* self, int index, const char* label, int imageIndex)
+int wxListCtrl_InsertTextImageItem(wxListCtrl* self, int index, dstr label, int imageIndex)
 {
-    return self->InsertItem(index, wxString(label, wxConvUTF8), imageIndex);
+    return self->InsertItem(index, wxString(label.data, wxConvUTF8, label.length), imageIndex);
 }
 
 //-----------------------------------------------------------------------------
@@ -492,9 +496,9 @@ int wxListCtrl_InsertColumn(wxListCtrl* self, int col, wxListItem* info)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxListCtrl_InsertTextColumn(wxListCtrl* self, int col, const char* heading, int format, int width)
+int wxListCtrl_InsertTextColumn(wxListCtrl* self, int col, dstr heading, int format, int width)
 {
-    return self->InsertColumn(col, wxString(heading, wxConvUTF8), format, width);
+    return self->InsertColumn(col, wxString(heading.data, wxConvUTF8, heading.length), format, width);
 }
 
 //-----------------------------------------------------------------------------
@@ -637,9 +641,9 @@ int wxListItem_GetState(wxListItem* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxListItem_GetText(wxListItem* self)
+dstr wxListItem_GetText(wxListItem* self)
 {
-    return new wxString(self->GetText());
+    return dstr(self->GetText());
 }
 
 //-----------------------------------------------------------------------------
@@ -741,9 +745,9 @@ void wxListItem_SetStateMask(wxListItem* self, int stateMask)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxListItem_SetText(wxListItem* self, const char* text)
+void wxListItem_SetText(wxListItem* self, dstr text)
 {
-    self->SetText(wxString(text, wxConvUTF8));
+    self->SetText(wxString(text.data, wxConvUTF8, text.length));
 }
 
 //-----------------------------------------------------------------------------
@@ -841,9 +845,9 @@ void wxListEvent_SetEditCanceled(wxListEvent* self, bool editCancelled)
 //----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxListEvent_GetLabel(wxListEvent* self)
+dstr wxListEvent_GetLabel(wxListEvent* self)
 {
-    return new wxString(self->GetLabel());
+    return dstr(self->GetLabel());
 }
 
 //-----------------------------------------------------------------------------
@@ -865,9 +869,9 @@ int wxListEvent_GetImage(wxListEvent* self)
 
 
 extern "C" WXEXPORT
-wxString* wxListEvent_GetText(wxListEvent* self)
+dstr wxListEvent_GetText(wxListEvent* self)
 {
-    return new wxString(self->GetText());
+    return dstr(self->GetText());
 }
 
 //-----------------------------------------------------------------------------
@@ -932,7 +936,7 @@ wxListView* wxListView_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxListView_Create(wxListCtrl *self, wxWindow *parent, wxWindowID id, const wxPoint* pos, const wxSize* size, int style, const wxValidator* validator, const char* name)
+bool wxListView_Create(wxListCtrl *self, wxWindow *parent, wxWindowID id, const wxPoint* pos, const wxSize* size, int style, const wxValidator* validator, dstr name)
 {
     if (pos == NULL)
         pos = &wxDefaultPosition;
@@ -943,10 +947,10 @@ bool wxListView_Create(wxListCtrl *self, wxWindow *parent, wxWindowID id, const 
     if (validator == NULL)
         validator = &wxDefaultValidator;
 
-    if (name == NULL)
-        name = "listview";
+    if (name.data==NULL)
+        name = dstr("listview",sizeof("listview")-1);
 
-    return self->Create(parent, id, *pos, *size, style, *validator, wxString(name, wxConvUTF8))?1:0;
+    return self->Create(parent, id, *pos, *size, style, *validator, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------

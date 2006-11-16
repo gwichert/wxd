@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - html.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - html.cxx
 //
 // The wxHTML proxy interface.
@@ -11,24 +14,19 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/html/htmlwin.h>
 #include <wx/html/htmlproc.h>
 #include <wx/html/htmprint.h>
 #include "local_events.h"
 
-#if defined(_WINDOWS)
-#define CALLBACK __stdcall
-#else
-#define CALLBACK
-#endif
-
 //-----------------------------------------------------------------------------
 
-typedef void (CALLBACK* Virtual_OnLinkClicked) (wxHtmlLinkInfo* );
-typedef void (CALLBACK* Virtual_OnSetTitle) (wxString* );
-typedef void (CALLBACK* Virtual_OnCellMouseHover) (wxHtmlCell*, wxCoord, wxCoord);
-typedef void (CALLBACK* Virtual_OnCellClicked) (wxHtmlCell*, wxCoord, wxCoord, wxMouseEvent*);
-typedef wxHtmlOpeningStatus (CALLBACK* Virtual_OnOpeningURL) (wxHtmlURLType, wxString*, wxString*);
+typedef void (CALLBACK* Virtual_OnLinkClicked) (dobj, wxHtmlLinkInfo* );
+typedef void (CALLBACK* Virtual_OnSetTitle) (dobj, dstr );
+typedef void (CALLBACK* Virtual_OnCellMouseHover) (dobj, wxHtmlCell*, wxCoord, wxCoord);
+typedef void (CALLBACK* Virtual_OnCellClicked) (dobj, wxHtmlCell*, wxCoord, wxCoord, wxMouseEvent*);
+typedef wxHtmlOpeningStatus (CALLBACK* Virtual_OnOpeningURL) (dobj, wxHtmlURLType, dstr, dstr);
 
 class _HtmlWindow : public wxHtmlWindow
 {
@@ -40,26 +38,27 @@ public:
 		: wxHtmlWindow(parent, id, pos, size, style, name) {}
 
 	void OnLinkClicked(const wxHtmlLinkInfo& link)
-	{ m_OnLinkClicked(new wxHtmlLinkInfo(link)); }
+	{ m_OnLinkClicked(m_dobj, new wxHtmlLinkInfo(link)); }
 	
 	void OnSetTitle(const wxString& title)
-	{ m_OnSetTitle(new wxString(title)); }
+	{ m_OnSetTitle(m_dobj, dstr(title)); }
 	
 	void OnCellMouseHover(wxHtmlCell* cell, wxCoord x, wxCoord y)
-	{ m_OnCellMouseHover(cell, x, y); }
+	{ m_OnCellMouseHover(m_dobj, cell, x, y); }
 	
 	void OnCellClicked(wxHtmlCell* cell, wxCoord x, wxCoord y, const wxMouseEvent& event)
-	{ m_OnCellClicked(cell, x, y, new wxMouseEvent(event)); }
+	{ m_OnCellClicked(m_dobj, cell, x, y, new wxMouseEvent(event)); }
 	
 	wxHtmlOpeningStatus OnOpeningURL(wxHtmlURLType type, const wxString& url, wxString * redirect) const
-	{ return m_OnOpeningURL(type, new wxString(url), redirect); }
+	{ return m_OnOpeningURL(m_dobj, type, new wxString(url), redirect); }
 
-	void RegisterVirtual(Virtual_OnLinkClicked onLinkClicked, 
+	void RegisterVirtual(dobj obj, Virtual_OnLinkClicked onLinkClicked, 
 		Virtual_OnSetTitle onSetTitle,
 		Virtual_OnCellMouseHover onCellMouseHover,
 		Virtual_OnCellClicked onCellClicked,
 		Virtual_OnOpeningURL onOpeningURL)
 	{
+		m_dobj = obj;
 		m_OnLinkClicked = onLinkClicked;
 		m_OnSetTitle = onSetTitle;
 		m_OnCellMouseHover = onCellMouseHover;
@@ -73,6 +72,7 @@ private:
 	Virtual_OnCellMouseHover m_OnCellMouseHover;
 	Virtual_OnCellClicked m_OnCellClicked;
 	Virtual_OnOpeningURL m_OnOpeningURL;
+	dobj m_dobj;
 	
 public:
 	DECLARE_OBJECTDELETED(_HtmlWindow)
@@ -89,94 +89,94 @@ wxHtmlWindow* wxHtmlWindow_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxHtmlWindow* wxHtmlWindow_ctor2(wxWindow* parent, wxWindowID id, wxPoint* pos, wxSize* size, long style, char* name)
+wxHtmlWindow* wxHtmlWindow_ctor2(wxWindow* parent, wxWindowID id, wxPoint* pos, wxSize* size, long style, dstr name)
 {
-	return new _HtmlWindow(parent, id, *pos, *size, style, wxString(name, wxConvUTF8));
+	return new _HtmlWindow(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlWindow_RegisterVirtual(_HtmlWindow* self, 
+void wxHtmlWindow_RegisterVirtual(_HtmlWindow* self, dobj obj,
 	Virtual_OnLinkClicked onLinkClicked,
 	Virtual_OnSetTitle onSetTitle,
 	Virtual_OnCellMouseHover onCellMouseHover,
 	Virtual_OnCellClicked onCellClicked,
 	Virtual_OnOpeningURL onOpeningURL)
 {
-	self->RegisterVirtual(onLinkClicked, onSetTitle, onCellMouseHover, onCellClicked, onOpeningURL);
+	self->RegisterVirtual(obj, onLinkClicked, onSetTitle, onCellMouseHover, onCellClicked, onOpeningURL);
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxHtmlWindow_Create(_HtmlWindow* self, wxWindow* parent, wxWindowID id, wxPoint* pos, wxSize* size, long style, char* name)
+bool wxHtmlWindow_Create(_HtmlWindow* self, wxWindow* parent, wxWindowID id, wxPoint* pos, wxSize* size, long style, dstr name)
 {
-    return self->Create(parent, id, *pos, *size, style, wxString(name, wxConvUTF8))?1:0;
+    return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxHtmlWindow_SetPage(_HtmlWindow* self, const char* source)
+bool wxHtmlWindow_SetPage(_HtmlWindow* self, dstr source)
 {
-    return self->SetPage(wxString(source, wxConvUTF8))?1:0;
+    return self->SetPage(wxString(source.data, wxConvUTF8, source.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxHtmlWindow_AppendToPage(_HtmlWindow* self, const char* source)
+bool wxHtmlWindow_AppendToPage(_HtmlWindow* self, dstr source)
 {
-    return self->AppendToPage(wxString(source, wxConvUTF8))?1:0;
+    return self->AppendToPage(wxString(source.data, wxConvUTF8, source.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxHtmlWindow_LoadPage(_HtmlWindow* self, const char* location)
+bool wxHtmlWindow_LoadPage(_HtmlWindow* self, dstr location)
 {
-    return self->LoadPage(wxString(location, wxConvUTF8))?1:0;
+    return self->LoadPage(wxString(location.data, wxConvUTF8, location.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------
 // FIXME??: LoadFile uses wxFileName not wxString
 extern "C" WXEXPORT
-bool wxHtmlWindow_LoadFile(_HtmlWindow* self, const char* filename)
+bool wxHtmlWindow_LoadFile(_HtmlWindow* self, dstr filename)
 {
-    return self->LoadFile(wxString(filename, wxConvUTF8))?1:0;
+    return self->LoadFile(wxString(filename.data, wxConvUTF8, filename.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxHtmlWindow_GetOpenedPage(_HtmlWindow* self)
+dstr wxHtmlWindow_GetOpenedPage(_HtmlWindow* self)
 {
-    return new wxString(self->GetOpenedPage());
+    return dstr(self->GetOpenedPage());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxHtmlWindow_GetOpenedAnchor(_HtmlWindow* self)
+dstr wxHtmlWindow_GetOpenedAnchor(_HtmlWindow* self)
 {
-    return new wxString(self->GetOpenedAnchor());
+    return dstr(self->GetOpenedAnchor());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxHtmlWindow_GetOpenedPageTitle(_HtmlWindow* self)
+dstr wxHtmlWindow_GetOpenedPageTitle(_HtmlWindow* self)
 {
-    return new wxString(self->GetOpenedPageTitle());
+    return dstr(self->GetOpenedPageTitle());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlWindow_SetRelatedFrame(_HtmlWindow* self, wxFrame* frame, char* format)
+void wxHtmlWindow_SetRelatedFrame(_HtmlWindow* self, wxFrame* frame, dstr format)
 {
-    self->SetRelatedFrame(frame, wxString(format, wxConvUTF8));
+    self->SetRelatedFrame(frame, wxString(format.data, wxConvUTF8, format.length));
 }
 
 //-----------------------------------------------------------------------------
@@ -198,9 +198,9 @@ void wxHtmlWindow_SetRelatedStatusBar(_HtmlWindow* self, int bar)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlWindow_SetFonts(_HtmlWindow* self, char* normal_face, char* fixed_face, int* sizes)
+void wxHtmlWindow_SetFonts(_HtmlWindow* self, dstr normal_face, dstr fixed_face, int* sizes)
 {
-    self->SetFonts(wxString(normal_face, wxConvUTF8), wxString(fixed_face, wxConvUTF8), sizes);
+    self->SetFonts(wxString(normal_face.data, wxConvUTF8, normal_face.length), wxString(fixed_face.data, wxConvUTF8, fixed_face.length), sizes);
 }
 
 //-----------------------------------------------------------------------------
@@ -214,17 +214,17 @@ void wxHtmlWindow_SetBorders(_HtmlWindow* self, int b)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlWindow_ReadCustomization(_HtmlWindow* self, wxConfigBase* cfg, char* path)
+void wxHtmlWindow_ReadCustomization(_HtmlWindow* self, wxConfigBase* cfg, dstr path)
 {
-    self->ReadCustomization(cfg, wxString(path, wxConvUTF8));
+    self->ReadCustomization(cfg, wxString(path.data, wxConvUTF8, path.length));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlWindow_WriteCustomization(_HtmlWindow* self, wxConfigBase* cfg, char* path)
+void wxHtmlWindow_WriteCustomization(_HtmlWindow* self, wxConfigBase* cfg, dstr path)
 {
-    self->WriteCustomization(cfg, wxString(path, wxConvUTF8));
+    self->WriteCustomization(cfg, wxString(path.data, wxConvUTF8, path.length));
 }
 
 //-----------------------------------------------------------------------------
@@ -318,9 +318,9 @@ bool wxHtmlWindow_AcceptsFocusFromKeyboard(_HtmlWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlWindow_OnSetTitle(_HtmlWindow* self, char* title)
+void wxHtmlWindow_OnSetTitle(_HtmlWindow* self, dstr title)
 {
-    self->wxHtmlWindow::OnSetTitle(wxString(title, wxConvUTF8));
+    self->wxHtmlWindow::OnSetTitle(wxString(title.data, wxConvUTF8, title.length));
 }
 
 //-----------------------------------------------------------------------------
@@ -342,9 +342,9 @@ void wxHtmlWindow_OnLinkClicked(_HtmlWindow* self, wxHtmlLinkInfo* link)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxHtmlOpeningStatus wxHtmlWindow_OnOpeningURL(_HtmlWindow* self, wxHtmlURLType type, const char * url, const char* redirect)
+wxHtmlOpeningStatus wxHtmlWindow_OnOpeningURL(_HtmlWindow* self, wxHtmlURLType type, dstr url, dstr redirect)
 {
-	return self->wxHtmlWindow::OnOpeningURL(type, wxString(url, wxConvUTF8), new wxString(redirect, wxConvUTF8));
+	return self->wxHtmlWindow::OnOpeningURL(type, wxString(url.data, wxConvUTF8, url.length), new wxString(redirect.data, wxConvUTF8, redirect.length));
 }
 
 //-----------------------------------------------------------------------------
@@ -374,17 +374,17 @@ void wxHtmlWindow_SelectLine(_HtmlWindow* self, wxPoint* pos)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxHtmlWindow_ToText(_HtmlWindow* self)
+dstr wxHtmlWindow_ToText(_HtmlWindow* self)
 {
-	return new wxString(self->ToText());
+	return dstr(self->ToText());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxHtmlWindow_SelectionToText(_HtmlWindow* self)
+dstr wxHtmlWindow_SelectionToText(_HtmlWindow* self)
 {
-	return new wxString(self->SelectionToText());
+	return dstr(self->SelectionToText());
 }
 
 //-----------------------------------------------------------------------------
@@ -448,12 +448,12 @@ wxHtmlLinkInfo* wxHtmlLinkInfo_ctor()
 //-----------------------------------------------------------------------------
 
 /*extern "C" WXEXPORT
-wxHtmlLinkInfo* wxHtmlLinkInfo_ctor(char* href, char* target)
+wxHtmlLinkInfo* wxHtmlLinkInfo_ctor(dstr href, dstr target)
 {
     if (target == NULL)
         target = &wxEmptyString;
 
-    return new wxHtmlLinkInfo(wxString(href, wxConvUTF8), wxString(target, wxConvUTF8));
+    return new wxHtmlLinkInfo(wxString(href.data, wxConvUTF8, href.length), wxString(target.data, wxConvUTF8, target.length));
 }
 
 //-----------------------------------------------------------------------------
@@ -483,17 +483,17 @@ void wxHtmlLinkInfo_SetHtmlCell(wxHtmlLinkInfo* self, wxHtmlCell* e)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxHtmlLinkInfo_GetHref(wxHtmlLinkInfo* self)
+dstr wxHtmlLinkInfo_GetHref(wxHtmlLinkInfo* self)
 {
-    return new wxString(self->GetHref());
+    return dstr(self->GetHref());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxHtmlLinkInfo_GetTarget(wxHtmlLinkInfo* self)
+dstr wxHtmlLinkInfo_GetTarget(wxHtmlLinkInfo* self)
 {
-    return new wxString(self->GetTarget());
+    return dstr(self->GetTarget());
 }
 
 //-----------------------------------------------------------------------------
@@ -611,17 +611,17 @@ int wxHtmlCell_GetDescent(wxHtmlCell* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxHtmlCell_GetId(wxHtmlCell* self)
+dstr wxHtmlCell_GetId(wxHtmlCell* self)
 {
-    return new wxString(self->GetId());
+    return dstr(self->GetId());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlCell_SetId(wxHtmlCell* self, char* id)
+void wxHtmlCell_SetId(wxHtmlCell* self, dstr id)
 {
-    self->SetId(wxString(id, wxConvUTF8));
+    self->SetId(wxString(id.data, wxConvUTF8, id.length));
 }
 
 //-----------------------------------------------------------------------------
@@ -739,9 +739,9 @@ wxHtmlCell* wxHtmlCell_FindCellByPos(wxHtmlCell* self, wxCoord x, wxCoord y)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxHtmlWordCell* wxHtmlWordCell_ctor(char* word, wxDC* dc)
+wxHtmlWordCell* wxHtmlWordCell_ctor(dstr word, wxDC* dc)
 {
-    return new wxHtmlWordCell(wxString(word, wxConvUTF8), *dc);
+    return new wxHtmlWordCell(wxString(word.data, wxConvUTF8, word.length), *dc);
 }
 
 //-----------------------------------------------------------------------------
@@ -1027,57 +1027,57 @@ wxHtmlTag* wxHtmlTag_GetNextTag(wxHtmlTag* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxHtmlTag_GetName(wxHtmlTag* self)
+dstr wxHtmlTag_GetName(wxHtmlTag* self)
 {
-    return new wxString(self->GetName());
+    return dstr(self->GetName());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxHtmlTag_HasParam(wxHtmlTag* self, char* par)
+bool wxHtmlTag_HasParam(wxHtmlTag* self, dstr par)
 {
-    return self->HasParam(wxString(par, wxConvUTF8))?1:0;
+    return self->HasParam(wxString(par.data, wxConvUTF8, par.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxHtmlTag_GetParam(wxHtmlTag* self, char* par, bool with_commas)
+dstr wxHtmlTag_GetParam(wxHtmlTag* self, dstr par, bool with_commas)
 {
-    return new wxString(self->GetParam(wxString(par, wxConvUTF8), with_commas));
+    return dstr(self->GetParam(wxString(par.data, wxConvUTF8, par.length), with_commas));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxHtmlTag_GetParamAsColour(wxHtmlTag* self, char* par, wxColour* clr)
+bool wxHtmlTag_GetParamAsColour(wxHtmlTag* self, dstr par, wxColour* clr)
 {
-    return self->GetParamAsColour(wxString(par, wxConvUTF8), clr)?1:0;
+    return self->GetParamAsColour(wxString(par.data, wxConvUTF8, par.length), clr)?1:0;
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxHtmlTag_GetParamAsInt(wxHtmlTag* self, char* par, int* clr)
+bool wxHtmlTag_GetParamAsInt(wxHtmlTag* self, dstr par, int* clr)
 {
-    return self->GetParamAsInt(wxString(par, wxConvUTF8), clr)?1:0;
+    return self->GetParamAsInt(wxString(par.data, wxConvUTF8, par.length), clr)?1:0;
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxHtmlTag_ScanParam(wxHtmlTag* self, char* par, char* format, void* param)
+int wxHtmlTag_ScanParam(wxHtmlTag* self, dstr par, const char* format, void* param)
 {
-    return self->ScanParam(wxString(par, wxConvUTF8), wxString(format, wxConvUTF8).c_str(), param);
+    return self->ScanParam(wxString(par.data, wxConvUTF8, par.length), format, param);
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxHtmlTag_GetAllParams(wxHtmlTag* self)
+dstr wxHtmlTag_GetAllParams(wxHtmlTag* self)
 {
-    return new wxString(self->GetAllParams());
+    return dstr(self->GetAllParams());
 }
 
 //-----------------------------------------------------------------------------
@@ -1132,10 +1132,10 @@ bool wxHtmlFilter_CanRead(wxHtmlFilter* self, wxFSFile* file)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxHtmlFilter_ReadFile(wxHtmlFilter* self, wxFSFile* file)
+dstr wxHtmlFilter_ReadFile(wxHtmlFilter* self, wxFSFile* file)
 {
 	wxString str = self->ReadFile(*file);
-	return new wxString(str);
+	return dstr(str);
 }
 
 //-----------------------------------------------------------------------------
@@ -1149,10 +1149,10 @@ bool wxHtmlFilterPlainText_CanRead(wxHtmlFilterPlainText* self, wxFSFile* file)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxHtmlFilterPlainText_ReadFile(wxHtmlFilterPlainText* self, wxFSFile* file)
+dstr wxHtmlFilterPlainText_ReadFile(wxHtmlFilterPlainText* self, wxFSFile* file)
 {
 	wxString str = self->ReadFile(*file);
-    return new wxString(str);
+    return dstr(str);
 }
 
 //-----------------------------------------------------------------------------
@@ -1166,10 +1166,10 @@ bool wxHtmlFilterHTML_CanRead(wxHtmlFilterHTML* self, wxFSFile* file)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxHtmlFilterHTML_ReadFile(wxHtmlFilterHTML* self, wxFSFile* file)
+dstr wxHtmlFilterHTML_ReadFile(wxHtmlFilterHTML* self, wxFSFile* file)
 {
 	wxString str = self->ReadFile(*file);
-    return new wxString(str);
+    return dstr(str);
 }
 
 //-----------------------------------------------------------------------------
@@ -1215,9 +1215,9 @@ wxHtmlWinParser* wxHtmlWinParser_ctor(wxHtmlWindow* wnd)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlWinParser_InitParser(wxHtmlWinParser* self, char* source)
+void wxHtmlWinParser_InitParser(wxHtmlWinParser* self, dstr source)
 {
-    self->InitParser(wxString(source, wxConvUTF8));
+    self->InitParser(wxString(source.data, wxConvUTF8, source.length));
 }
 
 //-----------------------------------------------------------------------------
@@ -1239,9 +1239,9 @@ wxObject* wxHtmlWinParser_GetProduct(wxHtmlWinParser* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxFSFile* wxHtmlWinParser_OpenURL(wxHtmlWinParser* self, wxHtmlURLType type, char* url)
+wxFSFile* wxHtmlWinParser_OpenURL(wxHtmlWinParser* self, wxHtmlURLType type, dstr url)
 {
-    return self->OpenURL(type, wxString(url, wxConvUTF8));
+    return self->OpenURL(type, wxString(url.data, wxConvUTF8, url.length));
 }
 
 //-----------------------------------------------------------------------------
@@ -1295,9 +1295,9 @@ wxHtmlWindow* wxHtmlWinParser_GetWindow(wxHtmlWinParser* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlWinParser_SetFonts(wxHtmlWinParser* self, char* normal_face, char* fixed_face, int* sizes)
+void wxHtmlWinParser_SetFonts(wxHtmlWinParser* self, dstr normal_face, dstr fixed_face, int* sizes)
 {
-    self->SetFonts(wxString(normal_face, wxConvUTF8), wxString(fixed_face, wxConvUTF8), sizes);
+    self->SetFonts(wxString(normal_face.data, wxConvUTF8, normal_face.length), wxString(fixed_face.data, wxConvUTF8, fixed_face.length), sizes);
 }
 
 //-----------------------------------------------------------------------------
@@ -1431,17 +1431,17 @@ void wxHtmlWinParser_SetFontFixed(wxHtmlWinParser* self, int x)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxHtmlWinParser_GetFontFace(wxHtmlWinParser* self)
+dstr wxHtmlWinParser_GetFontFace(wxHtmlWinParser* self)
 {
-    return new wxString(self->GetFontFace());
+    return dstr(self->GetFontFace());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlWinParser_SetFontFace(wxHtmlWinParser* self, char* face)
+void wxHtmlWinParser_SetFontFace(wxHtmlWinParser* self, dstr face)
 {
-    self->SetFontFace(wxString(face, wxConvUTF8));
+    self->SetFontFace(wxString(face.data, wxConvUTF8, face.length));
 }
 
 //-----------------------------------------------------------------------------
@@ -1559,17 +1559,17 @@ void wxHtmlEntitiesParser_SetEncoding(wxHtmlEntitiesParser* self, wxFontEncoding
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxHtmlEntitiesParser_Parse(wxHtmlEntitiesParser* self, char* input)
+dstr wxHtmlEntitiesParser_Parse(wxHtmlEntitiesParser* self, dstr input)
 {
-    return new wxString(self->Parse(wxString(input, wxConvUTF8)));
+    return dstr(self->Parse(wxString(input.data, wxConvUTF8, input.length)));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-char wxHtmlEntitiesParser_GetEntityChar(wxHtmlEntitiesParser* self, char* entity)
+char wxHtmlEntitiesParser_GetEntityChar(wxHtmlEntitiesParser* self, dstr entity)
 {
-    return (char)self->GetEntityChar(wxString(entity, wxConvUTF8));
+    return (char)self->GetEntityChar(wxString(entity.data, wxConvUTF8, entity.length));
 }
 
 //-----------------------------------------------------------------------------
@@ -1599,25 +1599,25 @@ wxFileSystem* wxHtmlParser_GetFS(wxHtmlParser* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxFSFile* wxHtmlParser_OpenURL(wxHtmlParser* self, wxHtmlURLType type, char* url)
+wxFSFile* wxHtmlParser_OpenURL(wxHtmlParser* self, wxHtmlURLType type, dstr url)
 {
-    return self->OpenURL(type, wxString(url, wxConvUTF8));
+    return self->OpenURL(type, wxString(url.data, wxConvUTF8, url.length));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxObject* wxHtmlParser_Parse(wxHtmlParser* self, char* source)
+wxObject* wxHtmlParser_Parse(wxHtmlParser* self, dstr source)
 {
-    return self->Parse(wxString(source, wxConvUTF8));
+    return self->Parse(wxString(source.data, wxConvUTF8, source.length));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlParser_InitParser(wxHtmlParser* self, char* source)
+void wxHtmlParser_InitParser(wxHtmlParser* self, dstr source)
 {
-    self->InitParser(wxString(source, wxConvUTF8));
+    self->InitParser(wxString(source.data, wxConvUTF8, source.length));
 }
 
 //-----------------------------------------------------------------------------
@@ -1677,9 +1677,9 @@ void wxHtmlParser_AddTagHandler(wxHtmlParser* self, wxHtmlTagHandler* handler)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlParser_PushTagHandler(wxHtmlParser* self, wxHtmlTagHandler* handler, char* tags)
+void wxHtmlParser_PushTagHandler(wxHtmlParser* self, wxHtmlTagHandler* handler, dstr tags)
 {
-    self->PushTagHandler(handler, wxString(tags, wxConvUTF8));
+    self->PushTagHandler(handler, wxString(tags.data, wxConvUTF8, tags.length));
 }
 
 //-----------------------------------------------------------------------------
@@ -1693,7 +1693,7 @@ void wxHtmlParser_PopTagHandler(wxHtmlParser* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxHtmlParser_GetSource(wxHtmlParser* self)
+dstr wxHtmlParser_GetSource(wxHtmlParser* self)
 {
     return self->GetSource();
 }
@@ -1701,17 +1701,17 @@ wxString* wxHtmlParser_GetSource(wxHtmlParser* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlParser_SetSource(wxHtmlParser* self, char* src)
+void wxHtmlParser_SetSource(wxHtmlParser* self, dstr src)
 {
-    self->SetSource(wxString(src, wxConvUTF8));
+    self->SetSource(wxString(src.data, wxConvUTF8, src.length));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlParser_SetSourceAndSaveState(wxHtmlParser* self, char* src)
+void wxHtmlParser_SetSourceAndSaveState(wxHtmlParser* self, dstr src)
 {
-    self->SetSourceAndSaveState(wxString(src, wxConvUTF8));
+    self->SetSourceAndSaveState(wxString(src.data, wxConvUTF8, src.length));
 }
 
 //-----------------------------------------------------------------------------
@@ -1725,9 +1725,9 @@ bool wxHtmlParser_RestoreState(wxHtmlParser* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxHtmlParser_ExtractCharsetInformation(wxHtmlParser* self, char* markup)
+dstr wxHtmlParser_ExtractCharsetInformation(wxHtmlParser* self, dstr markup)
 {
-    return new wxString(self->ExtractCharsetInformation(wxString(markup, wxConvUTF8)));
+    return dstr(self->ExtractCharsetInformation(wxString(markup.data, wxConvUTF8, markup.length)));
 }
 
 //-----------------------------------------------------------------------------
@@ -1874,41 +1874,41 @@ bool wxHtmlSelection_IsEmpty(wxHtmlSelection* self)
 // wxHtmlEasyPrinting
 
 extern "C" WXEXPORT
-wxHtmlEasyPrinting* wxHtmlEasyPrinting_ctor(const char* name, wxWindow* parent)
+wxHtmlEasyPrinting* wxHtmlEasyPrinting_ctor(dstr name, wxWindow* parent)
 {
-	return new wxHtmlEasyPrinting(wxString(name, wxConvUTF8), parent);
+	return new wxHtmlEasyPrinting(wxString(name.data, wxConvUTF8, name.length), parent);
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxHtmlEasyPrinting_PreviewFile(wxHtmlEasyPrinting* self, const char* htmlfile)
+bool wxHtmlEasyPrinting_PreviewFile(wxHtmlEasyPrinting* self, dstr htmlfile)
 {
-	return self->PreviewFile(wxString(htmlfile, wxConvUTF8))?1:0;
+	return self->PreviewFile(wxString(htmlfile.data, wxConvUTF8, htmlfile.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxHtmlEasyPrinting_PreviewText(wxHtmlEasyPrinting* self, const char* htmltext, const char* basepath)
+bool wxHtmlEasyPrinting_PreviewText(wxHtmlEasyPrinting* self, dstr htmltext, dstr basepath)
 {
-	return self->PreviewText(wxString(htmltext, wxConvUTF8), wxString(basepath, wxConvUTF8))?1:0;
+	return self->PreviewText(wxString(htmltext.data, wxConvUTF8, htmltext.length), wxString(basepath.data, wxConvUTF8, basepath.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxHtmlEasyPrinting_PrintFile(wxHtmlEasyPrinting* self, const char* htmlfile)
+bool wxHtmlEasyPrinting_PrintFile(wxHtmlEasyPrinting* self, dstr htmlfile)
 {
-	return self->PrintFile(wxString(htmlfile, wxConvUTF8))?1:0;
+	return self->PrintFile(wxString(htmlfile.data, wxConvUTF8, htmlfile.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxHtmlEasyPrinting_PrintText(wxHtmlEasyPrinting* self, const char* htmltext, const char* basepath)
+bool wxHtmlEasyPrinting_PrintText(wxHtmlEasyPrinting* self, dstr htmltext, dstr basepath)
 {
-	return self->PrintText(wxString(htmltext, wxConvUTF8), wxString(basepath, wxConvUTF8))?1:0;
+	return self->PrintText(wxString(htmltext.data, wxConvUTF8, htmltext.length), wxString(basepath.data, wxConvUTF8, basepath.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -1930,33 +1930,33 @@ void wxHtmlEasyPrinting_PageSetup(wxHtmlEasyPrinting* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlEasyPrinting_SetHeader(wxHtmlEasyPrinting* self, const char* header, int pg)
+void wxHtmlEasyPrinting_SetHeader(wxHtmlEasyPrinting* self, dstr header, int pg)
 {
-	self->SetHeader(wxString(header, wxConvUTF8), pg);
+	self->SetHeader(wxString(header.data, wxConvUTF8, header.length), pg);
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlEasyPrinting_SetFooter(wxHtmlEasyPrinting* self, const char* footer, int pg)
+void wxHtmlEasyPrinting_SetFooter(wxHtmlEasyPrinting* self, dstr footer, int pg)
 {
-	self->SetFooter(wxString(footer, wxConvUTF8), pg);
+	self->SetFooter(wxString(footer.data, wxConvUTF8, footer.length), pg);
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlEasyPrinting_SetFonts(wxHtmlEasyPrinting* self, const char* normal_face, const char* fixed_face, int* sizes)
+void wxHtmlEasyPrinting_SetFonts(wxHtmlEasyPrinting* self, dstr normal_face, dstr fixed_face, int* sizes)
 {
-	self->SetFonts(wxString(normal_face, wxConvUTF8), wxString(fixed_face, wxConvUTF8), sizes);
+	self->SetFonts(wxString(normal_face.data, wxConvUTF8, normal_face.length), wxString(fixed_face.data, wxConvUTF8, fixed_face.length), sizes);
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlEasyPrinting_SetStandardFonts(wxHtmlEasyPrinting* self, int size, const char* normal_face, const char* fixed_face)
+void wxHtmlEasyPrinting_SetStandardFonts(wxHtmlEasyPrinting* self, int size, dstr normal_face, dstr fixed_face)
 {
-	self->SetStandardFonts(size, wxString(normal_face, wxConvUTF8), wxString(fixed_face, wxConvUTF8));
+	self->SetStandardFonts(size, wxString(normal_face.data, wxConvUTF8, normal_face.length), wxString(fixed_face.data, wxConvUTF8, fixed_face.length));
 }
 
 //-----------------------------------------------------------------------------

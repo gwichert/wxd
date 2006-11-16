@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - Locale.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - Locale.cs
 //
 // The wxLocale wrapper class.
@@ -10,11 +13,10 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Runtime.InteropServices;
+module wx.Locale;
+import wx.common;
+import wx.Font;
 
-namespace wx
-{
 	public enum Language
 	{
 		wxLANGUAGE_DEFAULT,
@@ -280,171 +282,108 @@ namespace wx
 	
 	//-----------------------------------------------------------------------------
 	
-	public class LanguageInfo : Object
-	{
-		[DllImport("wx-c")] static extern IntPtr wxLanguageInfo_ctor();
-		[DllImport("wx-c")] static extern void   wxLanguageInfo_dtor(IntPtr self);
-		[DllImport("wx-c")] static extern void   wxLanguageInfo_SetLanguage(IntPtr self, int value);
-		[DllImport("wx-c")] static extern int    wxLanguageInfo_GetLanguage(IntPtr self);
-		[DllImport("wx-c")] static extern void   wxLanguageInfo_SetCanonicalName(IntPtr self, string name);
-		[DllImport("wx-c")] static extern IntPtr wxLanguageInfo_GetCanonicalName(IntPtr self);
-		[DllImport("wx-c")] static extern void   wxLanguageInfo_SetDescription(IntPtr self, string name);
-		[DllImport("wx-c")] static extern IntPtr wxLanguageInfo_GetDescription(IntPtr self);
+		static extern (C) IntPtr wxLanguageInfo_ctor();
+		static extern (C) void   wxLanguageInfo_dtor(IntPtr self);
+		static extern (C) void   wxLanguageInfo_SetLanguage(IntPtr self, int value);
+		static extern (C) int    wxLanguageInfo_GetLanguage(IntPtr self);
+		static extern (C) void   wxLanguageInfo_SetCanonicalName(IntPtr self, string name);
+		static extern (C) string wxLanguageInfo_GetCanonicalName(IntPtr self);
+		static extern (C) void   wxLanguageInfo_SetDescription(IntPtr self, string name);
+		static extern (C) string wxLanguageInfo_GetDescription(IntPtr self);
 		
 		//-----------------------------------------------------------------------------
 
-		public LanguageInfo(IntPtr wxObject)
-			: base(wxObject)
+	public class LanguageInfo : wxObject
+	{
+		public this(IntPtr wxobj)
 		{
-			this.wxObject = wxObject;
+			super(wxobj);
 		}
 			
-		internal LanguageInfo(IntPtr wxObject, bool memOwn)
-			: base(wxObject)
+		private this(IntPtr wxobj, bool memOwn)
 		{
+			super(wxobj);
 			this.memOwn = memOwn;
-			this.wxObject = wxObject;
 		}
 		
-		public LanguageInfo()
-			: this(wxLanguageInfo_ctor(), true) {}
+		public this()
+			{ this(wxLanguageInfo_ctor(), true);}
 		
+		
+		public static wxObject New(IntPtr ptr) { return new LanguageInfo(ptr); }
 		//---------------------------------------------------------------------
 
-		public override void Dispose()
-		{
-			if (!disposed)
-			{
-				if (wxObject != IntPtr.Zero)
-				{
-					if (memOwn)
-					{
-						wxLanguageInfo_dtor(wxObject);
-					}
-				}
-				RemoveObject(wxObject);
-				wxObject = IntPtr.Zero;
-				disposed= true;
-			}
-			
-			virtual_Dispose = null;
-			base.Dispose();
-			GC.SuppressFinalize(this);
-		}
+		override private void dtor() { wxLanguageInfo_dtor(wxobj); }
 		
 		//---------------------------------------------------------------------
 		
-		~LanguageInfo() 
-		{
-			Dispose();
-		}
+		public int language() { return wxLanguageInfo_GetLanguage(wxobj); }
+		public void language(int value) { wxLanguageInfo_SetLanguage(wxobj, value); }
 		
 		//---------------------------------------------------------------------
 		
-		public int Language
-		{
-			get { return wxLanguageInfo_GetLanguage(wxObject); }
-			set { wxLanguageInfo_SetLanguage(wxObject, value); }
-		}
+		public string CanonicalName() { return wxLanguageInfo_GetCanonicalName(wxobj).dup; }
+		public void CanonicalName(string value) { wxLanguageInfo_SetCanonicalName(wxobj, value); }
 		
 		//---------------------------------------------------------------------
 		
-		public string CanonicalName
-		{
-			get { return new wxString(wxLanguageInfo_GetCanonicalName(wxObject), true); }
-			set { wxLanguageInfo_SetCanonicalName(wxObject, value); }
-		}
-		
-		//---------------------------------------------------------------------
-		
-		public string Description
-		{
-			get { return new wxString(wxLanguageInfo_GetDescription(wxObject), true); }
-			set { wxLanguageInfo_SetDescription(wxObject, value); }
-		}
+		public string Description() { return wxLanguageInfo_GetDescription(wxobj).dup; }
+		public void Description(string value) { wxLanguageInfo_SetDescription(wxobj, value); }
 	}
 	
 	//-----------------------------------------------------------------------------
 	
-	public class Locale : Object
-	{
-		[DllImport("wx-c")] static extern IntPtr wxLocale_ctor();
-		[DllImport("wx-c")] static extern IntPtr wxLocale_ctor2(int language, int flags);
-		[DllImport("wx-c")] static extern void   wxLocale_dtor(IntPtr self);
-		[DllImport("wx-c")] static extern bool   wxLocale_Init(IntPtr self, int language, int flags);
-		[DllImport("wx-c")] static extern bool   wxLocale_AddCatalog(IntPtr self, string szDomain);
-		[DllImport("wx-c")] static extern bool   wxLocale_AddCatalog2(IntPtr self, string szDomain, int msgIdLanguage, string msgIdCharset);
-		[DllImport("wx-c")] static extern void   wxLocale_AddCatalogLookupPathPrefix(IntPtr self, string prefix);
-		[DllImport("wx-c")] static extern void   wxLocale_AddLanguage(IntPtr info);
-		[DllImport("wx-c")] static extern IntPtr wxLocale_FindLanguageInfo(string locale);
-		[DllImport("wx-c")] static extern IntPtr wxLocale_GetCanonicalName(IntPtr self);
-		[DllImport("wx-c")] static extern int    wxLocale_GetLanguage(IntPtr self);
-		[DllImport("wx-c")] static extern IntPtr wxLocale_GetLanguageInfo(int lang);
-		[DllImport("wx-c")] static extern IntPtr wxLocale_GetLanguageName(int lang);
-		[DllImport("wx-c")] static extern IntPtr wxLocale_GetLocale(IntPtr self);
-		[DllImport("wx-c")] static extern IntPtr wxLocale_GetName(IntPtr self);
-		[DllImport("wx-c")] static extern IntPtr wxLocale_GetString(IntPtr self, string szOrigString, string szDomain);
-		[DllImport("wx-c")] static extern IntPtr wxLocale_GetHeaderValue(IntPtr self, string szHeader, string szDomain);
-		[DllImport("wx-c")] static extern IntPtr wxLocale_GetSysName(IntPtr self);
-		[DllImport("wx-c")] static extern int    wxLocale_GetSystemEncoding();
-		[DllImport("wx-c")] static extern IntPtr wxLocale_GetSystemEncodingName();
-		[DllImport("wx-c")] static extern int    wxLocale_GetSystemLanguage();
-		[DllImport("wx-c")] static extern bool   wxLocale_IsLoaded(IntPtr self, string domain);
-		[DllImport("wx-c")] static extern bool   wxLocale_IsOk(IntPtr self);
+		static extern (C) IntPtr wxLocale_ctor();
+		static extern (C) IntPtr wxLocale_ctor2(int language, int flags);
+		static extern (C) void   wxLocale_dtor(IntPtr self);
+		static extern (C) bool   wxLocale_Init(IntPtr self, int language, int flags);
+		static extern (C) bool   wxLocale_AddCatalog(IntPtr self, string szDomain);
+		static extern (C) bool   wxLocale_AddCatalog2(IntPtr self, string szDomain, int msgIdLanguage, string msgIdCharset);
+		static extern (C) void   wxLocale_AddCatalogLookupPathPrefix(IntPtr self, string prefix);
+		static extern (C) void   wxLocale_AddLanguage(IntPtr info);
+		static extern (C) IntPtr wxLocale_FindLanguageInfo(string locale);
+		static extern (C) string wxLocale_GetCanonicalName(IntPtr self);
+		static extern (C) int    wxLocale_GetLanguage(IntPtr self);
+		static extern (C) IntPtr wxLocale_GetLanguageInfo(int lang);
+		static extern (C) string wxLocale_GetLanguageName(int lang);
+		static extern (C) string wxLocale_GetLocale(IntPtr self);
+		static extern (C) string wxLocale_GetName(IntPtr self);
+		static extern (C) string wxLocale_GetString(IntPtr self, string szOrigString, string szDomain);
+		static extern (C) string wxLocale_GetHeaderValue(IntPtr self, string szHeader, string szDomain);
+		static extern (C) string wxLocale_GetSysName(IntPtr self);
+		static extern (C) int    wxLocale_GetSystemEncoding();
+		static extern (C) string wxLocale_GetSystemEncodingName();
+		static extern (C) int    wxLocale_GetSystemLanguage();
+		static extern (C) bool   wxLocale_IsLoaded(IntPtr self, string domain);
+		static extern (C) bool   wxLocale_IsOk(IntPtr self);
 		
 		//-----------------------------------------------------------------------------
 
-		public Locale(IntPtr wxObject)
-			: base(wxObject)
+	public class Locale : wxObject
+	{
+		public this(IntPtr wxobj)
 		{
-			this.wxObject = wxObject;
+			super(wxobj);
 		}
 			
-		internal Locale(IntPtr wxObject, bool memOwn)
-			: base(wxObject)
+		private this(IntPtr wxobj, bool memOwn)
 		{
+			super(wxobj);
 			this.memOwn = memOwn;
-			this.wxObject = wxObject;
 		}
 		
-		public Locale()
-			: this(wxLocale_ctor(), true) {}
+		public this()
+			{ this(wxLocale_ctor(), true);}
 			
-		public Locale(int language)
-			: this(language, LocaleInitFlags.wxLOCALE_LOAD_DEFAULT | LocaleInitFlags.wxLOCALE_CONV_ENCODING) {}
+		public this(int language)
+			{ this(language, LocaleInitFlags.wxLOCALE_LOAD_DEFAULT | LocaleInitFlags.wxLOCALE_CONV_ENCODING);}
 			
-		public Locale(int language, LocaleInitFlags flags)
-			: this(wxLocale_ctor2(language, (int)flags), true) {}
+		public this(int language, LocaleInitFlags flags)
+			{ this(wxLocale_ctor2(language, cast(int)flags), true);}
 		
 		//---------------------------------------------------------------------
 
-		public override void Dispose()
-		{
-			if (!disposed)
-			{
-				if (wxObject != IntPtr.Zero)
-				{
-					if (memOwn)
-					{
-						wxLocale_dtor(wxObject);
-					}
-				}
-				RemoveObject(wxObject);
-				wxObject = IntPtr.Zero;
-				disposed= true;
-			}
-			
-			virtual_Dispose = null;
-			base.Dispose();
-			GC.SuppressFinalize(this);
-		}
-		
-		//---------------------------------------------------------------------
-		
-		~Locale() 
-		{
-			Dispose();
-		}
+		override private void dtor() { wxLocale_dtor(wxobj); }
 		
 		//-----------------------------------------------------------------------------
 		
@@ -460,83 +399,74 @@ namespace wx
 		
 		public bool Init(Language language, LocaleInitFlags flags)
 		{
-			return wxLocale_Init(wxObject, (int)language, (int)flags);
+			return wxLocale_Init(wxobj, cast(int)language, cast(int)flags);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public bool AddCatalog(string szDomain)
 		{
-			return wxLocale_AddCatalog(wxObject, szDomain);
+			return wxLocale_AddCatalog(wxobj, szDomain);
 		}
 		
 		public bool AddCatalog(string szDomain, Language msgIdLanguage, string msgIdCharset)
 		{
-			return wxLocale_AddCatalog2(wxObject, szDomain, (int)msgIdLanguage, msgIdCharset);
+			return wxLocale_AddCatalog2(wxobj, szDomain, cast(int)msgIdLanguage, msgIdCharset);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public void AddCatalogLookupPathPrefix(string prefix)
 		{
-			wxLocale_AddCatalogLookupPathPrefix(wxObject, prefix);
+			wxLocale_AddCatalogLookupPathPrefix(wxobj, prefix);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public static void AddLanguage(LanguageInfo info)
 		{
-			wxLocale_AddLanguage(Object.SafePtr(info));
+			wxLocale_AddLanguage(wxObject.SafePtr(info));
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public static LanguageInfo FindLanguageInfo(string locale)
 		{
-			return (LanguageInfo)Object.FindObject(wxLocale_FindLanguageInfo(locale), typeof(LanguageInfo));
+			return cast(LanguageInfo)FindObject(wxLocale_FindLanguageInfo(locale), &LanguageInfo.New);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public string CanonicalName
-		{
-			get { return new wxString(wxLocale_GetCanonicalName(wxObject), true); }
-		}
+		public string CanonicalName() { return wxLocale_GetCanonicalName(wxobj).dup; }
 		
 		//-----------------------------------------------------------------------------
 		
-		public Language Language
-		{
-			get { return (Language)wxLocale_GetLanguage(wxObject); }
-		}
+		public Language language() { return cast(Language)wxLocale_GetLanguage(wxobj); }
 		
 		//-----------------------------------------------------------------------------
 		
 		public static LanguageInfo GetLanguageInfo(Language lang)
 		{
-			return (LanguageInfo)Object.FindObject(wxLocale_GetLanguageInfo((int)lang), typeof(LanguageInfo));
+			return cast(LanguageInfo)FindObject(wxLocale_GetLanguageInfo(cast(int)lang), &LanguageInfo.New);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public static string GetLanguageName(Language lang)
 		{
-			return new wxString(wxLocale_GetLanguageName((int)lang), true);
+			return wxLocale_GetLanguageName(cast(int)lang).dup;
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public string GetLocale()
 		{
-			return new wxString(wxLocale_GetLocale(wxObject), true);
+			return wxLocale_GetLocale(wxobj).dup;
 		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public string Name
-		{
-			get { return new wxString(wxLocale_GetName(wxObject), true); }
-		}
+		public string Name() { return wxLocale_GetName(wxobj).dup; }
 		
 		//-----------------------------------------------------------------------------
 		
@@ -547,7 +477,7 @@ namespace wx
 		
 		public string GetString(string szOrigString, string szDomain)
 		{
-			return new wxString(wxLocale_GetString(wxObject, szOrigString, szDomain), true);
+			return wxLocale_GetString(wxobj, szOrigString, szDomain).dup;
 		}
 		
 		//-----------------------------------------------------------------------------
@@ -559,49 +489,33 @@ namespace wx
 		
 		public string GetHeaderValue(string szHeader, string szDomain)
 		{
-			return new wxString(wxLocale_GetHeaderValue(wxObject, szHeader, szDomain), true);
+			return wxLocale_GetHeaderValue(wxobj, szHeader, szDomain).dup;
 		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public string SysName
-		{
-			get { return new wxString(wxLocale_GetSysName(wxObject), true); }
-		}
+		public string SysName() { return wxLocale_GetSysName(wxobj).dup; }
 		
 		//-----------------------------------------------------------------------------
 		
-		public static FontEncoding SystemEncoding
-		{
-			get { return (FontEncoding)wxLocale_GetSystemEncoding(); }
-		}
+		static FontEncoding SystemEncoding() { return cast(FontEncoding)wxLocale_GetSystemEncoding(); }
 		
 		//-----------------------------------------------------------------------------
 		
-		public static string SystemEncodingName
-		{
-			get { return new wxString(wxLocale_GetSystemEncodingName(), true); }
-		}
+		static string SystemEncodingName() { return wxLocale_GetSystemEncodingName().dup; }
 		
 		//-----------------------------------------------------------------------------
 		
-		public static Language SystemLanguage
-		{
-			get { return (Language)wxLocale_GetSystemLanguage(); }
-		}
+		static Language SystemLanguage() { return cast(Language)wxLocale_GetSystemLanguage(); }
 		
 		//-----------------------------------------------------------------------------
 		
 		public bool IsLoaded(string domain)
 		{
-			return wxLocale_IsLoaded(wxObject, domain);
+			return wxLocale_IsLoaded(wxobj, domain);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public bool IsOk
-		{
-			get { return wxLocale_IsOk(wxObject); }
-		}
+		public bool IsOk() { return wxLocale_IsOk(wxobj); }
 	}
-}

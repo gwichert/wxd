@@ -1,0 +1,9 @@
+all:
+	make -f Makefile.linux -C wxc
+	make -f Makefile.linux -C wx
+	make -f Makefile.linux -C Samples
+
+clean:
+	make -f Makefile.linux clean -C wxc
+	make -f Makefile.linux clean -C wx
+	make -f Makefile.linux clean -C Samples

@@ -1,88 +1,79 @@
 //-----------------------------------------------------------------------------
-// wx.NET - Colour.cs
+// wxD - Colour.d
 //
 // The wxColour wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
+// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Runtime.InteropServices;
+module wx.Colour;
+import wx.common;
+private import std.string;
 
-namespace wx
-{
-	public class Colour : Object
-	{
-		[DllImport("wx-c")] static extern IntPtr wxColour_ctor();
-		[DllImport("wx-c")] static extern IntPtr wxColour_ctorByName(string name);
-		[DllImport("wx-c")] static extern IntPtr wxColour_ctorByParts(byte red, byte green, byte blue);
-		[DllImport("wx-c")] static extern void   wxColour_dtor(IntPtr self);
-		//[DllImport("wx-c")] static extern void   wxColour_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
+		static extern (C) IntPtr wxColour_ctor();
+		static extern (C) IntPtr wxColour_ctorByName(string name);
+		static extern (C) IntPtr wxColour_ctorByParts(ubyte red, ubyte green, ubyte blue);
+		static extern (C) void   wxColour_dtor(IntPtr self);
+		//static extern (C) void   wxColour_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
 
-		[DllImport("wx-c")] static extern byte   wxColour_Red(IntPtr self);
-		[DllImport("wx-c")] static extern byte   wxColour_Blue(IntPtr self);
-		[DllImport("wx-c")] static extern byte   wxColour_Green(IntPtr self);
+		static extern (C) ubyte   wxColour_Red(IntPtr self);
+		static extern (C) ubyte   wxColour_Blue(IntPtr self);
+		static extern (C) ubyte   wxColour_Green(IntPtr self);
 
-		[DllImport("wx-c")] static extern bool   wxColour_Ok(IntPtr self);
-		[DllImport("wx-c")] static extern void   wxColour_Set(IntPtr self, byte red, byte green, byte blue);
+		static extern (C) bool   wxColour_Ok(IntPtr self);
+		static extern (C) void   wxColour_Set(IntPtr self, ubyte red, ubyte green, ubyte blue);
 		
-		[DllImport("wx-c")] static extern IntPtr wxColour_CreateByName(string name);
+		static extern (C) IntPtr wxColour_CreateByName(string name);
 
 		//---------------------------------------------------------------------
 
-		public static Colour wxBLACK       = new Colour("Black");
-		public static Colour wxWHITE       = new Colour("White");
-		public static Colour wxRED         = new Colour("Red");
-		public static Colour wxBLUE        = new Colour("Blue");
-		public static Colour wxGREEN       = new Colour("Green");
-		public static Colour wxCYAN        = new Colour("Cyan");
-		public static Colour wxLIGHT_GREY  = new Colour("Light Gray");
+	public class Colour : wxObject
+	{
+		public static Colour wxBLACK;
+		public static Colour wxWHITE;
+		public static Colour wxRED;
+		public static Colour wxBLUE;
+		public static Colour wxGREEN;
+		public static Colour wxCYAN;
+		public static Colour wxLIGHT_GREY;
+		public static Colour wxNullColour;
 
 		//---------------------------------------------------------------------
 
-		public Colour(IntPtr wxObject)
-			: base(wxObject) 
+		public this(IntPtr wxobj)
 		{
-			this.wxObject = wxObject; 
+			super(wxobj);
 		}
 			
-		internal Colour(IntPtr wxObject, bool memOwn)
-			: base(wxObject)
+		public this(IntPtr wxobj, bool memOwn)
 		{ 
+			super(wxobj);
 			this.memOwn = memOwn;
-			this.wxObject = wxObject;
 		}
 
-		public Colour() 
-			: this(wxColour_ctor(), true) 
+		public this() 
 		{ 
-			/*virtual_Dispose = new Virtual_Dispose(VirtualDispose);
-			wxColour_RegisterDisposable(wxObject, virtual_Dispose);*/
+			this(wxColour_ctor(), true);
+			//wxColour_RegisterDisposable(wxobj, &VirtualDispose);
 		}
 
-		public Colour(string name)
-			: this(wxColour_ctorByName(name.ToUpper()), true) 
+		public this(string name)
 		{ 
-			/*virtual_Dispose = new Virtual_Dispose(VirtualDispose);
-			wxColour_RegisterDisposable(wxObject, virtual_Dispose);*/
+			this(wxColour_ctorByName(toupper(name)), true);
+			//wxColour_RegisterDisposable(wxobj, &VirtualDispose);
 		}
 
-		public Colour(byte red, byte green, byte blue)
-			: this(wxColour_ctorByParts(red, green, blue), true) 
+		public this(ubyte red, ubyte green, ubyte blue)
 		{ 
-			/*virtual_Dispose = new Virtual_Dispose(VirtualDispose);
-			wxColour_RegisterDisposable(wxObject, virtual_Dispose);*/
+			this(wxColour_ctorByParts(red, green, blue), true);
+			//wxColour_RegisterDisposable(wxobj, &VirtualDispose);
 		}
 
-		~Colour()
-		{
-			Dispose();
-		}
-		
 		//---------------------------------------------------------------------
 
 		public override void Dispose()
@@ -92,46 +83,38 @@ namespace wx
 					(this != Colour.wxGREEN) && (this != Colour.wxCYAN) &&
 						(this != Colour.wxLIGHT_GREY)) 
 			{
-				Dispose(true);
+				super.Dispose(/*true*/);
 			}
 		}
 
 		//---------------------------------------------------------------------
 
-		public byte Red
-		{
-			get { return wxColour_Red(wxObject); }
-		}
+		public ubyte Red() { return wxColour_Red(wxobj); }
 
-		public byte Green
-		{
-			get { return wxColour_Green(wxObject); }
-		}
+		public ubyte Green() { return wxColour_Green(wxobj); }
 
-		public byte Blue
-		{
-			get { return wxColour_Blue(wxObject); }
-		}
+		public ubyte Blue() { return wxColour_Blue(wxobj); }
 
 		//---------------------------------------------------------------------
 
 		public bool Ok()
 		{
-			return wxColour_Ok(wxObject);
+			return wxColour_Ok(wxobj);
 		}
 
-		public void Set(byte red, byte green, byte blue)
+		public void Set(ubyte red, ubyte green, ubyte blue)
 		{
-			wxColour_Set(wxObject, red, green, blue);
+			wxColour_Set(wxobj, red, green, blue);
 		}
 
 		//---------------------------------------------------------------------
 		
-		#if __WXGTK__
+		version(__WXGTK__){
 		public static Colour CreateByName(string name)
 		{
 			return new Colour(wxColour_CreateByName(name), true);
 		}
-		#endif
+		} // version(__WXGTK__)
+
+		public static wxObject New(IntPtr ptr) { return new Colour(ptr); }
 	}
-}

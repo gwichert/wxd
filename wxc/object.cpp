@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - Object.cs
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - Object.cs
 //
 // The wxObject wrapper class.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 
 #define CLASSNAME(name) \
 	(new wxString(CLASSINFO(name)->GetClassName()))
@@ -22,9 +26,9 @@
 
 // Utility function to grab the C++ typename of a given pointer to a class.
 extern "C" WXEXPORT
-const wxString* wxObject_GetTypeName(wxObject* obj)
+const dstr wxObject_GetTypeName(wxObject* obj)
 {
-	return OBJECTNAME(obj);
+	return dstr(obj->GetClassInfo()->GetClassName());
 }
 
 //-----------------------------------------------------------------------------
@@ -40,8 +44,8 @@ void wxObject_dtor(wxObject* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxGetTranslation_func(const char* str)
+dstr wxGetTranslation_func(dstr str)
 {
-	return new wxString(wxGetTranslation(wxString(str, wxConvUTF8)));
+	return dstr(wxGetTranslation(wxString(str.data, wxConvUTF8, str.length)));
 }
 

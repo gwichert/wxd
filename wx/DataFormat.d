@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - DataFormat.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - DataFormat.cs
 // 
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
@@ -6,12 +9,9 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.DataFormat;
+import wx.common;
 
-namespace wx
-{
     public enum DataFormatId
     {
         wxDF_INVALID =          0,
@@ -36,88 +36,53 @@ namespace wx
         wxDF_MAX
     }
  
-    public class DataFormat : Object
-    {
-        [DllImport("wx-c")] static extern IntPtr wxDataFormat_ctor();
-	[DllImport("wx-c")] static extern void   wxDataFormat_dtor(IntPtr self);
-        [DllImport("wx-c")] static extern IntPtr wxDataFormat_ctorByType(int type);
-        [DllImport("wx-c")] static extern IntPtr wxDataFormat_ctorById(string id);
+        static extern (C) IntPtr wxDataFormat_ctor();
+	static extern (C) void   wxDataFormat_dtor(IntPtr self);
+        static extern (C) IntPtr wxDataFormat_ctorByType(int type);
+        static extern (C) IntPtr wxDataFormat_ctorById(string id);
 
-        [DllImport("wx-c")] static extern string wxDataFormat_GetId(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxDataFormat_SetId(IntPtr self, string id);
+        static extern (C) string wxDataFormat_GetId(IntPtr self);
+        static extern (C) void   wxDataFormat_SetId(IntPtr self, string id);
 
-        [DllImport("wx-c")] static extern int    wxDataFormat_GetType(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxDataFormat_SetType(IntPtr self, int type);
+        static extern (C) int    wxDataFormat_GetType(IntPtr self);
+        static extern (C) void   wxDataFormat_SetType(IntPtr self, int type);
 	
         //-----------------------------------------------------------------------------
 	
-	public DataFormat(IntPtr wxObject)
-		: base(wxObject)
+    public class DataFormat : wxObject
+    {
+	public this(IntPtr wxobj)
 	{ 
-		this.wxObject = wxObject;
+		super(wxobj);
 	}
 			
-	internal DataFormat(IntPtr wxObject, bool memOwn)
-		: base(wxObject)
+	private this(IntPtr wxobj, bool memOwn)
 	{ 
+		super(wxobj);
 		this.memOwn = memOwn;
-		this.wxObject = wxObject;
 	}
 
-        public  DataFormat()
-            : this(wxDataFormat_ctor(), true) { }
+        public  this()
+            { this(wxDataFormat_ctor(), true); }
 
-        public DataFormat(DataFormatId type)
-            : this(wxDataFormat_ctorByType((int)type), true) { }
+        public this(DataFormatId type)
+            { this(wxDataFormat_ctorByType(cast(int)type), true); }
 
-        public DataFormat(string id)
-            : this(wxDataFormat_ctorById(id), true) { }
+        public this(string id)
+            { this(wxDataFormat_ctorById(id), true); }
 	    
 	//---------------------------------------------------------------------
-				
-	public override void Dispose()
-	{
-		if (!disposed)
-		{
-			if (wxObject != IntPtr.Zero)
-			{
-				if (memOwn)
-				{
-					wxDataFormat_dtor(wxObject);
-					memOwn = false;
-				}
-			}
-			RemoveObject(wxObject);
-			wxObject = IntPtr.Zero;
-			disposed= true;
-		}
-		
-		base.Dispose();
-		GC.SuppressFinalize(this);
-	}
 	
-	//---------------------------------------------------------------------
-	
-	~DataFormat() 
-	{
-		Dispose();
-	}
+	override private void dtor() { wxDataFormat_dtor(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public string Id
-        {
-            get { return wxDataFormat_GetId(wxObject); }
-            set { wxDataFormat_SetId(wxObject, value); }
-        }
+        public string Id() { return wxDataFormat_GetId(wxobj); }
+        public void Id(string value) { wxDataFormat_SetId(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public DataFormatId Type
-        {
-            get { return (DataFormatId)wxDataFormat_GetType(wxObject); }
-            set { wxDataFormat_SetType(wxObject, (int)value); }
-        }
+        public DataFormatId Type() { return cast(DataFormatId)wxDataFormat_GetType(wxobj); }
+        public void Type(DataFormatId value) { wxDataFormat_SetType(wxobj, cast(int)value); }
     }
-}
 

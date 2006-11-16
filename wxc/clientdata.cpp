@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - clientdata.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - clientdata.cxx
 //
 // The wxClientData proxy interface
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/textctrl.h>
 #include "local_events.h"
 
@@ -50,9 +54,9 @@ void wxClientData_RegisterDisposable(_ClientData* self, Virtual_Dispose onDispos
 // wxStringClientData
 
 extern "C" WXEXPORT
-wxStringClientData* wxStringClientData_ctor(const char* data)
+wxStringClientData* wxStringClientData_ctor(dstr data)
 {
-	return new wxStringClientData(wxString(data, wxConvUTF8));
+	return new wxStringClientData(wxString(data.data, wxConvUTF8, data.length));
 }
 
 //-----------------------------------------------------------------------------
@@ -67,17 +71,17 @@ void wxStringClientData_dtor(wxStringClientData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStringClientData_SetData(wxStringClientData* self, const char* data)
+void wxStringClientData_SetData(wxStringClientData* self, dstr data)
 {
-	self->SetData(wxString(data, wxConvUTF8));
+	self->SetData(wxString(data.data, wxConvUTF8, data.length));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxStringClientData_GetData(wxStringClientData* self)
+dstr wxStringClientData_GetData(wxStringClientData* self)
 {
-	return new wxString(self->GetData());
+	return dstr(self->GetData());
 }
 
 

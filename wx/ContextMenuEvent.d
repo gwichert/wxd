@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - ContextMenuEvent.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - ContextMenuEvent.cs
 //
 // The wxContextMenuEvent wrapper class.
@@ -10,37 +13,38 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.ContextMenuEvent;
+import wx.common;
+import wx.CommandEvent;
 
-namespace wx
-{
-	public class ContextMenuEvent : CommandEvent
-	{
-		[DllImport("wx-c")] static extern IntPtr wxContextMenuEvent_ctor(int type);
-		[DllImport("wx-c")] static extern void   wxContextMenuEvent_GetPosition(IntPtr self, ref Point pos);
-		[DllImport("wx-c")] static extern void   wxContextMenuEvent_SetPosition(IntPtr self, ref Point pos);
+		static extern (C) IntPtr wxContextMenuEvent_ctor(int type);
+		static extern (C) void   wxContextMenuEvent_GetPosition(IntPtr self, inout Point pos);
+		static extern (C) void   wxContextMenuEvent_SetPosition(IntPtr self, inout Point pos);
 		
 		//-----------------------------------------------------------------------------
 
-		public ContextMenuEvent(IntPtr wxObject) 
-			: base(wxObject) { }
+	public class ContextMenuEvent : CommandEvent
+	{
+		public this(IntPtr wxobj) 
+			{ super(wxobj); }
 
-		public ContextMenuEvent(int type)
-			: this(wxContextMenuEvent_ctor(type)) { }
+		public this(int type)
+			{ this(wxContextMenuEvent_ctor(type)); }
 
 		//-----------------------------------------------------------------------------	
 		
-		public Point Position
-		{
-			get { 
-				Point p = new Point();
-				wxContextMenuEvent_GetPosition(wxObject, ref p); 
+		public Point Position() { 
+				Point p;
+				wxContextMenuEvent_GetPosition(wxobj, p); 
 				return p;
 			}
 			
-			set { wxContextMenuEvent_SetPosition(wxObject, ref value); }
+		public void Position(Point value) { wxContextMenuEvent_SetPosition(wxobj, value); }
+
+		private static Event New(IntPtr obj) { return new ContextMenuEvent(obj); }
+
+		static this()
+		{
+			AddEventType(wxEVT_CONTEXT_MENU,			&ContextMenuEvent.New);
 		}
 	}
-}

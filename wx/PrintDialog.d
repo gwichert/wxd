@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - PrintDialog.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - PrintDialog.cs
 //
 // The wxPrintDialog wrapper classes.
@@ -10,114 +13,97 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.PrintDialog;
+import wx.common;
+import wx.Dialog;
+import wx.PrintData;
 
-namespace wx
-{
+        static extern (C) IntPtr wxPageSetupDialog_ctor(IntPtr parent, IntPtr data);
+        static extern (C) IntPtr wxPageSetupDialog_GetPageSetupData(IntPtr self);
+
+        //-----------------------------------------------------------------------------
+
     public class PageSetupDialog : Dialog
     {
-        [DllImport("wx-c")] static extern IntPtr wxPageSetupDialog_ctor(IntPtr parent, IntPtr data);
-        [DllImport("wx-c")] static extern IntPtr wxPageSetupDialog_GetPageSetupData(IntPtr self);
+        private this(IntPtr wxobj)
+            { super(wxobj); }
+
+        public this(Window parent)
+            { this(parent, null); }
+        public this(Window parent, PageSetupDialogData data)
+            { this(wxPageSetupDialog_ctor(wxObject.SafePtr(parent), wxObject.SafePtr(data))); }
 
         //-----------------------------------------------------------------------------
 
-        internal PageSetupDialog(IntPtr wxObject)
-            : base(wxObject) { }
-
-        public PageSetupDialog(Window parent)
-            : this(parent, null) { }
-        public PageSetupDialog(Window parent, PageSetupDialogData data)
-            : this(wxPageSetupDialog_ctor(Object.SafePtr(parent), Object.SafePtr(data))) { }
-
-        //-----------------------------------------------------------------------------
-
-        public PageSetupDialogData PageSetupData
-        {
-            get { return (PageSetupDialogData)FindObject(wxPageSetupDialog_GetPageSetupData(wxObject), typeof(PageSetupDialogData)); }
-        }
+        public PageSetupDialogData PageSetupData() { return cast(PageSetupDialogData)FindObject(wxPageSetupDialog_GetPageSetupData(wxobj), &PageSetupDialogData.New); }
     }
+
+        static extern (C) IntPtr wxPrintDialog_ctor(IntPtr parent, IntPtr data);
+        static extern (C) IntPtr wxPrintDialog_ctorPrintData(IntPtr parent, IntPtr data);
+        static extern (C) IntPtr wxPrintDialog_GetPrintData(IntPtr self);
+        static extern (C) IntPtr wxPrintDialog_GetPrintDialogData(IntPtr self);
+        static extern (C) IntPtr wxPrintDialog_GetPrintDC(IntPtr self);
+
+        //-----------------------------------------------------------------------------
 
     public class PrintDialog : Dialog
     {
-        [DllImport("wx-c")] static extern IntPtr wxPrintDialog_ctor(IntPtr parent, IntPtr data);
-        [DllImport("wx-c")] static extern IntPtr wxPrintDialog_ctorPrintData(IntPtr parent, IntPtr data);
-        [DllImport("wx-c")] static extern IntPtr wxPrintDialog_GetPrintData(IntPtr self);
-        [DllImport("wx-c")] static extern IntPtr wxPrintDialog_GetPrintDialogData(IntPtr self);
-        [DllImport("wx-c")] static extern IntPtr wxPrintDialog_GetPrintDC(IntPtr self);
+        private this(IntPtr wxobj)
+            { super(wxobj); }
+
+        public this(Window parent)
+            { this(parent, cast(PrintDialogData)null); }
+        public this(Window parent, PrintDialogData data)
+            { this(wxPrintDialog_ctor(wxObject.SafePtr(parent), wxObject.SafePtr(data))); }
+
+        public this(Window parent, PrintData data)
+            { this(wxPrintDialog_ctorPrintData(wxObject.SafePtr(parent), wxObject.SafePtr(data))); }
 
         //-----------------------------------------------------------------------------
 
-        internal PrintDialog(IntPtr wxObject)
-            : base(wxObject) { }
-
-        public PrintDialog(Window parent)
-            : this(parent, (PrintDialogData)null) { }
-        public PrintDialog(Window parent, PrintDialogData data)
-            : this(wxPrintDialog_ctor(Object.SafePtr(parent), Object.SafePtr(data))) { }
-
-        public PrintDialog(Window parent, PrintData data)
-            : this(wxPrintDialog_ctorPrintData(Object.SafePtr(parent), Object.SafePtr(data))) { }
+        public PrintData printData() { return cast(PrintData)FindObject(wxPrintDialog_GetPrintData(wxobj), &PrintData.New); }
 
         //-----------------------------------------------------------------------------
 
-        public PrintData PrintData
-        {
-            get { return (PrintData)FindObject(wxPrintDialog_GetPrintData(wxObject), typeof(PrintData)); }
-        }
+        public PrintDialogData printDialogData() { return cast(PrintDialogData)FindObject(wxPrintDialog_GetPrintDialogData(wxobj), &PrintDialogData.New); }
 
         //-----------------------------------------------------------------------------
 
-        public PrintDialogData PrintDialogData
-        {
-            get { return (PrintDialogData)FindObject(wxPrintDialog_GetPrintDialogData(wxObject), typeof(PrintDialogData)); }
-        }
-
-        //-----------------------------------------------------------------------------
-
-        public DC PrintDC
-        {
-            get { return (DC)FindObject(wxPrintDialog_GetPrintDC(wxObject), typeof(DC)); }
-        }
+        public DC PrintDC() { return cast(DC)FindObject(wxPrintDialog_GetPrintDC(wxobj), &DC.New); }
     }
 
-#if __WXGTK__
+version(__WXGTK__){
     
-    public class PrintSetupDialog : Dialog
-    {
-        [DllImport("wx-c")] static extern IntPtr wxPrintSetupDialog_ctor(IntPtr parent, IntPtr data);
-        [DllImport("wx-c")] static extern IntPtr wxPrintSetupDialog_ctorPrintData(IntPtr parent, IntPtr data);
-        [DllImport("wx-c")] static extern void wxPrintSetupDialog_Init(IntPtr self, IntPtr data);
-        [DllImport("wx-c")] static extern IntPtr wxPrintSetupDialog_GetPrintData(IntPtr self);
+        static extern (C) IntPtr wxPrintSetupDialog_ctor(IntPtr parent, IntPtr data);
+        static extern (C) IntPtr wxPrintSetupDialog_ctorPrintData(IntPtr parent, IntPtr data);
+        static extern (C) void wxPrintSetupDialog_Init(IntPtr self, IntPtr data);
+        static extern (C) IntPtr wxPrintSetupDialog_GetPrintData(IntPtr self);
 
         //-----------------------------------------------------------------------------
 
-        internal PrintSetupDialog(IntPtr wxObject)
-            : base(wxObject) { }
+    public class PrintSetupDialog : Dialog
+    {
+        private this(IntPtr wxobj)
+            { super(wxobj); }
 
-        public PrintSetupDialog(Window parent) 
-            : this(parent, (PrintDialogData)null) { }
-        public PrintSetupDialog(Window parent, PrintDialogData data)
-            : this(wxPrintSetupDialog_ctor(Object.SafePtr(parent), Object.SafePtr(data))) { }
+        public this(Window parent) 
+            { this(parent, cast(PrintDialogData)null); }
+        public this(Window parent, PrintDialogData data)
+            { this(wxPrintSetupDialog_ctor(wxObject.SafePtr(parent), wxObject.SafePtr(data))); }
 
-        public PrintSetupDialog(Window parent, PrintData data)
-            : this(wxPrintSetupDialog_ctorPrintData(Object.SafePtr(parent), Object.SafePtr(data))) { }
+        public this(Window parent, PrintData data)
+            { this(wxPrintSetupDialog_ctorPrintData(wxObject.SafePtr(parent), wxObject.SafePtr(data))); }
 
         //-----------------------------------------------------------------------------
 
         public void Init(PrintData data)
         {
-            wxPrintSetupDialog_Init(wxObject, Object.SafePtr(data));
+            wxPrintSetupDialog_Init(wxobj, wxObject.SafePtr(data));
         }
 
         //-----------------------------------------------------------------------------
 
-        public PrintData PrintData
-        {
-            get { return (PrintData)FindObject(wxPrintSetupDialog_GetPrintData(wxObject), typeof(PrintData)); }
-        }
+        public PrintData printData() { return cast(PrintData)FindObject(wxPrintSetupDialog_GetPrintData(wxobj), &PrintData.New); }
     }
-    
-#endif
-}
+
+} // __WXGTK__

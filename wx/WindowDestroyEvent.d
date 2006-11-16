@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - WindowDestroyEvent.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - WindowDestroyEvent.cs
 //
 // The wxWindowDestroyEvent wrapper class.
@@ -10,29 +13,32 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Runtime.InteropServices;
+module wx.WindowDestroyEvent;
+import wx.common;
+import wx.CommandEvent;
+import wx.Window;
 
-namespace wx
-{
-	public class WindowDestroyEvent : CommandEvent
-	{
-		[DllImport("wx-c")] static extern IntPtr wxWindowDestroyEvent_ctor(IntPtr type);
-		[DllImport("wx-c")] static extern IntPtr wxWindowDestroyEvent_GetWindow(IntPtr self);
+		static extern (C) IntPtr wxWindowDestroyEvent_ctor(IntPtr type);
+		static extern (C) IntPtr wxWindowDestroyEvent_GetWindow(IntPtr self);
 		
 		//-----------------------------------------------------------------------------
 
-		public WindowDestroyEvent(IntPtr wxObject) 
-			: base(wxObject) { }
+	public class WindowDestroyEvent : CommandEvent
+	{
+		public this(IntPtr wxobj) 
+			{ super(wxobj); }
 
-		public WindowDestroyEvent(Window win)
-			: this(wxWindowDestroyEvent_ctor(Object.SafePtr(win))) { }
+		public this(Window win)
+			{ this(wxWindowDestroyEvent_ctor(wxObject.SafePtr(win))); }
 
 		//-----------------------------------------------------------------------------	
 		
-		public Window Active
+		public Window Active() { return cast(Window)FindObject(wxWindowDestroyEvent_GetWindow(wxobj), &Window.New); }
+
+		private static Event New(IntPtr obj) { return new WindowDestroyEvent(obj); }
+
+		static this()
 		{
-			get { return (Window)FindObject(wxWindowDestroyEvent_GetWindow(wxObject), typeof(Window)); }
+			AddEventType(wxEVT_DESTROY,				&WindowDestroyEvent.New);
 		}
 	}
-}

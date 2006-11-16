@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - WizardPage.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - WizardPage.cs
 //
 // The wxWizardPage wrapper class.
@@ -10,19 +13,18 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Runtime.InteropServices;
+module wx.WizardPage;
+import wx.common;
+import wx.Panel;
 
-namespace wx
-{
 	public class WizardPage : Panel
 	{
 		//---------------------------------------------------------------------
 
-		public WizardPage(IntPtr wxObject) : base(wxObject)
+		public this(IntPtr wxobj) 
 		{
+			super(wxobj);
 		}
 
 		//---------------------------------------------------------------------
 	}
-}

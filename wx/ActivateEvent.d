@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - ActivateEvent.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - ActivateEvent.cs
 //
 // The wxActivateEvent wrapper class.
@@ -10,29 +13,32 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Runtime.InteropServices;
+module wx.ActivateEvent;
+import wx.common;
+import wx.Event;
 
-namespace wx
-{
-	public class ActivateEvent : Event
-	{
-		[DllImport("wx-c")] static extern IntPtr wxActivateEvent_ctor(int type);
-		[DllImport("wx-c")] static extern bool wxActivateEvent_GetActive(IntPtr self);
+		static extern (C) IntPtr wxActivateEvent_ctor(int type);
+		static extern (C) bool wxActivateEvent_GetActive(IntPtr self);
 		
 		//-----------------------------------------------------------------------------
 
-		public ActivateEvent(IntPtr wxObject) 
-			: base(wxObject) { }
+	public class ActivateEvent : Event
+	{
+		public this(IntPtr wxobj) 
+			{ super(wxobj); }
 
-		public ActivateEvent(int type)
-			: this(wxActivateEvent_ctor(type)) { }
+		public this(int type)
+			{ this(wxActivateEvent_ctor(type)); }
 
 		//-----------------------------------------------------------------------------	
 		
-		public bool Active
+		public bool Active() { return wxActivateEvent_GetActive(wxobj); }
+
+
+		private static Event New(IntPtr obj) { return new ActivateEvent(obj); }
+
+		static this()
 		{
-			get { return wxActivateEvent_GetActive(wxObject); }
+			AddEventType(wxEVT_ACTIVATE,                        &ActivateEvent.New);
 		}
 	}
-}

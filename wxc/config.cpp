@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - config.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - config.cxx
 // 
 // The wxConfig proxy interface.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/config.h>
 
 //-----------------------------------------------------------------------------
@@ -50,15 +54,15 @@ void wxConfigBase_dtor(wxConfigBase* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxConfigBase_SetPath(wxConfigBase* self, char* strPath)
+void wxConfigBase_SetPath(wxConfigBase* self, dstr strPath)
 {
-    self->SetPath(wxString(strPath, wxConvUTF8));
+    self->SetPath(wxString(strPath.data, wxConvUTF8, strPath.length));
 }
 
 extern "C" WXEXPORT
-wxString* wxConfigBase_GetPath(wxConfigBase* self)
+dstr wxConfigBase_GetPath(wxConfigBase* self)
 {
-    return new wxString(self->GetPath());
+    return dstr(self->GetPath());
 }
 
 //-----------------------------------------------------------------------------
@@ -106,127 +110,127 @@ int wxConfigBase_GetNumberOfGroups(wxConfigBase* self, bool bRecursive)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxConfigBase_HasGroup(wxConfigBase* self, char* strName)
+bool wxConfigBase_HasGroup(wxConfigBase* self, dstr strName)
 {
-    return self->HasGroup(wxString(strName, wxConvUTF8))?1:0;
+    return self->HasGroup(wxString(strName.data, wxConvUTF8, strName.length))?1:0;
 }
 
 extern "C" WXEXPORT
-bool wxConfigBase_HasEntry(wxConfigBase* self, char* strName)
+bool wxConfigBase_HasEntry(wxConfigBase* self, dstr strName)
 {
-    return self->HasEntry(wxString(strName, wxConvUTF8))?1:0;
-}
-
-//-----------------------------------------------------------------------------
-
-extern "C" WXEXPORT
-bool wxConfigBase_Exists(wxConfigBase* self, char* strName)
-{
-    return self->Exists(wxString(strName, wxConvUTF8))?1:0;
+    return self->HasEntry(wxString(strName.data, wxConvUTF8, strName.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxConfigBase_GetEntryType(wxConfigBase* self, char* name)
+bool wxConfigBase_Exists(wxConfigBase* self, dstr strName)
 {
-    return self->GetEntryType(wxString(name, wxConvUTF8));
+    return self->Exists(wxString(strName.data, wxConvUTF8, strName.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxConfigBase_ReadStr(wxConfigBase* self, char* key, wxString* pStr)
+int wxConfigBase_GetEntryType(wxConfigBase* self, dstr name)
 {
-    return self->Read(wxString(key, wxConvUTF8), pStr)?1:0;
-}
-
-extern "C" WXEXPORT
-bool wxConfigBase_ReadStrDef(wxConfigBase* self, char* key, wxString* pStr, char* defVal)
-{
-    return self->Read(wxString(key, wxConvUTF8), pStr, wxString(defVal, wxConvUTF8))?1:0;
+    return self->GetEntryType(wxString(name.data, wxConvUTF8, name.length));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxConfigBase_ReadInt(wxConfigBase* self, char* key, int* pl)
+bool wxConfigBase_ReadStr(wxConfigBase* self, dstr key, wxString* pStr)
 {
-    return self->Read(wxString(key, wxConvUTF8), pl)?1:0;
+    return self->Read(wxString(key.data, wxConvUTF8, key.length), pStr)?1:0;
 }
 
 extern "C" WXEXPORT
-bool wxConfigBase_ReadIntDef(wxConfigBase* self, char* key, int* pl, int defVal)
+bool wxConfigBase_ReadStrDef(wxConfigBase* self, dstr key, wxString* pStr, dstr defVal)
 {
-    return self->Read(wxString(key, wxConvUTF8), pl, defVal)?1:0;
-}
-
-//-----------------------------------------------------------------------------
-
-extern "C" WXEXPORT
-bool wxConfigBase_ReadDbl(wxConfigBase* self, char* key, double* val)
-{
-    return self->Read(wxString(key, wxConvUTF8), val)?1:0;
-}
-
-extern "C" WXEXPORT
-bool wxConfigBase_ReadDblDef(wxConfigBase* self, char* key, double* val, double defVal)
-{
-    return self->Read(wxString(key, wxConvUTF8), val, defVal)?1:0;
+    return self->Read(wxString(key.data, wxConvUTF8, key.length), pStr, wxString(defVal.data, wxConvUTF8, defVal.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxConfigBase_ReadBool(wxConfigBase* self, char* key, bool* val)
+bool wxConfigBase_ReadInt(wxConfigBase* self, dstr key, int* pl)
 {
-    return self->Read(wxString(key, wxConvUTF8), val)?1:0;
+    return self->Read(wxString(key.data, wxConvUTF8, key.length), pl)?1:0;
 }
 
 extern "C" WXEXPORT
-bool wxConfigBase_ReadBoolDef(wxConfigBase* self, char* key, bool* val, bool defVal)
+bool wxConfigBase_ReadIntDef(wxConfigBase* self, dstr key, int* pl, int defVal)
 {
-    return self->Read(wxString(key, wxConvUTF8), val, defVal)?1:0;
-}
-
-//-----------------------------------------------------------------------------
-
-extern "C" WXEXPORT
-wxString* wxConfigBase_ReadStrRet(wxConfigBase* self, char* key, char* defVal)
-{
-    return new wxString(self->Read(wxString(key, wxConvUTF8), wxString(defVal, wxConvUTF8)));
-}
-
-extern "C" WXEXPORT
-int wxConfigBase_ReadIntRet(wxConfigBase* self, char* key, int defVal)
-{
-    return self->Read(wxString(key, wxConvUTF8), defVal);
+    return self->Read(wxString(key.data, wxConvUTF8, key.length), pl, defVal)?1:0;
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxConfigBase_WriteStr(wxConfigBase* self, char* key, char* value)
+bool wxConfigBase_ReadDbl(wxConfigBase* self, dstr key, double* val)
 {
-    return self->Write(wxString(key, wxConvUTF8), wxString(value, wxConvUTF8))?1:0;
+    return self->Read(wxString(key.data, wxConvUTF8, key.length), val)?1:0;
 }
 
 extern "C" WXEXPORT
-bool wxConfigBase_WriteInt(wxConfigBase* self, char* key, int value)
+bool wxConfigBase_ReadDblDef(wxConfigBase* self, dstr key, double* val, double defVal)
 {
-    return self->Write(wxString(key, wxConvUTF8), value)?1:0;
+    return self->Read(wxString(key.data, wxConvUTF8, key.length), val, defVal)?1:0;
+}
+
+//-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT
+bool wxConfigBase_ReadBool(wxConfigBase* self, dstr key, bool* val)
+{
+    return self->Read(wxString(key.data, wxConvUTF8, key.length), val)?1:0;
 }
 
 extern "C" WXEXPORT
-bool wxConfigBase_WriteDbl(wxConfigBase* self, char* key, double value)
+bool wxConfigBase_ReadBoolDef(wxConfigBase* self, dstr key, bool* val, bool defVal)
 {
-    return self->Write(wxString(key, wxConvUTF8), value)?1:0;
+    return self->Read(wxString(key.data, wxConvUTF8, key.length), val, defVal)?1:0;
+}
+
+//-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT
+dstr wxConfigBase_ReadStrRet(wxConfigBase* self, dstr key, dstr defVal)
+{
+    return dstr(self->Read(wxString(key.data, wxConvUTF8, key.length), wxString(defVal.data, wxConvUTF8, defVal.length)));
 }
 
 extern "C" WXEXPORT
-bool wxConfigBase_WriteBool(wxConfigBase* self, char* key, bool value)
+int wxConfigBase_ReadIntRet(wxConfigBase* self, dstr key, int defVal)
 {
-    return self->Write(wxString(key, wxConvUTF8), value)?1:0;
+    return self->Read(wxString(key.data, wxConvUTF8, key.length), defVal);
+}
+
+//-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT
+bool wxConfigBase_WriteStr(wxConfigBase* self, dstr key, dstr value)
+{
+    return self->Write(wxString(key.data, wxConvUTF8, key.length), wxString(value.data, wxConvUTF8, value.length))?1:0;
+}
+
+extern "C" WXEXPORT
+bool wxConfigBase_WriteInt(wxConfigBase* self, dstr key, int value)
+{
+    return self->Write(wxString(key.data, wxConvUTF8, key.length), value)?1:0;
+}
+
+extern "C" WXEXPORT
+bool wxConfigBase_WriteDbl(wxConfigBase* self, dstr key, double value)
+{
+    return self->Write(wxString(key.data, wxConvUTF8, key.length), value)?1:0;
+}
+
+extern "C" WXEXPORT
+bool wxConfigBase_WriteBool(wxConfigBase* self, dstr key, bool value)
+{
+    return self->Write(wxString(key.data, wxConvUTF8, key.length), value)?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -240,29 +244,29 @@ bool wxConfigBase_Flush(wxConfigBase* self, bool bCurrentOnly)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxConfigBase_RenameEntry(wxConfigBase* self, char* oldName, char* newName)
+bool wxConfigBase_RenameEntry(wxConfigBase* self, dstr oldName, dstr newName)
 {
-    return self->RenameEntry(wxString(oldName, wxConvUTF8), wxString(newName, wxConvUTF8))?1:0;
+    return self->RenameEntry(wxString(oldName.data, wxConvUTF8, oldName.length), wxString(newName.data, wxConvUTF8, newName.length))?1:0;
 }
 
 extern "C" WXEXPORT
-bool wxConfigBase_RenameGroup(wxConfigBase* self, char* oldName, char* newName)
+bool wxConfigBase_RenameGroup(wxConfigBase* self, dstr oldName, dstr newName)
 {
-    return self->RenameGroup(wxString(oldName, wxConvUTF8), wxString(newName, wxConvUTF8))?1:0;
+    return self->RenameGroup(wxString(oldName.data, wxConvUTF8, oldName.length), wxString(newName.data, wxConvUTF8, newName.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxConfigBase_DeleteEntry(wxConfigBase* self, char* key, bool bDeleteGroupIfEmpty)
+bool wxConfigBase_DeleteEntry(wxConfigBase* self, dstr key, bool bDeleteGroupIfEmpty)
 {
-    return self->DeleteEntry(wxString(key, wxConvUTF8), bDeleteGroupIfEmpty)?1:0;
+    return self->DeleteEntry(wxString(key.data, wxConvUTF8, key.length), bDeleteGroupIfEmpty)?1:0;
 }
 
 extern "C" WXEXPORT
-bool wxConfigBase_DeleteGroup(wxConfigBase* self, char* key)
+bool wxConfigBase_DeleteGroup(wxConfigBase* self, dstr key)
 {
-    return self->DeleteGroup(wxString(key, wxConvUTF8))?1:0;
+    return self->DeleteGroup(wxString(key.data, wxConvUTF8, key.length))?1:0;
 }
 
 extern "C" WXEXPORT
@@ -286,9 +290,9 @@ void wxConfigBase_SetExpandEnvVars(wxConfigBase* self, bool bDoIt)
 }
 
 extern "C" WXEXPORT
-wxString* wxConfigBase_ExpandEnvVars(wxConfigBase* self, char* str)
+dstr wxConfigBase_ExpandEnvVars(wxConfigBase* self, dstr str)
 {
-    return new wxString(self->ExpandEnvVars(wxString(str, wxConvUTF8)));
+    return dstr(self->ExpandEnvVars(wxString(str.data, wxConvUTF8, str.length)));
 }
 
 //-----------------------------------------------------------------------------
@@ -308,29 +312,29 @@ bool wxConfigBase_IsRecordingDefaults(wxConfigBase* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxConfigBase_GetAppName(wxConfigBase* self)
+dstr wxConfigBase_GetAppName(wxConfigBase* self)
 {
-    return new wxString(self->GetAppName());
+    return dstr(self->GetAppName());
 }
 
 extern "C" WXEXPORT
-void wxConfigBase_SetAppName(wxConfigBase* self, char* appName)
+void wxConfigBase_SetAppName(wxConfigBase* self, dstr appName)
 {
-    self->SetAppName(wxString(appName, wxConvUTF8));
+    self->SetAppName(wxString(appName.data, wxConvUTF8, appName.length));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxConfigBase_GetVendorName(wxConfigBase* self)
+dstr wxConfigBase_GetVendorName(wxConfigBase* self)
 {
-    return new wxString(self->GetVendorName());
+    return dstr(self->GetVendorName());
 }
 
 extern "C" WXEXPORT
-void wxConfigBase_SetVendorName(wxConfigBase* self, char* vendorName)
+void wxConfigBase_SetVendorName(wxConfigBase* self, dstr vendorName)
 {
-    self->SetVendorName(wxString(vendorName, wxConvUTF8));
+    self->SetVendorName(wxString(vendorName.data, wxConvUTF8, vendorName.length));
 }
 
 //-----------------------------------------------------------------------------

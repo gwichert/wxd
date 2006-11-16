@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - Tbarbase.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - Tbarbase.cs
 // 
 // The wxToolBar wrapper class.
@@ -10,541 +13,465 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.ToolBar;
+import wx.common;
+import wx.Bitmap;
+import wx.Control;
+import wx.ClientData;
 
-namespace wx
-{
-	public class ToolBarTool : Object
-	{
-		[DllImport("wx-c")] static extern IntPtr wxToolBarToolBase_ctor(IntPtr tbar, int toolid, string label, IntPtr bmpNormal, IntPtr bmpDisabled, int kind, IntPtr clientData, string shortHelpString, string longHelpString);
-		[DllImport("wx-c")] static extern IntPtr wxToolBarToolBase_ctorCtrl(IntPtr tbar, IntPtr control);
-		[DllImport("wx-c")] static extern int    wxToolBarToolBase_GetId(IntPtr self);
-		[DllImport("wx-c")] static extern IntPtr wxToolBarToolBase_GetControl(IntPtr self);
-		[DllImport("wx-c")] static extern IntPtr wxToolBarToolBase_GetToolBar(IntPtr self);
-		[DllImport("wx-c")] static extern bool   wxToolBarToolBase_IsButton(IntPtr self);
-		[DllImport("wx-c")] static extern bool   wxToolBarToolBase_IsControl(IntPtr self);
-		[DllImport("wx-c")] static extern bool   wxToolBarToolBase_IsSeparator(IntPtr self);
-		[DllImport("wx-c")] static extern int    wxToolBarToolBase_GetStyle(IntPtr self);
-		[DllImport("wx-c")] static extern int    wxToolBarToolBase_GetKind(IntPtr self);
-		[DllImport("wx-c")] static extern bool   wxToolBarToolBase_IsEnabled(IntPtr self);
-		[DllImport("wx-c")] static extern bool   wxToolBarToolBase_IsToggled(IntPtr self);
-		[DllImport("wx-c")] static extern bool   wxToolBarToolBase_CanBeToggled(IntPtr self);
-		[DllImport("wx-c")] static extern IntPtr wxToolBarToolBase_GetLabel(IntPtr self);
-		[DllImport("wx-c")] static extern IntPtr wxToolBarToolBase_GetShortHelp(IntPtr self);
-		[DllImport("wx-c")] static extern IntPtr wxToolBarToolBase_GetLongHelp(IntPtr self);
-		[DllImport("wx-c")] static extern IntPtr wxToolBarToolBase_GetClientData(IntPtr self);
-		[DllImport("wx-c")] static extern bool   wxToolBarToolBase_Enable(IntPtr self, bool enable);
-		[DllImport("wx-c")] static extern bool   wxToolBarToolBase_Toggle(IntPtr self, bool toggle);
-		[DllImport("wx-c")] static extern bool   wxToolBarToolBase_SetToggle(IntPtr self, bool toggle);
-		[DllImport("wx-c")] static extern bool   wxToolBarToolBase_SetShortHelp(IntPtr self, string help);
-		[DllImport("wx-c")] static extern bool   wxToolBarToolBase_SetLongHelp(IntPtr self, string help);
-		[DllImport("wx-c")] static extern void   wxToolBarToolBase_Toggle(IntPtr self);
-		[DllImport("wx-c")] static extern void   wxToolBarToolBase_SetNormalBitmap(IntPtr self, IntPtr bmp);
-		[DllImport("wx-c")] static extern void   wxToolBarToolBase_SetDisabledBitmap(IntPtr self, IntPtr bmp);
-		[DllImport("wx-c")] static extern void   wxToolBarToolBase_SetLabel(IntPtr self, string label);
-		[DllImport("wx-c")] static extern void   wxToolBarToolBase_SetClientData(IntPtr self, IntPtr clientData);
-		[DllImport("wx-c")] static extern void   wxToolBarToolBase_Detach(IntPtr self);
-		[DllImport("wx-c")] static extern void   wxToolBarToolBase_Attach(IntPtr self, IntPtr tbar);
+		static extern (C) IntPtr wxToolBarToolBase_ctor(IntPtr tbar, int toolid, string label, IntPtr bmpNormal, IntPtr bmpDisabled, int kind, IntPtr clientData, string shortHelpString, string longHelpString);
+		static extern (C) IntPtr wxToolBarToolBase_ctorCtrl(IntPtr tbar, IntPtr control);
+		static extern (C) int    wxToolBarToolBase_GetId(IntPtr self);
+		static extern (C) IntPtr wxToolBarToolBase_GetControl(IntPtr self);
+		static extern (C) IntPtr wxToolBarToolBase_GetToolBar(IntPtr self);
+		static extern (C) bool   wxToolBarToolBase_IsButton(IntPtr self);
+		static extern (C) bool   wxToolBarToolBase_IsControl(IntPtr self);
+		static extern (C) bool   wxToolBarToolBase_IsSeparator(IntPtr self);
+		static extern (C) int    wxToolBarToolBase_GetStyle(IntPtr self);
+		static extern (C) int    wxToolBarToolBase_GetKind(IntPtr self);
+		static extern (C) bool   wxToolBarToolBase_IsEnabled(IntPtr self);
+		static extern (C) bool   wxToolBarToolBase_IsToggled(IntPtr self);
+		static extern (C) bool   wxToolBarToolBase_CanBeToggled(IntPtr self);
+		static extern (C) string wxToolBarToolBase_GetLabel(IntPtr self);
+		static extern (C) string wxToolBarToolBase_GetShortHelp(IntPtr self);
+		static extern (C) string wxToolBarToolBase_GetLongHelp(IntPtr self);
+		static extern (C) IntPtr wxToolBarToolBase_GetClientData(IntPtr self);
+		static extern (C) bool   wxToolBarToolBase_Enable(IntPtr self, bool enable);
+		static extern (C) bool   wxToolBarToolBase_Toggle(IntPtr self, bool toggle);
+		static extern (C) bool   wxToolBarToolBase_SetToggle(IntPtr self, bool toggle);
+		static extern (C) bool   wxToolBarToolBase_SetShortHelp(IntPtr self, string help);
+		static extern (C) bool   wxToolBarToolBase_SetLongHelp(IntPtr self, string help);
+		static extern (C) void   wxToolBarToolBase_Toggle(IntPtr self);
+		static extern (C) void   wxToolBarToolBase_SetNormalBitmap(IntPtr self, IntPtr bmp);
+		static extern (C) void   wxToolBarToolBase_SetDisabledBitmap(IntPtr self, IntPtr bmp);
+		static extern (C) void   wxToolBarToolBase_SetLabel(IntPtr self, string label);
+		static extern (C) void   wxToolBarToolBase_SetClientData(IntPtr self, IntPtr clientData);
+		static extern (C) void   wxToolBarToolBase_Detach(IntPtr self);
+		static extern (C) void   wxToolBarToolBase_Attach(IntPtr self, IntPtr tbar);
 
         //---------------------------------------------------------------------
         
-        public ToolBarTool(IntPtr wxObject) 
-            : base(wxObject) { }
+	public class ToolBarTool : wxObject
+	{
+        public this(IntPtr wxobj) 
+            { super(wxobj); }
 
-        public ToolBarTool(ToolBar tbar, int toolid, string label, Bitmap bmpNormal, Bitmap bmpDisabled, ItemKind kind, ClientData clientData, string shortHelpString, string longHelpString)
-            : this(wxToolBarToolBase_ctor(Object.SafePtr(tbar), toolid, label, Object.SafePtr(bmpNormal), Object.SafePtr(bmpDisabled), (int)kind, Object.SafePtr(clientData), shortHelpString, longHelpString)) { }
+        public this(ToolBar tbar, int toolid, string label, Bitmap bmpNormal, Bitmap bmpDisabled, ItemKind kind, ClientData clientData, string shortHelpString, string longHelpString)
+            { this(wxToolBarToolBase_ctor(wxObject.SafePtr(tbar), toolid, label, wxObject.SafePtr(bmpNormal), wxObject.SafePtr(bmpDisabled), cast(int)kind, wxObject.SafePtr(clientData), shortHelpString, longHelpString)); }
 
-        public ToolBarTool(ToolBar tbar, Control control)
-            : this(wxToolBarToolBase_ctorCtrl(Object.SafePtr(tbar), Object.SafePtr(control))) { }
+        public this(ToolBar tbar, Control control)
+            { this(wxToolBarToolBase_ctorCtrl(wxObject.SafePtr(tbar), wxObject.SafePtr(control))); }
+
+
+	public static wxObject New(IntPtr ptr) { return new ToolBarTool(ptr); }
+        //---------------------------------------------------------------------
+
+		public int ID() {return wxToolBarToolBase_GetId(wxobj); }
+
+		public Control control() { return cast(Control)FindObject(wxToolBarToolBase_GetControl(wxobj)); }
+
+		public ToolBar toolBar() { return cast(ToolBar)FindObject(wxToolBarToolBase_GetToolBar(wxobj), &ToolBar.New); }
 
         //---------------------------------------------------------------------
 
-		public int ID
-        {
-            get {return wxToolBarToolBase_GetId(wxObject); }
-        }
+		public bool IsButton() { return wxToolBarToolBase_IsButton(wxobj); }
 
-		public Control Control
-        {
-            get { return (Control)FindObject(wxToolBarToolBase_GetControl(wxObject)); }
-        }
+		bool IsControl() { return wxToolBarToolBase_IsControl(wxobj); }
 
-		public ToolBar ToolBar
-        {
-            get { return (ToolBar)FindObject(wxToolBarToolBase_GetToolBar(wxObject), typeof(ToolBar)); }
-        }
+		bool IsSeparator() { return wxToolBarToolBase_IsSeparator(wxobj); }
 
         //---------------------------------------------------------------------
 
-		public bool IsButton
-        {
-            get { return wxToolBarToolBase_IsButton(wxObject); }
-        }
+		public int Style() { return wxToolBarToolBase_GetStyle(wxobj); }
 
-		bool IsControl
-        {
-            get { return wxToolBarToolBase_IsControl(wxObject); }
-        }
-
-		bool IsSeparator
-        {
-            get { return wxToolBarToolBase_IsSeparator(wxObject); }
-        }
-
-        //---------------------------------------------------------------------
-
-		public int Style
-        {
-            get { return wxToolBarToolBase_GetStyle(wxObject); }
-        }
-
-		public ItemKind Kind
-        {
-            get { return (ItemKind)wxToolBarToolBase_GetKind(wxObject); }
-        }
+		public ItemKind Kind() { return cast(ItemKind)wxToolBarToolBase_GetKind(wxobj); }
 
         //---------------------------------------------------------------------
 
 		bool CanBeToggled()
         {
-            return wxToolBarToolBase_CanBeToggled(wxObject);
+            return wxToolBarToolBase_CanBeToggled(wxobj);
         }
 
         //---------------------------------------------------------------------
 
-		public string Label
-        {
-            get { return new wxString(wxToolBarToolBase_GetLabel(wxObject), true); }
-            set { wxToolBarToolBase_SetLabel(wxObject, value); }
-        }
+		public string Label() { return wxToolBarToolBase_GetLabel(wxobj).dup; }
+		public void Label(string value) { wxToolBarToolBase_SetLabel(wxobj, value); }
 
-		public string ShortHelp
-        {
-            get { return new wxString(wxToolBarToolBase_GetShortHelp(wxObject), true); }
-            set { wxToolBarToolBase_SetShortHelp(wxObject, value); }
-        }
+		public string ShortHelp() { return wxToolBarToolBase_GetShortHelp(wxobj).dup; }
+		public void ShortHelp(string value) { wxToolBarToolBase_SetShortHelp(wxobj, value); }
 
-		public string LongHelp
-        {
-            get { return new wxString(wxToolBarToolBase_GetLongHelp(wxObject), true); }
-            set { wxToolBarToolBase_SetLongHelp(wxObject, value); }
-        }
+		public string LongHelp() { return wxToolBarToolBase_GetLongHelp(wxobj).dup; }
+		public void LongHelp(string value) { wxToolBarToolBase_SetLongHelp(wxobj, value); }
 
         //---------------------------------------------------------------------
         
-		public ClientData ClientData
-        {
-            get { return (ClientData)Object.FindObject(wxToolBarToolBase_GetClientData(wxObject)); }
-            set { wxToolBarToolBase_SetClientData(wxObject, Object.SafePtr(value)); }
-        }
+		public ClientData clientData() { return cast(ClientData)FindObject(wxToolBarToolBase_GetClientData(wxobj)); }
+		public void clientData(ClientData value) { wxToolBarToolBase_SetClientData(wxobj, wxObject.SafePtr(value)); }
 
         //---------------------------------------------------------------------
 
-		public bool Enabled
-        {
-            set { wxToolBarToolBase_Enable(wxObject, value); }
-            get {return wxToolBarToolBase_IsEnabled(wxObject); }
-        }
+		public void Enabled(bool value) { wxToolBarToolBase_Enable(wxobj, value); }
+		public bool Enabled() {return wxToolBarToolBase_IsEnabled(wxobj); }
 
-		public bool Toggled
-        {
-            set { wxToolBarToolBase_SetToggle(wxObject, value); }
-            get { return wxToolBarToolBase_IsToggled(wxObject); }
-        }
+		public void Toggled(bool value) { wxToolBarToolBase_SetToggle(wxobj, value); }
+		public bool Toggled() { return wxToolBarToolBase_IsToggled(wxobj); }
 
         //---------------------------------------------------------------------
 
-		public Bitmap NormalBitmap
-        {
-            set { wxToolBarToolBase_SetNormalBitmap(wxObject, Object.SafePtr(value)); }
-        }
+		public void NormalBitmap(Bitmap value) { wxToolBarToolBase_SetNormalBitmap(wxobj, wxObject.SafePtr(value)); }
 
-		public Bitmap DisabledBitmap
-        {
-            set { wxToolBarToolBase_SetDisabledBitmap(wxObject, Object.SafePtr(value)); }
-        }
+		public void DisabledBitmap(Bitmap value) { wxToolBarToolBase_SetDisabledBitmap(wxobj, wxObject.SafePtr(value)); }
 
         //---------------------------------------------------------------------
 
 		void Detach()
         {
-            wxToolBarToolBase_Detach(wxObject);
+            wxToolBarToolBase_Detach(wxobj);
         }
 
 		void Attach(ToolBar tbar)
         {
-            wxToolBarToolBase_Attach(wxObject, Object.SafePtr(tbar));
+            wxToolBarToolBase_Attach(wxobj, wxObject.SafePtr(tbar));
         }
 
         //---------------------------------------------------------------------
 	}
 
-	public class ToolBar : Control
-	{
-		public const long wxTB_HORIZONTAL   = Orientation.wxHORIZONTAL;
-		public const long wxTB_VERTICAL     = Orientation.wxVERTICAL;
-		public const long wxTB_3DBUTTONS    = 0x0010;
-		public const long wxTB_FLAT         = 0x0020;
-		public const long wxTB_DOCKABLE     = 0x0040;
-		public const long wxTB_NOICONS      = 0x0080;
-		public const long wxTB_TEXT         = 0x0100;
-		public const long wxTB_NODIVIDER    = 0x0200;
-		public const long wxTB_NOALIGN      = 0x0400;
-	
-		//---------------------------------------------------------------------
-
-		[DllImport("wx-c")] static extern IntPtr wxToolBar_ctor(IntPtr parent, int id, ref Point pos, ref Size size, uint style);
-		[DllImport("wx-c")] static extern IntPtr wxToolBar_AddTool1(IntPtr self, int toolid, string label, IntPtr bitmap, IntPtr bmpDisabled, int kind, string shortHelp, string longHelp, IntPtr data);
-		[DllImport("wx-c")] static extern IntPtr wxToolBar_AddTool2(IntPtr self, int toolid, string label, IntPtr bitmap, string shortHelp, int kind);
-		[DllImport("wx-c")] static extern IntPtr wxToolBar_AddCheckTool(IntPtr self, int toolid, string label, IntPtr bitmap, IntPtr bmpDisabled, string shortHelp, string longHelp, IntPtr data);
-		[DllImport("wx-c")] static extern IntPtr wxToolBar_AddRadioTool(IntPtr self, int toolid, string label, IntPtr bitmap, IntPtr bmpDisabled, string shortHelp, string longHelp, IntPtr data);
-		[DllImport("wx-c")] static extern IntPtr wxToolBar_AddControl(IntPtr self, IntPtr control);
-		[DllImport("wx-c")] static extern IntPtr wxToolBar_InsertControl(IntPtr self, int pos, IntPtr control);
-		[DllImport("wx-c")] static extern IntPtr wxToolBar_FindControl(IntPtr self, int toolid);
-		[DllImport("wx-c")] static extern IntPtr wxToolBar_AddSeparator(IntPtr self);
-		[DllImport("wx-c")] static extern IntPtr wxToolBar_InsertSeparator(IntPtr self, int pos);
-		[DllImport("wx-c")] static extern IntPtr wxToolBar_RemoveTool(IntPtr self, int toolid);
-		[DllImport("wx-c")] static extern bool   wxToolBar_DeleteToolByPos(IntPtr self, int pos);
-		[DllImport("wx-c")] static extern bool   wxToolBar_DeleteTool(IntPtr self, int toolid);
-		[DllImport("wx-c")] static extern void   wxToolBar_ClearTools(IntPtr self);
-		[DllImport("wx-c")] static extern bool   wxToolBar_Realize(IntPtr self);
-		[DllImport("wx-c")] static extern void   wxToolBar_EnableTool(IntPtr self, int toolid, bool enable);
-		[DllImport("wx-c")] static extern void   wxToolBar_ToggleTool(IntPtr self, int toolid, bool toggle);
-		[DllImport("wx-c")] static extern IntPtr wxToolBar_GetToolClientData(IntPtr self, int toolid);
-		[DllImport("wx-c")] static extern void   wxToolBar_SetToolClientData(IntPtr self, int toolid, IntPtr clientData);
-		[DllImport("wx-c")] static extern bool   wxToolBar_GetToolState(IntPtr self, int toolid);
-		[DllImport("wx-c")] static extern bool   wxToolBar_GetToolEnabled(IntPtr self, int toolid);
-		[DllImport("wx-c")] static extern void   wxToolBar_SetToolShortHelp(IntPtr self, int toolid, string helpString);
-		[DllImport("wx-c")] static extern IntPtr wxToolBar_GetToolShortHelp(IntPtr self, int toolid);
-		[DllImport("wx-c")] static extern void   wxToolBar_SetToolLongHelp(IntPtr self, int toolid, string helpString);
-		[DllImport("wx-c")] static extern IntPtr wxToolBar_GetToolLongHelp(IntPtr self, int toolid);
-		[DllImport("wx-c")] static extern void   wxToolBar_SetMargins(IntPtr self, int x, int y);
-		[DllImport("wx-c")] static extern void   wxToolBar_SetToolPacking(IntPtr self, int packing);
-		[DllImport("wx-c")] static extern void   wxToolBar_SetToolSeparation(IntPtr self, int separation);
-		[DllImport("wx-c")] static extern void   wxToolBar_GetToolMargins(IntPtr self, ref Size size);
-		[DllImport("wx-c")] static extern int    wxToolBar_GetToolPacking(IntPtr self);
-		[DllImport("wx-c")] static extern int    wxToolBar_GetToolSeparation(IntPtr self);
-		[DllImport("wx-c")] static extern void   wxToolBar_SetRows(IntPtr self, int nRows);
-		[DllImport("wx-c")] static extern void   wxToolBar_SetMaxRowsCols(IntPtr self, int rows, int cols);
-		[DllImport("wx-c")] static extern int    wxToolBar_GetMaxRows(IntPtr self);
-		[DllImport("wx-c")] static extern int    wxToolBar_GetMaxCols(IntPtr self);
-		[DllImport("wx-c")] static extern void   wxToolBar_SetToolBitmapSize(IntPtr self, ref Size size);
-		[DllImport("wx-c")] static extern void   wxToolBar_GetToolBitmapSize(IntPtr self, ref Size size);
-		[DllImport("wx-c")] static extern void   wxToolBar_GetToolSize(IntPtr self, ref Size size);
-		[DllImport("wx-c")] static extern IntPtr wxToolBar_FindToolForPosition(IntPtr self, int x, int y);
-		[DllImport("wx-c")] static extern bool   wxToolBar_IsVertical(IntPtr self);
-		[DllImport("wx-c")] static extern IntPtr wxToolBar_AddTool3(IntPtr self, int toolid, IntPtr bitmap, IntPtr bmpDisabled, bool toggle, IntPtr clientData, string shortHelpString, string longHelpString);
-		[DllImport("wx-c")] static extern IntPtr wxToolBar_AddTool4(IntPtr self, int toolid, IntPtr bitmap, string shortHelpString, string longHelpString);
-		[DllImport("wx-c")] static extern IntPtr wxToolBar_AddTool5(IntPtr self, int toolid, IntPtr bitmap, IntPtr bmpDisabled, bool toggle, int xPos, int yPos, IntPtr clientData, string shortHelp, string longHelp);
-		[DllImport("wx-c")] static extern IntPtr wxToolBar_InsertTool(IntPtr self, int pos, int toolid, IntPtr bitmap, IntPtr bmpDisabled, bool toggle, IntPtr clientData, string shortHelp, string longHelp);
-		[DllImport("wx-c")] static extern bool   wxToolBar_AcceptsFocus(IntPtr self);
+		static extern (C) IntPtr wxToolBar_ctor(IntPtr parent, int id, inout Point pos, inout Size size, uint style);
+		static extern (C) IntPtr wxToolBar_AddTool1(IntPtr self, int toolid, string label, IntPtr bitmap, IntPtr bmpDisabled, int kind, string shortHelp, string longHelp, IntPtr data);
+		static extern (C) IntPtr wxToolBar_AddTool2(IntPtr self, int toolid, string label, IntPtr bitmap, string shortHelp, int kind);
+		static extern (C) IntPtr wxToolBar_AddCheckTool(IntPtr self, int toolid, string label, IntPtr bitmap, IntPtr bmpDisabled, string shortHelp, string longHelp, IntPtr data);
+		static extern (C) IntPtr wxToolBar_AddRadioTool(IntPtr self, int toolid, string label, IntPtr bitmap, IntPtr bmpDisabled, string shortHelp, string longHelp, IntPtr data);
+		static extern (C) IntPtr wxToolBar_AddControl(IntPtr self, IntPtr control);
+		static extern (C) IntPtr wxToolBar_InsertControl(IntPtr self, int pos, IntPtr control);
+		static extern (C) IntPtr wxToolBar_FindControl(IntPtr self, int toolid);
+		static extern (C) IntPtr wxToolBar_AddSeparator(IntPtr self);
+		static extern (C) IntPtr wxToolBar_InsertSeparator(IntPtr self, int pos);
+		static extern (C) IntPtr wxToolBar_RemoveTool(IntPtr self, int toolid);
+		static extern (C) bool   wxToolBar_DeleteToolByPos(IntPtr self, int pos);
+		static extern (C) bool   wxToolBar_DeleteTool(IntPtr self, int toolid);
+		static extern (C) void   wxToolBar_ClearTools(IntPtr self);
+		static extern (C) bool   wxToolBar_Realize(IntPtr self);
+		static extern (C) void   wxToolBar_EnableTool(IntPtr self, int toolid, bool enable);
+		static extern (C) void   wxToolBar_ToggleTool(IntPtr self, int toolid, bool toggle);
+		static extern (C) IntPtr wxToolBar_GetToolClientData(IntPtr self, int toolid);
+		static extern (C) void   wxToolBar_SetToolClientData(IntPtr self, int toolid, IntPtr clientData);
+		static extern (C) bool   wxToolBar_GetToolState(IntPtr self, int toolid);
+		static extern (C) bool   wxToolBar_GetToolEnabled(IntPtr self, int toolid);
+		static extern (C) void   wxToolBar_SetToolShortHelp(IntPtr self, int toolid, string helpString);
+		static extern (C) string wxToolBar_GetToolShortHelp(IntPtr self, int toolid);
+		static extern (C) void   wxToolBar_SetToolLongHelp(IntPtr self, int toolid, string helpString);
+		static extern (C) string wxToolBar_GetToolLongHelp(IntPtr self, int toolid);
+		static extern (C) void   wxToolBar_SetMargins(IntPtr self, int x, int y);
+		static extern (C) void   wxToolBar_SetToolPacking(IntPtr self, int packing);
+		static extern (C) void   wxToolBar_SetToolSeparation(IntPtr self, int separation);
+		static extern (C) void   wxToolBar_GetToolMargins(IntPtr self, inout Size size);
+		static extern (C) int    wxToolBar_GetToolPacking(IntPtr self);
+		static extern (C) int    wxToolBar_GetToolSeparation(IntPtr self);
+		static extern (C) void   wxToolBar_SetRows(IntPtr self, int nRows);
+		static extern (C) void   wxToolBar_SetMaxRowsCols(IntPtr self, int rows, int cols);
+		static extern (C) int    wxToolBar_GetMaxRows(IntPtr self);
+		static extern (C) int    wxToolBar_GetMaxCols(IntPtr self);
+		static extern (C) void   wxToolBar_SetToolBitmapSize(IntPtr self, inout Size size);
+		static extern (C) void   wxToolBar_GetToolBitmapSize(IntPtr self, inout Size size);
+		static extern (C) void   wxToolBar_GetToolSize(IntPtr self, inout Size size);
+		static extern (C) IntPtr wxToolBar_FindToolForPosition(IntPtr self, int x, int y);
+		static extern (C) bool   wxToolBar_IsVertical(IntPtr self);
+		static extern (C) IntPtr wxToolBar_AddTool3(IntPtr self, int toolid, IntPtr bitmap, IntPtr bmpDisabled, bool toggle, IntPtr clientData, string shortHelpString, string longHelpString);
+		static extern (C) IntPtr wxToolBar_AddTool4(IntPtr self, int toolid, IntPtr bitmap, string shortHelpString, string longHelpString);
+		static extern (C) IntPtr wxToolBar_AddTool5(IntPtr self, int toolid, IntPtr bitmap, IntPtr bmpDisabled, bool toggle, int xPos, int yPos, IntPtr clientData, string shortHelp, string longHelp);
+		static extern (C) IntPtr wxToolBar_InsertTool(IntPtr self, int pos, int toolid, IntPtr bitmap, IntPtr bmpDisabled, bool toggle, IntPtr clientData, string shortHelp, string longHelp);
+		static extern (C) bool   wxToolBar_AcceptsFocus(IntPtr self);
 
         //---------------------------------------------------------------------
 
-        public ToolBar(IntPtr wxObject) 
-            : base(wxObject) { }
+	public class ToolBar : Control
+	{
+		public const int wxTB_HORIZONTAL   = Orientation.wxHORIZONTAL;
+		public const int wxTB_VERTICAL     = Orientation.wxVERTICAL;
+		public const int wxTB_3DBUTTONS    = 0x0010;
+		public const int wxTB_FLAT         = 0x0020;
+		public const int wxTB_DOCKABLE     = 0x0040;
+		public const int wxTB_NOICONS      = 0x0080;
+		public const int wxTB_TEXT         = 0x0100;
+		public const int wxTB_NODIVIDER    = 0x0200;
+		public const int wxTB_NOALIGN      = 0x0400;
+	
+		//---------------------------------------------------------------------
 
-        public ToolBar(Window parent, int id)
-            : this(parent, id, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL | /*Border.*/wxNO_BORDER) { }
+        public this(IntPtr wxobj) 
+            { super(wxobj); }
 
-        public ToolBar(Window parent, int id, Point pos)
-            : this(parent, id, pos, wxDefaultSize, wxTB_HORIZONTAL | /*Border.*/wxNO_BORDER) { }
+        public this(Window parent, int id)
+            { this(parent, id, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL | /*Border.*/wxNO_BORDER); }
 
-        public ToolBar(Window parent, int id, Point pos, Size size)
-            : this(parent, id, pos, size, wxTB_HORIZONTAL | /*Border.*/wxNO_BORDER) { }
+        public this(Window parent, int id, Point pos)
+            { this(parent, id, pos, wxDefaultSize, wxTB_HORIZONTAL | /*Border.*/wxNO_BORDER); }
 
-        public ToolBar(Window parent, int id, Point pos, Size size, long style)
-            : this(wxToolBar_ctor(Object.SafePtr(parent), id, ref pos, ref size, (uint)style)) { }
+        public this(Window parent, int id, Point pos, Size size)
+            { this(parent, id, pos, size, wxTB_HORIZONTAL | /*Border.*/wxNO_BORDER); }
+
+        public this(Window parent, int id, Point pos, Size size, int style)
+            { this(wxToolBar_ctor(wxObject.SafePtr(parent), id, pos, size, cast(uint)style)); }
 	    
 	//---------------------------------------------------------------------
 	// ctors with self created id
 	    
-	public ToolBar(Window parent)
-            : this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL | /*Border.*/wxNO_BORDER) { }
+	public this(Window parent)
+            { this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, wxTB_HORIZONTAL | /*Border.*/wxNO_BORDER); }
 
-        public ToolBar(Window parent, Point pos)
-            : this(parent, Window.UniqueID, pos, wxDefaultSize, wxTB_HORIZONTAL | /*Border.*/wxNO_BORDER) { }
+        public this(Window parent, Point pos)
+            { this(parent, Window.UniqueID, pos, wxDefaultSize, wxTB_HORIZONTAL | /*Border.*/wxNO_BORDER); }
 
-        public ToolBar(Window parent, Point pos, Size size)
-            : this(parent, Window.UniqueID, pos, size, wxTB_HORIZONTAL | /*Border.*/wxNO_BORDER) { }
+        public this(Window parent, Point pos, Size size)
+            { this(parent, Window.UniqueID, pos, size, wxTB_HORIZONTAL | /*Border.*/wxNO_BORDER); }
 
-        public ToolBar(Window parent, Point pos, Size size, long style)
-	    : this(parent, Window.UniqueID, pos, size, style) {}
+        public this(Window parent, Point pos, Size size, int style)
+	    { this(parent, Window.UniqueID, pos, size, style);}
 
         //---------------------------------------------------------------------
 
         public ToolBarTool AddTool(int toolid, string label, Bitmap bitmap)
         {
-            return AddTool(toolid, label, bitmap, "", 0);
+            return AddTool(toolid, label, bitmap, "", cast(ItemKind)0);
         }
 
         public ToolBarTool AddTool(int toolid, string label, Bitmap bitmap, Bitmap bmpDisabled, ItemKind kind, string shortHelp, string longHelp, ClientData clientData)
         {
-            return new ToolBarTool(wxToolBar_AddTool1(wxObject, toolid, label, Object.SafePtr(bitmap), Object.SafePtr(bmpDisabled), (int)kind, shortHelp, longHelp, Object.SafePtr(clientData)));
+            return new ToolBarTool(wxToolBar_AddTool1(wxobj, toolid, label, wxObject.SafePtr(bitmap), wxObject.SafePtr(bmpDisabled), cast(int)kind, shortHelp, longHelp, wxObject.SafePtr(clientData)));
         }
 
         public ToolBarTool AddTool(int toolid, string label, Bitmap bitmap, string shortHelp, ItemKind kind)
         {
-            return new ToolBarTool(wxToolBar_AddTool2(wxObject, toolid, label, Object.SafePtr(bitmap), shortHelp, (int)kind));
+            return new ToolBarTool(wxToolBar_AddTool2(wxobj, toolid, label, wxObject.SafePtr(bitmap), shortHelp, cast(int)kind));
         }
 
         public ToolBarTool AddTool(int toolid, Bitmap bitmap, Bitmap bmpDisabled, bool toggle, ClientData clientData, string shortHelpString, string longHelpString)
         {
-            return new ToolBarTool(wxToolBar_AddTool3(wxObject, toolid, Object.SafePtr(bitmap), Object.SafePtr(bmpDisabled), toggle, Object.SafePtr(clientData), shortHelpString, longHelpString));
+            return new ToolBarTool(wxToolBar_AddTool3(wxobj, toolid, wxObject.SafePtr(bitmap), wxObject.SafePtr(bmpDisabled), toggle, wxObject.SafePtr(clientData), shortHelpString, longHelpString));
         }
 
         public ToolBarTool AddTool(int toolid, Bitmap bitmap, string shortHelpString)
             { return AddTool(toolid, bitmap, shortHelpString, ""); }
         public ToolBarTool AddTool(int toolid, Bitmap bitmap, string shortHelpString, string longHelpString)
         {
-            return new ToolBarTool(wxToolBar_AddTool4(wxObject, toolid, Object.SafePtr(bitmap), shortHelpString, longHelpString));
+            return new ToolBarTool(wxToolBar_AddTool4(wxobj, toolid, wxObject.SafePtr(bitmap), shortHelpString, longHelpString));
         }
 
         public ToolBarTool AddTool(int toolid, Bitmap bitmap, Bitmap bmpDisabled, bool toggle, int xPos, int yPos, ClientData clientData, string shortHelp, string longHelp)
         {
-            return new ToolBarTool(wxToolBar_AddTool5(wxObject, toolid, Object.SafePtr(bitmap), Object.SafePtr(bmpDisabled), toggle, xPos, yPos, Object.SafePtr(clientData), shortHelp, longHelp));
+            return new ToolBarTool(wxToolBar_AddTool5(wxobj, toolid, wxObject.SafePtr(bitmap), wxObject.SafePtr(bmpDisabled), toggle, xPos, yPos, wxObject.SafePtr(clientData), shortHelp, longHelp));
         }
 
         //---------------------------------------------------------------------
         
         public ToolBarTool InsertTool(int pos, int toolid, Bitmap bitmap, Bitmap bmpDisabled, bool toggle, ClientData clientData, string shortHelp, string longHelp)
         {
-            return new ToolBarTool(wxToolBar_InsertTool(wxObject, pos, toolid, Object.SafePtr(bitmap), Object.SafePtr(bmpDisabled), toggle, Object.SafePtr(clientData), shortHelp, longHelp));
+            return new ToolBarTool(wxToolBar_InsertTool(wxobj, pos, toolid, wxObject.SafePtr(bitmap), wxObject.SafePtr(bmpDisabled), toggle, wxObject.SafePtr(clientData), shortHelp, longHelp));
         }
 
         //---------------------------------------------------------------------
 
         public ToolBarTool AddCheckTool(int toolid, string label, Bitmap bitmap, Bitmap bmpDisabled, string shortHelp, string longHelp)
         {
-            return new ToolBarTool(wxToolBar_AddCheckTool(wxObject, toolid, label, Object.SafePtr(bitmap), Object.SafePtr(bmpDisabled), shortHelp, longHelp, Object.SafePtr(null)));
+            return new ToolBarTool(wxToolBar_AddCheckTool(wxobj, toolid, label, wxObject.SafePtr(bitmap), wxObject.SafePtr(bmpDisabled), shortHelp, longHelp, wxObject.SafePtr(null)));
         }
 
         public ToolBarTool AddRadioTool(int toolid, string label, Bitmap bitmap, Bitmap bmpDisabled, string shortHelp, string longHelp)
         {
-            return new ToolBarTool(wxToolBar_AddRadioTool(wxObject, toolid, label, Object.SafePtr(bitmap), Object.SafePtr(bmpDisabled), shortHelp, longHelp, Object.SafePtr(null)));
+            return new ToolBarTool(wxToolBar_AddRadioTool(wxobj, toolid, label, wxObject.SafePtr(bitmap), wxObject.SafePtr(bmpDisabled), shortHelp, longHelp, wxObject.SafePtr(null)));
         }
 
         //---------------------------------------------------------------------
 
         public ToolBarTool AddControl(Control ctrl)
         {
-            return new ToolBarTool(wxToolBar_AddControl(wxObject, Object.SafePtr(ctrl)));
+            return new ToolBarTool(wxToolBar_AddControl(wxobj, wxObject.SafePtr(ctrl)));
         }
 
         public ToolBarTool InsertControl(int pos, Control ctrl)
         {
-            return new ToolBarTool(wxToolBar_InsertControl(wxObject, pos, Object.SafePtr(ctrl)));
+            return new ToolBarTool(wxToolBar_InsertControl(wxobj, pos, wxObject.SafePtr(ctrl)));
         }
 
         public ToolBarTool FindControl(int toolid)
         {
-            return (ToolBarTool)FindObject(wxToolBar_FindControl(wxObject, toolid), typeof(ToolBarTool));
+            return cast(ToolBarTool)FindObject(wxToolBar_FindControl(wxobj, toolid), &ToolBarTool.New);
         }
 
         //---------------------------------------------------------------------
 
         public ToolBarTool AddSeparator()
         {
-            return new ToolBarTool(wxToolBar_AddSeparator(wxObject));
+            return new ToolBarTool(wxToolBar_AddSeparator(wxobj));
         }
 
         public ToolBarTool InsertSeparator(int pos)
         {
-            return new ToolBarTool(wxToolBar_InsertSeparator(wxObject, pos));
+            return new ToolBarTool(wxToolBar_InsertSeparator(wxobj, pos));
         }
 
         //---------------------------------------------------------------------
 
         public ToolBarTool RemoveTool(int toolid)
         {
-            return (ToolBarTool)FindObject(wxToolBar_RemoveTool(wxObject, toolid), typeof(ToolBarTool));
+            return cast(ToolBarTool)FindObject(wxToolBar_RemoveTool(wxobj, toolid), &ToolBarTool.New);
         }
 
         public bool DeleteToolByPos(int pos)
         {
-            return wxToolBar_DeleteToolByPos(wxObject, pos);
+            return wxToolBar_DeleteToolByPos(wxobj, pos);
         }
 
         public bool DeleteTool(int toolid)
         {
-            return wxToolBar_DeleteTool(wxObject, toolid);
+            return wxToolBar_DeleteTool(wxobj, toolid);
         }
 
         public void ClearTools()
         {
-            wxToolBar_ClearTools(wxObject);
+            wxToolBar_ClearTools(wxobj);
         }
 
         //---------------------------------------------------------------------
 
         public bool Realize()
         {
-            return wxToolBar_Realize(wxObject);
+            return wxToolBar_Realize(wxobj);
         }
 
         //---------------------------------------------------------------------
 
         public void EnableTool(int toolid, bool enable)
         {
-            wxToolBar_EnableTool(wxObject, toolid, enable);
+            wxToolBar_EnableTool(wxobj, toolid, enable);
         }
 
         public void ToggleTool(int toolid, bool toggle)
         {
-            wxToolBar_ToggleTool(wxObject, toolid, toggle);
+            wxToolBar_ToggleTool(wxobj, toolid, toggle);
         }
 
         //---------------------------------------------------------------------
 
         public void SetToolClientData(int toolid, ClientData clientData)
         {
-            wxToolBar_SetToolClientData(wxObject, toolid, Object.SafePtr(clientData));
+            wxToolBar_SetToolClientData(wxobj, toolid, wxObject.SafePtr(clientData));
         }
 
         public ClientData GetToolClientData(int toolid)
         {
-            return (ClientData)Object.FindObject(wxToolBar_GetToolClientData(wxObject, toolid));
+            return cast(ClientData)wxObject.FindObject(wxToolBar_GetToolClientData(wxobj, toolid));
         }
 
         //---------------------------------------------------------------------
         
         public bool GetToolState(int toolid)
         {
-            return wxToolBar_GetToolState(wxObject, toolid);
+            return wxToolBar_GetToolState(wxobj, toolid);
         }
 
         public bool GetToolEnable(int toolid)
         {
-            return wxToolBar_GetToolEnabled(wxObject, toolid);
+            return wxToolBar_GetToolEnabled(wxobj, toolid);
         }
 
         //---------------------------------------------------------------------
 
         public string GetToolShortHelp(int toolid)
         {
-            return new wxString(wxToolBar_GetToolShortHelp(wxObject, toolid), true);
+            return wxToolBar_GetToolShortHelp(wxobj, toolid).dup;
         }
 
         public void SetToolShortHelp(int toolid, string helpString)
         {
-            wxToolBar_SetToolShortHelp(wxObject, toolid, helpString);
+            wxToolBar_SetToolShortHelp(wxobj, toolid, helpString);
         }
 
         //---------------------------------------------------------------------
 
         public string GetToolLongHelp(int toolid)
         {
-            return new wxString(wxToolBar_GetToolLongHelp(wxObject, toolid), true);
+            return wxToolBar_GetToolLongHelp(wxobj, toolid).dup;
         }
 
         public void SetToolLongHelp(int toolid, string helpString)
         {
-            wxToolBar_SetToolLongHelp(wxObject, toolid, helpString);
+            wxToolBar_SetToolLongHelp(wxobj, toolid, helpString);
         }
 
         //---------------------------------------------------------------------
 
-        public void SetMargins(int x, int y)
-        {
-            Margins = new Size(x, y);
-        }
+        public void SetMargins(int x, int y) { wxToolBar_SetMargins(wxobj, x, y); }
 
-        public Size Margins
-        {
-            get { 
-			    Size size = new Size();
-			    wxToolBar_GetToolMargins(wxObject, ref size);
-                return size;
-			}
-            set { wxToolBar_SetMargins(wxObject, value.Width, value.Height); }
-        }
+        public Size Margins()
+        { 
+		Size size;
+		wxToolBar_GetToolMargins(wxobj, size);
+		return size;
+	}
+        public void Margins(Size value) { wxToolBar_SetMargins(wxobj, value.Width, value.Height); }
 
         //---------------------------------------------------------------------
 
-        public int ToolPacking
-        {
-            get { return wxToolBar_GetToolPacking(wxObject); }
-            set { wxToolBar_SetToolPacking(wxObject, value); }
-        }
+        public int ToolPacking() { return wxToolBar_GetToolPacking(wxobj); }
+        public void ToolPacking(int value) { wxToolBar_SetToolPacking(wxobj, value); }
 
         //---------------------------------------------------------------------
 
-        public int Separation
-        {
-            get { return wxToolBar_GetToolSeparation(wxObject); }
-            set { wxToolBar_SetToolSeparation(wxObject, value); }
-        }
+        public int Separation() { return wxToolBar_GetToolSeparation(wxobj); }
+        public void Separation(int value) { wxToolBar_SetToolSeparation(wxobj, value); }
 
         //---------------------------------------------------------------------
 
-        public int Rows
-        {
-            set { wxToolBar_SetRows(wxObject, value); }
-        }
+        public void Rows(int value) { wxToolBar_SetRows(wxobj, value); }
 
-        public int MaxRows
-        {
-            get { return wxToolBar_GetMaxRows(wxObject); }
-        }
+        public int MaxRows() { return wxToolBar_GetMaxRows(wxobj); }
 
-        public int MaxCols
-        {
-            get { return wxToolBar_GetMaxCols(wxObject); }
-        }
+        public int MaxCols() { return wxToolBar_GetMaxCols(wxobj); }
 
         //---------------------------------------------------------------------
 
         public void SetMaxRowsCols(int rows, int cols)
         {
-            wxToolBar_SetMaxRowsCols(wxObject, rows, cols);
+            wxToolBar_SetMaxRowsCols(wxobj, rows, cols);
         }
 
         //---------------------------------------------------------------------
 
-        public Size ToolBitmapSize
-        {
-            get { 
-                Size size = new Size();
-                wxToolBar_GetToolBitmapSize(wxObject, ref size); 
+        public Size ToolBitmapSize() { 
+                Size size;
+                wxToolBar_GetToolBitmapSize(wxobj, size); 
                 return size;
             }
-            set { wxToolBar_SetToolBitmapSize(wxObject, ref value); }
-        }
+        public void ToolBitmapSize(Size value) { wxToolBar_SetToolBitmapSize(wxobj, value); }
 
         //---------------------------------------------------------------------
 
-        public Size ToolSize
-        {
-            get { 
-                Size size = new Size();
-                wxToolBar_GetToolSize(wxObject, ref size); 
+        public Size ToolSize() { 
+                Size size;
+                wxToolBar_GetToolSize(wxobj, size); 
                 return size;
             }
-        }
 
         //---------------------------------------------------------------------
 
         public ToolBarTool FindToolForPosition(int x, int y)
         {
-            return (ToolBarTool)FindObject(wxToolBar_FindToolForPosition(wxObject, x, y), typeof(ToolBarTool));
+            return cast(ToolBarTool)FindObject(wxToolBar_FindToolForPosition(wxobj, x, y), &ToolBarTool.New);
         }
 
         //---------------------------------------------------------------------
 
-        public bool IsVertical
-        {
-            get { return wxToolBar_IsVertical(wxObject); }
-        }
+        public bool IsVertical() { return wxToolBar_IsVertical(wxobj); }
 
         //---------------------------------------------------------------------
 
         public override bool AcceptsFocus()
         {
-            return wxToolBar_AcceptsFocus(wxObject); 
+            return wxToolBar_AcceptsFocus(wxobj); 
         }
 
 	}
-}
 

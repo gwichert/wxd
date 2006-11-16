@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - Wizard.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - Wizard.cs
 //
 // The wxWizard wrapper class.
@@ -10,41 +13,36 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.Wizard;
+import wx.common;
+import wx.Dialog;
+import wx.WizardPage;
 
-namespace wx
-{
-	public class Wizard : Dialog
-	{
-		[DllImport("wx-c")] static extern IntPtr wxWizard_ctor(IntPtr parent, int id, string title, IntPtr bitmap, ref Point pos);
-		[DllImport("wx-c")] static extern bool   wxWizard_RunWizard(IntPtr self, IntPtr firstPage);
-		[DllImport("wx-c")] static extern void   wxWizard_SetPageSize(IntPtr self, ref Size size);
+		static extern (C) IntPtr wxWizard_ctor(IntPtr parent, int id, string title, IntPtr bitmap, inout Point pos);
+		static extern (C) bool   wxWizard_RunWizard(IntPtr self, IntPtr firstPage);
+		static extern (C) void   wxWizard_SetPageSize(IntPtr self, inout Size size);
 
 		//---------------------------------------------------------------------
 		
-		public Wizard(IntPtr wxObject) 
-			: base(wxObject) {}
+	public class Wizard : Dialog
+	{
+		public this(IntPtr wxobj) 
+			{ super(wxobj);}
 
-		public Wizard(Window parent, int id, string title, Bitmap bitmap)
-			: base(wxWizard_ctor(parent != null ? parent.wxObject : IntPtr.Zero, id, title, bitmap != null ? bitmap.wxObject : IntPtr.Zero, ref wxDefaultPosition)) {}
+		public this(Window parent, int id, string title, Bitmap bitmap)
+			{ super(wxWizard_ctor(parent !== null ? parent.wxobj : IntPtr.init, id, title, bitmap !== null ? bitmap.wxobj : IntPtr.init, wxDefaultPosition));}
 
 		//---------------------------------------------------------------------
 
 		public bool RunWizard(WizardPage firstPage)
 		{
-			if (firstPage == null)
+			if (firstPage === null)
 				throw new ArgumentNullException("firstPage");
 
-			return wxWizard_RunWizard(wxObject, firstPage.wxObject);
+			return wxWizard_RunWizard(wxobj, firstPage.wxobj);
 		}
 
 		//---------------------------------------------------------------------
 
-		public Size PageSize
-		{
-			set { wxWizard_SetPageSize(wxObject, ref value); }
-		}
+		public void PageSize(Size value) { wxWizard_SetPageSize(wxobj, value); }
 	}
-}

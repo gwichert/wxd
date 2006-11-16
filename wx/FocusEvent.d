@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - FocusEvent.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - FocusEvent.cs
 //
 // The wxFocusEvent wrapper class.
@@ -10,31 +13,35 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Runtime.InteropServices;
+module wx.FocusEvent;
+import wx.common;
+import wx.Window;
+import wx.Event;
 
-namespace wx
-{
-	public class FocusEvent : Event
-	{
-		[DllImport("wx-c")] static extern IntPtr wxFocusEvent_ctor(int type);
-		[DllImport("wx-c")] static extern IntPtr wxFocusEvent_GetWindow(IntPtr self);
-		[DllImport("wx-c")] static extern void   wxFocusEvent_SetWindow(IntPtr self, IntPtr win);
+		static extern (C) IntPtr wxFocusEvent_ctor(int type);
+		static extern (C) IntPtr wxFocusEvent_GetWindow(IntPtr self);
+		static extern (C) void   wxFocusEvent_SetWindow(IntPtr self, IntPtr win);
 		
 		//-----------------------------------------------------------------------------
 
-		public FocusEvent(IntPtr wxObject) 
-			: base(wxObject) { }
+	public class FocusEvent : Event
+	{
+		public this(IntPtr wxobj) 
+			{ super(wxobj); }
 
-		public FocusEvent(int type)
-			: this(wxFocusEvent_ctor(type)) { }
+		public this(int type)
+			{ this(wxFocusEvent_ctor(type)); }
 
 		//-----------------------------------------------------------------------------	
 		
-		public Window Window
+		public Window window() { return cast(Window)FindObject(wxFocusEvent_GetWindow(wxobj), &Window.New); }
+		public void window(Window value) { wxFocusEvent_SetWindow(wxobj, wxObject.SafePtr(value)); }
+
+		private static Event New(IntPtr obj) { return new FocusEvent(obj); }
+
+		static this()
 		{
-			get { return (Window)FindObject(wxFocusEvent_GetWindow(wxObject), typeof(Window)); }
-			set { wxFocusEvent_SetWindow(wxObject, Object.SafePtr(value)); }
+			AddEventType(wxEVT_SET_FOCUS,				&FocusEvent.New);
+			AddEventType(wxEVT_KILL_FOCUS,				&FocusEvent.New);
 		}
 	}
-}

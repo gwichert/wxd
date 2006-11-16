@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - Palette.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - Palette.cs
 //
 // The wxPalette wrapper class.
@@ -9,63 +12,62 @@
 //-----------------------------------------------------------------------------
 
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.Palette;
+import wx.common;
+import wx.GDIObject;
 
-namespace wx
-{
+		static extern (C) IntPtr wxPalette_ctor();
+		static extern (C) void wxPalette_dtor(IntPtr self);
+		static extern (C) bool wxPalette_Ok(IntPtr self);
+		static extern (C) bool wxPalette_Create(IntPtr self, int n, inout ubyte red, inout ubyte green, inout ubyte blue);
+		static extern (C) int wxPalette_GetPixel(IntPtr self, ubyte red, ubyte green, ubyte blue);
+		static extern (C) bool wxPalette_GetRGB(IntPtr self, int pixel, out ubyte red, out ubyte green, out ubyte blue);
+
 	public class Palette : GDIObject
 	{
-		[DllImport("wx-c")] static extern IntPtr wxPalette_ctor();
-		[DllImport("wx-c")] static extern void wxPalette_dtor(IntPtr self);
-		[DllImport("wx-c")] static extern bool wxPalette_Ok(IntPtr self);
-		[DllImport("wx-c")] static extern bool wxPalette_Create(IntPtr self, int n, char[] red, char[] green, char[] blue);
-		[DllImport("wx-c")] static extern int wxPalette_GetPixel(IntPtr self, char red, char green, char blue);
-		[DllImport("wx-c")] static extern bool wxPalette_GetRGB(IntPtr self, int pixel, out char red, out char green, out char blue);
-
+		public static Palette wxNullPalette;
 		//---------------------------------------------------------------------
 
-		public Palette()
-			: this(wxPalette_ctor()) {}
+		public this()
+			{ this(wxPalette_ctor());}
 
-		public Palette(IntPtr wxObject)
-			: base(wxObject) {}
+		public this(IntPtr wxobj)
+			{ super(wxobj);}
 
-		public Palette(int n, char[] r, char[] g, char[] b)
-			: this(wxPalette_ctor())
+		public this(int n, inout ubyte r, inout ubyte g, inout ubyte b)
 		{
-			if (!wxPalette_Create(wxObject, n, r, g, b))
+			this(wxPalette_ctor());
+			if (!wxPalette_Create(wxobj, n, r, g, b))
 			{
 				throw new InvalidOperationException("Failed to create Palette");
 			}
 		}
 
-		public bool Create(int n, char[] r, char[] g, char[] b)
+		public bool Create(int n, inout ubyte r, inout ubyte g, inout ubyte b)
 		{
-			return wxPalette_Create(wxObject, n, r, g, b);
+			return wxPalette_Create(wxobj, n, r, g, b);
 		}
 
+		public static wxObject New(IntPtr ptr) { return new Palette(ptr); }
 		//---------------------------------------------------------------------
 
 		public bool Ok()
 		{
-			return wxPalette_Ok(wxObject);
+			return wxPalette_Ok(wxobj);
 		}
 
 		//---------------------------------------------------------------------
 
-		public int GetPixel(char red, char green, char blue)
+		public int GetPixel(ubyte red, ubyte green, ubyte blue)
 		{
-			return wxPalette_GetPixel(wxObject, red, green, blue);
+			return wxPalette_GetPixel(wxobj, red, green, blue);
 		}
 
-		public bool GetRGB(int pixel, out char red, out char green, out char blue)
+		public bool GetRGB(int pixel, out ubyte red, out ubyte green, out ubyte blue)
 		{
-			return wxPalette_GetRGB(wxObject, pixel, out red, out green, out blue);
+			return wxPalette_GetRGB(wxobj, pixel, red, green, blue);
 		}
 
 		//---------------------------------------------------------------------
 	}
 
-}

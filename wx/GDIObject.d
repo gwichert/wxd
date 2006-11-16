@@ -1,35 +1,33 @@
 //-----------------------------------------------------------------------------
-// wx.NET - GDIObject.cs
+// wxD - GDIObject.d
 //
 // The wxGDIObject wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
+// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Runtime.InteropServices;
+module wx.GDIObject;
+import wx.common;
 
-namespace wx
-{
-	public class GDIObject : Object
-	{
-		[DllImport("wx-c")] static extern void wxGDIObj_dtor(IntPtr self);
+		static extern (C) void wxGDIObj_dtor(IntPtr self);
 
 		//---------------------------------------------------------------------
 
-		public GDIObject(IntPtr wxObject) 
-			: base(wxObject) {}
+	public class GDIObject : wxObject
+	{
+		public this(IntPtr wxobj) 
+			{ super(wxobj);}
 
 		/*public override void Dispose()
 		{
-			wxObject = IntPtr.Zero;
+			wxobj = IntPtr.init;
 			Dispose(false);
 		}*/		
 
 		//---------------------------------------------------------------------
 	}
-}

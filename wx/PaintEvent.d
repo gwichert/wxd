@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - PaintEvent.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - PaintEvent.cs
 //
 // The wxPaintEvent wrapper class.
@@ -10,21 +13,19 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Runtime.InteropServices;
+module wx.PaintEvent;
+import wx.common;
+import wx.Event;
 
-namespace wx
-{
-	public class PaintEvent : Event
-	{
-		[DllImport("wx-c")] static extern IntPtr wxPaintEvent_ctor(int Id);
+		static extern (C) IntPtr wxPaintEvent_ctor(int Id);
 		
 		//-----------------------------------------------------------------------------
 
-		public PaintEvent(IntPtr wxObject) 
-			: base(wxObject) { }
+	public class PaintEvent : Event
+	{
+		public this(IntPtr wxobj) 
+			{ super(wxobj); }
 
-		public PaintEvent(int Id)
-			: this(wxPaintEvent_ctor(Id)) { }
+		public this(int Id)
+			{ this(wxPaintEvent_ctor(Id)); }
 	}
-}

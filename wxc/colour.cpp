@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - colour.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - colour.cxx
 //
 // The wxColour proxy interface.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include "local_events.h"
 
 //-----------------------------------------------------------------------------
@@ -47,9 +51,9 @@ void wxColour_dtor(wxColour* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxColour* wxColour_ctorByName(const char* name)
+wxColour* wxColour_ctorByName(dstr name)
 {
-	return new wxColour(wxString(name, wxConvUTF8));
+	return new wxColour(wxString(name.data, wxConvUTF8, name.length));
 }
 
 //-----------------------------------------------------------------------------
@@ -106,8 +110,8 @@ void wxColour_Set(wxColour* self, unsigned char red, unsigned char green, unsign
 
 #ifdef __WXGTK__
 extern "C" WXEXPORT
-wxColour* wxColour_CreateByName(const char* name)
+wxColour* wxColour_CreateByName(dstr name)
 {
-	return new wxColour(wxColour::CreateByName(wxString(name, wxConvUTF8)));
+	return new wxColour(wxColour::CreateByName(wxString(name.data, wxConvUTF8, name.length)));
 }
 #endif

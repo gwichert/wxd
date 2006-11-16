@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - WizardPageSimple.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - WizardPageSimple.cs
 //
 // The wxWizardPageSimple wrapper class.
@@ -10,41 +13,41 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Runtime.InteropServices;
+module wx.WizardPageSimple;
+import wx.common;
+import wx.Wizard;
+import wx.WizardPage;
 
-namespace wx
-{
-	public class WizardPageSimple : WizardPage
-	{
-		[DllImport("wx-c")] static extern IntPtr wxWizPageSimp_ctor(IntPtr parent, IntPtr prev, IntPtr next);
-		[DllImport("wx-c")] static extern void   wxWizPageSimp_Chain(IntPtr first, IntPtr second);
+		static extern (C) IntPtr wxWizPageSimp_ctor(IntPtr parent, IntPtr prev, IntPtr next);
+		static extern (C) void   wxWizPageSimp_Chain(IntPtr first, IntPtr second);
 
 		//---------------------------------------------------------------------
 
-		public WizardPageSimple(Wizard parent)
-			: this(parent, null, null)
+	public class WizardPageSimple : WizardPage
+	{
+		public this(Wizard parent)
 		{
+			this(parent, null, null);
 		}
 
-		public WizardPageSimple(Wizard parent, WizardPage prev, WizardPage next)
-			: base(wxWizPageSimp_ctor(parent.wxObject,
-			                          prev != null ? prev.wxObject : IntPtr.Zero,
-			                          next != null ? next.wxObject : IntPtr.Zero))
+		public this(Wizard parent, WizardPage prev, WizardPage next)
 		{
+			super(wxWizPageSimp_ctor(parent.wxobj,
+			                          prev !== null ? prev.wxobj : IntPtr.init,
+			                          next !== null ? next.wxobj : IntPtr.init));
 		}
 
-		public WizardPageSimple(IntPtr wxObject) : base(wxObject)
+		public this(IntPtr wxobj) 
 		{
+			super(wxobj);
 		}
 
 		//---------------------------------------------------------------------
 
 		public static void Chain(WizardPageSimple first, WizardPageSimple second)
 		{
-			wxWizPageSimp_Chain(first.wxObject, second.wxObject);
+			wxWizPageSimp_Chain(first.wxobj, second.wxobj);
 		}
 
 		//---------------------------------------------------------------------
 	}
-}

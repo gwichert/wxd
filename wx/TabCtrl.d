@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - TabCtrl.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - TabCtrl.cs
 //
 // The wxTabCtrl wrapper class.
@@ -10,141 +13,138 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-#if ! __WXMSW__
-#warning TabCtrl not supported by wxGTK and Mac, Win only 
-#else
+module wx.TabCtrl;
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+version(__WXMSW__) {
 
-namespace wx
-{
+import wx.common;
+import wx.Event;
+import wx.Control;
+
+		static extern (C) IntPtr wxTabEvent_ctor(int commandType, int id, int nSel, int nOldSel);
+		static extern (C) int    wxTabEvent_GetSelection(IntPtr self);
+		static extern (C) void   wxTabEvent_SetSelection(IntPtr self, int nSel);
+		static extern (C) int    wxTabEvent_GetOldSelection(IntPtr self);
+		static extern (C) void   wxTabEvent_SetOldSelection(IntPtr self, int nOldSel);
+		static extern (C) void wxTabEvent_Veto(IntPtr self);
+		static extern (C) void wxTabEvent_Allow(IntPtr self);
+		static extern (C) bool wxTabEvent_IsAllowed(IntPtr self);		
+
+		//-----------------------------------------------------------------------------
+
 	public class TabEvent : Event
 	{
-		[DllImport("wx-c")] static extern IntPtr wxTabEvent_ctor(int commandType, int id, int nSel, int nOldSel);
-		[DllImport("wx-c")] static extern int    wxTabEvent_GetSelection(IntPtr self);
-		[DllImport("wx-c")] static extern void   wxTabEvent_SetSelection(IntPtr self, int nSel);
-		[DllImport("wx-c")] static extern int    wxTabEvent_GetOldSelection(IntPtr self);
-		[DllImport("wx-c")] static extern void   wxTabEvent_SetOldSelection(IntPtr self, int nOldSel);
-		[DllImport("wx-c")] static extern void wxTabEvent_Veto(IntPtr self);
-		[DllImport("wx-c")] static extern void wxTabEvent_Allow(IntPtr self);
-		[DllImport("wx-c")] static extern bool wxTabEvent_IsAllowed(IntPtr self);		
+		public this(IntPtr wxobj)
+			{ super(wxobj); }
+
+		public this(int commandType, int id, int nSel, int nOldSel)
+			{ super(wxTabEvent_ctor(commandType, id, nSel, nOldSel)); }
 
 		//-----------------------------------------------------------------------------
 
-		public TabEvent(IntPtr wxObject)
-			: base(wxObject) { }
-
-		public TabEvent(int commandType, int id, int nSel, int nOldSel)
-			: base(wxTabEvent_ctor(commandType, id, nSel, nOldSel)) { }
+		public int Selection() { return wxTabEvent_GetSelection(wxobj); }
+		public void Selection(int value) { wxTabEvent_SetSelection(wxobj, value); }
 
 		//-----------------------------------------------------------------------------
 
-		public int Selection
-		{
-			get { return wxTabEvent_GetSelection(wxObject); }
-			set { wxTabEvent_SetSelection(wxObject, value); }
-		}
-
-		//-----------------------------------------------------------------------------
-
-		public int OldSelection
-		{
-			get { return wxTabEvent_GetOldSelection(wxObject); }
-			set { wxTabEvent_SetOldSelection(wxObject, value); }
-		}
+		public int OldSelection() { return wxTabEvent_GetOldSelection(wxobj); }
+		public void OldSelection(int value) { wxTabEvent_SetOldSelection(wxobj, value); }
 		
 		//-----------------------------------------------------------------------------		
 		
 		public void Veto()
 		{
-			wxTabEvent_Veto(wxObject);
+			wxTabEvent_Veto(wxobj);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public void Allow()
 		{
-			wxTabEvent_Allow(wxObject);
+			wxTabEvent_Allow(wxobj);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public bool Allowed
+		public bool Allowed() { return wxTabEvent_IsAllowed(wxobj); }
+
+		private static Event New(IntPtr obj) { return new TabEvent(obj); }
+
+		static this()
 		{
-			get { return wxTabEvent_IsAllowed(wxObject); }
-		}		
+			AddEventType(wxEVT_COMMAND_TAB_SEL_CHANGED,   &TabEvent.New);
+			AddEventType(wxEVT_COMMAND_TAB_SEL_CHANGING,  &TabEvent.New);
+		}
 	}
 
 	//-----------------------------------------------------------------------------
 
+		static extern (C) IntPtr wxTabCtrl_ctor();
+		static extern (C) IntPtr wxTabCtrl_ctor2(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
+		static extern (C) int wxTabCtrl_GetSelection(IntPtr self);
+		static extern (C) int wxTabCtrl_GetCurFocus(IntPtr self);
+		static extern (C) IntPtr wxTabCtrl_GetImageList(IntPtr self);
+		static extern (C) int wxTabCtrl_GetItemCount(IntPtr self);
+		static extern (C) bool wxTabCtrl_GetItemRect(IntPtr self, int item, out Rectangle rect);
+		static extern (C) int wxTabCtrl_GetRowCount(IntPtr self);
+		static extern (C) IntPtr wxTabCtrl_GetItemText(IntPtr self, int item);
+		static extern (C) int wxTabCtrl_GetItemImage(IntPtr self, int item);
+		static extern (C) IntPtr wxTabCtrl_GetItemData(IntPtr self, int item);
+		static extern (C) int wxTabCtrl_SetSelection(IntPtr self, int item);
+		static extern (C) void wxTabCtrl_SetImageList(IntPtr self, IntPtr imageList);
+		static extern (C) bool wxTabCtrl_SetItemText(IntPtr self, int item, string text);
+		static extern (C) bool wxTabCtrl_SetItemImage(IntPtr self, int item, int image);
+		static extern (C) bool wxTabCtrl_SetItemData(IntPtr self, int item, IntPtr data);
+		static extern (C) void wxTabCtrl_SetItemSize(IntPtr self, inout Size size);
+		static extern (C) bool wxTabCtrl_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
+		static extern (C) void wxTabCtrl_SetPadding(IntPtr self, inout Size padding);
+		static extern (C) bool wxTabCtrl_DeleteAllItems(IntPtr self);
+		static extern (C) bool wxTabCtrl_DeleteItem(IntPtr self, int item);
+		static extern (C) int wxTabCtrl_HitTest(IntPtr self, inout Point pt, out int flags);
+		static extern (C) bool wxTabCtrl_InsertItem(IntPtr self, int item, string text, int imageId, IntPtr data);
+
 	public class TabCtrl : Control
 	{
-		[DllImport("wx-c")] static extern IntPtr wxTabCtrl_ctor();
-		[DllImport("wx-c")] static extern IntPtr wxTabCtrl_ctor2(IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
-		[DllImport("wx-c")] static extern int wxTabCtrl_GetSelection(IntPtr self);
-		[DllImport("wx-c")] static extern int wxTabCtrl_GetCurFocus(IntPtr self);
-		[DllImport("wx-c")] static extern IntPtr wxTabCtrl_GetImageList(IntPtr self);
-		[DllImport("wx-c")] static extern int wxTabCtrl_GetItemCount(IntPtr self);
-		[DllImport("wx-c")] static extern bool wxTabCtrl_GetItemRect(IntPtr self, int item, out Rectangle rect);
-		[DllImport("wx-c")] static extern int wxTabCtrl_GetRowCount(IntPtr self);
-		[DllImport("wx-c")] static extern IntPtr wxTabCtrl_GetItemText(IntPtr self, int item);
-		[DllImport("wx-c")] static extern int wxTabCtrl_GetItemImage(IntPtr self, int item);
-		[DllImport("wx-c")] static extern IntPtr wxTabCtrl_GetItemData(IntPtr self, int item);
-		[DllImport("wx-c")] static extern int wxTabCtrl_SetSelection(IntPtr self, int item);
-		[DllImport("wx-c")] static extern void wxTabCtrl_SetImageList(IntPtr self, IntPtr imageList);
-		[DllImport("wx-c")] static extern bool wxTabCtrl_SetItemText(IntPtr self, int item, string text);
-		[DllImport("wx-c")] static extern bool wxTabCtrl_SetItemImage(IntPtr self, int item, int image);
-		[DllImport("wx-c")] static extern bool wxTabCtrl_SetItemData(IntPtr self, int item, IntPtr data);
-		[DllImport("wx-c")] static extern void wxTabCtrl_SetItemSize(IntPtr self, ref Size size);
-		[DllImport("wx-c")] static extern bool wxTabCtrl_Create(IntPtr self, IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
-		[DllImport("wx-c")] static extern void wxTabCtrl_SetPadding(IntPtr self, ref Size padding);
-		[DllImport("wx-c")] static extern bool wxTabCtrl_DeleteAllItems(IntPtr self);
-		[DllImport("wx-c")] static extern bool wxTabCtrl_DeleteItem(IntPtr self, int item);
-		[DllImport("wx-c")] static extern int wxTabCtrl_HitTest(IntPtr self, ref Point pt, out long flags);
-		[DllImport("wx-c")] static extern bool wxTabCtrl_InsertItem(IntPtr self, int item, string text, int imageId, IntPtr data);
-
 		//-----------------------------------------------------------------------------
 
-		public TabCtrl(IntPtr wxObject) 
-			: base(wxObject) { }
+		public this(IntPtr wxobj) 
+			{ super(wxobj); }
 
-		public TabCtrl()
-			: base(wxTabCtrl_ctor()) {}
+		public this()
+			{ super(wxTabCtrl_ctor());}
 
-		public TabCtrl(Window parent, int id)
-			: this(parent, id, wxDefaultPosition, wxDefaultSize, 0, "tabCtrl") {}
+		public this(Window parent, int id)
+			{ this(parent, id, wxDefaultPosition, wxDefaultSize, 0, "tabCtrl");}
 
-		public TabCtrl(Window parent, int id, Point pos)
-			: this(parent, id, pos, wxDefaultSize, 0, "tabCtrl") {}
+		public this(Window parent, int id, Point pos)
+			{ this(parent, id, pos, wxDefaultSize, 0, "tabCtrl");}
 
-		public TabCtrl(Window parent, int id, Point pos, Size size)
-			: this(parent, id, pos, size, 0, "tabCtrl") {}
+		public this(Window parent, int id, Point pos, Size size)
+			{ this(parent, id, pos, size, 0, "tabCtrl");}
 
-		public TabCtrl(Window parent, int id, Point pos, Size size, long style)
-			: this(parent, id, pos, size, style, "tabCtrl") {}
+		public this(Window parent, int id, Point pos, Size size, int style)
+			{ this(parent, id, pos, size, style, "tabCtrl");}
 
-		public TabCtrl(Window parent, int id, Point pos, Size size, long style, string name)
-			: base(wxTabCtrl_ctor2(Object.SafePtr(parent), id, ref pos, ref size, (uint)style, name)) {}
+		public this(Window parent, int id, Point pos, Size size, int style, string name)
+			{ super(wxTabCtrl_ctor2(wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name));}
 			
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public TabCtrl(Window parent)
-			: this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, "tabCtrl") {}
+		public this(Window parent)
+			{ this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, "tabCtrl");}
 
-		public TabCtrl(Window parent, Point pos)
-			: this(parent, Window.UniqueID, pos, wxDefaultSize, 0, "tabCtrl") {}
+		public this(Window parent, Point pos)
+			{ this(parent, Window.UniqueID, pos, wxDefaultSize, 0, "tabCtrl");}
 
-		public TabCtrl(Window parent, Point pos, Size size)
-			: this(parent, Window.UniqueID, pos, size, 0, "tabCtrl") {}
+		public this(Window parent, Point pos, Size size)
+			{ this(parent, Window.UniqueID, pos, size, 0, "tabCtrl");}
 
-		public TabCtrl(Window parent, Point pos, Size size, long style)
-			: this(parent, Window.UniqueID, pos, size, style, "tabCtrl") {}
+		public this(Window parent, Point pos, Size size, int style)
+			{ this(parent, Window.UniqueID, pos, size, style, "tabCtrl");}
 
-		public TabCtrl(Window parent, Point pos, Size size, long style, string name)
-			: this(parent, Window.UniqueID, pos, size, style, name) {}
+		public this(Window parent, Point pos, Size size, int style, string name)
+			{ this(parent, Window.UniqueID, pos, size, style, name);}
 
 		//-----------------------------------------------------------------------------
 
@@ -163,168 +163,140 @@ namespace wx
 			return Create(parent, id, pos, size, 0, "tabCtrl");
 		}
 
-		public bool Create(Window parent, int id, Point pos, Size size, long style)
+		public bool Create(Window parent, int id, Point pos, Size size, int style)
 		{
 			return Create(parent, id, pos, size, style, "tabCtrl");
 		}
 
-		public bool Create(Window parent, int id, Point pos, Size size, long style, string name)
+		public bool Create(Window parent, int id, Point pos, Size size, int style, string name)
 		{
-			return wxTabCtrl_Create(wxObject, Object.SafePtr(parent), id, ref pos, ref size, (uint)style, name);
+			return wxTabCtrl_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name);
 		}
 		
 		//-----------------------------------------------------------------------------
 
-		public int Selection
-		{
-			get { return wxTabCtrl_GetSelection(wxObject); }
-			set { wxTabCtrl_SetSelection(wxObject, value); }
-		}
+		public int Selection() { return wxTabCtrl_GetSelection(wxobj); }
+		public void Selection(int value) { wxTabCtrl_SetSelection(wxobj, value); }
 		
 		//-----------------------------------------------------------------------------
 
-		public int CurFocus
-		{
-			get { return wxTabCtrl_GetCurFocus(wxObject); }
-		}
+		public int CurFocus() { return wxTabCtrl_GetCurFocus(wxobj); }
 		
 		//-----------------------------------------------------------------------------
 
-		public ImageList ImageList
-		{
-			get { return (ImageList)FindObject(wxTabCtrl_GetImageList(wxObject), typeof(ImageList)); }
-			set { wxTabCtrl_SetImageList(wxObject, Object.SafePtr(value)); }
-		}
+		public ImageList ImageList() { return cast(ImageList)FindObject(wxTabCtrl_GetImageList(wxobj), typeid(ImageList)); }
+		public void ImageList(ImageList value) { wxTabCtrl_SetImageList(wxobj, wxObject.SafePtr(value)); }
 		
 		//-----------------------------------------------------------------------------
 
-		public int ItemCount
-		{
-			get { return wxTabCtrl_GetItemCount(wxObject); }
-		}
+		public int ItemCount() { return wxTabCtrl_GetItemCount(wxobj); }
 		
 		//-----------------------------------------------------------------------------
 
 		public bool GetItemRect(int item, out Rectangle rect)
 		{
-			return wxTabCtrl_GetItemRect(wxObject, item, out rect);
+			return wxTabCtrl_GetItemRect(wxobj, item, rect);
 		}
 		
 		//-----------------------------------------------------------------------------
 
-		public int RowCount
-		{
-			get { return wxTabCtrl_GetRowCount(wxObject); }
-		}
+		public int RowCount() { return wxTabCtrl_GetRowCount(wxobj); }
 		
 		//-----------------------------------------------------------------------------
 
 		public string GetItemText(int item)
 		{
-			return new wxString(wxTabCtrl_GetItemText(wxObject, item), true);
+			return new wxString(wxTabCtrl_GetItemText(wxobj, item), true);
 		}
 		
 		//-----------------------------------------------------------------------------
 
 		public int GetItemImage(int item)
 		{
-			return wxTabCtrl_GetItemImage(wxObject, item);
+			return wxTabCtrl_GetItemImage(wxobj, item);
 		}
 		
 		//-----------------------------------------------------------------------------
 
 		public IntPtr GetItemData(int item)
 		{
-			return wxTabCtrl_GetItemData(wxObject, item);
+			return wxTabCtrl_GetItemData(wxobj, item);
 		}
 		
 		//-----------------------------------------------------------------------------
 
 		public bool SetItemText(int item, string text)
 		{
-			return wxTabCtrl_SetItemText(wxObject, item, text);
+			return wxTabCtrl_SetItemText(wxobj, item, text);
 		}
 		
 		//-----------------------------------------------------------------------------
 
 		public bool SetItemImage(int item, int image)
 		{
-			return wxTabCtrl_SetItemImage(wxObject, item, image);
+			return wxTabCtrl_SetItemImage(wxobj, item, image);
 		}
 		
 		//-----------------------------------------------------------------------------
 
 		public bool SetItemData(int item, IntPtr data)
 		{
-			return wxTabCtrl_SetItemData(wxObject, item, data);
+			return wxTabCtrl_SetItemData(wxobj, item, data);
 		}
 		
 		//-----------------------------------------------------------------------------
 
-		public Size ItemSize
-		{
-			set { wxTabCtrl_SetItemSize(wxObject, ref value); }
-		}
+		public void ItemSize(Size value) { wxTabCtrl_SetItemSize(wxobj, value); }
 		
 		//-----------------------------------------------------------------------------
 
-		public Size Padding
-		{
-			set { wxTabCtrl_SetPadding(wxObject, ref value); }
-		}
+		public void Padding(Size value) { wxTabCtrl_SetPadding(wxobj, value); }
 		
 		//-----------------------------------------------------------------------------
 
 		public bool DeleteAllItems()
 		{
-			return wxTabCtrl_DeleteAllItems(wxObject);
+			return wxTabCtrl_DeleteAllItems(wxobj);
 		}
 		
 		//-----------------------------------------------------------------------------
 
 		public bool DeleteItem(int item)
 		{
-			return wxTabCtrl_DeleteItem(wxObject, item);
+			return wxTabCtrl_DeleteItem(wxobj, item);
 		}
 		
 		//-----------------------------------------------------------------------------
 
-		public int HitTest(Point pt, out long flags)
+		public int HitTest(Point pt, out int flags)
 		{
-			return wxTabCtrl_HitTest(wxObject, ref pt, out flags);
+			return wxTabCtrl_HitTest(wxobj, pt, flags);
 		}
 		
 		//-----------------------------------------------------------------------------
 
 		public bool InsertItem(int item, string text)
 		{
-			return InsertItem(item, text, -1, IntPtr.Zero);
+			return InsertItem(item, text, -1, IntPtr.init);
 		}
 		
 		public bool InsertItem(int item, string text, int imageId)
 		{
-			return InsertItem(item, text, imageId, IntPtr.Zero);
+			return InsertItem(item, text, imageId, IntPtr.init);
 		}
 		
 		public bool InsertItem(int item, string text, int imageId, IntPtr data)
 		{
-			return wxTabCtrl_InsertItem(wxObject, item, text, imageId, data);
+			return wxTabCtrl_InsertItem(wxobj, item, text, imageId, data);
 		}
 
 		//---------------------------------------------------------------------
 
-		public event EventListener SelectionChange
-		{
-			add { AddCommandListener(Event.wxEVT_COMMAND_TAB_SEL_CHANGED, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+		public void SelectionChange_Add(EventListner value) { AddCommandListener(Event.wxEVT_COMMAND_TAB_SEL_CHANGED, ID, value, this); }
+		public void SelectionChange_Remove(EventListner value) { RemoveHandler(value, this); }
 
-		public event EventListener SelectionChanging
-		{
-			add { AddCommandListener(Event.wxEVT_COMMAND_TAB_SEL_CHANGING, ID, value, this); }
-			remove { RemoveHandler(value, this); }
-		}
+		public void SelectionChanging_Add(EventListner value) { AddCommandListener(Event.wxEVT_COMMAND_TAB_SEL_CHANGING, ID, value, this); }
+		public void SelectionChanging_Remove(EventListner value) { RemoveHandler(value, this); }
 	}
-}
 
-#endif
+}

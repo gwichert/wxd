@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - clipboard.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - clipboard.cxx
 //
 // The wxClipBoard proxy interface.
@@ -10,6 +13,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/clipbrd.h>
 
 //-----------------------------------------------------------------------------
@@ -103,15 +107,15 @@ void wxClipboard_UsePrimarySelection(wxClipboard* self, bool primary)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxClipboard* wxTheClipboard_static()
+wxClipboard* wxClipboard_Get()
 {
-	return wxTheClipboard;
+	return wxClipboard::Get();
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxClipboardLocker* wxClipBoardLocker_ctor(wxClipboard* clipboard)
+wxClipboardLocker* wxClipboardLocker_ctor(wxClipboard* clipboard)
 {
 	return new wxClipboardLocker(clipboard);
 }
@@ -119,7 +123,7 @@ wxClipboardLocker* wxClipBoardLocker_ctor(wxClipboard* clipboard)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxClipBoardLocker_dtor(wxClipboardLocker* self)
+void wxClipboardLocker_dtor(wxClipboardLocker* self)
 {
 	if (self != NULL)
 		delete self;

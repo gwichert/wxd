@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - ShowEvent.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - ShowEvent.cs
 //
 // The wxShowEvent wrapper class.
@@ -10,31 +13,33 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Runtime.InteropServices;
+module wx.ShowEvent;
+import wx.common;
+import wx.Event;
 
-namespace wx
-{
-	public class ShowEvent : Event
-	{
-		[DllImport("wx-c")] static extern IntPtr wxShowEvent_ctor(int type);
-		[DllImport("wx-c")] static extern bool wxShowEvent_GetShow(IntPtr self);
-		[DllImport("wx-c")] static extern void wxShowEvent_SetShow(IntPtr self, bool show);
+		static extern (C) IntPtr wxShowEvent_ctor(int type);
+		static extern (C) bool wxShowEvent_GetShow(IntPtr self);
+		static extern (C) void wxShowEvent_SetShow(IntPtr self, bool show);
 		
 		//-----------------------------------------------------------------------------
 
-		public ShowEvent(IntPtr wxObject) 
-			: base(wxObject) { }
+	public class ShowEvent : Event
+	{
+		public this(IntPtr wxobj) 
+			{ super(wxobj); }
 
-		public ShowEvent(int type)
-			: this(wxShowEvent_ctor(type)) { }
+		public this(int type)
+			{ this(wxShowEvent_ctor(type)); }
 
 		//-----------------------------------------------------------------------------	
 		
-		public bool Show
+		public bool Show() { return wxShowEvent_GetShow(wxobj); }
+		public void Show(bool value) { wxShowEvent_SetShow(wxobj, value); }
+
+		private static Event New(IntPtr obj) { return new ShowEvent(obj); }
+
+		static this()
 		{
-			get { return wxShowEvent_GetShow(wxObject); }
-			set { wxShowEvent_SetShow(wxObject, value); }
+			AddEventType(wxEVT_SHOW,				&ShowEvent.New);
 		}
 	}
-}

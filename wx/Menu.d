@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - Menu.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - Menu.cs
 //
 // The wxMenu wrapper class.
@@ -10,104 +13,105 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Collections;
-using System.Runtime.InteropServices;
+module wx.Menu;
+import wx.common;
+import wx.Defs;
+import wx.Window;
+import wx.MenuItem;
+import wx.MenuBar;
 
-namespace wx
-{
+		static extern (C) IntPtr wxMenuBase_ctor1(string titel, uint style);
+		static extern (C) IntPtr wxMenuBase_ctor2(uint style);
+		
+		static extern (C) IntPtr wxMenuBase_Append(IntPtr self, int id, string item, string help, ItemKind kind);
+		static extern (C) IntPtr wxMenuBase_AppendSubMenu(IntPtr self, int id, string item, IntPtr subMenu, string help);
+		static extern (C) IntPtr wxMenuBase_AppendItem(IntPtr self, IntPtr item);
+		static extern (C) IntPtr wxMenuBase_AppendSeparator(IntPtr self);
+		static extern (C) IntPtr wxMenuBase_AppendCheckItem(IntPtr self, int itemid, string text, string help);
+		static extern (C) IntPtr wxMenuBase_AppendRadioItem(IntPtr self, int itemid, string text, string help);
+		static extern (C) int    wxMenuBase_GetMenuItemCount(IntPtr self);
+		static extern (C) IntPtr wxMenuBase_GetMenuItem(IntPtr self, int index);
+		static extern (C) void   wxMenuBase_Break(IntPtr self);
+		
+		static extern (C) IntPtr wxMenuBase_Insert(IntPtr self, int pos, IntPtr item);
+		static extern (C) IntPtr wxMenuBase_Insert2(IntPtr self, int pos, int itemid, string text, string help, ItemKind kind);
+		static extern (C) IntPtr wxMenuBase_InsertSeparator(IntPtr self, int pos);
+		static extern (C) IntPtr wxMenuBase_InsertCheckItem(IntPtr self, int pos, int itemid, string text, string help);
+		static extern (C) IntPtr wxMenuBase_InsertRadioItem(IntPtr self, int pos, int itemid, string text, string help);
+		static extern (C) IntPtr wxMenuBase_InsertSubMenu(IntPtr self, int pos, int itemid, string text, IntPtr submenu, string help);
+		
+		static extern (C) IntPtr wxMenuBase_Prepend(IntPtr self, IntPtr item);
+		static extern (C) IntPtr wxMenuBase_Prepend2(IntPtr self, int itemid, string text, string help, ItemKind kind);
+		static extern (C) IntPtr wxMenuBase_PrependSeparator(IntPtr self);
+		static extern (C) IntPtr wxMenuBase_PrependCheckItem(IntPtr self, int itemid, string text, string help);
+		static extern (C) IntPtr wxMenuBase_PrependRadioItem(IntPtr self, int itemid, string text, string help);
+		static extern (C) IntPtr wxMenuBase_PrependSubMenu(IntPtr self, int itemid, string text, IntPtr submenu, string help);
+		
+		static extern (C) IntPtr wxMenuBase_Remove(IntPtr self, int itemid);
+		static extern (C) IntPtr wxMenuBase_Remove2(IntPtr self, IntPtr item);
+		
+		static extern (C) bool   wxMenuBase_Delete(IntPtr self, int itemid);
+		static extern (C) bool   wxMenuBase_Delete2(IntPtr self, IntPtr item);
+		
+		static extern (C) bool   wxMenuBase_Destroy(IntPtr self, int itemid);
+		static extern (C) bool   wxMenuBase_Destroy2(IntPtr self, IntPtr item);
+		
+		static extern (C) int    wxMenuBase_FindItem(IntPtr self, string item);
+		static extern (C) IntPtr wxMenuBase_FindItem2(IntPtr self, int itemid, inout IntPtr menu); 
+		static extern (C) IntPtr wxMenuBase_FindItemByPosition(IntPtr self, int position);
+		
+		static extern (C) void   wxMenuBase_Enable(IntPtr self, int itemid, bool enable);
+		static extern (C) bool   wxMenuBase_IsEnabled(IntPtr self, int itemid);
+		
+		static extern (C) void   wxMenuBase_Check(IntPtr self, int id, bool check);
+		static extern (C) bool   wxMenuBase_IsChecked(IntPtr self, int itemid);
+		
+		static extern (C) void   wxMenuBase_SetLabel(IntPtr self, int itemid, string label);
+		static extern (C) string wxMenuBase_GetLabel(IntPtr self, int itemid);
+		
+		static extern (C) void   wxMenuBase_SetHelpString(IntPtr self, int itemid, string helpString);
+		static extern (C) string wxMenuBase_GetHelpString(IntPtr self, int itemid);		
+		
+		static extern (C) void   wxMenuBase_SetTitle(IntPtr self, string title);
+		static extern (C) string wxMenuBase_GetTitle(IntPtr self);		
+		
+		static extern (C) void   wxMenuBase_SetInvokingWindow(IntPtr self, IntPtr win);
+		static extern (C) IntPtr wxMenuBase_GetInvokingWindow(IntPtr self);
+		
+		static extern (C) uint   wxMenuBase_GetStyle(IntPtr self);
+		
+		static extern (C) void   wxMenuBase_SetEventHandler(IntPtr self, IntPtr handler);
+		static extern (C) IntPtr wxMenuBase_GetEventHandler(IntPtr self);
+		
+		static extern (C) void   wxMenuBase_UpdateUI(IntPtr self, IntPtr source);
+		
+		static extern (C) IntPtr wxMenuBase_GetMenuBar(IntPtr self);
+		
+		static extern (C) bool   wxMenuBase_IsAttached(IntPtr self);
+		
+		static extern (C) void   wxMenuBase_SetParent(IntPtr self, IntPtr parent);
+		static extern (C) IntPtr wxMenuBase_GetParent(IntPtr self);
+		
+		static extern (C) IntPtr wxMenuBase_FindChildItem(IntPtr self, int itemid, out int pos);
+		static extern (C) IntPtr wxMenuBase_FindChildItem2(IntPtr self, int itemid);
+		static extern (C) bool   wxMenuBase_SendEvent(IntPtr self, int itemid, int xchecked);
+	
 	public class MenuBase : EvtHandler
 	{
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_ctor1(string titel, uint style);
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_ctor2(uint style);
-		
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_Append(IntPtr self, int id, string item, string help, ItemKind kind);
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_AppendSubMenu(IntPtr self, int id, string item, IntPtr subMenu, string help);
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_AppendItem(IntPtr self, IntPtr item);
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_AppendSeparator(IntPtr self);
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_AppendCheckItem(IntPtr self, int itemid, string text, string help);
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_AppendRadioItem(IntPtr self, int itemid, string text, string help);
-		[DllImport("wx-c")] static extern int    wxMenuBase_GetMenuItemCount(IntPtr self);
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_GetMenuItem(IntPtr self, int index);
-		[DllImport("wx-c")] static extern void   wxMenuBase_Break(IntPtr self);
-		
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_Insert(IntPtr self, int pos, IntPtr item);
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_Insert2(IntPtr self, int pos, int itemid, string text, string help, ItemKind kind);
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_InsertSeparator(IntPtr self, int pos);
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_InsertCheckItem(IntPtr self, int pos, int itemid, string text, string help);
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_InsertRadioItem(IntPtr self, int pos, int itemid, string text, string help);
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_InsertSubMenu(IntPtr self, int pos, int itemid, string text, IntPtr submenu, string help);
-		
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_Prepend(IntPtr self, IntPtr item);
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_Prepend2(IntPtr self, int itemid, string text, string help, ItemKind kind);
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_PrependSeparator(IntPtr self);
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_PrependCheckItem(IntPtr self, int itemid, string text, string help);
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_PrependRadioItem(IntPtr self, int itemid, string text, string help);
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_PrependSubMenu(IntPtr self, int itemid, string text, IntPtr submenu, string help);
-		
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_Remove(IntPtr self, int itemid);
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_Remove2(IntPtr self, IntPtr item);
-		
-		[DllImport("wx-c")] static extern bool   wxMenuBase_Delete(IntPtr self, int itemid);
-		[DllImport("wx-c")] static extern bool   wxMenuBase_Delete2(IntPtr self, IntPtr item);
-		
-		[DllImport("wx-c")] static extern bool   wxMenuBase_Destroy(IntPtr self, int itemid);
-		[DllImport("wx-c")] static extern bool   wxMenuBase_Destroy2(IntPtr self, IntPtr item);
-		
-		[DllImport("wx-c")] static extern int    wxMenuBase_FindItem(IntPtr self, string item);
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_FindItem2(IntPtr self, int itemid, ref IntPtr menu); 
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_FindItemByPosition(IntPtr self, int position);
-		
-		[DllImport("wx-c")] static extern void   wxMenuBase_Enable(IntPtr self, int itemid, bool enable);
-		[DllImport("wx-c")] static extern bool   wxMenuBase_IsEnabled(IntPtr self, int itemid);
-		
-		[DllImport("wx-c")] static extern void   wxMenuBase_Check(IntPtr self, int id, bool check);
-		[DllImport("wx-c")] static extern bool   wxMenuBase_IsChecked(IntPtr self, int itemid);
-		
-		[DllImport("wx-c")] static extern void   wxMenuBase_SetLabel(IntPtr self, int itemid, string label);
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_GetLabel(IntPtr self, int itemid);
-		
-		[DllImport("wx-c")] static extern void   wxMenuBase_SetHelpString(IntPtr self, int itemid, string helpString);
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_GetHelpString(IntPtr self, int itemid);		
-		
-		[DllImport("wx-c")] static extern void   wxMenuBase_SetTitle(IntPtr self, string title);
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_GetTitle(IntPtr self);		
-		
-		[DllImport("wx-c")] static extern void   wxMenuBase_SetInvokingWindow(IntPtr self, IntPtr win);
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_GetInvokingWindow(IntPtr self);
-		
-		[DllImport("wx-c")] static extern uint   wxMenuBase_GetStyle(IntPtr self);
-		
-		[DllImport("wx-c")] static extern void   wxMenuBase_SetEventHandler(IntPtr self, IntPtr handler);
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_GetEventHandler(IntPtr self);
-		
-		[DllImport("wx-c")] static extern void   wxMenuBase_UpdateUI(IntPtr self, IntPtr source);
-		
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_GetMenuBar(IntPtr self);
-		
-		[DllImport("wx-c")] static extern bool   wxMenuBase_IsAttached(IntPtr self);
-		
-		[DllImport("wx-c")] static extern void   wxMenuBase_SetParent(IntPtr self, IntPtr parent);
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_GetParent(IntPtr self);
-		
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_FindChildItem(IntPtr self, int itemid, out int pos);
-		[DllImport("wx-c")] static extern IntPtr wxMenuBase_FindChildItem2(IntPtr self, int itemid);
-		[DllImport("wx-c")] static extern bool   wxMenuBase_SendEvent(IntPtr self, int itemid, int xchecked);
-	
-		public MenuBase(IntPtr wxObject)
-			: base(wxObject) { }
+		public this(IntPtr wxobj)
+			{ super(wxobj); }
 			
-		public MenuBase()
-			: this(0) {}
+		public this()
+			{ this(0);}
 			
-		public MenuBase(long style)
-			: this(wxMenuBase_ctor2((uint)style)) {}			
+		public this(int style)
+			{ this(wxMenuBase_ctor2(cast(uint)style));}
 		
-		public MenuBase(string titel)
-			: this(titel, 0) {}
+		public this(string titel)
+			{ this(titel, 0);}
 		
-		public MenuBase(string titel, long style)
-			: this(wxMenuBase_ctor1(titel, (uint)style)) { }
+		public this(string titel, int style)
+			{ this(wxMenuBase_ctor1(titel, cast(uint)style)); }
 			
 		//---------------------------------------------------------------------
 		
@@ -123,7 +127,7 @@ namespace wx
 
 		public MenuItem Append(int id, string item, string help, ItemKind kind)
 		{
-			return (MenuItem)FindObject(wxMenuBase_Append(wxObject, id, item, help, kind), typeof(MenuItem));
+			return cast(MenuItem)FindObject(wxMenuBase_Append(wxobj, id, item, help, kind), &MenuItem.New2);
 		}
 		
 		public MenuItem Append(int id, string item, Menu subMenu)
@@ -133,12 +137,12 @@ namespace wx
 
 		public MenuItem Append(int id, string item, Menu subMenu, string help)
 		{
-			return (MenuItem)FindObject(wxMenuBase_AppendSubMenu(wxObject, id, item, Object.SafePtr(subMenu), help), typeof(MenuItem));
+			return cast(MenuItem)FindObject(wxMenuBase_AppendSubMenu(wxobj, id, item, wxObject.SafePtr(subMenu), help), &MenuItem.New2);
 		}
 
 		public MenuItem Append(MenuItem item) 
 		{
-			return (MenuItem)FindObject(wxMenuBase_AppendItem(wxObject, Object.SafePtr(item)), typeof(MenuItem));
+			return cast(MenuItem)FindObject(wxMenuBase_AppendItem(wxobj, wxObject.SafePtr(item)), &MenuItem.New2);
 		}
 
 		//---------------------------------------------------------------------
@@ -150,14 +154,14 @@ namespace wx
 
 		public MenuItem AppendCheckItem(int id, string item, string help)
 		{
-			return (MenuItem)FindObject(wxMenuBase_AppendCheckItem(wxObject, id, item, help), typeof(MenuItem));
+			return cast(MenuItem)FindObject(wxMenuBase_AppendCheckItem(wxobj, id, item, help), &MenuItem.New2);
 		}
 
 		//---------------------------------------------------------------------
 
 		public MenuItem AppendSeparator()
 		{
-			return (MenuItem)FindObject(wxMenuBase_AppendSeparator(wxObject), typeof(MenuItem));
+			return cast(MenuItem)FindObject(wxMenuBase_AppendSeparator(wxobj), &MenuItem.New2);
 		}
 		
 		//---------------------------------------------------------------------
@@ -169,40 +173,40 @@ namespace wx
 		
 		public MenuItem AppendRadioItem(int itemid, string text, string help)
 		{
-			return (MenuItem)FindObject(wxMenuBase_AppendRadioItem(wxObject, itemid, text, help), typeof(MenuItem));
+			return cast(MenuItem)FindObject(wxMenuBase_AppendRadioItem(wxobj, itemid, text, help), &MenuItem.New2);
 		}
 
 		//---------------------------------------------------------------------
 
 		public void Check(int id, bool check)
 		{
-			wxMenuBase_Check(wxObject, id, check);
+			wxMenuBase_Check(wxobj, id, check);
 		}
 
 		//---------------------------------------------------------------------
 
 		public int GetMenuItemCount()
 		{
-			return wxMenuBase_GetMenuItemCount(wxObject);
+			return wxMenuBase_GetMenuItemCount(wxobj);
 		}
 
 		public MenuItem GetMenuItem(int index)
 		{
-			return (MenuItem)FindObject(wxMenuBase_GetMenuItem(wxObject, index), typeof(MenuItem));
+			return cast(MenuItem)FindObject(wxMenuBase_GetMenuItem(wxobj, index), &MenuItem.New2);
 		}
 
 		//---------------------------------------------------------------------
 		
-		public virtual void Break()
+		public /+virtual+/ void Break()
 		{
-			wxMenuBase_Break(wxObject);
+			wxMenuBase_Break(wxobj);
 		}
 		
 		//---------------------------------------------------------------------
 		
 		public MenuItem Insert(int pos, MenuItem item)
 		{
-			return (MenuItem)FindObject(wxMenuBase_Insert(wxObject, pos, Object.SafePtr(item)), typeof(MenuItem));
+			return cast(MenuItem)FindObject(wxMenuBase_Insert(wxobj, pos, wxObject.SafePtr(item)), &MenuItem.New2);
 		}
 		
 		//---------------------------------------------------------------------
@@ -219,14 +223,14 @@ namespace wx
 		
 		public MenuItem Insert(int pos, int itemid, string text, string help, ItemKind kind)
 		{
-			return (MenuItem)FindObject(wxMenuBase_Insert2(wxObject, pos, itemid, text, help, kind), typeof(MenuItem));
+			return cast(MenuItem)FindObject(wxMenuBase_Insert2(wxobj, pos, itemid, text, help, kind), &MenuItem.New2);
 		}
 		
 		//---------------------------------------------------------------------
 		
 		public MenuItem InsertSeparator(int pos)
 		{
-			return (MenuItem)FindObject(wxMenuBase_InsertSeparator(wxObject, pos), typeof(MenuItem));
+			return cast(MenuItem)FindObject(wxMenuBase_InsertSeparator(wxobj, pos), &MenuItem.New2);
 		}
 		
 		//---------------------------------------------------------------------
@@ -238,7 +242,7 @@ namespace wx
 		
 		public MenuItem InsertCheckItem(int pos, int itemid, string text, string help)
 		{
-			return (MenuItem)FindObject(wxMenuBase_InsertCheckItem(wxObject, pos, itemid, text, help), typeof(MenuItem));
+			return cast(MenuItem)FindObject(wxMenuBase_InsertCheckItem(wxobj, pos, itemid, text, help), &MenuItem.New2);
 		}		
 		
 		//---------------------------------------------------------------------
@@ -250,7 +254,7 @@ namespace wx
 		
 		public MenuItem InsertRadioItem(int pos, int itemid, string text, string help)
 		{
-			return (MenuItem)FindObject(wxMenuBase_InsertRadioItem(wxObject, pos, itemid, text, help), typeof(MenuItem));
+			return cast(MenuItem)FindObject(wxMenuBase_InsertRadioItem(wxobj, pos, itemid, text, help), &MenuItem.New2);
 		}				
 		
 		//---------------------------------------------------------------------
@@ -262,14 +266,14 @@ namespace wx
 		
 		public MenuItem Insert(int pos, int itemid, string text, Menu submenu, string help)
 		{
-			return (MenuItem)FindObject(wxMenuBase_InsertSubMenu(wxObject, pos, itemid, text, Object.SafePtr(submenu), help), typeof(MenuItem));
+			return cast(MenuItem)FindObject(wxMenuBase_InsertSubMenu(wxobj, pos, itemid, text, wxObject.SafePtr(submenu), help), &MenuItem.New2);
 		}
 		
 		//---------------------------------------------------------------------
 		
 		public MenuItem Prepend(MenuItem item)
 		{
-			return (MenuItem)FindObject(wxMenuBase_Prepend(wxObject, Object.SafePtr(item)), typeof(MenuItem));
+			return cast(MenuItem)FindObject(wxMenuBase_Prepend(wxobj, wxObject.SafePtr(item)), &MenuItem.New2);
 		}
 		
 		//---------------------------------------------------------------------
@@ -286,14 +290,14 @@ namespace wx
 		
 		public MenuItem Prepend(int itemid, string text, string help, ItemKind kind)
 		{
-			return (MenuItem)FindObject(wxMenuBase_Prepend2(wxObject, itemid, text, help, kind), typeof(MenuItem));
+			return cast(MenuItem)FindObject(wxMenuBase_Prepend2(wxobj, itemid, text, help, kind), &MenuItem.New2);
 		}
 		
 		//---------------------------------------------------------------------
 		
 		public MenuItem PrependSeparator()
 		{
-			return (MenuItem)FindObject(wxMenuBase_PrependSeparator(wxObject));
+			return cast(MenuItem)FindObject(wxMenuBase_PrependSeparator(wxobj));
 		}
 		
 		//---------------------------------------------------------------------
@@ -305,7 +309,7 @@ namespace wx
 		
 		public MenuItem PrependCheckItem(int itemid, string text, string help)
 		{
-			return (MenuItem)FindObject(wxMenuBase_PrependCheckItem(wxObject, itemid, text, help), typeof(MenuItem));
+			return cast(MenuItem)FindObject(wxMenuBase_PrependCheckItem(wxobj, itemid, text, help), &MenuItem.New2);
 		}
 		
 		//---------------------------------------------------------------------
@@ -317,7 +321,7 @@ namespace wx
 		
 		public MenuItem PrependRadioItem(int itemid, string text, string help)
 		{
-			return (MenuItem)FindObject(wxMenuBase_PrependRadioItem(wxObject, itemid, text, help), typeof(MenuItem));
+			return cast(MenuItem)FindObject(wxMenuBase_PrependRadioItem(wxobj, itemid, text, help), &MenuItem.New2);
 		}		
 		
 		//---------------------------------------------------------------------
@@ -329,50 +333,50 @@ namespace wx
 		
 		public MenuItem Prepend(int itemid, string text, Menu submenu, string help)
 		{
-			return (MenuItem)FindObject(wxMenuBase_PrependSubMenu(wxObject, itemid, text, Object.SafePtr(submenu), help), typeof(MenuItem));
+			return cast(MenuItem)FindObject(wxMenuBase_PrependSubMenu(wxobj, itemid, text, wxObject.SafePtr(submenu), help), &MenuItem.New2);
 		}
 		
 		//---------------------------------------------------------------------
 		
 		public MenuItem Remove(int itemid)
 		{
-			return (MenuItem)FindObject(wxMenuBase_Remove(wxObject, itemid), typeof(MenuItem));
+			return cast(MenuItem)FindObject(wxMenuBase_Remove(wxobj, itemid), &MenuItem.New2);
 		}
 		
 		public MenuItem Remove(MenuItem item)
 		{
-			return (MenuItem)FindObject(wxMenuBase_Remove2(wxObject, Object.SafePtr(item)), typeof(MenuItem));
+			return cast(MenuItem)FindObject(wxMenuBase_Remove2(wxobj, wxObject.SafePtr(item)), &MenuItem.New2);
 		}		
 		
 		//---------------------------------------------------------------------
 		
 		public bool Delete(int itemid)
 		{
-			return wxMenuBase_Delete(wxObject, itemid);
+			return wxMenuBase_Delete(wxobj, itemid);
 		}
 		
 		public bool Delete(MenuItem item)
 		{
-			return wxMenuBase_Delete2(wxObject, Object.SafePtr(item));
+			return wxMenuBase_Delete2(wxobj, wxObject.SafePtr(item));
 		}
 		
 		//---------------------------------------------------------------------
 		
 		public bool Destroy(int itemid)
 		{
-			return wxMenuBase_Destroy(wxObject, itemid);
+			return wxMenuBase_Destroy(wxobj, itemid);
 		}
 		
 		public bool Destroy(MenuItem item)
 		{
-			return wxMenuBase_Destroy2(wxObject, Object.SafePtr(item));
+			return wxMenuBase_Destroy2(wxobj, wxObject.SafePtr(item));
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public virtual int FindItem(string item)
+		public /+virtual+/ int FindItem(string item)
 		{
-			return wxMenuBase_FindItem(wxObject, item);
+			return wxMenuBase_FindItem(wxobj, item);
 		}
 		
 		//---------------------------------------------------------------------
@@ -380,99 +384,93 @@ namespace wx
 		public MenuItem FindItem(int itemid)
 		{
 			Menu menuRef = null;
-			return FindItem(itemid, ref menuRef);
+			return FindItem(itemid, menuRef);
 		}
 		
-		public MenuItem FindItem(int itemid, ref Menu menu)
+		public MenuItem FindItem(int itemid, inout Menu menu)
 		{
-			IntPtr menuRef = IntPtr.Zero;
-			if (menu != null) 
+			IntPtr menuRef = IntPtr.init;
+			if (menu !== null) 
 			{
-				menuRef = Object.SafePtr(menu);
+				menuRef = wxObject.SafePtr(menu);
 			}
-			return (MenuItem)FindObject(wxMenuBase_FindItem2(wxObject, itemid, ref menuRef), typeof(MenuItem));
+			return cast(MenuItem)FindObject(wxMenuBase_FindItem2(wxobj, itemid, menuRef), &MenuItem.New2);
 		}
 		
 		//---------------------------------------------------------------------
 		 
 		public MenuItem FindItemByPosition(int position)
 		{
-			return (MenuItem)FindObject(wxMenuBase_FindItemByPosition(wxObject, position), typeof(MenuItem));
+			return cast(MenuItem)FindObject(wxMenuBase_FindItemByPosition(wxobj, position), &MenuItem.New2);
 		}
 		
 		//---------------------------------------------------------------------
 		
 		public void Enable(int itemid, bool enable)
 		{
-			wxMenuBase_Enable(wxObject, itemid, enable);
+			wxMenuBase_Enable(wxobj, itemid, enable);
 		}
 		
 		public bool IsEnabled(int itemid)
 		{
-			return wxMenuBase_IsEnabled(wxObject, itemid);
+			return wxMenuBase_IsEnabled(wxobj, itemid);
 		}
 		
 		//---------------------------------------------------------------------
 		
 		public bool IsChecked(int itemid)
 		{
-			return wxMenuBase_IsChecked(wxObject, itemid);
+			return wxMenuBase_IsChecked(wxobj, itemid);
 		}
 		
 		//---------------------------------------------------------------------
 		
 		public void SetLabel(int itemid, string label)
 		{
-			wxMenuBase_SetLabel(wxObject, itemid, label);
+			wxMenuBase_SetLabel(wxobj, itemid, label);
 		}
 		
 		public string GetLabel(int itemid)
 		{
-			return new wxString(wxMenuBase_GetLabel(wxObject, itemid), true);
+			return wxMenuBase_GetLabel(wxobj, itemid).dup;
 		}
 		
 		//---------------------------------------------------------------------
 		
 		public void SetHelpString(int itemid, string helpString)
 		{
-			wxMenuBase_SetHelpString(wxObject, itemid, helpString);
+			wxMenuBase_SetHelpString(wxobj, itemid, helpString);
 		}
 		
 		public string GetHelpString(int itemid)
 		{
-			return new wxString(wxMenuBase_GetHelpString(wxObject, itemid), true);
+			return wxMenuBase_GetHelpString(wxobj, itemid).dup;
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public string Title
-		{
-			get { return new wxString(wxMenuBase_GetTitle(wxObject), true); }
-			set { wxMenuBase_SetTitle(wxObject, value); }
-		}
+		public string Title() { return wxMenuBase_GetTitle(wxobj).dup; }
+		public void Title(string value) { wxMenuBase_SetTitle(wxobj, value); }
 		
 		//---------------------------------------------------------------------
 		
-		public EvtHandler EventHandler
-		{
-			get { return (EvtHandler)FindObject(wxMenuBase_GetEventHandler(wxObject), typeof(EvtHandler)); }
-			set { wxMenuBase_SetEventHandler(wxObject, Object.SafePtr(value)); }
+		public EvtHandler EventHandler() {
+		//	return cast(EvtHandler)FindObject(wxMenuBase_GetEventHandler(wxobj), &EvtHandler.New);
+			IntPtr ptr = wxMenuBase_GetEventHandler(wxobj);
+			wxObject o = FindObject(ptr);
+			if (o !== null) return cast(EvtHandler)o;
+			else new EvtHandler(ptr);
 		}
+		public void EventHandler(EvtHandler value) { wxMenuBase_SetEventHandler(wxobj, wxObject.SafePtr(value)); }
 		
 		//---------------------------------------------------------------------
 		
-		public Window InvokingWindow
-		{
-			get { return (Window)FindObject(wxMenuBase_GetInvokingWindow(wxObject), typeof(Window)); }
-			set { wxMenuBase_SetInvokingWindow(wxObject, Object.SafePtr(value)); }
-		}
+		public Window InvokingWindow() { return cast(Window)FindObject(wxMenuBase_GetInvokingWindow(wxobj), &Window.New); }
+		public void InvokingWindow(Window value) { wxMenuBase_SetInvokingWindow(wxobj, wxObject.SafePtr(value)); }
 		
 		//---------------------------------------------------------------------
 		
-		public long Style
-		{
-			get { return (long)wxMenuBase_GetStyle(wxObject); }
-		}
+		public int Style() { return cast(int)wxMenuBase_GetStyle(wxobj); }
 		
 		//---------------------------------------------------------------------
 		
@@ -483,41 +481,32 @@ namespace wx
 		
 		public void UpdateUI(EvtHandler source)
 		{
-			wxMenuBase_UpdateUI(wxObject, Object.SafePtr(source));
+			wxMenuBase_UpdateUI(wxobj, wxObject.SafePtr(source));
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public MenuBar MenuBar
-		{
-			get { return (MenuBar)FindObject(wxMenuBase_GetMenuBar(wxObject), typeof(MenuBar)); }
-		}
+		public MenuBar menuBar() { return cast(MenuBar)FindObject(wxMenuBase_GetMenuBar(wxobj), &MenuBar.New); }
 		
 		//---------------------------------------------------------------------
 		
-		public bool Attached
-		{
-			get { return wxMenuBase_IsAttached(wxObject); }
-		}
+		public bool Attached() { return wxMenuBase_IsAttached(wxobj); }
 		
 		//---------------------------------------------------------------------
 		
-		public Menu Parent
-		{
-			get { return (Menu)FindObject(wxMenuBase_GetParent(wxObject), typeof(Menu)); }
-			set { wxMenuBase_SetParent(wxObject, Object.SafePtr(value)); }
-		}
+		public Menu Parent() { return cast(Menu)FindObject(wxMenuBase_GetParent(wxobj), &Menu.New); }
+		public void Parent(Menu value) { wxMenuBase_SetParent(wxobj, wxObject.SafePtr(value)); }
 		
 		//---------------------------------------------------------------------
 		
 		public MenuItem FindChildItem(int itemid)
 		{
-			return (MenuItem)FindObject(wxMenuBase_FindChildItem2(wxObject, itemid), typeof(MenuItem));
+			return cast(MenuItem)FindObject(wxMenuBase_FindChildItem2(wxobj, itemid), &MenuItem.New2);
 		}
 		
 		public MenuItem FindChildItem(int itemid, out int pos)
 		{
-			return (MenuItem)FindObject(wxMenuBase_FindChildItem(wxObject, itemid, out pos), typeof(MenuItem));
+			return cast(MenuItem)FindObject(wxMenuBase_FindChildItem(wxobj, itemid, pos), &MenuItem.New2);
 		}
 		
 		//---------------------------------------------------------------------
@@ -529,37 +518,37 @@ namespace wx
 		
 		public bool SendEvent(int itemid, int xchecked)
 		{
-			return wxMenuBase_SendEvent(wxObject, itemid, xchecked);
+			return wxMenuBase_SendEvent(wxobj, itemid, xchecked);
 		}		
 	}
 	
 	//---------------------------------------------------------------------
 	// helper struct, stores added EventListeners...
 	
-	public struct MenuListener
+	public class MenuListener
 	{
 		public EventListener listener;
-		public Object owner;
+		public wxObject owner;
 		public int id;
 		
-		public MenuListener( int id, EventListener listener, Object owner )
+		public this( int id, EventListener listener, wxObject owner )
 		{
 			this.listener = listener;
 			this.owner = owner;
 			this.id = id;
 		}
-	}	
+	}
 	
 	//---------------------------------------------------------------------
 
-	public class Menu : MenuBase
-	{
-		[DllImport("wx-c")] static extern IntPtr wxMenu_ctor(string titel, uint style);
-		[DllImport("wx-c")] static extern IntPtr wxMenu_ctor2(uint style);
+		static extern (C) IntPtr wxMenu_ctor(string titel, uint style);
+		static extern (C) IntPtr wxMenu_ctor2(uint style);
 		
 		//---------------------------------------------------------------------
 		
-		public ArrayList eventListeners = new ArrayList();
+	public class Menu : MenuBase
+	{
+		public MenuListener[] eventListeners;
 
 		// InvokingWindow does not work on Windows, so we 
 		// need this...
@@ -572,34 +561,34 @@ namespace wx
 		
 		//---------------------------------------------------------------------
 		 
-		public Menu()
-			: this(0) {}
+		public this()
+			{ this(0);}
 			
-		public Menu(long style)
-			: this(wxMenu_ctor2((uint)style)) {}
+		public this(int style)
+			{ this(wxMenu_ctor2(cast(uint)style));}
 		
-		public Menu(string titel)
-			: this(titel, 0) {}
+		public this(string titel)
+			{ this(titel, 0);}
 		
-		public Menu(string titel, long style)
-			: this(wxMenu_ctor(titel, (uint)style)) { }
+		public this(string titel, int style)
+			{ this(wxMenu_ctor(titel, cast(uint)style)); }
 
-		public Menu(IntPtr wxObject)
-			: base(wxObject) { }
+		public this(IntPtr wxobj)
+			{ super(wxobj); }
 			
 		//---------------------------------------------------------------------
 			
-		public void AddEvent(int inId, EventListener el, Object owner)
+		public void AddEvent(int inId, EventListener el, wxObject owner)
 		{
 			// This is the only way of handling menu selection events (maybe there is an other solution)
 			// But for now we have to add the EventListener to the EventHandler of the invoking window,
 			// otherwise nothing happens.
-			// As long as we do not have an invoking window, which means, that for example the
+			// As int as we do not have an invoking window, which means, that for example the
 			// MenuBar of this Menu isn't connected to a Frame, the EventListener gets only
 			// added to the ArrayList, otherwise it gets directly added to the EventHandler of
 			// the invoking window. When Frame.MenuBar is set, it will call ConnectEvents() 
-			// for each Menu in MenuBar
-			eventListeners.Add( new MenuListener( inId, el, owner ) );
+			// for each Menu ; MenuBar
+			eventListeners ~=  new MenuListener( inId, el, owner );
 			
 			if ( eventsconnected )
 				parent.AddCommandListener(Event.wxEVT_COMMAND_MENU_SELECTED, inId, el, owner);
@@ -612,9 +601,9 @@ namespace wx
 		{
 			this.parent = parent;
 
-			if ( eventListeners.Count > 0 )
+			if ( eventListeners.length > 0 )
 			{
-				foreach( MenuListener ml in eventListeners )
+				foreach( MenuListener ml ; eventListeners )
 				{
 					parent.AddCommandListener(Event.wxEVT_COMMAND_MENU_SELECTED, ml.id, ml.listener, ml.owner);
 				}
@@ -672,11 +661,10 @@ namespace wx
 			return tmpitem;
 		}
 
-		public MenuItem Append(MenuItem item, EventListener listener) 
+		public MenuItem AppendWL(MenuItem item, EventListener listener) 
 		{
 			MenuItem tmpitem = Append(item);
 			AddEvent(item.ID, listener, tmpitem);
 			return tmpitem;
 		}
 	}
-}

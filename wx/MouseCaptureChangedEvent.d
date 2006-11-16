@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - MouseCaptureChangedEvent.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - MouseCaptureChangedEvent.cs
 //
 // The wxMouseCaptureChangedEvent wrapper class.
@@ -10,29 +13,32 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Runtime.InteropServices;
+module wx.MouseCaptureChangedEvent;
+import wx.common;
+import wx.Event;
+import wx.Window;
 
-namespace wx
-{
-	public class MouseCaptureChangedEvent : Event
-	{
-		[DllImport("wx-c")] static extern IntPtr wxMouseCaptureChangedEvent_ctor(int type);
-		[DllImport("wx-c")] static extern IntPtr wxMouseCaptureChangedEvent_GetCapturedWindow(IntPtr self);
+		static extern (C) IntPtr wxMouseCaptureChangedEvent_ctor(int type);
+		static extern (C) IntPtr wxMouseCaptureChangedEvent_GetCapturedWindow(IntPtr self);
 		
 		//-----------------------------------------------------------------------------
 
-		public MouseCaptureChangedEvent(IntPtr wxObject) 
-			: base(wxObject) { }
+	public class MouseCaptureChangedEvent : Event
+	{
+		public this(IntPtr wxobj) 
+			{ super(wxobj); }
 
-		public MouseCaptureChangedEvent(int type)
-			: this(wxMouseCaptureChangedEvent_ctor(type)) { }
+		public this(int type)
+			{ this(wxMouseCaptureChangedEvent_ctor(type)); }
 
 		//-----------------------------------------------------------------------------	
 		
-		public Window CapturedWindow
+		public Window CapturedWindow() { return cast(Window)FindObject(wxMouseCaptureChangedEvent_GetCapturedWindow(wxobj), &Window.New); }
+
+		private static Event New(IntPtr obj) { return new MouseCaptureChangedEvent(obj); }
+
+		static this()
 		{
-			get { return (Window)FindObject(wxMouseCaptureChangedEvent_GetCapturedWindow(wxObject), typeof(Window)); }
+			AddEventType(wxEVT_MOUSE_CAPTURE_CHANGED,		&MouseCaptureChangedEvent.New);
 		}
 	}
-}

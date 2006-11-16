@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - ToolTip.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - ToolTip.cs
 //
 // The wxToolTip wrapper class.
@@ -10,73 +13,59 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Runtime.InteropServices;
+module wx.ToolTip;
+import wx.common;
+import wx.Window;
 
-namespace wx
-{
-	public class ToolTip : Object
+		static extern (C) void   wxToolTip_Enable(bool flag);
+		static extern (C) void   wxToolTip_SetDelay(uint msecs);
+		static extern (C) IntPtr wxToolTip_ctor(string tip);
+		static extern (C) void   wxToolTip_SetTip(IntPtr self, string tip);
+		static extern (C) string wxToolTip_GetTip(IntPtr self);
+		static extern (C) IntPtr wxToolTip_GetWindow(IntPtr self);
+
+        //---------------------------------------------------------------------
+
+	public class ToolTip : wxObject
 	{
-		[DllImport("wx-c")] static extern void   wxToolTip_Enable(bool flag);
-		[DllImport("wx-c")] static extern void   wxToolTip_SetDelay(uint msecs);
-		[DllImport("wx-c")] static extern IntPtr wxToolTip_ctor(string tip);
-		[DllImport("wx-c")] static extern void   wxToolTip_SetTip(IntPtr self, string tip);
-		[DllImport("wx-c")] static extern IntPtr wxToolTip_GetTip(IntPtr self);
-		[DllImport("wx-c")] static extern IntPtr wxToolTip_GetWindow(IntPtr self);
+        public this(IntPtr wxobj)
+            { super(wxobj); }
+
+        public this(string tip)
+            { super(wxToolTip_ctor(tip)); }
 
         //---------------------------------------------------------------------
 
-        public ToolTip(IntPtr wxObject)
-            : base(wxObject) { }
-
-        public ToolTip(string tip)
-            : base(wxToolTip_ctor(tip)) { }
-
-        //---------------------------------------------------------------------
-
-        public static bool Enabled
-        {
-            set
+        static void Enabled(bool value) 
             {
                 wxToolTip_Enable(value);
             }
-        }
 
         //---------------------------------------------------------------------
         
-        public static long Delay
-        {
-            set
+        static void Delay(int value) 
             {
-                wxToolTip_SetDelay((uint)value);
+                wxToolTip_SetDelay(cast(uint)value);
             }
-        }
 
         //---------------------------------------------------------------------
 
-        public string Tip
-        {
-            get
+        public string Tip() 
             {
-                return new wxString(wxToolTip_GetTip(wxObject), true);
+                return wxToolTip_GetTip(wxobj).dup;
             }
-            set
+        public void Tip(string value) 
             {
-                wxToolTip_SetTip(wxObject, value);
+                wxToolTip_SetTip(wxobj, value);
             }
-        }
 
         //---------------------------------------------------------------------
 
-        public Window Window
-        {
-            get
+        public Window window() 
             {
-                return (Window)FindObject(wxToolTip_GetWindow(wxObject));
+                return cast(Window)FindObject(wxToolTip_GetWindow(wxobj));
             }
-        }
 
         //---------------------------------------------------------------------
 	}
-}
 

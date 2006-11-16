@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - splitterwindow.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - splitterwindow.cxx
 //
 // The wxSplitterWindow proxy interface.
@@ -11,18 +14,13 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/splitter.h>
 #include "local_events.h"
 
-#if defined(_WINDOWS)
-#define CALLBACK __stdcall
-#else
-#define CALLBACK
-#endif
-
-typedef void (CALLBACK* Virtual_OnDoubleClickSash) (int, int);
-typedef void (CALLBACK* Virtual_OnUnsplit) (wxWindow*);
-typedef bool (CALLBACK* Virtual_OnSashPositionChange) (int);
+typedef void (CALLBACK* Virtual_OnDoubleClickSash) (dobj obj, int, int);
+typedef void (CALLBACK* Virtual_OnUnsplit) (dobj obj, wxWindow*);
+typedef bool (CALLBACK* Virtual_OnSashPositionChange) (dobj obj, int);
 
 //-----------------------------------------------------------------------------
 
@@ -34,18 +32,19 @@ public:
 		: wxSplitterWindow(parent, id, pos, size, style, name) { }
 		
 	void OnDoubleClickSash(int x, int y)
-	{ m_OnDoubleClickSash(x, y); }
+	{ m_OnDoubleClickSash(m_dobj, x, y); }
 	
 	void OnUnsplit(wxWindow* removed)
-	{ m_OnUnsplit(removed); }
+	{ m_OnUnsplit(m_dobj, removed); }
 	
 	bool OnSashPositionChange(int newSashPosition)
-	{ return m_OnSashPositionChange(newSashPosition); }
+	{ return m_OnSashPositionChange(m_dobj, newSashPosition); }
 	
-	void RegisterVirtual(Virtual_OnDoubleClickSash onDoubleClickSash,
+	void RegisterVirtual(dobj obj, Virtual_OnDoubleClickSash onDoubleClickSash,
 		Virtual_OnUnsplit onUnsplit,
 		Virtual_OnSashPositionChange onSashPositionChange)
 	{	
+		m_dobj = obj;
 		m_OnDoubleClickSash = onDoubleClickSash;
 		m_OnUnsplit = onUnsplit;
 		m_OnSashPositionChange = onSashPositionChange;
@@ -55,6 +54,7 @@ private:
 	Virtual_OnDoubleClickSash m_OnDoubleClickSash;
 	Virtual_OnUnsplit m_OnUnsplit;
 	Virtual_OnSashPositionChange m_OnSashPositionChange;
+	dobj m_dobj;
 
 public:
 	DECLARE_OBJECTDELETED(_SplitterWindow)
@@ -63,9 +63,10 @@ public:
 //-----------------------------------------------------------------------------
 // C stubs for class methods
 
+#include <string.h> //for strlen
 extern "C" WXEXPORT
 wxSplitterWindow* wxSplitWnd_ctor(wxWindow *parent, wxWindowID id, const wxPoint* pos,
-					const wxSize* size, long style, const wxChar* name)
+					const wxSize* size, long style, dstr name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -73,18 +74,19 @@ wxSplitterWindow* wxSplitWnd_ctor(wxWindow *parent, wxWindowID id, const wxPoint
 	if (size == NULL)
 		size = &wxDefaultSize;
 
-	if (name == NULL)
-		name = wxPanelNameStr;
+	if (name.data == NULL)
+		name = dstr(wxPanelNameStr,strlen(wxPanelNameStr));
 
-	return new _SplitterWindow(parent, id, *pos, *size, style, name);
+	return new _SplitterWindow(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
 }
 
 extern "C" WXEXPORT
-void wxSplitWnd_RegisterVirtual(_SplitterWindow* self, Virtual_OnDoubleClickSash onDoubleClickSash,
+void wxSplitWnd_RegisterVirtual(_SplitterWindow* self, dobj dobj,
+		Virtual_OnDoubleClickSash onDoubleClickSash,
 		Virtual_OnUnsplit onUnsplit,
 		Virtual_OnSashPositionChange onSashPositionChange)
 {
-	self->RegisterVirtual(onDoubleClickSash, onUnsplit, onSashPositionChange);
+	self->RegisterVirtual(dobj, onDoubleClickSash, onUnsplit, onSashPositionChange);
 }
 
 //-----------------------------------------------------------------------------

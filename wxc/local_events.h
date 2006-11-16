@@ -51,18 +51,18 @@ DECLARE_EVENT_TYPE(wxEVT_OBJECTDELETED, 0)
 
 // Calls a delegate when an object is deleted internally.
 
-#if defined(_WINDOWS)
+#if 0 //defined(_WINDOWS)
 #define CALLBACK __stdcall
 #else
 #define CALLBACK
 #endif
 
-typedef void (CALLBACK* Virtual_Dispose)();
+typedef void (CALLBACK* Virtual_Dispose)(void* obj);
 
 #define DECLARE_DISPOSABLE(name) \
     void RegisterDispose(Virtual_Dispose onDispose) { m_onDispose = onDispose; } \
-    virtual ~name() { m_onDispose(); } \
+    virtual ~name() { m_onDispose(this); } \
     Virtual_Dispose m_onDispose;
-    
+
 #endif
 

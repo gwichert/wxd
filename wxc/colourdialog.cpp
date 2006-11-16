@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - colourdialog.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - colourdialog.cxx
 //
 // The wxColourDialog proxy interface.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/colordlg.h>
 #include "local_events.h"
 
@@ -59,6 +63,7 @@ int wxColourDialog_ShowModal(wxColourDialog* self)
 extern "C" WXEXPORT
 wxColour* wxColourDialog_GetColourFromUser(wxWindow* parent, const wxColour* colInit)
 {
+	if (colInit==NULL) colInit= &wxNullColour;
 	return new wxColour(wxGetColourFromUser(parent, *colInit));
 }
 
@@ -117,6 +122,11 @@ wxColour* wxColourData_GetCustomColour(wxColourData* self, int i)
 }
 
 //-----------------------------------------------------------------------------
-
-
-
+/*
+extern "C" WXEXPORT
+wxColor* wxGetColourFromUser_func(wxWindow *parent, wxColour *colInit)
+{
+	if (colInit == NULL) colInit = &wxNullColour;
+	return new wxColor(wxGetColourFromUser(parent,*colInit));
+}
+*/

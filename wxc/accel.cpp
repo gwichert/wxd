@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - accel.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - accel.cxx
 //
 // The wxAccelerator* proxy interfaces
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include "local_events.h"
 
 class _AcceleratorEntry : public wxAcceleratorEntry
@@ -94,9 +98,9 @@ wxMenuItem* wxAcceleratorEntry_GetMenuItem(wxAcceleratorEntry* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxAcceleratorEntry* wxAcceleratorEntry_GetAccelFromString(const char* label)
+wxAcceleratorEntry* wxAcceleratorEntry_GetAccelFromString(dstr label)
 {
-	return wxGetAccelFromString(wxString(label, wxConvUTF8));
+	return wxGetAccelFromString(wxString(label.data, wxConvUTF8, label.length));
 }
 
 //-----------------------------------------------------------------------------

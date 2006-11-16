@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - Validator.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - Validator.cs
 //
 // The wxValidator wrapper class.
@@ -10,23 +13,21 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Runtime.InteropServices;
+module wx.Validator;
+import wx.common;
+import wx.EvtHandler;
 
-namespace wx
-{
-	public class Validator : EvtHandler
-	{
-		[DllImport("wx-c")] static extern IntPtr wxValidator_ctor();
+		static extern (C) IntPtr wxValidator_ctor();
 		
 		//---------------------------------------------------------------------
 		
-		public Validator()
-			: base(wxValidator_ctor()) {}
+	public class Validator : EvtHandler
+	{
+		public this()
+			{ super(wxValidator_ctor());}
 
-		public Validator(IntPtr wxObject) 
-			: base(wxObject) {}
+		public this(IntPtr wxobj) 
+			{ super(wxobj);}
 
 		//---------------------------------------------------------------------
 	}
-}

@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - Config.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - Config.cs
 //
 // The wxConfig wrapper class.
@@ -10,12 +13,12 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.Config;
+import wx.common;
+import wx.Font;
+import wx.Colour;
+import wx.wxString;
 
-namespace wx
-{
     public enum EntryType 
     {
         Unknown,
@@ -35,76 +38,78 @@ namespace wx
     }
 
 
-    // although it wxConfig is not derived from wxObject we do not change it.
-    // Use Config.Get() to get an instance.
-    public class Config : Object
-    {
-        [DllImport("wx-c")] static extern IntPtr wxConfigBase_Set(IntPtr pConfig);
-        [DllImport("wx-c")] static extern IntPtr wxConfigBase_Get(bool createOnDemand);
-        [DllImport("wx-c")] static extern IntPtr wxConfigBase_Create();
-        [DllImport("wx-c")] static extern void   wxConfigBase_DontCreateOnDemand();
-        [DllImport("wx-c")] static extern void   wxConfigBase_SetPath(IntPtr self, string strPath);
-        [DllImport("wx-c")] static extern IntPtr wxConfigBase_GetPath(IntPtr self);
-        [DllImport("wx-c")] static extern bool   wxConfigBase_GetFirstGroup(IntPtr self, IntPtr str, ref int lIndex);
-        [DllImport("wx-c")] static extern bool   wxConfigBase_GetNextGroup(IntPtr self, IntPtr str, ref int lIndex);
-        [DllImport("wx-c")] static extern bool   wxConfigBase_GetFirstEntry(IntPtr self, IntPtr str, ref int lIndex);
-        [DllImport("wx-c")] static extern bool   wxConfigBase_GetNextEntry(IntPtr self, IntPtr str, ref int lIndex);
-        [DllImport("wx-c")] static extern int    wxConfigBase_GetNumberOfEntries(IntPtr self, bool bRecursive);
-        [DllImport("wx-c")] static extern int    wxConfigBase_GetNumberOfGroups(IntPtr self, bool bRecursive);
-        [DllImport("wx-c")] static extern bool   wxConfigBase_HasGroup(IntPtr self, string strName);
-        [DllImport("wx-c")] static extern bool   wxConfigBase_HasEntry(IntPtr self, string strName);
-        [DllImport("wx-c")] static extern bool   wxConfigBase_Exists(IntPtr self, string strName);
-        [DllImport("wx-c")] static extern int    wxConfigBase_GetEntryType(IntPtr self, string name);
-        [DllImport("wx-c")] static extern bool   wxConfigBase_ReadStr(IntPtr self, string key, IntPtr pStr);
-        [DllImport("wx-c")] static extern bool   wxConfigBase_ReadStrDef(IntPtr self, string key, IntPtr pStr, string defVal);
-        [DllImport("wx-c")] static extern bool   wxConfigBase_ReadInt(IntPtr self, string key, ref int pl);
-        [DllImport("wx-c")] static extern bool   wxConfigBase_ReadIntDef(IntPtr self, string key, ref int pl, int defVal);
-        [DllImport("wx-c")] static extern bool   wxConfigBase_ReadDbl(IntPtr self, string key, ref double val);
-        [DllImport("wx-c")] static extern bool   wxConfigBase_ReadDblDef(IntPtr self, string key, ref double val, double defVal);
-        [DllImport("wx-c")] static extern bool   wxConfigBase_ReadBool(IntPtr self, string key, ref bool val);
-        [DllImport("wx-c")] static extern bool   wxConfigBase_ReadBoolDef(IntPtr self, string key, ref bool val, bool defVal);
-        [DllImport("wx-c")] static extern IntPtr wxConfigBase_ReadStrRet(IntPtr self, string key, string defVal);
-        [DllImport("wx-c")] static extern int    wxConfigBase_ReadIntRet(IntPtr self, string key, int defVal);
-        [DllImport("wx-c")] static extern bool   wxConfigBase_WriteStr(IntPtr self, string key, string val);
-        [DllImport("wx-c")] static extern bool   wxConfigBase_WriteInt(IntPtr self, string key, int val);
-        [DllImport("wx-c")] static extern bool   wxConfigBase_WriteDbl(IntPtr self, string key, double val);
-        [DllImport("wx-c")] static extern bool   wxConfigBase_WriteBool(IntPtr self, string key, bool val);
-        [DllImport("wx-c")] static extern bool   wxConfigBase_Flush(IntPtr self, bool bCurrentOnly);
-        [DllImport("wx-c")] static extern bool   wxConfigBase_RenameEntry(IntPtr self, string oldName, string newName);
-        [DllImport("wx-c")] static extern bool   wxConfigBase_RenameGroup(IntPtr self, string oldName, string newName);
-        [DllImport("wx-c")] static extern bool   wxConfigBase_DeleteEntry(IntPtr self, string key, bool bDeleteGroupIfEmpty);
-        [DllImport("wx-c")] static extern bool   wxConfigBase_DeleteGroup(IntPtr self, string key);
-        [DllImport("wx-c")] static extern bool   wxConfigBase_DeleteAll(IntPtr self);
-        [DllImport("wx-c")] static extern bool   wxConfigBase_IsExpandingEnvVars(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxConfigBase_SetExpandEnvVars(IntPtr self, bool bDoIt);
-        [DllImport("wx-c")] static extern IntPtr wxConfigBase_ExpandEnvVars(IntPtr self, string str);
-        [DllImport("wx-c")] static extern void   wxConfigBase_SetRecordDefaults(IntPtr self, bool bDoIt);
-        [DllImport("wx-c")] static extern bool   wxConfigBase_IsRecordingDefaults(IntPtr self);
-        [DllImport("wx-c")] static extern IntPtr wxConfigBase_GetAppName(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxConfigBase_SetAppName(IntPtr self, string appName);
-        [DllImport("wx-c")] static extern IntPtr wxConfigBase_GetVendorName(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxConfigBase_SetVendorName(IntPtr self, string vendorName);
-        [DllImport("wx-c")] static extern void   wxConfigBase_SetStyle(IntPtr self, int style);
-        [DllImport("wx-c")] static extern int    wxConfigBase_GetStyle(IntPtr self);
+        static extern (C) IntPtr wxConfigBase_Set(IntPtr pConfig);
+        static extern (C) IntPtr wxConfigBase_Get(bool createOnDemand);
+        static extern (C) IntPtr wxConfigBase_Create();
+        static extern (C) void   wxConfigBase_DontCreateOnDemand();
+        static extern (C) void   wxConfigBase_SetPath(IntPtr self, string strPath);
+        static extern (C) string wxConfigBase_GetPath(IntPtr self);
+        static extern (C) bool   wxConfigBase_GetFirstGroup(IntPtr self, IntPtr str, inout int lIndex);
+        static extern (C) bool   wxConfigBase_GetNextGroup(IntPtr self, IntPtr str, inout int lIndex);
+        static extern (C) bool   wxConfigBase_GetFirstEntry(IntPtr self, IntPtr str, inout int lIndex);
+        static extern (C) bool   wxConfigBase_GetNextEntry(IntPtr self, IntPtr str, inout int lIndex);
+        static extern (C) int    wxConfigBase_GetNumberOfEntries(IntPtr self, bool bRecursive);
+        static extern (C) int    wxConfigBase_GetNumberOfGroups(IntPtr self, bool bRecursive);
+        static extern (C) bool   wxConfigBase_HasGroup(IntPtr self, string strName);
+        static extern (C) bool   wxConfigBase_HasEntry(IntPtr self, string strName);
+        static extern (C) bool   wxConfigBase_Exists(IntPtr self, string strName);
+        static extern (C) int    wxConfigBase_GetEntryType(IntPtr self, string name);
+        static extern (C) bool   wxConfigBase_ReadStr(IntPtr self, string key, IntPtr pStr);
+        static extern (C) bool   wxConfigBase_ReadStrDef(IntPtr self, string key, IntPtr pStr, string defVal);
+        static extern (C) bool   wxConfigBase_ReadInt(IntPtr self, string key, inout int pl);
+        static extern (C) bool   wxConfigBase_ReadIntDef(IntPtr self, string key, inout int pl, int defVal);
+        static extern (C) bool   wxConfigBase_ReadDbl(IntPtr self, string key, inout double val);
+        static extern (C) bool   wxConfigBase_ReadDblDef(IntPtr self, string key, inout double val, double defVal);
+        static extern (C) bool   wxConfigBase_ReadBool(IntPtr self, string key, inout bool val);
+        static extern (C) bool   wxConfigBase_ReadBoolDef(IntPtr self, string key, inout bool val, bool defVal);
+        static extern (C) string wxConfigBase_ReadStrRet(IntPtr self, string key, string defVal);
+        static extern (C) int    wxConfigBase_ReadIntRet(IntPtr self, string key, int defVal);
+        static extern (C) bool   wxConfigBase_WriteStr(IntPtr self, string key, string val);
+        static extern (C) bool   wxConfigBase_WriteInt(IntPtr self, string key, int val);
+        static extern (C) bool   wxConfigBase_WriteDbl(IntPtr self, string key, double val);
+        static extern (C) bool   wxConfigBase_WriteBool(IntPtr self, string key, bool val);
+        static extern (C) bool   wxConfigBase_Flush(IntPtr self, bool bCurrentOnly);
+        static extern (C) bool   wxConfigBase_RenameEntry(IntPtr self, string oldName, string newName);
+        static extern (C) bool   wxConfigBase_RenameGroup(IntPtr self, string oldName, string newName);
+        static extern (C) bool   wxConfigBase_DeleteEntry(IntPtr self, string key, bool bDeleteGroupIfEmpty);
+        static extern (C) bool   wxConfigBase_DeleteGroup(IntPtr self, string key);
+        static extern (C) bool   wxConfigBase_DeleteAll(IntPtr self);
+        static extern (C) bool   wxConfigBase_IsExpandingEnvVars(IntPtr self);
+        static extern (C) void   wxConfigBase_SetExpandEnvVars(IntPtr self, bool bDoIt);
+        static extern (C) string wxConfigBase_ExpandEnvVars(IntPtr self, string str);
+        static extern (C) void   wxConfigBase_SetRecordDefaults(IntPtr self, bool bDoIt);
+        static extern (C) bool   wxConfigBase_IsRecordingDefaults(IntPtr self);
+        static extern (C) string wxConfigBase_GetAppName(IntPtr self);
+        static extern (C) void   wxConfigBase_SetAppName(IntPtr self, string appName);
+        static extern (C) string wxConfigBase_GetVendorName(IntPtr self);
+        static extern (C) void   wxConfigBase_SetVendorName(IntPtr self, string vendorName);
+        static extern (C) void   wxConfigBase_SetStyle(IntPtr self, int style);
+        static extern (C) int    wxConfigBase_GetStyle(IntPtr self);
 
 		//---------------------------------------------------------------------
 
-        public Config(IntPtr wxObject)
-            : base(wxObject) { }
-	    
+    // although it wxConfig is not derived from wxobj we do not change it.
+    // Use Config.Get() to get an instance.
+    public class Config : wxObject
+    {
+        public this(IntPtr wxobj)
+            { super(wxobj); }
+	
+	public static wxObject New(IntPtr ptr) { return new Config(ptr); }
+	
         public static Config Set(Config config)
         {
-            return (Config)FindObject(wxConfigBase_Set(Object.SafePtr(config)), typeof(Config));
+            return cast(Config)FindObject(wxConfigBase_Set(wxObject.SafePtr(config)), &Config.New);
         }
 
         public static Config Get(bool createOnDemand)
         {
-            return (Config)FindObject(wxConfigBase_Get(createOnDemand), typeof(Config));
+            return cast(Config)FindObject(wxConfigBase_Get(createOnDemand), &Config.New);
         }
 	
 	public static Config Get()
         {
-            return (Config)FindObject(wxConfigBase_Get(true), typeof(Config));
+            return cast(Config)FindObject(wxConfigBase_Get(true), &Config.New);
         }
 
         public static Config Create()
@@ -121,56 +126,53 @@ namespace wx
 
 		//---------------------------------------------------------------------
 
-        public string Path
-        {
-            set { wxConfigBase_SetPath(wxObject, value); }
-            get { return new wxString(wxConfigBase_GetPath(wxObject), true); }
-        }
+        public void Path(string value) { wxConfigBase_SetPath(wxobj, value); }
+        public string Path() { return wxConfigBase_GetPath(wxobj).dup; }
 
 		//---------------------------------------------------------------------
 
-        public bool GetFirstGroup(ref string str, ref int lIndex)
+        public bool GetFirstGroup(inout string str, inout int lIndex)
         {
             bool ret;
             wxString wstr = new wxString(str);
 
-            ret = wxConfigBase_GetFirstGroup(wxObject, wxString.SafePtr(wstr), ref lIndex);
-            str = wstr;
+            ret = wxConfigBase_GetFirstGroup(wxobj, wxString.SafePtr(wstr), lIndex);
+            str = wstr.toString();
 
             return ret;
         }
 
-        public bool GetNextGroup(ref string str, ref int lIndex)
+        public bool GetNextGroup(inout string str, inout int lIndex)
         {
             bool ret;
             wxString wstr = new wxString(str);
 
-            ret = wxConfigBase_GetNextGroup(wxObject, wxString.SafePtr(wstr), ref lIndex);
-            str = wstr;
+            ret = wxConfigBase_GetNextGroup(wxobj, wxString.SafePtr(wstr), lIndex);
+            str = wstr.toString();
 
             return ret;
         }
 
 		//---------------------------------------------------------------------
 
-        public bool GetFirstEntry(ref string str, ref int lIndex)
+        public bool GetFirstEntry(inout string str, inout int lIndex)
         {
             bool ret;
             wxString wstr = new wxString(str);
 
-            ret = wxConfigBase_GetFirstEntry(wxObject, wxString.SafePtr(wstr), ref lIndex);
-            str = wstr;
+            ret = wxConfigBase_GetFirstEntry(wxobj, wxString.SafePtr(wstr), lIndex);
+            str = wstr.toString();
 
             return ret;
         }
 
-        public bool GetNextEntry(ref string str, ref int lIndex)
+        public bool GetNextEntry(inout string str, inout int lIndex)
         {
             bool ret;
             wxString wstr = new wxString(str);
 
-            ret = wxConfigBase_GetNextEntry(wxObject, wxString.SafePtr(wstr), ref lIndex);
-            str = wstr;
+            ret = wxConfigBase_GetNextEntry(wxobj, wxString.SafePtr(wstr), lIndex);
+            str = wstr.toString();
 
             return ret;
         }
@@ -179,106 +181,106 @@ namespace wx
 
         public int GetNumberOfEntries(bool bRecursive)
         {
-            return wxConfigBase_GetNumberOfEntries(wxObject, bRecursive);
+            return wxConfigBase_GetNumberOfEntries(wxobj, bRecursive);
         }
 
         public int GetNumberOfGroups(bool bRecursive)
         {
-            return wxConfigBase_GetNumberOfGroups(wxObject, bRecursive);
+            return wxConfigBase_GetNumberOfGroups(wxobj, bRecursive);
         }
 
 		//---------------------------------------------------------------------
 
         public bool HasGroup(string strName)
         {
-            return wxConfigBase_HasGroup(wxObject, strName);
+            return wxConfigBase_HasGroup(wxobj, strName);
         }
 
         public bool HasEntry(string strName)
         {
-            return wxConfigBase_HasEntry(wxObject, strName);
+            return wxConfigBase_HasEntry(wxobj, strName);
         }
 
 		//---------------------------------------------------------------------
 
         public bool Exists(string strName)
         {
-            return wxConfigBase_Exists(wxObject, strName);
+            return wxConfigBase_Exists(wxobj, strName);
         }
 
         public EntryType GetEntryType(string name)
         {
-            return (EntryType)wxConfigBase_GetEntryType(wxObject, name);
+            return cast(EntryType)wxConfigBase_GetEntryType(wxobj, name);
         }
 
 		//---------------------------------------------------------------------
 
-        public bool Read(string key, ref string str)
+        public bool Read(string key, inout string str)
         {
             bool ret;
             wxString wstr = new wxString(str);
 
-            ret = wxConfigBase_ReadStr(wxObject, key, wxString.SafePtr(wstr));
-            str = wstr;
+            ret = wxConfigBase_ReadStr(wxobj, key, wxString.SafePtr(wstr));
+            str = wstr.toString();
 
             return ret;
         }
 
-        public bool Read(string key, ref string str, string defVal)
+        public bool Read(string key, inout string str, string defVal)
         {
             bool ret;
             wxString wstr = new wxString(str);
 
-            ret = wxConfigBase_ReadStrDef(wxObject, key, wxString.SafePtr(wstr), defVal);
-            str = wstr;
+            ret = wxConfigBase_ReadStrDef(wxobj, key, wxString.SafePtr(wstr), defVal);
+            str = wstr.toString();
 
             return ret;
         }
 
 		//---------------------------------------------------------------------
 
-        public bool Read(string key, ref int pl)
+        public bool Read(string key, inout int pl)
         {
-            return wxConfigBase_ReadInt(wxObject, key, ref pl);
+            return wxConfigBase_ReadInt(wxobj, key, pl);
         }
 
-        public bool Read(string key, ref int pl, int defVal)
+        public bool Read(string key, inout int pl, int defVal)
         {
-            return wxConfigBase_ReadIntDef(wxObject, key, ref pl, defVal);
-        }
-
-		//---------------------------------------------------------------------
-
-        public bool Read(string key, ref double val)
-        {
-            return wxConfigBase_ReadDbl(wxObject, key, ref val);
-        }
-
-        public bool Read(string key, ref double val, double defVal)
-        {
-            return wxConfigBase_ReadDblDef(wxObject, key, ref val, defVal);
+            return wxConfigBase_ReadIntDef(wxobj, key, pl, defVal);
         }
 
 		//---------------------------------------------------------------------
 
-        public bool Read(string key, ref bool val)
+        public bool Read(string key, inout double val)
         {
-            return wxConfigBase_ReadBool(wxObject, key, ref val);
+            return wxConfigBase_ReadDbl(wxobj, key, val);
         }
 
-        public bool Read(string key, ref bool val, bool defVal)
+        public bool Read(string key, inout double val, double defVal)
         {
-            return wxConfigBase_ReadBoolDef(wxObject, key, ref val, defVal);
+            return wxConfigBase_ReadDblDef(wxobj, key, val, defVal);
         }
 
 		//---------------------------------------------------------------------
 
-        public bool Read(string key, ref Font val)
+        public bool Read(string key, inout bool val)
         {
-            return Read(key, ref val, Font.wxNORMAL_FONT);
+            return wxConfigBase_ReadBool(wxobj, key, val);
         }
 
-        public bool Read(string key, ref Font val, Font defVal)
+        public bool Read(string key, inout bool val, bool defVal)
+        {
+            return wxConfigBase_ReadBoolDef(wxobj, key, val, defVal);
+        }
+
+		//---------------------------------------------------------------------
+
+        public bool Read(string key, inout Font val)
+        {
+            return Read(key, val, Font.wxNORMAL_FONT);
+        }
+
+        public bool Read(string key, inout Font val, Font defVal)
         {
             bool ret = true;
 
@@ -286,76 +288,100 @@ namespace wx
             bool underline = false;
             string faceName = "";
 
-            ret &= Read(key + "/PointSize", ref pointSize,  (int)defVal.PointSize);
-            ret &= Read(key + "/Family",    ref family,     (int)defVal.Family);
-            ret &= Read(key + "/Style",     ref style,      (int)defVal.Style);
-            ret &= Read(key + "/Weight",    ref weight,     (int)defVal.Weight);
-            ret &= Read(key + "/Underline", ref underline,  (bool)defVal.Underlined);
-            ret &= Read(key + "/FaceName",  ref faceName,   defVal.FaceName);
-            ret &= Read(key + "/Encoding",  ref encoding,   (int)defVal.Encoding);
+            ret &= Read(key ~ "/PointSize", pointSize,  cast(int)defVal.PointSize);
+            ret &= Read(key ~ "/Family",    family,     cast(int)defVal.Family);
+            ret &= Read(key ~ "/Style",     style,      cast(int)defVal.Style);
+            ret &= Read(key ~ "/Weight",    weight,     cast(int)defVal.Weight);
+            ret &= Read(key ~ "/Underline", underline,  cast(bool)defVal.Underlined);
+            ret &= Read(key ~ "/FaceName",  faceName,   defVal.FaceName);
+            ret &= Read(key ~ "/Encoding",  encoding,   cast(int)defVal.Encoding);
 
             val.PointSize   = pointSize;
-            val.Family      = (FontFamily)family;
-            val.Style       = (FontStyle)style;
-            val.Weight      = (FontWeight)weight;
+            val.Family      = cast(FontFamily)family;
+            val.Style       = cast(FontStyle)style;
+            val.Weight      = cast(FontWeight)weight;
             val.Underlined  = underline;
             val.FaceName    = faceName;
-            val.Encoding    = (FontEncoding)encoding;
+            val.Encoding    = cast(FontEncoding)encoding;
 
             return ret;
         }
 
 		//---------------------------------------------------------------------
 
-        public bool Read(string key, ref Colour val)
+        public bool Read(string key, inout Colour val)
         {
             Colour def = new Colour(0, 0, 0);
-            return Read(key, ref val, def);
+            return Read(key, val, def);
         }
 
-        public bool Read(string key, ref Colour val, Colour defVal)
+	private static int hex2int(char[] str)
+	{
+		int value = 0;
+		foreach(char ch; str) {
+			if (ch>='0' && ch<='9') ch-='0';
+			else if (ch>='A' && ch<='F') ch=ch-'A'+10;
+			else if (ch>='a' && ch<='f') ch=ch-'a'+10;
+			else return -1;
+			value = value*10 + ch;
+		}
+		return value;
+	}
+
+        public bool Read(string key, inout Colour val, Colour defVal)
         {
+            string str;
+            bool ret = Read(key,str);
+            if (!ret || !str || str[0]!='#') {
+            //    val = defval;
+            } else {
+                uint c = hex2int(str[1..str.length]);
+                val = new Colour((c>>16)&255, (c>>8)&255, c&255);
+            }
+            return ret;
+/*
             bool ret = true;
             int r = 0, b = 0, g = 0;
 
-            ret &= Read(key + "/Red",   ref r, defVal.Red);
-            ret &= Read(key + "/Blue",  ref b, defVal.Blue);
-            ret &= Read(key + "/Green", ref g, defVal.Green);
+            ret &= Read(key ~ "/Red",   r, cast(int)defVal.Red);
+            ret &= Read(key ~ "/Blue",  b, cast(int)defVal.Blue);
+            ret &= Read(key ~ "/Green", g, cast(int)defVal.Green);
 
-            val = new Colour((byte)r, (byte)g, (byte)b);
+            val = new Colour(cast(ubyte)r, cast(ubyte)g, cast(ubyte)b);
 
             return ret;
+*/
         }
 
 		//---------------------------------------------------------------------
-
+/+
         public string Read(string key, string defVal)
         {
-            return new wxString(wxConfigBase_ReadStrRet(wxObject, key, defVal), true);
+            return wxConfigBase_ReadStrRet(wxobj, key, defVal).dup;
         }
-
++/
         public int Read(string key, int defVal)
         {
-            return wxConfigBase_ReadIntRet(wxObject, key, defVal);
+            return wxConfigBase_ReadIntRet(wxobj, key, defVal);
         }
 
         public bool Read(string key, bool defVal) {
             bool val = false;
-            Read(key, ref val, defVal);
+            Read(key, val, defVal);
             return val;
         }
 
         public Colour Read(string key, Colour defVal)
         {
             Colour col = new Colour();
-            Read(key, ref col, defVal);
+            Read(key, col, defVal);
             return col;
         }
 
         public Font Read(string key, Font defVal)
         {
             Font fnt = new Font();
-            Read(key, ref fnt, defVal);
+            Read(key, fnt, defVal);
             return fnt;
         }
 
@@ -363,46 +389,59 @@ namespace wx
 
         public bool Write(string key, string val)
         {
-            return wxConfigBase_WriteStr(wxObject, key, val);
+            return wxConfigBase_WriteStr(wxobj, key, val);
         }
 
         public bool Write(string key, int val)
         {
-            return wxConfigBase_WriteInt(wxObject, key, val);
+            return wxConfigBase_WriteInt(wxobj, key, val);
         }
 
         public bool Write(string key, double val)
         {
-            return wxConfigBase_WriteDbl(wxObject, key, val);
+            return wxConfigBase_WriteDbl(wxobj, key, val);
         }
 
         public bool Write(string key, bool val)
         {
-            return wxConfigBase_WriteBool(wxObject, key, val);
+            return wxConfigBase_WriteBool(wxobj, key, val);
         }
 
+	private static void tohex(char* s,uint value)
+	{
+		const static char[16] hexdigits = "0123456789ABCDEF";
+		s[0] = hexdigits[value>>4];
+		s[1] = hexdigits[value&15];
+	}
+	
         public bool Write(string key, Colour col)
         {
+/*
             bool ret = true;
-
-            ret &= Write(key + "/Red",   col.Red);
-            ret &= Write(key + "/Blue",  col.Blue);
-            ret &= Write(key + "/Green", col.Green);
-
+            ret &= Write(key ~ "/Red",   cast(int)col.Red);
+            ret &= Write(key ~ "/Blue",  cast(int)col.Blue);
+            ret &= Write(key ~ "/Green", cast(int)col.Green);
             return ret;
+*/
+	    char buf[7];
+	    buf[0] = '#';
+	    tohex(&buf[1],col.Red);
+	    tohex(&buf[3],col.Green);
+	    tohex(&buf[5],col.Blue);
+	    return Write(key,buf);
         }
 
         public bool Write(string key, Font val)
         {
             bool ret = true;
 
-            ret &= Write(key + "/PointSize", (int)val.PointSize);
-            ret &= Write(key + "/Family",    (int)val.Family);
-            ret &= Write(key + "/Style",     (int)val.Style);
-            ret &= Write(key + "/Weight",    (int)val.Weight);
-            ret &= Write(key + "/Underline", (bool)val.Underlined);
-            ret &= Write(key + "/FaceName",  val.FaceName);
-            ret &= Write(key + "/Encoding",  (int)val.Encoding);
+            ret &= Write(key ~ "/PointSize", cast(int)val.PointSize);
+            ret &= Write(key ~ "/Family",    cast(int)val.Family);
+            ret &= Write(key ~ "/Style",     cast(int)val.Style);
+            ret &= Write(key ~ "/Weight",    cast(int)val.Weight);
+            ret &= Write(key ~ "/Underline", cast(bool)val.Underlined);
+            ret &= Write(key ~ "/FaceName",  val.FaceName);
+            ret &= Write(key ~ "/Encoding",  cast(int)val.Encoding);
 
             return ret;
         }
@@ -411,84 +450,68 @@ namespace wx
 
         public bool Flush(bool bCurrentOnly)
         {
-            return wxConfigBase_Flush(wxObject, bCurrentOnly);
+            return wxConfigBase_Flush(wxobj, bCurrentOnly);
         }
 
 		//---------------------------------------------------------------------
 
         public bool RenameEntry(string oldName, string newName)
         {
-            return wxConfigBase_RenameEntry(wxObject, oldName, newName);
+            return wxConfigBase_RenameEntry(wxobj, oldName, newName);
         }
 
         public bool RenameGroup(string oldName, string newName)
         {
-            return wxConfigBase_RenameGroup(wxObject, oldName, newName);
+            return wxConfigBase_RenameGroup(wxobj, oldName, newName);
         }
 
 		//---------------------------------------------------------------------
 
         public bool DeleteEntry(string key, bool bDeleteGroupIfEmpty)
         {
-            return wxConfigBase_DeleteEntry(wxObject, key, bDeleteGroupIfEmpty);
+            return wxConfigBase_DeleteEntry(wxobj, key, bDeleteGroupIfEmpty);
         }
 
         public bool DeleteGroup(string key)
         {
-            return wxConfigBase_DeleteGroup(wxObject, key);
+            return wxConfigBase_DeleteGroup(wxobj, key);
         }
 
         public bool DeleteAll()
         {
-            return wxConfigBase_DeleteAll(wxObject);
+            return wxConfigBase_DeleteAll(wxobj);
         }
 
 		//---------------------------------------------------------------------
 
-        public bool ExpandEnvVars
-        {
-            get { return wxConfigBase_IsExpandingEnvVars(wxObject); }
-            set { wxConfigBase_SetExpandEnvVars(wxObject, value); }
-        }
+        public bool ExpandEnvVars() { return wxConfigBase_IsExpandingEnvVars(wxobj); }
+        public void ExpandEnvVars(bool value) { wxConfigBase_SetExpandEnvVars(wxobj, value); }
 
         /*public string ExpandEnvVars(string str)
         {
-            return new wxString(wxConfigBase_ExpandEnvVars(wxObject, str));
+            return new wxString(wxConfigBase_ExpandEnvVars(wxobj, str));
         }*/
 
 		//---------------------------------------------------------------------
 
-        public bool RecordDefaults
-        {
-            set { wxConfigBase_SetRecordDefaults(wxObject, value); }
-            get { return wxConfigBase_IsRecordingDefaults(wxObject); }
-        }
+        public void RecordDefaults(bool value) { wxConfigBase_SetRecordDefaults(wxobj, value); }
+        public bool RecordDefaults() { return wxConfigBase_IsRecordingDefaults(wxobj); }
 
 		//---------------------------------------------------------------------
 
-        public string AppName
-        {
-            get { return new wxString(wxConfigBase_GetAppName(wxObject), true); }
-            set { wxConfigBase_SetAppName(wxObject, value); }
-        }
+        public string AppName() { return wxConfigBase_GetAppName(wxobj).dup; }
+        public void AppName(string value) { wxConfigBase_SetAppName(wxobj, value); }
 
 		//---------------------------------------------------------------------
 
-        public string VendorName
-        {
-            get { return new wxString(wxConfigBase_GetVendorName(wxObject), true); }
-            set { wxConfigBase_SetVendorName(wxObject, value); }
-        }
+        public string VendorName() { return wxConfigBase_GetVendorName(wxobj).dup; }
+        public void VendorName(string value) { wxConfigBase_SetVendorName(wxobj, value); }
 
 		//---------------------------------------------------------------------
 
-        public int Style
-        {
-            set { wxConfigBase_SetStyle(wxObject, value); }
-            get { return wxConfigBase_GetStyle(wxObject); }
-        }
+        public void Style(int value) { wxConfigBase_SetStyle(wxobj, value); }
+        public int Style() { return wxConfigBase_GetStyle(wxobj); }
 
 		//---------------------------------------------------------------------
     }
-}
 

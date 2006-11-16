@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - staticline.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - staticline.cxx
 //
 // The wxStaticLine proxy interface.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/statline.h>
 #include "local_events.h"
 
@@ -35,7 +39,7 @@ wxStaticLine* wxStaticLine_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStaticLine_Create(wxStaticLine *self, wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, long style, const char* name)
+bool wxStaticLine_Create(wxStaticLine *self, wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, long style, dstr name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -43,10 +47,10 @@ bool wxStaticLine_Create(wxStaticLine *self, wxWindow* parent, wxWindowID id, co
 	if (size == NULL)
 		size = &wxDefaultSize;
 
-	if (name == NULL)
-		name = "staticLine";
+	if (name.data==NULL)
+		name = dstr("staticLine",sizeof("staticLine")-1);
 
-	return self->Create(parent, id, *pos, *size, style, wxString(name, wxConvUTF8))?1:0;
+	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------

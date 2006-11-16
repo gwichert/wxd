@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - NCPaintEvent.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - NCPaintEvent.cs
 //
 // The wxNCPaintEvent wrapper class.
@@ -10,21 +13,26 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Runtime.InteropServices;
+module wx.NcPaintEvent;
+import wx.common;
+import wx.Event;
 
-namespace wx
-{
-	public class NCPaintEvent : Event
-	{
-		[DllImport("wx-c")] static extern IntPtr wxNcPaintEvent_ctor(int Id);
+		static extern (C) IntPtr wxNcPaintEvent_ctor(int Id);
 		
 		//-----------------------------------------------------------------------------
 
-		public NCPaintEvent(IntPtr wxObject) 
-			: base(wxObject) { }
+	public class NCPaintEvent : Event
+	{
+		public this(IntPtr wxobj) 
+			{ super(wxobj); }
 
-		public NCPaintEvent(int Id)
-			: this(wxNcPaintEvent_ctor(Id)) { }
+		public this(int Id)
+			{ this(wxNcPaintEvent_ctor(Id)); }
+
+		private static Event New(IntPtr obj) { return new NCPaintEvent(obj); }
+
+		static this()
+		{
+			AddEventType(wxEVT_NC_PAINT,				&NCPaintEvent.New);
+		}
 	}
-}

@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - tipdialog.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - tipdialog.cxx
 //
 // The wxTipProvider proxy interface.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/tipdlg.h>
 #include "local_events.h"
 
@@ -28,14 +32,14 @@ size_t wxTipProvider_GetCurrentTip()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxTipProvider* wxCreateFileTipProvider_func(const char* filename, size_t currentTip)
+wxTipProvider* wxCreateFileTipProvider_func(dstr filename, size_t currentTip)
 {
 	if ( mpTipProvider != NULL)
 	{
 		delete mpTipProvider;
 	}
 	
-	mpTipProvider = wxCreateFileTipProvider(wxString(filename, wxConvUTF8), currentTip);
+	mpTipProvider = wxCreateFileTipProvider(wxString(filename.data, wxConvUTF8, filename.length), currentTip);
 	return mpTipProvider;
 }
 

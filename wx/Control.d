@@ -1,40 +1,39 @@
 //-----------------------------------------------------------------------------
-// wx.NET - Control.cs
+// wxD - Control.d
 //
 // The wxControl wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
+// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.Control;
+import wx.common;
+import wx.Window;
 
-namespace wx
-{
-	public class Control : Window
-	{
-		[DllImport("wx-c")] static extern void   wxControl_Command(IntPtr self, IntPtr evt);
-		[DllImport("wx-c")] static extern IntPtr wxControl_GetLabel(IntPtr self);
-		[DllImport("wx-c")] static extern void   wxControl_SetLabel(IntPtr self, string label);
+		static extern (C) void   wxControl_Command(IntPtr self, IntPtr evt);
+		static extern (C) string wxControl_GetLabel(IntPtr self);
+		static extern (C) void   wxControl_SetLabel(IntPtr self, string label);
 		
-		[DllImport("wx-c")] static extern int wxControl_GetAlignment(IntPtr self);
-		[DllImport("wx-c")] static extern bool wxControl_SetFont(IntPtr self, IntPtr font);
+		static extern (C) int wxControl_GetAlignment(IntPtr self);
+		static extern (C) bool wxControl_SetFont(IntPtr self, IntPtr font);
 
 		//---------------------------------------------------------------------
 
-		public Control(IntPtr wxObject) 
-			: base(wxObject) {}
+	public class Control : Window
+	{
+		public this(IntPtr wxobj) 
+			{ super(wxobj);}
 
-		public Control(Window parent, int id, Point pos, Size size, long style, string name)
-			: base(parent, id, pos, size, style, name) {}
+		public this(Window parent, int id, Point pos, Size size, int style, string name)
+			{ super(parent, id, pos, size, style, name);}
 		
-		public Control(Window parent, Point pos, Size size, long style, string name)
-			: base(parent, Window.UniqueID, pos, size, style, name) {}
+		public this(Window parent, Point pos, Size size, int style, string name)
+			{ super(parent, Window.UniqueID, pos, size, style, name);}
 
 		//---------------------------------------------------------------------
 
@@ -42,25 +41,21 @@ namespace wx
 
 		//---------------------------------------------------------------------
 
-		public string Label 
-		{
-			get { return new wxString(wxControl_GetLabel(wxObject), true); }
-			set { wxControl_SetLabel(wxObject, value); }
-		}
+		public string Label() { return wxControl_GetLabel(wxobj).dup; }
+		public void Label(string value) { wxControl_SetLabel(wxobj, value); }
 		
 		//---------------------------------------------------------------------
 		
 		public int GetAlignment()
 		{
-			return wxControl_GetAlignment(wxObject);
+			return wxControl_GetAlignment(wxobj);
 		}
 		
 		//---------------------------------------------------------------------
 		
 		public bool SetFont(Font font)
 		{
-			return wxControl_SetFont(wxObject, Object.SafePtr(font));
+			return wxControl_SetFont(wxobj, wxObject.SafePtr(font));
 		}
 	}
-}
 

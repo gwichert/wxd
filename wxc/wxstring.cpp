@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - wxstring.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - wxstring.cxx
 //
 // The wxString proxy interface
@@ -10,20 +13,30 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 
 class _wxString : public wxString
 {
 public:
-    _wxString(const char *psz, wxMBConv& conv)
+    _wxString(const char* psz, wxMBConv& conv)
         : wxString(psz, conv) { }
+    _wxString(const char* psz, wxMBConv& conv,size_t length)
+        : wxString(psz, conv, length) { }
 };
 
 //-----------------------------------------------------------------------------
 
+
 extern "C" WXEXPORT
-wxString* wxString_ctor(char* str)
+wxString* wxString_ctor(const char* str)
 {
 	return new _wxString(str, wxConvUTF8);
+}
+
+extern "C" WXEXPORT
+wxString* wxString_ctor2(dstr str)
+{
+	return new _wxString(str.data, wxConvUTF8, str.length);
 }
 
 extern "C" WXEXPORT
@@ -35,11 +48,13 @@ void wxString_dtor(wxString *self)
 
 //-----------------------------------------------------------------------------
 
+/*
 extern "C" WXEXPORT
-const char* wxString_mb_str(wxString* self)
+dstr wxString_mb_str(wxString* self)
 {
-	return (const char*)self->mb_str(wxConvUTF8);
+	return dstr((const char*)self->mb_str(wxConvUTF8),self->length());
 }
+*/
 
 extern "C" WXEXPORT
 const size_t wxString_Length(wxString* self)
@@ -57,6 +72,18 @@ extern "C" WXEXPORT
 int wxString_CharAtInt(wxString* self, size_t i)
 {
 		return (int)self->GetChar(i);
+}
+
+extern "C" WXEXPORT
+const char* wxString_c_str(wxString* self, size_t i)
+{
+	return self->c_str();
+}
+
+extern "C" WXEXPORT
+dstr wxString_d_str(wxString* self, size_t i)
+{
+	return dstr(self);
 }
 
 //-----------------------------------------------------------------------------

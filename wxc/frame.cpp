@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - frame.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - frame.cxx
 //
 // The wxFrame proxy interface.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include "local_events.h"
 
 //-----------------------------------------------------------------------------
@@ -30,7 +34,7 @@ wxFrame* wxFrame_ctor()
 }
 
 extern "C" WXEXPORT
-bool wxFrame_Create(wxFrame* self, wxWindow* parent, int id, const char* title, const wxPoint* pos, const wxSize* size, unsigned int style, const char* name)
+bool wxFrame_Create(wxFrame* self, wxWindow* parent, int id, dstr title, const wxPoint* pos, const wxSize* size, unsigned int style, dstr name)
 {
     if (pos == NULL)
         pos = &wxDefaultPosition;
@@ -38,7 +42,7 @@ bool wxFrame_Create(wxFrame* self, wxWindow* parent, int id, const char* title, 
     if (size == NULL)
         size = &wxDefaultSize;
 
-    return self->Create(parent, id, wxString(title, wxConvUTF8), *pos, *size, style, wxString(name, wxConvUTF8))?1:0;
+    return self->Create(parent, id, wxString(title.data, wxConvUTF8, title.length), *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }
 
 
@@ -59,9 +63,9 @@ bool wxFrame_IsFullScreen(wxFrame* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxStatusBar* wxFrame_CreateStatusBar(wxFrame* self, int number, unsigned int style, wxWindowID id, const char* name)
+wxStatusBar* wxFrame_CreateStatusBar(wxFrame* self, int number, unsigned int style, wxWindowID id, dstr name)
 {
-    return self->CreateStatusBar(number, style, id, wxString(name, wxConvUTF8));
+    return self->CreateStatusBar(number, style, id, wxString(name.data, wxConvUTF8, name.length));
 }
 
 extern "C" WXEXPORT
@@ -121,20 +125,20 @@ wxMenuBar* wxFrame_GetMenuBar(wxFrame* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxFrame_SetStatusText(wxFrame* self, const char* text, int number)
+void wxFrame_SetStatusText(wxFrame* self, dstr text, int number)
 {
-    self->SetStatusText(wxString(text, wxConvUTF8), number);
+    self->SetStatusText(wxString(text.data, wxConvUTF8, text.length), number);
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxToolBar* wxFrame_CreateToolBar(wxFrame* self, unsigned int style, wxWindowID id, const char* name)
+wxToolBar* wxFrame_CreateToolBar(wxFrame* self, unsigned int style, wxWindowID id, dstr name)
 {
-    if (name == NULL)
-        name = "toolBar";
+    if (name.data==NULL)
+        name = dstr("toolBar",sizeof("toolBar")-1);
 
-    return self->CreateToolBar(style, id, wxString(name, wxConvUTF8));
+    return self->CreateToolBar(style, id, wxString(name.data, wxConvUTF8, name.length));
 }
 
 extern "C" WXEXPORT

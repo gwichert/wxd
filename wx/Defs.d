@@ -1,20 +1,55 @@
 //-----------------------------------------------------------------------------
-// wx.NET - Defs.cs
+// wxD - Defs.d
 //
-// Symbol definitions that do not belong to any particular class.
+// Symbol definitions that do not beint to any particular class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
+// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
+module wx.Defs;
+//import wx.common;
 
-namespace wx
-{
+	public enum BitmapType {
+		wxBITMAP_TYPE_INVALID               = 0,
+		wxBITMAP_TYPE_BMP,
+		wxBITMAP_TYPE_BMP_RESOURCE,
+		wxBITMAP_TYPE_RESOURCE              = wxBITMAP_TYPE_BMP_RESOURCE,
+		wxBITMAP_TYPE_ICO,
+		wxBITMAP_TYPE_ICO_RESOURCE,
+		wxBITMAP_TYPE_CUR,
+		wxBITMAP_TYPE_CUR_RESOURCE,
+		wxBITMAP_TYPE_XBM,
+		wxBITMAP_TYPE_XBM_DATA,
+		wxBITMAP_TYPE_XPM,
+		wxBITMAP_TYPE_XPM_DATA,
+		wxBITMAP_TYPE_TIF,
+		wxBITMAP_TYPE_TIF_RESOURCE,
+		wxBITMAP_TYPE_GIF,
+		wxBITMAP_TYPE_GIF_RESOURCE,
+		wxBITMAP_TYPE_PNG,
+		wxBITMAP_TYPE_PNG_RESOURCE,
+		wxBITMAP_TYPE_JPEG,
+		wxBITMAP_TYPE_JPEG_RESOURCE,
+		wxBITMAP_TYPE_PNM,
+		wxBITMAP_TYPE_PNM_RESOURCE,
+		wxBITMAP_TYPE_PCX,
+		wxBITMAP_TYPE_PCX_RESOURCE,
+		wxBITMAP_TYPE_PICT,
+		wxBITMAP_TYPE_PICT_RESOURCE,
+		wxBITMAP_TYPE_ICON,
+		wxBITMAP_TYPE_ICON_RESOURCE,
+		wxBITMAP_TYPE_ANI,
+		wxBITMAP_TYPE_IFF,
+		wxBITMAP_TYPE_MACCURSOR,
+		wxBITMAP_TYPE_MACCURSOR_RESOURCE,
+		wxBITMAP_TYPE_ANY                   = 50
+	};
+
 	/*  Standard menu IDs */
 	public enum MenuIDs
 	{
@@ -132,7 +167,7 @@ namespace wx
 		wxID_HIGHEST = 5999
 	}
 
-	[Flags]
+	//[Flags]
 	public enum KeyCode 
 	{
 		WXK_BACK    = 8,
@@ -242,22 +277,22 @@ namespace wx
 		WXK_NUMPAD_DIVIDE
 	}
 
-	public class Direction 
+	public enum Direction 
 	{
-		public const long wxLEFT    = 0x0010;
-		public const long wxRIGHT   = 0x0020;
-		public const long wxUP      = 0x0040;
-		public const long wxDOWN    = 0x0080;
-		public const long wxTOP     = wxUP;
-		public const long wxBOTTOM  = wxDOWN;
-		public const long wxNORTH   = wxUP;
-		public const long wxSOUTH   = wxDOWN;
-		public const long wxWEST    = wxLEFT;
-		public const long wxEAST    = wxRIGHT;
-		public const long wxALL     = (wxUP | wxDOWN | wxRIGHT | wxLEFT);
+		wxLEFT    = 0x0010,
+		wxRIGHT   = 0x0020,
+		wxUP      = 0x0040,
+		wxDOWN    = 0x0080,
+		wxTOP     = wxUP,
+		wxBOTTOM  = wxDOWN,
+		wxNORTH   = wxUP,
+		wxSOUTH   = wxDOWN,
+		wxWEST    = wxLEFT,
+		wxEAST    = wxRIGHT,
+		wxALL     = (wxUP | wxDOWN | wxRIGHT | wxLEFT),
 	}
 
-	[Flags]
+	//[Flags]
 	public enum FillStyle
 	{
 		wxDEFAULT = 70,
@@ -279,7 +314,7 @@ namespace wx
 		
 		wxSOLID = 100,
 		wxDOT,
-		wxLONG_DASH,
+		wxint_DASH,
 		wxSHORT_DASH,
 		wxDOT_DASH,
 		wxUSER_DASH,
@@ -309,7 +344,7 @@ namespace wx
 	}
 
 	// Logical operations
-	[Flags]
+	//[Flags]
 	public enum Logic
 	{
 		wxCLEAR,        wxROP_BLACK = wxCLEAR,             wxBLIT_BLACKNESS = wxCLEAR,        // 0
@@ -330,49 +365,49 @@ namespace wx
 		wxSET,          wxROP_WHITE = wxSET,               wxBLIT_WHITENESS = wxSET           // 1
 	}
 
-	public class Orientation
+	public enum Orientation
 	{
-		public const int wxVERTICAL     = 0x0008;
-		public const int wxHORIZONTAL   = 0x0004;
+		wxVERTICAL     = 0x0008,
+		wxHORIZONTAL   = 0x0004,
 		
-		public const int wxBOTH     = (wxVERTICAL | wxHORIZONTAL);
+		wxBOTH     = (wxVERTICAL | wxHORIZONTAL),
 	}
 
-	public class Stretch
+	public enum Stretch
 	{
-		public const long wxSTRETCH_NOT     = 0x0000;
-		public const long wxSHRINK          = 0x1000;
-		public const long wxGROW            = 0x2000;
-		public const long wxEXPAND          = wxGROW;
-		public const long wxSHAPED          = 0x4000;
-		public const long wxFIXED_MINSIZE   = 0x8000;
-		public const long wxTILE            = 0xc000;
+		wxSTRETCH_NOT     = 0x0000,
+		wxSHRINK          = 0x1000,
+		wxGROW            = 0x2000,
+		wxEXPAND          = wxGROW,
+		wxSHAPED          = 0x4000,
+		wxFIXED_MINSIZE   = 0x8000,
+		wxTILE            = 0xc000,
 		
 		// changed in wxWidgets 2.5.2, see discussion on wx-dev
-		public const long wxADJUST_MINSIZE  = 0x0000;
+		wxADJUST_MINSIZE  = 0x0000,
 	}
 
-	public class Alignment
+	public enum Alignment
 	{
-		public const long wxALIGN_NOT               = 0x0000;
-		public const long wxALIGN_CENTER_HORIZONTAL = 0x0100;
-		public const long wxALIGN_LEFT              = wxALIGN_NOT;
-		public const long wxALIGN_TOP               = wxALIGN_NOT;
-		public const long wxALIGN_RIGHT             = 0x0200;
-		public const long wxALIGN_BOTTOM            = 0x0400;
-		public const long wxALIGN_CENTER_VERTICAL   = 0x0800;
+		wxALIGN_NOT               = 0x0000,
+		wxALIGN_CENTER_HORIZONTAL = 0x0100,
+		wxALIGN_LEFT              = wxALIGN_NOT,
+		wxALIGN_TOP               = wxALIGN_NOT,
+		wxALIGN_RIGHT             = 0x0200,
+		wxALIGN_BOTTOM            = 0x0400,
+		wxALIGN_CENTER_VERTICAL   = 0x0800,
 		
-		public const long wxALIGN_CENTER            = (wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL);
+		wxALIGN_CENTER            = (wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL),
 		
-		public const long wxALIGN_MASK              = 0x0f00;
+		wxALIGN_MASK              = 0x0f00,
 		
 		// Alternate spellings
-		public const long wxALIGN_CENTRE_VERTICAL   = wxALIGN_CENTER_VERTICAL;
-		public const long wxALIGN_CENTRE_HORIZONTAL = wxALIGN_CENTER_HORIZONTAL;
-		public const long wxALIGN_CENTRE            = wxALIGN_CENTER;
+		wxALIGN_CENTRE_VERTICAL   = wxALIGN_CENTER_VERTICAL,
+		wxALIGN_CENTRE_HORIZONTAL = wxALIGN_CENTER_HORIZONTAL,
+		wxALIGN_CENTRE            = wxALIGN_CENTER,
 	}
 
-	[Flags]
+	//[Flags]
 	public enum ItemKind
 	{
 		wxITEM_SEPARATOR = -1,
@@ -382,10 +417,10 @@ namespace wx
 		wxITEM_MAX
 	}
     
-	public class FloodStyle
+	public enum FloodStyle
 	{
-		public const int wxFLOOD_SURFACE = 1;
-		public const int wxFLOOD_BORDER = 2;
+		wxFLOOD_SURFACE = 1,
+		wxFLOOD_BORDER = 2,
 	}
     
 	public enum MouseButton
@@ -412,4 +447,4 @@ namespace wx
 		// the wxWS_EX_PROCESS_UI_UPDATES flag specified
 		wxUPDATE_UI_PROCESS_SPECIFIED
 	}
-}
+

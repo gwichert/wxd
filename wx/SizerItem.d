@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - SizerItem.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - SizerItem.cs
 //
 // The wxSizerItem wrapper class.
@@ -8,94 +11,89 @@
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.SizerItem;
+import wx.common;
+import wx.Window;
 
-namespace wx
-{
-    public class SizerItem : Object
-    {
-        [DllImport("wx-c")] static extern IntPtr wxSizerItem_ctorSpace(int width, int height, int proportion, int flag, int border, IntPtr userData);
-        [DllImport("wx-c")] static extern IntPtr wxSizerItem_ctorWindow(IntPtr window, int proportion, int flag, int border, IntPtr userData);
-        [DllImport("wx-c")] static extern IntPtr wxSizerItem_ctorSizer(IntPtr sizer, int proportion, int flag, int border, IntPtr userData);
-        [DllImport("wx-c")] static extern IntPtr wxSizerItem_ctor();
-        [DllImport("wx-c")] static extern void   wxSizerItem_DeleteWindows(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxSizerItem_DetachSizer(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxSizerItem_GetSize(IntPtr self, ref Size size);
-        [DllImport("wx-c")] static extern void   wxSizerItem_CalcMin(IntPtr self, ref Size min);
-        [DllImport("wx-c")] static extern void   wxSizerItem_SetDimension(IntPtr self, ref Point pos, ref Size size);
-        [DllImport("wx-c")] static extern void   wxSizerItem_GetMinSize(IntPtr self, ref Size size);
-        [DllImport("wx-c")] static extern void   wxSizerItem_SetInitSize(IntPtr self, int x, int y);
-        [DllImport("wx-c")] static extern void   wxSizerItem_SetRatioSize(IntPtr self, int width, int height);
-        [DllImport("wx-c")] static extern void   wxSizerItem_SetRatioFloat(IntPtr self, float ratio);
-        [DllImport("wx-c")] static extern float  wxSizerItem_GetRatioFloat(IntPtr self);
-        [DllImport("wx-c")] static extern bool   wxSizerItem_IsWindow(IntPtr self);
-        [DllImport("wx-c")] static extern bool   wxSizerItem_IsSizer(IntPtr self);
-        [DllImport("wx-c")] static extern bool   wxSizerItem_IsSpacer(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxSizerItem_SetProportion(IntPtr self, int proportion);
-        [DllImport("wx-c")] static extern int    wxSizerItem_GetProportion(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxSizerItem_SetFlag(IntPtr self, int flag);
-        [DllImport("wx-c")] static extern int    wxSizerItem_GetFlag(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxSizerItem_SetBorder(IntPtr self, int border);
-        [DllImport("wx-c")] static extern int    wxSizerItem_GetBorder(IntPtr self);
-        [DllImport("wx-c")] static extern IntPtr wxSizerItem_GetWindow(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxSizerItem_SetWindow(IntPtr self, IntPtr window);
-        [DllImport("wx-c")] static extern IntPtr wxSizerItem_GetSizer(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxSizerItem_SetSizer(IntPtr self, IntPtr sizer);
-        [DllImport("wx-c")] static extern void   wxSizerItem_GetSpacer(IntPtr self, ref Size size);
-        [DllImport("wx-c")] static extern void   wxSizerItem_SetSpacer(IntPtr self, ref Size size);
-        [DllImport("wx-c")] static extern void   wxSizerItem_Show(IntPtr self, bool show);
-        [DllImport("wx-c")] static extern bool   wxSizerItem_IsShown(IntPtr self);
-        [DllImport("wx-c")] static extern IntPtr wxSizerItem_GetUserData(IntPtr self);
-        [DllImport("wx-c")] static extern void   wxSizerItem_GetPosition(IntPtr self, ref Point pos);
+        static extern (C) IntPtr wxSizerItem_ctorSpace(int width, int height, int proportion, int flag, int border, IntPtr userData);
+        static extern (C) IntPtr wxSizerItem_ctorWindow(IntPtr window, int proportion, int flag, int border, IntPtr userData);
+        static extern (C) IntPtr wxSizerItem_ctorSizer(IntPtr sizer, int proportion, int flag, int border, IntPtr userData);
+        static extern (C) IntPtr wxSizerItem_ctor();
+        static extern (C) void   wxSizerItem_DeleteWindows(IntPtr self);
+        static extern (C) void   wxSizerItem_DetachSizer(IntPtr self);
+        static extern (C) void   wxSizerItem_GetSize(IntPtr self, inout Size size);
+        static extern (C) void   wxSizerItem_CalcMin(IntPtr self, inout Size min);
+        static extern (C) void   wxSizerItem_SetDimension(IntPtr self, inout Point pos, inout Size size);
+        static extern (C) void   wxSizerItem_GetMinSize(IntPtr self, inout Size size);
+        static extern (C) void   wxSizerItem_SetInitSize(IntPtr self, int x, int y);
+        static extern (C) void   wxSizerItem_SetRatioSize(IntPtr self, int width, int height);
+        static extern (C) void   wxSizerItem_SetRatioFloat(IntPtr self, float ratio);
+        static extern (C) float  wxSizerItem_GetRatioFloat(IntPtr self);
+        static extern (C) bool   wxSizerItem_IsWindow(IntPtr self);
+        static extern (C) bool   wxSizerItem_IsSizer(IntPtr self);
+        static extern (C) bool   wxSizerItem_IsSpacer(IntPtr self);
+        static extern (C) void   wxSizerItem_SetProportion(IntPtr self, int proportion);
+        static extern (C) int    wxSizerItem_GetProportion(IntPtr self);
+        static extern (C) void   wxSizerItem_SetFlag(IntPtr self, int flag);
+        static extern (C) int    wxSizerItem_GetFlag(IntPtr self);
+        static extern (C) void   wxSizerItem_SetBorder(IntPtr self, int border);
+        static extern (C) int    wxSizerItem_GetBorder(IntPtr self);
+        static extern (C) IntPtr wxSizerItem_GetWindow(IntPtr self);
+        static extern (C) void   wxSizerItem_SetWindow(IntPtr self, IntPtr window);
+        static extern (C) IntPtr wxSizerItem_GetSizer(IntPtr self);
+        static extern (C) void   wxSizerItem_SetSizer(IntPtr self, IntPtr sizer);
+        static extern (C) void   wxSizerItem_GetSpacer(IntPtr self, inout Size size);
+        static extern (C) void   wxSizerItem_SetSpacer(IntPtr self, inout Size size);
+        static extern (C) void   wxSizerItem_Show(IntPtr self, bool show);
+        static extern (C) bool   wxSizerItem_IsShown(IntPtr self);
+        static extern (C) IntPtr wxSizerItem_GetUserData(IntPtr self);
+        static extern (C) void   wxSizerItem_GetPosition(IntPtr self, inout Point pos);
 
         //-----------------------------------------------------------------------------
 
-        public SizerItem(int width, int height, int proportion, int flag, int border, Object userData)
-            : this(wxSizerItem_ctorSpace(width, height, proportion, flag, border, Object.SafePtr(userData))) { }
+    public class SizerItem : wxObject
+    {
+        public this(int width, int height, int proportion, int flag, int border, wxObject userData)
+            { this(wxSizerItem_ctorSpace(width, height, proportion, flag, border, wxObject.SafePtr(userData))); }
 
-        public SizerItem(Window window, int proportion, int flag, int border, Object userData)
-            : this(wxSizerItem_ctorWindow(Object.SafePtr(window), proportion, flag, border, Object.SafePtr(userData))) { }
+        public this(Window window, int proportion, int flag, int border, wxObject userData)
+            { this(wxSizerItem_ctorWindow(wxObject.SafePtr(window), proportion, flag, border, wxObject.SafePtr(userData))); }
 
-        public SizerItem(Sizer sizer, int proportion, int flag, int border, Object userData)
-            : this(wxSizerItem_ctorSizer(Object.SafePtr(sizer), proportion, flag, border, Object.SafePtr(userData))) { }
+        public this(Sizer sizer, int proportion, int flag, int border, wxObject userData)
+            { this(wxSizerItem_ctorSizer(wxObject.SafePtr(sizer), proportion, flag, border, wxObject.SafePtr(userData))); }
 
-        public SizerItem()
-            : this(wxSizerItem_ctor()) { }
+        public this()
+            { this(wxSizerItem_ctor()); }
 
-        public SizerItem(IntPtr wxObject)
-            : base(wxObject) { }
+        public this(IntPtr wxobj)
+            { super(wxobj); }
 
         //-----------------------------------------------------------------------------
 
         public void DeleteWindows()
         {
-            wxSizerItem_DeleteWindows(wxObject);
+            wxSizerItem_DeleteWindows(wxobj);
         }
 
         public void DetachSizer()
         {
-            wxSizerItem_DetachSizer(wxObject);
+            wxSizerItem_DetachSizer(wxobj);
         }
 
         //-----------------------------------------------------------------------------
 
-        public Size Size
-        {
-            get { 
-                Size size = new Size();
-                wxSizerItem_GetSize(wxObject, ref size);
+        public Size size() { 
+                Size size;
+                wxSizerItem_GetSize(wxobj, size);
                 return size; 
             }
-        }
 
         //-----------------------------------------------------------------------------
 
         public Size CalcMin()
         { 
-            Size min = new Size();
-            wxSizerItem_CalcMin(wxObject, ref min);
+            Size min;
+            wxSizerItem_CalcMin(wxobj, min);
             return min;
         }
 
@@ -103,25 +101,22 @@ namespace wx
 
         public void SetDimension(Point pos, Size size)
         {
-            wxSizerItem_SetDimension(wxObject, ref pos, ref size);
+            wxSizerItem_SetDimension(wxobj, pos, size);
         }
 
         //-----------------------------------------------------------------------------
 
-        public Size MinSize
-        {
-            get { 
-                Size size = new Size();
-                wxSizerItem_GetMinSize(wxObject, ref size);
+        public Size MinSize() { 
+                Size size;
+                wxSizerItem_GetMinSize(wxobj, size);
                 return size;
             }
-        }
 
         //-----------------------------------------------------------------------------
 
         public void SetInitSize(int x, int y)
         {
-            wxSizerItem_SetInitSize(wxObject, x, y);
+            wxSizerItem_SetInitSize(wxobj, x, y);
         }
 
         //-----------------------------------------------------------------------------
@@ -131,113 +126,73 @@ namespace wx
        
         public void SetRatio(int width, int height)
         {
-            wxSizerItem_SetRatioSize(wxObject, width, height);
+            wxSizerItem_SetRatioSize(wxobj, width, height);
         }
 
-        public float Ratio
-        {
-            set { wxSizerItem_SetRatioFloat(wxObject, value); }
-            get { return wxSizerItem_GetRatioFloat(wxObject); }
-        }
+        public void Ratio(float value) { wxSizerItem_SetRatioFloat(wxobj, value); }
+        public float Ratio() { return wxSizerItem_GetRatioFloat(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public bool IsWindow
-        {
-            get { return wxSizerItem_IsWindow(wxObject); }
-        }
+        public bool IsWindow() { return wxSizerItem_IsWindow(wxobj); }
 
-        public bool IsSizer
-        {
-            get { return wxSizerItem_IsSizer(wxObject); }
-        }
+        public bool IsSizer() { return wxSizerItem_IsSizer(wxobj); }
 
-        public bool IsSpacer
-        {
-            get { return wxSizerItem_IsSpacer(wxObject); }
-        }
+        public bool IsSpacer() { return wxSizerItem_IsSpacer(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public int Proportion
-        {
-            set { wxSizerItem_SetProportion(wxObject, value); }
-            get { return wxSizerItem_GetProportion(wxObject); }
-        }
+        public void Proportion(int value) { wxSizerItem_SetProportion(wxobj, value); }
+        public int Proportion() { return wxSizerItem_GetProportion(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public int Flag
-        {
-            set { wxSizerItem_SetFlag(wxObject, value); }
-            get { return wxSizerItem_GetFlag(wxObject); }
-        }
+        public void Flag(int value) { wxSizerItem_SetFlag(wxobj, value); }
+        public int Flag() { return wxSizerItem_GetFlag(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public int Border
-        {
-            set { wxSizerItem_SetBorder(wxObject, value); }
-            get { return wxSizerItem_GetBorder(wxObject); }
-        }
+        public void Border(int value) { wxSizerItem_SetBorder(wxobj, value); }
+        public int Border() { return wxSizerItem_GetBorder(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public Window Window
-        {
-            get { return (Window)FindObject(wxSizerItem_GetWindow(wxObject)); }
-            set { wxSizerItem_SetWindow(wxObject, Object.SafePtr(value)); }
-        }
+        public Window window() { return cast(Window)FindObject(wxSizerItem_GetWindow(wxobj)); }
+        public void window(Window value) { wxSizerItem_SetWindow(wxobj, wxObject.SafePtr(value)); }
 
         //-----------------------------------------------------------------------------
 
-        public Sizer Sizer
-        {
-            get { return (Sizer)FindObject(wxSizerItem_GetSizer(wxObject)); }
-            set { wxSizerItem_SetSizer(wxObject, Object.SafePtr(value)); }
-        }
+        public Sizer sizer() { return cast(Sizer)FindObject(wxSizerItem_GetSizer(wxobj)); }
+        public void sizer(Sizer value) { wxSizerItem_SetSizer(wxobj, wxObject.SafePtr(value)); }
 
         //-----------------------------------------------------------------------------
 
-        public Size Spacer
-        {
-            get { 
-                Size spacer = new Size();
-                wxSizerItem_GetSpacer(wxObject, ref spacer);
+        public Size Spacer() { 
+                Size spacer;
+                wxSizerItem_GetSpacer(wxobj, spacer);
                 return spacer;
             }
-            set { wxSizerItem_SetSpacer(wxObject, ref value); }
-        }
+        public void Spacer(Size value) { wxSizerItem_SetSpacer(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
         public void Show(bool show)
         {
-            wxSizerItem_Show(wxObject, show);
+            wxSizerItem_Show(wxobj, show);
         }
 
-        public bool IsShown
-        {
-            get { return wxSizerItem_IsShown(wxObject); }
-        }
+        public bool IsShown() { return wxSizerItem_IsShown(wxobj); }
 
         //-----------------------------------------------------------------------------
 
-        public Object UserData
-        {
-            get { return (Object)FindObject(wxSizerItem_GetUserData(wxObject)); }
-        }
+        public wxObject UserData() { return FindObject(wxSizerItem_GetUserData(wxobj)); }
 
         //-----------------------------------------------------------------------------
 
-        public Point Position
-        {
-            get {
-                Point pos = new Point();
-                wxSizerItem_GetPosition(wxObject, ref pos);
+        public Point Position() {
+                Point pos;
+                wxSizerItem_GetPosition(wxobj, pos);
                 return pos;
             }
-        }
     }
-}
 

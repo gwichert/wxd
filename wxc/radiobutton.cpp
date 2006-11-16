@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - radiobutton.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - radiobutton.cxx
 //
 // The wxRadioButton proxy interface
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/radiobut.h>
 #include "local_events.h"
 
@@ -34,9 +38,9 @@ wxRadioButton* wxRadioButton_ctor()
 
 extern "C" WXEXPORT
 bool wxRadioButton_Create(wxRadioButton* self, wxWindow* parent, int id,
-                       const char* label, const wxPoint* pos,
+                       dstr label, const wxPoint* pos,
                        const wxSize* size, int style, const wxValidator* val,
-                       const char* name)
+                       dstr name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -47,11 +51,11 @@ bool wxRadioButton_Create(wxRadioButton* self, wxWindow* parent, int id,
 	if (val == NULL)
 		val = &wxDefaultValidator;
 
-	if (name == NULL)
-		name = "radioButton";
+	if (name.data==NULL)
+		name = dstr("radioButton",sizeof("radioButton")-1);
 
-	return self->Create(parent, id, wxString(label, wxConvUTF8), *pos, *size, style,
-	                    *val, wxString(name, wxConvUTF8))?1:0;
+	return self->Create(parent, id, wxString(label.data, wxConvUTF8, label.length), *pos, *size, style,
+	                    *val, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------

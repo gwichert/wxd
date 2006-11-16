@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - notebook.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - notebook.cxx
 //
 // The wxNotebook proxy interface.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/notebook.h>
 #include "local_events.h"
 
@@ -37,16 +41,16 @@ wxNotebook* wxNotebook_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxNotebook_AddPage(wxNotebook* self, wxNotebookPage* page, const char* text, bool select, int imageId)
+bool wxNotebook_AddPage(wxNotebook* self, wxNotebookPage* page, dstr text, bool select, int imageId)
 {
-	return self->AddPage(page, wxString(text, wxConvUTF8), select, imageId)?1:0;
+	return self->AddPage(page, wxString(text.data, wxConvUTF8, text.length), select, imageId)?1:0;
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
 bool wxNotebook_Create(wxNotebook* self, wxWindow* parent, int id, const wxPoint* pos,
-                       const wxSize* size, long style, const char* name)
+                       const wxSize* size, long style, dstr name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -54,10 +58,10 @@ bool wxNotebook_Create(wxNotebook* self, wxWindow* parent, int id, const wxPoint
 	if (size == NULL)
 		size = &wxDefaultSize;
 
-	if (name == NULL)
-		name = "notebook";
+	if (name.data==NULL)
+		name = dstr("notebook",sizeof("notebook")-1);
 
-	return self->Create(parent, id, *pos, *size, style, wxString(name, wxConvUTF8))?1:0;
+	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -95,17 +99,17 @@ int wxNotebook_GetSelection(wxNotebook* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxNotebook_SetPageText(wxNotebook* self, int nPage, const char* strText)
+bool wxNotebook_SetPageText(wxNotebook* self, int nPage, dstr strText)
 {
-	return self->SetPageText(nPage, wxString(strText, wxConvUTF8))?1:0;
+	return self->SetPageText(nPage, wxString(strText.data, wxConvUTF8, strText.length))?1:0;
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxNotebook_GetPageText(wxNotebook* self, int nPage)
+dstr wxNotebook_GetPageText(wxNotebook* self, int nPage)
 {
-	return new wxString(self->GetPageText(nPage).c_str());;
+	return dstr(self->GetPageText(nPage).c_str());;
 }
 
 //-----------------------------------------------------------------------------
@@ -199,9 +203,9 @@ bool wxNotebook_DeleteAllPages(wxNotebook* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxNotebook_InsertPage(wxNotebook* self, int nPage, wxNotebookPage *pPage, const char* strText, bool bSelect, int imageId)
+bool wxNotebook_InsertPage(wxNotebook* self, int nPage, wxNotebookPage *pPage, dstr strText, bool bSelect, int imageId)
 {
-	return self->InsertPage(nPage, pPage, wxString(strText, wxConvUTF8), bSelect, imageId)?1:0;
+	return self->InsertPage(nPage, pPage, wxString(strText.data, wxConvUTF8, strText.length), bSelect, imageId)?1:0;
 }
 
 //-----------------------------------------------------------------------------

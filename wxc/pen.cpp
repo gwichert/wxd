@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - pen.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - pen.cxx
 //
 // The wxPen proxy interface.
@@ -11,13 +14,14 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxPen* wxPen_ctorByName(const char* name, int width, int style)
+wxPen* wxPen_ctorByName(dstr name, int width, int style)
 {
-	return new wxPen(wxString(name, wxConvUTF8), width, style);
+	return new wxPen(wxString(name.data, wxConvUTF8, name.length), width, style);
 }
 
 //-----------------------------------------------------------------------------

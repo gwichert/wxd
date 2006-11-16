@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - MaximizeEvent.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - MaximizeEvent.cs
 //
 // The wxMaximizeEvent wrapper class.
@@ -10,24 +13,28 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Runtime.InteropServices;
+module wx.MaximizeEvent;
+import wx.common;
+import wx.Event;
 
-namespace wx
-{
-	public class MaximizeEvent : Event
-	{
-		[DllImport("wx-c")] static extern IntPtr wxMaximizeEvent_ctor(int Id);
+		static extern (C) IntPtr wxMaximizeEvent_ctor(int Id);
 		
 		//-----------------------------------------------------------------------------
 
-		public MaximizeEvent(IntPtr wxObject) 
-			: base(wxObject) { }
+	public class MaximizeEvent : Event
+	{
+		public this(IntPtr wxobj) 
+			{ super(wxobj); }
 			
-		public MaximizeEvent()
-			: base(wxMaximizeEvent_ctor(0)) {}
+		public this()
+			{ super(wxMaximizeEvent_ctor(0));}
 
-		public MaximizeEvent(int Id)
-			: this(wxMaximizeEvent_ctor(Id)) { }
+		public this(int Id)
+			{ this(wxMaximizeEvent_ctor(Id)); }
+
+		private static Event New(IntPtr obj) { return new MaximizeEvent(obj); }
+
+		static this()
+		{
+			AddEventType(wxEVT_MAXIMIZE,				&MaximizeEvent.New);		}
 	}
-}

@@ -1,21 +1,18 @@
 //-----------------------------------------------------------------------------
-// wx.NET/Samples - Wizard.cs
+// wxD/Samples - Wizard.d
 //
-// A wx.NET version of the wxWidgets "wizard" sample.
+// A wxD version of the wxWidgets "wizard" sample.
 //
 // Written by Jason Perkins (jason@379.com)
+// Modified by BERO <berobero@users.sourceforge.net>
 // (C) 2003 by 379, Inc.
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using wx;
+import wx.wx;
 
-namespace wx.Samples
-{
     enum Cmd
     {
         About,
@@ -36,7 +33,7 @@ namespace wx.Samples
 
         //---------------------------------------------------------------------
 
-        [STAThread]
+        
         static void Main()
         {
             MyApp app = new MyApp();
@@ -51,56 +48,56 @@ namespace wx.Samples
     {
         //---------------------------------------------------------------------
 
-        public MyFrame(string title)
-            : base(title)
+        public this(string title)
         {
+            super(title);
             Menu fileMenu = new Menu();
-            fileMenu.Append((int)Cmd.RunWizard, "&Run wizard...\tCtrl-R");
+            fileMenu.Append(Cmd.RunWizard, "&Run wizard...\tCtrl-R");
             fileMenu.AppendSeparator();
-            fileMenu.Append((int)Cmd.Quit, "E&xit\tAlt-X", "Quit this program");
+            fileMenu.Append(Cmd.Quit, "E&xit\tAlt-X", "Quit this program");
 
             Menu helpMenu = new Menu();
-            helpMenu.Append((int)Cmd.About, "&About...\tF1", "Show about dialog");
+            helpMenu.Append(Cmd.About, "&About...\tF1", "Show about dialog");
 
             MenuBar menuBar = new MenuBar();
             menuBar.Append(fileMenu, "&File");
             menuBar.Append(helpMenu, "&Help");
-            MenuBar = menuBar;
+            this.menuBar = menuBar;
 
             CreateStatusBar();
 
             // Add event listeners
 
-            EVT_MENU((int)Cmd.About,        new EventListener(OnAbout));
-            EVT_MENU((int)Cmd.Quit,         new EventListener(OnQuit));
-            EVT_MENU((int)Cmd.RunWizard,    new EventListener(OnRunWizard));
+            EVT_MENU(Cmd.About,        &OnAbout);
+            EVT_MENU(Cmd.Quit,         &OnQuit);
+            EVT_MENU(Cmd.RunWizard,    &OnRunWizard);
         }
 
         //---------------------------------------------------------------------
 
-        public void OnQuit(object sender, Event e)
+        public void OnQuit(Object sender, Event e)
         {
             Close(true);
         }
 
         //---------------------------------------------------------------------
 
-        public void OnAbout(object sender, Event e)
+        public void OnAbout(Object sender, Event e)
         {
-            string msg = "Demo of wxWizard class\n© 1999, 2000 Vadim Zeitlin";
-            MessageDialog.ShowModal(this, msg, "About wxWizard Sample", Dialog.wxOK | Dialog.wxICON_INFORMATION);
+            string msg = "Demo of wxWizard class\n(c) 1999, 2000 Vadim Zeitlin\n ported for D by BERO";
+            MessageBox(this, msg, "About wxWizard Sample", Dialog.wxOK | Dialog.wxICON_INFORMATION);
         }
 
         //---------------------------------------------------------------------
 
-        public void OnRunWizard(object sender, Event e)
+        public void OnRunWizard(Object sender, Event e)
         {
             Wizard wizard = new Wizard(this, -1, "Absolutely Useless Wizard",
                                              new Bitmap("../Samples/Wizard/wiztest.png"));
 
             WizardPageSimple page1 = new WizardPageSimple(wizard);
             StaticText text = new StaticText(page1, -1,
-                                                   "This wizard doesn't help you do anything at all.\n\n" +
+                                                   "This wizard doesn't help you do anything at all.\n\n" ~
                                                    "The next pages will present you with more useless controls.");
 
             RadioBoxPage   page3 = new RadioBoxPage(wizard);
@@ -115,7 +112,7 @@ namespace wx.Samples
 
         //---------------------------------------------------------------------
 
-        public void OnWizardCancel(object sender, Event e)
+        public void OnWizardCancel(Object sender, Event e)
         {
         }
     }
@@ -127,8 +124,9 @@ namespace wx.Samples
 
         //---------------------------------------------------------------------
 
-        public ValidationPage(Wizard parent) : base(parent)
+        public this(Wizard parent)
         {
+            super(parent);
             checkbox = new CheckBox(this, -1, "Check Me");
         }
 
@@ -139,7 +137,7 @@ namespace wx.Samples
             if (!checkbox.Value)
             {
                 string msg = "Check the checkbox first!";
-                MessageDialog.ShowModal(this, msg, "No way", Dialog.wxOK | Dialog.wxICON_WARNING);
+                MessageBox(this, msg, "No way", Dialog.wxOK | Dialog.wxICON_WARNING);
                 return false;
             }
 
@@ -152,22 +150,26 @@ namespace wx.Samples
 
     public class RadioBoxPage : WizardPageSimple
     {
-        private enum Choices { Forward, Backward, Both, Neither };
-
         private RadioBox radio;
 
         //---------------------------------------------------------------------
 
-        public RadioBoxPage(Wizard parent) : base(parent)
+        public this(Wizard parent)
         {
-            radio = new RadioBox(this, -1, "Allow to proceed:", new Point(5,5),
-                                    wxDefaultSize, Enum.GetNames(typeof(Choices)),
+            super(parent);
+            static string[] choices = [ "Forward", "Backward", "Both", "Neither" ];
+
+            radio = new RadioBox(this, -1, "Allow to proceed:", new_Point(5,5),
+                                    wxDefaultSize, choices,
                                     1, 0);
-            radio.Selection = (int)Choices.Both;
+            radio.Selection = 2;
         }
 
         //---------------------------------------------------------------------
     }
 
-}
 
+void main()
+{
+	MyApp.Main();
+}

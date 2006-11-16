@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - maximizeevent.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - maximizeevent.cxx
 // 
 // The wxMaximizeEvent proxy interface.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 
 //-----------------------------------------------------------------------------
 

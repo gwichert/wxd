@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - MessageDialog.cs
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// based on
 // wx.NET - MessageDialog.cs
 //
 // The wxMessageDialog wrapper class.
@@ -10,91 +13,59 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
+module wx.MessageDialog;
+import wx.common;
+import wx.Dialog;
 
-namespace wx
-{
 	// The MessageDialog class implements the interface for wxWidgets' 
 	// wxMessageDialog class and wxMessageBox.
 
-	public class MessageDialog : Dialog
-	{
 		// MessageBox function
-		[DllImport("wx-c")] static extern int    wxMsgBox(IntPtr parent, string msg, string cap, uint style, ref Point pos);
+		static extern (C) int    wxMsgBox(IntPtr parent, string msg, string cap, uint style, inout Point pos);
 
 		// Message dialog methods
-		[DllImport("wx-c")] static extern IntPtr wxMessageDialog_ctor(IntPtr parent, string message, string caption, uint style, ref Point pos);
-		[DllImport("wx-c")] static extern int    wxMessageDialog_ShowModal(IntPtr self);
+		static extern (C) IntPtr wxMessageDialog_ctor(IntPtr parent, string message, string caption, uint style, inout Point pos);
+		static extern (C) int    wxMessageDialog_ShowModal(IntPtr self);
 
+	public class MessageDialog : Dialog
+	{
 		//---------------------------------------------------------------------
 	
-		internal MessageDialog(IntPtr wxObject) 
-			: base(wxObject) { }
+		private this(IntPtr wxobj) 
+			{ super(wxobj); }
 
-		public MessageDialog(Window parent, string msg)
-			: this(parent, msg, "Message box", wxOK | wxCANCEL | wxCENTRE, wxDefaultPosition) { }
+		public this(Window parent, string msg)
+			{ this(parent, msg, "Message box", wxOK | wxCANCEL | wxCENTRE, wxDefaultPosition); }
 
-		public MessageDialog(Window parent, string msg, string caption)
-			: this(parent, msg, caption, wxOK | wxCANCEL | wxCENTRE, wxDefaultPosition) { }
+		public this(Window parent, string msg, string caption)
+			{ this(parent, msg, caption, wxOK | wxCANCEL | wxCENTRE, wxDefaultPosition); }
 
-		public MessageDialog(Window parent, string msg, string caption, long style)
-			: this(parent, msg, caption, style, wxDefaultPosition) { }
+		public this(Window parent, string msg, string caption, int style)
+			{ this(parent, msg, caption, style, wxDefaultPosition); }
 
-		public MessageDialog(Window parent, string msg, string caption, long style, Point pos)
-			: this(wxMessageDialog_ctor(Object.SafePtr(parent), msg, caption, (uint)style, ref pos)) { } 
+		public this(Window parent, string msg, string caption, int style, Point pos)
+			{ this(wxMessageDialog_ctor(wxObject.SafePtr(parent), msg, caption, cast(uint)style, pos)); }
 
 		//---------------------------------------------------------------------
 
 		public override int ShowModal()
 		{
-			return wxMessageDialog_ShowModal(wxObject);
+			return wxMessageDialog_ShowModal(wxobj);
 		}
 
 		//---------------------------------------------------------------------
 
-		// MessageBox interface
-
-		public static int ShowModal(string msg, string caption, long style)
-		{
-			return ShowModal(null, msg, caption, style, new Point(-1, -1));
-		}
-
-		public static int ShowModal(Window parent, string msg, string caption, long style)
-		{
-			return ShowModal(parent, msg, caption, (uint)style, new Point(-1, -1));
-		}	
-
-		public static int ShowModal(Window parent, string msg, string caption, long style, Point pos)
-		{
-			IntPtr hParent = (parent != null) ? parent.wxObject : IntPtr.Zero;
-			return wxMsgBox(hParent, msg, caption, (uint)style, ref pos);
-		}
-		
-		public static int MessageBox(string msg)
-		{
-			return ShowModal(null, msg, "Message", wxOK, new Point(-1, -1));
-		}
-		
-		public static int MessageBox(string msg, string caption)
-		{
-			return ShowModal(null, msg, caption, wxOK, new Point(-1, -1));
-		}
-		
-		public static int MessageBox(string msg, string caption, long style)
-		{
-			return ShowModal(null, msg, caption, style, new Point(-1, -1));
-		}
-		
-		public static int MessageBox(string msg, string caption, long style, Window parent)
-		{
-			return ShowModal(parent, msg, caption, style, new Point(-1, -1));
-		}
-		
-		public static int MessageBox(string msg, string caption, long style, Window parent, Point pos)
-		{
-			return ShowModal(parent, msg, caption, style, pos);
-		}
 	}
-}
+
+		static extern(C) int wxMessageBox_func(string msg, string cap, int style, IntPtr parent,int x, int y);
+
+		static int MessageBox(string msg,string caption="Message",int style=Dialog.wxOK | Dialog.wxCENTRE , Window parent=null, int x=-1, int y=-1)
+		{
+			return wxMessageBox_func(msg,caption,style,wxObject.SafePtr(parent),x,y);
+		}
+
+		/* wx.NET compat */
+		static int MessageBox(Window parent,string msg,string caption="Message",int style=Dialog.wxOK | Dialog.wxCENTRE , Point pos=Dialog.wxDefaultPosition)
+		{
+			return wxMessageBox_func(msg,caption,style,wxObject.SafePtr(parent),pos.X,pos.Y);
+		}

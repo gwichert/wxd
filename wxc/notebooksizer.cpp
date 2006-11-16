@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - notebooksizer.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - notebooksizer.cxx
 //
 // The wxNotebookSizer proxy interface
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include <wx/sizer.h>
 
 //-----------------------------------------------------------------------------

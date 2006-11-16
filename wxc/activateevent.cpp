@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - activateevent.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - activateevent.cxx
 // 
 // The wxActivateEvent proxy interface.
@@ -11,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 
 //-----------------------------------------------------------------------------
 

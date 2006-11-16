@@ -1,4 +1,7 @@
 //-----------------------------------------------------------------------------
+// wxD - app.cxx
+// (C) 2005 bero <berobero.sourceforge.net>
+// based on
 // wx.NET - app.cxx
 //
 // The wxApp proxy interface.
@@ -11,10 +14,14 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#include "common.h"
 #include "local_events.h"
 
-typedef bool (CALLBACK* Virtual_OnInit) ();
-typedef int (CALLBACK* Virtual_OnExit) ();
+#include <stdio.h>
+
+typedef bool (CALLBACK* Virtual_Initialize) (dobj obj,int *argc,char** argv);
+typedef bool (CALLBACK* Virtual_OnInit) (dobj obj);
+typedef int (CALLBACK* Virtual_OnExit) (dobj obj);
 
 //-----------------------------------------------------------------------------
 // The proxy class
@@ -22,21 +29,30 @@ typedef int (CALLBACK* Virtual_OnExit) ();
 class _App : public wxApp
 {
 public:
+	bool Initialize(int& argc, wxChar **argv)
+	{
+		return m_Initialize(m_dobj,&argc,argv); 
+	}
+
 	bool OnInit()
-	{ return m_OnInit(); }
+	{ return m_OnInit(m_dobj); }
 	
 	int OnExit()
-	{ return m_OnExit(); }
+	{ return m_OnExit(m_dobj); }
 	
-	void RegisterVirtual(Virtual_OnInit onInit, Virtual_OnExit onExit)
+	void RegisterVirtual(dobj obj, Virtual_OnInit onInit, Virtual_OnExit onExit,Virtual_Initialize initialize)
 	{
+		m_dobj = obj;
 		m_OnInit = onInit;
 		m_OnExit = onExit;
+		m_Initialize = initialize;
 	}
 	
 private:
 	Virtual_OnInit m_OnInit;
 	Virtual_OnExit m_OnExit;
+	Virtual_Initialize m_Initialize;
+	dobj m_dobj;
 };
 
 //-----------------------------------------------------------------------------
@@ -60,9 +76,17 @@ _App* wxApp_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxApp_RegisterVirtual(_App* self, Virtual_OnInit onInit, Virtual_OnExit onExit)
+void wxApp_RegisterVirtual(_App* self, dobj obj, Virtual_OnInit onInit, Virtual_OnExit onExit,Virtual_Initialize initalize)
 {
-	self->RegisterVirtual(onInit, onExit );
+	self->RegisterVirtual(obj, onInit, onExit ,initalize);
+}
+
+//-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT
+bool wxApp_Initialize(_App* self,int& argc, wxChar **argv)
+{
+	return self->wxApp::Initialize(argc,argv)?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -83,62 +107,12 @@ int wxApp_OnExit(_App* self)
 
 //-----------------------------------------------------------------------------
 
-#if defined(_WINDOWS)
-
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
-
-#include <wx/msw/private.h>
-#include <wx/cmdline.h>
-
-	extern "C" WXEXPORT 
-	wxNetEntry(HINSTANCE hInstance, HINSTANCE WXUNUSED(hPrevInstance),
-			   char * WXUNUSED(pCmdLine), int nCmdShow)
-	{
-		// remember the parameters Windows gave us
-		wxSetInstance(hInstance);
-		wxApp::m_nCmdShow = nCmdShow;
-
-		// parse the command line: we can't use pCmdLine in Unicode build so it is
-		// simpler to never use it at all (this also results in a more correct
-		// argv[0])
-
-		// break the command line in words
-		wxArrayString args;
-		const wxChar *cmdLine = ::GetCommandLine();
-		if ( cmdLine )
-		{
-			args = wxCmdLineParser::ConvertStringToArgs(cmdLine);
-		}
-
-		int argc = args.GetCount();
-
-		// +1 here for the terminating NULL
-		wxChar **argv = new wxChar *[argc + 1];
-		for ( int i = 0; i < argc; i++ )
-		{
-			argv[i] = wxStrdup(args[i]);
-		}
-
-		// argv[] must be NULL-terminated
-		argv[argc] = NULL;
-
-		return wxEntry(argc, argv);
-	}
-
-	static HANDLE thisModule;
+#if defined(__WXMSW__)
 
 	extern "C" WXEXPORT
 	void wxApp_Run(int argc, char* argv[])
 	{
-		wxNetEntry((HINSTANCE)thisModule, NULL, (char*)GetCommandLineW(), 0);
-	}
-
-	BOOL APIENTRY DllMain(HANDLE hModule, DWORD ulReasonForCall, LPVOID lpReserved)
-	{
-		if (ulReasonForCall == DLL_PROCESS_ATTACH)
-			thisModule = hModule;
-		return TRUE;
+		wxEntry(GetModuleHandle(NULL), NULL, (char*)GetCommandLineW(), SW_SHOWNORMAL);
 	}
 
 #else
@@ -154,29 +128,29 @@ int wxApp_OnExit(_App* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT 
-wxString* wxApp_GetVendorName(wxApp* self)
+dstr wxApp_GetVendorName(wxApp* self)
 {
-    return new wxString(self->GetVendorName());
+    return dstr(self->GetVendorName());
 }
 
 extern "C" WXEXPORT 
-void wxApp_SetVendorName(wxApp* self, char* name)
+void wxApp_SetVendorName(wxApp* self, dstr name)
 {
-    self->SetVendorName(wxString(name, wxConvUTF8));
+    self->SetVendorName(wxString(name.data, wxConvUTF8, name.length));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT 
-wxString* wxApp_GetAppName(wxApp* self)
+dstr wxApp_GetAppName(wxApp* self)
 {
-    return new wxString(self->GetAppName());
+    return dstr(self->GetAppName());
 }
 
 extern "C" WXEXPORT 
-void wxApp_SetAppName(wxApp* self, char* name)
+void wxApp_SetAppName(wxApp* self, dstr name)
 {
-    self->SetAppName(wxString(name, wxConvUTF8));
+    self->SetAppName(wxString(name.data, wxConvUTF8, name.length));
 }
 
 //-----------------------------------------------------------------------------
