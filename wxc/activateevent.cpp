@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - activateevent.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - activateevent.cxx
 // 
 // The wxActivateEvent proxy interface.
@@ -14,14 +11,13 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxActivateEvent* wxActivateEvent_ctor(wxEventType type, bool active, int Id)
+wxActivateEvent* wxActivateEvent_ctor(wxEventType type)
 {
-    return new wxActivateEvent(type,active,Id);
+    return new wxActivateEvent(type);
 }
 
 extern "C" WXEXPORT

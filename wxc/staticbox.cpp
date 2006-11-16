@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - staticbox.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - staticbox.cxx
 //
 // The wxStaticBox proxy interface
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/statbox.h>
 #include "local_events.h"
 
@@ -44,9 +40,9 @@ void wxStaticBox_dtor(wxStaticBox* self)
 
 extern "C" WXEXPORT
 bool wxStaticBox_Create(wxStaticBox* self, wxWindow* parent, wxWindowID id,
-                        dstr label,
+                        const char* label,
                         const wxPoint* pos, const wxSize* size,
-                        long style, dstr name)
+                        long style, const char* name)
 {
     if (pos == NULL)
         pos = &wxDefaultPosition;
@@ -54,11 +50,11 @@ bool wxStaticBox_Create(wxStaticBox* self, wxWindow* parent, wxWindowID id,
     if (size == NULL)
         size = &wxDefaultSize;
 
-    if (name.data==NULL)
-        name = dstr("staticBox",sizeof("staticBox")-1);
+    if (name == NULL)
+        name = "staticBox";
 
-    return self->Create(parent, id, wxString(label.data, wxConvUTF8, label.length),
-                        *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+    return self->Create(parent, id, wxString(label, wxConvUTF8),
+                        *pos, *size, style, wxString(name, wxConvUTF8))?1:0;
 }
 
 //-----------------------------------------------------------------------------

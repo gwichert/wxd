@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - checkbox.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - checkbox.cxx
 //
 // The wxCheckBox proxy interface.
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include "local_events.h"
 
 //-----------------------------------------------------------------------------
@@ -38,9 +34,9 @@ wxCheckBox* wxCheckBox_ctor()
 
 extern "C" WXEXPORT
 bool wxCheckBox_Create(wxCheckBox* self, wxWindow* parent, int id,
-                       dstr label, const wxPoint* pos,
+                       const char* label, const wxPoint* pos,
                        const wxSize* size, int style, const wxValidator* val,
-                       dstr name)
+                       const char* name)
 {
     if (pos == NULL)
         pos = &wxDefaultPosition;
@@ -51,12 +47,12 @@ bool wxCheckBox_Create(wxCheckBox* self, wxWindow* parent, int id,
     if (val == NULL)
         val = &wxDefaultValidator;
 	
-   	if (name.data==NULL)
-		name = dstr("checkbox",sizeof("checkbox")-1);
+   	if (name == NULL)
+		name = "checkbox";
 
 
-    return self->Create(parent, id, wxString(label.data, wxConvUTF8, label.length), *pos, *size, style,
-                        *val, wxString(name.data, wxConvUTF8, name.length))?1:0;
+    return self->Create(parent, id, wxString(label, wxConvUTF8), *pos, *size, style,
+                        *val, wxString(name, wxConvUTF8))?1:0;
 }
 
 //-----------------------------------------------------------------------------

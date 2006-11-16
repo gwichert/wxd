@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - helpevent.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - helpevent.cxx
 // 
 // The wxHelpEvent proxy interface.
@@ -14,14 +11,13 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxHelpEvent* wxHelpEvent_ctor(wxEventType type, int winid , wxPoint *pos)
+wxHelpEvent* wxHelpEvent_ctor(wxEventType type)
 {
-    return new wxHelpEvent(type,winid,*pos);
+    return new wxHelpEvent(type);
 }
 
 //-----------------------------------------------------------------------------
@@ -43,32 +39,32 @@ void wxHelpEvent_SetPosition(wxHelpEvent* self, wxPoint* pos)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxHelpEvent_GetLink(wxHelpEvent* self)
+wxString* wxHelpEvent_GetLink(wxHelpEvent* self)
 {
-	return dstr_ret(self->GetLink());
+	return new wxString(self->GetLink());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHelpEvent_SetLink(wxHelpEvent* self, dstr link)
+void wxHelpEvent_SetLink(wxHelpEvent* self, const char* link)
 {
-	self->SetLink(wxString(link.data, wxConvUTF8, link.length));
+	self->SetLink(wxString(link, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxHelpEvent_GetTarget(wxHelpEvent* self)
+wxString* wxHelpEvent_GetTarget(wxHelpEvent* self)
 {
-	return dstr_ret(self->GetTarget());
+	return new wxString(self->GetTarget());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHelpEvent_SetTarget(wxHelpEvent* self, dstr target)
+void wxHelpEvent_SetTarget(wxHelpEvent* self, const char* target)
 {
-	self->SetTarget(wxString(target.data, wxConvUTF8, target.length));
+	self->SetTarget(wxString(target, wxConvUTF8));
 }
 

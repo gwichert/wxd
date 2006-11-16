@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - SetCursorEvent.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - SetCursorEvent.cs
 //
 // The wxSetCursorEvent wrapper class.
@@ -13,49 +10,55 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.SetCursorEvent;
-import wx.common;
-import wx.Event;
-import wx.Cursor;
+using System;
+using System.Runtime.InteropServices;
 
-		static extern (C) IntPtr	wxSetCursorEvent_ctor(int x,int y);
-		static extern (C) int		wxSetCursorEvent_GetX(IntPtr self);
-		static extern (C) int		wxSetCursorEvent_GetY(IntPtr self);
-		static extern (C) void		wxSetCursorEvent_SetCursor(IntPtr self, IntPtr cursor);
-		static extern (C) IntPtr	wxSetCursorEvent_GetCursor(IntPtr self);
-		static extern (C) bool		wxSetCursorEvent_HasCursor(IntPtr self);
+namespace wx
+{
+	public class SetCursorEvent : Event
+	{
+		[DllImport("wx-c")] static extern IntPtr	wxSetCursorEvent_ctor(int type);
+		[DllImport("wx-c")] static extern int		wxSetCursorEvent_GetX(IntPtr self);
+		[DllImport("wx-c")] static extern int		wxSetCursorEvent_GetY(IntPtr self);
+		[DllImport("wx-c")] static extern void		wxSetCursorEvent_SetCursor(IntPtr self, IntPtr cursor);
+		[DllImport("wx-c")] static extern IntPtr	wxSetCursorEvent_GetCursor(IntPtr self);
+		[DllImport("wx-c")] static extern bool		wxSetCursorEvent_HasCursor(IntPtr self);
 		
 		//-----------------------------------------------------------------------------
 
-	public class SetCursorEvent : Event
-	{
-		public this(IntPtr wxobj) 
-			{ super(wxobj); }
+		public SetCursorEvent(IntPtr wxObject) 
+			: base(wxObject) { }
 
-		public this(int x=0,int y=0)
-			{ this(wxSetCursorEvent_ctor(x,y)); }
+		public SetCursorEvent(int type)
+			: this(wxSetCursorEvent_ctor(type)) { }
 
 		//-----------------------------------------------------------------------------	
 		
-		public int X() { return wxSetCursorEvent_GetX(wxobj); }
-		
-		//-----------------------------------------------------------------------------	
-		
-		public int Y() { return wxSetCursorEvent_GetY(wxobj); }
-		
-		//-----------------------------------------------------------------------------	
-		
-		public Cursor cursor() { return cast(Cursor)FindObject(wxSetCursorEvent_GetCursor(wxobj), &Cursor.New); }
-		public void cursor(Cursor value) { wxSetCursorEvent_SetCursor(wxobj, wxObject.SafePtr(value)); }
-		
-		//-----------------------------------------------------------------------------	
-		
-		public bool HasCursor() { return wxSetCursorEvent_HasCursor(wxobj); }
-
-		private static Event New(IntPtr obj) { return new SetCursorEvent(obj); }
-
-		static this()
+		public int X
 		{
-			AddEventType(wxEVT_SET_CURSOR,				&SetCursorEvent.New);
+			get { return wxSetCursorEvent_GetX(wxObject); }
+		}
+		
+		//-----------------------------------------------------------------------------	
+		
+		public int Y
+		{
+			get { return wxSetCursorEvent_GetY(wxObject); }
+		}
+		
+		//-----------------------------------------------------------------------------	
+		
+		public Cursor Cursor
+		{
+			get { return (Cursor)FindObject(wxSetCursorEvent_GetCursor(wxObject), typeof(Cursor)); }
+			set { wxSetCursorEvent_SetCursor(wxObject, Object.SafePtr(value)); }
+		}
+		
+		//-----------------------------------------------------------------------------	
+		
+		public bool HasCursor
+		{
+			get { return wxSetCursorEvent_HasCursor(wxObject); }
 		}
 	}
+}

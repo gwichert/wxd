@@ -1,18 +1,20 @@
 //-----------------------------------------------------------------------------
-// wxD/Samples - Splitter.d
+// wx.NET/Samples - Splitter.cs
 //
-// A wxD version of the wxWidgets "splitter" sample.
+// A wx.NET version of the wxWidgets "splitter" sample.
 //
 // Written by Jason Perkins (jason@379.com)
-// Modified by BERO <berobero@users.sourceforge.net>
 // (C) 2003 by 379, Inc.
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-import wx.wx;
+using System;
+using System.Drawing;
 
+namespace wx.Samples
+{
 	enum Cmd
 	{
 		Quit,
@@ -25,7 +27,7 @@ import wx.wx;
 	}
 
 
-	public class SplitterApp : App
+	public class SplitterApp : wx.App
 	{
 		//---------------------------------------------------------------------
 
@@ -38,7 +40,7 @@ import wx.wx;
 
 		//---------------------------------------------------------------------
 
-		
+		[STAThread]
 		static void Main()
 		{
 			SplitterApp app = new SplitterApp();
@@ -49,34 +51,34 @@ import wx.wx;
 	}
 
 
-	public class MyFrame : Frame
+	public class MyFrame : wx.Frame
 	{
 		private MySplitterWindow splitter;
 		private MyCanvas         left, right;
 
 		//---------------------------------------------------------------------
 
-		public this()
+		public MyFrame()
+			: base("wxSplitterWindow Sample",
+			       wxDefaultPosition, new Size(420,300),
+			       wxDEFAULT_FRAME | wxNO_FULL_REPAINT_ON_RESIZE)
 		{
-			super("wxSplitterWindow Sample",
-			       wxDefaultPosition, new_Size(420,300),
-			       wxDEFAULT_FRAME | wxNO_FULL_REPAINT_ON_RESIZE);
-			Menu splitMenu = new Menu();
-			splitMenu.Append(Cmd.SplitVertical, "Split &Vertically\tCtrl-V", "Split vertically");
-			splitMenu.Append(Cmd.SplitHorizontal, "Split &Horizontally\tCtrl-H", "Split horizontally");
-			splitMenu.Append(Cmd.Unsplit, "&Unsplit\tCtrl-U", "Unsplit");
+			wx.Menu splitMenu = new wx.Menu();
+			splitMenu.Append((int)Cmd.SplitVertical, "Split &Vertically\tCtrl-V", "Split vertically");
+			splitMenu.Append((int)Cmd.SplitHorizontal, "Split &Horizontally\tCtrl-H", "Split horizontally");
+			splitMenu.Append((int)Cmd.Unsplit, "&Unsplit\tCtrl-U", "Unsplit");
 			splitMenu.AppendSeparator();
-			splitMenu.AppendCheckItem(Cmd.SplitLive, "&Live Update\tCtrl-L", "Toggle live update mode");
-			splitMenu.Append(Cmd.SetPosition, "Set &Position\tCtrl-P", "Set the splitter position");
-			splitMenu.Append(Cmd.SetMinSize, "Set &Minimum Size\tCtrl-M", "Set the minimum pane size");
+			splitMenu.AppendCheckItem((int)Cmd.SplitLive, "&Live Update\tCtrl-L", "Toggle live update mode");
+			splitMenu.Append((int)Cmd.SetPosition, "Set &Position\tCtrl-P", "Set the splitter position");
+			splitMenu.Append((int)Cmd.SetMinSize, "Set &Minimum Size\tCtrl-M", "Set the minimum pane size");
 			splitMenu.AppendSeparator();
-			splitMenu.Append(Cmd.Quit, "E&xit\tAlt-X", "Exit");
+			splitMenu.Append((int)Cmd.Quit, "E&xit\tAlt-X", "Exit");
 
-			MenuBar menuBar = new MenuBar();
+			wx.MenuBar menuBar = new wx.MenuBar();
 			menuBar.Append(splitMenu, "&Splitter");
-			this.menuBar = menuBar;
+			MenuBar = menuBar;
 
-			menuBar.Check(Cmd.SplitLive, true);
+			menuBar.Check((int)Cmd.SplitLive, true);
 
 			CreateStatusBar(2);
 			SetStatusText("Min pane size = 0", 1);
@@ -84,35 +86,35 @@ import wx.wx;
 			splitter = new MySplitterWindow(this);
 
 			left = new MyCanvas(splitter);
-			left.BackgroundColour = new Colour("RED");
+			left.BackgroundColour = new wx.Colour("RED");
 			left.SetScrollbars(20, 20, 50, 50);
-			left.cursor = new Cursor(StockCursor.wxCURSOR_MAGNIFIER);
+			left.Cursor = new Cursor(StockCursor.wxCURSOR_MAGNIFIER);
 
 			right = new MyCanvas(splitter);
-			right.BackgroundColour = new Colour("CYAN");
+			right.BackgroundColour = new wx.Colour("CYAN");
 			right.SetScrollbars(20, 20, 50, 50);
 
 			splitter.SplitVertically(left, right, 100);
 
 			// Set up the event table
 
-			EVT_MENU(Cmd.SplitVertical,    &SplitVertical);
-			EVT_MENU(Cmd.SplitHorizontal,  &SplitHorizontal);
-			EVT_MENU(Cmd.Unsplit,          &Unsplit);
-			EVT_MENU(Cmd.SplitLive,        &ToggleLive);
-			EVT_MENU(Cmd.SetPosition,      &SetPosition);
-			EVT_MENU(Cmd.SetMinSize,       &SetMinSize);
+			EVT_MENU((int)Cmd.SplitVertical,    new EventListener(SplitVertical));
+			EVT_MENU((int)Cmd.SplitHorizontal,  new EventListener(SplitHorizontal));
+			EVT_MENU((int)Cmd.Unsplit,          new EventListener(Unsplit));
+			EVT_MENU((int)Cmd.SplitLive,        new EventListener(ToggleLive));
+			EVT_MENU((int)Cmd.SetPosition,      new EventListener(SetPosition));
+			EVT_MENU((int)Cmd.SetMinSize,       new EventListener(SetMinSize));
 
-			EVT_MENU(Cmd.Quit,             &OnQuit);
+			EVT_MENU((int)Cmd.Quit,             new EventListener(OnQuit));
 
-			EVT_UPDATE_UI(Cmd.SplitVertical,   &UpdateUIVertical);
-			EVT_UPDATE_UI(Cmd.SplitHorizontal, &UpdateUIHorizontal);
-			EVT_UPDATE_UI(Cmd.Unsplit,         &UpdateUIUnsplit);
+			EVT_UPDATE_UI((int)Cmd.SplitVertical,   new EventListener(UpdateUIVertical));
+			EVT_UPDATE_UI((int)Cmd.SplitHorizontal, new EventListener(UpdateUIHorizontal));
+			EVT_UPDATE_UI((int)Cmd.Unsplit,         new EventListener(UpdateUIUnsplit));
 		}
 
 		//---------------------------------------------------------------------
 
-		public void SplitHorizontal(Object sender, Event e)
+		public void SplitHorizontal(object sender, wx.Event e)
 		{
 			if (splitter.IsSplit)
 				splitter.Unsplit();
@@ -125,7 +127,7 @@ import wx.wx;
 			SetStatusText("Splitter split horizontally", 1);
 		}
 
-		public void SplitVertical(Object sender, Event e)
+		public void SplitVertical(object sender, wx.Event e)
 		{
 			if (splitter.IsSplit)
 				splitter.Unsplit();
@@ -138,52 +140,52 @@ import wx.wx;
 			SetStatusText("Splitter split vertically", 1);
 		}
 
-		public void Unsplit(Object sender, Event e)
+		public void Unsplit(object sender, wx.Event e)
 		{
 			if (splitter.IsSplit)
 				splitter.Unsplit();
 			SetStatusText("No splitter", 1);
 		}
 
-		public void ToggleLive(Object sender, Event e)
+		public void ToggleLive(object sender, wx.Event e)
 		{
-			CommandEvent ce = cast(CommandEvent)e;
+			CommandEvent ce = (CommandEvent)e;
 			if (ce.IsChecked)
-				splitter.StyleFlags = splitter.StyleFlags | SplitterWindow.wxSP_LIVE_UPDATE;
+				splitter.StyleFlags |= SplitterWindow.wxSP_LIVE_UPDATE;
 			else
-				splitter.StyleFlags = splitter.StyleFlags & ~SplitterWindow.wxSP_LIVE_UPDATE;
+				splitter.StyleFlags &= ~SplitterWindow.wxSP_LIVE_UPDATE;
 		}
 
-		public void SetPosition(Object sender, Event e)
+		public void SetPosition(object sender, wx.Event e)
 		{
 		}
 
-		public void SetMinSize(Object sender, Event e)
+		public void SetMinSize(object sender, wx.Event e)
 		{
 		}
 
 		//---------------------------------------------------------------------
 
-		public void OnQuit(Object sender, Event e)
+		public void OnQuit(object sender, wx.Event e)
 		{
 			Close(true);
 		}
 
-		public void UpdateUIHorizontal(Object sender, Event e)
+		public void UpdateUIHorizontal(object sender, wx.Event e)
 		{
-			UpdateUIEvent ue = cast(UpdateUIEvent)e;
-			ue.Enabled = (!splitter.IsSplit || splitter.splitMode != SplitMode.wxSPLIT_HORIZONTAL);
+			UpdateUIEvent ue = (UpdateUIEvent)e;
+			ue.Enabled = (!splitter.IsSplit || splitter.SplitMode != SplitMode.wxSPLIT_HORIZONTAL);
 		}
 
-		public void UpdateUIVertical(Object sender, Event e)
+		public void UpdateUIVertical(object sender, wx.Event e)
 		{
-			UpdateUIEvent ue = cast(UpdateUIEvent)e;
-			ue.Enabled = (!splitter.IsSplit || splitter.splitMode != SplitMode.wxSPLIT_VERTICAL);
+			UpdateUIEvent ue = (UpdateUIEvent)e;
+			ue.Enabled = (!splitter.IsSplit || splitter.SplitMode != SplitMode.wxSPLIT_VERTICAL);
 		}
 
-		public void UpdateUIUnsplit(Object sender, Event e)
+		public void UpdateUIUnsplit(object sender, wx.Event e)
 		{
-			UpdateUIEvent ue = cast(UpdateUIEvent)e;
+			UpdateUIEvent ue = (UpdateUIEvent)e;
 			ue.Enabled = splitter.IsSplit;
 		}
 
@@ -192,35 +194,35 @@ import wx.wx;
 
 
 
-	public class MySplitterWindow : SplitterWindow
+	public class MySplitterWindow : wx.SplitterWindow
 	{
 		private Frame parent;
 
 		//---------------------------------------------------------------------
 
-		public this(Frame parent)
-		{
-			super(parent, -1,
+		public MySplitterWindow(wx.Frame parent)
+			: base(parent, -1,
 			       wxDefaultPosition, wxDefaultSize,
-			       wxSP_3D | wxSP_LIVE_UPDATE | wxCLIP_CHILDREN);
+			       wxSP_3D | wxSP_LIVE_UPDATE | wxCLIP_CHILDREN)
+		{
 			this.parent = parent;
 		}
 
 		//---------------------------------------------------------------------
 
-		public void OnPositionChanged(Object sender, Event e)
+		public void OnPositionChanged(object sender, wx.Event e)
 		{
 		}
 
-		public void OnPositionChanging(Object sender, Event e)
+		public void OnPositionChanging(object sender, wx.Event e)
 		{
 		}
 
-		public void OnDoubleClick(Object sender, Event e)
+		public void OnDoubleClick(object sender, wx.Event e)
 		{
 		}
 
-		public void OnUnsplit(Object sender, Event e)
+		public void OnUnsplit(object sender, wx.Event e)
 		{
 		}
 
@@ -228,35 +230,30 @@ import wx.wx;
 	}
 
 
-	public class MyCanvas : ScrolledWindow
+	public class MyCanvas : wx.ScrolledWindow
 	{
 		//---------------------------------------------------------------------
 
-		public this(Window parent)
+		public MyCanvas(Window parent)
+			: base(parent)
 		{
-			super(parent);
 		}
 
 		//---------------------------------------------------------------------
 
-		public override void OnDraw(DC dc)
+		public override void OnDraw(wx.DC dc)
 		{
-			dc.pen = new Pen("BLACK", 1, FillStyle.wxSOLID);
+			dc.Pen = new Pen("BLACK", 1, FillStyle.wxSOLID);
 			dc.DrawLine(0, 0, 100, 100);
 
 			dc.BackgroundMode = FillStyle.wxTRANSPARENT;
 			dc.DrawText("Testing", 50, 50);
 
-			dc.pen = new Pen("RED", 1, FillStyle.wxSOLID);
-			dc.brush = new Brush("GREEN", FillStyle.wxSOLID);
+			dc.Pen = new Pen("RED", 1, FillStyle.wxSOLID);
+			dc.Brush = new Brush("GREEN", FillStyle.wxSOLID);
 			dc.DrawRectangle(120, 120, 100, 80);
 		}
 
 		//---------------------------------------------------------------------
 	}
-
-
-void main()
-{
-	SplitterApp.Main();
 }

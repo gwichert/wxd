@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - Icon.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - Icon.cs
 //
 // The wxIcon wrapper class.
@@ -13,51 +10,65 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.Icon;
-import wx.common;
-import wx.Bitmap;
+using System;
+using System.Reflection;
+using System.Runtime.InteropServices;
 
-		static extern (C) IntPtr wxIcon_ctor();
-		static extern (C) void   wxIcon_CopyFromBitmap(IntPtr self, IntPtr bitmap);
-		static extern (C) bool   wxIcon_LoadFile(IntPtr self, string name, BitmapType type);
+namespace wx
+{
+	public class Icon : Bitmap
+	{
+		[DllImport("wx-c")] static extern IntPtr wxIcon_ctor();
+		[DllImport("wx-c")] static extern void   wxIcon_CopyFromBitmap(IntPtr self, IntPtr bitmap);
+		[DllImport("wx-c")] static extern bool   wxIcon_LoadFile(IntPtr self, string name, BitmapType type);
 
 		//---------------------------------------------------------------------
 
-	public class Icon : Bitmap
-	{
-		public static Icon wxNullIcon;
-		public this(string name)
+		public Icon(string name)
+			: this()
 		{
-			this();
 			Image img = new Image();
 			if (!img.LoadFile(name))
-				throw new ArgumentException("file '" ~ name ~ "' not found");
+				throw new ArgumentException("file '" + name + "' not found");
 
 			Bitmap bmp = new Bitmap(img);
-			wxIcon_CopyFromBitmap(wxobj, bmp.wxobj);
+			wxIcon_CopyFromBitmap(wxObject, bmp.wxObject);
 		}
 
-		public this(string name, BitmapType type)
+		public Icon(string name, BitmapType type)
+			: this()
 		{
-			this();
-			if (!wxIcon_LoadFile(wxobj, name, type))
-				throw new ArgumentException("file '" ~ name ~ "' can't load");
+			if (type == BitmapType.wxBITMAP_TYPE_RESOURCE)
+			{
+				Assembly ResourceAssembly = Assembly.GetCallingAssembly();
+
+				Image img = new Image(name, ResourceAssembly);
+
+				Bitmap bmp = new Bitmap(img);
+				wxIcon_CopyFromBitmap(wxObject, bmp.wxObject);
+			}
+			else
+			{
+				if (!wxIcon_LoadFile(wxObject, name, type))
+					throw new ArgumentException();
+			}
 		}
 
-		public this()
+		public Icon()
+			: base(wxIcon_ctor())
 		{
-			super(wxIcon_ctor());
 		}
 		
-		public this(IntPtr wxobj) 
-			{ super(wxobj); }
+		public Icon(IntPtr wxObject) 
+			: base(wxObject) { }		
 
 		//---------------------------------------------------------------------
 
 		public void CopyFromBitmap(Bitmap bitmap)
 		{
-			wxIcon_CopyFromBitmap(wxobj, wxObject.SafePtr(bitmap));
+			wxIcon_CopyFromBitmap(wxObject, Object.SafePtr(bitmap));
 		}
 
 		//---------------------------------------------------------------------
 	}
+}

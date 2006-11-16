@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - progdlg.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - progdlg.cxx
 //
 // The wxProgressDialog proxy interface.
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/progdlg.h>
 #include "local_events.h"
 
@@ -34,10 +30,10 @@ class _ProgressDialog : public wxProgressDialog
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxProgressDialog* wxProgressDialog_ctor(dstr title, dstr message,
+wxProgressDialog* wxProgressDialog_ctor(const char* title, const char* message,
         int maximum, wxWindow* parent, int style)
 {
-    return new _ProgressDialog(wxString(title.data, wxConvUTF8, title.length), wxString(message.data, wxConvUTF8, message.length),
+    return new _ProgressDialog(wxString(title, wxConvUTF8), wxString(message, wxConvUTF8),
             maximum, parent, style);
 }
 
@@ -52,9 +48,9 @@ void wxProgressDialog_dtor(wxProgressDialog* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxProgressDialog_Update(wxProgressDialog* self, int value, dstr newmsg)
+bool wxProgressDialog_Update(wxProgressDialog* self, int value, const char* newmsg)
 {
-    return self->Update(value, wxString(newmsg.data, wxConvUTF8, newmsg.length))?1:0;
+    return self->Update(value, wxString(newmsg, wxConvUTF8))?1:0;
 }
 
 //-----------------------------------------------------------------------------

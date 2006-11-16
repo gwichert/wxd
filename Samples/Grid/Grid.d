@@ -1,18 +1,20 @@
 //-----------------------------------------------------------------------------
-// wxD/Samples - Grid.d
+// wx.NET/Samples - Grid.cs
 //
-// wxD "grid" sample.
+// wx.NET "grid" sample.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
-// Modified by BERO <berobero@users.sourceforge.net>
 // (C) 2004 by Alexander Olk
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-import wx.wx;
+using System;
+using System.Drawing; 
 
+namespace wx.Samples
+{
 	public class GridFrame : Frame
 	{
 		enum Cmd  
@@ -81,10 +83,10 @@ import wx.wx;
 		
 		//-----------------------------------------------------------------------------
 		
-		public this()
+		public GridFrame()
+			: base( null, -1, "wxWidgets grid class demo", wxDefaultPosition, wxDefaultSize )
 		{
-			super( null, -1, "wxWidgets grid class demo", wxDefaultPosition, wxDefaultSize );
-			icon = new Icon( "../Samples/Grid/mondrian.png" );
+			Icon = new wx.Icon( "../Samples/Grid/mondrian.png" );
 			
 			int gridW = 600;
 			int gridH = 300;
@@ -92,79 +94,79 @@ import wx.wx;
 			int logH = 100;
 			
 			Menu fileMenu = new Menu();
-			fileMenu.Append( Cmd.ID_VTABLE, "&Virtual table test\tCtrl-V" );
-			fileMenu.Append( Cmd.ID_BUGS_TABLE, "&Bugs table test\tCtrl-B" );
-			fileMenu.Append( Cmd.ID_SMALL_GRID, "&Small Grid test\tCtrl-S" );
+			fileMenu.Append( (int)Cmd.ID_VTABLE, "&Virtual table test\tCtrl-V" );
+			fileMenu.Append( (int)Cmd.ID_BUGS_TABLE, "&Bugs table test\tCtrl-B" );
+			fileMenu.Append( (int)Cmd.ID_SMALL_GRID, "&Small Grid test\tCtrl-S" );
 			fileMenu.AppendSeparator();
-			fileMenu.Append( Cmd.ID_EXIT, "E&xit\tAlt-X" );
+			fileMenu.Append( (int)Cmd.ID_EXIT, "E&xit\tAlt-X" );
 
 			Menu viewMenu = new Menu();
-			viewMenu.AppendCheckItem( Cmd.ID_TOGGLEROWLABELS,  "&Row labels", "" );
-			viewMenu.AppendCheckItem( Cmd.ID_TOGGLECOLLABELS,  "&Col labels", "" );
-			viewMenu.AppendCheckItem( Cmd.ID_TOGGLEEDIT,  "&Editable", "" );
-			viewMenu.AppendCheckItem( Cmd.ID_TOGGLEROWSIZING, "Ro&w drag-resize", "" );
-			viewMenu.AppendCheckItem( Cmd.ID_TOGGLECOLSIZING, "C&ol drag-resize", "" );
-			viewMenu.AppendCheckItem( Cmd.ID_TOGGLEGRIDSIZING, "&Grid drag-resize", "" );
-			viewMenu.AppendCheckItem( Cmd.ID_TOGGLEGRIDLINES, "&Grid Lines", "" );
-			viewMenu.Append( Cmd.ID_SET_HIGHLIGHT_WIDTH, "&Set Cell Highlight Width...", "" );
-			viewMenu.Append( Cmd.ID_SET_RO_HIGHLIGHT_WIDTH, "&Set Cell RO Highlight Width...", "" );
-			viewMenu.Append( Cmd.ID_AUTOSIZECOLS, "&Auto-size cols" );
-			viewMenu.AppendCheckItem( Cmd.ID_CELLOVERFLOW, "&Overflow cells", "" );
-			viewMenu.AppendCheckItem( Cmd.ID_RESIZECELL, "&Resize cell (7,1)", "" );
+			viewMenu.AppendCheckItem( (int)Cmd.ID_TOGGLEROWLABELS,  "&Row labels", "" );
+			viewMenu.AppendCheckItem( (int)Cmd.ID_TOGGLECOLLABELS,  "&Col labels", "" );
+			viewMenu.AppendCheckItem( (int)Cmd.ID_TOGGLEEDIT,  "&Editable", "" );
+			viewMenu.AppendCheckItem( (int)Cmd.ID_TOGGLEROWSIZING, "Ro&w drag-resize", "" );
+			viewMenu.AppendCheckItem( (int)Cmd.ID_TOGGLECOLSIZING, "C&ol drag-resize", "" );
+			viewMenu.AppendCheckItem( (int)Cmd.ID_TOGGLEGRIDSIZING, "&Grid drag-resize", "" );
+			viewMenu.AppendCheckItem( (int)Cmd.ID_TOGGLEGRIDLINES, "&Grid Lines", "" );
+			viewMenu.Append( (int)Cmd.ID_SET_HIGHLIGHT_WIDTH, "&Set Cell Highlight Width...", "" );
+			viewMenu.Append( (int)Cmd.ID_SET_RO_HIGHLIGHT_WIDTH, "&Set Cell RO Highlight Width...", "" );
+			viewMenu.Append( (int)Cmd.ID_AUTOSIZECOLS, "&Auto-size cols" );
+			viewMenu.AppendCheckItem( (int)Cmd.ID_CELLOVERFLOW, "&Overflow cells", "" );
+			viewMenu.AppendCheckItem( (int)Cmd.ID_RESIZECELL, "&Resize cell (7,1)", "" );
 
 			Menu rowLabelMenu = new Menu();
 
-			viewMenu.Append( Cmd.ID_ROWLABELALIGN, "R&ow label alignment", rowLabelMenu, "Change alignment of row labels" );
+			viewMenu.Append( (int)Cmd.ID_ROWLABELALIGN, "R&ow label alignment", rowLabelMenu, "Change alignment of row labels" );
 
-			rowLabelMenu.Append( Cmd.ID_ROWLABELHORIZALIGN, "&Horizontal" );
-			rowLabelMenu.Append( Cmd.ID_ROWLABELVERTALIGN, "&Vertical" );
+			rowLabelMenu.Append( (int)Cmd.ID_ROWLABELHORIZALIGN, "&Horizontal" );
+			rowLabelMenu.Append( (int)Cmd.ID_ROWLABELVERTALIGN, "&Vertical" );
 
 			Menu colLabelMenu = new Menu();
 
-			viewMenu.Append( Cmd.ID_COLLABELALIGN, "Col l&abel alignment", colLabelMenu, "Change alignment of col labels" );
+			viewMenu.Append( (int)Cmd.ID_COLLABELALIGN, "Col l&abel alignment", colLabelMenu, "Change alignment of col labels" );
 
-			colLabelMenu.Append( Cmd.ID_COLLABELHORIZALIGN, "&Horizontal" );
-			colLabelMenu.Append( Cmd.ID_COLLABELVERTALIGN, "&Vertical" );
+			colLabelMenu.Append( (int)Cmd.ID_COLLABELHORIZALIGN, "&Horizontal" );
+			colLabelMenu.Append( (int)Cmd.ID_COLLABELVERTALIGN, "&Vertical" );
 
 			Menu colMenu = new Menu();
-			colMenu.Append( Cmd.ID_SETLABELCOLOUR, "Set &label colour..." );
-			colMenu.Append( Cmd.ID_SETLABELTEXTCOLOUR, "Set label &text colour..." );
-			colMenu.Append( Cmd.ID_SETLABEL_FONT, "Set label fo&nt..." );
-			colMenu.Append( Cmd.ID_GRIDLINECOLOUR, "&Grid line colour..." );
-			colMenu.Append( Cmd.ID_SET_CELL_FG_COLOUR, "Set cell &foreground colour..." );
-			colMenu.Append( Cmd.ID_SET_CELL_BG_COLOUR, "Set cell &background colour..." );
+			colMenu.Append( (int)Cmd.ID_SETLABELCOLOUR, "Set &label colour..." );
+			colMenu.Append( (int)Cmd.ID_SETLABELTEXTCOLOUR, "Set label &text colour..." );
+			colMenu.Append( (int)Cmd.ID_SETLABEL_FONT, "Set label fo&nt..." );
+			colMenu.Append( (int)Cmd.ID_GRIDLINECOLOUR, "&Grid line colour..." );
+			colMenu.Append( (int)Cmd.ID_SET_CELL_FG_COLOUR, "Set cell &foreground colour..." );
+			colMenu.Append( (int)Cmd.ID_SET_CELL_BG_COLOUR, "Set cell &background colour..." );
 
 			Menu editMenu = new Menu();
-			editMenu.Append( Cmd.ID_INSERTROW, "Insert &row" );
-			editMenu.Append( Cmd.ID_INSERTCOL, "Insert &column" );
-			editMenu.Append( Cmd.ID_DELETEROW, "Delete selected ro&ws" );
-			editMenu.Append( Cmd.ID_DELETECOL, "Delete selected co&ls" );
-			editMenu.Append( Cmd.ID_CLEARGRID, "Cl&ear grid cell contents" );
+			editMenu.Append( (int)Cmd.ID_INSERTROW, "Insert &row" );
+			editMenu.Append( (int)Cmd.ID_INSERTCOL, "Insert &column" );
+			editMenu.Append( (int)Cmd.ID_DELETEROW, "Delete selected ro&ws" );
+			editMenu.Append( (int)Cmd.ID_DELETECOL, "Delete selected co&ls" );
+			editMenu.Append( (int)Cmd.ID_CLEARGRID, "Cl&ear grid cell contents" );
 
 			Menu selectMenu = new Menu();
-			selectMenu.AppendCheckItem( Cmd.ID_SELECT_UNSELECT, "Add new cells to the selection",
+			selectMenu.AppendCheckItem( (int)Cmd.ID_SELECT_UNSELECT, "Add new cells to the selection",
 				"When off, old selection is deselected before selecting the new cells" );
-			selectMenu.Append( Cmd.ID_SELECT_ALL, "Select all" );
-			selectMenu.Append( Cmd.ID_SELECT_ROW, "Select row 2" );
-			selectMenu.Append( Cmd.ID_SELECT_COL, "Select col 2" );
-			selectMenu.Append( Cmd.ID_SELECT_CELL, "Select cell (3, 1)" );
-			selectMenu.Append( Cmd.ID_DESELECT_ALL, "Deselect all" );
-			selectMenu.Append( Cmd.ID_DESELECT_ROW, "Deselect row 2" );
-			selectMenu.Append( Cmd.ID_DESELECT_COL, "Deselect col 2" );
-			selectMenu.Append( Cmd.ID_DESELECT_CELL, "Deselect cell (3, 1)" );
+			selectMenu.Append( (int)Cmd.ID_SELECT_ALL, "Select all" );
+			selectMenu.Append( (int)Cmd.ID_SELECT_ROW, "Select row 2" );
+			selectMenu.Append( (int)Cmd.ID_SELECT_COL, "Select col 2" );
+			selectMenu.Append( (int)Cmd.ID_SELECT_CELL, "Select cell (3, 1)" );
+			selectMenu.Append( (int)Cmd.ID_DESELECT_ALL, "Deselect all" );
+			selectMenu.Append( (int)Cmd.ID_DESELECT_ROW, "Deselect row 2" );
+			selectMenu.Append( (int)Cmd.ID_DESELECT_COL, "Deselect col 2" );
+			selectMenu.Append( (int)Cmd.ID_DESELECT_CELL, "Deselect cell (3, 1)" );
 			
 			Menu selectionMenu = new Menu();
-			selectMenu.Append( Cmd.ID_CHANGESEL, "Change &selection mode", selectionMenu, "Change selection mode" );
+			selectMenu.Append( (int)Cmd.ID_CHANGESEL, "Change &selection mode", selectionMenu, "Change selection mode" );
 
-			selectionMenu.Append( Cmd.ID_SELCELLS, "Select &Cells" );
-			selectionMenu.Append( Cmd.ID_SELROWS, "Select &Rows" );
-			selectionMenu.Append( Cmd.ID_SELCOLS, "Select C&ols" );
+			selectionMenu.Append( (int)Cmd.ID_SELCELLS, "Select &Cells" );
+			selectionMenu.Append( (int)Cmd.ID_SELROWS, "Select &Rows" );
+			selectionMenu.Append( (int)Cmd.ID_SELCOLS, "Select C&ols" );
 
 
 			Menu helpMenu = new Menu();
-			helpMenu.Append( Cmd.ID_ABOUT, "&About wxGrid demo" );
+			helpMenu.Append( (int)Cmd.ID_ABOUT, "&About wxGrid demo" );
 
-			MenuBar menuBar = new MenuBar();
+			wx.MenuBar menuBar = new wx.MenuBar();
 			menuBar.Append( fileMenu, "&File" );
 			menuBar.Append( viewMenu, "&View" );
 			menuBar.Append( colMenu,  "&Colours" );
@@ -172,11 +174,11 @@ import wx.wx;
 			menuBar.Append( selectMenu, "&Select" );
 			menuBar.Append( helpMenu, "&Help" );
 
-			this.menuBar = menuBar ;	
+			MenuBar = menuBar ;	
 			
-			grid = new Grid( this, -1, new_Point( 0, 0 ), new_Size( 400, 300 ) );
+			grid = new Grid( this, -1, new Point( 0, 0 ), new Size( 400, 300 ) );
 			
-			logWin = new TextCtrl( this, -1, "", new_Point( 0, gridH + 20 ), new_Size( logW, logH ), TextCtrl.wxTE_MULTILINE );
+			logWin = new TextCtrl( this, -1, "", new Point( 0, gridH + 20 ), new Size( logW, logH ), TextCtrl.wxTE_MULTILINE );
 			
 			Log.SetActiveTarget( logWin ); 
 			
@@ -220,7 +222,7 @@ import wx.wx;
 			grid.SetCellBackgroundColour( 3, 3, Colour.wxLIGHT_GREY );
 
 			grid.SetCellValue( 4, 4, "a weird looking cell" );
-			grid.SetCellAlignment( 4, 4, Alignment.wxALIGN_CENTRE, Alignment.wxALIGN_CENTRE );
+			grid.SetCellAlignment( 4, 4, (int)Alignment.wxALIGN_CENTRE, (int)Alignment.wxALIGN_CENTRE );
 			grid.SetCellRenderer( 4, 4, new MyGridCellRenderer() );
 
 			grid.SetCellValue( 3, 0, "0" );
@@ -252,12 +254,12 @@ import wx.wx;
 			grid.SetCellValue( 1, 7, "1415" );
 			grid.SetCellValue( 2, 7, "12345.67890" );
 
-			const string[] choices =
-			[
+			string[] choices =
+			{
 				"Please select a choice",
 				"This takes two cells",
 				"Another choice"
-			];
+			};
 			
 			grid.SetCellEditor( 4, 0, new GridCellChoiceEditor( choices ) );
 			grid.SetCellSize( 4, 0, 1, 2 );
@@ -265,7 +267,7 @@ import wx.wx;
 			grid.SetCellOverflow( 4, 0, false );
 
 			grid.SetCellSize( 7, 1, 3, 4 );
-			grid.SetCellAlignment( 7, 1, Alignment.wxALIGN_CENTRE, Alignment.wxALIGN_CENTRE );
+			grid.SetCellAlignment( 7, 1, (int)Alignment.wxALIGN_CENTRE, (int)Alignment.wxALIGN_CENTRE );
 			grid.SetCellValue( 7, 1, "Big box!" );
 
 			BoxSizer topSizer = new BoxSizer( Orientation.wxVERTICAL );
@@ -274,7 +276,7 @@ import wx.wx;
 			topSizer.Add( logWin, 0, Stretch.wxEXPAND );
 
 			AutoLayout = true;
-			this.sizer = topSizer ;
+			Sizer = topSizer ;
 
 			topSizer.Fit( this );
 			topSizer.SetSizeHints( this );
@@ -282,83 +284,83 @@ import wx.wx;
 			Centre();
 			SetDefaults();			
 			
-			EVT_MENU( Cmd.ID_TOGGLEROWLABELS,  & ToggleRowLabels ) ;
-			EVT_MENU( Cmd.ID_TOGGLECOLLABELS,  & ToggleColLabels ) ;
-			EVT_MENU( Cmd.ID_TOGGLEEDIT, & ToggleEditing ) ;
-			EVT_MENU( Cmd.ID_TOGGLEROWSIZING, & ToggleRowSizing ) ;
-			EVT_MENU( Cmd.ID_TOGGLECOLSIZING, & ToggleColSizing ) ;
-			EVT_MENU( Cmd.ID_TOGGLEGRIDSIZING, & ToggleGridSizing ) ;
-			EVT_MENU( Cmd.ID_TOGGLEGRIDLINES, & ToggleGridLines ) ;
-			EVT_MENU( Cmd.ID_AUTOSIZECOLS, & AutoSizeCols ) ;
-			EVT_MENU( Cmd.ID_CELLOVERFLOW, & CellOverflow ) ;
-			EVT_MENU( Cmd.ID_RESIZECELL, & ResizeCell ) ;
-			EVT_MENU( Cmd.ID_SETLABELCOLOUR, & SetLabelColour ) ;
-			EVT_MENU( Cmd.ID_SETLABELTEXTCOLOUR, & SetLabelTextColour ) ;
-			EVT_MENU( Cmd.ID_SETLABEL_FONT, & SetLabelFont ) ;
-			EVT_MENU( Cmd.ID_ROWLABELHORIZALIGN, & SetRowLabelHorizAlignment ) ;
-			EVT_MENU( Cmd.ID_ROWLABELVERTALIGN, & SetRowLabelVertAlignment ) ;
-			EVT_MENU( Cmd.ID_COLLABELHORIZALIGN, & SetColLabelHorizAlignment ) ;
-			EVT_MENU( Cmd.ID_COLLABELVERTALIGN, & SetColLabelVertAlignment ) ;
-			EVT_MENU( Cmd.ID_GRIDLINECOLOUR, & SetGridLineColour ) ;
-			EVT_MENU( Cmd.ID_INSERTROW, & InsertRow ) ;
-			EVT_MENU( Cmd.ID_INSERTCOL, & InsertCol ) ;
-			EVT_MENU( Cmd.ID_DELETEROW, & DeleteSelectedRows ) ;
-			EVT_MENU( Cmd.ID_DELETECOL, & DeleteSelectedCols ) ;
-			EVT_MENU( Cmd.ID_CLEARGRID, & ClearGrid ) ;
-			EVT_MENU( Cmd.ID_SELCELLS,  & SelectCells ) ;
-			EVT_MENU( Cmd.ID_SELROWS,  & SelectRows ) ;
-			EVT_MENU( Cmd.ID_SELCOLS,  & SelectCols ) ;
+			EVT_MENU( (int)Cmd.ID_TOGGLEROWLABELS,  new EventListener( ToggleRowLabels ) );
+			EVT_MENU( (int)Cmd.ID_TOGGLECOLLABELS,  new EventListener( ToggleColLabels ) );
+			EVT_MENU( (int)Cmd.ID_TOGGLEEDIT, new EventListener( ToggleEditing ) );
+			EVT_MENU( (int)Cmd.ID_TOGGLEROWSIZING, new EventListener( ToggleRowSizing ) );
+			EVT_MENU( (int)Cmd.ID_TOGGLECOLSIZING, new EventListener( ToggleColSizing ) );
+			EVT_MENU( (int)Cmd.ID_TOGGLEGRIDSIZING, new EventListener( ToggleGridSizing ) );
+			EVT_MENU( (int)Cmd.ID_TOGGLEGRIDLINES, new EventListener( ToggleGridLines ) );
+			EVT_MENU( (int)Cmd.ID_AUTOSIZECOLS, new EventListener( AutoSizeCols ) );
+			EVT_MENU( (int)Cmd.ID_CELLOVERFLOW, new EventListener( CellOverflow ) );
+			EVT_MENU( (int)Cmd.ID_RESIZECELL, new EventListener( ResizeCell ) );
+			EVT_MENU( (int)Cmd.ID_SETLABELCOLOUR, new EventListener( SetLabelColour ) );
+			EVT_MENU( (int)Cmd.ID_SETLABELTEXTCOLOUR, new EventListener( SetLabelTextColour ) );
+			EVT_MENU( (int)Cmd.ID_SETLABEL_FONT, new EventListener( SetLabelFont ) );
+			EVT_MENU( (int)Cmd.ID_ROWLABELHORIZALIGN, new EventListener( SetRowLabelHorizAlignment ) );
+			EVT_MENU( (int)Cmd.ID_ROWLABELVERTALIGN, new EventListener( SetRowLabelVertAlignment ) );
+			EVT_MENU( (int)Cmd.ID_COLLABELHORIZALIGN, new EventListener( SetColLabelHorizAlignment ) );
+			EVT_MENU( (int)Cmd.ID_COLLABELVERTALIGN, new EventListener( SetColLabelVertAlignment ) );
+			EVT_MENU( (int)Cmd.ID_GRIDLINECOLOUR, new EventListener( SetGridLineColour ) );
+			EVT_MENU( (int)Cmd.ID_INSERTROW, new EventListener( InsertRow ) );
+			EVT_MENU( (int)Cmd.ID_INSERTCOL, new EventListener( InsertCol ) );
+			EVT_MENU( (int)Cmd.ID_DELETEROW, new EventListener( DeleteSelectedRows ) );
+			EVT_MENU( (int)Cmd.ID_DELETECOL, new EventListener( DeleteSelectedCols ) );
+			EVT_MENU( (int)Cmd.ID_CLEARGRID, new EventListener( ClearGrid ) );
+			EVT_MENU( (int)Cmd.ID_SELCELLS,  new EventListener( SelectCells ) );
+			EVT_MENU( (int)Cmd.ID_SELROWS,  new EventListener( SelectRows ) );
+			EVT_MENU( (int)Cmd.ID_SELCOLS,  new EventListener( SelectCols ) );
 			
-			EVT_MENU( Cmd.ID_SET_CELL_FG_COLOUR, & SetCellFgColour ) ;
-			EVT_MENU( Cmd.ID_SET_CELL_BG_COLOUR, & SetCellBgColour ) ;
+			EVT_MENU( (int)Cmd.ID_SET_CELL_FG_COLOUR, new EventListener( SetCellFgColour ) );
+			EVT_MENU( (int)Cmd.ID_SET_CELL_BG_COLOUR, new EventListener( SetCellBgColour ) );
 			
-			EVT_MENU( Cmd.ID_ABOUT, & About ) ;
-			EVT_MENU( Cmd.ID_EXIT, & OnQuit ) ;
-			EVT_MENU( Cmd.ID_VTABLE, & OnVTable) ;
-			EVT_MENU( Cmd.ID_BUGS_TABLE, & OnBugsTable) ;
-			EVT_MENU( Cmd.ID_SMALL_GRID, & OnSmallGrid) ;
+			EVT_MENU( (int)Cmd.ID_ABOUT, new EventListener( About ) );
+			EVT_MENU( (int)Cmd.ID_EXIT, new EventListener( OnQuit ) );
+			EVT_MENU( (int)Cmd.ID_VTABLE, new EventListener( OnVTable) );
+			EVT_MENU( (int)Cmd.ID_BUGS_TABLE, new EventListener( OnBugsTable) );
+			EVT_MENU( (int)Cmd.ID_SMALL_GRID, new EventListener( OnSmallGrid) );
 			
-			EVT_MENU( Cmd.ID_DESELECT_CELL, & DeselectCell) ;
-			EVT_MENU( Cmd.ID_DESELECT_COL, & DeselectCol) ;
-			EVT_MENU( Cmd.ID_DESELECT_ROW, & DeselectRow) ;
-			EVT_MENU( Cmd.ID_DESELECT_ALL, & DeselectAll) ;
-			EVT_MENU( Cmd.ID_SELECT_CELL, & SelectCell) ;
-			EVT_MENU( Cmd.ID_SELECT_COL, & SelectCol) ;
-			EVT_MENU( Cmd.ID_SELECT_ROW, & SelectRow) ;
-			EVT_MENU( Cmd.ID_SELECT_ALL, & SelectAll) ;
-			EVT_MENU( Cmd.ID_SELECT_UNSELECT, & OnAddToSelectToggle) ;
+			EVT_MENU( (int)Cmd.ID_DESELECT_CELL, new EventListener( DeselectCell) );
+			EVT_MENU( (int)Cmd.ID_DESELECT_COL, new EventListener( DeselectCol) );
+			EVT_MENU( (int)Cmd.ID_DESELECT_ROW, new EventListener( DeselectRow) );
+			EVT_MENU( (int)Cmd.ID_DESELECT_ALL, new EventListener( DeselectAll) );
+			EVT_MENU( (int)Cmd.ID_SELECT_CELL, new EventListener( SelectCell) );
+			EVT_MENU( (int)Cmd.ID_SELECT_COL, new EventListener( SelectCol) );
+			EVT_MENU( (int)Cmd.ID_SELECT_ROW, new EventListener( SelectRow) );
+			EVT_MENU( (int)Cmd.ID_SELECT_ALL, new EventListener( SelectAll) );
+			EVT_MENU( (int)Cmd.ID_SELECT_UNSELECT, new EventListener( OnAddToSelectToggle) );
 			
-			EVT_MENU( Cmd.ID_SET_HIGHLIGHT_WIDTH, & OnSetHighlightWidth) ;
-			EVT_MENU( Cmd.ID_SET_RO_HIGHLIGHT_WIDTH, & OnSetROHighlightWidth) ;
+			EVT_MENU( (int)Cmd.ID_SET_HIGHLIGHT_WIDTH, new EventListener( OnSetHighlightWidth) );
+			EVT_MENU( (int)Cmd.ID_SET_RO_HIGHLIGHT_WIDTH, new EventListener( OnSetROHighlightWidth) );
 			
-			EVT_GRID_LABEL_LEFT_CLICK( & OnLabelLeftClick ) ;
-			EVT_GRID_CELL_LEFT_CLICK( & OnCellLeftClick ) ;
-			EVT_GRID_ROW_SIZE( & OnRowSize ) ;
-			EVT_GRID_COL_SIZE( & OnColSize ) ;
-			EVT_GRID_SELECT_CELL( & OnSelectCell ) ;
-			EVT_GRID_RANGE_SELECT( & OnRangeSelected ) ;
-			EVT_GRID_CELL_CHANGE( & OnCellValueChanged ) ;
+			EVT_GRID_LABEL_LEFT_CLICK( new EventListener( OnLabelLeftClick ) );
+			EVT_GRID_CELL_LEFT_CLICK( new EventListener( OnCellLeftClick ) );
+			EVT_GRID_ROW_SIZE( new EventListener( OnRowSize ) );
+			EVT_GRID_COL_SIZE( new EventListener( OnColSize ) );
+			EVT_GRID_SELECT_CELL( new EventListener( OnSelectCell ) );
+			EVT_GRID_RANGE_SELECT( new EventListener( OnRangeSelected ) );
+			EVT_GRID_CELL_CHANGE( new EventListener( OnCellValueChanged ) );
 			
-			EVT_GRID_EDITOR_SHOWN( & OnEditorShown ) ;
-			EVT_GRID_EDITOR_HIDDEN( & OnEditorHidden ) ;			
+			EVT_GRID_EDITOR_SHOWN( new EventListener( OnEditorShown ) );
+			EVT_GRID_EDITOR_HIDDEN( new EventListener( OnEditorHidden ) );			
 			
 		}
 		
 		public void SetDefaults()
 		{
-			menuBar.Check( Cmd.ID_TOGGLEROWLABELS, true );
-			menuBar.Check( Cmd.ID_TOGGLECOLLABELS, true );
-			menuBar.Check( Cmd.ID_TOGGLEEDIT, true );
-			menuBar.Check( Cmd.ID_TOGGLEROWSIZING, true );
-			menuBar.Check( Cmd.ID_TOGGLECOLSIZING, true );
-			menuBar.Check( Cmd.ID_TOGGLEGRIDSIZING, true );
-			menuBar.Check( Cmd.ID_TOGGLEGRIDLINES, true );
-			menuBar.Check( Cmd.ID_CELLOVERFLOW, true );
+			MenuBar.Check( (int)Cmd.ID_TOGGLEROWLABELS, true );
+			MenuBar.Check( (int)Cmd.ID_TOGGLECOLLABELS, true );
+			MenuBar.Check( (int)Cmd.ID_TOGGLEEDIT, true );
+			MenuBar.Check( (int)Cmd.ID_TOGGLEROWSIZING, true );
+			MenuBar.Check( (int)Cmd.ID_TOGGLECOLSIZING, true );
+			MenuBar.Check( (int)Cmd.ID_TOGGLEGRIDSIZING, true );
+			MenuBar.Check( (int)Cmd.ID_TOGGLEGRIDLINES, true );
+			MenuBar.Check( (int)Cmd.ID_CELLOVERFLOW, true );
 		}
 		
-		public void ToggleRowLabels( Object sender, Event e )
+		public void ToggleRowLabels( object sender, Event e )
 		{
-			if ( menuBar.IsChecked( Cmd.ID_TOGGLEROWLABELS ) )
+			if ( MenuBar.IsChecked( (int)Cmd.ID_TOGGLEROWLABELS ) )
 			{
 				grid.RowLabelSize = grid.DefaultRowLabelSize;
 			}
@@ -368,9 +370,9 @@ import wx.wx;
 			}
 		}
 		
-		public void ToggleColLabels( Object sender, Event e )
+		public void ToggleColLabels( object sender, Event e )
 		{
-			if ( menuBar.IsChecked( Cmd.ID_TOGGLECOLLABELS ) )
+			if ( MenuBar.IsChecked( (int)Cmd.ID_TOGGLECOLLABELS ) )
 			{
 				grid.ColLabelSize = grid.DefaultColLabelSize;
 			}
@@ -380,48 +382,48 @@ import wx.wx;
 			}			
 		}
 		
-		public void ToggleEditing( Object sender, Event e )
+		public void ToggleEditing( object sender, Event e )
 		{
-			grid.IsEditable = menuBar.IsChecked( Cmd. ID_TOGGLEEDIT );
+			grid.IsEditable = MenuBar.IsChecked( (int)Cmd. ID_TOGGLEEDIT );
 		}
 
-		public void ToggleRowSizing( Object sender, Event e )
+		public void ToggleRowSizing( object sender, Event e )
 		{
-			grid.DragRowSizeEnabled = menuBar.IsChecked( Cmd.ID_TOGGLEROWSIZING );			
+			grid.DragRowSizeEnabled = MenuBar.IsChecked( (int)Cmd.ID_TOGGLEROWSIZING );			
 		}
 
-		public void ToggleColSizing( Object sender, Event e )
+		public void ToggleColSizing( object sender, Event e )
 		{
-			grid.DragColSizeEnabled = menuBar.IsChecked( Cmd.ID_TOGGLECOLSIZING );
+			grid.DragColSizeEnabled = MenuBar.IsChecked( (int)Cmd.ID_TOGGLECOLSIZING );
 			
 		}
 
-		public void ToggleGridSizing( Object sender, Event e )
+		public void ToggleGridSizing( object sender, Event e )
 		{
-			grid.DragGridSizeEnabled = menuBar.IsChecked( Cmd.ID_TOGGLEGRIDSIZING );			
+			grid.DragGridSizeEnabled = MenuBar.IsChecked( (int)Cmd.ID_TOGGLEGRIDSIZING );			
 		}
 
-		public void ToggleGridLines( Object sender, Event e )
+		public void ToggleGridLines( object sender, Event e )
 		{
-			grid.GridLinesEnabled = menuBar.IsChecked( Cmd.ID_TOGGLEGRIDLINES );			
+			grid.GridLinesEnabled = MenuBar.IsChecked( (int)Cmd.ID_TOGGLEGRIDLINES );			
 		}
 
-		public void AutoSizeCols( Object sender, Event e )
+		public void AutoSizeCols( object sender, Event e )
 		{
 			grid.AutoSizeColumns();
 			grid.Refresh();			
 		}
 
-		public void CellOverflow( Object sender, Event e )
+		public void CellOverflow( object sender, Event e )
 		{
-			CommandEvent ce = cast(CommandEvent) e;
+			CommandEvent ce = (CommandEvent) e;
 			grid.DefaultCellOverflow = ce.IsChecked;
 			grid.Refresh();
 		}
 
-		public void ResizeCell( Object sender, Event e )
+		public void ResizeCell( object sender, Event e )
 		{
-			CommandEvent ce = cast(CommandEvent) e;
+			CommandEvent ce = (CommandEvent) e;
 			
 			if ( ce.IsChecked )
 				grid.SetCellSize( 7, 1, 5, 5 );
@@ -431,31 +433,31 @@ import wx.wx;
 			grid.Refresh();
 		}
 
-		public void SetLabelColour( Object sender, Event e )
+		public void SetLabelColour( object sender, Event e )
 		{
-			ColourDialog dlg = new ColourDialog();
+			ColourDialog dlg = new ColourDialog( null );
 			if ( dlg.ShowModal() == wxID_OK )
 			{
-				ColourData retData = dlg.colourData;
-				Colour colour = retData.colour;
+				ColourData retData = dlg.ColourData;
+				Colour colour = retData.Colour;
 
 				grid.LabelBackgroundColour = colour;
 			}			
 		}
 		
-		public void SetLabelTextColour( Object sender, Event e )
+		public void SetLabelTextColour( object sender, Event e )
 		{
-			ColourDialog dlg = new ColourDialog();
+			ColourDialog dlg = new ColourDialog( null );
 			if ( dlg.ShowModal() == wxID_OK )
 			{
-				ColourData retData = dlg.colourData;
-				Colour colour = retData.colour;
+				ColourData retData = dlg.ColourData;
+				Colour colour = retData.Colour;
 
 				grid.LabelTextColour = colour;
 			}				
 		}		
 		
-		public void SetLabelFont( Object sender, Event e )
+		public void SetLabelFont( object sender, Event e )
 		{
 			FontData data = new FontData();
 			data.InitialFont = grid.LabelFont;
@@ -464,7 +466,7 @@ import wx.wx;
 			
 			if ( fd.ShowModal() == wxID_OK )
 			{			
-				Font font = fd.fontData.ChosenFont;
+				Font font = fd.FontData.ChosenFont;
 				if ( font.Ok )
 				{
 					grid.LabelFont = font;
@@ -473,121 +475,121 @@ import wx.wx;
 			
 		}		
 
-		public void SetRowLabelHorizAlignment( Object sender, Event e )
+		public void SetRowLabelHorizAlignment( object sender, Event e )
 		{
 			int horiz, vert;
-			grid.GetRowLabelAlignment( horiz, vert );
+			grid.GetRowLabelAlignment( out horiz, out vert );
 
 			switch ( horiz )
 			{
-				case Alignment.wxALIGN_LEFT:
-					horiz = Alignment.wxALIGN_CENTRE;
+				case (int)Alignment.wxALIGN_LEFT:
+					horiz = (int)Alignment.wxALIGN_CENTRE;
 				break;
 
-				case Alignment.wxALIGN_CENTRE:
-					horiz = Alignment.wxALIGN_RIGHT;
+				case (int)Alignment.wxALIGN_CENTRE:
+					horiz = (int)Alignment.wxALIGN_RIGHT;
 				break;
 
-				case Alignment.wxALIGN_RIGHT:
-					horiz = Alignment.wxALIGN_LEFT;
+				case (int)Alignment.wxALIGN_RIGHT:
+					horiz = (int)Alignment.wxALIGN_LEFT;
 				break;
 			}
 
 			grid.SetRowLabelAlignment( horiz, -1 );			
 		}		
 
-		public void SetRowLabelVertAlignment( Object sender, Event e )
+		public void SetRowLabelVertAlignment( object sender, Event e )
 		{
 			int horiz, vert;
-			grid.GetRowLabelAlignment( horiz, vert );
+			grid.GetRowLabelAlignment( out horiz, out vert );
 
 			switch ( vert )
 			{
-				case Alignment.wxALIGN_TOP:
-					vert = Alignment.wxALIGN_CENTRE;
+				case (int)Alignment.wxALIGN_TOP:
+					vert = (int)Alignment.wxALIGN_CENTRE;
 				break;
 
-				case Alignment.wxALIGN_CENTRE:
-					vert = Alignment.wxALIGN_BOTTOM;
+				case (int)Alignment.wxALIGN_CENTRE:
+					vert = (int)Alignment.wxALIGN_BOTTOM;
 				break;
 
-				case Alignment.wxALIGN_BOTTOM:
-					vert = Alignment.wxALIGN_TOP;
+				case (int)Alignment.wxALIGN_BOTTOM:
+					vert = (int)Alignment.wxALIGN_TOP;
 				break;
 			}
 
 			grid.SetRowLabelAlignment( -1, vert );			
 		}		
 
-		public void SetColLabelHorizAlignment( Object sender, Event e )
+		public void SetColLabelHorizAlignment( object sender, Event e )
 		{
 			int horiz, vert;
-			grid.GetColLabelAlignment( horiz, vert );
+			grid.GetColLabelAlignment( out horiz, out vert );
 
 			switch ( horiz )
 			{
-				case Alignment.wxALIGN_LEFT:
-					horiz = Alignment.wxALIGN_CENTRE;
+				case (int)Alignment.wxALIGN_LEFT:
+					horiz = (int)Alignment.wxALIGN_CENTRE;
 				break;
 
-				case Alignment.wxALIGN_CENTRE:
-					horiz = Alignment.wxALIGN_RIGHT;
+				case (int)Alignment.wxALIGN_CENTRE:
+					horiz = (int)Alignment.wxALIGN_RIGHT;
 				break;
 
-				case Alignment.wxALIGN_RIGHT:
-					horiz = Alignment.wxALIGN_LEFT;
+				case (int)Alignment.wxALIGN_RIGHT:
+					horiz = (int)Alignment.wxALIGN_LEFT;
 				break;
 			}
 
 			grid.SetColLabelAlignment( horiz, -1 );			
 		}		
 
-		public void SetColLabelVertAlignment( Object sender, Event e )
+		public void SetColLabelVertAlignment( object sender, Event e )
 		{
 			int horiz, vert;
-			grid.GetColLabelAlignment( horiz, vert );
+			grid.GetColLabelAlignment( out horiz, out vert );
 
 			switch ( vert )
 			{
-				case Alignment.wxALIGN_TOP:
-					vert = Alignment.wxALIGN_CENTRE;
+				case (int)Alignment.wxALIGN_TOP:
+					vert = (int)Alignment.wxALIGN_CENTRE;
 				break;
 
-				case Alignment.wxALIGN_CENTRE:
-					vert = Alignment.wxALIGN_BOTTOM;
+				case (int)Alignment.wxALIGN_CENTRE:
+					vert = (int)Alignment.wxALIGN_BOTTOM;
 				break;
 
-				case Alignment.wxALIGN_BOTTOM:
-				vert = Alignment.wxALIGN_TOP;
+				case (int)Alignment.wxALIGN_BOTTOM:
+				vert = (int)Alignment.wxALIGN_TOP;
 				break;
 			}
 
 			grid.SetColLabelAlignment( -1, vert );			
 		}		
 
-		public void SetGridLineColour( Object sender, Event e )
+		public void SetGridLineColour( object sender, Event e )
 		{
-			ColourDialog dlg = new ColourDialog();
+			ColourDialog dlg = new ColourDialog( null );
 			if ( dlg.ShowModal() == wxID_OK )
 			{
-				ColourData retData = dlg.colourData;
-				Colour colour = retData.colour;
+				ColourData retData = dlg.ColourData;
+				Colour colour = retData.Colour;
 
 				grid.GridLineColour = colour;
 			}							
 		}		
 		
-		public void InsertRow( Object sender, Event e )
+		public void InsertRow( object sender, Event e )
 		{
 			grid.InsertRows( grid.GridCursorRow, 1 );			
 		}		
 
-		public void InsertCol( Object sender, Event e )
+		public void InsertCol( object sender, Event e )
 		{
 			grid.InsertCols( grid.GridCursorCol, 1 );
 		}		
 
-		public void DeleteSelectedRows( Object sender, Event e )
+		public void DeleteSelectedRows( object sender, Event e )
 		{
 			if ( grid.IsSelection )
 			{
@@ -601,7 +603,7 @@ import wx.wx;
 			}			
 		}		
 
-		public void DeleteSelectedCols( Object sender, Event e )
+		public void DeleteSelectedCols( object sender, Event e )
 		{
 			if ( grid.IsSelection )
 			{
@@ -615,33 +617,33 @@ import wx.wx;
 			}			
 		}		
 		
-		public void ClearGrid( Object sender, Event e )
+		public void ClearGrid( object sender, Event e )
 		{
 			grid.ClearGrid();
 		}		
 		
-		public void SelectCells( Object sender, Event e )
+		public void SelectCells( object sender, Event e )
 		{
 			grid.SelectionMode = GridSelectionMode.wxGridSelectCells;
 		}		
 		
-		public void SelectRows( Object sender, Event e )
+		public void SelectRows( object sender, Event e )
 		{
 			grid.SelectionMode = GridSelectionMode.wxGridSelectRows;
 		}		
 
-		public void SelectCols( Object sender, Event e )
+		public void SelectCols( object sender, Event e )
 		{
 			grid.SelectionMode = GridSelectionMode.wxGridSelectColumns;
 		}		
 
-		public void SetCellFgColour( Object sender, Event e )
+		public void SetCellFgColour( object sender, Event e )
 		{
-			ColourDialog dlg = new ColourDialog();
+			ColourDialog dlg = new ColourDialog( null );
 			if ( dlg.ShowModal() == wxID_OK )
 			{
-				ColourData retData = dlg.colourData;
-				Colour colour = retData.colour;
+				ColourData retData = dlg.ColourData;
+				Colour colour = retData.Colour;
 
 				if ( colour.Ok() )
 				{
@@ -651,42 +653,43 @@ import wx.wx;
 			}										
 		}		
 
-		public void SetCellBgColour( Object sender, Event e )
+		public void SetCellBgColour( object sender, Event e )
 		{
-			ColourDialog dlg = new ColourDialog();
+			ColourDialog dlg = new ColourDialog( null );
 			if ( dlg.ShowModal() == wxID_OK )
 			{
-				ColourData retData = dlg.colourData;
-				Colour colour = retData.colour;
+				ColourData retData = dlg.ColourData;
+				Colour colour = retData.Colour;
 
 				if ( colour.Ok() )
 				{
 					grid.DefaultCellBackgroundColour = colour;
-					Rectangle r = new_Rectangle( 0, 0, grid.size.Width, grid.size.Height );
+					Rectangle r = new Rectangle( 0, 0, grid.Size.Width, grid.Size.Height );
 					grid.Refresh( true, r);
 				}
 			}													
 		}		
 	
-		public void About( Object sender, Event e )
+		public void About( object sender, Event e )
 		{
-			MessageBox( "\n\nwxGrid demo \n\n" ~
-				"Ported to wxD \nby BERO\n" ,
+			wx.MessageDialog.ShowModal( "\n\nwxGrid demo \n\n" +
+				"Ported to wx.NET \nby\n" +
+				"Alexander Olk\n\n",
 				"About",
 				Dialog.wxOK );			
 		}		
 
-		public void OnQuit( Object sender, Event e )
+		public void OnQuit( object sender, Event e )
 		{
 			Close( true );
 		}		
 
-		public void OnVTable( Object sender, Event e )
+		public void OnVTable( object sender, Event e )
 		{
 			s_sizeGrid = GetNumberFromUser( "Size of the table to create",
                                      "Size: ",
                                      "wxGridDemo question",
-                                     s_sizeGrid,
+                                     (int)s_sizeGrid,
                                      0, 32000, this);
 				
 			if ( s_sizeGrid != -1 )
@@ -696,116 +699,116 @@ import wx.wx;
 			}
 		}		
 		
-		public void OnBugsTable( Object sender, Event e )
+		public void OnBugsTable( object sender, Event e )
 		{
 			BugsGridFrame frame = new BugsGridFrame();
 			frame.Show( true );
 		}		
 		
-		public void OnSmallGrid( Object sender, Event e )
+		public void OnSmallGrid( object sender, Event e )
 		{
-			Frame frame = new Frame( null, -1, "A Small Grid", wxDefaultPosition, new_Size( 640, 480 ) );
+			Frame frame = new Frame( null, -1, "A Small Grid", wxDefaultPosition, new Size( 640, 480 ) );
 			Panel panel = new Panel( frame, -1 );
-			Grid agrid = new Grid( panel, -1, new_Point( 10, 10 ), new_Size( 400, 400 ), wxWANTS_CHARS | wxSIMPLE_BORDER );
+			Grid agrid = new Grid( panel, -1, new Point( 10, 10 ), new Size( 400, 400 ), wxWANTS_CHARS | wxSIMPLE_BORDER );
 			agrid.CreateGrid( 3, 3 );
 			frame.Show( true );
 		}		
 		
-		public void DeselectCell( Object sender, Event e )
+		public void DeselectCell( object sender, Event e )
 		{
 			grid.DeselectCell( 3, 1 );
 		}		
 
-		public void DeselectCol( Object sender, Event e )
+		public void DeselectCol( object sender, Event e )
 		{
 			grid.DeselectCol( 2 );
 		}		
 		
-		public void DeselectRow( Object sender, Event e )
+		public void DeselectRow( object sender, Event e )
 		{
 			grid.DeselectRow( 2 );
 		}		
 	
-		public void DeselectAll( Object sender, Event e )
+		public void DeselectAll( object sender, Event e )
 		{
 			grid.ClearSelection();
 		}		
 
-		public void SelectCell( Object sender, Event e )
+		public void SelectCell( object sender, Event e )
 		{
 			grid.SelectBlock( 3, 1, 3, 1, m_addToSel );
 		}		
 		
-		public void SelectCol( Object sender, Event e )
+		public void SelectCol( object sender, Event e )
 		{
 			grid.SelectCol( 2, m_addToSel );
 		}		
 		
-		public void SelectRow( Object sender, Event e )
+		public void SelectRow( object sender, Event e )
 		{
 			grid.SelectRow( 2, m_addToSel );
 		}		
 
-		public void SelectAll( Object sender, Event e )
+		public void SelectAll( object sender, Event e )
 		{
 			grid.SelectAll();
 		}		
 		
-		public void OnAddToSelectToggle( Object sender, Event e )
+		public void OnAddToSelectToggle( object sender, Event e )
 		{
-			CommandEvent ce = cast(CommandEvent) e;
+			CommandEvent ce = (CommandEvent) e;
 			m_addToSel = ce.IsChecked;
 		}		
 
-		public void OnSetHighlightWidth( Object sender, Event e )
+		public void OnSetHighlightWidth( object sender, Event e )
 		{
-			const string[] choices = [ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ];
+			string[] choices = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
 
 			SingleChoiceDialog dlg = new SingleChoiceDialog(this, "Choose the thickness of the highlight pen:",
 				"Pen Width", choices);
 
 			int current = grid.CellHighlightPenWidth;
-			dlg.Selection = current;
+			dlg.SetSelection( current );
 			if ( dlg.ShowModal() == wxID_OK ) 
 			{
-				grid.CellHighlightPenWidth = dlg.Selection;
+				grid.CellHighlightPenWidth = dlg.GetSelection();
 			}			
 		}		
 
-		public void OnSetROHighlightWidth( Object sender, Event e )
+		public void OnSetROHighlightWidth( object sender, Event e )
 		{
-			const string[] choices = [ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ];
+			string[] choices = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
 
 			SingleChoiceDialog dlg = new SingleChoiceDialog(this, "Choose the thickness of the highlight pen:",
 				"Pen Width", choices);
 
 			int current = grid.CellHighlightROPenWidth;
-			dlg.Selection = current ;
+			dlg.SetSelection( current );
 			if ( dlg.ShowModal() == wxID_OK ) 
 			{
-				grid.CellHighlightROPenWidth = dlg.Selection;
+				grid.CellHighlightROPenWidth = dlg.GetSelection();
 			}			
 		}		
 		
-		public void OnLabelLeftClick( Object sender, Event e )
+		public void OnLabelLeftClick( object sender, Event e )
 		{
-			GridEvent ge = cast(GridEvent) e;
+			GridEvent ge = (GridEvent) e;
 			
 			if ( ge.Row != -1 )
 			{
-				logBuf = "Left click on row label " ~ .toString(ge.Row);
+				logBuf = "Left click on row label " + ge.Row;
 			}
 			else if ( ge.Col != -1 )
 			{
-				logBuf = "Left click on col label " ~ .toString(ge.Col);
+				logBuf += "Left click on col label " + ge.Col;
 			}
 			else
 			{
-				logBuf = "Left click on corner label";
+				logBuf += "Left click on corner label";
 			}
 
-			if ( ge.ShiftDown ) logBuf ~= " (shift down)";
-			if ( ge.ControlDown ) logBuf ~= " (control down)";
+			if ( ge.ShiftDown ) logBuf += " (shift down)";
+			if ( ge.ControlDown ) logBuf += " (control down)";
 			Log.LogMessage( logBuf );
 
 			// you must call event skip if you want default grid processing
@@ -813,10 +816,10 @@ import wx.wx;
 			ge.Skip();			
 		}		
 		
-		public void OnCellLeftClick( Object sender, Event e )
+		public void OnCellLeftClick( object sender, Event e )
 		{
-			GridEvent ge = cast(GridEvent) e;
-			logBuf = "Left click at row " ~ .toString(ge.Row) ~ " col " ~ .toString(ge.Col);
+			GridEvent ge = (GridEvent) e;
+			logBuf = "Left click at row " + ge.Row + " col " + ge.Col;
 			Log.LogMessage( logBuf );
 
 			// you must call event skip if you want default grid processing
@@ -825,38 +828,38 @@ import wx.wx;
 			ge.Skip();			
 		}		
 
-		public void OnRowSize( Object sender, Event e )
+		public void OnRowSize( object sender, Event e )
 		{
-			GridSizeEvent ge = cast(GridSizeEvent) e;
-			logBuf = "Resized row " ~ .toString(ge.RowOrCol);
+			GridSizeEvent ge = (GridSizeEvent) e;
+			logBuf = "Resized row " + ge.RowOrCol;
 			Log.LogMessage( logBuf );
 
 			ge.Skip();			
 		}		
 		
-		public void OnColSize( Object sender, Event e )
+		public void OnColSize( object sender, Event e )
 		{
-			GridSizeEvent ge = cast(GridSizeEvent) e;
-			logBuf = "Resized col " ~ .toString(ge.RowOrCol);
+			GridSizeEvent ge = (GridSizeEvent) e;
+			logBuf = "Resized col " + ge.RowOrCol;
 			Log.LogMessage( logBuf );
 
 			ge.Skip();			
 		}		
 
-		public void OnSelectCell( Object sender, Event e )
+		public void OnSelectCell( object sender, Event e )
 		{
-			GridEvent ge = cast(GridEvent) e;
+			GridEvent ge = (GridEvent) e;
 			if ( ge.Selecting )
 				logBuf = "Selected ";
 			else
 				logBuf = "Deselected ";
 				
-			logBuf ~= "cell at row " ~ .toString(ge.Row) ~
-				" col " ~ .toString(ge.Col) ~
-				" ( ControlDown: " ~ ( ge.ControlDown ? "T":"F" ) ~
-				", ShiftDown: " ~ (ge.ShiftDown ? "T":"F") ~
-				", AltDown: " ~ (ge.AltDown ? "T":"F") ~
-				", MetaDown: " ~ (ge.MetaDown ? "T":"F") ~ " )";
+			logBuf += "cell at row " + ge.Row +
+				" col " + ge.Col +
+				" ( ControlDown: " + ( ge.ControlDown ? 'T':'F' ) +
+				", ShiftDown: " + (ge.ShiftDown ? 'T':'F') +
+				", AltDown: " + (ge.AltDown ? 'T':'F') +
+				", MetaDown: " + (ge.MetaDown ? 'T':'F') + " )";
 				
 			Log.LogMessage( logBuf );
 
@@ -865,48 +868,48 @@ import wx.wx;
 			ge.Skip();			
 		}		
 		
-		public void OnRangeSelected( Object sender, Event e )
+		public void OnRangeSelected( object sender, Event e )
 		{
-			GridRangeSelectEvent ge = cast(GridRangeSelectEvent) e;
+			GridRangeSelectEvent ge = (GridRangeSelectEvent) e;
 			
 			if ( ge.Selecting )
 				logBuf = "Selected ";
 			else
 				logBuf = "Deselected ";
 				
-			logBuf ~= "cells from row " ~ .toString(ge.TopRow) ~
-				" col " ~ .toString(ge.LeftCol) ~
-				" to row " ~ .toString(ge.BottomRow) ~
-				" col " ~ .toString(ge.RightCol) ~
-				" ( ControlDown: " ~ (ge.ControlDown ? "T":"F") ~
-				", ShiftDown: " ~ (ge.ShiftDown ? "T":"F") ~
-				", AltDown: " ~ (ge.AltDown ? "T":"F") ~
-				", MetaDown: " ~ (ge.MetaDown ? "T":"F") ~ " )";
+			logBuf += "cells from row " + ge.TopRow +
+				" col " + ge.LeftCol +
+				" to row " + ge.BottomRow +
+				" col " + ge.RightCol +
+				" ( ControlDown: " + (ge.ControlDown ? 'T':'F') +
+				", ShiftDown: " + (ge.ShiftDown ? 'T':'F') +
+				", AltDown: " + (ge.AltDown ? 'T':'F') +
+				", MetaDown: " + (ge.MetaDown ? 'T':'F') + " )";
 				
 			Log.LogMessage( logBuf );
 
 			ge.Skip();			
 		}		
 
-		public void OnCellValueChanged( Object sender, Event e )
+		public void OnCellValueChanged( object sender, Event e )
 		{
-			GridEvent ge = cast(GridEvent) e;
+			GridEvent ge = (GridEvent) e;
 			
-			logBuf = "Value changed for cell at" ~
-				" row " ~ .toString(ge.Row) ~
-				" col " ~ .toString(ge.Col);
+			logBuf = "Value changed for cell at" +
+				" row " + ge.Row +
+				" col " + ge.Col;
 
 				Log.LogMessage( logBuf );
 
 			ge.Skip();			
 		}		
 
-		public void OnEditorShown( Object sender, Event e )
+		public void OnEditorShown( object sender, Event e )
 		{
-			GridEvent ge = cast(GridEvent) e;
+			GridEvent ge = (GridEvent) e;
 			if ( ( ge.Col == 4 ) &&
 				( ge.Row == 0 ) &&
-				( MessageBox( "Are you sure you wish to edit this cell",
+				( wx.MessageDialog.ShowModal( "Are you sure you wish to edit this cell",
 						"Checking", Dialog.wxYES_NO ) == wxID_NO ) ) 
 			{
 
@@ -919,12 +922,12 @@ import wx.wx;
 			ge.Skip();
 		}		
 
-		public void OnEditorHidden( Object sender, Event e )
+		public void OnEditorHidden( object sender, Event e )
 		{
-			GridEvent ge = cast(GridEvent) e;
+			GridEvent ge = (GridEvent) e;
 			if ( ( ge.Col == 4 ) &&
 				( ge.Row == 0 ) &&
-				( MessageBox( "Are you sure you wish to finish editing this cell",
+				( wx.MessageDialog.ShowModal( "Are you sure you wish to finish editing this cell",
 						"Checking", Dialog.wxYES_NO ) == wxID_NO ) ) 
 			{
 
@@ -953,18 +956,18 @@ import wx.wx;
 			Col_Max
 		}
 		
-		const public string[] severities =
-		[
+		public string[] severities =
+		{
 			"wishlist",
 			"minor",
 			"normal",
 			"major",
 			"critical"
-		];
+		};
 		
-		public this()
+		public BugsGridFrame()
+			: base( null, -1, "Bugs table", wxDefaultPosition, new Size( 500, 300 ) )
 		{
-			super( null, -1, "Bugs table", wxDefaultPosition, new_Size( 500, 300 ) );
 			Grid grid = new Grid( this, -1, wxDefaultPosition );
 			GridTableBase table = new BugsGridTable();
 			table.SetAttrProvider( new MyGridCellAttrProvider() );
@@ -978,14 +981,14 @@ import wx.wx;
 			attrRange.Editor = new GridCellNumberEditor( 1, 5 );
 			attrCombo.Editor = new GridCellChoiceEditor( severities );
 
-			grid.SetColAttr(Columns.Col_Id,       attrRO);
-			grid.SetColAttr(Columns.Col_Priority, attrRange);
-			grid.SetColAttr(Columns.Col_Severity, attrCombo);
+			grid.SetColAttr((int)Columns.Col_Id,       attrRO);
+			grid.SetColAttr((int)Columns.Col_Priority, attrRange);
+			grid.SetColAttr((int)Columns.Col_Severity, attrCombo);
 
 			grid.SetMargins(0, 0);
 
 			grid.Fit();
-			ClientSize = grid.size;			
+			ClientSize = grid.Size;			
 		}
 	}
 	
@@ -1014,7 +1017,7 @@ import wx.wx;
 			Sev_Max
 		}
 		
-		public class BugsGridData
+		public struct BugsGridData
 		{
 			public int id;
 			public string summary;
@@ -1023,7 +1026,7 @@ import wx.wx;
 			public string platform;
 			public bool opened;
 			
-            public this(int id, string summary, Severity severity, 
+            public BugsGridData(int id, string summary, Severity severity, 
                                 int prio, string platform, bool opened)
 			{
 				this.id = id;
@@ -1036,29 +1039,29 @@ import wx.wx;
 		}
 		
 		public static string[] severities =
-		[
+		{
 			"wishlist",
 			"minor",
 			"normal",
 			"major",
 			"critical"
-		];
+		};
 		
 		public static string[] headers =
-		[
+		{
 			"Id",
 			"Summary",
 			"Severity",
 			"Priority",
 			"Platform",
 			"Opened?"
-		];
+		};
 		
-		public static BugsGridData[4]  gs_dataBugsGrid;
+		public static BugsGridData[] gs_dataBugsGrid = new BugsGridData[4];
 		
-		public this() 
+		public BugsGridTable() 
+			: base()
 		{
-			super();
 			gs_dataBugsGrid[0] = new BugsGridData( 18, "foo doesn't work", Severity.Sev_Major, 1, "wxMSW", true );
 			gs_dataBugsGrid[1] = new BugsGridData( 27, "bar crashes", Severity.Sev_Critical, 1, "all", false );
 			gs_dataBugsGrid[2] = new BugsGridData( 45, "printing is slow", Severity.Sev_Minor, 3, "wxMSW", true );
@@ -1067,12 +1070,12 @@ import wx.wx;
 		
 		public override int GetNumberRows()
 		{
-			return gs_dataBugsGrid.length;
+			return gs_dataBugsGrid.Length;
 		}
 		
 		public override int GetNumberCols()
 		{
-			return Columns.Col_Max;
+			return (int)Columns.Col_Max;
 		}
 		
 		public override bool IsEmptyCell( int row, int col )
@@ -1086,19 +1089,19 @@ import wx.wx;
 			
 			switch( col )
 			{
-				case Columns.Col_Id:
-				case Columns.Col_Priority:
-				case Columns.Col_Opened:
+				case (int)Columns.Col_Id:
+				case (int)Columns.Col_Priority:
+				case (int)Columns.Col_Opened:
 					Log.LogError( "unexpected column" );
 				break;
 
-				case Columns.Col_Severity:
-					return severities[gd.severity];
+				case (int)Columns.Col_Severity:
+					return severities[(int)gd.severity];
 
-				case Columns.Col_Summary:
+				case (int)Columns.Col_Summary:
 					return gd.summary;
 
-				case Columns.Col_Platform:
+				case (int)Columns.Col_Platform:
 					return gd.platform;
 			}
 
@@ -1111,25 +1114,25 @@ import wx.wx;
 
 			switch ( col )
 			{
-				case Columns.Col_Id:
-				case Columns.Col_Priority:
-				case Columns.Col_Opened:
+				case (int)Columns.Col_Id:
+				case (int)Columns.Col_Priority:
+				case (int)Columns.Col_Opened:
 					Log.LogError( "unexpected column" );
 				break;
 
-				case Columns.Col_Severity:
+				case (int)Columns.Col_Severity:
 				{
 					int n;
-					for ( n = 0; n < severities.length; n++ )
+					for ( n = 0; n < severities.Length; n++ )
 					{
 						if ( severities[n] == value )
 						{
-							gd.severity = cast(Severity)n;
+							gd.severity = (Severity)n;
 							break;
 						} 
 					}
 
-					if ( n == severities.length )
+					if ( n == severities.Length )
 					{
 						Log.LogWarning( "Invalid severity value '{0}'.", value );
 						gd.severity = Severity.Sev_Normal;
@@ -1137,11 +1140,11 @@ import wx.wx;
 				}
 				break;
 
-				case Columns.Col_Summary:
+				case (int)Columns.Col_Summary:
 					gd.summary = value;
 				break;
 
-				case Columns.Col_Platform:
+				case (int)Columns.Col_Platform:
 					gd.platform = value;
 				break;
 			}			
@@ -1156,22 +1159,22 @@ import wx.wx;
 		{
 			switch ( col )
 			{
-				case Columns.Col_Id:
+				case (int)Columns.Col_Id:
 					return "long";
 				
-				case Columns.Col_Priority:
+				case (int)Columns.Col_Priority:
 					return "long";
 
-				case Columns.Col_Severity:
+				case (int)Columns.Col_Severity:
 					return "string:80";
 
-				case Columns.Col_Summary:
+				case (int)Columns.Col_Summary:
 					return "string:80";
 
-				case Columns.Col_Platform:
+				case (int)Columns.Col_Platform:
 					return "choice:all,MSW,GTK,other";
 
-				case Columns.Col_Opened:
+				case (int)Columns.Col_Opened:
 					return "bool";
 			}
 
@@ -1186,11 +1189,11 @@ import wx.wx;
 			}
 			else if ( typeName == "bool" )
 			{
-				return col == Columns.Col_Opened;
+				return col == (int)Columns.Col_Opened;
 			}
 			else if ( typeName == "long" )
 			{
-				return col == Columns.Col_Id || col == Columns.Col_Priority || col == Columns.Col_Severity;
+				return col == (int)Columns.Col_Id || col == (int)Columns.Col_Priority || col == (int)Columns.Col_Severity;
 			}
 			else
 			{
@@ -1203,20 +1206,20 @@ import wx.wx;
 			return CanGetValueAs(row, col, typeName);
 		}
 
-		public override int GetValueAsLong( int row, int col )
+		public override long GetValueAsLong( int row, int col )
 		{
 			BugsGridData gd = gs_dataBugsGrid[row];
 			
 			switch ( col )
 			{
-				case Columns.Col_Id:
+				case (int)Columns.Col_Id:
 					return gd.id;
 
-				case Columns.Col_Priority:
+				case (int)Columns.Col_Priority:
 					return gd.prio;
 
-				case Columns.Col_Severity:
-					return gd.severity;
+				case (int)Columns.Col_Severity:
+					return (int)gd.severity;
 
 				default:
 					Log.LogError( "unexpected column" );
@@ -1226,7 +1229,7 @@ import wx.wx;
 		
 		public override bool GetValueAsBool( int row, int col )
 		{
-			if ( col == Columns.Col_Opened )
+			if ( col == (int)Columns.Col_Opened )
 			{
 				return gs_dataBugsGrid[row].opened;
 			}
@@ -1238,15 +1241,15 @@ import wx.wx;
 			}			
 		} 
 
-		public override void SetValueAsLong( int row, int col, int value )
+		public override void SetValueAsLong( int row, int col, long value )
 		{
 			BugsGridData gd = gs_dataBugsGrid[row];
 			
 
 			switch ( col )
 			{
-				case Columns.Col_Priority:
-					gd.prio = value;
+				case (int)Columns.Col_Priority:
+					gd.prio = (int)value;
 				break;
 
 				default:
@@ -1257,7 +1260,7 @@ import wx.wx;
 		
 		public override void SetValueAsBool( int row, int col, bool value )
 		{
-			if ( col == Columns.Col_Opened )
+			if ( col == (int)Columns.Col_Opened )
 			{
 				gs_dataBugsGrid[row].opened = value;
 			}
@@ -1274,7 +1277,7 @@ import wx.wx;
 	{
 		private GridCellAttr m_attrForOddRows;
 		
-		public this()
+		public MyGridCellAttrProvider()
 		{
 			m_attrForOddRows = new GridCellAttr();
 			m_attrForOddRows.BackgroundColour = Colour.wxLIGHT_GREY;
@@ -1283,11 +1286,11 @@ import wx.wx;
 		public override GridCellAttr GetAttr( int row, int col, GridCellAttr.AttrKind kind)
 		{
 		
-			GridCellAttr attr = super.GetAttr(row, col, kind);
+			GridCellAttr attr = base.GetAttr(row, col, kind);
 
 			if ( ( row % 2 ) > 0 )
 			{
-				if ( attr === null )
+				if ( attr == null )
 				{
 					attr = m_attrForOddRows;
 					attr.IncRef();
@@ -1312,15 +1315,15 @@ import wx.wx;
 	
 	public class MyGridCellRenderer : GridCellStringRenderer
 	{
-		public this()
+		public MyGridCellRenderer()
+			: base() {}
 			
-			{ super(); };
 		public override void Draw(Grid grid, GridCellAttr attr, DC dc, Rectangle rect, int row, int col, bool isSelected)
 		{
 			Draw(grid, attr, dc, rect, row, col, isSelected);
 			
-			dc.pen = Pen.wxGREEN_PEN;
-			dc.brush = Brush.wxTRANSPARENT_BRUSH;
+			dc.Pen = GDIPens.wxGREEN_PEN;
+			dc.Brush = GDIBrushes.wxTRANSPARENT_BRUSH;
 			dc.DrawEllipse( rect.X, rect.Y, rect.Width, rect.Height );
 		}
 	}
@@ -1332,9 +1335,9 @@ import wx.wx;
 		private Grid m_grid;
 		private BigGridTable m_table;
 		
-		public this(long sizeGrid)
+		public BigGridFrame(long sizeGrid)
+			: base(null, -1, "Plugin Virtual Table", wxDefaultPosition, new Size( 500, 450 ) )
 		{
-			super(null, -1, "Plugin Virtual Table", wxDefaultPosition, new_Size( 500, 450 ) );
 			m_grid = new Grid( this, -1, wxDefaultPosition, wxDefaultSize );
 			m_table = new BigGridTable( sizeGrid );
 			 
@@ -1348,25 +1351,25 @@ import wx.wx;
 	{
 		private long m_sizeGrid;
 		
-		public this( long sizeGrid)
+		public BigGridTable( long sizeGrid)
+			: base()
 		{
-			super();
 			m_sizeGrid = sizeGrid;
 		}
 		
 		public override int GetNumberRows()
 		{
-			return m_sizeGrid;
+			return (int)m_sizeGrid;
 		}
 		
 		public override int GetNumberCols()
 		{
-			return m_sizeGrid;
+			return (int)m_sizeGrid;
 		}
 		
 		public override string GetValue( int row, int col )
 		{
-			string ret = "(" ~ .toString(row) ~ ", " ~ .toString(col) ~ ")";
+			string ret = "(" + row + ", " + col + ")";
 			return ret;
 		}
 		
@@ -1382,7 +1385,7 @@ import wx.wx;
 	
 	//---------------------------------------------------------------------
 
-	public class GridApp : App
+	public class GridApp : wx.App
 	{
 		public override bool OnInit()
 		{
@@ -1394,15 +1397,11 @@ import wx.wx;
 
 		//---------------------------------------------------------------------
 
-		
+		[STAThread]
 		static void Main()
 		{
 			GridApp app = new GridApp();
 			app.Run();
 		}
 	}	
-
-void main()
-{
-	GridApp.Main();
 }

@@ -1,19 +1,20 @@
 //-----------------------------------------------------------------------------
-// wxD/Samples - HtmlListBox.d
+// wx.NET/Samples - HtmlListBox.cs
 //
-// wxD "HtmlListBox" sample.
+// wx.NET "HtmlListBox" sample.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
-// Modified by BERO <berobero@users.sourceforge.net>
 // (C) 2004 by Alexander Olk
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-import wx.wx;
-import std.string;
+using System;
+using System.Drawing;
 
+namespace wx.Samples
+{
 	public class MyHtmlListBox : HtmlListBox
 	{
 		//---------------------------------------------------------------------
@@ -22,12 +23,12 @@ import std.string;
 		
 		//---------------------------------------------------------------------
 		
-		public this( Window parent )
-			{ this( parent, false ); }
+		public MyHtmlListBox( Window parent )
+			: this( parent, false ) {}
 			
-		public this( Window parent, bool multi )
+		public MyHtmlListBox( Window parent, bool multi )
+			: base( parent, -1, wxDefaultPosition, wxDefaultSize, multi ? ListBox.wxLB_MULTIPLE : 0 )
 		{
-			super( parent, -1, wxDefaultPosition, wxDefaultSize, multi ? ListBox.wxLB_MULTIPLE : 0 );
 			m_change = true;
 			
 			SetMargins( 5, 5 );
@@ -39,44 +40,38 @@ import std.string;
 		
 		//---------------------------------------------------------------------
 		
-		public void ChangeSelFg(bool value)
+		public bool ChangeSelFg
 		{
-			m_change = value;
+			set { m_change = value; }
 		}
 		
 		//---------------------------------------------------------------------
 		
-		private static char[] tohex(ubyte value) {
-			char buf[2];
-			buf[0] = hexdigits[value/16];
-			buf[1] = hexdigits[value%16];
-			return buf.dup;
-		}
-		
-		private static uint abs(int value) { return value<0?-value:value; }
-		
 		protected override string OnGetItem( int n )
 		{
 			int level = ( n % 6 ) + 1;
-		
-			return std.string.format("<h%d><font color=#%02x%02x%02x>Item</font> <b>%u</b></h%d>",
-				level,
-				abs(n - 192) % 256,
-				abs(n - 256) % 256,
-				abs(n - 128) % 256,
-				n,level
-			);
+			    
+			string retval;
+			retval = String.Format( "<h{0}><font color=#{1:x2}{2:x2}{3:x2}>Item</font> <b>{4}</b></h{5}>", 
+					level, 
+					System.Math.Abs( n - 192 ) % 256,
+					System.Math.Abs( n - 256 ) % 256,
+					System.Math.Abs(n - 128) % 256,
+					n,
+					level );
+				
+			return retval;
 		}
 		
 		//---------------------------------------------------------------------
 		
 		protected override void OnDrawSeparator( DC dc, Rectangle rect, int n )   
 		{	
-			MyFrame mp = cast(MyFrame)Parent;
+			MyFrame mp = (MyFrame)Parent;
 			
-			if ( mp.menuBar.IsChecked( MyFrame.Cmd.HtmlLbox_DrawSeparator ) )
+			if ( mp.MenuBar.IsChecked( (int)MyFrame.Cmd.HtmlLbox_DrawSeparator ) )
 			{
-				dc.pen = Pen.wxBLACK_DASHED_PEN;
+				dc.Pen = GDIPens.wxBLACK_DASHED_PEN;
 				dc.DrawLine( rect.X, rect.Y, rect.Right - 1, rect.Y );
 				dc.DrawLine( rect.X, rect.Bottom - 1, rect.Right - 1, rect.Bottom - 1 );
 			}
@@ -87,7 +82,7 @@ import std.string;
 		
 		protected override Colour GetSelectedTextColour( Colour colFg )
 		{
-			return m_change ? super.GetSelectedTextColour( colFg ) : colFg;
+			return m_change ? base.GetSelectedTextColour( colFg ) : colFg;
 		}
 	}
 	
@@ -113,37 +108,37 @@ import std.string;
 		
 		//---------------------------------------------------------------------
 		
-		public this( Window parent, string title, Point pos, Size size ) 
+		public MyFrame( Window parent, string title, Point pos, Size size ) 
+			: base( parent, -1, title, pos, size )
 		{
-			super( parent, -1, title, pos, size );
-			icon = new Icon( "../Samples/HtmlListBox/mondrian.png" );
+			Icon = new wx.Icon( "../Samples/HtmlListBox/mondrian.png" );
 			
 			Menu menuFile = new Menu();
-			menuFile.Append( Cmd.HtmlLbox_Quit, "E&xit\tAlt-X", "Quit this program" );
+			menuFile.Append( (int)Cmd.HtmlLbox_Quit, "E&xit\tAlt-X", "Quit this program" );
 			
 			Menu menuHLbox = new Menu();
-			menuHLbox.Append( Cmd.HtmlLbox_SetMargins, "Set &margins...\tCtrl-G", "Change the margins around the items" );
-			menuHLbox.AppendCheckItem( Cmd.HtmlLbox_DrawSeparator, "&Draw separators\tCtrl-D", "Toggle drawing separators between cells" );
+			menuHLbox.Append( (int)Cmd.HtmlLbox_SetMargins, "Set &margins...\tCtrl-G", "Change the margins around the items" );
+			menuHLbox.AppendCheckItem( (int)Cmd.HtmlLbox_DrawSeparator, "&Draw separators\tCtrl-D", "Toggle drawing separators between cells" );
 			menuHLbox.AppendSeparator();
-			menuHLbox.AppendCheckItem( Cmd.HtmlLbox_ToggleMulti, "&Multiple selection\tCtrl-M", "Toggle multiple selection on/off" );
+			menuHLbox.AppendCheckItem( (int)Cmd.HtmlLbox_ToggleMulti, "&Multiple selection\tCtrl-M", "Toggle multiple selection on/off" );
 			menuHLbox.AppendSeparator();
-			menuHLbox.Append( Cmd.HtmlLbox_SelectAll, "Select &all items\tCtrl-A" );
+			menuHLbox.Append( (int)Cmd.HtmlLbox_SelectAll, "Select &all items\tCtrl-A" );
 			menuHLbox.AppendSeparator();
-			menuHLbox.Append( Cmd.HtmlLbox_SetBgCol, "Set &background...\tCtrl-B" );
-			menuHLbox.Append( Cmd.HtmlLbox_SetSelBgCol, "Set &selection background...\tCtrl-S" );
-			menuHLbox.AppendCheckItem( Cmd.HtmlLbox_SetSelFgCol, "Keep &foreground in selection\tCtrl-F" );
+			menuHLbox.Append( (int)Cmd.HtmlLbox_SetBgCol, "Set &background...\tCtrl-B" );
+			menuHLbox.Append( (int)Cmd.HtmlLbox_SetSelBgCol, "Set &selection background...\tCtrl-S" );
+			menuHLbox.AppendCheckItem( (int)Cmd.HtmlLbox_SetSelFgCol, "Keep &foreground in selection\tCtrl-F" );
 			
 			Menu helpMenu = new Menu();
-			helpMenu.Append( Cmd.HtmlLbox_About, "&About...\tF1", "Show about dialog" );
+			helpMenu.Append( (int)Cmd.HtmlLbox_About, "&About...\tF1", "Show about dialog" );
 			
 			MenuBar menuBar = new MenuBar();
 			menuBar.Append( menuFile, "&File" );
 			menuBar.Append( menuHLbox, "&Listbox" );
 			menuBar.Append( helpMenu, "&Help" );
 			
-			menuBar.Check( Cmd.HtmlLbox_DrawSeparator, true );
+			menuBar.Check( (int)Cmd.HtmlLbox_DrawSeparator, true );
 			
-			this.menuBar = menuBar;
+			MenuBar = menuBar;
 			
 			CreateStatusBar( 2 );
 			StatusText = "Welcome to wxWidgets!";
@@ -157,47 +152,47 @@ import std.string;
 			sizer.Add( m_hlbox, 1, Stretch.wxGROW );
 			sizer.Add( text, 1, Stretch.wxGROW );
 			
-			this.sizer = sizer;
+			Sizer = sizer;
 			
-			EVT_MENU( Cmd.HtmlLbox_Quit,  & OnQuit ) ;
-			EVT_MENU( Cmd.HtmlLbox_SetMargins,  & OnSetMargins ) ;
-			EVT_MENU( Cmd.HtmlLbox_DrawSeparator, & OnDrawSeparator ) ;
-			EVT_MENU( Cmd.HtmlLbox_ToggleMulti, & OnToggleMulti ) ;
-			EVT_MENU( Cmd.HtmlLbox_SelectAll, & OnSelectAll ) ;
+			EVT_MENU( (int)Cmd.HtmlLbox_Quit,  new EventListener( OnQuit ) );
+			EVT_MENU( (int)Cmd.HtmlLbox_SetMargins,  new EventListener( OnSetMargins ) );
+			EVT_MENU( (int)Cmd.HtmlLbox_DrawSeparator, new EventListener( OnDrawSeparator ) );
+			EVT_MENU( (int)Cmd.HtmlLbox_ToggleMulti, new EventListener( OnToggleMulti ) );
+			EVT_MENU( (int)Cmd.HtmlLbox_SelectAll, new EventListener( OnSelectAll ) );
 
-			EVT_MENU( Cmd.HtmlLbox_About, & OnAbout ) ;
+			EVT_MENU( (int)Cmd.HtmlLbox_About, new EventListener( OnAbout ) );
 
-			EVT_MENU( Cmd.HtmlLbox_SetBgCol, & OnSetBgCol ) ;
-			EVT_MENU( Cmd.HtmlLbox_SetSelBgCol, & OnSetSelBgCol ) ;
-			EVT_MENU( Cmd.HtmlLbox_SetSelFgCol, & OnSetSelFgCol ) ;
+			EVT_MENU( (int)Cmd.HtmlLbox_SetBgCol, new EventListener( OnSetBgCol ) );
+			EVT_MENU( (int)Cmd.HtmlLbox_SetSelBgCol, new EventListener( OnSetSelBgCol ) );
+			EVT_MENU( (int)Cmd.HtmlLbox_SetSelFgCol, new EventListener( OnSetSelFgCol ) );
 
-			EVT_UPDATE_UI( Cmd.HtmlLbox_SelectAll, & OnUpdateUISelectAll ) ;
+			EVT_UPDATE_UI( (int)Cmd.HtmlLbox_SelectAll, new EventListener( OnUpdateUISelectAll ) );
 
 
-			EVT_LISTBOX( wxID_ANY, & OnLboxSelect ) ;
-			EVT_LISTBOX_DCLICK( wxID_ANY, & OnLboxDClick ) ;
+			EVT_LISTBOX( wxID_ANY, new EventListener( OnLboxSelect ) );
+			EVT_LISTBOX_DCLICK( wxID_ANY, new EventListener( OnLboxDClick ) );
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnQuit( Object sender, Event e )
+		public void OnQuit( object sender, Event e )
 		{
 			Close();
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnAbout( Object sender, Event e )
+		public void OnAbout( object sender, Event e )
 		{
-			MessageBox( this, "This sample shows wxHtmlListBox class.\n" 
-				"\n" 
-				"(c) 2003 Vadim Zeitlin\n" 
-				"Ported to wxD by BERO", "About HtmlLbox", Dialog.wxOK | Dialog.wxICON_INFORMATION );
+			wx.MessageDialog.ShowModal( this, "This sample shows wxHtmlListBox class.\n" +
+				"\n" +
+				"© 2003 Vadim Zeitlin\n" +
+				"Ported to wx.NET by Alexander Olk", "About HtmlLbox", Dialog.wxOK | Dialog.wxICON_INFORMATION );
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnSetMargins( Object sender, Event e )
+		public void OnSetMargins( object sender, Event e )
 		{
 			long margin = GetNumberFromUser(
 				"Enter the margins to use for the listbox items.",
@@ -209,47 +204,47 @@ import std.string;
 			
 			if ( margin != -1 )
 			{
-				m_hlbox.SetMargins( margin, margin );
+				m_hlbox.SetMargins( (int)margin, (int)margin );
 				m_hlbox.RefreshAll();
 			}
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnDrawSeparator( Object sender, Event e )
+		public void OnDrawSeparator( object sender, Event e )
 		{
 			m_hlbox.RefreshAll();
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnToggleMulti( Object sender, Event e )
+		public void OnToggleMulti( object sender, Event e )
 		{
-			CommandEvent evt = cast(CommandEvent) e;
+			CommandEvent evt = (CommandEvent) e;
 			
-			Sizer sizer = this.sizer;
+			Sizer sizer = Sizer;
 			sizer.Detach( m_hlbox );
 			
 			m_hlbox = new MyHtmlListBox( this, evt.IsChecked );
-			sizer.Prepend( m_hlbox, 1, Stretch.wxGROW, 0, null );
+			sizer.Prepend( m_hlbox, 1, (int)Stretch.wxGROW, 0, null );
 			
 			sizer.Layout();
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnSelectAll( Object sender, Event e )
+		public void OnSelectAll( object sender, Event e )
 		{
 			m_hlbox.SelectAll();
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnSetBgCol( Object sender, Event e )
+		public void OnSetBgCol( object sender, Event e )
 		{
 			ColourData data = new ColourData();
 
-			data.colour = m_hlbox.BackgroundColour;
+			data.Colour = m_hlbox.BackgroundColour;
 			data.ChooseFull = true;
 			
 			ColourDialog cd = new ColourDialog( this, data );
@@ -257,7 +252,7 @@ import std.string;
 			
 			if ( cd.ShowModal() == wxID_OK )
 			{
-				Colour col = cd.colourData.colour;
+				Colour col = cd.ColourData.Colour;
 			
 				if ( col.Ok() )
 				{
@@ -271,11 +266,11 @@ import std.string;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnSetSelBgCol( Object sender, Event e )
+		public void OnSetSelBgCol( object sender, Event e )
 		{
 			ColourData data = new ColourData();
 
-			data.colour = m_hlbox.BackgroundColour;
+			data.Colour = m_hlbox.BackgroundColour;
 			data.ChooseFull = true;
 			
 			ColourDialog cd = new ColourDialog( this, data );
@@ -283,7 +278,7 @@ import std.string;
 			
 			if ( cd.ShowModal() == wxID_OK )
 			{
-				Colour col = cd.colourData.colour;
+				Colour col = cd.ColourData.Colour;
 			
 			
 				if ( col.Ok() )
@@ -298,9 +293,9 @@ import std.string;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnSetSelFgCol( Object sender, Event e )
+		public void OnSetSelFgCol( object sender, Event e )
 		{
-			CommandEvent evt = cast(CommandEvent) e;
+			CommandEvent evt = (CommandEvent) e;
 			
 			m_hlbox.ChangeSelFg = !evt.IsChecked;
 			m_hlbox.Refresh();
@@ -308,18 +303,18 @@ import std.string;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnUpdateUISelectAll( Object sender, Event e )
+		public void OnUpdateUISelectAll( object sender, Event e )
 		{
-			UpdateUIEvent evt = cast(UpdateUIEvent) e;
+			UpdateUIEvent evt = (UpdateUIEvent) e;
 			
 			evt.Enabled = ( m_hlbox != null ) && m_hlbox.HasMultipleSelection;
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnLboxSelect( Object sender, Event e )
+		public void OnLboxSelect( object sender, Event e )
 		{
-			CommandEvent evt = cast(CommandEvent) e;
+			CommandEvent evt = (CommandEvent) e;
 			
 			Log.LogMessage( "Listbox selection is now {0}.", evt.Int );
 			
@@ -327,9 +322,9 @@ import std.string;
 			{
 				string s = "";
 				bool first = true;
-				uint cookie = 0;
+				ulong cookie = 0;
 				
-				for ( int item = m_hlbox.GetFirstSelected( cookie ); item != -1/*wxNOT_FOUND*/; item = m_hlbox.GetNextSelected( cookie ) )
+				for ( int item = m_hlbox.GetFirstSelected( out cookie ); item != -1/*wxNOT_FOUND*/; item = m_hlbox.GetNextSelected( out cookie ) )
 				{
 					if ( first )
 					{
@@ -337,25 +332,25 @@ import std.string;
 					}
 					else
 					{
-						s ~= ", ";
+						s += ", ";
 					}
 					
-					s ~= item;
+					s += item;
 					
 				}
 				
-				if ( s.length > 0 )
+				if ( s.Length > 0 )
 					Log.LogMessage( "Selected items: {0}", s );
 			}
 			
-			StatusText = "# items selected = " ~ .toString(m_hlbox.SelectedCount);
+			StatusText = "# items selected = " + m_hlbox.SelectedCount;
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnLboxDClick( Object sender, Event e )
+		public void OnLboxDClick( object sender, Event e )
 		{
-			CommandEvent evt = cast(CommandEvent) e;
+			CommandEvent evt = (CommandEvent) e;
 			
 			Log.LogMessage( "Listbox item {0} double clicked.", evt.Int );
 		}
@@ -363,11 +358,11 @@ import std.string;
 	
 	//---------------------------------------------------------------------
 
-	public class HTLBox : App
+	public class HTLBox : wx.App
 	{
 		public override bool OnInit()
 		{
-			MyFrame frame = new MyFrame( null, "HtmListBox sample", new_Point( -1, -1 ), new_Size( 400, 500 ) );
+			MyFrame frame = new MyFrame( null, "HtmListBox sample", new Point( -1, -1 ), new Size( 400, 500 ) );
 			frame.Show( true );
 
 			return true;
@@ -375,16 +370,11 @@ import std.string;
 
 		//---------------------------------------------------------------------
 
-		
+		[STAThread]
 		static void Main()
 		{
 			HTLBox app = new HTLBox();
 			app.Run();
 		}
 	}	
-
-
-void main()
-{
-	HTLBox.Main();
 }

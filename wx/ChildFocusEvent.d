@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - ChildFocusEvent.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - ChildFocusEvent.cs
 //
 // The wxChildFocusEvent wrapper class.
@@ -13,32 +10,32 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.ChildFocusEvent;
-import wx.common;
-import wx.CommandEvent;
-import wx.Window;
+using System;
+using System.Runtime.InteropServices;
 
-		static extern (C) IntPtr wxChildFocusEvent_ctor(IntPtr win);
-		static extern (C) IntPtr wxChildFocusEvent_GetWindow(IntPtr self);
+namespace wx
+{
+	public class ChildFocusEvent : CommandEvent
+	{
+		[DllImport("wx-c")] static extern IntPtr wxChildFocusEvent_ctor(IntPtr win);
+		[DllImport("wx-c")] static extern IntPtr wxChildFocusEvent_GetWindow(IntPtr self);
 		
 		//-----------------------------------------------------------------------------
 
-	public class ChildFocusEvent : CommandEvent
-	{
-		public this(IntPtr wxobj) 
-			{ super(wxobj); }
+		public ChildFocusEvent(IntPtr wxObject) 
+			: base(wxObject) { }
 			
-		public this(Window win)
-			{ super(wxChildFocusEvent_ctor(wxObject.SafePtr(win))); }
+		public ChildFocusEvent()
+			: this(null) {}
+
+		public ChildFocusEvent(Window win)
+			: base(wxChildFocusEvent_ctor(Object.SafePtr(win))) { }
 
 		//-----------------------------------------------------------------------------	
 		
-		public Window window() { return cast(Window)FindObject(wxChildFocusEvent_GetWindow(wxobj), &Window.New); }
-
-		private static Event New(IntPtr obj) { return new ChildFocusEvent(obj); }
-
-		static this()
+		public Window Window
 		{
-			AddEventType(wxEVT_CHILD_FOCUS,				&ChildFocusEvent.New);
+			get { return (Window)FindObject(wxChildFocusEvent_GetWindow(wxObject), typeof(Window)); }
 		}
 	}
+}

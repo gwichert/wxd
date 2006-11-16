@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - ActivateEvent.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - ActivateEvent.cs
 //
 // The wxActivateEvent wrapper class.
@@ -13,239 +10,252 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.GdiCommon;
-import wx.common;
-import wx.Bitmap;
-import wx.Cursor;
-import wx.Icon;
-import wx.Pen;
-import wx.Brush;
-import wx.Font;
-import wx.Colour;
+using System;
+using System.Runtime.InteropServices;
 
-		static extern (C) IntPtr wxSTANDARD_CURSOR_Get();
-		static extern (C) IntPtr wxHOURGLASS_CURSOR_Get();
-		static extern (C) IntPtr wxCROSS_CURSOR_Get();
-		
-		static extern (C) IntPtr wxGDIObj_GetRedPen();
-		static extern (C) IntPtr wxGDIObj_GetCyanPen();
-		static extern (C) IntPtr wxGDIObj_GetGreenPen();
-		static extern (C) IntPtr wxGDIObj_GetBlackPen();
-		static extern (C) IntPtr wxGDIObj_GetWhitePen();
-		static extern (C) IntPtr wxGDIObj_GetTransparentPen();
-		static extern (C) IntPtr wxGDIObj_GetBlackDashedPen();
-		static extern (C) IntPtr wxGDIObj_GetGreyPen();
-		static extern (C) IntPtr wxGDIObj_GetMediumGreyPen();
-		static extern (C) IntPtr wxGDIObj_GetLightGreyPen();
-
-		static extern (C) IntPtr wxBLUE_BRUSH_Get();
-		static extern (C) IntPtr wxGREEN_BRUSH_Get();
-		static extern (C) IntPtr wxWHITE_BRUSH_Get();
-		static extern (C) IntPtr wxBLACK_BRUSH_Get();
-		static extern (C) IntPtr wxGREY_BRUSH_Get();
-		static extern (C) IntPtr wxMEDIUM_GREY_BRUSH_Get();
-		static extern (C) IntPtr wxLIGHT_GREY_BRUSH_Get();
-		static extern (C) IntPtr wxTRANSPARENT_BRUSH_Get();
-		static extern (C) IntPtr wxCYAN_BRUSH_Get();
-		static extern (C) IntPtr wxRED_BRUSH_Get();
-
-		static extern (C) IntPtr wxNullBitmap_Get();
-		static extern (C) IntPtr wxNullIcon_Get();
-		static extern (C) IntPtr wxNullCursor_Get();
-		static extern (C) IntPtr wxNullPen_Get();
-		static extern (C) IntPtr wxNullBrush_Get();
-		static extern (C) IntPtr wxNullPalette_Get();
-		static extern (C) IntPtr wxNullFont_Get();
-		static extern (C) IntPtr wxNullColour_Get();
-		
-
-	void InitializeStockObjects()
+namespace wx
+{
+	public class GDIPens
 	{
-			Cursor.wxSTANDARD_CURSOR = new Cursor(wxSTANDARD_CURSOR_Get());
-			Cursor.wxHOURGLASS_CURSOR = new Cursor(wxHOURGLASS_CURSOR_Get());
-			Cursor.wxCROSS_CURSOR = new Cursor(wxCROSS_CURSOR_Get());
+		[DllImport("wx-c")] static extern IntPtr wxGDIObj_GetRedPen();
+		[DllImport("wx-c")] static extern IntPtr wxGDIObj_GetCyanPen();
+		[DllImport("wx-c")] static extern IntPtr wxGDIObj_GetGreenPen();
+		[DllImport("wx-c")] static extern IntPtr wxGDIObj_GetBlackPen();
+		[DllImport("wx-c")] static extern IntPtr wxGDIObj_GetWhitePen();
+		[DllImport("wx-c")] static extern IntPtr wxGDIObj_GetTransparentPen();
+		[DllImport("wx-c")] static extern IntPtr wxGDIObj_GetBlackDashedPen();
+		[DllImport("wx-c")] static extern IntPtr wxGDIObj_GetGreyPen();
+		[DllImport("wx-c")] static extern IntPtr wxGDIObj_GetMediumGreyPen();
+		[DllImport("wx-c")] static extern IntPtr wxGDIObj_GetLightGreyPen();
 
-			Pen.wxRED_PEN = new Pen(wxGDIObj_GetRedPen());
-			Pen.wxCYAN_PEN = new Pen(wxGDIObj_GetCyanPen());
-			Pen.wxGREEN_PEN = new Pen(wxGDIObj_GetGreenPen());
-			Pen.wxBLACK_PEN = new Pen(wxGDIObj_GetBlackPen());
-			Pen.wxWHITE_PEN = new Pen(wxGDIObj_GetWhitePen());
-			Pen.wxTRANSPARENT_PEN = new Pen(wxGDIObj_GetTransparentPen());
-			Pen.wxBLACK_DASHED_PEN = new Pen(wxGDIObj_GetBlackDashedPen());
-			Pen.wxGREY_PEN = new Pen(wxGDIObj_GetGreyPen());
-			Pen.wxMEDIUM_GREY_PEN = new Pen(wxGDIObj_GetMediumGreyPen());
-			Pen.wxLIGHT_GREY_PEN = new Pen(wxGDIObj_GetLightGreyPen());
-
-			Brush.wxBLUE_BRUSH = new Brush(wxBLUE_BRUSH_Get());
-			Brush.wxGREEN_BRUSH = new Brush(wxGREEN_BRUSH_Get());
-			Brush.wxWHITE_BRUSH = new Brush(wxWHITE_BRUSH_Get());
-			Brush.wxBLACK_BRUSH = new Brush(wxBLACK_BRUSH_Get());
-			Brush.wxGREY_BRUSH = new Brush(wxGREY_BRUSH_Get());
-			Brush.wxMEDIUM_GREY_BRUSH = new Brush(wxMEDIUM_GREY_BRUSH_Get());
-			Brush.wxLIGHT_GREY_BRUSH = new Brush(wxLIGHT_GREY_BRUSH_Get());
-			Brush.wxTRANSPARENT_BRUSH = new Brush(wxTRANSPARENT_BRUSH_Get());
-			Brush.wxCYAN_BRUSH = new Brush(wxCYAN_BRUSH_Get());
-			Brush.wxRED_BRUSH = new Brush(wxRED_BRUSH_Get());
-
-			Font.wxNORMAL_FONT    = new Font(wxFont_NORMAL_FONT());
-			Font.wxSMALL_FONT     = new Font(wxFont_SMALL_FONT());
-			Font.wxITALIC_FONT    = new Font(wxFont_ITALIC_FONT());
-			Font.wxSWISS_FONT     = new Font(wxFont_SWISS_FONT());
-
-			Colour.wxBLACK       = new Colour("Black");
-			Colour.wxWHITE       = new Colour("White");
-			Colour.wxRED         = new Colour("Red");
-			Colour.wxBLUE        = new Colour("Blue");
-			Colour.wxGREEN       = new Colour("Green");
-			Colour.wxCYAN        = new Colour("Cyan");
-			Colour.wxLIGHT_GREY  = new Colour("Light Gray");
-
-			Bitmap.wxNullBitmap = new Bitmap(wxNullBitmap_Get());
-			Icon.wxNullIcon = new Icon(wxNullIcon_Get());
-			Cursor.wxNullCursor = new Cursor(wxNullCursor_Get());
-			Pen.wxNullPen = new Pen(wxNullPen_Get());
-			Brush.wxNullBrush = new Brush(wxNullBrush_Get());
-			Palette.wxNullPalette = new Palette(wxNullPalette_Get());
-			Font.wxNullFont = new Font(wxNullFont_Get());
-			Colour.wxNullColour = new Colour(wxNullColour_Get());
+		public static Pen wxRED_PEN = new Pen(wxGDIObj_GetRedPen());
+		public static Pen wxCYAN_PEN = new Pen(wxGDIObj_GetCyanPen());
+		public static Pen wxGREEN_PEN = new Pen(wxGDIObj_GetGreenPen());
+		public static Pen wxBLACK_PEN = new Pen(wxGDIObj_GetBlackPen());
+		public static Pen wxWHITE_PEN = new Pen(wxGDIObj_GetWhitePen());
+		public static Pen wxTRANSPARENT_PEN = new Pen(wxGDIObj_GetTransparentPen());
+		public static Pen wxBLACK_DASHED_PEN = new Pen(wxGDIObj_GetBlackDashedPen());
+		public static Pen wxGREY_PEN = new Pen(wxGDIObj_GetGreyPen());
+		public static Pen wxMEDIUM_GREY_PEN = new Pen(wxGDIObj_GetMediumGreyPen());
+		public static Pen wxLIGHT_GREY_PEN = new Pen(wxGDIObj_GetLightGreyPen());
+	}
+	
+	//-----------------------------------------------------------------------------
+	
+	public class GDIBrushes
+	{
+		[DllImport("wx-c")] static extern IntPtr wxBLUE_BRUSH_Get();
+		[DllImport("wx-c")] static extern IntPtr wxGREEN_BRUSH_Get();
+		[DllImport("wx-c")] static extern IntPtr wxWHITE_BRUSH_Get();
+		[DllImport("wx-c")] static extern IntPtr wxBLACK_BRUSH_Get();
+		[DllImport("wx-c")] static extern IntPtr wxGREY_BRUSH_Get();
+		[DllImport("wx-c")] static extern IntPtr wxMEDIUM_GREY_BRUSH_Get();
+		[DllImport("wx-c")] static extern IntPtr wxLIGHT_GREY_BRUSH_Get();
+		[DllImport("wx-c")] static extern IntPtr wxTRANSPARENT_BRUSH_Get();
+		[DllImport("wx-c")] static extern IntPtr wxCYAN_BRUSH_Get();
+		[DllImport("wx-c")] static extern IntPtr wxRED_BRUSH_Get();
+		
+		public static Brush wxBLUE_BRUSH = new Brush(wxBLUE_BRUSH_Get());
+		public static Brush wxGREEN_BRUSH = new Brush(wxGREEN_BRUSH_Get());
+		public static Brush wxWHITE_BRUSH = new Brush(wxWHITE_BRUSH_Get());
+		public static Brush wxBLACK_BRUSH = new Brush(wxBLACK_BRUSH_Get());
+		public static Brush wxGREY_BRUSH = new Brush(wxGREY_BRUSH_Get());
+		public static Brush wxMEDIUM_GREY_BRUSH = new Brush(wxMEDIUM_GREY_BRUSH_Get());
+		public static Brush wxLIGHT_GREY_BRUSH = new Brush(wxLIGHT_GREY_BRUSH_Get());
+		public static Brush wxTRANSPARENT_BRUSH = new Brush(wxTRANSPARENT_BRUSH_Get());
+		public static Brush wxCYAN_BRUSH = new Brush(wxCYAN_BRUSH_Get());
+		public static Brush wxRED_BRUSH = new Brush(wxRED_BRUSH_Get());
+	}
+	
+	//-----------------------------------------------------------------------------
+	
+	public class NullObjects
+	{
+		[DllImport("wx-c")] static extern IntPtr wxNullBitmap_Get();
+		[DllImport("wx-c")] static extern IntPtr wxNullIcon_Get();
+		[DllImport("wx-c")] static extern IntPtr wxNullCursor_Get();
+		[DllImport("wx-c")] static extern IntPtr wxNullPen_Get();
+		[DllImport("wx-c")] static extern IntPtr wxNullBrush_Get();
+		[DllImport("wx-c")] static extern IntPtr wxNullPalette_Get();
+		[DllImport("wx-c")] static extern IntPtr wxNullFont_Get();
+		[DllImport("wx-c")] static extern IntPtr wxNullColour_Get();
+		
+		public static wx.Bitmap wxNullBitmap = new wx.Bitmap(wxNullBitmap_Get());
+		public static Icon wxNullIcon = new Icon(wxNullIcon_Get());
+		public static Cursor wxNullCursor = new Cursor(wxNullCursor_Get());
+		public static Pen wxNullPen = new Pen(wxNullPen_Get());
+		public static Brush wxNullBrush = new Brush(wxNullBrush_Get());
+		public static Palette wxNullPalette = new Palette(wxNullPalette_Get());
+		public static Font wxNullFont = new Font(wxNullFont_Get());
+		public static Colour wxNullColour = new Colour(wxNullColour_Get());
 	}
 
 	//-----------------------------------------------------------------------------
 
-		static extern (C) IntPtr wxColourDatabase_ctor();
-		static extern (C) void wxColourDataBase_dtor(IntPtr self);
-		static extern (C) IntPtr wxColourDatabase_Find(IntPtr self, string name);
-		static extern (C) string wxColourDatabase_FindName(IntPtr self, IntPtr colour);
-		static extern (C) void wxColourDatabase_AddColour(IntPtr self, string name, IntPtr colour);
+	public class ColourDatabase : Object
+	{
+		[DllImport("wx-c")] static extern IntPtr wxColourDatabase_ctor();
+		[DllImport("wx-c")] static extern void wxColourDataBase_dtor(IntPtr self);
+		[DllImport("wx-c")] static extern IntPtr wxColourDatabase_Find(IntPtr self, string name);
+		[DllImport("wx-c")] static extern IntPtr wxColourDatabase_FindName(IntPtr self, IntPtr colour);
+		[DllImport("wx-c")] static extern void wxColourDatabase_AddColour(IntPtr self, string name, IntPtr colour);
 		
 		//-----------------------------------------------------------------------------
 	
-	public class ColourDatabase : wxObject
-	{
-		public this(IntPtr wxobj)
+		public ColourDatabase(IntPtr wxObject)
+			: base(wxObject) 
 		{
-			super(wxobj);
+			this.wxObject = wxObject;
 		}
 		
-		private this(IntPtr wxobj, bool memOwn)
+		internal ColourDatabase(IntPtr wxObject, bool memOwn)
+			: base(wxObject)
 		{ 
-			super(wxobj);
 			this.memOwn = memOwn;
+			this.wxObject = wxObject;
 		}
 			
-		public this()
-			{ this(wxColourDatabase_ctor(), true);}
+		public ColourDatabase()
+			: this(wxColourDatabase_ctor(), true) {}
 			
 		//---------------------------------------------------------------------
 				
-		override private void dtor() { wxColourDataBase_dtor(wxobj); }
+		public override void Dispose()
+		{
+			if (!disposed)
+			{
+				if (wxObject != IntPtr.Zero)
+				{
+					if (memOwn)
+					{
+						wxColourDataBase_dtor(wxObject);
+						memOwn = false;
+					}
+				}
+				RemoveObject(wxObject);
+				wxObject = IntPtr.Zero;
+				disposed= true;
+			}
+			
+			base.Dispose();
+			GC.SuppressFinalize(this);
+		}
+		
+		//---------------------------------------------------------------------
+		
+		~ColourDatabase() 
+		{
+			Dispose();
+		}
 			
 		//-----------------------------------------------------------------------------
 			
 		public Colour Find(string name)
 		{
-			return new Colour(wxColourDatabase_Find(wxobj, name), true);
+			return new Colour(wxColourDatabase_Find(wxObject, name), true);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public string FindName(Colour colour)
 		{
-			return wxColourDatabase_FindName(wxobj, wxObject.SafePtr(colour)).dup;
+			return new wxString(wxColourDatabase_FindName(wxObject, Object.SafePtr(colour)), true);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public void AddColour(string name, Colour colour)
 		{
-			wxColourDatabase_AddColour(wxobj, name, wxObject.SafePtr(colour));
+			wxColourDatabase_AddColour(wxObject, name, Object.SafePtr(colour));
 		}
 	}
 	
 	//-----------------------------------------------------------------------------
 	
-		static extern (C) IntPtr wxPenList_ctor();
-		static extern (C) void wxPenList_AddPen(IntPtr self, IntPtr pen);
-		static extern (C) void wxPenList_RemovePen(IntPtr self, IntPtr pen);
-		static extern (C) IntPtr wxPenList_FindOrCreatePen(IntPtr self, IntPtr colour, int width, int style);
+	public class PenList : Object
+	{
+		[DllImport("wx-c")] static extern IntPtr wxPenList_ctor();
+		[DllImport("wx-c")] static extern void wxPenList_AddPen(IntPtr self, IntPtr pen);
+		[DllImport("wx-c")] static extern void wxPenList_RemovePen(IntPtr self, IntPtr pen);
+		[DllImport("wx-c")] static extern IntPtr wxPenList_FindOrCreatePen(IntPtr self, IntPtr colour, int width, int style);
 		
 		//-----------------------------------------------------------------------------
 	
-	public class PenList : wxObject
-	{
-		public this(IntPtr wxobj)
-			{ super(wxobj);}
+		public PenList(IntPtr wxObject)
+			: base(wxObject) {}
 			
-		public this()
-			{ super(wxPenList_ctor());}
+		public PenList()
+			: base(wxPenList_ctor()) {}
 			
 		//-----------------------------------------------------------------------------
 			
 		public void AddPen(Pen pen)
 		{
-			wxPenList_AddPen(wxobj, wxObject.SafePtr(pen));
+			wxPenList_AddPen(wxObject, Object.SafePtr(pen));
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public void RemovePen(Pen pen)
 		{
-			wxPenList_RemovePen(wxobj, wxObject.SafePtr(pen));
+			wxPenList_RemovePen(wxObject, Object.SafePtr(pen));
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public Pen FindOrCreatePen(Colour colour, int width, int style)
 		{
-			return new Pen(wxPenList_FindOrCreatePen(wxobj, wxObject.SafePtr(colour), width, style));
+			return new Pen(wxPenList_FindOrCreatePen(wxObject, Object.SafePtr(colour), width, style));
 		}
 	}
 	
 	//-----------------------------------------------------------------------------
 	
-		static extern (C) IntPtr wxBrushList_ctor();
-		static extern (C) void wxBrushList_AddBrush(IntPtr self, IntPtr brush);
-		static extern (C) void wxBrushList_RemoveBrush(IntPtr self, IntPtr brush);
-		static extern (C) IntPtr wxBrushList_FindOrCreateBrush(IntPtr self, IntPtr colour, int style);
+	public class BrushList : Object
+	{
+		[DllImport("wx-c")] static extern IntPtr wxBrushList_ctor();
+		[DllImport("wx-c")] static extern void wxBrushList_AddBrush(IntPtr self, IntPtr brush);
+		[DllImport("wx-c")] static extern void wxBrushList_RemoveBrush(IntPtr self, IntPtr brush);
+		[DllImport("wx-c")] static extern IntPtr wxBrushList_FindOrCreateBrush(IntPtr self, IntPtr colour, int style);
 		
 		//-----------------------------------------------------------------------------
 	
-	public class BrushList : wxObject
-	{
-		public this(IntPtr wxobj)
-			{ super(wxobj);}
+		public BrushList(IntPtr wxObject)
+			: base(wxObject) {}
 			
-		public this()
-			{ super(wxBrushList_ctor());}
+		public BrushList()
+			: base(wxBrushList_ctor()) {}
 			
 		//-----------------------------------------------------------------------------
 			
 		public void AddBrush(Brush brush)
 		{
-			wxBrushList_AddBrush(wxobj, wxObject.SafePtr(brush));
+			wxBrushList_AddBrush(wxObject, Object.SafePtr(brush));
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public void RemoveBrush(Brush brush)
 		{
-			wxBrushList_RemoveBrush(wxobj, wxObject.SafePtr(brush));
+			wxBrushList_RemoveBrush(wxObject, Object.SafePtr(brush));
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public Brush FindOrCreateBrush(Colour colour, int style)
 		{
-			return new Brush(wxBrushList_FindOrCreateBrush(wxobj, wxObject.SafePtr(colour), style));
+			return new Brush(wxBrushList_FindOrCreateBrush(wxObject, Object.SafePtr(colour), style));
 		}
 	}	
 	
 	//-----------------------------------------------------------------------------
 	
-		static extern (C) IntPtr wxFontList_ctor();
-		static extern (C) void wxFontList_AddFont(IntPtr self, IntPtr font);
-		static extern (C) void wxFontList_RemoveFont(IntPtr self, IntPtr font);
-		static extern (C) IntPtr wxFontList_FindOrCreateFont(IntPtr self, 
+	public class FontList : Object
+	{
+		[DllImport("wx-c")] static extern IntPtr wxFontList_ctor();
+		[DllImport("wx-c")] static extern void wxFontList_AddFont(IntPtr self, IntPtr font);
+		[DllImport("wx-c")] static extern void wxFontList_RemoveFont(IntPtr self, IntPtr font);
+		[DllImport("wx-c")] static extern IntPtr wxFontList_FindOrCreateFont(IntPtr self, 
 			int pointSize, 
 			int family, 
 			int style, 
@@ -256,26 +266,24 @@ import wx.Colour;
 		
 		//-----------------------------------------------------------------------------
 	
-	public class FontList : wxObject
-	{
-		public this(IntPtr wxobj)
-			{ super(wxobj);}
+		public FontList(IntPtr wxObject)
+			: base(wxObject) {}
 			
-		public this()
-			{ super(wxFontList_ctor());}
+		public FontList()
+			: base(wxFontList_ctor()) {}
 			
 		//-----------------------------------------------------------------------------
 			
 		public void AddFont(Font font)
 		{
-			wxFontList_AddFont(wxobj, wxObject.SafePtr(font));
+			wxFontList_AddFont(wxObject, Object.SafePtr(font));
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public void RemoveFont(Font font)
 		{
-			wxFontList_RemoveFont(wxobj, wxObject.SafePtr(font));
+			wxFontList_RemoveFont(wxObject, Object.SafePtr(font));
 		}
 		
 		//-----------------------------------------------------------------------------
@@ -298,39 +306,54 @@ import wx.Colour;
 		
 		public Font FindOrCreateFont(int pointSize, int family, int style, int weight, bool underline, string face, FontEncoding encoding)
 		{
-			return new Font(wxFontList_FindOrCreateFont(wxobj, pointSize, family, style, weight, underline, face, encoding));
+			return new Font(wxFontList_FindOrCreateFont(wxObject, pointSize, family, style, weight, underline, face, encoding));
 		}
 	}		
 	
 	//-----------------------------------------------------------------------------
 	
-		static extern (C) IntPtr wxBitmapList_ctor();
-		static extern (C) void   wxBitmapList_AddBitmap(IntPtr self, IntPtr bitmap);
-		static extern (C) void   wxBitmapList_RemoveBitmap(IntPtr self, IntPtr bitmap);
+	public class BitmapList : Object
+	{
+		[DllImport("wx-c")] static extern IntPtr wxBitmapList_ctor();
+		[DllImport("wx-c")] static extern void   wxBitmapList_AddBitmap(IntPtr self, IntPtr bitmap);
+		[DllImport("wx-c")] static extern void   wxBitmapList_RemoveBitmap(IntPtr self, IntPtr bitmap);
 		
 		//-----------------------------------------------------------------------------
 		
-	public class BitmapList : wxObject
-	{
-		public this(IntPtr wxobj)
-			{ super(wxobj);}
+		public BitmapList(IntPtr wxObject)
+			: base(wxObject) {}
 			
-		public this()
-			{ super(wxBitmapList_ctor());}
+		public BitmapList()
+			: base(wxBitmapList_ctor()) {}
 			
 		//-----------------------------------------------------------------------------
 		
 		public void AddBitmap(Bitmap bitmap)
 		{
-			wxBitmapList_AddBitmap(wxobj, wxObject.SafePtr(bitmap));
+			wxBitmapList_AddBitmap(wxObject, Object.SafePtr(bitmap));
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public void RemoveBitmap(Bitmap bitmap)
 		{
-			wxBitmapList_RemoveBitmap(wxobj, wxObject.SafePtr(bitmap));
+			wxBitmapList_RemoveBitmap(wxObject, Object.SafePtr(bitmap));
 		}
 	}
 	
 	//-----------------------------------------------------------------------------
+	
+	public struct StockCursors
+	{
+		[DllImport("wx-c")] static extern IntPtr wxSTANDARD_CURSOR_Get();
+		[DllImport("wx-c")] static extern IntPtr wxHOURGLASS_CURSOR_Get();
+		[DllImport("wx-c")] static extern IntPtr wxCROSS_CURSOR_Get();
+		
+		//-----------------------------------------------------------------------------
+		
+		public static Cursor wxSTANDARD_CURSOR = new Cursor(wxSTANDARD_CURSOR_Get());
+		public static Cursor wxHOURGLASS_CURSOR = new Cursor(wxHOURGLASS_CURSOR_Get());
+		public static Cursor wxCROSS_CURSOR = new Cursor(wxCROSS_CURSOR_Get());
+	}
+}
+

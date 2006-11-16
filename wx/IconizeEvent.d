@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - IconizeEvent.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - IconizeEvent.cs
 //
 // The wxIconizeEvent wrapper class.
@@ -13,32 +10,29 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.IconizeEvent;
-import wx.common;
-import wx.Event;
+using System;
+using System.Runtime.InteropServices;
 
-		static extern (C) IntPtr wxIconizeEvent_ctor(int winid,bool iconized);
-		static extern (C) bool wxIconizeEvent_Iconized(IntPtr self);
+namespace wx
+{
+	public class IconizeEvent : Event
+	{
+		[DllImport("wx-c")] static extern IntPtr wxIconizeEvent_ctor(int type);
+		[DllImport("wx-c")] static extern bool wxIconizeEvent_Iconized(IntPtr self);
 		
 		//-----------------------------------------------------------------------------
 
-	public class IconizeEvent : Event
-	{
-		public this(IntPtr wxobj) 
-			{ super(wxobj); }
+		public IconizeEvent(IntPtr wxObject) 
+			: base(wxObject) { }
 
-		public this(int winid = 0, bool iconized = true)
-			{ this(wxIconizeEvent_ctor(winid,iconized)); }
+		public IconizeEvent(int type)
+			: this(wxIconizeEvent_ctor(type)) { }
 
 		//-----------------------------------------------------------------------------	
 		
-		public bool Iconized() { return wxIconizeEvent_Iconized(wxobj); }
-
-
-		private static Event New(IntPtr obj) { return new IconizeEvent(obj); }
-
-		static this()
+		public bool Iconized
 		{
-			AddEventType(wxEVT_ICONIZE,				&IconizeEvent.New);
+			get { return wxIconizeEvent_Iconized(wxObject); }
 		}
 	}
+}

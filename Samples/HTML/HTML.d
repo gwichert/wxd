@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// wxD/Samples - HTML.cs
+// wx.NET/Samples - HTML.cs
 //
 // A NET version of the wxWidgets "HTML" sample.
 //
@@ -10,8 +10,12 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-import wx.wx;
+using System;
+using System.Drawing;
+using wx;
 
+namespace Samples
+{
     public class MyFrame : Frame
     {
         enum Cmd { Open, OpenURL, About, Quit, Dialog, Back, Forward }
@@ -21,32 +25,32 @@ import wx.wx;
 
         //---------------------------------------------------------------------
 
-        public this(string title, Point pos, Size size)
+        public MyFrame(string title, Point pos, Size size)
+            : base(title, pos, size)
         {
-            super(title, pos, size);
             // Set the window icon
 
-            this.icon = new Icon("../Samples/HTML/mondrian.png");
+            Icon = new wx.Icon("../Samples/HTML/mondrian.png");
 
             // Set up a menu
 
             Menu fileMenu = new Menu();
-            fileMenu.Append(Cmd.Open, "Open...\tCtrl+O",
+            fileMenu.Append((int)Cmd.Open, "Open...\tCtrl+O",
                             "Open a page");
-            fileMenu.Append(Cmd.OpenURL, "Open URL...\tCtrl+U",
+            fileMenu.Append((int)Cmd.OpenURL, "Open URL...\tCtrl+U",
                             "Open a URL");
             fileMenu.AppendSeparator();
-            fileMenu.Append(Cmd.Quit, "E&xit\tAlt-X", 
+            fileMenu.Append((int)Cmd.Quit, "E&xit\tAlt-X", 
                             "Quit this program");
 
             Menu goMenu = new Menu();
-            goMenu.Append(Cmd.Back, "&Back\tCtrl+B", 
+            goMenu.Append((int)Cmd.Back, "&Back\tCtrl+B", 
                           "Browse back one page");
-            goMenu.Append(Cmd.Forward, "&Forward\tCtrl+F", 
+            goMenu.Append((int)Cmd.Forward, "&Forward\tCtrl+F", 
                           "Browse forward one page");
 
             Menu helpMenu = new Menu();
-            helpMenu.Append(Cmd.About, "&About...\tF1", 
+            helpMenu.Append((int)Cmd.About, "&About...\tF1", 
                             "Show about dialog");
 
             MenuBar menuBar = new MenuBar();
@@ -54,7 +58,7 @@ import wx.wx;
             menuBar.Append(goMenu,   "&Browse");
             menuBar.Append(helpMenu, "&Help");
 
-            this.menuBar = menuBar;
+            MenuBar = menuBar;
 
             // Set up a status bar
 
@@ -70,27 +74,27 @@ import wx.wx;
 
             // Set up the event table
 
-            EVT_MENU(Cmd.Open,    &OnOpen);
-            EVT_MENU(Cmd.OpenURL, &OnOpenURL);
-            EVT_MENU(Cmd.Quit,    &OnQuit);
-            EVT_MENU(Cmd.Back,    &OnBack);
-            EVT_MENU(Cmd.Forward, &OnForward);
-            EVT_MENU(Cmd.About,   &OnAbout);
+            EVT_MENU((int)Cmd.Open,    new EventListener(OnOpen));
+            EVT_MENU((int)Cmd.OpenURL, new EventListener(OnOpenURL));
+            EVT_MENU((int)Cmd.Quit,    new EventListener(OnQuit));
+            EVT_MENU((int)Cmd.Back,    new EventListener(OnBack));
+            EVT_MENU((int)Cmd.Forward, new EventListener(OnForward));
+            EVT_MENU((int)Cmd.About,   new EventListener(OnAbout));
         }
 
         //---------------------------------------------------------------------
 
-        public void OnOpen(Object sender, Event e)
+        public void OnOpen(object sender, Event e)
         {
-            string page = FileSelector("Open HTML document", "", "", "", 
-                                           "HTML Files (*.htm)|*.htm|" ~ 
+            string page = new FileSelector("Open HTML document", "", "", "", 
+                                           "HTML Files (*.htm)|*.htm|" + 
                                            "All Files (*.*)|*.*");
             if (page != "") {
                 m_html.LoadPage(page);
             }
         }
 
-        public void OnOpenURL(Object sender, Event e)
+        public void OnOpenURL(object sender, Event e)
         {
             TextEntryDialog dlg = 
                 new TextEntryDialog(this, "Enter URL to open", "Open URL", 
@@ -101,14 +105,14 @@ import wx.wx;
             }
         }
 
-        public void OnQuit(Object sender, Event e)
+        public void OnQuit(object sender, Event e)
         {
             Close();
         }
 
         //---------------------------------------------------------------------
 
-        public void OnAbout(Object sender, Event e)
+        public void OnAbout(object sender, Event e)
         {
             HtmlAboutDialog dlg = new HtmlAboutDialog(this);
             dlg.ShowModal();
@@ -116,7 +120,7 @@ import wx.wx;
 
         //---------------------------------------------------------------------
 
-        public void OnBack(Object sender, Event e)
+        public void OnBack(object sender, Event e)
         {
             if (!m_html.HistoryBack()) {
                 MessageDialog dlg = 
@@ -126,7 +130,7 @@ import wx.wx;
             }
         }
 
-        public void OnForward(Object sender, Event e)
+        public void OnForward(object sender, Event e)
         {
             if (!m_html.HistoryForward()) {
                 MessageDialog dlg = 
@@ -143,36 +147,36 @@ import wx.wx;
     {
         //---------------------------------------------------------------------
 
-        public this (Window parent)
+        public HtmlAboutDialog (Window parent)
+            : base(parent, -1, "About HTML")
         {
-            super(parent, -1, "About HTML");
-
-            this.sizer = new BoxSizer(Orientation.wxVERTICAL);
+            Sizer = new BoxSizer(Orientation.wxVERTICAL);
 
             // Create the about html window
 
             HtmlWindow html = new HtmlWindow(this, -1, wxDefaultPosition,
-                                             new_Size(380,160), 
+                                             new Size(380, 160), 
                                              HtmlWindow.wxHW_SCROLLBAR_NEVER);
             html.Borders = 0;
             html.LoadPage("../Samples/HTML/Data/about.htm");
 
-            html.size = html.InternalRepresentation.size;
+            html.Size = new Size(html.InternalRepresentation.Width,
+                                 html.InternalRepresentation.Height);
 
-            sizer.Add(html, 1, Direction.wxALL, 5);
+            Sizer.Add(html, 1, Direction.wxALL, 5);
 
             // Create the OK button
 
-            sizer.Add(new Button(this, -1, "OK"), 0, 
+            Sizer.Add(new Button(this, -1, "OK"), 0, 
                       Alignment.wxALIGN_CENTER | Direction.wxALL, 5);
-            sizer.Fit(this);
+            Sizer.Fit(this);
 
-            EVT_BUTTON(-1, &OnOK);
+            EVT_BUTTON(-1, new EventListener(OnOK));
         }
 
         //---------------------------------------------------------------------
 
-        public void OnOK(Object sender, Event e)
+        public void OnOK(object sender, Event e)
         {
             EndModal(wxID_OK);
         }
@@ -186,8 +190,8 @@ import wx.wx;
 
         public override bool OnInit()
         {
-            MyFrame frame = new MyFrame("HTML Sample", new_Point(50,50), new_Size(450,340));
-
+            MyFrame frame = new MyFrame("HTML Sample", new Point(50,50), 
+                                        new Size(450,340));
             frame.Show(true);
 
             return true;
@@ -195,6 +199,7 @@ import wx.wx;
 
         //---------------------------------------------------------------------
 
+        [STAThread]
         static void Main()
         {
             MyApp app = new MyApp();
@@ -203,8 +208,4 @@ import wx.wx;
 
         //---------------------------------------------------------------------
     }
-
-void main()
-{
-	MyApp.Main();
 }

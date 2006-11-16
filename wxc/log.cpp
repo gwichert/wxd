@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - log.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - log.cxx
 //
 // The wxLog and wxLogXXX proxy interfaces.
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/log.h>
 
 //-----------------------------------------------------------------------------
@@ -54,9 +50,9 @@ bool wxLog_EnableLogging(bool doit)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxLog_OnLog(unsigned long level, dstr szString, long t)
+void wxLog_OnLog(unsigned long level, const char*  szString, long t)
 {
-    wxLog::OnLog(level, wxString(szString.data, wxConvUTF8, szString.length).c_str(), t);
+    wxLog::OnLog(level, wxString(szString, wxConvUTF8).c_str(), t);
 }
 
 //-----------------------------------------------------------------------------
@@ -157,17 +153,17 @@ void wxLog_SetTraceMask(wxTraceMask ulMask)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxLog_AddTraceMask(dstr str)
+void wxLog_AddTraceMask(const char* str)
 {
-    wxLog::AddTraceMask(wxString(str.data, wxConvUTF8, str.length));
+    wxLog::AddTraceMask(wxString(str, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxLog_RemoveTraceMask(dstr str)
+void wxLog_RemoveTraceMask(const char* str)
 {
-    wxLog::RemoveTraceMask(wxString(str.data, wxConvUTF8, str.length));
+    wxLog::RemoveTraceMask(wxString(str, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
@@ -189,9 +185,9 @@ wxArrayString* wxLog_GetTraceMasks()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxLog_SetTimestamp(dstr ts)
+void wxLog_SetTimestamp(const char* ts)
 {
-    wxLog::SetTimestamp(wxString(ts.data, wxConvUTF8, ts.length).c_str());
+    wxLog::SetTimestamp(wxString(ts, wxConvUTF8).c_str());
 }
 
 //-----------------------------------------------------------------------------
@@ -213,9 +209,9 @@ wxTraceMask wxLog_GetTraceMask()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxLog_IsAllowedTraceMask(dstr mask)
+bool wxLog_IsAllowedTraceMask(const char* mask)
 {
-    return wxLog::IsAllowedTraceMask(wxString(mask.data, wxConvUTF8, mask.length).c_str())?1:0;
+    return wxLog::IsAllowedTraceMask(wxString(mask, wxConvUTF8).c_str())?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -229,17 +225,17 @@ wxLogLevel wxLog_GetLogLevel()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxLog_GetTimestamp()
+wxString* wxLog_GetTimestamp()
 {
-    return dstr_ret(wxLog::GetTimestamp());
+    return new wxString(wxLog::GetTimestamp());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxLog_TimeStamp(dstr str)
+void wxLog_TimeStamp(const char* str)
 {
-    wxLog::TimeStamp(new wxString(str.data, wxConvUTF8, str.length));
+    wxLog::TimeStamp(new wxString(str, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
@@ -256,9 +252,9 @@ enum {
 };
 
 extern "C" WXEXPORT
-void wxLog_Log_Function(int what, dstr szFormat)
+void wxLog_Log_Function(int what, const char* szFormat)
 {
-    wxString tmpstr = wxString(szFormat.data, wxConvUTF8, szFormat.length);
+    wxString tmpstr = wxString(szFormat, wxConvUTF8);
     // params are converted by csharp code
 
     switch (what) {

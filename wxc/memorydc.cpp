@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - memorydc.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - memorydc.cxx
 // 
 // The wxBufferedDC and wxMemoryDC proxy interface.
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/dcbuffer.h>
 #include <wx/dcmemory.h>
 

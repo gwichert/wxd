@@ -5,20 +5,23 @@
 // Licensed	under the Widgets license, see LICENSE.txt for details.
 //-----------------------------------------------------------------------------
 
-import wx.wx;
+using System;
+using System.Drawing;
+using wx;
 
+namespace MyApp
+{
 	public class CompareModesDialog : Dialog
 	{
-		public this( Window parent, int id, Display display )
-		{
-			super( parent, id , "VideoMode Euqlity/Match Results", 
+		public CompareModesDialog( Window parent, int id, Display display )
+			: base( parent, id , "VideoMode Euqlity/Match Results", 
 			wxDefaultPosition, wxDefaultSize, 
-			wxDEFAULT_DIALOG_STYLE | wxMAXIMIZE_BOX | wxRESIZE_BORDER);
+			wxDEFAULT_DIALOG_STYLE | wxMAXIMIZE_BOX | wxRESIZE_BORDER)
+		{
 			// Instructions
 			HtmlWindow html_instr = new HtmlWindow(this);
 			// Force HTML font sizes to be same on all platforms
-			const int[] data = [ 7, 8, 10, 12, 16, 22, 30 ];
-			html_instr.SetFonts("", "", data);
+			html_instr.SetFonts("", "", new int[] { 7, 8, 10, 12, 16, 22, 30 });
 			html_instr.SetPage("Testing current display's video modes for equality and \"match\" (non-zero fields are equal except for refresh, which is allowed to have a greater value).");
 			html_instr.SetSizeHints(-1,75);
 
@@ -47,7 +50,7 @@ import wx.wx;
 				}
 			}
 
-			// Ensure ListCtrl cast(wide)is as it's data
+			// Ensure ListCtrl is as wide as it's data
 			int width = 0;
 			for (int col = 0; col <= 3; col++)
 			{
@@ -69,8 +72,9 @@ import wx.wx;
 
 			sizer.Fit(this);
 			AutoLayout = true;
-			this.sizer =  sizer;
+			SetSizer( sizer );
 		}
 
 	}
  
+} // namespace

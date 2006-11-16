@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - iconizeevent.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - iconizeevent.cxx
 // 
 // The wxIconizeEvent proxy interface.
@@ -14,14 +11,13 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxIconizeEvent* wxIconizeEvent_ctor(int winid, bool iconized)
+wxIconizeEvent* wxIconizeEvent_ctor(wxEventType type)
 {
-    return new wxIconizeEvent(winid,iconized);
+    return new wxIconizeEvent(type);
 }
 
 extern "C" WXEXPORT

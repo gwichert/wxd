@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - KeyEvent.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - KeyEvent.cs
 // 
 // The wxKeyEvent wrapper class.
@@ -13,93 +10,122 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.KeyEvent;
-import wx.common;
-import wx.Event;
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
-        static extern (C) IntPtr wxKeyEvent_ctor(int type);
-
-        static extern (C) bool   wxKeyEvent_ControlDown(IntPtr self);
-        static extern (C) bool   wxKeyEvent_ShiftDown(IntPtr self);
-        static extern (C) bool   wxKeyEvent_AltDown(IntPtr self);
-        static extern (C) bool   wxKeyEvent_MetaDown(IntPtr self);
-
-        static extern (C) uint   wxKeyEvent_GetRawKeyCode(IntPtr self);
-        static extern (C) int    wxKeyEvent_GetKeyCode(IntPtr self);
-
-        static extern (C) uint   wxKeyEvent_GetRawKeyFlags(IntPtr self);
-        static extern (C) bool   wxKeyEvent_HasModifiers(IntPtr self);
-
-        static extern (C) void   wxKeyEvent_GetPosition(IntPtr self, inout Point pt);
-        static extern (C) int    wxKeyEvent_GetX(IntPtr self);
-        static extern (C) int    wxKeyEvent_GetY(IntPtr self);
-	
-	static extern (C) bool   wxKeyEvent_CmdDown(IntPtr self);
-
-        //-----------------------------------------------------------------------------
-
+namespace wx
+{
     public class KeyEvent : Event
     {
-        public this(IntPtr wxobj) 
-            { super(wxobj); }
+        [DllImport("wx-c")] static extern IntPtr wxKeyEvent_ctor(int type);
 
-        public this(EventType type = wxEVT_NULL)
-            { this(wxKeyEvent_ctor(type)); }
+        [DllImport("wx-c")] static extern bool   wxKeyEvent_ControlDown(IntPtr self);
+        [DllImport("wx-c")] static extern bool   wxKeyEvent_ShiftDown(IntPtr self);
+        [DllImport("wx-c")] static extern bool   wxKeyEvent_AltDown(IntPtr self);
+        [DllImport("wx-c")] static extern bool   wxKeyEvent_MetaDown(IntPtr self);
+
+        [DllImport("wx-c")] static extern uint   wxKeyEvent_GetRawKeyCode(IntPtr self);
+        [DllImport("wx-c")] static extern int    wxKeyEvent_GetKeyCode(IntPtr self);
+
+        [DllImport("wx-c")] static extern uint   wxKeyEvent_GetRawKeyFlags(IntPtr self);
+        [DllImport("wx-c")] static extern bool   wxKeyEvent_HasModifiers(IntPtr self);
+
+        [DllImport("wx-c")] static extern void   wxKeyEvent_GetPosition(IntPtr self, ref Point pt);
+        [DllImport("wx-c")] static extern int    wxKeyEvent_GetX(IntPtr self);
+        [DllImport("wx-c")] static extern int    wxKeyEvent_GetY(IntPtr self);
+	
+	[DllImport("wx-c")] static extern bool   wxKeyEvent_CmdDown(IntPtr self);
 
         //-----------------------------------------------------------------------------
 
-        public bool ControlDown() { return wxKeyEvent_ControlDown(wxobj); }
+        public KeyEvent(IntPtr wxObject) 
+            : base(wxObject) { }
 
-        public bool MetaDown() { return wxKeyEvent_MetaDown(wxobj); }
+        public KeyEvent(int type)
+            : this(wxKeyEvent_ctor(type)) { }
 
-        public bool ShiftDown() { return wxKeyEvent_ShiftDown(wxobj); }
+        //-----------------------------------------------------------------------------
 
-        public bool AltDown() { return wxKeyEvent_AltDown(wxobj); }
+        public bool ControlDown
+        {
+            get { return wxKeyEvent_ControlDown(wxObject); }
+        }
+
+        public bool MetaDown
+        {
+            get { return wxKeyEvent_MetaDown(wxObject); }
+        }
+
+        public bool ShiftDown
+        {
+            get { return wxKeyEvent_ShiftDown(wxObject); }
+        }
+
+        public bool AltDown
+        {
+            get { return wxKeyEvent_AltDown(wxObject); }
+        }
 
         //-----------------------------------------------------------------------------
 
         /*public KeyCode KeyCode
         {
-            get { return (KeyCode)wxKeyEvent_GetKeyCode(wxobj); }
+            get { return (KeyCode)wxKeyEvent_GetKeyCode(wxObject); }
         }*/
 	
-	public int KeyCode() { return wxKeyEvent_GetKeyCode(wxobj); }
+	public int KeyCode
+        {
+            get { return wxKeyEvent_GetKeyCode(wxObject); }
+        }
 
-        public int RawKeyCode() { return wxKeyEvent_GetRawKeyCode(wxobj); }
-
-        //-----------------------------------------------------------------------------
-
-        public int RawKeyFlags() { return wxKeyEvent_GetRawKeyFlags(wxobj); }
-
-        //-----------------------------------------------------------------------------
-
-        public bool HasModifiers() { return wxKeyEvent_HasModifiers(wxobj); }
+        public long RawKeyCode
+        {
+            get { return wxKeyEvent_GetRawKeyCode(wxObject); }
+        }
 
         //-----------------------------------------------------------------------------
 
-        public Point Position() {
-                Point pt;
-                wxKeyEvent_GetPosition(wxobj, pt);
+        public long RawKeyFlags
+        {
+            get { return wxKeyEvent_GetRawKeyFlags(wxObject); }
+        }
+
+        //-----------------------------------------------------------------------------
+
+        public bool HasModifiers
+        {
+            get { return wxKeyEvent_HasModifiers(wxObject); }
+        }
+
+        //-----------------------------------------------------------------------------
+
+        public Point Position
+        {
+            get {
+                Point pt = new Point();
+                wxKeyEvent_GetPosition(wxObject, ref pt);
                 return pt;
             }
+        }
 
         //-----------------------------------------------------------------------------
 
-        public int X() { return wxKeyEvent_GetX(wxobj); }
+        public int X
+        {
+            get { return wxKeyEvent_GetX(wxObject); }
+        }
 
-        public int Y() { return wxKeyEvent_GetY(wxobj); }
+        public int Y
+        {
+            get { return wxKeyEvent_GetY(wxObject); }
+        }
 
         //-----------------------------------------------------------------------------
 	
-	public bool CmdDown() { return wxKeyEvent_CmdDown(wxobj); }
-
-		private static Event New(IntPtr obj) { return new KeyEvent(obj); }
-
-		static this()
-		{
-			AddEventType(wxEVT_KEY_DOWN,                        &KeyEvent.New);
-			AddEventType(wxEVT_KEY_UP,                          &KeyEvent.New);
-			AddEventType(wxEVT_CHAR,                            &KeyEvent.New);
-			AddEventType(wxEVT_CHAR_HOOK,                       &KeyEvent.New);
-		}
+	public bool CmdDown
+	{
+		get { return wxKeyEvent_CmdDown(wxObject); }
+	}
     }
+}

@@ -1,60 +1,63 @@
 //-----------------------------------------------------------------------------
-// wxD - Caret.d
+// wx.NET - Caret.cs
 //
 // The wxCaret wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 by Bryan Bulten
-// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.Caret;
-import wx.common;
-import wx.Window;
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
-		static extern (C) IntPtr wxCaret_ctor();
-		static extern (C) void wxCaret_dtor(IntPtr self);
-		static extern (C) bool wxCaret_Create(IntPtr self, IntPtr window, int width, int height);
-		static extern (C) bool wxCaret_IsOk(IntPtr self);
-		static extern (C) bool wxCaret_IsVisible(IntPtr self);
-		static extern (C) void wxCaret_GetPosition(IntPtr self, out int x, out int y);
-		static extern (C) void wxCaret_GetSize(IntPtr self, out int width, out int height);
-		static extern (C) IntPtr wxCaret_GetWindow(IntPtr self);
-		static extern (C) void wxCaret_SetSize(IntPtr self, int width, int height);
-		static extern (C) void wxCaret_Move(IntPtr self, int x, int y);
-		static extern (C) void wxCaret_Show(IntPtr self, bool show);
-		static extern (C) void wxCaret_Hide(IntPtr self);
-		static extern (C) int wxCaret_GetBlinkTime();
-		static extern (C) void wxCaret_SetBlinkTime(int milliseconds);
+namespace wx
+{
+	public class Caret : Object
+	{
+		[DllImport("wx-c")] static extern IntPtr wxCaret_ctor();
+		[DllImport("wx-c")] static extern void wxCaret_dtor(IntPtr self);
+		[DllImport("wx-c")] static extern bool wxCaret_Create(IntPtr self, IntPtr window, int width, int height);
+		[DllImport("wx-c")] static extern bool wxCaret_IsOk(IntPtr self);
+		[DllImport("wx-c")] static extern bool wxCaret_IsVisible(IntPtr self);
+		[DllImport("wx-c")] static extern void wxCaret_GetPosition(IntPtr self, out int x, out int y);
+		[DllImport("wx-c")] static extern void wxCaret_GetSize(IntPtr self, out int width, out int height);
+		[DllImport("wx-c")] static extern IntPtr wxCaret_GetWindow(IntPtr self);
+		[DllImport("wx-c")] static extern void wxCaret_SetSize(IntPtr self, int width, int height);
+		[DllImport("wx-c")] static extern void wxCaret_Move(IntPtr self, int x, int y);
+		[DllImport("wx-c")] static extern void wxCaret_Show(IntPtr self, bool show);
+		[DllImport("wx-c")] static extern void wxCaret_Hide(IntPtr self);
+		[DllImport("wx-c")] static extern int wxCaret_GetBlinkTime();
+		[DllImport("wx-c")] static extern void wxCaret_SetBlinkTime(int milliseconds);
 		
 		//---------------------------------------------------------------------
 
-	public class Caret : wxObject
-	{
-		public this()
-			{ this(wxCaret_ctor(), true);}
+		public Caret()
+			: this(wxCaret_ctor(), true) {}
 
-		public this(IntPtr wxobj)
+		public Caret(IntPtr wxObject)
+			: base(wxObject)
 		{
-			super(wxobj);
+			this.wxObject = wxObject;
 		}
 		
-		private this(IntPtr wxobj, bool memOwn)
+		internal Caret(IntPtr wxObject, bool memOwn)
+			: base(wxObject)
 		{ 
-			super(wxobj);
 			this.memOwn = memOwn;
+			this.wxObject = wxObject;
 		}
 
-		public this(Window window, Size size)
-			{ this(window, size.Width, size.Height);}
+		public Caret(Window window, Size size)
+			: this(window, size.Width, size.Height) {}
 
-		public this(Window window, int width, int height)
+		public Caret(Window window, int width, int height)
+			: this(wxCaret_ctor(), true)
 		{
-			this(wxCaret_ctor(), true);
-			if (!wxCaret_Create(wxobj, wxObject.SafePtr(window), width, height))
+			if (!wxCaret_Create(wxObject, Object.SafePtr(window), width, height))
 			{
 				throw new InvalidOperationException("Failed to create Caret");
 			}
@@ -62,103 +65,175 @@ import wx.Window;
 		
 		//---------------------------------------------------------------------
 				
-		override private void dtor() { wxCaret_dtor(wxobj); }
+		public override void Dispose()
+		{
+			if (!disposed)
+			{
+				if (wxObject != IntPtr.Zero)
+				{
+					if (memOwn)
+					{
+						wxCaret_dtor(wxObject);
+						memOwn = false;
+					}
+				}
+				RemoveObject(wxObject);
+				wxObject = IntPtr.Zero;
+				disposed= true;
+			}
+			
+			base.Dispose();
+			GC.SuppressFinalize(this);
+		}
+		
+		//---------------------------------------------------------------------
+		
+		~Caret() 
+		{
+			Dispose();
+		}
 		
 		//---------------------------------------------------------------------
 
 		public bool Create(Window window, int width, int height)
 		{
-			return wxCaret_Create(wxobj, wxObject.SafePtr(window), width, height);
+			return wxCaret_Create(wxObject, Object.SafePtr(window), width, height);
 		}
 
 		//---------------------------------------------------------------------
 
-		public bool IsOk() { return wxCaret_IsOk(wxobj); }
+		public bool IsOk
+		{
+			get { return wxCaret_IsOk(wxObject); }
+		}
 
-		public bool IsVisible() { return wxCaret_IsVisible(wxobj); }
+		public bool IsVisible
+		{
+			get { return wxCaret_IsVisible(wxObject); }
+		}
 
 		//---------------------------------------------------------------------
 
-		public Point Position() 
+		public Point Position
+		{
+			get
 			{
-				Point point;
-				wxCaret_GetPosition(wxobj, point.X, point.Y);
-				return point;
+				int x, y;
+				wxCaret_GetPosition(wxObject, out x, out y);
+				return new Point(x, y);
 			}
-		public void Position(Point value) 
+			set
 			{
-				wxCaret_Move(wxobj, value.X, value.Y);
+				wxCaret_Move(wxObject, value.X, value.Y);
 			}
-
-		//---------------------------------------------------------------------
-
-		public Size size() 
-		{
-			Size sz;
-			wxCaret_GetSize(wxobj, sz.Width, sz.Height);
-			return sz;
-		}
-		public void size(Size value) 
-		{
-			wxCaret_SetSize(wxobj, value.Width, value.Height);
 		}
 
 		//---------------------------------------------------------------------
 
-		public Window window() 
+		public Size Size
 		{
-			return cast(Window)FindObject(wxCaret_GetWindow(wxobj));
+			get
+			{
+				int w, h;
+				wxCaret_GetSize(wxObject, out w, out h);
+				return new Size(w, h);
+			}
+			set
+			{
+				wxCaret_SetSize(wxObject, value.Width, value.Height);
+			}
+		}
+
+		//---------------------------------------------------------------------
+
+		public Window Window
+		{
+			get
+			{
+				return (Window)Object.FindObject(wxCaret_GetWindow(wxObject));
+			}
 		}
 
 		//---------------------------------------------------------------------
 
 		public void Show(bool show)
 		{
-			wxCaret_Show(wxobj, show);
+			wxCaret_Show(wxObject, show);
 		}
 
 		public void Hide()
 		{
-			wxCaret_Hide(wxobj);
+			wxCaret_Hide(wxObject);
 		}
 
 		//---------------------------------------------------------------------
 
-		static int BlinkTime()
+		public static int BlinkTime
 		{
-			return wxCaret_GetBlinkTime();
-		}
-		static void BlinkTime(int value) 
-		{
-			wxCaret_SetBlinkTime(value);
+			get
+			{
+				return wxCaret_GetBlinkTime();
+			}
+			set
+			{
+				wxCaret_SetBlinkTime(value);
+			}
 		}
 
-		public static wxObject New(IntPtr ptr) { return new Caret(ptr); }
 		//---------------------------------------------------------------------
 	}
 
-		static extern (C) IntPtr wxCaretSuspend_ctor(IntPtr win);
-		static extern (C) void wxCaretSuspend_dtor(IntPtr self);
+	public class CaretSuspend : Object
+	{
+		[DllImport("wx-c")] static extern IntPtr wxCaretSuspend_ctor(IntPtr win);
+		[DllImport("wx-c")] static extern void wxCaretSuspend_dtor(IntPtr self);
 		
 		//---------------------------------------------------------------------
 
-	public class CaretSuspend : wxObject
-	{
-		public this(Window win)
-			{ this(wxCaretSuspend_ctor(wxObject.SafePtr(win)), true);}
+		public CaretSuspend(Window win)
+			: this(wxCaretSuspend_ctor(Object.SafePtr(win)), true) {}
 		
-		public this(IntPtr wxobj)
+		public CaretSuspend(IntPtr wxObject)
+			: base(wxObject)
 		{ 
-			super(wxobj);
+			this.wxObject = wxObject;
 		}
 		
-		private this(IntPtr wxobj, bool memOwn)
+		internal CaretSuspend(IntPtr wxObject, bool memOwn)
+			: base(wxObject)
 		{ 
-			super(wxobj);
 			this.memOwn = memOwn;
+			this.wxObject = wxObject;
 		}
 		
 		//---------------------------------------------------------------------
 				
-		override private void dtor() { wxCaretSuspend_dtor(wxobj); }
+		public override void Dispose()
+		{
+			if (!disposed)
+			{
+				if (wxObject != IntPtr.Zero)
+				{
+					if (memOwn)
+					{
+						wxCaretSuspend_dtor(wxObject);
+						memOwn = false;
+					}
+				}
+				RemoveObject(wxObject);
+				wxObject = IntPtr.Zero;
+				disposed= true;
+			}
+			
+			base.Dispose();
+			GC.SuppressFinalize(this);
+		}
+		
+		//---------------------------------------------------------------------
+		
+		~CaretSuspend() 
+		{
+			Dispose();
+		}
 	}
+}

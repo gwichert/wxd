@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - MouseCaptureChangedEvent.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - MouseCaptureChangedEvent.cs
 //
 // The wxMouseCaptureChangedEvent wrapper class.
@@ -13,32 +10,29 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.MouseCaptureChangedEvent;
-import wx.common;
-import wx.Event;
-import wx.Window;
+using System;
+using System.Runtime.InteropServices;
 
-		static extern (C) IntPtr wxMouseCaptureChangedEvent_ctor(int winid,IntPtr gainedCapture);
-		static extern (C) IntPtr wxMouseCaptureChangedEvent_GetCapturedWindow(IntPtr self);
+namespace wx
+{
+	public class MouseCaptureChangedEvent : Event
+	{
+		[DllImport("wx-c")] static extern IntPtr wxMouseCaptureChangedEvent_ctor(int type);
+		[DllImport("wx-c")] static extern IntPtr wxMouseCaptureChangedEvent_GetCapturedWindow(IntPtr self);
 		
 		//-----------------------------------------------------------------------------
 
-	public class MouseCaptureChangedEvent : Event
-	{
-		public this(IntPtr wxobj) 
-			{ super(wxobj); }
+		public MouseCaptureChangedEvent(IntPtr wxObject) 
+			: base(wxObject) { }
 
-		public this(int winid = 0, Window gainedCapture = null)
-			{ this(wxMouseCaptureChangedEvent_ctor(winid,wxObject.SafePtr(gainedCapture))); }
+		public MouseCaptureChangedEvent(int type)
+			: this(wxMouseCaptureChangedEvent_ctor(type)) { }
 
 		//-----------------------------------------------------------------------------	
 		
-		public Window CapturedWindow() { return cast(Window)FindObject(wxMouseCaptureChangedEvent_GetCapturedWindow(wxobj), &Window.New); }
-
-		private static Event New(IntPtr obj) { return new MouseCaptureChangedEvent(obj); }
-
-		static this()
+		public Window CapturedWindow
 		{
-			AddEventType(wxEVT_MOUSE_CAPTURE_CHANGED,		&MouseCaptureChangedEvent.New);
+			get { return (Window)FindObject(wxMouseCaptureChangedEvent_GetCapturedWindow(wxObject), typeof(Window)); }
 		}
 	}
+}

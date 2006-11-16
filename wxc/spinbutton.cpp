@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - spinbutton.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - spinbutton.cxx
 //
 // The wxSpinButton proxy interface
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/spinbutt.h>
 #include "local_events.h"
 
@@ -37,7 +33,7 @@ wxSpinButton* wxSpinButton_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxSpinButton_Create(wxSpinButton* self, wxWindow *parent, wxWindowID id, const wxPoint* pos, const wxSize* size, long style, dstr name)
+bool wxSpinButton_Create(wxSpinButton* self, wxWindow *parent, wxWindowID id, const wxPoint* pos, const wxSize* size, long style, const char* name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -45,10 +41,10 @@ bool wxSpinButton_Create(wxSpinButton* self, wxWindow *parent, wxWindowID id, co
 	if (size == NULL)
 		size = &wxDefaultSize;
 
-	if (name.data==NULL)
-		name = dstr("spinbutton",sizeof("spinbutton")-1);
+	if (name == NULL)
+		name = "spinbutton";
 
-	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, *pos, *size, style, wxString(name, wxConvUTF8))?1:0;
 }
 
 //-----------------------------------------------------------------------------

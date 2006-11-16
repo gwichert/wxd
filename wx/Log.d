@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - Log.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - Log.cs
 //
 // The Log wrapper classes.
@@ -13,23 +10,17 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.Log;
-import wx.common;
-import wx.TextCtrl;
-private import std.format;
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
-		static extern (C) IntPtr wxLog_ctor();
-		static extern (C) bool wxLog_IsEnabled();
-		static extern (C) void wxLog_FlushActive();
-		static extern (C) IntPtr wxLog_SetActiveTargetTextCtrl(IntPtr pLogger);
-		static extern (C) void wxLog_Log_Function(int what, string szFormat);
-		static extern (C) void wxLog_AddTraceMask(string tmask);
-		
-	public class Log: wxObject
+namespace wx
+{
+	public class Log: Object
 	{
 		enum eLogLevel : int
 		{
-			xLOG,
+			xLOGMESSAGE,
 			xFATALERROR,
 			xERROR,
 			xWARNING,
@@ -39,14 +30,24 @@ private import std.format;
 			xSYSERROR
 		}
 		
-		public this(IntPtr wxobj)
-		    { super(wxobj);}
+		[DllImport("wx-c")] static extern IntPtr wxLog_ctor();
+		[DllImport("wx-c")] static extern bool wxLog_IsEnabled();
+		[DllImport("wx-c")] static extern void wxLog_FlushActive();
+		[DllImport("wx-c")] static extern IntPtr wxLog_SetActiveTargetTextCtrl(IntPtr pLogger);
+		[DllImport("wx-c")] static extern void wxLog_Log_Function(int what, string szFormat);
+		[DllImport("wx-c")] static extern void wxLog_AddTraceMask(string tmask);
+		
+		public Log(IntPtr wxObject)
+		    : base(wxObject) {}
 
-		public this()
-		    { super(wxLog_ctor());}
+		public Log()
+		    : base(wxLog_ctor()) {}
 
 
-		static bool IsEnabled() { return wxLog_IsEnabled(); }
+		public static bool IsEnabled
+		{
+			get { return wxLog_IsEnabled(); }
+		}
 
 		public static void FlushActive()
 		{
@@ -56,7 +57,7 @@ private import std.format;
 		// at the moment only TextCtrl
 		public static void SetActiveTarget(TextCtrl pLogger)
 		{
-			wxLog_SetActiveTargetTextCtrl(wxObject.SafePtr(pLogger));
+			wxLog_SetActiveTargetTextCtrl(Object.SafePtr(pLogger));
 		}
 
 		public static void AddTraceMask(string tmask)
@@ -64,115 +65,44 @@ private import std.format;
 			wxLog_AddTraceMask(tmask);
 		}
 
-		public static void LogMessage(...)
+		public static void LogMessage(string message, params object[] param)
 		{
-			wxLog_Log_Function(cast(int)eLogLevel.xLOG, stringFormat(_arguments,_argptr));
+			wxLog_Log_Function((int)eLogLevel.xLOGMESSAGE, string.Format(message, param));
 		}
 
-		public static void LogFatalError(...)
+		public static void LogFatalError(string message, params object[] param)
 		{
-			wxLog_Log_Function(cast(int)eLogLevel.xFATALERROR, stringFormat(_arguments,_argptr));
+			wxLog_Log_Function((int)eLogLevel.xFATALERROR, string.Format(message, param));
 		}
 
-		public static void LogError(...)
+		public static void LogError(string message, params object[] param)
 		{
-			wxLog_Log_Function(cast(int)eLogLevel.xERROR, stringFormat(_arguments,_argptr));
+			wxLog_Log_Function((int)eLogLevel.xERROR, string.Format(message, param));
 		}
 
-		public static void LogWarning(...)
+		public static void LogWarning(string message, params object[] param)
 		{
-			wxLog_Log_Function(cast(int)eLogLevel.xWARNING, stringFormat(_arguments,_argptr));
+			wxLog_Log_Function((int)eLogLevel.xWARNING, string.Format(message, param));
 		}
 
-		public static void LogInfo(...)
+		public static void LogInfo(string message, params object[] param)
 		{
-			wxLog_Log_Function(cast(int)eLogLevel.xINFO, stringFormat(_arguments,_argptr));
+			wxLog_Log_Function((int)eLogLevel.xINFO, string.Format(message, param));
 		}
 
-		public static void LogVerbose(...)
+		public static void LogVerbose(string message, params object[] param)
 		{
-			wxLog_Log_Function(cast(int)eLogLevel.xVERBOSE, stringFormat(_arguments,_argptr));
+			wxLog_Log_Function((int)eLogLevel.xVERBOSE, string.Format(message, param));
 		}
 
-		public static void LogStatus(...)
+		public static void LogStatus(string message, params object[] param)
 		{
-			wxLog_Log_Function(cast(int)eLogLevel.xSTATUS, stringFormat(_arguments,_argptr));
+			wxLog_Log_Function((int)eLogLevel.xSTATUS, string.Format(message, param));
 		}
 
-		public static void LogSysError(...)
+		public static void LogSysError(string message, params object[] param)
 		{
-			wxLog_Log_Function(cast(int)eLogLevel.xSYSERROR, stringFormat(_arguments,_argptr));
+			wxLog_Log_Function((int)eLogLevel.xSYSERROR, string.Format(message, param));
 		}
-
-		private static char[] stringFormat(TypeInfo[] arguments, va_list argptr)
-		{
-			char[] s;
-
-			void putc(dchar c)
-			{
-				std.utf.encode(s, c);
-			}
-
-			std.format.doFormat(&putc, arguments, argptr);
-			return s;
-		}
-
-version (none) {
-/* C# compatible */
-private static string stringFormat(string str,void* argptr,TypeInfo[] arguments)
-{
-	if (arguments.length==0) return str;
-
-	string[] args = new string[arguments.length];
-
-	for(uint i=0;i<arguments.length;i++) {
-		TypeInfo id = arguments[i];
-		char[] value;
-		if (id == typeid(int)) {
-			value = .toString(*cast(int*)argptr);
-			argptr += int.sizeof;
-		}
-		else if (id == typeid(long)) {
-			value = .toString(*cast(long*)argptr);
-			argptr += long.sizeof;
-		}
-		else if (id == typeid(float)) {
-			value = .toString(*cast(long*)argptr);
-			argptr += long.sizeof;
-		}
-		else if (id == typeid(double)) {
-			value = .toString(*cast(long*)argptr);
-			argptr += long.sizeof;
-		}
-		else if (id == typeid(string)) {
-			value = *cast(string*)argptr;
-			argptr += string.sizeof;
-		}
-		args[i] = value;
 	}
-
-	string ret;
-	while(1) {
-		int start,end;
-		start = find(str,'{');
-		if (start<0) break;
-
-		ret ~= str[0..start];
-		str = str[start+1..str.length];
-
-		end = find(str,'}');
-		assert(end>0);
-		int idx = atoi(str[0..end]);
-		assert(idx<args.length);
-		
-		ret ~= args[idx];
-		str = str[end+1..str.length];
-	}
-	ret ~= str;
-
-	return ret;
 }
-
-}
-	}
-

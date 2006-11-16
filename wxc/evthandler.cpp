@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - evthandler.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - evthandler.cxx
 //
 // The wxEvtHandler proxy interface.
@@ -14,19 +11,19 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include "local_events.h"
 
 //-----------------------------------------------------------------------------
 
-typedef void (CALLBACK* EventListener)(dobj obj,wxEvent* event, int iListener);
+#if defined(_WINDOWS)
+#define CALLBACK __stdcall
+#else
+#define CALLBACK
+#endif
+
+typedef void (CALLBACK* EventListener)(wxEvent* event, int iListener);
 
 //-----------------------------------------------------------------------------
-
-struct clientdata {
-	EventListener listner;
-	dobj obj;
-};
 
 struct wxProxyData : public wxObject
 {
@@ -40,17 +37,17 @@ public:
 	{
 		wxProxyData* data = (wxProxyData*)event.m_callbackUserData;
 
-		clientdata *u = (clientdata*)GetClientData();
-		u->listner(u->obj,&event, data->iListener);
+		EventListener el = (EventListener)GetClientData();
+		el(&event, data->iListener);
 	}
 };
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxEvtHandler_proxy(wxEvtHandler* self, clientdata* data)
+void wxEvtHandler_proxy(wxEvtHandler* self, EventListener listener)
 {
-	self->SetClientData((void*)data);
+	self->SetClientData((void*)listener);
 }
 
 //-----------------------------------------------------------------------------
@@ -60,16 +57,8 @@ void wxEvtHandler_Connect(wxEvtHandler* self, int evtType, int id, int lastId, i
 {
 	wxProxyData* data = new wxProxyData;
 	data->iListener = iListener;
-
+	
 	self->Connect(id, lastId, evtType, (wxObjectEventFunction)&wxEvtProxy::ForwardEvent, data);
-}
-
-//-----------------------------------------------------------------------------
-
-extern "C" WXEXPORT
-void wxEvtHandler_Disconnect(wxEvtHandler* self, int evtType, int id, int lastId)
-{
-	self->Connect(id, lastId, evtType, (wxObjectEventFunction)&wxEvtProxy::ForwardEvent);
 }
 
 //-----------------------------------------------------------------------------

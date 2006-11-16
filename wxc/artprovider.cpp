@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - artprovider.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - artprovider.cxx
 //
 // The wxArtProvider proxy interface.
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/artprov.h>
 
 wxArtID GetArtId(int id)

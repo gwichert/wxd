@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - mousecapturechangedevent.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - mousecapturechangedevent.cxx
 // 
 // The wxMouseCaptureChangedEvent proxy interface.
@@ -14,14 +11,13 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxMouseCaptureChangedEvent* wxMouseCaptureChangedEvent_ctor(wxWindowID winid, wxWindow* gainedCapture)
+wxMouseCaptureChangedEvent* wxMouseCaptureChangedEvent_ctor(wxEventType type)
 {
-    return new wxMouseCaptureChangedEvent(winid,gainedCapture);
+    return new wxMouseCaptureChangedEvent(type);
 }
 
 extern "C" WXEXPORT

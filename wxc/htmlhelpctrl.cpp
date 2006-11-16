@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - htmlhelpctrl.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - htmlhelpctrl.cxx
 // 
 // The wxHtmlHelpController proxy interface.
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/html/helpctrl.h>
 
 extern "C" WXEXPORT
@@ -26,33 +22,33 @@ wxHtmlHelpController* wxHtmlHelpController_ctor(int style)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlHelpController_SetTitleFormat(wxHtmlHelpController* self, dstr format)
+void wxHtmlHelpController_SetTitleFormat(wxHtmlHelpController* self, const char* format)
 {
-	self->SetTitleFormat(wxString(format.data, wxConvUTF8, format.length));
+	self->SetTitleFormat(wxString(format, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlHelpController_SetTempDir(wxHtmlHelpController* self, dstr path)
+void wxHtmlHelpController_SetTempDir(wxHtmlHelpController* self, const char* path)
 {
-	self->SetTempDir(wxString(path.data, wxConvUTF8, path.length));
+	self->SetTempDir(wxString(path, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxHtmlHelpController_AddBook(wxHtmlHelpController* self, dstr book_url)
+bool wxHtmlHelpController_AddBook(wxHtmlHelpController* self, const char* book_url)
 {
-	return self->AddBook(wxString(book_url.data, wxConvUTF8, book_url.length))?1:0;
+	return self->AddBook(wxString(book_url, wxConvUTF8))?1:0;
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxHtmlHelpController_Display(wxHtmlHelpController* self, dstr x)
+bool wxHtmlHelpController_Display(wxHtmlHelpController* self, const char* x)
 {
-	return self->Display(wxString(x.data, wxConvUTF8, x.length))?1:0;
+	return self->Display(wxString(x, wxConvUTF8))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -82,33 +78,33 @@ bool wxHtmlHelpController_DisplayIndex(wxHtmlHelpController* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxHtmlHelpController_KeywordSearch(wxHtmlHelpController* self, dstr keyword, wxHelpSearchMode mode)
+bool wxHtmlHelpController_KeywordSearch(wxHtmlHelpController* self, const char* keyword, wxHelpSearchMode mode)
 {
-	return self->KeywordSearch(wxString(keyword.data, wxConvUTF8, keyword.length), mode)?1:0;
+	return self->KeywordSearch(wxString(keyword, wxConvUTF8), mode)?1:0;
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlHelpController_UseConfig(wxHtmlHelpController* self, wxConfigBase* config, dstr rootpath)
+void wxHtmlHelpController_UseConfig(wxHtmlHelpController* self, wxConfigBase* config, const char* rootpath)
 {
-	self->UseConfig(config, wxString(rootpath.data, wxConvUTF8, rootpath.length));
+	self->UseConfig(config, wxString(rootpath, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlHelpController_ReadCustomization(wxHtmlHelpController* self, wxConfigBase *cfg, dstr path)
+void wxHtmlHelpController_ReadCustomization(wxHtmlHelpController* self, wxConfigBase *cfg, const char* path)
 {
-	self->ReadCustomization(cfg, wxString(path.data, wxConvUTF8, path.length));
+	self->ReadCustomization(cfg, wxString(path, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlHelpController_WriteCustomization(wxHtmlHelpController* self, wxConfigBase *cfg, dstr path)
+void wxHtmlHelpController_WriteCustomization(wxHtmlHelpController* self, wxConfigBase *cfg, const char* path)
 {
-	self->WriteCustomization(cfg, wxString(path.data, wxConvUTF8, path.length));
+	self->WriteCustomization(cfg, wxString(path, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------

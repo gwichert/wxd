@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - focusevent.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - focusevent.cxx
 // 
 // The wxFocusEvent proxy interface.
@@ -14,12 +11,11 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxFocusEvent* wxFocusEvent_ctor(wxEventType type,int winid)
+wxFocusEvent* wxFocusEvent_ctor(wxEventType type)
 {
     return new wxFocusEvent(type);
 }

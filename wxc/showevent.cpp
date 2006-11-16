@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - showevent.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - showevent.cxx
 // 
 // The wxShowEvent proxy interface.
@@ -14,14 +11,13 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxShowEvent* wxShowEvent_ctor(int winid, bool show)
+wxShowEvent* wxShowEvent_ctor(wxEventType type)
 {
-    return new wxShowEvent(winid,show);
+    return new wxShowEvent(type);
 }
 
 extern "C" WXEXPORT

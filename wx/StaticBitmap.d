@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - StaticBitmap.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - StaticBitmap.cs
 //
 // The wxStaticBitmap wrapper class.
@@ -13,30 +10,42 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.StaticBitmap;
-import wx.common;
-import wx.Control;
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
-		static extern (C) IntPtr wxStaticBitmap_ctor();
-		static extern (C) bool wxStaticBitmap_Create(IntPtr self, IntPtr parent, int id, IntPtr label, inout Point pos, inout Size size, uint style, string name);
-		static extern (C) void wxStaticBitmap_SetBitmap(IntPtr self, IntPtr bitmap);
-		static extern (C) IntPtr wxStaticBitmap_GetBitmap(IntPtr self);
+namespace wx
+{
+	public class StaticBitmap : Control
+	{
+		[DllImport("wx-c")] static extern IntPtr wxStaticBitmap_ctor();
+		[DllImport("wx-c")] static extern bool wxStaticBitmap_Create(IntPtr self, IntPtr parent, int id, IntPtr label, ref Point pos, ref Size size, uint style, string name);
+		[DllImport("wx-c")] static extern void wxStaticBitmap_SetBitmap(IntPtr self, IntPtr bitmap);
+		[DllImport("wx-c")] static extern IntPtr wxStaticBitmap_GetBitmap(IntPtr self);
 
 		//---------------------------------------------------------------------
 
-	public class StaticBitmap : Control
-	{
-		public const string wxStaticBitmapNameStr = "message";
+		public StaticBitmap()
+			: base(wxStaticBitmap_ctor()) { }
 
-		public this()
-			{ super(wxStaticBitmap_ctor()); }
+		public StaticBitmap(IntPtr wxObject) 
+			: base(wxObject) { }
 
-		public this(IntPtr wxobj) 
-			{ super(wxobj); }
+		public StaticBitmap(Window parent, int id, Bitmap label)
+			: this(parent, id, label, wxDefaultPosition, wxDefaultSize, 0, null) { }
 
-		public this(Window parent, int id, Bitmap label, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, string name = wxStaticBitmapNameStr)
+		public StaticBitmap(Window parent, int id, Bitmap label, Point pos)
+			: this(parent, id, label, pos, wxDefaultSize, 0, null) { }
+
+		public StaticBitmap(Window parent, int id, Bitmap label, Point pos, Size size)
+			: this(parent, id, label, pos, size, 0, null) { }
+
+		public StaticBitmap(Window parent, int id, Bitmap label, Point pos, Size size, long style)
+			: this(parent, id, label, pos, size, style, null) { }
+
+		public StaticBitmap(Window parent, int id, Bitmap label, Point pos, Size size, long style, string name)
+		: base(wxStaticBitmap_ctor())
 		{
-			super(wxStaticBitmap_ctor());
 			if (!Create(parent, id, label, pos, size, style, name))
 			{
 				throw new InvalidOperationException("Failed to create StaticBitmap");
@@ -46,18 +55,34 @@ import wx.Control;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent, Bitmap label, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, string name = wxStaticBitmapNameStr)
-			{ this(parent, Window.UniqueID, label, pos, size, style, name);}
+		public StaticBitmap(Window parent, Bitmap label)
+			: this(parent, Window.UniqueID, label, wxDefaultPosition, wxDefaultSize, 0, null) { }
+
+		public StaticBitmap(Window parent, Bitmap label, Point pos)
+			: this(parent, Window.UniqueID, label, pos, wxDefaultSize, 0, null) { }
+
+		public StaticBitmap(Window parent, Bitmap label, Point pos, Size size)
+			: this(parent, Window.UniqueID, label, pos, size, 0, null) { }
+
+		public StaticBitmap(Window parent, Bitmap label, Point pos, Size size, long style)
+			: this(parent, Window.UniqueID, label, pos, size, style, null) { }
+
+		public StaticBitmap(Window parent, Bitmap label, Point pos, Size size, long style, string name)
+			: this(parent, Window.UniqueID, label, pos, size, style, name) {}
 		
 		//---------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, Bitmap label, inout Point pos, inout Size size, int style, string name)
+		public bool Create(Window parent, int id, Bitmap label, Point pos, Size size, long style, string name)
 		{
-			return wxStaticBitmap_Create(wxobj, wxObject.SafePtr(parent), id, wxObject.SafePtr(label), pos, size, cast(uint)style, name);
+			return wxStaticBitmap_Create(wxObject, Object.SafePtr(parent), id, Object.SafePtr(label), ref pos, ref size, (uint)style, name);
 		}
 
 		//---------------------------------------------------------------------
 
-		public void bitmap(Bitmap value) { wxStaticBitmap_SetBitmap(wxobj, wxObject.SafePtr(value)); }
-		public Bitmap bitmap() { return cast(Bitmap)FindObject(wxStaticBitmap_GetBitmap(wxobj), &Bitmap.New); }
+		public wx.Bitmap Bitmap
+		{
+			set { wxStaticBitmap_SetBitmap(wxObject, Object.SafePtr(value)); }
+			get { return (Bitmap)FindObject(wxStaticBitmap_GetBitmap(wxObject), typeof(Bitmap)); }
+		}
 	}
+}

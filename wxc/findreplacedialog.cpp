@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - findreplacedialog.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - findreplacedialog.cxx
 //
 // The wxFindReplaceDialog proxy interface.
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/fdrepdlg.h>
 #include "local_events.h"
 
@@ -37,9 +33,9 @@ wxFindReplaceDialog* wxFindReplaceDialog_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxFindReplaceDialog_Create(wxFindReplaceDialog* self, wxWindow* parent, wxFindReplaceData* data, dstr title, int style)
+bool wxFindReplaceDialog_Create(wxFindReplaceDialog* self, wxWindow* parent, wxFindReplaceData* data, char* title, int style)
 {
-    return self->Create(parent, data, wxString(title.data, wxConvUTF8, title.length), style);
+    return self->Create(parent, data, wxString(title, wxConvUTF8), style);
 }
 
 //-----------------------------------------------------------------------------
@@ -77,17 +73,17 @@ int wxFindDialogEvent_GetFlags(wxFindDialogEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxFindDialogEvent_GetFindString(wxFindDialogEvent* self)
+wxString* wxFindDialogEvent_GetFindString(wxFindDialogEvent* self)
 {
-    return dstr_ret(self->GetFindString());
+    return new wxString(self->GetFindString());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxFindDialogEvent_GetReplaceString(wxFindDialogEvent* self)
+wxString* wxFindDialogEvent_GetReplaceString(wxFindDialogEvent* self)
 {
-    return dstr_ret(self->GetReplaceString());
+    return new wxString(self->GetReplaceString());
 }
 
 //-----------------------------------------------------------------------------
@@ -109,17 +105,17 @@ void wxFindDialogEvent_SetFlags(wxFindDialogEvent* self, int flags)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxFindDialogEvent_SetFindString(wxFindDialogEvent* self, dstr str)
+void wxFindDialogEvent_SetFindString(wxFindDialogEvent* self, char* str)
 {
-    self->SetFindString(wxString(str.data, wxConvUTF8, str.length));
+    self->SetFindString(wxString(str, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxFindDialogEvent_SetReplaceString(wxFindDialogEvent* self, dstr str)
+void wxFindDialogEvent_SetReplaceString(wxFindDialogEvent* self, char* str)
 {
-    self->SetReplaceString(wxString(str.data, wxConvUTF8, str.length));
+    self->SetReplaceString(wxString(str, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
@@ -133,17 +129,17 @@ wxFindReplaceData* wxFindReplaceData_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxFindReplaceData_GetFindString(wxFindReplaceData* self)
+wxString* wxFindReplaceData_GetFindString(wxFindReplaceData* self)
 {
-    return dstr_ret(self->GetFindString());
+    return new wxString(self->GetFindString());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxFindReplaceData_GetReplaceString(wxFindReplaceData* self)
+wxString* wxFindReplaceData_GetReplaceString(wxFindReplaceData* self)
 {
-    return dstr_ret(self->GetReplaceString());
+    return new wxString(self->GetReplaceString());
 }
 
 //-----------------------------------------------------------------------------
@@ -165,24 +161,18 @@ void wxFindReplaceData_SetFlags(wxFindReplaceData* self, wxUint32 flags)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxFindReplaceData_SetFindString(wxFindReplaceData* self, dstr str)
+void wxFindReplaceData_SetFindString(wxFindReplaceData* self, char* str)
 {
-    self->SetFindString(wxString(str.data, wxConvUTF8, str.length));
+    self->SetFindString(wxString(str, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxFindReplaceData_SetReplaceString(wxFindReplaceData* self, dstr str)
+void wxFindReplaceData_SetReplaceString(wxFindReplaceData* self, char* str)
 {
-    self->SetReplaceString(wxString(str.data, wxConvUTF8, str.length));
+    self->SetReplaceString(wxString(str, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
-
-extern "C" WXEXPORT int wxEvent_EVT_COMMAND_FIND()                  { return wxEVT_COMMAND_FIND; }
-extern "C" WXEXPORT int wxEvent_EVT_COMMAND_FIND_NEXT()             { return wxEVT_COMMAND_FIND_NEXT; }
-extern "C" WXEXPORT int wxEvent_EVT_COMMAND_FIND_REPLACE()          { return wxEVT_COMMAND_FIND_REPLACE; }
-extern "C" WXEXPORT int wxEvent_EVT_COMMAND_FIND_REPLACE_ALL()      { return wxEVT_COMMAND_FIND_REPLACE_ALL; }
-extern "C" WXEXPORT int wxEvent_EVT_COMMAND_FIND_CLOSE()            { return wxEVT_COMMAND_FIND_CLOSE; }
 

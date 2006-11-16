@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - updateuievent.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - updateuievent.cxx
 //
 // The wxUpdateUIEvent proxy interface.
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 
 //-----------------------------------------------------------------------------
 
@@ -91,9 +87,9 @@ bool wxUpdateUIEvent_GetSetText(wxUpdateUIEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxUpdateUIEvent_GetText(wxUpdateUIEvent* self)
+wxString* wxUpdateUIEvent_GetText(wxUpdateUIEvent* self)
 {
-	return dstr_ret(self->GetText());
+	return new wxString(self->GetText());
 }
 
 //-----------------------------------------------------------------------------
@@ -131,9 +127,9 @@ void wxUpdateUIEvent_SetMode(wxUpdateUIMode mode)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxUpdateUIEvent_SetText(wxUpdateUIEvent* self, dstr text)
+void wxUpdateUIEvent_SetText(wxUpdateUIEvent* self, const char* text)
 {
-	self->SetText(wxString(text.data, wxConvUTF8, text.length));
+	self->SetText(wxString(text, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------

@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - vlbox.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - vlbox.cxx
 //
 // The wxVListBox proxy interface.
@@ -14,14 +11,19 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/vlbox.h>
 #include "local_events.h"
 
+#if defined(_WINDOWS)
+#define CALLBACK __stdcall
+#else
+#define CALLBACK
+#endif
+
 //-----------------------------------------------------------------------------
 
-typedef void (CALLBACK* Virtual_voidDcRectSizeT) (dobj, wxDC*, const wxRect*, size_t);
-typedef int (CALLBACK* Virtual_IntInt) (dobj, int);
+typedef void (CALLBACK* Virtual_voidDcRectSizeT) (wxDC*, wxRect*, size_t);
+typedef int (CALLBACK* Virtual_IntInt) (int);
 
 class _VListBox : public wxVListBox
 {
@@ -30,14 +32,12 @@ public:
 					const wxSize& size, long style, const wxString& name)
 		: wxVListBox(parent, id, pos, size, style, name) { }
 		
-	void RegisterVirtual(dobj obj,
-		Virtual_voidDcRectSizeT onDrawItem,
+	void RegisterVirtual(Virtual_voidDcRectSizeT onDrawItem,
 		Virtual_IntInt onMeasureItem,
 		Virtual_voidDcRectSizeT onDrawSeparator,
 		Virtual_voidDcRectSizeT onDrawBackground,
 		Virtual_IntInt onGetLineHeight)
 		{
-			m_dobj = obj;
 			m_OnDrawItem = onDrawItem;
 			m_OnMeasureItem = onMeasureItem;
 			m_OnDrawSeparator = onDrawSeparator;
@@ -62,19 +62,19 @@ public:
 		
 protected:
 	void OnDrawItem( wxDC& dc, const wxRect& rect, size_t n) const
-		{ m_OnDrawItem(m_dobj,  &dc, &rect, n); }	
+		{ m_OnDrawItem( &dc, new wxRect(rect), n); }	
 		
 	wxCoord OnMeasureItem( size_t n) const
-		{ return m_OnMeasureItem(m_dobj,  n); }		
+		{ return m_OnMeasureItem( n); }		
 		
 	void OnDrawSeparator(wxDC& dc, wxRect& rect, size_t n) const
-		{ return m_OnDrawSeparator(m_dobj, &dc, &rect, n); }
+		{ return m_OnDrawSeparator(&dc, new wxRect(rect), n); }
 		
 	void OnDrawBackground(wxDC& dc, const wxRect& rect, size_t n) const
-		{ return m_OnDrawBackground(m_dobj, &dc, &rect, n); }
+		{ return m_OnDrawBackground(&dc, new wxRect(rect), n); }
 		
-	wxCoord OnGetLineHeight(size_t n) const
-		{ return m_OnGetLineHeight(m_dobj, n); }	
+	wxCoord OnGetLineHeight( size_t n) const
+		{ return m_OnGetLineHeight(n); }	
 				
 private:
 	Virtual_voidDcRectSizeT m_OnDrawItem;
@@ -82,7 +82,6 @@ private:
 	Virtual_voidDcRectSizeT m_OnDrawSeparator;
 	Virtual_voidDcRectSizeT m_OnDrawBackground;
 	Virtual_IntInt m_OnGetLineHeight;
-	dobj m_dobj;
 	
 public: 
 	DECLARE_OBJECTDELETED(_VListBox)
@@ -93,7 +92,7 @@ public:
 
 extern "C" WXEXPORT
 wxVListBox* wxVListBox_ctor(wxWindow *parent, wxWindowID id, const wxPoint* pos,
-					               const wxSize* size, long style, dstr name)
+					               const wxSize* size, long style, const char* name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -101,30 +100,29 @@ wxVListBox* wxVListBox_ctor(wxWindow *parent, wxWindowID id, const wxPoint* pos,
 	if (size == NULL)
 		size = &wxDefaultSize;
 
-	if (name.data==NULL)
-		name = dstr("vlistbox",sizeof("vlistbox")-1);
+	if (name == NULL)
+		name = "vlistbox";
 
-	return new _VListBox(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
+	return new _VListBox(parent, id, *pos, *size, style, wxString(name, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxVListBox_RegisterVirtual(_VListBox* self, dobj obj,
-		Virtual_voidDcRectSizeT onDrawItem,
+void wxVListBox_RegisterVirtual(_VListBox* self, Virtual_voidDcRectSizeT onDrawItem,
 		Virtual_IntInt onMeasureItem,
 		Virtual_voidDcRectSizeT onDrawSeparator,
 		Virtual_voidDcRectSizeT onDrawBackground,
 		Virtual_IntInt onGetLineHeight)
 {
-	self->RegisterVirtual(obj, onDrawItem, onMeasureItem, onDrawSeparator, onDrawBackground, onGetLineHeight);
+	self->RegisterVirtual(onDrawItem, onMeasureItem, onDrawSeparator, onDrawBackground, onGetLineHeight);
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
 bool wxVListBox_Create(_VListBox* self, wxWindow *parent, wxWindowID id, const wxPoint* pos,
-					               const wxSize* size, long style, dstr name)
+					               const wxSize* size, long style, const char* name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -132,10 +130,10 @@ bool wxVListBox_Create(_VListBox* self, wxWindow *parent, wxWindowID id, const w
 	if (size == NULL)
 		size = &wxDefaultSize;
 
-	if (name.data==NULL)
-		name = dstr("vlistbox",sizeof("vlistbox")-1);
+	if (name == NULL)
+		name = "vlistbox";	
 			
-	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, *pos, *size, style, wxString(name, wxConvUTF8))?1:0;
 }
 
 //-----------------------------------------------------------------------------

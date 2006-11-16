@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - SizeEvent.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - SizeEvent.cs
 //
 // The wxSizeEvent wrapper class.
@@ -13,60 +10,34 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.SizeEvent;
-import wx.common;
-import wx.Event;
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
-		static extern (C) IntPtr wxSizeEvent_ctor();
-		static extern (C) IntPtr wxSizeEvent_ctorSize(inout Size sz,int winid);
-		static extern (C) IntPtr wxSizeEvent_ctorRect(inout Rect sz,int winid);
-		static extern (C) void wxSizeEvent_GetSize(IntPtr self, out Size size);
-		static extern (C) void wxSizeEvent_GetRect(IntPtr self, out Rect rect);
-		static extern (C) void wxSizeEvent_SetRect(IntPtr self, inout Rect rect);
+namespace wx
+{
+	public class SizeEvent : Event
+	{
+		[DllImport("wx-c")] static extern IntPtr wxSizeEvent_ctor();
+		[DllImport("wx-c")] static extern void wxSizeEvent_GetSize(IntPtr self, out Size size);
 		
 		//-----------------------------------------------------------------------------
 
-	public class SizeEvent : Event
-	{
-		public this(IntPtr wxobj) 
-			{ super(wxobj); }
+		public SizeEvent(IntPtr wxObject) 
+			: base(wxObject) { }
 
-		public this()
-			{ this(wxSizeEvent_ctor()); }
-
-		public this(Size sz,int winid = 0)
-			{ this(wxSizeEvent_ctorSize(sz,winid)); }
-
-		public this(Rectangle rect,int winid = 0)
-			{ this(wxSizeEvent_ctorRect(rect,winid)); }
-
+		public SizeEvent()
+			: this(wxSizeEvent_ctor()) { }
 
 		//-----------------------------------------------------------------------------	
 		
-		public Size size()
-			{
-				Size size;
-				wxSizeEvent_GetSize(wxobj, size);
+		public Size Size
+		{
+			get {
+				Size size = new Size();
+				wxSizeEvent_GetSize(wxObject, out size);
 				return size;
 			}
-
-		public Rectangle rect()
-			{
-				Rectangle rect;
-				wxSizeEvent_GetRect(wxobj, rect);
-				return rect;
-			}
-
-		public void rect(Rectangle rect)
-			{
-				wxSizeEvent_SetRect(wxobj, rect);
-			}
-
-
-		private static Event New(IntPtr obj) { return new SizeEvent(obj); }
-
-		static this()
-		{
-			AddEventType(wxEVT_SIZE,                            &SizeEvent.New);
-		}
+		}		
 	}
+}

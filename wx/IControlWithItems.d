@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - IControlWithItems.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - IControlWithItems.cs
 //
 // The ControlWithItems Interface.
@@ -13,9 +10,8 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.IControlWithItems;
-import wx.ClientData;
-
+namespace wx
+{
 	public interface IControlWithItems 
 	{
 		int Append(string item);
@@ -46,11 +42,11 @@ import wx.ClientData;
 		
 		//-----------------------------------------------------------------------------
 		
-		int Count();
+		int Count { get; }
 		
 		//-----------------------------------------------------------------------------
 		
-		bool Empty();
+		bool Empty { get; }
 		
 		//-----------------------------------------------------------------------------
 		
@@ -76,7 +72,7 @@ import wx.ClientData;
 		
 		//-----------------------------------------------------------------------------
 		
-		string StringSelection();
+		string StringSelection { get; }
 		
 		//-----------------------------------------------------------------------------
 		
@@ -96,4 +92,6 @@ import wx.ClientData;
 		
 		bool ShouldInheritColours();
 	}
+}
+
 

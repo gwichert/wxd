@@ -1,9 +1,7 @@
 //-----------------------------------------------------------------------------
-// wxd/Samples - Minimal.d
-// based on
-// NET/Samples - Minimal.cs
+// wx.NET/Samples - Minimal.cs
 //
-// A NET version of the wxWidgets "minimal" sample.
+// A wx.NET version of the wxWidgets "minimal" sample.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
@@ -12,35 +10,38 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-import wx.wx;
+using System;
+using System.Drawing;
 
-	public class MyFrame : Frame
+namespace wx.Samples
+{
+	public class MyFrame : wx.Frame
 	{
 		enum Cmd { About, Quit, Dialog }
 
 		//---------------------------------------------------------------------
 
-		public this(string title, Point pos, Size size)
+		public MyFrame(string title, Point pos, Size size)
+			: base(title, pos, size)
 		{
-			super(title, pos, size);
 			// Set the window icon
 
-			icon = new Icon("../Samples/Minimal/mondrian.png");
+			Icon = new wx.Icon("../Samples/Minimal/mondrian.png");
 
 			// Set up a menu
 
-			Menu fileMenu = new Menu();
-			//fileMenu.Append(Cmd.Dialog, "&Show dialog\tAlt-D", "Show test dialog");
-			fileMenu.Append(Cmd.Quit, "E&xit\tAlt-X", "Quit this program");
+			wx.Menu fileMenu = new wx.Menu();
+			//fileMenu.Append((int)Cmd.Dialog, "&Show dialog\tAlt-D", "Show test dialog");
+			fileMenu.Append((int)Cmd.Quit, "E&xit\tAlt-X", "Quit this program");
 
-			Menu helpMenu = new Menu();
-			helpMenu.Append(Cmd.About, "&About...\tF1", "Show about dialog");
+			wx.Menu helpMenu = new wx.Menu();
+			helpMenu.Append((int)Cmd.About, "&About...\tF1", "Show about dialog");
 
-			MenuBar menuBar = new MenuBar();
+			wx.MenuBar menuBar = new wx.MenuBar();
 			menuBar.Append(fileMenu, "&File");
 			menuBar.Append(helpMenu, "&Help");
 
-			this.menuBar = menuBar;
+			MenuBar = menuBar;
 
 			// Set up a status bar
 
@@ -49,36 +50,36 @@ import wx.wx;
 
 			// Set up the event table
 
-			EVT_MENU(Cmd.Quit,    &OnQuit);
-			EVT_MENU(Cmd.Dialog,  &OnDialog);
-			EVT_MENU(Cmd.About,   &OnAbout);
+			EVT_MENU((int)Cmd.Quit,    new EventListener(OnQuit));
+		    EVT_MENU((int)Cmd.Dialog,  new EventListener(OnDialog));
+			EVT_MENU((int)Cmd.About,   new EventListener(OnAbout));
 		}
 
 		//---------------------------------------------------------------------
 
-		public void OnQuit(Object sender, Event e)
+		public void OnQuit(object sender, wx.Event e)
 		{
 			Close();
 		}
 
 		//---------------------------------------------------------------------
 
-		public void OnDialog(Object sender, Event e)
+		public void OnDialog(object sender, wx.Event e)
 		{
-            Dialog dialog = new Dialog( this, -1, "Test dialog", new_Point(50,50), new_Size(450,340) );
-            BoxSizer main_sizer = new BoxSizer( Orientation.wxVERTICAL );
+            wx.Dialog dialog = new wx.Dialog( this, -1, "Test dialog", new Point(50,50), new Size(450,340) );
+            wx.BoxSizer main_sizer = new wx.BoxSizer( wx.Orientation.wxVERTICAL );
             
-            StaticBoxSizer top_sizer = new StaticBoxSizer( new StaticBox( dialog, -1, "Bitmaps" ), Orientation.wxHORIZONTAL );
-            main_sizer.Add( top_sizer, 0, Direction.wxALL, 5 );
+            wx.StaticBoxSizer top_sizer = new wx.StaticBoxSizer( new wx.StaticBox( dialog, -1, "Bitmaps" ), wx.Orientation.wxHORIZONTAL );
+            main_sizer.Add( top_sizer, 0, wx.Direction.wxALL, 5 );
             
-            BitmapButton bb = new BitmapButton( dialog, -1, new Bitmap("../Samples/Minimal/mondrian.png") );
-            top_sizer.Add( bb, 0, Direction.wxALL, 10 );
+            wx.BitmapButton bb = new wx.BitmapButton( dialog, -1, new wx.Bitmap("../Samples/Minimal/mondrian.png") );
+            top_sizer.Add( bb, 0, wx.Direction.wxALL, 10 );
             
-            StaticBitmap sb = new StaticBitmap( dialog, -1, new Bitmap("../Samples/Minimal/mondrian.png") );
-            top_sizer.Add( sb, 0, Direction.wxALL, 10 );
+            wx.StaticBitmap sb = new wx.StaticBitmap( dialog, -1, new wx.Bitmap("../Samples/Minimal/mondrian.png") );
+            top_sizer.Add( sb, 0, wx.Direction.wxALL, 10 );
             
-            Button button = new Button( dialog, 5100, "OK" );
-            main_sizer.Add( button, 0, Direction.wxALL|Alignment.wxALIGN_CENTER, 5 );
+            wx.Button button = new wx.Button( dialog, 5100, "OK" );
+            main_sizer.Add( button, 0, wx.Direction.wxALL|wx.Alignment.wxALIGN_CENTER, 5 );
             
             dialog.SetSizer( main_sizer, true );
             main_sizer.Fit( dialog );
@@ -90,10 +91,10 @@ import wx.wx;
 
 		//---------------------------------------------------------------------
 
-		public void OnAbout(Object sender, Event e)
+		public void OnAbout(object sender, wx.Event e)
 		{
 			string msg = "This is the About dialog of the minimal sample.";
-			MessageBox(this, msg, "About Minimal", Dialog.wxOK | Dialog.wxICON_INFORMATION);
+			wx.MessageDialog.ShowModal(this, msg, "About Minimal", Dialog.wxOK | Dialog.wxICON_INFORMATION);
 		}
 
 		//---------------------------------------------------------------------
@@ -101,13 +102,13 @@ import wx.wx;
 
 
 
-	public class Minimal : App
+	public class Minimal : wx.App
 	{
 		//---------------------------------------------------------------------
 
 		public override bool OnInit()
 		{
-			MyFrame frame = new MyFrame("Minimal wxWidgets App", new_Point(50,50), new_Size(450,340));
+			MyFrame frame = new MyFrame("Minimal wxWidgets App", new Point(50,50), new Size(450,340));
 			frame.Show(true);
 
 			return true;
@@ -115,6 +116,7 @@ import wx.wx;
 
 		//---------------------------------------------------------------------
 
+		[STAThread]
 		static void Main()
 		{
 			Minimal app = new Minimal();
@@ -123,9 +125,4 @@ import wx.wx;
 
 		//---------------------------------------------------------------------
 	}
-
-int main()
-{
-	Minimal.Main();
-	return 0;
 }

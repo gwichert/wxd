@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - contextmenuevent.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - contextmenuevent.cxx
 // 
 // The wxContextMenuEvent proxy interface.
@@ -14,14 +11,13 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxContextMenuEvent* wxContextMenuEvent_ctor(wxEventType type,wxWindowID winid,const wxPoint* pt)
+wxContextMenuEvent* wxContextMenuEvent_ctor(wxEventType type)
 {
-    return new wxContextMenuEvent(type,winid,*pt);
+    return new wxContextMenuEvent(type);
 }
 
 extern "C" WXEXPORT

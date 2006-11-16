@@ -1,79 +1,88 @@
 //-----------------------------------------------------------------------------
-// wxD - Colour.d
+// wx.NET - Colour.cs
 //
 // The wxColour wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
-// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.Colour;
-import wx.common;
-private import std.string;
+using System;
+using System.Runtime.InteropServices;
 
-		static extern (C) IntPtr wxColour_ctor();
-		static extern (C) IntPtr wxColour_ctorByName(string name);
-		static extern (C) IntPtr wxColour_ctorByParts(ubyte red, ubyte green, ubyte blue);
-		static extern (C) void   wxColour_dtor(IntPtr self);
-		//static extern (C) void   wxColour_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
-
-		static extern (C) ubyte   wxColour_Red(IntPtr self);
-		static extern (C) ubyte   wxColour_Blue(IntPtr self);
-		static extern (C) ubyte   wxColour_Green(IntPtr self);
-
-		static extern (C) bool   wxColour_Ok(IntPtr self);
-		static extern (C) void   wxColour_Set(IntPtr self, ubyte red, ubyte green, ubyte blue);
-		
-		static extern (C) IntPtr wxColour_CreateByName(string name);
-
-		//---------------------------------------------------------------------
-
-	public class Colour : wxObject
+namespace wx
+{
+	public class Colour : Object
 	{
-		public static Colour wxBLACK;
-		public static Colour wxWHITE;
-		public static Colour wxRED;
-		public static Colour wxBLUE;
-		public static Colour wxGREEN;
-		public static Colour wxCYAN;
-		public static Colour wxLIGHT_GREY;
-		public static Colour wxNullColour;
+		[DllImport("wx-c")] static extern IntPtr wxColour_ctor();
+		[DllImport("wx-c")] static extern IntPtr wxColour_ctorByName(string name);
+		[DllImport("wx-c")] static extern IntPtr wxColour_ctorByParts(byte red, byte green, byte blue);
+		[DllImport("wx-c")] static extern void   wxColour_dtor(IntPtr self);
+		//[DllImport("wx-c")] static extern void   wxColour_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
+
+		[DllImport("wx-c")] static extern byte   wxColour_Red(IntPtr self);
+		[DllImport("wx-c")] static extern byte   wxColour_Blue(IntPtr self);
+		[DllImport("wx-c")] static extern byte   wxColour_Green(IntPtr self);
+
+		[DllImport("wx-c")] static extern bool   wxColour_Ok(IntPtr self);
+		[DllImport("wx-c")] static extern void   wxColour_Set(IntPtr self, byte red, byte green, byte blue);
+		
+		[DllImport("wx-c")] static extern IntPtr wxColour_CreateByName(string name);
 
 		//---------------------------------------------------------------------
 
-		public this(IntPtr wxobj)
+		public static Colour wxBLACK       = new Colour("Black");
+		public static Colour wxWHITE       = new Colour("White");
+		public static Colour wxRED         = new Colour("Red");
+		public static Colour wxBLUE        = new Colour("Blue");
+		public static Colour wxGREEN       = new Colour("Green");
+		public static Colour wxCYAN        = new Colour("Cyan");
+		public static Colour wxLIGHT_GREY  = new Colour("Light Gray");
+
+		//---------------------------------------------------------------------
+
+		public Colour(IntPtr wxObject)
+			: base(wxObject) 
 		{
-			super(wxobj);
+			this.wxObject = wxObject; 
 		}
 			
-		public this(IntPtr wxobj, bool memOwn)
+		internal Colour(IntPtr wxObject, bool memOwn)
+			: base(wxObject)
 		{ 
-			super(wxobj);
 			this.memOwn = memOwn;
+			this.wxObject = wxObject;
 		}
 
-		public this() 
+		public Colour() 
+			: this(wxColour_ctor(), true) 
 		{ 
-			this(wxColour_ctor(), true);
-			//wxColour_RegisterDisposable(wxobj, &VirtualDispose);
+			/*virtual_Dispose = new Virtual_Dispose(VirtualDispose);
+			wxColour_RegisterDisposable(wxObject, virtual_Dispose);*/
 		}
 
-		public this(string name)
+		public Colour(string name)
+			: this(wxColour_ctorByName(name.ToUpper()), true) 
 		{ 
-			this(wxColour_ctorByName(toupper(name)), true);
-			//wxColour_RegisterDisposable(wxobj, &VirtualDispose);
+			/*virtual_Dispose = new Virtual_Dispose(VirtualDispose);
+			wxColour_RegisterDisposable(wxObject, virtual_Dispose);*/
 		}
 
-		public this(ubyte red, ubyte green, ubyte blue)
+		public Colour(byte red, byte green, byte blue)
+			: this(wxColour_ctorByParts(red, green, blue), true) 
 		{ 
-			this(wxColour_ctorByParts(red, green, blue), true);
-			//wxColour_RegisterDisposable(wxobj, &VirtualDispose);
+			/*virtual_Dispose = new Virtual_Dispose(VirtualDispose);
+			wxColour_RegisterDisposable(wxObject, virtual_Dispose);*/
 		}
 
+		~Colour()
+		{
+			Dispose();
+		}
+		
 		//---------------------------------------------------------------------
 
 		public override void Dispose()
@@ -83,38 +92,46 @@ private import std.string;
 					(this != Colour.wxGREEN) && (this != Colour.wxCYAN) &&
 						(this != Colour.wxLIGHT_GREY)) 
 			{
-				super.Dispose(/*true*/);
+				Dispose(true);
 			}
 		}
 
 		//---------------------------------------------------------------------
 
-		public ubyte Red() { return wxColour_Red(wxobj); }
+		public byte Red
+		{
+			get { return wxColour_Red(wxObject); }
+		}
 
-		public ubyte Green() { return wxColour_Green(wxobj); }
+		public byte Green
+		{
+			get { return wxColour_Green(wxObject); }
+		}
 
-		public ubyte Blue() { return wxColour_Blue(wxobj); }
+		public byte Blue
+		{
+			get { return wxColour_Blue(wxObject); }
+		}
 
 		//---------------------------------------------------------------------
 
 		public bool Ok()
 		{
-			return wxColour_Ok(wxobj);
+			return wxColour_Ok(wxObject);
 		}
 
-		public void Set(ubyte red, ubyte green, ubyte blue)
+		public void Set(byte red, byte green, byte blue)
 		{
-			wxColour_Set(wxobj, red, green, blue);
+			wxColour_Set(wxObject, red, green, blue);
 		}
 
 		//---------------------------------------------------------------------
 		
-		version(__WXGTK__){
+		#if __WXGTK__
 		public static Colour CreateByName(string name)
 		{
 			return new Colour(wxColour_CreateByName(name), true);
 		}
-		} // version(__WXGTK__)
-
-		public static wxObject New(IntPtr ptr) { return new Colour(ptr); }
+		#endif
 	}
+}

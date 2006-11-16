@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - VLBox.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - VLBox.cs
 //
 // The wxVListBox wrapper class.
@@ -13,207 +10,249 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.VLBox;
-import wx.common;
-import wx.VScroll;
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
-		extern (C) {
-		alias int function(VListBox obj, int n) Virtual_IntInt;
-		alias void function(VListBox obj, IntPtr dc, Rectangle rect, int n) Virtual_VoidDcRectSizeT;
-		}
+namespace wx
+{
+	public abstract class VListBox : VScrolledWindow
+	{
+		private delegate int Virtual_IntInt(int n);
+		private delegate void Virtual_VoidDcRectSizeT(IntPtr dc, IntPtr rect, int n);
 
-		static extern (C) IntPtr wxVListBox_ctor(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
-		static extern (C) void wxVListBox_RegisterVirtual(IntPtr self, VListBox obj, 
+		private Virtual_VoidDcRectSizeT onDrawItem;
+		private Virtual_IntInt onMeasureItem;
+		private Virtual_VoidDcRectSizeT onDrawSeparator;
+		private Virtual_VoidDcRectSizeT onDrawBackground;
+		private Virtual_IntInt onGetLineHeight;
+		
+		[DllImport("wx-c")] static extern IntPtr wxVListBox_ctor(IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
+		[DllImport("wx-c")] static extern void wxVListBox_RegisterVirtual(IntPtr self, 
 			Virtual_VoidDcRectSizeT onDrawItem, 
 			Virtual_IntInt onMeasureItem, 
 			Virtual_VoidDcRectSizeT onDrawSeparator,
 			Virtual_VoidDcRectSizeT onDrawBackground,
 			Virtual_IntInt onGetLineHeight);
-		static extern (C) bool wxVListBox_Create(IntPtr self,IntPtr parent, int id, inout Point pos, inout Size size, int style, string name);		
-		static extern (C) void wxVListBox_OnDrawSeparator(IntPtr self, IntPtr dc, inout Rectangle rect, int n);
-		static extern (C) void wxVListBox_OnDrawBackground(IntPtr self, IntPtr dc, inout Rectangle rect, int n);
-		static extern (C) int wxVListBox_OnGetLineHeight(IntPtr self, int line);
-		static extern (C) int wxVListBox_GetItemCount(IntPtr self);
-		static extern (C) bool wxVListBox_HasMultipleSelection(IntPtr self);
-		static extern (C) int wxVListBox_GetSelection(IntPtr self);
-		static extern (C) bool wxVListBox_IsCurrent(IntPtr self, int item);
-		static extern (C) bool wxVListBox_IsSelected(IntPtr self, int item);
-		static extern (C) int wxVListBox_GetSelectedCount(IntPtr self);
-		static extern (C) int wxVListBox_GetFirstSelected(IntPtr self, out uint cookie);
-		static extern (C) int wxVListBox_GetNextSelected(IntPtr self, out uint cookie);
-		static extern (C) void wxVListBox_GetMargins(IntPtr self, out Point pt);
-		static extern (C) IntPtr wxVListBox_GetSelectionBackground(IntPtr self);
-		static extern (C) void wxVListBox_SetItemCount(IntPtr self, int count);
-		static extern (C) void wxVListBox_Clear(IntPtr self);
-		static extern (C) void wxVListBox_SetSelection(IntPtr self, int selection);
-		static extern (C) bool wxVListBox_Select(IntPtr self, int item, bool select);
-		static extern (C) bool wxVListBox_SelectRange(IntPtr self, int from, int to);
-		static extern (C) void wxVListBox_Toggle(IntPtr self, int item);
-		static extern (C) bool wxVListBox_SelectAll(IntPtr self);
-		static extern (C) bool wxVListBox_DeselectAll(IntPtr self);
-		static extern (C) void wxVListBox_SetMargins(IntPtr self, inout Point pt);
-		static extern (C) void wxVListBox_SetMargins2(IntPtr self, int x, int y);
-		static extern (C) void wxVListBox_SetSelectionBackground(IntPtr self, IntPtr col);
+		[DllImport("wx-c")] static extern bool wxVListBox_Create(IntPtr self,IntPtr parent, int id, ref Point pos, ref Size size, int style, string name);		
+		[DllImport("wx-c")] static extern void wxVListBox_OnDrawSeparator(IntPtr self, IntPtr dc, ref Rectangle rect, int n);
+		[DllImport("wx-c")] static extern void wxVListBox_OnDrawBackground(IntPtr self, IntPtr dc, ref Rectangle rect, int n);
+		[DllImport("wx-c")] static extern int wxVListBox_OnGetLineHeight(IntPtr self, int line);
+		[DllImport("wx-c")] static extern int wxVListBox_GetItemCount(IntPtr self);
+		[DllImport("wx-c")] static extern bool wxVListBox_HasMultipleSelection(IntPtr self);
+		[DllImport("wx-c")] static extern int wxVListBox_GetSelection(IntPtr self);
+		[DllImport("wx-c")] static extern bool wxVListBox_IsCurrent(IntPtr self, int item);
+		[DllImport("wx-c")] static extern bool wxVListBox_IsSelected(IntPtr self, int item);
+		[DllImport("wx-c")] static extern int wxVListBox_GetSelectedCount(IntPtr self);
+		[DllImport("wx-c")] static extern int wxVListBox_GetFirstSelected(IntPtr self, out ulong cookie);
+		[DllImport("wx-c")] static extern int wxVListBox_GetNextSelected(IntPtr self, out ulong cookie);
+		[DllImport("wx-c")] static extern void wxVListBox_GetMargins(IntPtr self, out Point pt);
+		[DllImport("wx-c")] static extern IntPtr wxVListBox_GetSelectionBackground(IntPtr self);
+		[DllImport("wx-c")] static extern void wxVListBox_SetItemCount(IntPtr self, int count);
+		[DllImport("wx-c")] static extern void wxVListBox_Clear(IntPtr self);
+		[DllImport("wx-c")] static extern void wxVListBox_SetSelection(IntPtr self, int selection);
+		[DllImport("wx-c")] static extern bool wxVListBox_Select(IntPtr self, int item, bool select);
+		[DllImport("wx-c")] static extern bool wxVListBox_SelectRange(IntPtr self, int from, int to);
+		[DllImport("wx-c")] static extern void wxVListBox_Toggle(IntPtr self, int item);
+		[DllImport("wx-c")] static extern bool wxVListBox_SelectAll(IntPtr self);
+		[DllImport("wx-c")] static extern bool wxVListBox_DeselectAll(IntPtr self);
+		[DllImport("wx-c")] static extern void wxVListBox_SetMargins(IntPtr self, ref Point pt);
+		[DllImport("wx-c")] static extern void wxVListBox_SetMargins2(IntPtr self, int x, int y);
+		[DllImport("wx-c")] static extern void wxVListBox_SetSelectionBackground(IntPtr self, IntPtr col);
 		
-	public abstract class VListBox : VScrolledWindow
-	{
-		const string wxVListBoxNameStr = "wxVListBox";
-	
-		public this(IntPtr wxobj)
-			{ super(wxobj);}
+		public VListBox(IntPtr wxObject)
+			: base(wxObject) {}
 			
-		public this()
-			{ this(null, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, "");}
+		public VListBox()
+			: this(null, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, "") {}	
 			
-		public this(Window parent, int id /*= wxID_ANY*/, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, string name = wxVListBoxNameStr)
+		public VListBox(Window parent)
+			: this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, "") {}
+			
+		public VListBox(Window parent, int id)
+			: this(parent, id, wxDefaultPosition, wxDefaultSize, 0, "") {}
+			
+		public VListBox(Window parent, int id, Point pos)
+			: this(parent, id, pos, wxDefaultSize, 0, "") {}
+			
+		public VListBox(Window parent, int id, Point pos, Size size)
+			: this(parent, id, pos, size, 0, "") {}
+			
+		public VListBox(Window parent, int id, Point pos, Size size, int style)
+			: this(parent, id, pos, size, style, "") {}
+		
+		public VListBox(Window parent, int id, Point pos, Size size, int style, string name)
+			: this(wxVListBox_ctor(Object.SafePtr(parent), id, ref pos, ref size, (uint)style, name))
 		{
-			this(wxVListBox_ctor(wxObject.SafePtr(parent), id, pos, size, style, name));
-			wxVListBox_RegisterVirtual(wxobj, this,
-				&staticDoOnDrawItem,
-				&staticOnMeasureItem,
-				&staticDoOnDrawSeparator,
-				&staticDoOnDrawBackground,
-				&staticOnGetLineHeight);
+			onDrawItem = new Virtual_VoidDcRectSizeT(DoOnDrawItem);
+			onMeasureItem = new Virtual_IntInt(OnMeasureItem);
+			onDrawSeparator = new Virtual_VoidDcRectSizeT(DoOnDrawSeparator);
+			onDrawBackground = new Virtual_VoidDcRectSizeT(DoOnDrawBackground);
+			onGetLineHeight = new Virtual_IntInt(OnGetLineHeight);
+
+			wxVListBox_RegisterVirtual(wxObject, 
+				onDrawItem,
+				onMeasureItem,
+				onDrawSeparator,
+				onDrawBackground,
+				onGetLineHeight);
 		}
 		
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, string name = wxVListBoxNameStr)
-			{ this(parent, Window.UniqueID, pos, size, style, name);}
+		public VListBox(Window parent, Point pos)
+			: this(parent, Window.UniqueID, pos, wxDefaultSize, 0, "") {}
+			
+		public VListBox(Window parent, Point pos, Size size)
+			: this(parent, Window.UniqueID, pos, size, 0, "") {}
+			
+		public VListBox(Window parent, Point pos, Size size, int style)
+			: this(parent, Window.UniqueID, pos, size, style, "") {}
+		
+		public VListBox(Window parent, Point pos, Size size, int style, string name)
+			: this(parent, Window.UniqueID, pos, size, style, name) {}
 		
 		//-----------------------------------------------------------------------------
 		
-		public bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
+		public new bool Create(Window parent, int id, Point pos, Size size, int style, string name)
 		{
-			return wxVListBox_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, style, name); 
+			return wxVListBox_Create(wxObject, Object.SafePtr(parent), id, ref pos, ref size, style, name); 
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		protected abstract void OnDrawItem(DC dc, Rectangle rect, int n);
 		
-		static extern(C) private void staticDoOnDrawItem(VListBox obj, IntPtr dc, Rectangle rect, int n)
+		private void DoOnDrawItem(IntPtr dc, IntPtr rect, int n)
 		{
-			obj.OnDrawItem(cast(DC)FindObject(dc, &DC.New), rect, n);
+			OnDrawItem((DC)FindObject(dc, typeof(DC)), new wxRect(rect), n);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		protected abstract int OnMeasureItem(int n);
 		
-		static extern(C) private int staticOnMeasureItem(VListBox obj, int n)
-		{
-			return obj.OnMeasureItem(n);
-		}
-
 		//-----------------------------------------------------------------------------
 		
-		protected /+virtual+/ void OnDrawSeparator(DC dc, Rectangle rect, int n)
+		protected virtual void OnDrawSeparator(DC dc, Rectangle rect, int n)
 		{
-			wxVListBox_OnDrawSeparator(wxobj, wxObject.SafePtr(dc), rect, n);
+			wxVListBox_OnDrawSeparator(wxObject, Object.SafePtr(dc), ref rect, n);
 		}
 		
-		static extern(C) private void staticDoOnDrawSeparator(VListBox obj, IntPtr dc, Rectangle rect, int n)
+		private void DoOnDrawSeparator(IntPtr dc, IntPtr rect, int n)
 		{
-			obj.OnDrawSeparator(cast(DC)FindObject(dc, &DC.New), rect, n);
+			OnDrawSeparator((DC)FindObject(dc, typeof(DC)), new wxRect(rect), n);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
-		protected /+virtual+/ void OnDrawBackground(DC dc, Rectangle rect, int n)
+		protected virtual void OnDrawBackground(DC dc, Rectangle rect, int n)
 		{
-			wxVListBox_OnDrawBackground(wxobj, wxObject.SafePtr(dc), rect, n);
+			wxVListBox_OnDrawBackground(wxObject, Object.SafePtr(dc), ref rect, n);
 		}
 		
-		static extern(C) private void staticDoOnDrawBackground(VListBox obj, IntPtr dc, Rectangle rect, int n)
+		private void DoOnDrawBackground(IntPtr dc, IntPtr rect, int n)
 		{
-			obj.OnDrawBackground(cast(DC)FindObject(dc, &DC.New), rect, n);
+			OnDrawBackground((DC)FindObject(dc, typeof(DC)), new wxRect(rect), n);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		protected override int OnGetLineHeight(int line)
 		{
-			return wxVListBox_OnGetLineHeight(wxobj, line);
+			return wxVListBox_OnGetLineHeight(wxObject, line);
 		}
 		
-		static extern(C) private override int staticOnGetLineHeight(VListBox obj, int line)
+		//-----------------------------------------------------------------------------
+		
+		public int ItemCount
 		{
-			return obj.OnGetLineHeight(line);
+			get { return wxVListBox_GetItemCount(wxObject); }
+			set { wxVListBox_SetItemCount(wxObject, value); }
 		}
-
-		//-----------------------------------------------------------------------------
-		
-		public int ItemCount() { return wxVListBox_GetItemCount(wxobj); }
-		public void ItemCount(int value) { wxVListBox_SetItemCount(wxobj, value); }
 		
 		//-----------------------------------------------------------------------------
 		
-		public bool HasMultipleSelection() { return wxVListBox_HasMultipleSelection(wxobj); }
+		public bool HasMultipleSelection
+		{
+			get { return wxVListBox_HasMultipleSelection(wxObject); }
+		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public int Selection() { return wxVListBox_GetSelection(wxobj); }
-		public void Selection(int value) { wxVListBox_SetSelection(wxobj, value); }
+		public int Selection
+		{
+			get { return wxVListBox_GetSelection(wxObject); }
+			set { wxVListBox_SetSelection(wxObject, value); }
+		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public bool IsCurrent(int item)
 		{
-			return wxVListBox_IsCurrent(wxobj, item);
+			return wxVListBox_IsCurrent(wxObject, item);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public bool IsSelected(int item)
 		{
-			return wxVListBox_IsSelected(wxobj, item);
+			return wxVListBox_IsSelected(wxObject, item);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public int SelectedCount() { return wxVListBox_GetSelectedCount(wxobj); }
-		
-		//-----------------------------------------------------------------------------
-		
-		public int GetFirstSelected(out uint cookie)
+		public int SelectedCount
 		{
-			return wxVListBox_GetFirstSelected(wxobj, cookie);
+			get { return wxVListBox_GetSelectedCount(wxObject); }
 		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public int GetNextSelected(out uint cookie)
+		public int GetFirstSelected(out ulong cookie)
 		{
-			return wxVListBox_GetNextSelected(wxobj, cookie);
+			return wxVListBox_GetFirstSelected(wxObject, out cookie);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public Point Margins() { 
-				Point pt;
-				wxVListBox_GetMargins(wxobj, pt);
+		public int GetNextSelected(out ulong cookie)
+		{
+			return wxVListBox_GetNextSelected(wxObject, out cookie);
+		}
+		
+		//-----------------------------------------------------------------------------
+		
+		public Point Margins
+		{
+			get { 
+				Point pt = new Point();
+				wxVListBox_GetMargins(wxObject, out pt);
 				return pt;
 			}
 			
-		public void Margins(Point value) { wxVListBox_SetMargins(wxobj, value); }
+			set { wxVListBox_SetMargins(wxObject, ref value); }
+		}
 		
 		public void SetMargins(int x, int y)
 		{
-			wxVListBox_SetMargins2(wxobj, x, y);
+			wxVListBox_SetMargins2(wxObject, x, y);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public Colour SelectionBackground() { return new Colour(wxVListBox_GetSelectionBackground(wxobj), true); }
-		public void SelectionBackground(Colour value) { wxVListBox_SetSelectionBackground(wxobj, wxObject.SafePtr(value)); }
+		public Colour SelectionBackground
+		{
+			get { return new Colour(wxVListBox_GetSelectionBackground(wxObject), true); }
+			set { wxVListBox_SetSelectionBackground(wxObject, Object.SafePtr(value)); }
+		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public void Clear()
 		{
-			wxVListBox_Clear(wxobj);
+			wxVListBox_Clear(wxObject);
 		}
 		
 		//-----------------------------------------------------------------------------
@@ -225,34 +264,35 @@ import wx.VScroll;
 		
 		public bool Select(int item, bool select)
 		{
-			return wxVListBox_Select(wxobj, item, select);
+			return wxVListBox_Select(wxObject, item, select);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public bool SelectRange(int from, int to)
 		{
-			return wxVListBox_SelectRange(wxobj, from, to);
+			return wxVListBox_SelectRange(wxObject, from, to);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public void Toggle(int item)
 		{
-			wxVListBox_Toggle(wxobj, item);
+			wxVListBox_Toggle(wxObject, item);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public bool SelectAll()
 		{
-			return wxVListBox_SelectAll(wxobj);
+			return wxVListBox_SelectAll(wxObject);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public bool DeselectAll()
 		{
-			return wxVListBox_DeselectAll(wxobj);
+			return wxVListBox_DeselectAll(wxObject);
 		}
 	}
+}

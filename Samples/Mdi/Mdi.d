@@ -1,41 +1,22 @@
 //-----------------------------------------------------------------------------
-// wxD/Samples - Mdi.d
+// wx.NET/Samples - Mdi.cs
 //
-// wxD "mdi" sample.
+// wx.NET "mdi" sample.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
-// Modified by BERO <berobero@users.sourceforge.net>
 // (C) 2004 by Alexander Olk
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-import wx.wx;
+using System;
+using System.Drawing;
+using System.Collections;
 
-struct ArrayList /* for .NET compatibility */
+namespace wx.Samples
 {
-	Object[] array;
-
-	void Add(Object o)
-	{
-		array ~= o;
-	}
-	void Remove(Object o)
-	{
-		uint i;
-		for(i=0;i<array.length;i++) {
-			if (array[i]===o) break;
-		}
-		if (i==array.length) return;
-		for(i++;i<array.length;i++) {
-			array[i-1] = array[i];
-		}
-		array.length = array.length-1;
-	}
-}
-
-	public class MyFrame : MDIParentFrame
+	public class MyFrame : wx.MDIParentFrame
 	{
 		public enum Cmd 
 		{ 
@@ -52,86 +33,86 @@ struct ArrayList /* for .NET compatibility */
 		
 		public static MyFrame frame = null;
 
-		public static ArrayList my_children;
+		public static ArrayList my_children = new ArrayList();
 
 		//---------------------------------------------------------------------
 
-		public this( Window parent, string title, Point pos, Size size )
+		public MyFrame( Window parent, string title, Point pos, Size size )
+			: base( parent, -1, title, pos, size )
 		{
-			super( parent, -1, title, pos, size );
-			icon = new Icon( "../Samples/Mdi/mondrian.png" );
+			Icon = new wx.Icon( "../Samples/Mdi/mondrian.png" );
 
 			// Make a menubar
 			Menu file_menu = new Menu();
 
-			file_menu.Append( Cmd.MDI_NEW_WINDOW, "&New window\tCtrl-N", "Create a new child window" );
-			file_menu.Append( Cmd.MDI_QUIT, "&Exit\tAlt-X", "Quit the program" );
+			file_menu.Append( (int)Cmd.MDI_NEW_WINDOW, "&New window\tCtrl-N", "Create a new child window" );
+			file_menu.Append( (int)Cmd.MDI_QUIT, "&Exit\tAlt-X", "Quit the program" );
 
 			Menu help_menu = new Menu();
-			help_menu.Append( Cmd.MDI_ABOUT, "&About\tF1" );
+			help_menu.Append( (int)Cmd.MDI_ABOUT, "&About\tF1" );
 
 			MenuBar menu_bar = new MenuBar();
 
 			menu_bar.Append( file_menu, "&File" );
 			menu_bar.Append( help_menu, "&Help" );
 
-			this.menuBar = menu_bar;
+			MenuBar = menu_bar;
 			
 			textWindow = new TextCtrl( this, -1, "A help window", wxDefaultPosition, wxDefaultSize, TextCtrl.wxTE_MULTILINE | TextCtrl.wxSUNKEN_BORDER );
 			
-			ToolBar toolBar = CreateToolBar(ToolBar.wxTB_FLAT | ToolBar.wxTB_HORIZONTAL);
-			InitToolBar(this.toolBar);	
+			ToolBar toolBar = CreateToolBar(wx.ToolBar.wxTB_FLAT | wx.ToolBar.wxTB_HORIZONTAL);
+			InitToolBar(ToolBar);	
 
 			CreateStatusBar();
 
 			frame = this;
 			
-			EVT_MENU( Cmd.MDI_ABOUT, & OnAbout ) ;
-			EVT_MENU( Cmd.MDI_NEW_WINDOW, & OnNewWindow ) ;
-			EVT_MENU( Cmd.MDI_QUIT, & OnQuit ) ;
+			EVT_MENU( (int)Cmd.MDI_ABOUT, new EventListener( OnAbout ) );
+			EVT_MENU( (int)Cmd.MDI_NEW_WINDOW, new EventListener( OnNewWindow ) );
+			EVT_MENU( (int)Cmd.MDI_QUIT, new EventListener( OnQuit ) );
 			 
-			EVT_CLOSE( & OnClose ) ;
+			EVT_CLOSE( new EventListener( OnClose ) );
 
-			EVT_SIZE( & OnSize ) ;
+			EVT_SIZE( new EventListener( OnSize ) );
 		}
 
 		//---------------------------------------------------------------------
 		
-		public void OnAbout( Object sender, Event e )
+		public void OnAbout( object sender, Event e )
 		{
-			MessageDialog md = new MessageDialog( this, "wxWidgets 2.0 MDI Demo\nPorted to wxD by Alexander Olk 2004\n", "About MDI Demo" );
+			MessageDialog md = new MessageDialog( this, "wxWidgets 2.0 MDI Demo\nPorted to wx.NET by Alexander Olk 2004\n", "About MDI Demo" );
 			md.ShowModal();
 		}
 
 		//---------------------------------------------------------------------
 		
-		public void OnNewWindow( Object sender, Event e )
+		public void OnNewWindow( object sender, Event e )
 		{
-			stdout.writeLine( "MyFrame: OnNewWindow");
-			MyChild subframe = new MyChild( this, "Canvas Frame", new_Point( -1, -1 ),
-					new_Size( -1, -1 ), wxDEFAULT_FRAME_STYLE );
+			Console.WriteLine( "MyFrame: OnNewWindow");
+			MyChild subframe = new MyChild( this, "Canvas Frame", new Point( -1, -1 ),
+					new Size( -1, -1 ), wxDEFAULT_FRAME_STYLE );
 
 			subframe.Show( true );	
 		}
 
 		//---------------------------------------------------------------------
 
-		public void OnQuit( Object sender, Event e )
+		public void OnQuit( object sender, Event e )
 		{
-			stdout.writeLine( "MyFrame: OnQuit" );
+			Console.WriteLine( "MyFrame: OnQuit" );
 			Close();
 		}
 
 		//---------------------------------------------------------------------
 
-		public void OnClose( Object sender, Event e )
+		public void OnClose( object sender, Event e )
 		{
-			stdout.writeLine( "MyFrame: OnClose" );
-			CloseEvent ce = cast(CloseEvent) e;
+			Console.WriteLine( "MyFrame: OnClose" );
+			CloseEvent ce = (CloseEvent) e;
 			
 			if ( ce.CanVeto && MyFrame.gs_nFrames > 0 )
 			{
-				string msg = .toString(gs_nFrames) ~ " windows still open, close anyhow?";
+				string msg = gs_nFrames + " windows still open, close anyhow?";
 				MessageDialog md = new MessageDialog( this, msg, "Please confirm", Dialog.wxICON_QUESTION | Dialog.wxYES_NO );
 				if ( md.ShowModal() != wxID_YES )
 				{
@@ -144,7 +125,7 @@ struct ArrayList /* for .NET compatibility */
 
 		//---------------------------------------------------------------------
 		
-		public void OnSize( Object sender, Event e )
+		public void OnSize( object sender, Event e )
 		{
 			Size cs = ClientSize;
 			
@@ -156,35 +137,43 @@ struct ArrayList /* for .NET compatibility */
 		
 		public void InitToolBar( ToolBar toolBar )
 		{
-			Bitmap[] bitmaps = new Bitmap[8];
+			wx.Bitmap[] bitmaps = new wx.Bitmap[8];
 			
-			bitmaps[0] = new Bitmap( "../Samples/Mdi/bitmaps/new.xpm" );
-			bitmaps[1] = new Bitmap( "../Samples/Mdi/bitmaps/open.xpm" );
-			bitmaps[2] = new Bitmap( "../Samples/Mdi/bitmaps/save.xpm" );
-			bitmaps[3] = new Bitmap( "../Samples/Mdi/bitmaps/copy.xpm" );
-			bitmaps[4] = new Bitmap( "../Samples/Mdi/bitmaps/cut.xpm" );
-			bitmaps[5] = new Bitmap( "../Samples/Mdi/bitmaps/paste.xpm" );
-			bitmaps[6] = new Bitmap( "../Samples/Mdi/bitmaps/print.xpm" );
-			bitmaps[7] = new Bitmap( "../Samples/Mdi/bitmaps/help.xpm" );
+			bitmaps[0] = new wx.Bitmap();
+			bitmaps[0].LoadFile( "../Samples/Mdi/bitmaps/new.xpm", BitmapType.wxBITMAP_TYPE_XPM );
+			bitmaps[1] = new wx.Bitmap();
+			bitmaps[1].LoadFile( "../Samples/Mdi/bitmaps/open.xpm", BitmapType.wxBITMAP_TYPE_XPM );
+			bitmaps[2] = new wx.Bitmap();
+			bitmaps[2].LoadFile( "../Samples/Mdi/bitmaps/save.xpm", BitmapType.wxBITMAP_TYPE_XPM );
+			bitmaps[3] = new wx.Bitmap();
+			bitmaps[3].LoadFile( "../Samples/Mdi/bitmaps/copy.xpm", BitmapType.wxBITMAP_TYPE_XPM );
+			bitmaps[4] = new wx.Bitmap();
+			bitmaps[4].LoadFile( "../Samples/Mdi/bitmaps/cut.xpm", BitmapType.wxBITMAP_TYPE_XPM );
+			bitmaps[5] = new wx.Bitmap();
+			bitmaps[5].LoadFile( "../Samples/Mdi/bitmaps/paste.xpm", BitmapType.wxBITMAP_TYPE_XPM );
+			bitmaps[6] = new wx.Bitmap();
+			bitmaps[6].LoadFile( "../Samples/Mdi/bitmaps/print.xpm", BitmapType.wxBITMAP_TYPE_XPM );
+			bitmaps[7] = new wx.Bitmap();
+			bitmaps[7].LoadFile( "../Samples/Mdi/bitmaps/help.xpm", BitmapType.wxBITMAP_TYPE_XPM );
 			
 			int width = 24;
 			int currentX = 5;
 			
-			toolBar.AddTool( Cmd.MDI_NEW_WINDOW, bitmaps[0], Bitmap.wxNullBitmap, false, currentX, -1, null, "New File", "" );
+			toolBar.AddTool( (int)Cmd.MDI_NEW_WINDOW, bitmaps[0], NullObjects.wxNullBitmap, false, currentX, -1, null, "New File", "" );
 			currentX += width + 5;
-			toolBar.AddTool( 100, bitmaps[1], Bitmap.wxNullBitmap, false, currentX, -1, null, "Open file", "" );
+			toolBar.AddTool( 100, bitmaps[1], NullObjects.wxNullBitmap, false, currentX, -1, null, "Open file", "" );
 			currentX += width + 5;
-			toolBar.AddTool( 200, bitmaps[2], Bitmap.wxNullBitmap, false, currentX, -1, null, "Save file", "" );
+			toolBar.AddTool( 200, bitmaps[2], NullObjects.wxNullBitmap, false, currentX, -1, null, "Save file", "" );
 			currentX += width + 5;
-			toolBar.AddTool( 300, bitmaps[3], Bitmap.wxNullBitmap, false, currentX, -1, null, "Copy", "" );
+			toolBar.AddTool( 300, bitmaps[3], NullObjects.wxNullBitmap, false, currentX, -1, null, "Copy", "" );
 			currentX += width + 5;
-			toolBar.AddTool( 400, bitmaps[4], Bitmap.wxNullBitmap, false, currentX, -1, null, "Cut", "" );
+			toolBar.AddTool( 400, bitmaps[4], NullObjects.wxNullBitmap, false, currentX, -1, null, "Cut", "" );
 			currentX += width + 5;
-			toolBar.AddTool( 500, bitmaps[5], Bitmap.wxNullBitmap, false, currentX, -1, null, "Paste", "" );
+			toolBar.AddTool( 500, bitmaps[5], NullObjects.wxNullBitmap, false, currentX, -1, null, "Paste", "" );
 			currentX += width + 5;
-			toolBar.AddTool( 600, bitmaps[6], Bitmap.wxNullBitmap, false, currentX, -1, null, "Print", "" );
+			toolBar.AddTool( 600, bitmaps[6], NullObjects.wxNullBitmap, false, currentX, -1, null, "Print", "" );
 			currentX += width + 5;
-			toolBar.AddTool( 700, bitmaps[7], Bitmap.wxNullBitmap, false, currentX, -1, null, "Help", "" );
+			toolBar.AddTool( 700, bitmaps[7], NullObjects.wxNullBitmap, false, currentX, -1, null, "Help", "" );
 			
 			toolBar.Realize();
 		}
@@ -199,26 +188,26 @@ struct ArrayList /* for .NET compatibility */
 		
 		//---------------------------------------------------------------------
 		
-		public this( Window parent, Point pos, Size size )
+		public MyCanvas( Window parent, Point pos, Size size )
+			: base( parent, -1, pos, size,  /*Border.*/wxSUNKEN_BORDER | wxNO_FULL_REPAINT_ON_RESIZE | wxVSCROLL | wxHSCROLL )
 		{
-			super( parent, -1, pos, size,  /*Border.*/wxSUNKEN_BORDER | wxNO_FULL_REPAINT_ON_RESIZE | wxVSCROLL | wxHSCROLL );
 			BackgroundColour = new Colour( "WHITE" );
 			
-			this.EVT_MOUSE_EVENTS( & OnEvent ) ;
+			this.EVT_MOUSE_EVENTS( new EventListener( OnEvent ) );
 		}
 		
 		//---------------------------------------------------------------------
 		
 		public override void OnDraw( DC dc )
 		{
-			dc.font = Font.wxSWISS_FONT;
-			dc.pen = Pen.wxGREEN_PEN;
+			dc.Font = Font.wxSWISS_FONT;
+			dc.Pen = GDIPens.wxGREEN_PEN;
 			
 			dc.DrawLine( 0, 0, 200, 200 );
 			dc.DrawLine( 200, 0, 0, 200 );
 			
-			dc.brush = Brush.wxCYAN_BRUSH;
-			dc.pen = Pen.wxRED_PEN;
+			dc.Brush = GDIBrushes.wxCYAN_BRUSH;
+			dc.Pen = GDIPens.wxRED_PEN;
 			dc.DrawRectangle( 100, 100, 100, 50 );
 			dc.DrawRoundedRectangle( 150, 150, 100, 50, 20 );
 			
@@ -227,7 +216,7 @@ struct ArrayList /* for .NET compatibility */
 			dc.DrawLine( 50, 230, 200, 230 );
 			dc.DrawText( "This is a test string", 50, 230 );
 			
-			Point[3] points;
+			Point[] points = new Point[3];
 			points[0].X = 200; points[0].Y = 300;
 			points[1].X = 100; points[1].Y = 400;
 			points[2].X = 300; points[2].Y = 400;
@@ -238,16 +227,16 @@ struct ArrayList /* for .NET compatibility */
 		
 		//---------------------------------------------------------------------
 		
-		public void OnEvent( Object sender, Event e)
+		public void OnEvent( object sender, Event e)
 		{
-			MouseEvent me = cast(MouseEvent) e;
+			MouseEvent me = (MouseEvent) e;
 
-			if ( e.eventType == Event.wxEVT_LEFT_DOWN )
+			if ( e.EventType == Event.wxEVT_LEFT_DOWN )
 			{
 				drawing = true;
 			}
 
-			if ( e.eventType == Event.wxEVT_LEFT_UP )
+			if ( e.EventType == Event.wxEVT_LEFT_UP )
 			{
 				drawing = false;
 			}
@@ -261,7 +250,7 @@ struct ArrayList /* for .NET compatibility */
 
 				if ( MyFrame.xpos > -1 && MyFrame.ypos > -1 && me.Dragging )
 				{
-					dc.pen = Pen.wxBLACK_PEN;
+					dc.Pen = GDIPens.wxBLACK_PEN;
 					dc.DrawLine( MyFrame.xpos, MyFrame.ypos, pt.X, pt.Y );
 
 					m_dirty = true;
@@ -276,9 +265,9 @@ struct ArrayList /* for .NET compatibility */
 
 		//---------------------------------------------------------------------
 		
-		public bool IsDirty()
+		public bool IsDirty
 		{
-			return m_dirty;
+			get { return m_dirty; }
 		}
 	}
 	
@@ -294,35 +283,35 @@ struct ArrayList /* for .NET compatibility */
 		
 		//---------------------------------------------------------------------
 		
-		public this( MDIParentFrame parent, string title, Point pos, Size size, long style )
+		public MyChild( MDIParentFrame parent, string title, Point pos, Size size, long style )
+			: base( parent, -1, title, pos, size, style | wxNO_FULL_REPAINT_ON_RESIZE )
 		{
-			super( parent, -1, title, pos, size, style | wxNO_FULL_REPAINT_ON_RESIZE );
 			MyFrame.my_children.Add( this );
 
-			icon = new Icon( "../Samples/Mdi/mondrian.png" );
+			Icon = new wx.Icon( "../Samples/Mdi/mondrian.png" );
 			
 			SetSizeHints( 100, 100 );
 			
-			string atitle = "Canvas Frame " ~ .toString( ++MyFrame.gs_nFrames );
+			string atitle = "Canvas Frame " + ( ++MyFrame.gs_nFrames );
 			
 			Title = atitle;
 			
 			Menu file_menu = new Menu();
 
-			file_menu.Append( Cmd.MDI_NEW_WINDOW, "&New window" );
-			file_menu.Append( Cmd.MDI_CHILD_QUIT, "&Close child", "Close this window" );
-			file_menu.Append( Cmd.MDI_QUIT, "&Exit" );
+			file_menu.Append( (int)Cmd.MDI_NEW_WINDOW, "&New window" );
+			file_menu.Append( (int)Cmd.MDI_CHILD_QUIT, "&Close child", "Close this window" );
+			file_menu.Append( (int)Cmd.MDI_QUIT, "&Exit" );
 
 			Menu option_menu = new Menu();
 
-			option_menu.Append( Cmd.MDI_REFRESH, "&Refresh picture" );
-			option_menu.Append( Cmd.MDI_CHANGE_TITLE, "Change &title...\tCtrl-T" );
+			option_menu.Append( (int)Cmd.MDI_REFRESH, "&Refresh picture" );
+			option_menu.Append( (int)Cmd.MDI_CHANGE_TITLE, "Change &title...\tCtrl-T" );
 			option_menu.AppendSeparator();
-			option_menu.Append( Cmd.MDI_CHANGE_POSITION, "Move frame\tCtrl-M" );
-			option_menu.Append( Cmd.MDI_CHANGE_SIZE, "Resize frame\tCtrl-S" );
+			option_menu.Append( (int)Cmd.MDI_CHANGE_POSITION, "Move frame\tCtrl-M" );
+			option_menu.Append( (int)Cmd.MDI_CHANGE_SIZE, "Resize frame\tCtrl-S" );
 
 			Menu help_menu = new Menu();
-			help_menu.Append( Cmd.MDI_ABOUT, "&About" );
+			help_menu.Append( (int)Cmd.MDI_ABOUT, "&About" );
 
 			MenuBar menu_bar = new MenuBar();
 
@@ -330,45 +319,45 @@ struct ArrayList /* for .NET compatibility */
 			menu_bar.Append( option_menu, "&Child" );
 			menu_bar.Append( help_menu, "&Help" );
 
-			this.menuBar = menu_bar;
+			MenuBar = menu_bar;
 
 			//CreateStatusBar();
 			MyFrame.frame.StatusText = title;
 
 			Size cs = ClientSize;
-			canvas = new MyCanvas( this, new_Point( 0, 0 ), new_Size( cs.Width, cs.Height ) );
-			canvas.cursor = new Cursor( StockCursor.wxCURSOR_PENCIL );
+			canvas = new MyCanvas( this, new Point( 0, 0 ), new Size( cs.Width, cs.Height ) );
+			canvas.Cursor = new Cursor( StockCursor.wxCURSOR_PENCIL );
 
 			canvas.SetScrollbars(20, 20, 50, 50);
 			
-			EVT_MENU( Cmd.MDI_CHILD_QUIT, & OnQuit ) ;
-			EVT_MENU( Cmd.MDI_REFRESH,  & OnRefresh ) ;
-			EVT_MENU( Cmd.MDI_CHANGE_TITLE, & OnChangeTitle ) ;
-			EVT_MENU( Cmd.MDI_CHANGE_POSITION, & OnChangePosition ) ;
-			EVT_MENU( Cmd.MDI_CHANGE_SIZE, & OnChangeSize ) ;
+			EVT_MENU( (int)Cmd.MDI_CHILD_QUIT, new EventListener( OnQuit ) );
+			EVT_MENU( (int)Cmd.MDI_REFRESH,  new EventListener( OnRefresh ) );
+			EVT_MENU( (int)Cmd.MDI_CHANGE_TITLE, new EventListener( OnChangeTitle ) );
+			EVT_MENU( (int)Cmd.MDI_CHANGE_POSITION, new EventListener( OnChangePosition ) );
+			EVT_MENU( (int)Cmd.MDI_CHANGE_SIZE, new EventListener( OnChangeSize ) );
 			
-			EVT_MENU( Cmd.MDI_NEW_WINDOW, & MyFrame.frame.OnNewWindow ) ;
-			EVT_MENU( Cmd.MDI_QUIT, & MyFrame.frame.OnQuit ) ;
-			EVT_MENU( Cmd.MDI_ABOUT, & MyFrame.frame.OnAbout ) ;
+			EVT_MENU( (int)Cmd.MDI_NEW_WINDOW, new EventListener( MyFrame.frame.OnNewWindow ) );
+			EVT_MENU( (int)Cmd.MDI_QUIT, new EventListener( MyFrame.frame.OnQuit ) );
+			EVT_MENU( (int)Cmd.MDI_ABOUT, new EventListener( MyFrame.frame.OnAbout ) );
 
-			EVT_SIZE( & OnSize ) ;
-			EVT_MOVE( & OnMove ) ;
+			EVT_SIZE( new EventListener( OnSize ) );
+			EVT_MOVE( new EventListener( OnMove ) );
 
-			EVT_CLOSE( & OnClose ) ;			
+			EVT_CLOSE( new EventListener( OnClose ) );			
 		}
 
 		//---------------------------------------------------------------------
 		
-		public void OnQuit( Object sender, Event e )
+		public void OnQuit( object sender, Event e )
 		{
-			stdout.writeLine( "MyChild: OnQuit" );
+			Console.WriteLine( "MyChild: OnQuit" );
 			MyFrame.my_children.Remove( this );
 			Close( true );
 		}
 
 		//---------------------------------------------------------------------
 		
-		public void OnRefresh( Object sender, Event e )
+		public void OnRefresh( object sender, Event e )
 		{
 			if ( canvas != null ) 
 				canvas.Refresh();
@@ -376,11 +365,11 @@ struct ArrayList /* for .NET compatibility */
 
 		//---------------------------------------------------------------------
 		
-		public void OnChangeTitle( Object sender, Event e )
+		public void OnChangeTitle( object sender, Event e )
 		{
-			string title = GetTextFromUser( "Enter the new title for MDI child", "MDI sample question", s_title, Parent.Parent );
+			string title = new GetTextFromUser( "Enter the new title for MDI child", "MDI sample question", s_title, Parent.Parent );
 			
-			if ( title.length == 0 )
+			if ( title.Length == 0 )
 				return;
 				
 			s_title = title;
@@ -389,37 +378,37 @@ struct ArrayList /* for .NET compatibility */
 
 		//---------------------------------------------------------------------
 		
-		public void OnChangePosition( Object sender, Event e )
+		public void OnChangePosition( object sender, Event e )
 		{
 			Move( 10, 10, 0 );
 		}
 
 		//---------------------------------------------------------------------
 
-		public void OnChangeSize( Object sender, Event e )
+		public void OnChangeSize( object sender, Event e )
 		{
-			ClientSize = new_Size( 100, 100 );
+			ClientSize = new Size( 100, 100 );
 		}
 
 		//---------------------------------------------------------------------
 		
-		public void OnSize( Object sender, Event e )
+		public void OnSize( object sender, Event e )
 		{
-			SizeEvent se = cast(SizeEvent) e;
-			Size size1 = se.size;
-			Size size2 = size;
+			SizeEvent se = (SizeEvent) e;
+			Size size1 = se.Size;
+			Size size2 = Size;
 			Size size3 = ClientSize;
 			
-			Log.LogStatus( "size from event: %dx%d, from frame %dx%d, client %dx%d",
+			Log.LogStatus( "size from event: {0}x{1}, from frame {2}x{3}, client {4}x{5}",
 					size1.Width, size1.Height, size2.Width, size2.Height, size3.Width, size3.Height );
 			se.Skip();
 		}
 
 		//---------------------------------------------------------------------
 		
-		public void OnMove( Object sender, Event e )
+		public void OnMove( object sender, Event e )
 		{
-			MoveEvent me = cast(MoveEvent) e;
+			MoveEvent me = (MoveEvent) e;
 			Point pos1 = me.Position;
 			Point pos2 = Position;
 
@@ -431,10 +420,10 @@ struct ArrayList /* for .NET compatibility */
 
 		//---------------------------------------------------------------------
 		
-		public void OnClose( Object sender, Event e )
+		public void OnClose( object sender, Event e )
 		{
-			stdout.writeLine( "MyChild: OnClose" );
-			CloseEvent ce = cast(CloseEvent) e;
+			Console.WriteLine( "MyChild: OnClose" );
+			CloseEvent ce = (CloseEvent) e;
 
 			if ( canvas != null && canvas.IsDirty )
 			{
@@ -454,9 +443,9 @@ struct ArrayList /* for .NET compatibility */
 	
 		//---------------------------------------------------------------------
 		
-		public override void OnActivate( Object sender, Event e )
+		public override void OnActivate( object sender, Event e )
 		{
-			ActivateEvent ae = cast(ActivateEvent) e;
+			ActivateEvent ae = (ActivateEvent) e;
 			if ( ae.Active && canvas != null )
 				canvas.SetFocus();
 		}
@@ -464,11 +453,11 @@ struct ArrayList /* for .NET compatibility */
 	
 	//---------------------------------------------------------------------
 
-	public class MDI : App
+	public class MDI : wx.App
 	{
 		public override bool OnInit()
 		{
-			MyFrame.frame = new MyFrame( null, "MDI Demo", new_Point( -1, -1 ), new_Size( 500, 400 ) );
+			MyFrame.frame = new MyFrame( null, "MDI Demo", new Point( -1, -1 ), new Size( 500, 400 ) );
 			MyFrame.frame.Show( true );
 
 			return true;
@@ -476,16 +465,11 @@ struct ArrayList /* for .NET compatibility */
 
 		//---------------------------------------------------------------------
 
-		
+		[STAThread]
 		static void Main()
 		{
 			MDI app = new MDI();
 			app.Run();
 		}
 	}	
-
-
-void main()
-{
-	MDI.Main();
 }

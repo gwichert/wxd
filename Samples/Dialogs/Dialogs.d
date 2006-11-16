@@ -1,22 +1,21 @@
 //-----------------------------------------------------------------------------
-// wxD/Samples - Dialogs.d
+// wx.NET/Samples - Dialogs.cs
 //
-// A wxD version of the wxWidgets "dialogs" sample.
+// A wx.NET version of the wxWidgets "dialogs" sample.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
-// Modified by BERO <berobero@users.sourceforge.net>
 // (C) 2003 Bryan Bulten
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-import wx.wx;
-import std.string;
-import std.random;
-alias std.string.find indexOf;
-alias std.string.rfind LastIndexOf;
+using System;
+using System.Drawing;
+using System.IO;
 
+namespace wx.Samples
+{
 	public class MyFrame : Frame
 	{
 		enum Cmd 
@@ -47,49 +46,49 @@ alias std.string.rfind LastIndexOf;
 
 		//---------------------------------------------------------------------
 
-		public this(string title, Point pos, Size size)
+		public MyFrame(string title, Point pos, Size size)
+			: base(title, pos, size)
 		{
-			super(title, pos, size);
 			// Set the window icon
-			icon = new Icon("../Samples/Dialogs/mondrian.png");
+			Icon = new Icon("../Samples/Dialogs/mondrian.png");
 
 			// Set up a menu
 			Menu fileMenu = new Menu();
-			fileMenu.Append(Cmd.ChooseColour,	"&Choose Colour");
+			fileMenu.Append((int)Cmd.ChooseColour,	"&Choose Colour");
 			fileMenu.AppendSeparator();
-			fileMenu.Append(Cmd.ChooseFont, 	"Choose &Font");
+			fileMenu.Append((int)Cmd.ChooseFont, 	"Choose &Font");
 			fileMenu.AppendSeparator();
-			fileMenu.Append(Cmd.LogDialog, 	"&Log dialog\tCtrl-L");
-			fileMenu.Append(Cmd.MessageBox, 	"&Message Box\tCtrl-M");
-			fileMenu.Append(Cmd.TextEntry, 	"Text &entry\tCtrl-E");
-			fileMenu.Append(Cmd.PasswordEntry, 	"&Password entry\tCtrl-P");
-			fileMenu.Append(Cmd.NumEntry, 		"&Numeric entry\tCtrl-N");
-			fileMenu.Append(Cmd.SingleChoice, 	"&Single choice\tCtrl-C");
-			fileMenu.Append(Cmd.MultiChoice, 	"M&ultiple choice\tCtrl-U");
+			fileMenu.Append((int)Cmd.LogDialog, 	"&Log dialog\tCtrl-L");
+			fileMenu.Append((int)Cmd.MessageBox, 	"&Message Box\tCtrl-M");
+			fileMenu.Append((int)Cmd.TextEntry, 	"Text &entry\tCtrl-E");
+			fileMenu.Append((int)Cmd.PasswordEntry, 	"&Password entry\tCtrl-P");
+			fileMenu.Append((int)Cmd.NumEntry, 		"&Numeric entry\tCtrl-N");
+			fileMenu.Append((int)Cmd.SingleChoice, 	"&Single choice\tCtrl-C");
+			fileMenu.Append((int)Cmd.MultiChoice, 	"M&ultiple choice\tCtrl-U");
 			fileMenu.AppendSeparator();
-			fileMenu.Append(Cmd.Tip,		"&Tip of the day\tCtrl-T");
+			fileMenu.Append((int)Cmd.Tip,		"&Tip of the day\tCtrl-T");
 			fileMenu.AppendSeparator();
-			fileMenu.Append(Cmd.FileOpen, 		"&Open file\tCtrl-O");
-			fileMenu.Append(Cmd.FileOpen2, 	"&Second open file\tCtrl-2");
-			fileMenu.Append(Cmd.FilesOpen, 	"Open &files\tCtrl-Q");
-			fileMenu.Append(Cmd.FileSave, 		"Sa&ve file\tCtrl-S");
-			fileMenu.Append(Cmd.DirChoose, 	"Choose &Directory\tCtrl-D");
-			fileMenu.Append(Cmd.Progress, 		"Pro&gress dialog\tCtrl-G");
-			fileMenu.Append(Cmd.Busyinfo, 		"&Busy info dialog\tCtrl-B");
-			fileMenu.AppendCheckItem(Cmd.Find,	"&Find dialog\tCtrl-F", "");
-			fileMenu.AppendCheckItem(Cmd.Replace,	"Find and &replace dialog\tShift-Ctrl-F", "");
+			fileMenu.Append((int)Cmd.FileOpen, 		"&Open file\tCtrl-O");
+			fileMenu.Append((int)Cmd.FileOpen2, 	"&Second open file\tCtrl-2");
+			fileMenu.Append((int)Cmd.FilesOpen, 	"Open &files\tCtrl-Q");
+			fileMenu.Append((int)Cmd.FileSave, 		"Sa&ve file\tCtrl-S");
+			fileMenu.Append((int)Cmd.DirChoose, 	"Choose &Directory\tCtrl-D");
+			fileMenu.Append((int)Cmd.Progress, 		"Pro&gress dialog\tCtrl-G");
+			fileMenu.Append((int)Cmd.Busyinfo, 		"&Busy info dialog\tCtrl-B");
+			fileMenu.AppendCheckItem((int)Cmd.Find,	"&Find dialog\tCtrl-F", "");
+			fileMenu.AppendCheckItem((int)Cmd.Replace,	"Find and &replace dialog\tShift-Ctrl-F", "");
 			fileMenu.AppendSeparator();
-			fileMenu.Append(Cmd.Modal,	"Mo&dal dialog\tCtrl-W");
-			fileMenu.AppendCheckItem(Cmd.Modeless,	"Modeless &dialog\tCtrl-Z", "");
+			fileMenu.Append((int)Cmd.Modal,	"Mo&dal dialog\tCtrl-W");
+			fileMenu.AppendCheckItem((int)Cmd.Modeless,	"Modeless &dialog\tCtrl-Z", "");
 
 			fileMenu.AppendSeparator();
 
-			fileMenu.Append(Cmd.Exit, "E&xit\tAlt-X");
+			fileMenu.Append((int)Cmd.Exit, "E&xit\tAlt-X");
 
 			MenuBar menuBar = new MenuBar();
 			menuBar.Append(fileMenu, "&File");
 
-			this.menuBar = menuBar;
+			MenuBar = menuBar;
 
 			// Set up a status bar
 			CreateStatusBar();
@@ -98,55 +97,55 @@ alias std.string.rfind LastIndexOf;
 			canvas = new MyCanvas(this);
 
 			// Set up the event table
-			EVT_MENU(Cmd.ChooseColour,     &OnChooseColour);
-			EVT_MENU(Cmd.ChooseFont,       &OnChooseFont);
+			EVT_MENU((int)Cmd.ChooseColour,     new EventListener(OnChooseColour));
+			EVT_MENU((int)Cmd.ChooseFont,       new EventListener(OnChooseFont));
 
-			EVT_MENU(Cmd.DirChoose,        &OnDirChoose);
+			EVT_MENU((int)Cmd.DirChoose,        new EventListener(OnDirChoose));
 
-			EVT_MENU(Cmd.LogDialog,	&OnLogDialog);
-			EVT_MENU(Cmd.MessageBox,	&OnMessageBox);
-			EVT_MENU(Cmd.TextEntry,	&OnTextEntry);
-			EVT_MENU(Cmd.PasswordEntry,	&OnPasswordEntry);
-			EVT_MENU(Cmd.NumEntry,		&OnNumericEntry);
-			EVT_MENU(Cmd.SingleChoice,	&OnSingleChoice);
-			EVT_MENU(Cmd.MultiChoice,	&OnMultiChoice);
+			EVT_MENU((int)Cmd.LogDialog,	new EventListener(OnLogDialog));
+			EVT_MENU((int)Cmd.MessageBox,	new EventListener(OnMessageBox));
+			EVT_MENU((int)Cmd.TextEntry,	new EventListener(OnTextEntry));
+			EVT_MENU((int)Cmd.PasswordEntry,	new EventListener(OnPasswordEntry));
+			EVT_MENU((int)Cmd.NumEntry,		new EventListener(OnNumericEntry));
+			EVT_MENU((int)Cmd.SingleChoice,	new EventListener(OnSingleChoice));
+			EVT_MENU((int)Cmd.MultiChoice,	new EventListener(OnMultiChoice));
 
-			EVT_MENU(Cmd.Tip,		&OnTip);
+			EVT_MENU((int)Cmd.Tip,		new EventListener(OnTip));
 
-			EVT_MENU(Cmd.FileOpen,		&OnFileOpen);
-			EVT_MENU(Cmd.FileOpen2,	&OnFileOpen2);
-			EVT_MENU(Cmd.FilesOpen,	&OnFilesOpen);
-			EVT_MENU(Cmd.FileSave,		&OnFileSave);
-			EVT_MENU(Cmd.Progress,		&OnProgress);
-			EVT_MENU(Cmd.Busyinfo,		&OnBusyinfo);
-			EVT_MENU(Cmd.Find,		&OnFind);
-			EVT_MENU(Cmd.Replace,		&OnReplace);
-			EVT_MENU(Cmd.Modal,		&OnModal);
-			EVT_MENU(Cmd.Modeless,		&OnModeless);
+			EVT_MENU((int)Cmd.FileOpen,		new EventListener(OnFileOpen));
+			EVT_MENU((int)Cmd.FileOpen2,	new EventListener(OnFileOpen2));
+			EVT_MENU((int)Cmd.FilesOpen,	new EventListener(OnFilesOpen));
+			EVT_MENU((int)Cmd.FileSave,		new EventListener(OnFileSave));
+			EVT_MENU((int)Cmd.Progress,		new EventListener(OnProgress));
+			EVT_MENU((int)Cmd.Busyinfo,		new EventListener(OnBusyinfo));
+			EVT_MENU((int)Cmd.Find,		new EventListener(OnFind));
+			EVT_MENU((int)Cmd.Replace,		new EventListener(OnReplace));
+			EVT_MENU((int)Cmd.Modal,		new EventListener(OnModal));
+			EVT_MENU((int)Cmd.Modeless,		new EventListener(OnModeless));
 
-			EVT_FIND(-1,			&OnFindEvent);
-			EVT_FIND_NEXT(-1,			&OnFindEvent);
-			EVT_FIND_REPLACE(-1,		&OnFindEvent);
-			EVT_FIND_REPLACE_ALL(-1,		&OnFindEvent);
-			EVT_FIND_CLOSE(-1,			&OnFindEvent);
+			EVT_FIND(-1,			new EventListener(OnFindEvent));
+			EVT_FIND_NEXT(-1,			new EventListener(OnFindEvent));
+			EVT_FIND_REPLACE(-1,		new EventListener(OnFindEvent));
+			EVT_FIND_REPLACE_ALL(-1,		new EventListener(OnFindEvent));
+			EVT_FIND_CLOSE(-1,			new EventListener(OnFindEvent));
 
-			EVT_MENU(Cmd.Exit,             &OnExit);
+			EVT_MENU((int)Cmd.Exit,             new EventListener(OnExit));
 
 			m_findData = new FindReplaceData();
 		}
 
 		//---------------------------------------------------------------------
 
-		public void OnChooseColour(Object sender, Event e)
+		public void OnChooseColour(object sender, Event e)
 		{
 			ColourData data = new ColourData();
 
-			data.colour = canvas.BackgroundColour;
+			data.Colour = canvas.BackgroundColour;
 			data.ChooseFull = true;
 
 			for(int i = 0; i < 16; i++) 
 			{
-				ubyte rgb = cast(ubyte)(i * 16);
+				byte rgb = (byte)(i * 16);
 				Colour col = new Colour(rgb, rgb, rgb);
 				data.SetCustomColour(i, col);
 			}
@@ -156,41 +155,41 @@ alias std.string.rfind LastIndexOf;
 
 			if (cd.ShowModal() == wxID_OK) 
 			{
-				canvas.BackgroundColour = cd.colourData.colour;
+				canvas.BackgroundColour = cd.ColourData.Colour;
 				//canvas.Clear();
 				canvas.Refresh();
 			}
 		}
 
-		public void OnChooseFont(Object sender, Event e)
+		public void OnChooseFont(object sender, Event e)
 		{
 			FontData data = new FontData();
 			data.InitialFont = canvas.font;
-			data.colour = canvas.textColour;
+			data.Colour = canvas.textColour;
 
 			FontDialog fd = new FontDialog(this, data);
 
 			if (fd.ShowModal() == wxID_OK) 
 			{
-				canvas.font = fd.fontData.ChosenFont;
-				canvas.textColour = fd.fontData.colour;
+				canvas.font = fd.FontData.ChosenFont;
+				canvas.textColour = fd.FontData.Colour;
 				canvas.Refresh();
 			}
 		}
 
-		public void OnDirChoose(Object sender, Event e)
+		public void OnDirChoose(object sender, Event e)
 		{
-			string dirHome = std.file.getcwd();
+			string dirHome = Directory.GetCurrentDirectory();
 			DirDialog dlg = new DirDialog(this, "Testing directory picker",
 				dirHome);
 
 			if (dlg.ShowModal() == Dialog.wxID_OK) 
 			{
-				Log.LogMessage("Selected path: " ~ dlg.Path);
+				Log.LogMessage("Selected path: " + dlg.Path);
 			}
 		}
 
-		public void OnLogDialog(Object sender, Event e)
+		public void OnLogDialog(object sender, Event e)
 		{
 		{
 			BusyCursor bc = new BusyCursor();
@@ -198,7 +197,7 @@ alias std.string.rfind LastIndexOf;
 			Log.LogMessage("Another message...\n... this one is on multiple lines");
 			Log.LogWarning("And then something went wrong!");
 
-			//wxYield();
+			//Utils.wxYield();
 			bc.Dispose();
 		}
 
@@ -210,7 +209,7 @@ alias std.string.rfind LastIndexOf;
 			Log.LogMessage("And this is the same dialog but with only one message.");
 		}
 
-		public void OnMessageBox(Object sender, Event e)
+		public void OnMessageBox(object sender, Event e)
 		{
 			MessageDialog md = new MessageDialog(this, "This is a message box\nA long, long string to test out the message box properly",
 				"Message box text", Dialog.wxNO_DEFAULT|Dialog.wxYES_NO|Dialog.wxCANCEL|Dialog.wxICON_INFORMATION);
@@ -228,10 +227,10 @@ alias std.string.rfind LastIndexOf;
 			}
 		}
 
-		public void OnTextEntry(Object sender, Event e)
+		public void OnTextEntry(object sender, Event e)
 		{
 			TextEntryDialog ted = new TextEntryDialog(this,
-				"This is a small sample\n" ~
+				"This is a small sample\n" +
 				"A long, long string to test out the text entrybox",
 				"Please enter a string",
 				"Default value",
@@ -244,30 +243,30 @@ alias std.string.rfind LastIndexOf;
 			}
 		}
 
-		public void OnPasswordEntry(Object sender, Event e)
+		public void OnPasswordEntry(object sender, Event e)
 		{
-			string pwd = GetPasswordFromUser("Enter password:",
+			string pwd = new GetPasswordFromUser("Enter password:",
 				"Password entry dialog",
 				"",
 				this);
 
-			if (pwd.length > 0)
+			if (pwd.Length > 0)
 			{
-				MessageDialog md = new MessageDialog(this, "Your password is " ~ pwd, "Got password");
+				MessageDialog md = new MessageDialog(this, "Your password is "+pwd, "Got password");
 				md.ShowModal();
 			}
 		}
 
-		public void OnNumericEntry(Object sender, Event e)
+		public void OnNumericEntry(object sender, Event e)
 		{
-			int res = GetNumberFromUser( "This is some text, actually a lot of text.\n" ~
+			long res = GetNumberFromUser( "This is some text, actually a lot of text.\n" +
 				"Even two rows of text.",
 				"Enter a number:",
 				"Numeric input test",
 				50, 0, 100, this );
 
 			string msg;
-			int icon;
+			long icon;
 			if ( res == -1 )
 			{
 				msg = "Invalid number entered or dialog cancelled.";
@@ -275,7 +274,7 @@ alias std.string.rfind LastIndexOf;
 			}
 			else
 			{
-				msg = "You've entered " ~ .toString(res);
+				msg = "You've entered " + res;
 				icon = Dialog.wxICON_INFORMATION;
 			}
 
@@ -283,44 +282,44 @@ alias std.string.rfind LastIndexOf;
 			md.ShowModal();
 		}
 
-		public void OnSingleChoice(Object sender, Event e)
+		public void OnSingleChoice(object sender, Event e)
 		{
-			const string[] choices = [ "One", "Two", "Three", "Four", "Five"];
+			string[] choices = { "One", "Two", "Three", "Four", "Five"};
 
-			SingleChoiceDialog scd = new SingleChoiceDialog(this,"This is a small sample\n" ~
+			SingleChoiceDialog scd = new SingleChoiceDialog(this,"This is a small sample\n" +
 				"A single-choice dialog",
 				"Please select a value",
 				choices);
-			scd.Selection = 2;
+			scd.SetSelection(2);
 
 			if (scd.ShowModal() == wxID_OK)
 			{
-				MessageDialog md = new MessageDialog(this, scd.StringSelection(), "Got string");
+				MessageDialog md = new MessageDialog(this, scd.GetStringSelection(), "Got string");
 				md.ShowModal();
 			}
 		}
 
-		public void OnMultiChoice(Object sender, Event e)
+		public void OnMultiChoice(object sender, Event e)
 		{
 			// OnMultiChoice uses MultiChoiceDialog instead of GetMultipleChoices which isn't implemented yet
-			const string[] choices = [
+			string[] choices = new string[] {
 														  "One", "Two", "Three", "Four", "Five",
 														  "Six", "Seven", "Eight", "Nine", "Ten",
-														  "Eleven", "Twelve", "Seventeen" ];
+														  "Eleven", "Twelve", "Seventeen" };
 
-			MultiChoiceDialog mcd = new MultiChoiceDialog(this, "This is a small sample\n" ~
+			MultiChoiceDialog mcd = new MultiChoiceDialog(this, "This is a small sample\n" +
 				"A multi-choice convenience dialog",
 				"Please select a value",
 				choices);
 			if (mcd.ShowModal() == wxID_OK)
 			{
 				int[] selections = mcd.GetSelections();
-				int count = selections.length;
+				int count = selections.Length;
 				string msg;
-				msg = "You selected " ~ .toString(count) ~ " items:\n";
+				msg = "You selected " + count + " items:\n";
 				for (int n = 0; n < count; n++)
 				{
-					msg ~= "\t" ~ .toString(n) ~ ": " ~ .toString(selections[n]) ~ " (" ~ choices[selections[n]] ~ ")\n";
+					msg += "\t" + n + ": " + selections[n] + " (" + choices[selections[n]] + ")\n";
 				}
 
 				MessageDialog md = new MessageDialog(this, msg, "Information");
@@ -329,16 +328,16 @@ alias std.string.rfind LastIndexOf;
 
 		}
 
-		public void OnTip(Object sender, Event e)
+		public void OnTip(object sender, Event e)
 		{
 			// we have to use a IntPtr, class wxTipProvider is abstract and wxFileTipProvider private
-			IntPtr tp = TipProvider.CreateFileTipProvider("../Samples/Dialogs/tips.txt", std.random.rand());
+			IntPtr tp = TipProvider.CreateFileTipProvider("../Samples/Dialogs/tips.txt", new Random().Next());
 
 			bool showAtStartup = TipProvider.ShowTip(this, tp);
 
 			if ( showAtStartup )
 			{
-				MessageBox(this, "Will show tips on startup", "Tips dialog",
+				wx.MessageDialog.ShowModal(this, "Will show tips on startup", "Tips dialog",
 					Dialog.wxOK | Dialog.wxICON_INFORMATION);
 			}
 
@@ -346,7 +345,7 @@ alias std.string.rfind LastIndexOf;
 			int s_index = TipProvider.CurrentTip;
 		}
 
-		public void OnFileOpen(Object sender, Event e)
+		public void OnFileOpen(object sender, Event e)
 		{
 			FileDialog fd = new FileDialog(this,
 				"Testing open file dialog",
@@ -354,42 +353,42 @@ alias std.string.rfind LastIndexOf;
 				"",
 				"cs files (*.cs)|*.cs");
 
-			fd.Directory = GetHomeDir();
+			fd.Directory = Utils.GetHomeDir();
 
 			if (fd.ShowModal() == wxID_OK)
 			{
-				string info = "Full file name: " ~ fd.Path ~ "\n" ~
-					"Path: " ~ fd.Directory ~ "\n" ~
-					"Name: " ~ fd.Filename;
+				string info = "Full file name: " + fd.Path + "\n" +
+					"Path: " + fd.Directory + "\n" +
+					"Name: " + fd.Filename;
 				MessageDialog md = new MessageDialog(this, info, "Selected file");
 				md.ShowModal();
 			}
 		}
 
-		public void OnFileOpen2(Object sender, Event e)
+		public void OnFileOpen2(object sender, Event e)
 		{
-			string path = FileSelector( "Select the file to load",
+			string path = new FileSelector( "Select the file to load",
 				"", "", s_extDef,
 				"Waveform (*.wav)|*.wav|Plain text (*.txt)|*.txt|All files (*.*)|*.*",
-				FileDialog.wxCHANGE_DIR,
+				FileSelector.wxCHANGE_DIR,
 				this );
-			if (path.length == 0) return;
+			if (path.Length == 0) return;
 
-			s_extDef = path[path.LastIndexOf(".") + 1..path.length];
+			s_extDef = path.Substring(path.LastIndexOf(".") + 1);
 
 			MessageDialog md = new MessageDialog(this,
-				"You selected the file '" ~ path ~
-				"', remembered extension '" ~ s_extDef ~ "'",
+				"You selected the file '" + path +
+				"', remembered extension '" + s_extDef + "'",
 				"FileOpen2");
 			md.ShowModal();
 		}
 
-		public void OnFilesOpen(Object sender, Event e)
+		public void OnFilesOpen(object sender, Event e)
 		{
 			FileDialog fd = new FileDialog(this,
 				"Testing open multiple file dialog",
 				"", "", "*",
-				FileDialog.wxMULTIPLE);
+				FileDialogStyle.wxMULTIPLE);
 
 			if (fd.ShowModal() == wxID_OK)
 			{
@@ -398,10 +397,10 @@ alias std.string.rfind LastIndexOf;
 				filenames = fd.Filenames;
 
 				string msg = "";
-				for (int n = 0; n < paths.length; n++)
+				for (int n = 0; n < paths.Length; n++)
 				{
-					msg ~= "File " ~ .toString(n) ~ ": " ~ paths[n] ~ " " ~
-						" (" ~ filenames[n] ~ ")\n";
+					msg += "File " + n + ": " + paths[n] + " " +
+						" (" + filenames[n] + ")\n";
 				}
 
 				MessageDialog md = new MessageDialog(this, msg, "Selected files");
@@ -409,25 +408,25 @@ alias std.string.rfind LastIndexOf;
 			}
 		}
 
-		public void OnFileSave(Object sender, Event e)
+		public void OnFileSave(object sender, Event e)
 		{
 			FileDialog fd = new FileDialog(this,
 				"Testing save file dialog",
 				"",
 				"myletter.doc",
 				"Text files (*.txt)|*.txt|Document files (*.doc)|*.doc",
-				FileDialog.wxSAVE | FileDialog.wxOVERWRITE_PROMPT);
+				FileDialogStyle.wxSAVE | FileDialogStyle.wxOVERWRITE_PROMPT);
 
 			fd.FilterIndex = 1;
 
 			if (fd.ShowModal() == wxID_OK)
 			{
-				MessageDialog md = new MessageDialog(this, fd.Path ~ ", filter " ~ .toString(fd.FilterIndex), "FileSave");
+				MessageDialog md = new MessageDialog(this, fd.Path + ", filter " + fd.FilterIndex, "FileSave");
 				md.ShowModal();
 			}
 		}
 
-		public void OnProgress(Object sender, Event e)
+		public void OnProgress(object sender, Event e)
 		{
 			int max = 10;
 
@@ -438,7 +437,7 @@ alias std.string.rfind LastIndexOf;
 				this,
 				ProgressDialog.wxPD_CAN_ABORT |
 				ProgressDialog.wxPD_APP_MODAL |
-				// ProgressDialog.wxPD_AUTO_HIDE | -- try cast(well)this
+				// ProgressDialog.wxPD_AUTO_HIDE | -- try this as well
 				ProgressDialog.wxPD_ELAPSED_TIME |
 				ProgressDialog.wxPD_ESTIMATED_TIME |
 				ProgressDialog.wxPD_REMAINING_TIME);
@@ -446,7 +445,7 @@ alias std.string.rfind LastIndexOf;
 			bool cont = true;
 			for ( int i = 0; i <= max; i++)
 			{
-				wxSleep(1);
+				System.Threading.Thread.Sleep(1000);
 				if ( i == max )
 				{
 					cont = pd.Update(i, "That's all, folks!");
@@ -480,7 +479,7 @@ alias std.string.rfind LastIndexOf;
 			pd.Dispose();
 		}
 
-		public void OnBusyinfo(Object sender, Event e)
+		public void OnBusyinfo(object sender, Event e)
 		{
 			WindowDisabler disableAll = new WindowDisabler();
 
@@ -489,17 +488,17 @@ alias std.string.rfind LastIndexOf;
 			for ( int i = 0; i < 18; i++ )
 			{
 				App.GetApp().Yield();
-				// or wxYield();
+				// or Utils.wxYield();
 			}
 
-			wxSleep(1);
+			System.Threading.Thread.Sleep(1500);
 
 			// how can this be done automatically ???
 			disableAll.Dispose();
 			info.Dispose();
 		}
 
-		public void OnFind(Object sender, Event e)
+		public void OnFind(object sender, Event e)
 		{
 			m_dlgFind = new FindReplaceDialog(
 				this,
@@ -509,7 +508,7 @@ alias std.string.rfind LastIndexOf;
 			m_dlgFind.Show(true);
 		}
 
-		public void OnReplace(Object sender, Event e)
+		public void OnReplace(object sender, Event e)
 		{
 			m_dlgReplace = new FindReplaceDialog(
 				this,
@@ -521,22 +520,22 @@ alias std.string.rfind LastIndexOf;
 
 		public string DecodeFindDialogEventFlags(int flags)
 		{
-			string 	str = (((flags & FindReplaceDialog.wxFR_DOWN) != 0) ? "down" : "up") ~ ", " ~
-				(((flags & FindReplaceDialog.wxFR_WHOLEWORD) != 0) ? "whole words only, " : "") ~
-				(((flags & FindReplaceDialog.wxFR_MATCHCASE) != 0) ? "" : "not ") ~
+			string 	str = (((flags & FindReplaceDialog.wxFR_DOWN) != 0) ? "down" : "up") + ", " +
+				(((flags & FindReplaceDialog.wxFR_WHOLEWORD) != 0) ? "whole words only, " : "") +
+				(((flags & FindReplaceDialog.wxFR_MATCHCASE) != 0) ? "" : "not ") +
 				"case sensitive";
 
 			return str;
 		}
 
-		public void OnFindEvent(Object sender, Event e)
+		public void OnFindEvent(object sender, Event e)
 		{
-			FindDialogEvent fre= cast(FindDialogEvent)e;
-			int etype = fre.eventType;
+			FindDialogEvent fre= (FindDialogEvent)e;
+			int etype = fre.EventType;
 
 			if ( etype == Event.wxEVT_COMMAND_FIND   || etype == Event.wxEVT_COMMAND_FIND_NEXT )
 			{
-				Log.LogMessage("Find %s'%s' (flags: {%s})",
+				Log.LogMessage("Find {0}'{1}' (flags: {2})",
 					etype == Event.wxEVT_COMMAND_FIND_NEXT ? "next " : "",
 					fre.FindString,
 					DecodeFindDialogEventFlags(fre.Flags));
@@ -544,7 +543,7 @@ alias std.string.rfind LastIndexOf;
 			else if ( etype == Event.wxEVT_COMMAND_FIND_REPLACE ||
 				etype == Event.wxEVT_COMMAND_FIND_REPLACE_ALL )
 			{
-				Log.LogMessage("Replace %s'%s' with '%s' (flags: %s)",
+				Log.LogMessage("Replace {0}'{1}' with '{2}' (flags: {3})",
 					etype == Event.wxEVT_COMMAND_FIND_REPLACE_ALL ? "all " : "",
 					fre.FindString,
 					fre.ReplaceString,
@@ -559,13 +558,13 @@ alias std.string.rfind LastIndexOf;
 				if ( dlg == m_dlgFind )
 				{
 					txt = "Find";
-					idMenu = Cmd.Find;
+					idMenu = (int)Cmd.Find;
 					m_dlgFind = null;
 				}
 				else if ( dlg == m_dlgReplace )
 				{
 					txt = "Replace";
-					idMenu = Cmd.Replace;
+					idMenu = (int)Cmd.Replace;
 					m_dlgReplace = null;
 				}
 				else
@@ -577,11 +576,11 @@ alias std.string.rfind LastIndexOf;
 					Log.LogError("unexpected event");
 				}
 
-				Log.LogMessage("%s dialog is being closed.", txt);
+				Log.LogMessage("{0} dialog is being closed.", txt);
 
 				if ( idMenu != -1 )
 				{
-					menuBar.Check(idMenu, false);
+					MenuBar.Check(idMenu, false);
 				}
 
 				dlg.Destroy();
@@ -592,16 +591,16 @@ alias std.string.rfind LastIndexOf;
 			}
 		}
 
-		public void OnModal(Object sender, Event e)
+		public void OnModal(object sender, Event e)
 		{
 			MyModalDialog dlg = new MyModalDialog(this);
 			dlg.ShowModal();
 		}
 
-		public void OnModeless(Object sender, Event e)
+		public void OnModeless(object sender, Event e)
 		{
-			CommandEvent ce = cast(CommandEvent) e;
-			bool show = menuBar.IsChecked(ce.ID);
+			CommandEvent ce = (CommandEvent) e;
+			bool show = MenuBar.IsChecked(ce.ID);
 
 			if ( show )
 			{
@@ -616,7 +615,7 @@ alias std.string.rfind LastIndexOf;
 
 		//---------------------------------------------------------------------
 
-		public void OnExit(Object sender, Event e)
+		public void OnExit(object sender, Event e)
 		{
 			Close(true);
 		}
@@ -629,19 +628,19 @@ alias std.string.rfind LastIndexOf;
 		public Font font;
 		public Colour textColour;
 
-		public this(Window parent)
+		public MyCanvas(Window parent)
+			: base(parent)
 		{
-			super(parent);
 			font = Font.wxNORMAL_FONT;
 			textColour = new Colour(0, 0, 0);
 			
-			EVT_PAINT(&OnPaint);
+			EVT_PAINT(new EventListener(OnPaint));
 		}
 
-		public void OnPaint(Object sender, Event e)
+		public void OnPaint(object sender, Event e)
 		{
 			PaintDC dc = new PaintDC(this);
-			dc.font = font;
+			dc.Font = font;
 			dc.TextForeground = textColour;
 			dc.BackgroundMode = FillStyle.wxTRANSPARENT;
 			dc.DrawText("wxWidgets common dialogs test application", 10, 10);
@@ -658,12 +657,12 @@ alias std.string.rfind LastIndexOf;
 			DIALOG_MODELESS_BTN = 1
 		}
 
-		public this(Window parent)
+		public MyModelessDialog(Window parent)
+			: base(parent, -1, "Modeless dialog")
 		{
-			super(parent, -1, "Modeless dialog");
 			BoxSizer sizerTop = new BoxSizer(Orientation.wxVERTICAL);
 
-			Button btn = new Button(this, Id.DIALOG_MODELESS_BTN, "Press me");
+			Button btn = new Button(this, (int)Id.DIALOG_MODELESS_BTN, "Press me");
 			CheckBox check = new CheckBox(this, -1, "Should be disabled");
 			check.Disable();
 
@@ -676,17 +675,17 @@ alias std.string.rfind LastIndexOf;
 			sizerTop.SetSizeHints(this);
 			sizerTop.Fit(this);
 
-			EVT_BUTTON(Id.DIALOG_MODELESS_BTN, &OnButton);
-			EVT_CLOSE(&OnClose);
+			EVT_BUTTON((int)Id.DIALOG_MODELESS_BTN, new EventListener(OnButton));
+			EVT_CLOSE(new EventListener(OnClose));
 		}
 
-		public void OnButton(Object sender, Event e)
+		public void OnButton(object sender, Event e)
 		{
-			MessageBox(this, "Button pressed in modeless dialog", "Info",
+			wx.MessageDialog.ShowModal(this, "Button pressed in modeless dialog", "Info",
 				Dialog.wxOK | Dialog.wxICON_INFORMATION);
 		}
 
-		public void OnClose(Object sender, Event e)
+		public void OnClose(object sender, Event e)
 		{
 			// must add CloseEvent...
 			// must add Event.Veto
@@ -700,9 +699,9 @@ alias std.string.rfind LastIndexOf;
 		public Button m_btnFocused;
 		public Button m_btnDelete;
 
-		public this(Window parent)
+		public MyModalDialog(Window parent)
+			: base(parent, -1, "Modal dialog")
 		{
-			super(parent, -1, "Modal dialog");
 			BoxSizer sizerTop = new BoxSizer(Orientation.wxHORIZONTAL);
 
 			m_btnFocused = new Button(this, -1, "Default button");
@@ -721,12 +720,12 @@ alias std.string.rfind LastIndexOf;
 			m_btnFocused.SetFocus();
 			m_btnFocused.SetDefault();
 
-			EVT_BUTTON(-1, &OnButton);
+			EVT_BUTTON(-1, new EventListener(OnButton));
 		}
 
-		public void OnButton(Object sender, Event e)
+		public void OnButton(object sender, Event e)
 		{
-			CommandEvent ce = cast(CommandEvent) e;
+			CommandEvent ce = (CommandEvent) e;
 
 			if ( ce.EventObject == m_btnDelete )
 			{
@@ -736,7 +735,7 @@ alias std.string.rfind LastIndexOf;
 			}
 			else if (ce.EventObject == m_btnFocused )
 			{
-				GetTextFromUser("Dummy prompt",
+				new GetTextFromUser("Dummy prompt",
 					"Modal dialog called from dialog",
 					"", this);
 			}
@@ -754,7 +753,7 @@ alias std.string.rfind LastIndexOf;
 		public override bool OnInit()
 		{
 			MyFrame frame = new MyFrame("wxWidgets Dialogs Example",
-				new_Point(50,50), new_Size(450,340));
+				new Point(50,50), new Size(450,340));
 			frame.Show(true);
 
 			return true;
@@ -762,7 +761,7 @@ alias std.string.rfind LastIndexOf;
 
 		//---------------------------------------------------------------------
 
-		
+		[STAThread]
 		static void Main()
 		{
 			Dialogs app = new Dialogs();
@@ -771,8 +770,4 @@ alias std.string.rfind LastIndexOf;
 
 		//---------------------------------------------------------------------
 	}
-
-void main()
-{
-	Dialogs.Main();
 }

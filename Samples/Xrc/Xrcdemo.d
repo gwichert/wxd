@@ -1,58 +1,60 @@
 //-----------------------------------------------------------------------------
-// wxD/Samples - Xrcdemo.d
+// wx.NET/Samples - Xrcdemo.cs
 //
-// wxD "Xrcdemo" sample.
+// wx.NET "Xrcdemo" sample.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
-// Modified by BERO <berobero@users.sourceforge.net>
 // (C) 2004 Alexander Olk
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-import wx.wx;
+using System;
+using System.Drawing;
 
+namespace wx.Samples
+{
 	public class XrcFrame : Frame
 	{
-		public this()
-			{ this( null ); }
+		public XrcFrame()
+			: this( null ) {}
 			
-		public this( Window parent )			
+		public XrcFrame( Window parent )			
 		{
 			XmlResource.Get().LoadFrame( this, parent, "main_frame" );
 			
-			icon = new Icon( "../Samples/Xrc/rc/appicon.ico" );
+			Icon = new Icon( "../Samples/Xrc/rc/appicon.ico" );
 			
-			menuBar = XmlResource.Get().LoadMenuBar( "main_menu" );
+			MenuBar = XmlResource.Get().LoadMenuBar( "main_menu" );
 			
-			toolBar = XmlResource.Get().LoadToolBar( this, "main_toolbar" );
+			ToolBar = XmlResource.Get().LoadToolBar( this, "main_toolbar" );
 			
 			CreateStatusBar( 1 );
 			
-			EVT_MENU( XmlResource.XRCID( "exit_tool_or_menuitem" ), & OnExitToolOrMenuCommand ) ;
-			EVT_MENU( XmlResource.XRCID( "non_derived_dialog_tool_or_menuitem" ), & OnNonDerivedDialogToolOrMenuCommand ) ;
-			EVT_MENU( XmlResource.XRCID( "derived_tool_or_menuitem" ), & OnDerivedDialogToolOrMenuCommand ) ;
-			EVT_MENU( XmlResource.XRCID( "controls_tool_or_menuitem" ), & OnControlsToolOrMenuCommand ) ;
-			EVT_MENU( XmlResource.XRCID( "uncentered_tool_or_menuitem" ), & OnUncenteredToolOrMenuCommand ) ;
-			EVT_MENU( XmlResource.XRCID( "custom_class_tool_or_menuitem" ), & OnCustomClassToolOrMenuCommand ) ;
-			EVT_MENU( XmlResource.XRCID( "platform_property_tool_or_menuitem" ), & OnPlatformPropertyToolOrMenuCommand ) ;
-			EVT_MENU( XmlResource.XRCID( "art_provider_tool_or_menuitem" ), & OnArtProviderToolOrMenuCommand ) ;
-			EVT_MENU( XmlResource.XRCID( "variable_expansion_tool_or_menuitem" ), & OnVariableExpansionToolOrMenuCommand ) ;
-			EVT_MENU( XmlResource.XRCID( "wxglade_dialog_menuitem" ), & OnWxGladeMenu ) ;
-			EVT_MENU( XmlResource.XRCID( "about_tool_or_menuitem" ), & OnAboutToolOrMenuCommand ) ;
+			EVT_MENU( XmlResource.XRCID( "exit_tool_or_menuitem" ), new EventListener( OnExitToolOrMenuCommand ) );
+			EVT_MENU( XmlResource.XRCID( "non_derived_dialog_tool_or_menuitem" ), new EventListener( OnNonDerivedDialogToolOrMenuCommand ) );
+			EVT_MENU( XmlResource.XRCID( "derived_tool_or_menuitem" ), new EventListener( OnDerivedDialogToolOrMenuCommand ) );
+			EVT_MENU( XmlResource.XRCID( "controls_tool_or_menuitem" ), new EventListener( OnControlsToolOrMenuCommand ) );
+			EVT_MENU( XmlResource.XRCID( "uncentered_tool_or_menuitem" ), new EventListener( OnUncenteredToolOrMenuCommand ) );
+			EVT_MENU( XmlResource.XRCID( "custom_class_tool_or_menuitem" ), new EventListener( OnCustomClassToolOrMenuCommand ) );
+			EVT_MENU( XmlResource.XRCID( "platform_property_tool_or_menuitem" ), new EventListener( OnPlatformPropertyToolOrMenuCommand ) );
+			EVT_MENU( XmlResource.XRCID( "art_provider_tool_or_menuitem" ), new EventListener( OnArtProviderToolOrMenuCommand ) );
+			EVT_MENU( XmlResource.XRCID( "variable_expansion_tool_or_menuitem" ), new EventListener( OnVariableExpansionToolOrMenuCommand ) );
+			EVT_MENU( XmlResource.XRCID( "wxglade_dialog_menuitem" ), new EventListener( OnWxGladeMenu ) );
+			EVT_MENU( XmlResource.XRCID( "about_tool_or_menuitem" ), new EventListener( OnAboutToolOrMenuCommand ) );
 		}
 		
 		//---------------------------------------------------------------------	
 		
-		public void OnExitToolOrMenuCommand( Object sender, Event e )
+		public void OnExitToolOrMenuCommand( object sender, Event e )
 		{
 			Close(true);
 		}
 		
 		//---------------------------------------------------------------------	
 		
-		public void OnNonDerivedDialogToolOrMenuCommand( Object sender, Event e )
+		public void OnNonDerivedDialogToolOrMenuCommand( object sender, Event e )
 		{
 			Dialog dlg = XmlResource.Get().LoadDialog(this, "non_derived_dialog" ); 
 			
@@ -61,7 +63,7 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------	
 		
-		public void OnDerivedDialogToolOrMenuCommand( Object sender, Event e )
+		public void OnDerivedDialogToolOrMenuCommand( object sender, Event e )
 		{
 			PreferencesDialog preferencesDialog = new PreferencesDialog( this );
 			
@@ -70,7 +72,7 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------	
 		
-		public void OnWxGladeMenu( Object sender, Event e )
+		public void OnWxGladeMenu( object sender, Event e )
 		{
 		
 			/*Dialog dlg = XmlResource.Get().LoadDialog(this, "wxglade_dialog" ); 
@@ -84,20 +86,20 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------	
 		
-		public void OnControlsToolOrMenuCommand( Object sender, Event e )
+		public void OnControlsToolOrMenuCommand( object sender, Event e )
 		{
 			Dialog dlg = XmlResource.Get().LoadDialog(this, "controls_dialog" );
 			
 			//ListCtrl lc = (ListCtrl)dlg.FindWindow( XmlResource.XRCID( "controls_listctrl" ), typeof( ListCtrl) );
 			
-			ListCtrl lc = cast(ListCtrl)XmlResource.XRCCTRL( dlg, "controls_listctrl", &ListCtrl.New );
+			ListCtrl lc = (ListCtrl)XmlResource.XRCCTRL( dlg, "controls_listctrl", typeof( ListCtrl ) );
 			
 			lc.InsertColumn( 0, "Name", ListCtrl.wxLIST_FORMAT_LEFT, 200);
 			lc.InsertItem( 0, "Todd Hope" );
 			lc.InsertItem( 1, "Kim Wynd" );
 			lc.InsertItem( 2, "Leon Li" );
 			
-			TreeCtrl treectrl = cast(TreeCtrl)XmlResource.XRCCTRL(  dlg, "controls_treectrl", &TreeCtrl.New );
+			TreeCtrl treectrl = (TreeCtrl)XmlResource.XRCCTRL(  dlg, "controls_treectrl", typeof( TreeCtrl ) );
 			
 			treectrl.AddRoot( "Godfather" );
 			
@@ -110,7 +112,7 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------	
 		
-		public void OnUncenteredToolOrMenuCommand( Object sender, Event e )
+		public void OnUncenteredToolOrMenuCommand( object sender, Event e )
 		{
 			Dialog dlg = XmlResource.Get().LoadDialog( this, "uncentered_dialog" );
 			dlg.ShowModal();
@@ -118,7 +120,7 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------	
 		
-		public void OnCustomClassToolOrMenuCommand( Object sender, Event e )
+		public void OnCustomClassToolOrMenuCommand( object sender, Event e )
 		{
 			Dialog dlg = XmlResource.Get().LoadDialog( this, "custom_class_dialog" );
 			
@@ -136,7 +138,7 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------	
 		
-		public void OnPlatformPropertyToolOrMenuCommand( Object sender, Event e )
+		public void OnPlatformPropertyToolOrMenuCommand( object sender, Event e )
 		{
 			Dialog dlg = XmlResource.Get().LoadDialog( this, "platform_property_dialog" );
 			dlg.ShowModal();
@@ -144,7 +146,7 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------	
 		
-		public void OnArtProviderToolOrMenuCommand( Object sender, Event e )
+		public void OnArtProviderToolOrMenuCommand( object sender, Event e )
 		{
 			Dialog dlg = XmlResource.Get().LoadDialog( this, "art_provider_dialog" );
 			dlg.ShowModal();
@@ -152,7 +154,7 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------	
 		
-		public void OnVariableExpansionToolOrMenuCommand( Object sender, Event e )
+		public void OnVariableExpansionToolOrMenuCommand( object sender, Event e )
 		{
 			Dialog dlg = XmlResource.Get().LoadDialog( this, "variable_expansion_dialog" );
 			dlg.ShowModal();
@@ -160,11 +162,11 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------	
 		
-		public void OnAboutToolOrMenuCommand( Object sender, Event e )
+		public void OnAboutToolOrMenuCommand( object sender, Event e )
 		{
-			string msg = "This is the about dialog of XML resources demo.\n" 
-					"Ported to D by BERO";
-			MessageBox( this, msg, "About XML resources demo", Dialog.wxOK | Dialog.wxICON_INFORMATION );
+			string msg = "This is the about dialog of XML resources demo.\n" +
+					"Ported to wx.NET by Alexander Olk";
+			MessageDialog.ShowModal( this, msg, "About XML resources demo", Dialog.wxOK | Dialog.wxICON_INFORMATION );
 		}
 	}   
 	
@@ -172,34 +174,34 @@ import wx.wx;
 	
 	public class PreferencesDialog : Dialog
 	{
-		public this( Window parent )
+		public PreferencesDialog( Window parent )
 		{
 			XmlResource.Get().LoadDialog( this, parent, "derived_dialog" );
 		
-			EVT_BUTTON( XmlResource.XRCID( "my_button" ), & OnMyButtonClicked ) ;
-			EVT_UPDATE_UI( XmlResource.XRCID( "my_checkbox" ), & OuUpdateUIMyCheckbox ) ;
-			EVT_BUTTON( wxID_OK, & OnOK ) ;
+			EVT_BUTTON( XmlResource.XRCID( "my_button" ), new EventListener( OnMyButtonClicked ) );
+			EVT_UPDATE_UI( XmlResource.XRCID( "my_checkbox" ), new EventListener( OuUpdateUIMyCheckbox ) );
+			EVT_BUTTON( wxID_OK, new EventListener( OnOK ) );
 		}
 		
 		//---------------------------------------------------------------------	
 		
-		public void OnMyButtonClicked( Object sender, Event e )
+		public void OnMyButtonClicked( object sender, Event e )
 		{
-			MessageBox( this, "You cliecked on My Button", "", Dialog.wxOK  | Dialog.wxICON_INFORMATION );
+			MessageDialog.ShowModal( this, "You cliecked on My Button", "", Dialog.wxOK  | Dialog.wxICON_INFORMATION );
 		}
 		
 		//---------------------------------------------------------------------	
 		
-		public void OuUpdateUIMyCheckbox( Object sender, Event e )
+		public void OuUpdateUIMyCheckbox( object sender, Event e )
 		{
-			 bool myCheckBoxIsChecked = ( cast(CheckBox)XmlResource.XRCCTRL(  this, "my_checkbox", &CheckBox.New ) ).IsChecked;
+			 bool myCheckBoxIsChecked = ( (CheckBox)XmlResource.XRCCTRL(  this, "my_checkbox", typeof( CheckBox ) ) ).IsChecked;
 			 
-			 ( cast(TextCtrl)XmlResource.XRCCTRL( this, "my_textctrl", &TextCtrl.New ) ).Enable( myCheckBoxIsChecked );
+			 ( (TextCtrl)XmlResource.XRCCTRL( this, "my_textctrl", typeof( TextCtrl ) ) ).Enable( myCheckBoxIsChecked );
 		}
 		
 		//---------------------------------------------------------------------	
 		
-		public void OnOK( Object sender, Event e )
+		public void OnOK( object sender, Event e )
 		{
 			MessageDialog md = new MessageDialog( this, "Press OK to close Derived dialog, or Cancel to abort",
 					"Overriding base class OK button handler", Dialog.wxOK | Dialog.wxCANCEL | Dialog.wxCENTER );
@@ -221,33 +223,33 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------	
 	
-		public this( Window parent, int id, Point pos, Size size, long style, Validator validator)
+		public MyResizableListCtrl( Window parent, int id, Point pos, Size size, long style, Validator validator)
+			: base( parent, id, pos, size, style, validator, "myResizableListCtrl" )
 		{
-			super( parent, id, pos, size, style, validator, "myResizableListCtrl" );
-			InsertColumn( COL.RECORD_COLUMN, "Record", ListCtrl.wxLIST_FORMAT_LEFT, 140 );
-			InsertColumn( COL.ACTION_COLUMN, "Action", ListCtrl.wxLIST_FORMAT_LEFT, 70 );
-			InsertColumn( COL.PRIORITY_COLUMN, "Priority", ListCtrl.wxLIST_FORMAT_LEFT, 70 );
+			InsertColumn( (int)COL.RECORD_COLUMN, "Record", ListCtrl.wxLIST_FORMAT_LEFT, 140 );
+			InsertColumn( (int)COL.ACTION_COLUMN, "Action", ListCtrl.wxLIST_FORMAT_LEFT, 70 );
+			InsertColumn( (int)COL.PRIORITY_COLUMN, "Priority", ListCtrl.wxLIST_FORMAT_LEFT, 70 );
 			
-			EVT_RIGHT_DOWN( & ContextSensitiveMenu ) ;
-			EVT_SIZE( & OnSize ) ;
+			EVT_RIGHT_DOWN( new EventListener( ContextSensitiveMenu ) );
+			EVT_SIZE( new EventListener( OnSize ) );
 		}
 		
 		//---------------------------------------------------------------------	
 		
-		public void ContextSensitiveMenu( Object sender, Event e )
+		public void ContextSensitiveMenu( object sender, Event e )
 		{
-			MouseEvent me = cast(MouseEvent) e;
+			MouseEvent me = (MouseEvent) e;
 		
 			Menu a_menu = new Menu();
 			
-			a_menu.Append( Cmd.PU_ADD_RECORD, "Add a new record" );
-			a_menu.Append( Cmd.PU_EDIT_RECORD, "Edit selected record..." );
-			a_menu.Append( Cmd.PU_DELETE_RECORD, "Delete selected record" );
+			a_menu.Append( (int)Cmd.PU_ADD_RECORD, "Add a new record" );
+			a_menu.Append( (int)Cmd.PU_EDIT_RECORD, "Edit selected record..." );
+			a_menu.Append( (int)Cmd.PU_DELETE_RECORD, "Delete selected record" );
 			
 			if ( SelectedItemCount == 0 )
 			{
-				a_menu.Enable( Cmd.PU_EDIT_RECORD, false );
-				a_menu.Enable( Cmd.PU_DELETE_RECORD, false );
+				a_menu.Enable( (int)Cmd.PU_EDIT_RECORD, false );
+				a_menu.Enable( (int)Cmd.PU_DELETE_RECORD, false );
 			}
 			
 			PopupMenu( a_menu, me.Position );
@@ -255,7 +257,7 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------	
 		
-		protected void OnSize( Object sender, Event e )
+		protected void OnSize( object sender, Event e )
 		{
 			SetColumnWidths();
 			e.Skip();
@@ -267,12 +269,12 @@ import wx.wx;
 		{
 			int leftmostColumnWidth = Size.Width;
 			
-			leftmostColumnWidth -= GetColumnWidth( COL.ACTION_COLUMN );
-			leftmostColumnWidth -= GetColumnWidth( COL.PRIORITY_COLUMN );
+			leftmostColumnWidth -= GetColumnWidth( (int)COL.ACTION_COLUMN );
+			leftmostColumnWidth -= GetColumnWidth( (int)COL.PRIORITY_COLUMN );
 			leftmostColumnWidth -= SystemSettings.GetMetric( SystemMetric.wxSYS_VSCROLL_X );
 			leftmostColumnWidth -= 5;
 			
-			SetColumnWidth( COL.RECORD_COLUMN, leftmostColumnWidth );
+			SetColumnWidth( (int)COL.RECORD_COLUMN, leftmostColumnWidth );
 		}
 	}
 	
@@ -280,16 +282,16 @@ import wx.wx;
 	
 	public class wxGladeDialog : Dialog
 	{
-		public this( Window parent )
+		public wxGladeDialog( Window parent )
 		{
 			XmlResource.Get().LoadDialog( this, parent, "wxglade_dialog" );
 		
-			EVT_BUTTON( wxID_OK, & OnOK ) ;
+			EVT_BUTTON( wxID_OK, new EventListener( OnOK ) );
 		}
 		
 		//---------------------------------------------------------------------	
 		
-		public void OnOK( Object sender, Event e)
+		public void OnOK( object sender, Event e)
 		{
 			Close();
 		}
@@ -339,7 +341,7 @@ import wx.wx;
 
 		//---------------------------------------------------------------------
 
-		
+		[STAThread]
 		static void Main()
 		{
 			Xrcdemo app = new Xrcdemo();			
@@ -348,8 +350,4 @@ import wx.wx;
 
 		//---------------------------------------------------------------------
 	}
-
-void main()
-{
-	Xrcdemo.Main();
 }

@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - scrolledwindow.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - scrolledwindow.cxx
 //
 // The wxScrolledWindow proxy interface.
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/scrolwin.h>
 #include "local_events.h"
 
@@ -28,6 +24,8 @@ public:
 		: wxScrolledWindow(parent, id, pos, size, style, name) { }
 
     DECLARE_OBJECTDELETED(_ScrolledWindow)
+    
+#include "panel.inc"
 };
 
 //-----------------------------------------------------------------------------
@@ -35,7 +33,7 @@ public:
 
 extern "C" WXEXPORT
 wxScrolledWindow* wxScrollWnd_ctor(wxWindow *parent, wxWindowID id, const wxPoint* pos,
-					               const wxSize* size, long style, dstr name)
+					               const wxSize* size, long style, const char* name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -43,10 +41,10 @@ wxScrolledWindow* wxScrollWnd_ctor(wxWindow *parent, wxWindowID id, const wxPoin
 	if (size == NULL)
 		size = &wxDefaultSize;
 
-	if (name.data==NULL)
-		name = dstr("scrolled",sizeof("scrolled")-1);
+	if (name == NULL)
+		name = "scrolled";
 
-	return new _ScrolledWindow(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
+	return new _ScrolledWindow(parent, id, *pos, *size, style, wxString(name, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------

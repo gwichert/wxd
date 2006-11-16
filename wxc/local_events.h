@@ -35,6 +35,7 @@ public:
 
 DECLARE_EVENT_TYPE(wxEVT_APPINIT, 0)
 DECLARE_EVENT_TYPE(wxEVT_TRANSFERDATAFROMWINDOW, 0)
+DECLARE_EVENT_TYPE(wxEVT_TRANSFERDATATOWINDOW, 0)
 DECLARE_EVENT_TYPE(wxEVT_OBJECTDELETED, 0)
 
 // Short-cut for virtual destructors
@@ -51,18 +52,18 @@ DECLARE_EVENT_TYPE(wxEVT_OBJECTDELETED, 0)
 
 // Calls a delegate when an object is deleted internally.
 
-#if 0 //defined(_WINDOWS)
+#if defined(_WINDOWS)
 #define CALLBACK __stdcall
 #else
 #define CALLBACK
 #endif
 
-typedef void (CALLBACK* Virtual_Dispose)(void* obj);
+typedef void (CALLBACK* Virtual_Dispose)();
 
 #define DECLARE_DISPOSABLE(name) \
     void RegisterDispose(Virtual_Dispose onDispose) { m_onDispose = onDispose; } \
-    virtual ~name() { m_onDispose(this); } \
+    virtual ~name() { m_onDispose(); } \
     Virtual_Dispose m_onDispose;
-
+    
 #endif
 

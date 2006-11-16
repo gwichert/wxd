@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - NotebookSizer.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - NotebookSizer.cs
 //
 // The wxNotebookSizer proxy interface.
@@ -13,54 +10,59 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.NotebookSizer;
-import wx.common;
-import wx.Sizer;
-import wx.Notebook;
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
-		static extern (C) IntPtr wxNotebookSizer_ctor(IntPtr nb);
-		static extern (C) void wxNotebookSizer_RecalcSizes(IntPtr self);
-		static extern (C) void wxNotebookSizer_CalcMin(IntPtr self, inout Size size);
-		static extern (C) IntPtr wxNotebookSizer_GetNotebook(IntPtr self);
+namespace wx
+{
+	public class NotebookSizer : Sizer
+	{
+		[DllImport("wx-c")] static extern IntPtr wxNotebookSizer_ctor(IntPtr nb);
+		[DllImport("wx-c")] static extern void wxNotebookSizer_RecalcSizes(IntPtr self);
+		[DllImport("wx-c")] static extern void wxNotebookSizer_CalcMin(IntPtr self, ref Size size);
+		[DllImport("wx-c")] static extern IntPtr wxNotebookSizer_GetNotebook(IntPtr self);
 
 		//---------------------------------------------------------------------
 
-	public class NotebookSizer : Sizer
-	{
-		public this(IntPtr wxobj)
+		public NotebookSizer(IntPtr wxObject)
+			: base(wxObject)
 		{
-			super(wxobj);
 		}
 
-		public this(Notebook nb)
+		public NotebookSizer(Notebook nb)
+			: base(wxNotebookSizer_ctor(Object.SafePtr(nb)))
 		{
-			super(wxNotebookSizer_ctor(wxObject.SafePtr(nb)));
 		}
 
 		//---------------------------------------------------------------------
 
 		public override void RecalcSizes()
 		{
-			wxNotebookSizer_RecalcSizes(wxobj);
+			wxNotebookSizer_RecalcSizes(wxObject);
 		}
 
 		//---------------------------------------------------------------------
 
 		public override Size CalcMin()
 		{
-			Size size;
-			wxNotebookSizer_CalcMin(wxobj, size);
+			Size size = new Size();
+			wxNotebookSizer_CalcMin(wxObject, ref size);
 			return size;
 		}
 
 		//---------------------------------------------------------------------
 
-		public Notebook notebook() 
+		public Notebook Notebook
+		{
+			get
 			{
-				return cast(Notebook)FindObject(
-                                    wxNotebookSizer_GetNotebook(wxobj)
+				return (Notebook)FindObject(
+                                    wxNotebookSizer_GetNotebook(wxObject)
                                 );
 			}
+		}
 
 		//---------------------------------------------------------------------
 	}
+}

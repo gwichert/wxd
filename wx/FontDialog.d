@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - Fontdlg.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - Fontdlg.cs
 // 
 // The wxFontDialog wrapper class.
@@ -13,127 +10,143 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.FontDialog;
-import wx.common;
-import wx.Dialog;
-import wx.Font;
-import wx.GdiCommon; //for nullobject
+using System;
+using System.Runtime.InteropServices;
 
-		static extern (C) IntPtr wxFontData_ctor();
-		static extern (C) void   wxFontData_dtor(IntPtr self);
-
-		static extern (C) void   wxFontData_SetAllowSymbols(IntPtr self, bool flag);
-		static extern (C) bool   wxFontData_GetAllowSymbols(IntPtr self);
-
-		static extern (C) void   wxFontData_SetColour(IntPtr self, IntPtr colour);
-		static extern (C) IntPtr wxFontData_GetColour(IntPtr self);
-
-		static extern (C) void   wxFontData_SetShowHelp(IntPtr self, bool flag);
-		static extern (C) bool   wxFontData_GetShowHelp(IntPtr self);
-
-		static extern (C) void   wxFontData_EnableEffects(IntPtr self, bool flag);
-		static extern (C) bool   wxFontData_GetEnableEffects(IntPtr self);
-
-		static extern (C) void   wxFontData_SetInitialFont(IntPtr self, IntPtr font);
-		static extern (C) IntPtr wxFontData_GetInitialFont(IntPtr self);
-
-		static extern (C) void   wxFontData_SetChosenFont(IntPtr self, IntPtr font);
-		static extern (C) IntPtr wxFontData_GetChosenFont(IntPtr self);
-
-		static extern (C) void   wxFontData_SetRange(IntPtr self, int minRange, int maxRange);
-
-        //---------------------------------------------------------------------
-
-    public class FontData : wxObject
+namespace wx
+{
+    public class FontData : Object
     {
-        public this(IntPtr wxobj) 
-            { super(wxobj); }
+        [DllImport("wx-c")] static extern IntPtr wxFontData_ctor();
+		[DllImport("wx-c")] static extern void   wxFontData_dtor(IntPtr self);
 
-        public this()
-            { super(wxFontData_ctor()); }
+		[DllImport("wx-c")] static extern void   wxFontData_SetAllowSymbols(IntPtr self, bool flag);
+		[DllImport("wx-c")] static extern bool   wxFontData_GetAllowSymbols(IntPtr self);
+
+		[DllImport("wx-c")] static extern void   wxFontData_SetColour(IntPtr self, IntPtr colour);
+		[DllImport("wx-c")] static extern IntPtr wxFontData_GetColour(IntPtr self);
+
+		[DllImport("wx-c")] static extern void   wxFontData_SetShowHelp(IntPtr self, bool flag);
+		[DllImport("wx-c")] static extern bool   wxFontData_GetShowHelp(IntPtr self);
+
+		[DllImport("wx-c")] static extern void   wxFontData_EnableEffects(IntPtr self, bool flag);
+		[DllImport("wx-c")] static extern bool   wxFontData_GetEnableEffects(IntPtr self);
+
+		[DllImport("wx-c")] static extern void   wxFontData_SetInitialFont(IntPtr self, IntPtr font);
+		[DllImport("wx-c")] static extern IntPtr wxFontData_GetInitialFont(IntPtr self);
+
+		[DllImport("wx-c")] static extern void   wxFontData_SetChosenFont(IntPtr self, IntPtr font);
+		[DllImport("wx-c")] static extern IntPtr wxFontData_GetChosenFont(IntPtr self);
+
+		[DllImport("wx-c")] static extern void   wxFontData_SetRange(IntPtr self, int minRange, int maxRange);
 
         //---------------------------------------------------------------------
 
-        public bool AllowSymbols() { return wxFontData_GetAllowSymbols(wxobj); }
-        public void AllowSymbols(bool value) { wxFontData_SetAllowSymbols(wxobj, value); }
+        public FontData(IntPtr wxObject) 
+            : base(wxObject) { }
+
+        public FontData()
+            : base(wxFontData_ctor()) { }
 
         //---------------------------------------------------------------------
 
-        public bool EffectsEnabled() { return wxFontData_GetEnableEffects(wxobj); }
-        public void EffectsEnabled(bool value) { wxFontData_EnableEffects(wxobj, value); }
+        public bool AllowSymbols
+        {
+            get { return wxFontData_GetAllowSymbols(wxObject); }
+            set { wxFontData_SetAllowSymbols(wxObject, value); }
+        }
 
         //---------------------------------------------------------------------
 
-        public bool ShowHelp() { return wxFontData_GetShowHelp(wxobj); }
-        public void ShowHelp(bool value) { wxFontData_SetShowHelp(wxobj, value); }
+        public bool EffectsEnabled
+        {
+            get { return wxFontData_GetEnableEffects(wxObject); }
+            set { wxFontData_EnableEffects(wxObject, value); }
+        }
 
         //---------------------------------------------------------------------
 
-        public Colour colour() 
+        public bool ShowHelp
+        {
+            get { return wxFontData_GetShowHelp(wxObject); }
+            set { wxFontData_SetShowHelp(wxObject, value); }
+        }
+
+        //---------------------------------------------------------------------
+
+        public Colour Colour
+        {
+            get 
             {
-                return new Colour(wxFontData_GetColour(wxobj), true);
+                return new Colour(wxFontData_GetColour(wxObject), true);
             }
-        public void colour(Colour value) 
+            set 
             {
-                wxFontData_SetColour(wxobj, wxObject.SafePtr(value)); 
+                wxFontData_SetColour(wxObject, Object.SafePtr(value)); 
             }
+        }
 
         //---------------------------------------------------------------------
         
-        public Font InitialFont() 
+        public Font InitialFont
+        {
+            get
             {
-                return new Font(wxFontData_GetInitialFont(wxobj));
+                return new Font(wxFontData_GetInitialFont(wxObject));
             }
-        public void InitialFont(Font value) 
+            set
             {
-                wxFontData_SetInitialFont(wxobj, wxObject.SafePtr(value));
+                wxFontData_SetInitialFont(wxObject, Object.SafePtr(value));
             }
+        }
 
         //---------------------------------------------------------------------
 
-        public Font ChosenFont() 
+        public Font ChosenFont
+        {
+            get
             {
-                return new Font(wxFontData_GetChosenFont(wxobj));
+                return new Font(wxFontData_GetChosenFont(wxObject));
             }
-        public void ChosenFont(Font value) 
+            set
             {
-                wxFontData_SetChosenFont(wxobj, wxObject.SafePtr(value));
+                wxFontData_SetChosenFont(wxObject, Object.SafePtr(value));
             }
+        }
 
         //---------------------------------------------------------------------
 
         public void SetRange(int min, int max)
         {
-            wxFontData_SetRange(wxobj, min, max);
+            wxFontData_SetRange(wxObject, min, max);
         }
 
         //---------------------------------------------------------------------
-	public static wxObject New(IntPtr ptr) { return new FontData(ptr); }
     }
-
-		static extern (C) IntPtr wxFontDialog_ctor();
-		static extern (C) bool   wxFontDialog_Create(IntPtr self, IntPtr parent, IntPtr data);
-		static extern (C) void   wxFontDialog_dtor(IntPtr self);
-
-		static extern (C) int    wxFontDialog_ShowModal(IntPtr self);
-		static extern (C) IntPtr wxFontDialog_GetFontData(IntPtr self);
-
-        //---------------------------------------------------------------------
 
 	public class FontDialog : Dialog
 	{
-        public this(IntPtr wxobj)
-            { super(wxobj); }
+		[DllImport("wx-c")] static extern IntPtr wxFontDialog_ctor();
+		[DllImport("wx-c")] static extern bool   wxFontDialog_Create(IntPtr self, IntPtr parent, IntPtr data);
+		[DllImport("wx-c")] static extern void   wxFontDialog_dtor(IntPtr self);
 
-        public this()
-            { super(wxFontDialog_ctor()); }
+		[DllImport("wx-c")] static extern int    wxFontDialog_ShowModal(IntPtr self);
+		[DllImport("wx-c")] static extern IntPtr wxFontDialog_GetFontData(IntPtr self);
 
-        public this(Window parent)
-            { this(parent, null); }
+        //---------------------------------------------------------------------
 
-        public this(Window parent, FontData data)
+        public FontDialog(IntPtr wxObject)
+            : base(wxObject) { }
+
+        public FontDialog()
+            : base(wxFontDialog_ctor()) { }
+
+        public FontDialog(Window parent)
+            : this(parent, null) { }
+
+        public FontDialog(Window parent, FontData data)
+            : this()
         {
-        	this();
             if (!Create(parent, data)) 
             {
                 throw new InvalidOperationException("Failed to create FontDialog");
@@ -142,29 +155,28 @@ import wx.GdiCommon; //for nullobject
 
         public bool Create(Window parent, FontData data)
         {
-            return wxFontDialog_Create(wxobj, wxObject.SafePtr(parent), wxObject.SafePtr(data));
+            return wxFontDialog_Create(wxObject, Object.SafePtr(parent), Object.SafePtr(data));
         }
 
         //---------------------------------------------------------------------
 
-        public FontData fontData() 
+        public FontData FontData
         {
-            return cast(FontData)FindObject(wxFontDialog_GetFontData(wxobj), &FontData.New);
+            get
+            {
+                IntPtr ptr = wxFontDialog_GetFontData(wxObject);
+                return (FontData)FindObject(ptr, typeof(FontData));
+            }
         }
 
         //---------------------------------------------------------------------
 
         public override int ShowModal()
         {
-            return wxFontDialog_ShowModal(wxobj);
+            return wxFontDialog_ShowModal(wxObject);
         }
 
         //---------------------------------------------------------------------
 	}
 
-	extern (C) IntPtr wxGetFontFromUser_func(IntPtr parent, IntPtr fontInit);
-
-	Font GetFontFromUser(Window parent,Font fontInit=null)
-	{
-		return new Font(wxGetFontFromUser_func(wxObject.SafePtr(parent),wxObject.SafePtr(fontInit)));
-	}
+}

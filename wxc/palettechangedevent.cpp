@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - palettechangedevent.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - palettechangedevent.cxx
 // 
 // The wxPaletteChangedEvent proxy interface.
@@ -14,14 +11,13 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxPaletteChangedEvent* wxPaletteChangedEvent_ctor(wxWindowID winid)
+wxPaletteChangedEvent* wxPaletteChangedEvent_ctor(wxEventType type)
 {
-    return new wxPaletteChangedEvent(winid);
+    return new wxPaletteChangedEvent(type);
 }
 
 extern "C" WXEXPORT

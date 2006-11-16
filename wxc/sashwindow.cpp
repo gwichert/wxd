@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - sashwindow.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - sashwindow.cxx
 // 
 // The wxSashWindow proxy interface.
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/sashwin.h>
 #include "local_events.h"
 
@@ -80,7 +76,7 @@ wxSashWindow* wxSashWindow_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxSashWindow_Create(wxSashWindow* self, wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, int style, dstr name)
+bool wxSashWindow_Create(wxSashWindow* self, wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, int style, const char* name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -88,10 +84,10 @@ bool wxSashWindow_Create(wxSashWindow* self, wxWindow* parent, wxWindowID id, co
 	if (size == NULL)
 		size = &wxDefaultSize;
 		
-	if (name.data==NULL)
-		name = dstr("sashwindow",sizeof("sashwindow")-1);
+	if (name == NULL)
+		name = "sashwindow";
 		
-	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, *pos, *size, style, wxString(name, wxConvUTF8))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -288,4 +284,4 @@ wxSashDragStatus wxSashEvent_GetDragStatus(wxSashEvent* self)
 }
 
 
-extern "C" WXEXPORT int wxEvent_EVT_SASH_DRAGGED()			{ return wxEVT_SASH_DRAGGED; }
+

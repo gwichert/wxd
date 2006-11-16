@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - PrintPreview.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - PrintPreview.cs
 //
 // The wxPrintPreview wrapper class.
@@ -13,239 +10,274 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.PrintPreview;
-import wx.common;
-import wx.Panel;
-import wx.Frame;
-import wx.ScrolledWindow;
-import wx.PrintData;
-import wx.Printer;
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
-        static extern (C) IntPtr wxPrintPreview_ctor(IntPtr printout, IntPtr printoutForPrinting, IntPtr data);
-        static extern (C) IntPtr wxPrintPreview_ctorPrintData(IntPtr printout, IntPtr printoutForPrinting, IntPtr data);
-        static extern (C) bool   wxPrintPreview_SetCurrentPage(IntPtr self, int pageNum);
-        static extern (C) int    wxPrintPreview_GetCurrentPage(IntPtr self);
-        static extern (C) void   wxPrintPreview_SetPrintout(IntPtr self, IntPtr printout);
-        static extern (C) IntPtr wxPrintPreview_GetPrintout(IntPtr self);
-        static extern (C) IntPtr wxPrintPreview_GetPrintoutForPrinting(IntPtr self);
-        static extern (C) void   wxPrintPreview_SetFrame(IntPtr self, IntPtr frame);
-        static extern (C) void   wxPrintPreview_SetCanvas(IntPtr self, IntPtr canvas);
-        static extern (C) IntPtr wxPrintPreview_GetFrame(IntPtr self);
-        static extern (C) IntPtr wxPrintPreview_GetCanvas(IntPtr self);
-        static extern (C) bool   wxPrintPreview_PaintPage(IntPtr self, IntPtr canvas, IntPtr dc);
-        static extern (C) bool   wxPrintPreview_DrawBlankPage(IntPtr self, IntPtr canvas, IntPtr dc);
-        static extern (C) bool   wxPrintPreview_RenderPage(IntPtr self, int pageNum);
-        static extern (C) IntPtr wxPrintPreview_GetPrintDialogData(IntPtr self);
-        static extern (C) void   wxPrintPreview_SetZoom(IntPtr self, int percent);
-        static extern (C) int    wxPrintPreview_GetZoom(IntPtr self);
-        static extern (C) int    wxPrintPreview_GetMaxPage(IntPtr self);
-        static extern (C) int    wxPrintPreview_GetMinPage(IntPtr self);
-        static extern (C) bool   wxPrintPreview_Ok(IntPtr self);
-        static extern (C) void   wxPrintPreview_SetOk(IntPtr self, bool ok);
-        static extern (C) bool   wxPrintPreview_Print(IntPtr self, bool interactive);
-        static extern (C) void   wxPrintPreview_DetermineScaling(IntPtr self);
+namespace wx
+{
+    public class PrintPreview : Object
+    {
+        [DllImport("wx-c")] static extern IntPtr wxPrintPreview_ctor(IntPtr printout, IntPtr printoutForPrinting, IntPtr data);
+        [DllImport("wx-c")] static extern IntPtr wxPrintPreview_ctorPrintData(IntPtr printout, IntPtr printoutForPrinting, IntPtr data);
+        [DllImport("wx-c")] static extern bool   wxPrintPreview_SetCurrentPage(IntPtr self, int pageNum);
+        [DllImport("wx-c")] static extern int    wxPrintPreview_GetCurrentPage(IntPtr self);
+        [DllImport("wx-c")] static extern void   wxPrintPreview_SetPrintout(IntPtr self, IntPtr printout);
+        [DllImport("wx-c")] static extern IntPtr wxPrintPreview_GetPrintout(IntPtr self);
+        [DllImport("wx-c")] static extern IntPtr wxPrintPreview_GetPrintoutForPrinting(IntPtr self);
+        [DllImport("wx-c")] static extern void   wxPrintPreview_SetFrame(IntPtr self, IntPtr frame);
+        [DllImport("wx-c")] static extern void   wxPrintPreview_SetCanvas(IntPtr self, IntPtr canvas);
+        [DllImport("wx-c")] static extern IntPtr wxPrintPreview_GetFrame(IntPtr self);
+        [DllImport("wx-c")] static extern IntPtr wxPrintPreview_GetCanvas(IntPtr self);
+        [DllImport("wx-c")] static extern bool   wxPrintPreview_PaintPage(IntPtr self, IntPtr canvas, IntPtr dc);
+        [DllImport("wx-c")] static extern bool   wxPrintPreview_DrawBlankPage(IntPtr self, IntPtr canvas, IntPtr dc);
+        [DllImport("wx-c")] static extern bool   wxPrintPreview_RenderPage(IntPtr self, int pageNum);
+        [DllImport("wx-c")] static extern IntPtr wxPrintPreview_GetPrintDialogData(IntPtr self);
+        [DllImport("wx-c")] static extern void   wxPrintPreview_SetZoom(IntPtr self, int percent);
+        [DllImport("wx-c")] static extern int    wxPrintPreview_GetZoom(IntPtr self);
+        [DllImport("wx-c")] static extern int    wxPrintPreview_GetMaxPage(IntPtr self);
+        [DllImport("wx-c")] static extern int    wxPrintPreview_GetMinPage(IntPtr self);
+        [DllImport("wx-c")] static extern bool   wxPrintPreview_Ok(IntPtr self);
+        [DllImport("wx-c")] static extern void   wxPrintPreview_SetOk(IntPtr self, bool ok);
+        [DllImport("wx-c")] static extern bool   wxPrintPreview_Print(IntPtr self, bool interactive);
+        [DllImport("wx-c")] static extern void   wxPrintPreview_DetermineScaling(IntPtr self);
 
         //-----------------------------------------------------------------------------
 
-    public class PrintPreview : wxObject
-    {
-        private this(IntPtr wxobj)
-            { super(wxobj); }
+        internal PrintPreview(IntPtr wxObject)
+            : base(wxObject) { }
 
-        public this(Printout printout, Printout printoutForPrinting, PrintDialogData data)
-            { this(wxPrintPreview_ctor(wxObject.SafePtr(printout), wxObject.SafePtr(printoutForPrinting), wxObject.SafePtr(data))); }
+        public PrintPreview(Printout printout, Printout printoutForPrinting, PrintDialogData data)
+            : this(wxPrintPreview_ctor(Object.SafePtr(printout), Object.SafePtr(printoutForPrinting), Object.SafePtr(data))) { }
 
-        public this(Printout printout, Printout printoutForPrinting)
-            { this(printout, printoutForPrinting, cast(PrintData)null); }
-        public this(Printout printout, Printout printoutForPrinting, PrintData data)
-            { this(wxPrintPreview_ctor(wxObject.SafePtr(printout), wxObject.SafePtr(printoutForPrinting), wxObject.SafePtr(data))); }
+        public PrintPreview(Printout printout, Printout printoutForPrinting)
+            : this(printout, printoutForPrinting, (PrintData)null) { }
+        public PrintPreview(Printout printout, Printout printoutForPrinting, PrintData data)
+            : this(wxPrintPreview_ctor(Object.SafePtr(printout), Object.SafePtr(printoutForPrinting), Object.SafePtr(data))) { }
 
-	public static wxObject New(IntPtr ptr) { return new PrintPreview(ptr); }
         //-----------------------------------------------------------------------------
 
         public bool SetCurrentPage(int pageNum)
         {
-            return wxPrintPreview_SetCurrentPage(wxobj, pageNum);
+            return wxPrintPreview_SetCurrentPage(wxObject, pageNum);
         }
 
-        public int CurrentPage() { return wxPrintPreview_GetCurrentPage(wxobj); }
-        public void CurrentPage(int value) { SetCurrentPage(value); }
-
-        //-----------------------------------------------------------------------------
-
-        public void printout(Printout value) { wxPrintPreview_SetPrintout(wxobj, wxObject.SafePtr(value)); }
-        public Printout printout() { return cast(Printout)FindObject(wxPrintPreview_GetPrintout(wxobj)/*, &Printout.New*/); }
-
-        //-----------------------------------------------------------------------------
-
-        public Printout PrintoutForPrinting() { return cast(Printout)FindObject(wxPrintPreview_GetPrintoutForPrinting(wxobj)/*, &Printout.New*/); }
-
-        //-----------------------------------------------------------------------------
-
-        public void frame(Frame value) { wxPrintPreview_SetFrame(wxobj, wxObject.SafePtr(value)); }
-        public Frame frame() { return cast(Frame)FindObject(wxPrintPreview_GetFrame(wxobj), &Frame.New); }
-
-        //-----------------------------------------------------------------------------
-
-        public Window Canvas() { return cast(Window)FindObject(wxPrintPreview_GetCanvas(wxobj), &Window.New); }
-        public void Canvas(Window value) { wxPrintPreview_SetCanvas(wxobj, wxObject.SafePtr(value)); }
-
-        //-----------------------------------------------------------------------------
-
-        public bool PaintPage(Window canvas, inout DC dc)
+        public int CurrentPage
         {
-            return wxPrintPreview_PaintPage(wxobj, wxObject.SafePtr(canvas), wxObject.SafePtr(dc));
+            get { return wxPrintPreview_GetCurrentPage(wxObject); }
+            set { SetCurrentPage(value); }
         }
 
         //-----------------------------------------------------------------------------
 
-        public bool DrawBlankPage(Window canvas, inout DC dc)
+        public Printout Printout
         {
-            return wxPrintPreview_DrawBlankPage(wxobj, wxObject.SafePtr(canvas), wxObject.SafePtr(dc));
+            set { wxPrintPreview_SetPrintout(wxObject, Object.SafePtr(value)); }
+            get { return (Printout)FindObject(wxPrintPreview_GetPrintout(wxObject), typeof(Printout)); }
+        }
+
+        //-----------------------------------------------------------------------------
+
+        public Printout PrintoutForPrinting
+        {
+            get { return (Printout)FindObject(wxPrintPreview_GetPrintoutForPrinting(wxObject), typeof(Printout)); }
+        }
+
+        //-----------------------------------------------------------------------------
+
+        public Frame Frame
+        {
+            set { wxPrintPreview_SetFrame(wxObject, Object.SafePtr(value)); }
+            get { return (Frame)FindObject(wxPrintPreview_GetFrame(wxObject), typeof(Frame)); }
+        }
+
+        //-----------------------------------------------------------------------------
+
+        public Window Canvas
+        {
+            get { return (Window)FindObject(wxPrintPreview_GetCanvas(wxObject), typeof(Window)); }
+            set { wxPrintPreview_SetCanvas(wxObject, Object.SafePtr(value)); }
+        }
+
+        //-----------------------------------------------------------------------------
+
+        public bool PaintPage(Window canvas, ref DC dc)
+        {
+            return wxPrintPreview_PaintPage(wxObject, Object.SafePtr(canvas), Object.SafePtr(dc));
+        }
+
+        //-----------------------------------------------------------------------------
+
+        public bool DrawBlankPage(Window canvas, ref DC dc)
+        {
+            return wxPrintPreview_DrawBlankPage(wxObject, Object.SafePtr(canvas), Object.SafePtr(dc));
         }
 
         //-----------------------------------------------------------------------------
 
         public bool RenderPage(int pageNum)
         {
-            return wxPrintPreview_RenderPage(wxobj, pageNum);
+            return wxPrintPreview_RenderPage(wxObject, pageNum);
         }
 
         //-----------------------------------------------------------------------------
 
-        public PrintDialogData printDialogData() { return cast(PrintDialogData)FindObject(wxPrintPreview_GetPrintDialogData(wxobj), &PrintDialogData.New); }
+        public PrintDialogData PrintDialogData
+        {
+            get { return (PrintDialogData)FindObject(wxPrintPreview_GetPrintDialogData(wxObject), typeof(PrintDialogData)); }
+        }
 
         //-----------------------------------------------------------------------------
 
-        public void Zoom(int value) { wxPrintPreview_SetZoom(wxobj, value); }
-        public int Zoom() { return wxPrintPreview_GetZoom(wxobj); }
+        public int Zoom
+        {
+            set { wxPrintPreview_SetZoom(wxObject, value); }
+            get { return wxPrintPreview_GetZoom(wxObject); }
+        }
 
         //-----------------------------------------------------------------------------
 
-        public int MaxPage() { return wxPrintPreview_GetMaxPage(wxobj); }
+        public int MaxPage
+        {
+            get { return wxPrintPreview_GetMaxPage(wxObject); }
+        }
 
-        public int MinPage() { return wxPrintPreview_GetMinPage(wxobj); }
+        public int MinPage
+        {
+            get { return wxPrintPreview_GetMinPage(wxObject); }
+        }
 
         //-----------------------------------------------------------------------------
 
-        public bool Ok() { return wxPrintPreview_Ok(wxobj); }
-        public void Ok(bool value) { wxPrintPreview_SetOk(wxobj, value); }
+        public bool Ok
+        {
+            get { return wxPrintPreview_Ok(wxObject); }
+            set { wxPrintPreview_SetOk(wxObject, value); }
+        }
 
         //-----------------------------------------------------------------------------
 
         public bool Print(bool interactive)
         {
-            return wxPrintPreview_Print(wxobj, interactive);
+            return wxPrintPreview_Print(wxObject, interactive);
         }
 
         //-----------------------------------------------------------------------------
 
         public void DetermineScaling()
         {
-            wxPrintPreview_DetermineScaling(wxobj);
+            wxPrintPreview_DetermineScaling(wxObject);
         }
     }
 
-        static extern (C) IntPtr wxPreviewFrame_ctor(IntPtr preview, IntPtr parent, string title, inout Point pos, inout Size size, uint style, string name);
-        static extern (C) void   wxPreviewFrame_Initialize(IntPtr self);
-        static extern (C) void   wxPreviewFrame_CreateCanvas(IntPtr self);
-        static extern (C) void   wxPreviewFrame_CreateControlBar(IntPtr self);
+    public class PreviewFrame : Frame
+    {
+        [DllImport("wx-c")] static extern IntPtr wxPreviewFrame_ctor(IntPtr preview, IntPtr parent, string title, ref Point pos, ref Size size, uint style, string name);
+        [DllImport("wx-c")] static extern void   wxPreviewFrame_Initialize(IntPtr self);
+        [DllImport("wx-c")] static extern void   wxPreviewFrame_CreateCanvas(IntPtr self);
+        [DllImport("wx-c")] static extern void   wxPreviewFrame_CreateControlBar(IntPtr self);
 
         //-----------------------------------------------------------------------------
 
-    public class PreviewFrame : Frame
-    {
-        private this(IntPtr wxobj) 
-            { super(wxobj); }
+        internal PreviewFrame(IntPtr wxObject) 
+            : base(wxObject) { }
 
-        public this(PrintPreview preview, Window parent, string title = "Print Preview", Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = wxDEFAULT_FRAME_STYLE, string name = "frame")
-            { this(wxPreviewFrame_ctor(wxObject.SafePtr(preview), wxObject.SafePtr(parent), title, pos, size, cast(uint)style, name)); }
+        public PreviewFrame(PrintPreview preview, Frame parent, string title)
+            : this(preview, parent, title, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, "PreviewFrame") { }
+        public PreviewFrame(PrintPreview preview, Frame parent, string title, Point pos)
+            : this(preview, parent, title, pos, wxDefaultSize, wxDEFAULT_FRAME_STYLE, "PreviewFrame") { }
+        public PreviewFrame(PrintPreview preview, Frame parent, string title, Point pos, Size size)
+            : this(preview, parent, title, pos, size, wxDEFAULT_FRAME_STYLE, "PreviewFrame") { }
+        public PreviewFrame(PrintPreview preview, Frame parent, string title, Point pos, Size size, long style)
+            : this(preview, parent, title, pos, size, style, "PreviewFrame") { }
+        public PreviewFrame(PrintPreview preview, Frame parent, string title, Point pos, Size size, long style, string name)
+            : this(wxPreviewFrame_ctor(Object.SafePtr(preview), Object.SafePtr(parent), title, ref pos, ref size, (uint)style, name)) { }
 
         //-----------------------------------------------------------------------------
 
         public void Initialize()
         {
-            wxPreviewFrame_Initialize(wxobj);
+            wxPreviewFrame_Initialize(wxObject);
         }
 
         //-----------------------------------------------------------------------------
 
         public void CreateCanvas()
         {
-            wxPreviewFrame_CreateCanvas(wxobj);
+            wxPreviewFrame_CreateCanvas(wxObject);
         }
 
         //-----------------------------------------------------------------------------
 
         public void CreateControlBar()
         {
-            wxPreviewFrame_CreateControlBar(wxobj);
+            wxPreviewFrame_CreateControlBar(wxObject);
         }
     }
 
-        static extern (C) IntPtr wxPreviewControlBar_ctor(IntPtr preview, int buttons, IntPtr parent, inout Point pos, inout Size size, uint style, string name);
-        static extern (C) void   wxPreviewControlBar_CreateButtons(IntPtr self);
-        static extern (C) void   wxPreviewControlBar_SetZoomControl(IntPtr self, int zoom);
-        static extern (C) int    wxPreviewControlBar_GetZoomControl(IntPtr self);
-        static extern (C) IntPtr wxPreviewControlBar_GetPrintPreview(IntPtr self);
+    public class PreviewControlBar : Panel
+    {
+        [DllImport("wx-c")] static extern IntPtr wxPreviewControlBar_ctor(IntPtr preview, int buttons, IntPtr parent, ref Point pos, ref Size size, uint style, string name);
+        [DllImport("wx-c")] static extern void   wxPreviewControlBar_CreateButtons(IntPtr self);
+        [DllImport("wx-c")] static extern void   wxPreviewControlBar_SetZoomControl(IntPtr self, int zoom);
+        [DllImport("wx-c")] static extern int    wxPreviewControlBar_GetZoomControl(IntPtr self);
+        [DllImport("wx-c")] static extern IntPtr wxPreviewControlBar_GetPrintPreview(IntPtr self);
 
         //-----------------------------------------------------------------------------
 
-    public class PreviewControlBar : Panel
-    {
-        const int wxPREVIEW_PRINT       =  1;
-        const int wxPREVIEW_PREVIOUS    =  2;
-        const int wxPREVIEW_NEXT        =  4;
-        const int wxPREVIEW_ZOOM        =  8;
-        const int wxPREVIEW_FIRST       = 16;
-        const int wxPREVIEW_LAST        = 32;
-        const int wxPREVIEW_GOTO        = 64;
+        internal PreviewControlBar(IntPtr wxObject)
+            : base(wxObject) { }
 
-        const int wxPREVIEW_DEFAULT     = wxPREVIEW_PREVIOUS|wxPREVIEW_NEXT|wxPREVIEW_ZOOM
-                          |wxPREVIEW_FIRST|wxPREVIEW_GOTO|wxPREVIEW_LAST;
-
-        // Ids for controls
-        const int wxID_PREVIEW_CLOSE      = 1;
-        const int wxID_PREVIEW_NEXT       = 2;
-        const int wxID_PREVIEW_PREVIOUS   = 3;
-        const int wxID_PREVIEW_PRINT      = 4;
-        const int wxID_PREVIEW_ZOOM       = 5;
-        const int wxID_PREVIEW_FIRST      = 6;
-        const int wxID_PREVIEW_LAST       = 7;
-        const int wxID_PREVIEW_GOTO       = 8;
-    
-        private this(IntPtr wxobj)
-            { super(wxobj); }
-
-        public this(PrintPreview preview, int buttons, Window parent, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=wxTAB_TRAVERSAL, string name="panel")
-            { this(wxPreviewControlBar_ctor(wxObject.SafePtr(preview), buttons, wxObject.SafePtr(parent), pos, size, cast(uint)style, name)); }
+        public PreviewControlBar(PrintPreview preview, int buttons, Window parent)
+            : this(preview, buttons, parent, wxDefaultPosition, wxDefaultSize, 0, "PreviewControlBar") { }
+        public PreviewControlBar(PrintPreview preview, int buttons, Window parent, Point pos)
+            : this(preview, buttons, parent, pos, wxDefaultSize, 0, "PreviewControlBar") { }
+        public PreviewControlBar(PrintPreview preview, int buttons, Window parent, Point pos, Size size)
+            : this(preview, buttons, parent, pos, size, 0, "PreviewControlBar") { }
+        public PreviewControlBar(PrintPreview preview, int buttons, Window parent, Point pos, Size size, long style)
+            : this(preview, buttons, parent, pos, size, style, "PreviewControlBar") { }
+        public PreviewControlBar(PrintPreview preview, int buttons, Window parent, Point pos, Size size, long style, string name)
+            : this(wxPreviewControlBar_ctor(Object.SafePtr(preview), buttons, Object.SafePtr(parent), ref pos, ref size, (uint)style, name)) { }
 
         //-----------------------------------------------------------------------------
 
         public void CreateButtons()
         {
-            wxPreviewControlBar_CreateButtons(wxobj);
+            wxPreviewControlBar_CreateButtons(wxObject);
         }
 
         //-----------------------------------------------------------------------------
 
-        public int ZoomControl() { return wxPreviewControlBar_GetZoomControl(wxobj); }
-        public void ZoomControl(int value) { wxPreviewControlBar_SetZoomControl(wxobj, value); }
+        public int ZoomControl
+        {
+            get { return wxPreviewControlBar_GetZoomControl(wxObject); }
+            set { wxPreviewControlBar_SetZoomControl(wxObject, value); }
+        }
 
         //-----------------------------------------------------------------------------
 
-        public PrintPreview printPreview() { return cast(PrintPreview)FindObject(wxPreviewControlBar_GetPrintPreview(wxobj), &PrintPreview.New); }
+        public PrintPreview PrintPreview
+        {
+            get { return (PrintPreview)FindObject(wxPreviewControlBar_GetPrintPreview(wxObject), typeof(PrintPreview)); }
+        }
     }
-
-        static extern (C) IntPtr wxPreviewCanvas_ctor(IntPtr preview, IntPtr parent, inout Point pos, inout Size size, uint style, string name);
-
-        //-----------------------------------------------------------------------------
 
     public class PreviewCanvas : ScrolledWindow
     {
-        private this(IntPtr wxobj) 
-            { super(wxobj); }
+        [DllImport("wx-c")] static extern IntPtr wxPreviewCanvas_ctor(IntPtr preview, IntPtr parent, ref Point pos, ref Size size, uint style, string name);
 
-        public this(PrintPreview preview, Window parent, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, string name = "canvas")
-            { this(wxPreviewCanvas_ctor(wxObject.SafePtr(preview), wxObject.SafePtr(parent), pos, size, cast(uint)style, name)); }
+        //-----------------------------------------------------------------------------
+
+        internal PreviewCanvas(IntPtr wxObject) 
+            : base(wxObject) { }
+
+        public PreviewCanvas(PrintPreview preview, Window parent)
+            : this(preview, parent, wxDefaultPosition, wxDefaultSize, 0, "PreviewCanvas") { }
+        public PreviewCanvas(PrintPreview preview, Window parent, Point pos)
+            : this(preview, parent, pos, wxDefaultSize, 0, "PreviewCanvas") { }
+        public PreviewCanvas(PrintPreview preview, Window parent, Point pos, Size size, long style)
+            : this(preview, parent, pos, size, style, "PreviewCanvas") { }
+        public PreviewCanvas(PrintPreview preview, Window parent, Point pos, Size size, long style, string name)
+            : this(wxPreviewCanvas_ctor(Object.SafePtr(preview), Object.SafePtr(parent), ref pos, ref size, (uint)style, name)) { }
     }
+}

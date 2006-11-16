@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - IdleEvent.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - IdleEvent.cs
 //
 // The wxIdleEvent wrapper class.
@@ -13,11 +10,11 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.IdleEvent;
-import wx.common;
-import wx.Event;
-import wx.Window;
+using System;
+using System.Runtime.InteropServices;
 
+namespace wx
+{
 	public enum IdleMode
 	{
 		wxIDLE_PROCESS_ALL,
@@ -26,23 +23,23 @@ import wx.Window;
 	
 	//-----------------------------------------------------------------------------
 
-		static extern (C) IntPtr wxIdleEvent_ctor();
-		static extern (C) void   wxIdleEvent_RequestMore(IntPtr self, bool needMore);
-		static extern (C) bool   wxIdleEvent_MoreRequested(IntPtr self);
+	public class IdleEvent : Event
+	{
+		[DllImport("wx-c")] static extern IntPtr wxIdleEvent_ctor();
+		[DllImport("wx-c")] static extern void   wxIdleEvent_RequestMore(IntPtr self, bool needMore);
+		[DllImport("wx-c")] static extern bool   wxIdleEvent_MoreRequested(IntPtr self);
 		
-		static extern (C) void   wxIdleEvent_SetMode(IdleMode mode);
-		static extern (C) IdleMode wxIdleEvent_GetMode();
-		static extern (C) bool   wxIdleEvent_CanSend(IntPtr win);
+		[DllImport("wx-c")] static extern void   wxIdleEvent_SetMode(IdleMode mode);
+		[DllImport("wx-c")] static extern IdleMode wxIdleEvent_GetMode();
+		[DllImport("wx-c")] static extern bool   wxIdleEvent_CanSend(IntPtr win);
 		
 		//-----------------------------------------------------------------------------
 
-	public class IdleEvent : Event
-	{
-		public this(IntPtr wxobj) 
-			{ super(wxobj); }
+		public IdleEvent(IntPtr wxObject) 
+			: base(wxObject) { }
 
-		public this()
-			{ this(wxIdleEvent_ctor()); }
+		public IdleEvent()
+			: this(wxIdleEvent_ctor()) { }
 
 		//-----------------------------------------------------------------------------	
 		
@@ -53,32 +50,29 @@ import wx.Window;
 		
 		public void RequestMore(bool needMore)
 		{
-			wxIdleEvent_RequestMore(wxobj, needMore);
+			wxIdleEvent_RequestMore(wxObject, needMore);
 		}
 		
 		//-----------------------------------------------------------------------------	
 		
 		public bool MoreRequested()
 		{
-			return wxIdleEvent_MoreRequested(wxobj);
+			return wxIdleEvent_MoreRequested(wxObject);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
-		static IdleMode Mode() { return wxIdleEvent_GetMode(); }
-		static void Mode(IdleMode value) { wxIdleEvent_SetMode(value); }
+		public static IdleMode Mode
+		{
+			get { return wxIdleEvent_GetMode(); }
+			set { wxIdleEvent_SetMode(value); }
+		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public static bool CanSend(Window win)
 		{
-			return wxIdleEvent_CanSend(wxObject.SafePtr(win));
-		}
-
-		private static Event New(IntPtr obj) { return new IdleEvent(obj); }
-
-		static this()
-		{
-			AddEventType(wxEVT_IDLE, 				&IdleEvent.New);
+			return wxIdleEvent_CanSend(Object.SafePtr(win));
 		}
 	}
+}

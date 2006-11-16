@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - commandevent.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - commandevent.cxx
 //
 // The wxCommandEvent proxy interface.
@@ -14,14 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
-
-
-extern "C" WXEXPORT
-wxCommandEvent* wxCommandEvent_ctor(wxEventType type, int winid)
-{
-    return new wxCommandEvent(type,winid);
-}
 
 //-----------------------------------------------------------------------------
 
@@ -34,15 +23,15 @@ int wxCommandEvent_GetSelection(wxCommandEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxCommandEvent_GetString(wxCommandEvent* self)
+const wxString* wxCommandEvent_GetString(wxCommandEvent* self)
 {
-	return dstr_ret(self->GetString());
+	return new wxString(self->GetString());
 }
 
 extern "C" WXEXPORT
-void wxCommandEvent_SetString(wxCommandEvent* self, dstr s)
+void wxCommandEvent_SetString(wxCommandEvent* self, const char* s)
 {
-	self->SetString(wxString(s.data, wxConvUTF8, s.length));
+	self->SetString(wxString(s, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------

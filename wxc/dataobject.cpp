@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - dataobj.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - dataobj.cxx
 //
 // The wxDataObject proxy interface.
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/dataobj.h>
 #include "local_events.h"
 
@@ -147,9 +143,9 @@ public:
 };
 
 extern "C" WXEXPORT
-wxTextDataObject* wxTextDataObject_ctor(dstr text)
+wxTextDataObject* wxTextDataObject_ctor(char * text)
 {
-	return new _TextDataObject(wxString(text.data, wxConvUTF8, text.length));
+	return new _TextDataObject(wxString(text, wxConvUTF8));
 }
 
 extern "C" WXEXPORT
@@ -172,15 +168,15 @@ size_t wxTextDataObject_GetTextLength(wxTextDataObject* self)
 }
 
 extern "C" WXEXPORT
-dstrret wxTextDataObject_GetText(wxTextDataObject* self)
+wxString* wxTextDataObject_GetText(wxTextDataObject* self)
 {
-	return dstr_ret(self->GetText().c_str());
+	return new wxString(self->GetText().c_str());
 }
 
 extern "C" WXEXPORT
-void wxTextDataObject_SetText(wxTextDataObject* self, dstr text)
+void wxTextDataObject_SetText(wxTextDataObject* self, char* text)
 {
-	self->SetText(wxString(text.data, wxConvUTF8, text.length));
+	self->SetText(wxString(text, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
@@ -214,9 +210,9 @@ void wxFileDataObject_RegisterDisposable(_FileDataObject* self, Virtual_Dispose 
 }
 
 extern "C" WXEXPORT
-void wxFileDataObject_AddFile(wxFileDataObject* self, dstr filename)
+void wxFileDataObject_AddFile(wxFileDataObject* self, const char* filename)
 {
-	self->AddFile(wxString(filename.data, wxConvUTF8, filename.length));
+	self->AddFile(wxString(filename, wxConvUTF8));
 }
 
 extern "C" WXEXPORT

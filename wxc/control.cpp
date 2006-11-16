@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - control.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - control.cxx
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
@@ -12,7 +9,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/control.h>
 
 //-----------------------------------------------------------------------------
@@ -27,17 +23,17 @@ void wxControl_Command(wxControl *self, wxCommandEvent *event)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxControl_SetLabel(wxControl *self, dstr label)
+void wxControl_SetLabel(wxControl *self, const char* label)
 {
-	self->SetLabel(wxString(label.data, wxConvUTF8, label.length));
+	self->SetLabel(wxString(label, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxControl_GetLabel(wxControl *self)
+wxString *wxControl_GetLabel(wxControl *self)
 {
-	return dstr_ret(self->GetLabel());
+	return new wxString(self->GetLabel());
 }
 
 //-----------------------------------------------------------------------------

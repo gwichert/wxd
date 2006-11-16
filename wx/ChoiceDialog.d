@@ -1,133 +1,148 @@
 //-----------------------------------------------------------------------------
-// wxD - ChoiceDialog.d
+// wx.NET - ChoiceDialog.cs
 //
 // The wxChoiceDialog wrapper classes.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2003 Alexander Olk
-// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.ChoiceDialog;
-import wx.common;
-import wx.Dialog;
-import wx.ClientData;
-import wx.ArrayInt;
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
-        static extern (C) IntPtr wxSingleChoiceDialog_ctor(IntPtr parent, string message, string caption, int n, string* choices, IntPtr clientData, uint style, inout Point pos);
-        static extern (C) void wxSingleChoiceDialog_SetSelection(IntPtr self, int sel);
-        static extern (C) int wxSingleChoiceDialog_GetSelection(IntPtr self);
-        static extern (C) string wxSingleChoiceDialog_GetStringSelection(IntPtr self);
-        static extern (C) IntPtr wxSingleChoiceDialog_GetSelectionClientData(IntPtr self);
-
-        //-----------------------------------------------------------------------------
-
+namespace wx
+{
     public class SingleChoiceDialog : Dialog
     {
-        enum {
-            wxCHOICEDLG_STYLE	= (wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER | wxOK | wxCANCEL | wxCENTRE)
-        }
-	public const int wxCHOICE_HEIGHT = 150;
-	public const int wxCHOICE_WIDTH  = 200;
+        public const long wxCHOICEDLG_STYLE	= (wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER | wxOK | wxCANCEL | wxCENTRE);
 
+        [DllImport("wx-c")] static extern IntPtr wxSingleChoiceDialog_ctor(IntPtr parent, string message, string caption, int n, string[] choices, IntPtr clientData, uint style, ref Point pos);
+        [DllImport("wx-c")] static extern void wxSingleChoiceDialog_SetSelection(IntPtr self, int sel);
+        [DllImport("wx-c")] static extern int wxSingleChoiceDialog_GetSelection(IntPtr self);
+        [DllImport("wx-c")] static extern IntPtr wxSingleChoiceDialog_GetStringSelection(IntPtr self);
+        [DllImport("wx-c")] static extern IntPtr wxSingleChoiceDialog_GetSelectionClientData(IntPtr self);
+
+        //-----------------------------------------------------------------------------
 
         // TODO: ClientData... !?!
 
-        public this(IntPtr wxobj)
-            { super(wxobj);}
+        public SingleChoiceDialog(IntPtr wxObject)
+            : base(wxObject) {}
 
-        public  this(Window parent, string message, string caption, string[] choices, ClientData clientData = null, int style =  wxCHOICEDLG_STYLE, Point pos = wxDefaultPosition)
-            { super(wxSingleChoiceDialog_ctor(wxObject.SafePtr(parent), message, caption, choices.length, choices, wxObject.SafePtr(clientData), style, pos));}
+        public SingleChoiceDialog(Window parent, string message, string caption, string[] choices)
+            : this(parent, message, caption, choices, null, wxCHOICEDLG_STYLE, wxDefaultPosition) {}
+
+        public SingleChoiceDialog(Window parent, string message, string caption, string[] choices, ClientData clientData)
+            : this(parent, message, caption, choices, clientData, wxCHOICEDLG_STYLE, wxDefaultPosition) {}
+
+        public SingleChoiceDialog(Window parent, string message, string caption, string[] choices, ClientData clientData, long style)
+            : this(parent, message, caption, choices, clientData, style, wxDefaultPosition) {}
+
+        public  SingleChoiceDialog(Window parent, string message, string caption, string[] choices, ClientData clientData, long style, Point pos)
+            : base(wxSingleChoiceDialog_ctor(Object.SafePtr(parent), message, caption, choices.Length, choices, Object.SafePtr(clientData), (uint)style, ref pos)) {}
 
         //-----------------------------------------------------------------------------
 
-        public void Selection(int sel)
+        public void SetSelection(int sel)
         {
-            wxSingleChoiceDialog_SetSelection(wxobj, sel);
+            wxSingleChoiceDialog_SetSelection(wxObject, sel);
         }
 
         //-----------------------------------------------------------------------------
 
-        public int Selection()
+        public int GetSelection()
         {
-            return wxSingleChoiceDialog_GetSelection(wxobj);
+            return wxSingleChoiceDialog_GetSelection(wxObject);
         }
 
         //-----------------------------------------------------------------------------
 
-        public string StringSelection()
+        public string GetStringSelection()
         {
-            return wxSingleChoiceDialog_GetStringSelection(wxobj).dup;
+            return new wxString(wxSingleChoiceDialog_GetStringSelection(wxObject), true);
         }
 
         //-----------------------------------------------------------------------------
 
-        public ClientData SelectionClientData()
+        public ClientData GetSelectionClientData()
         {
-            return cast(ClientData)FindObject(wxSingleChoiceDialog_GetSelectionClientData(wxobj));
+            return (ClientData)Object.FindObject(wxSingleChoiceDialog_GetSelectionClientData(wxObject));
         }
     }
 
 	//-----------------------------------------------------------------------------
 
-        static extern (C) IntPtr wxMultiChoiceDialog_ctor(IntPtr parent, string message, string caption, int n, string* choices, uint style, inout Point pos);
-        static extern (C) void wxMultiChoiceDialog_SetSelections(IntPtr self, int* sel, int numsel);
-        static extern (C) IntPtr wxMultiChoiceDialog_GetSelections(IntPtr self);
+    public class MultiChoiceDialog : Dialog
+    {
+        [DllImport("wx-c")] static extern IntPtr wxMultiChoiceDialog_ctor(IntPtr parent, string message, string caption, int n, string[] choices, uint style, ref Point pos);
+        [DllImport("wx-c")] static extern void wxMultiChoiceDialog_SetSelections(IntPtr self, int[] sel, int numsel);
+        [DllImport("wx-c")] static extern IntPtr wxMultiChoiceDialog_GetSelections(IntPtr self);
 
         //-----------------------------------------------------------------------------
 
-    public class MultiChoiceDialog : Dialog
-    {
-        public this(IntPtr wxobj)
-            { super(wxobj);}
+        public MultiChoiceDialog(IntPtr wxObject)
+            : base(wxObject) {}
 
-        public  this(Window parent, string message, string caption, string[] choices, int style = SingleChoiceDialog.wxCHOICEDLG_STYLE, Point pos = wxDefaultPosition)
-            { super(wxMultiChoiceDialog_ctor(wxObject.SafePtr(parent), message, caption, choices.length, choices, style, pos));}
+        public MultiChoiceDialog(Window parent, string message, string caption, string[] choices)
+            : this(parent, message, caption, choices, SingleChoiceDialog.wxCHOICEDLG_STYLE, wxDefaultPosition) {}
+
+        public MultiChoiceDialog(Window parent, string message, string caption, string[] choices, long style)
+            : this(parent, message, caption, choices, style, wxDefaultPosition) {}
+
+        public  MultiChoiceDialog(Window parent, string message, string caption, string[] choices, long style, Point pos)
+            : base(wxMultiChoiceDialog_ctor(Object.SafePtr(parent), message, caption, choices.Length, choices, (uint)style, ref pos)) {}
 
         //-----------------------------------------------------------------------------
 
         public void SetSelections(int[] sel)
         {
-            wxMultiChoiceDialog_SetSelections(wxobj, sel, sel.length);
+            wxMultiChoiceDialog_SetSelections(wxObject, sel, sel.Length);
         }
 
         //-----------------------------------------------------------------------------
-	
+
         public int[] GetSelections()
         {
-            return (new ArrayInt(wxMultiChoiceDialog_GetSelections(wxobj), true)).toArray();
+            return new ArrayInt(wxMultiChoiceDialog_GetSelections(wxObject), true);
         }
-        
     }
 
 	//-----------------------------------------------------------------------------
 
-	static extern (C) string wxGetSingleChoice_func(string message, string caption, int n, string* choices, IntPtr parent, int x, int y, bool centre, int width, int height);
-	static extern (C) int wxGetSingleChoiceIndex_func(string message, string caption, int n, string* choices, IntPtr parent, int x, int y, bool centre, int width, int height);
-	static extern (C) void* wxGetSingleChoiceData_func(string message, string caption, int n, string* choices, void **client_data, IntPtr parent, int x, int y, bool centre, int width, int height);
-	static extern (C) uint wxGetMultipleChoices_func(IntPtr selections,string message, string caption, int n, string* choices, IntPtr parent, int x, int y, bool centre, int width, int height);
-
-	public string GetSingleChoice(string message, string caption, string[] choices, Window parent = null, int x = -1, int y= -1, bool centre = true, int width = SingleChoiceDialog.wxCHOICE_WIDTH, int height = SingleChoiceDialog.wxCHOICE_HEIGHT)
+	public class GetSingleChoice
 	{
-		return wxGetSingleChoice_func(message, caption, choices.length, choices, wxObject.SafePtr(parent), x, y, centre, width, height).dup;
-	}
+		public const int wxCHOICE_HEIGHT = 150;
+		public const int wxCHOICE_WIDTH  = 200;
+		public string value = "";
 
-	public int GetSingleChoiceIndex(string message, string caption, string[] choices, Window parent = null, int x = -1, int y= -1, bool centre = true, int width = SingleChoiceDialog.wxCHOICE_WIDTH, int height = SingleChoiceDialog.wxCHOICE_HEIGHT)
-	{
-		return wxGetSingleChoiceIndex_func(message, caption, choices.length, choices, wxObject.SafePtr(parent), x, y, centre, width, height);
-	}
+		//-----------------------------------------------------------------------------
 
-	public void* GetSingleChoiceData(string message, string caption, string[] choices, void **client_data, Window parent = null, int x = -1, int y= -1, bool centre = true, int width = SingleChoiceDialog.wxCHOICE_WIDTH, int height = SingleChoiceDialog.wxCHOICE_HEIGHT)
-	{
-		return wxGetSingleChoiceData_func(message, caption, choices.length, choices, client_data, wxObject.SafePtr(parent), x, y, centre, width, height);
-	}
+	        [DllImport("wx-c")] static extern IntPtr wxGetSingleChoice_func(string message, string caption, int n, string[] choices, IntPtr parent, int x, int y, bool centre, int width, int height);
 
-	public int[] GetMultipleChoices(string message, string caption, string[] choices, Window parent = null, int x = -1, int y= -1, bool centre = true, int width = SingleChoiceDialog.wxCHOICE_WIDTH, int height = SingleChoiceDialog.wxCHOICE_HEIGHT)
-	{
-		ArrayInt ari = new ArrayInt();
-		uint sz = wxGetMultipleChoices_func(wxObject.SafePtr(ari), message, caption, choices.length, choices, wxObject.SafePtr(parent), x, y, centre, width, height);
-		return ari.toArray();
+        	//-----------------------------------------------------------------------------
+
+		public GetSingleChoice(string message, string caption, string[] choices)
+		{
+			value = new wxString(wxGetSingleChoice_func(message, caption, choices.Length, choices, IntPtr.Zero, -1, -1, true, wxCHOICE_WIDTH, wxCHOICE_HEIGHT), true);
+		}
+
+        	//-----------------------------------------------------------------------------
+
+		public GetSingleChoice(string message, string caption, string[] choices, Window parent, int x, int y, bool centre, int width, int height)
+		{
+			value = new wxString(wxGetSingleChoice_func(message, caption, choices.Length, choices, Object.SafePtr(parent), x, y, centre, width, height), true);
+		}
+
+		//-----------------------------------------------------------------------------
+
+		public static implicit operator string(GetSingleChoice g)
+		{
+			return g.value;
+		}
 	}
+}
+

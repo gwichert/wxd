@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - tooltip.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - tooltip.cxx
 //
 // The wxToolTip proxy interface
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/tooltip.h>
 
 //-----------------------------------------------------------------------------
@@ -36,25 +32,25 @@ void wxToolTip_SetDelay(long msecs)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxToolTip* wxToolTip_ctor(dstr tip)
+wxToolTip* wxToolTip_ctor(const char* tip)
 {
-	return new wxToolTip(wxString(tip.data, wxConvUTF8, tip.length));
+	return new wxToolTip(wxString(tip, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxToolTip_SetTip(wxToolTip* self, dstr tip)
+void wxToolTip_SetTip(wxToolTip* self, const char* tip)
 {
-	self->SetTip(wxString(tip.data, wxConvUTF8, tip.length));
+	self->SetTip(wxString(tip, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxToolTip_GetTip(wxToolTip* self)
+wxString* wxToolTip_GetTip(wxToolTip* self)
 {
-	return dstr_ret(self->GetTip());
+	return new wxString(self->GetTip());
 }
 
 //-----------------------------------------------------------------------------
@@ -63,15 +59,6 @@ extern "C" WXEXPORT
 wxWindow* wxToolTip_GetWindow(wxToolTip* self)
 {
 	return self->GetWindow();
-}
-
-//-----------------------------------------------------------------------------
-
-
-extern "C" WXEXPORT
-void wxToolTip_SetWindow(wxToolTip* self,wxWindow* win)
-{
-	return self->SetWindow(win);
 }
 
 //-----------------------------------------------------------------------------

@@ -1,23 +1,25 @@
 //-----------------------------------------------------------------------------
-// D/Samples - Controls.d
+// NET/Samples - Controls.cs
 //
-// A D version of the wxWidgets "controls" sample.
+// A .NET version of the wxWidgets "controls" sample.
 //
 // TODO: update to use sizers more (this is a straight port of the wxWidgets
 // original, which also used absolute positioning in many places for unknown
 // reasons). [t9mike]
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
-// Modified by BERO <berobero@users.sourceforge.net>
 // (C) 2003 Bryan Bulten
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-import wx.wx;
-import std.string;
+using System;
+using System.Drawing;
+using wx;
 
+namespace Samples
+{
     //-------------------------------------------------------------------------
     // Application entry class
 
@@ -28,14 +30,14 @@ import std.string;
             // TODO: Add command line processing for window position
 
             MyFrame frame = new MyFrame("Controls wxWidgets App",
-                                        new_Point(50,50), new_Size(500,430));
+                                        new Point(50,50), new Size(500,430));
             frame.Show(true);
             return true;
         }
 
         //---------------------------------------------------------------------
 
-        
+        [STAThread]
         static void Main()
         {
             Controls app = new Controls();
@@ -64,11 +66,11 @@ import std.string;
 
         //---------------------------------------------------------------------
 
-        public this(string title, Point pos, Size size)
+        public MyFrame(string title, Point pos, Size size)
+            : base(title, pos, size)
         {
-            super(title, pos, size);
             // Set the window icon
-            icon = new Icon("../Samples/Controls/mondrian.png");
+            Icon = new wx.Icon("../Samples/Controls/mondrian.png");
 
             // Create the main panel
             panel = new MyPanel(this, 10, 10, 300, 100);
@@ -102,15 +104,15 @@ import std.string;
             menuBar.Append(tooltipMenu, "&Tooltips");
             menuBar.Append(panelMenu, "&Panel");
 
-            this.menuBar = menuBar;
+            MenuBar = menuBar;
 
             // Set up the event table for the menu
-            EVT_MENU(ID_CLEAR_LOG,      &OnClearLog);
-            EVT_MENU(ID_ABOUT,          &OnAbout);
-            EVT_MENU(ID_EXIT,           &OnQuit);
-            EVT_MENU(ID_SET_DELAY,      &OnSetTooltipDelay);
-            EVT_MENU(ID_TOGGLE_TIPS,    &OnToggleTooltips);
-            EVT_MENU(ID_DISABLE_ALL,    &OnDisableAll);
+            EVT_MENU(ID_CLEAR_LOG,      new EventListener(OnClearLog));
+            EVT_MENU(ID_ABOUT,          new EventListener(OnAbout));
+            EVT_MENU(ID_EXIT,           new EventListener(OnQuit));
+            EVT_MENU(ID_SET_DELAY,      new EventListener(OnSetTooltipDelay));
+            EVT_MENU(ID_TOGGLE_TIPS,    new EventListener(OnToggleTooltips));
+            EVT_MENU(ID_DISABLE_ALL,    new EventListener(OnDisableAll));
 
             // Set up a status bar
             CreateStatusBar(2);
@@ -119,31 +121,31 @@ import std.string;
 
         //---------------------------------------------------------------------
 
-        public void OnClearLog(Object sender, Event e)
+        public void OnClearLog(object sender, Event e)
         {
             panel.text.Clear();
         }
-
+   
         //---------------------------------------------------------------------
 
-        public void OnAbout(Object sender, Event e)
+        public void OnAbout(object sender, Event e)
         {
-            string msg = "This is the wxWidgets controls sample written " ~
+            string msg = "This is the wxWidgets controls sample written " +
                          "in C#.";
-            MessageBox(this, msg, "About Controls",
+            wx.MessageDialog.ShowModal(this, msg, "About Controls",
                                        Dialog.wxOK);
         }
 
         //---------------------------------------------------------------------
 
-        public void OnQuit(Object sender, Event e)
+        public void OnQuit(object sender, Event e)
         {
             Close(true);
         }
 
         //---------------------------------------------------------------------
 
-        public void OnSetTooltipDelay(Object sender, Event e)
+        public void OnSetTooltipDelay(object sender, Event e)
         {
             int input;
             input = GetNumberFromUser("Enter delay (in milliseconds)",
@@ -152,25 +154,25 @@ import std.string;
 
             if (input != -1) {
                 tipDelay = input;
-                ToolTip.Delay = tipDelay;
+                wx.ToolTip.Delay = tipDelay;
             }
 
-            Log.LogStatus("Tooltip delay set to %d milliseconds", input);
+            Log.LogStatus("Tooltip delay set to {0} milliseconds", input);
         }
 
         //---------------------------------------------------------------------
 
-        public void OnToggleTooltips(Object sender, Event e)
+        public void OnToggleTooltips(object sender, Event e)
         {
             tipsEnabled = !tipsEnabled;
-            ToolTip.Enabled = tipsEnabled;
+            wx.ToolTip.Enabled = tipsEnabled;
 
             Log.LogStatus("Tooltips {0}abled", tipsEnabled ? "en" : "dis" );
         }
 
         //---------------------------------------------------------------------
 
-        public void OnDisableAll(Object sender, Event e)
+        public void OnDisableAll(object sender, Event e)
         {
             panelEnabled = !panelEnabled;
             panel.Enabled = panelEnabled;
@@ -282,22 +284,22 @@ import std.string;
 
         //---------------------------------------------------------------------
 
-        public this(Frame frame, int x, int y, int w, int h)
+        public MyPanel(Frame frame, int x, int y, int w, int h)
+            : base(frame, -1, new Point(x, y), new Size(w, h))
         {
-            super(frame, -1, new_Point(x, y), new_Size(w, h));
-            const string[] choices = [
+            string[] choices = {
                 "This", "is", "one of my", "wonderful", "examples"
-            ];
+            };
 
-            const string[] choices2 = [
+            string[] choices2 = {
                     "First", "Second"
-            ];
+            };
 
             oldColour = false;
 
             // Create the log text view
             text = new TextCtrl(this, -1, "This is the log window.\n",
-                                new_Point(0, 250), new_Size(100, 50),
+                                new Point(0, 250), new Size(100, 50),
                                 TextCtrl.wxTE_MULTILINE);
             text.BackgroundColour = new Colour("wheat");
 
@@ -310,14 +312,26 @@ import std.string;
             // Create the image list for the notebook
             string imgPath = "../Samples/Controls/Icons/";
             ImageList imagelist = new ImageList(16, 16, false,
-                                                Images.Max);
+                                                (int)Images.Max);
 
-            imagelist.Add(new Bitmap(imgPath ~ "list.xpm"));
-            imagelist.Add(new Bitmap(imgPath ~ "choice.xpm"));
-            imagelist.Add(new Bitmap(imgPath ~ "combo.xpm"));
-            imagelist.Add(new Bitmap(imgPath ~ "text.xpm"));
-            imagelist.Add(new Bitmap(imgPath ~ "radio.xpm"));
-            imagelist.Add(new Bitmap(imgPath ~ "gauge.xpm"));
+            wx.Bitmap bmp = new wx.Bitmap();
+            bmp.LoadFile(imgPath + "list.xpm", BitmapType.wxBITMAP_TYPE_XPM);
+            imagelist.Add(bmp);
+            bmp = new wx.Bitmap();
+            bmp.LoadFile(imgPath + "choice.xpm", BitmapType.wxBITMAP_TYPE_XPM);
+            imagelist.Add(bmp);
+            bmp = new wx.Bitmap();
+            bmp.LoadFile(imgPath + "combo.xpm", BitmapType.wxBITMAP_TYPE_XPM);
+            imagelist.Add(bmp);
+            bmp = new wx.Bitmap();
+            bmp.LoadFile(imgPath + "text.xpm", BitmapType.wxBITMAP_TYPE_XPM);
+            imagelist.Add(bmp);
+            bmp = new wx.Bitmap();
+            bmp.LoadFile(imgPath + "radio.xpm", BitmapType.wxBITMAP_TYPE_XPM);
+            imagelist.Add(bmp);
+            bmp = new wx.Bitmap();
+            bmp.LoadFile(imgPath + "gauge.xpm", BitmapType.wxBITMAP_TYPE_XPM);
+            imagelist.Add(bmp);
 
             notebook.Images = imagelist;
 
@@ -325,61 +339,62 @@ import std.string;
 
             // wxListBox sample panel
             Panel panel = new Panel(notebook);
-            notebook.AddPage(panel, "wxListBox", true, Images.List);
+
+            notebook.AddPage(panel, "wxListBox", true, (int)Images.List);
 
             listbox = new ListBox(panel, ID_LISTBOX,
-                                  new_Point(10, 10), new_Size(120, 70),
-                                  choices, ListBox.wxLB_ALWAYS_SB);
+                                  new Point(10, 10), new Size(120, 70),
+                                  5, choices, ListBox.wxLB_ALWAYS_SB);
             listboxSorted = new ListBox(panel, ID_LISTBOX_SORTED,
-                                        new_Point(10, 90), new_Size(120, 70),
-                                        choices, ListBox.wxLB_SORT);
+                                        new Point(10, 90), new Size(120, 70),
+                                        5, choices, ListBox.wxLB_SORT);
 
             // TODO: Add in ClientData
 
-            listbox.toolTip = "This is a List Box.";
-            listboxSorted.toolTip = "This is a sorted List Box.";
+            listbox.ToolTip = "This is a List Box.";
+            listboxSorted.ToolTip = "This is a sorted List Box.";
 
             selectNum = new Button(panel, -1,
-                                   "Select #&2", new_Point(180, 30),
-                                   new_Size(150, -1));
+                                   "Select #&2", new Point(180, 30),
+                                   new Size(150, -1));
             selectStr = new Button(panel, ID_LISTBOX_SEL_STR,
-                                   "&Select 'This'", new_Point(340, 30),
-                                   new_Size(150, -1));
+                                   "&Select 'This'", new Point(340, 30),
+                                   new Size(150, -1));
 
             new Button(panel, ID_LISTBOX_CLEAR, "&Clear",
-                       new_Point(180, 80), new_Size(150, -1));
+                       new Point(180, 80), new Size(150, -1));
             new Button(panel, ID_LISTBOX_APPEND, "&Append 'Hi!'",
-                       new_Point(340, 80), new_Size(150, -1));
+                       new Point(340, 80), new Size(150, -1));
             new Button(panel, ID_LISTBOX_DELETE,
                        "Delete selected item",
-                       new_Point(180, 130), new_Size(150, -1));
+                       new Point(180, 130), new Size(150, -1));
 
             Button button = new Button(panel, ID_LISTBOX_FONT,
                                        "Set &Italic font",
-                                       new_Point(340, 130),
-                                       new_Size(150, -1));
+                                       new Point(340, 130),
+                                       new Size(150, -1));
             button.SetDefault();
-            button.ForegroundColour = new Colour("blue");
-            button.toolTip = "Click here to set Italic font";
+            button.ForegroundColour = new wx.Colour("blue");
+            button.ToolTip = "Click here to set Italic font";
 
             checkbox = new CheckBox(panel, ID_LISTBOX_ENABLE,
-                                    "&Disable", new_Point(20, 170));
+                                    "&Disable", new Point(20, 170));
             checkbox.Value = false;
-            checkbox.toolTip = "Click to disable listbox";
+            checkbox.ToolTip = "Click to disable listbox";
 
             new CheckBox(panel, ID_LISTBOX_COLOUR,
-                         "&Toggle colour", new_Point(110, 170));
+                         "&Toggle colour", new Point(110, 170));
 
-            panel.cursor = new Cursor(StockCursor.wxCURSOR_HAND);
+            panel.Cursor = new Cursor(StockCursor.wxCURSOR_HAND);
 
             // wxChoice sample panel
             panel = new Panel(notebook);
-            notebook.AddPage(panel, "wxChoice", false, Images.Choice);
+            notebook.AddPage(panel, "wxChoice", false, (int)Images.Choice);
 
-            choice = new Choice(panel, ID_CHOICE, new_Point(10, 10),
-                                new_Size(120, -1), choices);
+            choice = new Choice(panel, ID_CHOICE, new Point(10, 10),
+                                new Size(120, -1), choices);
             choiceSorted = new Choice(panel, ID_CHOICE_SORTED,
-                                      new_Point(10, 70), new_Size(120, -1),
+                                      new Point(10, 70), new Size(120, -1),
                                       choices, ComboBox.wxCB_SORT);
 
             // TODO: Add in client data
@@ -388,159 +403,159 @@ import std.string;
             choice.BackgroundColour = new Colour("red");
 
             new Button(panel, ID_CHOICE_SEL_NUM, "Select #&2",
-                       new_Point(180, 30), new_Size(150, -1));
+                       new Point(180, 30), new Size(150, -1));
             new Button(panel, ID_CHOICE_SEL_STR, "&Select 'This'",
-                       new_Point(340, 30), new_Size(150, -1));
+                       new Point(340, 30), new Size(150, -1));
             new Button(panel, ID_CHOICE_CLEAR, "&Clear",
-                       new_Point(180, 80), new_Size(150, -1));
+                       new Point(180, 80), new Size(150, -1));
             new Button(panel, ID_CHOICE_APPEND, "&Append 'Hi!'",
-                       new_Point(340, 80), new_Size(150, -1));
+                       new Point(340, 80), new Size(150, -1));
             new Button(panel, ID_CHOICE_DELETE, "D&elete selected item",
-                       new_Point(180, 130), new_Size(150, -1));
+                       new Point(180, 130), new Size(150, -1));
             new Button(panel, ID_CHOICE_FONT, "Set &Italic font",
-                       new_Point(340, 130), new_Size(150, -1));
+                       new Point(340, 130), new Size(150, -1));
             new CheckBox(panel, ID_CHOICE_ENABLE, "&Disable",
-                         new_Point(20, 130));
+                         new Point(20, 130));
 
             // wxComboBox sample panel
             panel = new Panel(notebook);
-            notebook.AddPage(panel, "wxComboBox", false, Images.Combo);
+            notebook.AddPage(panel, "wxComboBox", false, (int)Images.Combo);
 
             new StaticBox(panel, -1, "&Box around combobox",
-                          new_Point(5, 5), new_Size(150, 100));
+                          new Point(5, 5), new Size(150, 100));
             combo = new ComboBox(panel, ID_COMBO, "This",
-                                 new_Point(20, 25), new_Size(120, -1),
+                                 new Point(20, 25), new Size(120, -1),
                                  choices);
-            combo.toolTip = "This is a natural\ncombobox - unbelievable";
+            combo.ToolTip = "This is a natural\ncombobox - unbelievable";
 
             new Button(panel, ID_COMBO_SEL_NUM, "Select #&2",
-                       new_Point(180, 30), new_Size(150, -1));
+                       new Point(180, 30), new Size(150, -1));
             new Button(panel, ID_COMBO_SEL_STR, "&Select 'This'",
-                       new_Point(340, 30), new_Size(150, -1));
+                       new Point(340, 30), new Size(150, -1));
             new Button(panel, ID_COMBO_CLEAR, "&Clear",
-                       new_Point(180, 80), new_Size(150, -1));
+                       new Point(180, 80), new Size(150, -1));
             new Button(panel, ID_COMBO_APPEND, "&Append 'Hi!'",
-                       new_Point(340, 80), new_Size(150, -1));
+                       new Point(340, 80), new Size(150, -1));
             new Button(panel, ID_COMBO_DELETE, "D&elete selected item",
-                       new_Point(180, 130), new_Size(150, -1));
+                       new Point(180, 130), new Size(150, -1));
             new Button(panel, ID_COMBO_FONT, "Set &Italic font",
-                       new_Point(340, 130), new_Size(150, -1));
+                       new Point(340, 130), new Size(150, -1));
             new CheckBox(panel, ID_COMBO_ENABLE, "&Disable",
-                         new_Point(20, 130));
+                         new Point(20, 130));
 
             // wxRadioBox sample panel
             panel = new Panel(notebook);
-            notebook.AddPage(panel, "wxRadioBox", false, Images.Radio);
+            notebook.AddPage(panel, "wxRadioBox", false, (int)Images.Radio);
 
                         new RadioBox(panel, ID_RADIO, "&That",
-                         new_Point(10, 160), wxDefaultSize, choices2, 1,
+                         new Point(10, 160), wxDefaultSize, choices2, 1,
                          RadioBox.wxRA_SPECIFY_ROWS);
             radiobox = new RadioBox(panel, ID_RADIO,
-                                    "T&his", new_Point(10, 10),
+                                    "T&his", new Point(10, 10),
                                     wxDefaultSize, choices, 1,
                                     RadioBox.wxRA_SPECIFY_COLS);
-            radiobox.toolTip = "Ever seen a radiobox?";
+            radiobox.ToolTip = "Ever seen a radiobox?";
             radiobox.ForegroundColour = new Colour("Red");
 
             new Button(panel, ID_RADIO_SEL_NUM, "Select #&2",
-                       new_Point(180, 30), new_Size(150, -1));
+                       new Point(180, 30), new Size(150, -1));
             fontButton = new Button(panel, ID_SETFONT, "Set &more Italic font",
-                       new_Point(340, 30), new_Size(150, -1));
+                       new Point(340, 30), new Size(150, -1));
             new Button(panel, ID_RADIO_SEL_STR, "&Select 'This'",
-                       new_Point(180, 80), new_Size(150, -1));
+                       new Point(180, 80), new Size(150, -1));
             new Button(panel, ID_RADIO_FONT, "Set &Italic Font",
-                       new_Point(340, 80), new_Size(150, -1));
+                       new Point(340, 80), new Size(150, -1));
             new CheckBox(panel, ID_RADIO_ENABLE, "&Disable",
-                         new_Point(340, 130));
+                         new Point(340, 130));
 
-                        (new RadioButton(panel, ID_RADIO_BUTTON1, "Radiobutton1",
-                                                        new_Point(210, 170), wxDefaultSize,
-                                                        RadioButton.wxRB_GROUP)).Value = false;
+                        new RadioButton(panel, ID_RADIO_BUTTON1, "Radiobutton1",
+                                                        new Point(210, 170), wxDefaultSize,
+                                                        RadioButton.wxRB_GROUP).Value = false;
                         new RadioButton(panel, ID_RADIO_BUTTON2, "Radiobutton2",
-                                                        new_Point(340, 170));
+                                                        new Point(340, 170));
 
             // wxGauge sample panel
             panel = new Panel(notebook);
-            notebook.AddPage(panel, "wxGauge", false, Images.Gauge);
+            notebook.AddPage(panel, "wxGauge", false, (int)Images.Gauge);
 
             new StaticBox(panel, -1, "&wxGauge and wxSlider", 
-                          new_Point(10, 10), new_Size(222, 130));
+                          new Point(10, 10), new Size(222, 130));
             gauge = new Gauge(panel, -1, 200, 
-                              new_Point(18, 50), new_Size(155, 30), 
+                              new Point(18, 50), new Size(155, 30), 
                               Gauge.wxGA_HORIZONTAL | /*Border.*/wxNO_BORDER);
             gauge.BackgroundColour = new Colour("Green");
             gauge.ForegroundColour = new Colour("Red");
 
             gaugeVert = new Gauge(panel, -1, 200, 
-                                  new_Point(195, 35), new_Size(30, 90),
+                                  new Point(195, 35), new Size(30, 90),
                                   Gauge.wxGA_VERTICAL | Gauge.wxGA_SMOOTH |
                                   /*Border.*/wxNO_BORDER);
 
             slider = new Slider(panel, ID_SLIDER, 0, 0, 200, 
-                                new_Point(18, 90), new_Size(155, -1),
+                                new Point(18, 90), new Size(155, -1),
                                 Slider.wxSL_AUTOTICKS | Slider.wxSL_LABELS);
             slider.SetTickFreq(40, 0);
-            slider.toolTip = "This is a sliding slider!";
+            slider.ToolTip = "This is a sliding slider!";
 
-            new StaticBox(panel, -1, "&Explanation", new_Point(230, 10),
-                          new_Size(270, 130), Alignment.wxALIGN_CENTER);
+            new StaticBox(panel, -1, "&Explanation", new Point(230, 10),
+                          new Size(270, 130), Alignment.wxALIGN_CENTER);
             new StaticText(panel, -1, 
-                           "In order to see the gauge (aka progress \n" ~
-                           "bar) control do something, drag the \n" ~
-                           "handle of the slider to the right\n" ~
-                           "\n" ~
-                           "This is also supposed to demonstrate\n" ~
+                           "In order to see the gauge (aka progress \n" +
+                           "bar) control do something, drag the \n" +
+                           "handle of the slider to the right\n" +
+                           "\n" +
+                           "This is also supposed to demonstrate\n" +
                            "how to use static controls.",
-                           new_Point(250, 25), new_Size(240, 110));
+                           new Point(250, 25), new Size(240, 110));
 
             spinctrl = new SpinCtrl(panel, ID_SPINCTRL, "",
-                                    new_Point(200, 160), new_Size(80, -1));
+                                    new Point(200, 160), new Size(80, -1));
             spinctrl.SetRange(10, 30);
             spinctrl.Value = 15;
 
             initialSpinValue = -5;
-            spintext = new TextCtrl(panel, -1, "" ~ .toString(initialSpinValue),
-                                    new_Point(20, 160), new_Size(80, -1));
+            spintext = new TextCtrl(panel, -1, "" + initialSpinValue,
+                                    new Point(20, 160), new Size(80, -1));
             spinbutton = new SpinButton(panel, ID_SPIN, 
-                                        new_Point(103, 160), new_Size(80, -1));
+                                        new Point(103, 160), new Size(80, -1));
             spinbutton.SetRange(-40, 30);
             spinbutton.Value = initialSpinValue;
 
             btnProgress = new Button(panel, ID_BTNPROGRESS, 
                                      "&Show progress dialog",
-                                     new_Point(300, 160)); 
+                                     new Point(300, 160)); 
 									 
 			// wxBitmapXXX sampel panel
 			panel = new Panel(notebook);
 			notebook.AddPage(panel, "wxBitmapXXX", false );
 			
-			Icon icon = ArtProvider.GetIcon( ArtID.wxART_INFORMATION );
-			new StaticBitmap( panel, -1, icon, new_Point(10, 10) );
+			wx.Icon icon = ArtProvider.GetIcon( ArtID.wxART_INFORMATION );
+			new StaticBitmap( panel, -1, icon, new Point(10, 10) );
 			
-			Bitmap bitmap = new Bitmap( 100, 100 );
+			wx.Bitmap bitmap = new wx.Bitmap( 100, 100 );
 			MemoryDC dc = new MemoryDC();
 			dc.SelectObject( bitmap );
-			dc.pen = Pen.wxGREEN_PEN;
+			dc.Pen = GDIPens.wxGREEN_PEN;
 			dc.Clear();
 			dc.DrawEllipse( 5, 5, 90, 90 );
 			dc.DrawText( "Bitmap", 30, 40 );
-			dc.SelectObject( Bitmap.wxNullBitmap );
+			dc.SelectObject( NullObjects.wxNullBitmap );
 			
-			new BitmapButton( panel, ID_BITMAP_BTN, bitmap, new_Point( 100, 20 ) );
+			new BitmapButton( panel, ID_BITMAP_BTN, bitmap, new Point( 100, 20 ) );
 			
-			Bitmap bmp1 = ArtProvider.GetBitmap( ArtID.wxART_INFORMATION );
-			Bitmap bmp2 = ArtProvider.GetBitmap( ArtID.wxART_WARNING );
-			Bitmap bmp3 = ArtProvider.GetBitmap( ArtID.wxART_QUESTION );
+			wx.Bitmap bmp1 = ArtProvider.GetBitmap( ArtID.wxART_INFORMATION );
+			wx.Bitmap bmp2 = ArtProvider.GetBitmap( ArtID.wxART_WARNING );
+			wx.Bitmap bmp3 = ArtProvider.GetBitmap( ArtID.wxART_QUESTION );
 			
-			BitmapButton bmpBtn = new BitmapButton( panel, -1, bmp1, new_Point( 30, 70 ) );
+			BitmapButton bmpBtn = new BitmapButton( panel, -1, bmp1, new Point( 30, 70 ) );
 			
 			bmpBtn.BitmapSelected = bmp2;
 			bmpBtn.BitmapFocus = bmp3;
 			
-			new ToggleButton( panel, ID_BUTTON_LABEL, "&Toggle label", new_Point( 250, 20 ) );
+			new ToggleButton( panel, ID_BUTTON_LABEL, "&Toggle label", new Point( 250, 20 ) );
 			
 			m_label = new StaticText( panel, -1, "Label with some long text", 
-									new_Point ( 250, 60 ), wxDefaultSize, Alignment.wxALIGN_RIGHT );
+									new Point ( 250, 60 ), wxDefaultSize, Alignment.wxALIGN_RIGHT );
 			m_label.ForegroundColour = Colour.wxBLUE;
 			
 			// wxSizer sampel panel
@@ -599,89 +614,89 @@ import std.string;
 			
 			sizer.Add( m_hsizer, 1, Stretch.wxEXPAND );
 			
-			panel.sizer = sizer;
+			panel.Sizer = sizer;
 
             // Set event listeners
 
-            EVT_SIZE(&OnSize);
+            EVT_SIZE(new EventListener(OnSize));
 
-            EVT_LISTBOX     (ID_LISTBOX,            &OnListBox);
-            EVT_LISTBOX     (ID_LISTBOX_SORTED,     &OnListBox);
-            EVT_LISTBOX_DCLICK(-1,                  &OnListBoxDoubleClick);
-	    selectNum.Click_Add(& OnListBoxButtons );
-	    selectNum.Click_Add(& OnClicked2 );
-	    EVT_BUTTON      (-1,/*ID_LISTBOX_SEL_NUM,*/    &OnListBoxButtons);
-            //EVT_BUTTON      (ID_LISTBOX_SEL_STR,    &OnListBoxButtons);
-	    selectStr.Click_Add(& OnListBoxButtons );
-            EVT_BUTTON      (ID_LISTBOX_CLEAR,      &OnListBoxButtons);
-            EVT_BUTTON      (ID_LISTBOX_APPEND,     &OnListBoxButtons);
-            EVT_BUTTON      (ID_LISTBOX_DELETE,     &OnListBoxButtons);
-            //EVT_BUTTON      (ID_LISTBOX_FONT,       &OnListBoxButtons);
-	    button.Click_Add(& OnListBoxButtons );
-            EVT_CHECKBOX    (ID_LISTBOX_ENABLE,     &OnListBoxButtons);
-            EVT_CHECKBOX    (ID_LISTBOX_COLOUR,     &OnChangeColour);
+            EVT_LISTBOX     (ID_LISTBOX,            new EventListener(OnListBox));
+            EVT_LISTBOX     (ID_LISTBOX_SORTED,     new EventListener(OnListBox));
+            EVT_LISTBOX_DCLICK(-1,                  new EventListener(OnListBoxDoubleClick));
+	    selectNum.Click += new EventListener( OnListBoxButtons );
+	    selectNum.Click += new EventListener( OnClicked2 );
+	    EVT_BUTTON      (-1,/*ID_LISTBOX_SEL_NUM,*/    new EventListener(OnListBoxButtons));
+            //EVT_BUTTON      (ID_LISTBOX_SEL_STR,    new EventListener(OnListBoxButtons));
+	    selectStr.Click += new EventListener( OnListBoxButtons );
+            EVT_BUTTON      (ID_LISTBOX_CLEAR,      new EventListener(OnListBoxButtons));
+            EVT_BUTTON      (ID_LISTBOX_APPEND,     new EventListener(OnListBoxButtons));
+            EVT_BUTTON      (ID_LISTBOX_DELETE,     new EventListener(OnListBoxButtons));
+            //EVT_BUTTON      (ID_LISTBOX_FONT,       new EventListener(OnListBoxButtons));
+	    button.Click += new EventListener( OnListBoxButtons );
+            EVT_CHECKBOX    (ID_LISTBOX_ENABLE,     new EventListener(OnListBoxButtons));
+            EVT_CHECKBOX    (ID_LISTBOX_COLOUR,     new EventListener(OnChangeColour));
 
-            EVT_CHOICE      (ID_CHOICE,             &OnChoice);
-            EVT_CHOICE      (ID_CHOICE_SORTED,      &OnChoice);
-            EVT_BUTTON      (ID_CHOICE_SEL_NUM,     &OnChoiceButtons);
-            EVT_BUTTON      (ID_CHOICE_SEL_STR,     &OnChoiceButtons);
-            EVT_BUTTON      (ID_CHOICE_FONT,        &OnChoiceButtons);
-            EVT_BUTTON      (ID_CHOICE_DELETE,      &OnChoiceButtons);
-            EVT_BUTTON      (ID_CHOICE_APPEND,      &OnChoiceButtons);
-            EVT_BUTTON      (ID_CHOICE_CLEAR,       &OnChoiceButtons);
-            EVT_CHECKBOX    (ID_CHOICE_ENABLE,      &OnChoiceButtons);
+            EVT_CHOICE      (ID_CHOICE,             new EventListener(OnChoice));
+            EVT_CHOICE      (ID_CHOICE_SORTED,      new EventListener(OnChoice));
+            EVT_BUTTON      (ID_CHOICE_SEL_NUM,     new EventListener(OnChoiceButtons));
+            EVT_BUTTON      (ID_CHOICE_SEL_STR,     new EventListener(OnChoiceButtons));
+            EVT_BUTTON      (ID_CHOICE_FONT,        new EventListener(OnChoiceButtons));
+            EVT_BUTTON      (ID_CHOICE_DELETE,      new EventListener(OnChoiceButtons));
+            EVT_BUTTON      (ID_CHOICE_APPEND,      new EventListener(OnChoiceButtons));
+            EVT_BUTTON      (ID_CHOICE_CLEAR,       new EventListener(OnChoiceButtons));
+            EVT_CHECKBOX    (ID_CHOICE_ENABLE,      new EventListener(OnChoiceButtons));
 
-            EVT_COMBOBOX    (ID_COMBO,              &OnCombo);
-            EVT_TEXT        (ID_COMBO,              &OnComboTextChanged);
-            EVT_TEXT_ENTER  (ID_COMBO,              &OnComboTextEnter);
-            EVT_BUTTON      (ID_COMBO_SEL_NUM,      &OnComboButtons);
-            EVT_BUTTON      (ID_COMBO_SEL_STR,      &OnComboButtons);
-            EVT_BUTTON      (ID_COMBO_FONT,         &OnComboButtons);
-            EVT_BUTTON      (ID_COMBO_DELETE,       &OnComboButtons);
-            EVT_BUTTON      (ID_COMBO_APPEND,       &OnComboButtons);
-            EVT_BUTTON      (ID_COMBO_CLEAR,        &OnComboButtons);
-            EVT_CHECKBOX    (ID_COMBO_ENABLE,       &OnComboButtons);
+            EVT_COMBOBOX    (ID_COMBO,              new EventListener(OnCombo));
+            EVT_TEXT        (ID_COMBO,              new EventListener(OnComboTextChanged));
+            EVT_TEXT_ENTER  (ID_COMBO,              new EventListener(OnComboTextEnter));
+            EVT_BUTTON      (ID_COMBO_SEL_NUM,      new EventListener(OnComboButtons));
+            EVT_BUTTON      (ID_COMBO_SEL_STR,      new EventListener(OnComboButtons));
+            EVT_BUTTON      (ID_COMBO_FONT,         new EventListener(OnComboButtons));
+            EVT_BUTTON      (ID_COMBO_DELETE,       new EventListener(OnComboButtons));
+            EVT_BUTTON      (ID_COMBO_APPEND,       new EventListener(OnComboButtons));
+            EVT_BUTTON      (ID_COMBO_CLEAR,        new EventListener(OnComboButtons));
+            EVT_CHECKBOX    (ID_COMBO_ENABLE,       new EventListener(OnComboButtons));
 
-            EVT_RADIOBOX    (ID_RADIO,              &OnRadio);
-            EVT_BUTTON      (ID_RADIO_SEL_NUM,      &OnRadioButtons);
-            EVT_BUTTON      (ID_RADIO_SEL_STR,      &OnRadioButtons);
-            EVT_BUTTON      (ID_RADIO_FONT,         &OnRadioButtons);
-            EVT_CHECKBOX    (ID_RADIO_ENABLE,       &OnRadioButtons);
-            EVT_BUTTON      (ID_SETFONT,            &OnSetFont);
+            EVT_RADIOBOX    (ID_RADIO,              new EventListener(OnRadio));
+            EVT_BUTTON      (ID_RADIO_SEL_NUM,      new EventListener(OnRadioButtons));
+            EVT_BUTTON      (ID_RADIO_SEL_STR,      new EventListener(OnRadioButtons));
+            EVT_BUTTON      (ID_RADIO_FONT,         new EventListener(OnRadioButtons));
+            EVT_CHECKBOX    (ID_RADIO_ENABLE,       new EventListener(OnRadioButtons));
+            EVT_BUTTON      (ID_SETFONT,            new EventListener(OnSetFont));
 
-            EVT_SLIDER      (ID_SLIDER,             &OnSliderUpdate);
-            EVT_SPINCTRL    (ID_SPINCTRL,           &OnSpinCtrl);
-            EVT_SPIN_UP     (ID_SPINCTRL,           &OnSpinCtrlUp);
-            EVT_SPIN_DOWN   (ID_SPINCTRL,           &OnSpinCtrlDown);
-            EVT_TEXT        (ID_SPINCTRL,           &OnSpinCtrlText);
-            EVT_SPIN        (ID_SPIN,               &OnSpinUpdate);
-            EVT_SPIN_UP     (ID_SPIN,               &OnSpinUp);
-            EVT_SPIN_DOWN   (ID_SPIN,               &OnSpinDown);
-            EVT_UPDATE_UI   (ID_BTNPROGRESS,        &OnUpdateShowProgress);
-            EVT_BUTTON      (ID_BTNPROGRESS,        &OnShowProgress);
+            EVT_SLIDER      (ID_SLIDER,             new EventListener(OnSliderUpdate));
+            EVT_SPINCTRL    (ID_SPINCTRL,           new EventListener(OnSpinCtrl));
+            EVT_SPIN_UP     (ID_SPINCTRL,           new EventListener(OnSpinCtrlUp));
+            EVT_SPIN_DOWN   (ID_SPINCTRL,           new EventListener(OnSpinCtrlDown));
+            EVT_TEXT        (ID_SPINCTRL,           new EventListener(OnSpinCtrlText));
+            EVT_SPIN        (ID_SPIN,               new EventListener(OnSpinUpdate));
+            EVT_SPIN_UP     (ID_SPIN,               new EventListener(OnSpinUp));
+            EVT_SPIN_DOWN   (ID_SPIN,               new EventListener(OnSpinDown));
+            EVT_UPDATE_UI   (ID_BTNPROGRESS,        new EventListener(OnUpdateShowProgress));
+            EVT_BUTTON      (ID_BTNPROGRESS,        new EventListener(OnShowProgress));
 			
-			EVT_TOGGLEBUTTON(ID_BUTTON_LABEL,       &OnUpdateLabel);
-			EVT_BUTTON(ID_BITMAP_BTN,               &OnBmpButton);
+			EVT_TOGGLEBUTTON(ID_BUTTON_LABEL,       new EventListener(OnUpdateLabel));
+			EVT_BUTTON(ID_BITMAP_BTN,               new EventListener(OnBmpButton));
 			
-			EVT_CHECKBOX(ID_SIZER_CHECK1,           &OnSizerCheck);
-			EVT_CHECKBOX(ID_SIZER_CHECK2,           &OnSizerCheck);
-			EVT_CHECKBOX(ID_SIZER_CHECK3,           &OnSizerCheck);
-			EVT_CHECKBOX(ID_SIZER_CHECK4,           &OnSizerCheck);
-			EVT_CHECKBOX(ID_SIZER_CHECK14,          &OnSizerCheck);
-			EVT_CHECKBOX(ID_SIZER_CHECKBIG,         &OnSizerCheck);
+			EVT_CHECKBOX(ID_SIZER_CHECK1,           new EventListener(OnSizerCheck));
+			EVT_CHECKBOX(ID_SIZER_CHECK2,           new EventListener(OnSizerCheck));
+			EVT_CHECKBOX(ID_SIZER_CHECK3,           new EventListener(OnSizerCheck));
+			EVT_CHECKBOX(ID_SIZER_CHECK4,           new EventListener(OnSizerCheck));
+			EVT_CHECKBOX(ID_SIZER_CHECK14,          new EventListener(OnSizerCheck));
+			EVT_CHECKBOX(ID_SIZER_CHECKBIG,         new EventListener(OnSizerCheck));
 			
-			EVT_NOTEBOOK_PAGE_CHANGING(ID_NOTEBOOK, &OnPageChanging);
-			EVT_NOTEBOOK_PAGE_CHANGED(ID_NOTEBOOK,  &OnPageChanged);
+			EVT_NOTEBOOK_PAGE_CHANGING(ID_NOTEBOOK, new EventListener(OnPageChanging));
+			EVT_NOTEBOOK_PAGE_CHANGED(ID_NOTEBOOK,  new EventListener(OnPageChanged));
         }
 	
-	public void OnClicked2( Object sender, Event e )
+	public void OnClicked2( object sender, Event e )
 	{
-		stdout.writeLine( "OnClicked2");
+		Console.WriteLine( "OnClicked2");
 	}
 
         //---------------------------------------------------------------------
 
-        public void OnSize(Object sender, Event e)
+        public void OnSize(object sender, Event e)
         {
             notebook.SetSize(2, 2, ClientSize.Width - 4,
                              ClientSize.Height * 2 / 3 - 4);
@@ -691,9 +706,9 @@ import std.string;
 
         //---------------------------------------------------------------------
 
-        public void OnListBox(Object sender, Event e)
+        public void OnListBox(object sender, Event e)
         {
-            CommandEvent ce = cast(CommandEvent)e;
+            CommandEvent ce = (CommandEvent)e;
 
             if (ce.ID == -1)
             {
@@ -703,25 +718,25 @@ import std.string;
 
             ListBox lb =
                 ce.ID == ID_LISTBOX ? listbox : listboxSorted;
-            text.AppendText("ListBox event selection string is: '" ~
-                            ce.String ~ "'\n" ~
-                            "ListBox control selection string is: '" ~
-                            lb.StringSelection ~ "'\n");
+            text.AppendText("ListBox event selection string is: '" +
+                            ce.String + "'\n" +
+                            "ListBox control selection string is: '" +
+                            lb.StringSelection + "'\n");
         }
 
-        public void OnListBoxDoubleClick(Object sender, Event e)
+        public void OnListBoxDoubleClick(object sender, Event e)
         {
-            CommandEvent ce = cast(CommandEvent)e;
-            text.AppendText("ListBox event selection string is: '" ~
-                            ce.String ~ "'\n");
+            CommandEvent ce = (CommandEvent)e;
+            text.AppendText("ListBox event selection string is: '" +
+                            ce.String + "'\n");
         }
 
-        public void OnListBoxButtons(Object sender, Event e)
+        public void OnListBoxButtons(object sender, Event e)
         {
             switch(e.ID)
             {
             case ID_LISTBOX_SEL_NUM:
-	    	stdout.writeLine( "OnListBoxButtons");
+	    	Console.WriteLine( "OnListBoxButtons");
                 listbox.Selection = 2;
                 listboxSorted.Selection = 2;
                 break;
@@ -750,14 +765,14 @@ import std.string;
             case ID_LISTBOX_ENABLE:
                 text.AppendText("CheckBox clicked.\n");
 
-                CommandEvent ce = cast(CommandEvent)e;
+                CommandEvent ce = (CommandEvent)e;
 
-                CheckBox cb = cast(CheckBox)e.EventObject;
+                CheckBox cb = (CheckBox)e.EventObject;
 
                 if (ce.Int == 1)
-                    cb.toolTip = "Click to enable listbox";
+                    cb.ToolTip = "Click to enable listbox";
                 else
-                    cb.toolTip = "Click to disable listbox";
+                    cb.ToolTip = "Click to disable listbox";
 
                 listbox.Enabled = (ce.Int == 0);
                 listboxSorted.Enabled = (ce.Int == 0);
@@ -776,15 +791,15 @@ import std.string;
                 break;
 
             case ID_LISTBOX_FONT:
-                listbox.font = Font.wxITALIC_FONT;
-                listboxSorted.font = Font.wxITALIC_FONT;
+                listbox.Font = wx.Font.wxITALIC_FONT;
+                listboxSorted.Font = wx.Font.wxITALIC_FONT;
                 break;
             }
         }
 
         //---------------------------------------------------------------------
 
-        public void OnChangeColour(Object sender, Event e)
+        public void OnChangeColour(object sender, Event e)
         {
             if(oldColour)
             {
@@ -804,9 +819,9 @@ import std.string;
 
         //---------------------------------------------------------------------
 
-        public void OnChoiceButtons(Object sender, Event e)
+        public void OnChoiceButtons(object sender, Event e)
         {
-            CommandEvent ce = cast(CommandEvent)e;
+            CommandEvent ce = (CommandEvent)e;
 
             switch(ce.ID)
             {
@@ -838,8 +853,8 @@ import std.string;
                 break;
 
             case ID_CHOICE_FONT:
-                choice.font = Font.wxITALIC_FONT;
-                choiceSorted.font = Font.wxITALIC_FONT;
+                choice.Font = wx.Font.wxITALIC_FONT;
+                choiceSorted.Font = wx.Font.wxITALIC_FONT;
                 break;
 
             case ID_CHOICE_ENABLE:
@@ -849,22 +864,22 @@ import std.string;
             }
         }
 
-        public void OnChoice(Object sender, Event e)
+        public void OnChoice(object sender, Event e)
         {
-            CommandEvent ce = cast(CommandEvent)e;
+            CommandEvent ce = (CommandEvent)e;
             Choice c = e.ID == ID_CHOICE ? choice : choiceSorted;
 
-            text.AppendText("Choice event selection is: '" ~
-                            ce.String ~ "'\n" ~
-                            "Choice control selection is: '" ~
-                            c.StringSelection ~ "'\n");
+            text.AppendText("Choice event selection is: '" +
+                            ce.String + "'\n" +
+                            "Choice control selection is: '" +
+                            c.StringSelection + "'\n");
         }
 
         //---------------------------------------------------------------------
 
-        public void OnComboButtons(Object sender, Event e)
+        public void OnComboButtons(object sender, Event e)
         {
-            CommandEvent ce = cast(CommandEvent)e;
+            CommandEvent ce = (CommandEvent)e;
 
             switch(ce.ID)
             {
@@ -890,8 +905,8 @@ import std.string;
                 break;
 
             case ID_COMBO_FONT:
-                combo.font = Font.wxITALIC_FONT;
-                combo.font = Font.wxITALIC_FONT;
+                combo.Font = wx.Font.wxITALIC_FONT;
+                combo.Font = wx.Font.wxITALIC_FONT;
                 break;
 
             case ID_COMBO_ENABLE:
@@ -900,42 +915,42 @@ import std.string;
             }
         }
 
-        public void OnCombo(Object sender, Event e)
+        public void OnCombo(object sender, Event e)
         {
-            CommandEvent ce = cast(CommandEvent)e;
+            CommandEvent ce = (CommandEvent)e;
 
-            text.AppendText("Combo event selection is: '" ~
-                            ce.String ~ "'\n" ~
-                            "Combo control selection is: '" ~
-                            combo.StringSelection ~ "'\n");
+            text.AppendText("Combo event selection is: '" +
+                            ce.String + "'\n" +
+                            "Combo control selection is: '" +
+                            combo.StringSelection + "'\n");
         }
 
-        public void OnComboTextChanged(Object sender, Event e)
+        public void OnComboTextChanged(object sender, Event e)
         {
-            CommandEvent ce = cast(CommandEvent)e;
+            CommandEvent ce = (CommandEvent)e;
 
-	    	stdout.writeLine( ce.String );
+	    	Console.WriteLine( ce.String );
 
             Log.LogMessage( "Text in the combobox changed: now is '{0}'", ce.String);
         }
 
-        public void OnComboTextEnter(Object sender, Event e)
+        public void OnComboTextEnter(object sender, Event e)
         {
             Log.LogMessage("Enter pressed in the combobox: value is: '{0}'", combo.Value);
         }
 
         //---------------------------------------------------------------------
 
-        public void OnRadio(Object sender, Event e)
+        public void OnRadio(object sender, Event e)
         {
-            CommandEvent ce = cast(CommandEvent)e;
-            text.AppendText("Radio selection string is: '" ~
-                            ce.String ~ "'.\n");
+            CommandEvent ce = (CommandEvent)e;
+            text.AppendText("Radio selection string is: '" +
+                            ce.String + "'.\n");
         }
 
-        public void OnRadioButtons(Object sender, Event e)
+        public void OnRadioButtons(object sender, Event e)
         {
-            CommandEvent ce = cast(CommandEvent)e;
+            CommandEvent ce = (CommandEvent)e;
 
             switch(ce.ID)
             {
@@ -953,33 +968,33 @@ import std.string;
 
             case ID_RADIO_FONT:
                 radiobox.ForegroundColour = new Colour("Green");
-                radiobox.font = Font.wxITALIC_FONT;
+                radiobox.Font = wx.Font.wxITALIC_FONT;
                 break;
             }
         }
 
         //---------------------------------------------------------------------
 
-        public void OnSetFont(Object sender, Event e)
+        public void OnSetFont(object sender, Event e)
         {
-			fontButton.font = Font.wxITALIC_FONT;
-			text.font = Font.wxITALIC_FONT;
+			fontButton.Font = wx.Font.wxITALIC_FONT;
+			text.Font = wx.Font.wxITALIC_FONT;
         }
 		
-		public void OnUpdateLabel(Object sender, Event e)
+		public void OnUpdateLabel(object sender, Event e)
 		{
-			CommandEvent ce = cast(CommandEvent) e;
+			CommandEvent ce = (CommandEvent) e;
 			m_label.Label = ce.Int == 0 ? "Very very very very very long text." : "Shorter text.";
 		}
 		
-		public void OnBmpButton(Object sender, Event e)
+		public void OnBmpButton(object sender, Event e)
 		{
 			Log.LogMessage("Bitmap button clicked.");
 		}
 		
-		public void OnSizerCheck(Object sender, Event e)
+		public void OnSizerCheck(object sender, Event e)
 		{
-			CommandEvent ce = cast(CommandEvent) e;
+			CommandEvent ce = (CommandEvent) e;
 			switch( e.ID )
 			{
 				case ID_SIZER_CHECK1:
@@ -1011,57 +1026,57 @@ import std.string;
 
         //---------------------------------------------------------------------
         
-        public void OnSliderUpdate(Object sender, Event e)
+        public void OnSliderUpdate(object sender, Event e)
         {
             gauge.Value = slider.Value;
             gaugeVert.Value = slider.Value;
         }
 
-        public void OnSpinCtrl(Object sender, Event e)
+        public void OnSpinCtrl(object sender, Event e)
         {
-            CommandEvent ce = cast(CommandEvent)e;
-            text.AppendText("SpinCtrl changed: now " ~ .toString(spinctrl.Value) ~ 
-                            " (from event: " ~ .toString(ce.Int) ~ ")\n");
+            CommandEvent ce = (CommandEvent)e;
+            text.AppendText("SpinCtrl changed: now " + spinctrl.Value + 
+                            " (from event: " + ce.Int + ")\n");
         }
 
-        public void OnSpinCtrlUp(Object sender, Event e)
+        public void OnSpinCtrlUp(object sender, Event e)
         {
-            CommandEvent ce = cast(CommandEvent)e;
-            text.AppendText("SpinCtrl up: now " ~ .toString(spinctrl.Value) ~ 
-                            " (from event: " ~ .toString(ce.Int) ~ ")\n");
+            CommandEvent ce = (CommandEvent)e;
+            text.AppendText("SpinCtrl up: now " + spinctrl.Value + 
+                            " (from event: " + ce.Int + ")\n");
         }
 
-        public void OnSpinCtrlDown(Object sender, Event e)
+        public void OnSpinCtrlDown(object sender, Event e)
         {
-            CommandEvent ce = cast(CommandEvent)e;
-            text.AppendText("SpinCtrl down: now " ~ .toString(spinctrl.Value) ~ 
-                            " (from event: " ~ .toString(ce.Int) ~ ")\n");
+            CommandEvent ce = (CommandEvent)e;
+            text.AppendText("SpinCtrl down: now " + spinctrl.Value + 
+                            " (from event: " + ce.Int + ")\n");
         }
 
-        public void OnSpinCtrlText(Object sender, Event e)
+        public void OnSpinCtrlText(object sender, Event e)
         {
-            CommandEvent ce = cast(CommandEvent)e;
-            text.AppendText("SpinCtrl text changed: now " ~ .toString(spinctrl.Value) ~ 
-                            " (from event: " ~ ce.String ~ ")\n");
+            CommandEvent ce = (CommandEvent)e;
+            text.AppendText("SpinCtrl text changed: now " + spinctrl.Value + 
+                            " (from event: " + ce.String + ")\n");
         } 
 
-        public void OnSpinUpdate(Object sender, Event e) 
+        public void OnSpinUpdate(object sender, Event e) 
         {
-			SpinEvent se = cast(SpinEvent) e;
-            spintext.Value = "" ~ .toString(se.Position);
+			SpinEvent se = (SpinEvent) e;
+            spintext.Value = "" + se.Position;
 
-            text.AppendText("Spin conntrol range: (" ~ .toString(spinbutton.Min) ~ ", " ~ 
-					.toString(spinbutton.Max) ~ "), current = " ~ .toString(spinbutton.Value) ~ "\n");
+            text.AppendText("Spin conntrol range: (" + spinbutton.Min + ", " + 
+					spinbutton.Max + "), current = " + spinbutton.Value + "\n");
 
         }
 
-        public void OnSpinUp(Object sender, Event e)
+        public void OnSpinUp(object sender, Event e)
         {
-			SpinEvent se = cast(SpinEvent) e;
-            string str = "Spin button up: current = " ~ .toString(spinbutton.Value) ~ "\n";
+			SpinEvent se = (SpinEvent) e;
+            string str = "Spin button up: current = " + spinbutton.Value + "\n";
 
             if (se.Position > 17) {
-                str ~= "Preventing spin button from going above 17.\n";
+                str += "Preventing spin button from going above 17.\n";
 
 				se.Veto();
 			}
@@ -1069,13 +1084,13 @@ import std.string;
 			Log.LogMessage(str);
         }
         
-        public void OnSpinDown(Object sender, Event e)
+        public void OnSpinDown(object sender, Event e)
         {
-            SpinEvent se = cast(SpinEvent) e;
-            string str = "Spin button down: current = " ~ .toString(spinbutton.Value) ~ "\n";
+            SpinEvent se = (SpinEvent) e;
+            string str = "Spin button down: current = " + spinbutton.Value + "\n";
 
             if (se.Position < -17) {
-                str ~= "Preventing spin button from going below -17.\n";
+                str += "Preventing spin button from going below -17.\n";
 
 				se.Veto();
             }
@@ -1083,12 +1098,12 @@ import std.string;
 			Log.LogMessage(str);
         }
 
-        public void OnUpdateShowProgress(Object sender, Event e)
+        public void OnUpdateShowProgress(object sender, Event e)
         {
             btnProgress.Enabled = spinbutton.Value > 0;
         }
 
-        public void OnShowProgress(Object sender, Event e)
+        public void OnShowProgress(object sender, Event e)
         {
 			int max = spinbutton.Value;
 			
@@ -1112,7 +1127,7 @@ import std.string;
 			bool cont = true;
 			for ( int i = 0; i <= max; i++ )
 			{
-				wxSleep(1);
+				Utils.wxSleep(1);
 				if ( i == max )
 				{
 					cont = pd.Update(i, "That's all, folks!");
@@ -1139,18 +1154,18 @@ import std.string;
 			}
 			else
 			{
-				text.AppendText("Countdown from " ~ .toString(max) ~ " finished.\n");
+				text.AppendText("Countdown from " + max.ToString() + " finished.\n");
 			}
         }
 		
-		public void OnPageChanging(Object sender, Event e)
+		public void OnPageChanging(object sender, Event e)
 		{
-			NotebookEvent ne = cast(NotebookEvent) e;
+			NotebookEvent ne = (NotebookEvent) e;
 			int selOld = ne.OldSelection;
 			if ( selOld == 2 )
 			{
-				MessageDialog md = new MessageDialog(this, "This demonstrates how a program may prevent the\n" ~
-									"page change from taking place - if you select\n" ~
+				MessageDialog md = new MessageDialog(this, "This demonstrates how a program may prevent the\n" +
+									"page change from taking place - if you select\n" +
 									"[No] the current page will stay the third one\n",
 									"Control sample", Dialog.wxNO_DEFAULT|Dialog.wxICON_QUESTION | Dialog.wxYES_NO);
 				
@@ -1161,24 +1176,19 @@ import std.string;
 				}	
 			}
 			
-			text.AppendText("Notebook selection is being changed from " ~ .toString(selOld) ~
-							" to " ~  .toString(ne.Selection) ~
-							" (current page from notebook is " ~
-							.toString(notebook.Selection) ~ ")\n");
+			text.AppendText("Notebook selection is being changed from " + selOld.ToString() +
+							" to " +  ne.Selection.ToString() +
+							" (current page from notebook is " +
+							notebook.Selection.ToString() + ")\n");
 		}
 		
-		public void OnPageChanged(Object sender, Event e)
+		public void OnPageChanged(object sender, Event e)
 		{
-			NotebookEvent ne = cast(NotebookEvent) e;
-			text.AppendText("Notebook selection is now " ~ .toString(ne.Selection) ~
-							" (from notebook: " ~ .toString(notebook.Selection) ~ ")\n");
+			NotebookEvent ne = (NotebookEvent) e;
+			text.AppendText("Notebook selection is now " + ne.Selection.ToString() +
+							" (from notebook: " + notebook.Selection + ")\n");
 		}
 
         //---------------------------------------------------------------------
     }
-
-
-void main()
-{
-	Controls.Main();
 }

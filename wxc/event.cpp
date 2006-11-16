@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - event.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - event.cxx
 //
 // The wxEvent proxy interface.
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/tglbtn.h>
 #include <wx/calctrl.h>
 #include <wx/fdrepdlg.h>
@@ -34,8 +30,6 @@
 // Event type for virtual destructors
 
 DEFINE_EVENT_TYPE(wxEVT_OBJECTDELETED)    
-
-extern "C" WXEXPORT int wxEvent_EVT_NULL()        { return wxEVT_NULL; }
 
 //-----------------------------------------------------------------------------
 
@@ -159,12 +153,98 @@ extern "C" WXEXPORT int wxEvent_EVT_COMMAND_RIGHT_DCLICK()          { return wxE
 extern "C" WXEXPORT int wxEvent_EVT_COMMAND_SET_FOCUS()             { return wxEVT_COMMAND_SET_FOCUS; }
 extern "C" WXEXPORT int wxEvent_EVT_COMMAND_KILL_FOCUS()            { return wxEVT_COMMAND_KILL_FOCUS; }
 extern "C" WXEXPORT int wxEvent_EVT_COMMAND_ENTER()                 { return wxEVT_COMMAND_ENTER; }
-
 extern "C" WXEXPORT int wxEvent_EVT_HELP()                          { return wxEVT_HELP; }
 extern "C" WXEXPORT int wxEvent_EVT_DETAILED_HELP()                 { return wxEVT_DETAILED_HELP; }
-
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TOGGLEBUTTON_CLICKED()  { return wxEVT_COMMAND_TOGGLEBUTTON_CLICKED; }
 extern "C" WXEXPORT int wxEvent_EVT_OBJECTDELETED()                 { return wxEVT_OBJECTDELETED; }
 
+extern "C" WXEXPORT int wxEvent_EVT_CALENDAR_SEL_CHANGED()          { return wxEVT_CALENDAR_SEL_CHANGED; }
+extern "C" WXEXPORT int wxEvent_EVT_CALENDAR_DAY_CHANGED()          { return wxEVT_CALENDAR_DAY_CHANGED; }
+extern "C" WXEXPORT int wxEvent_EVT_CALENDAR_MONTH_CHANGED()        { return wxEVT_CALENDAR_MONTH_CHANGED; }
+extern "C" WXEXPORT int wxEvent_EVT_CALENDAR_YEAR_CHANGED()         { return wxEVT_CALENDAR_YEAR_CHANGED; }
+extern "C" WXEXPORT int wxEvent_EVT_CALENDAR_DOUBLECLICKED()        { return wxEVT_CALENDAR_DOUBLECLICKED; }
+extern "C" WXEXPORT int wxEvent_EVT_CALENDAR_WEEKDAY_CLICKED()      { return wxEVT_CALENDAR_WEEKDAY_CLICKED; }
+
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_FIND()                  { return wxEVT_COMMAND_FIND; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_FIND_NEXT()             { return wxEVT_COMMAND_FIND_NEXT; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_FIND_REPLACE()          { return wxEVT_COMMAND_FIND_REPLACE; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_FIND_REPLACE_ALL()      { return wxEVT_COMMAND_FIND_REPLACE_ALL; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_FIND_CLOSE()            { return wxEVT_COMMAND_FIND_CLOSE; }
+
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_BEGIN_DRAG()             { return wxEVT_COMMAND_TREE_BEGIN_DRAG; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_BEGIN_RDRAG()            { return wxEVT_COMMAND_TREE_BEGIN_RDRAG; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_BEGIN_LABEL_EDIT()       { return wxEVT_COMMAND_TREE_BEGIN_LABEL_EDIT; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_END_LABEL_EDIT()         { return wxEVT_COMMAND_TREE_END_LABEL_EDIT; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_DELETE_ITEM()            { return wxEVT_COMMAND_TREE_DELETE_ITEM; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_GET_INFO()               { return wxEVT_COMMAND_TREE_GET_INFO; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_SET_INFO()               { return wxEVT_COMMAND_TREE_SET_INFO; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_ITEM_EXPANDED()          { return wxEVT_COMMAND_TREE_ITEM_EXPANDED; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_ITEM_EXPANDING()         { return wxEVT_COMMAND_TREE_ITEM_EXPANDING; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_ITEM_COLLAPSED()         { return wxEVT_COMMAND_TREE_ITEM_COLLAPSED; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_ITEM_COLLAPSING()        { return wxEVT_COMMAND_TREE_ITEM_COLLAPSING; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_SEL_CHANGED()            { return wxEVT_COMMAND_TREE_SEL_CHANGED; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_SEL_CHANGING()           { return wxEVT_COMMAND_TREE_SEL_CHANGING; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_KEY_DOWN()               { return wxEVT_COMMAND_TREE_KEY_DOWN; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_ITEM_ACTIVATED()         { return wxEVT_COMMAND_TREE_ITEM_ACTIVATED; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_ITEM_RIGHT_CLICK()       { return wxEVT_COMMAND_TREE_ITEM_RIGHT_CLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_ITEM_MIDDLE_CLICK()      { return wxEVT_COMMAND_TREE_ITEM_MIDDLE_CLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TREE_END_DRAG()               { return wxEVT_COMMAND_TREE_END_DRAG; }
+
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_BEGIN_DRAG()             { return wxEVT_COMMAND_LIST_BEGIN_DRAG; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_BEGIN_RDRAG()            { return wxEVT_COMMAND_LIST_BEGIN_RDRAG; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_BEGIN_LABEL_EDIT()       { return wxEVT_COMMAND_LIST_BEGIN_LABEL_EDIT; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_END_LABEL_EDIT()         { return wxEVT_COMMAND_LIST_END_LABEL_EDIT; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_DELETE_ITEM()            { return wxEVT_COMMAND_LIST_DELETE_ITEM; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_DELETE_ALL_ITEMS()       { return wxEVT_COMMAND_LIST_DELETE_ALL_ITEMS; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_GET_INFO()			{ return wxEVT_COMMAND_LIST_GET_INFO; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_SET_INFO()			{ return wxEVT_COMMAND_LIST_SET_INFO; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_ITEM_SELECTED()          { return wxEVT_COMMAND_LIST_ITEM_SELECTED; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_ITEM_DESELECTED()        { return wxEVT_COMMAND_LIST_ITEM_DESELECTED; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_ITEM_ACTIVATED()         { return wxEVT_COMMAND_LIST_ITEM_ACTIVATED; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_ITEM_FOCUSED()           { return wxEVT_COMMAND_LIST_ITEM_FOCUSED; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_ITEM_MIDDLE_CLICK()      { return wxEVT_COMMAND_LIST_ITEM_MIDDLE_CLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_ITEM_RIGHT_CLICK()       { return wxEVT_COMMAND_LIST_ITEM_RIGHT_CLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_KEY_DOWN()               { return wxEVT_COMMAND_LIST_KEY_DOWN; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_INSERT_ITEM()            { return wxEVT_COMMAND_LIST_INSERT_ITEM; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_COL_CLICK()              { return wxEVT_COMMAND_LIST_COL_CLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_COL_RIGHT_CLICK()        { return wxEVT_COMMAND_LIST_COL_RIGHT_CLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_COL_BEGIN_DRAG()         { return wxEVT_COMMAND_LIST_COL_BEGIN_DRAG; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_COL_DRAGGING()           { return wxEVT_COMMAND_LIST_COL_DRAGGING; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_COL_END_DRAG()           { return wxEVT_COMMAND_LIST_COL_END_DRAG; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_CACHE_HINT()             { return wxEVT_COMMAND_LIST_CACHE_HINT; }
+
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_NOTEBOOK_PAGE_CHANGED()       { return wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_NOTEBOOK_PAGE_CHANGING()      { return wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGING; }
+
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LISTBOOK_PAGE_CHANGED()       { return wxEVT_COMMAND_LISTBOOK_PAGE_CHANGED; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LISTBOOK_PAGE_CHANGING()      { return wxEVT_COMMAND_LISTBOOK_PAGE_CHANGING; }
+
+#ifdef __WXMSW__
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TAB_SEL_CHANGED()		{ return wxEVT_COMMAND_TAB_SEL_CHANGED; }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TAB_SEL_CHANGING()		{ return wxEVT_COMMAND_TAB_SEL_CHANGING; }
+#endif
+
+extern "C" WXEXPORT int wxEvent_EVT_GRID_CELL_LEFT_CLICK() 		{ return wxEVT_GRID_CELL_LEFT_CLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_CELL_RIGHT_CLICK() 		{ return wxEVT_GRID_CELL_RIGHT_CLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_CELL_LEFT_DCLICK() 		{ return wxEVT_GRID_CELL_LEFT_DCLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_CELL_RIGHT_DCLICK() 		{ return wxEVT_GRID_CELL_RIGHT_DCLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_LABEL_LEFT_CLICK()		{ return wxEVT_GRID_LABEL_LEFT_CLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_LABEL_RIGHT_CLICK()		{ return wxEVT_GRID_LABEL_RIGHT_CLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_LABEL_LEFT_DCLICK()		{ return wxEVT_GRID_LABEL_LEFT_DCLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_LABEL_RIGHT_DCLICK()		{ return wxEVT_GRID_LABEL_RIGHT_DCLICK; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_ROW_SIZE()			{ return wxEVT_GRID_ROW_SIZE; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_COL_SIZE()			{ return wxEVT_GRID_COL_SIZE; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_RANGE_SELECT()			{ return wxEVT_GRID_RANGE_SELECT; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_CELL_CHANGE()			{ return wxEVT_GRID_CELL_CHANGE; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_SELECT_CELL()			{ return wxEVT_GRID_SELECT_CELL; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_EDITOR_SHOWN()			{ return wxEVT_GRID_EDITOR_SHOWN; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_EDITOR_HIDDEN()		{ return wxEVT_GRID_EDITOR_HIDDEN; }
+extern "C" WXEXPORT int wxEvent_EVT_GRID_EDITOR_CREATED()		{ return wxEVT_GRID_EDITOR_CREATED; }
+
+extern "C" WXEXPORT int wxEvent_EVT_SASH_DRAGGED()			{ return wxEVT_SASH_DRAGGED; }
+
+extern "C" WXEXPORT int wxEvent_EVT_QUERY_LAYOUT_INFO()			{ return wxEVT_QUERY_LAYOUT_INFO; }
+extern "C" WXEXPORT int wxEvent_EVT_CALCULATE_LAYOUT()			{ return wxEVT_CALCULATE_LAYOUT; }
 
 //-----------------------------------------------------------------------------
 

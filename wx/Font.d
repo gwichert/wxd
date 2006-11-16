@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - Font.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - Font.cs
 //
 // The wxFont wrapper class.
@@ -13,10 +10,11 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.Font;
-import wx.common;
-import wx.GDIObject;
+using System;
+using System.Runtime.InteropServices;
 
+namespace wx
+{
 	// Font encodings - taken from wx/fontenc.h
 	// Author: Vadim Zeitlin, (C) Vadim Zeitlin
 	public enum FontEncoding
@@ -155,84 +153,78 @@ import wx.GDIObject;
 			wxFONTFLAG_STRIKETHROUGH
 	}
 
-		static extern (C)        IntPtr wxFont_NORMAL_FONT();
-		static extern (C)        IntPtr wxFont_SMALL_FONT();
-		static extern (C)        IntPtr wxFont_ITALIC_FONT();
-		static extern (C)        IntPtr wxFont_SWISS_FONT();
-		static extern (C) IntPtr wxNullFont_Get();
-
-		static extern (C)        IntPtr wxFont_ctorDef();
-		static extern (C)        IntPtr wxFont_ctor(int pointSize, int family, int style, int weight, bool underline, string faceName, FontEncoding encoding);
-		static extern (C) void   wxFont_dtor(IntPtr self);
-		static extern (C) bool   wxFont_Ok(IntPtr self);
-		static extern (C) int    wxFont_GetPointSize(IntPtr self);
-		static extern (C) int    wxFont_GetFamily(IntPtr self);
-		static extern (C) int    wxFont_GetStyle(IntPtr self);
-		static extern (C) int    wxFont_GetWeight(IntPtr self);
-		static extern (C) bool   wxFont_GetUnderlined(IntPtr self);
-		static extern (C) string wxFont_GetFaceName(IntPtr self);
-		static extern (C) int    wxFont_GetEncoding(IntPtr self);
-		static extern (C)        IntPtr wxFont_GetNativeFontInfo(IntPtr self);
-		static extern (C) bool   wxFont_IsFixedWidth(IntPtr self);
-		static extern (C) string wxFont_GetNativeFontInfoDesc(IntPtr self);
-		static extern (C) string wxFont_GetNativeFontInfoUserDesc(IntPtr self);
-		static extern (C) void   wxFont_SetPointSize(IntPtr self, int pointSize);
-		static extern (C) void   wxFont_SetFamily(IntPtr self, int family);
-		static extern (C) void   wxFont_SetStyle(IntPtr self, int style);
-		static extern (C) void   wxFont_SetWeight(IntPtr self, int weight);
-		static extern (C) void   wxFont_SetFaceName(IntPtr self, string faceName);
-		static extern (C) void   wxFont_SetUnderlined(IntPtr self, bool underlined);
-		static extern (C) void   wxFont_SetEncoding(IntPtr self, int encoding);
-		static extern (C) void   wxFont_SetNativeFontInfoUserDesc(IntPtr self, IntPtr info);
-		static extern (C) string wxFont_GetFamilyString(IntPtr self);
-		static extern (C) string wxFont_GetStyleString(IntPtr self);
-		static extern (C) string wxFont_GetWeightString(IntPtr self);
-		static extern (C) void   wxFont_SetNoAntiAliasing(IntPtr self, bool no);
-		static extern (C) bool   wxFont_GetNoAntiAliasing(IntPtr self);
-		static extern (C) int    wxFont_GetDefaultEncoding();
-		static extern (C) void   wxFont_SetDefaultEncoding(int encoding);
-	
-		static extern (C) IntPtr wxFont_New(string strNativeFontDesc);
-
-		//---------------------------------------------------------------------
-
 	public class Font : GDIObject, ICloneable
 	{
-		public static Font wxNORMAL_FONT;
-		public static Font wxSMALL_FONT;
-		public static Font wxITALIC_FONT;
-		public static Font wxSWISS_FONT;
-		public static Font wxNullFont;
+		[DllImport("wx-c")] static extern        IntPtr wxFont_NORMAL_FONT();
+		[DllImport("wx-c")] static extern        IntPtr wxFont_SMALL_FONT();
+		[DllImport("wx-c")] static extern        IntPtr wxFont_ITALIC_FONT();
+		[DllImport("wx-c")] static extern        IntPtr wxFont_SWISS_FONT();
 
-/+
-		override public void Dispose()
-		{
-			if (this !== wxNORMAL_FONT
-			&&  this !== wxSMALL_FONT
-			&&  this !== wxITALIC_FONT
-			&&  this !== wxSWISS_FONT) {
-				super.Dispose();
-			}
-		}
-+/
+		[DllImport("wx-c")] static extern        IntPtr wxFont_ctorDef();
+		[DllImport("wx-c")] static extern        IntPtr wxFont_ctor(int pointSize, int family, int style, int weight, bool underline, string faceName, FontEncoding encoding);
+		[DllImport("wx-c")] static extern void   wxFont_dtor(IntPtr self);
+		[DllImport("wx-c")] static extern bool   wxFont_Ok(IntPtr self);
+		[DllImport("wx-c")] static extern int    wxFont_GetPointSize(IntPtr self);
+		[DllImport("wx-c")] static extern int    wxFont_GetFamily(IntPtr self);
+		[DllImport("wx-c")] static extern int    wxFont_GetStyle(IntPtr self);
+		[DllImport("wx-c")] static extern int    wxFont_GetWeight(IntPtr self);
+		[DllImport("wx-c")] static extern bool   wxFont_GetUnderlined(IntPtr self);
+		[DllImport("wx-c")] static extern IntPtr wxFont_GetFaceName(IntPtr self);
+		[DllImport("wx-c")] static extern int    wxFont_GetEncoding(IntPtr self);
+		[DllImport("wx-c")] static extern        IntPtr wxFont_GetNativeFontInfo(IntPtr self);
+		[DllImport("wx-c")] static extern bool   wxFont_IsFixedWidth(IntPtr self);
+		[DllImport("wx-c")] static extern IntPtr wxFont_GetNativeFontInfoDesc(IntPtr self);
+		[DllImport("wx-c")] static extern IntPtr wxFont_GetNativeFontInfoUserDesc(IntPtr self);
+		[DllImport("wx-c")] static extern void   wxFont_SetPointSize(IntPtr self, int pointSize);
+		[DllImport("wx-c")] static extern void   wxFont_SetFamily(IntPtr self, int family);
+		[DllImport("wx-c")] static extern void   wxFont_SetStyle(IntPtr self, int style);
+		[DllImport("wx-c")] static extern void   wxFont_SetWeight(IntPtr self, int weight);
+		[DllImport("wx-c")] static extern void   wxFont_SetFaceName(IntPtr self, string faceName);
+		[DllImport("wx-c")] static extern void   wxFont_SetUnderlined(IntPtr self, bool underlined);
+		[DllImport("wx-c")] static extern void   wxFont_SetEncoding(IntPtr self, int encoding);
+		[DllImport("wx-c")] static extern void   wxFont_SetNativeFontInfoUserDesc(IntPtr self, IntPtr info);
+		[DllImport("wx-c")] static extern IntPtr wxFont_GetFamilyString(IntPtr self);
+		[DllImport("wx-c")] static extern IntPtr wxFont_GetStyleString(IntPtr self);
+		[DllImport("wx-c")] static extern IntPtr wxFont_GetWeightString(IntPtr self);
+		[DllImport("wx-c")] static extern void   wxFont_SetNoAntiAliasing(IntPtr self, bool no);
+		[DllImport("wx-c")] static extern bool   wxFont_GetNoAntiAliasing(IntPtr self);
+		[DllImport("wx-c")] static extern int    wxFont_GetDefaultEncoding();
+		[DllImport("wx-c")] static extern void   wxFont_SetDefaultEncoding(int encoding);
+	
+		[DllImport("wx-c")] static extern IntPtr wxFont_New(string strNativeFontDesc);
+
 		//---------------------------------------------------------------------
 
-		public this(IntPtr wxobj) 
-			{ super(wxobj); }
+		public static Font wxNORMAL_FONT    = new Font(wxFont_NORMAL_FONT());
+		public static Font wxSMALL_FONT     = new Font(wxFont_SMALL_FONT());
+		public static Font wxITALIC_FONT    = new Font(wxFont_ITALIC_FONT());
+		public static Font wxSWISS_FONT     = new Font(wxFont_SWISS_FONT());
+
+		//---------------------------------------------------------------------
+
+		public Font(IntPtr wxObject) 
+			: base(wxObject) { }
 			
-		public this(IntPtr wxobj, bool memOwn)
+		internal Font(IntPtr wxObject, bool memOwn)
+			: base(wxObject)
 		{ 
-			super(wxobj);
 			this.memOwn = memOwn;
+			this.wxObject = wxObject;
 		}
 
-		public this()
-			{ this(wxFont_ctorDef(), true); }
+		public Font()
+			: this(wxFont_ctorDef(), true) { }
 
-		public this(int pointSize, FontFamily family, FontStyle style, FontWeight weight, bool underline = false, string face = "", FontEncoding encoding = FontEncoding.wxFONTENCODING_DEFAULT)
-			{ this(wxFont_ctor(pointSize, cast(int)family, cast(int)style, cast(int)weight, underline, face, encoding), true); }
+		public Font(int pointSize, FontFamily family, FontStyle style, FontWeight weight)
+			: this(pointSize, family, style, weight, false, "", FontEncoding.wxFONTENCODING_DEFAULT) { }
+
+		public Font(int pointSize, FontFamily family, FontStyle style, FontWeight weight, bool underline, string faceName)
+			: this(pointSize, family, style, weight, underline, faceName, FontEncoding.wxFONTENCODING_DEFAULT) { }
+
+		public Font(int pointSize, FontFamily family, FontStyle style, FontWeight weight, bool underline, string faceName, FontEncoding encoding)
+			: this(wxFont_ctor(pointSize, (int)family, (int)style, (int)weight, underline, faceName, encoding), true) { }
 			
-		~this()
+		~Font()
 		{
 			Dispose();
 		}
@@ -244,48 +236,93 @@ import wx.GDIObject;
 			if ((this != Font.wxNORMAL_FONT) && (this != Font.wxSWISS_FONT) &&
 				(this != Font.wxSMALL_FONT) && (this != Font.wxITALIC_FONT)) 
 			{
-				super.Dispose(/*true*/);
+				Dispose(true);
 			}
 		}
 
 		//---------------------------------------------------------------------
 
-		public int PointSize() { return wxFont_GetPointSize(wxobj); }
-		public void PointSize(int value) { wxFont_SetPointSize(wxobj, value); }
+		public int PointSize
+		{
+			get { return wxFont_GetPointSize(wxObject); }
+			set { wxFont_SetPointSize(wxObject, value); }
+		}
 
-		public FontFamily Family() { return cast(FontFamily)wxFont_GetFamily(wxobj); }
-		public void Family(FontFamily value) { wxFont_SetFamily(wxobj, cast(int)value); }
+		public FontFamily Family
+		{
+			get { return (FontFamily)wxFont_GetFamily(wxObject); }
+			set { wxFont_SetFamily(wxObject, (int)value); }
+		}
 
-		public FontStyle Style() { return cast(FontStyle)wxFont_GetStyle(wxobj); }
-		public void Style(FontStyle value) { wxFont_SetStyle(wxobj, cast(int)value); }
+		public FontStyle Style
+		{
+			get { return (FontStyle)wxFont_GetStyle(wxObject); }
+			set { wxFont_SetStyle(wxObject, (int)value); }
+		}
 
-		public FontEncoding Encoding() { return cast(FontEncoding)wxFont_GetEncoding(wxobj); }
-		public void Encoding(FontEncoding value) { wxFont_SetEncoding(wxobj, cast(int)value); }
+		public FontEncoding Encoding
+		{
+			get { return (FontEncoding)wxFont_GetEncoding(wxObject); }
+			set { wxFont_SetEncoding(wxObject, (int)value); }
+		}
 
-		public FontWeight Weight() { return cast(FontWeight)wxFont_GetWeight(wxobj); }
-		public void Weight(FontWeight value) { wxFont_SetWeight(wxobj, cast(int)value); }
+		public FontWeight Weight
+		{
+			get { return (FontWeight)wxFont_GetWeight(wxObject); }
+			set { wxFont_SetWeight(wxObject, (int)value); }
+		}
 
-		public bool Underlined() { return wxFont_GetUnderlined(wxobj); }
-		public void Underlined(bool value) { wxFont_SetUnderlined(wxobj, value); }
+		public bool Underlined
+		{
+			get { return wxFont_GetUnderlined(wxObject); }
+			set { wxFont_SetUnderlined(wxObject, value); }
+		}
 
-		public string FaceName() { return wxFont_GetFaceName(wxobj).dup; }
-		public void FaceName(string value) { wxFont_SetFaceName(wxobj, value); }
+		public string FaceName
+		{
+			get { return new wxString(wxFont_GetFaceName(wxObject), true); }
+			set { wxFont_SetFaceName(wxObject, value); }
+		}
 	
-		public string FamilyString() { return wxFont_GetFamilyString(wxobj).dup; }
+		public string FamilyString
+		{
+			get { return new wxString(wxFont_GetFamilyString(wxObject), true); }
+		}
 	
-		public string StyleString() { return wxFont_GetStyleString(wxobj).dup; }
+		public string StyleString
+		{
+			get { return new wxString(wxFont_GetStyleString(wxObject), true); }
+		}
 	
-		public string WeightString() { return wxFont_GetStyleString(wxobj).dup; }
+		public string WeightString
+		{
+			get { return new wxString(wxFont_GetStyleString(wxObject), true); }
+		}
 	
-		public bool IsFixedWidth() { return wxFont_IsFixedWidth(wxobj); }
+		public bool IsFixedWidth
+		{
+			get { return wxFont_IsFixedWidth(wxObject); }
+		}
 	
-		public bool Ok() { return wxFont_Ok(wxobj); }
+		public bool Ok
+		{
+			get { return wxFont_Ok(wxObject); }
+		}
 	
-		public IntPtr NativeFontInfo() { return wxFont_GetNativeFontInfo(wxobj); }
+		public IntPtr NativeFontInfo
+		{
+			get { return wxFont_GetNativeFontInfo(wxObject); }
+		}
 	
-		public string NativeFontInfoUserDesc() { return wxFont_GetNativeFontInfoUserDesc(wxobj).dup; }
+		public string NativeFontInfoUserDesc
+		{
+			get { return new wxString(wxFont_GetNativeFontInfoUserDesc(wxObject), true); }
+		}
 	
-		public string NativeFontInfoDesc() { return wxFont_GetNativeFontInfoDesc(wxobj).dup; }
+		public string NativeFontInfoDesc
+		{
+			get{ return new wxString(wxFont_GetNativeFontInfoDesc(wxObject), true); }
+		}
 	
 		public static Font New(string strNativeFontDesc)
 		{
@@ -295,16 +332,28 @@ import wx.GDIObject;
 		//---------------------------------------------------------------------
 
 		// Implement ICloneable to provide instance copy
-		public Object Clone()
+		public object Clone()
 		{
-			return new Font(this);
+			Font clone = new Font();
+			CopyMembers(this, clone);
+			return clone;
 		}
 
 		// Constructor that copies font passed in
-		public this(Font other) 
+		public Font(Font existing_font) : this(wxFont_ctorDef())
 		{
-			this(other.PointSize,other.Family,other.Style,other.Weight,other.Underlined,other.FaceName,other.Encoding);
+			CopyMembers(existing_font, this);
 		}
 
-		public static wxObject New(IntPtr ptr) { return new Font(ptr); }
+		private void CopyMembers(Font from, Font to)
+		{
+			to.Encoding = from.Encoding;
+			to.FaceName = from.FaceName;
+			to.Family = from.Family;
+			to.PointSize = from.PointSize;
+			to.Style = from.Style;
+			to.Underlined = from.Underlined;
+			to.Weight = from.Weight;
+		}
 	}
+}

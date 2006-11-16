@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - fontdialog.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - fontdialog.cxx
 //
 // The wxFontDialog proxy interface.
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/fontdlg.h>
 #include "local_events.h"
 
@@ -176,9 +172,3 @@ void wxFontData_SetRange(wxFontData* self, int minRange, int maxRange)
 
 //-----------------------------------------------------------------------------
 
-extern "C" WXEXPORT
-wxFont* wxGetFontFromUser_func(wxWindow *parent, wxFont *fontInit)
-{
-	if (fontInit == NULL) fontInit = &wxNullFont;
-	return new wxFont(wxGetFontFromUser(parent,*fontInit));
-}

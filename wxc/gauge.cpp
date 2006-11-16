@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - gauge.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - gauge.cxx
 //
 // The wxGauge proxy interface
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/gauge.h>
 #include "local_events.h"
 
@@ -45,7 +41,7 @@ void wxGauge_dtor(wxGauge* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxGauge_Create(wxGauge* self, wxWindow *parent, wxWindowID id, int range, const wxPoint* pos, const wxSize* size, long style, const wxValidator* validator, dstr name)
+bool wxGauge_Create(wxGauge* self, wxWindow *parent, wxWindowID id, int range, const wxPoint* pos, const wxSize* size, long style, const wxValidator* validator, const char* name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -56,10 +52,10 @@ bool wxGauge_Create(wxGauge* self, wxWindow *parent, wxWindowID id, int range, c
 	if (validator == NULL)
 		validator = &wxDefaultValidator;
 
-	if (name.data==NULL)
-		name = dstr("gauge",sizeof("gauge")-1);
+	if (name == NULL)
+		name = "gauge";
 
-	return self->Create(parent, id, range, *pos, *size, style, *validator, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, range, *pos, *size, style, *validator, wxString(name, wxConvUTF8))?1:0;
 }
 
 //-----------------------------------------------------------------------------

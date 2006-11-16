@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - Notebook.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - Notebook.cs
 //
 // The wxNotebook wrapper class.
@@ -13,119 +10,128 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.Notebook;
-import wx.common;
-import wx.Event;
-import wx.Control;
-import wx.ImageList;
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
-		static extern (C) IntPtr wxNotebookEvent_ctor(int commandType, int id, int nSel, int nOldSel);
-		static extern (C) int    wxNotebookEvent_GetSelection(IntPtr self);
-		static extern (C) void   wxNotebookEvent_SetSelection(IntPtr self, int nSel);
-		static extern (C) int    wxNotebookEvent_GetOldSelection(IntPtr self);
-		static extern (C) void   wxNotebookEvent_SetOldSelection(IntPtr self, int nOldSel);
-		static extern (C) void wxNotebookEvent_Veto(IntPtr self);
-		static extern (C) void wxNotebookEvent_Allow(IntPtr self);
-		static extern (C) bool wxNotebookEvent_IsAllowed(IntPtr self);		
-
-		//-----------------------------------------------------------------------------
-
+namespace wx
+{
 	public class NotebookEvent : Event
 	{
-		public this(IntPtr wxobj)
-			{ super(wxobj); }
-
-		public this(int commandType, int id, int nSel, int nOldSel)
-			{ super(wxNotebookEvent_ctor(commandType, id, nSel, nOldSel)); }
-
-		//-----------------------------------------------------------------------------
-
-		public int Selection() { return wxNotebookEvent_GetSelection(wxobj); }
-		public void Selection(int value) { wxNotebookEvent_SetSelection(wxobj, value); }
+		[DllImport("wx-c")] static extern IntPtr wxNotebookEvent_ctor(int commandType, int id, int nSel, int nOldSel);
+		[DllImport("wx-c")] static extern int    wxNotebookEvent_GetSelection(IntPtr self);
+		[DllImport("wx-c")] static extern void   wxNotebookEvent_SetSelection(IntPtr self, int nSel);
+		[DllImport("wx-c")] static extern int    wxNotebookEvent_GetOldSelection(IntPtr self);
+		[DllImport("wx-c")] static extern void   wxNotebookEvent_SetOldSelection(IntPtr self, int nOldSel);
+		[DllImport("wx-c")] static extern void wxNotebookEvent_Veto(IntPtr self);
+		[DllImport("wx-c")] static extern void wxNotebookEvent_Allow(IntPtr self);
+		[DllImport("wx-c")] static extern bool wxNotebookEvent_IsAllowed(IntPtr self);		
 
 		//-----------------------------------------------------------------------------
 
-		public int OldSelection() { return wxNotebookEvent_GetOldSelection(wxobj); }
-		public void OldSelection(int value) { wxNotebookEvent_SetOldSelection(wxobj, value); }
+		public NotebookEvent(IntPtr wxObject)
+			: base(wxObject) { }
+
+		public NotebookEvent(int commandType, int id, int nSel, int nOldSel)
+			: base(wxNotebookEvent_ctor(commandType, id, nSel, nOldSel)) { }
+
+		//-----------------------------------------------------------------------------
+
+		public int Selection
+		{
+			get { return wxNotebookEvent_GetSelection(wxObject); }
+			set { wxNotebookEvent_SetSelection(wxObject, value); }
+		}
+
+		//-----------------------------------------------------------------------------
+
+		public int OldSelection
+		{
+			get { return wxNotebookEvent_GetOldSelection(wxObject); }
+			set { wxNotebookEvent_SetOldSelection(wxObject, value); }
+		}
 		
 		//-----------------------------------------------------------------------------		
 		
 		public void Veto()
 		{
-			wxNotebookEvent_Veto(wxobj);
+			wxNotebookEvent_Veto(wxObject);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public void Allow()
 		{
-			wxNotebookEvent_Allow(wxobj);
+			wxNotebookEvent_Allow(wxObject);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public bool Allowed() { return wxNotebookEvent_IsAllowed(wxobj); }
-
-		private static Event New(IntPtr obj) { return new NotebookEvent(obj); }
-
-		static this()
+		public bool Allowed
 		{
-			wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED = wxEvent_EVT_COMMAND_NOTEBOOK_PAGE_CHANGED();
-			wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGING = wxEvent_EVT_COMMAND_NOTEBOOK_PAGE_CHANGING();
-
-			AddEventType(wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED,   &NotebookEvent.New);
-			AddEventType(wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGING,  &NotebookEvent.New);
-		}
+			get { return wxNotebookEvent_IsAllowed(wxObject); }
+		}		
 	}
 
-		static extern (C) IntPtr wxNotebook_ctor();
-		static extern (C) bool   wxNotebook_AddPage(IntPtr self, IntPtr page, string text, bool select, int imageId);
-		static extern (C) bool   wxNotebook_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
-		static extern (C) int    wxNotebook_GetPageCount(IntPtr self);
-		static extern (C) IntPtr wxNotebook_GetPage(IntPtr self, int nPage);
-		static extern (C) int    wxNotebook_GetSelection(IntPtr self);
-		static extern (C) bool   wxNotebook_SetPageText(IntPtr self, int nPage, string strText);
-		static extern (C) string wxNotebook_GetPageText(IntPtr self, int nPage);
-		static extern (C) void   wxNotebook_SetImageList(IntPtr self, IntPtr imageList);
-		static extern (C) void   wxNotebook_AssignImageList(IntPtr self, IntPtr imageList);
-		static extern (C) IntPtr wxNotebook_GetImageList(IntPtr self);
-		static extern (C) int    wxNotebook_GetPageImage(IntPtr self, int nPage);
-		static extern (C) bool   wxNotebook_SetPageImage(IntPtr self, int nPage, int nImage);
-		static extern (C) int    wxNotebook_GetRowCount(IntPtr self);
-		static extern (C) void   wxNotebook_SetPageSize(IntPtr self, inout Size size);
-		static extern (C) void   wxNotebook_SetPadding(IntPtr self, inout Size padding);
-		static extern (C) void   wxNotebook_SetTabSize(IntPtr self, inout Size sz);
-		static extern (C) bool   wxNotebook_DeletePage(IntPtr self, int nPage);
-		static extern (C) bool   wxNotebook_RemovePage(IntPtr self, int nPage);
-		static extern (C) bool   wxNotebook_DeleteAllPages(IntPtr self);
-		static extern (C) bool   wxNotebook_InsertPage(IntPtr self, int nPage, IntPtr pPage, string strText, bool bSelect, int imageId);
-		static extern (C) int    wxNotebook_SetSelection(IntPtr self, int nPage);
-		static extern (C) void   wxNotebook_AdvanceSelection(IntPtr self, bool forward);
+	public class Notebook : Control
+	{
+		public const long wxNB_FIXEDWIDTH       = 0x0010;
+		public const long wxNB_TOP              = 0x0000;
+		public const long wxNB_LEFT             = 0x0020;
+		public const long wxNB_RIGHT            = 0x0040;
+		public const long wxNB_BOTTOM           = 0x0080;
+		public const long wxNB_MULTILINE        = 0x0100;
+	
+		//-----------------------------------------------------------------------------
+
+		[DllImport("wx-c")] static extern IntPtr wxNotebook_ctor();
+		[DllImport("wx-c")] static extern bool   wxNotebook_AddPage(IntPtr self, IntPtr page, string text, bool select, int imageId);
+		[DllImport("wx-c")] static extern bool   wxNotebook_Create(IntPtr self, IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
+		[DllImport("wx-c")] static extern int    wxNotebook_GetPageCount(IntPtr self);
+		[DllImport("wx-c")] static extern IntPtr wxNotebook_GetPage(IntPtr self, int nPage);
+		[DllImport("wx-c")] static extern int    wxNotebook_GetSelection(IntPtr self);
+		[DllImport("wx-c")] static extern bool   wxNotebook_SetPageText(IntPtr self, int nPage, string strText);
+		[DllImport("wx-c")] static extern IntPtr wxNotebook_GetPageText(IntPtr self, int nPage);
+		[DllImport("wx-c")] static extern void   wxNotebook_SetImageList(IntPtr self, IntPtr imageList);
+		[DllImport("wx-c")] static extern void   wxNotebook_AssignImageList(IntPtr self, IntPtr imageList);
+		[DllImport("wx-c")] static extern IntPtr wxNotebook_GetImageList(IntPtr self);
+		[DllImport("wx-c")] static extern int    wxNotebook_GetPageImage(IntPtr self, int nPage);
+		[DllImport("wx-c")] static extern bool   wxNotebook_SetPageImage(IntPtr self, int nPage, int nImage);
+		[DllImport("wx-c")] static extern int    wxNotebook_GetRowCount(IntPtr self);
+		[DllImport("wx-c")] static extern void   wxNotebook_SetPageSize(IntPtr self, ref Size size);
+		[DllImport("wx-c")] static extern void   wxNotebook_SetPadding(IntPtr self, ref Size padding);
+		[DllImport("wx-c")] static extern void   wxNotebook_SetTabSize(IntPtr self, ref Size sz);
+		[DllImport("wx-c")] static extern bool   wxNotebook_DeletePage(IntPtr self, int nPage);
+		[DllImport("wx-c")] static extern bool   wxNotebook_RemovePage(IntPtr self, int nPage);
+		[DllImport("wx-c")] static extern bool   wxNotebook_DeleteAllPages(IntPtr self);
+		[DllImport("wx-c")] static extern bool   wxNotebook_InsertPage(IntPtr self, int nPage, IntPtr pPage, string strText, bool bSelect, int imageId);
+		[DllImport("wx-c")] static extern int    wxNotebook_SetSelection(IntPtr self, int nPage);
+		[DllImport("wx-c")] static extern void   wxNotebook_AdvanceSelection(IntPtr self, bool forward);
 
 		//---------------------------------------------------------------------
 		
-	public class Notebook : Control
-	{
-		public const int wxNB_FIXEDWIDTH       = 0x0010;
-		public const int wxNB_TOP              = 0x0000;
-		public const int wxNB_LEFT             = 0x0020;
-		public const int wxNB_RIGHT            = 0x0040;
-		public const int wxNB_BOTTOM           = 0x0080;
-		public const int wxNB_MULTILINE        = 0x0100;
-	
-		public const string wxNOTEBOOK_NAME = "notebook";
-		//-----------------------------------------------------------------------------
+		public Notebook(IntPtr wxObject) 
+			: base(wxObject) { }
 
-		public this(IntPtr wxobj) 
-			{ super(wxobj); }
+		public Notebook()
+			: base(wxNotebook_ctor()) { }
 
-		public this()
-			{ super(wxNotebook_ctor()); }
+		public Notebook(Window parent)
+			: this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, null) { }
 
-		public this(Window parent, int id, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, string name = wxNOTEBOOK_NAME)
+		public Notebook(Window parent, int id)
+			: this(parent, id, wxDefaultPosition, wxDefaultSize, 0, null) { }
+
+		public Notebook(Window parent, int id, Point pos, Size size)
+			: this(parent, id, pos, size, 0, null) { }
+
+		public Notebook(Window parent, int id, Point pos, Size size, long style)
+			: this(parent, id, pos, size, style, null) { }
+
+		public Notebook(Window parent, int id, Point pos, Size size, long style, string name)
+			: base(wxNotebook_ctor())
 		{
-			super(wxNotebook_ctor());
-			if (!wxNotebook_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, style, name)) 
+			if (!wxNotebook_Create(wxObject, Object.SafePtr(parent), id, ref pos, ref size, (uint)style, name)) 
 			{
 				throw new InvalidOperationException("Failed to create Notebook");
 			}
@@ -134,8 +140,14 @@ import wx.ImageList;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 			
-		public this(Window parent, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, string name = wxNOTEBOOK_NAME)
-			{ this(parent, Window.UniqueID, pos, size, style, name);}
+		public Notebook(Window parent, Point pos, Size size)
+			: this(parent, Window.UniqueID, pos, size, 0, null) { }
+
+		public Notebook(Window parent, Point pos, Size size, long style)
+			: this(parent, Window.UniqueID, pos, size, style, null) { }
+
+		public Notebook(Window parent, Point pos, Size size, long style, string name)
+			: this(parent, Window.UniqueID, pos, size, style, name) {}
         
 		//---------------------------------------------------------------------
 
@@ -149,92 +161,113 @@ import wx.ImageList;
 		
 		public bool AddPage(Window page, string text, bool select, int imageId)
 		{
-			return wxNotebook_AddPage(wxobj, wxObject.SafePtr(page), text, select, imageId);
+			return wxNotebook_AddPage(wxObject, Object.SafePtr(page), text, select, imageId);
 		}
 
 		//---------------------------------------------------------------------
 
-		public void Images(ImageList value) { wxNotebook_SetImageList(wxobj, wxObject.SafePtr(value)); }
-		public ImageList Images() { return cast(ImageList)FindObject(wxNotebook_GetImageList(wxobj)); }
+		public ImageList Images
+		{
+			set { wxNotebook_SetImageList(wxObject, Object.SafePtr(value)); }
+			get { return (ImageList)FindObject(wxNotebook_GetImageList(wxObject)); }
+		}
 
 		//---------------------------------------------------------------------
 
-		public int PageCount() { return wxNotebook_GetPageCount(wxobj); }
+		public int PageCount
+		{
+			get { return wxNotebook_GetPageCount(wxObject); }
+		}
 
 		// TODO: Switch window with NotebookPage
 		public Window GetPage(int page)
 		{
-			return cast(Window)FindObject(wxNotebook_GetPage(wxobj, page));
+			return (Window)FindObject(wxNotebook_GetPage(wxObject, page));
 		}
 
 		//---------------------------------------------------------------------
 
-		public int Selection() { return wxNotebook_GetSelection(wxobj); }
-		public void Selection(int value) { wxNotebook_SetSelection(wxobj, value); }
+		public int Selection
+		{
+			get { return wxNotebook_GetSelection(wxObject); }
+			set { wxNotebook_SetSelection(wxObject, value); }
+		}
 
 		public void AdvanceSelection(bool forward)
 		{
-			wxNotebook_AdvanceSelection(wxobj, forward);
+			wxNotebook_AdvanceSelection(wxObject, forward);
 		}
 
 		//---------------------------------------------------------------------
 
 		public bool SetPageText(int page, string text)
 		{
-			return wxNotebook_SetPageText(wxobj, page, text);
+			return wxNotebook_SetPageText(wxObject, page, text);
 		}
 
 		public string GetPageText(int page)
 		{
-			return wxNotebook_GetPageText(wxobj, page).dup;
+			return new wxString(wxNotebook_GetPageText(wxObject, page), true);
 		}
 
 		//---------------------------------------------------------------------
 
 		public void AssignImageList(ImageList imageList)
 		{
-			wxNotebook_AssignImageList(wxobj, wxObject.SafePtr(imageList));
+			wxNotebook_AssignImageList(wxObject, Object.SafePtr(imageList));
 		}
 
 		//---------------------------------------------------------------------
 
 		public int GetPageImage(int page)
 		{
-			return wxNotebook_GetPageImage(wxobj, page);
+			return wxNotebook_GetPageImage(wxObject, page);
 		}
 
 		public bool SetPageImage(int page, int image)
 		{
-			return wxNotebook_SetPageImage(wxobj, page, image);
+			return wxNotebook_SetPageImage(wxObject, page, image);
 		}
 
 		//---------------------------------------------------------------------
 
-		public int RowCount() { return wxNotebook_GetRowCount(wxobj); }
+		public int RowCount
+		{
+			get { return wxNotebook_GetRowCount(wxObject); }
+		}
 
 		//---------------------------------------------------------------------
 
-		public void PageSize(Size value) { wxNotebook_SetPageSize(wxobj, value); }
+		public Size PageSize
+		{
+			set { wxNotebook_SetPageSize(wxObject, ref value); }
+		}
 
-		public void Padding(Size value) { wxNotebook_SetPadding(wxobj, value); }
+		public Size Padding
+		{
+			set { wxNotebook_SetPadding(wxObject, ref value); }
+		}
 
-		public void TabSize(Size value) { wxNotebook_SetTabSize(wxobj, value); }
+		public Size TabSize
+		{
+			set { wxNotebook_SetTabSize(wxObject, ref value); }
+		}
 
 		//---------------------------------------------------------------------
 
 		public bool DeletePage(int page)
 		{
-			return wxNotebook_DeletePage(wxobj, page);
+			return wxNotebook_DeletePage(wxObject, page);
 		}
 
 		public bool RemovePage(int page)
 		{
-			return wxNotebook_RemovePage(wxobj, page);
+			return wxNotebook_RemovePage(wxObject, page);
 		}
 
 		public bool DeleteAllPages()
 		{
-			return wxNotebook_DeleteAllPages(wxobj);
+			return wxNotebook_DeleteAllPages(wxObject);
 		}
 
 		//---------------------------------------------------------------------
@@ -243,16 +276,23 @@ import wx.ImageList;
 		public bool InsertPage(int page, Window window, string text,
 							   bool select, int image)
 		{
-			return wxNotebook_InsertPage(wxobj, page,
-										 wxObject.SafePtr(window), text, select,
+			return wxNotebook_InsertPage(wxObject, page,
+										 Object.SafePtr(window), text, select,
 										 image);
 		}
 
 		//---------------------------------------------------------------------
 
-		public void PageChange_Add(EventListener value) { AddCommandListener(Event.wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED, ID, value, this); }
-		public void PageChange_Remove(EventListener value) { RemoveHandler(value, this); }
+		public event EventListener PageChange
+		{
+			add { AddCommandListener(Event.wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED, ID, value, this); }
+			remove { RemoveHandler(value, this); }
+		}
 
-		public void PageChanging_Add(EventListener value) { AddCommandListener(Event.wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGING, ID, value, this); }
-		public void PageChanging_Remove(EventListener value) { RemoveHandler(value, this); }
+		public event EventListener PageChanging
+		{
+			add { AddCommandListener(Event.wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGING, ID, value, this); }
+			remove { RemoveHandler(value, this); }
+		}
 	}
+}

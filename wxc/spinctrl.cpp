@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - spinctl.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - spinctl.cxx
 //
 // The wxSpinCtrl proxy interface
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/spinctrl.h>
 #include "local_events.h"
 
@@ -37,10 +33,10 @@ wxSpinCtrl* wxSpinCtrl_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxSpinCtrl_Create(wxSpinCtrl* self, wxWindow *parent, wxWindowID id, dstr value, const wxPoint* pos, const wxSize* size, long style, int min, int max, int initial, dstr name)
+bool wxSpinCtrl_Create(wxSpinCtrl* self, wxWindow *parent, wxWindowID id, const char* value, const wxPoint* pos, const wxSize* size, long style, int min, int max, int initial, const char* name)
 {
-//	if (value == NULL)
-//		value = "";
+	if (value == NULL)
+		value = "";
 
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -48,10 +44,10 @@ bool wxSpinCtrl_Create(wxSpinCtrl* self, wxWindow *parent, wxWindowID id, dstr v
 	if (size == NULL)
 		size = &wxDefaultSize;
 
-	if (name.data==NULL)
-		name = dstr("spinctrl",sizeof("spinctrl")-1);
+	if (name == NULL)
+		name = "spinctrl";
 
-	return self->Create(parent, id, wxString(value.data, wxConvUTF8, value.length), *pos, *size, style, min, max, initial, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, wxString(value, wxConvUTF8), *pos, *size, style, min, max, initial, wxString(name, wxConvUTF8))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -73,9 +69,9 @@ void wxSpinCtrl_SetValue(wxSpinCtrl* self, int val)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxSpinCtrl_SetValueStr(wxSpinCtrl* self, dstr text)
+void wxSpinCtrl_SetValueStr(wxSpinCtrl* self, const char* text)
 {
-	self->SetValue(wxString(text.data, wxConvUTF8, text.length));
+	self->SetValue(wxString(text, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------

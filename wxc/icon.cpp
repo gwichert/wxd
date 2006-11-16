@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - icon.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - icon.cxx
 //
 // The wxIcon proxy interface.
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 
 //-----------------------------------------------------------------------------
 
@@ -35,7 +31,7 @@ void wxIcon_CopyFromBitmap(wxIcon* self, const wxBitmap* bitmap)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxIcon_LoadFile(wxIcon* self, dstr name, wxBitmapType type)
+bool wxIcon_LoadFile(wxIcon* self, const char* name, wxBitmapType type)
 {
-	return self->LoadFile(wxString(name.data, wxConvUTF8, name.length), type)?1:0;
+	return self->LoadFile(wxString(name, wxConvUTF8), type)?1:0;
 }

@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - global.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - global.cxx
 //
 // The proxy interface for wxWidgets global methods.
@@ -14,15 +11,14 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/busyinfo.h>
 #include "local_events.h"
 
 //-----------------------------------------------------------------------------
-/*
+
 extern "C" WXEXPORT
 int wxGlobal_GetNumberFromUser(
-                    dstr msg, dstr prompt, dstr caption,
+                    const char* msg, const char* prompt, const char* caption,
                     int value, int min, int max, wxWindow* parent,
                     const wxPoint* pos
                 )
@@ -32,36 +28,36 @@ int wxGlobal_GetNumberFromUser(
     }
 
     return wxGetNumberFromUser(
-                    wxString(msg.data, wxConvUTF8, msg.length), wxString(prompt.data, wxConvUTF8, prompt.length),
-                    wxString(caption.data, wxConvUTF8, caption.length), value, min, max, parent,
+                    wxString(msg, wxConvUTF8), wxString(prompt, wxConvUTF8),
+                    wxString(caption, wxConvUTF8), value, min, max, parent,
                     *pos
                 );
 }
-*/
+
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxGlobal_GetHomeDir()
+wxString* wxGlobal_GetHomeDir()
 {
-	return dstr_ret(wxGetHomeDir());
+	return new wxString(wxGetHomeDir());
 }
 
 //-----------------------------------------------------------------------------
-/*
+
 extern "C" WXEXPORT
-dstrret wxGlobal_FileSelector(const char* message, const char* default_path,
+wxString* wxGlobal_FileSelector(const char* message, const char* default_path,
 				const char* default_filename, const char* default_extension,
 				const char* wildcard, int flags,
 				wxWindow* parent, int x, int y)
 {
-	return dstr_ret(wxFileSelector(message,
-						default_path,
-						default_filename,
-						default_extension,
-						wildcard,
+	return new wxString(wxFileSelector(wxString(message, wxConvUTF8).c_str(),
+						wxString(default_path, wxConvUTF8).c_str(),
+						wxString(default_filename, wxConvUTF8).c_str(),
+						wxString(default_extension, wxConvUTF8).c_str(),
+						wxString(wildcard, wxConvUTF8).c_str(),
 						flags, parent, x, y));
 }
-*/
+
 //-----------------------------------------------------------------------------
 
 class _ArrayInt : public wxArrayInt
@@ -96,12 +92,6 @@ extern "C" WXEXPORT
 void wxArrayInt_Add(wxArrayInt* self, int toadd)
 {
 	self->Add(toadd);
-}
-
-extern "C" WXEXPORT
-void wxArrayInt_Alloc(wxArrayInt* self, int n)
-{
-	self->Alloc(n);
 }
 
 extern "C" WXEXPORT
@@ -147,22 +137,16 @@ void wxArrayString_RegisterDisposable(_ArrayString* self, Virtual_Dispose onDisp
 }
 
 extern "C" WXEXPORT
-void wxArrayString_Add(wxArrayString* self, dstr toadd)
+void wxArrayString_Add(wxArrayString* self, const char* toadd)
 {
-	wxString tmps(wxString(toadd.data, wxConvUTF8, toadd.length));
+	wxString tmps(wxString(toadd, wxConvUTF8));
 	self->Add(tmps);
 }
 
 extern "C" WXEXPORT
-void wxArrayString_Alloc(wxArrayString* self, int n)
+wxString* wxArrayString_Item(wxArrayString* self, int num)
 {
-	self->Alloc(n);
-}
-
-extern "C" WXEXPORT
-dstrret wxArrayString_Item(wxArrayString* self, int num)
-{
-	return dstr_ret(self->Item(num));
+	return new wxString(self->Item(num));
 }
 
 extern "C" WXEXPORT
@@ -219,9 +203,9 @@ void wxWindowDisabler_dtor(wxWindowDisabler* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxBusyInfo* wxBusyInfo_ctor(dstr message, wxWindow* parent)
+wxBusyInfo* wxBusyInfo_ctor(const char* message, wxWindow* parent)
 {
-	return new wxBusyInfo(wxString(message.data, wxConvUTF8, message.length), parent);
+	return new wxBusyInfo(wxString(message, wxConvUTF8), parent);
 }
 
 extern "C" WXEXPORT
@@ -244,7 +228,6 @@ void wxMutexGuiLeave_func()
 	wxMutexGuiLeave();
 }
 
-/*
 //-----------------------------------------------------------------------------
 // wxSize
 
@@ -373,4 +356,3 @@ void wxRect_SetHeight(wxRect* self, int h)
 {
 	self->SetHeight(h);
 }
-*/

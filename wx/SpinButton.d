@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - SpinButton.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - SpinButton.cs
 //
 // The wxSpinButton wrapper class.
@@ -12,94 +9,102 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.SpinButton;
-import wx.common;
-import wx.CommandEvent;
-import wx.Control;
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
-		static extern (C) IntPtr wxSpinEvent_ctor(int commandType, int id);
-		static extern (C) int wxSpinEvent_GetPosition(IntPtr self);
-		static extern (C) void wxSpinEvent_SetPosition(IntPtr self, int pos);
-		static extern (C) void wxSpinEvent_Veto(IntPtr self);
-		static extern (C) void wxSpinEvent_Allow(IntPtr self);
-		static extern (C) bool wxSpinEvent_IsAllowed(IntPtr self);	
+namespace wx
+{
+	public class SpinEvent : CommandEvent
+	{
+		[DllImport("wx-c")] static extern IntPtr wxSpinEvent_ctor(int commandType, int id);
+		[DllImport("wx-c")] static extern int wxSpinEvent_GetPosition(IntPtr self);
+		[DllImport("wx-c")] static extern void wxSpinEvent_SetPosition(IntPtr self, int pos);
+		[DllImport("wx-c")] static extern void wxSpinEvent_Veto(IntPtr self);
+		[DllImport("wx-c")] static extern void wxSpinEvent_Allow(IntPtr self);
+		[DllImport("wx-c")] static extern bool wxSpinEvent_IsAllowed(IntPtr self);	
 
 		//-----------------------------------------------------------------------------
 	
-	public class SpinEvent : CommandEvent
-	{
-		public this(IntPtr wxobj)
-			{ super(wxobj); }
+		public SpinEvent(IntPtr wxObject)
+			: base(wxObject) { }	
 			
-		public this(int commandType, int id)
-			{ super(wxSpinEvent_ctor(commandType, id)); }
+		public SpinEvent(int commandType, int id)
+			: base(wxSpinEvent_ctor(commandType, id)) { }		
 
 		//-----------------------------------------------------------------------------	
 
-		public int Position() { return wxSpinEvent_GetPosition(wxobj); }
-		public void Position(int value) { wxSpinEvent_SetPosition(wxobj, value); }
+		public int Position
+		{
+			get { return wxSpinEvent_GetPosition(wxObject); }
+			set { wxSpinEvent_SetPosition(wxObject, value); }
+		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public void Veto()
 		{
-			wxSpinEvent_Veto(wxobj);
+			wxSpinEvent_Veto(wxObject);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public void Allow()
 		{
-			wxSpinEvent_Allow(wxobj);
+			wxSpinEvent_Allow(wxObject);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public bool Allowed() { return wxSpinEvent_IsAllowed(wxobj); }
-
-		private static Event New(IntPtr obj) { return new SpinEvent(obj); }
-
-		static this()
+		public bool Allowed
 		{
-			AddEventType(wxEVT_SCROLL_THUMBTRACK,               &SpinEvent.New);
-			AddEventType(wxEVT_SCROLL_LINEUP,                   &SpinEvent.New);
-			AddEventType(wxEVT_SCROLL_LINEDOWN,                 &SpinEvent.New);        		}
+			get { return wxSpinEvent_IsAllowed(wxObject); }
+		}		
 	}
 	
 	//-----------------------------------------------------------------------------
 	
-		static extern (C) IntPtr wxSpinButton_ctor();
-		static extern (C) bool   wxSpinButton_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
-		static extern (C) int    wxSpinButton_GetValue(IntPtr self);
-		static extern (C) int    wxSpinButton_GetMin(IntPtr self);
-		static extern (C) int    wxSpinButton_GetMax(IntPtr self);
-		static extern (C) void   wxSpinButton_SetValue(IntPtr self, int val);
-		static extern (C) void   wxSpinButton_SetRange(IntPtr self, int minVal, int maxVal);
-
-		//---------------------------------------------------------------------
 	public class SpinButton : Control
 	{
 		// These are duplicated in SpinCtrl.cs (for easier access)
-		enum {
-			wxSP_HORIZONTAL       = Orientation.wxHORIZONTAL,
-			wxSP_VERTICAL         = Orientation.wxVERTICAL,
-			wxSP_ARROW_KEYS       = 0x1000,
-			wxSP_WRAP             = 0x2000,
-		}
+		public const long wxSP_HORIZONTAL       = Orientation.wxHORIZONTAL;
+		public const long wxSP_VERTICAL         = Orientation.wxVERTICAL;
+		public const long wxSP_ARROW_KEYS       = 0x1000;
+		public const long wxSP_WRAP             = 0x2000;
 	
-		public const string wxSPIN_BUTTON_NAME = "SpinButton";
 		//---------------------------------------------------------------------
         
-		
-		public this(IntPtr wxobj) 
-			{ super(wxobj);}
+		[DllImport("wx-c")] static extern IntPtr wxSpinButton_ctor();
+		[DllImport("wx-c")] static extern bool   wxSpinButton_Create(IntPtr self, IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
+		[DllImport("wx-c")] static extern int    wxSpinButton_GetValue(IntPtr self);
+		[DllImport("wx-c")] static extern int    wxSpinButton_GetMin(IntPtr self);
+		[DllImport("wx-c")] static extern int    wxSpinButton_GetMax(IntPtr self);
+		[DllImport("wx-c")] static extern void   wxSpinButton_SetValue(IntPtr self, int val);
+		[DllImport("wx-c")] static extern void   wxSpinButton_SetRange(IntPtr self, int minVal, int maxVal);
 
-		public this()
-			{ super(wxSpinButton_ctor()); }
+		//---------------------------------------------------------------------
+		
+		public SpinButton(IntPtr wxObject) 
+			: base(wxObject) {}
+
+		public SpinButton()
+			: base(wxSpinButton_ctor()) { }
 			
-		public this(Window parent, int id /*= wxID_ANY*/, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = wxSP_VERTICAL | wxSP_ARROW_KEYS, string name = wxSPIN_BUTTON_NAME)
+		public SpinButton(Window parent, int id)
+			: this(parent, id, wxDefaultPosition, wxDefaultSize, 0, "spinButton") { }
+			
+		public SpinButton(Window parent, int id, Point pos)
+			: this(parent, id, pos, wxDefaultSize, 0, "spinButton") { }
+			
+		public SpinButton(Window parent, int id, Point pos, Size size)
+			: this(parent, id, pos, size, 0, "spinButton") { }
+
+		public SpinButton(Window parent, int id, Point pos, Size size, long style)
+			: this(parent, id, pos, size, style, "spinButton") { }
+
+		public SpinButton(Window parent, int id, Point pos, Size size, long style, string name)
+			: base(wxSpinButton_ctor())
 		{
-			super(wxSpinButton_ctor());
 			if(!Create(parent, id, pos, size, style, name))
 			{
 				throw new InvalidOperationException("Failed to create SpinButton");
@@ -109,30 +114,52 @@ import wx.Control;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = wxSP_VERTICAL | wxSP_ARROW_KEYS, string name = wxSPIN_BUTTON_NAME)
-			{ this(parent, Window.UniqueID, pos, size, style, name);}
+		public SpinButton(Window parent)
+			: this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, 0, "spinButton") { }
+			
+		public SpinButton(Window parent, Point pos)
+			: this(parent, Window.UniqueID, pos, wxDefaultSize, 0, "spinButton") { }
+			
+		public SpinButton(Window parent, Point pos, Size size)
+			: this(parent, Window.UniqueID, pos, size, 0, "spinButton") { }
+
+		public SpinButton(Window parent, Point pos, Size size, long style)
+			: this(parent, Window.UniqueID, pos, size, style, "spinButton") { }
+
+		public SpinButton(Window parent, Point pos, Size size, long style, string name)
+			: this(parent, Window.UniqueID, pos, size, style, name) {}
 		
 		//---------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, inout Point pos, inout Size size,  int style, string name)
+		public bool Create(Window parent, int id, Point pos, Size size,  long style, string name)
 		{
-			return wxSpinButton_Create(wxobj, wxObject.SafePtr(parent), id,
-						pos, size, cast(uint)style, name);
+			return wxSpinButton_Create(wxObject, Object.SafePtr(parent), id,
+						ref pos, ref size, (uint)style, name);
 		}
 
 		//---------------------------------------------------------------------
         
-		public int Value() { return wxSpinButton_GetValue(wxobj); }
-		public void Value(int value) { wxSpinButton_SetValue(wxobj, value); }
+		public int Value
+		{
+			get { return wxSpinButton_GetValue(wxObject); }
+			set { wxSpinButton_SetValue(wxObject, value); }
+		}
 
 		//---------------------------------------------------------------------
         
-		public int Max() { return wxSpinButton_GetMax(wxobj); }
+		public int Max
+		{
+			get { return wxSpinButton_GetMax(wxObject); }
+		}
 
-		public int Min() { return wxSpinButton_GetMin(wxobj); }
+		public int Min
+		{
+			get { return wxSpinButton_GetMin(wxObject); }
+		}
 
 		public void SetRange(int min, int max)
 		{
-			wxSpinButton_SetRange(wxobj, min, max);
+			wxSpinButton_SetRange(wxObject, min, max);
 		}
 	}
+}

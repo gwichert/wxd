@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - gridctrl.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - gridctrl.cxx
 // 
 // The wxGrid controls proxy interface.
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/grid.h>
 #include <wx/generic/gridctrl.h>
 #include "local_events.h"
@@ -23,9 +19,9 @@
 // wxGridCellDateTimeRenderer
 
 extern "C" WXEXPORT
-wxGridCellDateTimeRenderer* wxGridCellDateTimeRenderer_ctor(dstr outformat, dstr informat)
+wxGridCellDateTimeRenderer* wxGridCellDateTimeRenderer_ctor(const char* outformat, const char* informat)
 {
-	return new wxGridCellDateTimeRenderer(wxString(outformat.data, wxConvUTF8, outformat.length), wxString(informat.data, wxConvUTF8, informat.length));
+	return new wxGridCellDateTimeRenderer(wxString(outformat, wxConvUTF8), wxString(informat, wxConvUTF8));
 }
 
 extern "C" WXEXPORT
@@ -56,21 +52,21 @@ wxGridCellRenderer* wxGridCellDateTimeRenderer_Clone(wxGridCellDateTimeRenderer*
 }
 
 extern "C" WXEXPORT
-void wxGridCellDateTimeRenderer_SetParameters(wxGridCellDateTimeRenderer* self, dstr params)
+void wxGridCellDateTimeRenderer_SetParameters(wxGridCellDateTimeRenderer* self, const char* params)
 {
-	self->SetParameters(wxString(params.data, wxConvUTF8, params.length));
+	self->SetParameters(wxString(params, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
 // wxGridCellEnumRenderer
 
 extern "C" WXEXPORT
-wxGridCellEnumRenderer* wxGridCellEnumRenderer_ctor(int n, dstr choices[])
+wxGridCellEnumRenderer* wxGridCellEnumRenderer_ctor(int n, const char* choices[])
 {
 	wxString *pchoices = new wxString[n];
 	for (int i = 0; i < n; ++i)
 	{
-		pchoices[i] = wxString(choices[i].data, wxConvUTF8, choices[i].length);
+		pchoices[i] = wxString(choices[i], wxConvUTF8);
         }
 
 	return new wxGridCellEnumRenderer(*pchoices);
@@ -104,9 +100,9 @@ wxGridCellRenderer* wxGridCellEnumRenderer_Clone(wxGridCellEnumRenderer* self)
 }
 
 extern "C" WXEXPORT
-void wxGridCellEnumRenderer_SetParameters(wxGridCellEnumRenderer* self, dstr params)
+void wxGridCellEnumRenderer_SetParameters(wxGridCellEnumRenderer* self, const char* params)
 {
-	self->SetParameters(wxString(params.data, wxConvUTF8, params.length));
+	self->SetParameters(wxString(params, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
@@ -164,12 +160,12 @@ wxGridCellRenderer* wxGridCellAutoWrapStringRenderer_Clone(wxGridCellAutoWrapStr
 // wxGridCellEnumEditor
 
 extern "C" WXEXPORT
-wxGridCellEnumEditor* wxGridCellEnumEditor_ctor(int n, dstr choices[])
+wxGridCellEnumEditor* wxGridCellEnumEditor_ctor(int n, char* choices[])
 {
 	wxString *pchoices = new wxString[n];
 	for (int i = 0; i < n; ++i)
 	{
-		pchoices[i] = wxString(choices[i].data, wxConvUTF8, choices[i].length);
+		pchoices[i] = wxString(choices[i], wxConvUTF8);
         }
 
 	return new wxGridCellEnumEditor(* pchoices);

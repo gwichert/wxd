@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - LayoutWin.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - LayoutWin.cs
 // 
 // The wxSashLayoutWindow proxy interface.
@@ -13,13 +10,12 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.LayoutWin;
-import wx.common;
-import wx.SashWindow;
-import wx.Event;
-import wx.Frame;
-import wx.MDI;
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
+namespace wx
+{
 	public enum LayoutOrientation
 	{
 		wxLAYOUT_HORIZONTAL,
@@ -39,27 +35,42 @@ import wx.MDI;
 	
 	//-----------------------------------------------------------------------------
 
-		static extern (C) IntPtr wxSashLayoutWindow_ctor();
-		static extern (C) bool wxSashLayoutWindow_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
-		static extern (C) LayoutAlignment wxSashLayoutWindow_GetAlignment(IntPtr self);
-		static extern (C) LayoutOrientation wxSashLayoutWindow_GetOrientation(IntPtr self);
-		static extern (C) void wxSashLayoutWindow_SetAlignment(IntPtr self, LayoutAlignment alignment);
-		static extern (C) void wxSashLayoutWindow_SetOrientation(IntPtr self, LayoutOrientation orient);
-		static extern (C) void wxSashLayoutWindow_SetDefaultSize(IntPtr self, inout Size size);
+	public class SashLayoutWindow : SashWindow
+	{
+		[DllImport("wx-c")] static extern IntPtr wxSashLayoutWindow_ctor();
+		[DllImport("wx-c")] static extern bool wxSashLayoutWindow_Create(IntPtr self, IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
+		[DllImport("wx-c")] static extern LayoutAlignment wxSashLayoutWindow_GetAlignment(IntPtr self);
+		[DllImport("wx-c")] static extern LayoutOrientation wxSashLayoutWindow_GetOrientation(IntPtr self);
+		[DllImport("wx-c")] static extern void wxSashLayoutWindow_SetAlignment(IntPtr self, LayoutAlignment align);
+		[DllImport("wx-c")] static extern void wxSashLayoutWindow_SetOrientation(IntPtr self, LayoutOrientation orient);
+		[DllImport("wx-c")] static extern void wxSashLayoutWindow_SetDefaultSize(IntPtr self, ref Size size);
 		
 		//-----------------------------------------------------------------------------
 	
-	public class SashLayoutWindow : SashWindow
-	{
-		public this(IntPtr wxobj)
-			{ super(wxobj);}
+		public SashLayoutWindow(IntPtr wxObject)
+			: base(wxObject) {}
 			
-		public this()
-			{ super(wxSashLayoutWindow_ctor());}
+		public SashLayoutWindow()
+			: base(wxSashLayoutWindow_ctor()) {}
 			
-		public this(Window parent, int id /*= wxID_ANY*/, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style=wxSW_3D|wxCLIP_CHILDREN, string name = "layoutWindow")
+		public SashLayoutWindow(Window parent)
+			: this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, wxSW_3D|wxCLIP_CHILDREN, "layoutWindow") {}
+			
+		public SashLayoutWindow(Window parent, int id)
+			: this(parent, id, wxDefaultPosition, wxDefaultSize, wxSW_3D|wxCLIP_CHILDREN, "layoutWindow") {}
+			
+		public SashLayoutWindow(Window parent, int id, Point pos)
+			: this(parent, id, pos, wxDefaultSize, wxSW_3D|wxCLIP_CHILDREN, "layoutWindow") {}
+			
+		public SashLayoutWindow(Window parent, int id, Point pos, Size size)
+			: this(parent, id, pos, size, wxSW_3D|wxCLIP_CHILDREN, "layoutWindow") {}
+			
+		public SashLayoutWindow(Window parent, int id, Point pos, Size size, long style)
+			: this(parent, id, pos, size, style, "layoutWindow") {}
+			
+		public SashLayoutWindow(Window parent, int id, Point pos, Size size, long style, string name)
+			: base(wxSashLayoutWindow_ctor())
 		{
-			super(wxSashLayoutWindow_ctor());
 			if (!Create(parent, id, pos, size, style, name)) 
 			{
 				throw new InvalidOperationException("Failed to create SashLayoutWindow");
@@ -69,60 +80,78 @@ import wx.MDI;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style=wxSW_3D|wxCLIP_CHILDREN, string name = "layoutWindow")
-			{ this(parent, Window.UniqueID, pos, size, style, name);}
+		public SashLayoutWindow(Window parent, Point pos)
+			: this(parent, Window.UniqueID, pos, wxDefaultSize, wxSW_3D|wxCLIP_CHILDREN, "layoutWindow") {}
+			
+		public SashLayoutWindow(Window parent, Point pos, Size size)
+			: this(parent, Window.UniqueID, pos, size, wxSW_3D|wxCLIP_CHILDREN, "layoutWindow") {}
+			
+		public SashLayoutWindow(Window parent, Point pos, Size size, long style)
+			: this(parent, Window.UniqueID, pos, size, style, "layoutWindow") {}
+			
+		public SashLayoutWindow(Window parent, Point pos, Size size, long style, string name)
+			: this(parent, Window.UniqueID, pos, size, style, name) {}
 		
 		//-----------------------------------------------------------------------------
 		
-		public bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
+		public new bool Create(Window parent, int id, Point pos, Size size, long style, string name)
 		{
-			return wxSashLayoutWindow_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name);
+			return wxSashLayoutWindow_Create(wxObject, Object.SafePtr(parent), id, ref pos, ref size, (uint)style, name);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public LayoutAlignment Alignment() { return wxSashLayoutWindow_GetAlignment(wxobj); }
-		public void Alignment(LayoutAlignment value) { wxSashLayoutWindow_SetAlignment(wxobj, value); }
+		public LayoutAlignment Alignment
+		{
+			get { return wxSashLayoutWindow_GetAlignment(wxObject); }
+			set { wxSashLayoutWindow_SetAlignment(wxObject, value); }
+		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public LayoutOrientation Orientation() { return wxSashLayoutWindow_GetOrientation(wxobj); }
-		public void Orientation(LayoutOrientation value) { wxSashLayoutWindow_SetOrientation(wxobj, value); }
+		public LayoutOrientation Orientation
+		{
+			get { return wxSashLayoutWindow_GetOrientation(wxObject); }
+			set { wxSashLayoutWindow_SetOrientation(wxObject, value); }
+		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public void DefaultSize(Size value) { wxSashLayoutWindow_SetDefaultSize(wxobj, value); }
+		public Size DefaultSize
+		{
+			set { wxSashLayoutWindow_SetDefaultSize(wxObject, ref value); }
+		}
 	}
 	
 	//-----------------------------------------------------------------------------
 	
-		static extern (C) IntPtr wxLayoutAlgorithm_ctor();
-		static extern (C) bool wxLayoutAlgorithm_LayoutMDIFrame(IntPtr self, IntPtr frame, inout Rectangle rect);
-		static extern (C) bool wxLayoutAlgorithm_LayoutFrame(IntPtr self, IntPtr frame, IntPtr mainWindow);
-		static extern (C) bool wxLayoutAlgorithm_LayoutWindow(IntPtr self, IntPtr frame, IntPtr mainWindow);
+	public class LayoutAlgorithm : Object
+	{
+		[DllImport("wx-c")] static extern IntPtr wxLayoutAlgorithm_ctor();
+		[DllImport("wx-c")] static extern bool wxLayoutAlgorithm_LayoutMDIFrame(IntPtr self, IntPtr frame, ref Rectangle rect);
+		[DllImport("wx-c")] static extern bool wxLayoutAlgorithm_LayoutFrame(IntPtr self, IntPtr frame, IntPtr mainWindow);
+		[DllImport("wx-c")] static extern bool wxLayoutAlgorithm_LayoutWindow(IntPtr self, IntPtr frame, IntPtr mainWindow);
 		
 		//-----------------------------------------------------------------------------
 		
-	public class LayoutAlgorithm : wxObject
-	{
-		public this(IntPtr wxobj)
-			{ super(wxobj);}
+		public LayoutAlgorithm(IntPtr wxObject)
+			: base(wxObject) {}
 			
-		public this()
-			{ super(wxLayoutAlgorithm_ctor());}
+		public LayoutAlgorithm()
+			: base(wxLayoutAlgorithm_ctor()) {}
 			
 		//-----------------------------------------------------------------------------
 		
 		public bool LayoutMDIFrame(MDIParentFrame frame)
 		{
 			// FIXME
-			Rectangle dummy;
+			Rectangle dummy = new Rectangle(0, 0, 0, 0);
 			return LayoutMDIFrame(frame, dummy);
 		}
 		
 		public bool LayoutMDIFrame(MDIParentFrame frame, Rectangle rect)
 		{
-			return wxLayoutAlgorithm_LayoutMDIFrame(wxobj, wxObject.SafePtr(frame), rect);
+			return wxLayoutAlgorithm_LayoutMDIFrame(wxObject, Object.SafePtr(frame), ref rect);
 		}
 		
 		//-----------------------------------------------------------------------------
@@ -134,7 +163,7 @@ import wx.MDI;
 		
 		public bool LayoutFrame(Frame frame, Window mainWindow)
 		{
-			return wxLayoutAlgorithm_LayoutFrame(wxobj, wxObject.SafePtr(frame), wxObject.SafePtr(mainWindow));
+			return wxLayoutAlgorithm_LayoutFrame(wxObject, Object.SafePtr(frame), Object.SafePtr(mainWindow));
 		}
 		
 		//-----------------------------------------------------------------------------
@@ -146,118 +175,122 @@ import wx.MDI;
 		
 		public bool LayoutWindow(Window frame, Window mainWindow)
 		{
-			return wxLayoutAlgorithm_LayoutWindow(wxobj, wxObject.SafePtr(frame), wxObject.SafePtr(mainWindow));
+			return wxLayoutAlgorithm_LayoutWindow(wxObject, Object.SafePtr(frame), Object.SafePtr(mainWindow));
 		}
 	}
 	
 	//-----------------------------------------------------------------------------
 	
-		static extern (C) IntPtr wxQueryLayoutInfoEvent_ctor(int id);
-		static extern (C) void wxQueryLayoutInfoEvent_SetRequestedLength(IntPtr self, int length);
-		static extern (C) int wxQueryLayoutInfoEvent_GetRequestedLength(IntPtr self);
-		static extern (C) void wxQueryLayoutInfoEvent_SetFlags(IntPtr self, int flags);
-		static extern (C) int wxQueryLayoutInfoEvent_GetFlags(IntPtr self);
-		static extern (C) void wxQueryLayoutInfoEvent_SetSize(IntPtr self, inout Size size);
-		static extern (C) void wxQueryLayoutInfoEvent_GetSize(IntPtr self, out Size size);
-		static extern (C) void wxQueryLayoutInfoEvent_SetOrientation(IntPtr self, LayoutOrientation orient);
-		static extern (C) LayoutOrientation wxQueryLayoutInfoEvent_GetOrientation(IntPtr self);
-		static extern (C) void wxQueryLayoutInfoEvent_SetAlignment(IntPtr self, LayoutAlignment alignment);
-		static extern (C) LayoutAlignment wxQueryLayoutInfoEvent_GetAlignment(IntPtr self);
-	
-		//-----------------------------------------------------------------------------
-		
 	public class QueryLayoutInfoEvent : Event
 	{
-		public this(IntPtr wxobj)
-			{ super(wxobj);}
+		[DllImport("wx-c")] static extern IntPtr wxQueryLayoutInfoEvent_ctor(int id);
+		[DllImport("wx-c")] static extern void wxQueryLayoutInfoEvent_SetRequestedLength(IntPtr self, int length);
+		[DllImport("wx-c")] static extern int wxQueryLayoutInfoEvent_GetRequestedLength(IntPtr self);
+		[DllImport("wx-c")] static extern void wxQueryLayoutInfoEvent_SetFlags(IntPtr self, int flags);
+		[DllImport("wx-c")] static extern int wxQueryLayoutInfoEvent_GetFlags(IntPtr self);
+		[DllImport("wx-c")] static extern void wxQueryLayoutInfoEvent_SetSize(IntPtr self, ref Size size);
+		[DllImport("wx-c")] static extern void wxQueryLayoutInfoEvent_GetSize(IntPtr self, out Size size);
+		[DllImport("wx-c")] static extern void wxQueryLayoutInfoEvent_SetOrientation(IntPtr self, LayoutOrientation orient);
+		[DllImport("wx-c")] static extern LayoutOrientation wxQueryLayoutInfoEvent_GetOrientation(IntPtr self);
+		[DllImport("wx-c")] static extern void wxQueryLayoutInfoEvent_SetAlignment(IntPtr self, LayoutAlignment align);
+		[DllImport("wx-c")] static extern LayoutAlignment wxQueryLayoutInfoEvent_GetAlignment(IntPtr self);
+	
+		//-----------------------------------------------------------------------------
+		
+		public QueryLayoutInfoEvent(IntPtr wxObject)
+			: base(wxObject) {}
 			
-		public this()
-			{ this(0);}
+		public QueryLayoutInfoEvent()
+			: this(0) {}
 			
-		public this(int id)
-			{ super(wxQueryLayoutInfoEvent_ctor(id));}
+		public QueryLayoutInfoEvent(int id)
+			: base(wxQueryLayoutInfoEvent_ctor(id)) {}
 			
 		//-----------------------------------------------------------------------------
 		
-		public int RequestedLength() { return wxQueryLayoutInfoEvent_GetRequestedLength(wxobj); }
-		public void RequestedLength(int value) { wxQueryLayoutInfoEvent_SetRequestedLength(wxobj, value); }
+		public int RequestedLength
+		{
+			get { return wxQueryLayoutInfoEvent_GetRequestedLength(wxObject); }
+			set { wxQueryLayoutInfoEvent_SetRequestedLength(wxObject, value); }
+		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public int Flags() { return wxQueryLayoutInfoEvent_GetFlags(wxobj); }
-		public void Flags(int value) { wxQueryLayoutInfoEvent_SetFlags(wxobj, value); }
+		public int Flags
+		{
+			get { return wxQueryLayoutInfoEvent_GetFlags(wxObject); }
+			set { wxQueryLayoutInfoEvent_SetFlags(wxObject, value); }
+		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public Size size() {
-				Size size;
-				wxQueryLayoutInfoEvent_GetSize(wxobj, size);
+		public Size Size
+		{
+			get {
+				Size size = new Size();
+				wxQueryLayoutInfoEvent_GetSize(wxObject, out size);
 				return size;
 			}
-		public void size(Size value) { wxQueryLayoutInfoEvent_SetSize(wxobj, value); }
+			set { wxQueryLayoutInfoEvent_SetSize(wxObject, ref value); }
+		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public LayoutOrientation Orientation() { return wxQueryLayoutInfoEvent_GetOrientation(wxobj); }
-		public void Orientation(LayoutOrientation value) { wxQueryLayoutInfoEvent_SetOrientation(wxobj, value); }
-		
-		//-----------------------------------------------------------------------------
-		
-		public LayoutAlignment Alignment() { return wxQueryLayoutInfoEvent_GetAlignment(wxobj); }
-		public void Alignment(LayoutAlignment value) { wxQueryLayoutInfoEvent_SetAlignment(wxobj, value); }
-
-		private static Event New(IntPtr obj) { return new QueryLayoutInfoEvent(obj); }
-
-		static this()
+		public LayoutOrientation Orientation
 		{
-			wxEVT_QUERY_LAYOUT_INFO = wxEvent_EVT_QUERY_LAYOUT_INFO();
-
-			AddEventType(wxEVT_QUERY_LAYOUT_INFO,               &QueryLayoutInfoEvent.New);
+			get { return wxQueryLayoutInfoEvent_GetOrientation(wxObject); }
+			set { wxQueryLayoutInfoEvent_SetOrientation(wxObject, value); }
+		}
+		
+		//-----------------------------------------------------------------------------
+		
+		public LayoutAlignment Alignment
+		{
+			get { return wxQueryLayoutInfoEvent_GetAlignment(wxObject); }
+			set { wxQueryLayoutInfoEvent_SetAlignment(wxObject, value); }
 		}
 	}
 	
 	//-----------------------------------------------------------------------------
-	
-		static extern (C) IntPtr wxCalculateLayoutEvent_ctor(int id);
-		static extern (C) void wxCalculateLayoutEvent_SetFlags(IntPtr self, int flags);
-		static extern (C) int wxCalculateLayoutEvent_GetFlags(IntPtr self);
-		static extern (C) void wxCalculateLayoutEvent_SetRect(IntPtr self, inout Rectangle rect);
-		static extern (C) void wxCalculateLayoutEvent_GetRect(IntPtr self, out Rectangle rect);
-		
-		//-----------------------------------------------------------------------------
 	
 	public class CalculateLayoutEvent : Event
 	{
-		public this(IntPtr wxobj)
-			{ super(wxobj);}
+		[DllImport("wx-c")] static extern IntPtr wxCalculateLayoutEvent_ctor(int id);
+		[DllImport("wx-c")] static extern void wxCalculateLayoutEvent_SetFlags(IntPtr self, int flags);
+		[DllImport("wx-c")] static extern int wxCalculateLayoutEvent_GetFlags(IntPtr self);
+		[DllImport("wx-c")] static extern void wxCalculateLayoutEvent_SetRect(IntPtr self, ref Rectangle rect);
+		[DllImport("wx-c")] static extern void wxCalculateLayoutEvent_GetRect(IntPtr self, out Rectangle rect);
+		
+		//-----------------------------------------------------------------------------
+	
+		public CalculateLayoutEvent(IntPtr wxObject)
+			: base(wxObject) {}
 			
-		public this()
-			{ this(0);}
+		public CalculateLayoutEvent()
+			: this(0) {}
 			
-		public this(int id)
-			{ super(wxCalculateLayoutEvent_ctor(id));}
+		public CalculateLayoutEvent(int id)
+			: base(wxCalculateLayoutEvent_ctor(id)) {}
 		
 		//-----------------------------------------------------------------------------
 		
-		public int Flags() { return wxCalculateLayoutEvent_GetFlags(wxobj); }
-		public void Flags(int value) { wxCalculateLayoutEvent_SetFlags(wxobj, value); }
+		public int Flags
+		{
+			get { return wxCalculateLayoutEvent_GetFlags(wxObject); }
+			set { wxCalculateLayoutEvent_SetFlags(wxObject, value); }
+		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public Rectangle Rect() {
-				Rectangle rect;
-				wxCalculateLayoutEvent_GetRect(wxobj, rect);
+		public Rectangle Rect
+		{
+			get {
+				Rectangle rect = new Rectangle();
+				wxCalculateLayoutEvent_GetRect(wxObject, out rect);
 				return rect;
 			}
 			
-		public void Rect(Rectangle value) { wxCalculateLayoutEvent_SetRect(wxobj, value); }
-
-		private static Event New(IntPtr obj) { return new CalculateLayoutEvent(obj); }
-
-		static this()
-		{
-			wxEVT_CALCULATE_LAYOUT = wxEvent_EVT_CALCULATE_LAYOUT();
-
-			AddEventType(wxEVT_CALCULATE_LAYOUT,                &CalculateLayoutEvent.New);
+			set { wxCalculateLayoutEvent_SetRect(wxObject, ref value); }
 		}
 	}
+}

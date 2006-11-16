@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - dnd.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - dnd.cxx
 //
 // The wxDND proxy interface.
@@ -13,14 +10,19 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/dnd.h>
 #include <wx/dataobj.h>
 #include "local_events.h"
 
+#if defined(_WINDOWS)
+#define CALLBACK __stdcall
+#else
+#define CALLBACK
+#endif
+
 //-----------------------------------------------------------------------------
 
-typedef wxDragResult (CALLBACK* Virtual_DoDragDrop) (dobj,int);
+typedef wxDragResult (CALLBACK* Virtual_DoDragDrop) (int);
 
 class _DropSource : public wxDropSource
 {
@@ -32,17 +34,15 @@ public:
 		: wxDropSource(data, win) {}	
 
 	wxDragResult DoDragDrop(int flags) 
-        { return m_DoDragDrop(m_dobj, flags); }
+        { return m_DoDragDrop(flags); }
         
-	void RegisterVirtual(dobj obj, Virtual_DoDragDrop doDragDrop)
+	void RegisterVirtual(Virtual_DoDragDrop doDragDrop)
 	{
-		m_dobj = obj;
 		m_DoDragDrop = doDragDrop;
 	}
 	
 private:
 	Virtual_DoDragDrop m_DoDragDrop;
-	dobj m_dobj;
 };
 
 //-----------------------------------------------------------------------------
@@ -69,9 +69,9 @@ void wxDropSource_dtor(_DropSource* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxDropSource_RegisterVirtual(_DropSource* self, dobj obj, Virtual_DoDragDrop doDragDrop)
+void wxDropSource_RegisterVirtual(_DropSource* self, Virtual_DoDragDrop doDragDrop)
 {
-	self->RegisterVirtual(obj, doDragDrop);
+	self->RegisterVirtual(doDragDrop);
 }
 
 //-----------------------------------------------------------------------------
@@ -116,12 +116,12 @@ bool wxDropSource_GiveFeedback(_DropSource* self, wxDragResult *effect)
 
 //-----------------------------------------------------------------------------
 
-typedef wxDragResult (CALLBACK* Virtual_OnDragOver) (dobj, wxCoord, wxCoord, wxDragResult);
-typedef bool (CALLBACK* Virtual_OnDrop) (dobj, wxCoord, wxCoord);
-typedef wxDragResult (CALLBACK* Virtual_OnData3) (dobj, wxCoord, wxCoord, wxDragResult);
-typedef bool (CALLBACK* Virtual_GetData) (dobj);
-typedef void (CALLBACK* Virtual_OnLeave) (dobj);
-typedef wxDragResult (CALLBACK* Virtual_OnEnter) (dobj, wxCoord, wxCoord, wxDragResult);
+typedef wxDragResult (CALLBACK* Virtual_OnDragOver) (wxCoord, wxCoord, wxDragResult);
+typedef bool (CALLBACK* Virtual_OnDrop) (wxCoord, wxCoord);
+typedef wxDragResult (CALLBACK* Virtual_OnData3) (wxCoord, wxCoord, wxDragResult);
+typedef bool (CALLBACK* Virtual_GetData) ();
+typedef void (CALLBACK* Virtual_OnLeave) ();
+typedef wxDragResult (CALLBACK* Virtual_OnEnter) (wxCoord, wxCoord, wxDragResult);
 
 class _DropTarget : public wxDropTarget
 {
@@ -130,32 +130,30 @@ public:
 		: wxDropTarget(dataObject) {}
 
 	wxDragResult OnDragOver(wxCoord x, wxCoord y, wxDragResult def) 
-        { return m_OnDragOver(m_dobj, x, y, def); }
+        { return m_OnDragOver(x, y, def); }
         
     bool OnDrop(wxCoord x, wxCoord y)
-    	{ return m_OnDrop(m_dobj, x, y); }
+    	{ return m_OnDrop(x, y); }
     
     wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def)
-    	{ return m_OnData(m_dobj, x, y, def); }
+    	{ return m_OnData(x, y, def); }
     	
     bool GetData()
-    	{ return m_GetData(m_dobj); }
+    	{ return m_GetData(); }
     	
     void OnLeave()
-    	{ return m_OnLeave(m_dobj); }
+    	{ return m_OnLeave(); }
     	
     wxDragResult OnEnter(wxCoord x, wxCoord y, wxDragResult def)
-    	{ return m_OnEnter(m_dobj, x, y, def); }
+    	{ return m_OnEnter(x, y, def); }
 
-	void RegisterVirtual(dobj obj, 
-						Virtual_OnDragOver onDragOver,
+	void RegisterVirtual(Virtual_OnDragOver onDragOver,
 						Virtual_OnDrop onDrop,
 						Virtual_OnData3 onData,
 						Virtual_GetData getData,
 						Virtual_OnLeave onLeave,
 						Virtual_OnEnter onEnter)
 	{
-		m_dobj = obj;
 		m_OnDragOver = onDragOver;
 		m_OnDrop = onDrop;
 		m_OnData = onData;
@@ -171,7 +169,6 @@ private:
 	Virtual_GetData    m_GetData;
 	Virtual_OnLeave    m_OnLeave;
 	Virtual_OnEnter    m_OnEnter;
-	dobj m_dobj;
 	
 public:
 	DECLARE_DISPOSABLE(_DropTarget)
@@ -198,15 +195,14 @@ void wxDropTarget_dtor(_DropTarget* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxDropTarget_RegisterVirtual(_DropTarget* self, dobj obj,
-						Virtual_OnDragOver onDragOver,
+void wxDropTarget_RegisterVirtual(_DropTarget* self, Virtual_OnDragOver onDragOver,
 						Virtual_OnDrop onDrop,
 						Virtual_OnData3 onData,
 						Virtual_GetData getData,
 						Virtual_OnLeave onLeave,
 						Virtual_OnEnter onEnter)
 {
-	self->RegisterVirtual(obj, onDragOver, onDrop, onData, getData, onLeave, onEnter);
+	self->RegisterVirtual(onDragOver, onDrop, onData, getData, onLeave, onEnter);
 }
 
 extern "C" WXEXPORT
@@ -273,8 +269,8 @@ bool wxDropTarget_GetData(_DropTarget* self)
 
 //----------------------------------------------------------------------------
 
-typedef bool (CALLBACK* Virtual_OnDropText) (dobj, wxCoord, wxCoord, wxString*);
-typedef wxDragResult (CALLBACK* Virtual_OnData)(dobj, wxCoord, wxCoord, wxDragResult);
+typedef bool (CALLBACK* Virtual_OnDropText) (wxCoord, wxCoord, wxString*);
+typedef wxDragResult (CALLBACK* Virtual_OnData)(wxCoord, wxCoord, wxDragResult);
 
 class _TextDropTarget : public wxTextDropTarget
 {
@@ -283,13 +279,12 @@ public:
 		: wxTextDropTarget() {}
 
 	bool OnDropText(wxCoord x, wxCoord y, const wxString& text) 
-        { return m_OnDropText(m_dobj, x, y, new wxString(text)); }
+        { return m_OnDropText(x, y, new wxString(text)); }
 	wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def) 
-        { return m_OnData(m_dobj, x, y, def); }
+        { return m_OnData(x, y, def); }
 
-	void RegisterVirtual(dobj obj, Virtual_OnDropText onDropText, Virtual_OnData onData)
+	void RegisterVirtual(Virtual_OnDropText onDropText, Virtual_OnData onData)
 	{
-		m_dobj = obj;
 		m_OnDropText = onDropText;
 		m_OnData = onData;
 	}
@@ -297,7 +292,6 @@ public:
 private:
 	Virtual_OnDropText m_OnDropText;
 	Virtual_OnData m_OnData;
-	dobj m_dobj;
 };
 
 //-----------------------------------------------------------------------------
@@ -311,11 +305,11 @@ wxTextDropTarget* wxTextDropTarget_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxTextDropTarget_RegisterVirtual(_TextDropTarget *self, dobj obj,
+void wxTextDropTarget_RegisterVirtual(_TextDropTarget *self,
 			Virtual_OnDropText onDropText,
 			Virtual_OnData onData)
 {
-	self->RegisterVirtual(obj, onDropText, onData);
+	self->RegisterVirtual(onDropText, onData);
 }
 
 //-----------------------------------------------------------------------------
@@ -344,8 +338,8 @@ bool wxTextDropTarget_GetData(_TextDropTarget * self)
 
 //----------------------------------------------------------------------------
 
-typedef bool (CALLBACK* Virtual_OnDropFiles) (dobj, wxCoord, wxCoord, wxArrayString*);
-typedef wxDragResult (CALLBACK* Virtual_OnData2)(dobj, wxCoord, wxCoord, wxDragResult);
+typedef bool (CALLBACK* Virtual_OnDropFiles) (wxCoord, wxCoord, wxArrayString*);
+typedef wxDragResult (CALLBACK* Virtual_OnData2)(wxCoord, wxCoord, wxDragResult);
 
 
 class _FileDropTarget : public wxFileDropTarget
@@ -354,13 +348,12 @@ public:
 	_FileDropTarget()
 		: wxFileDropTarget() {}
 
-	bool OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames) { return m_OnDropFiles(m_dobj, x, y, new wxArrayString(filenames)); }
-	wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def) { return m_OnData(m_dobj, x, y, def); }
+	bool OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames) { return m_OnDropFiles(x, y, new wxArrayString(filenames)); }
+	wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def) { return m_OnData(x, y, def); }
 
-	void RegisterVirtual( dobj obj, Virtual_OnDropFiles onDropFiles,
+	void RegisterVirtual( Virtual_OnDropFiles onDropFiles,
 				Virtual_OnData2 onData)
 	{
-		m_dobj = obj;
 		m_OnDropFiles = onDropFiles;
 		m_OnData = onData;
 	}
@@ -368,7 +361,6 @@ public:
 private:
 	Virtual_OnDropFiles m_OnDropFiles;
 	Virtual_OnData2 m_OnData;
-	dobj m_dobj;
 };
 
 //-----------------------------------------------------------------------------
@@ -382,11 +374,11 @@ wxFileDropTarget* wxFileDropTarget_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxFileDropTarget_RegisterVirtual(_FileDropTarget *self,dobj obj,
+void wxFileDropTarget_RegisterVirtual(_FileDropTarget *self,
 			Virtual_OnDropFiles onDropFiles,
 			Virtual_OnData2 onData)
 {
-	self->RegisterVirtual(obj, onDropFiles, onData);
+	self->RegisterVirtual(onDropFiles, onData);
 }
 
 //-----------------------------------------------------------------------------

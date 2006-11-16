@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - DateTime.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - DateTime.cs
 // 
 // The wxDateTime wrapper class.
@@ -13,101 +10,137 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.wxDateTime;
-import wx.common;
-//import std.date;
+using System.Runtime.InteropServices;
+using System.Drawing;
+using System;
 
-    alias wxDateTime DateTime;
-    enum DayOfWeek
+namespace wx
+{
+    public class wxDateTime : Object
     {
-        Sun, Mon, Tue, Wed, Thu, Fri, Sat, Inv_WeekDay
-    };
-
-/* wxDateTime imprementation is class { longlong } */
-
-        static extern (C) IntPtr wxDefaultDateTime_Get();
-        static extern (C) IntPtr wxDateTime_ctor();
-        static extern (C) IntPtr wxDateTime_Now();
-	static extern (C) void   wxDateTime_dtor(IntPtr self);
-        static extern (C) void   wxDateTime_Set(IntPtr self, ushort day, int month, int year, ushort hour, ushort minute, ushort second, ushort millisec);
-        static extern (C) ushort wxDateTime_GetYear(IntPtr self);
-        static extern (C) int    wxDateTime_GetMonth(IntPtr self);
-        static extern (C) ushort wxDateTime_GetDay(IntPtr self);
-        static extern (C) ushort wxDateTime_GetHour(IntPtr self);
-        static extern (C) ushort wxDateTime_GetMinute(IntPtr self);
-        static extern (C) ushort wxDateTime_GetSecond(IntPtr self);
-        static extern (C) ushort wxDateTime_GetMillisecond(IntPtr self);
+        [DllImport("wx-c")] static extern IntPtr wxDateTime_ctor();
+	[DllImport("wx-c")] static extern void   wxDateTime_dtor(IntPtr self);
+        [DllImport("wx-c")] static extern void   wxDateTime_Set(IntPtr self, ushort day, int month, int year, ushort hour, ushort minute, ushort second, ushort millisec);
+        [DllImport("wx-c")] static extern ushort wxDateTime_GetYear(IntPtr self);
+        [DllImport("wx-c")] static extern int    wxDateTime_GetMonth(IntPtr self);
+        [DllImport("wx-c")] static extern ushort wxDateTime_GetDay(IntPtr self);
+        [DllImport("wx-c")] static extern ushort wxDateTime_GetHour(IntPtr self);
+        [DllImport("wx-c")] static extern ushort wxDateTime_GetMinute(IntPtr self);
+        [DllImport("wx-c")] static extern ushort wxDateTime_GetSecond(IntPtr self);
+        [DllImport("wx-c")] static extern ushort wxDateTime_GetMillisecond(IntPtr self);
 	
         //-----------------------------------------------------------------------------
 
-    public class wxDateTime : wxObject
-    {
-	static wxDateTime wxDefaultDateTime;
-	static this()
-	{
-		wxDefaultDateTime = new wxDateTime(wxDefaultDateTime_Get());
-	}
-
-        public this(IntPtr wxobj)
+        public wxDateTime(IntPtr wxObject)
+            : base(wxObject) 
 	{ 
-		super(wxobj);
+		this.wxObject = wxObject;
 	}
 	
-	private this(IntPtr wxobj, bool memOwn)
+	internal wxDateTime(IntPtr wxObject, bool memOwn)
+			: base(wxObject)
 	{ 
-		super(wxobj);
 		this.memOwn = memOwn;
+		this.wxObject = wxObject;
 	}
 
-        public this()
-            { this(wxDateTime_ctor(), true); }
+        public wxDateTime()
+            : this(wxDateTime_ctor(), true) { } 
 	    
 	//---------------------------------------------------------------------
+				
+	public override void Dispose()
+	{
+		if (!disposed)
+		{
+			if (wxObject != IntPtr.Zero)
+			{
+				if (memOwn)
+				{
+					wxDateTime_dtor(wxObject);
+					memOwn = false;
+				}
+			}
+			RemoveObject(wxObject);
+			wxObject = IntPtr.Zero;
+			disposed= true;
+		}
+		
+		base.Dispose();
+		GC.SuppressFinalize(this);
+	}
 	
-	override private void dtor() { wxDateTime_dtor(wxobj); }
+	//---------------------------------------------------------------------
+	
+	~wxDateTime() 
+	{
+		Dispose();
+	}
 
         //-----------------------------------------------------------------------------
 
         public void Set(ushort day, int month, int year, ushort hour, ushort minute, ushort second, ushort millisec)
         {
-            wxDateTime_Set(wxobj, day, month, year, hour, minute, second, millisec);
+            wxDateTime_Set(wxObject, day, month, year, hour, minute, second, millisec);
         }
 
         //-----------------------------------------------------------------------------
 
-        public ushort Year() { return wxDateTime_GetYear(wxobj); }
+        public ushort Year
+        {
+            get { return wxDateTime_GetYear(wxObject); }
+        }
 
-        int Month() { return wxDateTime_GetMonth(wxobj); }
+        int Month
+        {
+            get { return wxDateTime_GetMonth(wxObject); }
+        }
 
-        ushort Day() { return wxDateTime_GetDay(wxobj); }
+        ushort Day
+        {
+            get { return wxDateTime_GetDay(wxObject); }
+        }
 
-        ushort Hour() { return wxDateTime_GetHour(wxobj); }
+        ushort Hour
+        {
+            get { return wxDateTime_GetHour(wxObject); }
+        }
 
-        ushort Minute() { return wxDateTime_GetMinute(wxobj); }
+        ushort Minute
+        {
+            get { return wxDateTime_GetMinute(wxObject); }
+        }
         
-        ushort Second() { return wxDateTime_GetSecond(wxobj); }
+        ushort Second
+        {
+            get { return wxDateTime_GetSecond(wxObject); }
+        }
 
-        ushort Millisecond() { return wxDateTime_GetMillisecond(wxobj); }
+        ushort Millisecond
+        {
+            get { return wxDateTime_GetMillisecond(wxObject); }
+        }
 
-	static wxDateTime Now() { return new wxDateTime(wxDateTime_Now()); }
         //-----------------------------------------------------------------------------
-/+
+
         public static implicit operator DateTime (wxDateTime wdt)
         {
-            DateTime dt = new DateTime(wdt.Year, cast(int)wdt.Month, cast(int)wdt.Day, 
-                                       cast(int)wdt.Hour, cast(int)wdt.Minute, 
-                                       cast(int)wdt.Second, cast(int)wdt.Millisecond);
+            DateTime dt = new DateTime(wdt.Year, (int)wdt.Month, (int)wdt.Day, 
+                                       (int)wdt.Hour, (int)wdt.Minute, 
+                                       (int)wdt.Second, (int)wdt.Millisecond);
             return dt;
         }
 
         public static implicit operator wxDateTime (DateTime dt)
         {
-            wxDateTime wdt = new this();
+            wxDateTime wdt = new wxDateTime();
             wdt.Set((ushort)dt.Day, dt.Month, dt.Year, (ushort)dt.Hour, 
                     (ushort)dt.Minute, (ushort)dt.Second, 
                     (ushort)dt.Millisecond);
             return wdt;
         }
-+/
+
         //-----------------------------------------------------------------------------
     }
+}
+

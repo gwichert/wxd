@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - DbGrid
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - DbGrid
 //
 // The DbGrid class.
@@ -13,10 +10,15 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.DbGrid;
-import wx.common;
-import wx.Grid;
+using System;
+using System.Drawing;
+using System.Data;
+using System.Collections;
 
+using wx;
+
+namespace wx.DataAccess
+{
 	public class Column
 	{
 		private string dbcolumnname;
@@ -25,35 +27,44 @@ import wx.Grid;
 
 		//-----------------------------------------------------------------------------
 
-		public this() {}
+		public Column() {}
 
 		//-----------------------------------------------------------------------------
 
-		public String dbColumnName() { return dbcolumnname; }
-		public void dbColumnName(String value) { dbcolumnname = value; }
+		public String dbColumnName
+		{
+			get { return dbcolumnname; }
+			set { dbcolumnname = value; }
+		}
 
 		//-----------------------------------------------------------------------------
 
-		public String newColumnName() { return newcolumnname; }
-		public void newColumnName(String value) { newcolumnname = value; }
+		public String newColumnName
+		{
+			get { return newcolumnname; }
+			set { newcolumnname = value; }
+		}
 
 		//-----------------------------------------------------------------------------
 
-		public int Width() { return width; }
-		public void Width(int value) { width = value; }
+		public int Width
+		{
+			get { return width; }
+			set { width = value; }
+		}
 	}
 
 	//-----------------------------------------------------------------------------
 
 	public class ColumnMapping
 	{
-		private Column[] cols;
+		private ArrayList cols = null;
 
 		private int DEFAULT_COLUMN_WIDTH = 75;
 
 		//-----------------------------------------------------------------------------
 
-		public this()
+		public ColumnMapping()
 		{
 			cols = new ArrayList();
 		}
@@ -71,18 +82,21 @@ import wx.Grid;
 			col.dbColumnName = dbcolumnname;
 			col.newColumnName = newcolumnname;
 			col.Width = width;
-			cols =~ col;
+			cols.Add(col);
 		}
 
 		//-----------------------------------------------------------------------------
 
-		public uint length() { return cols.length; }
+		public int Count
+		{
+			get { return cols.Count; }
+		}
 
 		//-----------------------------------------------------------------------------
 
-		public Column opIndex(int index)
+		public Column GetColumn(int index)
 		{
-			return cols[index];
+			return cols[index] as Column;
 		}
 
 		//-----------------------------------------------------------------------------
@@ -90,9 +104,9 @@ import wx.Grid;
 		public Column Search(string dbcolumnname)
 		{
 			Column result = null;
-			foreach (Column col;cols) 
+			foreach (Column col in cols) 
 			{
-				if (col.dbColumnName == dbcolumnname)
+				if (col.dbColumnName.Equals(dbcolumnname))
 				{
 					result =  col;
 					break;
@@ -106,7 +120,7 @@ import wx.Grid;
 		public Column SearchDbColumnName(string newcolumnname)
 		{
 			Column result = null;
-			foreach (Column col;cols) 
+			foreach (Column col in cols) 
 			{
 				if (col.newColumnName.Equals(newcolumnname))
 				{
@@ -119,12 +133,18 @@ import wx.Grid;
 		
 		//-----------------------------------------------------------------------------
 		
-		public Column[] Cols() { return cols; }
+		public ArrayList Cols
+		{
+			get { return cols; }
+		}
 
 		//-----------------------------------------------------------------------------
 
-		public int DefaultColumnWidth() { return DEFAULT_COLUMN_WIDTH; }
-		public void DefaultColumnWidth(int value) { DEFAULT_COLUMN_WIDTH = value; }
+		public int DefaultColumnWidth
+		{
+			get { return DEFAULT_COLUMN_WIDTH; }
+			set { DEFAULT_COLUMN_WIDTH = value; }
+		}
 	}
 	
 	//-----------------------------------------------------------------------------
@@ -151,24 +171,24 @@ import wx.Grid;
 		
 		//-----------------------------------------------------------------------------
 		
-		public this(IntPtr wxobj)
-			{ super(wxobj);}
+		public DbGrid(IntPtr wxObject)
+			: base(wxObject) {}
 
-		public this(Window parent, int id)
-			{ this(parent, id, wxDefaultPosition, wxDefaultSize, wxWANTS_CHARS, "grid"); }
+		public DbGrid(Window parent, int id)
+			: this(parent, id, wxDefaultPosition, wxDefaultSize, wxWANTS_CHARS, "grid") { }
 
-		public this(Window parent, int id, Point pos)
-			{ this(parent, id, pos, wxDefaultSize, wxWANTS_CHARS, "grid"); }
+		public DbGrid(Window parent, int id, Point pos)
+			: this(parent, id, pos, wxDefaultSize, wxWANTS_CHARS, "grid") { }
 
-		public this(Window parent, int id, Point pos, Size size)
-			{ this(parent, id, pos, size, wxWANTS_CHARS, "grid"); }
+		public DbGrid(Window parent, int id, Point pos, Size size)
+			: this(parent, id, pos, size, wxWANTS_CHARS, "grid") { }
 
-		public this(Window parent, int id, Point pos, Size size, int style)
-			{ this(parent, id, pos, size, style, "grid"); }
+		public DbGrid(Window parent, int id, Point pos, Size size, long style)
+			: this(parent, id, pos, size, style, "grid") { }
 
-		public this(Window parent, int id, Point pos, Size size, int style, string name)
+		public DbGrid(Window parent, int id, Point pos, Size size, long style, string name)
+			: base(parent, id, pos, size, style, name)
 		{
-			super(parent, id, pos, size, style, name);
 			myDataSet = new DataSet();
 			colmap = new ColumnMapping();
 
@@ -178,35 +198,44 @@ import wx.Grid;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent)
-			{ this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, wxWANTS_CHARS, "grid"); }
+		public DbGrid(Window parent)
+			: this(parent, Window.UniqueID, wxDefaultPosition, wxDefaultSize, wxWANTS_CHARS, "grid") { }
 
-		public this(Window parent, Point pos)
-			{ this(parent, Window.UniqueID, pos, wxDefaultSize, wxWANTS_CHARS, "grid"); }
+		public DbGrid(Window parent, Point pos)
+			: this(parent, Window.UniqueID, pos, wxDefaultSize, wxWANTS_CHARS, "grid") { }
 
-		public this(Window parent, Point pos, Size size)
-			{ this(parent, Window.UniqueID, pos, size, wxWANTS_CHARS, "grid"); }
+		public DbGrid(Window parent, Point pos, Size size)
+			: this(parent, Window.UniqueID, pos, size, wxWANTS_CHARS, "grid") { }
 
-		public this(Window parent, Point pos, Size size, int style)
-			{ this(parent, Window.UniqueID, pos, size, style, "grid"); }
+		public DbGrid(Window parent, Point pos, Size size, long style)
+			: this(parent, Window.UniqueID, pos, size, style, "grid") { }
 
-		public this(Window parent, Point pos, Size size, int style, string name)
-			{ this(parent, Window.UniqueID, pos, size, style, name);}
+		public DbGrid(Window parent, Point pos, Size size, long style, string name)
+			: this(parent, Window.UniqueID, pos, size, style, name) {}
 		
 		//-----------------------------------------------------------------------------
 
-		public DataSet dataSet() { return myDataSet; }
-		public void dataSet(DataSet value) { myDataSet = value; }
+		public DataSet dataSet
+		{
+			get{ return myDataSet; }
+			set{ myDataSet = value; }
+		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public ColumnMapping columnMapping() { return colmap; }
-		public void columnMapping(ColumnMapping value) { colmap = value; }
+		public ColumnMapping columnMapping
+		{
+			get{ return colmap; }
+			set{ colmap = value; }
+		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public int DefaultColumnWidth() { return colmap.DefaultColumnWidth; }
-		public void DefaultColumnWidth(int value) { colmap.DefaultColumnWidth = value; }
+		public int DefaultColumnWidth
+		{
+			get { return colmap.DefaultColumnWidth; }
+			set { colmap.DefaultColumnWidth = value; }
+		}
 		
 		//-----------------------------------------------------------------------------
 		
@@ -230,13 +259,13 @@ import wx.Grid;
 		{
 			if (dataSet != null) 
 			{
-				// No tables;dataset
+				// No tables in dataset
 				if (dataSet.Tables.Count == 0)
 				{
 					return DbGridMsg.NO_TABLE_ERROR;
 				}
 				
-				// No columns;dataset
+				// No columns in dataset
 				if (dataSet.Tables[tablename].Columns.Count == 0)
 				{
 					return DbGridMsg.NO_COLUMN_ERROR;
@@ -259,7 +288,7 @@ import wx.Grid;
 				
 				// If a mapping name exists use mapping name
 				// else use dataset column caption
-				foreach (DataColumn col;table.Columns) 
+				foreach (DataColumn col in table.Columns) 
 				{
 					Column icol = colmap.Search(col.Caption);
 					
@@ -280,10 +309,10 @@ import wx.Grid;
 				}	
 				
 				// Fill grid
-				foreach (DataRow row;table.Rows) 
+				foreach (DataRow row in table.Rows) 
 				{
 					c = 0;					
-					foreach (DataColumn col;table.Columns) 
+					foreach (DataColumn col in table.Columns) 
 					{
 						SetCellValue(r, c, row[col].ToString());
 						c++;
@@ -303,19 +332,19 @@ import wx.Grid;
 		{
 			if (dataSet != null) 
 			{
-				// No tables;dataset
+				// No tables in dataset
 				if (dataSet.Tables.Count == 0)
 				{
 					return DbGridMsg.NO_TABLE_ERROR;
 				}
 				
-				// No columns;dataset
+				// No columns in dataset
 				if (dataSet.Tables[tablename].Columns.Count == 0)
 				{
 					return DbGridMsg.NO_COLUMN_ERROR;
 				}
 				
-				// No columns;colmap
+				// No columns in colmap
 				if ( colmap.Count == 0 )
 				{
 					return DbGridMsg.NO_COLUMN_MAPPING_ERROR;
@@ -337,7 +366,7 @@ import wx.Grid;
 				RowLabelSize = 0; 
 				
 				// Grid column names = colmap newColumnName
-				foreach (Column icol;colmap.Cols) 
+				foreach (Column icol in colmap.Cols) 
 				{					
 					SetColumnWidth(c, icol.Width);
 						
@@ -346,10 +375,10 @@ import wx.Grid;
 				}	
 				
 				// Fill grid
-				foreach (DataRow row;table.Rows) 
+				foreach (DataRow row in table.Rows) 
 				{
 					c = 0;		
-					foreach (Column col;colmap.Cols) 
+					foreach (Column col in colmap.Cols) 
 					{					
 						SetCellValue(r, c, row[col.dbColumnName].ToString());
 						c++;
@@ -365,7 +394,7 @@ import wx.Grid;
 
 		// currently this only works manually
 		// you have to call it from the application
-		// it will add a new row to the grid and the datatable;the dataset
+		// it will add a new row to the grid and the datatable in the dataset
 		public void AddRow()
 		{
 			AppendRows(1, true);
@@ -395,9 +424,9 @@ import wx.Grid;
 		//-----------------------------------------------------------------------------		
 		
 		// Cell change ?? Change the corresponding dataset also
-		private void OnGridCellChange(Object sender, Event e)
+		private void OnGridCellChange(object sender, Event e)
 		{
-			GridEvent ge = cast(GridEvent)e;
+			GridEvent ge = e as GridEvent;
 			string s = GetColLabelValue(ge.Col);		
 			DataRow row = myDataSet.Tables[tablename].Rows[ge.Row];			
 			row[s] = GetCellValue(ge.Row, ge.Col);
@@ -405,3 +434,4 @@ import wx.Grid;
 		
 		//-----------------------------------------------------------------------------
 	}
+}

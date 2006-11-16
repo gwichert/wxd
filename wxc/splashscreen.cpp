@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - splashscreen.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - splashscreen.cxx
 //
 // The wxSplashScreen proxy interface.
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/splash.h>
 #include "local_events.h"
 

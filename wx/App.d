@@ -1,87 +1,74 @@
 //-----------------------------------------------------------------------------
-// wxD - App.d
+// wx.NET - App.cs
 //
 // The wxApp wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
-// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgtes license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.App;
-import wx.common;
-import wx.EvtHandler;
-import wx.Window;
-import wx.GdiCommon;
+using System;
+using System.Runtime.InteropServices;
 
-	extern (C) {
-	alias bool function(App o) Virtual_OnInit;
-	alias int  function(App o) Virtual_OnExit;
-	alias bool function(App o,inout int argc,char** argv) Virtual_Initialize;
-	}
-
-        static extern (C) IntPtr wxApp_ctor();
-	
-	static extern (C) void wxApp_RegisterVirtual(IntPtr self, App o, Virtual_OnInit onInit, Virtual_OnExit onExit, Virtual_Initialize initalize);
-	static extern (C) bool wxApp_Initialize(IntPtr self,inout int argc,char** argv);
-	static extern (C) bool wxApp_OnInit(IntPtr self);
-	static extern (C) int wxApp_OnExit(IntPtr self);
-	
-        static extern (C) void   wxApp_Run(int argc, char** argv);
-
-        static extern (C) void   wxApp_SetVendorName(IntPtr self, string name);
-        static extern (C) string wxApp_GetVendorName(IntPtr self);
-
-        static extern (C) void   wxApp_SetAppName(IntPtr self, string name);
-        static extern (C) string wxApp_GetAppName(IntPtr self);
-
-        static extern (C) bool   wxApp_SafeYield(IntPtr win, bool onlyIfNeeded);
-        static extern (C) bool   wxApp_Yield(IntPtr self, bool onlyIfNeeded);
-        static extern (C) void   wxApp_WakeUpIdle();
-
-        //---------------------------------------------------------------------
-
+namespace wx
+{
     public abstract class App : EvtHandler
     {
+	private delegate bool Virtual_OnInit();
+	private delegate int Virtual_OnExit();
+	
+	private Virtual_OnInit virtual_OnInit;
+	private Virtual_OnExit virtual_OnExit;
+    
+        [DllImport("wx-c")] static extern IntPtr wxApp_ctor();
+	
+	[DllImport("wx-c")] static extern void wxApp_RegisterVirtual(IntPtr self, Virtual_OnInit onInit, Virtual_OnExit onExit);
+	[DllImport("wx-c")] static extern bool wxApp_OnInit(IntPtr self);
+	[DllImport("wx-c")] static extern int wxApp_OnExit(IntPtr self);
+	
+        [DllImport("wx-c")] static extern void   wxApp_Run(int argc, string[] argv);
+
+        [DllImport("wx-c")] static extern void   wxApp_SetVendorName(IntPtr self, string name);
+        [DllImport("wx-c")] static extern IntPtr wxApp_GetVendorName(IntPtr self);
+
+        [DllImport("wx-c")] static extern void   wxApp_SetAppName(IntPtr self, string name);
+        [DllImport("wx-c")] static extern IntPtr wxApp_GetAppName(IntPtr self);
+
+        [DllImport("wx-c")] static extern bool   wxApp_SafeYield(IntPtr win, bool onlyIfNeeded);
+        [DllImport("wx-c")] static extern bool   wxApp_Yield(IntPtr self, bool onlyIfNeeded);
+        [DllImport("wx-c")] static extern void   wxApp_WakeUpIdle();
         
+        //---------------------------------------------------------------------
+
         private static App app;
 
         //---------------------------------------------------------------------
 
-        protected this() 
+        protected App() : base(wxApp_ctor())
         {
-        	super(wxApp_ctor());
             app = this;
 	    
-	    wxApp_RegisterVirtual(wxobj, this, &staticOnInit, &staticOnExit, &staticInitalize);
+	    virtual_OnInit = new Virtual_OnInit(OnInit);
+	    virtual_OnExit = new Virtual_OnExit(OnExit);
+	    
+	    wxApp_RegisterVirtual(wxObject, virtual_OnInit, virtual_OnExit);
         }
 
         //---------------------------------------------------------------------
 
-	extern (C) private static bool staticInitalize(App o,inout int argc,char** argv) { return o.Initalize(argc,argv); }
-	extern (C) private static bool staticOnInit(App o) { return o.OnInit(); }
-	extern (C) private static int  staticOnExit(App o) { return o.OnExit(); }
-
-	private bool Initalize(inout int argc,char** argv)
+	public virtual bool OnInit()
 	{
-		bool ret = wxApp_Initialize(wxobj, argc,argv);
-		InitializeStockObjects();
-		return ret;
-	}
-
-	public /+virtual+/ bool OnInit()
-	{
-		return wxApp_OnInit(wxobj);
+		return wxApp_OnInit(wxObject);
 	}
 	
 	//---------------------------------------------------------------------
 	
-	public /+virtual+/ int OnExit()
+	public virtual int OnExit()
 	{
-		return wxApp_OnExit(wxobj);
+		return wxApp_OnExit(wxObject);
 	}
 
         //---------------------------------------------------------------------
@@ -95,27 +82,37 @@ import wx.GdiCommon;
 
         public void Run()
         {
-            //string[] args; // = Environment.GetCommandLineArgs();
-            wxApp_Run(0, null);
+            string[] args = Environment.GetCommandLineArgs();
+            wxApp_Run(args.Length, args);
         }
 
         //---------------------------------------------------------------------
         
-        public string VendorName() { return wxApp_GetVendorName(wxobj).dup; }
-        public string AppName() { return wxApp_GetAppName(wxobj).dup; }
+        public string VendorName
+        {
+            set { wxApp_SetVendorName(wxObject, value); }
+            get { return new wxString(wxApp_GetVendorName(wxObject), true); }
+        }
+
+        public string AppName
+        {
+            set { wxApp_SetAppName(wxObject, value); }
+            get { return new wxString(wxApp_GetAppName(wxObject), true); }
+        }
+
         //---------------------------------------------------------------------
 
         public static bool SafeYield() 
-            { return wxApp_SafeYield(wxObject.SafePtr(null), false); }
+            { return wxApp_SafeYield(Object.SafePtr(null), false); }
         public static bool SafeYield(Window win) 
-            { return wxApp_SafeYield(wxObject.SafePtr(win), false); }
+            { return wxApp_SafeYield(Object.SafePtr(win), false); }
         public static bool SafeYield(Window win, bool onlyIfNeeded) 
-            { return wxApp_SafeYield(wxObject.SafePtr(win), onlyIfNeeded); }
+            { return wxApp_SafeYield(Object.SafePtr(win), onlyIfNeeded); }
 
         public bool Yield() 
-            { return wxApp_Yield(wxobj, false); }
+            { return wxApp_Yield(wxObject, false); }
         public bool Yield(bool onlyIfNeeded) 
-            { return wxApp_Yield(wxobj, onlyIfNeeded); }
+            { return wxApp_Yield(wxObject, onlyIfNeeded); }
 
         //---------------------------------------------------------------------
 
@@ -126,3 +123,4 @@ import wx.GdiCommon;
 
         //---------------------------------------------------------------------
     }
+}

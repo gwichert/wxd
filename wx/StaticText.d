@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - StaticText.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - StaticText.cs
 //
 // The wxStaticText wrapper class.
@@ -13,30 +10,42 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.StaticText;
-import wx.common;
-import wx.Control;
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
-		static extern (C) IntPtr wxStaticText_ctor();
-		static extern (C) bool wxStaticText_Create(IntPtr self, IntPtr parent, int id, string label, inout Point pos, inout Size size, uint style, string name);
+namespace wx
+{
+	public class StaticText : Control
+	{
+		public const long wxST_NO_AUTORESIZE = 0x0001;
+	
+		[DllImport("wx-c")] static extern IntPtr wxStaticText_ctor();
+		[DllImport("wx-c")] static extern bool wxStaticText_Create(IntPtr self, IntPtr parent, int id, string label, ref Point pos, ref Size size, uint style, string name);
 
 		//---------------------------------------------------------------------
 		
-	public class StaticText : Control
-	{
-		public const int wxST_NO_AUTORESIZE = 0x0001;
-	
-		public const string wxStaticTextNameStr = "message";
-	
-		public this(IntPtr wxobj) 
-			{ super(wxobj);}
+		public StaticText(IntPtr wxObject) 
+			: base(wxObject) {}
 
-		public this()
-			{ super(wxStaticText_ctor()); }
+		public StaticText()
+			: base(wxStaticText_ctor())	{ }
 
-		public this(Window parent, int id, string label, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, string name = wxStaticTextNameStr)
+		public StaticText(Window parent, int id, string label)
+			: this(parent, id, label, wxDefaultPosition, wxDefaultSize, 0, null) { }
+
+		public StaticText(Window parent, int id, string label, Point pos)
+			: this(parent, id, label, pos, wxDefaultSize, 0, null) { }
+
+		public StaticText(Window parent, int id, string label, Point pos, Size size)
+			: this(parent, id, label, pos, size, 0, null) { }
+
+		public StaticText(Window parent, int id, string label, Point pos, Size size, long style)
+			: this(parent, id, label, pos, size, style, null) { }
+			
+		public StaticText(Window parent, int id, string label, Point pos, Size size, long style, string name)
+			: base(wxStaticText_ctor())
 		{
-			super(wxStaticText_ctor());
 			if (!Create(parent, id, label, pos, size, style, name))
 			{
 				throw new InvalidOperationException("Failed to create StaticText");
@@ -46,13 +55,26 @@ import wx.Control;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent, string label, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, string name = wxStaticTextNameStr)
-			{ this(parent, Window.UniqueID, label, pos, size, style, name);}
+		public StaticText(Window parent, string label)
+			: this(parent, Window.UniqueID, label, wxDefaultPosition, wxDefaultSize, 0, null) { }
+
+		public StaticText(Window parent, string label, Point pos)
+			: this(parent, Window.UniqueID, label, pos, wxDefaultSize, 0, null) { }
+
+		public StaticText(Window parent, string label, Point pos, Size size)
+			: this(parent, Window.UniqueID, label, pos, size, 0, null) { }
+
+		public StaticText(Window parent, string label, Point pos, Size size, long style)
+			: this(parent, Window.UniqueID, label, pos, size, style, null) { }
+			
+		public StaticText(Window parent, string label, Point pos, Size size, long style, string name)
+			: this(parent, Window.UniqueID, label, pos, size, style, name) {}
 		
 		//---------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, string label, inout Point pos, inout Size size, int style, string name)
+		public bool Create(Window parent, int id, string label, Point pos, Size size, long style, string name)
 		{
-			return wxStaticText_Create(wxobj, wxObject.SafePtr(parent), id, label, pos, size, cast(uint)style, name);
+			return wxStaticText_Create(wxObject, Object.SafePtr(parent), id, label, ref pos, ref size, (uint)style, name);
 		}
 	}
+}

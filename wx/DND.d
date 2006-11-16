@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - Dnd.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - Dnd.cs
 //
 // The wxDND wrapper classes.
@@ -13,11 +10,11 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.DND;
-import wx.common;
-import wx.DataObject;
-import wx.Window;
+using System;
+using System.Runtime.InteropServices;
 
+namespace wx 
+{
 	public enum Drag
 	{
 		wxDrag_CopyOnly    = 0,
@@ -39,216 +36,287 @@ import wx.Window;
 	
 	//---------------------------------------------------------------------
 
-		extern (C) {
-		alias int function(DropSource obj, int flags) Virtual_DoDragDrop;
-		}
+	public class DropSource : Object
+	{
+		private delegate int Virtual_DoDragDrop(int flags);
 
-		static extern (C) IntPtr wxDropSource_Win_ctor(IntPtr win);
-		static extern (C) IntPtr wxDropSource_DataObject_ctor(IntPtr dataObject, IntPtr win);
-		static extern (C) void wxDropSource_dtor(IntPtr self);
-		static extern (C) void wxDropSource_RegisterVirtual(IntPtr self, DropSource obj, Virtual_DoDragDrop doDragDrop);
-		static extern (C) int wxDropSource_DoDragDrop(IntPtr self, int flags);
-		static extern (C) void wxDropSource_SetData(IntPtr self, IntPtr dataObject);
+		private Virtual_DoDragDrop virtual_DoDragDrop;
+		
+		protected DataObject m_dataObject = null;
+		
+		[DllImport("wx-c")] static extern IntPtr wxDropSource_Win_ctor(IntPtr win);
+		[DllImport("wx-c")] static extern IntPtr wxDropSource_DataObject_ctor(IntPtr dataObject, IntPtr win);
+		[DllImport("wx-c")] static extern void wxDropSource_dtor(IntPtr self);
+		[DllImport("wx-c")] static extern void wxDropSource_RegisterVirtual(IntPtr self, Virtual_DoDragDrop doDragDrop);
+		[DllImport("wx-c")] static extern int wxDropSource_DoDragDrop(IntPtr self, int flags);
+		[DllImport("wx-c")] static extern void wxDropSource_SetData(IntPtr self, IntPtr dataObject);
 		
 		//---------------------------------------------------------------------
 
-	public class DropSource : wxObject
-	{
-		protected DataObject m_dataObject = null;
-		
-		public this(IntPtr wxobj)
+		public DropSource(IntPtr wxObject)
+			: base(wxObject) 
 		{
-			super(wxobj);
+			this.wxObject = wxObject;
 		}		
 			
-		private this(IntPtr wxobj, bool memOwn)
+		internal DropSource(IntPtr wxObject, bool memOwn)
+			: base(wxObject)
 		{ 
-			super(wxobj);
 			this.memOwn = memOwn;
+			this.wxObject = wxObject;
 		}
 		
-		public this(Window win = null)
+		public DropSource(Window win)
+			: this(wxDropSource_Win_ctor(Object.SafePtr(win)), true) 
 		{ 
-			this(wxDropSource_Win_ctor(wxObject.SafePtr(win)), true);
 			m_dataObject = null;
 			
-			wxDropSource_RegisterVirtual( wxobj, this, &staticDoDoDragDrop );
+			virtual_DoDragDrop = new Virtual_DoDragDrop(DoDoDragDrop);
+
+			wxDropSource_RegisterVirtual( wxObject, virtual_DoDragDrop );
 		}
 
-		public this(DataObject dataObject, Window win = null)
+		public DropSource(DataObject dataObject, Window win)
+			: this(wxDropSource_DataObject_ctor(Object.SafePtr(dataObject), Object.SafePtr(win)), true) 
 		{
-			this(wxDropSource_DataObject_ctor(wxObject.SafePtr(dataObject), wxObject.SafePtr(win)), true);
 			m_dataObject = dataObject;
 
-			wxDropSource_RegisterVirtual( wxobj, this, &staticDoDoDragDrop );
+			virtual_DoDragDrop = new Virtual_DoDragDrop(DoDoDragDrop);
+			
+			wxDropSource_RegisterVirtual( wxObject, virtual_DoDragDrop );
 		}
 		
 		//---------------------------------------------------------------------
-		override private void dtor() { wxDropSource_dtor(wxobj); }
-
-		//---------------------------------------------------------------------
-
-		static extern (C) private int staticDoDoDragDrop(DropSource obj,int flags)
+				
+		public override void Dispose()
 		{
-			return cast(int)obj.DoDragDrop(flags);
-		}
-
-		public /+virtual+/ DragResult DoDragDrop(int flags)
-		{
-			return cast(DragResult)wxDropSource_DoDragDrop(wxobj, flags);
+			if (!disposed)
+			{
+				if (wxObject != IntPtr.Zero)
+				{
+					if (memOwn)
+					{
+						wxDropSource_dtor(wxObject);
+						memOwn = false;
+					}
+				}
+				RemoveObject(wxObject);
+				wxObject = IntPtr.Zero;
+				disposed= true;
+			}
+			
+			base.Dispose();
+			GC.SuppressFinalize(this);
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public DataObject dataObject() { return m_dataObject; }
-		public void dataObject(DataObject value) { m_dataObject = value; wxDropSource_SetData(wxobj, wxObject.SafePtr(value)); }
+		~DropSource() 
+		{
+			Dispose();
+		}
+
+		//---------------------------------------------------------------------
+
+		public virtual DragResult DoDragDrop(int flags)
+		{
+			return (DragResult)wxDropSource_DoDragDrop(wxObject, flags);
+		}
+		
+		private int DoDoDragDrop(int flags)
+		{
+			return (int)DoDragDrop(flags);
+		}
+		
+		//---------------------------------------------------------------------
+		
+		public DataObject DataObject
+		{
+			get { return m_dataObject; }
+			set { m_dataObject = value; wxDropSource_SetData(wxObject, Object.SafePtr(value)); }
+		}
 	}
 	
 	//---------------------------------------------------------------------
 
-		extern (C) {
-		alias int  function(DropTarget obj, int x, int y, int def) Virtual_OnDragOver;
-		alias bool function(DropTarget obj, int x, int y) Virtual_OnDrop;
-		alias int  function(DropTarget obj, int x, int y, int def) Virtual_OnData3;
-		alias bool function(DropTarget obj) Virtual_GetData;
-		alias void function(DropTarget obj) Virtual_OnLeave;
-		alias int  function(DropTarget obj, int x, int y, int def) Virtual_OnEnter;
-		}
+	public abstract class DropTarget : Object
+	{
+		private delegate int Virtual_OnDragOver(int x, int y, int def);
+		private delegate bool Virtual_OnDrop(int x, int y);
+		private delegate int Virtual_OnData3(int x, int y, int def);
+		private delegate bool Virtual_GetData();
+		private delegate void Virtual_OnLeave();
+		private delegate int Virtual_OnEnter(int x, int y, int def);
 
+		private Virtual_OnDragOver virtual_OnDragOver;
+		private Virtual_OnDrop virtual_OnDrop;
+		private Virtual_OnData3 virtual_OnData3;
+		private Virtual_GetData virtual_GetData;
+		private Virtual_OnLeave virtual_OnLeave;
+		private Virtual_OnEnter virtual_OnEnter;
+		
 		//---------------------------------------------------------------------
 		
 		protected DataObject m_dataObject = null;
 		
 		//---------------------------------------------------------------------
 		
-		static extern (C) IntPtr wxDropTarget_ctor(IntPtr dataObject);
-		static extern (C) void wxDropTarget_dtor(IntPtr self);
-		static extern (C) void wxDropTarget_RegisterVirtual(IntPtr self, DropTarget obj, Virtual_OnDragOver onDragOver, Virtual_OnDrop onDrop, Virtual_OnData3 onData, Virtual_GetData getData, Virtual_OnLeave onLeave, Virtual_OnEnter onEnter);  
-		static extern (C) void   wxDropTarget_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
-		static extern (C) void   wxDropTarget_SetDataObject(IntPtr self, IntPtr dataObject);
-		static extern (C) int wxDropTarget_OnEnter(IntPtr self, int x, int y, int def);
-		static extern (C) int wxDropTarget_OnDragOver(IntPtr self, int x, int y, int def);
-		static extern (C) void   wxDropTarget_OnLeave(IntPtr self);
-		static extern (C) bool wxDropTarget_OnDrop(IntPtr self, int x, int y);
-		static extern (C) bool wxDropTarget_GetData(IntPtr self);
+		[DllImport("wx-c")] static extern IntPtr wxDropTarget_ctor(IntPtr dataObject);
+		[DllImport("wx-c")] static extern void wxDropTarget_dtor(IntPtr self);
+		[DllImport("wx-c")] static extern void wxDropTarget_RegisterVirtual(IntPtr self, Virtual_OnDragOver onDragOver, Virtual_OnDrop onDrop, Virtual_OnData3 onData, Virtual_GetData getData, Virtual_OnLeave onLeave, Virtual_OnEnter onEnter);  
+		[DllImport("wx-c")] static extern void   wxDropTarget_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
+		[DllImport("wx-c")] static extern void   wxDropTarget_SetDataObject(IntPtr self, IntPtr dataObject);
+		[DllImport("wx-c")] static extern int wxDropTarget_OnEnter(IntPtr self, int x, int y, int def);
+		[DllImport("wx-c")] static extern int wxDropTarget_OnDragOver(IntPtr self, int x, int y, int def);
+		[DllImport("wx-c")] static extern void   wxDropTarget_OnLeave(IntPtr self);
+		[DllImport("wx-c")] static extern bool wxDropTarget_OnDrop(IntPtr self, int x, int y);
+		[DllImport("wx-c")] static extern bool wxDropTarget_GetData(IntPtr self);
 		
 		//---------------------------------------------------------------------
 
-	public abstract class DropTarget : wxObject
-	{
-		public this(DataObject dataObject = null)
+		public DropTarget()
+			: this(null) { }		
+		
+		public DropTarget(DataObject dataObject)
+			: this(wxDropTarget_ctor(Object.SafePtr(dataObject)), true) 
 		{ 
-			this(wxDropTarget_ctor(wxObject.SafePtr(dataObject)), true);
 			m_dataObject = dataObject;
 
-			wxDropTarget_RegisterVirtual( wxobj, this,
-				&staticDoOnDragOver,
-				&staticOnDrop,
-				&staticDoOnData,
-				&staticGetData,
-				&staticOnLeave,
-				&staticDoOnEnter);
+			virtual_OnDragOver = new Virtual_OnDragOver(DoOnDragOver);
+			virtual_OnDrop = new Virtual_OnDrop(OnDrop);
+			virtual_OnData3 = new Virtual_OnData3(DoOnData);
+			virtual_GetData = new Virtual_GetData(GetData);
+			virtual_OnLeave = new Virtual_OnLeave(OnLeave);
+			virtual_OnEnter = new Virtual_OnEnter(DoOnEnter);
+			
+			wxDropTarget_RegisterVirtual( wxObject, virtual_OnDragOver,
+				virtual_OnDrop,
+				virtual_OnData3,
+				virtual_GetData,
+				virtual_OnLeave,
+				virtual_OnEnter);
 				
-			wxDropTarget_RegisterDisposable(wxobj, &VirtualDispose);
+			virtual_Dispose = new Virtual_Dispose(VirtualDispose);
+			wxDropTarget_RegisterDisposable(wxObject, virtual_Dispose);
 		}
 
-		public this(IntPtr wxobj)
+		public DropTarget(IntPtr wxObject)
+			: base(wxObject) 
 		{
-			super(wxobj);
+			this.wxObject = wxObject;
 		}			
 		
-		private this(IntPtr wxobj, bool memOwn)
+		internal DropTarget(IntPtr wxObject, bool memOwn)
+			: base(wxObject)
 		{ 
-			super(wxobj);
 			this.memOwn = memOwn;
+			this.wxObject = wxObject;
+		}
+		
+		//---------------------------------------------------------------------
+				
+		public override void Dispose()
+		{
+			if (!disposed)
+			{
+				if (wxObject != IntPtr.Zero)
+				{
+					if (memOwn)
+					{
+						wxDropTarget_dtor(wxObject);
+						memOwn = false;
+					}
+				}
+				RemoveObject(wxObject);
+				wxObject = IntPtr.Zero;
+				disposed= true;
+			}
+			
+			base.Dispose();
+			GC.SuppressFinalize(this);
 		}
 		
 		//---------------------------------------------------------------------
 		
-		override private void dtor() { wxDropTarget_dtor(wxobj); }
+		~DropTarget() 
+		{
+			Dispose();
+		}
+
+		//---------------------------------------------------------------------
+
+		public virtual DragResult OnDragOver(int x, int y, DragResult def)
+		{
+			return (DragResult)wxDropTarget_OnDragOver(wxObject, x, y, (int)def);
+		}
+		
+		private int DoOnDragOver(int x, int y, int def)
+		{
+			return (int)OnDragOver(x, y, (DragResult)def);
+		}
 		
 		//---------------------------------------------------------------------
 
-		static extern (C) private int staticDoOnDragOver(DropTarget obj, int x, int y, int def)
+		public virtual bool OnDrop(int x, int y)
 		{
-			return cast(int)obj.OnDragOver(x, y, cast(DragResult)def);
-		}
-		public /+virtual+/ DragResult OnDragOver(int x, int y, DragResult def)
-		{
-			return cast(DragResult)wxDropTarget_OnDragOver(wxobj, x, y, cast(int)def);
+			return wxDropTarget_OnDrop(wxObject, x, y);
 		}
 		
 		//---------------------------------------------------------------------
 
-		static extern (C) private bool staticOnDrop(DropTarget obj, int x, int y)
-		{
-			return obj.OnDrop(x,y);
-		}
-		public /+virtual+/ bool OnDrop(int x, int y)
-		{
-			return wxDropTarget_OnDrop(wxobj, x, y);
-		}
-		
-		//---------------------------------------------------------------------
-
-		static extern (C) private int staticDoOnData(DropTarget obj, int x, int y, int def)
-		{
-			return cast(int)obj.OnData(x, y, cast(DragResult) def);
-		}
 		public abstract DragResult OnData(int x, int y, DragResult def);
 		
+		private int DoOnData(int x, int y, int def)
+		{
+			return (int)OnData(x, y, (DragResult) def);
+		}
+
 		//---------------------------------------------------------------------
 
-		static extern (C) private bool staticGetData(DropTarget obj)
+		public virtual bool GetData()
 		{
-			return obj.GetData();
-		}
-		public /+virtual+/ bool GetData()
-		{
-			return wxDropTarget_GetData(wxobj);
+			return wxDropTarget_GetData(wxObject);
 		}
 		
 		//---------------------------------------------------------------------
 
-		static extern (C) private int staticDoOnEnter(DropTarget obj, int x, int y, int def)
+		public virtual DragResult OnEnter(int x, int y, DragResult def)
 		{
-			return cast(int)obj.OnEnter(x, y, cast(DragResult) def);
+			return (DragResult)wxDropTarget_OnEnter(wxObject, x, y, (int)def);
 		}
-		public /+virtual+/ DragResult OnEnter(int x, int y, DragResult def)
+		
+		private int DoOnEnter(int x, int y, int def)
 		{
-			return cast(DragResult)wxDropTarget_OnEnter(wxobj, x, y, cast(int)def);
+			return (int)OnEnter(x, y, (DragResult) def);
 		}
 		
 		//---------------------------------------------------------------------
 
-		static extern (C) private void staticOnLeave(DropTarget obj)
+		public virtual void OnLeave()
 		{
-			return obj.OnLeave();
-		}
-		public /+virtual+/ void OnLeave()
-		{
-			wxDropTarget_OnLeave(wxobj);
+			wxDropTarget_OnLeave(wxObject);
 		}
 		
 		//---------------------------------------------------------------------
 
-		public DataObject dataObject() { return m_dataObject; }
-		public void dataObject(DataObject value) { m_dataObject = value; wxDropTarget_SetDataObject(wxobj, wxObject.SafePtr(value)); }
-
-	//	public static wxObject New(IntPtr ptr) { return new DropTarget(ptr); }
+		public DataObject DataObject
+		{
+			get { return m_dataObject; }
+			set { m_dataObject = value; wxDropTarget_SetDataObject(wxObject, Object.SafePtr(value)); }
+		}
 	}
 	
 	//---------------------------------------------------------------------
-
-		static extern (C) bool wxTextDropTarget_OnDrop(IntPtr self, int x, int y);
-		static extern (C) bool wxTextDropTarget_GetData(IntPtr self);
-
-		//---------------------------------------------------------------------
 
 	public abstract class TextDropTarget : DropTarget
 	{
-		public this()
-			{ super(new TextDataObject());}
+		[DllImport("wx-c")] static extern bool wxTextDropTarget_OnDrop(IntPtr self, int x, int y);
+		[DllImport("wx-c")] static extern bool wxTextDropTarget_GetData(IntPtr self);
+
+		//---------------------------------------------------------------------
+
+		public TextDropTarget()
+			: base(new TextDataObject()) {}
 			
 		public abstract bool OnDropText(int x, int y, string text);
 
@@ -259,7 +327,7 @@ import wx.Window;
 			if (!GetData())
 				return DragResult.wxDragNone;
 				
-			TextDataObject dobj = cast(TextDataObject)m_dataObject;
+			TextDataObject dobj = (TextDataObject)m_dataObject;
 		
 			return OnDropText(x, y, dobj.Text) ? def : DragResult.wxDragNone;
 		}
@@ -268,28 +336,28 @@ import wx.Window;
         
 		public override bool OnDrop(int x, int y)
 		{
-			return wxTextDropTarget_OnDrop(wxobj, x, y);
+			return wxTextDropTarget_OnDrop(wxObject, x, y);
 		}
 		
 		//---------------------------------------------------------------------
 
 		public override bool GetData()
 		{
-			return wxTextDropTarget_GetData(wxobj);
+			return wxTextDropTarget_GetData(wxObject);
 		}
 	}
 	
 	//---------------------------------------------------------------------
 
-		static extern (C) bool wxFileDropTarget_OnDrop(IntPtr self, int x, int y);
-		static extern (C) bool wxFileDropTarget_GetData(IntPtr self);
+	public abstract class FileDropTarget : DropTarget
+	{
+		[DllImport("wx-c")] static extern bool wxFileDropTarget_OnDrop(IntPtr self, int x, int y);
+		[DllImport("wx-c")] static extern bool wxFileDropTarget_GetData(IntPtr self);
 
 		//---------------------------------------------------------------------
 
-	public abstract class FileDropTarget : DropTarget
-	{
-		public this()
-			{ super(new FileDataObject());}
+		public FileDropTarget()
+			: base(new FileDataObject()) {}
  
 		public abstract bool OnDropFiles(int x, int y, string[] filenames);
 		
@@ -300,7 +368,7 @@ import wx.Window;
 			if ( !GetData() )
 				return DragResult.wxDragNone;
 				
-			FileDataObject dobj = cast(FileDataObject)m_dataObject;
+			FileDataObject dobj = (FileDataObject)m_dataObject;
 			
 			return OnDropFiles(x, y, dobj.Filenames) ? def : DragResult.wxDragNone;
 		}
@@ -309,14 +377,15 @@ import wx.Window;
                 
 		public override bool OnDrop(int x, int y)
 		{
-			return wxFileDropTarget_OnDrop(wxobj, x, y);
+			return wxFileDropTarget_OnDrop(wxObject, x, y);
 		}
 		
 		//---------------------------------------------------------------------
 
 		public override bool GetData()
 		{
-			return wxFileDropTarget_GetData(wxobj);
+			return wxFileDropTarget_GetData(wxObject);
 		}
 	}
+}
 

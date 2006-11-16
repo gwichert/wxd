@@ -1,85 +1,145 @@
 //-----------------------------------------------------------------------------
-// wxD - ClientData.d
+// wx.NET - ClientData.cs
 //
 // The wxClientData wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
-// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.ClientData;
-import wx.common;
+using System;
+using System.Runtime.InteropServices;
 
-		static extern (C) IntPtr wxClientData_ctor();
-		static extern (C) void wxClientData_dtor(IntPtr self);
-		static extern (C) void wxClientData_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
+namespace wx
+{
+	public class ClientData : Object
+	{
+		[DllImport("wx-c")] static extern IntPtr wxClientData_ctor();
+		[DllImport("wx-c")] static extern void wxClientData_dtor(IntPtr self);
+		[DllImport("wx-c")] static extern void wxClientData_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
 		
 		//---------------------------------------------------------------------
         
-	public class ClientData : wxObject
-	{
-		public this(IntPtr wxobj)
+		public ClientData(IntPtr wxObject)
+			: base(wxObject) 
 		{ 
-			super(wxobj);
+			this.wxObject = wxObject;
 		}
 		
-		private this(IntPtr wxobj, bool memOwn)
+		internal ClientData(IntPtr wxObject, bool memOwn)
+			: base(wxObject)
 		{ 
-			super(wxobj);
 			this.memOwn = memOwn;
+			this.wxObject = wxObject;
 		}
 
-		public this()
+		public ClientData()
+			: this(wxClientData_ctor(), true) 
 		{ 
-			this(wxClientData_ctor(), true);
-			wxClientData_RegisterDisposable(wxobj, &VirtualDispose);
+			virtual_Dispose = new Virtual_Dispose(VirtualDispose);
+			wxClientData_RegisterDisposable(wxObject, virtual_Dispose);
 		}
 			
 		//---------------------------------------------------------------------
 				
-		override private void dtor() { wxClientData_dtor(wxobj); }
-
-		static wxObject New(IntPtr ptr) { return new ClientData(ptr); }
+		public override void Dispose()
+		{
+			if (!disposed)
+			{
+				if (wxObject != IntPtr.Zero)
+				{
+					if (memOwn)
+					{
+						wxClientData_dtor(wxObject);
+						memOwn = false;
+					}
+				}
+				RemoveObject(wxObject);
+				wxObject = IntPtr.Zero;
+				disposed= true;
+			}
+			base.Dispose();
+			GC.SuppressFinalize(this);
+		}
+		
+		//---------------------------------------------------------------------
+		
+		~ClientData() 
+		{
+			Dispose();
+		}
 	}
     
 	//---------------------------------------------------------------------
     
-		static extern (C) IntPtr wxStringClientData_ctor(string data);
-		static extern (C) void   wxStringClientData_dtor(IntPtr self);
-		static extern (C) void   wxStringClientData_SetData(IntPtr self, string data);
-		static extern (C) string wxStringClientData_GetData(IntPtr self);
+	public class StringClientData : ClientData
+	{
+		[DllImport("wx-c")] static extern IntPtr wxStringClientData_ctor(string data);
+		[DllImport("wx-c")] static extern void   wxStringClientData_dtor(IntPtr self);
+		[DllImport("wx-c")] static extern void   wxStringClientData_SetData(IntPtr self, string data);
+		[DllImport("wx-c")] static extern IntPtr wxStringClientData_GetData(IntPtr self);
 		
 		//---------------------------------------------------------------------
         
-	public class StringClientData : ClientData
-	{
-		public this()
-			{ this(wxStringClientData_ctor(""), true); }
+		public StringClientData()
+			: this(wxStringClientData_ctor(""), true) { }
 			
-		public this(string data)
-			{ this(wxStringClientData_ctor(data), true); }
+		public StringClientData(string data)
+			: this(wxStringClientData_ctor(data), true) { }
 			
-		public this(IntPtr wxobj)
+		public StringClientData(IntPtr wxObject)
+			: base(wxObject) 
 		{ 
-			super(wxobj);
+			this.wxObject = wxObject;
 		}
 			
-		private this(IntPtr wxobj, bool memOwn)
+		internal StringClientData(IntPtr wxObject, bool memOwn)
+			: base(wxObject)
 		{ 
-			super(wxobj);
 			this.memOwn = memOwn;
+			this.wxObject = wxObject;
 		}
 		
 		//---------------------------------------------------------------------
 				
-		override private void dtor() { wxStringClientData_dtor(wxobj); }
+		public override void Dispose()
+		{
+			if (!disposed)
+			{
+				if (wxObject != IntPtr.Zero)
+				{
+					if (memOwn)
+					{
+						wxStringClientData_dtor(wxObject);
+						memOwn = false;
+					}
+				}
+				RemoveObject(wxObject);
+				wxObject = IntPtr.Zero;
+				disposed= true;
+			}
+			
+			base.Dispose();
+			GC.SuppressFinalize(this);
+		}
+		
 		//---------------------------------------------------------------------
 		
-		public string Data() { return wxStringClientData_GetData(wxobj).dup; }
-		public void Data(string value) { wxStringClientData_SetData(wxobj, value); }
+		~StringClientData() 
+		{
+			Dispose();
+		}
+
+		//---------------------------------------------------------------------
+		
+		public string Data
+		{
+			get { return new wxString(wxStringClientData_GetData(wxObject), true); }
+			set { wxStringClientData_SetData(wxObject, value); }
+		}
 	}
+}
 

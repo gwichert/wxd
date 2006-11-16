@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - imghandler.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - imghandler.cxx
 //
 // The wxImageHandlers proxy interfaces.
@@ -14,72 +11,137 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/image.h>
 
 extern "C" WXEXPORT
-wxImageHandler* BMPHandler_ctor() 
+void * CSharp_new_BMPHandler() 
 {
-    return new wxBMPHandler();
+    void * jresult = 0 ;
+    wxBMPHandler *result;
+    
+    result = (wxBMPHandler *)new wxBMPHandler();
+    
+    jresult = (void *)result; 
+    return jresult;
 }
 
 extern "C" WXEXPORT
-wxImageHandler* ICOHandler_ctor() 
+void * CSharp_new_ICOHandler() 
 {
-    return new wxICOHandler();
+    void * jresult = 0 ;
+    wxICOHandler *result;
+    
+    result = (wxICOHandler *)new wxICOHandler();
+    
+    jresult = (void *)result; 
+    return jresult;
 }
 
 extern "C" WXEXPORT
-wxImageHandler* CURHandler_ctor() 
+void * CSharp_new_CURHandler() 
 {
-    return new wxCURHandler();
+    void * jresult = 0 ;
+    wxCURHandler *result;
+    
+    result = (wxCURHandler *)new wxCURHandler();
+    
+    jresult = (void *)result; 
+    return jresult;
 }
 
 extern "C" WXEXPORT
-wxImageHandler* ANIHandler_ctor() 
+void * CSharp_new_ANIHandler() 
 {
-    return new wxANIHandler();
+    void * jresult = 0 ;
+    wxANIHandler *result;
+    
+    result = (wxANIHandler *)new wxANIHandler();
+    
+    jresult = (void *)result; 
+    return jresult;
 }
 
 extern "C" WXEXPORT
-wxImageHandler* PNGHandler_ctor() 
+void * CSharp_new_PNGHandler() 
 {
-    return new wxPNGHandler();
+    void * jresult = 0 ;
+    wxPNGHandler *result;
+    
+    result = (wxPNGHandler *)new wxPNGHandler();
+    
+    jresult = (void *)result; 
+    return jresult;
 }
 
 extern "C" WXEXPORT
-wxImageHandler* GIFHandler_ctor() 
+void * CSharp_new_GIFHandler() 
 {
-    return new wxGIFHandler();
+    void * jresult = 0 ;
+    wxGIFHandler *result;
+    
+    result = (wxGIFHandler *)new wxGIFHandler();
+    
+    jresult = (void *)result; 
+    return jresult;
 }
 
 extern "C" WXEXPORT
-wxImageHandler* PCXHandler_ctor() 
+void * CSharp_new_PCXHandler() 
 {
-    return new wxPCXHandler();
+    void * jresult = 0 ;
+    wxPCXHandler *result;
+    
+    result = (wxPCXHandler *)new wxPCXHandler();
+    
+    jresult = (void *)result; 
+    return jresult;
 }
 
 extern "C" WXEXPORT
-wxImageHandler* JPEGHandler_ctor() 
+void * CSharp_new_JPEGHandler() 
 {
-    return new wxJPEGHandler();
+    void * jresult = 0 ;
+    wxJPEGHandler *result;
+    
+    result = (wxJPEGHandler *)new wxJPEGHandler();
+    
+    jresult = (void *)result; 
+    return jresult;
 }
 
 extern "C" WXEXPORT
-wxImageHandler* PNMHandler_ctor() 
+void * CSharp_new_PNMHandler() 
 {
-    return new wxPNMHandler();
+    void * jresult = 0 ;
+    wxPNMHandler *result;
+    
+    result = (wxPNMHandler *)new wxPNMHandler();
+    
+    jresult = (void *)result; 
+    return jresult;
 }
 
 extern "C" WXEXPORT
-wxImageHandler* XPMHandler_ctor() 
+void * CSharp_new_XPMHandler() 
 {
-    return new wxXPMHandler();
+    void * jresult = 0 ;
+    wxXPMHandler *result;
+    
+    result = (wxXPMHandler *)new wxXPMHandler();
+    
+    jresult = (void *)result; 
+    return jresult;
 }
 
 extern "C" WXEXPORT
-wxImageHandler* TIFFHandler_ctor() 
+void * CSharp_new_TIFFHandler() 
 {
-    return new wxTIFFHandler();
+    void * jresult = 0 ;
+    wxTIFFHandler *result;
+    
+    result = (wxTIFFHandler *)new wxTIFFHandler();
+    
+    jresult = (void *)result; 
+    return jresult;
 }
 

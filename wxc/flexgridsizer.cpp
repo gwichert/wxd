@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - flexgridsizer.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - flexgridsizer.cxx
 //
 // The wxFlexGridSizer proxy interface
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/sizer.h>
 
 //-----------------------------------------------------------------------------

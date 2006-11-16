@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - laywin.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - laywin.cxx
 // 
 // The wxSashLayoutWindow proxy interface.
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/laywin.h>
 #include "local_events.h"
 
@@ -40,7 +36,7 @@ wxSashLayoutWindow* wxSashLayoutWindow_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxSashLayoutWindow_Create(wxSashLayoutWindow* self, wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, long style, dstr name)
+bool wxSashLayoutWindow_Create(wxSashLayoutWindow* self, wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, long style, const char* name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -48,10 +44,10 @@ bool wxSashLayoutWindow_Create(wxSashLayoutWindow* self, wxWindow* parent, wxWin
 	if (size == NULL)
 		size = &wxDefaultSize;
 		
-	if (name.data==NULL)
-		name = dstr("sashlayoutwindow",sizeof("sashlayoutwindow")-1);
+	if (name == NULL)
+		name = "sashlayoutwindow";
 		
-	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, *pos, *size, style, wxString(name, wxConvUTF8))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -130,7 +126,6 @@ bool wxLayoutAlgorithm_LayoutWindow(wxLayoutAlgorithm* self, wxWindow* frame, wx
 //-----------------------------------------------------------------------------
 // wxQueryLayoutInfoEvent
 
-extern "C" WXEXPORT
 wxQueryLayoutInfoEvent* wxQueryLayoutInfoEvent_ctor(wxWindowID id)
 {
 	return new wxQueryLayoutInfoEvent(id);
@@ -138,7 +133,6 @@ wxQueryLayoutInfoEvent* wxQueryLayoutInfoEvent_ctor(wxWindowID id)
 
 //-----------------------------------------------------------------------------
 
-extern "C" WXEXPORT
 void wxQueryLayoutInfoEvent_SetRequestedLength(wxQueryLayoutInfoEvent* self, int length)
 {
 	self->SetRequestedLength(length);
@@ -146,7 +140,6 @@ void wxQueryLayoutInfoEvent_SetRequestedLength(wxQueryLayoutInfoEvent* self, int
 
 //-----------------------------------------------------------------------------
 
-extern "C" WXEXPORT
 int wxQueryLayoutInfoEvent_GetRequestedLength(wxQueryLayoutInfoEvent* self)
 {
 	return self->GetRequestedLength();
@@ -154,7 +147,6 @@ int wxQueryLayoutInfoEvent_GetRequestedLength(wxQueryLayoutInfoEvent* self)
 
 //-----------------------------------------------------------------------------
 
-extern "C" WXEXPORT
 void wxQueryLayoutInfoEvent_SetFlags(wxQueryLayoutInfoEvent* self, int flags)
 {
 	self->SetFlags(flags);
@@ -162,7 +154,6 @@ void wxQueryLayoutInfoEvent_SetFlags(wxQueryLayoutInfoEvent* self, int flags)
 
 //-----------------------------------------------------------------------------
 
-extern "C" WXEXPORT
 int wxQueryLayoutInfoEvent_GetFlags(wxQueryLayoutInfoEvent* self)
 {
 	return self->GetFlags();
@@ -170,7 +161,6 @@ int wxQueryLayoutInfoEvent_GetFlags(wxQueryLayoutInfoEvent* self)
 
 //-----------------------------------------------------------------------------
 
-extern "C" WXEXPORT
 void wxQueryLayoutInfoEvent_SetSize(wxQueryLayoutInfoEvent* self, const wxSize* size)
 {
 	self->SetSize(*size);
@@ -178,7 +168,6 @@ void wxQueryLayoutInfoEvent_SetSize(wxQueryLayoutInfoEvent* self, const wxSize* 
 
 //-----------------------------------------------------------------------------
 
-extern "C" WXEXPORT
 void wxQueryLayoutInfoEvent_GetSize(wxQueryLayoutInfoEvent* self, wxSize* size)
 {
 	*size = self->GetSize();
@@ -186,7 +175,6 @@ void wxQueryLayoutInfoEvent_GetSize(wxQueryLayoutInfoEvent* self, wxSize* size)
 
 //-----------------------------------------------------------------------------
 
-extern "C" WXEXPORT
 void wxQueryLayoutInfoEvent_SetOrientation(wxQueryLayoutInfoEvent* self, wxLayoutOrientation orient)
 {
 	self->SetOrientation(orient);
@@ -194,7 +182,6 @@ void wxQueryLayoutInfoEvent_SetOrientation(wxQueryLayoutInfoEvent* self, wxLayou
 
 //-----------------------------------------------------------------------------
 
-extern "C" WXEXPORT
 wxLayoutOrientation wxQueryLayoutInfoEvent_GetOrientation(wxQueryLayoutInfoEvent* self)
 {
 	return self->GetOrientation();
@@ -202,7 +189,6 @@ wxLayoutOrientation wxQueryLayoutInfoEvent_GetOrientation(wxQueryLayoutInfoEvent
 
 //-----------------------------------------------------------------------------
 
-extern "C" WXEXPORT
 void wxQueryLayoutInfoEvent_SetAlignment(wxQueryLayoutInfoEvent* self, wxLayoutAlignment align)
 {
 	self->SetAlignment(align);
@@ -210,7 +196,6 @@ void wxQueryLayoutInfoEvent_SetAlignment(wxQueryLayoutInfoEvent* self, wxLayoutA
 
 //-----------------------------------------------------------------------------
 
-extern "C" WXEXPORT
 wxLayoutAlignment wxQueryLayoutInfoEvent_GetAlignment(wxQueryLayoutInfoEvent* self)
 {
 	return self->GetAlignment();
@@ -219,7 +204,6 @@ wxLayoutAlignment wxQueryLayoutInfoEvent_GetAlignment(wxQueryLayoutInfoEvent* se
 //-----------------------------------------------------------------------------
 // wxCalculateLayoutEvent
 
-extern "C" WXEXPORT
 wxCalculateLayoutEvent* wxCalculateLayoutEvent_ctor(wxWindowID id)
 {
 	return new wxCalculateLayoutEvent(id);
@@ -227,7 +211,6 @@ wxCalculateLayoutEvent* wxCalculateLayoutEvent_ctor(wxWindowID id)
 
 //-----------------------------------------------------------------------------
 
-extern "C" WXEXPORT
 void wxCalculateLayoutEvent_SetFlags(wxCalculateLayoutEvent* self, int flags)
 {
 	self->SetFlags(flags);
@@ -235,7 +218,6 @@ void wxCalculateLayoutEvent_SetFlags(wxCalculateLayoutEvent* self, int flags)
 
 //-----------------------------------------------------------------------------
 
-extern "C" WXEXPORT
 int wxCalculateLayoutEvent_GetFlags(wxCalculateLayoutEvent* self)
 {
 	return self->GetFlags();
@@ -243,7 +225,6 @@ int wxCalculateLayoutEvent_GetFlags(wxCalculateLayoutEvent* self)
 
 //-----------------------------------------------------------------------------
 
-extern "C" WXEXPORT
 void wxCalculateLayoutEvent_SetRect(wxCalculateLayoutEvent* self, const wxRect* rect)
 {
 	self->SetRect(*rect);
@@ -251,11 +232,8 @@ void wxCalculateLayoutEvent_SetRect(wxCalculateLayoutEvent* self, const wxRect* 
 
 //-----------------------------------------------------------------------------
 
-extern "C" WXEXPORT
 void wxCalculateLayoutEvent_GetRect(wxCalculateLayoutEvent* self, wxRect* rect)
 {
 	*rect = self->GetRect();
 }
 
-extern "C" WXEXPORT int wxEvent_EVT_QUERY_LAYOUT_INFO()			{ return wxEVT_QUERY_LAYOUT_INFO; }
-extern "C" WXEXPORT int wxEvent_EVT_CALCULATE_LAYOUT()			{ return wxEVT_CALCULATE_LAYOUT; }

@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - closeevent.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - closeevent.cxx
 // 
 // The wxCloseEvent proxy interface.
@@ -14,14 +11,13 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxCloseEvent* wxCloseEvent_ctor(wxEventType type, int winid)
+wxCloseEvent* wxCloseEvent_ctor(wxEventType type)
 {
-    return new wxCloseEvent(type,winid);
+    return new wxCloseEvent(type);
 }
 
 extern "C" WXEXPORT

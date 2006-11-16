@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - messagedialog.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - messagedialog.cxx
 //
 // The wxMessageDialog proxy interface.
@@ -14,15 +11,14 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include "local_events.h"
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxMessageBox_func(dstr msg, dstr cap, int style, wxWindow* parent,int x, int y)
+int wxMsgBox(wxWindow* parent, const char* msg, const char* cap, int style, const wxPoint* pos)
 {
-	return wxMessageBox(wxString(msg.data, wxConvUTF8, msg.length), wxString(cap.data, wxConvUTF8, cap.length), style, parent, x, y);
+	return wxMessageBox(wxString(msg, wxConvUTF8), wxString(cap, wxConvUTF8), style, parent, pos->x, pos->y);
 }
 
 //-----------------------------------------------------------------------------
@@ -41,18 +37,18 @@ public:
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxMessageDialog* wxMessageDialog_ctor(wxWindow *parent, dstr message, dstr caption, int style, const wxPoint* pos)
+wxMessageDialog* wxMessageDialog_ctor(wxWindow *parent, const char* message, const char* caption, int style, const wxPoint* pos)
 {
     wxString cptn;
-	if (caption.data == NULL)
+	if (caption == NULL)
         cptn = wxMessageBoxCaptionStr;
     else 
-        cptn = wxString(caption.data, wxConvUTF8, caption.length);
+        cptn = wxString(caption, wxConvUTF8);
 
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
 
-	return new _MessageDialog(parent, wxString(message.data, wxConvUTF8, message.length), cptn, style, *pos);
+	return new _MessageDialog(parent, wxString(message, wxConvUTF8), cptn, style, *pos);
 }
 
 //-----------------------------------------------------------------------------

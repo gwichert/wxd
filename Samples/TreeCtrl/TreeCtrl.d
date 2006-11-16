@@ -1,26 +1,29 @@
 //-----------------------------------------------------------------------------
-// wxD/Samples - TreeCtrl.d
+// wx.NET/Samples - TreeCtrl.cs
 //
-// A wxD version of the wxWidgets "treectrl" sample.
+// A wx.NET version of the wxWidgets "treectrl" sample.
 //
 // Written by Jason Perkins (jason@379.com)
-// Modified by BERO <berobero@users.sourceforge.net>
 // (C) 2003 by 379, Inc.
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-import wx.wx;
+using System;
+using System.Drawing;
+using System.Text;
 
-	public class TreeTestApp : App
+namespace wx.Samples
+{
+	public class TreeTestApp : wx.App
 	{
 		static bool showImages = true;
 // 		static bool showButtons = false;
 
 		//---------------------------------------------------------------------
 
-		
+		[STAThread]
 		static void Main()
 		{
 			TreeTestApp app = new TreeTestApp();
@@ -31,15 +34,18 @@ import wx.wx;
 
 		public override bool OnInit()
 		{
-			MyFrame frame = new MyFrame("TreeCtrl Test", new_Point(50,50), new_Size(450,600));
+			MyFrame frame = new MyFrame("TreeCtrl Test", new Point(50,50), new Size(450,600));
 			frame.Show(true);
 			return true;
 		}
 
 		//---------------------------------------------------------------------
 
-		public static bool ShowImages() { return showImages; }
-		public static void ShowImages(bool value) { showImages = value; }
+		public static bool ShowImages
+		{
+			get { return showImages; }
+			set { showImages = value; }
+		}
 		
 		//---------------------------------------------------------------------
 
@@ -52,7 +58,7 @@ import wx.wx;
 
 	//---------------------------------------------------------------------
 
-	public class MyFrame : Frame
+	public class MyFrame : wx.Frame
 	{
 		public enum Cmd 
 		{
@@ -109,87 +115,87 @@ import wx.wx;
 
 		//---------------------------------------------------------------------
 
-		public this(string title, Point pos, Size size)
+		public MyFrame(string title, Point pos, Size size)
+			: base(title, pos, size)
 		{
-			super(title, pos, size);
 			BackgroundColour = new Colour(255, 255, 255);
 		
-			icon = new Icon("../Samples/TreeCtrl/mondrian.png");
+			Icon = new wx.Icon("../Samples/TreeCtrl/mondrian.png");
 
 			// Set up a menu
 
-			Menu fileMenu = new Menu();
-			Menu style_menu = new Menu();
-			Menu tree_menu = new Menu();
-			Menu item_menu = new Menu();
+			wx.Menu fileMenu = new wx.Menu();
+			wx.Menu style_menu = new wx.Menu();
+			wx.Menu tree_menu = new wx.Menu();
+			wx.Menu item_menu = new wx.Menu();
 
-			fileMenu.Append(Cmd.TreeTest_About, "&About...\tF1");
+			fileMenu.Append((int)Cmd.TreeTest_About, "&About...\tF1");
 			fileMenu.AppendSeparator();
-			fileMenu.Append(Cmd.TreeTest_Quit, "E&xit\tAlt-X");
+			fileMenu.Append((int)Cmd.TreeTest_Quit, "E&xit\tAlt-X");
 			
-			style_menu.AppendCheckItem(Cmd.TreeTest_TogButtons, "Toggle &normal buttons");
-			style_menu.AppendCheckItem(Cmd.TreeTest_TogTwist, "Toggle &twister buttons");
-			style_menu.AppendCheckItem(Cmd.TreeTest_ToggleButtons, "Toggle image &buttons");
+			style_menu.AppendCheckItem((int)Cmd.TreeTest_TogButtons, "Toggle &normal buttons");
+			style_menu.AppendCheckItem((int)Cmd.TreeTest_TogTwist, "Toggle &twister buttons");
+			style_menu.AppendCheckItem((int)Cmd.TreeTest_ToggleButtons, "Toggle image &buttons");
 			style_menu.AppendSeparator();
-			style_menu.AppendCheckItem(Cmd.TreeTest_TogLines, "Toggle &connecting lines");
-			style_menu.AppendCheckItem(Cmd.TreeTest_TogRootLines, "Toggle &lines at root");
-			style_menu.AppendCheckItem(Cmd.TreeTest_TogHideRoot, "Toggle &hidden root");
-			style_menu.AppendCheckItem(Cmd.TreeTest_TogBorder, "Toggle &item border");
-			style_menu.AppendCheckItem(Cmd.TreeTest_TogFullHighlight, "Toggle &full row highlight");
-			style_menu.AppendCheckItem(Cmd.TreeTest_TogEdit, "Toggle &edit mode");
-			style_menu.AppendCheckItem(Cmd.TreeTest_ToggleSel, "Toggle &selection mode");
-			style_menu.AppendCheckItem(Cmd.TreeTest_ToggleImages, "Toggle show ima&ges");
-			style_menu.Append(Cmd.TreeTest_SetImageSize, "Set image si&ze...");
+			style_menu.AppendCheckItem((int)Cmd.TreeTest_TogLines, "Toggle &connecting lines");
+			style_menu.AppendCheckItem((int)Cmd.TreeTest_TogRootLines, "Toggle &lines at root");
+			style_menu.AppendCheckItem((int)Cmd.TreeTest_TogHideRoot, "Toggle &hidden root");
+			style_menu.AppendCheckItem((int)Cmd.TreeTest_TogBorder, "Toggle &item border");
+			style_menu.AppendCheckItem((int)Cmd.TreeTest_TogFullHighlight, "Toggle &full row highlight");
+			style_menu.AppendCheckItem((int)Cmd.TreeTest_TogEdit, "Toggle &edit mode");
+			style_menu.AppendCheckItem((int)Cmd.TreeTest_ToggleSel, "Toggle &selection mode");
+			style_menu.AppendCheckItem((int)Cmd.TreeTest_ToggleImages, "Toggle show ima&ges");
+			style_menu.Append((int)Cmd.TreeTest_SetImageSize, "Set image si&ze...");
 			style_menu.AppendSeparator();
-			style_menu.Append(Cmd.TreeTest_SetFgColour, "Set &foreground colour...");
-			style_menu.Append(Cmd.TreeTest_SetBgColour, "Set &background colour...");
+			style_menu.Append((int)Cmd.TreeTest_SetFgColour, "Set &foreground colour...");
+			style_menu.Append((int)Cmd.TreeTest_SetBgColour, "Set &background colour...");
 			style_menu.AppendSeparator();
-			style_menu.Append(Cmd.TreeTest_ResetStyle, "&Reset to default\tF10");
+			style_menu.Append((int)Cmd.TreeTest_ResetStyle, "&Reset to default\tF10");
 
-			tree_menu.Append(Cmd.TreeTest_Recreate, "&Recreate the tree");
-			tree_menu.Append(Cmd.TreeTest_CollapseAndReset, "C&ollapse and reset");
+			tree_menu.Append((int)Cmd.TreeTest_Recreate, "&Recreate the tree");
+			tree_menu.Append((int)Cmd.TreeTest_CollapseAndReset, "C&ollapse and reset");
 			tree_menu.AppendSeparator();
-			tree_menu.Append(Cmd.TreeTest_AddItem, "Append a &new item");
-			tree_menu.Append(Cmd.TreeTest_InsertItem, "&Insert a new item");
-			tree_menu.Append(Cmd.TreeTest_Delete, "&Delete this item");
-			tree_menu.Append(Cmd.TreeTest_DeleteChildren, "Delete &children");
-			tree_menu.Append(Cmd.TreeTest_DeleteAll, "Delete &all items");
-			tree_menu.Append(Cmd.TreeTest_SelectRoot, "Select root item");
+			tree_menu.Append((int)Cmd.TreeTest_AddItem, "Append a &new item");
+			tree_menu.Append((int)Cmd.TreeTest_InsertItem, "&Insert a new item");
+			tree_menu.Append((int)Cmd.TreeTest_Delete, "&Delete this item");
+			tree_menu.Append((int)Cmd.TreeTest_DeleteChildren, "Delete &children");
+			tree_menu.Append((int)Cmd.TreeTest_DeleteAll, "Delete &all items");
+			tree_menu.Append((int)Cmd.TreeTest_SelectRoot, "Select root item");
 			tree_menu.AppendSeparator();
-			tree_menu.Append(Cmd.TreeTest_Count, "Count children of current item");
-			tree_menu.Append(Cmd.TreeTest_CountRec, "Recursively count children of current item");
+			tree_menu.Append((int)Cmd.TreeTest_Count, "Count children of current item");
+			tree_menu.Append((int)Cmd.TreeTest_CountRec, "Recursively count children of current item");
 			tree_menu.AppendSeparator();
-			tree_menu.Append(Cmd.TreeTest_Sort, "Sort children of current item");
-			tree_menu.Append(Cmd.TreeTest_SortRev, "Sort in reversed order");
+			tree_menu.Append((int)Cmd.TreeTest_Sort, "Sort children of current item");
+			tree_menu.Append((int)Cmd.TreeTest_SortRev, "Sort in reversed order");
 			tree_menu.AppendSeparator();
-			tree_menu.Append(Cmd.TreeTest_EnsureVisible, "Make the last item &visible");
+			tree_menu.Append((int)Cmd.TreeTest_EnsureVisible, "Make the last item &visible");
 			tree_menu.AppendSeparator();
-			tree_menu.Append(Cmd.TreeTest_IncIndent, "Add 5 points to indentation\tAlt-I");
-			tree_menu.Append(Cmd.TreeTest_DecIndent, "Reduce indentation by 5 points\tAlt-R");
+			tree_menu.Append((int)Cmd.TreeTest_IncIndent, "Add 5 points to indentation\tAlt-I");
+			tree_menu.Append((int)Cmd.TreeTest_DecIndent, "Reduce indentation by 5 points\tAlt-R");
 			tree_menu.AppendSeparator();
-			tree_menu.Append(Cmd.TreeTest_IncSpacing, "Add 5 points to spacing\tCtrl-I");
-			tree_menu.Append(Cmd.TreeTest_DecSpacing, "Reduce spacing by 5 points\tCtrl-R");
+			tree_menu.Append((int)Cmd.TreeTest_IncSpacing, "Add 5 points to spacing\tCtrl-I");
+			tree_menu.Append((int)Cmd.TreeTest_DecSpacing, "Reduce spacing by 5 points\tCtrl-R");
 
-			item_menu.Append(Cmd.TreeTest_Dump, "&Dump item children");
-			item_menu.Append(Cmd.TreeTest_Rename, "&Rename item...");
+			item_menu.Append((int)Cmd.TreeTest_Dump, "&Dump item children");
+			item_menu.Append((int)Cmd.TreeTest_Rename, "&Rename item...");
 
 			item_menu.AppendSeparator();
-			item_menu.Append(Cmd.TreeTest_SetBold, "Make item &bold");
-			item_menu.Append(Cmd.TreeTest_ClearBold, "Make item &not bold");
+			item_menu.Append((int)Cmd.TreeTest_SetBold, "Make item &bold");
+			item_menu.Append((int)Cmd.TreeTest_ClearBold, "Make item &not bold");
 			item_menu.AppendSeparator();
-			item_menu.Append(Cmd.TreeTest_ToggleIcon, "Toggle the item's &icon");
+			item_menu.Append((int)Cmd.TreeTest_ToggleIcon, "Toggle the item's &icon");
 
 			item_menu.AppendSeparator();
-			item_menu.Append(Cmd.TreeTest_DumpSelected, "Dump selected items\tAlt-D");
-			item_menu.Append(Cmd.TreeTest_Select, "Select current item\tAlt-S");
-			item_menu.Append(Cmd.TreeTest_Unselect, "Unselect everything\tAlt-U");
+			item_menu.Append((int)Cmd.TreeTest_DumpSelected, "Dump selected items\tAlt-D");
+			item_menu.Append((int)Cmd.TreeTest_Select, "Select current item\tAlt-S");
+			item_menu.Append((int)Cmd.TreeTest_Unselect, "Unselect everything\tAlt-U");
 
-			MenuBar menuBar = new MenuBar();
+			wx.MenuBar menuBar = new wx.MenuBar();
 			menuBar.Append(fileMenu, "&File");
 			menuBar.Append(style_menu, "&Style");
 			menuBar.Append(tree_menu, "&Tree");
 			menuBar.Append(item_menu, "&Item");
-			this.menuBar = menuBar;
+			MenuBar = menuBar;
 			
 			m_textCtrl = new TextCtrl(this, -1, "", wxDefaultPosition, wxDefaultSize, 
 				TextCtrl.wxTE_MULTILINE | TextCtrl.wxSUNKEN_BORDER);
@@ -203,56 +209,56 @@ import wx.wx;
 
 			CreateTreeWithDefaultStyle();
 			
-			menuBar.Check(Cmd.TreeTest_ToggleImages, true);
+			menuBar.Check((int)Cmd.TreeTest_ToggleImages, true);
 			
 			Log.SetActiveTarget( m_textCtrl ); 
 
 			// Set up the event table
 
-			EVT_MENU(Cmd.TreeTest_Quit,  &OnQuit);
-			EVT_MENU(Cmd.TreeTest_About, &OnAbout);
+			EVT_MENU((int)Cmd.TreeTest_Quit,  new EventListener(OnQuit));
+			EVT_MENU((int)Cmd.TreeTest_About, new EventListener(OnAbout));
 			
-			EVT_MENU(Cmd.TreeTest_TogButtons, &OnTogButtons);
-			EVT_MENU(Cmd.TreeTest_Rename, &OnRename);
-			EVT_MENU(Cmd.TreeTest_Count, &OnCount);
-			EVT_MENU(Cmd.TreeTest_CountRec, &OnCountRec);
-			EVT_MENU(Cmd.TreeTest_Dump, &OnDump);
-			EVT_MENU(Cmd.TreeTest_ToggleSel, &OnToggleSel);
-			EVT_MENU(Cmd.TreeTest_DumpSelected, &OnDumpSelected);
-			EVT_MENU(Cmd.TreeTest_Select, &OnSelect);
-			EVT_MENU(Cmd.TreeTest_SelectRoot, &OnSelectRoot);
-			EVT_MENU(Cmd.TreeTest_Unselect, &OnUnselect);
-			EVT_MENU(Cmd.TreeTest_SetBold, &OnSetBold);
-			EVT_MENU(Cmd.TreeTest_ClearBold, &OnClearBold);
-			EVT_MENU(Cmd.TreeTest_Delete, &OnDelete);
-			EVT_MENU(Cmd.TreeTest_DeleteChildren, &OnDeleteChildren);
-			EVT_MENU(Cmd.TreeTest_DeleteAll, &OnDeleteAll);
-			EVT_MENU(Cmd.TreeTest_Recreate, &OnRecreate);
-			EVT_MENU(Cmd.TreeTest_SetImageSize, &OnSetImageSize);
-			EVT_MENU(Cmd.TreeTest_ToggleImages, &OnToggleImages);
-			EVT_MENU(Cmd.TreeTest_CollapseAndReset, &OnCollapseAndReset);
-			EVT_MENU(Cmd.TreeTest_EnsureVisible, &OnEnsureVisible);
-			EVT_MENU(Cmd.TreeTest_InsertItem, &OnInsertItem);
-			EVT_MENU(Cmd.TreeTest_AddItem, &OnAddItem);
-			EVT_MENU(Cmd.TreeTest_IncIndent, &OnIncIndent);
-			EVT_MENU(Cmd.TreeTest_DecIndent, &OnDecIndent);
-			EVT_MENU(Cmd.TreeTest_IncSpacing, &OnIncSpacing);
-			EVT_MENU(Cmd.TreeTest_DecSpacing, &OnDecSpacing);
-			EVT_MENU(Cmd.TreeTest_ToggleIcon, &OnToggleIcon);
-			EVT_MENU(Cmd.TreeTest_SetFgColour, &OnSetFgColour);
-			EVT_MENU(Cmd.TreeTest_SetBgColour, &OnSetBgColour);
+			EVT_MENU((int)Cmd.TreeTest_TogButtons, new EventListener(OnTogButtons));
+			EVT_MENU((int)Cmd.TreeTest_Rename, new EventListener(OnRename));
+			EVT_MENU((int)Cmd.TreeTest_Count, new EventListener(OnCount));
+			EVT_MENU((int)Cmd.TreeTest_CountRec, new EventListener(OnCountRec));
+			EVT_MENU((int)Cmd.TreeTest_Dump, new EventListener(OnDump));
+			EVT_MENU((int)Cmd.TreeTest_ToggleSel, new EventListener(OnToggleSel));
+			EVT_MENU((int)Cmd.TreeTest_DumpSelected, new EventListener(OnDumpSelected));
+			EVT_MENU((int)Cmd.TreeTest_Select, new EventListener(OnSelect));
+			EVT_MENU((int)Cmd.TreeTest_SelectRoot, new EventListener(OnSelectRoot));
+			EVT_MENU((int)Cmd.TreeTest_Unselect, new EventListener(OnUnselect));
+			EVT_MENU((int)Cmd.TreeTest_SetBold, new EventListener(OnSetBold));
+			EVT_MENU((int)Cmd.TreeTest_ClearBold, new EventListener(OnClearBold));
+			EVT_MENU((int)Cmd.TreeTest_Delete, new EventListener(OnDelete));
+			EVT_MENU((int)Cmd.TreeTest_DeleteChildren, new EventListener(OnDeleteChildren));
+			EVT_MENU((int)Cmd.TreeTest_DeleteAll, new EventListener(OnDeleteAll));
+			EVT_MENU((int)Cmd.TreeTest_Recreate, new EventListener(OnRecreate));
+			EVT_MENU((int)Cmd.TreeTest_SetImageSize, new EventListener(OnSetImageSize));
+			EVT_MENU((int)Cmd.TreeTest_ToggleImages, new EventListener(OnToggleImages));
+			EVT_MENU((int)Cmd.TreeTest_CollapseAndReset, new EventListener(OnCollapseAndReset));
+			EVT_MENU((int)Cmd.TreeTest_EnsureVisible, new EventListener(OnEnsureVisible));
+			EVT_MENU((int)Cmd.TreeTest_InsertItem, new EventListener(OnInsertItem));
+			EVT_MENU((int)Cmd.TreeTest_AddItem, new EventListener(OnAddItem));
+			EVT_MENU((int)Cmd.TreeTest_IncIndent, new EventListener(OnIncIndent));
+			EVT_MENU((int)Cmd.TreeTest_DecIndent, new EventListener(OnDecIndent));
+			EVT_MENU((int)Cmd.TreeTest_IncSpacing, new EventListener(OnIncSpacing));
+			EVT_MENU((int)Cmd.TreeTest_DecSpacing, new EventListener(OnDecSpacing));
+			EVT_MENU((int)Cmd.TreeTest_ToggleIcon, new EventListener(OnToggleIcon));
+			EVT_MENU((int)Cmd.TreeTest_SetFgColour, new EventListener(OnSetFgColour));
+			EVT_MENU((int)Cmd.TreeTest_SetBgColour, new EventListener(OnSetBgColour));
 			
-			EVT_MENU(Cmd.TreeTest_Sort, &OnSort);
-			EVT_MENU(Cmd.TreeTest_SortRev, &OnSortRev);
+			EVT_MENU((int)Cmd.TreeTest_Sort, new EventListener(OnSort));
+			EVT_MENU((int)Cmd.TreeTest_SortRev, new EventListener(OnSortRev));
 			
-			EVT_IDLE( &OnIdle) ;
+			EVT_IDLE( new EventListener(OnIdle) );
 			
-			EVT_SIZE( &OnSize) ;
+			EVT_SIZE( new EventListener(OnSize) );
 		}
 		
 		//---------------------------------------------------------------------
 		
-		~this()
+		~MyFrame()
 		{
 			Log.SetActiveTarget(null);
 		}
@@ -262,25 +268,25 @@ import wx.wx;
 		public void CreateTreeWithDefaultStyle()
 		{
 			long style = TreeCtrl.wxTR_DEFAULT_STYLE | TreeCtrl.wxTR_EDIT_LABELS;
-			CreateTree(style | Border.wxBORDER_SUNKEN);
+			CreateTree(style | (long) Border.wxBORDER_SUNKEN);
 			
-			MenuBar mbar = menuBar;
+			MenuBar mbar = MenuBar;
 			
-			mbar.Check(Cmd.TreeTest_TogButtons, (style & TreeCtrl.wxTR_HAS_BUTTONS) != 0);
-			mbar.Check(Cmd.TreeTest_TogButtons, (style & TreeCtrl.wxTR_TWIST_BUTTONS) != 0);
-			mbar.Check(Cmd.TreeTest_TogLines, (style & TreeCtrl.wxTR_NO_LINES) == 0);
-			mbar.Check(Cmd.TreeTest_TogRootLines, (style & TreeCtrl.wxTR_LINES_AT_ROOT) != 0);
-			mbar.Check(Cmd.TreeTest_TogHideRoot, (style & TreeCtrl.wxTR_HIDE_ROOT) != 0);
-			mbar.Check(Cmd.TreeTest_TogEdit, (style & TreeCtrl.wxTR_EDIT_LABELS) != 0);
-			mbar.Check(Cmd.TreeTest_TogBorder, (style & TreeCtrl.wxTR_ROW_LINES) != 0);
-			mbar.Check(Cmd.TreeTest_TogFullHighlight, (style & TreeCtrl.wxTR_FULL_ROW_HIGHLIGHT) != 0);
+			mbar.Check((int)Cmd.TreeTest_TogButtons, (style & TreeCtrl.wxTR_HAS_BUTTONS) != 0);
+			mbar.Check((int)Cmd.TreeTest_TogButtons, (style & TreeCtrl.wxTR_TWIST_BUTTONS) != 0);
+			mbar.Check((int)Cmd.TreeTest_TogLines, (style & TreeCtrl.wxTR_NO_LINES) == 0);
+			mbar.Check((int)Cmd.TreeTest_TogRootLines, (style & TreeCtrl.wxTR_LINES_AT_ROOT) != 0);
+			mbar.Check((int)Cmd.TreeTest_TogHideRoot, (style & TreeCtrl.wxTR_HIDE_ROOT) != 0);
+			mbar.Check((int)Cmd.TreeTest_TogEdit, (style & TreeCtrl.wxTR_EDIT_LABELS) != 0);
+			mbar.Check((int)Cmd.TreeTest_TogBorder, (style & TreeCtrl.wxTR_ROW_LINES) != 0);
+			mbar.Check((int)Cmd.TreeTest_TogFullHighlight, (style & TreeCtrl.wxTR_FULL_ROW_HIGHLIGHT) != 0);
 		}
 
 		//---------------------------------------------------------------------
 
 		public void CreateTree(long style)
 		{
-			m_treeCtrl = new MyTreeCtrl(this, Cmd.TreeTest_Ctrl, wxDefaultPosition, wxDefaultSize, style);
+			m_treeCtrl = new MyTreeCtrl(this, (int)Cmd.TreeTest_Ctrl, wxDefaultPosition, wxDefaultSize, style);
 			Resize();
 		}
 		
@@ -292,22 +298,22 @@ import wx.wx;
 			//delete m_treeCtrl;
 			CreateTree(style);
 
-			menuBar.Check(id, (style & flag) != 0);
+			MenuBar.Check(id, (style & flag) != 0);
 		}
 
 		//---------------------------------------------------------------------
 		
-		public void OnIdle(Object sender, Event e)
+		public void OnIdle(object sender, Event e)
 		{
-			if (m_treeCtrl !== null)
+			if (m_treeCtrl != null)
 			{
 				TreeItemId idRoot = m_treeCtrl.RootItem;
 			
 				string s = "Root/last item is ";
-				s ~= m_treeCtrl.IsVisible(idRoot) ? "" : "not ";
-				s ~= "visible/";
-				s ~= m_treeCtrl.IsVisible(m_treeCtrl.GetLastChild(idRoot)) ? "" : "not ";
-				s ~= "visible";
+				s += m_treeCtrl.IsVisible(idRoot) ? "" : "not ";
+				s += "visible/";
+				s += m_treeCtrl.IsVisible(m_treeCtrl.GetLastChild(idRoot)) ? "" : "not ";
+				s += "visible";
 				
 				SetStatusText(s, 1);
 			}
@@ -317,17 +323,17 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------
 
-		public void OnQuit(Object sender, Event e)
+		public void OnQuit(object sender, wx.Event e)
 		{
 			Close();
 		}
 
 		//---------------------------------------------------------------------
 
-		public void OnAbout(Object sender, Event e)
+		public void OnAbout(object sender, wx.Event e)
 		{
-			string msg = "Tree test sample\n(c) Julian Smart 1997, Vadim Zeitlin 1998\nPorted to wxD by Jason Perkins and Alexander Olk";
-			MessageBox(this, msg, "About Tree Test", Dialog.wxOK | Dialog.wxICON_INFORMATION);
+			string msg = "Tree test sample\n(c) Julian Smart 1997, Vadim Zeitlin 1998\nPorted to wx.NET by Jason Perkins and Alexander Olk";
+			wx.MessageDialog.ShowModal(this, msg, "About Tree Test", Dialog.wxOK | Dialog.wxICON_INFORMATION);
 		}
 
 		//---------------------------------------------------------------------
@@ -341,16 +347,16 @@ import wx.wx;
 
 		//---------------------------------------------------------------------
 		
-		public void OnTogButtons(Object sender, Event e)
+		public void OnTogButtons(object sender, Event e)
 		{
 			TogStyle(e.ID, TreeCtrl.wxTR_HAS_BUTTONS);
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnSize(Object sender, Event e)
+		public void OnSize(object sender, Event e)
 		{
-			if ( m_treeCtrl !== null && m_textCtrl !== null )
+			if ( m_treeCtrl != null && m_textCtrl != null )
 			{
 				Resize();
 			}
@@ -360,7 +366,7 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnRename(Object sender, Event e)
+		public void OnRename(object sender, Event e)
 		{
 			TreeItemId item = m_treeCtrl.Selection;
 
@@ -371,7 +377,7 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnCount(Object sender, Event e)
+		public void OnCount(object sender, Event e)
 		{
 			TreeItemId item = m_treeCtrl.Selection;
 
@@ -379,12 +385,12 @@ import wx.wx;
 
 			int i = m_treeCtrl.GetChildrenCount( item, false );
 
-			Log.LogMessage(.toString(i) ~ " children");
+			Log.LogMessage(i + " children");
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnCountRec(Object sender, Event e)
+		public void OnCountRec(object sender, Event e)
 		{
 			TreeItemId item = m_treeCtrl.Selection;
 
@@ -392,36 +398,36 @@ import wx.wx;
 
 			int i = m_treeCtrl.GetChildrenCount( item );
 
-			Log.LogMessage(.toString(i) ~ " children");
+			Log.LogMessage(i + " children");
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnDump(Object sender, Event e)
+		public void OnDump(object sender, Event e)
 		{
 			TreeItemId root = m_treeCtrl.Selection;
 			
 			CHECK_ITEM( root );
 
-			m_treeCtrl.GetItemsRecursively(root, IntPtr.init);
+			m_treeCtrl.GetItemsRecursively(root, IntPtr.Zero);
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnToggleSel(Object sender, Event e)
+		public void OnToggleSel(object sender, Event e)
 		{
 			TogStyle(e.ID, TreeCtrl.wxTR_MULTIPLE);
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnDumpSelected(Object sender, Event e)
+		public void OnDumpSelected(object sender, Event e)
 		{
 			TreeItemId[] array = m_treeCtrl.Selections();
 
-			int count = array.length;
+			int count = array.Length;
 			
-			Log.LogMessage(.toString(count) ~ " items selected");
+			Log.LogMessage(count +" items selected");
 
 			for ( int n = 0; n < count; n++ )
 			{
@@ -431,35 +437,35 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnSelect(Object sender, Event e)
+		public void OnSelect(object sender, Event e)
 		{
 			m_treeCtrl.SelectItem(m_treeCtrl.Selection);
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnSelectRoot(Object sender, Event e)
+		public void OnSelectRoot(object sender, Event e)
 		{
 			m_treeCtrl.SelectItem(m_treeCtrl.RootItem);
 		}
 
 		//---------------------------------------------------------------------
 
-		public void OnUnselect(Object sender, Event e)
+		public void OnUnselect(object sender, Event e)
 		{
 			m_treeCtrl.UnselectAll();
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnSetBold(Object sender, Event e)
+		public void OnSetBold(object sender, Event e)
 		{
 			DoSetBold(true);
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnClearBold(Object sender, Event e)
+		public void OnClearBold(object sender, Event e)
 		{
 			DoSetBold(false);
 		}
@@ -477,7 +483,7 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnDelete(Object sender, Event e)
+		public void OnDelete(object sender, Event e)
 		{
 			TreeItemId item = m_treeCtrl.Selection;
 
@@ -488,7 +494,7 @@ import wx.wx;
 
 		//---------------------------------------------------------------------
 
-		public void OnDeleteChildren(Object sender, Event e)
+		public void OnDeleteChildren(object sender, Event e)
 		{
 			TreeItemId item = m_treeCtrl.Selection;
 
@@ -499,14 +505,14 @@ import wx.wx;
 
 		//---------------------------------------------------------------------
 
-		public void OnDeleteAll(Object sender, Event e)
+		public void OnDeleteAll(object sender, Event e)
 		{
 			m_treeCtrl.DeleteAllItems();
 		}
 
 		//---------------------------------------------------------------------
 
-		public void OnRecreate(Object sender, Event e)
+		public void OnRecreate(object sender, Event e)
 		{
 			OnDeleteAll(this, e);
 			m_treeCtrl.AddTestItemsToTree(5, 2);
@@ -514,7 +520,7 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnSetImageSize(Object sender, Event e)
+		public void OnSetImageSize(object sender, Event e)
 		{
 			int size = GetNumberFromUser("Enter the size for the images to use",
 					"Size: ",
@@ -529,7 +535,7 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------
 
-		public void OnToggleImages(Object sender, Event e)
+		public void OnToggleImages(object sender, Event e)
 		{
 			if ( TreeTestApp.ShowImages )
 			{
@@ -545,7 +551,7 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------
 		
-// 		public void OnToggleButtons(Object sender, Event e)
+// 		public void OnToggleButtons(object sender, Event e)
 // 		{
 // 			if ( TreeTestApp.ShowButtons )
 // 			{
@@ -561,38 +567,38 @@ import wx.wx;
 
 		//---------------------------------------------------------------------
 		
-		public void OnCollapseAndReset(Object sender, Event e)
+		public void OnCollapseAndReset(object sender, Event e)
 		{
 			m_treeCtrl.CollapseAndReset(m_treeCtrl.RootItem);
 		}
 
 		//---------------------------------------------------------------------
 
-		public void OnEnsureVisible(Object sender, Event e)
+		public void OnEnsureVisible(object sender, Event e)
 		{
 			m_treeCtrl.DoEnsureVisible();
 		}
 
 		//---------------------------------------------------------------------
 
-		public void OnInsertItem(Object sender, Event e)
+		public void OnInsertItem(object sender, Event e)
 		{
-			int image = TreeTestApp.ShowImages ? MyTreeCtrl.TreeIcon.File : -1;
+			int image = TreeTestApp.ShowImages ? (int)MyTreeCtrl.TreeIcon.File : -1;
 			m_treeCtrl.InsertItem(m_treeCtrl.RootItem, image, "2nd item");
 		}
 
 		//---------------------------------------------------------------------
 
-		public void OnAddItem(Object sender, Event e)
+		public void OnAddItem(object sender, Event e)
 		{
-			string text = "Item #" ~ .toString(++s_num);
+			string text = "Item #" + (++s_num);
 
 			m_treeCtrl.AppendItem(m_treeCtrl.RootItem, text);
 		}
 
 		//---------------------------------------------------------------------
 
-		public void OnIncIndent(Object sender, Event e)
+		public void OnIncIndent(object sender, Event e)
 		{
 			uint indent = m_treeCtrl.Indent;
 			if (indent < 100)
@@ -601,7 +607,7 @@ import wx.wx;
 
 		//---------------------------------------------------------------------
 
-		public void OnDecIndent(Object sender, Event e)
+		public void OnDecIndent(object sender, Event e)
 		{
 			uint indent = m_treeCtrl.Indent;
 			if (indent > 10)
@@ -610,7 +616,7 @@ import wx.wx;
 
 		//---------------------------------------------------------------------
 
-		public void OnIncSpacing(Object sender, Event e)
+		public void OnIncSpacing(object sender, Event e)
 		{
 			uint indent = m_treeCtrl.Spacing;
 			if (indent < 100)
@@ -619,7 +625,7 @@ import wx.wx;
 
 		//---------------------------------------------------------------------
 
-		public void OnDecSpacing(Object sender, Event e)
+		public void OnDecSpacing(object sender, Event e)
 		{
 			uint indent = m_treeCtrl.Spacing;
 			if (indent > 10)
@@ -628,7 +634,7 @@ import wx.wx;
 
 		//---------------------------------------------------------------------
 
-		public void OnToggleIcon(Object sender, Event e)
+		public void OnToggleIcon(object sender, Event e)
 		{
 			TreeItemId item = m_treeCtrl.Selection;
 
@@ -639,18 +645,18 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------
 
-		public void OnSetFgColour(Object sender, Event e)
+		public void OnSetFgColour(object sender, Event e)
 		{
-			Colour col = GetColourFromUser(this, m_treeCtrl.ForegroundColour);
+			Colour col = ColourDialog.GetColourFromUser(this, m_treeCtrl.ForegroundColour);
 			if ( col.Ok() )
 				m_treeCtrl.ForegroundColour = col;
 		}
 
 		//---------------------------------------------------------------------
 
-		public void OnSetBgColour(Object sender, Event e)
+		public void OnSetBgColour(object sender, Event e)
 		{
-			Colour col = GetColourFromUser(this, m_treeCtrl.BackgroundColour);
+			Colour col = ColourDialog.GetColourFromUser(this, m_treeCtrl.BackgroundColour);
 			if ( col.Ok() )
 				m_treeCtrl.BackgroundColour = col;
 		}
@@ -658,14 +664,14 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnSort(Object sender, Event e)
+		public void OnSort(object sender, Event e)
 		{
 			DoSort(false);
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnSortRev(Object sender, Event e)
+		public void OnSortRev(object sender, Event e)
 		{
 			DoSort(true);
 		}
@@ -687,7 +693,7 @@ import wx.wx;
 		{
 			if ( !item.IsOk() ) 
 			{                                 
-				MessageBox(this, "Please select some item first!", 
+				MessageDialog.ShowModal(this, "Please select some item first!", 
 						"Tree sample error",              
 						Dialog.wxOK | Dialog.wxICON_EXCLAMATION);
 				return;                                             
@@ -697,7 +703,7 @@ import wx.wx;
 
 	//---------------------------------------------------------------------
 
-	public class MyTreeCtrl : TreeCtrl
+	public class MyTreeCtrl : wx.TreeCtrl
 	{
 		public enum TreeIcon
 		{
@@ -716,30 +722,30 @@ import wx.wx;
 
 		//---------------------------------------------------------------------
 
-		public this(Window parent, int id, Point pos, Size size, int style)
+		public MyTreeCtrl(Window parent, int id, Point pos, Size size, long style)
+			: base(parent, id, pos, size, style)
 		{
-			super(parent, id, pos, size, style);
 			CreateImageList(16);
 			AddTestItemsToTree(5, 2);
 			
-			EVT_TREE_BEGIN_DRAG(MyFrame.Cmd.TreeTest_Ctrl, &OnBeginDrag);
-			EVT_TREE_BEGIN_RDRAG(MyFrame.Cmd.TreeTest_Ctrl, &OnBeginRDrag);
-			EVT_TREE_END_DRAG(MyFrame.Cmd.TreeTest_Ctrl, &OnEndDrag);
-			EVT_TREE_BEGIN_LABEL_EDIT(MyFrame.Cmd.TreeTest_Ctrl, &OnBeginLabelEdit);
-			EVT_TREE_END_LABEL_EDIT(MyFrame.Cmd.TreeTest_Ctrl, &OnEndLabelEdit);
-			EVT_TREE_DELETE_ITEM(MyFrame.Cmd.TreeTest_Ctrl, &OnDeleteItem);
-			EVT_TREE_SET_INFO(MyFrame.Cmd.TreeTest_Ctrl, &OnSetInfo);
-			EVT_TREE_ITEM_EXPANDED(MyFrame.Cmd.TreeTest_Ctrl, &OnItemExpanded);
-			EVT_TREE_ITEM_EXPANDING(MyFrame.Cmd.TreeTest_Ctrl, &OnItemExpanding);
-			EVT_TREE_ITEM_COLLAPSED(MyFrame.Cmd.TreeTest_Ctrl, &OnItemCollapsed);
-			EVT_TREE_ITEM_COLLAPSING(MyFrame.Cmd.TreeTest_Ctrl, &OnItemCollapsing);
+			EVT_TREE_BEGIN_DRAG((int)MyFrame.Cmd.TreeTest_Ctrl, new EventListener(OnBeginDrag));
+			EVT_TREE_BEGIN_RDRAG((int)MyFrame.Cmd.TreeTest_Ctrl, new EventListener(OnBeginRDrag));
+			EVT_TREE_END_DRAG((int)MyFrame.Cmd.TreeTest_Ctrl, new EventListener(OnEndDrag));
+			EVT_TREE_BEGIN_LABEL_EDIT((int)MyFrame.Cmd.TreeTest_Ctrl, new EventListener(OnBeginLabelEdit));
+			EVT_TREE_END_LABEL_EDIT((int)MyFrame.Cmd.TreeTest_Ctrl, new EventListener(OnEndLabelEdit));
+			EVT_TREE_DELETE_ITEM((int)MyFrame.Cmd.TreeTest_Ctrl, new EventListener(OnDeleteItem));
+			EVT_TREE_SET_INFO((int)MyFrame.Cmd.TreeTest_Ctrl, new EventListener(OnSetInfo));
+			EVT_TREE_ITEM_EXPANDED((int)MyFrame.Cmd.TreeTest_Ctrl, new EventListener(OnItemExpanded));
+			EVT_TREE_ITEM_EXPANDING((int)MyFrame.Cmd.TreeTest_Ctrl, new EventListener(OnItemExpanding));
+			EVT_TREE_ITEM_COLLAPSED((int)MyFrame.Cmd.TreeTest_Ctrl, new EventListener(OnItemCollapsed));
+			EVT_TREE_ITEM_COLLAPSING((int)MyFrame.Cmd.TreeTest_Ctrl, new EventListener(OnItemCollapsing));
 
-			EVT_CONTEXT_MENU(&OnContextMenu);
-			EVT_TREE_SEL_CHANGED(MyFrame.Cmd.TreeTest_Ctrl, &OnSelChanged);
-			EVT_TREE_SEL_CHANGING(MyFrame.Cmd.TreeTest_Ctrl, &OnSelChanging);
-			EVT_TREE_KEY_DOWN(MyFrame.Cmd.TreeTest_Ctrl, &OnTreeKeyDown);
-			EVT_TREE_ITEM_ACTIVATED(MyFrame.Cmd.TreeTest_Ctrl, &OnItemActivated);
-			EVT_RIGHT_DCLICK(&OnRMouseDClick);
+			EVT_CONTEXT_MENU(new EventListener(OnContextMenu));
+			EVT_TREE_SEL_CHANGED((int)MyFrame.Cmd.TreeTest_Ctrl, new EventListener(OnSelChanged));
+			EVT_TREE_SEL_CHANGING((int)MyFrame.Cmd.TreeTest_Ctrl, new EventListener(OnSelChanging));
+			EVT_TREE_KEY_DOWN((int)MyFrame.Cmd.TreeTest_Ctrl, new EventListener(OnTreeKeyDown));
+			EVT_TREE_ITEM_ACTIVATED((int)MyFrame.Cmd.TreeTest_Ctrl, new EventListener(OnItemActivated));
+			EVT_RIGHT_DCLICK(new EventListener(OnRMouseDClick));
 		}
 
 		//---------------------------------------------------------------------
@@ -759,12 +765,12 @@ import wx.wx;
 
 			/* wxBusyCursor wait; */
 
-			ImageList images = new ImageList(size, size);
+			wx.ImageList images = new wx.ImageList(size, size);
 
 			for (int i = 0; i < 5; ++i)
 			{
-				Image image = new Image("../Samples/TreeCtrl/icon" ~ .toString(i) ~ ".png");
-				images.Add(new Bitmap(image.Rescale(size, size)));
+				Image image = new wx.Image("../Samples/TreeCtrl/icon" + i + ".png");
+				images.Add(new wx.Bitmap(image.Rescale(size, size)));
 			}
 
 			AssignImageList(images);
@@ -778,15 +784,16 @@ import wx.wx;
 			{
 				bool hasChildren = depth > 1;
 
+				StringBuilder str = new StringBuilder();
 				for (int n = 0; n < numChildren; ++n)
 				{
-					string str;
+					str.Length = 0;
 
 					// at depth 1 elements won't have any more children
 					if (hasChildren)
-						str ~= format("%s child %d", "Folder", n + 1);
+						str.AppendFormat("{0} child {1}", "Folder", n + 1);
 					else
-						str ~= format("%s child %d.%d", "File", folder, n + 1);
+						str.AppendFormat("{0} child {1}.{2}", "File", folder, n + 1);
 
 					// here we pass to AppendItem() normal and selected item images (we
 					// suppose that selected image follows the normal one in the enum)
@@ -794,7 +801,7 @@ import wx.wx;
 					int image, imageSel;
 					if (TreeTestApp.ShowImages)
 					{
-						image = (depth == 1) ? TreeIcon.File : TreeIcon.Folder;
+						image = (depth == 1) ? (int)TreeIcon.File : (int)TreeIcon.Folder;
 						imageSel = image + 1;
 					}
 					else
@@ -803,14 +810,14 @@ import wx.wx;
 						imageSel = -1;
 					}
 
-					TreeItemId id = AppendItem(idParent, str, image, imageSel,
-						new MyTreeItemData(str));
+					TreeItemId id = AppendItem(idParent, str.ToString(), image, imageSel,
+						new MyTreeItemData(str.ToString()));
 
 					// and now we also set the expanded one (only for the folders)
 
 					if (hasChildren && TreeTestApp.ShowImages)
 					{
-						SetItemImage(id, TreeIcon.FolderOpened, TreeItemIcon.wxTreeItemIcon_Expanded);
+						SetItemImage(id, (int)TreeIcon.FolderOpened, TreeItemIcon.wxTreeItemIcon_Expanded);
 					}
 
 					// remember the last child for OnEnsureVisible()
@@ -829,22 +836,22 @@ import wx.wx;
 
 		public void AddTestItemsToTree(int numChildren, int depth)
 		{
-			int image = TreeTestApp.ShowImages ? TreeIcon.Folder : -1;
+			int image = TreeTestApp.ShowImages ? (int)TreeIcon.Folder : -1;
 			TreeItemId rootId = AddRoot("Root", image, image,
 				new MyTreeItemData("Root item"));
 			if (image != -1)
-				SetItemImage(rootId, TreeIcon.FolderOpened, TreeItemIcon.wxTreeItemIcon_Expanded);
+				SetItemImage(rootId, (int)TreeIcon.FolderOpened, wx.TreeItemIcon.wxTreeItemIcon_Expanded);
 
 			AddItemsRecursively(rootId, numChildren, depth, 0);
 			
 			SetItemFont(rootId, Font.wxITALIC_FONT);
 			
-			IntPtr cookie = IntPtr.init;
-			TreeItemId id = GetFirstChild(rootId, cookie);
+			IntPtr cookie = IntPtr.Zero;
+			TreeItemId id = GetFirstChild(rootId, ref cookie);
 			SetItemTextColour(id, Colour.wxBLUE);
 
-			id = GetNextChild(rootId, cookie);
-			id = GetNextChild(rootId, cookie);
+			id = GetNextChild(rootId, ref cookie);
+			id = GetNextChild(rootId, ref cookie);
 			SetItemTextColour(id, Colour.wxRED);
 			SetItemBackgroundColour(id, Colour.wxLIGHT_GREY);
 		}
@@ -855,10 +862,10 @@ import wx.wx;
 		{
 			TreeItemId id;
 
-			if ( cookie == IntPtr.init )
-				id = GetFirstChild(idParent, cookie);
+			if ( cookie == IntPtr.Zero )
+				id = GetFirstChild(idParent, ref cookie);
 			else
-				id = GetNextChild(idParent, cookie);
+				id = GetNextChild(idParent, ref cookie);
 
 			if ( !id.IsOk() )
 				return;
@@ -867,16 +874,16 @@ import wx.wx;
 			Log.LogMessage(text);
 
 			if ( ItemHasChildren(id) )
-				GetItemsRecursively(id, IntPtr.init);
+				GetItemsRecursively(id, IntPtr.Zero);
 
 			GetItemsRecursively(idParent, cookie);
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public int ImageSize()
+		public int ImageSize
 		{
-			return imageSize;
+			get { return imageSize; }
 		}
 		
 		//---------------------------------------------------------------------
@@ -892,23 +899,23 @@ import wx.wx;
 		public void DoToggleIcon(TreeItemId item)
 		{
 			int image = GetItemImage(item);
-			image = image == TreeIcon.Folder ? TreeIcon.File
-								: TreeIcon.Folder;
+			image = image == (int)TreeIcon.Folder ? (int)TreeIcon.File
+								: (int)TreeIcon.Folder;
 
 			SetItemImage(item, image);
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnBeginDrag(Object sender, Event e)
+		public void OnBeginDrag(object sender, Event e)
 		{
-			TreeEvent te = cast(TreeEvent)e;
+			TreeEvent te = e as TreeEvent;
 		
 			if ( te.Item != RootItem )
 			{
 				m_draggedItem = te.Item;
 
-				Log.LogMessage("OnBeginDrag: started dragging " ~ GetItemText(m_draggedItem));
+				Log.LogMessage("OnBeginDrag: started dragging " + GetItemText(m_draggedItem));
 
 				te.Allow();
 			}
@@ -920,7 +927,7 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnBeginRDrag(Object sender, Event e)
+		public void OnBeginRDrag(object sender, Event e)
 		{
 			Log.LogMessage("OnBeginRDrag");
 			e.Skip();
@@ -928,9 +935,9 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnEndDrag(Object sender, Event e)
+		public void OnEndDrag(object sender, Event e)
 		{
-			TreeEvent te = cast(TreeEvent)e;
+			TreeEvent te = e as TreeEvent;
 			
 			TreeItemId itemSrc = m_draggedItem;
 			TreeItemId itemDst = te.Item;
@@ -949,24 +956,24 @@ import wx.wx;
 			}
 
 			string text = GetItemText(itemSrc);
-			Log.LogMessage("OnEndDrag: '" ~ text ~ "' copied to '" ~ GetItemText(itemDst) ~ "'.");
+			Log.LogMessage("OnEndDrag: '" + text + "' copied to '" + GetItemText(itemDst) + "'.");
 
-			int image = TreeTestApp.ShowImages ? TreeIcon.File : -1;
+			int image = TreeTestApp.ShowImages ? (int)TreeIcon.File : -1;
 			AppendItem(itemDst, text, image);
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnBeginLabelEdit(Object sender, Event e)
+		public void OnBeginLabelEdit(object sender, Event e)
 		{
-			TreeEvent te = cast(TreeEvent)e;
+			TreeEvent te = e as TreeEvent;
 			
 			Log.LogMessage("OnBeginLabelEdit");
 
 			TreeItemId itemId = te.Item;
 			if ( IsTestItem(itemId) )
 			{
-				MessageBox("You can't edit this item.");
+				MessageDialog.MessageBox("You can't edit this item.");
 
 				te.Veto();
 			}
@@ -974,15 +981,15 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnEndLabelEdit(Object sender, Event e)
+		public void OnEndLabelEdit(object sender, Event e)
 		{
-			TreeEvent te = cast(TreeEvent)e;
+			TreeEvent te = e as TreeEvent;
 		
 			Log.LogMessage("OnEndLabelEdit");
 
 // 			if ( !te.Label.IsWord() )
 // 			{
-// 				MessageBox("The new label should be a single word.");
+// 				MessageDialog.MessageBox("The new label should be a single word.");
 // 
 // 				te.Veto();
 // 			}
@@ -990,7 +997,7 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnDeleteItem(Object sender, Event e)
+		public void OnDeleteItem(object sender, Event e)
 		{
 // 			Log.LogMessage("OnDeleteItem");
 			e.Skip();
@@ -998,7 +1005,7 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnSetInfo(Object sender, Event e)
+		public void OnSetInfo(object sender, Event e)
 		{
 			Log.LogMessage("OnSetInfo");
 			e.Skip();
@@ -1006,7 +1013,7 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnItemExpanded(Object sender, Event e)
+		public void OnItemExpanded(object sender, Event e)
 		{
 			Log.LogMessage("OnItemExpanded");
 			e.Skip();
@@ -1014,7 +1021,7 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnItemExpanding(Object sender, Event e)
+		public void OnItemExpanding(object sender, Event e)
 		{
 			Log.LogMessage("OnItemExpanding");
 			e.Skip();
@@ -1022,7 +1029,7 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnItemCollapsed(Object sender, Event e)
+		public void OnItemCollapsed(object sender, Event e)
 		{
 			Log.LogMessage("OnItemCollapsed");
 			e.Skip();
@@ -1030,16 +1037,16 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnItemCollapsing(Object sender, Event e)
+		public void OnItemCollapsing(object sender, Event e)
 		{
-			TreeEvent te = cast(TreeEvent)e;
+			TreeEvent te = e as TreeEvent;
 		
 			Log.LogMessage("OnItemCollapsing");
 
 			TreeItemId itemId = te.Item;
 			if ( IsTestItem(itemId) )
 			{
-				MessageBox("You can't collapse this item.");
+				MessageDialog.MessageBox("You can't collapse this item.");
 
 				te.Veto();
 			}
@@ -1047,25 +1054,25 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnContextMenu(Object sender, Event e)
+		public void OnContextMenu(object sender, Event e)
 		{
-			ContextMenuEvent ce = cast(ContextMenuEvent)e;
+			ContextMenuEvent ce = e as ContextMenuEvent;
 		
 			Point pt = ce.Position;
 			TreeItemId item = Selection;
-			Log.LogMessage("OnContextMenu at screen coords (" ~ .toString(pt.X) ~ ", " ~ .toString(pt.Y) ~ ")");
+			Log.LogMessage("OnContextMenu at screen coords (" + pt.X + ", " + pt.Y + ")");
 
 			if (pt.X==-1 && pt.Y==-1) 
 			{
 				if (item.IsOk())
 				{
-					Rectangle rect = new_Rectangle(0, 0, 0, 0);
-					GetBoundingRect(item, rect, true); 
-					pt = new_Point(rect.Left, rect.Top);
+					Rectangle rect = new Rectangle(0, 0, 0, 0);
+					GetBoundingRect(item, ref rect, true); 
+					pt = new Point(rect.Right, rect.Top);
 				}
 				else
 				{
-					pt = new_Point(0, 0);
+					pt = new Point(0, 0);
 				}
 			}
 			else
@@ -1078,7 +1085,7 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnSelChanged(Object sender, Event e)
+		public void OnSelChanged(object sender, Event e)
 		{
 			Log.LogMessage("OnSelChanged");
 			e.Skip();
@@ -1086,7 +1093,7 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnSelChanging(Object sender, Event e)
+		public void OnSelChanging(object sender, Event e)
 		{
 			Log.LogMessage("OnSelChanging");
 			e.Skip();
@@ -1094,20 +1101,20 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnTreeKeyDown(Object sender, Event e)
+		public void OnTreeKeyDown(object sender, Event e)
 		{
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnItemActivated(Object sender, Event e)
+		public void OnItemActivated(object sender, Event e)
 		{
-			TreeEvent te = cast(TreeEvent)e;
+			TreeEvent te = e as TreeEvent;
 		
 			TreeItemId itemId = te.Item;
-			MyTreeItemData item = cast(MyTreeItemData)GetItemData(itemId);
+			MyTreeItemData item = (MyTreeItemData)GetItemData(itemId);
 
-			if ( item !== null )
+			if ( item != null )
 			{
 				item.ShowInfo(this);
 			}
@@ -1117,19 +1124,19 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnRMouseDClick(Object sender, Event e)
+		public void OnRMouseDClick(object sender, Event e)
 		{
-			MouseEvent me = cast(MouseEvent)e;
+			MouseEvent me = e as MouseEvent;
 		
 			int flags = 0;
-			TreeItemId id = HitTest(me.Position, flags);
-			if ( id === null )
+			TreeItemId id = HitTest(me.Position, out flags);
+			if ( id == null )
 				Log.LogMessage("No item under mouse");
 			else
 			{
-				MyTreeItemData item = cast(MyTreeItemData)GetItemData(id);
-				if ( item !== null )
-					Log.LogMessage("Item '" ~ item.Desc ~ "' under mouse");
+				MyTreeItemData item = (MyTreeItemData)GetItemData(id);
+				if ( item != null )
+					Log.LogMessage("Item '" + item.Desc + "' under mouse");
 			}
 		}
 		
@@ -1137,7 +1144,7 @@ import wx.wx;
 		
 		private bool IsTestItem(TreeItemId item)
 		{
-			return GetItemParent(item) == RootItem && (GetPrevSibling(item) === null);
+			return GetItemParent(item) == RootItem && (GetPrevSibling(item) == null);
 		}
 		
 		//---------------------------------------------------------------------
@@ -1154,7 +1161,7 @@ import wx.wx;
 			string title = "";
 			if ( id.IsOk() )
 			{
-				title ~= "Menu for " ~ GetItemText(id);
+				title += "Menu for " + GetItemText(id);
 			}
 			else
 			{
@@ -1162,8 +1169,8 @@ import wx.wx;
 			}
 
 			Menu menu = new Menu(title);
-			menu.Append(MyFrame.Cmd.TreeTest_About, "&About...");
-			menu.Append(MyFrame.Cmd.TreeTest_Dump, "&Dump");
+			menu.Append((int)MyFrame.Cmd.TreeTest_About, "&About...");
+			menu.Append((int)MyFrame.Cmd.TreeTest_Dump, "&Dump");
 
 			PopupMenu(menu, pt);
 		}
@@ -1173,7 +1180,7 @@ import wx.wx;
 		public void DoSortChildren(TreeItemId item, bool reverse)
 		{
 			m_reverseSort = reverse;
-			super.SortChildren(item);
+			base.SortChildren(item);
 		}
 		
 		//---------------------------------------------------------------------
@@ -1182,11 +1189,11 @@ import wx.wx;
 		{
 			if ( m_reverseSort )
 			{
-				return super.OnCompareItems(item2, item1);
+				return base.OnCompareItems(item2, item1);
 			}
 			else
 			{
-				return super.OnCompareItems(item1, item2);
+				return base.OnCompareItems(item1, item2);
 			}
 		}
 	}
@@ -1199,17 +1206,17 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------
 	
-		public this(string desc)
+		public MyTreeItemData(string desc)
+			: base()
 		{
-			super();
 			m_desc = desc;
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public string Desc()
+		public string Desc
 		{
-			return m_desc;
+			get { return m_desc; }
 		}
 		
 		protected string Bool2String(bool b)
@@ -1221,19 +1228,14 @@ import wx.wx;
 		
 		public void ShowInfo(TreeCtrl tree)
 		{
-			string msg = "Item '" ~ m_desc ~ "': ";
-			msg ~= Bool2String(tree.IsSelected(Id)) ~ "selected, ";
-			msg ~= Bool2String(tree.IsExpanded(Id)) ~ "expanded, ";
-			msg ~= Bool2String(tree.IsBold(Id)) ~ "bold,\n";
-			msg ~= .toString(tree.GetChildrenCount(Id)) ~ " children (";
-			msg ~= .toString(tree.GetChildrenCount(Id, false)) ~ " immediately under this item).";
+			string msg = "Item '" + m_desc +"': ";
+			msg += Bool2String(tree.IsSelected(Id)) + "selected, ";
+			msg += Bool2String(tree.IsExpanded(Id)) + "expanded, ";
+			msg += Bool2String(tree.IsBold(Id)) + "bold,\n";
+			msg += tree.GetChildrenCount(Id) + " children (";
+			msg += tree.GetChildrenCount(Id, false) + " immediately under this item).";
 		
 			Log.LogMessage(msg);
 		}
 	}
-
-
-void main()
-{
-	TreeTestApp.Main();
 }

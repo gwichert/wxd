@@ -1,55 +1,20 @@
 //-----------------------------------------------------------------------------
-// wxD - Defs.d
+// wx.NET - Defs.cs
 //
-// Symbol definitions that do not beint to any particular class.
+// Symbol definitions that do not belong to any particular class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
-// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.Defs;
-//import wx.common;
+using System;
+using System.Drawing;
 
-	public enum BitmapType {
-		wxBITMAP_TYPE_INVALID               = 0,
-		wxBITMAP_TYPE_BMP,
-		wxBITMAP_TYPE_BMP_RESOURCE,
-		wxBITMAP_TYPE_RESOURCE              = wxBITMAP_TYPE_BMP_RESOURCE,
-		wxBITMAP_TYPE_ICO,
-		wxBITMAP_TYPE_ICO_RESOURCE,
-		wxBITMAP_TYPE_CUR,
-		wxBITMAP_TYPE_CUR_RESOURCE,
-		wxBITMAP_TYPE_XBM,
-		wxBITMAP_TYPE_XBM_DATA,
-		wxBITMAP_TYPE_XPM,
-		wxBITMAP_TYPE_XPM_DATA,
-		wxBITMAP_TYPE_TIF,
-		wxBITMAP_TYPE_TIF_RESOURCE,
-		wxBITMAP_TYPE_GIF,
-		wxBITMAP_TYPE_GIF_RESOURCE,
-		wxBITMAP_TYPE_PNG,
-		wxBITMAP_TYPE_PNG_RESOURCE,
-		wxBITMAP_TYPE_JPEG,
-		wxBITMAP_TYPE_JPEG_RESOURCE,
-		wxBITMAP_TYPE_PNM,
-		wxBITMAP_TYPE_PNM_RESOURCE,
-		wxBITMAP_TYPE_PCX,
-		wxBITMAP_TYPE_PCX_RESOURCE,
-		wxBITMAP_TYPE_PICT,
-		wxBITMAP_TYPE_PICT_RESOURCE,
-		wxBITMAP_TYPE_ICON,
-		wxBITMAP_TYPE_ICON_RESOURCE,
-		wxBITMAP_TYPE_ANI,
-		wxBITMAP_TYPE_IFF,
-		wxBITMAP_TYPE_MACCURSOR,
-		wxBITMAP_TYPE_MACCURSOR_RESOURCE,
-		wxBITMAP_TYPE_ANY                   = 50
-	}
-
+namespace wx
+{
 	/*  Standard menu IDs */
 	public enum MenuIDs
 	{
@@ -167,7 +132,7 @@ module wx.Defs;
 		wxID_HIGHEST = 5999
 	}
 
-	//[Flags]
+	[Flags]
 	public enum KeyCode 
 	{
 		WXK_BACK    = 8,
@@ -277,22 +242,22 @@ module wx.Defs;
 		WXK_NUMPAD_DIVIDE
 	}
 
-	public enum Direction 
+	public class Direction 
 	{
-		wxLEFT    = 0x0010,
-		wxRIGHT   = 0x0020,
-		wxUP      = 0x0040,
-		wxDOWN    = 0x0080,
-		wxTOP     = wxUP,
-		wxBOTTOM  = wxDOWN,
-		wxNORTH   = wxUP,
-		wxSOUTH   = wxDOWN,
-		wxWEST    = wxLEFT,
-		wxEAST    = wxRIGHT,
-		wxALL     = (wxUP | wxDOWN | wxRIGHT | wxLEFT),
+		public const long wxLEFT    = 0x0010;
+		public const long wxRIGHT   = 0x0020;
+		public const long wxUP      = 0x0040;
+		public const long wxDOWN    = 0x0080;
+		public const long wxTOP     = wxUP;
+		public const long wxBOTTOM  = wxDOWN;
+		public const long wxNORTH   = wxUP;
+		public const long wxSOUTH   = wxDOWN;
+		public const long wxWEST    = wxLEFT;
+		public const long wxEAST    = wxRIGHT;
+		public const long wxALL     = (wxUP | wxDOWN | wxRIGHT | wxLEFT);
 	}
 
-	//[Flags]
+	[Flags]
 	public enum FillStyle
 	{
 		wxDEFAULT = 70,
@@ -314,7 +279,7 @@ module wx.Defs;
 		
 		wxSOLID = 100,
 		wxDOT,
-		wxint_DASH,
+		wxLONG_DASH,
 		wxSHORT_DASH,
 		wxDOT_DASH,
 		wxUSER_DASH,
@@ -344,7 +309,7 @@ module wx.Defs;
 	}
 
 	// Logical operations
-	//[Flags]
+	[Flags]
 	public enum Logic
 	{
 		wxCLEAR,        wxROP_BLACK = wxCLEAR,             wxBLIT_BLACKNESS = wxCLEAR,        // 0
@@ -365,49 +330,49 @@ module wx.Defs;
 		wxSET,          wxROP_WHITE = wxSET,               wxBLIT_WHITENESS = wxSET           // 1
 	}
 
-	public enum Orientation
+	public class Orientation
 	{
-		wxVERTICAL     = 0x0008,
-		wxHORIZONTAL   = 0x0004,
+		public const int wxVERTICAL     = 0x0008;
+		public const int wxHORIZONTAL   = 0x0004;
 		
-		wxBOTH     = (wxVERTICAL | wxHORIZONTAL),
+		public const int wxBOTH     = (wxVERTICAL | wxHORIZONTAL);
 	}
 
-	public enum Stretch
+	public class Stretch
 	{
-		wxSTRETCH_NOT     = 0x0000,
-		wxSHRINK          = 0x1000,
-		wxGROW            = 0x2000,
-		wxEXPAND          = wxGROW,
-		wxSHAPED          = 0x4000,
-		wxFIXED_MINSIZE   = 0x8000,
-		wxTILE            = 0xc000,
+		public const long wxSTRETCH_NOT     = 0x0000;
+		public const long wxSHRINK          = 0x1000;
+		public const long wxGROW            = 0x2000;
+		public const long wxEXPAND          = wxGROW;
+		public const long wxSHAPED          = 0x4000;
+		public const long wxFIXED_MINSIZE   = 0x8000;
+		public const long wxTILE            = 0xc000;
 		
 		// changed in wxWidgets 2.5.2, see discussion on wx-dev
-		wxADJUST_MINSIZE  = 0x0000,
+		public const long wxADJUST_MINSIZE  = 0x0000;
 	}
 
-	public enum Alignment
+	public class Alignment
 	{
-		wxALIGN_NOT               = 0x0000,
-		wxALIGN_CENTER_HORIZONTAL = 0x0100,
-		wxALIGN_LEFT              = wxALIGN_NOT,
-		wxALIGN_TOP               = wxALIGN_NOT,
-		wxALIGN_RIGHT             = 0x0200,
-		wxALIGN_BOTTOM            = 0x0400,
-		wxALIGN_CENTER_VERTICAL   = 0x0800,
+		public const long wxALIGN_NOT               = 0x0000;
+		public const long wxALIGN_CENTER_HORIZONTAL = 0x0100;
+		public const long wxALIGN_LEFT              = wxALIGN_NOT;
+		public const long wxALIGN_TOP               = wxALIGN_NOT;
+		public const long wxALIGN_RIGHT             = 0x0200;
+		public const long wxALIGN_BOTTOM            = 0x0400;
+		public const long wxALIGN_CENTER_VERTICAL   = 0x0800;
 		
-		wxALIGN_CENTER            = (wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL),
+		public const long wxALIGN_CENTER            = (wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL);
 		
-		wxALIGN_MASK              = 0x0f00,
+		public const long wxALIGN_MASK              = 0x0f00;
 		
 		// Alternate spellings
-		wxALIGN_CENTRE_VERTICAL   = wxALIGN_CENTER_VERTICAL,
-		wxALIGN_CENTRE_HORIZONTAL = wxALIGN_CENTER_HORIZONTAL,
-		wxALIGN_CENTRE            = wxALIGN_CENTER,
+		public const long wxALIGN_CENTRE_VERTICAL   = wxALIGN_CENTER_VERTICAL;
+		public const long wxALIGN_CENTRE_HORIZONTAL = wxALIGN_CENTER_HORIZONTAL;
+		public const long wxALIGN_CENTRE            = wxALIGN_CENTER;
 	}
 
-	//[Flags]
+	[Flags]
 	public enum ItemKind
 	{
 		wxITEM_SEPARATOR = -1,
@@ -417,10 +382,10 @@ module wx.Defs;
 		wxITEM_MAX
 	}
     
-	public enum FloodStyle
+	public class FloodStyle
 	{
-		wxFLOOD_SURFACE = 1,
-		wxFLOOD_BORDER = 2,
+		public const int wxFLOOD_SURFACE = 1;
+		public const int wxFLOOD_BORDER = 2;
 	}
     
 	public enum MouseButton
@@ -447,12 +412,4 @@ module wx.Defs;
 		// the wxWS_EX_PROCESS_UI_UPDATES flag specified
 		wxUPDATE_UI_PROCESS_SPECIFIED
 	}
-
-	enum {
-		wxID_ANY = -1
-	}
-
-	enum {
-		wxID_SEPARATOR = -2
-	}
-
+}

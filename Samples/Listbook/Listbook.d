@@ -1,19 +1,20 @@
 //-----------------------------------------------------------------------------
-// wxD/Samples - Listbook.d
+// wx.NET/Samples - Listbook.cs
 //
-// wxD "Listbook" sample.
+// wx.NET "Listbook" sample.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
-// Modified by BERO <berobero@users.sourceforge.net>
 // (C) 2004 Alexander Olk
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-import wx.wx;
-import std.string;
+using System;
+using System.Drawing;
 
+namespace wx.Samples
+{
 	public class ListbookFrame : Frame
 	{
 		enum Cmd 
@@ -29,24 +30,24 @@ import std.string;
 
 		//---------------------------------------------------------------------
 
-		public this(string title, Point pos, Size size)
+		public ListbookFrame(string title, Point pos, Size size)
+			: base(title, pos, size)
 		{
-			super(title, pos, size);
 			// Set the window icon and status bar
 
-			icon = new Icon("../Samples/Listbook/mondrian.png");
+			Icon = new wx.Icon("../Samples/Listbook/mondrian.png");
 
 			CreateStatusBar();
 			StatusText = "Welcome to the Listbook Sample!";	
 			
 			Menu menuFile = new Menu();
-			menuFile.AppendWL( Cmd.About, "&About", & OnAbout ) ;
+			menuFile.AppendWL( (int)Cmd.About, "&About", new EventListener( OnAbout ) );
 			menuFile.AppendSeparator();
-			menuFile.AppendWL( Cmd.Quit, "E&xit\tAlt-X", "Quit this program", & OnQuit) ;
+			menuFile.AppendWL( (int)Cmd.Quit, "E&xit\tAlt-X", "Quit this program", new EventListener( OnQuit) );
 			
 			MenuBar menuBar = new MenuBar();
 			menuBar.Append( menuFile, "&File" );
-			this.menuBar = menuBar;
+			MenuBar = menuBar;
 
 			textCtrl = new TextCtrl(this, -1, "", wxDefaultPosition, wxDefaultSize, 
 				TextCtrl.wxTE_MULTILINE | TextCtrl.wxTE_READONLY | TextCtrl.wxSUNKEN_BORDER );
@@ -59,20 +60,20 @@ import std.string;
 			bSizer.Add( listbook, 1, Stretch.wxGROW );
 			bSizer.Add( textCtrl, 0, Stretch.wxGROW );
 
-			sizer = bSizer;
+			Sizer = bSizer;
 		}
 
 		//---------------------------------------------------------------------	
 
-		public void OnAbout( Object sender, Event e )
+		public void OnAbout( object sender, Event e )
 		{
-			MessageBox( "wxD Listbook sample\n2004 by Alexander Olk\nportred D by BERO", "About",
+			MessageDialog.MessageBox( "wx.NET Listbook sample\n2004 by Alexander Olk", "About",
 				Dialog.wxOK | Dialog.wxICON_INFORMATION);
 		}
 
 		//---------------------------------------------------------------------	
 
-		public void OnQuit( Object sender, Event e )
+		public void OnQuit( object sender, Event e )
 		{
 			Close();
 		}
@@ -86,16 +87,16 @@ import std.string;
 
 		//---------------------------------------------------------------------	
 
-		public this( Window parent, int id)
+		public MyListbook( Window parent, int id)
+			: base( parent, id )
 		{
-			super( parent, id );
 			imageList = new ImageList( 32, 32 );
 
 			// load bitmaps
 			for ( int i = 1; i < 16; ++i )
 			{
-				Bitmap bmp = new Bitmap( std.string.format( "../Samples/Listbook/bmp/toblom%02d.png", 
-					i ) );
+				Bitmap bmp = new Bitmap( String.Format( "../Samples/Listbook/bmp/toblom{0}.png", 
+					i.ToString().PadLeft( 2, '0' ) ) );
 				imageList.Add( bmp );
 			}
 
@@ -104,33 +105,33 @@ import std.string;
 			for ( int i = 1; i < 16; ++i )
 			{
 				ListbookPanel p = new ListbookPanel( this, -1, i );
-				AddPage( p , std.string.format( "Picture %d    ", i ), false, i - 1 );
+				AddPage( p , String.Format( "Picture {0}    ", i ), false, i - 1 );
 			} 
 
-			EVT_LISTBOOK_PAGE_CHANGED( -1, & OnPageChanged ) ;
-			EVT_LISTBOOK_PAGE_CHANGING( -1, & OnPageChanging ) ;
+			EVT_LISTBOOK_PAGE_CHANGED( -1, new EventListener( OnPageChanged ) );
+			EVT_LISTBOOK_PAGE_CHANGING( -1, new EventListener( OnPageChanging ) );
 		}
 
 		//---------------------------------------------------------------------	
 
-		public void OnPageChanged( Object sender, Event e )
+		public void OnPageChanged( object sender, Event e )
 		{
-			ListbookEvent le = cast(ListbookEvent) e;
+			ListbookEvent le = (ListbookEvent) e;
 
-			Log.LogMessage( "OnPageChanged, old: " ~ .toString(le.OldSelection) ~ ", " ~
-				"new: " ~ .toString(le.Selection) ~ ", Selection: " ~ .toString(this.Selection) );
+			Log.LogMessage( "OnPageChanged, old: " + le.OldSelection + ", " +
+				"new: " + le.Selection + ", Selection: " + this.Selection );
 
 			e.Skip();
 		}
 
 		//---------------------------------------------------------------------	
 
-		public void OnPageChanging( Object sender, Event e )
+		public void OnPageChanging( object sender, Event e )
 		{
-			ListbookEvent le = cast(ListbookEvent) e;
+			ListbookEvent le = (ListbookEvent) e;
 
-			Log.LogMessage( "OnPageChanging, old: " ~ .toString(le.OldSelection) ~ ", " ~
-				"new: " ~ .toString(le.Selection) ~ ", Selection: " ~ .toString(this.Selection) );
+			Log.LogMessage( "OnPageChanging, old: " + le.OldSelection + ", " +
+				"new: " + le.Selection + ", Selection: " + this.Selection );
 
 			e.Skip();
 		}
@@ -144,34 +145,34 @@ import std.string;
 		
 		//---------------------------------------------------------------------	
 
-		public this( Window parent, int id, int number )
+		public ListbookPanel( Window parent, int id, int number )
+			: base( parent, id )
 		{
-			super( parent, id );
 			htmlWindow = new HtmlWindow( this );
-			htmlWindow.AppendToPage( "<html><body><center><h1>This is HtmlWindow page " ~
-				.toString(number) ~ ".</h1><br><br><br>" ~ 
-				"<img height=\"32\" width=\"32\" alt=\"\" " ~
-				"src=\"" ~
-				std.string.format( "../Samples/Listbook/bmp/toblom%02d.png", number ) ~
-				"\">" ~
+			htmlWindow.AppendToPage( "<html><body><center><h1>This is HtmlWindow page " +
+				number + ".</h1><br><br><br>" + 
+				"<img height=\"32\" width=\"32\" alt=\"\" " +
+				"src=\"" +
+				String.Format( "../Samples/Listbook/bmp/toblom{0}.png", number.ToString().PadLeft( 2, '0' ) ) +
+				"\">" +
 				"</center></body></html>" );
 
 			BoxSizer bSizer = new BoxSizer( Orientation.wxVERTICAL );
 			bSizer.Add( htmlWindow, 1, Stretch.wxGROW );
 
-			sizer = bSizer;
+			Sizer = bSizer;
 		}
 	}
 
 	//---------------------------------------------------------------------	
 
-	public class ListbookApp : App
+	public class ListbookApp : wx.App
 	{
 		//---------------------------------------------------------------------
 
 		public override bool OnInit()
 		{
-			ListbookFrame frame = new ListbookFrame("Listbook wxWidgets Sample", new_Point(10, 100), new_Size(650,340));
+			ListbookFrame frame = new ListbookFrame("Listbook wxWidgets Sample", new Point(10, 100), new Size(650,340));
 			frame.Show(true);
 
 			return true;
@@ -179,7 +180,7 @@ import std.string;
 
 		//---------------------------------------------------------------------
 
-		
+		[STAThread]
 		static void Main()
 		{
 			ListbookApp app = new ListbookApp();
@@ -188,9 +189,4 @@ import std.string;
 
 		//---------------------------------------------------------------------
 	}
-
-
-void main()
-{
-	ListbookApp.Main();
 }

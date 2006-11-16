@@ -1,49 +1,57 @@
 //-----------------------------------------------------------------------------
-// wxD/Samples - Font.d
+// wx.NET/Samples - Font.cs
 //
-// wxD "Font" sample.
+// wx.NET "Font" sample.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
-// Modified by BERO <berobero@users.sourceforge.net>
 // (C) 2003 Alexander Olk
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-import wx.wx;
-import std.stream;
-alias std.string.find indexOf;
+using System;
+using System.IO;
+using System.Drawing;
+using System.Collections;
 
+namespace wx.Samples
+{
 	public class MyCanvas : Window
 	{
 		private Colour m_colour;
-		private Font m_font;
+		private wx.Font m_font;
 		
 		//---------------------------------------------------------------------
 		
-		public this( Window parent )
+		public MyCanvas( Window parent )
+			: base( parent )
 		{
-			super( parent );
 			m_colour = Colour.wxRED;
-			m_font = Font.wxNORMAL_FONT;
+			m_font = wx.Font.wxNORMAL_FONT;
 			
-			EVT_PAINT( & OnPaint ) ;
+			EVT_PAINT( new EventListener( OnPaint ) );
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public Font TextFont() { return m_font; }
-		public void TextFont(Font value) { m_font = value; }
+		public Font TextFont
+		{
+			get { return m_font; }
+			set { m_font = value; }
+		}
 		
 		//---------------------------------------------------------------------
 		
-		public Colour colour() { return m_colour; }
-		public void   colour(Colour value) { m_colour = value; }
+		public Colour Colour 
+		{
+			get { return m_colour; }
+			set { m_colour = value; }
+		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnPaint( Object sender, Event e )
+		public void OnPaint( object sender, Event e )
 		{
 			PaintDC dc = new PaintDC( this );
 			PrepareDC( dc );
@@ -56,14 +64,14 @@ alias std.string.find indexOf;
 			int x = 5;
 			int y = 5;
 			
-			string fontinfo = "Font size is " ~ .toString(m_font.PointSize) ~ " points, family: " ~
-				.toString(m_font.FamilyString) ~ ", encoding: " ~ FontMapper.GetEncodingDescription( m_font.Encoding );
+			string fontinfo = "Font size is " + m_font.PointSize + " points, family: " +
+				m_font.FamilyString + ", encoding: " + FontMapper.GetEncodingDescription( m_font.Encoding );
 				
 			dc.DrawText( fontinfo, x, y );
 			y += hLine;
 			
-			fontinfo = "Style: " ~ m_font.StyleString ~ ", weight: " ~ m_font.WeightString ~
-				", fixed width: " ~ (m_font.IsFixedWidth ? "yes" : "no");
+			fontinfo = "Style: " + m_font.StyleString + ", weight: " + m_font.WeightString +
+				", fixed width: " + (m_font.IsFixedWidth ? "yes" : "no");
 				
 			dc.DrawText( fontinfo, x, y );
 			y += hLine;
@@ -71,10 +79,10 @@ alias std.string.find indexOf;
 			if ( m_font.Ok )
 			{
 				IntPtr info = m_font.NativeFontInfo;
-				if ( info != IntPtr.init )
+				if ( info != IntPtr.Zero )
 				{
 					string fontDesc = m_font.NativeFontInfoUserDesc;
-					fontinfo = "Native font info: " ~ fontDesc;
+					fontinfo = "Native font info: " + fontDesc;
 					
 					dc.DrawText( fontinfo, x, y );
 					y += hLine;
@@ -83,13 +91,13 @@ alias std.string.find indexOf;
 			
 			y += hLine;
 			
-			dc.font = m_font;
+			dc.Font = m_font;
 			dc.TextForeground = m_colour;
 			
 			int maxCharWidth;
 			int maxCharHeight;
 			
-			dc.GetTextExtent( "W", maxCharWidth, maxCharHeight );
+			dc.GetTextExtent( "W", out maxCharWidth, out maxCharHeight );
 			
 			int w = maxCharWidth + 5;
 			int h = maxCharHeight + 4;
@@ -98,22 +106,21 @@ alias std.string.find indexOf;
 			{
 				for ( int j = 0; j < 32; j++ )
 				{
-					char c = cast(char)( 32 * ( i + 1 ) + j );
+					char c = Convert.ToChar( 32 * ( i + 1 ) + j );
 					
 					int charWidth;
 					int charHeight;
 					
-					string s = .toString(c);
-					dc.GetTextExtent( s, charWidth, charHeight );
+					dc.GetTextExtent( c.ToString(), out charWidth, out charHeight );
 					dc.DrawText( 
-						s, 
+						c.ToString(), 
 						x + w * j + ( maxCharWidth - charWidth ) / 2 + 1, 
 						y + h * i + ( maxCharHeight - charHeight ) / 2 
 					);
 				}
 			}
 			
-			dc.pen = new Pen( new Colour( "blue" ), 1, FillStyle.wxSOLID );
+			dc.Pen = new Pen( new Colour( "blue" ), 1, FillStyle.wxSOLID );
 			
 			int l;
 			
@@ -154,53 +161,53 @@ alias std.string.find indexOf;
 		
 		//---------------------------------------------------------------------
 	
-		public this( string title, Point pos, Size size )
+		public FontFrame( string title, Point pos, Size size )
+			: base( title, pos, size )
 		{
-			super( title, pos, size );
-			icon = new Icon( "../Samples/Font/mondrian.png" );
+			Icon = new wx.Icon( "../Samples/Font/mondrian.png" );
 			
 			m_fontSize = 12;
 			
 			Menu menuFile = new Menu();
-			menuFile.Append( Cmd.Font_ViewMsg, "&View...\tCtrl-V", "View an email message file" );
+			menuFile.Append( (int)Cmd.Font_ViewMsg, "&View...\tCtrl-V", "View an email message file" );
 			menuFile.AppendSeparator();
-			menuFile.Append( Cmd.Font_About, "&About...\tCtrl-A", "Show about dialog" );
+			menuFile.Append( (int)Cmd.Font_About, "&About...\tCtrl-A", "Show about dialog" );
 			menuFile.AppendSeparator();
-			menuFile.Append( Cmd.Font_Quit, "E&xit\tAlt-X", "Quit this program" );
+			menuFile.Append( (int)Cmd.Font_Quit, "E&xit\tAlt-X", "Quit this program" );
 			
 			Menu menuFont = new Menu();
-			menuFont.Append( Cmd.Font_IncSize, "&Increase font size by 2 points\tCtrl-I" );
-			menuFont.Append( Cmd.Font_DecSize, "&Decrease font size by 2 points\tCtrl-D" );
+			menuFont.Append( (int)Cmd.Font_IncSize, "&Increase font size by 2 points\tCtrl-I" );
+			menuFont.Append( (int)Cmd.Font_DecSize, "&Decrease font size by 2 points\tCtrl-D" );
 			menuFont.AppendSeparator();
-			menuFont.AppendCheckItem( Cmd.Font_Bold, "&Bold\tCtrl-B", "Toggle bold state" );
-			menuFont.AppendCheckItem( Cmd.Font_Italic, "&Oblique\tCtrl-O", "Toggle italic state" );
-			menuFont.AppendCheckItem( Cmd.Font_Underlined, "&Underlined\tCtrl-U", "Toggle underlined state" );
+			menuFont.AppendCheckItem( (int)Cmd.Font_Bold, "&Bold\tCtrl-B", "Toggle bold state" );
+			menuFont.AppendCheckItem( (int)Cmd.Font_Italic, "&Oblique\tCtrl-O", "Toggle italic state" );
+			menuFont.AppendCheckItem( (int)Cmd.Font_Underlined, "&Underlined\tCtrl-U", "Toggle underlined state" );
 			
 			menuFont.AppendSeparator();
-			menuFont.Append( Cmd.Font_CheckNativeToFromString, "Check Native Font Info To/From String" );
+			menuFont.Append( (int)Cmd.Font_CheckNativeToFromString, "Check Native Font Info To/From String" );
 			
 			Menu menuSelect = new Menu();
-			menuSelect.Append( Cmd.Font_Choose, "&Select font...\tCtrl-S", "Select a standard font" );
+			menuSelect.Append( (int)Cmd.Font_Choose, "&Select font...\tCtrl-S", "Select a standard font" );
 			
 			Menu menuStdFonts = new Menu();
-			menuStdFonts.Append( Cmd.Font_wxNORMAL_FONT, "wxNORMAL_FONT", "Normal font used by wxWidgets" );
-			menuStdFonts.Append( Cmd.Font_wxSMALL_FONT,  "wxSMALL_FONT",  "Small font used by wxWidgets" );
-			menuStdFonts.Append( Cmd.Font_wxITALIC_FONT, "wxITALIC_FONT", "Italic font used by wxWidgets" );
-			menuStdFonts.Append( Cmd.Font_wxSWISS_FONT,  "wxSWISS_FONT",  "Swiss font used by wxWidgets" );
+			menuStdFonts.Append( (int)Cmd.Font_wxNORMAL_FONT, "wxNORMAL_FONT", "Normal font used by wxWidgets" );
+			menuStdFonts.Append( (int)Cmd.Font_wxSMALL_FONT,  "wxSMALL_FONT",  "Small font used by wxWidgets" );
+			menuStdFonts.Append( (int)Cmd.Font_wxITALIC_FONT, "wxITALIC_FONT", "Italic font used by wxWidgets" );
+			menuStdFonts.Append( (int)Cmd.Font_wxSWISS_FONT,  "wxSWISS_FONT",  "Swiss font used by wxWidgets" );
 			menuSelect.Append(-2, "Standar&d fonts", menuStdFonts, "" );
 
 			menuSelect.AppendSeparator();
-			menuSelect.Append( Cmd.Font_EnumFamilies, "Enumerate font &families\tCtrl-F" );
-			menuSelect.Append( Cmd.Font_EnumFixedFamilies, "Enumerate fi&xed font families\tCtrl-X" );
-			menuSelect.Append( Cmd.Font_EnumEncodings, "Enumerate &encodings\tCtrl-E" );
-			menuSelect.Append( Cmd.Font_EnumFamiliesForEncoding, "Find font for en&coding...\tCtrl-C", "Find font families for given encoding" );
+			menuSelect.Append( (int)Cmd.Font_EnumFamilies, "Enumerate font &families\tCtrl-F" );
+			menuSelect.Append( (int)Cmd.Font_EnumFixedFamilies, "Enumerate fi&xed font families\tCtrl-X" );
+			menuSelect.Append( (int)Cmd.Font_EnumEncodings, "Enumerate &encodings\tCtrl-E" );
+			menuSelect.Append( (int)Cmd.Font_EnumFamiliesForEncoding, "Find font for en&coding...\tCtrl-C", "Find font families for given encoding" );
 			
-			MenuBar menuBar = new MenuBar();
+			wx.MenuBar menuBar = new wx.MenuBar();
 			menuBar.Append( menuFile, "&File" );
 			menuBar.Append( menuFont, "F&ont" );
 			menuBar.Append( menuSelect, "&Select" );
 			
-			this.menuBar = menuBar;
+			MenuBar = menuBar;
 			
 			SplitterWindow splitter = new SplitterWindow( this );
 			
@@ -216,40 +223,40 @@ alias std.string.find indexOf;
 			CreateStatusBar();
 			StatusText = "Welcome to wxWidgets font demo!";	
 			
-			EVT_MENU( Cmd.Font_Quit,  & OnQuit ) ;
-			EVT_MENU( Cmd.Font_ViewMsg, & OnViewMsg ) ;
-			EVT_MENU( Cmd.Font_About, & OnAbout ) ;
+			EVT_MENU( (int)Cmd.Font_Quit,  new EventListener( OnQuit ) );
+			EVT_MENU( (int)Cmd.Font_ViewMsg, new EventListener( OnViewMsg ) );
+			EVT_MENU( (int)Cmd.Font_About, new EventListener( OnAbout ) );
 
-			EVT_MENU( Cmd.Font_IncSize, & OnIncFont ) ;
-			EVT_MENU( Cmd.Font_DecSize, & OnDecFont ) ;
-			EVT_MENU( Cmd.Font_Bold, & OnBold ) ;
-			EVT_MENU( Cmd.Font_Italic, & OnItalic ) ;
-			EVT_MENU( Cmd.Font_Underlined, & OnUnderline ) ;
+			EVT_MENU( (int)Cmd.Font_IncSize, new EventListener( OnIncFont ) );
+			EVT_MENU( (int)Cmd.Font_DecSize, new EventListener( OnDecFont ) );
+			EVT_MENU( (int)Cmd.Font_Bold, new EventListener( OnBold ) );
+			EVT_MENU( (int)Cmd.Font_Italic, new EventListener( OnItalic ) );
+			EVT_MENU( (int)Cmd.Font_Underlined, new EventListener( OnUnderline ) );
 
-			EVT_MENU( Cmd.Font_wxNORMAL_FONT, & OnwxPointerFont ) ;
-			EVT_MENU( Cmd.Font_wxSMALL_FONT, & OnwxPointerFont ) ;
-			EVT_MENU( Cmd.Font_wxITALIC_FONT, & OnwxPointerFont ) ;
-			EVT_MENU( Cmd.Font_wxSWISS_FONT, & OnwxPointerFont ) ;
+			EVT_MENU( (int)Cmd.Font_wxNORMAL_FONT, new EventListener( OnwxPointerFont ) );
+			EVT_MENU( (int)Cmd.Font_wxSMALL_FONT, new EventListener( OnwxPointerFont ) );
+			EVT_MENU( (int)Cmd.Font_wxITALIC_FONT, new EventListener( OnwxPointerFont ) );
+			EVT_MENU( (int)Cmd.Font_wxSWISS_FONT, new EventListener( OnwxPointerFont ) );
 
-			EVT_MENU( Cmd.Font_CheckNativeToFromString, & OnCheckNativeToFromString ) ;
+			EVT_MENU( (int)Cmd.Font_CheckNativeToFromString, new EventListener( OnCheckNativeToFromString ) );
 
-			EVT_MENU( Cmd.Font_Choose, & OnSelectFont ) ;
-			EVT_MENU( Cmd.Font_EnumFamiliesForEncoding, & OnEnumerateFamiliesForEncoding ) ;
-			EVT_MENU( Cmd.Font_EnumFamilies, & OnEnumerateFamilies ) ;
-			EVT_MENU( Cmd.Font_EnumFixedFamilies, & OnEnumerateFixedFamilies ) ;
-			EVT_MENU( Cmd.Font_EnumEncodings, & OnEnumerateEncodings ) ;
+			EVT_MENU( (int)Cmd.Font_Choose, new EventListener( OnSelectFont ) );
+			EVT_MENU( (int)Cmd.Font_EnumFamiliesForEncoding, new EventListener( OnEnumerateFamiliesForEncoding ) );
+			EVT_MENU( (int)Cmd.Font_EnumFamilies, new EventListener( OnEnumerateFamilies ) );
+			EVT_MENU( (int)Cmd.Font_EnumFixedFamilies, new EventListener( OnEnumerateFixedFamilies ) );
+			EVT_MENU( (int)Cmd.Font_EnumEncodings, new EventListener( OnEnumerateEncodings ) );
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnQuit( Object sender, Event e )
+		public void OnQuit( object sender, Event e )
 		{
 			Close();
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnViewMsg( Object sender, Event e )
+		public void OnViewMsg( object sender, Event e )
 		{
 			FileDialog dialog = new FileDialog( this, "Open an email message file", s_dir, s_file, "*" );
 			if ( dialog.ShowModal() != wxID_OK ) return;
@@ -258,39 +265,49 @@ alias std.string.find indexOf;
 			s_file = dialog.Filename;
 			
 			string filename = dialog.Path;
-			string message;
-
+			
+			FileStream fs;
+			
 			try
 			{
-				message = cast(string)std.file.read(filename);
+				fs = new FileStream( filename, FileMode.Open );
 			}
 			catch (Exception ex)
 			{
 				return;
 			}
-						
+			
+			StreamReader sr = new StreamReader( fs );
+			//sr.BaseStream.Seek(0, SeekOrigin.Begin); 
+
+			string message = sr.ReadToEnd();
+			
+			sr.Close();			
+			
 			string charset;
 			
 			string prefix = "Content-Type: text/plain; charset=";
 			
-			int pos = message.indexOf( prefix );
+			int pos = message.IndexOf( prefix );
 			
 			if ( pos == -1 )
 			{
-				Log.LogError( "The file '%s' doesn't contain charset information.", filename );
+				Log.LogError( "The file '{0}' doesn't contain charset information.", filename );
 				return;
 			}
 			
-			pos += prefix.length + 1; 
+			pos += prefix.Length + 1; 
 			
 			int pos2 = pos;
 			
-			while ( message[pos2] != '"' )
+			while ( !message[pos2].Equals('"') )
 			{
 				pos2++;
 			}
-						
-			charset = message[pos..pos2];
+			
+			pos2--;
+			
+			charset = message.Substring( pos, pos2 - pos + 1 );
 			
 			FontEncoding fontenc = FontMapper.Get.CharsetToEncoding( charset );
 			if ( fontenc == FontEncoding.wxFONTENCODING_SYSTEM )
@@ -305,7 +322,7 @@ alias std.string.find indexOf;
 				!FontMapper.Get.IsEncodingAvailable(fontenc) )
 			{
 				FontEncoding encAlt;
-				if ( FontMapper.Get.GetAltForEncoding( fontenc, encAlt ) )
+				if ( FontMapper.Get.GetAltForEncoding( fontenc, out encAlt ) )
 				{
 					EncodingConverter conv = new EncodingConverter();
 					
@@ -347,31 +364,31 @@ alias std.string.find indexOf;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnAbout( Object sender, Event e )
+		public void OnAbout( object sender, Event e )
 		{
-			MessageBox( this, "wxWidgets font demo\n(c) 1999 Vadim Zeitlin\nPorted to wxD by BERO",
+			wx.MessageDialog.ShowModal( this, "wxWidgets font demo\n(c) 1999 Vadim Zeitlin\nPorted to wx.NET by Alexander Olk",
 				"About Font", Dialog.wxOK | Dialog.wxICON_INFORMATION );
 		}		
 		
 		//---------------------------------------------------------------------
 		
-		public void OnIncFont( Object sender, Event e )
+		public void OnIncFont( object sender, Event e )
 		{
 			DoResizeFont( +2 ); 
 		}		
 		
 		//---------------------------------------------------------------------
 		
-		public void OnDecFont( Object sender, Event e )
+		public void OnDecFont( object sender, Event e )
 		{
 			DoResizeFont( -2 );
 		}		
 		
 		//---------------------------------------------------------------------
 		
-		public void OnBold( Object sender, Event e )
+		public void OnBold( object sender, Event e )
 		{
-			CommandEvent ce = cast(CommandEvent) e;
+			CommandEvent ce = (CommandEvent) e;
 			Font font = m_canvas.TextFont;
 			
 			font.Weight = ce.IsChecked ? FontWeight.wxBOLD : FontWeight.wxNORMAL ;
@@ -380,9 +397,9 @@ alias std.string.find indexOf;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnItalic( Object sender, Event e )
+		public void OnItalic( object sender, Event e )
 		{
-			CommandEvent ce = cast(CommandEvent) e;
+			CommandEvent ce = (CommandEvent) e;
 			Font font = m_canvas.TextFont;
 			
 			font.Style = ce.IsChecked ? FontStyle.wxITALIC : FontStyle.wxNORMAL ;
@@ -391,9 +408,9 @@ alias std.string.find indexOf;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnUnderline( Object sender, Event e )
+		public void OnUnderline( object sender, Event e )
 		{
-			CommandEvent ce = cast(CommandEvent) e;
+			CommandEvent ce = (CommandEvent) e;
 			Font font = m_canvas.TextFont;
 			
 			font.Underlined = ce.IsChecked;
@@ -402,75 +419,75 @@ alias std.string.find indexOf;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnwxPointerFont( Object sender, Event e )
+		public void OnwxPointerFont( object sender, Event e )
 		{
 			Font font;
 			
 			switch ( e.ID )
 			{
-				case Cmd.Font_wxNORMAL_FONT : font = Font.wxNORMAL_FONT; break;
-				case Cmd.Font_wxSMALL_FONT : font = Font.wxSMALL_FONT; break;
-				case Cmd.Font_wxITALIC_FONT : font = Font.wxITALIC_FONT; break;
-				case Cmd.Font_wxSWISS_FONT : font = Font.wxSWISS_FONT; break;
+				case (int)Cmd.Font_wxNORMAL_FONT : font = Font.wxNORMAL_FONT; break;
+				case (int)Cmd.Font_wxSMALL_FONT : font = Font.wxSMALL_FONT; break;
+				case (int)Cmd.Font_wxITALIC_FONT : font = Font.wxITALIC_FONT; break;
+				case (int)Cmd.Font_wxSWISS_FONT : font = Font.wxSWISS_FONT; break;
 				default : font = Font.wxNORMAL_FONT; break;
 			}
 			
-			menuBar.Check( Cmd.Font_Bold, false );
-			menuBar.Check( Cmd.Font_Italic, false );
-			menuBar.Check( Cmd.Font_Underlined, false );
+			MenuBar.Check( (int)Cmd.Font_Bold, false );
+			MenuBar.Check( (int)Cmd.Font_Italic, false );
+			MenuBar.Check( (int)Cmd.Font_Underlined, false );
 			
 			DoChangeFont( font );
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnCheckNativeToFromString( Object sender, Event e )
+		public void OnCheckNativeToFromString( object sender, Event e )
 		{
 			string fontinfo = m_canvas.TextFont.NativeFontInfoDesc;
 			
-			if ( fontinfo.length == 0 )
+			if ( fontinfo.Length == 0 )
 			{
 				Log.LogError( "Native font info string is empty!" );
 			}
 			else
 			{
 				Font font = Font.New( fontinfo );
-				if ( fontinfo != font.NativeFontInfoDesc )
-					Log.LogError( "wxNativeFontInfo toString()/FromString() broken!" );
+				if ( !fontinfo.Equals( font.NativeFontInfoDesc ) )
+					Log.LogError( "wxNativeFontInfo ToString()/FromString() broken!" );
 				else
-					Log.LogMessage( "wxNativeFontInfo works: " ~ fontinfo );
+					Log.LogMessage( "wxNativeFontInfo works: {0}", fontinfo );
 			}
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnSelectFont( Object sender, Event e )
+		public void OnSelectFont( object sender, Event e )
 		{
 			FontData data = new FontData();
 			data.InitialFont = m_canvas.TextFont;
-			data.colour = m_canvas.colour;
+			data.Colour = m_canvas.Colour;
 			
 			FontDialog dialog = new FontDialog( this, data );
 			if ( dialog.ShowModal() == wxID_OK )
 			{
-				FontData refData = dialog.fontData;
+				FontData refData = dialog.FontData;
 				Font font = refData.ChosenFont;
-				Colour colour = refData.colour;
+				Colour colour = refData.Colour;
 				
 				DoChangeFont( font, colour );
 				
-				menuBar.Check( Cmd.Font_Bold, font.Weight == FontWeight.wxBOLD );
-				menuBar.Check( Cmd.Font_Italic, font.Style == FontStyle.wxITALIC );
-				menuBar.Check( Cmd.Font_Underlined, font.Underlined );
+				MenuBar.Check( (int)Cmd.Font_Bold, font.Weight == FontWeight.wxBOLD );
+				MenuBar.Check( (int)Cmd.Font_Italic, font.Style == FontStyle.wxITALIC );
+				MenuBar.Check( (int)Cmd.Font_Underlined, font.Underlined );
 			}
 		}		
 		
 		//---------------------------------------------------------------------
 		
-		public void OnEnumerateFamiliesForEncoding( Object sender, Event e )
+		public void OnEnumerateFamiliesForEncoding( object sender, Event e )
 		{
-			 const FontEncoding[] encodings = 
-			 [
+			 FontEncoding[] encodings = 
+			 {
 				FontEncoding.wxFONTENCODING_ISO8859_1,
 				FontEncoding.wxFONTENCODING_ISO8859_2,
 				FontEncoding.wxFONTENCODING_ISO8859_5,
@@ -480,10 +497,10 @@ alias std.string.find indexOf;
 				FontEncoding.wxFONTENCODING_CP1250,
 				FontEncoding.wxFONTENCODING_CP1251,
 				FontEncoding.wxFONTENCODING_CP1252,
-			];
+			};
 			
-			 const string[] encodingNames =
-			 [
+			 string[] encodingNames =
+			 {
 				"Western European (ISO-8859-1)",
 				"Central European (ISO-8859-2)",
 				"Cyrillic (ISO-8859-5)",
@@ -493,13 +510,13 @@ alias std.string.find indexOf;
 				"Windows Central European (CP 1250)",
 				"Windows Cyrillic (CP 1251)",
 				"Windows Western European (CP 1252)",
-			];
+			};
 			
-			string result = GetSingleChoice( "Choose an encoding", "Font demo", encodingNames );
+			string result = new GetSingleChoice( "Choose an encoding", "Font demo", encodingNames );
 
 			int n = -1;
-			for ( int i = 0; i < encodingNames.length; i++ )
-				if ( encodingNames[i] == result )
+			for ( int i = 0; i < encodingNames.Length; i++ )
+				if ( encodingNames[i].Equals( result ) )
 					{
 						n = i;
 						break;
@@ -513,21 +530,21 @@ alias std.string.find indexOf;
 		
 		//---------------------------------------------------------------------
 		
-		public void OnEnumerateFamilies( Object sender, Event e )
+		public void OnEnumerateFamilies( object sender, Event e )
 		{
 			DoEnumerateFamilies( false );
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnEnumerateFixedFamilies( Object sender, Event e )
+		public void OnEnumerateFixedFamilies( object sender, Event e )
 		{
 			DoEnumerateFamilies( true );
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnEnumerateEncodings( Object sender, Event e )
+		public void OnEnumerateEncodings( object sender, Event e )
 		{
 			MyEncodingEnumerator fontEnumerator = new MyEncodingEnumerator();
 			
@@ -556,7 +573,7 @@ alias std.string.find indexOf;
 			
 			if ( fontEnumerator.GotAny )
 			{
-				int nFacenames = fontEnumerator.Facenames.length;
+				int nFacenames = fontEnumerator.Facenames.Count;
 				if ( !silent )
 				{
 					Log.LogStatus( "Found {0} {1}fonts", nFacenames, 
@@ -566,17 +583,17 @@ alias std.string.find indexOf;
 				string facename;
 				if ( silent) 
 				{
-					facename = fontEnumerator.Facenames[0];
+					facename = (string)fontEnumerator.Facenames[0];
 				}
 				else
 				{
 					string[] facenames = new string[nFacenames];
 					int n;
 					for ( n = 0; n < nFacenames; n++ )
-						facenames[n] = fontEnumerator.Facenames[n];
+						facenames[n] = (string)fontEnumerator.Facenames[n];
 						
-					facename = GetSingleChoice( "Choose a facename", "Font demo", facenames );
-					/*for ( int i = 0; i < facenames.length; i ++ )
+					facename = new GetSingleChoice( "Choose a facename", "Font demo", facenames );
+					/*for ( int i = 0; i < facenames.Length; i ++ )
 						if ( facenames[i].Equals( result ) )
 							{
 								n = i;
@@ -587,7 +604,7 @@ alias std.string.find indexOf;
 						facename = facename[n];*/
 				}
 				
-				if ( !( facename.length == 0 ) )
+				if ( !( facename.Length == 0 ) )
 				{
 					Font font = new Font( 12, FontFamily.wxDEFAULT, FontStyle.wxNORMAL, FontWeight.wxNORMAL, false, facename, encoding );
 					
@@ -624,12 +641,13 @@ alias std.string.find indexOf;
 		protected void DoChangeFont( Font font, Colour col)
 		{
 			m_canvas.TextFont = font;
-			if ( col !== null )
+			if ( col != null )
 				if ( col.Ok() )
-					m_canvas.colour = col;
+					m_canvas.Colour = col;
 			m_canvas.Refresh();
-			m_textctrl.font = font;
-			if ( col !== null )
+			
+			m_textctrl.Font = font;
+			if ( col != null )
 				if ( col.Ok() )
 					m_textctrl.ForegroundColour = col;
 		}
@@ -639,34 +657,35 @@ alias std.string.find indexOf;
 	
 	public class MyFontEnumerator : FontEnumerator
 	{
-		private string[] m_facenames;
+		private ArrayList m_facenames;
 		
 		//---------------------------------------------------------------------
 		
-		public this()
+		public MyFontEnumerator()
+			: base() 
 		{
-			super() ;
+			m_facenames = new ArrayList();
 		}
 		
 		//---------------------------------------------------------------------
 			
-		public bool GotAny()
+		public bool GotAny
 		{
-			return ( m_facenames.length > 0 );
+			get { return ( m_facenames.Count > 0 ); } 
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public string[] Facenames()
+		public new ArrayList Facenames
 		{
-			return m_facenames;
+			get { return m_facenames; }
 		}
 		 
 		//---------------------------------------------------------------------
 		
 		public override bool OnFacename( string facename )
 		{ 
-			m_facenames ~= facename;
+			m_facenames.Add( facename );
 			return true;
 		}
 		
@@ -681,14 +700,14 @@ alias std.string.find indexOf;
 		
 		//---------------------------------------------------------------------	
 		
-		public this()
+		public MyEncodingEnumerator()
+			: base() {}
 			
-			{ super(); }
 		//---------------------------------------------------------------------	
 			
-		public string Text()
+		public string Text
 		{
-			return m_text;
+			get { return m_text; }
 		}
 		
 		//---------------------------------------------------------------------	
@@ -696,20 +715,20 @@ alias std.string.find indexOf;
 		public override bool OnFontEncoding( string facename, 
 			string encoding )
 		{
-			string text = "Encoding " ~ .toString(++m_n) ~ ": " ~ encoding ~ " (available in facename '" ~ facename ~ "')\n";
+			string text = "Encoding " + ++m_n + ": " + encoding + " (available in facename '" + facename + "')\n";
 			
-			m_text ~= text;
+			m_text += text;
 			return true;
 		}
 	}
 	
 	//---------------------------------------------------------------------	
 
-	public class FONT : App
+	public class FONT : wx.App
 	{
 		public override bool OnInit()
 		{
-			FontFrame frame = new FontFrame( "Font wxWidgets App", new_Point( 50, 50 ), new_Size( 600,400 ) );
+			FontFrame frame = new FontFrame( "Font wxWidgets App", new Point( 50, 50 ), new Size( 600,400 ) );
 			frame.Show( true );
 			
 			return true;
@@ -717,16 +736,11 @@ alias std.string.find indexOf;
 
 	//---------------------------------------------------------------------
 	
-		
+		[STAThread]
 		static void Main()
 		{
 			FONT app = new FONT();
 			app.Run();
 		}
 	}	
-
-
-void main()
-{
-	FONT.Main();
 }

@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - slider.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - slider.cxx
 //
 // The wxSlider proxy interface
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/slider.h>
 #include "local_events.h"
 
@@ -37,7 +33,7 @@ wxSlider* wxSlider_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxSlider_Create(wxSlider* self, wxWindow *parent, wxWindowID id, int value, int minValue, int maxValue, const wxPoint* pos, const wxSize* size, long style, const wxValidator* validator, dstr name)
+bool wxSlider_Create(wxSlider* self, wxWindow *parent, wxWindowID id, int value, int minValue, int maxValue, const wxPoint* pos, const wxSize* size, long style, const wxValidator* validator, const char* name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -45,15 +41,15 @@ bool wxSlider_Create(wxSlider* self, wxWindow *parent, wxWindowID id, int value,
 	if (size == NULL)
 		size = &wxDefaultSize;
 		
-	if (name.data==NULL)
-		name = dstr("slider",sizeof("slider")-1);
+	if (name == NULL)
+		name = "slider";
 
 	if (validator == NULL)
 	{
-		return self->Create(parent, id, value, minValue, maxValue, *pos, *size, style, wxDefaultValidator, wxString(name.data, wxConvUTF8, name.length));
+		return self->Create(parent, id, value, minValue, maxValue, *pos, *size, style, wxDefaultValidator, wxString(name, wxConvUTF8));
 	}
 
-	return self->Create(parent, id, value, minValue, maxValue, *pos, *size, style, *validator, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, value, minValue, maxValue, *pos, *size, style, *validator, wxString(name, wxConvUTF8))?1:0;
 }
 
 //-----------------------------------------------------------------------------

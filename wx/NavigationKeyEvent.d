@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - NavigationKeyEvent.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - NavigationKeyEvent.cs
 //
 // The wxNavigationKeyEvent wrapper class.
@@ -13,53 +10,59 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.NavigationKeyEvent;
-import wx.common;
-import wx.Event;
-import wx.Window;
+using System;
+using System.Runtime.InteropServices;
 
-		static extern (C) IntPtr wxNavigationKeyEvent_ctor();
-		static extern (C) bool wxNavigationKeyEvent_GetDirection(IntPtr self);
-		static extern (C) void wxNavigationKeyEvent_SetDirection(IntPtr self, bool bForward);
-		static extern (C) bool wxNavigationKeyEvent_IsWindowChange(IntPtr self);
-		static extern (C) void wxNavigationKeyEvent_SetWindowChange(IntPtr self, bool bIs);
-		static extern (C) IntPtr wxNavigationKeyEvent_GetCurrentFocus(IntPtr self);
-		static extern (C) void wxNavigationKeyEvent_SetCurrentFocus(IntPtr self, IntPtr win);
-		static extern (C) void wxNavigationKeyEvent_SetFlags(IntPtr self, uint flags);
+namespace wx
+{
+	public class NavigationKeyEvent : Event
+	{
+		[DllImport("wx-c")] static extern IntPtr wxNavigationKeyEvent_ctor();
+		[DllImport("wx-c")] static extern bool wxNavigationKeyEvent_GetDirection(IntPtr self);
+		[DllImport("wx-c")] static extern void wxNavigationKeyEvent_SetDirection(IntPtr self, bool bForward);
+		[DllImport("wx-c")] static extern bool wxNavigationKeyEvent_IsWindowChange(IntPtr self);
+		[DllImport("wx-c")] static extern void wxNavigationKeyEvent_SetWindowChange(IntPtr self, bool bIs);
+		[DllImport("wx-c")] static extern IntPtr wxNavigationKeyEvent_GetCurrentFocus(IntPtr self);
+		[DllImport("wx-c")] static extern void wxNavigationKeyEvent_SetCurrentFocus(IntPtr self, IntPtr win);
+		[DllImport("wx-c")] static extern void wxNavigationKeyEvent_SetFlags(IntPtr self, uint flags);
 		
 		//-----------------------------------------------------------------------------
 
-	public class NavigationKeyEvent : Event
-	{
-		public this(IntPtr wxobj) 
-			{ super(wxobj); }
+		public NavigationKeyEvent(IntPtr wxObject) 
+			: base(wxObject) { }
 
-		public this()
-			{ this(wxNavigationKeyEvent_ctor()); }
+		public NavigationKeyEvent()
+			: this(wxNavigationKeyEvent_ctor()) { }
 			
 		//-----------------------------------------------------------------------------
 		
-		public bool Direction() { return wxNavigationKeyEvent_GetDirection(wxobj); }
-		public void Direction(bool value) { wxNavigationKeyEvent_SetDirection(wxobj, value); }
-		
-		//-----------------------------------------------------------------------------
-		
-		public bool WindowChange() { return wxNavigationKeyEvent_IsWindowChange(wxobj); }
-		public void WindowChange(bool value) { wxNavigationKeyEvent_SetWindowChange(wxobj, value); }
-		
-		//-----------------------------------------------------------------------------
-		
-		public Window CurrentFocus() { return cast(Window)FindObject(wxNavigationKeyEvent_GetCurrentFocus(wxobj), &Window.New); }
-		public void CurrentFocus(Window value) { wxNavigationKeyEvent_SetCurrentFocus(wxobj, wxObject.SafePtr(value)); }
-		
-		//-----------------------------------------------------------------------------
-		
-		public void Flags(int value) { wxNavigationKeyEvent_SetFlags(wxobj, cast(uint)value); }
-
-		private static Event New(IntPtr obj) { return new NavigationKeyEvent(obj); }
-
-		static this()
+		public bool Direction
 		{
-			AddEventType(wxEVT_NAVIGATION_KEY,			&NavigationKeyEvent.New);
+			get { return wxNavigationKeyEvent_GetDirection(wxObject); }
+			set { wxNavigationKeyEvent_SetDirection(wxObject, value); }
+		}
+		
+		//-----------------------------------------------------------------------------
+		
+		public bool WindowChange
+		{
+			get { return wxNavigationKeyEvent_IsWindowChange(wxObject); }
+			set { wxNavigationKeyEvent_SetWindowChange(wxObject, value); }
+		}
+		
+		//-----------------------------------------------------------------------------
+		
+		public Window CurrentFocus
+		{
+			get { return (Window)FindObject(wxNavigationKeyEvent_GetCurrentFocus(wxObject), typeof(Window)); }
+			set { wxNavigationKeyEvent_SetCurrentFocus(wxObject, Object.SafePtr(value)); }
+		}
+		
+		//-----------------------------------------------------------------------------
+		
+		public long Flags
+		{
+			set { wxNavigationKeyEvent_SetFlags(wxObject, (uint)value); }
 		}
 	}
+}

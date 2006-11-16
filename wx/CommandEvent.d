@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - CommandEvent.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - CommandEvent.cs
 //
 // The wxCommandEvent wrapper class.
@@ -13,91 +10,84 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.CommandEvent;
-import wx.common;
-import wx.Event;
-import wx.ClientData;
+using System;
+using System.Runtime.InteropServices;
 
-		static extern (C) IntPtr wxCommandEvent_ctor(int type,int winid);
-		static extern (C) int    wxCommandEvent_GetSelection(IntPtr self);
-		static extern (C) string wxCommandEvent_GetString(IntPtr self);
-		static extern (C) void wxCommandEvent_SetString(IntPtr self, string s);
-		static extern (C) bool   wxCommandEvent_IsChecked(IntPtr self);
-		static extern (C) bool   wxCommandEvent_IsSelection(IntPtr self);
-		static extern (C) int    wxCommandEvent_GetInt(IntPtr self);
-		static extern (C) void wxCommandEvent_SetInt(IntPtr self, int i);
-
-		static extern (C) IntPtr wxCommandEvent_GetClientObject(IntPtr self);
-		static extern (C) void   wxCommandEvent_SetClientObject(IntPtr self, IntPtr data);
-		
-		static extern (C) void wxCommandEvent_SetExtraLong(IntPtr self, uint extralong);
-		static extern (C) uint wxCommandEvent_GetExtraLong(IntPtr self);
-
-		//-----------------------------------------------------------------------------
-
+namespace wx
+{
 	public class CommandEvent : Event
 	{
 
-		public this(IntPtr wxobj) 
-			{ super(wxobj); }
+		[DllImport("wx-c")] static extern int    wxCommandEvent_GetSelection(IntPtr self);
+		[DllImport("wx-c")] static extern IntPtr wxCommandEvent_GetString(IntPtr self);
+		[DllImport("wx-c")] static extern void wxCommandEvent_SetString(IntPtr self, string s);
+		[DllImport("wx-c")] static extern bool   wxCommandEvent_IsChecked(IntPtr self);
+		[DllImport("wx-c")] static extern bool   wxCommandEvent_IsSelection(IntPtr self);
+		[DllImport("wx-c")] static extern int    wxCommandEvent_GetInt(IntPtr self);
+		[DllImport("wx-c")] static extern void wxCommandEvent_SetInt(IntPtr self, int i);
 
-		public this(EventType commandType = wxEVT_NULL, int winid = 0)
-			{ super(wxCommandEvent_ctor(commandType,winid)); }
-
-		//-----------------------------------------------------------------------------
-
-		public int Selection() { return wxCommandEvent_GetSelection(wxobj); }
-
-		//-----------------------------------------------------------------------------
-
-		public string String() { return wxCommandEvent_GetString(wxobj).dup; }
-		public void String(string value) { wxCommandEvent_SetString(wxobj, value); }
-
-		//-----------------------------------------------------------------------------
-
-		public bool IsChecked() { return wxCommandEvent_IsChecked(wxobj); }
-
-		//-----------------------------------------------------------------------------
-
-		public bool IsSelection() { return wxCommandEvent_IsSelection(wxobj); }
-
-		//-----------------------------------------------------------------------------
-
-		public int Int() { return wxCommandEvent_GetInt(wxobj); }
-		public void Int(int value) { wxCommandEvent_SetInt(wxobj, value); }
-
-		//-----------------------------------------------------------------------------
-
-		public ClientData ClientObject() { return cast(ClientData)FindObject(wxCommandEvent_GetClientObject(wxobj)); }
-		public void ClientObject(ClientData value) { wxCommandEvent_SetClientObject(wxobj, wxObject.SafePtr(value)); }
+		[DllImport("wx-c")] static extern IntPtr wxCommandEvent_GetClientObject(IntPtr self);
+		[DllImport("wx-c")] static extern void   wxCommandEvent_SetClientObject(IntPtr self, IntPtr data);
 		
+		[DllImport("wx-c")] static extern void wxCommandEvent_SetExtraLong(IntPtr self, uint extralong);
+		[DllImport("wx-c")] static extern uint wxCommandEvent_GetExtraLong(IntPtr self);
+
 		//-----------------------------------------------------------------------------
-		
-		public int ExtraLong() { return cast(int)wxCommandEvent_GetExtraLong(wxobj); }
-		public void ExtraLong(int value) { wxCommandEvent_SetExtraLong(wxobj, cast(uint)value); }
 
-		private static Event New(IntPtr obj) { return new CommandEvent(obj); }
+		public CommandEvent(IntPtr wxObject) 
+			: base(wxObject) { }
 
-		static this()
+		//-----------------------------------------------------------------------------
+
+		public int Selection
 		{
-			AddEventType(wxEVT_COMMAND_BUTTON_CLICKED,          &CommandEvent.New);
-			AddEventType(wxEVT_COMMAND_MENU_SELECTED,           &CommandEvent.New);
-		
-			AddEventType(wxEVT_COMMAND_CHECKBOX_CLICKED,        &CommandEvent.New);
-		
-			AddEventType(wxEVT_COMMAND_LISTBOX_SELECTED,        &CommandEvent.New);
-			AddEventType(wxEVT_COMMAND_LISTBOX_DOUBLECLICKED,   &CommandEvent.New);
-			AddEventType(wxEVT_COMMAND_CHOICE_SELECTED,         &CommandEvent.New);
-			AddEventType(wxEVT_COMMAND_COMBOBOX_SELECTED,       &CommandEvent.New);
-			AddEventType(wxEVT_COMMAND_TEXT_UPDATED,            &CommandEvent.New);
-			AddEventType(wxEVT_COMMAND_TEXT_ENTER,              &CommandEvent.New);
-			AddEventType(wxEVT_COMMAND_RADIOBOX_SELECTED,       &CommandEvent.New);
-			AddEventType(wxEVT_COMMAND_RADIOBUTTON_SELECTED,    &CommandEvent.New);
-			AddEventType(wxEVT_COMMAND_SLIDER_UPDATED,          &CommandEvent.New);
-			AddEventType(wxEVT_COMMAND_SPINCTRL_UPDATED,        &CommandEvent.New);
+			get { return wxCommandEvent_GetSelection(wxObject); }
+		}
 
-			AddEventType(wxEVT_COMMAND_TOGGLEBUTTON_CLICKED,    &CommandEvent.New);
-			
-			AddEventType(wxEVT_COMMAND_CHECKLISTBOX_TOGGLED,    &CommandEvent.New);
+		//-----------------------------------------------------------------------------
+
+		public string String
+		{
+			get { return new wxString(wxCommandEvent_GetString(wxObject), true); }
+			set { wxCommandEvent_SetString(wxObject, value); }
+		}
+
+		//-----------------------------------------------------------------------------
+
+		public bool IsChecked
+		{
+			get { return wxCommandEvent_IsChecked(wxObject); }
+		}
+
+		//-----------------------------------------------------------------------------
+
+		public bool IsSelection
+		{
+			get { return wxCommandEvent_IsSelection(wxObject); }
+		}
+
+		//-----------------------------------------------------------------------------
+
+		public int Int
+		{
+			get { return wxCommandEvent_GetInt(wxObject); }
+			set { wxCommandEvent_SetInt(wxObject, value); }
+		}
+
+		//-----------------------------------------------------------------------------
+
+		public ClientData ClientObject
+		{
+			get { return (ClientData)Object.FindObject(wxCommandEvent_GetClientObject(wxObject)); }
+			set { wxCommandEvent_SetClientObject(wxObject, Object.SafePtr(value)); }
+		}
+		
+		//-----------------------------------------------------------------------------
+		
+		public long ExtraLong
+		{
+			get { return (long)wxCommandEvent_GetExtraLong(wxObject); }
+			set { wxCommandEvent_SetExtraLong(wxObject, (uint)value); }
 		}
 	}
+}

@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - textdialog.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - textdialog.cxx
 //
 // The wxTextEntryDialog proxy interface.
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/textdlg.h>
 #include "local_events.h"
 
@@ -35,12 +31,12 @@ class _TextEntryDialog : public wxTextEntryDialog
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxTextEntryDialog* wxTextEntryDialog_ctor(wxWindow* parent, dstr message,
-        dstr caption, dstr value, int style, wxPoint* pos)
+wxTextEntryDialog* wxTextEntryDialog_ctor(wxWindow* parent, char* message,
+        char* caption, char* value, int style, wxPoint* pos)
 {
-    return new _TextEntryDialog(parent, wxString(message.data, wxConvUTF8, message.length),
-            wxString(caption.data, wxConvUTF8, caption.length),
-            wxString(value.data, wxConvUTF8, value.length), style, *pos);
+    return new _TextEntryDialog(parent, wxString(message, wxConvUTF8),
+            wxString(caption, wxConvUTF8),
+            wxString(value, wxConvUTF8), style, *pos);
 }
 
 //-----------------------------------------------------------------------------
@@ -62,41 +58,41 @@ int wxTextEntryDialog_ShowModal(wxTextEntryDialog* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxTextEntryDialog_SetValue(wxTextEntryDialog* self, dstr val)
+void wxTextEntryDialog_SetValue(wxTextEntryDialog* self, char* val)
 {
-    self->SetValue(wxString(val.data, wxConvUTF8, val.length));
+    self->SetValue(wxString(val, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxTextEntryDialog_GetValue(wxTextEntryDialog* self)
+wxString* wxTextEntryDialog_GetValue(wxTextEntryDialog* self)
 {
-    return dstr_ret(self->GetValue());
+    return new wxString(self->GetValue());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxGetPasswordFromUser_func(dstr message, dstr caption,
-                                     dstr defaultValue, wxWindow* parent)
+wxString* wxGetPasswordFromUser_func(char* message, char* caption,
+                                     char* defaultValue, wxWindow* parent)
 {
-    return dstr_ret(wxGetPasswordFromUser(wxString(message.data, wxConvUTF8, message.length),
-                        wxString(caption.data, wxConvUTF8, caption.length),
-                        wxString(defaultValue.data, wxConvUTF8, defaultValue.length),
+    return new wxString(wxGetPasswordFromUser(wxString(message, wxConvUTF8),
+                        wxString(caption, wxConvUTF8),
+                        wxString(defaultValue, wxConvUTF8),
                         parent));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxGetTextFromUser_func(dstr message, dstr caption,
-                                 dstr defaultValue, wxWindow* parent,
+wxString* wxGetTextFromUser_func(char* message, char* caption,
+                                 char* defaultValue, wxWindow* parent,
                                  int x, int y, bool centre)
 {
-    return dstr_ret(wxGetTextFromUser(wxString(message.data, wxConvUTF8, message.length),
-                        wxString(caption.data, wxConvUTF8, caption.length),
-                        wxString(defaultValue.data, wxConvUTF8, defaultValue.length),
+    return new wxString(wxGetTextFromUser(wxString(message, wxConvUTF8),
+                        wxString(caption, wxConvUTF8),
+                        wxString(defaultValue, wxConvUTF8),
                         parent, x, y, centre));
 }
 

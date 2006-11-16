@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - FlexGridSizer.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - FlexGridSizer.cs
 //
 // The wxFlexGridSizer proxy interface.
@@ -13,71 +10,74 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.FlexGridSizer;
-import wx.common;
-import wx.GridSizer;
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
-		static extern (C) IntPtr wxFlexGridSizer_ctor(int rows, int cols, int vgap, int hgap);
-		static extern (C) void wxFlexGridSizer_dtor(IntPtr self);
-		static extern (C) void wxFlexGridSizer_RecalcSizes(IntPtr self);
-		static extern (C) void wxFlexGridSizer_CalcMin(IntPtr self, inout Size size);
-		static extern (C) void wxFlexGridSizer_AddGrowableRow(IntPtr self, uint idx);
-		static extern (C) void wxFlexGridSizer_RemoveGrowableRow(IntPtr self, uint idx);
-		static extern (C) void wxFlexGridSizer_AddGrowableCol(IntPtr self, uint idx);
-		static extern (C) void wxFlexGridSizer_RemoveGrowableCol(IntPtr self, uint idx);
+namespace wx
+{
+	public class FlexGridSizer : GridSizer
+	{
+		[DllImport("wx-c")] static extern IntPtr wxFlexGridSizer_ctor(int rows, int cols, int vgap, int hgap);
+		[DllImport("wx-c")] static extern void wxFlexGridSizer_dtor(IntPtr self);
+		[DllImport("wx-c")] static extern void wxFlexGridSizer_RecalcSizes(IntPtr self);
+		[DllImport("wx-c")] static extern void wxFlexGridSizer_CalcMin(IntPtr self, ref Size size);
+		[DllImport("wx-c")] static extern void wxFlexGridSizer_AddGrowableRow(IntPtr self, uint idx);
+		[DllImport("wx-c")] static extern void wxFlexGridSizer_RemoveGrowableRow(IntPtr self, uint idx);
+		[DllImport("wx-c")] static extern void wxFlexGridSizer_AddGrowableCol(IntPtr self, uint idx);
+		[DllImport("wx-c")] static extern void wxFlexGridSizer_RemoveGrowableCol(IntPtr self, uint idx);
 
 		//---------------------------------------------------------------------
 
-	public class FlexGridSizer : GridSizer
-	{
-		public this(IntPtr wxobj)
-			{ super(wxobj); }
+		public FlexGridSizer(IntPtr wxObject)
+			: base(wxObject) { }
 
-        public this(int cols, int vgap, int hgap)
-            { this(0, cols, vgap, hgap); }
+        public FlexGridSizer(int cols, int vgap, int hgap)
+            : this(0, cols, vgap, hgap) { }
 
-		public this(int rows, int cols, int vgap, int hgap)
-			{ super(wxFlexGridSizer_ctor(rows, cols, vgap, hgap)); }
+		public FlexGridSizer(int rows, int cols, int vgap, int hgap)
+			: base(wxFlexGridSizer_ctor(rows, cols, vgap, hgap)) { }
 
 		//---------------------------------------------------------------------
 
 		public override void RecalcSizes()
 		{
-			wxFlexGridSizer_RecalcSizes(wxobj);
+			wxFlexGridSizer_RecalcSizes(wxObject);
 		}
 
 		//---------------------------------------------------------------------
 
 		public override Size CalcMin()
 		{
-			Size size;
-			wxFlexGridSizer_CalcMin(wxobj, size);
+			Size size = new Size();
+			wxFlexGridSizer_CalcMin(wxObject, ref size);
 			return size;
 		}
 
 		//---------------------------------------------------------------------
 
-		public void AddGrowableRow(int idx)
+		public void AddGrowableRow(long idx)
 		{
-			wxFlexGridSizer_AddGrowableRow(wxobj, cast(uint)idx);
+			wxFlexGridSizer_AddGrowableRow(wxObject, (uint)idx);
 		}
 
-		public void RemoveGrowableRow(int idx)
+		public void RemoveGrowableRow(long idx)
 		{
-			wxFlexGridSizer_RemoveGrowableRow(wxobj, cast(uint)idx);
+			wxFlexGridSizer_RemoveGrowableRow(wxObject, (uint)idx);
 		}
 
 		//---------------------------------------------------------------------
 
-		public void AddGrowableCol(int idx)
+		public void AddGrowableCol(long idx)
 		{
-			wxFlexGridSizer_AddGrowableCol(wxobj, cast(uint)idx);
+			wxFlexGridSizer_AddGrowableCol(wxObject, (uint)idx);
 		}
 
-		public void RemoveGrowableCol(int idx)
+		public void RemoveGrowableCol(long idx)
 		{
-			wxFlexGridSizer_RemoveGrowableCol(wxobj, cast(uint)idx);
+			wxFlexGridSizer_RemoveGrowableCol(wxObject, (uint)idx);
 		}
 
 		//---------------------------------------------------------------------
 	}
+}

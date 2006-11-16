@@ -1,20 +1,23 @@
 //-----------------------------------------------------------------------------
-// wxD/Samples - Launcher.d
+// wx.NET/Samples - Launcher.cs
 //
-// wxD sample "Launcher".
+// wx.NET sample "Launcher".
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
-// Modified by BERO <berobero@users.sourceforge.net>
 // (C) 2004 Alexander Olk
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-import wx.wx;
-import std.process;
-import std.c.process;
+using System;
+using System.Drawing;
+using System.Collections;
+using System.Diagnostics;
+using System.IO;
 
+namespace wx.Samples
+{
 	public class LauncherFrame : Frame
 	{
 		private MiddleHtmlWindow middleHtmlWindow = null;
@@ -23,10 +26,10 @@ import std.c.process;
 		
 		//---------------------------------------------------------------------
 
-		public this( string title, Point pos, Size size )
+		public LauncherFrame( string title, Point pos, Size size )
+			: base(title, wxDefaultPosition, size)
 		{
-			super(title, wxDefaultPosition, size);
-			icon = new Icon( "../Samples/Launcher/mondrian.png" );
+			Icon = new wx.Icon( "../Samples/Launcher/mondrian.png" );
 
 			CreateStatusBar( 1 );
 			StatusText = "Welcome...";	
@@ -41,7 +44,7 @@ import std.c.process;
 			bs.Add( middleHtmlWindow, 1, Stretch.wxGROW );
 			bs.Add( bottomHtmlWindow, 0, Stretch.wxGROW );
 			
-			sizer = bs;
+			Sizer = bs;
 			
 			CheckEnvironment();
 		}
@@ -51,12 +54,12 @@ import std.c.process;
 		private void CheckEnvironment()
 		{
 			// If we could determine they are running under PNET warn them
-			// things probably won't work (at cast(of)least v0.6.6)
-			string clr; //= Environment.GetEnvironmentVariable("CLR_LAUNCHER");
+			// things probably won't work (at least as of v0.6.6)
+			string clr = Environment.GetEnvironmentVariable("CLR_LAUNCHER");
 			if (clr == "ilrun")
 			{
 				MessageDialog md = new MessageDialog(this, 
-					"There is a bug in DotGNU cast(of)PortableD v0.6.6 that does not allow the Launcher to work properly. Process.Start(\"ilrun example.exe\") does not work and results in a defunct process.\n\nYou may continue to use the Launcher; however, unless you have a newer version PNET samples probably won't launch when you click them.",
+					"There is a bug in DotGNU Portable.NET as of v0.6.6 that does not allow the Launcher to work properly. Process.Start(\"ilrun example.exe\") does not work and results in a defunct process.\n\nYou may continue to use the Launcher; however, unless you have a newer version PNET samples probably won't launch when you click them.",
 					"Launcher Error", Dialog.wxOK | Dialog.wxICON_WARNING);
 				md.ShowModal();
 			}
@@ -67,9 +70,9 @@ import std.c.process;
 	
 	public class TopHtmlWindow : HtmlWindow
 	{
-		public this( LauncherFrame parent )
+		public TopHtmlWindow( LauncherFrame parent )
+			: base( parent, -1, wxDefaultPosition, new Size( 400, 144 ) )
 		{
-			super( parent, -1, wxDefaultPosition, new_Size( 400, 144 ) );
 			LoadPage( "../Samples/Launcher/launchertop.html" );
 		}
 	}
@@ -80,9 +83,9 @@ import std.c.process;
 	{
 		private LauncherFrame parent = null;
 	
-		public this( LauncherFrame parent )
+		public BottomHtmlWindow( LauncherFrame parent )
+			: base( parent, -1, wxDefaultPosition, new Size( 400, 80 ) )
 		{
-			super( parent, -1, wxDefaultPosition, new_Size( 400, 80 ) );
 			this.parent = parent;
 			LoadPage( "../Samples/Launcher/launcherbottom.html" );
 		}
@@ -107,12 +110,12 @@ import std.c.process;
 		
 		//---------------------------------------------------------------------	
 	
-		public this( LauncherFrame parent )
+		public MiddleHtmlWindow( LauncherFrame parent )
+			: base( parent )
 		{
-			super( parent );
 			this.parent = parent;
 		
-			LoadPage( "../Samples/Launcher/wxDSamplesLauncher.html" );
+			LoadPage( "../Samples/Launcher/wx.NETSamplesLauncher.html" );
 		}
 		
 		//---------------------------------------------------------------------	
@@ -121,39 +124,39 @@ import std.c.process;
 		{
 			string app = link.Href;
 			
-			if ( std.file.exists( app ~ ".exe" ) )
+			if ( System.IO.File.Exists( app + ".exe" ) )
 			{
 				string launch_command = "";
 
                                 // If we are on a Linux platform, use wxnet-run script to
                                 // launch samples. This is not used to pick up environment
                                 // as this gets inherited. The script ensures we use the
-                                // D runtime the user has selected.
-                                if ( std.file.exists( "wxnet-run" ) )
-                                        launch_command = "./wxnet-run " ~ app ~ ".exe";
+                                // .NET runtime the user has selected.
+                                if ( File.Exists( "wxnet-run" ) )
+                                        launch_command = "./wxnet-run " + app + ".exe";
 
                                 // On MacOS we need to launch the appropriate bundle
-                                else if ( std.file.exists( "../MacBundles" ) ) //FIXME: check directory
-                                        launch_command = "open ../MacBundles/" ~ app ~ ".app";
+                                else if ( Directory.Exists( "../MacBundles" ) )
+                                        launch_command = "open ../MacBundles/" + app + ".app";
 
                                 // Everything else (Windows for now) just execute the assembly
                                 else
-                                        launch_command = app ~ ".exe";
+                                        launch_command = app + ".exe";
 
 				try
 				{
-					parent.StatusText = "Executing " ~ launch_command;		
-					std.process.spawnvp(_P_NOWAIT, launch_command ,null);
+					parent.StatusText = "Executing " + launch_command;		
+					Process.Start( launch_command );
 				}
 				catch (Exception ex)
 				{
-					TellError("Error running command '" ~ launch_command ~ "': " ~
-						ex.msg);
+					TellError("Error running command '" + launch_command + "': " +
+						ex.Message);
 				}
 			}
 			else
 			{
-				TellError("The sample " ~ app ~ " could not be found in the 'Bin' directory. The sample may not be available on your operating system or it could not be built because of missing development libraries.");
+				TellError("The sample " + app + " could not be found in the 'Bin' directory. The sample may not be available on your operating system or it could not be built because of missing development libraries.");
 			}
 		}
 		
@@ -162,7 +165,7 @@ import std.c.process;
 		private void TellError(string msg)
 		{
 			MessageDialog md = new MessageDialog(this, 
-				"An error occured while trying to launch your sample:\n\n" ~ msg,
+				"An error occured while trying to launch your sample:\n\n" + msg,
 				"Sample Launch Error", Dialog.wxOK | Dialog.wxICON_WARNING);
 			md.ShowModal();
 		}
@@ -170,11 +173,11 @@ import std.c.process;
 	
 	//---------------------------------------------------------------------	
 
-	public class LauncherApp : App
+	public class LauncherApp : wx.App
 	{
 		public override bool OnInit()
 		{
-			LauncherFrame frame = new LauncherFrame( "wxD Samples Launcher", new_Point( 10, 100 ), new_Size( 600, 600 ) );
+			LauncherFrame frame = new LauncherFrame( "wx.NET Samples Launcher", new Point( 10, 100 ), new Size( 600, 600 ) );
 			frame.Show( true );
 
 			return true;
@@ -182,16 +185,11 @@ import std.c.process;
 
 		//---------------------------------------------------------------------
 
-		
+		[STAThread]
 		static void Main()
 		{
 			LauncherApp app = new LauncherApp();
 			app.Run();
 		}
 	}
-
-
-void main()
-{
-	LauncherApp.Main();
 }

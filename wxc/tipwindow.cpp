@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - tipwindow.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - tipwindow.cxx
 //
 // The wxTipWindow proxy interface.
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/tipwin.h>
 #include "local_events.h"
 
@@ -33,13 +29,13 @@ public:
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxTipWindow* wxTipWindow_ctor(wxWindow* parent, dstr text, wxCoord maxLength, wxRect* rectBound)
+wxTipWindow* wxTipWindow_ctor(wxWindow* parent, char* text, wxCoord maxLength, wxRect* rectBound)
 {
-    return new _TipWindow(parent, wxString(text.data, wxConvUTF8, text.length), maxLength, NULL, rectBound);
+    return new _TipWindow(parent, wxString(text, wxConvUTF8), maxLength, NULL, rectBound);
 }
 
 extern "C" WXEXPORT
-wxTipWindow* wxTipWindow_ctorNoRect(wxWindow* parent, dstr text, wxCoord maxLength)
+wxTipWindow* wxTipWindow_ctorNoRect(wxWindow* parent, char* text, wxCoord maxLength)
 {
     return wxTipWindow_ctor(parent, text, maxLength, NULL);
 }

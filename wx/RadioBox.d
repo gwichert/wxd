@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - RadioBox.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - RadioBox.cs
 //
 // The wxRadioBox wrapper class.
@@ -13,58 +10,78 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.RadioBox;
-import wx.common;
-import wx.Control;
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
-		static extern (C) IntPtr wxRadioBox_ctor();
-		static extern (C) bool   wxRadioBox_Create(IntPtr self, IntPtr parent, int id,
-		                                                           string label, inout Point pos, inout Size size,
-		                                                           int n, string* choices, int majorDimension,
-		                                                           uint style, IntPtr val, string name);
-
-		static extern (C) void   wxRadioBox_SetSelection(IntPtr self, int n);
-		static extern (C) int    wxRadioBox_GetSelection(IntPtr self);
-
-		static extern (C) string wxRadioBox_GetStringSelection(IntPtr self);
-		static extern (C) bool   wxRadioBox_SetStringSelection(IntPtr self, string s);
-
-		static extern (C) int    wxRadioBox_GetCount(IntPtr self);
-		static extern (C) int    wxRadioBox_FindString(IntPtr self, string s);
-
-		static extern (C) string wxRadioBox_GetString(IntPtr self, int n);
-		static extern (C) void   wxRadioBox_SetString(IntPtr self, int n, string label);
-
-		static extern (C) void   wxRadioBox_Enable(IntPtr self, int n, bool enable);
-		static extern (C) void   wxRadioBox_Show(IntPtr self, int n, bool show);
-		
-		static extern (C) string wxRadioBox_GetLabel(IntPtr self);
-		static extern (C) void   wxRadioBox_SetLabel(IntPtr self, string label);
-
-		//---------------------------------------------------------------------
-		
+namespace wx
+{
 	public class RadioBox : Control
 	{
-		enum {
-			wxRA_LEFTTORIGHT    = 0x0001,
-			wxRA_TOPTOBOTTOM    = 0x0002,
-			wxRA_SPECIFY_COLS   = Orientation.wxHORIZONTAL,
-			wxRA_SPECIFY_ROWS   = Orientation.wxVERTICAL,
-			wxRA_HORIZONTAL     = Orientation.wxHORIZONTAL,
-			wxRA_VERTICAL       = Orientation.wxVERTICAL,
-		}
+		public const int wxRA_LEFTTORIGHT    = 0x0001;
+		public const int wxRA_TOPTOBOTTOM    = 0x0002;
+		public const int wxRA_SPECIFY_COLS   = Orientation.wxHORIZONTAL;
+		public const int wxRA_SPECIFY_ROWS   = Orientation.wxVERTICAL;
+		public const int wxRA_HORIZONTAL     = Orientation.wxHORIZONTAL;
+		public const int wxRA_VERTICAL       = Orientation.wxVERTICAL;
 
-		public const string wxRadioBoxNameStr = "radioBox";
 		//---------------------------------------------------------------------
         
-		public this(IntPtr wxobj)
-			{ super(wxobj);}
+		[DllImport("wx-c")] static extern IntPtr wxRadioBox_ctor();
+		[DllImport("wx-c")] static extern bool   wxRadioBox_Create(IntPtr self, IntPtr parent, int id,
+		                                                           string label, ref Point pos, ref Size size,
+		                                                           int n, string[] choices, int majorDimension,
+		                                                           uint style, IntPtr val, string name);
+
+		[DllImport("wx-c")] static extern void   wxRadioBox_SetSelection(IntPtr self, int n);
+		[DllImport("wx-c")] static extern int    wxRadioBox_GetSelection(IntPtr self);
+
+		[DllImport("wx-c")] static extern IntPtr wxRadioBox_GetStringSelection(IntPtr self);
+		[DllImport("wx-c")] static extern bool   wxRadioBox_SetStringSelection(IntPtr self, string s);
+
+		[DllImport("wx-c")] static extern int    wxRadioBox_GetCount(IntPtr self);
+		[DllImport("wx-c")] static extern int    wxRadioBox_FindString(IntPtr self, string s);
+
+		[DllImport("wx-c")] static extern IntPtr wxRadioBox_GetString(IntPtr self, int n);
+		[DllImport("wx-c")] static extern void   wxRadioBox_SetString(IntPtr self, int n, string label);
+
+		[DllImport("wx-c")] static extern void   wxRadioBox_Enable(IntPtr self, int n, bool enable);
+		[DllImport("wx-c")] static extern void   wxRadioBox_Show(IntPtr self, int n, bool show);
+		
+		[DllImport("wx-c")] static extern IntPtr wxRadioBox_GetLabel(IntPtr self);
+		[DllImport("wx-c")] static extern void   wxRadioBox_SetLabel(IntPtr self, string label);
+
+		//---------------------------------------------------------------------
+		
+		public RadioBox(IntPtr wxObject)
+			: base(wxObject) {}
 			
-		public this(Window parent, int id, string label, Point pos = wxDefaultPosition, Size size = wxDefaultSize, string[] choices = null, int majorDimension = 0, int style = wxRA_HORIZONTAL, Validator val = null, string name = wxRadioBoxNameStr)
+		public RadioBox(Window parent, int id, string label)
+			: this(parent, id, label, wxDefaultPosition, wxDefaultSize, null, 0, wxRA_SPECIFY_COLS, null, "radioBox") {} 
+			
+		public RadioBox(Window parent, int id, string label, Point pos)
+			: this(parent, id, label, pos, wxDefaultSize, null, 0, wxRA_SPECIFY_COLS, null, "radioBox") {} 
+			
+		public RadioBox(Window parent, int id, string label, Point pos, Size size)
+			: this(parent, id, label, pos, size, null, 0, wxRA_SPECIFY_COLS, null, "radioBox") {} 
+			
+		public RadioBox(Window parent, int id, string label, Point pos, Size size, string[] choices)
+			: this(parent, id, label, pos, size, choices, 0, wxRA_SPECIFY_COLS, null, "radioBox") {} 
+			
+		public RadioBox(Window parent, int id, string label, Point pos, Size size, string[] choices, int majorDimension)
+			: this(parent, id, label, pos, size, choices, majorDimension, wxRA_SPECIFY_COLS, null, "radioBox") {} 
+
+		public RadioBox(Window parent, int id, string label, Point pos, Size size, string[] choices, int majorDimension, int style)
+			: this(parent, id, label, pos, size, choices, majorDimension, style, null, null) { }
+			
+		public RadioBox(Window parent, int id, string label, Point pos, Size size, string[] choices, int majorDimension, int style, Validator validator)
+			: this(parent, id, label, pos, size, choices, majorDimension, style, validator, null) { }
+
+		public RadioBox(Window parent, int id, string label, Point pos, Size size, string[] choices, int majorDimension, int style, Validator val, string name)
+			: base(wxRadioBox_ctor())
 		{
-			super(wxRadioBox_ctor());
-			if (!wxRadioBox_Create(wxobj, wxObject.SafePtr(parent), id, label, pos, size,
-			                       choices.length, choices, majorDimension, cast(uint)style, wxObject.SafePtr(val), name))
+			if (!wxRadioBox_Create(wxObject, Object.SafePtr(parent), id, label, ref pos, ref size,
+			                       choices.Length, choices, majorDimension, (uint)style, Object.SafePtr(val), name))
 			{
 				throw new InvalidOperationException("failed to create checkbox");
 			}
@@ -73,59 +90,96 @@ import wx.Control;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent, string label, Point pos = wxDefaultPosition, Size size = wxDefaultSize, string[] choices = null, int majorDimension = 0, int style = wxRA_HORIZONTAL, Validator val = null, string name = wxRadioBoxNameStr)
-			{ this(parent, Window.UniqueID, label, pos, size, choices, majorDimension, style, val, name);}
+		public RadioBox(Window parent, string label)
+			: this(parent, Window.UniqueID, label, wxDefaultPosition, wxDefaultSize, null, 0, wxRA_SPECIFY_COLS, null, "radioBox") {} 
+			
+		public RadioBox(Window parent, string label, Point pos)
+			: this(parent, Window.UniqueID, label, pos, wxDefaultSize, null, 0, wxRA_SPECIFY_COLS, null, "radioBox") {} 
+			
+		public RadioBox(Window parent, string label, Point pos, Size size)
+			: this(parent, Window.UniqueID, label, pos, size, null, 0, wxRA_SPECIFY_COLS, null, "radioBox") {} 
+			
+		public RadioBox(Window parent, string label, Point pos, Size size, string[] choices)
+			: this(parent, Window.UniqueID, label, pos, size, choices, 0, wxRA_SPECIFY_COLS, null, "radioBox") {} 
+			
+		public RadioBox(Window parent, string label, Point pos, Size size, string[] choices, int majorDimension)
+			: this(parent, Window.UniqueID, label, pos, size, choices, majorDimension, wxRA_SPECIFY_COLS, null, "radioBox") {} 
+
+		public RadioBox(Window parent, string label, Point pos, Size size, string[] choices, int majorDimension, int style)
+			: this(parent, Window.UniqueID, label, pos, size, choices, majorDimension, style, null, null) { }
+			
+		public RadioBox(Window parent, string label, Point pos, Size size, string[] choices, int majorDimension, int style, Validator validator)
+			: this(parent, Window.UniqueID, label, pos, size, choices, majorDimension, style, validator, null) { }
+
+		public RadioBox(Window parent, string label, Point pos, Size size, string[] choices, int majorDimension, int style, Validator val, string name)
+			: this(parent, Window.UniqueID, label, pos, size, choices, majorDimension, style, val, name) {}
 
 		//---------------------------------------------------------------------
 
-		public void Selection(int value) { wxRadioBox_SetSelection(wxobj, value); }
-		public int Selection() { return wxRadioBox_GetSelection(wxobj); }
+		public int Selection
+		{
+			set { wxRadioBox_SetSelection(wxObject, value); }
+			get { return wxRadioBox_GetSelection(wxObject); }
+		}
 
-		public void StringSelection(string value) { wxRadioBox_SetStringSelection(wxobj, value); }
-		public string StringSelection() { return wxRadioBox_GetStringSelection(wxobj).dup; }
+		public string StringSelection
+		{
+			set { wxRadioBox_SetStringSelection(wxObject, value); }
+			get { return new wxString(wxRadioBox_GetStringSelection(wxObject), true); }
+		}
 
 		//---------------------------------------------------------------------
 
-		public int Count() { return wxRadioBox_GetCount(wxobj); }
+		public int Count
+		{
+			get { return wxRadioBox_GetCount(wxObject); }
+		}
 
 		//---------------------------------------------------------------------
 
 		public int FindString(string s)
 		{
-			return wxRadioBox_FindString(wxobj, s);
+			return wxRadioBox_FindString(wxObject, s);
 		}
 
 		//---------------------------------------------------------------------
 
 		public string GetString(int n)
 		{
-			return wxRadioBox_GetString(wxobj, n).dup;
+			return new wxString(wxRadioBox_GetString(wxObject, n), true);
 		}
 
 		public void SetString(int n, string label)
 		{
-			wxRadioBox_SetString(wxobj, n, label);
+			wxRadioBox_SetString(wxObject, n, label);
 		}
 
 		//---------------------------------------------------------------------
 
 		public void Enable(int n, bool enable)
 		{
-			wxRadioBox_Enable(wxobj, n, enable);
+			wxRadioBox_Enable(wxObject, n, enable);
 		}
 
 		public void Show(int n, bool show)
 		{
-			wxRadioBox_Show(wxobj, n , show);
+			wxRadioBox_Show(wxObject, n , show);
 		}
 
 		//---------------------------------------------------------------------
 		
-		public string Label() { return wxRadioBox_GetLabel(wxobj).dup; }
-		public void Label(string value) { wxRadioBox_SetLabel(wxobj, value); }
+		public new string Label
+		{
+			get { return new wxString(wxRadioBox_GetLabel(wxObject), true); }
+			set { wxRadioBox_SetLabel(wxObject, value); }
+		}
 		
 		//---------------------------------------------------------------------
 
-		public void Select_Add(EventListener value) { AddCommandListener(Event.wxEVT_COMMAND_RADIOBOX_SELECTED, ID, value, this); }
-		public void Select_Remove(EventListener value) { RemoveHandler(value, this); }
+		public event EventListener Select
+		{
+			add { AddCommandListener(Event.wxEVT_COMMAND_RADIOBOX_SELECTED, ID, value, this); }
+			remove { RemoveHandler(value, this); }
+		}
 	}
+}

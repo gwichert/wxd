@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - SysColourChangedEvent.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - SysColourChangedEvent.cs
 //
 // The wxSysColourChangedEvent wrapper class.
@@ -13,26 +10,21 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.SysColourChangedEvent;
-import wx.common;
-import wx.Event;
+using System;
+using System.Runtime.InteropServices;
 
-		static extern (C) IntPtr wxSysColourChangedEvent_ctor();
+namespace wx
+{
+	public class SysColourChangedEvent : Event
+	{
+		[DllImport("wx-c")] static extern IntPtr wxSysColourChangedEvent_ctor();
 		
 		//-----------------------------------------------------------------------------
 
-	public class SysColourChangedEvent : Event
-	{
-		public this(IntPtr wxobj) 
-			{ super(wxobj); }
+		public SysColourChangedEvent(IntPtr wxObject) 
+			: base(wxObject) { }
 
-		public this()
-			{ this(wxSysColourChangedEvent_ctor()); }
-
-		private static Event New(IntPtr obj) { return new SysColourChangedEvent(obj); }
-
-		static this()
-		{
-			AddEventType(wxEVT_SYS_COLOUR_CHANGED,			&SysColourChangedEvent.New);
-		}
+		public SysColourChangedEvent()
+			: this(wxSysColourChangedEvent_ctor()) { }
 	}
+}

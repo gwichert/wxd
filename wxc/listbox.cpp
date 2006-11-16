@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - listbox.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - listbox.cxx
 //
 // wxListBox proxy inteface.
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/listbox.h>
 #include <wx/checklst.h>
 #include "local_events.h"
@@ -48,8 +44,8 @@ void wxListBox_dtor(wxListBox* self)
 extern "C" WXEXPORT
 bool wxListBox_Create(wxListBox* self, wxWindow *parent, wxWindowID id,
 					  const wxPoint* pos, const wxSize* size, int n,
-					  dstr items[], long style,
-					  const wxValidator* validator, dstr name)
+					  const char* items[], long style,
+					  const wxValidator* validator, const char* name)
 {
 	int i;
 
@@ -62,19 +58,19 @@ bool wxListBox_Create(wxListBox* self, wxWindow *parent, wxWindowID id,
 	if (validator == NULL)
 		validator = &wxDefaultValidator;
 
-	if (name.data==NULL)
-		name = dstr("listbox",sizeof("listbox")-1);
+	if (name == NULL)
+		name = "listbox";
 
 	wxString* strings = NULL;
 
     if (items != NULL) {
         strings = new wxString[n];
         for (i = 0; i < n; ++i)
-            strings[i] = wxString(items[i].data, wxConvUTF8, items[i].length);
+            strings[i] = wxString(items[i], wxConvUTF8);
     }
 
 	return self->Create(parent, id, *pos, *size, n, strings, style,
-						*validator, wxString(name.data, wxConvUTF8, name.length))?1:0;
+						*validator, wxString(name, wxConvUTF8))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -104,25 +100,25 @@ int wxListBox_GetCount(wxListBox* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxListBox_GetSingleString(wxListBox* self, int n)
+wxString* wxListBox_GetSingleString(wxListBox* self, int n)
 {
-	return dstr_ret(self->GetString(n).c_str());
+	return new wxString(self->GetString(n).c_str());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxListBox_SetSingleString(wxListBox* self, int n, dstr s)
+void wxListBox_SetSingleString(wxListBox* self, int n, const char* s)
 {
-	self->SetString(n, wxString(s.data, wxConvUTF8, s.length));
+	self->SetString(n, wxString(s, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxListBox_FindString(wxListBox* self, dstr s)
+int wxListBox_FindString(wxListBox* self, const char* s)
 {
-	return self->FindString(wxString(s.data, wxConvUTF8, s.length));
+	return self->FindString(wxString(s, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
@@ -154,37 +150,37 @@ wxArrayInt* wxListBox_GetSelections(wxListBox* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxListBox_InsertText(wxListBox* self, dstr item, int pos)
+void wxListBox_InsertText(wxListBox* self, const char* item, int pos)
 {
-	self->Insert(wxString(item.data, wxConvUTF8, item.length), pos);
+	self->Insert(wxString(item, wxConvUTF8), pos);
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxListBox_InsertTextData(wxListBox* self, dstr item, int pos, void *clientData)
+void wxListBox_InsertTextData(wxListBox* self, const char* item, int pos, void *clientData)
 {
-	self->Insert(wxString(item.data, wxConvUTF8, item.length), pos, clientData);
+	self->Insert(wxString(item, wxConvUTF8), pos, clientData);
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxListBox_InsertTextClientData(wxListBox* self, dstr item, int pos, wxClientData *clientData)
+void wxListBox_InsertTextClientData(wxListBox* self, const char* item, int pos, wxClientData *clientData)
 {
-	self->Insert(wxString(item.data, wxConvUTF8, item.length), pos, clientData);
+	self->Insert(wxString(item, wxConvUTF8), pos, clientData);
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxListBox_InsertItems(wxListBox* self, int nItems, dstr items[], int pos)
+void wxListBox_InsertItems(wxListBox* self, int nItems, const char* items[], int pos)
 {
 	int i;
 
 	wxString* strings = new wxString[nItems];
 	for (i = 0; i < nItems; ++i)
-		strings[i] = wxString(items[i].data, wxConvUTF8, items[i].length);
+		strings[i] = wxString(items[i], wxConvUTF8);
 
 	self->InsertItems(nItems, strings, pos);
 }
@@ -192,13 +188,13 @@ void wxListBox_InsertItems(wxListBox* self, int nItems, dstr items[], int pos)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxListBox_Set(wxListBox* self, int n, dstr items[], void *clientData)
+void wxListBox_Set(wxListBox* self, int n, const char* items[], void *clientData)
 {
 	int i;
 
 	wxString* strings = new wxString[n];
 	for (i = 0; i < n; ++i)
-		strings[i] = wxString(items[i].data, wxConvUTF8, items[i].length);
+		strings[i] = wxString(items[i], wxConvUTF8);
 
 	self->Set(n, strings, &clientData);
 }
@@ -230,9 +226,9 @@ void wxListBox_DeselectAll(wxListBox* self, int itemToLeaveSelected)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxListBox_SetStringSelection(wxListBox* self, dstr s, bool select)
+bool wxListBox_SetStringSelection(wxListBox* self, const char* s, bool select)
 {
-	return self->SetStringSelection(wxString(s.data, wxConvUTF8, s.length), select)?1:0;
+	return self->SetStringSelection(wxString(s, wxConvUTF8), select)?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -246,9 +242,9 @@ void wxListBox_SetFirstItem(wxListBox* self, int n)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxListBox_SetFirstItemText(wxListBox* self, dstr s)
+void wxListBox_SetFirstItemText(wxListBox* self, const char* s)
 {
-	self->SetFirstItem(wxString(s.data, wxConvUTF8, s.length));
+	self->SetFirstItem(wxString(s, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
@@ -286,25 +282,25 @@ bool wxListBox_Selected(wxListBox* self, int n)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-const dstrret wxListBox_GetStringSelection(wxListBox* self)
+const wxString* wxListBox_GetStringSelection(wxListBox* self)
 {
-	return dstr_ret(self->GetStringSelection());
+	return new wxString(self->GetStringSelection());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxListBox_Append(wxListBox* self, dstr item)
+void wxListBox_Append(wxListBox* self, const char* item)
 {
-	self->Append(wxString(item.data, wxConvUTF8, item.length));
+	self->Append(wxString(item, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxListBox_AppendClientData(wxListBox* self, dstr item, void* clientData)
+void wxListBox_AppendClientData(wxListBox* self, const char* item, void* clientData)
 {
-	self->Append(wxString(item.data, wxConvUTF8, item.length), clientData);
+	self->Append(wxString(item, wxConvUTF8), clientData);
 }
 
 //-----------------------------------------------------------------------------
@@ -341,7 +337,7 @@ wxCheckListBox* wxCheckListBox_ctor1()
 
 extern "C" WXEXPORT
 wxCheckListBox* wxCheckListBox_ctor2(wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, 
-	int nStrings, dstr choices[], long style, const wxValidator* validator, dstr name)
+	int nStrings, const char* choices[], long style, const wxValidator* validator, const char* name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -352,8 +348,8 @@ wxCheckListBox* wxCheckListBox_ctor2(wxWindow* parent, wxWindowID id, const wxPo
 	if (validator == NULL)
 		validator = &wxDefaultValidator;
 
-	if (name.data==NULL)
-		name = dstr("checklistbox",sizeof("checklistbox")-1);
+	if (name == NULL)
+		name = "checklistbox";
 
 	wxString* strings = NULL;
 
@@ -361,10 +357,10 @@ wxCheckListBox* wxCheckListBox_ctor2(wxWindow* parent, wxWindowID id, const wxPo
 	{
 		strings = new wxString[nStrings];
 		for (int i = 0; i < nStrings; ++i)
-			strings[i] = wxString(choices[i].data, wxConvUTF8, choices[i].length);
+			strings[i] = wxString(choices[i], wxConvUTF8);
     	}
 	
-	return new _CheckListBox(parent, id, *pos, *size, nStrings, strings, style, *validator, wxString(name.data, wxConvUTF8, name.length));
+	return new _CheckListBox(parent, id, *pos, *size, nStrings, strings, style, *validator, wxString(name, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------

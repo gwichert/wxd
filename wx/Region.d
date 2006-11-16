@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - Region.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - Region.cs
 //
 // The wxRegion wrapper class.
@@ -12,277 +9,296 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.Region;
-import wx.common;
-import wx.GDIObject;
-import wx.Bitmap;
-import wx.Colour;
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
+namespace wx
+{
     public enum RegionContain {
         wxOutRegion = 0,
         wxPartRegion,
         wxInRegion
     }
 
-        static extern (C) IntPtr wxRegion_ctor();
-        static extern (C) IntPtr wxRegion_ctorByCoords(int x, int y, int w, int h);
-        static extern (C) IntPtr wxRegion_ctorByCorners(inout Point topLeft, inout Point bottomRight);
-        static extern (C) IntPtr wxRegion_ctorByRect(inout Rectangle rect);
-        static extern (C) IntPtr wxRegion_ctorByPoly(int n, inout Point[] points, int fillStyle);
-        static extern (C) IntPtr wxRegion_ctorByBitmap(IntPtr bmp, IntPtr transColour, int tolerance);
-        static extern (C) IntPtr wxRegion_ctorByRegion(IntPtr region);
-
-        static extern (C) void   wxRegion_dtor(IntPtr self);
-
-        static extern (C) void   wxRegion_Clear(IntPtr self);
-        static extern (C) bool   wxRegion_Offset(IntPtr self, int x, int y);
-
-        static extern (C) bool   wxRegion_Union(IntPtr self, int x, int y, int width, int height);
-        static extern (C) bool   wxRegion_UnionRect(IntPtr self, inout Rectangle rect);
-        static extern (C) bool   wxRegion_UnionRegion(IntPtr self, IntPtr region);
-        static extern (C) bool   wxRegion_UnionBitmap(IntPtr self, IntPtr bmp, IntPtr transColour, int tolerance);
-
-        static extern (C) bool   wxRegion_Intersect(IntPtr self, int x, int y, int width, int height);
-        static extern (C) bool   wxRegion_IntersectRect(IntPtr self, inout Rectangle rect);
-        static extern (C) bool   wxRegion_IntersectRegion(IntPtr self, IntPtr region);
-
-        static extern (C) bool   wxRegion_Subtract(IntPtr self, int x, int y, int width, int height);
-        static extern (C) bool   wxRegion_SubtractRect(IntPtr self, inout Rectangle rect);
-        static extern (C) bool   wxRegion_SubtractRegion(IntPtr self, IntPtr region);
-
-        static extern (C) bool   wxRegion_Xor(IntPtr self, int x, int y, int width, int height);
-        static extern (C) bool   wxRegion_XorRect(IntPtr self, inout Rectangle rect);
-        static extern (C) bool   wxRegion_XorRegion(IntPtr self, IntPtr region);
-
-        static extern (C) RegionContain wxRegion_ContainsCoords(IntPtr self, int x, int y);
-        static extern (C) RegionContain wxRegion_ContainsPoint(IntPtr self, inout Point pt);
-        static extern (C) RegionContain wxRegion_ContainsRectCoords(IntPtr self, int x, int y, int width, int height);
-        static extern (C) RegionContain wxRegion_ContainsRect(IntPtr self, inout Rectangle rect);
-
-        static extern (C) void   wxRegion_GetBox(IntPtr self, inout Rectangle rect);
-        static extern (C) bool   wxRegion_IsEmpty(IntPtr self);
-        static extern (C) IntPtr wxRegion_ConvertToBitmap(IntPtr self);
-
-        //---------------------------------------------------------------------
-
     public class Region : GDIObject
     {
 
-        public this(IntPtr wxobj) 
-            { super(wxobj); }
+        [DllImport("wx-c")] static extern IntPtr wxRegion_ctor();
+        [DllImport("wx-c")] static extern IntPtr wxRegion_ctorByCoords(int x, int y, int w, int h);
+        [DllImport("wx-c")] static extern IntPtr wxRegion_ctorByCorners(ref Point topLeft, ref Point bottomRight);
+        [DllImport("wx-c")] static extern IntPtr wxRegion_ctorByRect(ref Rectangle rect);
+        [DllImport("wx-c")] static extern IntPtr wxRegion_ctorByPoly(int n, ref Point[] points, int fillStyle);
+        [DllImport("wx-c")] static extern IntPtr wxRegion_ctorByBitmap(IntPtr bmp, IntPtr transColour, int tolerance);
+        [DllImport("wx-c")] static extern IntPtr wxRegion_ctorByRegion(IntPtr region);
 
-        public this()
-            { this(wxRegion_ctor()); }
+        [DllImport("wx-c")] static extern void   wxRegion_dtor(IntPtr self);
 
-        public this(int x, int y, int w, int h)
-            { this(wxRegion_ctorByCoords(x, y, w, h)); }
+        [DllImport("wx-c")] static extern void   wxRegion_Clear(IntPtr self);
+        [DllImport("wx-c")] static extern bool   wxRegion_Offset(IntPtr self, int x, int y);
 
-        public this(Point topLeft, Point bottomRight)
-            { this(wxRegion_ctorByCorners(topLeft, bottomRight)); }
+        [DllImport("wx-c")] static extern bool   wxRegion_Union(IntPtr self, int x, int y, int width, int height);
+        [DllImport("wx-c")] static extern bool   wxRegion_UnionRect(IntPtr self, ref Rectangle rect);
+        [DllImport("wx-c")] static extern bool   wxRegion_UnionRegion(IntPtr self, IntPtr region);
+        [DllImport("wx-c")] static extern bool   wxRegion_UnionBitmap(IntPtr self, IntPtr bmp, IntPtr transColour, int tolerance);
 
-        public this(Rectangle rect)
-            { this(wxRegion_ctorByRect(rect)); }
+        [DllImport("wx-c")] static extern bool   wxRegion_Intersect(IntPtr self, int x, int y, int width, int height);
+        [DllImport("wx-c")] static extern bool   wxRegion_IntersectRect(IntPtr self, ref Rectangle rect);
+        [DllImport("wx-c")] static extern bool   wxRegion_IntersectRegion(IntPtr self, IntPtr region);
 
-        public this(Point[] points, int fillStyle)
-            { this(wxRegion_ctorByPoly(points.length, points, fillStyle)); }
+        [DllImport("wx-c")] static extern bool   wxRegion_Subtract(IntPtr self, int x, int y, int width, int height);
+        [DllImport("wx-c")] static extern bool   wxRegion_SubtractRect(IntPtr self, ref Rectangle rect);
+        [DllImport("wx-c")] static extern bool   wxRegion_SubtractRegion(IntPtr self, IntPtr region);
 
-        public this(Bitmap bmp, Colour transColour, int tolerance)
-            { this(wxRegion_ctorByBitmap(wxObject.SafePtr(bmp), wxObject.SafePtr(transColour), tolerance)); }
+        [DllImport("wx-c")] static extern bool   wxRegion_Xor(IntPtr self, int x, int y, int width, int height);
+        [DllImport("wx-c")] static extern bool   wxRegion_XorRect(IntPtr self, ref Rectangle rect);
+        [DllImport("wx-c")] static extern bool   wxRegion_XorRegion(IntPtr self, IntPtr region);
 
-        public this(Region reg)
-            { this(wxRegion_ctorByRegion(wxObject.SafePtr(reg))); }
+        [DllImport("wx-c")] static extern RegionContain wxRegion_ContainsCoords(IntPtr self, int x, int y);
+        [DllImport("wx-c")] static extern RegionContain wxRegion_ContainsPoint(IntPtr self, ref Point pt);
+        [DllImport("wx-c")] static extern RegionContain wxRegion_ContainsRectCoords(IntPtr self, int x, int y, int width, int height);
+        [DllImport("wx-c")] static extern RegionContain wxRegion_ContainsRect(IntPtr self, ref Rectangle rect);
+
+        [DllImport("wx-c")] static extern void   wxRegion_GetBox(IntPtr self, ref Rectangle rect);
+        [DllImport("wx-c")] static extern bool   wxRegion_IsEmpty(IntPtr self);
+        [DllImport("wx-c")] static extern IntPtr wxRegion_ConvertToBitmap(IntPtr self);
+
+        //---------------------------------------------------------------------
+
+        public Region(IntPtr wxObject) 
+            : base(wxObject) { }
+
+        public Region()
+            : this(wxRegion_ctor()) { }
+
+        public Region(int x, int y, int w, int h)
+            : this(wxRegion_ctorByCoords(x, y, w, h)) { }
+
+        public Region(Point topLeft, Point bottomRight)
+            : this(wxRegion_ctorByCorners(ref topLeft, ref bottomRight)) { }
+
+        public Region(Rectangle rect)
+            : this(wxRegion_ctorByRect(ref rect)) { }
+
+        public Region(Point[] points, int fillStyle)
+            : this(wxRegion_ctorByPoly(points.Length, ref points, fillStyle)) { }
+
+        public Region(Bitmap bmp, Colour transColour, int tolerance)
+            : this(wxRegion_ctorByBitmap(Object.SafePtr(bmp), Object.SafePtr(transColour), tolerance)) { }
+
+        public Region(Region reg)
+            : this(wxRegion_ctorByRegion(Object.SafePtr(reg))) { }
 
         //---------------------------------------------------------------------
 
         public void Clear()
         {
-            wxRegion_Clear(wxobj);
+            wxRegion_Clear(wxObject);
         }
 
         public bool Offset(int x, int y)
         {
-            return wxRegion_Offset(wxobj, x, y);
+            return wxRegion_Offset(wxObject, x, y);
         }
 
         //---------------------------------------------------------------------
 
         public bool Union(int x, int y, int width, int height) 
         {
-            return wxRegion_Union(wxobj, x, y, width, height);
+            return wxRegion_Union(wxObject, x, y, width, height);
         }
 
         public bool Union(Rectangle rect)
         {
-            return wxRegion_UnionRect(wxobj, rect);
+            return wxRegion_UnionRect(wxObject, ref rect);
         }
 
         public bool Union(Region reg)
         {
-            return wxRegion_UnionRegion(wxobj, wxObject.SafePtr(reg));
+            return wxRegion_UnionRegion(wxObject, Object.SafePtr(reg));
         }
 
         public bool Union(Bitmap bmp, Colour transColour, int tolerance)
         {
-            return wxRegion_UnionBitmap(wxobj, wxObject.SafePtr(bmp), wxObject.SafePtr(transColour), tolerance);
+            return wxRegion_UnionBitmap(wxObject, Object.SafePtr(bmp), Object.SafePtr(transColour), tolerance);
         }
 
         //---------------------------------------------------------------------
 
         public bool Intersect(int x, int y, int width, int height)
         {
-            return wxRegion_Intersect(wxobj, x, y, width, height);
+            return wxRegion_Intersect(wxObject, x, y, width, height);
         }
 
         public bool Intersect(Rectangle rect)
         {
-            return wxRegion_IntersectRect(wxobj, rect);
+            return wxRegion_IntersectRect(wxObject, ref rect);
         }
 
         public bool Intersect(Region region)
         {
-            return wxRegion_IntersectRegion(wxobj, wxObject.SafePtr(region));
+            return wxRegion_IntersectRegion(wxObject, Object.SafePtr(region));
         }
 
         //---------------------------------------------------------------------
 
         public bool Subtract(int x, int y, int width, int height)
         {
-            return wxRegion_Subtract(wxobj, x, y, width, height);
+            return wxRegion_Subtract(wxObject, x, y, width, height);
         }
 
         public bool Subtract(Rectangle rect)
         {
-            return wxRegion_SubtractRect(wxobj, rect);
+            return wxRegion_SubtractRect(wxObject, ref rect);
         }
 
         public bool Subtract(Region region)
         {
-            return wxRegion_SubtractRegion(wxobj, wxObject.SafePtr(region));
+            return wxRegion_SubtractRegion(wxObject, Object.SafePtr(region));
         }
 
         //---------------------------------------------------------------------
 
         public bool Xor(int x, int y, int width, int height)
         {
-            return wxRegion_Xor(wxobj, x, y, width, height);
+            return wxRegion_Xor(wxObject, x, y, width, height);
         }
 
         public bool Xor(Rectangle rect)
         {
-            return wxRegion_XorRect(wxobj, rect);
+            return wxRegion_XorRect(wxObject, ref rect);
         }
 
         public bool Xor(Region region)
         {
-            return wxRegion_XorRegion(wxobj, wxObject.SafePtr(region));
+            return wxRegion_XorRegion(wxObject, Object.SafePtr(region));
         }
 
         //---------------------------------------------------------------------
 
         public RegionContain Contains(int x, int y)
         {
-            return wxRegion_ContainsCoords(wxobj, x, y);
+            return wxRegion_ContainsCoords(wxObject, x, y);
         }
 
         public RegionContain Contains(Point pt)
         {
-            return wxRegion_ContainsPoint(wxobj, pt);
+            return wxRegion_ContainsPoint(wxObject, ref pt);
         }
 
         public RegionContain Contains(int x, int y, int width, int height)
         {
-            return wxRegion_ContainsRectCoords(wxobj, x, y, width, height);
+            return wxRegion_ContainsRectCoords(wxObject, x, y, width, height);
         }
 
         public RegionContain Contains(Rectangle rect)
         {
-            return wxRegion_ContainsRect(wxobj, rect);
+            return wxRegion_ContainsRect(wxObject, ref rect);
         }
 
         //---------------------------------------------------------------------
         
         public Rectangle GetBox()
         {
-            Rectangle rect;
-            wxRegion_GetBox(wxobj, rect);
+            Rectangle rect = new Rectangle();
+            wxRegion_GetBox(wxObject, ref rect);
             return rect;
         }
 
-        public bool IsEmpty() { return wxRegion_IsEmpty(wxobj); }
+        public bool IsEmpty
+        {
+            get { return wxRegion_IsEmpty(wxObject); }
+        }
 
         public Bitmap ConvertToBitmap()
         {
-            return new Bitmap(wxRegion_ConvertToBitmap(wxobj));
+            return new Bitmap(wxRegion_ConvertToBitmap(wxObject));
         }
     }
 
-        static extern (C) IntPtr wxRegionIterator_ctor();
-        static extern (C) IntPtr wxRegionIterator_ctorByRegion(IntPtr region);
+    public class RegionIterator : Object
+    {
+        [DllImport("wx-c")] static extern IntPtr wxRegionIterator_ctor();
+        [DllImport("wx-c")] static extern IntPtr wxRegionIterator_ctorByRegion(IntPtr region);
 
-        static extern (C) void   wxRegionIterator_Reset(IntPtr self);
-        static extern (C) void   wxRegionIterator_ResetToRegion(IntPtr self, IntPtr region);
+        [DllImport("wx-c")] static extern void   wxRegionIterator_Reset(IntPtr self);
+        [DllImport("wx-c")] static extern void   wxRegionIterator_ResetToRegion(IntPtr self, IntPtr region);
 
-        static extern (C) bool   wxRegionIterator_HaveRects(IntPtr self);
+        [DllImport("wx-c")] static extern bool   wxRegionIterator_HaveRects(IntPtr self);
         
-        static extern (C) int    wxRegionIterator_GetX(IntPtr self);
-        static extern (C) int    wxRegionIterator_GetY(IntPtr self);
+        [DllImport("wx-c")] static extern int    wxRegionIterator_GetX(IntPtr self);
+        [DllImport("wx-c")] static extern int    wxRegionIterator_GetY(IntPtr self);
 
-        static extern (C) int    wxRegionIterator_GetW(IntPtr self);
-        static extern (C) int    wxRegionIterator_GetWidth(IntPtr self);
-        static extern (C) int    wxRegionIterator_GetH(IntPtr self);
-        static extern (C) int    wxRegionIterator_GetHeight(IntPtr self);
+        [DllImport("wx-c")] static extern int    wxRegionIterator_GetW(IntPtr self);
+        [DllImport("wx-c")] static extern int    wxRegionIterator_GetWidth(IntPtr self);
+        [DllImport("wx-c")] static extern int    wxRegionIterator_GetH(IntPtr self);
+        [DllImport("wx-c")] static extern int    wxRegionIterator_GetHeight(IntPtr self);
 
-        static extern (C) void   wxRegionIterator_GetRect(IntPtr self, inout Rectangle rect);
+        [DllImport("wx-c")] static extern void   wxRegionIterator_GetRect(IntPtr self, ref Rectangle rect);
 
         //---------------------------------------------------------------------
 
-    public class RegionIterator : wxObject
-    {
-        public this(IntPtr wxobj) 
-            { super(wxobj); }
+        public RegionIterator(IntPtr wxObject) 
+            : base(wxObject) { }
 
-        public this()
-            { this(wxRegionIterator_ctor()); }
+        public RegionIterator()
+            : this(wxRegionIterator_ctor()) { }
 
-        public this(Region reg)
-            { this(wxRegionIterator_ctorByRegion(wxObject.SafePtr(reg))); }
+        public RegionIterator(Region reg)
+            : this(wxRegionIterator_ctorByRegion(Object.SafePtr(reg))) { }
 
         //---------------------------------------------------------------------
 
         public void Reset()
         {
-            wxRegionIterator_Reset(wxobj);
+            wxRegionIterator_Reset(wxObject);
         }
 
         public void ResetToRegion(Region region)
         {
-            wxRegionIterator_ResetToRegion(wxobj, wxObject.SafePtr(region));
+            wxRegionIterator_ResetToRegion(wxObject, Object.SafePtr(region));
         }
 
         //---------------------------------------------------------------------
 
         public bool HaveRects()
         {
-            return wxRegionIterator_HaveRects(wxobj);
+            return wxRegionIterator_HaveRects(wxObject);
         }
 
         //---------------------------------------------------------------------
         
-        public int X() { return wxRegionIterator_GetX(wxobj); }
+        public int X
+        {
+            get { return wxRegionIterator_GetX(wxObject); }
+        }
 
-        public int Y() { return wxRegionIterator_GetY(wxobj); }
+        public int Y
+        {
+            get { return wxRegionIterator_GetY(wxObject); }
+        }
 
         //---------------------------------------------------------------------
 
-        public int Width() { return wxRegionIterator_GetWidth(wxobj); }
+        public int Width
+        {
+            get { return wxRegionIterator_GetWidth(wxObject); }
+        }
 
-        public int Height() { return wxRegionIterator_GetHeight(wxobj); }
+        public int Height 
+        {
+            get { return wxRegionIterator_GetHeight(wxObject); }
+        }
 
         //---------------------------------------------------------------------
 
-        public Rectangle Rect() { 
-                Rectangle rect;
-                wxRegionIterator_GetRect(wxobj, rect);
+        public Rectangle Rect
+        {
+            get { 
+                Rectangle rect = new Rectangle();
+                wxRegionIterator_GetRect(wxObject, ref rect);
                 return rect;
             }
+        }
     }
+}

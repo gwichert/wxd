@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - statictext.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - statictext.cxx
 //
 // The wxStaticText proxy interface.
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include "local_events.h"
 
 
@@ -43,7 +39,7 @@ wxStaticText* wxStaticText_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStaticText_Create(wxStaticText *self, wxWindow* parent, wxWindowID id, dstr label, const wxPoint* pos, const wxSize* size, long style, dstr name)
+bool wxStaticText_Create(wxStaticText *self, wxWindow* parent, wxWindowID id, const char* label, const wxPoint* pos, const wxSize* size, long style, const char* name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -51,10 +47,10 @@ bool wxStaticText_Create(wxStaticText *self, wxWindow* parent, wxWindowID id, ds
 	if (size == NULL)
 		size = &wxDefaultSize;
 
-	if (name.data==NULL)
-		name = dstr("staticText",sizeof("staticText")-1);
+	if (name == NULL)
+		name = "staticText";
 
-	return self->Create(parent, id, wxString(label.data, wxConvUTF8, label.length), *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, wxString(label, wxConvUTF8), *pos, *size, style, wxString(name, wxConvUTF8))?1:0;
 }
 
 // On WIN32 EVT_ENTER_WINDOW and EVT_LEAVE_WINDOW are broken in wxWidgets. And

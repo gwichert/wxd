@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - querynewpaletteevent.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - querynewpaletteevent.cxx
 // 
 // The wxQueryNewPaletteEvent proxy interface.
@@ -14,14 +11,13 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxQueryNewPaletteEvent* wxQueryNewPaletteEvent_ctor(wxWindowID winid)
+wxQueryNewPaletteEvent* wxQueryNewPaletteEvent_ctor(wxEventType type)
 {
-    return new wxQueryNewPaletteEvent(winid);
+    return new wxQueryNewPaletteEvent(type);
 }
 
 extern "C" WXEXPORT
@@ -31,7 +27,7 @@ bool wxQueryNewPaletteEvent_GetPaletteRealized(wxQueryNewPaletteEvent* self)
 }
 
 extern "C" WXEXPORT
-void wxQueryNewPaletteEvent_SetPaletteRealized(wxQueryNewPaletteEvent* self, bool realized)
+void wxQueryNewPaletteEvent_SetPaletteRelized(wxQueryNewPaletteEvent* self, bool realized)
 {
 	self->SetPaletteRealized(realized);
 }

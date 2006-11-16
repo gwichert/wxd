@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - MemoryDC.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - MemoryDC.cs
 // 
 // The wxBufferedDC and wxMemoryDC wrapper classes.
@@ -13,95 +10,98 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.MemoryDC;
-import wx.common;
-import wx.DC;
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
-		static extern (C) IntPtr wxMemoryDC_ctor();
-		static extern (C) IntPtr wxMemoryDC_ctorByDC(IntPtr dc);
-		static extern (C) void   wxMemoryDC_SelectObject(IntPtr self, IntPtr bitmap);
+namespace wx
+{
+	public class MemoryDC : WindowDC
+	{
+		[DllImport("wx-c")] static extern IntPtr wxMemoryDC_ctor();
+		[DllImport("wx-c")] static extern IntPtr wxMemoryDC_ctorByDC(IntPtr dc);
+		[DllImport("wx-c")] static extern void   wxMemoryDC_SelectObject(IntPtr self, IntPtr bitmap);
 
 		//---------------------------------------------------------------------
 
-	public class MemoryDC : WindowDC
-	{
-        public this(IntPtr wxobj) 
-            { super(wxobj); }
+        public MemoryDC(IntPtr wxObject) 
+            : base(wxObject) { }
 
-        public this()
-            { this(wxMemoryDC_ctor()); }
+        public MemoryDC()
+            : this(wxMemoryDC_ctor()) { }
 
-        public this(DC dc)
-            { this(wxMemoryDC_ctorByDC(wxObject.SafePtr(dc))); }
+        public MemoryDC(DC dc)
+            : this(wxMemoryDC_ctorByDC(Object.SafePtr(dc))) { }
 
 		//---------------------------------------------------------------------
 
         public void SelectObject(Bitmap bitmap)
         {
-            wxMemoryDC_SelectObject(wxobj, wxObject.SafePtr(bitmap));
+            wxMemoryDC_SelectObject(wxObject, Object.SafePtr(bitmap));
         }
 
 		//---------------------------------------------------------------------
 	}
 
-		static extern (C) IntPtr wxBufferedDC_ctor();
-		static extern (C) IntPtr wxBufferedDC_ctorByBitmap(IntPtr dc, IntPtr buffer);
-		static extern (C) IntPtr wxBufferedDC_ctorBySize(IntPtr dc, inout Size area);
+	public class BufferedDC : MemoryDC
+	{
+		[DllImport("wx-c")] static extern IntPtr wxBufferedDC_ctor();
+		[DllImport("wx-c")] static extern IntPtr wxBufferedDC_ctorByBitmap(IntPtr dc, IntPtr buffer);
+		[DllImport("wx-c")] static extern IntPtr wxBufferedDC_ctorBySize(IntPtr dc, ref Size area);
 
-		static extern (C) void   wxBufferedDC_InitByBitmap(IntPtr self, IntPtr dc, IntPtr bitmap);
-		static extern (C) void   wxBufferedDC_InitBySize(IntPtr self, IntPtr dc, inout Size area);
-		static extern (C) void   wxBufferedDC_UnMask(IntPtr self);
+		[DllImport("wx-c")] static extern void   wxBufferedDC_InitByBitmap(IntPtr self, IntPtr dc, IntPtr bitmap);
+		[DllImport("wx-c")] static extern void   wxBufferedDC_InitBySize(IntPtr self, IntPtr dc, ref Size area);
+		[DllImport("wx-c")] static extern void   wxBufferedDC_UnMask(IntPtr self);
 
 		//---------------------------------------------------------------------
 
-	public class BufferedDC : MemoryDC
-	{
-        public this(IntPtr wxobj) 
-            { super(wxobj); }
+        public BufferedDC(IntPtr wxObject) 
+            : base(wxObject) { }
 
-        public this()
-            { this(wxBufferedDC_ctor()); }
+        public BufferedDC()
+            : this(wxBufferedDC_ctor()) { }
 
-        public this(DC dc, Bitmap bitmap) 
-            { this(wxBufferedDC_ctorByBitmap(wxObject.SafePtr(dc), wxObject.SafePtr(bitmap))); }
+        public BufferedDC(DC dc, Bitmap bitmap) 
+            : this(wxBufferedDC_ctorByBitmap(Object.SafePtr(dc), Object.SafePtr(bitmap))) { }
 
-        public this(DC dc, Size size)
-            { this(wxBufferedDC_ctorBySize(wxObject.SafePtr(dc), size)); }
+        public BufferedDC(DC dc, Size size)
+            : this(wxBufferedDC_ctorBySize(Object.SafePtr(dc), ref size)) { }
 
 		//---------------------------------------------------------------------
 
 		public void InitByBitmap(DC dc, Bitmap bitmap)
         {
-            wxBufferedDC_InitByBitmap(wxobj, wxObject.SafePtr(dc), wxObject.SafePtr(bitmap));
+            wxBufferedDC_InitByBitmap(wxObject, Object.SafePtr(dc), Object.SafePtr(bitmap));
         }
 
 		public void InitBySize(DC dc, Size area)
         {
-            wxBufferedDC_InitBySize(wxobj, wxObject.SafePtr(dc), area);
+            wxBufferedDC_InitBySize(wxObject, Object.SafePtr(dc), ref area);
         }
 
 		//---------------------------------------------------------------------
 
         public void UnMask()
         {
-            wxBufferedDC_UnMask(wxobj);
+            wxBufferedDC_UnMask(wxObject);
         }
 
 		//---------------------------------------------------------------------
 	}
 
-		static extern (C) IntPtr wxBufferedPaintDC_ctor(IntPtr window, IntPtr buffer);
+	public class BufferedPaintDC : BufferedDC
+	{
+		[DllImport("wx-c")] static extern IntPtr wxBufferedPaintDC_ctor(IntPtr window, IntPtr buffer);
 
 		//---------------------------------------------------------------------
         
-	public class BufferedPaintDC : BufferedDC
-	{
-        public this(IntPtr wxobj) 
-            { super(wxobj); }
+        public BufferedPaintDC(IntPtr wxObject) 
+            : base(wxObject) { }
 
-        public this(Window window, Bitmap buffer)
-            { this(wxBufferedPaintDC_ctor(wxObject.SafePtr(window), wxObject.SafePtr(buffer))); }
+        public BufferedPaintDC(Window window, Bitmap buffer)
+            : this(wxBufferedPaintDC_ctor(Object.SafePtr(window), Object.SafePtr(buffer))) { }
 
 		//---------------------------------------------------------------------
 	}
+}
 

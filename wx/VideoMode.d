@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - VidMode.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - VidMode.cs
 // 
 // Michael S. Muegel mike _at_ muegel dot org
@@ -26,28 +23,26 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.VideoMode;
-import wx.common;
-import std.string;
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
-//    [StructLayout(LayoutKind.Sequential)]
-
-        public VideoMode new_VideoMode(int width, int height, int depth, int freq)
+namespace wx
+{
+    [StructLayout(LayoutKind.Sequential)]
+    public struct VideoMode : IComparable
+    {
+        public VideoMode(int width, int height, int depth, int freq)
         {
-            VideoMode v;
-            v.w = width;
-            v.h = height;
-            v.bpp = depth;
-            v.refresh = freq;
-            return v;
+            w = width;
+            h = height;
+            bpp = depth;
+            refresh = freq;
         }
 
-    public struct VideoMode // : IComparable
-    {
-/+
-		public int opCmp(VideoMode other)
+		public int CompareTo(object obj)
 		{
-		//	VideoMode other = cast(VideoMode) obj;
+			VideoMode other = (VideoMode) obj;
 			if (other.w > w)
 				return -1;
 			else if (other.w < w)
@@ -68,19 +63,35 @@ import std.string;
 				return 0;
 		}
 
-        public override int opEquals(Object obj)
+        public override bool Equals(object obj)
         {
-            if (obj === null) return false;
-            VideoMode other = cast(VideoMode) obj;
-            return (w == other.w) && (h == other.h) && 
-                (bpp == other.bpp) && (refresh == other.refresh);
+            if (obj == null) return false;
+            VideoMode otherMode = (VideoMode) obj;
+            return (w == otherMode.w) && (h == otherMode.h) && 
+                (bpp == otherMode.bpp) && (refresh == otherMode.refresh);
         }
 
-        public override uint toHash()
+        public override int GetHashCode()
         {
-            return w ^ h ^ bpp ^ refresh;
+            return w.GetHashCode() ^ h.GetHashCode() ^ 
+                bpp.GetHashCode() ^ refresh.GetHashCode();
         }
-+/
+
+        public static bool operator == (VideoMode mode1, VideoMode mode2)
+        {
+            object obj1 = mode1, obj2 = mode2;
+            if (obj1 == null && obj2 == null) return true;
+            if (obj1 == null || obj2 == null) return false;
+
+            return mode1.Equals(mode2);
+        }
+
+        public static bool operator != (VideoMode mode1, VideoMode mode2)
+        {
+            return ! mode1.Equals(mode2);
+        }
+
+
         // returns true if this mode matches the other one in the sense that all
         // non zero fields of the other mode have the same value in this one
         // (except for refresh which is allowed to have a greater value)
@@ -93,29 +104,41 @@ import std.string;
         }
 
         // trivial accessors
-        public int Width() { return w; }
+        public int Width
+        {
+            get { return w; }
+        }
 
-        public int Height() { return h; }
+        public int Height
+        {
+            get { return h; }
+        }
 
-        public int Depth() { return bpp; }
+        public int Depth
+        {
+            get { return bpp; }
+        }
 
         // This is not defined in vidmode.h
-        public int RefreshFrequency() { return refresh; }
+        public int RefreshFrequency
+        {
+            get { return refresh; }
+        }
 
 
         // returns true if the object has been initialized
         // not implemented -- seems impossible
         // bool IsOk() const { return w && h; }
 
-		public string toString()
+		public override string ToString()
 		{
 			string s;
-			s = .toString(w) ~ "x" ~ .toString(h);
+			s = w.ToString() + "x" + h.ToString();
 			if ( bpp > 0 )
-				s ~= ", " ~ .toString(bpp) ~ "bpp";
+				s += ", " + bpp.ToString() + "bpp";
 
 			if ( refresh > 0 )
-				s ~= ", " ~ .toString(refresh) ~ "Hz";
+				s += ", " + refresh.ToString() + "Hz";
 
 			return s;
 		}
@@ -129,3 +152,4 @@ import std.string;
         // refresh frequency in Hz, 0 means unspecified/unknown
         private int refresh;
     }
+}

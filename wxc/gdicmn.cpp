@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - gdicmn.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - gdicmn.cxx
 // 
 // The GDI common classes proxy interface.
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/gdicmn.h>
 
 //-----------------------------------------------------------------------------
@@ -212,25 +208,25 @@ void wxColourDataBase_dtor(wxColourDatabase* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxColour* wxColourDatabase_Find(wxColourDatabase* self, dstr name)
+wxColour* wxColourDatabase_Find(wxColourDatabase* self, const char* name)
 {
-	return new wxColour(self->Find(wxString(name.data, wxConvUTF8, name.length)));
+	return new wxColour(self->Find(wxString(name, wxConvUTF8)));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxColourDatabase_FindName(wxColourDatabase* self, wxColour* colour)
+wxString* wxColourDatabase_FindName(wxColourDatabase* self, wxColour* colour)
 {
-	return dstr_ret(self->FindName(*colour));
+	return new wxString(self->FindName(*colour));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxColourDatabase_AddColour(wxColourDatabase* self, dstr name, wxColour* colour)
+void wxColourDatabase_AddColour(wxColourDatabase* self, const char* name, wxColour* colour)
 {
-	self->AddColour(wxString(name.data, wxConvUTF8, name.length), *colour);
+	self->AddColour(wxString(name, wxConvUTF8), *colour);
 }
 
 //-----------------------------------------------------------------------------
@@ -278,7 +274,7 @@ wxBrushList* wxBrushList_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxBrushList_AddBrush(wxBrushList* self, wxBrush* brush)
+void wxBrushList_AddPen(wxBrushList* self, wxBrush* brush)
 {
 	self->AddBrush(brush);
 }
@@ -286,7 +282,7 @@ void wxBrushList_AddBrush(wxBrushList* self, wxBrush* brush)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxBrushList_RemoveBrush(wxBrushList* self, wxBrush* brush)
+void wxBrushList_RemovePen(wxBrushList* self, wxBrush* brush)
 {
 	self->RemoveBrush(brush);
 }
@@ -323,10 +319,10 @@ void wxFontList_RemoveFont(wxFontList* self, wxFont* font)
 extern "C" WXEXPORT
 wxFont* wxFontList_FindOrCreateFont(wxFontList* self, int pointSize, int family, int style, int weight,
                              bool underline,
-                             dstr face,
+                             const char* face,
                              wxFontEncoding encoding)
 {
-	return self->FindOrCreateFont(pointSize, family, style, weight, underline, wxString(face.data, wxConvUTF8, face.length), encoding);
+	return self->FindOrCreateFont(pointSize, family, style, weight, underline, wxString(face, wxConvUTF8), encoding);
 }
 
 //-----------------------------------------------------------------------------

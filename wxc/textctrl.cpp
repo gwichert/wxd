@@ -1,7 +1,4 @@
 // //-----------------------------------------------------------------------------
-// wxD - textctrl.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - textctrl.cxx
 //
 // The wxTextCtrl proxy interface.
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/textctrl.h>
 #include "local_events.h"
 
@@ -287,25 +283,25 @@ public:
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxTextCtrl_GetValue(wxTextCtrl* self)
+wxString* wxTextCtrl_GetValue(wxTextCtrl* self)
 {
-	return dstr_ret(self->GetValue().c_str());
+	return new wxString(self->GetValue().c_str());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxTextCtrl_SetValue(wxTextCtrl* self, dstr value)
+void wxTextCtrl_SetValue(wxTextCtrl* self, const char* value)
 {
-	self->SetValue(wxString(value.data, wxConvUTF8, value.length));
+	self->SetValue(wxString(value, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxTextCtrl_GetRange(wxTextCtrl* self, long from, long to)
+wxString* wxTextCtrl_GetRange(wxTextCtrl* self, long from, long to)
 {
-	return dstr_ret(self->GetRange(from, to).c_str());
+	return new wxString(self->GetRange(from, to).c_str());
 }
 
 //-----------------------------------------------------------------------------
@@ -319,9 +315,9 @@ int wxTextCtrl_GetLineLength(wxTextCtrl* self, long lineNo)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxTextCtrl_GetLineText(wxTextCtrl* self, long lineNo)
+wxString* wxTextCtrl_GetLineText(wxTextCtrl* self, long lineNo)
 {
-	return dstr_ret(self->GetLineText(lineNo).c_str());
+	return new wxString(self->GetLineText(lineNo).c_str());
 }
 
 //-----------------------------------------------------------------------------
@@ -375,9 +371,9 @@ void wxTextCtrl_GetSelection(wxTextCtrl* self, long* from, long* to)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxTextCtrl_GetStringSelection(wxTextCtrl* self)
+wxString* wxTextCtrl_GetStringSelection(wxTextCtrl* self)
 {
-	return dstr_ret(self->GetStringSelection().c_str());
+	return new wxString(self->GetStringSelection().c_str());
 }
 
 //-----------------------------------------------------------------------------
@@ -391,9 +387,9 @@ void wxTextCtrl_Clear(wxTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxTextCtrl_Replace(wxTextCtrl* self, long from, long to, dstr value)
+void wxTextCtrl_Replace(wxTextCtrl* self, long from, long to, const char* value)
 {
-	self->Replace(from, to, wxString(value.data, wxConvUTF8, value.length));
+	self->Replace(from, to, wxString(value, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
@@ -407,20 +403,20 @@ void wxTextCtrl_Remove(wxTextCtrl* self, long from, long to)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTextCtrl_LoadFile(wxTextCtrl* self, dstr file)
+bool wxTextCtrl_LoadFile(wxTextCtrl* self, const char* file)
 {
-	return self->LoadFile(wxString(file.data, wxConvUTF8, file.length))?1:0;
+	return self->LoadFile(wxString(file, wxConvUTF8))?1:0;
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTextCtrl_SaveFile(wxTextCtrl* self, dstr file)
+bool wxTextCtrl_SaveFile(wxTextCtrl* self, const char* file)
 {
-//	if (file == NULL)
-//		file = "";
+	if (file == NULL)
+		file = "";
 
-	return self->SaveFile(wxString(file.data, wxConvUTF8, file.length))?1:0;
+	return self->SaveFile(wxString(file, wxConvUTF8))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -442,17 +438,17 @@ void wxTextCtrl_SetMaxLength(wxTextCtrl* self, unsigned long len)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxTextCtrl_WriteText(wxTextCtrl* self, dstr text)
+void wxTextCtrl_WriteText(wxTextCtrl* self, const char* text)
 {
-	self->WriteText(wxString(text.data, wxConvUTF8, text.length));
+	self->WriteText(wxString(text, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxTextCtrl_AppendText(wxTextCtrl* self, dstr text)
+void wxTextCtrl_AppendText(wxTextCtrl* self, const char* text)
 {
-	self->AppendText(wxString(text.data, wxConvUTF8, text.length));
+	self->AppendText(wxString(text, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
@@ -690,10 +686,10 @@ wxTextCtrl* wxTextCtrl_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTextCtrl_Create(wxTextCtrl* self, wxWindow *parent, wxWindowID id, dstr value, const wxPoint *pos, const wxSize *size, long style, const wxValidator* validator, dstr name)
+bool wxTextCtrl_Create(wxTextCtrl* self, wxWindow *parent, wxWindowID id, const char *value, const wxPoint *pos, const wxSize *size, long style, const wxValidator* validator, const char *name)
 {
-//	if (value == NULL)
-//		value = "";
+	if (value == NULL)
+		value = "";
 
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -704,10 +700,10 @@ bool wxTextCtrl_Create(wxTextCtrl* self, wxWindow *parent, wxWindowID id, dstr v
 	if (validator == NULL)
 		validator = &wxDefaultValidator;
 
-//	if (name == NULL)
-//		name = "";
+	if (name == NULL)
+		name = "";
 
-	return self->Create(parent, id, wxString(value.data, wxConvUTF8, value.length), *pos, *size, style, *validator, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, wxString(value, wxConvUTF8), *pos, *size, style, *validator, wxString(name, wxConvUTF8))?1:0;
 }
 
 //-----------------------------------------------------------------------------

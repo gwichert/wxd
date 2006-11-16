@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - mdi.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - mdi.cxx
 // 
 // The wxMDI* proxy interface.
@@ -14,13 +11,12 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/mdi.h>
 #include "local_events.h"
 
 //-----------------------------------------------------------------------------
 
-typedef wxMDIClientWindow* (CALLBACK* Virtual_OnCreateClient) (dobj obj);
+typedef wxMDIClientWindow* (CALLBACK* Virtual_OnCreateClient) ();
 
 class _MDIParentFrame : public wxMDIParentFrame 
 {
@@ -29,17 +25,15 @@ public:
 		: wxMDIParentFrame() {}
 	
 	wxMDIClientWindow *OnCreateClient()
-	{ return m_OnCreateClient(m_dobj); }
+	{ return m_OnCreateClient(); }
 	
-	void Register_Virtual(dobj obj, Virtual_OnCreateClient onCreateClient)
+	void Register_Virtual(Virtual_OnCreateClient onCreateClient)
 	{
-		m_dobj = obj;
 		m_OnCreateClient = onCreateClient;
 	}
 	
 private:
 	Virtual_OnCreateClient m_OnCreateClient;
-	dobj m_dobj;
 };
 
 //-----------------------------------------------------------------------------
@@ -51,9 +45,9 @@ wxMDIParentFrame* wxMDIParentFrame_ctor()
 }
 
 extern "C" WXEXPORT
-void wxMDIParentFrame_RegisterVirtual(_MDIParentFrame* self, dobj obj, Virtual_OnCreateClient onCreateClient)
+void wxMDIParentFrame_RegisterVirtual(_MDIParentFrame* self, Virtual_OnCreateClient onCreateClient)
 {
-	self->Register_Virtual(obj, onCreateClient);
+	self->Register_Virtual(onCreateClient);
 }
 
 //-----------------------------------------------------------------------------
@@ -67,7 +61,7 @@ wxMDIClientWindow* wxMDIParentFrame_OnCreateClient(_MDIParentFrame* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxMDIParentFrame_Create(_MDIParentFrame* self, wxWindow* parent, wxWindowID id, dstr title, const wxPoint* pos, const wxSize* size, int style, dstr name)
+bool wxMDIParentFrame_Create(_MDIParentFrame* self, wxWindow* parent, wxWindowID id, char* title, const wxPoint* pos, const wxSize* size, int style, const char* name)
 {
         if (pos == NULL)
         pos = &wxDefaultPosition;
@@ -75,10 +69,10 @@ bool wxMDIParentFrame_Create(_MDIParentFrame* self, wxWindow* parent, wxWindowID
     if (size == NULL)
         size = &wxDefaultSize;
 
-    if (name.data==NULL)
-        name = dstr("mdiParentFrame",sizeof("mdiParentFrame")-1);
+    if (name == NULL)
+        name = "mdiParentFrame";
 
-    return self->Create(parent, id, wxString(title.data, wxConvUTF8, title.length), *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+    return self->Create(parent, id, wxString(title, wxConvUTF8), *pos, *size, style, wxString(name, wxConvUTF8))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -179,7 +173,7 @@ void wxMDIChildFrame_Activate(wxMDIChildFrame* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxMDIChildFrame_Create(wxMDIChildFrame* self, wxMDIParentFrame* parent, wxWindowID id, dstr title, const wxPoint* pos, const wxSize* size, long style, dstr name)
+bool wxMDIChildFrame_Create(wxMDIChildFrame* self, wxMDIParentFrame* parent, wxWindowID id, char* title, const wxPoint* pos, const wxSize* size, long style, const char* name)
 {
     if (pos == NULL)
         pos = &wxDefaultPosition;
@@ -187,10 +181,10 @@ bool wxMDIChildFrame_Create(wxMDIChildFrame* self, wxMDIParentFrame* parent, wxW
     if (size == NULL)
         size = &wxDefaultSize;
 
-    if (name.data==NULL)
-        name = dstr("mdiChildFrame",sizeof("mdiChildFrame")-1);
+    if (name == NULL)
+        name = "mdiChildFrame";
 
-    return self->Create(parent, id, wxString(title.data, wxConvUTF8, title.length), *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+    return self->Create(parent, id, wxString(title, wxConvUTF8), *pos, *size, style, wxString(name, wxConvUTF8))?1:0;
 }
 
 //-----------------------------------------------------------------------------

@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - setcursorevent.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - setcursorevent.cxx
 // 
 // The wxSetCursorEvent proxy interface.
@@ -14,14 +11,13 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxSetCursorEvent* wxSetCursorEvent_ctor(wxCoord x, wxCoord y)
+wxSetCursorEvent* wxSetCursorEvent_ctor(wxEventType type)
 {
-    return new wxSetCursorEvent(x,y);
+    return new wxSetCursorEvent(type);
 }
 
 //-----------------------------------------------------------------------------

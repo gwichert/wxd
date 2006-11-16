@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - StaticBox.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - StaticBox.cs
 //
 // The wxStaticBox wrapper class.
@@ -12,28 +9,40 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.StaticBox;
-import wx.common;
-import wx.Control;
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
-		static extern (C) IntPtr wxStaticBox_ctor();
-		static extern (C) bool wxStaticBox_Create(IntPtr self, IntPtr parent, int id, string label, inout Point pos, inout Size size, uint style, string name);
+namespace wx
+{
+	public class StaticBox : Control
+	{
+		[DllImport("wx-c")] static extern IntPtr wxStaticBox_ctor();
+		[DllImport("wx-c")] static extern bool wxStaticBox_Create(IntPtr self, IntPtr parent, int id, string label, ref Point pos, ref Size size, uint style, string name);
 	
 		//---------------------------------------------------------------------
 
-	public class StaticBox : Control
-	{
-		public const string wxStaticBoxNameStr = "groupBox";
+		public StaticBox()
+			: base(wxStaticBox_ctor()) { }
 
-		public this()
-			{ super(wxStaticBox_ctor()); }
-
-		public this(IntPtr wxobj)
-			{ super(wxobj); }
+		public StaticBox(IntPtr wxObject)
+			: base(wxObject) { }
 			
-		public this(Window window, int id, string label, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, string name = wxStaticBoxNameStr)
+		public StaticBox(Window window, int id, string label)
+			: this(window, id, label, wxDefaultPosition, wxDefaultSize, 0, null) { }
+			
+		public StaticBox(Window window, int id, string label, Point pos)
+			: this(window, id, label, pos, wxDefaultSize, 0, null) { }
+
+		public StaticBox(Window window, int id, string label, Point pos, Size size)
+			: this(window, id, label, pos, size, 0, null) { }
+
+		public StaticBox(Window window, int id, string label, Point pos, Size size, long style)
+			: this(window, id, label, pos, size, style, null) { }
+
+		public StaticBox(Window window, int id, string label, Point pos, Size size, long style, string name)
+			: this()
 		{
-			this();
 			if (!Create(window, id, label, pos, size, style, name))
 			{
 				throw new InvalidOperationException("Failed to create StaticBox");
@@ -43,15 +52,28 @@ import wx.Control;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window window, string label, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, string name = wxStaticBoxNameStr)
-			{ this(window, Window.UniqueID, label, pos, size, style, name);}
+		public StaticBox(Window window, string label)
+			: this(window, Window.UniqueID, label, wxDefaultPosition, wxDefaultSize, 0, null) { }
+			
+		public StaticBox(Window window, string label, Point pos)
+			: this(window, Window.UniqueID, label, pos, wxDefaultSize, 0, null) { }
+
+		public StaticBox(Window window, string label, Point pos, Size size)
+			: this(window, Window.UniqueID, label, pos, size, 0, null) { }
+
+		public StaticBox(Window window, string label, Point pos, Size size, long style)
+			: this(window, Window.UniqueID, label, pos, size, style, null) { }
+
+		public StaticBox(Window window, string label, Point pos, Size size, long style, string name)
+			: this(window, Window.UniqueID, label, pos, size, style, name) {}
 
 		//---------------------------------------------------------------------
 
-		public bool Create(Window window, int id, string label, inout Point pos, inout Size size, int style, string name)
+		public bool Create(Window window, int id, string label, Point pos, Size size, long style, string name)
 		{
-			return wxStaticBox_Create(wxobj, wxObject.SafePtr(window), 
-					id, label, pos, size, 
-					cast(uint)style, name);
+			return wxStaticBox_Create(wxObject, Object.SafePtr(window), 
+					id, label, ref pos, ref size, 
+					(uint)style, name);
 		}
 	}
+}

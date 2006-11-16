@@ -1,18 +1,20 @@
 //-----------------------------------------------------------------------------
-// wxD/Samples - ListView.cs
+// wx.NET/Samples - ListView.cs
 //
-// wxD "ListView" sample.
+// wx.NET "ListView" sample.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
-// Modified by BERO <berobero@users.sourceforge.net>
 // (C) 2004 Alexander Olk
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-import wx.wx;
+using System;
+using System.Drawing;
 
+namespace wx.Samples
+{
 	public class ListViewFrame : Frame
 	{
 		enum Cmd 
@@ -27,24 +29,24 @@ import wx.wx;
 
 		//---------------------------------------------------------------------
 
-		public this(string title, Point pos, Size size)
+		public ListViewFrame(string title, Point pos, Size size)
+			: base(title, pos, size)
 		{
-			super(title, pos, size);
 			// Set the window icon and status bar
 
-			this.icon = new Icon("../Samples/ListView/mondrian.png");
+			Icon = new wx.Icon("../Samples/ListView/mondrian.png");
 
 			CreateStatusBar();
 			StatusText = "Welcome to the ListView Sample!";	
 			
 			Menu menuFile = new Menu();
-			menuFile.AppendWL( Cmd.About, "&About", & OnAbout ) ;
+			menuFile.AppendWL( (int)Cmd.About, "&About", new EventListener( OnAbout ) );
 			menuFile.AppendSeparator();
-			menuFile.AppendWL( Cmd.Quit, "E&xit\tAlt-X", "Quit this program", & OnQuit) ;
+			menuFile.AppendWL( (int)Cmd.Quit, "E&xit\tAlt-X", "Quit this program", new EventListener( OnQuit) );
 			
 			MenuBar menuBar = new MenuBar();
 			menuBar.Append( menuFile, "&File" );
-			this.menuBar = menuBar;
+			MenuBar = menuBar;
 
 			textCtrl = new TextCtrl(this, -1, "", wxDefaultPosition, wxDefaultSize, 
 				TextCtrl.wxTE_MULTILINE | TextCtrl.wxTE_READONLY | TextCtrl.wxSUNKEN_BORDER );
@@ -57,20 +59,20 @@ import wx.wx;
 			bSizer.Add( mlv, 1, Stretch.wxGROW );
 			bSizer.Add( textCtrl, 0, Stretch.wxGROW );
 
-			this.sizer = bSizer;
+			Sizer = bSizer;
 		}
 
 		//---------------------------------------------------------------------	
 
-		public void OnAbout( Object sender, Event e )
+		public void OnAbout( object sender, Event e )
 		{
-			MessageBox( "wxD ListView sample\n2004 by Alexander Olk", "About",
+			MessageDialog.MessageBox( "wx.NET ListView sample\n2004 by Alexander Olk", "About",
 				Dialog.wxOK | Dialog.wxICON_INFORMATION );
 		}
 
 		//---------------------------------------------------------------------	
 
-		public void OnQuit( Object sender, Event e )
+		public void OnQuit( object sender, Event e )
 		{
 			Close();
 		}
@@ -80,9 +82,9 @@ import wx.wx;
 	
 	public class MyListView : ListView
 	{
-		public this( Window parent )
+		public MyListView( Window parent )
+			: base( parent, -1, wxDefaultPosition, wxDefaultSize, ListCtrl.wxLC_REPORT | ListCtrl.wxLC_EDIT_LABELS  )
 		{
-			super( parent, -1, wxDefaultPosition, wxDefaultSize, ListCtrl.wxLC_REPORT | ListCtrl.wxLC_EDIT_LABELS  );
 		
 			InsertColumn( 0, "First Column" );
 			SetColumnWidth( 0, 200 );
@@ -95,65 +97,65 @@ import wx.wx;
 		
 			for ( int i = 0; i < 200; ++i )
 			{
-				string buf = "Col 1 Item " ~ .toString(i);
+				string buf = "Col 1 Item " + i;
 				int tmp = InsertItem( i, buf, 0);
 				SetItemData( tmp, i );
 				
-				buf = "Col 2 Item " ~ .toString(i);
+				buf = "Col 2 Item " + i;
 				SetItem( i, 1, buf );
 			}
 				
 			Log.LogMessage( "Items created..." );
 			
-			ColumnClick_Add(& OnColumnClick );
-			ItemSelect_Add(& OnItemSelect );
-			ColumnRightClick_Add(& OnColumnRightClick );
+			ColumnClick += new EventListener( OnColumnClick );
+			ItemSelect += new EventListener( OnItemSelect );
+			ColumnRightClick += new EventListener( OnColumnRightClick );
 		}
 		
 		//---------------------------------------------------------------------	
 		
-		public void OnColumnClick( Object sender, Event e )
+		public void OnColumnClick( object sender, Event e )
 		{
-			ListEvent le = cast(ListEvent)e;
+			ListEvent le = e as ListEvent;
 			
-			Log.LogMessage( "Clicked column header " ~ .toString(le.Column) );
+			Log.LogMessage( "Clicked column header " + le.Column );
 		}
 		
 		//---------------------------------------------------------------------	
 		
-		public void OnItemSelect( Object sender, Event e )
+		public void OnItemSelect( object sender, Event e )
 		{
-			ListEvent le = cast(ListEvent)e;
+			ListEvent le = e as ListEvent;
 			
-			Log.LogMessage( "Value 1st field of selected item: " ~ le.Text );
+			Log.LogMessage( "Value 1st field of selected item: " + le.Text );
 			
 			ListItem info = new ListItem();
 			info.Id = le.Index;
 			info.Column = 1;
 			info.Mask = ListCtrl.wxLIST_MASK_TEXT;
 			
-			GetItem( info );
+			GetItem( ref info );
 			
-			Log.LogMessage( "Value of 2nd field of selected item: " ~ info.Text );
+			Log.LogMessage( "Value of 2nd field of selected item: " + info.Text );
 		}
 		
 		//---------------------------------------------------------------------	
 		
-		public void OnColumnRightClick( Object sender, Event e )
+		public void OnColumnRightClick( object sender, Event e )
 		{
-			ListEvent le = cast(ListEvent)e;
+			ListEvent le = e as ListEvent;
 			
-			Log.LogMessage( "Right clicked column header " ~ .toString(le.Column) );
+			Log.LogMessage( "Right clicked column header " + le.Column );
 		}
 	}
 	
 	//---------------------------------------------------------------------	
 
-	public class ListViewApp : App
+	public class ListViewApp : wx.App
 	{
 		public override bool OnInit()
 		{
-			ListViewFrame frame = new ListViewFrame("ListView wxWidgets Sample", new_Point(10, 100), new_Size(650,340));
+			ListViewFrame frame = new ListViewFrame("ListView wxWidgets Sample", new Point(10, 100), new Size(650,340));
 			frame.Show(true);
 
 			return true;
@@ -161,15 +163,11 @@ import wx.wx;
 
 		//---------------------------------------------------------------------
 
-		
+		[STAThread]
 		static void Main()
 		{
 			ListViewApp app = new ListViewApp();
 			app.Run();
 		}
 	}
-
-void main(char[][] argv)
-{
-	ListViewApp.Main();
 }

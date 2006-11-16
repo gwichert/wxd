@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - ImageList.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - ImageList.cs
 //
 // The wxImageList wrapper class.
@@ -13,11 +10,11 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.ImageList;
-import wx.common;
-import wx.Bitmap;
-import wx.DC;
+using System;
+using System.Runtime.InteropServices;
 
+namespace wx
+{
 	public enum wxImageList
 	{
 		wxIMAGE_LIST_NORMAL, // Normal icons
@@ -27,29 +24,7 @@ import wx.DC;
 	
 	//---------------------------------------------------------------------
 
-		static extern (C) IntPtr wxImageList_ctor(int width, int height, bool mask, int initialCount);
-		static extern (C) IntPtr wxImageList_ctor2();
-		static extern (C) int    wxImageList_AddBitmap1(IntPtr self, IntPtr bmp, IntPtr mask);
-		static extern (C) int    wxImageList_AddBitmap(IntPtr self, IntPtr bmp, IntPtr maskColour);
-		static extern (C) int    wxImageList_AddIcon(IntPtr self, IntPtr icon);
-		static extern (C) int    wxImageList_GetImageCount(IntPtr self);
-		
-		static extern (C) bool   wxImageList_Draw(IntPtr self, int index, IntPtr dc, int x, int y, int flags, bool solidBackground);
-		
-		static extern (C) bool   wxImageList_Create(IntPtr self, int width, int height, bool mask, int initialCount);
-		
-		static extern (C) bool   wxImageList_Replace(IntPtr self, int index, IntPtr bitmap);
-		
-		static extern (C) bool   wxImageList_Remove(IntPtr self, int index);
-		static extern (C) bool   wxImageList_RemoveAll(IntPtr self);
-		
-		//static extern (C) IntPtr wxImageList_GetBitmap(IntPtr self, int index);
-		
-		static extern (C) bool   wxImageList_GetSize(IntPtr self, int index, inout int width, inout int height);
-
-		//---------------------------------------------------------------------
-
-	public class ImageList : wxObject
+	public class ImageList : Object
 	{
 		public const int wxIMAGELIST_DRAW_NORMAL	= 0x0001;
 		public const int wxIMAGELIST_DRAW_TRANSPARENT	= 0x0002;
@@ -58,36 +33,63 @@ import wx.DC;
 		
 		//---------------------------------------------------------------------
 	
-		public this(int width, int height, bool mask = true, int initialCount=1)
-			{ super(wxImageList_ctor(width, height, mask, initialCount));}
+		[DllImport("wx-c")] static extern IntPtr wxImageList_ctor(int width, int height, bool mask, int initialCount);
+		[DllImport("wx-c")] static extern IntPtr wxImageList_ctor2();
+		[DllImport("wx-c")] static extern int    wxImageList_AddBitmap1(IntPtr self, IntPtr bmp, IntPtr mask);
+		[DllImport("wx-c")] static extern int    wxImageList_AddBitmap(IntPtr self, IntPtr bmp, IntPtr maskColour);
+		[DllImport("wx-c")] static extern int    wxImageList_AddIcon(IntPtr self, IntPtr icon);
+		[DllImport("wx-c")] static extern int    wxImageList_GetImageCount(IntPtr self);
+		
+		[DllImport("wx-c")] static extern bool   wxImageList_Draw(IntPtr self, int index, IntPtr dc, int x, int y, int flags, bool solidBackground);
+		
+		[DllImport("wx-c")] static extern bool   wxImageList_Create(IntPtr self, int width, int height, bool mask, int initialCount);
+		
+		[DllImport("wx-c")] static extern bool   wxImageList_Replace(IntPtr self, int index, IntPtr bitmap);
+		
+		[DllImport("wx-c")] static extern bool   wxImageList_Remove(IntPtr self, int index);
+		[DllImport("wx-c")] static extern bool   wxImageList_RemoveAll(IntPtr self);
+		
+		//[DllImport("wx-c")] static extern IntPtr wxImageList_GetBitmap(IntPtr self, int index);
+		
+		[DllImport("wx-c")] static extern bool   wxImageList_GetSize(IntPtr self, int index, ref int width, ref int height);
 
-		public this(IntPtr wxobj) 
-			{ super(wxobj);}
+		//---------------------------------------------------------------------
+
+		public ImageList(int width, int height)
+			: this(width, height, true, 1) {}
 			
-		public this()
-			{ super(wxImageList_ctor2());}
+		public ImageList(int width, int height, bool mask)
+			: this(width, height, mask, 1) {}
 
-		public static wxObject New(IntPtr ptr) { return new ImageList(ptr); }
+		public ImageList(int width, int height, bool mask, int initialCount)
+			: base(wxImageList_ctor(width, height, mask, initialCount)) {}
+
+		public ImageList(IntPtr wxObject) 
+			: base(wxObject) {}
+			
+		public ImageList()
+			: base(wxImageList_ctor2()) {}
+
 		//---------------------------------------------------------------------
 
 		public int Add(Bitmap bitmap)
 		{
-			return wxImageList_AddBitmap1(wxobj, wxObject.SafePtr(bitmap), IntPtr.init);
+			return wxImageList_AddBitmap1(wxObject, Object.SafePtr(bitmap), IntPtr.Zero);
 		}
 		
 		public int Add(Bitmap bitmap, Bitmap mask)
 		{
-			return wxImageList_AddBitmap1(wxobj, wxObject.SafePtr(bitmap), wxObject.SafePtr(mask));
+			return wxImageList_AddBitmap1(wxObject, Object.SafePtr(bitmap), Object.SafePtr(mask));
 		}
 
 		public int Add(Icon icon)
 		{
-			return wxImageList_AddIcon(wxobj, wxObject.SafePtr(icon));
+			return wxImageList_AddIcon(wxObject, Object.SafePtr(icon));
 		}
 		
 		public int Add(Bitmap bmp, Colour maskColour)
 		{
-			return wxImageList_AddBitmap(wxobj, wxObject.SafePtr(bmp), wxObject.SafePtr(maskColour));
+			return wxImageList_AddBitmap(wxObject, Object.SafePtr(bmp), Object.SafePtr(maskColour));
 		}
 
 		//---------------------------------------------------------------------
@@ -104,12 +106,15 @@ import wx.DC;
 		
 		public bool Create(int width, int height, bool mask, int initialCount)
 		{
-			return wxImageList_Create(wxobj, width, height, mask, initialCount);
+			return wxImageList_Create(wxObject, width, height, mask, initialCount);
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public int ImageCount() { return wxImageList_GetImageCount(wxobj); }
+		public int ImageCount
+		{
+			get { return wxImageList_GetImageCount(wxObject); }
+		}
 		
 		//---------------------------------------------------------------------
 		
@@ -125,41 +130,42 @@ import wx.DC;
 		
 		public bool Draw(int index, DC dc, int x, int y, int flags, bool solidBackground)
 		{
-			return wxImageList_Draw(wxobj, index, wxObject.SafePtr(dc), x, y, flags, solidBackground);
+			return wxImageList_Draw(wxObject, index, Object.SafePtr(dc), x, y, flags, solidBackground);
 		}
 		
 		//---------------------------------------------------------------------
 		
 		public bool Replace(int index, Bitmap bitmap)
 		{
-			return wxImageList_Replace(wxobj, index, wxObject.SafePtr(bitmap));
+			return wxImageList_Replace(wxObject, index, Object.SafePtr(bitmap));
 		}
 		
 		//---------------------------------------------------------------------
 		
 		public bool Remove(int index)
 		{
-			return wxImageList_Remove(wxobj, index);
+			return wxImageList_Remove(wxObject, index);
 		}
 		
 		//---------------------------------------------------------------------
 		
 		public bool RemoveAll()
 		{
-			return wxImageList_RemoveAll(wxobj);
+			return wxImageList_RemoveAll(wxObject);
 		}
 		
 		//---------------------------------------------------------------------
 		
 		/*public Bitmap GetBitmap(int index)
 		{
-			return cast(Bitmap)FindObject(wxImageList_GetBitmap(wxobj, index), &Bitmap.New);
+			return (Bitmap)FindObject(wxImageList_GetBitmap(wxObject, index), typeof(Bitmap));
 		}*/
 		
 		//---------------------------------------------------------------------
 		
-		public bool GetSize(int index, inout int width, inout int height)
+		public bool GetSize(int index, ref int width, ref int height)
 		{
-			return wxImageList_GetSize(wxobj, index, width, height);
+			return wxImageList_GetSize(wxObject, index, ref width, ref height);
 		}
 	}
+}

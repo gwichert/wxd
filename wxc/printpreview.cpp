@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - printpreview.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - printpreview.cxx
 //
 // The wxPrintPreview proxy interface.
@@ -14,9 +11,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/print.h>
-#include "local_events.h"
 
 //-----------------------------------------------------------------------------
 
@@ -205,12 +200,12 @@ void wxPrintPreview_DetermineScaling(wxPrintPreview* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxPreviewFrame* wxPreviewFrame_ctor(wxPrintPreviewBase* preview, wxFrame* parent, dstr title, wxPoint* pos, wxSize* size, int style, dstr name)
+wxPreviewFrame* wxPreviewFrame_ctor(wxPrintPreviewBase* preview, wxFrame* parent, char* title, wxPoint* pos, wxSize* size, int style, char* name)
 {
-    if (name.data==NULL)
-        name = dstr("PreviewFrame",sizeof("PreviewFrame")-1);
+    if (name == NULL)
+        name = "PreviewFrame";
 
-    return new wxPreviewFrame(preview, parent, wxString(title.data, wxConvUTF8, title.length), *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
+    return new wxPreviewFrame(preview, parent, wxString(title, wxConvUTF8), *pos, *size, style, wxString(name, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
@@ -240,66 +235,13 @@ void wxPreviewFrame_CreateControlBar(wxPreviewFrame* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxPreviewCanvas* wxPreviewCanvas_ctor(wxPrintPreviewBase* preview, wxWindow* parent, wxPoint* pos, wxSize* size, int style, dstr name)
+wxPreviewCanvas* wxPreviewCanvas_ctor(wxPrintPreviewBase* preview, wxWindow* parent, wxPoint* pos, wxSize* size, int style, char* name)
 {
-    if (name.data==NULL)
-        name = dstr("PreviewCanvas",sizeof("PreviewCanvas")-1);
+    if (name == NULL)
+        name = "PreviewCanvas";
 
-    return new wxPreviewCanvas(preview, parent, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
+    return new wxPreviewCanvas(preview, parent, *pos, *size, style, wxString(name, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
 
-class _PreviewControlBar : public wxPreviewControlBar
-{
-public:
-    _PreviewControlBar(wxPrintPreviewBase *preview,
-                        long buttons,
-                        wxWindow *parent,
-                        const wxPoint& pos,
-                        const wxSize& size,
-                        long style,
-                        const wxString& name)
-                : wxPreviewControlBar(preview,buttons,parent,pos,size,style,name) {}
-
-    DECLARE_OBJECTDELETED(_PreviewControlBar)
-};
-
-extern "C" WXEXPORT
-wxPreviewControlBar* wxPreviewControlBar_ctor(wxPrintPreviewBase *preview,
-                        long buttons,
-                        wxWindow *parent,
-                        const wxPoint* pos,
-                        const wxSize* size,
-                        long style,
-                        dstr name)
-{
-    if (name.data==NULL)
-        name = dstr("panel",sizeof("panel")-1);
-
-    return new _PreviewControlBar(preview,buttons,parent,*pos,*size,style,wxString(name.data, wxConvUTF8, name.length));
-}
-
-extern "C" WXEXPORT
-void wxPreviewControlBar_CreateButtons(wxPreviewControlBar* self)
-{
-    self->CreateButtons();
-}
-
-extern "C" WXEXPORT
-void wxPreviewControlBar_SetZoomControl(wxPreviewControlBar* self, int zoom)
-{
-    self->SetZoomControl(zoom);
-}
-
-extern "C" WXEXPORT
-int wxPreviewControlBar_GetZoomControl(wxPreviewControlBar* self)
-{
-    return self->GetZoomControl();
-}
-
-extern "C" WXEXPORT
-wxPrintPreviewBase* wxPreviewControlBar_GetPrintPreview(wxPreviewControlBar* self)
-{
-    return self->GetPrintPreview();
-}

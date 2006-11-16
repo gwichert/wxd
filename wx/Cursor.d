@@ -1,20 +1,20 @@
 //-----------------------------------------------------------------------------
-// wxD - Cursor.d
+// wx.NET - Cursor.cs
 //
 // The wxCursor wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
-// Modified by BERO <berobero.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.Cursor;
-import wx.common;
-import wx.Bitmap;
+using System;
+using System.Runtime.InteropServices;
 
+namespace wx
+{
 	public enum StockCursor
 	{
 		wxCURSOR_NONE,
@@ -48,63 +48,48 @@ import wx.Bitmap;
 		wxCURSOR_MAX
 	}
 
-		//-----------------------------------------------------------------------------
-		
-		static extern (C) IntPtr wxCursor_ctorById(StockCursor id);
-		static extern (C) IntPtr wxCursor_ctorImage(IntPtr image);
-		static extern (C) IntPtr wxCursor_ctorCopy(IntPtr cursor);
+	public class Cursor : Bitmap
+	{
+		[DllImport("wx-c")] static extern IntPtr wxCursor_ctorById(StockCursor id);
+		[DllImport("wx-c")] static extern IntPtr wxCursor_ctorImage(IntPtr image);
+		[DllImport("wx-c")] static extern IntPtr wxCursor_ctorCopy(IntPtr cursor);
 
-		static extern (C) bool   wxCursor_Ok(IntPtr self);
+		[DllImport("wx-c")] static extern bool   wxCursor_Ok(IntPtr self);
 		
-		static extern (C) void   wxCursor_SetCursor(IntPtr cursor);
+		[DllImport("wx-c")] static extern void   wxCursor_SetCursor(IntPtr cursor);
 
 		//---------------------------------------------------------------------
 		
-	public class Cursor : Bitmap
-	{
-		public static Cursor wxSTANDARD_CURSOR;
-		public static Cursor wxHOURGLASS_CURSOR;
-		public static Cursor wxCROSS_CURSOR;
-		public static Cursor wxNullCursor;
+		public Cursor(IntPtr wxObject)
+			: base(wxObject) {}
 
-		public this(IntPtr wxobj)
-			{ super(wxobj);}
-
-		public this(StockCursor id)
+		public Cursor(StockCursor id)
+			: base(wxCursor_ctorById(id))
 		{
-			super(wxCursor_ctorById(id));
 		}
 
-		public this(Image image)
+		public Cursor(Image image)
+			: base(wxCursor_ctorImage(Object.SafePtr(image)))
 		{
-			super(wxCursor_ctorImage(wxObject.SafePtr(image)));
 		}
 
-		public this(Cursor cursor)
+		public Cursor(Cursor cursor)
+			: base(wxCursor_ctorCopy(Object.SafePtr(cursor)))
 		{
-			super(wxCursor_ctorCopy(wxObject.SafePtr(cursor)));
 		}
-/+
-		override public void Dispose()
-		{
-			if (this !== wxSTANDARD_CURSOR
-			&&  this !== wxHOURGLASS_CURSOR
-			&&  this !== wxCROSS_CURSOR) {
-				super.Dispose();
-			}
-		}
-+/
+
 		//---------------------------------------------------------------------
 
 		public override bool Ok()
 		{
-			return wxCursor_Ok(wxobj);
+			return wxCursor_Ok(wxObject);
 		}
 
 		//---------------------------------------------------------------------
 		
 		public static void SetCursor(Cursor cursor)
 		{
-			wxCursor_SetCursor(wxObject.SafePtr(cursor));
+			wxCursor_SetCursor(Object.SafePtr(cursor));
 		}
 	}
+}

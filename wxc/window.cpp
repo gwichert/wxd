@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - window.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - window.cxx
 //
 // The wxWindow proxy interface.
@@ -14,7 +11,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include "local_events.h"
 
 //-----------------------------------------------------------------------------
@@ -28,13 +24,21 @@ int wxWindow_EVT_TRANSFERDATAFROMWINDOW()
     return wxEVT_TRANSFERDATAFROMWINDOW;
 }
 
+DEFINE_EVENT_TYPE(wxEVT_TRANSFERDATATOWINDOW)
+
+extern "C" WXEXPORT
+int wxWindow_EVT_TRANSFERDATATOWINDOW()
+{
+    return wxEVT_TRANSFERDATATOWINDOW;
+}
+
 //-----------------------------------------------------------------------------
 // The proxy class
 
 class _Window : public wxWindow
 {
 public:
-	_Window(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style, const wxString& name)
+	_Window(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style, const wxChar* name)
 		: wxWindow(parent, id, pos, size, style, name)
 	{
 	}
@@ -47,10 +51,9 @@ public:
 //-----------------------------------------------------------------------------
 // C stubs for class methods
 
-#include <string.h>
 extern "C" WXEXPORT
 wxWindow* wxWindow_ctor(wxWindow *parent, wxWindowID id, const wxPoint* pos,
-					const wxSize* size, int style, dstr name)
+					const wxSize* size, int style, const wxChar* name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -58,10 +61,10 @@ wxWindow* wxWindow_ctor(wxWindow *parent, wxWindowID id, const wxPoint* pos,
 	if (size == NULL)
 		size = &wxDefaultSize;
 
-	if (name.data==NULL)
-		name = dstr(wxPanelNameStr,strlen(wxPanelNameStr));
+	if (name == NULL)
+		name = wxPanelNameStr;
 
-	return new _Window(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
+	return new _Window(parent, id, *pos, *size, style, name);
 }
 
 //-----------------------------------------------------------------------------
@@ -217,9 +220,9 @@ wxFont *wxWindow_GetFont(wxWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxWindow_SetToolTip(wxWindow* self, dstr tip)
+void wxWindow_SetToolTip(wxWindow* self, const char* tip)
 {
-	self->SetToolTip(wxString(tip.data, wxConvUTF8, tip.length));
+	self->SetToolTip(wxString(tip, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
@@ -240,9 +243,9 @@ bool wxWindow_IsEnabled(wxWindow* self)
 
 #if 0
 extern "C" WXEXPORT
-bool wxWindow_LoadFromResource(wxWindow* self, wxWindow *parent, dstr resourceName, const wxResourceTable *table)
+bool wxWindow_LoadFromResource(wxWindow* self, wxWindow *parent, const char* resourceName, const wxResourceTable *table)
 {
-	return self->LoadFromResource(parent, wxString(resourceName.data, wxConvUTF8, resourceName.length), table);
+	return self->LoadFromResource(parent, wxString(resourceName, wxConvUTF8), table);
 }
 #endif
 
@@ -275,31 +278,31 @@ bool wxWindow_DestroyChildren(wxWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxWindow_SetTitle(wxWindow* self, dstr title)
+void wxWindow_SetTitle(wxWindow* self, const char* title)
 {
-	self->SetTitle(wxString(title.data, wxConvUTF8, title.length));
+	self->SetTitle(wxString(title, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxWindow_GetTitle(wxWindow* self)
+wxString* wxWindow_GetTitle(wxWindow* self)
 {
-	return dstr_ret(self->GetTitle().c_str());
+	return new wxString(self->GetTitle().c_str());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxWindow_SetName(wxWindow* self, dstr name)
+void wxWindow_SetName(wxWindow* self, const char* name)
 {
-	self->SetName(wxString(name.data, wxConvUTF8, name.length));
+	self->SetName(wxString(name, wxConvUTF8));
 }
 
 extern "C" WXEXPORT
-dstrret wxWindow_GetName(wxWindow* self)
+wxString* wxWindow_GetName(wxWindow* self)
 {
-	return dstr_ret(self->GetName().c_str());
+	return new wxString(self->GetName().c_str());
 }
 
 //-----------------------------------------------------------------------------
@@ -717,9 +720,9 @@ wxWindow* wxWindow_FindWindowId(wxWindow* self, long id)
 }
 
 extern "C" WXEXPORT
-wxWindow* wxWindow_FindWindowName(wxWindow* self, dstr name)
+wxWindow* wxWindow_FindWindowName(wxWindow* self, const char* name)
 {
-	return self->FindWindow(wxString(name.data, wxConvUTF8, name.length));
+	return self->FindWindow(wxString(name, wxConvUTF8));
 }
 
 //-----------------------------------------------------------------------------
@@ -731,15 +734,15 @@ wxWindow* wxWindow_FindWindowById(long id, const wxWindow *parent)
 }
 
 extern "C" WXEXPORT
-wxWindow* wxWindow_FindWindowByName(dstr name, const wxWindow *parent)
+wxWindow* wxWindow_FindWindowByName(const char* name, const wxWindow *parent)
 {
-	return wxWindow::FindWindowByName(wxString(name.data, wxConvUTF8, name.length), parent);
+	return wxWindow::FindWindowByName(wxString(name, wxConvUTF8), parent);
 }
 
 extern "C" WXEXPORT
-wxWindow* wxWindow_FindWindowByLabel(dstr label, const wxWindow *parent)
+wxWindow* wxWindow_FindWindowByLabel(const char* label, const wxWindow *parent)
 {
-	return wxWindow::FindWindowByLabel(wxString(label.data, wxConvUTF8, label.length), parent);
+	return wxWindow::FindWindowByLabel(wxString(label, wxConvUTF8), parent);
 }
 
 //-----------------------------------------------------------------------------
@@ -1003,9 +1006,9 @@ int wxWindow_GetCharWidth(wxWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxWindow_GetTextExtent(wxWindow* self, dstr string, int *x, int *y, int *descent, int *externalLeading, const wxFont *theFont)
+void wxWindow_GetTextExtent(wxWindow* self, const char* string, int *x, int *y, int *descent, int *externalLeading, const wxFont *theFont)
 {
-	self->GetTextExtent(wxString(string.data, wxConvUTF8, string.length), x, y, descent, externalLeading, theFont);
+	self->GetTextExtent(wxString(string, wxConvUTF8), x, y, descent, externalLeading, theFont);
 }
 
 //-----------------------------------------------------------------------------
@@ -1157,21 +1160,21 @@ bool wxWindow_PageDown(wxWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxWindow_SetHelpText(wxWindow* self, dstr text)
+void wxWindow_SetHelpText(wxWindow* self, const char* text)
 {
-	self->SetHelpText(wxString(text.data, wxConvUTF8, text.length));
+	self->SetHelpText(wxString(text, wxConvUTF8));
 }
 
 extern "C" WXEXPORT
-void wxWindow_SetHelpTextForId(wxWindow* self, dstr text)
+void wxWindow_SetHelpTextForId(wxWindow* self, const char* text)
 {
-	self->SetHelpTextForId(wxString(text.data, wxConvUTF8, text.length));
+	self->SetHelpTextForId(wxString(text, wxConvUTF8));
 }
 
 extern "C" WXEXPORT
-dstrret wxWindow_GetHelpText(wxWindow* self)
+wxString* wxWindow_GetHelpText(wxWindow* self)
 {
-	return dstr_ret(self->GetHelpText());
+	return new wxString(self->GetHelpText());
 }
 
 //-----------------------------------------------------------------------------
@@ -1187,9 +1190,9 @@ wxToolTip* wxWindow_GetToolTip(wxWindow* self)
 // TODO Not available in OS X
 #if 0
 extern "C" WXEXPORT
-dstrret wxWindow_GetToolTipText(wxWindow* self)
+wxString* wxWindow_GetToolTipText(wxWindow* self)
 {
-	return dstr_ret(self->GetToolTipText());
+	return new wxString(self->GetToolTipText());
 }
 #endif
 

@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - eraseevent.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - eraseevent.cxx
 // 
 // The wxEraseEvent proxy interface.
@@ -14,14 +11,13 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxEraseEvent* wxEraseEvent_ctor(int Id, wxDC *dc)
+wxEraseEvent* wxEraseEvent_ctor(wxEventType type)
 {
-    return new wxEraseEvent(Id,dc);
+    return new wxEraseEvent(type);
 }
 
 extern "C" WXEXPORT

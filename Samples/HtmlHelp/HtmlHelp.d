@@ -1,18 +1,20 @@
 //-----------------------------------------------------------------------------
-// wxD/Samples - HtmlHelp.cs
+// wx.NET/Samples - HtmlHelp.cs
 //
-// wxD "HtmlHelpController" sample.
+// wx.NET "HtmlHelpController" sample.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
-// Modified by BERO <berobero@users.sourceforge.net>
 // (C) 2004 by Alexander Olk
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-import wx.wx;
+using System;
+using System.Drawing;
 
+namespace wx.Samples
+{
 	public class MyFrame : Frame
 	{
 		public enum Cmd 
@@ -24,19 +26,19 @@ import wx.wx;
 		
 		private HtmlHelpController help;
 		
-		public this( Window parent, string title, Point pos, Size size ) 
+		public MyFrame( Window parent, string title, Point pos, Size size ) 
+			: base( parent, -1, title, pos, size )
 		{
-			super( parent, -1, title, pos, size );
 			Menu menuFile = new Menu();
 			
-			menuFile.AppendWL( Cmd.HtmlHelp_Help, "&Help", "Test Help...", & OnHelp ) ;
-			menuFile.AppendWL( Cmd.HtmlHelp_About, "&About", "About the sample...", & OnAbout ) ;
-			menuFile.AppendWL( Cmd.HtmlHelp_Quit, "E&xit\tAlt-X", "Quit this program", & OnQuit ) ;
+			menuFile.AppendWL( (int)Cmd.HtmlHelp_Help, "&Help", "Test Help...", new EventListener( OnHelp ) );
+			menuFile.AppendWL( (int)Cmd.HtmlHelp_About, "&About", "About the sample...", new EventListener( OnAbout ) );
+			menuFile.AppendWL( (int)Cmd.HtmlHelp_Quit, "E&xit\tAlt-X", "Quit this program", new EventListener( OnQuit ) );
 			
 			MenuBar menuBar = new MenuBar();
 			menuBar.Append( menuFile, "&File" );
 			
-			this.menuBar = menuBar;
+			MenuBar = menuBar;
 			
 			help = new HtmlHelpController( HtmlHelpController.wxHF_DEFAULT_STYLE | HtmlHelpController.wxHF_OPEN_FILES) ;
 			
@@ -46,51 +48,51 @@ import wx.wx;
 			
 			bool ret = help.AddBook( "../Samples/HtmlHelp/helpfiles/testing.hhp" );
 			if ( !ret )
-				MessageBox( "Failed adding book ../Samples/HtmlHelp/helpfiles/testing.hhp" );
+				MessageDialog.MessageBox( "Failed adding book ../Samples/HtmlHelp/helpfiles/testing.hhp" );
 				
 			ret = help.AddBook( "../Samples/HtmlHelp/helpfiles/another.hhp" );
 			if ( !ret )
-				MessageBox( "Failed adding book ../Samples/HtmlHelp/helpfiles/another.hhp" );
+				MessageDialog.MessageBox( "Failed adding book ../Samples/HtmlHelp/helpfiles/another.hhp" );
 				
-			this.Closing_Add(&OnClosing);
+			this.Closing += new EventListener(OnClosing);
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnQuit( Object sender, Event e )
+		public void OnQuit( object sender, Event e )
 		{
 			Close();
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnHelp( Object sender, Event e )
+		public void OnHelp( object sender, Event e )
 		{
 			help.Display( "Test HELPFILE" );
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnClosing( Object sender, Event e )
+		public void OnClosing( object sender, Event e )
 		{
-			if ( help.frame != null )
-				help.frame.Close();
+			if ( help.Frame != null )
+				help.Frame.Close();
 			e.Skip();
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void OnAbout( Object sender, Event e )
+		public void OnAbout( object sender, Event e )
 		{
-			MessageBox( this, "HtmlHelpController class sample.\n" 
-				"\n" 
-				"Ported to wxD by BERO", "About HtmlHelpController", Dialog.wxOK | Dialog.wxICON_INFORMATION );
+			MessageDialog.ShowModal( this, "HtmlHelpController class sample.\n" +
+				"\n" +
+				"Ported to wx.NET by Alexander Olk", "About HtmlHelpController", Dialog.wxOK | Dialog.wxICON_INFORMATION );
 		}
 	}
 	
 	//---------------------------------------------------------------------
 
-	public class HtmlHelp : App
+	public class HtmlHelp : wx.App
 	{
 		public override bool OnInit()
 		{
@@ -102,17 +104,12 @@ import wx.wx;
 
 		//---------------------------------------------------------------------
 
-		
+		[STAThread]
 		static void Main()
 		{
 			HtmlHelp app = new HtmlHelp();
 			app.Run();
 		}
 	}		
-
-
-
-void main()
-{
-	HtmlHelp.Main();
 }
+

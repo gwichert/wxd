@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - statbmp.cxx
-// (C) 2005 bero <berobero.sourceforge.net>
-// based on
 // wx.NET - statbmp.cxx
 //
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
@@ -10,7 +7,6 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
-#include "common.h"
 #include <wx/statbmp.h>
 #include "local_events.h"
 
@@ -33,7 +29,7 @@ wxStaticBitmap* wxStaticBitmap_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStaticBitmap_Create(wxStaticBitmap* self, wxWindow *parent, wxWindowID id, const wxBitmap *bitmap, const wxPoint* pos, const wxSize* size, long style, dstr name)
+bool wxStaticBitmap_Create(wxStaticBitmap* self, wxWindow *parent, wxWindowID id, const wxBitmap *bitmap, const wxPoint* pos, const wxSize* size, long style, const char* name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -41,10 +37,10 @@ bool wxStaticBitmap_Create(wxStaticBitmap* self, wxWindow *parent, wxWindowID id
 	if (size == NULL)
 		size = &wxDefaultSize;
 
-	if (name.data==NULL)
-		name = dstr("staticbitmap",sizeof("staticbitmap")-1);
+	if (name == NULL)
+		name = "staticbitmap";
 
-	return self->Create(parent, id, *bitmap, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, *bitmap, *pos, *size, style, wxString(name, wxConvUTF8))?1:0;
 }
 
 //-----------------------------------------------------------------------------

@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - XmlResource.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - XmlResource.cs
 //
 // The wxXmlResource wrapper class.
@@ -13,70 +10,60 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.XmlResource;
-import wx.common;
-import wx.Dialog;
-import wx.Window;
-import wx.Frame;
-import wx.Menu;
-import wx.MenuBar;
-import wx.Panel;
-import wx.ToolBar;
-import std.stream;
-import std.regexp;
+using System;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Runtime.Remoting;
+using System.Text.RegularExpressions;
+using System.Reflection;
+using System.Diagnostics;
 
+namespace wx
+{
 	public enum XmlResourceFlags : int
 	{
 		XRC_USE_LOCALE     = 1,
 		XRC_NO_SUBCLASSING = 2
 	};
 
-		static extern (C) void wxXmlResource_InitAllHandlers(IntPtr self);
-		static extern (C) bool wxXmlResource_Load(IntPtr self, string filemask);
-		static extern (C) IntPtr wxXmlResource_LoadDialog(IntPtr self, IntPtr parent, string name);
-		static extern (C) bool wxXmlResource_LoadDialogDlg(IntPtr self, IntPtr dlg, IntPtr parent, string name);
-		static extern (C) int wxXmlResource_GetXRCID(string str_id);
-		static extern (C) IntPtr wxXmlResource_ctorByFilemask(string filemask, int flags);
-		static extern (C) IntPtr wxXmlResource_ctor(int flags);
-		static extern (C) uint wxXmlResource_GetVersion(IntPtr self);
-		static extern (C) bool wxXmlResource_LoadFrameWithFrame(IntPtr self, IntPtr frame, IntPtr parent, string name);
-		static extern (C) IntPtr wxXmlResource_LoadFrame(IntPtr self, IntPtr parent, string name);
-		static extern (C) IntPtr wxXmlResource_LoadBitmap(IntPtr self, string name);
-		static extern (C) IntPtr wxXmlResource_LoadIcon(IntPtr self, string name);
-		static extern (C) IntPtr wxXmlResource_LoadMenu(IntPtr self, string name);
-		static extern (C) IntPtr wxXmlResource_LoadMenuBarWithParent(IntPtr self, IntPtr parent, string name);
-		static extern (C) IntPtr wxXmlResource_LoadMenuBar(IntPtr self, string name);
-		static extern (C) bool wxXmlResource_LoadPanelWithPanel(IntPtr self, IntPtr panel, IntPtr parent, string name);
-		static extern (C) IntPtr wxXmlResource_LoadPanel(IntPtr self, IntPtr parent, string name);
-		static extern (C) IntPtr wxXmlResource_LoadToolBar(IntPtr self, IntPtr parent, string name);
-		static extern (C) int wxXmlResource_SetFlags(IntPtr self, int flags);
-		static extern (C) int wxXmlResource_GetFlags(IntPtr self);
-		static extern (C) void wxXmlResource_UpdateResources(IntPtr self);
-		static extern (C) int wxXmlResource_CompareVersion(IntPtr self, int major, int minor, int release, int revision);
-		static extern (C) bool wxXmlResource_AttachUnknownControl(IntPtr self, string name, IntPtr control, IntPtr parent);
-
-		//---------------------------------------------------------------------
-
-		static extern (C) bool wxXmlSubclassFactory_ctor(XmlSubclassCreate create);
-
-		extern (C) {
-		alias IntPtr function(string className) XmlSubclassCreate;
-		}
-
-
-	public class XmlResource : wxObject
+	public class XmlResource : Object
 	{
 		public static XmlResource globalXmlResource = null;
 	
 		//---------------------------------------------------------------------
     
-		static this()
+		[DllImport("wx-c")] static extern void wxXmlResource_InitAllHandlers(IntPtr self);
+		[DllImport("wx-c")] static extern bool wxXmlResource_Load(IntPtr self, string filemask);
+		[DllImport("wx-c")] static extern bool wxXmlResource_LoadFromByteArray(IntPtr self, string filemask, IntPtr data, int length);
+		[DllImport("wx-c")] static extern IntPtr wxXmlResource_LoadDialog(IntPtr self, IntPtr parent, string name);
+		[DllImport("wx-c")] static extern bool wxXmlResource_LoadDialogDlg(IntPtr self, IntPtr dlg, IntPtr parent, string name);
+		[DllImport("wx-c")] static extern int wxXmlResource_GetXRCID(string str_id);
+		[DllImport("wx-c")] static extern IntPtr wxXmlResource_ctorByFilemask(string filemask, int flags);
+		[DllImport("wx-c")] static extern IntPtr wxXmlResource_ctor(int flags);
+		[DllImport("wx-c")] static extern uint wxXmlResource_GetVersion(IntPtr self);
+		[DllImport("wx-c")] static extern bool wxXmlResource_LoadFrameWithFrame(IntPtr self, IntPtr frame, IntPtr parent, string name);
+		[DllImport("wx-c")] static extern IntPtr wxXmlResource_LoadFrame(IntPtr self, IntPtr parent, string name);
+		[DllImport("wx-c")] static extern IntPtr wxXmlResource_LoadBitmap(IntPtr self, string name);
+		[DllImport("wx-c")] static extern IntPtr wxXmlResource_LoadIcon(IntPtr self, string name);
+		[DllImport("wx-c")] static extern IntPtr wxXmlResource_LoadMenu(IntPtr self, string name);
+		[DllImport("wx-c")] static extern IntPtr wxXmlResource_LoadMenuBarWithParent(IntPtr self, IntPtr parent, string name);
+		[DllImport("wx-c")] static extern IntPtr wxXmlResource_LoadMenuBar(IntPtr self, string name);
+		[DllImport("wx-c")] static extern bool wxXmlResource_LoadPanelWithPanel(IntPtr self, IntPtr panel, IntPtr parent, string name);
+		[DllImport("wx-c")] static extern IntPtr wxXmlResource_LoadPanel(IntPtr self, IntPtr parent, string name);
+		[DllImport("wx-c")] static extern IntPtr wxXmlResource_LoadToolBar(IntPtr self, IntPtr parent, string name);
+		[DllImport("wx-c")] static extern int wxXmlResource_SetFlags(IntPtr self, int flags);
+		[DllImport("wx-c")] static extern int wxXmlResource_GetFlags(IntPtr self);
+		[DllImport("wx-c")] static extern void wxXmlResource_UpdateResources(IntPtr self);
+		[DllImport("wx-c")] static extern int wxXmlResource_CompareVersion(IntPtr self, int major, int minor, int release, int revision);
+		[DllImport("wx-c")] static extern bool wxXmlResource_AttachUnknownControl(IntPtr self, string name, IntPtr control, IntPtr parent);
+
+		//---------------------------------------------------------------------
+
+		static XmlResource()
 		{
 			wxXmlSubclassFactory_ctor(m_create);
 		}
-		private static void SetSubclassDefaults() {}
 
-/+
 		// Sets the default assembly/namespace based on the assembly from
 		// which this method is called (i.e. your assembly!).
 		//
@@ -96,7 +83,7 @@ import std.regexp;
 				{
 					_CallerNamespace = type.Namespace;
 					_CallerAssembly = st_assembly;
-					stdout.writeLine("Setting sub-class default assembly to {0}, namespace to {1}", _CallerAssembly, _CallerNamespace);
+					Console.WriteLine("Setting sub-class default assembly to {0}, namespace to {1}", _CallerAssembly, _CallerNamespace);
 					break;
 				}
 			}
@@ -107,8 +94,11 @@ import std.regexp;
 		// will be used. This property is only used if an assembly is not
 		// specified in the XRC XML subclass property via the [assembly]class
 		// syntax.
-		static void SubclassAssembly(string value) { _SubclassAssembly = value; }
-		static string SubclassAssembly() { return _SubclassAssembly; }
+		public static string SubclassAssembly
+		{
+			set { _SubclassAssembly = value; }
+			get { return _SubclassAssembly; }
+		}
 		static string _SubclassAssembly;
 
 		// Get/set the namespace that is pre-pended to class names in sub-classing.
@@ -116,34 +106,37 @@ import std.regexp;
 		// this is not specified and the class does not already have a namespace
 		// specified, the namespace of the class which invoked the LoadXXX() method
 		// is used.
-		static void SubclassNamespace(string value) { _SubclassNamespace = value; }
-		static string SubclassNamespace() { return _SubclassNamespace; }
+		public static string SubclassNamespace
+		{
+			set { _SubclassNamespace = value; }
+			get { return _SubclassNamespace; }
+		}
 		static string _SubclassNamespace;
 
 		// Defaults set via LoadXXX() methods
 		private static string _CallerAssembly;
 		private static string _CallerNamespace;
-+/
+
 
 		//---------------------------------------------------------------------
 
-		public this()
-			{ this(XmlResourceFlags.XRC_USE_LOCALE);}
+		public XmlResource()
+			: this(XmlResourceFlags.XRC_USE_LOCALE) {}
 
-		public this(IntPtr wxobj)
-			{ super(wxobj); }
+		public XmlResource(IntPtr wxObject)
+			: base(wxObject) { }
  
-		public this(XmlResourceFlags flags)
-			{ this(wxXmlResource_ctor(cast(int)flags)); }
+		public XmlResource(XmlResourceFlags flags)
+			: this(wxXmlResource_ctor((int)flags)) { }
 
-		public this(string filemask, XmlResourceFlags flags)
-			{ this(wxXmlResource_ctorByFilemask(filemask,cast(int)flags)); }
+		public XmlResource(string filemask, XmlResourceFlags flags)
+			: this(wxXmlResource_ctorByFilemask(filemask,(int)flags)) { }
 	    
 		//---------------------------------------------------------------------
 	
 		public static XmlResource Get()
 		{
-			if (globalXmlResource === null)
+			if (globalXmlResource == null)
 			{
 				globalXmlResource = new XmlResource();
 			}
@@ -164,23 +157,46 @@ import std.regexp;
 
 		public void InitAllHandlers()
 		{
-			wxXmlResource_InitAllHandlers(wxobj);
+			wxXmlResource_InitAllHandlers(wxObject);
 		}
 	
 		//---------------------------------------------------------------------
 
 		public bool Load(string filemask)
 		{
-			return wxXmlResource_Load(wxobj,filemask);
+			return wxXmlResource_Load(wxObject,filemask);
 		}
 	
+		//---------------------------------------------------------------------
+
+		public bool LoadFromEmbeddedResource(string ResourceName)
+		{
+			Assembly ResourceAssembly = Assembly.GetCallingAssembly();
+
+			ManifestResourceInfo mri = ResourceAssembly.GetManifestResourceInfo(ResourceName);
+			if (mri == null)
+				throw new ArgumentException("No resource named \"" + ResourceName + "\" was found in the assembly.");
+
+			Stream stm = ResourceAssembly.GetManifestResourceStream(ResourceName);
+
+			BinaryReader binr = new BinaryReader(stm);
+			byte[] XrcBytes = binr.ReadBytes(Convert.ToInt32(stm.Length));
+			
+			IntPtr DataPtr = IntPtr.Zero;
+			DataPtr = Marshal.AllocHGlobal(XrcBytes.Length);
+
+			Marshal.Copy(XrcBytes, 0, DataPtr, XrcBytes.Length);
+
+			return wxXmlResource_LoadFromByteArray(wxObject, ResourceName, DataPtr, XrcBytes.Length);
+		}
+		
 		//---------------------------------------------------------------------
 
 		public Dialog LoadDialog(Window parent, string name)
 		{
 			SetSubclassDefaults();
-			IntPtr ptr = wxXmlResource_LoadDialog(wxobj,wxObject.SafePtr(parent),name);
-			if (ptr != IntPtr.init)
+			IntPtr ptr = wxXmlResource_LoadDialog(wxObject,Object.SafePtr(parent),name);
+			if (ptr != IntPtr.Zero)
 				return new Dialog(ptr);
 			else
 				return null;
@@ -191,7 +207,7 @@ import std.regexp;
 		public bool LoadDialog(Dialog dlg, Window parent, string name)
 		{
 			SetSubclassDefaults();
-			return wxXmlResource_LoadDialogDlg(wxobj,wxObject.SafePtr(dlg),wxObject.SafePtr(parent),name);
+			return wxXmlResource_LoadDialogDlg(wxObject,Object.SafePtr(dlg),Object.SafePtr(parent),name);
 		}
 	
 		//---------------------------------------------------------------------
@@ -210,14 +226,17 @@ import std.regexp;
 	
 		//---------------------------------------------------------------------
 
-		public int Version() { return wxXmlResource_GetVersion(wxobj); }
+		public long Version
+		{
+			get { return wxXmlResource_GetVersion(wxObject); }
+		}
 	
 		//---------------------------------------------------------------------
 
 		public bool LoadFrame(Frame frame, Window parent, string name)
 		{
 			SetSubclassDefaults();
-			return wxXmlResource_LoadFrameWithFrame(wxobj, wxObject.SafePtr(frame), wxObject.SafePtr(parent), name);
+			return wxXmlResource_LoadFrameWithFrame(wxObject, Object.SafePtr(frame), Object.SafePtr(parent), name);
 		}
 	
 		//---------------------------------------------------------------------
@@ -225,8 +244,8 @@ import std.regexp;
 		public Frame LoadFrame(Window parent, string name)
 		{
 			SetSubclassDefaults();
-			IntPtr ptr = wxXmlResource_LoadFrame(wxobj,wxObject.SafePtr(parent),name);
-			if (ptr != IntPtr.init)
+			IntPtr ptr = wxXmlResource_LoadFrame(wxObject,Object.SafePtr(parent),name);
+			if (ptr != IntPtr.Zero)
 				return new Frame(ptr);
 			else
 				return null;
@@ -237,8 +256,8 @@ import std.regexp;
 		public Menu LoadMenu(string name)
 		{
 			SetSubclassDefaults();
-			IntPtr ptr = wxXmlResource_LoadMenu(wxobj, name);
-			if (ptr != IntPtr.init)
+			IntPtr ptr = wxXmlResource_LoadMenu(wxObject, name);
+			if (ptr != IntPtr.Zero)
 				return new Menu(ptr);
 			else
 				return null;
@@ -249,8 +268,8 @@ import std.regexp;
 		public MenuBar LoadMenuBar(Window parent, string name)
 		{
 			SetSubclassDefaults();
-			IntPtr ptr = wxXmlResource_LoadMenuBarWithParent(wxobj, wxObject.SafePtr(parent), name);
-			if (ptr != IntPtr.init)
+			IntPtr ptr = wxXmlResource_LoadMenuBarWithParent(wxObject, Object.SafePtr(parent), name);
+			if (ptr != IntPtr.Zero)
 				return new MenuBar(ptr);
 			else
 				return null;
@@ -261,8 +280,8 @@ import std.regexp;
 		public MenuBar LoadMenuBar(string name)
 		{
 			SetSubclassDefaults();
-			IntPtr ptr = wxXmlResource_LoadMenuBar(wxobj, name);
-			if (ptr != IntPtr.init)
+			IntPtr ptr = wxXmlResource_LoadMenuBar(wxObject, name);
+			if (ptr != IntPtr.Zero)
 				return new MenuBar(ptr);
 			else
 				return null;
@@ -273,7 +292,7 @@ import std.regexp;
 		public bool LoadPanel(Panel panel, Window parent, string name)
 		{
 			SetSubclassDefaults();
-			return wxXmlResource_LoadPanelWithPanel(wxobj, wxObject.SafePtr(panel), wxObject.SafePtr(parent), name);
+			return wxXmlResource_LoadPanelWithPanel(wxObject, Object.SafePtr(panel), Object.SafePtr(parent), name);
 		}
 	
 		//---------------------------------------------------------------------
@@ -281,8 +300,8 @@ import std.regexp;
 		public Panel LoadPanel(Window parent, string name)
 		{
 			SetSubclassDefaults();
-			IntPtr ptr = wxXmlResource_LoadPanel(wxobj, wxObject.SafePtr(parent), name);
-			if (ptr != IntPtr.init)
+			IntPtr ptr = wxXmlResource_LoadPanel(wxObject, Object.SafePtr(parent), name);
+			if (ptr != IntPtr.Zero)
 				return new Panel(ptr);
 			else
 				return null;
@@ -293,8 +312,8 @@ import std.regexp;
 		public ToolBar LoadToolBar(Window parent, string name)
 		{
 			SetSubclassDefaults();
-			IntPtr ptr = wxXmlResource_LoadToolBar(wxobj, wxObject.SafePtr(parent), name);
-			if (ptr != IntPtr.init)
+			IntPtr ptr = wxXmlResource_LoadToolBar(wxObject, Object.SafePtr(parent), name);
+			if (ptr != IntPtr.Zero)
 				return new ToolBar(ptr);
 			else
 				return null;
@@ -302,35 +321,38 @@ import std.regexp;
 	
 		//---------------------------------------------------------------------
 
-		public void Flags(XmlResourceFlags value) { wxXmlResource_SetFlags(wxobj, cast(int)value); }
-		public XmlResourceFlags Flags() { return cast(XmlResourceFlags)wxXmlResource_GetFlags(wxobj); }
+		public XmlResourceFlags Flags
+		{
+			set { wxXmlResource_SetFlags(wxObject, (int)value); }
+			get { return (XmlResourceFlags)wxXmlResource_GetFlags(wxObject); }
+		}
 	
 		//---------------------------------------------------------------------
-	/+
+
 		public void UpdateResources()
 		{
-			wxXmlResource_UpdateResources(wxobj);
+			wxXmlResource_UpdateResources(wxObject);
 		}
-	+/
+	
 		//---------------------------------------------------------------------
 	
 		public Bitmap LoadBitmap(string name)
 		{
-			return new Bitmap(wxXmlResource_LoadBitmap(wxobj, name));
+			return new Bitmap(wxXmlResource_LoadBitmap(wxObject, name));
 		}
 	
 		//---------------------------------------------------------------------
 	
 		public Icon LoadIcon(string name)
 		{
-			return new Icon(wxXmlResource_LoadIcon(wxobj, name));
+			return new Icon(wxXmlResource_LoadIcon(wxObject, name));
 		}
 	
 		//---------------------------------------------------------------------
 	
 		public int CompareVersion(int major, int minor, int release, int revision)
 		{
-			return wxXmlResource_CompareVersion(wxobj, major, minor, release, revision);
+			return wxXmlResource_CompareVersion(wxObject, major, minor, release, revision);
 		}
 	
 		//---------------------------------------------------------------------
@@ -342,35 +364,37 @@ import std.regexp;
 	
 		public bool AttachUnknownControl(string name, Window control, Window parent)
 		{
-			return wxXmlResource_AttachUnknownControl(wxobj, name, wxObject.SafePtr(control), wxObject.SafePtr(parent));
+			return wxXmlResource_AttachUnknownControl(wxObject, name, Object.SafePtr(control), Object.SafePtr(parent));
 		}
 	
 		//---------------------------------------------------------------------
- 
-		public static wxObject XRCCTRL(Window window, string id, newfunc func)
+	  
+		public static Object XRCCTRL(Window window, string id, Type type)
 		{
-			return window.FindWindow(XRCID(id), func);
+			return window.FindWindow(XRCID(id), type);
 		}
 
-        public static wxObject GetControl(Window window, string id, newfunc func)
+        public static Object GetControl(Window window, string id, Type type)
         { 
-            return XRCCTRL(window, id, func); 
+            return XRCCTRL(window, id, type); 
         }
+
 		//---------------------------------------------------------------------
 		// XmlResource control subclassing
         
-		private static XmlSubclassCreate m_create = cast(XmlSubclassCreate)&XmlSubclassCreateCS;
-		//private static IntPtr function(string className) m_create = &XmlSubclassCreateCS;
+		[DllImport("wx-c")] static extern bool wxXmlSubclassFactory_ctor(XmlSubclassCreate create);
 
-		extern(C) private static IntPtr XmlSubclassCreateCS(string className)
+		private delegate IntPtr XmlSubclassCreate(IntPtr className);
+
+		private static XmlSubclassCreate m_create = new XmlSubclassCreate(XmlSubclassCreateCS);
+
+		private static IntPtr XmlSubclassCreateCS(IntPtr className)
 		{
-/+
-			string name = className;
+			string name = new wxString(className);
 			string assembly = null;
 			// Allow these two formats for for class names:
 			//   class
 			//   [assembly]class (specify assembly)
-
 			Match m = Regex.Match(name, "\\[(.+)\\]");
 			if (m.Success)
 			{
@@ -401,25 +425,24 @@ import std.regexp;
 
 			try 
 			{
-				stdout.writeLine("Attempting to create " ~ name ~ " from assembly " ~ assembly);
-			//	ObjectHandle handle = Activator.CreateInstance(assembly, name);
+				Console.WriteLine("Attempting to create {0} from assembly {1}", 
+					name, assembly);
+				ObjectHandle handle = Activator.CreateInstance(assembly, name);
 
-				if (handle === null) 
+				if (handle == null) 
 				{
-					return IntPtr.init;
+					return IntPtr.Zero;
 				}
 
-				wxObject o = cast(wxObject)handle.Unwrap();
-				return o.wxobj;
+				Object o = (Object)handle.Unwrap();
+				return o.wxObject;
 			} 
 			catch (Exception e) 
 			{
-				stdout.writeLine(e);
+				Console.WriteLine(e);
 
-				return IntPtr.init;
+				return IntPtr.Zero;
 			}
-+/
-			return IntPtr.init;
 		}
-
 	}
+}

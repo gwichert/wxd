@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - EraseEvent.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - EraseEvent.cs
 //
 // The wxEraseEvent wrapper class.
@@ -13,32 +10,29 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.EraseEvent;
-import wx.common;
-import wx.Event;
-import wx.DC;
+using System;
+using System.Runtime.InteropServices;
 
-		static extern (C) IntPtr wxEraseEvent_ctor(int id, IntPtr dc);
-		static extern (C) IntPtr wxEraseEvent_GetDC(IntPtr self);
+namespace wx
+{
+	public class EraseEvent : Event
+	{
+		[DllImport("wx-c")] static extern IntPtr wxEraseEvent_ctor(int type);
+		[DllImport("wx-c")] static extern IntPtr wxEraseEvent_GetDC(IntPtr self);
 		
 		//-----------------------------------------------------------------------------
 
-	public class EraseEvent : Event
-	{
-		public this(IntPtr wxobj) 
-			{ super(wxobj); }
+		public EraseEvent(IntPtr wxObject) 
+			: base(wxObject) { }
 
-		public this(int id=0, DC dc = null)
-			{ this(wxEraseEvent_ctor(id,wxObject.SafePtr(dc))); }
+		public EraseEvent(int type)
+			: this(wxEraseEvent_ctor(type)) { }
 
 		//-----------------------------------------------------------------------------	
 		
-		public DC GetDC() { return cast(DC)FindObject(wxEraseEvent_GetDC(wxobj), &DC.New); }
-
-		private static Event New(IntPtr obj) { return new EraseEvent(obj); }
-
-		static this()
+		public DC DC
 		{
-			AddEventType(wxEVT_ERASE_BACKGROUND,			&EraseEvent.New);
+			get { return (DC)FindObject(wxEraseEvent_GetDC(wxObject), typeof(DC)); }
 		}
 	}
+}

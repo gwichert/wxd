@@ -1,21 +1,21 @@
 //-----------------------------------------------------------------------------
-// wxD/Samples - Notebook.d
+// wx.NET/Samples - Notebook.cs
 //
-// wxD "Notebook" sample.
+// wx.NET "Notebook" sample.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
-// Modified by BERO <berobero@users.sourceforge.net>
 // (C) 2003 by Alexander Olk
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
 
-import wx.wx;
-import std.string;
-alias std.string.find indexOf;
+using System;
+using System.Drawing;
 
-	public class MyFrame : Frame
+namespace wx.Samples
+{ 
+	public class MyFrame : wx.Frame
 	{
 		enum ID_CONTROLS 
 		{
@@ -62,10 +62,10 @@ alias std.string.find indexOf;
 		
 		//---------------------------------------------------------------------
 
-		public this( string title, Point pos, Size size )
+		public MyFrame( string title, Point pos, Size size )
+			: base( title, pos, size )
 		{
-			super( title, pos, size );
-			Size imageSize = new_Size( 32, 32 );
+			Size imageSize = new Size( 32, 32 );
 			
 			m_imageList = new ImageList( imageSize.Width, imageSize.Height );
 			
@@ -80,37 +80,37 @@ alias std.string.find indexOf;
 			m_panel = new Panel( this, -1, wxDefaultPosition, wxDefaultSize,
 				wxTAB_TRAVERSAL | wxCLIP_CHILDREN | wxNO_BORDER );
 			
-			const string[] strOrientations =
-			[
+			string[] strOrientations =
+			{
 				"&Top",
 				"&Bottom",
 				"&Left",
 				"&Right"
-			];
+			};
 			
 			m_radioOrient = new RadioBox(
-				m_panel, ID_CONTROLS.ID_RADIO_ORIENT,
+				m_panel, (int)ID_CONTROLS.ID_RADIO_ORIENT,
 				"&Tab orientation",
 				wxDefaultPosition, wxDefaultSize,
 				strOrientations,
 				1, RadioBox.wxRA_SPECIFY_COLS );
 			
-			m_chkShowImages = new CheckBox( m_panel, ID_CONTROLS.ID_CHK_SHOWIMAGES, "&Show images" );
+			m_chkShowImages = new CheckBox( m_panel, (int)ID_CONTROLS.ID_CHK_SHOWIMAGES, "&Show images" );
 			
-			m_btnAddPage = new Button( m_panel, ID_CONTROLS.ID_BTN_ADD_PAGE, "&Add page" );
+			m_btnAddPage = new Button( m_panel, (int)ID_CONTROLS.ID_BTN_ADD_PAGE, "&Add page" );
 			
-			m_btnInsertPage = new Button( m_panel, ID_CONTROLS.ID_BTN_INSERT_PAGE, "&Insert page" );
+			m_btnInsertPage = new Button( m_panel, (int)ID_CONTROLS.ID_BTN_INSERT_PAGE, "&Insert page" );
 			
-			m_btnDeleteCurPage = new Button( m_panel, ID_CONTROLS.ID_BTN_DELETE_CUR_PAGE, "&Delete current page" );
+			m_btnDeleteCurPage = new Button( m_panel, (int)ID_CONTROLS.ID_BTN_DELETE_CUR_PAGE, "&Delete current page" );
 			
-			m_btnDeleteLastPage = new Button( m_panel, ID_CONTROLS.ID_BTN_DELETE_LAST_PAGE, "Delete las&t page" );
+			m_btnDeleteLastPage = new Button( m_panel, (int)ID_CONTROLS.ID_BTN_DELETE_LAST_PAGE, "Delete las&t page" );
 			
-			m_btnNextPage = new Button( m_panel, ID_CONTROLS.ID_BTN_NEXT_PAGE, "&Next page" );
+			m_btnNextPage = new Button( m_panel, (int)ID_CONTROLS.ID_BTN_NEXT_PAGE, "&Next page" );
 			
 			m_btnExit = new Button( m_panel, wxID_OK, "&Exit" );
 			m_btnExit.SetDefault();
 			
-			m_notebook = new MyNotebook( m_panel, ID_CONTROLS.ID_NOTEBOOK );
+			m_notebook = new MyNotebook( m_panel, (int)ID_CONTROLS.ID_NOTEBOOK );
 			
 			m_text = new TextCtrl( m_panel, -1, "", wxDefaultPosition, wxDefaultSize, TextCtrl.wxTE_MULTILINE | TextCtrl.wxTE_READONLY );
 			
@@ -147,7 +147,7 @@ alias std.string.find indexOf;
 			
 			ReInitNotebook();
 			
-			m_panel.sizer = m_sizerFrame;
+			m_panel.Sizer = m_sizerFrame;
 			
 			m_panel.AutoLayout = true;
 			
@@ -155,23 +155,23 @@ alias std.string.find indexOf;
 			
 			Centre( Orientation.wxBOTH );
 			
-			EVT_RADIOBOX( ID_CONTROLS.ID_RADIO_ORIENT, & OnCheckOrRadioBox) ;
-			EVT_CHECKBOX( ID_CONTROLS.ID_CHK_SHOWIMAGES, & OnCheckOrRadioBox ) ;
+			EVT_RADIOBOX( (int)ID_CONTROLS.ID_RADIO_ORIENT, new EventListener( OnCheckOrRadioBox) );
+			EVT_CHECKBOX( (int)ID_CONTROLS.ID_CHK_SHOWIMAGES, new EventListener( OnCheckOrRadioBox ) );
 
-			EVT_BUTTON( ID_CONTROLS.ID_BTN_ADD_PAGE, & OnButtonAddPage ) ;
-			EVT_BUTTON( ID_CONTROLS.ID_BTN_INSERT_PAGE, & OnButtonInsertPage ) ;
-			EVT_BUTTON( ID_CONTROLS.ID_BTN_DELETE_CUR_PAGE, & OnButtonDeleteCurPage ) ;
-			EVT_BUTTON( ID_CONTROLS.ID_BTN_DELETE_LAST_PAGE, & OnButtonDeleteLastPage ) ;
-			EVT_BUTTON( ID_CONTROLS.ID_BTN_NEXT_PAGE, & OnButtonNextPage ) ;
-			EVT_BUTTON( wxID_OK, & OnButtonExit ) ;
+			EVT_BUTTON( (int)ID_CONTROLS.ID_BTN_ADD_PAGE, new EventListener( OnButtonAddPage ) );
+			EVT_BUTTON( (int)ID_CONTROLS.ID_BTN_INSERT_PAGE, new EventListener( OnButtonInsertPage ) );
+			EVT_BUTTON( (int)ID_CONTROLS.ID_BTN_DELETE_CUR_PAGE, new EventListener( OnButtonDeleteCurPage ) );
+			EVT_BUTTON( (int)ID_CONTROLS.ID_BTN_DELETE_LAST_PAGE, new EventListener( OnButtonDeleteLastPage ) );
+			EVT_BUTTON( (int)ID_CONTROLS.ID_BTN_NEXT_PAGE, new EventListener( OnButtonNextPage ) );
+			EVT_BUTTON( wxID_OK, new EventListener( OnButtonExit ) );
 
-			EVT_UPDATE_UI( ID_CONTROLS.ID_BTN_DELETE_CUR_PAGE, & OnUpdateUIBtnDeleteCurPage ) ;
-			EVT_UPDATE_UI( ID_CONTROLS.ID_BTN_DELETE_LAST_PAGE, & OnUpdateUIBtnDeleteLastPage ) ;
+			EVT_UPDATE_UI( (int)ID_CONTROLS.ID_BTN_DELETE_CUR_PAGE, new EventListener( OnUpdateUIBtnDeleteCurPage ) );
+			EVT_UPDATE_UI( (int)ID_CONTROLS.ID_BTN_DELETE_LAST_PAGE, new EventListener( OnUpdateUIBtnDeleteLastPage ) );
 
-			EVT_NOTEBOOK_PAGE_CHANGED( ID_CONTROLS.ID_NOTEBOOK, & OnNotebook ) ;
-			EVT_NOTEBOOK_PAGE_CHANGING( ID_CONTROLS.ID_NOTEBOOK, & OnNotebook ) ;
+			EVT_NOTEBOOK_PAGE_CHANGED( (int)ID_CONTROLS.ID_NOTEBOOK, new EventListener( OnNotebook ) );
+			EVT_NOTEBOOK_PAGE_CHANGING( (int)ID_CONTROLS.ID_NOTEBOOK, new EventListener( OnNotebook ) );
 
-			EVT_IDLE( & OnIdle ) ;
+			EVT_IDLE( new EventListener( OnIdle ) );
 		}
 		
 		public void ReInitNotebook()
@@ -197,7 +197,7 @@ alias std.string.find indexOf;
 			
 			MyNotebook notebook = m_notebook;
 			
-			m_notebook = new MyNotebook( m_panel, ID_CONTROLS.ID_NOTEBOOK,
+			m_notebook = new MyNotebook( m_panel, (int)ID_CONTROLS.ID_NOTEBOOK,
 				wxDefaultPosition, wxDefaultSize, flags );
 			
 			if ( m_chkShowImages.IsChecked )
@@ -205,7 +205,7 @@ alias std.string.find indexOf;
 				m_notebook.Images = m_imageList;
 			}
 			
-			if ( notebook !== null )
+			if ( notebook != null )
 			{
 				int sel = notebook.Selection;
 				
@@ -219,7 +219,7 @@ alias std.string.find indexOf;
 					m_notebook.AddPage( page, str, false, m_notebook.IconIndex );
 				}
 				
-				if ( m_sizerNotebook !== null )
+				if ( m_sizerNotebook != null )
 				{
 					m_sizerTop.Remove( m_sizerNotebook );
 				}
@@ -238,30 +238,30 @@ alias std.string.find indexOf;
 			m_sizerTop.Layout();
 		}
 		
-		public void OnCheckOrRadioBox( Object sender, Event e )
+		public void OnCheckOrRadioBox( object sender, Event e )
 		{
 			ReInitNotebook();
 		}
 		
-		public void OnButtonAddPage( Object sender, Event e )
+		public void OnButtonAddPage( object sender, Event e )
 		{
 			Panel panel = new Panel( m_notebook, -1 );
-			new Button( panel, -1, "First button", new_Point( 10, 10 ), new_Size( -1, -1 ) );
-			new Button( panel, -1, "Second button", new_Point( 50, 100 ), new_Size( -1, -1 ) );
+			new Button( panel, -1, "First button", new Point( 10, 10 ), new Size( -1, -1 ) );
+			new Button( panel, -1, "Second button", new Point( 50, 100 ), new Size( -1, -1 ) );
 			
-			m_notebook.AddPage( panel, "Added " ~ .toString( ++s_pageAdded), true, m_notebook.IconIndex );
+			m_notebook.AddPage( panel, "Added " + ( ++s_pageAdded).ToString(), true, m_notebook.IconIndex );
 		}
 		
-		public void OnButtonInsertPage( Object sender, Event e )
+		public void OnButtonInsertPage( object sender, Event e )
 		{
 			Panel panel = m_notebook.CreateUserCreatedPage();
 			
-			m_notebook.InsertPage( 0, panel, "Inserted " ~ .toString( ++s_pageIns), false, m_notebook.IconIndex );
+			m_notebook.InsertPage( 0, panel, "Inserted " + ( ++s_pageIns).ToString(), false, m_notebook.IconIndex );
 			
 			m_notebook.Selection = 0;
 		}
 		
-		public void OnButtonDeleteCurPage( Object sender, Event e )
+		public void OnButtonDeleteCurPage( object sender, Event e )
 		{
 			int sel = m_notebook.Selection;
 			
@@ -271,7 +271,7 @@ alias std.string.find indexOf;
 			}
 		}
 		
-		public void OnButtonDeleteLastPage( Object sender, Event e )
+		public void OnButtonDeleteLastPage( object sender, Event e )
 		{
 			int page = m_notebook.PageCount;
 			
@@ -281,23 +281,23 @@ alias std.string.find indexOf;
 			}
 		}
 		
-		public void OnButtonNextPage( Object sender, Event e )
+		public void OnButtonNextPage( object sender, Event e )
 		{
 			m_notebook.AdvanceSelection( true );
 		}
 		
-		public void OnButtonExit( Object sender, Event e )
+		public void OnButtonExit( object sender, Event e )
 		{
 			Close();
 		}
 		
-		public void OnNotebook( Object sender, Event e )
+		public void OnNotebook( object sender, Event e )
 		{
 			string str = "Unknown notebook event";
 			
-			NotebookEvent ne = cast(NotebookEvent) e;
+			NotebookEvent ne = (NotebookEvent) e;
 			
-			int eventType = ne.eventType;
+			int eventType = ne.EventType;
 			
 			if ( eventType == Event.wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED )
 			{
@@ -330,19 +330,19 @@ alias std.string.find indexOf;
 			ne.Skip();
 		}
 		
-		public void OnUpdateUIBtnDeleteCurPage( Object sender, Event e )
+		public void OnUpdateUIBtnDeleteCurPage( object sender, Event e )
 		{
-			UpdateUIEvent ue = cast(UpdateUIEvent) e;
+			UpdateUIEvent ue = (UpdateUIEvent) e;
 			ue.Enabled = m_notebook.Selection != -1;
 		}
 		
-		public void OnUpdateUIBtnDeleteLastPage( Object sender, Event e )
+		public void OnUpdateUIBtnDeleteLastPage( object sender, Event e )
 		{
-			UpdateUIEvent ue = cast(UpdateUIEvent) e;
+			UpdateUIEvent ue = (UpdateUIEvent) e;
 			ue.Enabled = m_notebook.PageCount != 0;
 		}
 		
-		public void OnIdle( Object sender, Event e )
+		public void OnIdle( object sender, Event e )
 		{
 			int nPages = m_notebook.PageCount;
 			int nSel = m_notebook.Selection;
@@ -351,7 +351,7 @@ alias std.string.find indexOf;
 				s_nPages = nPages;
 				s_nSel = nSel;
 				
-				string title = "Notebook (" ~ .toString(nPages) ~ " pages, selection: " ~ .toString(nSel) ~ ")";
+				string title = "Notebook (" + nPages + " pages, selection: " + nSel + ")";
 				
 				Title = title;
 			}
@@ -360,14 +360,14 @@ alias std.string.find indexOf;
 	
 	//---------------------------------------------------------------------
 	
-	public class MyNotebook : Notebook
+	public class MyNotebook : wx.Notebook
 	{
-		public this( Window parent, int id )
-			{ this( parent, id, wxDefaultPosition, wxDefaultSize, 0 ); }
+		public MyNotebook( Window parent, int id )
+			: this( parent, id, wxDefaultPosition, wxDefaultSize, 0 ) {}
 		
-		public this( Window parent, int id, Point pos, Size size, long style )
+		public MyNotebook( Window parent, int id, Point pos, Size size, long style )
+			: base ( parent, id, pos, size, style )
 		{
-			super ( parent, id, pos, size, style );
 		}
 		
 		public void CreateInitialPages()
@@ -391,7 +391,7 @@ alias std.string.find indexOf;
 		
 		public Panel CreatePage( string pageName )
 		{
-			if ( pageName.indexOf( "Inserted " ) != -1 || pageName.indexOf( "Added " ) != -1 )
+			if ( pageName.IndexOf( "Inserted " ) != -1 || pageName.IndexOf( "Added " ) != -1 )
 			{
 				return CreateUserCreatedPage();
 			}
@@ -423,14 +423,15 @@ alias std.string.find indexOf;
 		{
 			Panel panel = new Panel( this );
 			
-			new Button( panel, -1, "Button", new_Point( 10, 10 ), new_Size( -1, -1 ) );
+			new Button( panel, -1, "Button", new Point( 10, 10 ), new Size( -1, -1 ) );
 			
 			return panel;
 		}
 		
-		public int IconIndex()
+		public int IconIndex
 		{
-				if ( Images !== null )
+			get { 
+				if ( Images != null )
 				{
 					int nImages = Images.ImageCount;
 					if ( nImages > 0 )
@@ -439,6 +440,7 @@ alias std.string.find indexOf;
 					}
 				}
 				return -1; 
+			}
 		}
 		
 		private Panel CreateInsertPage()
@@ -447,7 +449,7 @@ alias std.string.find indexOf;
 			
 			panel.BackgroundColour = new Colour( "MAROON" );
 			
-			new StaticText( panel, -1, "This page has been inserted, not added.", new_Point( 10, 10 ) );
+			new StaticText( panel, -1, "This page has been inserted, not added.", new Point( 10, 10 ) );
 			
 			return panel;
 		}
@@ -456,12 +458,12 @@ alias std.string.find indexOf;
 		{
 			Panel panel = new Panel( this );
 			
-			const string[] animals = [ "Fox", "Hare", "Rabbit", "Sabre-toothed tiger", "Rex" ];
+			string[] animals = { "Fox", "Hare", "Rabbit", "Sabre-toothed tiger", "Rex" };
 			
 			RadioBox radiobox1 = new RadioBox( panel, -1, "Choose one", 
 				wxDefaultPosition, wxDefaultSize, animals, 2, RadioBox.wxRA_SPECIFY_ROWS );
 			
-			const string[] computers = [ "Amiga", "Commodore 64", "PET", "Another" ];
+			string[] computers = { "Amiga", "Commodore 64", "PET", "Another" };
 			
 			RadioBox radiobox2 = new RadioBox( panel, -1, "Choose your favourite",
 				wxDefaultPosition, wxDefaultSize, computers, 0, RadioBox.wxRA_SPECIFY_COLS );
@@ -469,7 +471,7 @@ alias std.string.find indexOf;
 			BoxSizer sizerPanel = new BoxSizer( Orientation.wxVERTICAL );
 			sizerPanel.Add( radiobox1, 2, Stretch.wxEXPAND );
 			sizerPanel.Add( radiobox2, 1, Stretch.wxEXPAND );
-			panel.sizer = sizerPanel;
+			panel.Sizer = sizerPanel;
 			
 			return panel;
 		}
@@ -478,7 +480,7 @@ alias std.string.find indexOf;
 		{
 			Panel panel = new Panel( this );
 			
-			new StaticText( panel, -1, "This page intentionally left blank", new_Point( 10, 10 ) );
+			new StaticText( panel, -1, "This page intentionally left blank", new Point( 10, 10 ) );
 			
 			return panel;
 		}
@@ -487,11 +489,11 @@ alias std.string.find indexOf;
 		{
 			Panel panel = new Panel( this );
 			
-			Button buttonBig = new Button( panel, -1, "Maximized button", new_Point( 0, 0 ), new_Size( 480, 360 ) );
+			Button buttonBig = new Button( panel, -1, "Maximized button", new Point( 0, 0 ), new Size( 480, 360 ) );
 			
 			BoxSizer sizerPanel = new BoxSizer( Orientation.wxVERTICAL );
 			sizerPanel.Add( buttonBig, 1, Stretch.wxEXPAND );
-			panel.sizer = sizerPanel;
+			panel.Sizer = sizerPanel;
 			
 			return panel;
 		}
@@ -499,7 +501,7 @@ alias std.string.find indexOf;
 	
 	//---------------------------------------------------------------------
 
-	public class NOTEBOOK : App
+	public class NOTEBOOK : wx.App
 	{
 		public override bool OnInit()
 		{
@@ -511,16 +513,11 @@ alias std.string.find indexOf;
 
 		//---------------------------------------------------------------------
 
-		
+		[STAThread]
 		static void Main()
 		{
 			NOTEBOOK app = new NOTEBOOK();
 			app.Run();
 		}
 	}
-
-
-void main()
-{
-	NOTEBOOK.Main();
 }

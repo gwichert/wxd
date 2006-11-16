@@ -1,7 +1,4 @@
 //-----------------------------------------------------------------------------
-// wxD - FindReplaceDialog.cs
-// (C) 2005 bero <berobero@users.sourceforge.net>
-// based on
 // wx.NET - FindReplaceDialog.cs
 //
 // The wxFindReplaceDialog wrapper class.
@@ -13,179 +10,203 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-module wx.FindReplaceDialog;
-import wx.common;
-import wx.Dialog;
-import wx.CommandEvent;
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
-        static extern (C) IntPtr wxFindReplaceDialog_ctor();
-        static extern (C) bool   wxFindReplaceDialog_Create(IntPtr self, IntPtr parent, IntPtr data, string title, uint style);
-
-        static extern (C) IntPtr wxFindReplaceDialog_GetData(IntPtr self);
-        static extern (C) void   wxFindReplaceDialog_SetData(IntPtr self, IntPtr data);
-
-        //-----------------------------------------------------------------------------
-
+namespace wx
+{
     public class FindReplaceDialog : Dialog
     {
         public const int wxFR_DOWN       = 1;
         public const int wxFR_WHOLEWORD  = 2;
         public const int wxFR_MATCHCASE  = 4;
 
-        public const int wxFR_REPLACEDIALOG = 1;
-        public const int wxFR_NOUPDOWN      = 2;
-        public const int wxFR_NOMATCHCASE   = 4;
-        public const int wxFR_NOWHOLEWORD   = 8;
+        public const long wxFR_REPLACEDIALOG = 1;
+        public const long wxFR_NOUPDOWN      = 2;
+        public const long wxFR_NOMATCHCASE   = 4;
+        public const long wxFR_NOWHOLEWORD   = 8;
 
         //-----------------------------------------------------------------------------
 
-        public this(IntPtr wxobj) 
-            { super(wxobj); }
+        [DllImport("wx-c")] static extern IntPtr wxFindReplaceDialog_ctor();
+        [DllImport("wx-c")] static extern bool   wxFindReplaceDialog_Create(IntPtr self, IntPtr parent, IntPtr data, string title, uint style);
 
-        public this()
-            { super(wxFindReplaceDialog_ctor()); }
+        [DllImport("wx-c")] static extern IntPtr wxFindReplaceDialog_GetData(IntPtr self);
+        [DllImport("wx-c")] static extern void   wxFindReplaceDialog_SetData(IntPtr self, IntPtr data);
 
-        public this(Window parent, FindReplaceData data, string title, int style = 0)
+        //-----------------------------------------------------------------------------
+
+        public FindReplaceDialog(IntPtr wxObject) 
+            : base(wxObject) { }
+
+        public FindReplaceDialog()
+            : base(wxFindReplaceDialog_ctor()) { }
+
+        public FindReplaceDialog(Window parent, FindReplaceData data, string title)
+            : this(parent, data, title, 0) { }
+
+        public FindReplaceDialog(Window parent, FindReplaceData data, string title, long style)
+            : base(wxFindReplaceDialog_ctor())
         {
-        	super(wxFindReplaceDialog_ctor());
             if (!Create(parent, data, title, style))
             {
                 throw new InvalidOperationException("Could not create FindReplaceDialog");
             }
         }
 
-        public bool Create(Window parent, FindReplaceData data, string title, int style = 0)
+        public bool Create(Window parent, FindReplaceData data, string title, long style)
         {
-            return wxFindReplaceDialog_Create(wxobj, wxObject.SafePtr(parent), wxObject.SafePtr(data), title, cast(uint)style);
+            return wxFindReplaceDialog_Create(wxObject, Object.SafePtr(parent), Object.SafePtr(data), title, (uint)style);
         }
 
         //-----------------------------------------------------------------------------
 
-        public FindReplaceData Data() { return cast(FindReplaceData)FindObject(wxFindReplaceDialog_GetData(wxobj), &FindReplaceData.New); }
-        public void Data(FindReplaceData value) { wxFindReplaceDialog_SetData(wxobj, wxObject.SafePtr(value)); } 
+        public FindReplaceData Data
+        {
+            get { return (FindReplaceData)FindObject(wxFindReplaceDialog_GetData(wxObject), typeof(FindReplaceData)); }
+            set { wxFindReplaceDialog_SetData(wxObject, Object.SafePtr(value)); } 
+        }
 
         //-----------------------------------------------------------------------------
 
-		public void Find_Add(EventListener value) { AddCommandListener(Event.wxEVT_COMMAND_FIND, ID, value, this); }
-		public void Find_Remove(EventListener value) { RemoveHandler(value, this); }
+		public event EventListener Find
+		{
+			add { AddCommandListener(Event.wxEVT_COMMAND_FIND, ID, value, this); }
+			remove { RemoveHandler(value, this); }
+		}
 
-		public void FindNext_Add(EventListener value) { AddCommandListener(Event.wxEVT_COMMAND_FIND_NEXT, ID, value, this); }
-		public void FindNext_Remove(EventListener value) { RemoveHandler(value, this); }
+		public event EventListener FindNext
+		{
+			add { AddCommandListener(Event.wxEVT_COMMAND_FIND_NEXT, ID, value, this); }
+			remove { RemoveHandler(value, this); }
+		}
 
-		public void FindReplace_Add(EventListener value) { AddCommandListener(Event.wxEVT_COMMAND_FIND_REPLACE, ID, value, this); }
-		public void FindReplace_Remove(EventListener value) { RemoveHandler(value, this); }
+		public event EventListener FindReplace
+		{
+			add { AddCommandListener(Event.wxEVT_COMMAND_FIND_REPLACE, ID, value, this); }
+			remove { RemoveHandler(value, this); }
+		}
 
-		public void FindReplaceAll_Add(EventListener value) { AddCommandListener(Event.wxEVT_COMMAND_FIND_REPLACE_ALL, ID, value, this); }
-		public void FindReplaceAll_Remove(EventListener value) { RemoveHandler(value, this); }
+		public event EventListener FindReplaceAll
+		{
+			add { AddCommandListener(Event.wxEVT_COMMAND_FIND_REPLACE_ALL, ID, value, this); }
+			remove { RemoveHandler(value, this); }
+		}
 
-		public void FindClose_Add(EventListener value) { AddCommandListener(Event.wxEVT_COMMAND_FIND_CLOSE, ID, value, this); }
-		public void FindClose_Remove(EventListener value) { RemoveHandler(value, this); }
+		public event EventListener FindClose
+		{
+			add { AddCommandListener(Event.wxEVT_COMMAND_FIND_CLOSE, ID, value, this); }
+			remove { RemoveHandler(value, this); }
+		}
     }
 
 	//-----------------------------------------------------------------------------
-
-        static extern (C) IntPtr wxFindDialogEvent_ctor(int commandType, int id);
-
-        static extern (C) int    wxFindDialogEvent_GetFlags(IntPtr self);
-        static extern (C) void   wxFindDialogEvent_SetFlags(IntPtr self, int flags);
-
-        static extern (C) string wxFindDialogEvent_GetFindString(IntPtr self);
-        static extern (C) void   wxFindDialogEvent_SetFindString(IntPtr self, string str);
-
-        static extern (C) string wxFindDialogEvent_GetReplaceString(IntPtr self);
-        static extern (C) void   wxFindDialogEvent_SetReplaceString(IntPtr self, string str);
-
-        static extern (C) IntPtr wxFindDialogEvent_GetDialog(IntPtr self);
-
-        //-----------------------------------------------------------------------------
 
     public class FindDialogEvent : CommandEvent
     {
-	static this()
-	{
-			wxEVT_COMMAND_FIND = wxEvent_EVT_COMMAND_FIND();
-			wxEVT_COMMAND_FIND_NEXT = wxEvent_EVT_COMMAND_FIND_NEXT();
-			wxEVT_COMMAND_FIND_REPLACE = wxEvent_EVT_COMMAND_FIND_REPLACE();
-			wxEVT_COMMAND_FIND_REPLACE_ALL = wxEvent_EVT_COMMAND_FIND_REPLACE_ALL();
-			wxEVT_COMMAND_FIND_CLOSE = wxEvent_EVT_COMMAND_FIND_CLOSE();
+        [DllImport("wx-c")] static extern IntPtr wxFindDialogEvent_ctor(int commandType, int id);
 
-			AddEventType(wxEVT_COMMAND_FIND,	&FindDialogEvent.New);
-			AddEventType(wxEVT_COMMAND_FIND_NEXT,	&FindDialogEvent.New);
-			AddEventType(wxEVT_COMMAND_FIND_REPLACE,	&FindDialogEvent.New);
-			AddEventType(wxEVT_COMMAND_FIND_REPLACE_ALL,	&FindDialogEvent.New);
-			AddEventType(wxEVT_COMMAND_FIND_CLOSE,	&FindDialogEvent.New);
-	
-	}
+        [DllImport("wx-c")] static extern int    wxFindDialogEvent_GetFlags(IntPtr self);
+        [DllImport("wx-c")] static extern void   wxFindDialogEvent_SetFlags(IntPtr self, int flags);
 
-        public this(IntPtr wxobj)
-            { super(wxobj); }
+        [DllImport("wx-c")] static extern IntPtr wxFindDialogEvent_GetFindString(IntPtr self);
+        [DllImport("wx-c")] static extern void   wxFindDialogEvent_SetFindString(IntPtr self, string str);
 
-        public this(int commandType, int id)
-            { super(wxFindDialogEvent_ctor(commandType, id)); }
+        [DllImport("wx-c")] static extern IntPtr wxFindDialogEvent_GetReplaceString(IntPtr self);
+        [DllImport("wx-c")] static extern void   wxFindDialogEvent_SetReplaceString(IntPtr self, string str);
 
-	public static Event New(IntPtr ptr) { return new FindDialogEvent(ptr); }
+        [DllImport("wx-c")] static extern IntPtr wxFindDialogEvent_GetDialog(IntPtr self);
 
         //-----------------------------------------------------------------------------
 
-        public int Flags() { return wxFindDialogEvent_GetFlags(wxobj); }
-        public void Flags(int value) { wxFindDialogEvent_SetFlags(wxobj, value); }
+        public FindDialogEvent(IntPtr wxObject)
+            : base(wxObject) { }
+
+        public FindDialogEvent(int commandType, int id)
+            : base(wxFindDialogEvent_ctor(commandType, id)) { }
 
         //-----------------------------------------------------------------------------
 
-        public string FindString() { return wxFindDialogEvent_GetFindString(wxobj).dup; }
-        public void FindString(string value) { wxFindDialogEvent_SetFindString(wxobj, value); }
+        public int Flags
+        {
+            get { return wxFindDialogEvent_GetFlags(wxObject); }
+            set { wxFindDialogEvent_SetFlags(wxObject, value); }
+        }
 
         //-----------------------------------------------------------------------------
 
-        public string ReplaceString() { return wxFindDialogEvent_GetReplaceString(wxobj).dup; }
-        public void ReplaceString(string value) { wxFindDialogEvent_SetReplaceString(wxobj, value); }
+        public string FindString
+        {
+            get { return new wxString(wxFindDialogEvent_GetFindString(wxObject), true); }
+            set { wxFindDialogEvent_SetFindString(wxObject, value); }
+        }
 
         //-----------------------------------------------------------------------------
 
-        public FindReplaceDialog Dialog() { return cast(FindReplaceDialog)FindObject(wxFindDialogEvent_GetDialog(wxobj)); }
+        public string ReplaceString
+        {
+            get { return new wxString(wxFindDialogEvent_GetReplaceString(wxObject), true); }
+            set { wxFindDialogEvent_SetReplaceString(wxObject, value); }
+        }
+
+        //-----------------------------------------------------------------------------
+
+        public FindReplaceDialog Dialog
+        {
+            get { return (FindReplaceDialog)FindObject(wxFindDialogEvent_GetDialog(wxObject)); }
+        }
     }
 
 	//-----------------------------------------------------------------------------
 
-        static extern (C) IntPtr wxFindReplaceData_ctor(uint flags);
-
-        static extern (C) string wxFindReplaceData_GetFindString(IntPtr self);
-        static extern (C) void   wxFindReplaceData_SetFindString(IntPtr self, string str);
-
-        static extern (C) int    wxFindReplaceData_GetFlags(IntPtr self);
-        static extern (C) void   wxFindReplaceData_SetFlags(IntPtr self, int flags);
-
-        static extern (C) void   wxFindReplaceData_SetReplaceString(IntPtr self, string str);
-        static extern (C) string wxFindReplaceData_GetReplaceString(IntPtr self);
-
-        //-----------------------------------------------------------------------------
-
-    public class FindReplaceData : wxObject
+    public class FindReplaceData : Object
     {
-        public this(IntPtr wxobj)
-            { super(wxobj); }
+        [DllImport("wx-c")] static extern IntPtr wxFindReplaceData_ctor(uint flags);
 
-        public this()
-            { this(0); }
+        [DllImport("wx-c")] static extern IntPtr wxFindReplaceData_GetFindString(IntPtr self);
+        [DllImport("wx-c")] static extern void   wxFindReplaceData_SetFindString(IntPtr self, string str);
 
-        public this(int flags)
-            { super(wxFindReplaceData_ctor(cast(uint)flags));}
+        [DllImport("wx-c")] static extern int    wxFindReplaceData_GetFlags(IntPtr self);
+        [DllImport("wx-c")] static extern void   wxFindReplaceData_SetFlags(IntPtr self, int flags);
 
-        //-----------------------------------------------------------------------------
-
-        public string FindString() { return wxFindReplaceData_GetFindString(wxobj).dup; }
-        public void FindString(string value) { wxFindReplaceData_SetFindString(wxobj, value); }
+        [DllImport("wx-c")] static extern void   wxFindReplaceData_SetReplaceString(IntPtr self, string str);
+        [DllImport("wx-c")] static extern IntPtr wxFindReplaceData_GetReplaceString(IntPtr self);
 
         //-----------------------------------------------------------------------------
 
-        public string ReplaceString() { return wxFindReplaceData_GetReplaceString(wxobj).dup; }
-        public void ReplaceString(string value) { wxFindReplaceData_SetReplaceString(wxobj, value); }
+        public FindReplaceData(IntPtr wxObject)
+            : base(wxObject) { }
+
+        public FindReplaceData()
+            : this(0) { }
+
+        public FindReplaceData(int flags)
+            : base(wxFindReplaceData_ctor((uint)flags)) {}
 
         //-----------------------------------------------------------------------------
 
-        public int Flags() { return wxFindReplaceData_GetFlags(wxobj); }
-        public void Flags(int value) { wxFindReplaceData_SetFlags(wxobj, value); }
-        
-        public static wxObject New(IntPtr ptr) { return new FindReplaceData(ptr); }
+        public string FindString
+        {
+            get { return new wxString(wxFindReplaceData_GetFindString(wxObject), true); }
+            set { wxFindReplaceData_SetFindString(wxObject, value); }
+        }
+
+        //-----------------------------------------------------------------------------
+
+        public string ReplaceString
+        {
+            get { return new wxString(wxFindReplaceData_GetReplaceString(wxObject), true); }
+            set { wxFindReplaceData_SetReplaceString(wxObject, value); }
+        }
+
+        //-----------------------------------------------------------------------------
+
+        public int Flags
+        {
+            get { return wxFindReplaceData_GetFlags(wxObject); }
+            set { wxFindReplaceData_SetFlags(wxObject, value); }
+        }
     }
+}
 
