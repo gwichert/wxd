@@ -14,9 +14,9 @@
 //-----------------------------------------------------------------------------
 
 module wx.Panel;
-import wx.common;
-import wx.Window;
-import wx.Button;
+public import wx.common;
+public import wx.Window;
+public import wx.Button;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxPanel_ctor();
@@ -28,6 +28,11 @@ import wx.Button;
 		//! \endcond
 
 	alias Panel wxPanel;
+	//! \brief A panel is a window on which controls are placed. It is usually
+	//! placed within a frame. It contains minimal extra functionality over and
+	//! above its parent class wxWindow; its main purpose is to be similar in
+	//! appearance and functionality to a dialog, but with the flexibility of
+	//! having any window as a parent.
 	public class Panel : Window
 	{
 		//---------------------------------------------------------------------

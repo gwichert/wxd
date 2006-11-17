@@ -14,9 +14,9 @@
 //-----------------------------------------------------------------------------
 
 module wx.FindReplaceDialog;
-import wx.common;
-import wx.Dialog;
-import wx.CommandEvent;
+public import wx.common;
+public import wx.Dialog;
+public import wx.CommandEvent;
 
 		//! \cond EXTERN
         static extern (C) IntPtr wxFindReplaceDialog_ctor();

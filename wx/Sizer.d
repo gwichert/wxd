@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.Sizer;
-import wx.common;
-import wx.Window;
+public import wx.common;
+public import wx.Window;
 
 		//! \cond EXTERN
 		static extern (C) void wxSizer_AddWindow(IntPtr self, IntPtr window, int proportion, int flag, int border, IntPtr userData);

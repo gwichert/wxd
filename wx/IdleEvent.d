@@ -14,10 +14,10 @@
 //-----------------------------------------------------------------------------
 
 module wx.IdleEvent;
-import wx.common;
+public import wx.common;
 
-import wx.Event;
-import wx.Window;
+public import wx.Event;
+public import wx.Window;
 
 	public enum IdleMode
 	{

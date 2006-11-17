@@ -12,7 +12,8 @@
 //-----------------------------------------------------------------------------
 
 import wx.wx;
-import std.stdio;
+private import std.stdio;
+private import std.string;
 
 	public enum Cmd
 	{

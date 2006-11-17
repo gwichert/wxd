@@ -14,12 +14,12 @@
 //-----------------------------------------------------------------------------
 
 module wx.PrintPreview;
-import wx.common;
-import wx.Panel;
-import wx.Frame;
-import wx.ScrolledWindow;
-import wx.PrintData;
-import wx.Printer;
+public import wx.common;
+public import wx.Panel;
+public import wx.Frame;
+public import wx.ScrolledWindow;
+public import wx.PrintData;
+public import wx.Printer;
 
 		//! \cond EXTERN
         static extern (C) IntPtr wxPrintPreview_ctor(IntPtr printout, IntPtr printoutForPrinting, IntPtr data);

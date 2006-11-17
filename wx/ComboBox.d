@@ -14,9 +14,9 @@
 //-----------------------------------------------------------------------------
 
 module wx.ComboBox;
-import wx.common;
-import wx.Control;
-import wx.ClientData;
+public import wx.common;
+public import wx.Control;
+public import wx.ClientData;
 
 		
 		//! \cond EXTERN

@@ -14,11 +14,11 @@
 //-----------------------------------------------------------------------------
 
 module wx.WindowDestroyEvent;
-import wx.common;
+public import wx.common;
 
-import wx.CommandEvent;
+public import wx.CommandEvent;
 
-import wx.Window;
+public import wx.Window;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxWindowDestroyEvent_ctor(IntPtr type);

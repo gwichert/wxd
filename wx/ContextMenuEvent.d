@@ -14,10 +14,10 @@
 //-----------------------------------------------------------------------------
 
 module wx.ContextMenuEvent;
-import wx.common;
+public import wx.common;
 
-import wx.CommandEvent;
-import wx.Window;
+public import wx.CommandEvent;
+public import wx.Window;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxContextMenuEvent_ctor(int type,int winid, inout Point pos);

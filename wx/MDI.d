@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.MDI;
-import wx.common;
-import wx.Frame;
+public import wx.common;
+public import wx.Frame;
 
 		//! \cond EXTERN
 		extern (C) {

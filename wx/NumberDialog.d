@@ -10,8 +10,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.NumberDialog;
-import wx.common;
-import wx.Dialog;
+public import wx.common;
+public import wx.Dialog;
 
 		//! \cond EXTERN
         static extern (C) IntPtr wxNumberEntryDialog_ctor(IntPtr parent, string message, string prompt, string caption, int value, int min, int max, inout Point pos);

@@ -14,10 +14,10 @@
 //-----------------------------------------------------------------------------
 
 module wx.EraseEvent;
-import wx.common;
+public import wx.common;
 
-import wx.Event;
-import wx.DC;
+public import wx.Event;
+public import wx.DC;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxEraseEvent_ctor(int id, IntPtr dc);

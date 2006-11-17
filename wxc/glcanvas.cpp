@@ -31,7 +31,7 @@ void wxGLContext_SetCurrent(wxGLContext* self)
 extern "C" WXEXPORT
 void wxGLContext_Update(wxGLContext* self)
 {
-#ifndef __WXGTK__
+#ifdef __WXMAC__
 	// must be called after window drag/grows/zoom or clut change
 	self->Update();
 #endif
@@ -163,7 +163,7 @@ void wxGLCanvas_SetCurrent(wxGLCanvas* self)
 extern "C" WXEXPORT
 void wxGLCanvas_UpdateContext(wxGLCanvas* self)
 {
-#ifndef __WXGTK__
+#ifdef __WXMAC__
 	self->UpdateContext();
 #endif
 }

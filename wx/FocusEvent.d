@@ -14,10 +14,10 @@
 //-----------------------------------------------------------------------------
 
 module wx.FocusEvent;
-import wx.common;
+public import wx.common;
 
-import wx.Window;
-import wx.Event;
+public import wx.Window;
+public import wx.Event;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxFocusEvent_ctor(int type,int winid);

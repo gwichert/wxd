@@ -4,4 +4,4 @@ TARGET=..\..\bin\$(NAME).exe
 TOPDIR=..\..
 DFLAGS=-g
 
-include $(TOPDIR)\config.mak
+include $(TOPDIR)\Configs\config.mak

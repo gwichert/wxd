@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.SplashScreen;
-import wx.common;
-import wx.Frame;
+public import wx.common;
+public import wx.Frame;
 
 		//! \cond EXTERN
         static extern (C) IntPtr wxSplashScreen_ctor(IntPtr bitmap, uint splashStyle, int milliseconds, IntPtr parent, int id, inout Point pos, inout Size size, uint style);

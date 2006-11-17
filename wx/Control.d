@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.Control;
-import wx.common;
-import wx.Window;
+public import wx.common;
+public import wx.Window;
 
 		//! \cond EXTERN
 		static extern (C) void   wxControl_Command(IntPtr self, IntPtr evt);
@@ -29,6 +29,9 @@ import wx.Window;
 		//---------------------------------------------------------------------
 
 	alias Control wxControl;
+	//! \brief This is the base class for a control or "widget".
+	//! A control is generally a small window which processes user input
+	//! and/or displays one or more item of data.
 	public class Control : Window
 	{
 		const string wxControlNameStr = "control";

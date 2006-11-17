@@ -15,9 +15,9 @@
 //-----------------------------------------------------------------------------
 
 module wx.Clipboard;
-import wx.common;
-import wx.DataFormat;
-import wx.DataObject;
+public import wx.common;
+public import wx.DataFormat;
+public import wx.DataObject;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxClipboard_ctor();

@@ -22,6 +22,12 @@ It is composed of two parts:
 
 * Status
 
+0.07 (afb)
+Updated imports for DMD 0.164 ("public")
+Moved all config files to a sub-directory
+Fixed MSW issue with Update/UpdateContext
+Now compiles with D warnings enabled too
+
 0.06 (afb)
 Lots of bugfixes by Matrix, thanks a lot!
 Fixed issue with wxValidator* constness

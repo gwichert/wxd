@@ -13,7 +13,6 @@
 import wx.wx;
 
 import wx.Sound;
-import wx.NumberDialog;
 
 const char[] WAV_FILE = "doggrowl.wav";
 

@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.SplitterWindow;
-import wx.common;
-import wx.Window;
+public import wx.common;
+public import wx.Window;
 
 	public enum SplitMode
 	{

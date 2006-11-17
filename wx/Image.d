@@ -14,11 +14,11 @@
 //-----------------------------------------------------------------------------
 
 module wx.Image;
-import wx.common;
-import wx.Defs;
-//import wx.Bitmap;
-import wx.Palette;
-import wx.Colour;
+public import wx.common;
+public import wx.Defs;
+//public import wx.Bitmap;
+public import wx.Palette;
+public import wx.Colour;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxImage_ctor();
@@ -148,7 +148,7 @@ import wx.Colour;
 			{ this(width, height, true);}
 		
 		public this(byte[] data, BitmapType type)
-			{ /* this(wxImage_ctorByByteArray(data.ptr, data.length, type)); */ assert(0); this(wxImage_ctor()); }
+			{ /* this(wxImage_ctorByByteArray(data.ptr, data.length, type)); */ debug assert(0); this(wxImage_ctor()); }
 			
 		public this(int width, int height, bool clear)
 			{ this(wxImage_ctorintintbool(width, height, clear));}

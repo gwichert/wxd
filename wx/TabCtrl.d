@@ -15,13 +15,15 @@
 
 module wx.TabCtrl;
 
+//! \cond VERSION
 version(__WXMSW__) {
+//! \endcond VERSION
 
-import wx.common;
-import wx.Event;
-import wx.Control;
-import wx.ImageList;
-import wx.wxString;
+public import wx.common;
+public import wx.Event;
+public import wx.Control;
+public import wx.ImageList;
+public import wx.wxString;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxTabEvent_ctor(int commandType, int id, int nSel, int nOldSel);
@@ -267,4 +269,6 @@ import wx.wxString;
 		public void SelectionChanging_Remove(EventListener value) { RemoveHandler(value, this); }
 	}
 
-}
+//! \cond VERSION
+} // version(__WXMSW__)
+//! \endcond VERSION

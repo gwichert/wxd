@@ -14,9 +14,9 @@
 //-----------------------------------------------------------------------------
 
 module wx.ListBox;
-import wx.common;
-import wx.Control;
-import wx.ClientData;
+public import wx.common;
+public import wx.Control;
+public import wx.ClientData;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxListBox_ctor();
@@ -331,10 +331,8 @@ import wx.ClientData;
 		
 		//---------------------------------------------------------------------
 		
-		version(__WXMAC__) {
-		} else {
+		version(__WXMAC__) {} else
 		public int ItemHeight() { return wxCheckListBox_GetItemHeight(wxobj); }
-		} // version()
 		
 		//---------------------------------------------------------------------
 		

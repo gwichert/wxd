@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.SizeEvent;
-import wx.common;
-import wx.Event;
+public import wx.common;
+public import wx.Event;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxSizeEvent_ctor();

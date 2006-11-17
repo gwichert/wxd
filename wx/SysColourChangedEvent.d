@@ -14,9 +14,9 @@
 //-----------------------------------------------------------------------------
 
 module wx.SysColourChangedEvent;
-import wx.common;
+public import wx.common;
 
-import wx.Event;
+public import wx.Event;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxSysColourChangedEvent_ctor();

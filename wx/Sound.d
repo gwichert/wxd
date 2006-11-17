@@ -2,7 +2,7 @@
 // wxD - Sound.d
 // (C) 2006 afb <afb@users.sourceforge.net>
 // 
-/// The wxSound wrapper classes. Optional on non-Windows platforms.
+/// The wxSound wrapper classes. (Optional on non-Windows platforms)
 //
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
@@ -10,7 +10,7 @@
 //-----------------------------------------------------------------------------
 
 module wx.Sound;
-import wx.common;
+public import wx.common;
 
 	//---------------------------------------------------------------------------
 	// Constants for Sound.Play

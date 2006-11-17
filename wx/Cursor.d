@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.Cursor;
-import wx.common;
-import wx.Bitmap;
+public import wx.common;
+public import wx.Bitmap;
 
 	public enum StockCursor
 	{

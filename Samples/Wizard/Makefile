@@ -3,4 +3,4 @@ OBJECTS=$(NAME).obj
 TARGET=..\..\bin\$(NAME).exe
 TOPDIR=..\..
 
-include $(TOPDIR)\config.mak
+include $(TOPDIR)\Configs\config.mak

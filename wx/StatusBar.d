@@ -12,8 +12,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.StatusBar;
-import wx.common;
-import wx.Window;
+public import wx.common;
+public import wx.Window;
 
 
 		public const int wxST_SIZEGRIP         = 0x0010;

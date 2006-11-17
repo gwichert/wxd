@@ -14,10 +14,10 @@
 //-----------------------------------------------------------------------------
 
 module wx.Config;
-import wx.common;
-import wx.Font;
-import wx.Colour;
-import wx.wxString;
+public import wx.common;
+public import wx.Font;
+public import wx.Colour;
+public import wx.wxString;
 
     public enum EntryType 
     {
@@ -339,7 +339,12 @@ import wx.wxString;
             //    val = defval;
             } else {
                 uint c = hex2int(str[1..str.length]);
-                val = new Colour((c>>16)&255, (c>>8)&255, c&255);
+
+                int r = (c>>16)&255;
+                int g = (c>>8)&255;
+                int b = (c)&255;
+
+                val = new Colour(cast(ubyte)r, cast(ubyte)g, cast(ubyte)b);
             }
             return ret;
 /*

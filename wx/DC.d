@@ -15,11 +15,11 @@
 
 
 module wx.DC;
-import wx.common;
-import wx.Window;
-import wx.Pen;
-import wx.Brush;
-import wx.ArrayInt;
+public import wx.common;
+public import wx.Window;
+public import wx.Pen;
+public import wx.Brush;
+public import wx.ArrayInt;
 
 		//! \cond EXTERN
 		static extern (C) void   wxDC_dtor(IntPtr self);

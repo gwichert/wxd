@@ -27,11 +27,14 @@
 //------------------------------------------------------------------------
 
 module wx.Display;
-import wx.common;
+public import wx.common;
 
-version(WXNET_DISPLAY){
+//! \cond VERSION
+version(WXD_DISPLAY){
+//! \endcond VERSION
 
-import wx.VideoMode;
+public import wx.VideoMode;
+public import wx.Window;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxDisplay_ctor(int index);
@@ -40,7 +43,7 @@ import wx.VideoMode;
 		static extern (C) int wxDisplay_GetFromPoint(inout Point pt);
 		static extern (C) int wxDisplay_GetFromWindow(IntPtr window);
 		static extern (C) void wxDisplay_GetGeometry(IntPtr self, out Rectangle rect);
-		static extern (C) IntPtr wxDisplay_GetName(IntPtr self);
+		static extern (C) string wxDisplay_GetName(IntPtr self);
 		static extern (C) bool wxDisplay_IsPrimary(IntPtr self);
 		static extern (C) void wxDisplay_GetCurrentMode(IntPtr self, out VideoMode mode);
 		static extern (C) bool wxDisplay_ChangeMode(IntPtr self, VideoMode mode);
@@ -140,7 +143,7 @@ import wx.VideoMode;
 			version(__WXMSW__){
 				return wxDisplay_GetFromWindow(wxObject.SafePtr(window));
 			} else {
-				throw new ApplicationException("Display.GetFromWindow is only available on WIN32");
+				throw new Exception("Display.GetFromWindow is only available on WIN32");
 			} // version(__WXMSW__)
 		}
 
@@ -195,4 +198,6 @@ import wx.VideoMode;
 
 	}
 
-}
+//! \cond VERSION
+} // version(WXD_DISPLAY)
+//! \endcond VERSION

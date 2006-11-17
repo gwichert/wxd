@@ -1,5 +1,5 @@
-import std.stdio;
-import std.string;
+private import std.stdio;
+private import std.string;
 
 import wx.wx;
 

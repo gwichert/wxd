@@ -15,15 +15,15 @@
 //-----------------------------------------------------------------------------
 
 module wx.App;
-import wx.common;
-import wx.EvtHandler;
-import wx.Window;
-import wx.GdiCommon;
-import wx.Clipboard;
-import wx.FontMisc;
+public import wx.common;
+public import wx.EvtHandler;
+public import wx.Window;
+public import wx.GdiCommon;
+public import wx.Clipboard;
+public import wx.FontMisc;
 
 //! \cond STD
-import std.string;
+private import std.string;
 //! \endcond
 
 		//! \cond EXTERN
@@ -55,6 +55,13 @@ import std.string;
         //---------------------------------------------------------------------
 
     alias App wxApp;
+	//! \brief The wxApp class represents the application itself.
+	
+	//! It is used to:
+	//! - set and get application-wide properties;
+	//! - implement the windowing system message or event loop;
+	//! - initiate application processing via wxApp::OnInit;
+	//! - allow default processing of events not handled by other objects in the application.
     public abstract class App : EvtHandler
     {
         

@@ -14,9 +14,9 @@
 //-----------------------------------------------------------------------------
 
 module wx.NotebookSizer;
-import wx.common;
-import wx.Sizer;
-import wx.Notebook;
+public import wx.common;
+public import wx.Sizer;
+public import wx.Notebook;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxNotebookSizer_ctor(IntPtr nb);

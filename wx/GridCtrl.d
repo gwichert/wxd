@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.GridCtrl;
-import wx.common;
-import wx.Grid;
+public import wx.common;
+public import wx.Grid;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxGridCellDateTimeRenderer_ctor(string outformat, string informat);

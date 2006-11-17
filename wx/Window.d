@@ -14,22 +14,22 @@
 //-----------------------------------------------------------------------------
 
 module wx.Window;
-import wx.common;
-import wx.EvtHandler;
-import wx.Cursor;
-import wx.Font;
-import wx.Colour;
-import wx.Region;
-import wx.Validator;
-import wx.Palette;
-import wx.Accelerator;
+public import wx.common;
+public import wx.EvtHandler;
+public import wx.Cursor;
+public import wx.Font;
+public import wx.Colour;
+public import wx.Region;
+public import wx.Validator;
+public import wx.Palette;
+public import wx.Accelerator;
 
-import wx.Caret;
-import wx.DC;
-import wx.DND;
-import wx.Sizer;
-import wx.Menu;
-import wx.ToolTip;
+public import wx.Caret;
+public import wx.DC;
+public import wx.DND;
+public import wx.Sizer;
+public import wx.Menu;
+public import wx.ToolTip;
 
 	public enum WindowVariant
 	{
@@ -319,6 +319,10 @@ import wx.ToolTip;
 		//---------------------------------------------------------------------
 
 	alias Window wxWindow;
+	//! \brief wxWindow is the base class for all windows and represents any
+	//! visible object on screen. All controls, top level windows and so on
+	//! are windows. Sizers and device contexts are not, however, as they don't
+	//! appear on screen themselves.
 	public class Window : EvtHandler
 	{
 		enum {

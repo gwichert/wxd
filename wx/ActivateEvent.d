@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.ActivateEvent;
-import wx.common;
-import wx.Event;
+public import wx.common;
+public import wx.Event;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxActivateEvent_ctor(int type, bool active,int Id);

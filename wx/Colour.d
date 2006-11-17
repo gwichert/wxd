@@ -14,7 +14,7 @@
 //-----------------------------------------------------------------------------
 
 module wx.Colour;
-import wx.common;
+public import wx.common;
 
 //! \cond STD
 private import std.string;

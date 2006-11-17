@@ -168,7 +168,7 @@ SOURCES = $(shell ls *.d | grep -v DbGrid.d)
 all:  $(LIBTARGET)
 
 DMD = dmd
-DFLAGS = -O -g -I..
+DFLAGS = -O -w -g
 
 prefix=/usr/local
 exec_prefix=$(prefix)
@@ -186,7 +186,7 @@ install: $(LIBTARGET)
 	-$(RANLIB) $(DESTDIR)$(libdir)/`basename $(LIBTARGET)`
 
 ddoc:
-	$(DMD) -c -o- -D $(DFLAGS) $(SOURCES)
+	$(DMD) -c -o- -D $(DFLAGS) -I.. $(SOURCES)
 
 clean:
 	-rm *.o *.html
@@ -197,5 +197,5 @@ $(LIBTARGET): $(OBJECTS)
 
 
 %.o:%.d
-	$(DMD) -c $(DFLAGS) $<
+	$(DMD) -c $(DFLAGS) -I.. $<
 

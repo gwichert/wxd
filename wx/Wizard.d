@@ -14,11 +14,11 @@
 //-----------------------------------------------------------------------------
 
 module wx.Wizard;
-import wx.common;
-import wx.Dialog;
-import wx.Panel;
-//import wx.NotifyEvent;
-import wx.WizardPage;
+public import wx.common;
+public import wx.Dialog;
+public import wx.Panel;
+//public import wx.NotifyEvent;
+public import wx.WizardPage;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxWizard_ctor(IntPtr parent, int id, string title, IntPtr bitmap, inout Point pos, int style);

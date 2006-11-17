@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.Locale;
-import wx.common;
-import wx.Font;
+public import wx.common;
+public import wx.Font;
 
 	public enum Language
 	{

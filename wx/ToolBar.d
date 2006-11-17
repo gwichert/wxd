@@ -14,10 +14,10 @@
 //-----------------------------------------------------------------------------
 
 module wx.ToolBar;
-import wx.common;
-import wx.Bitmap;
-import wx.Control;
-import wx.ClientData;
+public import wx.common;
+public import wx.Bitmap;
+public import wx.Control;
+public import wx.ClientData;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxToolBarToolBase_ctor(IntPtr tbar, int toolid, string label, IntPtr bmpNormal, IntPtr bmpDisabled, int kind, IntPtr clientData, string shortHelpString, string longHelpString);
@@ -232,7 +232,7 @@ import wx.ClientData;
             return new ToolBarTool(wxToolBar_AddTool1(wxobj, toolid, label, wxObject.SafePtr(bitmap), wxObject.SafePtr(bmpDisabled), cast(int)kind, shortHelp, longHelp, wxObject.SafePtr(clientData)));
         }
 
-        public ToolBarTool AddTool(int toolid, string label, Bitmap bitmap, string shortHelp, ItemKind kind)
+        public ToolBarTool AddTool(int toolid, string label, Bitmap bitmap, string shortHelp, ItemKind kind = ItemKind.wxITEM_NORMAL)
         {
             return new ToolBarTool(wxToolBar_AddTool2(wxobj, toolid, label, wxObject.SafePtr(bitmap), shortHelp, cast(int)kind));
         }

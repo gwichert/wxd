@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.SizerItem;
-import wx.common;
-import wx.Window;
+public import wx.common;
+public import wx.Window;
 
 		//! \cond EXTERN
         static extern (C) IntPtr wxSizerItem_ctorSpace(int width, int height, int proportion, int flag, int border, IntPtr userData);

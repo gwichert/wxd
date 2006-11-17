@@ -67,23 +67,23 @@ import wx.wx;
 		{
             Dialog dialog = new Dialog( this, -1, "Test dialog", Point(50,50), Size(450,340) );
             BoxSizer main_sizer = new BoxSizer( Orientation.wxVERTICAL );
-            
+
             StaticBoxSizer top_sizer = new StaticBoxSizer( new StaticBox( dialog, -1, "Bitmaps" ), Orientation.wxHORIZONTAL );
             main_sizer.Add( top_sizer, 0, Direction.wxALL, 5 );
-            
+
             BitmapButton bb = new BitmapButton( dialog, -1, new Bitmap("../Samples/Minimal/mondrian.png") );
             top_sizer.Add( bb, 0, Direction.wxALL, 10 );
-            
+
             StaticBitmap sb = new StaticBitmap( dialog, -1, new Bitmap("../Samples/Minimal/mondrian.png") );
             top_sizer.Add( sb, 0, Direction.wxALL, 10 );
-            
+
             Button button = new Button( dialog, 5100, "OK" );
             main_sizer.Add( button, 0, Direction.wxALL|Alignment.wxALIGN_CENTER, 5 );
-            
+
             dialog.SetSizer( main_sizer, true );
             main_sizer.Fit( dialog );
             main_sizer.SetSizeHints( dialog );
-            
+
             dialog.CentreOnParent();
             dialog.ShowModal();
 		}

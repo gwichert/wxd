@@ -16,8 +16,8 @@
 //-----------------------------------------------------------------------------
 
 import wx.wx;
-import std.string;
-import std.stdio;
+private import std.string;
+private import std.stdio;
 
     //-------------------------------------------------------------------------
     // Application entry class

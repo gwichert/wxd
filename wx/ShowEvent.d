@@ -14,9 +14,9 @@
 //-----------------------------------------------------------------------------
 
 module wx.ShowEvent;
-import wx.common;
+public import wx.common;
 
-import wx.Event;
+public import wx.Event;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxShowEvent_ctor(int winid, bool show);

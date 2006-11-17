@@ -14,7 +14,7 @@
 //-----------------------------------------------------------------------------
 
 module wx.Defs;
-//import wx.common;
+//public import wx.common;
 
 	public enum BitmapType {
 		wxBITMAP_TYPE_INVALID               = 0,

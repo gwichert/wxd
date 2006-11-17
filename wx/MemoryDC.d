@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.MemoryDC;
-import wx.common;
-import wx.DC;
+public import wx.common;
+public import wx.DC;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxMemoryDC_ctor();

@@ -14,9 +14,9 @@
 //-----------------------------------------------------------------------------
 
 module wx.VScroll;
-import wx.common;
-import wx.Panel;
-import wx.SizeEvent;
+public import wx.common;
+public import wx.Panel;
+public import wx.SizeEvent;
 
 		//-----------------------------------------------------------------------------
 		

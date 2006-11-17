@@ -1,6 +1,6 @@
 /// The wxArrayString wrapper class
 module wx.ArrayString;
-import wx.common;
+public import wx.common;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxArrayString_ctor();

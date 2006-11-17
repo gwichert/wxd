@@ -14,9 +14,9 @@
 //-----------------------------------------------------------------------------
 
 module wx.Listbook;
-import wx.common;
-import wx.Control;
-import wx.ImageList;
+public import wx.common;
+public import wx.Control;
+public import wx.ImageList;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxListbookEvent_ctor(int commandType, int id, int nSel, int nOldSel);

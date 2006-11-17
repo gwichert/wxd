@@ -12,8 +12,8 @@
 //-----------------------------------------------------------------------------
 
 import wx.wx;
-import std.process;
-import std.c.process;
+private import std.process;
+private import std.c.process;
 
 	public class LauncherFrame : Frame
 	{

@@ -14,11 +14,11 @@
 //-----------------------------------------------------------------------------
 
 module wx.SetCursorEvent;
-import wx.common;
+public import wx.common;
 
-import wx.Event;
+public import wx.Event;
 
-import wx.Cursor;
+public import wx.Cursor;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr	wxSetCursorEvent_ctor(int x,int y);

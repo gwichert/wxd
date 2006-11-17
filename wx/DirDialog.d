@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.DirDialog;
-import wx.common;
-import wx.Dialog;
+public import wx.common;
+public import wx.Dialog;
 
 		//! \cond EXTERN
         static extern (C) IntPtr wxDirDialog_ctor(IntPtr parent, string message, string defaultPath, uint style, inout Point pos, inout Size size, string name);

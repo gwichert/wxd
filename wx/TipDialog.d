@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.TipDialog;
-import wx.common;
-import wx.Dialog;
+public import wx.common;
+public import wx.Dialog;
 
 	//! \cond EXTERN
 	static extern (C) IntPtr wxCreateFileTipProvider_func(string filename, int currentTip);

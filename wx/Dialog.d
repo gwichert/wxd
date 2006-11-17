@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.Dialog;
-import wx.common;
-import wx.Window;
+public import wx.common;
+public import wx.Window;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxDialog_ctor();
@@ -43,6 +43,10 @@ import wx.Window;
 		//---------------------------------------------------------------------
 		
 	alias Dialog wxDialog;
+	//! \brief A dialog box is a window with a title bar and sometimes a
+	//! system menu, which can be moved around the screen. It can contain
+	//! controls and other windows and is usually used to allow the user
+	//! to make some choice or to answer a question.
 	public class Dialog : Window
 	{
 		enum {

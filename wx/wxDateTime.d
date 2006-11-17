@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.wxDateTime;
-import wx.common;
-//import std.date;
+public import wx.common;
+//private import std.date;
 
     alias wxDateTime DateTime;
     enum DayOfWeek
@@ -42,6 +42,7 @@ import wx.common;
 	
         //-----------------------------------------------------------------------------
 
+    //! \brief wxDateTime class represents an absolute moment in time.
     public class wxDateTime : wxObject
     {
 	static wxDateTime wxDefaultDateTime;

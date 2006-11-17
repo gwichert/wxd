@@ -48,14 +48,14 @@ class ArgumentNullException : Exception
 
 	alias char[] string;
 
-//import wx.Defs;
-import wx.wxObject;
-//import wx.wxString;
-//import wx.Log;
-//import wx.Event;
-//import wx.EvtHandler;
-//import wx.App;
-//import wx.Utils;
+//public import wx.Defs;
+public public import wx.wxObject;
+//public import wx.wxString;
+//public import wx.Log;
+//public import wx.Event;
+//public import wx.EvtHandler;
+//public import wx.App;
+//public import wx.Utils;
 
 alias Point wxPoint;
 struct Point

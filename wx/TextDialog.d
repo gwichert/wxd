@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.TextDialog;
-import wx.common;
-import wx.Dialog;
+public import wx.common;
+public import wx.Dialog;
 
 		//! \cond EXTERN
         static extern (C) IntPtr wxTextEntryDialog_ctor(IntPtr parent, string message, string caption, string value, uint style, inout Point pos);

@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.DataObject;
-import wx.common;
-import wx.ArrayString;
+public import wx.common;
+public import wx.ArrayString;
 
 	public abstract class DataObject : wxObject
 	{

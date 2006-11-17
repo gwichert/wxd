@@ -14,10 +14,10 @@
 //-----------------------------------------------------------------------------
 
 module wx.BitmapButton;
-import wx.common;
-import wx.Bitmap;
-import wx.Button;
-import wx.Control;
+public import wx.common;
+public import wx.Bitmap;
+public import wx.Button;
+public import wx.Control;
 
 		//! \cond EXTERN
 		extern (C) {

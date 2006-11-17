@@ -14,7 +14,7 @@
 //-----------------------------------------------------------------------------
 
 module wx.wxObject;
-import wx.common;
+public import wx.common;
 
 		//! \cond EXTERN
 		extern (C) {
@@ -53,12 +53,19 @@ import wx.common;
 		else new T(ptr);
 	}
 +/
+	//! \brief This is the root class of all wxWidgets classes.
+	//! It declares a virtual destructor which ensures that destructors get
+	//! called for all derived class objects where necessary.
+	
+	//! wxObject is the hub of a dynamic object creation scheme, enabling a
+	//! program to create instances of a class only knowing its string class
+	//! name, and to query the class hierarchy.
 	public class wxObject : IDisposable
 	{
 		// Reference to the associated C++ object
 		public IntPtr wxobj = IntPtr.init;
 
-		// Hashtable to associate C++ objects with C# references
+		// Hashtable to associate C++ objects with D references
 		private static wxObject[IntPtr] objects;
 		
 		// memOwn is true when we create a new instance with the wrapper ctor
@@ -166,7 +173,7 @@ import wx.common;
 		// returns true if the object is found in the
 		// Hashtable and is removed (for Dispose)
 
-		private static bool RemoveObject(IntPtr ptr)
+		public static bool RemoveObject(IntPtr ptr)
 		{
 			bool retval = false;
 

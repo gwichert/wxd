@@ -14,10 +14,10 @@
 //-----------------------------------------------------------------------------
 
 module wx.HtmlHelpController;
-import wx.common;
+public import wx.common;
 
-import wx.Config;
-import wx.Frame;
+public import wx.Config;
+public import wx.Frame;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxHtmlHelpController_ctor(int style);

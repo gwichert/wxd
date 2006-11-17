@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.Validator;
-import wx.common;
-import wx.EvtHandler;
+public import wx.common;
+public import wx.EvtHandler;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxValidator_ctor();

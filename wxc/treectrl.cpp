@@ -647,7 +647,7 @@ void wxTreeCtrl_SetItemSelectedImage(wxTreeCtrl* self, wxTreeItemId* item, int s
 #if WXWIN_COMPATIBILITY_2_4
 	self->SetItemSelectedImage(*item, selImage);
 #else
-	self->SetItemImage(*item, selImage);
+	self->SetItemImage(*item, selImage, wxTreeItemIcon_Selected);
 #endif
 }
 

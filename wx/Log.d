@@ -14,10 +14,11 @@
 //-----------------------------------------------------------------------------
 
 module wx.Log;
-import wx.common;
-import wx.TextCtrl;
+public import wx.common;
+public import wx.TextCtrl;
 //! \cond STD
 private import std.format;
+private import std.stdarg;
 //! \endcond
 
 		//! \cond EXTERN
@@ -122,6 +123,7 @@ private import std.format;
 			return s;
 		}
 
+//! \cond VERSION
 version (none) {
 /* C# compatible */
 private static string stringFormat(string str,void* argptr,TypeInfo[] arguments)
@@ -179,5 +181,6 @@ private static string stringFormat(string str,void* argptr,TypeInfo[] arguments)
 }
 
 }
+//! \endcond VERSION
 	}
 

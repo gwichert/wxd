@@ -1,6 +1,6 @@
 /// The wxArrayInt wrapper class
 module wx.ArrayInt;
-import wx.common;
+public import wx.common;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxArrayInt_ctor();

@@ -14,9 +14,9 @@
 //-----------------------------------------------------------------------------
 
 module wx.PrintDialog;
-import wx.common;
-import wx.Dialog;
-import wx.PrintData;
+public import wx.common;
+public import wx.Dialog;
+public import wx.PrintData;
 
 		//! \cond EXTERN
         static extern (C) IntPtr wxPageSetupDialog_ctor(IntPtr parent, IntPtr data);
@@ -78,6 +78,7 @@ import wx.PrintData;
         public DC PrintDC() { return cast(DC)FindObject(wxPrintDialog_GetPrintDC(wxobj), &DC.New); }
     }
 
+//! \cond VERSION
 version(none) /*(__WXGTK__)*/{
     
 		//! \cond EXTERN
@@ -116,3 +117,4 @@ version(none) /*(__WXGTK__)*/{
     }
 
 } // __WXGTK__
+//! \endcond VERSION

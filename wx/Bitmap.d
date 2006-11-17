@@ -14,12 +14,12 @@
 //-----------------------------------------------------------------------------
 
 module wx.Bitmap;
-import wx.common;
-import wx.GDIObject;
-import wx.Colour;
-import wx.Palette;
-import wx.Image;
-import wx.Icon;
+public import wx.common;
+public import wx.GDIObject;
+public import wx.Colour;
+public import wx.Palette;
+public import wx.Image;
+public import wx.Icon;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxBitmap_ctor();

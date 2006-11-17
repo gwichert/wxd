@@ -14,9 +14,9 @@
 //-----------------------------------------------------------------------------
 
 module wx.MenuBar;
-import wx.common;
-import wx.EvtHandler;
-import wx.Menu;
+public import wx.common;
+public import wx.EvtHandler;
+public import wx.Menu;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxMenuBar_ctor();

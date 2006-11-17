@@ -14,9 +14,9 @@
 //-----------------------------------------------------------------------------
 
 module wx.SashWindow;
-import wx.common;
-import wx.Window;
-import wx.CommandEvent;
+public import wx.common;
+public import wx.Window;
+public import wx.CommandEvent;
 
 	public enum SashEdgePosition 
 	{

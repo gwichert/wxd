@@ -14,10 +14,10 @@
 //-----------------------------------------------------------------------------
 
 module wx.NavigationKeyEvent;
-import wx.common;
+public import wx.common;
 
-import wx.Event;
-import wx.Window;
+public import wx.Event;
+public import wx.Window;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxNavigationKeyEvent_ctor();

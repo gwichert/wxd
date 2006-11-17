@@ -14,9 +14,9 @@
 //-----------------------------------------------------------------------------
 
 module wx.Button;
-import wx.common;
-import wx.Control;
-import wx.Bitmap;
+public import wx.common;
+public import wx.Control;
+public import wx.Bitmap;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxButton_ctor();

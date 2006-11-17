@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.Font;
-import wx.common;
-import wx.GDIObject;
+public import wx.common;
+public import wx.GDIObject;
 
 	// Font encodings - taken from wx/fontenc.h
 	// Author: Vadim Zeitlin, (C) Vadim Zeitlin

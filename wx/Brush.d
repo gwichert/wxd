@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.Brush;
-import wx.common;
-import wx.Bitmap;
+public import wx.common;
+public import wx.Bitmap;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxBLUE_BRUSH_Get();

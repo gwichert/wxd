@@ -13,9 +13,9 @@
 //-----------------------------------------------------------------------------
 
 module wx.StaticBoxSizer;
-import wx.common;
-import wx.BoxSizer;
-import wx.StaticBox;
+public import wx.common;
+public import wx.BoxSizer;
+public import wx.StaticBox;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxStaticBoxSizer_ctor(IntPtr box, int orient);

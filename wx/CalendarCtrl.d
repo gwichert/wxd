@@ -14,12 +14,12 @@
 //-----------------------------------------------------------------------------
 
 module wx.CalendarCtrl;
-import wx.common;
-import wx.wxDateTime;
-import wx.Colour;
-import wx.Font;
-import wx.Control;
-import wx.CommandEvent;
+public import wx.common;
+public import wx.wxDateTime;
+public import wx.Colour;
+public import wx.Font;
+public import wx.Control;
+public import wx.CommandEvent;
 
     public enum CalendarHitTestResult
     {

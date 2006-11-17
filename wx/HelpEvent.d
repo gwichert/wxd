@@ -14,9 +14,9 @@
 //-----------------------------------------------------------------------------
 
 module wx.HelpEvent;
-import wx.common;
-import wx.CommandEvent;
-import wx.Window;
+public import wx.common;
+public import wx.CommandEvent;
+public import wx.Window;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxHelpEvent_ctor(int type,int winid, inout Point pos);

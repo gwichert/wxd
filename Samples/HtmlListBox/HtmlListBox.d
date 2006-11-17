@@ -12,7 +12,8 @@
 //-----------------------------------------------------------------------------
 
 import wx.wx;
-import std.string;
+private import std.string;
+
 
 	public class MyHtmlListBox : HtmlListBox
 	{

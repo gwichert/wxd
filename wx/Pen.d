@@ -14,10 +14,10 @@
 //-----------------------------------------------------------------------------
 
 module wx.Pen;
-import wx.common;
-import wx.Defs;
-import wx.GDIObject;
-import wx.Colour;
+public import wx.common;
+public import wx.Defs;
+public import wx.GDIObject;
+public import wx.Colour;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxGDIObj_GetRedPen();

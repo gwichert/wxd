@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.Utils;
-import wx.common;
-import wx.Window;
+public import wx.common;
+public import wx.Window;
 
 		//! \cond EXTERN
 		static extern (C) string wxGlobal_GetHomeDir();

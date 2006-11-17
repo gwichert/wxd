@@ -12,7 +12,8 @@
 //-----------------------------------------------------------------------------
 
 import wx.wx;
-import std.stream;
+private import std.stream;
+private import std.string;
 alias std.string.find indexOf;
 
 	public class MyCanvas : Window

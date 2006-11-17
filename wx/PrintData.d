@@ -14,7 +14,7 @@
 //-----------------------------------------------------------------------------
 
 module wx.PrintData;
-import wx.common;
+public import wx.common;
 
     public enum PrintMode
     {

@@ -14,9 +14,9 @@
 //-----------------------------------------------------------------------------
 
 module wx.ImageList;
-import wx.common;
-import wx.Bitmap;
-import wx.DC;
+public import wx.common;
+public import wx.Bitmap;
+public import wx.DC;
 
 	// Flag values for Set/GetImageList
 	enum

@@ -14,9 +14,9 @@
 //-----------------------------------------------------------------------------
 
 module wx.SystemSettings;
-import wx.common;
-import wx.Colour;
-import wx.Font;
+public import wx.common;
+public import wx.Colour;
+public import wx.Font;
 
     public enum SystemFont
     {

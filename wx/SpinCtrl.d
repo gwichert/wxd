@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.SpinCtrl;
-import wx.common;
-import wx.Control;
+public import wx.common;
+public import wx.Control;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxSpinCtrl_ctor();

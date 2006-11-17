@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.MoveEvent;
-import wx.common;
-import wx.Event;
+public import wx.common;
+public import wx.Event;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxMoveEvent_ctor();

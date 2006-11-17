@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.CheckBox;
-import wx.common;
-import wx.Control;
+public import wx.common;
+public import wx.Control;
 
 	public enum CheckBoxState
 	{

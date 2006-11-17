@@ -14,10 +14,10 @@
 //-----------------------------------------------------------------------------
 
 module wx.FontDialog;
-import wx.common;
-import wx.Dialog;
-import wx.Font;
-import wx.GdiCommon; //for nullobject
+public import wx.common;
+public import wx.Dialog;
+public import wx.Font;
+public import wx.GdiCommon; //for nullobject
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxFontData_ctor();

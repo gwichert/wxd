@@ -14,7 +14,7 @@
 //-----------------------------------------------------------------------------
 
 module wx.GDIObject;
-import wx.common;
+public import wx.common;
 
 		//! \cond EXTERN
 		static extern (C) void wxGDIObj_dtor(IntPtr self);

@@ -14,10 +14,10 @@
 //-----------------------------------------------------------------------------
 
 module wx.FontMisc;
-import wx.common;
-import wx.Font;
-import wx.Window;
-import wx.ArrayString;
+public import wx.common;
+public import wx.Font;
+public import wx.Window;
+public import wx.ArrayString;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxFontMapper_ctor();

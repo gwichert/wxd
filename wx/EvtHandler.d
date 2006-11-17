@@ -19,10 +19,15 @@
 //		that the event proxy gets...
 
 module wx.EvtHandler;
-import wx.common;
-import wx.Event;
+public import wx.common;
+public import wx.Event;
 
 	alias void delegate(Object sender, Event e) EventListener;
+
+//! \cond VERSION
+version(WXD_STYLEDTEXTCTRL)
+//! \endcond VERSION
+public import wx.StyledTextCtrl;
 	
 	//---------------------------------------------------------------------
 
@@ -71,6 +76,9 @@ import wx.Event;
 		
 
 	alias EvtHandler wxEvtHandler;
+	//! \brief A class that can handle events from the windowing system.
+	//! wxWindow (and therefore all window classes) are derived from this
+	//! class.
 	public class EvtHandler : wxObject
 	{
 		private SListener[] listeners;
@@ -615,7 +623,9 @@ version(__WXMSW__){
 			{ AddCommandListener(Event.wxEVT_DETAILED_HELP, id, lsnr); }
 
 
-version(WXNET_STYLEDTEXTCTRL){
+//! \cond VERSION
+version(WXD_STYLEDTEXTCTRL){
+//! \endcond VERSION
 
 		// StyledTextCtrl specific events
 		
@@ -678,6 +688,8 @@ version(WXNET_STYLEDTEXTCTRL){
 		
 		public void EVT_STC_CALLTIP_CLICK(int id, EventListener lsnr)    
 			{ AddCommandListener(StyledTextCtrl.wxEVT_STC_CALLTIP_CLICK, id, lsnr); }			
-} // version(WXNET_STYLEDTEXTCTRL)
+//! \cond VERSION
+} // version(WXD_STYLEDTEXTCTRL)
+//! \endcond VERSION
 		public static wxObject New(IntPtr ptr) { return new EvtHandler(ptr); }
 	}

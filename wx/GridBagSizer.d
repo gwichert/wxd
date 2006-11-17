@@ -11,9 +11,9 @@
 //-----------------------------------------------------------------------------
 
 module wx.GridBagSizer;
-import wx.common;
-import wx.SizerItem;
-import wx.FlexGridSizer;
+public import wx.common;
+public import wx.SizerItem;
+public import wx.FlexGridSizer;
 
 		//! \cond EXTERN
         static extern (C) IntPtr wxGBSizerItem_ctor(int width, int height, IntPtr pos, IntPtr span, int flag, int border, IntPtr userData);

@@ -14,12 +14,12 @@
 //-----------------------------------------------------------------------------
 
 module wx.Frame;
-import wx.common;
-import wx.Window;
-import wx.ToolBar;
-import wx.MenuBar;
-import wx.StatusBar;
-import wx.Icon;
+public import wx.common;
+public import wx.Window;
+public import wx.ToolBar;
+public import wx.MenuBar;
+public import wx.StatusBar;
+public import wx.Icon;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxFrame_ctor();
@@ -65,6 +65,10 @@ import wx.Icon;
 		//---------------------------------------------------------------------
 
 	alias Frame wxFrame;
+	//! \brief A frame is a window whose size and position can (usually) be
+	//! changed by the user. It usually has thick borders and a title bar,
+	//! and can optionally contain a menu bar, toolbar and status bar.
+	//! A frame can contain any window that is not a frame or dialog.
 	public class Frame : Window
 	{
 		public const int wxFULLSCREEN_NOMENUBAR   = 0x0001;

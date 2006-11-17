@@ -14,7 +14,7 @@
 //-----------------------------------------------------------------------------
 
 module wx.Event;
-import wx.common;
+public import wx.common;
 
 typedef int EventType;
 
@@ -678,7 +678,7 @@ version(__WXMSW__){
 
 		//---------------------------------------------------------------------
 
-		private static Event CreateFrom(IntPtr wxEvent)
+		public static Event CreateFrom(IntPtr wxEvent)
 		{
 			// Check to see if this event type is in the type map
 

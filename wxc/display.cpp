@@ -11,7 +11,7 @@
 //
 //-----------------------------------------------------------------------------
 
-#ifdef WXNET_DISPLAY
+#ifdef WXD_DISPLAY
 
 #include <wx/wx.h>
 #include "common.h"

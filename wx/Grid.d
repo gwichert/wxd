@@ -14,13 +14,13 @@
 //-----------------------------------------------------------------------------
 
 module wx.Grid;
-import wx.common;
-import wx.Event;
-import wx.KeyEvent;
-import wx.CommandEvent;
-import wx.Window;
-import wx.Control;
-import wx.ScrolledWindow;
+public import wx.common;
+public import wx.Event;
+public import wx.KeyEvent;
+public import wx.CommandEvent;
+public import wx.Window;
+public import wx.Control;
+public import wx.ScrolledWindow;
 
     public enum GridSelectionMode
     {
@@ -2121,6 +2121,7 @@ import wx.ScrolledWindow;
     
             //-----------------------------------------------------------------------------
 
+//! \cond VERSION
 version(NOT_IMPLEMENTED){
             public GridCellCoordsArray GetSelectedCells()
         {
@@ -2154,7 +2155,8 @@ version(NOT_IMPLEMENTED){
             {
             return wxGrid_GetSelectedCols(wxobj);
             }
-} // NOT_IMPREMENT
+} // version(NOT_IMPLEMENTED)
+//! \endcond VERSION
             //-----------------------------------------------------------------------------
     
             public Rectangle BlockToDeviceRect(GridCellCoords topLeft, GridCellCoords bottomRight)

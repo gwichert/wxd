@@ -12,8 +12,8 @@
 //-----------------------------------------------------------------------------
 
 import wx.wx;
-import std.string;
-import std.random;
+private import std.string;
+private import std.random;
 alias std.string.find indexOf;
 alias std.string.rfind LastIndexOf;
 

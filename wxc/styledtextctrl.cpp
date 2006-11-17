@@ -13,7 +13,7 @@
 // $Id$
 //-----------------------------------------------------------------------------
 
-#ifdef WXNET_STYLEDTEXTCTRL
+#ifdef WXD_STYLEDTEXTCTRL
 
 #include <wx/wx.h>
 #include "common.h"
@@ -681,7 +681,7 @@ void wxStyledTextCtrl_CmdKeyClearAll(wxStyledTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetStyleBytes(wxStyledTextCtrl* self, int length, dstr styleBytes)
+void wxStyledTextCtrl_SetStyleBytes(wxStyledTextCtrl* self, int length, char* styleBytes)
 {
     self->SetStyleBytes(length, styleBytes);
 }
@@ -1979,7 +1979,7 @@ dbit wxStyledTextCtrl_GetUseVerticalScrollBar(wxStyledTextCtrl* self)
 extern "C" WXEXPORT
 void wxStyledTextCtrl_AppendText(wxStyledTextCtrl* self, dstr text)
 {
-    self->AppendText(length, wxString(text.data, wxConvUTF8, text.length));
+    self->AppendText(wxString(text.data, wxConvUTF8, text.length));
 }
 
 //-----------------------------------------------------------------------------

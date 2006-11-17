@@ -14,11 +14,11 @@
 //-----------------------------------------------------------------------------
 
 module wx.LayoutWin;
-import wx.common;
-import wx.SashWindow;
-import wx.Event;
-import wx.Frame;
-import wx.MDI;
+public import wx.common;
+public import wx.SashWindow;
+public import wx.Event;
+public import wx.Frame;
+public import wx.MDI;
 
 	public enum LayoutOrientation
 	{

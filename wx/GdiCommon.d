@@ -14,14 +14,14 @@
 //-----------------------------------------------------------------------------
 
 module wx.GdiCommon;
-import wx.common;
-import wx.Bitmap;
-import wx.Cursor;
-import wx.Icon;
-import wx.Pen;
-import wx.Brush;
-import wx.Font;
-import wx.Colour;
+public import wx.common;
+public import wx.Bitmap;
+public import wx.Cursor;
+public import wx.Icon;
+public import wx.Pen;
+public import wx.Brush;
+public import wx.Font;
+public import wx.Colour;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxSTANDARD_CURSOR_Get();

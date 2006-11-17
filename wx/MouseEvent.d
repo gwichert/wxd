@@ -14,10 +14,10 @@
 //-----------------------------------------------------------------------------
 
 module wx.MouseEvent;
-import wx.common;
-import wx.Event;
+public import wx.common;
+public import wx.Event;
 
-import wx.DC;
+public import wx.DC;
 
 		//! \cond EXTERN
         static extern (C) IntPtr wxMouseEvent_ctor(int mouseType);

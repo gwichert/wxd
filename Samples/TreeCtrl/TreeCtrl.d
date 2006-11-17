@@ -12,6 +12,7 @@
 //-----------------------------------------------------------------------------
 
 import wx.wx;
+private import std.string;
 
 	public class TreeTestApp : App
 	{

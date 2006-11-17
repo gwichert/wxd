@@ -14,9 +14,9 @@
 //-----------------------------------------------------------------------------
 
 module wx.ColourDialog;
-import wx.common;
-import wx.Colour;
-import wx.Dialog;
+public import wx.common;
+public import wx.Colour;
+public import wx.Dialog;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxColourData_ctor();

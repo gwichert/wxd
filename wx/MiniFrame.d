@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.MiniFrame;
-import wx.common;
-import wx.Frame;
+public import wx.common;
+public import wx.Frame;
 
 		//! \cond EXTERN
         static extern (C) IntPtr wxMiniFrame_ctor();

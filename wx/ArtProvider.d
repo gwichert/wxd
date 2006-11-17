@@ -14,10 +14,10 @@
 //-----------------------------------------------------------------------------
 
 module wx.ArtProvider;
-import wx.common;
-import wx.Bitmap;
-import wx.Icon;
-import wx.Window;
+public import wx.common;
+public import wx.Bitmap;
+public import wx.Icon;
+public import wx.Window;
 
 	public enum ArtID 
 	{

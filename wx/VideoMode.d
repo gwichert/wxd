@@ -29,10 +29,10 @@
 //-----------------------------------------------------------------------------
 
 module wx.VideoMode;
-import wx.common;
+public import wx.common;
 
 //! \cond STD
-import std.string;
+private import std.string;
 //! \endcond
 
 //    [StructLayout(LayoutKind.Sequential)]

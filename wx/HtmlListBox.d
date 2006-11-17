@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.HtmlListBox;
-import wx.common;
-import wx.VLBox;
+public import wx.common;
+public import wx.VLBox;
 
 		//-----------------------------------------------------------------------------
 		

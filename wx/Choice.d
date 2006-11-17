@@ -14,11 +14,11 @@
 //-----------------------------------------------------------------------------
 
 module wx.Choice;
-import wx.common;
-import wx.Control;
-import wx.ClientData;
-import wx.IControlWithItems;
-import wx.ArrayString;
+public import wx.common;
+public import wx.Control;
+public import wx.ClientData;
+public import wx.IControlWithItems;
+public import wx.ArrayString;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxChoice_ctor();

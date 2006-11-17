@@ -13,10 +13,10 @@
 //-----------------------------------------------------------------------------
 
 module wx.TextCtrl;
-import wx.common;
-import wx.Control;
-import wx.CommandEvent;
-import wx.KeyEvent;
+public import wx.common;
+public import wx.Control;
+public import wx.CommandEvent;
+public import wx.KeyEvent;
 
 	public enum TextAttrAlignment
 	{

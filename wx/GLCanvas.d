@@ -2,7 +2,7 @@
 // wxD - GLCanvas.d
 // (C) 2006 afb <afb@users.sourceforge.net>
 // 
-/// The wxGLCanvas wrapper classes. Optional, requires OpenGL.
+/// The wxGLCanvas wrapper classes. (Optional, requires OpenGL)
 //
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
@@ -10,9 +10,9 @@
 //-----------------------------------------------------------------------------
 
 module wx.GLCanvas;
-import wx.common;
-import wx.Window;
-import wx.Palette;
+public import wx.common;
+public import wx.Window;
+public import wx.Palette;
 
 	//---------------------------------------------------------------------------
 	// Constants for attriblist

@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.ScrolledWindow;
-import wx.common;
-import wx.Panel;
+public import wx.common;
+public import wx.Panel;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxScrollWnd_ctor(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);

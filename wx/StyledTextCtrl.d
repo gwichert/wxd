@@ -4,7 +4,7 @@
 // based on
 // wx.NET - StyledTextCtrl.h
 //
-/// The wxStyledTextCtrl wrapper class.
+/// The wxStyledTextCtrl wrapper class. (Optional, requires STC contrib)
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -15,39 +15,41 @@
 
 module wx.StyledTextCtrl;
 
-version(WXNET_STYLEDTEXTCTRL){
+//! \cond VERSION
+version(WXD_STYLEDTEXTCTRL){
+//! \endcond VERSION
 
-import wx.common;
-import wx.Control;
-import wx.CommandEvent;
+public import wx.common;
+public import wx.Control;
+public import wx.CommandEvent;
 
 		//! \cond EXTERN
-        static extern (C) int wxStyledTextCtrl_EVT_STC_CHANGE();
-        static extern (C) int wxStyledTextCtrl_EVT_STC_STYLENEEDED();
-        static extern (C) int wxStyledTextCtrl_EVT_STC_CHARADDED();
-        static extern (C) int wxStyledTextCtrl_EVT_STC_SAVEPOINTREACHED();
-        static extern (C) int wxStyledTextCtrl_EVT_STC_SAVEPOINTLEFT();  
-        static extern (C) int wxStyledTextCtrl_EVT_STC_ROMODIFYATTEMPT();
-        static extern (C) int wxStyledTextCtrl_EVT_STC_KEY();
-        static extern (C) int wxStyledTextCtrl_EVT_STC_DOUBLECLICK();
-        static extern (C) int wxStyledTextCtrl_EVT_STC_UPDATEUI();
-        static extern (C) int wxStyledTextCtrl_EVT_STC_MODIFIED();
-        static extern (C) int wxStyledTextCtrl_EVT_STC_MACRORECORD();
-        static extern (C) int wxStyledTextCtrl_EVT_STC_MARGINCLICK();
-        static extern (C) int wxStyledTextCtrl_EVT_STC_NEEDSHOWN();
-        static extern (C) int wxStyledTextCtrl_EVT_STC_POSCHANGED();
-        static extern (C) int wxStyledTextCtrl_EVT_STC_PAINTED();
-        static extern (C) int wxStyledTextCtrl_EVT_STC_USERLISTSELECTION();
-        static extern (C) int wxStyledTextCtrl_EVT_STC_URIDROPPED();
-        static extern (C) int wxStyledTextCtrl_EVT_STC_DWELLSTART();
-        static extern (C) int wxStyledTextCtrl_EVT_STC_DWELLEND();
-        static extern (C) int wxStyledTextCtrl_EVT_STC_START_DRAG();
-        static extern (C) int wxStyledTextCtrl_EVT_STC_DRAG_OVER();
-        static extern (C) int wxStyledTextCtrl_EVT_STC_DO_DROP();
-        static extern (C) int wxStyledTextCtrl_EVT_STC_ZOOM();
-        static extern (C) int wxStyledTextCtrl_EVT_STC_HOTSPOT_CLICK();
-        static extern (C) int wxStyledTextCtrl_EVT_STC_HOTSPOT_DCLICK();
-        static extern (C) int wxStyledTextCtrl_EVT_STC_CALLTIP_CLICK();
+        static extern (C) EventType wxStyledTextCtrl_EVT_STC_CHANGE();
+        static extern (C) EventType wxStyledTextCtrl_EVT_STC_STYLENEEDED();
+        static extern (C) EventType wxStyledTextCtrl_EVT_STC_CHARADDED();
+        static extern (C) EventType wxStyledTextCtrl_EVT_STC_SAVEPOINTREACHED();
+        static extern (C) EventType wxStyledTextCtrl_EVT_STC_SAVEPOINTLEFT();  
+        static extern (C) EventType wxStyledTextCtrl_EVT_STC_ROMODIFYATTEMPT();
+        static extern (C) EventType wxStyledTextCtrl_EVT_STC_KEY();
+        static extern (C) EventType wxStyledTextCtrl_EVT_STC_DOUBLECLICK();
+        static extern (C) EventType wxStyledTextCtrl_EVT_STC_UPDATEUI();
+        static extern (C) EventType wxStyledTextCtrl_EVT_STC_MODIFIED();
+        static extern (C) EventType wxStyledTextCtrl_EVT_STC_MACRORECORD();
+        static extern (C) EventType wxStyledTextCtrl_EVT_STC_MARGINCLICK();
+        static extern (C) EventType wxStyledTextCtrl_EVT_STC_NEEDSHOWN();
+        static extern (C) EventType wxStyledTextCtrl_EVT_STC_POSCHANGED();
+        static extern (C) EventType wxStyledTextCtrl_EVT_STC_PAINTED();
+        static extern (C) EventType wxStyledTextCtrl_EVT_STC_USERLISTSELECTION();
+        static extern (C) EventType wxStyledTextCtrl_EVT_STC_URIDROPPED();
+        static extern (C) EventType wxStyledTextCtrl_EVT_STC_DWELLSTART();
+        static extern (C) EventType wxStyledTextCtrl_EVT_STC_DWELLEND();
+        static extern (C) EventType wxStyledTextCtrl_EVT_STC_START_DRAG();
+        static extern (C) EventType wxStyledTextCtrl_EVT_STC_DRAG_OVER();
+        static extern (C) EventType wxStyledTextCtrl_EVT_STC_DO_DROP();
+        static extern (C) EventType wxStyledTextCtrl_EVT_STC_ZOOM();
+        static extern (C) EventType wxStyledTextCtrl_EVT_STC_HOTSPOT_CLICK();
+        static extern (C) EventType wxStyledTextCtrl_EVT_STC_HOTSPOT_DCLICK();
+        static extern (C) EventType wxStyledTextCtrl_EVT_STC_CALLTIP_CLICK();
 
         static extern (C) IntPtr wxStyledTextCtrl_ctor(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
         static extern (C) void   wxStyledTextCtrl_AddText(IntPtr self, string text);
@@ -391,62 +393,33 @@ import wx.CommandEvent;
 
         // StyledTextCtrl Events
  
-        public static /*readonly*/ int wxEVT_STC_CHANGE;
-        public static /*readonly*/ int wxEVT_STC_STYLENEEDED;
-        public static /*readonly*/ int wxEVT_STC_CHARADDED;
-        public static /*readonly*/ int wxEVT_STC_SAVEPOINTREACHED;
-        public static /*readonly*/ int wxEVT_STC_SAVEPOINTLEFT;  
-        public static /*readonly*/ int wxEVT_STC_ROMODIFYATTEMPT;
-        public static /*readonly*/ int wxEVT_STC_KEY;
-        public static /*readonly*/ int wxEVT_STC_DOUBLECLICK;
-        public static /*readonly*/ int wxEVT_STC_UPDATEUI;
-        public static /*readonly*/ int wxEVT_STC_MODIFIED;
-        public static /*readonly*/ int wxEVT_STC_MACRORECORD;
-        public static /*readonly*/ int wxEVT_STC_MARGINCLICK;
-        public static /*readonly*/ int wxEVT_STC_NEEDSHOWN;
-        //public static /*readonly*/ int wxEVT_STC_POSCHANGED;
-        public static /*readonly*/ int wxEVT_STC_PAINTED;
-        public static /*readonly*/ int wxEVT_STC_USERLISTSELECTION;
-        public static /*readonly*/ int wxEVT_STC_URIDROPPED;
-        public static /*readonly*/ int wxEVT_STC_DWELLSTART;
-        public static /*readonly*/ int wxEVT_STC_DWELLEND;
-        public static /*readonly*/ int wxEVT_STC_START_DRAG;
-        public static /*readonly*/ int wxEVT_STC_DRAG_OVER;
-        public static /*readonly*/ int wxEVT_STC_DO_DROP;
-        public static /*readonly*/ int wxEVT_STC_ZOOM;
-        public static /*readonly*/ int wxEVT_STC_HOTSPOT_CLICK;
-        public static /*readonly*/ int wxEVT_STC_HOTSPOT_DCLICK;
-        public static /*readonly*/ int wxEVT_STC_CALLTIP_CLICK;
+        public static /*readonly*/ EventType wxEVT_STC_CHANGE;
+        public static /*readonly*/ EventType wxEVT_STC_STYLENEEDED;
+        public static /*readonly*/ EventType wxEVT_STC_CHARADDED;
+        public static /*readonly*/ EventType wxEVT_STC_SAVEPOINTREACHED;
+        public static /*readonly*/ EventType wxEVT_STC_SAVEPOINTLEFT;  
+        public static /*readonly*/ EventType wxEVT_STC_ROMODIFYATTEMPT;
+        public static /*readonly*/ EventType wxEVT_STC_KEY;
+        public static /*readonly*/ EventType wxEVT_STC_DOUBLECLICK;
+        public static /*readonly*/ EventType wxEVT_STC_UPDATEUI;
+        public static /*readonly*/ EventType wxEVT_STC_MODIFIED;
+        public static /*readonly*/ EventType wxEVT_STC_MACRORECORD;
+        public static /*readonly*/ EventType wxEVT_STC_MARGINCLICK;
+        public static /*readonly*/ EventType wxEVT_STC_NEEDSHOWN;
+        //public static /*readonly*/ EventType wxEVT_STC_POSCHANGED;
+        public static /*readonly*/ EventType wxEVT_STC_PAINTED;
+        public static /*readonly*/ EventType wxEVT_STC_USERLISTSELECTION;
+        public static /*readonly*/ EventType wxEVT_STC_URIDROPPED;
+        public static /*readonly*/ EventType wxEVT_STC_DWELLSTART;
+        public static /*readonly*/ EventType wxEVT_STC_DWELLEND;
+        public static /*readonly*/ EventType wxEVT_STC_START_DRAG;
+        public static /*readonly*/ EventType wxEVT_STC_DRAG_OVER;
+        public static /*readonly*/ EventType wxEVT_STC_DO_DROP;
+        public static /*readonly*/ EventType wxEVT_STC_ZOOM;
+        public static /*readonly*/ EventType wxEVT_STC_HOTSPOT_CLICK;
+        public static /*readonly*/ EventType wxEVT_STC_HOTSPOT_DCLICK;
+        public static /*readonly*/ EventType wxEVT_STC_CALLTIP_CLICK;
 
-	static this()
-	{
-        	 wxEVT_STC_CHANGE = wxStyledTextCtrl_EVT_STC_CHANGE();
-        	 wxEVT_STC_STYLENEEDED = wxStyledTextCtrl_EVT_STC_STYLENEEDED();
-        	 wxEVT_STC_CHARADDED = wxStyledTextCtrl_EVT_STC_CHARADDED();
-        	 wxEVT_STC_SAVEPOINTREACHED = wxStyledTextCtrl_EVT_STC_SAVEPOINTREACHED();
-        	 wxEVT_STC_SAVEPOINTLEFT = wxStyledTextCtrl_EVT_STC_SAVEPOINTLEFT();  
-        	 wxEVT_STC_ROMODIFYATTEMPT = wxStyledTextCtrl_EVT_STC_ROMODIFYATTEMPT();
-        	 wxEVT_STC_KEY = wxStyledTextCtrl_EVT_STC_KEY();
-        	 wxEVT_STC_DOUBLECLICK = wxStyledTextCtrl_EVT_STC_DOUBLECLICK();
-        	 wxEVT_STC_UPDATEUI = wxStyledTextCtrl_EVT_STC_UPDATEUI();
-        	 wxEVT_STC_MODIFIED = wxStyledTextCtrl_EVT_STC_MODIFIED();
-        	 wxEVT_STC_MACRORECORD = wxStyledTextCtrl_EVT_STC_MACRORECORD();
-        	 wxEVT_STC_MARGINCLICK = wxStyledTextCtrl_EVT_STC_MARGINCLICK();
-        	 wxEVT_STC_NEEDSHOWN = wxStyledTextCtrl_EVT_STC_NEEDSHOWN();
-        //	 wxEVT_STC_POSCHANGED = wxStyledTextCtrl_EVT_STC_POSCHANGED();
-        	 wxEVT_STC_PAINTED = wxStyledTextCtrl_EVT_STC_PAINTED();
-        	 wxEVT_STC_USERLISTSELECTION = wxStyledTextCtrl_EVT_STC_USERLISTSELECTION();
-        	 wxEVT_STC_URIDROPPED = wxStyledTextCtrl_EVT_STC_URIDROPPED();
-        	 wxEVT_STC_DWELLSTART = wxStyledTextCtrl_EVT_STC_DWELLSTART();
-        	 wxEVT_STC_DWELLEND = wxStyledTextCtrl_EVT_STC_DWELLEND();
-        	 wxEVT_STC_START_DRAG = wxStyledTextCtrl_EVT_STC_START_DRAG();
-        	 wxEVT_STC_DRAG_OVER = wxStyledTextCtrl_EVT_STC_DRAG_OVER();
-        	 wxEVT_STC_DO_DROP = wxStyledTextCtrl_EVT_STC_DO_DROP();
-        	 wxEVT_STC_ZOOM = wxStyledTextCtrl_EVT_STC_ZOOM();
-        	 wxEVT_STC_HOTSPOT_CLICK = wxStyledTextCtrl_EVT_STC_HOTSPOT_CLICK();
-        	 wxEVT_STC_HOTSPOT_DCLICK = wxStyledTextCtrl_EVT_STC_HOTSPOT_DCLICK();
-        	 wxEVT_STC_CALLTIP_CLICK = wxStyledTextCtrl_EVT_STC_CALLTIP_CLICK();
-	}
         //-----------------------------------------------------------------------------
 
         public const int wxSTC_INVALID_POSITION = -1;
@@ -1422,6 +1395,33 @@ import wx.CommandEvent;
 
         static this()
         {
+        	 wxEVT_STC_CHANGE = wxStyledTextCtrl_EVT_STC_CHANGE();
+        	 wxEVT_STC_STYLENEEDED = wxStyledTextCtrl_EVT_STC_STYLENEEDED();
+        	 wxEVT_STC_CHARADDED = wxStyledTextCtrl_EVT_STC_CHARADDED();
+        	 wxEVT_STC_SAVEPOINTREACHED = wxStyledTextCtrl_EVT_STC_SAVEPOINTREACHED();
+        	 wxEVT_STC_SAVEPOINTLEFT = wxStyledTextCtrl_EVT_STC_SAVEPOINTLEFT();  
+        	 wxEVT_STC_ROMODIFYATTEMPT = wxStyledTextCtrl_EVT_STC_ROMODIFYATTEMPT();
+        	 wxEVT_STC_KEY = wxStyledTextCtrl_EVT_STC_KEY();
+        	 wxEVT_STC_DOUBLECLICK = wxStyledTextCtrl_EVT_STC_DOUBLECLICK();
+        	 wxEVT_STC_UPDATEUI = wxStyledTextCtrl_EVT_STC_UPDATEUI();
+        	 wxEVT_STC_MODIFIED = wxStyledTextCtrl_EVT_STC_MODIFIED();
+        	 wxEVT_STC_MACRORECORD = wxStyledTextCtrl_EVT_STC_MACRORECORD();
+        	 wxEVT_STC_MARGINCLICK = wxStyledTextCtrl_EVT_STC_MARGINCLICK();
+        	 wxEVT_STC_NEEDSHOWN = wxStyledTextCtrl_EVT_STC_NEEDSHOWN();
+        //	 wxEVT_STC_POSCHANGED = wxStyledTextCtrl_EVT_STC_POSCHANGED();
+        	 wxEVT_STC_PAINTED = wxStyledTextCtrl_EVT_STC_PAINTED();
+        	 wxEVT_STC_USERLISTSELECTION = wxStyledTextCtrl_EVT_STC_USERLISTSELECTION();
+        	 wxEVT_STC_URIDROPPED = wxStyledTextCtrl_EVT_STC_URIDROPPED();
+        	 wxEVT_STC_DWELLSTART = wxStyledTextCtrl_EVT_STC_DWELLSTART();
+        	 wxEVT_STC_DWELLEND = wxStyledTextCtrl_EVT_STC_DWELLEND();
+        	 wxEVT_STC_START_DRAG = wxStyledTextCtrl_EVT_STC_START_DRAG();
+        	 wxEVT_STC_DRAG_OVER = wxStyledTextCtrl_EVT_STC_DRAG_OVER();
+        	 wxEVT_STC_DO_DROP = wxStyledTextCtrl_EVT_STC_DO_DROP();
+        	 wxEVT_STC_ZOOM = wxStyledTextCtrl_EVT_STC_ZOOM();
+        	 wxEVT_STC_HOTSPOT_CLICK = wxStyledTextCtrl_EVT_STC_HOTSPOT_CLICK();
+        	 wxEVT_STC_HOTSPOT_DCLICK = wxStyledTextCtrl_EVT_STC_HOTSPOT_DCLICK();
+        	 wxEVT_STC_CALLTIP_CLICK = wxStyledTextCtrl_EVT_STC_CALLTIP_CLICK();
+
             Event.AddEventType(wxEVT_STC_CHANGE,               &StyledTextEvent.New);
             Event.AddEventType(wxEVT_STC_STYLENEEDED,          &StyledTextEvent.New);
             Event.AddEventType(wxEVT_STC_CHARADDED,            &StyledTextEvent.New);
@@ -1456,13 +1456,13 @@ import wx.CommandEvent;
         public this(IntPtr wxobj) 
             { super (wxobj); }
 
-        public  this(Window parent, int id /*= wxID_ANY*/, Point pos = wxDefaultPosition, Size size = wxDefaultSiz, int style =0, string name = wxSTCNameStr)
+        public  this(Window parent, int id /*= wxID_ANY*/, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style =0, string name = wxSTCNameStr)
             { this(wxStyledTextCtrl_ctor(wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name)); }
 	    
 	//---------------------------------------------------------------------
 	// ctors with self created id
 	    
-        public  this(Window parent, Point pos = wxDefaultPosition, Size size = wxDefaultSiz, int style =0, string name = wxSTCNameStr)
+        public  this(Window parent, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style =0, string name = wxSTCNameStr)
 	    { this(parent, Window.UniqueID, pos, size, style, name);}
 
         //-----------------------------------------------------------------------------
@@ -1874,7 +1874,7 @@ import wx.CommandEvent;
 
         public void SetStyleBytes(ubyte[] styleBytes)
         {
-            wxStyledTextCtrl_SetStyleBytes(wxobj, styleBytes.length, styleBytes);
+            wxStyledTextCtrl_SetStyleBytes(wxobj, styleBytes.length, styleBytes.ptr);
         }
 
         //-----------------------------------------------------------------------------
@@ -3169,4 +3169,6 @@ import wx.CommandEvent;
         public bool Alt() { return wxStyledTextEvent_GetAlt(wxobj); }
     }
 
-}
+//! \cond VERSION
+} // version(WXD_STYLEDTEXTCTRL)
+//! \endcond VERSION

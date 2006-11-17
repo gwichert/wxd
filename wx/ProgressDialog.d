@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.ProgressDialog;
-import wx.common;
-import wx.Dialog;
+public import wx.common;
+public import wx.Dialog;
 
 		//! \cond EXTERN
         static extern (C) IntPtr wxProgressDialog_ctor(string title, string message, int maximum, IntPtr parent, uint style);

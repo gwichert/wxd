@@ -14,7 +14,7 @@
 //-----------------------------------------------------------------------------
 
 module wx.wxString;
-import wx.common;
+public import wx.common;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxString_ctor(char* str);
@@ -30,6 +30,7 @@ import wx.common;
 		
 		//---------------------------------------------------------------------
 
+	//! \brief wxString is a class representing a character string.
 	public class wxString : wxObject
 	{
 		public this(IntPtr wxobj)

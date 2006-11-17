@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.DbGrid;
-import wx.common;
-import wx.Grid;
+public import wx.common;
+public import wx.Grid;
 
 	alias Column wxColumn;
 	public class Column

@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.BoxSizer;
-import wx.common;
-import wx.Sizer;
+public import wx.common;
+public import wx.Sizer;
 
 		//! \cond EXTERN
 		extern(C) {

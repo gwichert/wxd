@@ -14,9 +14,9 @@
 //-----------------------------------------------------------------------------
 
 module wx.Printer;
-import wx.common;
-import wx.Window;
-import wx.PrintData;
+public import wx.common;
+public import wx.Window;
+public import wx.PrintData;
 
     public enum PrinterError 
     {

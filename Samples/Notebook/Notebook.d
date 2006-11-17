@@ -12,7 +12,7 @@
 //-----------------------------------------------------------------------------
 
 import wx.wx;
-import std.string;
+private import std.string;
 alias std.string.find indexOf;
 
 	public class MyFrame : Frame

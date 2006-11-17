@@ -14,10 +14,10 @@
 //-----------------------------------------------------------------------------
 
 module wx.CommandEvent;
-import wx.common;
-import wx.Event;
+public import wx.common;
+public import wx.Event;
 
-import wx.ClientData;
+public import wx.ClientData;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxCommandEvent_ctor(int type,int winid);

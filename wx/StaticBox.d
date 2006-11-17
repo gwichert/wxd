@@ -13,8 +13,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.StaticBox;
-import wx.common;
-import wx.Control;
+public import wx.common;
+public import wx.Control;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxStaticBox_ctor();

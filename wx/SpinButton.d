@@ -13,9 +13,9 @@
 //-----------------------------------------------------------------------------
 
 module wx.SpinButton;
-import wx.common;
-import wx.CommandEvent;
-import wx.Control;
+public import wx.common;
+public import wx.CommandEvent;
+public import wx.Control;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxSpinEvent_ctor(int commandType, int id);

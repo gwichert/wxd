@@ -14,10 +14,10 @@
 //-----------------------------------------------------------------------------
 
 module wx.ChoiceDialog;
-import wx.common;
-import wx.Dialog;
-import wx.ClientData;
-import wx.ArrayInt;
+public import wx.common;
+public import wx.Dialog;
+public import wx.ClientData;
+public import wx.ArrayInt;
 
 		//! \cond EXTERN
         static extern (C) IntPtr wxSingleChoiceDialog_ctor(IntPtr parent, string message, string caption, int n, string* choices, IntPtr clientData, uint style, inout Point pos);

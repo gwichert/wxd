@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.KeyEvent;
-import wx.common;
-import wx.Event;
+public import wx.common;
+public import wx.Event;
 
 		//! \cond EXTERN
         static extern (C) IntPtr wxKeyEvent_ctor(int type);

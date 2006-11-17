@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.ImageHandlers;
-import wx.common;
-import wx.Image;
+public import wx.common;
+public import wx.Image;
 
   //! \cond EXTERN
   public static extern (C) IntPtr BMPHandler_ctor();

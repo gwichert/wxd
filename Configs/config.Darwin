@@ -1,0 +1,54 @@
+# from samples
+
+WX_CONFIG = wx-config
+PLATFORM = $(shell cat $(TOPDIR)/wxc/platform)
+
+CXX = $(shell $(WX_CONFIG) --cxx)
+DC = gdc
+
+CXXFLAGS = -O2 -g
+DCFLAGS += -fversion=__$(PLATFORM)__ -O2 -g
+
+WXVERSION = `$(WX_CONFIG) --version`
+WXLIBS = `$(WX_CONFIG) --libs`
+
+LDFLAGS = -lstdc++ `test -r /usr/lib/libcc_dynamic.a && echo -lcc_dynamic`
+REZFLAGS = $(shell $(WX_CONFIG) --rezflags)
+
+
+.cpp.o: 
+	$(CXX) -c $(CXXFLAGS) `$(WX_CONFIG) --cxxflags` $<
+
+%.o:%.d
+	$(DC) -c $(DCFLAGS) -I$(TOPDIR) $<
+
+
+BUNDLE_EXECUTABLE = $(shell basename $(TARGET))
+BUNDLE_IDENTIFIER = $(shell basename $(TARGET) | tr 'A-Z' 'a-z')
+
+BUNDLE_PLIST = $(TOPDIR)/Samples/Info.plist.in
+BUNDLE_ICONS = $(TOPDIR)/Samples/wxmac.icns
+
+all: $(TARGET).app
+
+$(TARGET).app: $(TARGET)
+	mkdir -p $@/Contents
+	sed -e "s/IDENTIFIER/$(BUNDLE_IDENTIFIER)/" \
+	    -e "s/EXECUTABLE/$(BUNDLE_EXECUTABLE)/" \
+	    -e "s/VERSION/$(WXVERSION)/" \
+	    $(BUNDLE_PLIST) >$@/Contents/Info.plist
+	echo -n "APPL????" >$@/Contents/PkgInfo
+	mkdir -p $@/Contents/MacOS
+	ln -f $(TARGET) $@/Contents/MacOS/$(BUNDLE_EXECUTABLE)
+	mkdir -p $@/Contents/Resources
+	cp -f $(BUNDLE_ICONS) $@/Contents/Resources/
+	-touch -r $< $@
+
+$(TARGET) : $(OBJECTS)
+	$(DC) -o $@ $(OBJECTS) -L$(TOPDIR) -lwxd -lwxc $(WXLIBS) $(LDFLAGS)
+	-$(REZFLAGS) $@
+	
+clean:
+	-rm *.o
+	-rm $(TARGET)
+	-rm -r $(TARGET).app

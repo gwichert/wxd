@@ -14,24 +14,24 @@
 //-----------------------------------------------------------------------------
 
 module wx.XmlResource;
-import wx.common;
-import wx.Dialog;
+public import wx.common;
+public import wx.Dialog;
 
-import wx.Window;
+public import wx.Window;
 
-import wx.Frame;
+public import wx.Frame;
 
-import wx.Menu;
+public import wx.Menu;
 
-import wx.MenuBar;
+public import wx.MenuBar;
 
-import wx.Panel;
+public import wx.Panel;
 
-import wx.ToolBar;
+public import wx.ToolBar;
 
 //! \cond STD
-import std.stream;
-import std.regexp;
+private import std.stream;
+private import std.regexp;
 //! \endcond
 
 	public enum XmlResourceFlags : int

@@ -14,12 +14,12 @@
 //-----------------------------------------------------------------------------
 
 module wx.HTML;
-import wx.common;
-import wx.ScrolledWindow;
-import wx.Frame;
-import wx.Config;
-import wx.PrintData;
-import wx.MouseEvent;
+public import wx.common;
+public import wx.ScrolledWindow;
+public import wx.Frame;
+public import wx.Config;
+public import wx.PrintData;
+public import wx.MouseEvent;
 
 //class HtmlContainerCell;
 //class HtmlFilter;

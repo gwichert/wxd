@@ -13,10 +13,10 @@
 //-----------------------------------------------------------------------------
 
 module wx.Region;
-import wx.common;
-import wx.GDIObject;
-import wx.Bitmap;
-import wx.Colour;
+public import wx.common;
+public import wx.GDIObject;
+public import wx.Bitmap;
+public import wx.Colour;
 
     public enum RegionContain {
         wxOutRegion = 0,

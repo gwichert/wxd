@@ -13,8 +13,8 @@
 
 
 module wx.Palette;
-import wx.common;
-import wx.GDIObject;
+public import wx.common;
+public import wx.GDIObject;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxPalette_ctor();

@@ -12,8 +12,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.TipWindow;
-import wx.common;
-import wx.Window;
+public import wx.common;
+public import wx.Window;
 
 		//! \cond EXTERN
         static extern (C) IntPtr wxTipWindow_ctor(IntPtr parent, string text, int maxLength, Rectangle* rectBound);

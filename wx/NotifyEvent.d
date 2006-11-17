@@ -10,8 +10,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.NotifyEvent;
-import wx.common;
-import wx.CommandEvent;
+public import wx.common;
+public import wx.CommandEvent;
 
 
 		//! \cond EXTERN

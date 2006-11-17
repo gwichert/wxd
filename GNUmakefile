@@ -40,4 +40,3 @@ clean:
 	$(MAKE) DMD="$(DMD_WXD)" clean -C wx
 	$(MAKE) DMD="$(DMD_WXD)" clean -C Samples
 	-rm wxc/platform
-

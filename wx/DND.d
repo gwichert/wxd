@@ -14,9 +14,9 @@
 //-----------------------------------------------------------------------------
 
 module wx.DND;
-import wx.common;
-import wx.DataObject;
-import wx.Window;
+public import wx.common;
+public import wx.DataObject;
+public import wx.Window;
 
 	public enum Drag
 	{

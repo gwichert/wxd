@@ -14,11 +14,11 @@
 //-----------------------------------------------------------------------------
 
 module wx.Menu;
-import wx.common;
-import wx.Defs;
-import wx.Window;
-import wx.MenuItem;
-import wx.MenuBar;
+public import wx.common;
+public import wx.Defs;
+public import wx.Window;
+public import wx.MenuItem;
+public import wx.MenuBar;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxMenuBase_ctor1(string titel, uint style);
@@ -456,7 +456,7 @@ import wx.MenuBar;
 			IntPtr ptr = wxMenuBase_GetEventHandler(wxobj);
 			wxObject o = FindObject(ptr);
 			if (o) return cast(EvtHandler)o;
-			else new EvtHandler(ptr);
+			else return new EvtHandler(ptr);
 		}
 		public void EventHandler(EvtHandler value) { wxMenuBase_SetEventHandler(wxobj, wxObject.SafePtr(value)); }
 		

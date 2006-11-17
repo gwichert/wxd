@@ -14,7 +14,7 @@
 //-----------------------------------------------------------------------------
 
 module wx.WizardPage;
-import wx.Panel;
+public import wx.Panel;
 
 	alias WizardPage wxWizardPage;
 	public class WizardPage : Panel

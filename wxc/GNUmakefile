@@ -161,7 +161,7 @@ all:  platform $(LIBTARGET)
 WX_CONFIG = wx-config
 
 CXX = $(shell $(WX_CONFIG) --cxx)
-CXXFLAGS = -O2 -Wall `$(WX_CONFIG) --cxxflags`
+CXXFLAGS = -O2 -Wall
 
 prefix=/usr/local
 exec_prefix=$(prefix)
@@ -184,8 +184,8 @@ clean:
 	-rm $(LIBTARGET)
 
 $(LIBTARGET) : $(OBJECTS)
-	ar rcs $@ $(OBJECTS)
+	ar rcs $@ $^
 
 
 %.o:%.cpp
-	$(CXX) -c $(CXXFLAGS) $<
+	$(CXX) -c $(CXXFLAGS) `$(WX_CONFIG) --cxxflags` $<

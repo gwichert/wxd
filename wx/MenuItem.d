@@ -14,11 +14,11 @@
 //-----------------------------------------------------------------------------
 
 module wx.MenuItem;
-import wx.common;
-import wx.Accelerator;
-import wx.Menu;
-import wx.Bitmap;
-import wx.EvtHandler;
+public import wx.common;
+public import wx.Accelerator;
+public import wx.Menu;
+public import wx.Bitmap;
+public import wx.EvtHandler;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxMenuItem_GetMenu(IntPtr self);

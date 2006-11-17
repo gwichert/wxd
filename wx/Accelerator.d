@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.Accelerator;
-import wx.common;
-import wx.MenuItem;
+public import wx.common;
+public import wx.MenuItem;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxAcceleratorEntry_ctor(int flags, int keyCode, int cmd, IntPtr item);
@@ -133,8 +133,9 @@ import wx.MenuItem;
 		public this()
 			{ this(wxAcceleratorTable_ctor());}
 			
-		version(__WXMAC__) {
-		} else {
+		//! \cond VERSION
+		version(__WXMAC__) {} else {
+		//! \endcond VERSION
 		//-----------------------------------------------------------------------------
 
 		/*public void Add(AcceleratorEntry entry)
@@ -162,7 +163,9 @@ import wx.MenuItem;
 		{
 			return cast(AcceleratorEntry)FindObject(wxAcceleratorTable_GetEntry(wxobj, wxObject.SafePtr(evt)),&AcceleratorEntry.New);
 		}*/
-		} // version()
+		//! \cond VERSION
+		} // version(__WXMAC__)
+		//! \endcond VERSION
 
 		//-----------------------------------------------------------------------------
 

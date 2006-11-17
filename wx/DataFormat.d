@@ -12,7 +12,7 @@
 //-----------------------------------------------------------------------------
 
 module wx.DataFormat;
-import wx.common;
+public import wx.common;
 
     public enum DataFormatId
     {

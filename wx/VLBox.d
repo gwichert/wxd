@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.VLBox;
-import wx.common;
-import wx.VScroll;
+public import wx.common;
+public import wx.VScroll;
 
 		//! \cond EXTERN
 		extern (C) {

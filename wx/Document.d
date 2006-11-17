@@ -14,9 +14,10 @@
 //-----------------------------------------------------------------------------
 
 module wx.Document;
-import wx.common;
-import wx.EvtHandler;
+public import wx.common;
+public import wx.EvtHandler;
 
+//! \cond VERSION
 version(NOT_READY_YET){
 
 		//! \cond EXTERN
@@ -220,4 +221,5 @@ version(NOT_READY_YET){
 
         public Window DocumentWindow() { return cast(Window)FindObject(wxDocument_GetDocumentWindow(wxobj)); }
     }
-}
+} // version(NOT_READY_YET)
+//! \endcond VERSION

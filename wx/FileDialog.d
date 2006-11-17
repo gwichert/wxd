@@ -15,12 +15,12 @@
 //-----------------------------------------------------------------------------
 
 module wx.FileDialog;
-import wx.common;
-import wx.Dialog;
-import wx.ArrayString;
+public import wx.common;
+public import wx.Dialog;
+public import wx.ArrayString;
 
 //! \cond STD
-import std.string;
+private import std.string;
 //! \endcond
 
 		//! \cond EXTERN

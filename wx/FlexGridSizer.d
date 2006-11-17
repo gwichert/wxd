@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.FlexGridSizer;
-import wx.common;
-import wx.GridSizer;
+public import wx.common;
+public import wx.GridSizer;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxFlexGridSizer_ctor(int rows, int cols, int vgap, int hgap);

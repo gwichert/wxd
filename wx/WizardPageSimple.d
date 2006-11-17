@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.WizardPageSimple;
-import wx.WizardPage;
-import wx.Wizard;
+public import wx.WizardPage;
+public import wx.Wizard;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxWizardPageSimple_ctor(IntPtr parent, IntPtr prev, IntPtr next, IntPtr bitmap, char* resource);

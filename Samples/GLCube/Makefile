@@ -12,5 +12,5 @@ GLLIBS = \
 	$(LIBDIRNAME)\wxmsw$(WX_RELEASE_NODOT)d$(WX_LIB_FLAVOUR)_gl.lib \
 	opengl32.lib glu32.lib
 
-include $(TOPDIR)/config.mak
+include $(TOPDIR)/Configs/config.mak
 

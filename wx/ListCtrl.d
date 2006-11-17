@@ -14,10 +14,10 @@
 //-----------------------------------------------------------------------------
 
 module wx.ListCtrl;
-import wx.common;
-import wx.Control;
-import wx.ClientData;
-import wx.ImageList;
+public import wx.common;
+public import wx.Control;
+public import wx.ClientData;
+public import wx.ImageList;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxListItem_ctor();

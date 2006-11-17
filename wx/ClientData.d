@@ -14,7 +14,7 @@
 //-----------------------------------------------------------------------------
 
 module wx.ClientData;
-import wx.common;
+public import wx.common;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxClientData_ctor();

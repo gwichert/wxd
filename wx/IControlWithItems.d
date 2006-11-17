@@ -14,7 +14,7 @@
 //-----------------------------------------------------------------------------
 
 module wx.IControlWithItems;
-import wx.ClientData;
+public import wx.ClientData;
 
 	public interface IControlWithItems 
 	{

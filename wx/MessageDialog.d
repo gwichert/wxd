@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.MessageDialog;
-import wx.common;
-import wx.Dialog;
+public import wx.common;
+public import wx.Dialog;
 
 	// The MessageDialog class implements the interface for wxWidgets' 
 	// wxMessageDialog class and wxMessageBox.

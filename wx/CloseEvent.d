@@ -14,8 +14,8 @@
 //-----------------------------------------------------------------------------
 
 module wx.CloseEvent;
-import wx.common;
-import wx.Event;
+public import wx.common;
+public import wx.Event;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxCloseEvent_ctor(int type,int winid);
