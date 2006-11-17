@@ -18,8 +18,12 @@ module wx.FileDialog;
 import wx.common;
 import wx.Dialog;
 import wx.ArrayString;
-import std.string;
 
+//! \cond STD
+import std.string;
+//! \endcond
+
+		//! \cond EXTERN
         static extern (C) IntPtr wxFileDialog_ctor(IntPtr parent, string message, string defaultDir, string defaultFile, string wildcard, uint style, inout Point pos);
         static extern (C) void   wxFileDialog_dtor(IntPtr self);
 
@@ -48,6 +52,7 @@ import std.string;
 
         static extern (C) IntPtr wxFileDialog_GetPaths(IntPtr self);
         static extern (C) IntPtr wxFileDialog_GetFilenames(IntPtr self);
+		//! \endcond
 
         //---------------------------------------------------------------------
 
@@ -113,10 +118,12 @@ import std.string;
         public string[] Filenames() { return (new ArrayString(wxFileDialog_GetFilenames(wxobj), true)).toArray(); }
     }
 
+	//! \cond EXTERN
 	static extern (C) string wxFileSelector_func(char[] message, char[] default_path,char[] default_filename,char[] default_extension, char[] wildcard, int flags, IntPtr parent, int x, int y);
 	static extern (C) string wxFileSelectorEx_func(char[] message, char[] default_path,char[] default_filename,int *indexDefaultExtension, char[] wildcard, int flags, IntPtr parent, int x, int y);
 	static extern (C) string wxLoadFileSelector_func(char[] what, char[] extension, char[] default_name, IntPtr parent);
 	static extern (C) string wxSaveFileSelector_func(char[] what, char[] extension, char[] default_name, IntPtr parent);
+	//! \endcond
 
 string FileSelector(
 	string message = FileDialog.wxFileSelectorPromptStr,

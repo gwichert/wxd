@@ -43,12 +43,14 @@ import wx.Window;
 		alias int function(DropSource obj, int flags) Virtual_DoDragDrop;
 		}
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxDropSource_Win_ctor(IntPtr win);
 		static extern (C) IntPtr wxDropSource_DataObject_ctor(IntPtr dataObject, IntPtr win);
 		static extern (C) void wxDropSource_dtor(IntPtr self);
 		static extern (C) void wxDropSource_RegisterVirtual(IntPtr self, DropSource obj, Virtual_DoDragDrop doDragDrop);
 		static extern (C) int wxDropSource_DoDragDrop(IntPtr self, int flags);
 		static extern (C) void wxDropSource_SetData(IntPtr self, IntPtr dataObject);
+		//! \endcond
 		
 		//---------------------------------------------------------------------
 
@@ -121,6 +123,7 @@ import wx.Window;
 		
 		//---------------------------------------------------------------------
 		
+		//! \cond EXTERN
 		static extern (C) IntPtr wxDropTarget_ctor(IntPtr dataObject);
 		static extern (C) void wxDropTarget_dtor(IntPtr self);
 		static extern (C) void wxDropTarget_RegisterVirtual(IntPtr self, DropTarget obj, Virtual_OnDragOver onDragOver, Virtual_OnDrop onDrop, Virtual_OnData3 onData, Virtual_GetData getData, Virtual_OnLeave onLeave, Virtual_OnEnter onEnter);  
@@ -131,6 +134,7 @@ import wx.Window;
 		static extern (C) void   wxDropTarget_OnLeave(IntPtr self);
 		static extern (C) bool wxDropTarget_OnDrop(IntPtr self, int x, int y);
 		static extern (C) bool wxDropTarget_GetData(IntPtr self);
+		//! \endcond
 		
 		//---------------------------------------------------------------------
 
@@ -240,8 +244,10 @@ import wx.Window;
 	
 	//---------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) bool wxTextDropTarget_OnDrop(IntPtr self, int x, int y);
 		static extern (C) bool wxTextDropTarget_GetData(IntPtr self);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 
@@ -281,8 +287,10 @@ import wx.Window;
 	
 	//---------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) bool wxFileDropTarget_OnDrop(IntPtr self, int x, int y);
 		static extern (C) bool wxFileDropTarget_GetData(IntPtr self);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 

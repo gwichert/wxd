@@ -20,9 +20,11 @@ import wx.Panel;
 //import wx.NotifyEvent;
 import wx.WizardPage;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxWizard_ctor(IntPtr parent, int id, string title, IntPtr bitmap, inout Point pos, int style);
 		static extern (C) bool   wxWizard_RunWizard(IntPtr self, IntPtr firstPage);
 		static extern (C) void   wxWizard_SetPageSize(IntPtr self, inout Size size);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 		
@@ -49,6 +51,7 @@ import wx.WizardPage;
 		public void PageSize(Size value) { wxWizard_SetPageSize(wxobj, value); }
 	}
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxWizardEvent_ctor(int type,int id, bool direction,IntPtr page);
 		static extern (C) bool   wxWizardEvent_GetDirection(IntPtr self);
 		static extern (C) IntPtr wxWizardEvent_GetPage(IntPtr self);
@@ -58,6 +61,7 @@ import wx.WizardPage;
 		static extern (C) EventType wxEvent_WIZARD_CANCEL();
 		static extern (C) EventType wxEvent_WIZARD_HELP();
 		static extern (C) EventType wxEvent_WIZARD_FINISHED();
+		//! \endcond
 
 /+
 	public class WizardEvent : NotifyEvent

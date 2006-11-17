@@ -1,7 +1,7 @@
 MAKE=make
 
 OS=$(shell uname)
-ARCH=$(shell arch | sed -e s/i.86/x86/ )
+ARCH=$(shell arch 2>/dev/null || echo i386 | sed -e s/i.86/x86/ )
 
 ifeq ("$(OS) $(ARCH)","Linux x86")
 CXX = g++ -D__DMD__
@@ -19,6 +19,12 @@ all:
 install:
 	$(MAKE) CXX="$(CXX)" DMD="$(DMD)" install -C wxc
 	$(MAKE) CXX="$(CXX)" DMD="$(DMD)" install -C wx
+
+docs: Doxyfile
+	doxygen
+
+ddoc:
+	$(MAKE) CXX="$(CXX)" DMD="$(DMD)" ddoc -C wx
 
 clean:
 	$(MAKE) CXX="$(CXX)" DMD="$(DMD)" clean -C wxc

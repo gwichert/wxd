@@ -19,9 +19,11 @@ import wx.common;
 import wx.CommandEvent;
 import wx.Window;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxContextMenuEvent_ctor(int type,int winid, inout Point pos);
 		static extern (C) void   wxContextMenuEvent_GetPosition(IntPtr self, inout Point pos);
 		static extern (C) void   wxContextMenuEvent_SetPosition(IntPtr self, inout Point pos);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 

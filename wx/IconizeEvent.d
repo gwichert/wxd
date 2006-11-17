@@ -18,8 +18,10 @@ import wx.common;
 
 import wx.Event;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxIconizeEvent_ctor(int winid,bool iconized);
 		static extern (C) bool wxIconizeEvent_Iconized(IntPtr self);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 

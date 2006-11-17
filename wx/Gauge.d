@@ -17,6 +17,7 @@ module wx.Gauge;
 import wx.common;
 import wx.Control;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxGauge_ctor();
 		static extern (C) void   wxGauge_dtor(IntPtr self);
 		static extern (C) bool   wxGauge_Create(IntPtr self, IntPtr parent, int id, int range, inout Point pos, inout Size size, uint style, IntPtr validator, string name);
@@ -30,6 +31,7 @@ import wx.Control;
 		static extern (C) int    wxGauge_GetBezelFace(IntPtr self);
 		static extern (C) bool   wxGauge_AcceptsFocus(IntPtr self);
 		static extern (C) bool   wxGauge_IsVertical(IntPtr self);
+		//! \endcond
 	
 		//---------------------------------------------------------------------
 		

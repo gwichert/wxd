@@ -19,6 +19,7 @@ import wx.Event;
 import wx.Control;
 import wx.ImageList;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxNotebookEvent_ctor(int commandType, int id, int nSel, int nOldSel);
 		static extern (C) int    wxNotebookEvent_GetSelection(IntPtr self);
 		static extern (C) void   wxNotebookEvent_SetSelection(IntPtr self, int nSel);
@@ -27,6 +28,7 @@ import wx.ImageList;
 		static extern (C) void wxNotebookEvent_Veto(IntPtr self);
 		static extern (C) void wxNotebookEvent_Allow(IntPtr self);
 		static extern (C) bool wxNotebookEvent_IsAllowed(IntPtr self);		
+		//! \endcond
 
 		//-----------------------------------------------------------------------------
 
@@ -78,6 +80,7 @@ import wx.ImageList;
 		}
 	}
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxNotebook_ctor();
 		static extern (C) bool   wxNotebook_AddPage(IntPtr self, IntPtr page, string text, bool select, int imageId);
 		static extern (C) bool   wxNotebook_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
@@ -101,6 +104,7 @@ import wx.ImageList;
 		static extern (C) bool   wxNotebook_InsertPage(IntPtr self, int nPage, IntPtr pPage, string strText, bool bSelect, int imageId);
 		static extern (C) int    wxNotebook_SetSelection(IntPtr self, int nPage);
 		static extern (C) void   wxNotebook_AdvanceSelection(IntPtr self, bool forward);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 		

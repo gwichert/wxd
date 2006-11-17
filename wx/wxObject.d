@@ -16,17 +16,21 @@
 module wx.wxObject;
 import wx.common;
 
+		//! \cond EXTERN
 		extern (C) {
 		alias void function(IntPtr ptr) Virtual_Dispose;
 		}
 	
 		static extern (C) string wxObject_GetTypeName(IntPtr obj);
 		static extern (C) void   wxObject_dtor(IntPtr self);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 		// this is for Locale gettext support...
 		
+		//! \cond EXTERN
 		static extern (C) string wxGetTranslation_func(string str);
+		//! \endcond
 		
 		public static string GetTranslation(string str)
 		{

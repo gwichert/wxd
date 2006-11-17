@@ -31,6 +31,7 @@ version(WXNET_DISPLAY){
 
 import wx.VideoMode;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxDisplay_ctor(int index);
 		static extern (C) IntPtr wxDisplay_ctor(inout VideoMode mode);
 		static extern (C) int wxDisplay_GetCount();
@@ -49,6 +50,7 @@ import wx.VideoMode;
 		
 		static extern (C) void wxDisplay_ResetMode(IntPtr self);
 		static extern (C) void wxDisplay_dtor(IntPtr self);
+		//! \endcond
 
 	public class Display : wxObject
 	{

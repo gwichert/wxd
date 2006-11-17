@@ -16,12 +16,14 @@ module wx.Palette;
 import wx.common;
 import wx.GDIObject;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxPalette_ctor();
 		static extern (C) void wxPalette_dtor(IntPtr self);
 		static extern (C) bool wxPalette_Ok(IntPtr self);
 		static extern (C) bool wxPalette_Create(IntPtr self, int n, inout ubyte red, inout ubyte green, inout ubyte blue);
 		static extern (C) int wxPalette_GetPixel(IntPtr self, ubyte red, ubyte green, ubyte blue);
 		static extern (C) bool wxPalette_GetRGB(IntPtr self, int pixel, out ubyte red, out ubyte green, out ubyte blue);
+		//! \endcond
 
 	public class Palette : GDIObject
 	{

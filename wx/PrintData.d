@@ -111,6 +111,7 @@ import wx.common;
         wxPAPER_A3_EXTRA_TRANSVERSE // A3 Extra Transverse 322 x 445 mm
     }
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxPageSetupDialogData_ctor();
         static extern (C) IntPtr wxPageSetupDialogData_ctorPrintSetup(IntPtr dialogData);
         static extern (C) IntPtr wxPageSetupDialogData_ctorPrintData(IntPtr printData);
@@ -146,6 +147,7 @@ import wx.common;
         static extern (C) void wxPageSetupDialogData_CalculatePaperSizeFromId(IntPtr self);
         static extern (C) IntPtr wxPageSetupDialogData_GetPrintData(IntPtr self);
         static extern (C) void wxPageSetupDialogData_SetPrintData(IntPtr self, IntPtr printData);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -274,6 +276,7 @@ import wx.common;
 +/
     }
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxPrintDialogData_ctor();
         static extern (C) IntPtr wxPrintDialogData_ctorDialogData(IntPtr dialogData);
         static extern (C) IntPtr wxPrintDialogData_ctorPrintData(IntPtr printData);
@@ -308,6 +311,7 @@ import wx.common;
         static extern (C) bool wxPrintDialogData_Ok(IntPtr self);
         static extern (C) IntPtr wxPrintDialogData_GetPrintData(IntPtr self);
         static extern (C) void wxPrintDialogData_SetPrintData(IntPtr self, IntPtr printData);
+		//! \endcond
 
     public class PrintDialogData : wxObject
     {
@@ -397,6 +401,7 @@ import wx.common;
         public void printData(PrintData value) { wxPrintDialogData_SetPrintData(wxobj, wxObject.SafePtr(value)); }
     }
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxPrintData_ctor();
         static extern (C) IntPtr wxPrintData_ctorPrintData(IntPtr printData);
         static extern (C) int wxPrintData_GetNoCopies(IntPtr self);
@@ -440,6 +445,7 @@ import wx.common;
         static extern (C) void wxPrintData_SetPrinterTranslateY(IntPtr self, int y);
         static extern (C) void wxPrintData_SetPrinterTranslation(IntPtr self, int x, int y);
         static extern (C) void wxPrintData_SetPrintMode(IntPtr self, int printMode);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 

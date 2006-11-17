@@ -24,6 +24,7 @@ import wx.SizeEvent;
 
 		//-----------------------------------------------------------------------------
 		
+		//! \cond EXTERN
 		static extern (C) IntPtr wxVScrolledWindow_ctor();
 		static extern (C) IntPtr wxVScrolledWindow_ctor2(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
 		static extern (C) void wxVScrolledWindow_RegisterVirtual(IntPtr self, VScrolledWindow obj, Virtual_IntInt onGetLineHeight);
@@ -41,6 +42,7 @@ import wx.SizeEvent;
 		static extern (C) int wxVScrolledWindow_GetFirstVisibleLine(IntPtr self);
 		static extern (C) int wxVScrolledWindow_GetLastVisibleLine(IntPtr self);
 		static extern (C) bool wxVScrolledWindow_IsVisible(IntPtr self, int line);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 		

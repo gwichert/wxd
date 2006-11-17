@@ -20,12 +20,14 @@ import wx.Event;
 
 import wx.Cursor;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr	wxSetCursorEvent_ctor(int x,int y);
 		static extern (C) int		wxSetCursorEvent_GetX(IntPtr self);
 		static extern (C) int		wxSetCursorEvent_GetY(IntPtr self);
 		static extern (C) void		wxSetCursorEvent_SetCursor(IntPtr self, IntPtr cursor);
 		static extern (C) IntPtr	wxSetCursorEvent_GetCursor(IntPtr self);
 		static extern (C) bool		wxSetCursorEvent_HasCursor(IntPtr self);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 

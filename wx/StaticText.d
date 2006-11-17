@@ -17,8 +17,10 @@ module wx.StaticText;
 import wx.common;
 import wx.Control;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxStaticText_ctor();
 		static extern (C) bool wxStaticText_Create(IntPtr self, IntPtr parent, int id, string label, inout Point pos, inout Size size, uint style, string name);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 		

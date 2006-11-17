@@ -21,6 +21,7 @@ import wx.common;
 import wx.Control;
 import wx.CommandEvent;
 
+		//! \cond EXTERN
         static extern (C) int wxStyledTextCtrl_EVT_STC_CHANGE();
         static extern (C) int wxStyledTextCtrl_EVT_STC_STYLENEEDED();
         static extern (C) int wxStyledTextCtrl_EVT_STC_CHARADDED();
@@ -379,6 +380,7 @@ import wx.CommandEvent;
         static extern (C) void   wxStyledTextCtrl_SetLastKeydownProcessed(IntPtr self, bool val);
         static extern (C) bool   wxStyledTextCtrl_SaveFile(IntPtr self, string filename);
         static extern (C) bool   wxStyledTextCtrl_LoadFile(IntPtr self, string filename);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 

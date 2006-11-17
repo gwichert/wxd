@@ -38,6 +38,7 @@ import wx.wxString;
     }
 
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxConfigBase_Set(IntPtr pConfig);
         static extern (C) IntPtr wxConfigBase_Get(bool createOnDemand);
         static extern (C) IntPtr wxConfigBase_Create();
@@ -85,6 +86,7 @@ import wx.wxString;
         static extern (C) void   wxConfigBase_SetVendorName(IntPtr self, string vendorName);
         static extern (C) void   wxConfigBase_SetStyle(IntPtr self, int style);
         static extern (C) int    wxConfigBase_GetStyle(IntPtr self);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 

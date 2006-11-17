@@ -73,6 +73,7 @@ import wx.ToolTip;
 		wxNO_BORDER       = wxBORDER_NONE
 	};
 	
+		//! \cond EXTERN
 		static extern (C) IntPtr wxVisualAttributes_ctor();
 		static extern (C) void   wxVisualAttributes_dtor(IntPtr self);
 		static extern (C) void   wxVisualAttributes_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
@@ -82,6 +83,7 @@ import wx.ToolTip;
 		static extern (C) IntPtr wxVisualAttributes_GetColourFg(IntPtr self);
 		static extern (C) void   wxVisualAttributes_SetColourBg(IntPtr self, IntPtr colour);
 		static extern (C) IntPtr wxVisualAttributes_GetColourBg(IntPtr self);
+		//! \endcond
 		
 		//---------------------------------------------------------------------
 
@@ -122,6 +124,7 @@ import wx.ToolTip;
 
 	//---------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxWindow_ctor(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
 		static extern (C) bool   wxWindow_Close(IntPtr self, bool force);
 		static extern (C) void   wxWindow_GetBestSize(IntPtr self, out Size size);
@@ -310,6 +313,7 @@ import wx.ToolTip;
 		static extern (C) IntPtr wxWindow_GetAncestorWithCustomPalette(IntPtr self);
 		static extern (C) void   wxWindow_InheritAttributes(IntPtr self);
 		static extern (C) bool   wxWindow_ShouldInheritColours(IntPtr self);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 

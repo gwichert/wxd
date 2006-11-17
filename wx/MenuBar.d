@@ -18,6 +18,7 @@ import wx.common;
 import wx.EvtHandler;
 import wx.Menu;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxMenuBar_ctor();
 		static extern (C) IntPtr wxMenuBar_ctor2(uint style);
 		static extern (C) bool   wxMenuBar_Append(IntPtr self, IntPtr menu, string title);
@@ -50,6 +51,7 @@ import wx.Menu;
 		static extern (C) void   wxMenuBar_SetHelpString(IntPtr self, int id, string helpstring);
 		static extern (C) void   wxMenuBar_SetLabel(IntPtr self, int id, string label);
 		static extern (C) void   wxMenuBar_SetLabelTop(IntPtr self, int pos, string label);
+		//! \endcond
 
 	public class MenuBar : EvtHandler
 	{

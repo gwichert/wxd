@@ -17,11 +17,13 @@ module wx.ProgressDialog;
 import wx.common;
 import wx.Dialog;
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxProgressDialog_ctor(string title, string message, int maximum, IntPtr parent, uint style);
 	static extern (C) void wxProgressDialog_dtor(IntPtr self);
         static extern (C) bool wxProgressDialog_Update(IntPtr self, int value, string newmsg);
         static extern (C) void wxProgressDialog_Resume(IntPtr self);
         static extern (C) bool wxProgressDialog_Show(IntPtr self, bool show);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 

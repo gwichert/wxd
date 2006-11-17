@@ -13,6 +13,7 @@ import wx.common;
 import wx.SizerItem;
 import wx.FlexGridSizer;
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxGBSizerItem_ctor(int width, int height, IntPtr pos, IntPtr span, int flag, int border, IntPtr userData);
         static extern (C) IntPtr wxGBSizerItem_ctorWindow(IntPtr window, IntPtr pos, IntPtr span, int flag, int border, IntPtr userData);
         static extern (C) IntPtr wxGBSizerItem_ctorSizer(IntPtr sizer, IntPtr pos, IntPtr span, int flag, int border, IntPtr userData);
@@ -32,6 +33,7 @@ import wx.FlexGridSizer;
         static extern (C) void   wxGBSizerItem_GetEndPos(IntPtr self, inout int row, inout int col);
         static extern (C) IntPtr wxGBSizerItem_GetGBSizer(IntPtr self);
         static extern (C) void   wxGBSizerItem_SetGBSizer(IntPtr self, IntPtr sizer);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -89,6 +91,7 @@ import wx.FlexGridSizer;
 	public static wxObject New(IntPtr ptr) { return new GBSizerItem(ptr); }
     }
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxGBSpan_ctorDefault();
         static extern (C) IntPtr wxGBSpan_ctor(int rowspan, int colspan);
 
@@ -96,6 +99,7 @@ import wx.FlexGridSizer;
         static extern (C) int    wxGBSpan_GetRowspan(IntPtr self);
         static extern (C) int    wxGBSpan_GetColspan(IntPtr self);
         static extern (C) void   wxGBSpan_SetColspan(IntPtr self, int colspan);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -122,6 +126,7 @@ import wx.FlexGridSizer;
         public void Colspan(int value) { wxGBSpan_SetColspan(wxobj, value); }
     }
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxGridBagSizer_ctor(int vgap, int hgap);
         static extern (C) bool   wxGridBagSizer_AddWindow(IntPtr self, IntPtr window, IntPtr pos, IntPtr span, int flag, int border, IntPtr userData);
         static extern (C) bool   wxGridBagSizer_AddSizer(IntPtr self, IntPtr sizer, IntPtr pos, IntPtr span, int flag, int border, IntPtr userData);
@@ -154,6 +159,7 @@ import wx.FlexGridSizer;
 
         static extern (C) bool   wxGridBagSizer_CheckForIntersectionItem(IntPtr self, IntPtr item, IntPtr excludeItem);
         static extern (C) bool   wxGridBagSizer_CheckForIntersectionPos(IntPtr self, IntPtr pos, IntPtr span, IntPtr excludeItem);
+		//! \endcond
 
     public class GridBagSizer : FlexGridSizer
     {
@@ -315,12 +321,14 @@ import wx.FlexGridSizer;
 
     }
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxGBPosition_ctor();
         static extern (C) IntPtr wxGBPosition_ctor(int row, int col);
         static extern (C) int    wxGBPosition_GetRow(IntPtr self);
         static extern (C) int    wxGBPosition_GetCol(IntPtr self);
         static extern (C) void   wxGBPosition_SetRow(IntPtr self, int row);
         static extern (C) void   wxGBPosition_SetCol(IntPtr self, int col);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 

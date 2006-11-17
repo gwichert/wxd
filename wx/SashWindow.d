@@ -37,11 +37,13 @@ import wx.CommandEvent;
 		
 	//-----------------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxSashEdge_ctor();
 		static extern (C) void wxSashEdge_dtor(IntPtr self);
 		static extern (C) bool wxSashEdge_m_show(IntPtr self);
 		static extern (C) bool wxSashEdge_m_border(IntPtr self);
 		static extern (C) int wxSashEdge_m_margin(IntPtr self);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 	
@@ -80,6 +82,7 @@ import wx.CommandEvent;
 	
 	//-----------------------------------------------------------------------------
 	
+		//! \cond EXTERN
 		static extern (C) IntPtr wxSashWindow_ctor();
 		static extern (C) bool wxSashWindow_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
 		static extern (C) void wxSashWindow_SetSashVisible(IntPtr self, SashEdgePosition edge, bool sash);
@@ -99,6 +102,7 @@ import wx.CommandEvent;
 		static extern (C) void wxSashWindow_SetMaximumSizeY(IntPtr self, int max);
 		static extern (C) int wxSashWindow_GetMaximumSizeX(IntPtr self);
 		static extern (C) int wxSashWindow_GetMaximumSizeY(IntPtr self);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 		
@@ -208,6 +212,7 @@ import wx.CommandEvent;
 	
 	//-----------------------------------------------------------------------------
 	
+		//! \cond EXTERN
 		static extern (C) IntPtr wxSashEvent_ctor(int id, SashEdgePosition edge);
 		static extern (C) void wxSashEvent_SetEdge(IntPtr self, SashEdgePosition edge);
 		static extern (C) SashEdgePosition wxSashEvent_GetEdge(IntPtr self);
@@ -215,6 +220,7 @@ import wx.CommandEvent;
 		static extern (C) void wxSashEvent_GetDragRect(IntPtr self, out Rectangle rect);
 		static extern (C) void wxSashEvent_SetDragStatus(IntPtr self, SashDragStatus status);
 		static extern (C) SashDragStatus wxSashEvent_GetDragStatus(IntPtr self);
+		//! \endcond
 	
 	public class SashEvent : CommandEvent
 	{

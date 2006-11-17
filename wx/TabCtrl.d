@@ -21,6 +21,7 @@ import wx.common;
 import wx.Event;
 import wx.Control;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxTabEvent_ctor(int commandType, int id, int nSel, int nOldSel);
 		static extern (C) int    wxTabEvent_GetSelection(IntPtr self);
 		static extern (C) void   wxTabEvent_SetSelection(IntPtr self, int nSel);
@@ -29,6 +30,7 @@ import wx.Control;
 		static extern (C) void wxTabEvent_Veto(IntPtr self);
 		static extern (C) void wxTabEvent_Allow(IntPtr self);
 		static extern (C) bool wxTabEvent_IsAllowed(IntPtr self);		
+		//! \endcond
 
 		//-----------------------------------------------------------------------------
 
@@ -82,6 +84,7 @@ import wx.Control;
 
 	//-----------------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxTabCtrl_ctor();
 		static extern (C) IntPtr wxTabCtrl_ctor2(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
 		static extern (C) int wxTabCtrl_GetSelection(IntPtr self);
@@ -105,6 +108,7 @@ import wx.Control;
 		static extern (C) bool wxTabCtrl_DeleteItem(IntPtr self, int item);
 		static extern (C) int wxTabCtrl_HitTest(IntPtr self, inout Point pt, out int flags);
 		static extern (C) bool wxTabCtrl_InsertItem(IntPtr self, int item, string text, int imageId, IntPtr data);
+		//! \endcond
 
 	public class TabCtrl : Control
 	{

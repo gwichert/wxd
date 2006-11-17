@@ -19,6 +19,7 @@ import wx.Bitmap;
 import wx.Control;
 import wx.ClientData;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxToolBarToolBase_ctor(IntPtr tbar, int toolid, string label, IntPtr bmpNormal, IntPtr bmpDisabled, int kind, IntPtr clientData, string shortHelpString, string longHelpString);
 		static extern (C) IntPtr wxToolBarToolBase_ctorCtrl(IntPtr tbar, IntPtr control);
 		static extern (C) int    wxToolBarToolBase_GetId(IntPtr self);
@@ -48,6 +49,7 @@ import wx.ClientData;
 		static extern (C) void   wxToolBarToolBase_SetClientData(IntPtr self, IntPtr clientData);
 		static extern (C) void   wxToolBarToolBase_Detach(IntPtr self);
 		static extern (C) void   wxToolBarToolBase_Attach(IntPtr self, IntPtr tbar);
+		//! \endcond
 
         //---------------------------------------------------------------------
         
@@ -138,6 +140,7 @@ import wx.ClientData;
         //---------------------------------------------------------------------
 	}
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxToolBar_ctor(IntPtr parent, int id, inout Point pos, inout Size size, uint style);
 		static extern (C) IntPtr wxToolBar_AddTool1(IntPtr self, int toolid, string label, IntPtr bitmap, IntPtr bmpDisabled, int kind, string shortHelp, string longHelp, IntPtr data);
 		static extern (C) IntPtr wxToolBar_AddTool2(IntPtr self, int toolid, string label, IntPtr bitmap, string shortHelp, int kind);
@@ -183,6 +186,7 @@ import wx.ClientData;
 		static extern (C) IntPtr wxToolBar_AddTool5(IntPtr self, int toolid, IntPtr bitmap, IntPtr bmpDisabled, bool toggle, int xPos, int yPos, IntPtr clientData, string shortHelp, string longHelp);
 		static extern (C) IntPtr wxToolBar_InsertTool(IntPtr self, int pos, int toolid, IntPtr bitmap, IntPtr bmpDisabled, bool toggle, IntPtr clientData, string shortHelp, string longHelp);
 		static extern (C) bool   wxToolBar_AcceptsFocus(IntPtr self);
+		//! \endcond
 
         //---------------------------------------------------------------------
 

@@ -18,11 +18,13 @@ import wx.common;
 import wx.Dialog;
 import wx.CommandEvent;
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxFindReplaceDialog_ctor();
         static extern (C) bool   wxFindReplaceDialog_Create(IntPtr self, IntPtr parent, IntPtr data, string title, uint style);
 
         static extern (C) IntPtr wxFindReplaceDialog_GetData(IntPtr self);
         static extern (C) void   wxFindReplaceDialog_SetData(IntPtr self, IntPtr data);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -84,6 +86,7 @@ import wx.CommandEvent;
 
 	//-----------------------------------------------------------------------------
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxFindDialogEvent_ctor(int commandType, int id);
 
         static extern (C) int    wxFindDialogEvent_GetFlags(IntPtr self);
@@ -96,6 +99,7 @@ import wx.CommandEvent;
         static extern (C) void   wxFindDialogEvent_SetReplaceString(IntPtr self, string str);
 
         static extern (C) IntPtr wxFindDialogEvent_GetDialog(IntPtr self);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -147,6 +151,7 @@ import wx.CommandEvent;
 
 	//-----------------------------------------------------------------------------
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxFindReplaceData_ctor(uint flags);
 
         static extern (C) string wxFindReplaceData_GetFindString(IntPtr self);
@@ -157,6 +162,7 @@ import wx.CommandEvent;
 
         static extern (C) void   wxFindReplaceData_SetReplaceString(IntPtr self, string str);
         static extern (C) string wxFindReplaceData_GetReplaceString(IntPtr self);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 

@@ -19,6 +19,7 @@ import wx.Event;
 
 import wx.ClientData;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxCommandEvent_ctor(int type,int winid);
 		static extern (C) int    wxCommandEvent_GetSelection(IntPtr self);
 		static extern (C) string wxCommandEvent_GetString(IntPtr self);
@@ -33,6 +34,7 @@ import wx.ClientData;
 		
 		static extern (C) void wxCommandEvent_SetExtraLong(IntPtr self, uint extralong);
 		static extern (C) uint wxCommandEvent_GetExtraLong(IntPtr self);
+		//! \endcond
 
 		//-----------------------------------------------------------------------------
 

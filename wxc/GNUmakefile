@@ -52,6 +52,7 @@ OBJECTS = \
 	gauge.o \
 	gdicmn.o \
 	gdiobject.o \
+	glcanvas.o \
 	global.o \
 	grid.o \
 	gridbagsizer.o \

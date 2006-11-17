@@ -17,8 +17,10 @@ import wx.common;
 import wx.BoxSizer;
 import wx.StaticBox;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxStaticBoxSizer_ctor(IntPtr box, int orient);
 		static extern (C) IntPtr wxStaticBoxSizer_GetStaticBox(IntPtr self);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 

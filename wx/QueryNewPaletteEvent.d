@@ -18,9 +18,11 @@ import wx.common;
 
 import wx.Event;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxQueryNewPaletteEvent_ctor(int winid);
 		static extern (C) bool wxQueryNewPaletteEvent_GetPaletteRealized(IntPtr self);
 		static extern (C) void wxQueryNewPaletteEvent_SetPaletteRealized(IntPtr self, bool realized);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 

@@ -20,6 +20,7 @@ import wx.Defs;
 import wx.Palette;
 import wx.Colour;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxImage_ctor();
 		static extern (C) IntPtr wxImage_ctorByName(string name, BitmapType type);
 		static extern (C) IntPtr wxImage_ctorintintbool(int width, int height, bool clear);
@@ -110,6 +111,7 @@ import wx.Colour;
 		static extern (C) void   wxImage_CleanUpHandlers();
 		
 		static extern (C) void   wxImage_InitStandardHandlers();
+		//! \endcond
 
 		//---------------------------------------------------------------------
 
@@ -603,6 +605,7 @@ import wx.Colour;
 	
 	//---------------------------------------------------------------------
 	
+		//! \cond EXTERN
 		static extern (C) void   wxImageHandler_SetName(IntPtr self, string name);
 		static extern (C) void   wxImageHandler_SetExtension(IntPtr self, string ext);
 		static extern (C) void   wxImageHandler_SetType(IntPtr self, uint type);
@@ -611,6 +614,7 @@ import wx.Colour;
 		static extern (C) string wxImageHandler_GetExtension(IntPtr self);
 		static extern (C) uint   wxImageHandler_GetType(IntPtr self);
 		static extern (C) string wxImageHandler_GetMimeType(IntPtr self);
+		//! \endcond
 		
 		//---------------------------------------------------------------------
 	
@@ -642,12 +646,14 @@ import wx.Colour;
 	
 	//---------------------------------------------------------------------
 	
+		//! \cond EXTERN
 		static extern (C) IntPtr wxImageHistogramEntry_ctor();
 		static extern (C) void   wxImageHistogramEntry_dtor(IntPtr self);
 		static extern (C) uint  wxImageHistogramEntry_index(IntPtr self);
 		static extern (C) void   wxImageHistogramEntry_Setindex(IntPtr self, uint v);
 		static extern (C) uint  wxImageHistogramEntry_value(IntPtr self);
 		static extern (C) void   wxImageHistogramEntry_Setvalue(IntPtr self, uint v);
+		//! \endcond
 		
 		//---------------------------------------------------------------------
 		
@@ -684,10 +690,12 @@ import wx.Colour;
 	
 	//---------------------------------------------------------------------
 	
+		//! \cond EXTERN
 		static extern (C) IntPtr wxImageHistogram_ctor();	
 		static extern (C) void   wxImageHistogram_dtor(IntPtr self);
 		static extern (C) uint  wxImageHistogram_MakeKey(ubyte r, ubyte g, ubyte b);
 		static extern (C) bool   wxImageHistogram_FindFirstUnusedColour(IntPtr self, inout ubyte r, inout ubyte g, inout ubyte b, ubyte startR, ubyte startG, ubyte startB);
+		//! \endcond
 				
 		//---------------------------------------------------------------------
 		

@@ -20,6 +20,7 @@ import wx.Window;
 import wx.MenuItem;
 import wx.MenuBar;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxMenuBase_ctor1(string titel, uint style);
 		static extern (C) IntPtr wxMenuBase_ctor2(uint style);
 		
@@ -95,6 +96,7 @@ import wx.MenuBar;
 		static extern (C) IntPtr wxMenuBase_FindChildItem(IntPtr self, int itemid, out int pos);
 		static extern (C) IntPtr wxMenuBase_FindChildItem2(IntPtr self, int itemid);
 		static extern (C) bool   wxMenuBase_SendEvent(IntPtr self, int itemid, int xchecked);
+		//! \endcond
 	
 	public class MenuBase : EvtHandler
 	{
@@ -535,8 +537,10 @@ import wx.MenuBar;
 	
 	//---------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxMenu_ctor(string titel, uint style);
 		static extern (C) IntPtr wxMenu_ctor2(uint style);
+		//! \endcond
 		
 		//---------------------------------------------------------------------
 		

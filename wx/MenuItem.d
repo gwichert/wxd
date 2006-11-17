@@ -20,6 +20,7 @@ import wx.Menu;
 import wx.Bitmap;
 import wx.EvtHandler;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxMenuItem_GetMenu(IntPtr self);
 		static extern (C) void   wxMenuItem_SetMenu(IntPtr self, IntPtr menu);
 		static extern (C) void   wxMenuItem_SetId(IntPtr self, int id);
@@ -51,6 +52,7 @@ import wx.EvtHandler;
 		static extern (C) void   wxMenuItem_SetBitmap(IntPtr self, IntPtr bitmap);
 		static extern (C) IntPtr wxMenuItem_GetBitmap(IntPtr self);
 		static extern (C) IntPtr wxMenuItem_ctor(IntPtr parentMenu, int id, string text, string help, int kind, IntPtr subMenu);
+		//! \endcond
 
 		//-----------------------------------------------------------------------------
 

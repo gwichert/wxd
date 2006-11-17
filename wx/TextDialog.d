@@ -17,11 +17,13 @@ module wx.TextDialog;
 import wx.common;
 import wx.Dialog;
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxTextEntryDialog_ctor(IntPtr parent, string message, string caption, string value, uint style, inout Point pos);
         static extern (C) void wxTextEntryDialog_dtor(IntPtr self);
         static extern (C) void wxTextEntryDialog_SetValue(IntPtr self, string val);
         static extern (C) string wxTextEntryDialog_GetValue(IntPtr self);
         static extern (C) int wxTextEntryDialog_ShowModal(IntPtr self);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -53,8 +55,10 @@ import wx.Dialog;
 
     //-----------------------------------------------------------------------------
 
+		//! \cond EXTERN
         static extern (C) string wxGetPasswordFromUser_func(string message, string caption, string defaultValue, IntPtr parent);
         static extern (C) string wxGetTextFromUser_func(string message, string caption, string defaultValue, IntPtr parent, int x, int y, bool centre);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 

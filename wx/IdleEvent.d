@@ -27,6 +27,7 @@ import wx.Window;
 	
 	//-----------------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxIdleEvent_ctor();
 		static extern (C) void   wxIdleEvent_RequestMore(IntPtr self, bool needMore);
 		static extern (C) bool   wxIdleEvent_MoreRequested(IntPtr self);
@@ -34,6 +35,7 @@ import wx.Window;
 		static extern (C) void   wxIdleEvent_SetMode(IdleMode mode);
 		static extern (C) IdleMode wxIdleEvent_GetMode();
 		static extern (C) bool   wxIdleEvent_CanSend(IntPtr win);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 

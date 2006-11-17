@@ -19,8 +19,10 @@ import wx.common;
 import wx.CommandEvent;
 import wx.Window;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxChildFocusEvent_ctor(IntPtr win);
 		static extern (C) IntPtr wxChildFocusEvent_GetWindow(IntPtr self);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 

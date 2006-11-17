@@ -18,7 +18,9 @@ import wx.common;
 
 import wx.Event;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxDisplayChangedEvent_ctor();
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 

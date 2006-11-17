@@ -17,12 +17,14 @@ module wx.ToggleButton;
 import wx.common;
 import wx.Control;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxToggleButton_ctor();
 		static extern (C) bool   wxToggleButton_Create(IntPtr self, IntPtr parent,
 			int id, string label, inout Point pos, inout Size size, uint style,
 			IntPtr validator, string name);
 		static extern (C) bool wxToggleButton_GetValue(IntPtr self);
 		static extern (C) bool wxToggleButton_SetValue(IntPtr self, bool state);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 		

@@ -17,6 +17,7 @@ module wx.CloseEvent;
 import wx.common;
 import wx.Event;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxCloseEvent_ctor(int type,int winid);
 		static extern (C) void wxCloseEvent_SetLoggingOff(IntPtr self, bool logOff);
 		static extern (C) bool wxCloseEvent_GetLoggingOff(IntPtr self);
@@ -24,6 +25,7 @@ import wx.Event;
 		static extern (C) void wxCloseEvent_SetCanVeto(IntPtr self, bool canVeto);
 		static extern (C) bool wxCloseEvent_CanVeto(IntPtr self);
 		static extern (C) bool wxCloseEvent_GetVeto(IntPtr self);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 

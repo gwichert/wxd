@@ -17,6 +17,7 @@ module wx.GridSizer;
 import wx.common;
 import wx.Sizer;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxGridSizer_ctor(int rows, int cols, int vgap, int hgap);
 		static extern (C) void wxGridSizer_RecalcSizes(IntPtr self);
 		static extern (C) void wxGridSizer_CalcMin(IntPtr self, inout Size size);
@@ -28,6 +29,7 @@ import wx.Sizer;
 		static extern (C) int wxGridSizer_GetRows(IntPtr self);
 		static extern (C) int wxGridSizer_GetVGap(IntPtr self);
 		static extern (C) int wxGridSizer_GetHGap(IntPtr self);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 

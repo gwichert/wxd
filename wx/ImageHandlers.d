@@ -17,6 +17,7 @@ module wx.ImageHandlers;
 import wx.common;
 import wx.Image;
 
+  //! \cond EXTERN
   public static extern (C) IntPtr BMPHandler_ctor();
   public static extern (C) IntPtr ICOHandler_ctor();
   public static extern (C) IntPtr CURHandler_ctor();
@@ -28,6 +29,7 @@ import wx.Image;
   public static extern (C) IntPtr XPMHandler_ctor();
   public static extern (C) IntPtr PNMHandler_ctor();
   public static extern (C) IntPtr TIFFHandler_ctor();
+  //! \endcond
   
   
   

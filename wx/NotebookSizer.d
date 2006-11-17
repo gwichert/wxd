@@ -18,10 +18,12 @@ import wx.common;
 import wx.Sizer;
 import wx.Notebook;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxNotebookSizer_ctor(IntPtr nb);
 		static extern (C) void wxNotebookSizer_RecalcSizes(IntPtr self);
 		static extern (C) void wxNotebookSizer_CalcMin(IntPtr self, inout Size size);
 		static extern (C) IntPtr wxNotebookSizer_GetNotebook(IntPtr self);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 

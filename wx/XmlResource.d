@@ -29,8 +29,10 @@ import wx.Panel;
 
 import wx.ToolBar;
 
+//! \cond STD
 import std.stream;
 import std.regexp;
+//! \endcond
 
 	public enum XmlResourceFlags : int
 	{
@@ -38,6 +40,7 @@ import std.regexp;
 		XRC_NO_SUBCLASSING = 2
 	};
 
+		//! \cond EXTERN
 		static extern (C) void wxXmlResource_InitAllHandlers(IntPtr self);
 		static extern (C) bool wxXmlResource_Load(IntPtr self, string filemask);
 		static extern (C) bool wxXmlResource_LoadFromByteArray(IntPtr self, string filemask, IntPtr data, int length);
@@ -66,6 +69,7 @@ import std.regexp;
 		//---------------------------------------------------------------------
 
 		static extern (C) bool wxXmlSubclassFactory_ctor(XmlSubclassCreate create);
+		//! \endcond
 
 		extern (C) {
 		alias IntPtr function(string className) XmlSubclassCreate;

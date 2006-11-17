@@ -41,6 +41,7 @@ import wx.KeyEvent;
 	
 	//---------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxTextAttr_ctor(IntPtr colText, IntPtr colBack, IntPtr font, int alignment);
 		static extern (C) IntPtr wxTextAttr_ctor2();
 		static extern (C) void   wxTextAttr_dtor(IntPtr self);
@@ -72,6 +73,7 @@ import wx.KeyEvent;
 		static extern (C) bool   wxTextAttr_HasLeftIndent(IntPtr self);
 		static extern (C) bool   wxTextAttr_HasRightIndent(IntPtr self);
 		static extern (C) bool   wxTextAttr_HasFlag(IntPtr self, uint flag);
+		//! \endcond
 		
 		//---------------------------------------------------------------------
 		
@@ -217,6 +219,7 @@ import wx.KeyEvent;
 	
 	//---------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) string wxTextCtrl_GetValue(IntPtr self);
 		static extern (C) void   wxTextCtrl_SetValue(IntPtr self, string value);
 		static extern (C) string wxTextCtrl_GetRange(IntPtr self, uint from, uint to);
@@ -277,6 +280,7 @@ import wx.KeyEvent;
 		static extern (C) void   wxTextCtrl_Thaw(IntPtr self);
 		static extern (C) bool   wxTextCtrl_ScrollLines(IntPtr self, int lines);
 		static extern (C) bool   wxTextCtrl_ScrollPages(IntPtr self, int pages);
+		//! \endcond
 
 		//---------------------------------------------------------------------
         
@@ -703,9 +707,11 @@ import wx.KeyEvent;
 	
 	//---------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxTextUrlEvent_ctor(int id, IntPtr evtMouse, uint start, uint end);
 		static extern (C) uint   wxTextUrlEvent_GetURLStart(IntPtr self);
 		static extern (C) uint   wxTextUrlEvent_GetURLEnd(IntPtr self);
+		//! \endcond
 	
 	public class TextUrlEvent : CommandEvent
     	{

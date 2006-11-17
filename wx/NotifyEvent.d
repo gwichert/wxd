@@ -1,18 +1,23 @@
 //-----------------------------------------------------------------------------
-// wxD - NodifyEvent.d
+// wxD - NotifyEvent.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
+// $Id$
 //-----------------------------------------------------------------------------
 
 module wx.NotifyEvent;
 import wx.common;
 import wx.CommandEvent;
-
+
+
+		//! \cond EXTERN
 		static extern (C) IntPtr wxNotifyEvent_ctor(EventType commandtype,int winid);
 		static extern (C) void   wxNotifyEvent_Veto(IntPtr self);
 		static extern (C) void   wxNotifyEvent_Allow(IntPtr self);
 		static extern (C) bool   wxNotifyEvent_IsAllowed(IntPtr self);
+		//! \endcond
+
 		//-----------------------------------------------------------------------------
 
 	public class NotifyEvent : CommandEvent

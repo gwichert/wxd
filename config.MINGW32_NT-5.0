@@ -1,0 +1,31 @@
+# from samples
+
+WX_CONFIG = wx-config
+
+CXX = $(shell $(WX_CONFIG) --cxx)
+DC = gdc
+
+CXXFLAGS = -O2 `$(WX_CONFIG) --cxxflags`
+DCFLAGS+= -O2 -I$(TOPDIR)
+
+WXVERSION = `$(WX_CONFIG) --version`
+WXLIBS = `$(WX_CONFIG) --libs`
+
+LDFLAGS = $(WXLIBS) -lstdc++
+
+.cpp.o: 
+	$(CXX) -c $(CXXFLAGS) $<
+
+%.o:%.d
+	$(DC) -c $(DCFLAGS) $<
+
+
+all: $(TARGET)
+
+
+$(TARGET) : $(OBJECTS)
+	$(DC) -o $@ $(OBJECTS) -L$(TOPDIR) -lwxd -lwxc $(LDFLAGS)
+
+clean:
+	-rm *.o
+	-rm $(TARGET)

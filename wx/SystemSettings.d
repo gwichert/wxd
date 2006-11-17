@@ -130,6 +130,7 @@ import wx.Font;
         wxSYS_SCREEN_DESKTOP    //   >= 800x600
     }
 
+		//! \cond EXTERN
         static extern (C) int    wxSystemSettings_GetScreenType();
         static extern (C) void   wxSystemSettings_SetScreenType(int screen);
 
@@ -137,6 +138,7 @@ import wx.Font;
         static extern (C) IntPtr wxSystemSettings_GetFont(int index);
         static extern (C) int    wxSystemSettings_GetMetric(int index);
         static extern (C) bool   wxSystemSettings_HasFeature(int index);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 

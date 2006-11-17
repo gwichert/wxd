@@ -39,6 +39,7 @@ import wx.MDI;
 	
 	//-----------------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxSashLayoutWindow_ctor();
 		static extern (C) bool wxSashLayoutWindow_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
 		static extern (C) LayoutAlignment wxSashLayoutWindow_GetAlignment(IntPtr self);
@@ -46,6 +47,7 @@ import wx.MDI;
 		static extern (C) void wxSashLayoutWindow_SetAlignment(IntPtr self, LayoutAlignment alignment);
 		static extern (C) void wxSashLayoutWindow_SetOrientation(IntPtr self, LayoutOrientation orient);
 		static extern (C) void wxSashLayoutWindow_SetDefaultSize(IntPtr self, inout Size size);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 	
@@ -96,10 +98,12 @@ import wx.MDI;
 	
 	//-----------------------------------------------------------------------------
 	
+		//! \cond EXTERN
 		static extern (C) IntPtr wxLayoutAlgorithm_ctor();
 		static extern (C) bool wxLayoutAlgorithm_LayoutMDIFrame(IntPtr self, IntPtr frame, inout Rectangle rect);
 		static extern (C) bool wxLayoutAlgorithm_LayoutFrame(IntPtr self, IntPtr frame, IntPtr mainWindow);
 		static extern (C) bool wxLayoutAlgorithm_LayoutWindow(IntPtr self, IntPtr frame, IntPtr mainWindow);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 		
@@ -152,6 +156,7 @@ import wx.MDI;
 	
 	//-----------------------------------------------------------------------------
 	
+		//! \cond EXTERN
 		static extern (C) IntPtr wxQueryLayoutInfoEvent_ctor(int id);
 		static extern (C) void wxQueryLayoutInfoEvent_SetRequestedLength(IntPtr self, int length);
 		static extern (C) int wxQueryLayoutInfoEvent_GetRequestedLength(IntPtr self);
@@ -163,6 +168,7 @@ import wx.MDI;
 		static extern (C) LayoutOrientation wxQueryLayoutInfoEvent_GetOrientation(IntPtr self);
 		static extern (C) void wxQueryLayoutInfoEvent_SetAlignment(IntPtr self, LayoutAlignment alignment);
 		static extern (C) LayoutAlignment wxQueryLayoutInfoEvent_GetAlignment(IntPtr self);
+		//! \endcond
 	
 		//-----------------------------------------------------------------------------
 		
@@ -218,11 +224,13 @@ import wx.MDI;
 	
 	//-----------------------------------------------------------------------------
 	
+		//! \cond EXTERN
 		static extern (C) IntPtr wxCalculateLayoutEvent_ctor(int id);
 		static extern (C) void wxCalculateLayoutEvent_SetFlags(IntPtr self, int flags);
 		static extern (C) int wxCalculateLayoutEvent_GetFlags(IntPtr self);
 		static extern (C) void wxCalculateLayoutEvent_SetRect(IntPtr self, inout Rectangle rect);
 		static extern (C) void wxCalculateLayoutEvent_GetRect(IntPtr self, out Rectangle rect);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 	

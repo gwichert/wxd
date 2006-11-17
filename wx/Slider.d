@@ -16,6 +16,7 @@ module wx.Slider;
 import wx.common;
 import wx.Control;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxSlider_ctor();
 		static extern (C) bool   wxSlider_Create(IntPtr self, IntPtr parent, int id, int value, int minValue, int maxValue, inout Point pos, inout Size size, uint style, IntPtr validator, string name);
 		static extern (C) int    wxSlider_GetValue(IntPtr self);
@@ -37,6 +38,7 @@ import wx.Control;
 		static extern (C) int    wxSlider_GetSelEnd(IntPtr self);
 		static extern (C) int    wxSlider_GetSelStart(IntPtr self);
 		static extern (C) void   wxSlider_SetSelection(IntPtr self, int min, int max);
+		//! \endcond
 	
 		//---------------------------------------------------------------------
 		

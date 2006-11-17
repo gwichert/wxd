@@ -17,6 +17,7 @@ module wx.Dialog;
 import wx.common;
 import wx.Window;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxDialog_ctor();
 		static extern (C) void   wxDialog_dtor(IntPtr self);
 
@@ -37,6 +38,7 @@ import wx.Window;
 		static extern (C) void   wxDialog_SetIcons(IntPtr self, IntPtr icons);
 
 		static extern (C) int    wxDialog_ShowModal(IntPtr self);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 		

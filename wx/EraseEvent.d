@@ -19,8 +19,10 @@ import wx.common;
 import wx.Event;
 import wx.DC;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxEraseEvent_ctor(int id, IntPtr dc);
 		static extern (C) IntPtr wxEraseEvent_GetDC(IntPtr self);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 

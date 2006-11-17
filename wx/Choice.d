@@ -20,6 +20,7 @@ import wx.ClientData;
 import wx.IControlWithItems;
 import wx.ArrayString;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxChoice_ctor();
 		static extern (C) bool   wxChoice_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, int n, string* choices, uint style, IntPtr validator, string name);
 		static extern (C) void   wxChoice_dtor(IntPtr self);
@@ -68,6 +69,7 @@ import wx.ArrayString;
 		static extern (C)	bool wxChoice_ShouldInheritColours(IntPtr self);
 		
 		static extern (C)	bool wxChoice_IsEmpty(IntPtr self);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 		

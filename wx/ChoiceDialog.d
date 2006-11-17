@@ -19,11 +19,13 @@ import wx.Dialog;
 import wx.ClientData;
 import wx.ArrayInt;
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxSingleChoiceDialog_ctor(IntPtr parent, string message, string caption, int n, string* choices, IntPtr clientData, uint style, inout Point pos);
         static extern (C) void wxSingleChoiceDialog_SetSelection(IntPtr self, int sel);
         static extern (C) int wxSingleChoiceDialog_GetSelection(IntPtr self);
         static extern (C) string wxSingleChoiceDialog_GetStringSelection(IntPtr self);
         static extern (C) IntPtr wxSingleChoiceDialog_GetSelectionClientData(IntPtr self);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -75,9 +77,11 @@ import wx.ArrayInt;
 
 	//-----------------------------------------------------------------------------
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxMultiChoiceDialog_ctor(IntPtr parent, string message, string caption, int n, string* choices, uint style, inout Point pos);
         static extern (C) void wxMultiChoiceDialog_SetSelections(IntPtr self, int* sel, int numsel);
         static extern (C) IntPtr wxMultiChoiceDialog_GetSelections(IntPtr self);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -107,10 +111,12 @@ import wx.ArrayInt;
 
 	//-----------------------------------------------------------------------------
 
+	//! \cond EXTERN
 	static extern (C) string wxGetSingleChoice_func(string message, string caption, int n, string* choices, IntPtr parent, int x, int y, bool centre, int width, int height);
 	static extern (C) int wxGetSingleChoiceIndex_func(string message, string caption, int n, string* choices, IntPtr parent, int x, int y, bool centre, int width, int height);
 	static extern (C) void* wxGetSingleChoiceData_func(string message, string caption, int n, string* choices, void **client_data, IntPtr parent, int x, int y, bool centre, int width, int height);
 	static extern (C) uint wxGetMultipleChoices_func(IntPtr selections,string message, string caption, int n, string* choices, IntPtr parent, int x, int y, bool centre, int width, int height);
+	//! \endcond
 
 	public string GetSingleChoice(string message, string caption, string[] choices, Window parent = null, int x = -1, int y= -1, bool centre = true, int width = SingleChoiceDialog.wxCHOICE_WIDTH, int height = SingleChoiceDialog.wxCHOICE_HEIGHT)
 	{

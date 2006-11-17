@@ -8,6 +8,8 @@ all:
 	$(MAKE) -C EventDemo
 	$(MAKE) -C Font
 	$(MAKE) -C Grid
+	$(MAKE) -C GLCube
+	$(MAKE) -C Hello
 	$(MAKE) -C HTML
 	$(MAKE) -C HtmlHelp
 	$(MAKE) -C HtmlListBox
@@ -35,6 +37,8 @@ clean:
 	$(MAKE) clean -C EventDemo
 	$(MAKE) clean -C Font
 	$(MAKE) clean -C Grid
+	$(MAKE) clean -C GLCube
+	$(MAKE) clean -C Hello
 	$(MAKE) clean -C HTML
 	$(MAKE) clean -C HtmlHelp
 	$(MAKE) clean -C HtmlListBox

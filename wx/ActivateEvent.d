@@ -17,8 +17,10 @@ module wx.ActivateEvent;
 import wx.common;
 import wx.Event;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxActivateEvent_ctor(int type, bool active,int Id);
 		static extern (C) bool wxActivateEvent_GetActive(IntPtr self);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 

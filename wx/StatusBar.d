@@ -23,6 +23,7 @@ import wx.Window;
 	
 		//-----------------------------------------------------------------------------
 	
+		//! \cond EXTERN
 		static extern (C) IntPtr wxStatusBar_ctor();
 		static extern (C) bool   wxStatusBar_Create(IntPtr self, IntPtr parent, int id, uint style, string name);
 	
@@ -39,6 +40,7 @@ import wx.Window;
 		static extern (C) void   wxStatusBar_PushStatusText(IntPtr self, string xstring, int field);
 		static extern (C) void   wxStatusBar_SetMinHeight(IntPtr self, int height);
 		static extern (C) void   wxStatusBar_SetStatusStyles(IntPtr self, int n, int* styles);
+		//! \endcond
 	
 		//-----------------------------------------------------------------------------
 

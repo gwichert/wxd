@@ -20,8 +20,10 @@ import wx.CommandEvent;
 
 import wx.Window;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxWindowCreateEvent_ctor(IntPtr type);
 		static extern (C) IntPtr wxWindowCreateEvent_GetWindow(IntPtr self);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 

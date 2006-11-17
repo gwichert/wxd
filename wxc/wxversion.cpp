@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------------
 // wxD - wxversion.cpp
-// (C) 2005 afb <afb.sourceforge.net>
+// (C) 2005 afb <afb@users.sourceforge.net>
 //
 // Various wx version constants
 //

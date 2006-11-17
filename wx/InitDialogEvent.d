@@ -17,7 +17,9 @@ module wx.InitDialogEvent;
 import wx.common;
 import wx.Event;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxInitDialogEvent_ctor(int Id);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 

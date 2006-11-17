@@ -17,8 +17,10 @@ module wx.Validator;
 import wx.common;
 import wx.EvtHandler;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxValidator_ctor();
 		static extern (C) IntPtr wxDefaultValidator_Get();
+		//! \endcond
 		
 		//---------------------------------------------------------------------
 		

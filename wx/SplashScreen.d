@@ -17,10 +17,12 @@ module wx.SplashScreen;
 import wx.common;
 import wx.Frame;
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxSplashScreen_ctor(IntPtr bitmap, uint splashStyle, int milliseconds, IntPtr parent, int id, inout Point pos, inout Size size, uint style);
         static extern (C) int    wxSplashScreen_GetSplashStyle(IntPtr self);
         static extern (C) IntPtr wxSplashScreen_GetSplashWindow(IntPtr self);
         static extern (C) int    wxSplashScreen_GetTimeout(IntPtr self);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -59,9 +61,11 @@ import wx.Frame;
     
     //-----------------------------------------------------------------------------
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxSplashScreenWindow_ctor(IntPtr bitmap, IntPtr parent, int id, inout Point pos, inout Size size, uint style);
         static extern (C) void   wxSplashScreenWindow_SetBitmap(IntPtr self, IntPtr bitmap);
         static extern (C) IntPtr wxSplashScreenWindow_GetBitmap(IntPtr self);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 

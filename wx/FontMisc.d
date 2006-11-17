@@ -19,6 +19,7 @@ import wx.Font;
 import wx.Window;
 import wx.ArrayString;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxFontMapper_ctor();
 		static extern (C) void   wxFontMapper_dtor(IntPtr self);
 		
@@ -36,6 +37,7 @@ import wx.ArrayString;
 		
 		static extern (C) void   wxFontMapper_SetDialogParent(IntPtr self, IntPtr parent);
 		static extern (C) void   wxFontMapper_SetDialogTitle(IntPtr self, string title);
+		//! \endcond
 		
 		//---------------------------------------------------------------------
 		
@@ -169,9 +171,11 @@ import wx.ArrayString;
 	
 	//---------------------------------------------------------------------
 	
+		//! \cond EXTERN
 		static extern (C) IntPtr wxEncodingConverter_ctor();
 		static extern (C) bool wxEncodingConverter_Init(IntPtr self, int input_enc, int output_enc, int method);
 		static extern (C) string wxEncodingConverter_Convert(IntPtr self, string input);
+		//! \endcond
 		
 		//---------------------------------------------------------------------
 		
@@ -218,6 +222,7 @@ import wx.ArrayString;
 		alias bool function(FontEnumerator obj, string facename, string encoding) Virtual_OnFontEncoding;
 		}
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxFontEnumerator_ctor();
 		static extern (C) void wxFontEnumerator_dtor(IntPtr self);
 		static extern (C) void wxFontEnumerator_RegisterVirtual(IntPtr self, FontEnumerator obj,Virtual_EnumerateFacenames enumerateFacenames, Virtual_EnumerateEncodings enumerateEncodings, Virtual_OnFacename onFacename, Virtual_OnFontEncoding onFontEncoding);
@@ -227,6 +232,7 @@ import wx.ArrayString;
 		static extern (C) bool wxFontEnumerator_OnFontEncoding(IntPtr self, string facename, string encoding);
 		static extern (C) bool wxFontEnumerator_EnumerateFacenames(IntPtr self, int encoding, bool fixedWidthOnly);
 		static extern (C) bool wxFontEnumerator_EnumerateEncodings(IntPtr self, string facename);
+		//! \endcond
 		
 		//---------------------------------------------------------------------
 		

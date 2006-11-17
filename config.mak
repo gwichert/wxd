@@ -34,9 +34,11 @@ WXLIBS = \
 	$(LIBDIRNAME)\wxexpatd.lib  \
 	kernel32.lib user32.lib gdi32.lib comdlg32.lib winspool.lib winmm.lib shell32.lib comctl32.lib ole32.lib oleaut32.lib uuid.lib rpcrt4.lib advapi32.lib wsock32.lib odbc32.lib
 
+all: $(TARGET)
+
 $(TARGET) : $(OBJECTS)
 #	link /NOLOGO /SILENT /NOI /DELEXECUTABLE /EXETYPE:NT $(LDFLAGS) /DEBUG /CODEVIEW  /su:windows $(OBJECTS),$@,$(TARGET).map, $(TOPDIR)\wxc.lib $(TOPDIR)\wxd.lib $(LIBDIRNAME)\  ,, $(RES)
-	dmd -g -of$(TARGET) $(OBJECTS) $(TOPDIR)\wxd.lib $(TOPDIR)\wxc.lib $(WXLIBS)
+	dmd -g -of$(TARGET) $(OBJECTS) $(TOPDIR)\wxd.lib $(TOPDIR)\wxc.lib $(WXLIBS) $(GLLIBS) -L/EXETYPE:NT -L/SU:WINDOWS:4.0
 
 clean:
 	-del *.obj

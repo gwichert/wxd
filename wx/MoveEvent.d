@@ -17,8 +17,10 @@ module wx.MoveEvent;
 import wx.common;
 import wx.Event;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxMoveEvent_ctor();
 		static extern (C) IntPtr wxMoveEvent_GetPosition(IntPtr self, out Point point);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 

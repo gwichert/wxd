@@ -18,6 +18,7 @@ import wx.common;
 import wx.Control;
 import wx.Bitmap;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxButton_ctor();
 		static extern (C) bool   wxButton_Create(IntPtr self, IntPtr parent, int id, string label, inout Point pos, inout Size size, uint style, IntPtr validator, string name);
 		static extern (C) void   wxButton_SetDefault(IntPtr self);
@@ -27,6 +28,7 @@ import wx.Bitmap;
 		static extern (C) void wxButton_SetImageLabel(IntPtr self, IntPtr bitmap);
 		
 		static extern (C) void wxButton_SetLabel(IntPtr self, string label);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 

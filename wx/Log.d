@@ -16,14 +16,18 @@
 module wx.Log;
 import wx.common;
 import wx.TextCtrl;
+//! \cond STD
 private import std.format;
+//! \endcond
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxLog_ctor();
 		static extern (C) bool wxLog_IsEnabled();
 		static extern (C) void wxLog_FlushActive();
 		static extern (C) IntPtr wxLog_SetActiveTargetTextCtrl(IntPtr pLogger);
 		static extern (C) void wxLog_Log_Function(int what, string szFormat);
 		static extern (C) void wxLog_AddTraceMask(string tmask);
+		//! \endcond
 		
 	public class Log: wxObject
 	{

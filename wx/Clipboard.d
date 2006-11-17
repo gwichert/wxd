@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------------
 // wxD - Clipboard.d
-// (C) 2005 bero <berobero.sourceforge.net>
-// (C) 2005 afb <afb.sourceforge.net>
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// (C) 2005 afb <afb@users.sourceforge.net>
 // based on
 // wx.NET - Clipboard.cs
 //
@@ -19,6 +19,7 @@ import wx.common;
 import wx.DataFormat;
 import wx.DataObject;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxClipboard_ctor();
 		static extern (C) bool   wxClipboard_Open(IntPtr self);
 		static extern (C) void   wxClipboard_Close(IntPtr self);
@@ -31,6 +32,7 @@ import wx.DataObject;
 		static extern (C) bool   wxClipboard_Flush(IntPtr self);
 		static extern (C) void   wxClipboard_UsePrimarySelection(IntPtr self, bool primary);
 		static extern (C) IntPtr wxClipboard_Get();
+		//! \endcond
 
 		//-----------------------------------------------------------------------------
 		
@@ -115,13 +117,15 @@ import wx.DataObject;
 		
 	//-----------------------------------------------------------------------------
 	
+		//! \cond EXTERN
 		static extern (C) IntPtr wxClipboardLocker_ctor(IntPtr clipboard);
 		static extern (C) void   wxClipboardLocker_dtor(IntPtr self);
 		static extern (C) bool   wxClipboardLocker_IsOpen(IntPtr self);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 		
-	/* re-imprement using D */
+	/* re-implement using D */
 	public auto class ClipboardLocker // not wxObject
 	{
 		public this(Clipboard clipboard = null)

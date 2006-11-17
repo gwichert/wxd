@@ -282,6 +282,7 @@ import wx.Font;
 	
 	//-----------------------------------------------------------------------------
 	
+		//! \cond EXTERN
 		static extern (C) IntPtr wxLanguageInfo_ctor();
 		static extern (C) void   wxLanguageInfo_dtor(IntPtr self);
 		static extern (C) void   wxLanguageInfo_SetLanguage(IntPtr self, int value);
@@ -290,6 +291,7 @@ import wx.Font;
 		static extern (C) string wxLanguageInfo_GetCanonicalName(IntPtr self);
 		static extern (C) void   wxLanguageInfo_SetDescription(IntPtr self, string name);
 		static extern (C) string wxLanguageInfo_GetDescription(IntPtr self);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 
@@ -333,6 +335,7 @@ import wx.Font;
 	
 	//-----------------------------------------------------------------------------
 	
+		//! \cond EXTERN
 		static extern (C) IntPtr wxLocale_ctor();
 		static extern (C) IntPtr wxLocale_ctor2(int language, int flags);
 		static extern (C) void   wxLocale_dtor(IntPtr self);
@@ -356,6 +359,7 @@ import wx.Font;
 		static extern (C) int    wxLocale_GetSystemLanguage();
 		static extern (C) bool   wxLocale_IsLoaded(IntPtr self, string domain);
 		static extern (C) bool   wxLocale_IsOk(IntPtr self);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 

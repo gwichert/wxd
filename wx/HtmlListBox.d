@@ -28,6 +28,7 @@ import wx.VLBox;
 
 		//-----------------------------------------------------------------------------
 		
+		//! \cond EXTERN
 		static extern (C) IntPtr wxHtmlListBox_ctor2(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
 		static extern (C) void wxHtmlListBox_RegisterVirtual(IntPtr self,HtmlListBox obj,
 			Virtual_VoidNoParams refreshAll,
@@ -56,6 +57,7 @@ import wx.VLBox;
 		static extern (C) void wxHtmlListBox_OnDrawSeparator(IntPtr self, IntPtr dc, inout Rectangle rect, int n);
 		static extern (C) void wxHtmlListBox_OnDrawBackground(IntPtr self, IntPtr dc, inout Rectangle rect, int n);
 		static extern (C) int wxHtmlListBox_OnGetLineHeight(IntPtr self, int line);		
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 		

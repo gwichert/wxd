@@ -18,6 +18,7 @@ import wx.common;
 import wx.Control;
 import wx.ImageList;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxListbookEvent_ctor(int commandType, int id, int nSel, int nOldSel);
 		static extern (C) int    wxListbookEvent_GetSelection(IntPtr self);
 		static extern (C) void   wxListbookEvent_SetSelection(IntPtr self, int nSel);
@@ -26,6 +27,7 @@ import wx.ImageList;
 		static extern (C) void wxListbookEvent_Veto(IntPtr self);
 		static extern (C) void wxListbookEvent_Allow(IntPtr self);
 		static extern (C) bool wxListbookEvent_IsAllowed(IntPtr self);		
+		//! \endcond
 
 		//-----------------------------------------------------------------------------
 
@@ -78,6 +80,7 @@ import wx.ImageList;
 	
 	//-----------------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxListbook_ctor();
 		static extern (C) bool wxListbook_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
 		static extern (C) int wxListbook_GetSelection(IntPtr self);
@@ -100,6 +103,7 @@ import wx.ImageList;
 		static extern (C) bool wxListbook_DeleteAllPages(IntPtr self);
 		static extern (C) bool wxListbook_AddPage(IntPtr self, IntPtr page, string text, bool bselect, int imageId);
 		static extern (C) void wxListbook_AdvanceSelection(IntPtr self, bool forward);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 

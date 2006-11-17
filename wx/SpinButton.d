@@ -17,12 +17,14 @@ import wx.common;
 import wx.CommandEvent;
 import wx.Control;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxSpinEvent_ctor(int commandType, int id);
 		static extern (C) int wxSpinEvent_GetPosition(IntPtr self);
 		static extern (C) void wxSpinEvent_SetPosition(IntPtr self, int pos);
 		static extern (C) void wxSpinEvent_Veto(IntPtr self);
 		static extern (C) void wxSpinEvent_Allow(IntPtr self);
 		static extern (C) bool wxSpinEvent_IsAllowed(IntPtr self);	
+		//! \endcond
 
 		//-----------------------------------------------------------------------------
 	
@@ -68,6 +70,7 @@ import wx.Control;
 	
 	//-----------------------------------------------------------------------------
 	
+		//! \cond EXTERN
 		static extern (C) IntPtr wxSpinButton_ctor();
 		static extern (C) bool   wxSpinButton_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
 		static extern (C) int    wxSpinButton_GetValue(IntPtr self);
@@ -75,6 +78,7 @@ import wx.Control;
 		static extern (C) int    wxSpinButton_GetMax(IntPtr self);
 		static extern (C) void   wxSpinButton_SetValue(IntPtr self, int val);
 		static extern (C) void   wxSpinButton_SetRange(IntPtr self, int minVal, int maxVal);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 	public class SpinButton : Control

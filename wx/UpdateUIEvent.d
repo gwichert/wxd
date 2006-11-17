@@ -18,6 +18,7 @@ import wx.common;
 import wx.CommandEvent;
 import wx.Window;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxUpdateUIEvent_ctor(int commandId);
 		static extern (C) void   wxUpdUIEvt_Enable(IntPtr self, bool enable);
 		static extern (C) void   wxUpdUIEvt_Check(IntPtr self, bool check);
@@ -34,6 +35,7 @@ import wx.Window;
 		static extern (C) void   wxUpdateUIEvent_SetMode(int mode);
 		static extern (C) void   wxUpdateUIEvent_SetText(IntPtr self, string text);
 		static extern (C) void   wxUpdateUIEvent_SetUpdateInterval(uint updateInterval);
+		//! \endcond
 
 		//-----------------------------------------------------------------------------
 

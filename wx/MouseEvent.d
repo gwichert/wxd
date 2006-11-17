@@ -19,6 +19,7 @@ import wx.Event;
 
 import wx.DC;
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxMouseEvent_ctor(int mouseType);
         static extern (C) bool   wxMouseEvent_IsButton(IntPtr self);
         static extern (C) bool   wxMouseEvent_ButtonDown(IntPtr self);
@@ -54,6 +55,7 @@ import wx.DC;
         static extern (C) int    wxMouseEvent_GetWheelDelta(IntPtr self);
         static extern (C) int    wxMouseEvent_GetLinesPerAction(IntPtr self);
         static extern (C) bool   wxMouseEvent_IsPageScroll(IntPtr self);
+		//! \endcond
 
 		//----------------------------------------------------------------------------
 

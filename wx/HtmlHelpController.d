@@ -19,6 +19,7 @@ import wx.common;
 import wx.Config;
 import wx.Frame;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxHtmlHelpController_ctor(int style);
 		static extern (C) void   wxHtmlHelpController_SetTitleFormat(IntPtr self, string format);
 		static extern (C) void   wxHtmlHelpController_SetTempDir(IntPtr self, string path);
@@ -32,6 +33,7 @@ import wx.Frame;
 		static extern (C) void   wxHtmlHelpController_ReadCustomization(IntPtr self, IntPtr cfg, string path);
 		static extern (C) void   wxHtmlHelpController_WriteCustomization(IntPtr self, IntPtr cfg, string path);
 		static extern (C) IntPtr wxHtmlHelpController_GetFrame(IntPtr self);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 		

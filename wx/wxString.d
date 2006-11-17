@@ -16,6 +16,7 @@
 module wx.wxString;
 import wx.common;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxString_ctor(char* str);
 		static extern (C) IntPtr wxString_ctor2(char[] str);
 		static extern (C) void   wxString_dtor(IntPtr self);
@@ -25,6 +26,7 @@ import wx.common;
 		static extern (C) int    wxString_CharAtInt(IntPtr self, uint i);
 		static extern (C) char*  wxString_c_str(IntPtr self);
 		static extern (C) char[] wxString_d_str(IntPtr self);
+		//! \endcond
 		
 		//---------------------------------------------------------------------
 

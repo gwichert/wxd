@@ -17,8 +17,10 @@ module wx.MiniFrame;
 import wx.common;
 import wx.Frame;
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxMiniFrame_ctor();
         static extern (C) bool   wxMiniFrame_Create(IntPtr self, IntPtr parent, int id, string title, inout Point pos, inout Size size, uint style, string name);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 

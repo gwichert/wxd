@@ -16,9 +16,11 @@
 module wx.ClientData;
 import wx.common;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxClientData_ctor();
 		static extern (C) void wxClientData_dtor(IntPtr self);
 		static extern (C) void wxClientData_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
+		//! \endcond
 		
 		//---------------------------------------------------------------------
         
@@ -50,10 +52,12 @@ import wx.common;
     
 	//---------------------------------------------------------------------
     
+		//! \cond EXTERN
 		static extern (C) IntPtr wxStringClientData_ctor(string data);
 		static extern (C) void   wxStringClientData_dtor(IntPtr self);
 		static extern (C) void   wxStringClientData_SetData(IntPtr self, string data);
 		static extern (C) string wxStringClientData_GetData(IntPtr self);
+		//! \endcond
 		
 		//---------------------------------------------------------------------
         

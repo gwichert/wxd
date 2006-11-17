@@ -26,6 +26,7 @@ import wx.Control;
 	
 	//---------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxCheckBox_ctor();
 		static extern (C) bool   wxCheckBox_Create(IntPtr self, IntPtr parent, int id, string label, inout Point pos, inout Size size, uint style, IntPtr val, string name);
 		static extern (C) bool   wxCheckBox_GetValue(IntPtr self);
@@ -36,6 +37,7 @@ import wx.Control;
 		static extern (C) void wxCheckBox_Set3StateValue(IntPtr self, CheckBoxState state);
 		static extern (C) bool wxCheckBox_Is3State(IntPtr self);
 		static extern (C) bool wxCheckBox_Is3rdStateAllowedForUser(IntPtr self);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 		

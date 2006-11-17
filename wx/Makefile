@@ -51,6 +51,7 @@ OBJECTS = \
 	FontMisc.obj \
 	Frame.obj \
 	GDIObject.obj \
+	GLCanvas.obj \
 	Gauge.obj \
 	GdiCommon.obj \
 	GridBagSizer.obj \

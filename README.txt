@@ -1,7 +1,7 @@
 wxD - wxWidgets bindings for D language
 
 	(c) 2005 BERO <berobero@users.sourceforge.net>
-	(c) 2005 afb <afb@users.sourceforge.net>
+	(c) 2006 afb <afb@users.sourceforge.net>
 
 * About
 
@@ -20,6 +20,12 @@ It is composed of two parts:
 
 
 * Status
+
+0.04 (afb)
+removed the extra gcc linking for Darwin
+added wxGLCanvas class and the GLCube sample
+added Doxygen documentation (and \cond+\endcond)
+Extra configuration files for MinGW32 (Windows)
 
 0.03 (afb)
 Update to wx26
@@ -50,10 +56,10 @@ Some example program crashed.
 - get wxWidgets-2.6.1
 - extract
 - compile
-windows:
+windows: (Digital Mars)
   cd build\msw
   make -f makefile.dmc
-unix:
+unix/mac: (GNU)
   ./configure
   make
   make install
@@ -64,7 +70,7 @@ unix:
 windows:
   set WXDIR=<path to wxWidgets>
   make
-unix:
+unix/mac:
   make
 
 

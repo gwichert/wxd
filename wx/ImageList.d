@@ -27,6 +27,7 @@ import wx.DC;
 	
 	//---------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxImageList_ctor(int width, int height, bool mask, int initialCount);
 		static extern (C) IntPtr wxImageList_ctor2();
 		static extern (C) int    wxImageList_AddBitmap1(IntPtr self, IntPtr bmp, IntPtr mask);
@@ -46,6 +47,7 @@ import wx.DC;
 		//static extern (C) IntPtr wxImageList_GetBitmap(IntPtr self, int index);
 		
 		static extern (C) bool   wxImageList_GetSize(IntPtr self, int index, inout int width, inout int height);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 

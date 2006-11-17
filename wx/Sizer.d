@@ -17,6 +17,7 @@ module wx.Sizer;
 import wx.common;
 import wx.Window;
 
+		//! \cond EXTERN
 		static extern (C) void wxSizer_AddWindow(IntPtr self, IntPtr window, int proportion, int flag, int border, IntPtr userData);
 		static extern (C) void wxSizer_AddSizer(IntPtr self, IntPtr sizer, int proportion, int flag, int border, IntPtr userData);
 		static extern (C) void wxSizer_Add(IntPtr self, int width, int height, int proportion, int flag, int border, IntPtr userData);
@@ -68,6 +69,7 @@ import wx.Window;
 		static extern (C) bool wxSizer_DetachWindow(IntPtr self, IntPtr window);
 		static extern (C) bool wxSizer_DetachSizer(IntPtr self, IntPtr sizer);
 		static extern (C) bool wxSizer_Detach(IntPtr self, int index);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 

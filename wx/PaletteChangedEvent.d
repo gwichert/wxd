@@ -20,9 +20,11 @@ import wx.Event;
 
 import wx.Window;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxPaletteChangedEvent_ctor(int winid);
 		static extern (C) void wxPaletteChangedEvent_SetChangedWindow(IntPtr self, IntPtr win);
 		static extern (C) IntPtr wxPaletteChangedEvent_GetChangedWindow(IntPtr self);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 

@@ -17,10 +17,12 @@ module wx.StaticBitmap;
 import wx.common;
 import wx.Control;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxStaticBitmap_ctor();
 		static extern (C) bool wxStaticBitmap_Create(IntPtr self, IntPtr parent, int id, IntPtr label, inout Point pos, inout Size size, uint style, string name);
 		static extern (C) void wxStaticBitmap_SetBitmap(IntPtr self, IntPtr bitmap);
 		static extern (C) IntPtr wxStaticBitmap_GetBitmap(IntPtr self);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 

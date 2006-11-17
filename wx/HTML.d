@@ -43,6 +43,7 @@ import wx.MouseEvent;
 	
 	//-----------------------------------------------------------------------------
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxHtmlTag_GetParent(IntPtr self);
         static extern (C) IntPtr wxHtmlTag_GetFirstSibling(IntPtr self);
         static extern (C) IntPtr wxHtmlTag_GetLastSibling(IntPtr self);
@@ -62,6 +63,7 @@ import wx.MouseEvent;
         static extern (C) int    wxHtmlTag_GetBeginPos(IntPtr self);
         static extern (C) int    wxHtmlTag_GetEndPos1(IntPtr self);
         static extern (C) int    wxHtmlTag_GetEndPos2(IntPtr self);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -170,6 +172,7 @@ import wx.MouseEvent;
 
 	//-----------------------------------------------------------------------------
 
+        //! \cond EXTERN
         static extern (C) IntPtr wxHtmlCell_ctor();
         static extern (C) void   wxHtmlCell_SetParent(IntPtr self, IntPtr p);
         static extern (C) IntPtr wxHtmlCell_GetParent(IntPtr self);
@@ -194,6 +197,7 @@ import wx.MouseEvent;
         static extern (C) void   wxHtmlCell_GetHorizontalConstraints(IntPtr self, inout int left, inout int right);
         static extern (C) bool   wxHtmlCell_IsTerminalCell(IntPtr self);
         static extern (C) IntPtr wxHtmlCell_FindCellByPos(IntPtr self, int x, int y);
+        //! \endcond
 
     public class HtmlCell : wxObject
     {
@@ -335,9 +339,11 @@ import wx.MouseEvent;
 
 	//-----------------------------------------------------------------------------
 
+        //! \cond EXTERN
 		static extern (C) IntPtr wxHtmlFontCell_ctor(IntPtr font);
 		static extern (C) void   wxHtmlFontCell_Draw(IntPtr self, IntPtr dc, int x, int y, int view_y1, int view_y2, IntPtr info);
 		static extern (C) void   wxHtmlFontCell_DrawInvisible(IntPtr self, IntPtr dc, int x, int y, IntPtr info);
+        //! \endcond
 
 	public class HtmlFontCell : HtmlCell
 	{
@@ -366,6 +372,7 @@ import wx.MouseEvent;
 
 	//-----------------------------------------------------------------------------
 
+        //! \cond EXTERN
         static extern (C) IntPtr wxHtmlContainerCell_ctor(IntPtr parent);
         static extern (C) void   wxHtmlContainerCell_Layout(IntPtr self, int w);
         static extern (C) void   wxHtmlContainerCell_Draw(IntPtr self, IntPtr dc, int x, int y, int view_y1, int view_y2, IntPtr info);
@@ -393,6 +400,7 @@ import wx.MouseEvent;
         static extern (C) IntPtr wxHtmlContainerCell_GetFirstCell(IntPtr self);
         static extern (C) bool   wxHtmlContainerCell_IsTerminalCell(IntPtr self);
         static extern (C) IntPtr wxHtmlContainerCell_FindCellByPos(IntPtr self, int x, int y);
+        //! \endcond
 
     public class HtmlContainerCell : HtmlCell
     {
@@ -551,9 +559,11 @@ import wx.MouseEvent;
 
 	//-----------------------------------------------------------------------------
 
+        //! \cond EXTERN
 		static extern (C) IntPtr wxHtmlColourCell_ctor(IntPtr clr, int flags);
 		static extern (C) void   wxHtmlColourCell_Draw(IntPtr self, IntPtr dc, int x, int y, int view_y1, int view_y2, IntPtr info);
 		static extern (C) void   wxHtmlColourCell_DrawInvisible(IntPtr self, IntPtr dc, int x, int y, IntPtr info);
+        //! \endcond
 
 	public class HtmlColourCell : HtmlCell
 	{
@@ -582,6 +592,7 @@ import wx.MouseEvent;
 
 	//-----------------------------------------------------------------------------
 
+        //! \cond EXTERN
 		static extern (C) IntPtr wxHtmlLinkInfo_ctor();
 		static extern (C) IntPtr wxHtmlLinkInfo_ctor(string href, string target);
 		static extern (C) IntPtr wxHtmlLinkInfo_ctor(IntPtr l);
@@ -591,6 +602,7 @@ import wx.MouseEvent;
 		static extern (C) string wxHtmlLinkInfo_GetTarget(IntPtr self);
 		static extern (C) IntPtr wxHtmlLinkInfo_GetEvent(IntPtr self);
 		static extern (C) IntPtr wxHtmlLinkInfo_GetHtmlCell(IntPtr self);
+        //! \endcond
 		
 		//-----------------------------------------------------------------------------
 		
@@ -634,10 +646,12 @@ import wx.MouseEvent;
 
 	//-----------------------------------------------------------------------------
 
+        //! \cond EXTERN
         static extern (C) IntPtr wxHtmlWidgetCell_ctor(IntPtr wnd, int w);
         static extern (C) void   wxHtmlWidgetCell_Draw(IntPtr self, IntPtr dc, int x, int y, int view_y1, int view_y2, IntPtr info);
         static extern (C) void   wxHtmlWidgetCell_DrawInvisible(IntPtr self, IntPtr dc, int x, int y, IntPtr info);
         static extern (C) void   wxHtmlWidgetCell_Layout(IntPtr self, int w);
+        //! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -673,8 +687,10 @@ import wx.MouseEvent;
 
 	//-----------------------------------------------------------------------------
 
+        //! \cond EXTERN
         static extern (C) IntPtr wxHtmlWordCell_ctor(string word, IntPtr dc);
         static extern (C) void   wxHtmlWordCell_Draw(IntPtr self, IntPtr dc, int x, int y, int view_y1, int view_y2, IntPtr info);
+        //! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -696,8 +712,10 @@ import wx.MouseEvent;
 
 	//-----------------------------------------------------------------------------
 
+        //! \cond EXTERN
         static extern (C) bool   wxHtmlFilterPlainText_CanRead(IntPtr self, IntPtr file);
         static extern (C) IntPtr wxHtmlFilterPlainText_ReadFile(IntPtr self, IntPtr file);
+        //! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -723,8 +741,10 @@ import wx.MouseEvent;
 
 	//-----------------------------------------------------------------------------
 
+        //! \cond EXTERN
         static extern (C) bool   wxHtmlFilterHTML_CanRead(IntPtr self, IntPtr file);
         static extern (C) IntPtr wxHtmlFilterHTML_ReadFile(IntPtr self, IntPtr file);
+        //! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -750,11 +770,13 @@ import wx.MouseEvent;
 
 	//-----------------------------------------------------------------------------
 
+        //! \cond EXTERN
         static extern (C) IntPtr wxHtmlTagsModule_ctor();
         static extern (C) bool   wxHtmlTagsModule_OnInit(IntPtr self);
         static extern (C) void   wxHtmlTagsModule_OnExit(IntPtr self);
         static extern (C) void   wxHtmlTagsModule_FillHandlersTable(IntPtr self, IntPtr parser);
-
+        //! \endcond
+        
         //-----------------------------------------------------------------------------
 
     public class HtmlTagsModule : wxObject // TODO: Module
@@ -797,6 +819,7 @@ import wx.MouseEvent;
 
 	//-----------------------------------------------------------------------------
 
+        //! \cond EXTERN
         static extern (C) IntPtr wxHtmlWinParser_ctor(IntPtr wnd);
         static extern (C) void   wxHtmlWinParser_InitParser(IntPtr self, string source);
         static extern (C) void   wxHtmlWinParser_DoneParser(IntPtr self);
@@ -836,6 +859,7 @@ import wx.MouseEvent;
         static extern (C) IntPtr wxHtmlWinParser_GetLink(IntPtr self);
         static extern (C) void   wxHtmlWinParser_SetLink(IntPtr self, IntPtr link);
         static extern (C) IntPtr wxHtmlWinParser_CreateCurrentFont(IntPtr self);
+        //! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -990,7 +1014,9 @@ import wx.MouseEvent;
 
 	//-----------------------------------------------------------------------------
 
+        //! \cond EXTERN
         static extern (C) void   wxHtmlTagHandler_SetParser(IntPtr self, IntPtr parser);
+        //! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -1011,11 +1037,13 @@ import wx.MouseEvent;
 
 	//-----------------------------------------------------------------------------
 
+        //! \cond EXTERN
         static extern (C) IntPtr wxHtmlEntitiesParser_ctor();
         static extern (C) void   wxHtmlEntitiesParser_SetEncoding(IntPtr self, int encoding);
         static extern (C) string wxHtmlEntitiesParser_Parse(IntPtr self, string input);
         static extern (C) char   wxHtmlEntitiesParser_GetEntityChar(IntPtr self, string entity);
         static extern (C) char   wxHtmlEntitiesParser_GetCharForCode(IntPtr self, uint code);
+        //! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -1053,6 +1081,7 @@ import wx.MouseEvent;
 
 	//-----------------------------------------------------------------------------
 
+         //! \cond EXTERN
         static extern (C) void   wxHtmlParser_SetFS(IntPtr self, IntPtr fs);
         static extern (C) IntPtr wxHtmlParser_GetFS(IntPtr self);
         static extern (C) IntPtr wxHtmlParser_OpenURL(IntPtr self, int type, string url);
@@ -1071,6 +1100,7 @@ import wx.MouseEvent;
         static extern (C) void   wxHtmlParser_SetSourceAndSaveState(IntPtr self, string src);
         static extern (C) bool   wxHtmlParser_RestoreState(IntPtr self);
         static extern (C) string wxHtmlParser_ExtractCharsetInformation(IntPtr self, string markup);
+        //! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -1196,9 +1226,11 @@ import wx.MouseEvent;
 
 	//-----------------------------------------------------------------------------
 
+        //! \cond EXTERN
         static extern (C) int    wxHtmlProcessor_GetPriority(IntPtr self);
         static extern (C) void   wxHtmlProcessor_Enable(IntPtr self, bool enable);
         static extern (C) bool   wxHtmlProcessor_IsEnabled(IntPtr self);
+        //! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -1223,10 +1255,12 @@ import wx.MouseEvent;
     
 	//-----------------------------------------------------------------------------
     
+        //! \cond EXTERN
 		static extern (C) IntPtr wxHtmlRenderingInfo_ctor();
 		static extern (C) void wxHtmlRenderingInfo_dtor(IntPtr self);
 		static extern (C) void wxHtmlRenderingInfo_SetSelection(IntPtr self, IntPtr s);
 		static extern (C) IntPtr wxHtmlRenderingInfo_GetSelection(IntPtr self);
+        //! \endcond
 		
 		//-----------------------------------------------------------------------------
 		
@@ -1258,6 +1292,7 @@ import wx.MouseEvent;
 	
 	//-----------------------------------------------------------------------------
 	
+        //! \cond EXTERN
 		static extern (C) IntPtr wxHtmlSelection_ctor();
 		static extern (C) void wxHtmlSelection_dtor(IntPtr self);
 		static extern (C) void wxHtmlSelection_Set(IntPtr self, inout Point fromPos, IntPtr fromCell, inout Point toPos, IntPtr toCell);
@@ -1272,6 +1307,7 @@ import wx.MouseEvent;
 		static extern (C) void wxHtmlSelection_SetToPrivPos(IntPtr self, inout Point pos);
 		static extern (C) void wxHtmlSelection_ClearPrivPos(IntPtr self);
 		static extern (C) bool wxHtmlSelection_IsEmpty(IntPtr self);
+        //! \endcond
 		
 		//-----------------------------------------------------------------------------
 
@@ -1361,6 +1397,7 @@ import wx.MouseEvent;
 	
 	//-----------------------------------------------------------------------------
 	
+        //! \cond EXTERN
 		static extern (C) IntPtr wxHtmlEasyPrinting_ctor(string name, IntPtr parent);
 		static extern (C) bool   wxHtmlEasyPrinting_PreviewFile(IntPtr self, string htmlfile);
 		static extern (C) bool   wxHtmlEasyPrinting_PreviewText(IntPtr self, string htmltext, string basepath);
@@ -1374,6 +1411,7 @@ import wx.MouseEvent;
 		static extern (C) void   wxHtmlEasyPrinting_SetStandardFonts(IntPtr self, int size, string normal_face, string fixed_face);
 		static extern (C) IntPtr wxHtmlEasyPrinting_GetPrintData(IntPtr self);
 		static extern (C) IntPtr wxHtmlEasyPrinting_GetPageSetupData(IntPtr self);
+        //! \endcond
 		
 		//-----------------------------------------------------------------------------
 		
@@ -1528,6 +1566,7 @@ import wx.MouseEvent;
 
 		//-----------------------------------------------------------------------------
 
+        //! \cond EXTERN
 		static extern (C) IntPtr wxHtmlWindow_ctor();
 		static extern (C) void   wxHtmlWindow_RegisterVirtual(IntPtr self, HtmlWindow obj, 
 			Virtual_OnLinkClicked onLinkClicked,
@@ -1573,6 +1612,7 @@ import wx.MouseEvent;
 		static extern (C) string wxHtmlWindow_ToText(IntPtr self);
 		
 		static extern (C) string wxHtmlWindow_SelectionToText(IntPtr self);
+        //! \endcond
 		
 		//-----------------------------------------------------------------------------
 

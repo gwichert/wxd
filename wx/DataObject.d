@@ -45,12 +45,14 @@ import wx.common;
 	
 	//---------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxDataObjectSimple_ctor(IntPtr format);
 		static extern (C) void wxDataObjectSimple_dtor(IntPtr self);
 		static extern (C) void wxDataObjectSimple_SetFormat(IntPtr self, IntPtr format);
 		static extern (C) uint wxDataObjectSimple_GetDataSize(IntPtr self);
 		static extern (C) bool wxDataObjectSimple_GetDataHere(IntPtr self, IntPtr buf);
 		static extern (C) bool wxDataObjectSimple_SetData(IntPtr self, uint len, IntPtr buf);
+		//! \endcond
 		
 		//---------------------------------------------------------------------
 
@@ -74,12 +76,14 @@ import wx.common;
 	
 	//---------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxTextDataObject_ctor(string text);
 		static extern (C) void wxTextDataObject_dtor(IntPtr self);
 		static extern (C) void wxTextDataObject_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
 		static extern (C) int wxTextDataObject_GetTextLength(IntPtr self);
 		static extern (C) string wxTextDataObject_GetText(IntPtr self);
 		static extern (C) void wxTextDataObject_SetText(IntPtr self, string text);
+		//! \endcond
 		
 		//---------------------------------------------------------------------
 
@@ -121,11 +125,13 @@ import wx.common;
 	
 	//---------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxFileDataObject_ctor();
 		static extern (C) void wxFileDataObject_dtor(IntPtr self);
 		static extern (C) void wxFileDataObject_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
 		static extern (C) void wxFileDataObject_AddFile(IntPtr self, string filename);
 		static extern (C) IntPtr wxFileDataObject_GetFilenames(IntPtr self);
+		//! \endcond
 		
 		//---------------------------------------------------------------------
 		

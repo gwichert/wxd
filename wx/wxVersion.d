@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------------
 // wxD - wxVersion.d
-// (C) 2005 afb <afb.sourceforge.net>
+// (C) 2005 afb <afb@users.sourceforge.net>
 //
 // The wxVersion constants
 //
@@ -11,13 +11,18 @@
 
 module wx.wxVersion;
 import wx.common;
-import std.string;
 
+//! \cond STD
+import std.string;
+//! \endcond
+
+		//! \cond EXTERN
 		static extern (C) int wxVersion_MAJOR_VERSION();
 		static extern (C) int wxVersion_MINOR_VERSION();
 		static extern (C) int wxVersion_RELEASE_NUMBER();
 		static extern (C) int wxVersion_SUBRELEASE_NUMBER();
 		static extern (C) char* wxVersion_VERSION_STRING();
+		//! \endcond
 
 public int wxMAJOR_VERSION() { return wxVersion_MAJOR_VERSION(); }
 public int wxMINOR_VERSION() { return wxVersion_MINOR_VERSION(); }

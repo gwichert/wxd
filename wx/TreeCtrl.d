@@ -31,11 +31,13 @@ import wx.KeyEvent;
 	
 	//-----------------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxTreeItemData_ctor();
 		static extern (C) void   wxTreeItemData_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
 		static extern (C) void   wxTreeItemData_dtor(IntPtr self);
 		static extern (C) IntPtr wxTreeItemData_GetId(IntPtr self);
 		static extern (C) void   wxTreeItemData_SetId(IntPtr self, IntPtr param);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 
@@ -69,6 +71,7 @@ import wx.KeyEvent;
 	
 	//-----------------------------------------------------------------------------
 	
+		//! \cond EXTERN
 		static extern (C) IntPtr wxTreeItemAttr_ctor();
 		static extern (C) IntPtr wxTreeItemAttr_ctor2(IntPtr colText, IntPtr colBack, IntPtr font);
 		static extern (C) void   wxTreeItemAttr_dtor(IntPtr self);
@@ -82,6 +85,7 @@ import wx.KeyEvent;
 		static extern (C) IntPtr wxTreeItemAttr_GetTextColour(IntPtr self);
 		static extern (C) IntPtr wxTreeItemAttr_GetBackgroundColour(IntPtr self);
 		static extern (C) IntPtr wxTreeItemAttr_GetFont(IntPtr self);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 
@@ -144,12 +148,14 @@ import wx.KeyEvent;
 	
 	//-----------------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxTreeItemId_ctor();
 		static extern (C) IntPtr wxTreeItemId_ctor2(void* pItem);
 		static extern (C) void   wxTreeItemId_dtor(IntPtr self);
 		static extern (C) void   wxTreeItemId_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
 		static extern (C) bool   wxTreeItemId_Equal(IntPtr item1, IntPtr item2);
 		static extern (C) bool   wxTreeItemId_IsOk(IntPtr self);
+		//! \endcond
 		
 		//---------------------------------------------------------------------
 
@@ -232,6 +238,7 @@ import wx.KeyEvent;
 		
 		//-----------------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) uint   wxTreeCtrl_GetDefaultStyle();
 		static extern (C) IntPtr wxTreeCtrl_ctor();
 		static extern (C) void   wxTreeCtrl_RegisterVirtual(IntPtr self,TreeCtrl obj, Virtual_OnCompareItems onCompareItems);
@@ -342,6 +349,7 @@ import wx.KeyEvent;
 		
 		static extern (C) void   wxTreeCtrl_SetItemFont(IntPtr self, IntPtr item, IntPtr font);
 		static extern (C) void   wxTreeCtrl_SortChildren(IntPtr self, IntPtr item);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 
@@ -1128,6 +1136,7 @@ import wx.KeyEvent;
 	
 	//-----------------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxTreeEvent_ctor(int commandType, int id);
 		static extern (C) IntPtr wxTreeEvent_GetItem(IntPtr self);
 		static extern (C) void   wxTreeEvent_SetItem(IntPtr self, IntPtr item);
@@ -1148,6 +1157,7 @@ import wx.KeyEvent;
 		static extern (C) bool   wxTreeEvent_IsAllowed(IntPtr self);       
 		
 		static extern (C) void   wxTreeEvent_SetToolTip(IntPtr self, string toolTip);
+		//! \endcond
 
 		//-----------------------------------------------------------------------------
 
@@ -1261,12 +1271,14 @@ import wx.KeyEvent;
 	
 	//---------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxArrayTreeItemIds_ctor();
 		static extern (C) void   wxArrayTreeItemIds_dtor(IntPtr self);
 		static extern (C) void   wxArrayTreeItemIds_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
 		static extern (C) void   wxArrayTreeItemIds_Add(IntPtr self, IntPtr toadd);
 		static extern (C) IntPtr wxArrayTreeItemIds_Item(IntPtr self, int num);
 		static extern (C) int    wxArrayTreeItemIds_GetCount(IntPtr self);
+		//! \endcond
 		
 		//---------------------------------------------------------------------
 

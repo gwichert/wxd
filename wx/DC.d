@@ -21,6 +21,7 @@ import wx.Pen;
 import wx.Brush;
 import wx.ArrayInt;
 
+		//! \cond EXTERN
 		static extern (C) void   wxDC_dtor(IntPtr self);
 		static extern (C) void   wxDC_DrawBitmap(IntPtr self, IntPtr bmp, int x, int y, bool transparent);
 		static extern (C) void   wxDC_DrawPolygon(IntPtr self, int n, Point[] points, int xoffset, int yoffset, int fill_style);
@@ -149,6 +150,7 @@ import wx.ArrayInt;
 		static extern (C) int    wxDC_MaxX(IntPtr self);
 		static extern (C) int    wxDC_MinY(IntPtr self);
 		static extern (C) int    wxDC_MaxY(IntPtr self);
+		//! \endcond
 
 	public class DC : wxObject
 	{
@@ -908,6 +910,7 @@ import wx.ArrayInt;
 	
 	//---------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxWindowDC_ctor();
 		static extern (C) IntPtr wxWindowDC_ctor2(IntPtr win);
 		static extern (C) bool wxWindowDC_CanDrawBitmap(IntPtr self);
@@ -926,6 +929,7 @@ import wx.ArrayInt;
 		static extern (C) void wxWindowDC_SetPalette(IntPtr self, IntPtr palette);
 		static extern (C) void wxWindowDC_GetPPI(IntPtr self, inout Size size);
 		static extern (C) int wxWindowDC_GetDepth(IntPtr self);
+		//! \endcond
 		
 		//---------------------------------------------------------------------
 	
@@ -1076,8 +1080,10 @@ import wx.ArrayInt;
 	
 		//---------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxClientDC_ctor();
 		static extern (C) IntPtr wxClientDC_ctor2(IntPtr window);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 		
@@ -1106,8 +1112,10 @@ import wx.ArrayInt;
     
 	//---------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxPaintDC_ctor();
 		static extern (C) IntPtr wxPaintDC_ctor2(IntPtr window);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 

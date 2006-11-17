@@ -19,6 +19,7 @@ import wx.Dialog;
 import wx.Font;
 import wx.GdiCommon; //for nullobject
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxFontData_ctor();
 		static extern (C) void   wxFontData_dtor(IntPtr self);
 
@@ -41,6 +42,7 @@ import wx.GdiCommon; //for nullobject
 		static extern (C) IntPtr wxFontData_GetChosenFont(IntPtr self);
 
 		static extern (C) void   wxFontData_SetRange(IntPtr self, int minRange, int maxRange);
+		//! \endcond
 
         //---------------------------------------------------------------------
 
@@ -111,12 +113,14 @@ import wx.GdiCommon; //for nullobject
 	public static wxObject New(IntPtr ptr) { return new FontData(ptr); }
     }
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxFontDialog_ctor();
 		static extern (C) bool   wxFontDialog_Create(IntPtr self, IntPtr parent, IntPtr data);
 		static extern (C) void   wxFontDialog_dtor(IntPtr self);
 
 		static extern (C) int    wxFontDialog_ShowModal(IntPtr self);
 		static extern (C) IntPtr wxFontDialog_GetFontData(IntPtr self);
+		//! \endcond
 
         //---------------------------------------------------------------------
 
@@ -162,7 +166,9 @@ import wx.GdiCommon; //for nullobject
         //---------------------------------------------------------------------
 	}
 
+	//! \cond EXTERN
 	extern (C) IntPtr wxGetFontFromUser_func(IntPtr parent, IntPtr fontInit);
+	//! \endcond
 
 	Font GetFontFromUser(Window parent,Font fontInit=null)
 	{

@@ -15,8 +15,12 @@
 
 module wx.Colour;
 import wx.common;
-private import std.string;
 
+//! \cond STD
+private import std.string;
+//! \endcond
+
+		//! \cond EXTERN
 		static extern (C) IntPtr wxColour_ctor();
 		static extern (C) IntPtr wxColour_ctorByName(string name);
 		static extern (C) IntPtr wxColour_ctorByParts(ubyte red, ubyte green, ubyte blue);
@@ -31,6 +35,7 @@ private import std.string;
 		static extern (C) void   wxColour_Set(IntPtr self, ubyte red, ubyte green, ubyte blue);
 		
 		static extern (C) IntPtr wxColour_CreateByName(string name);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 

@@ -21,6 +21,7 @@ import wx.ScrolledWindow;
 import wx.PrintData;
 import wx.Printer;
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxPrintPreview_ctor(IntPtr printout, IntPtr printoutForPrinting, IntPtr data);
         static extern (C) IntPtr wxPrintPreview_ctorPrintData(IntPtr printout, IntPtr printoutForPrinting, IntPtr data);
         static extern (C) bool   wxPrintPreview_SetCurrentPage(IntPtr self, int pageNum);
@@ -44,6 +45,7 @@ import wx.Printer;
         static extern (C) void   wxPrintPreview_SetOk(IntPtr self, bool ok);
         static extern (C) bool   wxPrintPreview_Print(IntPtr self, bool interactive);
         static extern (C) void   wxPrintPreview_DetermineScaling(IntPtr self);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -146,10 +148,12 @@ import wx.Printer;
         }
     }
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxPreviewFrame_ctor(IntPtr preview, IntPtr parent, string title, inout Point pos, inout Size size, uint style, string name);
         static extern (C) void   wxPreviewFrame_Initialize(IntPtr self);
         static extern (C) void   wxPreviewFrame_CreateCanvas(IntPtr self);
         static extern (C) void   wxPreviewFrame_CreateControlBar(IntPtr self);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -183,11 +187,13 @@ import wx.Printer;
         }
     }
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxPreviewControlBar_ctor(IntPtr preview, int buttons, IntPtr parent, inout Point pos, inout Size size, uint style, string name);
         static extern (C) void   wxPreviewControlBar_CreateButtons(IntPtr self);
         static extern (C) void   wxPreviewControlBar_SetZoomControl(IntPtr self, int zoom);
         static extern (C) int    wxPreviewControlBar_GetZoomControl(IntPtr self);
         static extern (C) IntPtr wxPreviewControlBar_GetPrintPreview(IntPtr self);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -237,7 +243,9 @@ import wx.Printer;
         public PrintPreview printPreview() { return cast(PrintPreview)FindObject(wxPreviewControlBar_GetPrintPreview(wxobj), &PrintPreview.New); }
     }
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxPreviewCanvas_ctor(IntPtr preview, IntPtr parent, inout Point pos, inout Size size, uint style, string name);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 

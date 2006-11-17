@@ -52,6 +52,7 @@ import wx.Bitmap;
 
 		//-----------------------------------------------------------------------------
 		
+		//! \cond EXTERN
 		static extern (C) IntPtr wxCursor_ctorById(StockCursor id);
 		static extern (C) IntPtr wxCursor_ctorImage(IntPtr image);
 		static extern (C) IntPtr wxCursor_ctorCopy(IntPtr cursor);
@@ -59,6 +60,7 @@ import wx.Bitmap;
 		static extern (C) bool   wxCursor_Ok(IntPtr self);
 		
 		static extern (C) void   wxCursor_SetCursor(IntPtr cursor);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 		

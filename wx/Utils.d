@@ -17,6 +17,7 @@ module wx.Utils;
 import wx.common;
 import wx.Window;
 
+		//! \cond EXTERN
 		static extern (C) string wxGlobal_GetHomeDir();
 		static extern (C) void wxSleep_func(int num);
 		static extern (C) void wxYield_func();
@@ -24,6 +25,7 @@ import wx.Window;
 		static extern (C) void wxEndBusyCursor_func();
 		static extern (C) void wxMutexGuiEnter_func();
 		static extern (C) void wxMutexGuiLeave_func();
+		//! \endcond
 		
 		
 		public static string GetHomeDir()
@@ -96,8 +98,10 @@ import wx.Window;
 	
 	//---------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxWindowDisabler_ctor(IntPtr winToSkip);
 		static extern (C) void wxWindowDisabler_dtor(IntPtr self);
+		//! \endcond
 		
 	public class WindowDisabler : wxObject
 	{
@@ -127,8 +131,10 @@ import wx.Window;
 	
 	//---------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxBusyInfo_ctor(string message, IntPtr parent);
 		static extern (C) void   wxBusyInfo_dtor(IntPtr self);
+		//! \endcond
 		
 	public class BusyInfo : wxObject
 	{

@@ -17,6 +17,7 @@ module wx.Brush;
 import wx.common;
 import wx.Bitmap;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxBLUE_BRUSH_Get();
 		static extern (C) IntPtr wxGREEN_BRUSH_Get();
 		static extern (C) IntPtr wxWHITE_BRUSH_Get();
@@ -36,6 +37,7 @@ import wx.Bitmap;
 		static extern (C) void   wxBrush_SetStipple(IntPtr self, IntPtr stipple);
         	static extern (C) IntPtr wxBrush_GetColour(IntPtr self);
 		static extern (C) void   wxBrush_SetColour(IntPtr self, IntPtr col);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 

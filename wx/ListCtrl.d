@@ -19,6 +19,7 @@ import wx.Control;
 import wx.ClientData;
 import wx.ImageList;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxListItem_ctor();
 		static extern (C) void   wxListItem_Clear(IntPtr self);
 		static extern (C) void   wxListItem_ClearAttributes(IntPtr self);
@@ -50,6 +51,7 @@ import wx.ImageList;
 		
 		static extern (C) IntPtr wxListItem_GetAttributes(IntPtr self);
 		static extern (C) bool   wxListItem_HasAttributes(IntPtr self);
+		//! \endcond
 
 	public class ListItem : wxObject
 	{
@@ -153,6 +155,7 @@ import wx.ImageList;
 	
 	//-----------------------------------------------------------------------------
 	
+		//! \cond EXTERN
 		static extern (C) IntPtr wxListItemAttr_ctor();
 		static extern (C) IntPtr wxListItemAttr_ctor2(IntPtr colText, IntPtr colBack, IntPtr font);
 		static extern (C) void   wxListItemAttr_dtor(IntPtr self);
@@ -166,6 +169,7 @@ import wx.ImageList;
 		static extern (C) IntPtr wxListItemAttr_GetTextColour(IntPtr self);
 		static extern (C) IntPtr wxListItemAttr_GetBackgroundColour(IntPtr self);
 		static extern (C) IntPtr wxListItemAttr_GetFont(IntPtr self);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 
@@ -233,6 +237,7 @@ import wx.ImageList;
 		alias int function(int item1, int item2, int sortData) wxListCtrlCompare;
 		}
 	
+		//! \cond EXTERN
 		static extern (C) IntPtr wxListCtrl_ctor();
 		static extern (C) void   wxListCtrl_dtor(IntPtr self);
 		static extern (C) bool   wxListCtrl_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, IntPtr validator, string name);
@@ -297,6 +302,7 @@ import wx.ImageList;
 		
 		static extern (C) void   wxListCtrl_RefreshItem(IntPtr self, int item);
 		static extern (C) void   wxListCtrl_RefreshItems(IntPtr self, int itemFrom, int itemTo);
+		//! \endcond
 	
 	public class ListCtrl : Control
 	{
@@ -890,6 +896,7 @@ import wx.ImageList;
 	
 	//---------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxListEvent_ctor(int commandType, int id);
 		static extern (C) IntPtr wxListEvent_GetItem(IntPtr self);
 		static extern (C) string wxListEvent_GetLabel(IntPtr self);
@@ -908,6 +915,7 @@ import wx.ImageList;
 		static extern (C) void wxListEvent_Veto(IntPtr self);
 		static extern (C) void wxListEvent_Allow(IntPtr self);
 		static extern (C) bool wxListEvent_IsAllowed(IntPtr self);			
+		//! \endcond
 		
 		//---------------------------------------------------------------------
        
@@ -1049,6 +1057,7 @@ import wx.ImageList;
 
 	//-----------------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxListView_ctor();
 		static extern (C) bool wxListView_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, IntPtr validator, string name);
 		static extern (C) void wxListView_Select(IntPtr self, uint n, bool on);
@@ -1059,6 +1068,7 @@ import wx.ImageList;
 		static extern (C) bool wxListView_IsSelected(IntPtr self, uint index);
 		static extern (C) void wxListView_SetColumnImage(IntPtr self, int col, int image);
 		static extern (C) void wxListView_ClearColumnImage(IntPtr self, int col);
+		//! \endcond
 
 		//-----------------------------------------------------------------------------
 

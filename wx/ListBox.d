@@ -21,6 +21,7 @@ import wx.ClientData;
 // this is bogus, but better than nothing
 version (darwin) { version = __WXMAC__; }
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxListBox_ctor();
 		static extern (C) void   wxListBox_dtor(IntPtr self);
 		static extern (C) void   wxListBox_Clear(IntPtr self);
@@ -50,6 +51,7 @@ version (darwin) { version = __WXMAC__; }
 		static extern (C) void   wxListBox_AppendClientData(IntPtr self, string item, IntPtr cliendData);
 		static extern (C) void   wxListBox_Delete(IntPtr self, int n);
 		static extern (C) int    wxListBox_GetCount(IntPtr self);
+		//! \endcond
 	
 		//---------------------------------------------------------------------
 	
@@ -272,6 +274,7 @@ version (darwin) { version = __WXMAC__; }
 	
 	//---------------------------------------------------------------------
 	
+		//! \cond EXTERN
 		static extern (C) IntPtr wxCheckListBox_ctor1();
 		static extern (C) IntPtr wxCheckListBox_ctor2(IntPtr parent, 
 			int id,
@@ -285,7 +288,8 @@ version (darwin) { version = __WXMAC__; }
 		static extern (C) bool wxCheckListBox_IsChecked(IntPtr self, int index);
 		static extern (C) void wxCheckListBox_Check(IntPtr self, int index, bool check);
 		static extern (C) int wxCheckListBox_GetItemHeight(IntPtr self);
-		
+		//! \endcond
+				
 	public class CheckListBox : ListBox
 	{
 		const string wxListBoxNameStr = "listBox";

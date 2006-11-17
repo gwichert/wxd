@@ -8,8 +8,10 @@ DMD = dmd
 CXXFLAGS = -O2 `$(WX_CONFIG) --cxxflags`
 DFLAGS+= -O -I$(TOPDIR)
 
-LDFLAGS = `$(WX_CONFIG) --libs` -lstdc++ -lgcc
-WX_VERSION = `$(WX_CONFIG) --version`
+WXVERSION = `$(WX_CONFIG) --version`
+WXLIBS = `$(WX_CONFIG) --libs`
+
+LDFLAGS = $(WXLIBS) -lstdc++
 
 .cpp.o: 
 	$(CXX) -c $(CXXFLAGS) $<

@@ -23,6 +23,7 @@ import wx.Frame;
 		
 		//-----------------------------------------------------------------------------
 	
+		//! \cond EXTERN
 		static extern (C) IntPtr wxMDIParentFrame_ctor();
 		static extern (C) void wxMDIParentFrame_RegisterVirtual(IntPtr self, MDIParentFrame obj, Virtual_OnCreateClient onCreateClient);
 		static extern (C) IntPtr wxMDIParentFrame_OnCreateClient(IntPtr self);
@@ -42,6 +43,7 @@ import wx.Frame;
 		static extern (C) void   wxMDIParentFrame_ActivatePrevious(IntPtr self);
 		
 		static extern (C) void   wxMDIParentFrame_GetClientSize(IntPtr self, out int width, out int height);
+		//! \endcond
 
 		//-----------------------------------------------------------------------------
 
@@ -155,11 +157,13 @@ import wx.Frame;
 		}
 	}
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxMDIChildFrame_ctor();
 		static extern (C) bool   wxMDIChildFrame_Create(IntPtr self, IntPtr parent, int id, string title, inout  Point pos, inout Size size, uint style, string name);
 		static extern (C) void   wxMDIChildFrame_Activate(IntPtr self);
 		static extern (C) void   wxMDIChildFrame_Restore(IntPtr self);
 		static extern (C) void   wxMDIChildFrame_Maximize(IntPtr self, bool maximize);
+		//! \endcond
 
 		//-----------------------------------------------------------------------------
 
@@ -229,8 +233,10 @@ import wx.Frame;
 		}
 	}
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxMDIClientWindow_ctor();
 		static extern (C) bool   wxMDIClientWindow_CreateClient(IntPtr self, IntPtr parent, uint style);
+		//! \endcond
 	
 		//-----------------------------------------------------------------------------
 	

@@ -20,12 +20,16 @@ import wx.Dialog;
 	// The MessageDialog class implements the interface for wxWidgets' 
 	// wxMessageDialog class and wxMessageBox.
 
+		//! \cond EXTERN
+
 		// MessageBox function
 		static extern (C) int    wxMsgBox(IntPtr parent, string msg, string cap, uint style, inout Point pos);
 
 		// Message dialog methods
 		static extern (C) IntPtr wxMessageDialog_ctor(IntPtr parent, string message, string caption, uint style, inout Point pos);
 		static extern (C) int    wxMessageDialog_ShowModal(IntPtr self);
+
+		//! \endcond
 
 	public class MessageDialog : Dialog
 	{

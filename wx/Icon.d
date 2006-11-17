@@ -17,9 +17,11 @@ module wx.Icon;
 import wx.common;
 import wx.Bitmap;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxIcon_ctor();
 		static extern (C) void   wxIcon_CopyFromBitmap(IntPtr self, IntPtr bitmap);
 		static extern (C) bool   wxIcon_LoadFile(IntPtr self, string name, BitmapType type);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 

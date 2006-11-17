@@ -17,6 +17,7 @@ module wx.Caret;
 import wx.common;
 import wx.Window;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxCaret_ctor();
 		static extern (C) void wxCaret_dtor(IntPtr self);
 		static extern (C) bool wxCaret_Create(IntPtr self, IntPtr window, int width, int height);
@@ -31,6 +32,7 @@ import wx.Window;
 		static extern (C) void wxCaret_Hide(IntPtr self);
 		static extern (C) int wxCaret_GetBlinkTime();
 		static extern (C) void wxCaret_SetBlinkTime(int milliseconds);
+		//! \endcond
 		
 		//---------------------------------------------------------------------
 
@@ -139,8 +141,10 @@ import wx.Window;
 		//---------------------------------------------------------------------
 	}
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxCaretSuspend_ctor(IntPtr win);
 		static extern (C) void wxCaretSuspend_dtor(IntPtr self);
+		//! \endcond
 		
 		//---------------------------------------------------------------------
 

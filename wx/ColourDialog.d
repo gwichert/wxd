@@ -18,6 +18,7 @@ import wx.common;
 import wx.Colour;
 import wx.Dialog;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxColourData_ctor();
 
 		static extern (C) void   wxColourData_SetChooseFull(IntPtr self, bool flag);
@@ -28,6 +29,7 @@ import wx.Dialog;
 
 		static extern (C) void   wxColourData_SetCustomColour(IntPtr self, int i, IntPtr colour);
 		static extern (C) IntPtr wxColourData_GetCustomColour(IntPtr self, int i);
+		//! \endcond
 
 		//---------------------------------------------------------------------
         
@@ -78,12 +80,14 @@ import wx.Dialog;
 	
 	//---------------------------------------------------------------------
 	
+		//! \cond EXTERN
 		static extern (C) IntPtr wxColourDialog_ctor();
 		static extern (C) bool   wxColourDialog_Create(IntPtr self, IntPtr parent, IntPtr data);
 		static extern (C) IntPtr wxColourDialog_GetColourData(IntPtr self);
 		static extern (C) int    wxColourDialog_ShowModal(IntPtr self);
 		
 		static extern (C) IntPtr wxColourDialog_GetColourFromUser(IntPtr parent, IntPtr colInit);
+		//! \endcond
 	
 		//---------------------------------------------------------------------
 	

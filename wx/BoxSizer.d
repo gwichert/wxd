@@ -17,6 +17,7 @@ module wx.BoxSizer;
 import wx.common;
 import wx.Sizer;
 
+		//! \cond EXTERN
 		extern(C) {
 		alias void function(BoxSizer obj) Virtual_voidvoid;
 		alias void function(BoxSizer obj,out Size size) Virtual_wxSizevoid;
@@ -30,6 +31,7 @@ import wx.Sizer;
 		static extern (C) void wxBoxSizer_CalcMin(IntPtr self,out Size size);
 		static extern (C) int wxBoxSizer_GetOrientation(IntPtr self);
 		static extern (C) void wxBoxSizer_SetOrientation(IntPtr self, int orient);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 

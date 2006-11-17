@@ -17,6 +17,7 @@ module wx.SpinCtrl;
 import wx.common;
 import wx.Control;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxSpinCtrl_ctor();
 		static extern (C) bool   wxSpinCtrl_Create(IntPtr self, IntPtr parent, int id, string value, inout Point pos, inout Size size, uint style, int min, int max, int initial, string name);
 		static extern (C) int    wxSpinCtrl_GetValue(IntPtr self);
@@ -25,6 +26,7 @@ import wx.Control;
 		static extern (C) void   wxSpinCtrl_SetValueStr(IntPtr self, string value);
 		static extern (C) void   wxSpinCtrl_SetValue(IntPtr self, int val);
 		static extern (C) void   wxSpinCtrl_SetRange(IntPtr self, int min, int max);
+		//! \endcond
 	
 		//---------------------------------------------------------------------
 		

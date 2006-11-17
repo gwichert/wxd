@@ -17,9 +17,11 @@ module wx.MemoryDC;
 import wx.common;
 import wx.DC;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxMemoryDC_ctor();
 		static extern (C) IntPtr wxMemoryDC_ctorByDC(IntPtr dc);
 		static extern (C) void   wxMemoryDC_SelectObject(IntPtr self, IntPtr bitmap);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 
@@ -44,6 +46,7 @@ import wx.DC;
 		//---------------------------------------------------------------------
 	}
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxBufferedDC_ctor();
 		static extern (C) IntPtr wxBufferedDC_ctorByBitmap(IntPtr dc, IntPtr buffer);
 		static extern (C) IntPtr wxBufferedDC_ctorBySize(IntPtr dc, inout Size area);
@@ -51,6 +54,7 @@ import wx.DC;
 		static extern (C) void   wxBufferedDC_InitByBitmap(IntPtr self, IntPtr dc, IntPtr bitmap);
 		static extern (C) void   wxBufferedDC_InitBySize(IntPtr self, IntPtr dc, inout Size area);
 		static extern (C) void   wxBufferedDC_UnMask(IntPtr self);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 
@@ -90,7 +94,9 @@ import wx.DC;
 		//---------------------------------------------------------------------
 	}
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxBufferedPaintDC_ctor(IntPtr window, IntPtr buffer);
+		//! \endcond
 
 		//---------------------------------------------------------------------
         

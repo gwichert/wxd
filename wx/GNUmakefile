@@ -49,6 +49,7 @@ OBJECTS = \
 	FontMisc.o  \
 	Frame.o  \
 	GDIObject.o  \
+	GLCanvas.o  \
 	Gauge.o  \
 	GdiCommon.o  \
 	GridBagSizer.o  \
@@ -180,8 +181,11 @@ install: $(LIBTARGET)
 	$(INSTALL) -p *.d $(DESTDIR)$(libdir)/d/wx
 	-$(RANLIB) $(DESTDIR)$(libdir)/`basename $(LIBTARGET)`
 
+ddoc:
+	$(DMD) -c -D $(DFLAGS) `ls *.d | grep -v DbGrid.d`
+
 clean:
-	-rm *.o
+	-rm *.o *.html
 	-rm $(LIBTARGET)
 
 $(LIBTARGET): $(OBJECTS)

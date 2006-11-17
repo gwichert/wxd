@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------------
 // wxD - filedialog.cpp
-// (C) 2005 bero <berobero.sourceforge.net>
-// (C) 2005 afb <afb.sourceforge.net>
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// (C) 2005 afb <afb@users.sourceforge.net>
 // based on
 // wx.NET - filedialog.cxx
 //

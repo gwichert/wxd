@@ -22,6 +22,7 @@ import wx.VScroll;
 		alias void function(VListBox obj, IntPtr dc, Rectangle rect, int n) Virtual_VoidDcRectSizeT;
 		}
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxVListBox_ctor(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
 		static extern (C) void wxVListBox_RegisterVirtual(IntPtr self, VListBox obj, 
 			Virtual_VoidDcRectSizeT onDrawItem, 
@@ -54,6 +55,7 @@ import wx.VScroll;
 		static extern (C) void wxVListBox_SetMargins(IntPtr self, inout Point pt);
 		static extern (C) void wxVListBox_SetMargins2(IntPtr self, int x, int y);
 		static extern (C) void wxVListBox_SetSelectionBackground(IntPtr self, IntPtr col);
+		//! \endcond
 		
 	public abstract class VListBox : VScrolledWindow
 	{

@@ -18,6 +18,7 @@ import wx.common;
 
 typedef int EventType;
 
+		//! \cond EXTERN
 		static extern (C) EventType wxEvent_GetEventType(IntPtr self);
 		static extern (C) int    wxEvent_GetId(IntPtr self);
 		static extern (C) bool   wxEvent_GetSkipped(IntPtr self);
@@ -269,6 +270,7 @@ version(__WXMSW__){
 		static extern (C) EventType wxEvent_EVT_QUERY_LAYOUT_INFO();
 		static extern (C) EventType wxEvent_EVT_CALCULATE_LAYOUT();
 	
+		//! \endcond
 		//---------------------------------------------------------------------
 	
 	public class Event : wxObject

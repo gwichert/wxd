@@ -17,6 +17,7 @@ module wx.SizerItem;
 import wx.common;
 import wx.Window;
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxSizerItem_ctorSpace(int width, int height, int proportion, int flag, int border, IntPtr userData);
         static extern (C) IntPtr wxSizerItem_ctorWindow(IntPtr window, int proportion, int flag, int border, IntPtr userData);
         static extern (C) IntPtr wxSizerItem_ctorSizer(IntPtr sizer, int proportion, int flag, int border, IntPtr userData);
@@ -50,6 +51,7 @@ import wx.Window;
         static extern (C) bool   wxSizerItem_IsShown(IntPtr self);
         static extern (C) IntPtr wxSizerItem_GetUserData(IntPtr self);
         static extern (C) void   wxSizerItem_GetPosition(IntPtr self, inout Point pos);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 

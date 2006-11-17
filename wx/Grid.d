@@ -29,6 +29,7 @@ import wx.ScrolledWindow;
         wxGridSelectColumns
     }
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxGridEvent_ctor(int id, int type, IntPtr obj, int row, int col, int x, int y, bool sel, bool control, bool shift, bool alt, bool meta);
         static extern (C) int    wxGridEvent_GetRow(IntPtr self);
         static extern (C) int    wxGridEvent_GetCol(IntPtr self);
@@ -41,6 +42,7 @@ import wx.ScrolledWindow;
         static extern (C) void wxGridEvent_Veto(IntPtr self);
         static extern (C) void wxGridEvent_Allow(IntPtr self);
         static extern (C) bool wxGridEvent_IsAllowed(IntPtr self);      
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -152,6 +154,7 @@ import wx.ScrolledWindow;
 
         //-----------------------------------------------------------------------------
         
+		//! \cond EXTERN
         static extern (C) IntPtr wxGridCellEditor_ctor();
 	static extern (C) void wxGridCellEditor_dtor(IntPtr self);
         static extern (C) void wxGridCellEditor_RegisterVirtual(IntPtr self, GridCellEditor obj,
@@ -179,6 +182,7 @@ import wx.ScrolledWindow;
         static extern (C) void   wxGridCellEditor_HandleReturn(IntPtr self, IntPtr evt);
         static extern (C) void   wxGridCellEditor_Destroy(IntPtr self);
         static extern (C) string wxGridCellEditor_GetValue(IntPtr self);
+		//! \endcond
 	
         //-----------------------------------------------------------------------------
         
@@ -372,6 +376,7 @@ import wx.ScrolledWindow;
     
     //-----------------------------------------------------------------------------
     
+		//! \cond EXTERN
         static extern (C) IntPtr wxGridCellTextEditor_ctor();
 	static extern (C) void wxGridCellTextEditor_dtor(IntPtr self);
         static extern (C) void wxGridCellTextEditor_Create(IntPtr self, IntPtr parent, int id, IntPtr evtHandler);
@@ -385,6 +390,7 @@ import wx.ScrolledWindow;
         static extern (C) void wxGridCellTextEditor_SetParameters(IntPtr self, string parameter);
         static extern (C) IntPtr wxGridCellTextEditor_Clone(IntPtr self);
         static extern (C) string wxGridCellTextEditor_GetValue(IntPtr self);
+		//! \endcond
 	
     public class GridCellTextEditor : GridCellEditor
     {
@@ -464,6 +470,7 @@ import wx.ScrolledWindow;
 
     //-----------------------------------------------------------------------------
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxGridCellNumberEditor_ctor(int min, int max);
 	static extern (C) void wxGridCellNumberEditor_dtor(IntPtr self);
 	static extern (C) void wxGridCellNumberEditor_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
@@ -476,6 +483,7 @@ import wx.ScrolledWindow;
         static extern (C) void wxGridCellNumberEditor_SetParameters(IntPtr self, string parameter);
         static extern (C) IntPtr wxGridCellNumberEditor_Clone(IntPtr self);
         static extern (C) string wxGridCellNumberEditor_GetValue(IntPtr self);
+		//! \endcond
 	
     public class GridCellNumberEditor : GridCellTextEditor
     {
@@ -555,6 +563,7 @@ import wx.ScrolledWindow;
 
     //-----------------------------------------------------------------------------
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxGridCellFloatEditor_ctor(int width, int precision);
 	static extern (C) void wxGridCellFloatEditor_dtor(IntPtr self);
         static extern (C) void wxGridCellFloatEditor_Create(IntPtr self, IntPtr parent, int id, IntPtr evtHandler);
@@ -566,6 +575,7 @@ import wx.ScrolledWindow;
         static extern (C) void wxGridCellFloatEditor_SetParameters(IntPtr self, string parameter);
         static extern (C) IntPtr wxGridCellFloatEditor_Clone(IntPtr self);
         static extern (C) string wxGridCellFloatEditor_GetValue(IntPtr self);
+		//! \endcond
 	
     public class GridCellFloatEditor : GridCellTextEditor
     {
@@ -642,6 +652,7 @@ import wx.ScrolledWindow;
 
     //-----------------------------------------------------------------------------
     
+		//! \cond EXTERN
         static extern (C) IntPtr wxGridCellBoolEditor_ctor();
 	static extern (C) void wxGridCellBoolEditor_dtor(IntPtr self);
 	static extern (C) void wxGridCellBoolEditor_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
@@ -654,6 +665,7 @@ import wx.ScrolledWindow;
         static extern (C) void wxGridCellBoolEditor_StartingClick(IntPtr self);
         static extern (C) IntPtr wxGridCellBoolEditor_Clone(IntPtr self);
         static extern (C) string wxGridCellBoolEditor_GetValue(IntPtr self);
+		//! \endcond
 	
     public class GridCellBoolEditor : GridCellEditor
     {
@@ -727,6 +739,7 @@ import wx.ScrolledWindow;
     
     //-----------------------------------------------------------------------------
     
+		//! \cond EXTERN
         static extern (C) IntPtr wxGridCellChoiceEditor_ctor(int n, string* choices, bool allowOthers);
 	static extern (C) void wxGridCellChoiceEditor_dtor(IntPtr self);
 	static extern (C) void wxGridCellChoiceEditor_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
@@ -738,6 +751,7 @@ import wx.ScrolledWindow;
         static extern (C) void wxGridCellChoiceEditor_SetParameters(IntPtr self, string parameter);
         static extern (C) IntPtr wxGridCellChoiceEditor_Clone(IntPtr self);
         static extern (C) string wxGridCellChoiceEditor_GetValue(IntPtr self);
+		//! \endcond
 	
     public class GridCellChoiceEditor : GridCellEditor
     {
@@ -812,6 +826,7 @@ import wx.ScrolledWindow;
     
     //-----------------------------------------------------------------------------
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxGridRangeSelectEvent_ctor(int id, int type, IntPtr obj, IntPtr topLeft, IntPtr bottomRight, bool sel, bool control, bool shift, bool alt, bool meta);
         static extern (C) IntPtr wxGridRangeSelectEvent_GetTopLeftCoords(IntPtr self);
         static extern (C) IntPtr wxGridRangeSelectEvent_GetBottomRightCoords(IntPtr self);
@@ -827,6 +842,7 @@ import wx.ScrolledWindow;
         static extern (C) void wxGridRangeSelectEvent_Veto(IntPtr self);
         static extern (C) void wxGridRangeSelectEvent_Allow(IntPtr self);
         static extern (C) bool wxGridRangeSelectEvent_IsAllowed(IntPtr self);       
+		//! \endcond
     
         //-----------------------------------------------------------------------------
     
@@ -902,11 +918,13 @@ import wx.ScrolledWindow;
         alias void function(GridCellWorker obj, string param) Virtual_SetParameters;
 	}
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxGridCellWorker_ctor();
         static extern (C) void wxGridCellWorker_RegisterVirtual(IntPtr self, GridCellWorker obj, Virtual_SetParameters setParameters);
         static extern (C) void wxGridCellWorker_IncRef(IntPtr self);
         static extern (C) void wxGridCellWorker_DecRef(IntPtr self);
         static extern (C) void wxGridCellWorker_SetParameters(IntPtr self, string parms);
+		//! \endcond
 	
         //-----------------------------------------------------------------------------
         
@@ -960,6 +978,7 @@ import wx.ScrolledWindow;
     
     //-----------------------------------------------------------------------------
 
+            //! \cond EXTERN
             static extern (C) IntPtr wxGridEditorCreatedEvent_ctor(int id, int type, IntPtr obj, int row, int col, IntPtr ctrl);
             static extern (C) int    wxGridEditorCreatedEvent_GetRow(IntPtr self);
             static extern (C) int    wxGridEditorCreatedEvent_GetCol(IntPtr self);
@@ -967,6 +986,7 @@ import wx.ScrolledWindow;
             static extern (C) void   wxGridEditorCreatedEvent_SetRow(IntPtr self, int row);
             static extern (C) void   wxGridEditorCreatedEvent_SetCol(IntPtr self, int col);
             static extern (C) void   wxGridEditorCreatedEvent_SetControl(IntPtr self, IntPtr ctrl);
+            //! \endcond
 
             //-----------------------------------------------------------------------------
     
@@ -1003,6 +1023,7 @@ import wx.ScrolledWindow;
     
     //-----------------------------------------------------------------------------
 
+            //! \cond EXTERN
             static extern (C) IntPtr wxGrid_ctor();
             static extern (C) IntPtr wxGrid_ctorFull(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
             static extern (C) bool   wxGrid_CreateGrid(IntPtr self, int numRows, int numCols,  int selmode);
@@ -1217,6 +1238,7 @@ import wx.ScrolledWindow;
             static extern (C) void   wxGrid_SetDividerPen(IntPtr self, IntPtr pen);
             static extern (C) IntPtr wxGrid_GetDividerPen(IntPtr self);
             static extern (C) int    wxGrid_GetRowHeight(IntPtr self, int row);
+            //! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -2424,6 +2446,7 @@ version(NOT_IMPLEMENTED){
 
     }
 
+        //! \cond EXTERN
         static extern (C) IntPtr wxGridCellCoords_ctor();
 	static extern (C) void   wxGridCellCoords_dtor(IntPtr self);
         static extern (C) int    wxGridCellCoords_GetRow(IntPtr self);
@@ -2431,6 +2454,7 @@ version(NOT_IMPLEMENTED){
         static extern (C) int    wxGridCellCoords_GetCol(IntPtr self);
         static extern (C) void   wxGridCellCoords_SetCol(IntPtr self, int n);
         static extern (C) void   wxGridCellCoords_Set(IntPtr self, int row, int col);
+        //! \endcond
 	
         //-----------------------------------------------------------------------------
     
@@ -2478,6 +2502,7 @@ version(NOT_IMPLEMENTED){
         }
     }
 
+        //! \cond EXTERN
         static extern (C) IntPtr wxGridCellAttr_ctor(IntPtr colText, IntPtr colBack, IntPtr font, int hAlign, int vAlign);
         static extern (C) IntPtr wxGridCellAttr_ctor2();
         static extern (C) IntPtr wxGridCellAttr_ctor3(IntPtr attrDefault);
@@ -2511,6 +2536,7 @@ version(NOT_IMPLEMENTED){
         static extern (C) IntPtr wxGridCellAttr_GetEditor(IntPtr self, IntPtr grid, int row, int col);
         static extern (C) bool   wxGridCellAttr_IsReadOnly(IntPtr self);
         static extern (C) void   wxGridCellAttr_SetDefAttr(IntPtr self, IntPtr defAttr);
+        //! \endcond
 	
         //-----------------------------------------------------------------------------
     
@@ -2667,6 +2693,7 @@ version(NOT_IMPLEMENTED){
         public void DefAttr(GridCellAttr value) { wxGridCellAttr_SetDefAttr(wxobj, wxObject.SafePtr(value)); }
     }
 
+        //! \cond EXTERN
         static extern (C) IntPtr wxGridSizeEvent_ctor();
         static extern (C) IntPtr wxGridSizeEvent_ctorParam(int id, int type, IntPtr obj, int rowOrCol, int x, int y, bool control, bool shift, bool alt, bool meta);
         static extern (C) int    wxGridSizeEvent_GetRowOrCol(IntPtr self);
@@ -2678,6 +2705,7 @@ version(NOT_IMPLEMENTED){
         static extern (C) void wxGridSizeEvent_Veto(IntPtr self);
         static extern (C) void wxGridSizeEvent_Allow(IntPtr self);
         static extern (C) bool wxGridSizeEvent_IsAllowed(IntPtr self);          
+        //! \endcond
     
         //-----------------------------------------------------------------------------
         
@@ -2754,9 +2782,11 @@ version(NOT_IMPLEMENTED){
 
         //-----------------------------------------------------------------------------
         
+        //! \cond EXTERN
         static extern (C) IntPtr wxGridCellRenderer_ctor();
 	static extern (C) void wxGridCellRenderer_dtor(IntPtr self);
         static extern (C) void wxGridCellRenderer_RegisterVirtual(IntPtr self, GridCellRenderer obj, Virtual_Draw draw, Virtual_GetBestSize getBestSize, Virtual_RendererClone clone);
+        //! \endcond
 	
 	//-----------------------------------------------------------------------------
 	
@@ -2821,12 +2851,14 @@ version(NOT_IMPLEMENTED){
     
     //-----------------------------------------------------------------------------
     
+        //! \cond EXTERN
         static extern (C) IntPtr wxGridCellStringRenderer_ctor();
 	static extern (C) void wxGridCellStringRenderer_dtor(IntPtr self);
 	static extern (C) void wxGridCellStringRenderer_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
         static extern (C) void wxGridCellStringRenderer_Draw(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, inout Rectangle rect, int row, int col, bool isSelected);
         static extern (C) void wxGridCellStringRenderer_GetBestSize(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, int row, int col, out Size size);
         static extern (C) IntPtr wxGridCellStringRenderer_Clone(IntPtr self);
+        //! \endcond
 	
     public class GridCellStringRenderer : GridCellRenderer
     {
@@ -2921,6 +2953,7 @@ version(NOT_IMPLEMENTED){
     
     //-----------------------------------------------------------------------------
     
+        //! \cond EXTERN
         static extern (C) IntPtr wxGridCellFloatRenderer_ctor(int width, int precision);
 	static extern (C) void wxGridCellFloatRenderer_dtor(IntPtr self);
         static extern (C) void wxGridCellFloatRenderer_Draw(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, inout Rectangle rect, int row, int col, bool isSelected);
@@ -2931,6 +2964,7 @@ version(NOT_IMPLEMENTED){
         static extern (C) int wxGridCellFloatRenderer_GetPrecision(IntPtr self);
         static extern (C) void wxGridCellFloatRenderer_SetPrecision(IntPtr self, int precision);
         static extern (C) void wxGridCellFloatRenderer_SetParameters(IntPtr self, string parameter);
+        //! \endcond
 	
     public class GridCellFloatRenderer : GridCellStringRenderer
     {
@@ -2990,12 +3024,14 @@ version(NOT_IMPLEMENTED){
     
     //-----------------------------------------------------------------------------
     
+        //! \cond EXTERN
         static extern (C) IntPtr wxGridCellBoolRenderer_ctor();
 	static extern (C) void wxGridCellBoolRenderer_dtor(IntPtr self);
 	static extern (C) void wxGridCellBoolRenderer_RegisterDisposable(IntPtr self, wxObject obj, Virtual_Dispose onDispose);
         static extern (C) void wxGridCellBoolRenderer_Draw(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, inout Rectangle rect, int row, int col, bool isSelected);
         static extern (C) void wxGridCellBoolRenderer_GetBestSize(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, int row, int col, out Size size);
         static extern (C) IntPtr wxGridCellBoolRenderer_Clone(IntPtr self);
+        //! \endcond
 	
     public class GridCellBoolRenderer : GridCellRenderer
     {
@@ -3070,6 +3106,7 @@ version(NOT_IMPLEMENTED){
         alias void function(GridTableBase obj, IntPtr attr, int row) Virtual_SetRowAttr_gt;
         }
 
+        //! \cond EXTERN
         static extern (C) IntPtr wxGridTableBase_ctor();
         static extern (C) void wxGridTableBase_RegisterVirtual(IntPtr self, GridTableBase obj, 
             Virtual_GetNumberRows getNumberRows, 
@@ -3145,6 +3182,7 @@ version(NOT_IMPLEMENTED){
         static extern (C) void   wxGridTableBase_SetAttr(IntPtr self, IntPtr attr, int row, int col);
         static extern (C) void   wxGridTableBase_SetRowAttr(IntPtr self, IntPtr attr, int row);
         static extern (C) void   wxGridTableBase_SetColAttr(IntPtr self, IntPtr attr, int col);
+        //! \endcond
         
         //-----------------------------------------------------------------------------
     
@@ -3573,6 +3611,7 @@ version(NOT_IMPLEMENTED){
         alias void function(GridCellAttrProvider obj, IntPtr attr, int row) Virtual_SetRowAttr;
 	}
 
+        //! \cond EXTERN
         static extern (C) IntPtr wxGridCellAttrProvider_ctor();
 	static extern (C) void wxGridCellAttrProvider_dtor(IntPtr self);
         static extern (C) void wxGridCellAttrProvider_RegisterVirtual(IntPtr self,GridCellAttrProvider obj, 
@@ -3586,6 +3625,7 @@ version(NOT_IMPLEMENTED){
         static extern (C) void wxGridCellAttrProvider_SetColAttr(IntPtr self, IntPtr attr, int col); 
         static extern (C) void wxGridCellAttrProvider_UpdateAttrRows(IntPtr self, int pos, int numRows);
         static extern (C) void wxGridCellAttrProvider_UpdateAttrCols(IntPtr self, int pos, int numCols);
+        //! \endcond
 	
         //-----------------------------------------------------------------------------
         

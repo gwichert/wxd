@@ -17,9 +17,11 @@ module wx.TipDialog;
 import wx.common;
 import wx.Dialog;
 
+	//! \cond EXTERN
 	static extern (C) IntPtr wxCreateFileTipProvider_func(string filename, int currentTip);
 	static extern (C) bool wxShowTip_func(IntPtr parent, IntPtr tipProvider, bool showAtStartup);
 	static extern (C) int wxTipProvider_GetCurrentTip();
+	//! \endcond
 
     public class TipProvider
     {

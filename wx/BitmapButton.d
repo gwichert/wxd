@@ -23,6 +23,7 @@ import wx.Control;
 		alias void function(BitmapButton obj) Virtual_OnSetBitmap;
 		}
 		
+		//! \cond EXTERN
 		static extern (C) IntPtr wxBitmapButton_ctor();
 		static extern (C) void   wxBitmapButton_RegisterVirtual(IntPtr self, BitmapButton obj,Virtual_OnSetBitmap onSetBitmap);
 		//static extern (C) void   wxBitmapButton_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
@@ -49,6 +50,7 @@ import wx.Control;
 		static extern (C) void wxBitmapButton_OnSetBitmap(IntPtr self);
 		
 		//static extern (C) void wxBitmapButton_ApplyParentThemeBackground(IntPtr self, IntPtr colour);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 		
@@ -175,7 +177,9 @@ import wx.Control;
 		public void BitmapDisabled(Bitmap value) { wxBitmapButton_SetBitmapDisabled(wxobj, wxObject.SafePtr(value)); }
 
 		//---------------------------------------------------------------------
+		//! \cond EXTERN
 		extern(C) private static void staticOnSetBitmap(BitmapButton obj) { return obj.OnSetBitmap(); }
+		//! \endcond
 		protected /+virtual+/ void OnSetBitmap()
 		{
 			wxBitmapButton_OnSetBitmap(wxobj);

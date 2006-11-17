@@ -19,6 +19,7 @@ import wx.Defs;
 import wx.GDIObject;
 import wx.Colour;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxGDIObj_GetRedPen();
 		static extern (C) IntPtr wxGDIObj_GetCyanPen();
 		static extern (C) IntPtr wxGDIObj_GetGreenPen();
@@ -49,6 +50,7 @@ import wx.Colour;
 
 		//---------------------------------------------------------------------
 		static extern (C) IntPtr wxNullPen_Get();
+		//! \endcond
 
 	public class Pen : GDIObject
 	{

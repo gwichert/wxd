@@ -25,6 +25,7 @@ import wx.PrintData;
         wxPRINTER_ERROR
     }
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxPrinter_ctor(IntPtr data);
         static extern (C) IntPtr wxPrinter_CreateAbortWindow(IntPtr self, IntPtr parent, IntPtr printout);
         static extern (C) void   wxPrinter_ReportError(IntPtr self, IntPtr parent, IntPtr printout, string message);
@@ -34,6 +35,7 @@ import wx.PrintData;
         static extern (C) bool   wxPrinter_Setup(IntPtr self, IntPtr parent);
         static extern (C) bool   wxPrinter_Print(IntPtr self, IntPtr parent, IntPtr printout, bool prompt);
         static extern (C) IntPtr wxPrinter_PrintDialog(IntPtr self, IntPtr parent);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -104,6 +106,7 @@ import wx.PrintData;
 
         //-----------------------------------------------------------------------------
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxPrintout_ctor(string title);
         static extern (C) bool   wxPrintout_OnBeginDocument(IntPtr self, int startPage, int endPage);
         static extern (C) void   wxPrintout_OnEndDocument(IntPtr self);
@@ -127,6 +130,7 @@ import wx.PrintData;
         static extern (C) void   wxPrintout_SetIsPreview(IntPtr self, bool p);
 
         static extern (C) void   wxPrintout_RegisterVirtual(IntPtr self, Printout obj, Virtual_OnBeginDocument onBeginDocument, Virtual_NoParams onEndDocument, Virtual_NoParams onBeginPrinting, Virtual_NoParams onEndPrinting, Virtual_NoParams onPreparePrinting, Virtual_ParamsInt hasPage, Virtual_ParamsInt onPrintPage, Virtual_GetPageInfo getPageInfo);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 

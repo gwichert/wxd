@@ -17,6 +17,7 @@ module wx.Accelerator;
 import wx.common;
 import wx.MenuItem;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxAcceleratorEntry_ctor(int flags, int keyCode, int cmd, IntPtr item);
 		static extern (C) void   wxAcceleratorEntry_dtor(IntPtr self);
 		static extern (C) void   wxAcceleratorEntry_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
@@ -28,6 +29,7 @@ import wx.MenuItem;
 		static extern (C) IntPtr wxAcceleratorEntry_GetMenuItem(IntPtr self);
 		
 		static extern (C) IntPtr wxAcceleratorEntry_GetAccelFromString(string label);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 
@@ -109,6 +111,7 @@ import wx.MenuItem;
 	
 	//-----------------------------------------------------------------------------
 	
+		//! \cond EXTERN
 		static extern (C) IntPtr wxAcceleratorTable_ctor();
 		static extern (C) bool   wxAcceleratorTable_Ok(IntPtr self);
 		//static extern (C) void   wxAcceleratorTable_Add(IntPtr self, IntPtr entry);
@@ -116,6 +119,7 @@ import wx.MenuItem;
 		//static extern (C) IntPtr wxAcceleratorTable_GetMenuItem(IntPtr self, IntPtr evt);
 		//static extern (C) int    wxAcceleratorTable_GetCommand(IntPtr self, IntPtr evt);
 		//static extern (C) IntPtr wxAcceleratorTable_GetEntry(IntPtr self, IntPtr evt);
+		//! \endcond
 
 		//-----------------------------------------------------------------------------
 

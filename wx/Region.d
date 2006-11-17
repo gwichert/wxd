@@ -27,6 +27,7 @@ version (darwin) { version = __WXMAC__; }
         wxInRegion
     }
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxRegion_ctor();
         static extern (C) IntPtr wxRegion_ctorByCoords(int x, int y, int w, int h);
         static extern (C) IntPtr wxRegion_ctorByCorners(inout Point topLeft, inout Point bottomRight);
@@ -65,6 +66,7 @@ version (darwin) { version = __WXMAC__; }
         static extern (C) void   wxRegion_GetBox(IntPtr self, inout Rectangle rect);
         static extern (C) bool   wxRegion_IsEmpty(IntPtr self);
         static extern (C) IntPtr wxRegion_ConvertToBitmap(IntPtr self);
+		//! \endcond
 
         //---------------------------------------------------------------------
 
@@ -221,6 +223,7 @@ version (darwin) { version = __WXMAC__; }
         }
     }
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxRegionIterator_ctor();
         static extern (C) IntPtr wxRegionIterator_ctorByRegion(IntPtr region);
 
@@ -238,6 +241,7 @@ version (darwin) { version = __WXMAC__; }
         static extern (C) int    wxRegionIterator_GetHeight(IntPtr self);
 
         static extern (C) void   wxRegionIterator_GetRect(IntPtr self, inout Rectangle rect);
+		//! \endcond
 
         //---------------------------------------------------------------------
 

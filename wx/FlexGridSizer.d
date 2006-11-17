@@ -17,6 +17,7 @@ module wx.FlexGridSizer;
 import wx.common;
 import wx.GridSizer;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxFlexGridSizer_ctor(int rows, int cols, int vgap, int hgap);
 		static extern (C) void wxFlexGridSizer_dtor(IntPtr self);
 		static extern (C) void wxFlexGridSizer_RecalcSizes(IntPtr self);
@@ -25,6 +26,7 @@ import wx.GridSizer;
 		static extern (C) void wxFlexGridSizer_RemoveGrowableRow(IntPtr self, uint idx);
 		static extern (C) void wxFlexGridSizer_AddGrowableCol(IntPtr self, uint idx);
 		static extern (C) void wxFlexGridSizer_RemoveGrowableCol(IntPtr self, uint idx);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 

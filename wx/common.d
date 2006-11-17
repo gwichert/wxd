@@ -1,5 +1,10 @@
 module wx.common;
 
+/*! \mainpage
+ *  <p>wxD is <a href="http://www.wxwidgets.org/">wxWidgets</a> bindings for
+ *  <a href="http://www.digitalmars.com/d/">the D programming language</a>.</p>
+ */   
+
 interface IDisposable
 {
 	void Dispose();

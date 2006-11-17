@@ -19,6 +19,7 @@ import wx.common;
 import wx.Event;
 import wx.Window;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxNavigationKeyEvent_ctor();
 		static extern (C) bool wxNavigationKeyEvent_GetDirection(IntPtr self);
 		static extern (C) void wxNavigationKeyEvent_SetDirection(IntPtr self, bool bForward);
@@ -27,6 +28,7 @@ import wx.Window;
 		static extern (C) IntPtr wxNavigationKeyEvent_GetCurrentFocus(IntPtr self);
 		static extern (C) void wxNavigationKeyEvent_SetCurrentFocus(IntPtr self, IntPtr win);
 		static extern (C) void wxNavigationKeyEvent_SetFlags(IntPtr self, uint flags);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 

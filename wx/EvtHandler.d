@@ -61,12 +61,14 @@ import wx.Event;
 //		public ObjectDeletedHandler ObjectDeleted;
 
 
+		//! \cond EXTERN
 		static extern (C) void wxEvtHandler_proxy(IntPtr self, clientdata* data);
 		static extern (C) void wxEvtHandler_Connect(IntPtr self, int evtType, int id, int lastId, int iListener);
 		
 		static extern (C) bool wxEvtHandler_ProcessEvent(IntPtr self, IntPtr evt);
 		
 		static extern (C) void wxEvtHandler_AddPendingEvent(IntPtr self, IntPtr evt); 
+		//! \endcond
 		
 
 	public class EvtHandler : wxObject

@@ -38,6 +38,7 @@ import wx.CommandEvent;
         wxCAL_BORDER_ROUND
     }
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxCalendarCtrl_ctor();
         static extern (C) bool   wxCalendarCtrl_Create(IntPtr self, IntPtr parent, int id, IntPtr date, inout Point pos, inout Size size, uint style, string name);
         static extern (C) bool   wxCalendarCtrl_SetDate(IntPtr self, IntPtr date);
@@ -64,6 +65,7 @@ import wx.CommandEvent;
         static extern (C) void   wxCalendarCtrl_SetHoliday(IntPtr self, int day);
         static extern (C) void   wxCalendarCtrl_ResetAttr(IntPtr self, int day);
         static extern (C) int    wxCalendarCtrl_HitTest(IntPtr self, inout Point pos, IntPtr date, inout DayOfWeek wd);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -244,6 +246,7 @@ import wx.CommandEvent;
 		public void WeekdayClick_Remove(EventListener value) { RemoveHandler(value, this); }
     }
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxCalendarDateAttr_ctor();
         static extern (C) IntPtr wxCalendarDateAttr_ctor2(IntPtr colText, IntPtr colBack, IntPtr colBorder, IntPtr font, CalendarDateBorder border);
         static extern (C) IntPtr wxCalendarDateAttr_ctor3(CalendarDateBorder border, IntPtr colBorder);
@@ -266,6 +269,7 @@ import wx.CommandEvent;
         static extern (C) IntPtr wxCalendarDateAttr_GetBorderColour(IntPtr self);
         static extern (C) IntPtr wxCalendarDateAttr_GetFont(IntPtr self);
         static extern (C) int    wxCalendarDateAttr_GetBorder(IntPtr self);
+		//! \endcond
 	
         //-----------------------------------------------------------------------------
 
@@ -351,10 +355,12 @@ import wx.CommandEvent;
         //-----------------------------------------------------------------------------
     }
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxCalendarEvent_ctor();
         static extern (C) IntPtr wxCalendarEvent_ctor2(IntPtr cal, int type);
         static extern (C) IntPtr wxCalendarEvent_GetDate(IntPtr self);
         static extern (C) int    wxCalendarEvent_GetWeekDay(IntPtr self);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 	

@@ -36,6 +36,7 @@ import wx.common;
         wxDF_MAX
     }
  
+		//! \cond EXTERN
         static extern (C) IntPtr wxDataFormat_ctor();
 	static extern (C) void   wxDataFormat_dtor(IntPtr self);
         static extern (C) IntPtr wxDataFormat_ctorByType(int type);
@@ -46,6 +47,7 @@ import wx.common;
 
         static extern (C) int    wxDataFormat_GetType(IntPtr self);
         static extern (C) void   wxDataFormat_SetType(IntPtr self, int type);
+		//! \endcond
 	
         //-----------------------------------------------------------------------------
 	

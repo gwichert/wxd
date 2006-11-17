@@ -1,12 +1,14 @@
 module wx.ArrayInt;
 import wx.common;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxArrayInt_ctor();
 		static extern (C) void   wxArrayInt_dtor(IntPtr self);
 		static extern (C) void   wxArrayInt_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
 		static extern (C) void   wxArrayInt_Add(IntPtr self, int toadd);
 		static extern (C) int    wxArrayInt_Item(IntPtr self, int num);
 		static extern (C) int    wxArrayInt_GetCount(IntPtr self);
+		//! \endcond
 		
 	public class ArrayInt : wxObject
 	{

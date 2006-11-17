@@ -19,6 +19,7 @@ import wx.Control;
 import wx.ClientData;
 
 		
+		//! \cond EXTERN
 		static extern (C) IntPtr wxComboBox_ctor();
 		static extern (C) bool   wxComboBox_Create(IntPtr self, IntPtr window, int id, string value, inout Point pos, inout Size size, int n, string* choices, uint style, IntPtr validator, string name);
 		
@@ -62,6 +63,7 @@ import wx.ClientData;
 		static extern (C) void wxComboBox_SetSelection(IntPtr self, int n);
 		
 		static extern (C) void wxComboBox_Select(IntPtr self, int n);
+		//! \endcond
 		
 		//---------------------------------------------------------------------
 	

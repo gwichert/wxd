@@ -18,7 +18,9 @@ import wx.common;
 
 import wx.Event;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxNcPaintEvent_ctor(int Id);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 

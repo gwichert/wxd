@@ -155,6 +155,7 @@ import wx.GDIObject;
 			wxFONTFLAG_STRIKETHROUGH
 	}
 
+		//! \cond EXTERN
 		static extern (C)        IntPtr wxFont_NORMAL_FONT();
 		static extern (C)        IntPtr wxFont_SMALL_FONT();
 		static extern (C)        IntPtr wxFont_ITALIC_FONT();
@@ -193,6 +194,7 @@ import wx.GDIObject;
 		static extern (C) void   wxFont_SetDefaultEncoding(int encoding);
 	
 		static extern (C) IntPtr wxFont_New(string strNativeFontDesc);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 

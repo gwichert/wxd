@@ -19,6 +19,7 @@ import wx.EvtHandler;
 
 version(NOT_READY_YET){
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxDocument_ctor(IntPtr parent);
         static extern (C) void   wxDocument_SetFilename(IntPtr self, string filename, bool notifyViews);
         static extern (C) IntPtr wxDocument_GetFilename(IntPtr self);
@@ -52,6 +53,7 @@ version(NOT_READY_YET){
         static extern (C) void   wxDocument_SetDocumentTemplate(IntPtr self, IntPtr temp);
         static extern (C) bool   wxDocument_GetPrintableName(IntPtr self, IntPtr buf);
         static extern (C) IntPtr wxDocument_GetDocumentWindow(IntPtr self);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 

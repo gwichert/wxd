@@ -25,6 +25,7 @@ import wx.common;
 
 /* wxDateTime imprementation is class { longlong } */
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxDefaultDateTime_Get();
         static extern (C) IntPtr wxDateTime_ctor();
         static extern (C) IntPtr wxDateTime_Now();
@@ -37,6 +38,7 @@ import wx.common;
         static extern (C) ushort wxDateTime_GetMinute(IntPtr self);
         static extern (C) ushort wxDateTime_GetSecond(IntPtr self);
         static extern (C) ushort wxDateTime_GetMillisecond(IntPtr self);
+		//! \endcond
 	
         //-----------------------------------------------------------------------------
 

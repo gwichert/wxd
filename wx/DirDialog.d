@@ -17,6 +17,7 @@ module wx.DirDialog;
 import wx.common;
 import wx.Dialog;
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxDirDialog_ctor(IntPtr parent, string message, string defaultPath, uint style, inout Point pos, inout Size size, string name);
 
         static extern (C) void   wxDirDialog_SetPath(IntPtr self, string path);
@@ -29,6 +30,7 @@ import wx.Dialog;
         static extern (C) string wxDirDialog_GetMessage(IntPtr self);
 
         static extern (C) int    wxDirDialog_ShowModal(IntPtr self);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -71,11 +73,13 @@ import wx.Dialog;
         //-----------------------------------------------------------------------------
     }
 
+	//! \cond EXTERN
 	extern (C) string wxDirSelector_func(string message,
               string defaultPath,
               int style,
               inout Point pos,
               IntPtr parent);
+	//! \endcond
 
 	string DirSelector(string message = null,
               string defaultPath = null,

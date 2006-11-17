@@ -17,6 +17,7 @@ module wx.ToolTip;
 import wx.common;
 import wx.Window;
 
+		//! \cond EXTERN
 		static extern (C) void   wxToolTip_Enable(bool flag);
 		static extern (C) void   wxToolTip_SetDelay(uint msecs);
 		static extern (C) IntPtr wxToolTip_ctor(string tip);
@@ -24,6 +25,7 @@ import wx.Window;
 		static extern (C) string wxToolTip_GetTip(IntPtr self);
 		static extern (C) IntPtr wxToolTip_GetWindow(IntPtr self);
 		static extern (C) void   wxToolTip_SetWindow(IntPtr self,IntPtr win);
+		//! \endcond
 
         //---------------------------------------------------------------------
 

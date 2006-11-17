@@ -8,8 +8,11 @@ DC = gdc
 CXXFLAGS = -O2 `$(WX_CONFIG) --cxxflags`
 DCFLAGS+= -O2 -I$(TOPDIR)
 
-LDFLAGS = `$(WX_CONFIG) --libs` -lstdc++ -lcc_dynamic
-WX_VERSION = `$(WX_CONFIG) --version`
+WXVERSION = `$(WX_CONFIG) --version`
+WXLIBS = `$(WX_CONFIG) --libs`
+
+LDFLAGS = $(WXLIBS) -lstdc++ `test -r /usr/lib/libcc_dynamic.a && echo -lcc_dynamic`
+
 
 .cpp.o: 
 	$(CXX) -c $(CXXFLAGS) $<
@@ -30,7 +33,7 @@ $(TARGET).app: $(TARGET)
 	mkdir -p $@/Contents
 	sed -e "s/IDENTIFIER/$(BUNDLE_IDENTIFIER)/" \
 	    -e "s/EXECUTABLE/$(BUNDLE_EXECUTABLE)/" \
-	    -e "s/VERSION/$(WX_VERSION)/" \
+	    -e "s/VERSION/$(WXVERSION)/" \
 	    $(BUNDLE_PLIST) >$@/Contents/Info.plist
 	echo -n "APPL????" >$@/Contents/PkgInfo
 	mkdir -p $@/Contents/MacOS

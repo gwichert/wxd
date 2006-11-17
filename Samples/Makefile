@@ -5,14 +5,18 @@ all:
 	cd ..\Dialogs
 	make
 #	cd ..\Display
-	make
+#	make
 	cd ..\Dnd
 	make
 	cd ..\EventDemo
 	make
 	cd ..\Font
 	make
+#	cd ..\GLCube
+#	make
 	cd ..\Grid
+	make
+	cd ..\Hello
 	make
 	cd ..\HTML
 	make
@@ -45,7 +49,7 @@ all:
 	cd ..\TreeCtrl
 	make
 #	cd ..\Tutorial
-	make
+#	make
 	cd ..\Wizard
 	make
 	cd ..\Xrc
@@ -65,8 +69,12 @@ clean:
 	make clean
 	cd ..\Font
 	make clean
+#	cd ..\GLCube
+#	make
 	cd ..\Grid
 	make clean
+	cd ..\Hello
+	make
 	cd ..\HTML
 	make clean
 	cd ..\HtmlHelp

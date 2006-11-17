@@ -1,8 +1,8 @@
 //-----------------------------------------------------------------------------
-// wxD - scrolbar.h
+// wxD - ScrollBar.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
-// wx.NET - scrolbar.h
+// wx.NET - ScrollBar.cs
 //
 // The wxScrollBar wrapper class.
 //
@@ -17,6 +17,7 @@ module wx.ScrollBar;
 import wx.common;
 import wx.Control;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxScrollBar_ctor();
 		static extern (C) bool   wxScrollBar_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, IntPtr validator, string name);
 		static extern (C) int    wxScrollBar_GetThumbPosition(IntPtr self);
@@ -26,6 +27,7 @@ import wx.Control;
 		static extern (C) bool   wxScrollBar_IsVertical(IntPtr self);
 		static extern (C) void   wxScrollBar_SetThumbPosition(IntPtr self, int viewStart);
 		static extern (C) void   wxScrollBar_SetScrollbar(IntPtr self, int position, int thumbSize, int range, int pageSize, bool refresh);
+		//! \endcond
 
 		//-----------------------------------------------------------------------------
 

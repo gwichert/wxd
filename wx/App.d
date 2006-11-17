@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------------
 // wxD - App.d
-// (C) 2005 bero <berobero.sourceforge.net>
-// (C) 2005 afb <afb.sourceforge.net>
+// (C) 2005 bero <berobero@users.sourceforge.net>
+// (C) 2005 afb <afb@users.sourceforge.net>
 // based on
 // wx.NET - App.cs
 //
@@ -20,7 +20,9 @@ import wx.EvtHandler;
 import wx.Window;
 import wx.GdiCommon;
 
+//! \cond STD
 import std.string;
+//! \endcond
 
 	extern (C) {
 	alias bool function(App o) Virtual_OnInit;
@@ -28,6 +30,7 @@ import std.string;
 	alias bool function(App o,inout int argc,char** argv) Virtual_Initialize;
 	}
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxApp_ctor();
 	
 	static extern (C) void wxApp_RegisterVirtual(IntPtr self, App o, Virtual_OnInit onInit, Virtual_OnExit onExit, Virtual_Initialize initalize);
@@ -46,6 +49,7 @@ import std.string;
         static extern (C) bool   wxApp_SafeYield(IntPtr win, bool onlyIfNeeded);
         static extern (C) bool   wxApp_Yield(IntPtr self, bool onlyIfNeeded);
         static extern (C) void   wxApp_WakeUpIdle();
+		//! \endcond
 
         //---------------------------------------------------------------------
 
@@ -102,6 +106,7 @@ import std.string;
         {
             string[] args; // = Environment.GetCommandLineArgs();
             args.length = 1;
+            args[0] = "wx";
             Run(args);
         }
 

@@ -21,6 +21,7 @@ import wx.Palette;
 import wx.Image;
 import wx.Icon;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxBitmap_ctor();
 		static extern (C) IntPtr wxBitmap_ctorByImage(IntPtr image, int depth);
 		static extern (C) IntPtr wxBitmap_ctorByName(string name, BitmapType type);
@@ -51,6 +52,7 @@ import wx.Icon;
 		static extern (C) bool   wxBitmap_CopyFromIcon(IntPtr self, IntPtr icon);
 		
 		static extern (C) IntPtr wxBitmap_GetColourMap(IntPtr self);
+		//! \endcond
 	
 		//---------------------------------------------------------------------
 
@@ -170,6 +172,7 @@ import wx.Icon;
 
 	//---------------------------------------------------------------------
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxMask_ctor();
 		static extern (C) IntPtr wxMask_ctorByBitmpaColour(IntPtr bitmap, IntPtr colour);
 		static extern (C) IntPtr wxMask_ctorByBitmapIndex(IntPtr bitmap, int paletteIndex);
@@ -178,6 +181,7 @@ import wx.Icon;
 		static extern (C) bool wxMask_CreateByBitmapColour(IntPtr self, IntPtr bitmap, IntPtr colour);
 		static extern (C) bool wxMask_CreateByBitmapIndex(IntPtr self, IntPtr bitmap, int paletteIndex);
 		static extern (C) bool wxMask_CreateByBitmap(IntPtr self, IntPtr bitmap);
+		//! \endcond
 		
 		//---------------------------------------------------------------------
 	public class Mask : wxObject

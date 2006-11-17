@@ -18,12 +18,14 @@ import wx.common;
 import wx.Window;
 import wx.Button;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxPanel_ctor();
 		static extern (C) IntPtr wxPanel_ctor2(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
 		static extern (C) bool wxPanel_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
 		static extern (C) void wxPanel_InitDialog(IntPtr self);
 		static extern (C) IntPtr wxPanel_GetDefaultItem(IntPtr self);
 		static extern (C) void wxPanel_SetDefaultItem(IntPtr self, IntPtr btn);
+		//! \endcond
 
 	public class Panel : Window
 	{

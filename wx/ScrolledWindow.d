@@ -17,6 +17,7 @@ module wx.ScrolledWindow;
 import wx.common;
 import wx.Panel;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxScrollWnd_ctor(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
 		static extern (C) void   wxScrollWnd_PrepareDC(IntPtr self, IntPtr dc);
 		static extern (C) void   wxScrollWnd_SetScrollbars(IntPtr self, int pixX, int pixY, int numX, int numY, int x, int y, bool noRefresh);
@@ -29,6 +30,7 @@ import wx.Panel;
 		static extern (C) void   wxScrollWnd_Scroll(IntPtr self, int x, int y);
 		static extern (C) void   wxScrollWnd_SetScrollRate(IntPtr self, int xstep, int ystep);
 		static extern (C) void   wxScrollWnd_SetTargetWindow(IntPtr self, IntPtr window);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 

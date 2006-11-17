@@ -17,6 +17,7 @@ module wx.KeyEvent;
 import wx.common;
 import wx.Event;
 
+		//! \cond EXTERN
         static extern (C) IntPtr wxKeyEvent_ctor(int type);
 
         static extern (C) bool   wxKeyEvent_ControlDown(IntPtr self);
@@ -35,6 +36,7 @@ import wx.Event;
         static extern (C) int    wxKeyEvent_GetY(IntPtr self);
 	
 	static extern (C) bool   wxKeyEvent_CmdDown(IntPtr self);
+		//! \endcond
 
         //-----------------------------------------------------------------------------
 

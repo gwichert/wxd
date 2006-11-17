@@ -17,12 +17,14 @@ module wx.Control;
 import wx.common;
 import wx.Window;
 
+		//! \cond EXTERN
 		static extern (C) void   wxControl_Command(IntPtr self, IntPtr evt);
 		static extern (C) string wxControl_GetLabel(IntPtr self);
 		static extern (C) void   wxControl_SetLabel(IntPtr self, string label);
 		
 		static extern (C) int wxControl_GetAlignment(IntPtr self);
 		static extern (C) bool wxControl_SetFont(IntPtr self, IntPtr font);
+		//! \endcond
 
 		//---------------------------------------------------------------------
 

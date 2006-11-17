@@ -20,8 +20,10 @@ import wx.Event;
 
 import wx.Window;
 
+		//! \cond EXTERN
 		static extern (C) IntPtr wxMouseCaptureChangedEvent_ctor(int winid,IntPtr gainedCapture);
 		static extern (C) IntPtr wxMouseCaptureChangedEvent_GetCapturedWindow(IntPtr self);
+		//! \endcond
 		
 		//-----------------------------------------------------------------------------
 
