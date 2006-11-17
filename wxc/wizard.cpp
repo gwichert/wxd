@@ -48,7 +48,7 @@ wxWizard* wxWizard_ctor(wxWindow* parent, int id, dstr title, const wxBitmap* bi
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxWizard_RunWizard(wxWizard* self, wxWizardPage* firstPage)
+dbit wxWizard_RunWizard(wxWizard* self, wxWizardPage* firstPage)
 {
 	return self->RunWizard(firstPage)?1:0;
 }
@@ -97,13 +97,13 @@ void wxWizardPageSimple_Chain(wxWizardPageSimple* page1, wxWizardPageSimple* pag
 
 
 extern "C" WXEXPORT
-wxWizardEvent* wxWizardEvent_ctor(wxEventType type,int id,bool direction, wxWizardPage* page)
+wxWizardEvent* wxWizardEvent_ctor(wxEventType type,int id,dbit direction, wxWizardPage* page)
 {
 	return new wxWizardEvent(type,id,direction,page);
 }
 
 extern "C" WXEXPORT
-bool wxWizardEvent_GetDirection(wxWizardEvent* self)
+dbit wxWizardEvent_GetDirection(wxWizardEvent* self)
 {
 	return self->GetDirection();
 }

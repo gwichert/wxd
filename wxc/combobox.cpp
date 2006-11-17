@@ -35,7 +35,7 @@ wxComboBox* wxComboBox_ctor()
 }
 
 extern "C" WXEXPORT
-bool wxComboBox_Create(wxComboBox* self, wxWindow* window, int id,
+dbit wxComboBox_Create(wxComboBox* self, wxWindow* window, int id,
                        dstr value,
                        const wxPoint* pos, const wxSize* size,
                        int n, dstr choices[], long style,
@@ -231,7 +231,7 @@ void wxComboBox_SetSelectionMult(wxComboBox* self, long from, long to)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxComboBox_SetEditable(wxComboBox* self, bool editable)
+void wxComboBox_SetEditable(wxComboBox* self, dbit editable)
 {
     self->SetEditable(editable);
 }

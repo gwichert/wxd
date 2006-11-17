@@ -4,7 +4,7 @@
 // based on
 // wx.NET - ArtProvider.cs
 //
-// The wxArtProvider wrapper class.
+/// The wxArtProvider wrapper class.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2003 by Alexander Olk
@@ -77,6 +77,7 @@ import wx.Window;
 		
 		//---------------------------------------------------------------------
 		
+	alias ArtProvider wxArtProvider;
 	public class ArtProvider
 	{
 		public static Bitmap GetBitmap(ArtID id)

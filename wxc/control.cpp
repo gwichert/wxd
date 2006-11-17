@@ -51,7 +51,7 @@ int wxControl_GetAlignment(wxControl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxControl_SetFont(wxControl* self, wxFont* font)
+dbit wxControl_SetFont(wxControl* self, wxFont* font)
 {
 	return self->SetFont(*font)?1:0;
 }

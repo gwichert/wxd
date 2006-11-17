@@ -3,8 +3,8 @@
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - MemoryDC.cs
-// 
-// The wxBufferedDC and wxMemoryDC wrapper classes.
+//
+/// The wxBufferedDC and wxMemoryDC wrapper classes.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 by Bryan Bulten
@@ -25,6 +25,7 @@ import wx.DC;
 
 		//---------------------------------------------------------------------
 
+	alias MemoryDC wxMemoryDC;
 	public class MemoryDC : WindowDC
 	{
         public this(IntPtr wxobj) 
@@ -58,6 +59,7 @@ import wx.DC;
 
 		//---------------------------------------------------------------------
 
+	alias BufferedDC wxBufferedDC;
 	public class BufferedDC : MemoryDC
 	{
         public this(IntPtr wxobj) 
@@ -100,6 +102,7 @@ import wx.DC;
 
 		//---------------------------------------------------------------------
         
+	alias BufferedPaintDC wxBufferedPaintDC;
 	public class BufferedPaintDC : BufferedDC
 	{
         public this(IntPtr wxobj) 

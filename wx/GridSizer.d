@@ -4,7 +4,7 @@
 // based on
 // wx.NET - GridSizer.cs
 //
-// The wxGridSizer proxy interface.
+/// The wxGridSizer proxy interface.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -33,6 +33,7 @@ import wx.Sizer;
 
 		//---------------------------------------------------------------------
 
+	alias GridSizer wxGridSizer;
 	public class GridSizer : Sizer
 	{
 		public this(IntPtr wxobj)

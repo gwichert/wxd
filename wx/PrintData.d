@@ -4,7 +4,7 @@
 // based on
 // wx.NET - PrintData.cs
 //
-// The wxPrint data wrapper classes.
+/// The wxPrint data wrapper classes.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -151,6 +151,7 @@ import wx.common;
 
         //-----------------------------------------------------------------------------
 
+    alias PageSetupDialogData wxPageSetupDialogData;
     public class PageSetupDialogData : wxObject
     {
         public this(IntPtr wxobj) 
@@ -313,6 +314,7 @@ import wx.common;
         static extern (C) void wxPrintDialogData_SetPrintData(IntPtr self, IntPtr printData);
 		//! \endcond
 
+    alias PrintDialogData wxPrintDialogData;
     public class PrintDialogData : wxObject
     {
         //-----------------------------------------------------------------------------
@@ -449,6 +451,7 @@ import wx.common;
 
         //-----------------------------------------------------------------------------
 
+    alias PrintData wxPrintData;
     public class PrintData : wxObject
     {
         public this(IntPtr wxobj) 

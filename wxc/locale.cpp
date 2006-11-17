@@ -38,7 +38,7 @@ void wxLocale_dtor(wxLocale* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxLocale_Init(wxLocale* self, int language, int flags)
+dbit wxLocale_Init(wxLocale* self, int language, int flags)
 {
 	return self->Init(language, flags)?1:0;
 }
@@ -46,7 +46,7 @@ bool wxLocale_Init(wxLocale* self, int language, int flags)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxLocale_AddCatalog(wxLocale* self, dstr szDomain)
+dbit wxLocale_AddCatalog(wxLocale* self, dstr szDomain)
 {
 	return self->AddCatalog(wxString(szDomain.data, wxConvUTF8, szDomain.length))?1:0;
 }
@@ -54,7 +54,7 @@ bool wxLocale_AddCatalog(wxLocale* self, dstr szDomain)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxLocale_AddCatalog2(wxLocale* self, dstr szDomain, wxLanguage msgIdLanguage, dstr msgIdCharset)
+dbit wxLocale_AddCatalog2(wxLocale* self, dstr szDomain, wxLanguage msgIdLanguage, dstr msgIdCharset)
 {
 	return self->AddCatalog(wxString(szDomain.data, wxConvUTF8, szDomain.length), msgIdLanguage, wxString(msgIdCharset.data, wxConvUTF8, msgIdCharset.length));
 }
@@ -181,7 +181,7 @@ int wxLocale_GetSystemLanguage()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxLocale_IsLoaded(wxLocale* self, dstr domain)
+dbit wxLocale_IsLoaded(wxLocale* self, dstr domain)
 {
 	return self->IsLoaded(wxString(domain.data, wxConvUTF8, domain.length))?1:0;
 }
@@ -189,7 +189,7 @@ bool wxLocale_IsLoaded(wxLocale* self, dstr domain)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxLocale_IsOk(wxLocale* self)
+dbit wxLocale_IsOk(wxLocale* self)
 {
 	return self->IsOk()?1:0;
 }

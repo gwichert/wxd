@@ -4,7 +4,7 @@
 // based on
 // wx.NET - GDIObject.cs
 //
-// The wxGDIObject wrapper class.
+/// The wxGDIObject wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
@@ -22,6 +22,7 @@ import wx.common;
 
 		//---------------------------------------------------------------------
 
+	alias GDIObject wxGDIObject;
 	public class GDIObject : wxObject
 	{
 		public this(IntPtr wxobj) 

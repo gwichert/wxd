@@ -177,7 +177,7 @@ import wx.GLCanvas;
    			if (isCloneWindow) str ~= " - Clone";
  
  		    MyFrame frame = new MyFrame(null, str, wxDefaultPosition,
-       			 new_Size(400, 300));
+       			 Size(400, 300));
 
 			// Make a menubar
 			Menu winMenu = new Menu();

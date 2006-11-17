@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Menu.cs
 //
-// The wxMenu wrapper class.
+/// The wxMenu wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
@@ -98,6 +98,7 @@ import wx.MenuBar;
 		static extern (C) bool   wxMenuBase_SendEvent(IntPtr self, int itemid, int xchecked);
 		//! \endcond
 	
+	alias MenuBase wxMenuBase;
 	public class MenuBase : EvtHandler
 	{
 		public this(IntPtr wxobj)
@@ -521,6 +522,7 @@ import wx.MenuBar;
 	//---------------------------------------------------------------------
 	// helper struct, stores added EventListeners...
 	
+	alias MenuListener wxMenuListener;
 	public class MenuListener
 	{
 		public EventListener listener;
@@ -544,6 +546,7 @@ import wx.MenuBar;
 		
 		//---------------------------------------------------------------------
 		
+	alias Menu wxMenu;
 	public class Menu : MenuBase
 	{
 		public MenuListener[] eventListeners;

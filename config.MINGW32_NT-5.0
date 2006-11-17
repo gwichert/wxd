@@ -1,12 +1,13 @@
 # from samples
 
 WX_CONFIG = wx-config
+PLATFORM = $(shell cat $(TOPDIR)/wxc/platform)
 
 CXX = $(shell $(WX_CONFIG) --cxx)
 DC = gdc
 
-CXXFLAGS = -O2 `$(WX_CONFIG) --cxxflags`
-DCFLAGS+= -O2 -I$(TOPDIR)
+CXXFLAGS = -O2 -g `$(WX_CONFIG) --cxxflags`
+DCFLAGS+= -fversion=__$(PLATFORM)__ -O2 -g -I$(TOPDIR)
 
 WXVERSION = `$(WX_CONFIG) --version`
 WXLIBS = `$(WX_CONFIG) --libs`

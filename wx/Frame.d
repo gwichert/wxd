@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Frame.cs
 //
-// The wxFrame wrapper class.
+/// The wxFrame wrapper class.
 //
 // Written by Jason Perkins (jason@379.com), Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 by 379, Inc.
@@ -64,6 +64,7 @@ import wx.Icon;
             
 		//---------------------------------------------------------------------
 
+	alias Frame wxFrame;
 	public class Frame : Window
 	{
 		public const int wxFULLSCREEN_NOMENUBAR   = 0x0001;

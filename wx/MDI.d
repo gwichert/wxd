@@ -3,8 +3,8 @@
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - MDI.cs
-// 
-// The wxMDI* wrapper class.
+//
+/// The wxMDI* wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -17,13 +17,11 @@ module wx.MDI;
 import wx.common;
 import wx.Frame;
 
+		//! \cond EXTERN
 		extern (C) {
 		alias IntPtr function(MDIParentFrame obj) Virtual_OnCreateClient;
 		}
-		
-		//-----------------------------------------------------------------------------
-	
-		//! \cond EXTERN
+
 		static extern (C) IntPtr wxMDIParentFrame_ctor();
 		static extern (C) void wxMDIParentFrame_RegisterVirtual(IntPtr self, MDIParentFrame obj, Virtual_OnCreateClient onCreateClient);
 		static extern (C) IntPtr wxMDIParentFrame_OnCreateClient(IntPtr self);
@@ -47,6 +45,7 @@ import wx.Frame;
 
 		//-----------------------------------------------------------------------------
 
+	alias MDIParentFrame wxMDIParentFrame;
 	public class MDIParentFrame : Frame
 	{
 		enum { wxDEFAULT_MDI_FRAME_STYLE = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL }
@@ -167,6 +166,7 @@ import wx.Frame;
 
 		//-----------------------------------------------------------------------------
 
+	alias MDIChildFrame wxMDIChildFrame;
 	public class MDIChildFrame : Frame 
 	{
 		public this(IntPtr wxobj) 
@@ -240,6 +240,7 @@ import wx.Frame;
 	
 		//-----------------------------------------------------------------------------
 	
+	alias MDIClientWindow wxMDIClientWindow;
 	public class MDIClientWindow : Window
 	{
 		public this(IntPtr wxobj) 

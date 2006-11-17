@@ -109,7 +109,7 @@ void wxDropSource_SetCursor(_DropSource* self, wxDragResult* res, const wxCursor
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxDropSource_GiveFeedback(_DropSource* self, wxDragResult *effect)
+dbit wxDropSource_GiveFeedback(_DropSource* self, wxDragResult *effect)
 {
 	return self->GiveFeedback(*effect)?1:0;
 }
@@ -117,9 +117,9 @@ bool wxDropSource_GiveFeedback(_DropSource* self, wxDragResult *effect)
 //-----------------------------------------------------------------------------
 
 typedef wxDragResult (CALLBACK* Virtual_OnDragOver) (dobj, wxCoord, wxCoord, wxDragResult);
-typedef bool (CALLBACK* Virtual_OnDrop) (dobj, wxCoord, wxCoord);
+typedef dbit (CALLBACK* Virtual_OnDrop) (dobj, wxCoord, wxCoord);
 typedef wxDragResult (CALLBACK* Virtual_OnData3) (dobj, wxCoord, wxCoord, wxDragResult);
-typedef bool (CALLBACK* Virtual_GetData) (dobj);
+typedef dbit (CALLBACK* Virtual_GetData) (dobj);
 typedef void (CALLBACK* Virtual_OnLeave) (dobj);
 typedef wxDragResult (CALLBACK* Virtual_OnEnter) (dobj, wxCoord, wxCoord, wxDragResult);
 
@@ -258,7 +258,7 @@ void wxDropTarget_OnLeave(_DropTarget* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxDropTarget_OnDrop(_DropTarget* self, wxCoord x, wxCoord y)
+dbit wxDropTarget_OnDrop(_DropTarget* self, wxCoord x, wxCoord y)
 {
 	return self->wxDropTarget::OnDrop(x, y)?1:0;
 }
@@ -266,14 +266,14 @@ bool wxDropTarget_OnDrop(_DropTarget* self, wxCoord x, wxCoord y)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxDropTarget_GetData(_DropTarget* self)
+dbit wxDropTarget_GetData(_DropTarget* self)
 {
 	return self->wxDropTarget::GetData()?1:0;
 }
 
 //----------------------------------------------------------------------------
 
-typedef bool (CALLBACK* Virtual_OnDropText) (dobj, wxCoord, wxCoord, wxString*);
+typedef dbit (CALLBACK* Virtual_OnDropText) (dobj, wxCoord, wxCoord, wxString*);
 typedef wxDragResult (CALLBACK* Virtual_OnData)(dobj, wxCoord, wxCoord, wxDragResult);
 
 class _TextDropTarget : public wxTextDropTarget
@@ -329,7 +329,7 @@ wxDragResult wxTextDropTarget_OnData(_TextDropTarget * self, wxCoord x, wxCoord 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTextDropTarget_OnDrop(_TextDropTarget * self, int x, int y)
+dbit wxTextDropTarget_OnDrop(_TextDropTarget * self, int x, int y)
 {
 	return self->wxTextDropTarget::OnDrop(x, y)?1:0;
 }
@@ -337,14 +337,14 @@ bool wxTextDropTarget_OnDrop(_TextDropTarget * self, int x, int y)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTextDropTarget_GetData(_TextDropTarget * self)
+dbit wxTextDropTarget_GetData(_TextDropTarget * self)
 {
 	return self->wxTextDropTarget::GetData()?1:0;
 }
 
 //----------------------------------------------------------------------------
 
-typedef bool (CALLBACK* Virtual_OnDropFiles) (dobj, wxCoord, wxCoord, wxArrayString*);
+typedef dbit (CALLBACK* Virtual_OnDropFiles) (dobj, wxCoord, wxCoord, wxArrayString*);
 typedef wxDragResult (CALLBACK* Virtual_OnData2)(dobj, wxCoord, wxCoord, wxDragResult);
 
 
@@ -400,7 +400,7 @@ wxDragResult wxFileDropTarget_OnData(_FileDropTarget *self, wxCoord x, wxCoord y
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxFileDropTarget_OnDrop(_FileDropTarget * self, int x, int y)
+dbit wxFileDropTarget_OnDrop(_FileDropTarget * self, int x, int y)
 {
 	return self->wxFileDropTarget::OnDrop(x, y)?1:0;
 }
@@ -408,7 +408,7 @@ bool wxFileDropTarget_OnDrop(_FileDropTarget * self, int x, int y)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxFileDropTarget_GetData(_FileDropTarget * self)
+dbit wxFileDropTarget_GetData(_FileDropTarget * self)
 {
 	return self->wxFileDropTarget::GetData()?1:0;
 }

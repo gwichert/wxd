@@ -41,7 +41,7 @@ wxNotebook* wxNotebook_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxNotebook_AddPage(wxNotebook* self, wxNotebookPage* page, dstr text, bool select, int imageId)
+dbit wxNotebook_AddPage(wxNotebook* self, wxNotebookPage* page, dstr text, dbit select, int imageId)
 {
 	return self->AddPage(page, wxString(text.data, wxConvUTF8, text.length), select, imageId)?1:0;
 }
@@ -49,7 +49,7 @@ bool wxNotebook_AddPage(wxNotebook* self, wxNotebookPage* page, dstr text, bool 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxNotebook_Create(wxNotebook* self, wxWindow* parent, int id, const wxPoint* pos,
+dbit wxNotebook_Create(wxNotebook* self, wxWindow* parent, int id, const wxPoint* pos,
                        const wxSize* size, long style, dstr name)
 {
 	if (pos == NULL)
@@ -99,7 +99,7 @@ int wxNotebook_GetSelection(wxNotebook* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxNotebook_SetPageText(wxNotebook* self, int nPage, dstr strText)
+dbit wxNotebook_SetPageText(wxNotebook* self, int nPage, dstr strText)
 {
 	return self->SetPageText(nPage, wxString(strText.data, wxConvUTF8, strText.length))?1:0;
 }
@@ -139,7 +139,7 @@ int wxNotebook_GetPageImage(wxNotebook* self, int nPage)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxNotebook_SetPageImage(wxNotebook* self, int nPage, int nImage)
+dbit wxNotebook_SetPageImage(wxNotebook* self, int nPage, int nImage)
 {
 	return self->SetPageImage(nPage, nImage)?1:0;
 }
@@ -179,7 +179,7 @@ void wxNotebook_SetTabSize(wxNotebook* self, const wxSize* sz)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxNotebook_DeletePage(wxNotebook* self, int nPage)
+dbit wxNotebook_DeletePage(wxNotebook* self, int nPage)
 {
 	return self->DeletePage(nPage)?1:0;
 }
@@ -187,7 +187,7 @@ bool wxNotebook_DeletePage(wxNotebook* self, int nPage)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxNotebook_RemovePage(wxNotebook* self, int nPage)
+dbit wxNotebook_RemovePage(wxNotebook* self, int nPage)
 {
 	return self->RemovePage(nPage)?1:0;
 }
@@ -195,7 +195,7 @@ bool wxNotebook_RemovePage(wxNotebook* self, int nPage)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxNotebook_DeleteAllPages(wxNotebook* self)
+dbit wxNotebook_DeleteAllPages(wxNotebook* self)
 {
 	return self->DeleteAllPages()?1:0;
 }
@@ -203,7 +203,7 @@ bool wxNotebook_DeleteAllPages(wxNotebook* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxNotebook_InsertPage(wxNotebook* self, int nPage, wxNotebookPage *pPage, dstr strText, bool bSelect, int imageId)
+dbit wxNotebook_InsertPage(wxNotebook* self, int nPage, wxNotebookPage *pPage, dstr strText, dbit bSelect, int imageId)
 {
 	return self->InsertPage(nPage, pPage, wxString(strText.data, wxConvUTF8, strText.length), bSelect, imageId)?1:0;
 }
@@ -219,7 +219,7 @@ int wxNotebook_SetSelection(wxNotebook* self, int nPage)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxNotebook_AdvanceSelection(wxNotebook* self, bool forward)
+void wxNotebook_AdvanceSelection(wxNotebook* self, dbit forward)
 {
 	self->AdvanceSelection(forward);
 }
@@ -273,7 +273,7 @@ void wxNotebookEvent_Allow(wxNotebookEvent* self)
 }
 
 extern "C" WXEXPORT
-bool wxNotebookEvent_IsAllowed(wxNotebookEvent* self)
+dbit wxNotebookEvent_IsAllowed(wxNotebookEvent* self)
 {
     return self->IsAllowed()?1:0;
 }

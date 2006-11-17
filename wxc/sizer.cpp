@@ -101,19 +101,19 @@ void wxSizer_Prepend(wxSizer* self, int width, int height, int option,
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxSizer_RemoveWindow(wxSizer* self, wxWindow *window)
+dbit wxSizer_RemoveWindow(wxSizer* self, wxWindow *window)
 {
 	return self->Remove(window)?1:0;
 }
 
 extern "C" WXEXPORT
-bool wxSizer_RemoveSizer(wxSizer* self, wxSizer *sizer)
+dbit wxSizer_RemoveSizer(wxSizer* self, wxSizer *sizer)
 {
 	return self->Remove(sizer)?1:0;
 }
 
 extern "C" WXEXPORT
-bool wxSizer_Remove(wxSizer* self, int pos)
+dbit wxSizer_Remove(wxSizer* self, int pos)
 {
 	return self->Remove(pos)?1:0;
 }
@@ -121,7 +121,7 @@ bool wxSizer_Remove(wxSizer* self, int pos)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxSizer_Clear(wxSizer* self, bool delete_windows)
+void wxSizer_Clear(wxSizer* self, dbit delete_windows)
 {
 	self->Clear(delete_windows);
 }
@@ -143,19 +143,19 @@ void wxSizer_SetMinSize(wxSizer* self, wxSize* size)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxSizer_SetItemMinSizeWindow(wxSizer* self, wxWindow *window, wxSize* size)
+dbit wxSizer_SetItemMinSizeWindow(wxSizer* self, wxWindow *window, wxSize* size)
 {
 	return self->SetItemMinSize(window, *size)?1:0;
 }
 
 extern "C" WXEXPORT
-bool wxSizer_SetItemMinSizeSizer(wxSizer* self, wxSizer *sizer, wxSize* size)
+dbit wxSizer_SetItemMinSizeSizer(wxSizer* self, wxSizer *sizer, wxSize* size)
 {
 	return self->SetItemMinSize(sizer, *size)?1:0;
 }
 
 extern "C" WXEXPORT
-bool wxSizer_SetItemMinSize(wxSizer* self, int pos, wxSize* size)
+dbit wxSizer_SetItemMinSize(wxSizer* self, int pos, wxSize* size)
 {
 	return self->SetItemMinSize(pos, *size)?1:0;
 }
@@ -233,7 +233,7 @@ void wxSizer_SetDimension(wxSizer* self, int x, int y, int width, int height)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxSizer_ShowWindow(wxSizer* self, wxWindow *window, bool show)
+void wxSizer_ShowWindow(wxSizer* self, wxWindow *window, dbit show)
 {
 	self->Show(window, show);
 }
@@ -245,7 +245,7 @@ void wxSizer_HideWindow(wxSizer* self, wxWindow *window)
 }
 
 extern "C" WXEXPORT
-void wxSizer_ShowSizer(wxSizer* self, wxSizer *sizer, bool show)
+void wxSizer_ShowSizer(wxSizer* self, wxSizer *sizer, dbit show)
 {
 	self->Show(sizer, show);
 }
@@ -259,32 +259,32 @@ void wxSizer_HideSizer(wxSizer* self, wxSizer *sizer)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxSizer_IsShownWindow(wxSizer* self, wxWindow *window)
+dbit wxSizer_IsShownWindow(wxSizer* self, wxWindow *window)
 {
 	return self->IsShown(window)?1:0;
 }
 
 extern "C" WXEXPORT
-bool wxSizer_IsShownSizer(wxSizer* self, wxSizer *sizer)
+dbit wxSizer_IsShownSizer(wxSizer* self, wxSizer *sizer)
 {
 	return self->IsShown(sizer)?1:0;
 }
 
 
 extern "C" WXEXPORT
-bool wxSizer_DetachWindow(wxSizer* self, wxWindow* window)
+dbit wxSizer_DetachWindow(wxSizer* self, wxWindow* window)
 {
 	return self->Detach(window)?1:0;
 }
 
 extern "C" WXEXPORT
-bool wxSizer_DetachSizer(wxSizer* self, wxSizer* sizer)
+dbit wxSizer_DetachSizer(wxSizer* self, wxSizer* sizer)
 {
 	return self->Detach(sizer)?1:0;
 }
 
 extern "C" WXEXPORT
-bool wxSizer_Detach(wxSizer* self, int index)
+dbit wxSizer_Detach(wxSizer* self, int index)
 {
 	return self->Detach(index)?1:0;
 }

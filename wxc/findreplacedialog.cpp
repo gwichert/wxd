@@ -37,7 +37,7 @@ wxFindReplaceDialog* wxFindReplaceDialog_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxFindReplaceDialog_Create(wxFindReplaceDialog* self, wxWindow* parent, wxFindReplaceData* data, dstr title, int style)
+dbit wxFindReplaceDialog_Create(wxFindReplaceDialog* self, wxWindow* parent, wxFindReplaceData* data, dstr title, int style)
 {
     return self->Create(parent, data, wxString(title.data, wxConvUTF8, title.length), style);
 }

@@ -37,7 +37,7 @@ wxRadioBox* wxRadioBox_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxRadioBox_Create(wxRadioBox* self, wxWindow* parent, int id, dstr label,
+dbit wxRadioBox_Create(wxRadioBox* self, wxWindow* parent, int id, dstr label,
                        const wxPoint* pos, const wxSize* size, int n, dstr choices[],
                        int majorDimension, long style, const wxValidator* val, dstr name)
 {
@@ -59,7 +59,7 @@ bool wxRadioBox_Create(wxRadioBox* self, wxWindow* parent, int id, dstr label,
 	for (i = 0; i < n; ++i)
 		strings[i] = wxString(choices[i].data, wxConvUTF8, choices[i].length);
 
-	bool result = self->Create(parent, id, wxString(label.data, wxConvUTF8, label.length), *pos, *size, n,
+	dbit result = self->Create(parent, id, wxString(label.data, wxConvUTF8, label.length), *pos, *size, n,
 		                       strings, majorDimension, style, *val, wxString(name.data, wxConvUTF8, name.length));
 
 	delete[] strings;
@@ -93,7 +93,7 @@ dstrret wxRadioBox_GetStringSelection(wxRadioBox* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxRadioBox_SetStringSelection(wxRadioBox* self, dstr s)
+dbit wxRadioBox_SetStringSelection(wxRadioBox* self, dstr s)
 {
 	return self->SetStringSelection(wxString(s.data, wxConvUTF8, s.length))?1:0;
 }
@@ -133,7 +133,7 @@ void wxRadioBox_SetString(wxRadioBox* self, int n, dstr label)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxRadioBox_Enable(wxRadioBox* self, int n, bool enable)
+void wxRadioBox_Enable(wxRadioBox* self, int n, dbit enable)
 {
 	self->Enable(n, enable);
 }
@@ -141,7 +141,7 @@ void wxRadioBox_Enable(wxRadioBox* self, int n, bool enable)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxRadioBox_Show(wxRadioBox* self, int n, bool show)
+void wxRadioBox_Show(wxRadioBox* self, int n, dbit show)
 {
 	self->Show(n, show);
 }

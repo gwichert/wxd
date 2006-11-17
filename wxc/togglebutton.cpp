@@ -36,7 +36,7 @@ wxToggleButton* wxToggleButton_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxToggleButton_Create(wxToggleButton *self, wxWindow* parent, wxWindowID id, dstr label, const wxPoint* pos, const wxSize* size, long style, const wxValidator* validator, dstr name)
+dbit wxToggleButton_Create(wxToggleButton *self, wxWindow* parent, wxWindowID id, dstr label, const wxPoint* pos, const wxSize* size, long style, const wxValidator* validator, dstr name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -56,7 +56,7 @@ bool wxToggleButton_Create(wxToggleButton *self, wxWindow* parent, wxWindowID id
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxToggleButton_GetValue(wxToggleButton* self)
+dbit wxToggleButton_GetValue(wxToggleButton* self)
 {
 	return self->GetValue()?1:0;
 }
@@ -64,7 +64,7 @@ bool wxToggleButton_GetValue(wxToggleButton* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxToggleButton_SetValue(wxToggleButton* self, const bool state)
+void wxToggleButton_SetValue(wxToggleButton* self, const dbit state)
 {
 	self->SetValue(state);
 }

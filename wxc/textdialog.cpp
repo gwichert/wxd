@@ -92,7 +92,7 @@ dstrret wxGetPasswordFromUser_func(dstr message, dstr caption,
 extern "C" WXEXPORT
 dstrret wxGetTextFromUser_func(dstr message, dstr caption,
                                  dstr defaultValue, wxWindow* parent,
-                                 int x, int y, bool centre)
+                                 int x, int y, dbit centre)
 {
     return dstr_ret(wxGetTextFromUser(wxString(message.data, wxConvUTF8, message.length),
                         wxString(caption.data, wxConvUTF8, caption.length),

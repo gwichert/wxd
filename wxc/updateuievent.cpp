@@ -27,7 +27,7 @@ wxUpdateUIEvent* wxUpdateUIEvent_ctor(wxWindowID commandId)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxUpdateUIEvent_CanUpdate(wxWindow* window)
+dbit wxUpdateUIEvent_CanUpdate(wxWindow* window)
 {
 	return wxUpdateUIEvent::CanUpdate(window)?1:0;
 }
@@ -35,7 +35,7 @@ bool wxUpdateUIEvent_CanUpdate(wxWindow* window)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxUpdUIEvt_Enable(wxUpdateUIEvent* self, bool enable)
+void wxUpdUIEvt_Enable(wxUpdateUIEvent* self, dbit enable)
 {
 	self->Enable(enable);
 }
@@ -43,7 +43,7 @@ void wxUpdUIEvt_Enable(wxUpdateUIEvent* self, bool enable)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxUpdUIEvt_Check(wxUpdateUIEvent* self, bool check)
+void wxUpdUIEvt_Check(wxUpdateUIEvent* self, dbit check)
 {
 	self->Check(check);
 }
@@ -51,7 +51,7 @@ void wxUpdUIEvt_Check(wxUpdateUIEvent* self, bool check)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxUpdateUIEvent_GetChecked(wxUpdateUIEvent* self)
+dbit wxUpdateUIEvent_GetChecked(wxUpdateUIEvent* self)
 {
 	return self->GetChecked()?1:0;
 }
@@ -59,7 +59,7 @@ bool wxUpdateUIEvent_GetChecked(wxUpdateUIEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxUpdateUIEvent_GetEnabled(wxUpdateUIEvent* self)
+dbit wxUpdateUIEvent_GetEnabled(wxUpdateUIEvent* self)
 {
 	return self->GetEnabled()?1:0;
 }
@@ -67,7 +67,7 @@ bool wxUpdateUIEvent_GetEnabled(wxUpdateUIEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxUpdateUIEvent_GetSetChecked(wxUpdateUIEvent* self)
+dbit wxUpdateUIEvent_GetSetChecked(wxUpdateUIEvent* self)
 {
 	return self->GetSetChecked()?1:0;
 }
@@ -75,7 +75,7 @@ bool wxUpdateUIEvent_GetSetChecked(wxUpdateUIEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxUpdateUIEvent_GetSetEnabled(wxUpdateUIEvent* self)
+dbit wxUpdateUIEvent_GetSetEnabled(wxUpdateUIEvent* self)
 {
 	return self->GetSetEnabled()?1:0;
 }
@@ -83,7 +83,7 @@ bool wxUpdateUIEvent_GetSetEnabled(wxUpdateUIEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxUpdateUIEvent_GetSetText(wxUpdateUIEvent* self)
+dbit wxUpdateUIEvent_GetSetText(wxUpdateUIEvent* self)
 {
 	return self->GetSetText()?1:0;
 }

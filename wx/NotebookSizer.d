@@ -4,7 +4,7 @@
 // based on
 // wx.NET - NotebookSizer.cs
 //
-// The wxNotebookSizer proxy interface.
+/// The wxNotebookSizer proxy interface.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -27,6 +27,7 @@ import wx.Notebook;
 
 		//---------------------------------------------------------------------
 
+	alias NotebookSizer wxNotebookSizer;
 	public class NotebookSizer : Sizer
 	{
 		public this(IntPtr wxobj)

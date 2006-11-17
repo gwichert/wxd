@@ -4,7 +4,7 @@
 // based on
 // wx.NET - ListBox.cs
 //
-// wxListBox wrapper class.
+/// The wxListBox wrapper class
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -17,9 +17,6 @@ module wx.ListBox;
 import wx.common;
 import wx.Control;
 import wx.ClientData;
-
-// this is bogus, but better than nothing
-version (darwin) { version = __WXMAC__; }
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxListBox_ctor();
@@ -55,6 +52,7 @@ version (darwin) { version = __WXMAC__; }
 	
 		//---------------------------------------------------------------------
 	
+	alias ListBox wxListBox;
 	public class ListBox : Control
 	{
 		enum {
@@ -290,6 +288,7 @@ version (darwin) { version = __WXMAC__; }
 		static extern (C) int wxCheckListBox_GetItemHeight(IntPtr self);
 		//! \endcond
 				
+	alias CheckListBox wxCheckListBox;
 	public class CheckListBox : ListBox
 	{
 		const string wxListBoxNameStr = "listBox";

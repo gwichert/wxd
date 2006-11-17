@@ -40,10 +40,14 @@ all:
 	make
 	cd ..\Notebook
 	make
+	cd ..\Platform
+	make
 	cd ..\Printing
 	make
 	cd ..\SashWindow
 	make
+#	cd ..\Sound
+#	make
 	cd ..\Splitter
 	make
 	cd ..\TreeCtrl
@@ -69,12 +73,12 @@ clean:
 	make clean
 	cd ..\Font
 	make clean
-#	cd ..\GLCube
-#	make
+	cd ..\GLCube
+	make clean
 	cd ..\Grid
 	make clean
 	cd ..\Hello
-	make
+	make clean
 	cd ..\HTML
 	make clean
 	cd ..\HtmlHelp
@@ -97,9 +101,13 @@ clean:
 	make clean
 	cd ..\Notebook
 	make clean
+	cd ..\Platform
+	make clean
 	cd ..\Printing
 	make clean
 	cd ..\SashWindow
+	make clean
+	cd ..\Sound
 	make clean
 	cd ..\Splitter
 	make clean

@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Bitmap.cs
 //
-// The wxBitmap wrapper class.
+/// The wxBitmap wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
@@ -56,6 +56,7 @@ import wx.Icon;
 	
 		//---------------------------------------------------------------------
 
+	alias Bitmap wxBitmap;
 	public class Bitmap : GDIObject
 	{
 		public static Bitmap wxNullBitmap;
@@ -184,6 +185,7 @@ import wx.Icon;
 		//! \endcond
 		
 		//---------------------------------------------------------------------
+	alias Mask wxMask;
 	public class Mask : wxObject
 	{
 		

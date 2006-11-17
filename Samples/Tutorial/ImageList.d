@@ -19,7 +19,7 @@ import wx.wx;
          */
         public this(Window parent, ImageViewer viewer)
         {
-            super(parent, -1, wxDefaultPosition, new_Size(140, -1));
+            super(parent, -1, wxDefaultPosition, Size(140, -1));
             m_viewer = viewer;
 
             // A flex grid sizer will be used to align the images horizontally.

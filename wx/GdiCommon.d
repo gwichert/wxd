@@ -4,7 +4,7 @@
 // based on
 // wx.NET - ActivateEvent.cs
 //
-// The wxActivateEvent wrapper class.
+/// The wxActivateEvent wrapper class.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2004 by Alexander Olk
@@ -124,6 +124,7 @@ import wx.Colour;
 		
 		//-----------------------------------------------------------------------------
 	
+	alias ColourDatabase wxColourDatabase;
 	public class ColourDatabase : wxObject
 	{
 		public this(IntPtr wxobj)
@@ -177,6 +178,7 @@ import wx.Colour;
 		
 		//-----------------------------------------------------------------------------
 	
+	alias PenList wxPenList;
 	public class PenList : wxObject
 	{
 		public this(IntPtr wxobj)
@@ -218,6 +220,7 @@ import wx.Colour;
 		
 		//-----------------------------------------------------------------------------
 	
+	alias BrushList wxBrushList;
 	public class BrushList : wxObject
 	{
 		public this(IntPtr wxobj)
@@ -266,6 +269,7 @@ import wx.Colour;
 		
 		//-----------------------------------------------------------------------------
 	
+	alias FontList wxFontList;
 	public class FontList : wxObject
 	{
 		public this(IntPtr wxobj)
@@ -322,6 +326,7 @@ import wx.Colour;
 		
 		//-----------------------------------------------------------------------------
 		
+	alias BitmapList wxBitmapList;
 	public class BitmapList : wxObject
 	{
 		public this(IntPtr wxobj)

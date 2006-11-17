@@ -4,7 +4,7 @@
 // based on
 // wx.NET - EvtHandler.cs
 //
-// The wxEvtHandler wrapper class.
+/// The wxEvtHandler wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
@@ -44,7 +44,7 @@ import wx.Event;
 	
 	//---------------------------------------------------------------------
 
-
+		//! \cond EXTERN
 		extern (C) {
 		alias void function(EvtHandler obj,IntPtr wxEvent, int iListener) EvtMarshalDelegate;
 		}
@@ -61,7 +61,6 @@ import wx.Event;
 //		public ObjectDeletedHandler ObjectDeleted;
 
 
-		//! \cond EXTERN
 		static extern (C) void wxEvtHandler_proxy(IntPtr self, clientdata* data);
 		static extern (C) void wxEvtHandler_Connect(IntPtr self, int evtType, int id, int lastId, int iListener);
 		
@@ -71,6 +70,7 @@ import wx.Event;
 		//! \endcond
 		
 
+	alias EvtHandler wxEvtHandler;
 	public class EvtHandler : wxObject
 	{
 		private SListener[] listeners;

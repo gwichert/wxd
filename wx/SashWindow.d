@@ -3,8 +3,8 @@
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - SashWindow.cs
-// 
-// The wxSashWindow wrapper classes.
+//
+/// The wxSashWindow wrapper classes.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2004 Alexander Olk
@@ -47,6 +47,7 @@ import wx.CommandEvent;
 		
 		//-----------------------------------------------------------------------------
 	
+	alias SashEdge wxSashEdge;
 	public class SashEdge : wxObject
 	{
 		public this(IntPtr wxobj)
@@ -106,6 +107,7 @@ import wx.CommandEvent;
 		
 		//-----------------------------------------------------------------------------
 		
+	alias SashWindow wxSashWindow;
 	public class SashWindow : Window
 	{
 		enum {
@@ -222,6 +224,7 @@ import wx.CommandEvent;
 		static extern (C) SashDragStatus wxSashEvent_GetDragStatus(IntPtr self);
 		//! \endcond
 	
+	alias SashEvent wxSashEvent;
 	public class SashEvent : CommandEvent
 	{
 		public this(IntPtr wxobj)

@@ -4,7 +4,7 @@
 // based on
 // wx.NET - ActivateEvent.cs
 //
-// The wxActivateEvent wrapper class.
+/// The wxActivateEvent wrapper class.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2004 by Alexander Olk
@@ -24,6 +24,7 @@ import wx.Event;
 		
 		//-----------------------------------------------------------------------------
 
+	alias ActivateEvent wxActivateEvent;
 	public class ActivateEvent : Event
 	{
 		public this(IntPtr wxobj) 

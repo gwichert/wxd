@@ -153,7 +153,7 @@ import wx.wx;
 	{
 		public override bool OnInit()
 		{
-			ListViewFrame frame = new ListViewFrame("ListView wxWidgets Sample", new_Point(10, 100), new_Size(650,340));
+			ListViewFrame frame = new ListViewFrame("ListView wxWidgets Sample", Point(10, 100), Size(650,340));
 			frame.Show(true);
 
 			return true;
@@ -169,7 +169,7 @@ import wx.wx;
 		}
 	}
 
-void main(char[][] argv)
-{
+void main(char[][] argv)
+{
 	ListViewApp.Main();
 }

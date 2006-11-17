@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Caret.cs
 //
-// The wxCaret wrapper class.
+/// The wxCaret wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 by Bryan Bulten
@@ -36,6 +36,7 @@ import wx.Window;
 		
 		//---------------------------------------------------------------------
 
+	alias Caret wxCaret;
 	public class Caret : wxObject
 	{
 		public this()
@@ -148,6 +149,7 @@ import wx.Window;
 		
 		//---------------------------------------------------------------------
 
+	alias CaretSuspend wxCaretSuspend;
 	public class CaretSuspend : wxObject
 	{
 		public this(Window win)

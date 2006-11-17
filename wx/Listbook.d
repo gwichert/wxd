@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Listbook.cs
 //
-// The wxListbook wrapper class.
+/// The wxListbook wrapper class.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2004 by Alexander Olk
@@ -31,6 +31,7 @@ import wx.ImageList;
 
 		//-----------------------------------------------------------------------------
 
+	alias ListbookEvent wxListbookEvent;
 	public class ListbookEvent : Event
 	{
 		public this(IntPtr wxobj)
@@ -107,6 +108,7 @@ import wx.ImageList;
 		
 		//-----------------------------------------------------------------------------
 
+	alias Listbook wxListbook;
 	public class Listbook : Control
 	{
 		public const int wxLB_DEFAULT		= 0;

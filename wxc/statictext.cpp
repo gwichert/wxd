@@ -43,7 +43,7 @@ wxStaticText* wxStaticText_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStaticText_Create(wxStaticText *self, wxWindow* parent, wxWindowID id, dstr label, const wxPoint* pos, const wxSize* size, long style, dstr name)
+dbit wxStaticText_Create(wxStaticText *self, wxWindow* parent, wxWindowID id, dstr label, const wxPoint* pos, const wxSize* size, long style, dstr name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;

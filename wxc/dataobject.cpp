@@ -61,7 +61,7 @@ size_t wxDataObject_GetDataSize(wxDataObject* self, const wxDataFormat* format)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxDataObject_GetDataHere(wxDataObject* self, const wxDataFormat* format, void *buf)
+dbit wxDataObject_GetDataHere(wxDataObject* self, const wxDataFormat* format, void *buf)
 {
 	return self->GetDataHere(*format, buf)?1:0;
 }
@@ -69,7 +69,7 @@ bool wxDataObject_GetDataHere(wxDataObject* self, const wxDataFormat* format, vo
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxDataObject_SetData(wxDataObject* self, const wxDataFormat* format, size_t len, const void * buf)
+dbit wxDataObject_SetData(wxDataObject* self, const wxDataFormat* format, size_t len, const void * buf)
 {
 	return self->SetData(*format, len, buf)?1:0;
 }
@@ -77,7 +77,7 @@ bool wxDataObject_SetData(wxDataObject* self, const wxDataFormat* format, size_t
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxDataObject_IsSupported(wxDataObject* self, const wxDataFormat* format, wxDataObject::Direction dir)
+dbit wxDataObject_IsSupported(wxDataObject* self, const wxDataFormat* format, wxDataObject::Direction dir)
 {
 	return self->IsSupported(*format, dir)?1:0;
 }
@@ -121,7 +121,7 @@ size_t wxDataObjectSimple_GetDataSize(wxDataObjectSimple* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxDataObjectSimple_GetDataHere(wxDataObjectSimple* self, void *buf)
+dbit wxDataObjectSimple_GetDataHere(wxDataObjectSimple* self, void *buf)
 {
 	return self->GetDataHere(buf)?1:0;
 }
@@ -129,7 +129,7 @@ bool wxDataObjectSimple_GetDataHere(wxDataObjectSimple* self, void *buf)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxDataObjectSimple_SetData(wxDataObjectSimple* self, size_t len, const void *buf)
+dbit wxDataObjectSimple_SetData(wxDataObjectSimple* self, size_t len, const void *buf)
 {
 	return self->SetData(len, buf)?1:0;
 }

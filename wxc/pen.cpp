@@ -87,7 +87,7 @@ int wxPen_GetStyle(wxPen* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxPen_Ok(wxPen* self)
+dbit wxPen_Ok(wxPen* self)
 {
 	return self->Ok()?1:0;
 }

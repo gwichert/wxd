@@ -4,7 +4,7 @@
 // based on
 // wx.NET - ListCtrl.cs
 //
-// The wxListCtrl wrapper class
+/// The wxListCtrl wrapper class
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 by Bryan Bulten
@@ -53,6 +53,7 @@ import wx.ImageList;
 		static extern (C) bool   wxListItem_HasAttributes(IntPtr self);
 		//! \endcond
 
+	alias ListItem wxListItem;
 	public class ListItem : wxObject
 	{
 		//---------------------------------------------------------------------
@@ -173,6 +174,7 @@ import wx.ImageList;
 		
 		//-----------------------------------------------------------------------------
 
+	alias ListItemAttr wxListItemAttr;
 	public class ListItemAttr : wxObject
 	{
 		public this(IntPtr wxobj)
@@ -233,11 +235,11 @@ import wx.ImageList;
 	
 	//---------------------------------------------------------------------
 
+		//! \cond EXTERN
 		extern (C) {
 		alias int function(int item1, int item2, int sortData) wxListCtrlCompare;
 		}
 	
-		//! \cond EXTERN
 		static extern (C) IntPtr wxListCtrl_ctor();
 		static extern (C) void   wxListCtrl_dtor(IntPtr self);
 		static extern (C) bool   wxListCtrl_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, IntPtr validator, string name);
@@ -304,6 +306,7 @@ import wx.ImageList;
 		static extern (C) void   wxListCtrl_RefreshItems(IntPtr self, int itemFrom, int itemTo);
 		//! \endcond
 	
+	alias ListCtrl wxListCtrl;
 	public class ListCtrl : Control
 	{
 		public const int wxLC_VRULES           = 0x0001;
@@ -919,6 +922,7 @@ import wx.ImageList;
 		
 		//---------------------------------------------------------------------
        
+	alias ListEvent wxListEvent;
 	public class ListEvent : Event 
 	{
 		public this(IntPtr wxobj)
@@ -1072,6 +1076,7 @@ import wx.ImageList;
 
 		//-----------------------------------------------------------------------------
 
+	alias ListView wxListView;
 	public class ListView : ListCtrl
 	{
 		public this(IntPtr wxobj)

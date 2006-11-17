@@ -1,6 +1,9 @@
 //-----------------------------------------------------------------------------
 // wxD - NotifyEvent.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
+//
+/// The wxNotifyEvent wrapper class
+//
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
@@ -20,6 +23,7 @@ import wx.CommandEvent;
 
 		//-----------------------------------------------------------------------------
 
+	alias NotifyEvent wxNotifyEvent;
 	public class NotifyEvent : CommandEvent
 	{
 

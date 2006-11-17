@@ -4,7 +4,7 @@
 // based on
 // wx.NET - CommandEvent.cs
 //
-// The wxCommandEvent wrapper class.
+/// The wxCommandEvent wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
@@ -38,6 +38,7 @@ import wx.ClientData;
 
 		//-----------------------------------------------------------------------------
 
+	alias CommandEvent wxCommandEvent;
 	public class CommandEvent : Event
 	{
 

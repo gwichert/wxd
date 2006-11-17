@@ -59,7 +59,7 @@ import wx.wx;
 		public this()
 		{
 			super("wxSplitterWindow Sample",
-			       wxDefaultPosition, new_Size(420,300),
+			       wxDefaultPosition, Size(420,300),
 			       wxDEFAULT_FRAME | wxNO_FULL_REPAINT_ON_RESIZE);
 			Menu splitMenu = new Menu();
 			splitMenu.Append(Cmd.SplitVertical, "Split &Vertically\tCtrl-V", "Split vertically");

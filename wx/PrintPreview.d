@@ -4,7 +4,7 @@
 // based on
 // wx.NET - PrintPreview.cs
 //
-// The wxPrintPreview wrapper class.
+/// The wxPrintPreview wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -49,6 +49,7 @@ import wx.Printer;
 
         //-----------------------------------------------------------------------------
 
+    alias PrintPreview wxPrintPreview;
     public class PrintPreview : wxObject
     {
         private this(IntPtr wxobj)
@@ -157,6 +158,7 @@ import wx.Printer;
 
         //-----------------------------------------------------------------------------
 
+    alias PreviewFrame wxPreviewFrame;
     public class PreviewFrame : Frame
     {
         private this(IntPtr wxobj) 
@@ -197,6 +199,7 @@ import wx.Printer;
 
         //-----------------------------------------------------------------------------
 
+    alias PreviewControlBar wxPreviewControlBar;
     public class PreviewControlBar : Panel
     {
         const int wxPREVIEW_PRINT       =  1;
@@ -249,6 +252,7 @@ import wx.Printer;
 
         //-----------------------------------------------------------------------------
 
+    alias PreviewCanvas wxPreviewCanvas;
     public class PreviewCanvas : ScrolledWindow
     {
         private this(IntPtr wxobj) 

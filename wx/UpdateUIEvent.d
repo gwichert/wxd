@@ -4,7 +4,7 @@
 // based on
 // wx.NET - UpdateUIEvent.cs
 //
-// The wxUpdateUIEvent wrapper class.
+/// The wxUpdateUIEvent wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
@@ -39,6 +39,7 @@ import wx.Window;
 
 		//-----------------------------------------------------------------------------
 
+	alias UpdateUIEvent wxUpdateUIEvent;
 	public class UpdateUIEvent : CommandEvent
 	{
 		public this(IntPtr wxobj) 

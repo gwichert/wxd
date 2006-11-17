@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Choice.cs
 //
-// The wxChoice wrapper class.
+/// The wxChoice wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -73,6 +73,7 @@ import wx.ArrayString;
 
 		//---------------------------------------------------------------------
 		
+	alias Choice wxChoice;
 	public class Choice : Control , IControlWithItems
 	{
 		public const string wxChoiceNameStr = "choice";

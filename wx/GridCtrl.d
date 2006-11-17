@@ -4,7 +4,7 @@
 // based on
 // wx.NET - GridCtrl.cs
 //
-// The wxGrid controls wrapper class.
+/// The wxGrid controls wrapper class.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2004 by Alexander Olk
@@ -26,6 +26,7 @@ import wx.Grid;
 		static extern (C) void wxGridCellDateTimeRenderer_SetParameters(IntPtr self, string parameter);
 		//! \endcond
 		
+	alias GridCellDateTimeRenderer wxGridCellDateTimeRenderer;
 	public class GridCellDateTimeRenderer : GridCellStringRenderer
 	{
 		public this()
@@ -87,6 +88,7 @@ import wx.Grid;
 		static extern (C) void wxGridCellEnumRenderer_SetParameters(IntPtr self, string parameter);
 		//! \endcond
 		
+	alias GridCellEnumRenderer wxGridCellEnumRenderer;
 	public class GridCellEnumRenderer : GridCellStringRenderer
 	{
 		public this()
@@ -144,6 +146,7 @@ import wx.Grid;
 		static extern (C) IntPtr wxGridCellEnumEditor_Clone(IntPtr self);
 		//! \endcond
 		
+	alias GridCellEnumEditor wxGridCellEnumEditor;
 	public class GridCellEnumEditor : GridCellChoiceEditor
 	{
 		public this()
@@ -194,6 +197,7 @@ import wx.Grid;
 		static extern (C) IntPtr wxGridCellAutoWrapStringEditor_Clone(IntPtr self);
 		//! \endcond
 		
+	alias GridCellAutoWrapStringEditor wxGridCellAutoWrapStringEditor;
 	public class GridCellAutoWrapStringEditor : GridCellTextEditor
 	{
 		public this()
@@ -241,6 +245,7 @@ import wx.Grid;
 		static extern (C) IntPtr wxGridCellAutoWrapStringRenderer_Clone(IntPtr self);
 		//! \endcond
 		
+	alias GridCellAutoWrapStringRenderer wxGridCellAutoWrapStringRenderer;
 	public class GridCellAutoWrapStringRenderer : GridCellStringRenderer
 	{
 		public this()

@@ -23,7 +23,7 @@
 extern "C" WXEXPORT
 void wxGLContext_SetCurrent(wxGLContext* self)
 {
-	return self->SetCurrent();
+	self->SetCurrent();
 }
 
 //-----------------------------------------------------------------------------
@@ -31,7 +31,10 @@ void wxGLContext_SetCurrent(wxGLContext* self)
 extern "C" WXEXPORT
 void wxGLContext_Update(wxGLContext* self)
 {
-	return self->Update();
+#ifndef __WXGTK__
+	// must be called after window drag/grows/zoom or clut change
+	self->Update();
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -39,7 +42,7 @@ void wxGLContext_Update(wxGLContext* self)
 extern "C" WXEXPORT
 void wxGLContext_SetColour(wxGLContext* self, dstr colour)
 {
-	return self->SetColour(wxString(colour.data, wxConvUTF8, colour.length));
+	self->SetColour(wxString(colour.data, wxConvUTF8, colour.length));
 }
 
 //-----------------------------------------------------------------------------
@@ -47,7 +50,7 @@ void wxGLContext_SetColour(wxGLContext* self, dstr colour)
 extern "C" WXEXPORT
 void wxGLContext_SwapBuffers(wxGLContext* self)
 {
-	return self->SwapBuffers();
+	self->SwapBuffers();
 }
 
 //-----------------------------------------------------------------------------
@@ -152,7 +155,7 @@ wxGLCanvas* wxGLCanvas_ctor3(wxWindow *parent, const wxGLCanvas *shared, wxWindo
 extern "C" WXEXPORT
 void wxGLCanvas_SetCurrent(wxGLCanvas* self)
 {
-	return self->SetCurrent();
+	self->SetCurrent();
 }
 
 //-----------------------------------------------------------------------------
@@ -160,7 +163,9 @@ void wxGLCanvas_SetCurrent(wxGLCanvas* self)
 extern "C" WXEXPORT
 void wxGLCanvas_UpdateContext(wxGLCanvas* self)
 {
-	return self->UpdateContext();
+#ifndef __WXGTK__
+	self->UpdateContext();
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -168,7 +173,7 @@ void wxGLCanvas_UpdateContext(wxGLCanvas* self)
 extern "C" WXEXPORT
 void wxGLCanvas_SetColour(wxGLCanvas* self, dstr colour)
 {
-	return self->SetColour(wxString(colour.data, wxConvUTF8, colour.length));
+	self->SetColour(wxString(colour.data, wxConvUTF8, colour.length));
 }
 
 //-----------------------------------------------------------------------------
@@ -176,7 +181,7 @@ void wxGLCanvas_SetColour(wxGLCanvas* self, dstr colour)
 extern "C" WXEXPORT
 void wxGLCanvas_SwapBuffers(wxGLCanvas* self)
 {
-	return self->SwapBuffers();
+	self->SwapBuffers();
 }
 
 //-----------------------------------------------------------------------------
@@ -188,5 +193,7 @@ wxGLContext* wxGLCanvas_GetContext(wxGLCanvas* self)
 }
 
 #else
+#ifdef __GNUC__
 #warning "wxUSE_GLCANVAS is not set"
+#endif
 #endif

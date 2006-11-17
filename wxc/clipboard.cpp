@@ -27,7 +27,7 @@ wxClipboard* wxClipboard_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxClipboard_Open(wxClipboard* self)
+dbit wxClipboard_Open(wxClipboard* self)
 {
     return self->Open()?1:0;
 }
@@ -43,7 +43,7 @@ void wxClipboard_Close(wxClipboard* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxClipboard_IsOpened(wxClipboard* self)
+dbit wxClipboard_IsOpened(wxClipboard* self)
 {
     return self->IsOpened()?1:0;
 }
@@ -51,7 +51,7 @@ bool wxClipboard_IsOpened(wxClipboard* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxClipboard_AddData(wxClipboard* self, wxDataObject* data)
+dbit wxClipboard_AddData(wxClipboard* self, wxDataObject* data)
 {
     return self->AddData(data)?1:0;
 }
@@ -59,7 +59,7 @@ bool wxClipboard_AddData(wxClipboard* self, wxDataObject* data)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxClipboard_SetData(wxClipboard* self, wxDataObject* data)
+dbit wxClipboard_SetData(wxClipboard* self, wxDataObject* data)
 {
     return self->SetData(data)?1:0;
 }
@@ -67,7 +67,7 @@ bool wxClipboard_SetData(wxClipboard* self, wxDataObject* data)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxClipboard_IsSupported(wxClipboard* self, wxDataFormat* format)
+dbit wxClipboard_IsSupported(wxClipboard* self, wxDataFormat* format)
 {
     return self->IsSupported(*format)?1:0;
 }
@@ -75,7 +75,7 @@ bool wxClipboard_IsSupported(wxClipboard* self, wxDataFormat* format)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxClipboard_GetData(wxClipboard* self, wxDataObject* data)
+dbit wxClipboard_GetData(wxClipboard* self, wxDataObject* data)
 {
     return self->GetData(*data)?1:0;
 }
@@ -91,7 +91,7 @@ void wxClipboard_Clear(wxClipboard* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxClipboard_Flush(wxClipboard* self)
+dbit wxClipboard_Flush(wxClipboard* self)
 {
     return self->Flush()?1:0;
 }
@@ -99,7 +99,7 @@ bool wxClipboard_Flush(wxClipboard* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxClipboard_UsePrimarySelection(wxClipboard* self, bool primary)
+void wxClipboard_UsePrimarySelection(wxClipboard* self, dbit primary)
 {
 	self->UsePrimarySelection(primary);
 }
@@ -140,7 +140,7 @@ void wxClipBoardLocker_dtor(wxClipboardLocker* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxClipboardLocker_IsOpen(wxClipboardLocker* self)
+dbit wxClipboardLocker_IsOpen(wxClipboardLocker* self)
 {
 	return !(*self)?1:0;
 }

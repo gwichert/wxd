@@ -115,6 +115,7 @@ OBJECTS = \
 	sizer.o \
 	sizeritem.o \
 	slider.o \
+	sound.o \
 	spinbutton.o \
 	spinctrl.o \
 	splashscreen.o \
@@ -149,17 +150,18 @@ OBJECTS = \
 	wxdatetime.o \
 	wxstring.o \
 	wxversion.o \
+	wxplatform.o \
 	xmlresource.o \
 	numdialog.o
 	
 #	notifyevent.o
 	
-all:  $(LIBTARGET)
+all:  platform $(LIBTARGET)
 
 WX_CONFIG = wx-config
 
 CXX = $(shell $(WX_CONFIG) --cxx)
-CXXFLAGS = -O2 `$(WX_CONFIG) --cxxflags`
+CXXFLAGS = -O2 -Wall `$(WX_CONFIG) --cxxflags`
 
 prefix=/usr/local
 exec_prefix=$(prefix)
@@ -173,6 +175,9 @@ install: $(LIBTARGET)
 	$(INSTALL) -d $(DESTDIR)$(libdir)
 	$(INSTALL) -p $(LIBTARGET) $(DESTDIR)$(libdir)
 	-$(RANLIB) $(DESTDIR)$(libdir)/`basename $(LIBTARGET)`
+
+platform:
+	$(WX_CONFIG) --cflags | sed -e 's/.*\-D__\(WX.*\)__.*/\1/' > $@
 
 clean:
 	-rm *.o

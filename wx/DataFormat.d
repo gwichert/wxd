@@ -4,6 +4,8 @@
 // based on
 // wx.NET - DataFormat.cs
 // 
+/// The wxDataFormat wrapper class
+//
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
@@ -51,6 +53,7 @@ import wx.common;
 	
         //-----------------------------------------------------------------------------
 	
+    alias DataFormat wxDataFormat;
     public class DataFormat : wxObject
     {
 	public this(IntPtr wxobj)

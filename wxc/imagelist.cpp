@@ -20,7 +20,7 @@
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxImageList* wxImageList_ctor(int width, int height, bool mask, int initialCount)
+wxImageList* wxImageList_ctor(int width, int height, dbit mask, int initialCount)
 {
 	return new wxImageList(width, height, mask, initialCount);
 }
@@ -69,7 +69,7 @@ int wxImageList_GetImageCount(wxImageList* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxImageList_Draw(wxImageList* self, int index, wxDC* dc, int x, int y, int flags, bool solidBackground)
+dbit wxImageList_Draw(wxImageList* self, int index, wxDC* dc, int x, int y, int flags, dbit solidBackground)
 {
 	return self->Draw(index, *dc, x, y, flags, solidBackground)?1:0;
 }
@@ -77,7 +77,7 @@ bool wxImageList_Draw(wxImageList* self, int index, wxDC* dc, int x, int y, int 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxImageList_Create(wxImageList* self, int width, int height, bool mask, int initialCount)
+dbit wxImageList_Create(wxImageList* self, int width, int height, dbit mask, int initialCount)
 {
 	return self->Create(width, height, mask, initialCount)?1:0;
 }
@@ -85,7 +85,7 @@ bool wxImageList_Create(wxImageList* self, int width, int height, bool mask, int
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxImageList_Replace(wxImageList* self, int index, const wxBitmap* bitmap)
+dbit wxImageList_Replace(wxImageList* self, int index, const wxBitmap* bitmap)
 {
 	return self->Replace(index, *bitmap)?1:0;
 }
@@ -93,7 +93,7 @@ bool wxImageList_Replace(wxImageList* self, int index, const wxBitmap* bitmap)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxImageList_Remove(wxImageList* self, int index)
+dbit wxImageList_Remove(wxImageList* self, int index)
 {
 	return self->Remove(index)?1:0;
 }
@@ -101,7 +101,7 @@ bool wxImageList_Remove(wxImageList* self, int index)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxImageList_RemoveAll(wxImageList* self)
+dbit wxImageList_RemoveAll(wxImageList* self)
 {
 	return self->RemoveAll()?1:0;
 }
@@ -117,7 +117,7 @@ const wxBitmap* wxImageList_GetBitmap(wxImageList* self, int index)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxImageList_GetSize(wxImageList* self, int index, int* width, int* height)
+dbit wxImageList_GetSize(wxImageList* self, int index, int* width, int* height)
 {
 	return self->GetSize(index, *width, *height)?1:0;
 }

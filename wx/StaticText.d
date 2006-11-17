@@ -4,7 +4,7 @@
 // based on
 // wx.NET - StaticText.cs
 //
-// The wxStaticText wrapper class.
+/// The wxStaticText wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
@@ -24,6 +24,7 @@ import wx.Control;
 
 		//---------------------------------------------------------------------
 		
+	alias StaticText wxStaticText;
 	public class StaticText : Control
 	{
 		public const int wxST_NO_AUTORESIZE = 0x0001;

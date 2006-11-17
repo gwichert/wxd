@@ -37,7 +37,7 @@ void wxGridCellDateTimeRenderer_dtor(wxGridCellDateTimeRenderer* self)
 
 extern "C" WXEXPORT
 void wxGridCellDateTimeRenderer_Draw(wxGridCellDateTimeRenderer* self, wxGrid* grid, wxGridCellAttr* attr,
-				wxDC* dc, wxRect* rect, int row, int col, bool isSelected)
+				wxDC* dc, wxRect* rect, int row, int col, dbit isSelected)
 {
 	self->Draw(*grid, *attr, *dc, *rect, row, col, isSelected);
 }
@@ -85,7 +85,7 @@ void wxGridCellEnumRenderer_dtor(wxGridCellEnumRenderer* self)
 
 extern "C" WXEXPORT
 void wxGridCellEnumRenderer_Draw(wxGridCellEnumRenderer* self, wxGrid* grid, wxGridCellAttr* attr,
-				wxDC* dc, wxRect* rect, int row, int col, bool isSelected)
+				wxDC* dc, wxRect* rect, int row, int col, dbit isSelected)
 {
 	self->Draw(*grid, *attr, *dc, *rect, row, col, isSelected);
 }
@@ -142,7 +142,7 @@ void wxGridCellAutoWrapStringRenderer_RegisterDisposable(_GridCellAutoWrapString
 
 extern "C" WXEXPORT
 void wxGridCellAutoWrapStringRenderer_Draw(wxGridCellAutoWrapStringRenderer* self, wxGrid* grid, wxGridCellAttr* attr,
-				wxDC* dc, wxRect* rect, int row, int col, bool isSelected)
+				wxDC* dc, wxRect* rect, int row, int col, dbit isSelected)
 {
 	self->Draw(*grid, *attr, *dc, *rect, row, col, isSelected);
 }
@@ -189,7 +189,7 @@ void wxGridCellEnumEditor_BeginEdit(wxGridCellEnumEditor* self, int row, int col
 }
 
 extern "C" WXEXPORT
-bool wxGridCellEnumEditor_EndEdit(wxGridCellEnumEditor* self, int row, int col, wxGrid* grid)
+dbit wxGridCellEnumEditor_EndEdit(wxGridCellEnumEditor* self, int row, int col, wxGrid* grid)
 {
 	return self->EndEdit(row, col, grid)?1:0;
 }

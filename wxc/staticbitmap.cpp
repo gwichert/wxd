@@ -33,7 +33,7 @@ wxStaticBitmap* wxStaticBitmap_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStaticBitmap_Create(wxStaticBitmap* self, wxWindow *parent, wxWindowID id, const wxBitmap *bitmap, const wxPoint* pos, const wxSize* size, long style, dstr name)
+dbit wxStaticBitmap_Create(wxStaticBitmap* self, wxWindow *parent, wxWindowID id, const wxBitmap *bitmap, const wxPoint* pos, const wxSize* size, long style, dstr name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;

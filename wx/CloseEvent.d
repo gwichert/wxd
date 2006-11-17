@@ -4,7 +4,7 @@
 // based on
 // wx.NET - CloseEvent.cs
 //
-// The wxCloseEvent wrapper class.
+/// The wxCloseEvent wrapper class.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2004 by Alexander Olk
@@ -29,6 +29,7 @@ import wx.Event;
 		
 		//-----------------------------------------------------------------------------
 
+	alias CloseEvent wxCloseEvent;
 	public class CloseEvent : Event
 	{
 		public this(IntPtr wxobj) 

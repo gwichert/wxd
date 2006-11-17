@@ -29,7 +29,7 @@ import std.stdio;
             // TODO: Add command line processing for window position
 
             MyFrame frame = new MyFrame("Controls wxWidgets App",
-                                        new_Point(50,50), new_Size(500,430));
+                                        Point(50,50), Size(500,430));
             frame.Show(true);
             return true;
         }
@@ -285,7 +285,7 @@ import std.stdio;
 
         public this(Frame frame, int x, int y, int w, int h)
         {
-            super(frame, -1, new_Point(x, y), new_Size(w, h));
+            super(frame, -1, Point(x, y), Size(w, h));
             const string[] choices = [
                 "This", "is", "one of my", "wonderful", "examples"
             ];
@@ -298,7 +298,7 @@ import std.stdio;
 
             // Create the log text view
             text = new TextCtrl(this, -1, "This is the log window.\n",
-                                new_Point(0, 250), new_Size(100, 50),
+                                Point(0, 250), Size(100, 50),
                                 TextCtrl.wxTE_MULTILINE);
             text.BackgroundColour = new Colour("wheat");
 
@@ -329,10 +329,10 @@ import std.stdio;
             notebook.AddPage(panel, "wxListBox", true, Images.List);
 
             listbox = new ListBox(panel, ID_LISTBOX,
-                                  new_Point(10, 10), new_Size(120, 70),
+                                  Point(10, 10), Size(120, 70),
                                   choices, ListBox.wxLB_ALWAYS_SB);
             listboxSorted = new ListBox(panel, ID_LISTBOX_SORTED,
-                                        new_Point(10, 90), new_Size(120, 70),
+                                        Point(10, 90), Size(120, 70),
                                         choices, ListBox.wxLB_SORT);
 
             // TODO: Add in ClientData
@@ -341,35 +341,35 @@ import std.stdio;
             listboxSorted.toolTip = "This is a sorted List Box.";
 
             selectNum = new Button(panel, -1,
-                                   "Select #&2", new_Point(180, 30),
-                                   new_Size(150, -1));
+                                   "Select #&2", Point(180, 30),
+                                   Size(150, -1));
             selectStr = new Button(panel, ID_LISTBOX_SEL_STR,
-                                   "&Select 'This'", new_Point(340, 30),
-                                   new_Size(150, -1));
+                                   "&Select 'This'", Point(340, 30),
+                                   Size(150, -1));
 
             new Button(panel, ID_LISTBOX_CLEAR, "&Clear",
-                       new_Point(180, 80), new_Size(150, -1));
+                       Point(180, 80), Size(150, -1));
             new Button(panel, ID_LISTBOX_APPEND, "&Append 'Hi!'",
-                       new_Point(340, 80), new_Size(150, -1));
+                       Point(340, 80), Size(150, -1));
             new Button(panel, ID_LISTBOX_DELETE,
                        "Delete selected item",
-                       new_Point(180, 130), new_Size(150, -1));
+                       Point(180, 130), Size(150, -1));
 
             Button button = new Button(panel, ID_LISTBOX_FONT,
                                        "Set &Italic font",
-                                       new_Point(340, 130),
-                                       new_Size(150, -1));
+                                       Point(340, 130),
+                                       Size(150, -1));
             button.SetDefault();
             button.ForegroundColour = new Colour("blue");
             button.toolTip = "Click here to set Italic font";
 
             checkbox = new CheckBox(panel, ID_LISTBOX_ENABLE,
-                                    "&Disable", new_Point(20, 170));
+                                    "&Disable", Point(20, 170));
             checkbox.Value = false;
             checkbox.toolTip = "Click to disable listbox";
 
             new CheckBox(panel, ID_LISTBOX_COLOUR,
-                         "&Toggle colour", new_Point(110, 170));
+                         "&Toggle colour", Point(110, 170));
 
             panel.cursor = new Cursor(StockCursor.wxCURSOR_HAND);
 
@@ -377,10 +377,10 @@ import std.stdio;
             panel = new Panel(notebook);
             notebook.AddPage(panel, "wxChoice", false, Images.Choice);
 
-            choice = new Choice(panel, ID_CHOICE, new_Point(10, 10),
-                                new_Size(120, -1), choices);
+            choice = new Choice(panel, ID_CHOICE, Point(10, 10),
+                                Size(120, -1), choices);
             choiceSorted = new Choice(panel, ID_CHOICE_SORTED,
-                                      new_Point(10, 70), new_Size(120, -1),
+                                      Point(10, 70), Size(120, -1),
                                       choices, ComboBox.wxCB_SORT);
 
             // TODO: Add in client data
@@ -389,102 +389,102 @@ import std.stdio;
             choice.BackgroundColour = new Colour("red");
 
             new Button(panel, ID_CHOICE_SEL_NUM, "Select #&2",
-                       new_Point(180, 30), new_Size(150, -1));
+                       Point(180, 30), Size(150, -1));
             new Button(panel, ID_CHOICE_SEL_STR, "&Select 'This'",
-                       new_Point(340, 30), new_Size(150, -1));
+                       Point(340, 30), Size(150, -1));
             new Button(panel, ID_CHOICE_CLEAR, "&Clear",
-                       new_Point(180, 80), new_Size(150, -1));
+                       Point(180, 80), Size(150, -1));
             new Button(panel, ID_CHOICE_APPEND, "&Append 'Hi!'",
-                       new_Point(340, 80), new_Size(150, -1));
+                       Point(340, 80), Size(150, -1));
             new Button(panel, ID_CHOICE_DELETE, "D&elete selected item",
-                       new_Point(180, 130), new_Size(150, -1));
+                       Point(180, 130), Size(150, -1));
             new Button(panel, ID_CHOICE_FONT, "Set &Italic font",
-                       new_Point(340, 130), new_Size(150, -1));
+                       Point(340, 130), Size(150, -1));
             new CheckBox(panel, ID_CHOICE_ENABLE, "&Disable",
-                         new_Point(20, 130));
+                         Point(20, 130));
 
             // wxComboBox sample panel
             panel = new Panel(notebook);
             notebook.AddPage(panel, "wxComboBox", false, Images.Combo);
 
             new StaticBox(panel, -1, "&Box around combobox",
-                          new_Point(5, 5), new_Size(150, 100));
+                          Point(5, 5), Size(150, 100));
             combo = new ComboBox(panel, ID_COMBO, "This",
-                                 new_Point(20, 25), new_Size(120, -1),
+                                 Point(20, 25), Size(120, -1),
                                  choices);
             combo.toolTip = "This is a natural\ncombobox - unbelievable";
 
             new Button(panel, ID_COMBO_SEL_NUM, "Select #&2",
-                       new_Point(180, 30), new_Size(150, -1));
+                       Point(180, 30), Size(150, -1));
             new Button(panel, ID_COMBO_SEL_STR, "&Select 'This'",
-                       new_Point(340, 30), new_Size(150, -1));
+                       Point(340, 30), Size(150, -1));
             new Button(panel, ID_COMBO_CLEAR, "&Clear",
-                       new_Point(180, 80), new_Size(150, -1));
+                       Point(180, 80), Size(150, -1));
             new Button(panel, ID_COMBO_APPEND, "&Append 'Hi!'",
-                       new_Point(340, 80), new_Size(150, -1));
+                       Point(340, 80), Size(150, -1));
             new Button(panel, ID_COMBO_DELETE, "D&elete selected item",
-                       new_Point(180, 130), new_Size(150, -1));
+                       Point(180, 130), Size(150, -1));
             new Button(panel, ID_COMBO_FONT, "Set &Italic font",
-                       new_Point(340, 130), new_Size(150, -1));
+                       Point(340, 130), Size(150, -1));
             new CheckBox(panel, ID_COMBO_ENABLE, "&Disable",
-                         new_Point(20, 130));
+                         Point(20, 130));
 
             // wxRadioBox sample panel
             panel = new Panel(notebook);
             notebook.AddPage(panel, "wxRadioBox", false, Images.Radio);
 
                         new RadioBox(panel, ID_RADIO, "&That",
-                         new_Point(10, 160), wxDefaultSize, choices2, 1,
+                         Point(10, 160), wxDefaultSize, choices2, 1,
                          RadioBox.wxRA_SPECIFY_ROWS);
             radiobox = new RadioBox(panel, ID_RADIO,
-                                    "T&his", new_Point(10, 10),
+                                    "T&his", Point(10, 10),
                                     wxDefaultSize, choices, 1,
                                     RadioBox.wxRA_SPECIFY_COLS);
             radiobox.toolTip = "Ever seen a radiobox?";
             radiobox.ForegroundColour = new Colour("Red");
 
             new Button(panel, ID_RADIO_SEL_NUM, "Select #&2",
-                       new_Point(180, 30), new_Size(150, -1));
+                       Point(180, 30), Size(150, -1));
             fontButton = new Button(panel, ID_SETFONT, "Set &more Italic font",
-                       new_Point(340, 30), new_Size(150, -1));
+                       Point(340, 30), Size(150, -1));
             new Button(panel, ID_RADIO_SEL_STR, "&Select 'This'",
-                       new_Point(180, 80), new_Size(150, -1));
+                       Point(180, 80), Size(150, -1));
             new Button(panel, ID_RADIO_FONT, "Set &Italic Font",
-                       new_Point(340, 80), new_Size(150, -1));
+                       Point(340, 80), Size(150, -1));
             new CheckBox(panel, ID_RADIO_ENABLE, "&Disable",
-                         new_Point(340, 130));
+                         Point(340, 130));
 
                         (new RadioButton(panel, ID_RADIO_BUTTON1, "Radiobutton1",
-                                                        new_Point(210, 170), wxDefaultSize,
+                                                        Point(210, 170), wxDefaultSize,
                                                         RadioButton.wxRB_GROUP)).Value = false;
                         new RadioButton(panel, ID_RADIO_BUTTON2, "Radiobutton2",
-                                                        new_Point(340, 170));
+                                                        Point(340, 170));
 
             // wxGauge sample panel
             panel = new Panel(notebook);
             notebook.AddPage(panel, "wxGauge", false, Images.Gauge);
 
             new StaticBox(panel, -1, "&wxGauge and wxSlider", 
-                          new_Point(10, 10), new_Size(222, 130));
+                          Point(10, 10), Size(222, 130));
             gauge = new Gauge(panel, -1, 200, 
-                              new_Point(18, 50), new_Size(155, 30), 
+                              Point(18, 50), Size(155, 30), 
                               Gauge.wxGA_HORIZONTAL | /*Border.*/wxNO_BORDER);
             gauge.BackgroundColour = new Colour("Green");
             gauge.ForegroundColour = new Colour("Red");
 
             gaugeVert = new Gauge(panel, -1, 200, 
-                                  new_Point(195, 35), new_Size(30, 90),
+                                  Point(195, 35), Size(30, 90),
                                   Gauge.wxGA_VERTICAL | Gauge.wxGA_SMOOTH |
                                   /*Border.*/wxNO_BORDER);
 
             slider = new Slider(panel, ID_SLIDER, 0, 0, 200, 
-                                new_Point(18, 90), new_Size(155, -1),
+                                Point(18, 90), Size(155, -1),
                                 Slider.wxSL_AUTOTICKS | Slider.wxSL_LABELS);
             slider.SetTickFreq(40, 0);
             slider.toolTip = "This is a sliding slider!";
 
-            new StaticBox(panel, -1, "&Explanation", new_Point(230, 10),
-                          new_Size(270, 130), Alignment.wxALIGN_CENTER);
+            new StaticBox(panel, -1, "&Explanation", Point(230, 10),
+                          Size(270, 130), Alignment.wxALIGN_CENTER);
             new StaticText(panel, -1, 
                            "In order to see the gauge (aka progress \n" ~
                            "bar) control do something, drag the \n" ~
@@ -492,31 +492,31 @@ import std.stdio;
                            "\n" ~
                            "This is also supposed to demonstrate\n" ~
                            "how to use static controls.",
-                           new_Point(250, 25), new_Size(240, 110));
+                           Point(250, 25), Size(240, 110));
 
             spinctrl = new SpinCtrl(panel, ID_SPINCTRL, "",
-                                    new_Point(200, 160), new_Size(80, -1));
+                                    Point(200, 160), Size(80, -1));
             spinctrl.SetRange(10, 30);
             spinctrl.Value = 15;
 
             initialSpinValue = -5;
             spintext = new TextCtrl(panel, -1, "" ~ .toString(initialSpinValue),
-                                    new_Point(20, 160), new_Size(80, -1));
+                                    Point(20, 160), Size(80, -1));
             spinbutton = new SpinButton(panel, ID_SPIN, 
-                                        new_Point(103, 160), new_Size(80, -1));
+                                        Point(103, 160), Size(80, -1));
             spinbutton.SetRange(-40, 30);
             spinbutton.Value = initialSpinValue;
 
             btnProgress = new Button(panel, ID_BTNPROGRESS, 
                                      "&Show progress dialog",
-                                     new_Point(300, 160)); 
+                                     Point(300, 160)); 
 									 
 			// wxBitmapXXX sampel panel
 			panel = new Panel(notebook);
 			notebook.AddPage(panel, "wxBitmapXXX", false );
 			
 			Icon icon = ArtProvider.GetIcon( ArtID.wxART_INFORMATION );
-			new StaticBitmap( panel, -1, icon, new_Point(10, 10) );
+			new StaticBitmap( panel, -1, icon, Point(10, 10) );
 			
 			Bitmap bitmap = new Bitmap( 100, 100 );
 			MemoryDC dc = new MemoryDC();
@@ -527,21 +527,21 @@ import std.stdio;
 			dc.DrawText( "Bitmap", 30, 40 );
 			dc.SelectObject( Bitmap.wxNullBitmap );
 			
-			new BitmapButton( panel, ID_BITMAP_BTN, bitmap, new_Point( 100, 20 ) );
+			new BitmapButton( panel, ID_BITMAP_BTN, bitmap, Point( 100, 20 ) );
 			
 			Bitmap bmp1 = ArtProvider.GetBitmap( ArtID.wxART_INFORMATION );
 			Bitmap bmp2 = ArtProvider.GetBitmap( ArtID.wxART_WARNING );
 			Bitmap bmp3 = ArtProvider.GetBitmap( ArtID.wxART_QUESTION );
 			
-			BitmapButton bmpBtn = new BitmapButton( panel, -1, bmp1, new_Point( 30, 70 ) );
+//			BitmapButton bmpBtn = new BitmapButton( panel, -1, bmp1, Point( 30, 70 ) );
 			
-			bmpBtn.BitmapSelected = bmp2;
-			bmpBtn.BitmapFocus = bmp3;
+//			bmpBtn.BitmapSelected = bmp2;
+//			bmpBtn.BitmapFocus = bmp3;
 			
-			new ToggleButton( panel, ID_BUTTON_LABEL, "&Toggle label", new_Point( 250, 20 ) );
+			new ToggleButton( panel, ID_BUTTON_LABEL, "&Toggle label", Point( 250, 20 ) );
 			
 			m_label = new StaticText( panel, -1, "Label with some long text", 
-									new_Point ( 250, 60 ), wxDefaultSize, Alignment.wxALIGN_RIGHT );
+									Point ( 250, 60 ), wxDefaultSize, Alignment.wxALIGN_RIGHT );
 			m_label.ForegroundColour = Colour.wxBLUE;
 			
 			// wxSizer sampel panel

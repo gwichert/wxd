@@ -37,7 +37,7 @@ wxListbook* wxListbook_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxListbook_Create(wxListbook *self, wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, long style, dstr name)
+dbit wxListbook_Create(wxListbook *self, wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, long style, dstr name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -61,7 +61,7 @@ int wxListbook_GetSelection(wxListbook* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxListbook_SetPageText(wxListbook* self, size_t n, dstr strText)
+dbit wxListbook_SetPageText(wxListbook* self, size_t n, dstr strText)
 {
 	return self->SetPageText(n, wxString(strText.data, wxConvUTF8, strText.length))?1:0;
 }
@@ -85,7 +85,7 @@ int wxListbook_GetPageImage(wxListbook* self, size_t n)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxListbook_SetPageImage(wxListbook* self, size_t n, int imageId)
+dbit wxListbook_SetPageImage(wxListbook* self, size_t n, int imageId)
 {
 	return self->SetPageImage(n, imageId)?1:0;
 }
@@ -101,7 +101,7 @@ void wxListbook_CalcSizeFromPage(wxListbook* self, const wxSize* sizePage, wxSiz
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxListbook_InsertPage(wxListbook* self, size_t n, wxWindow* page, dstr text, bool bSelect, int imageId)
+dbit wxListbook_InsertPage(wxListbook* self, size_t n, wxWindow* page, dstr text, dbit bSelect, int imageId)
 {
 	return self->InsertPage(n, page, wxString(text.data, wxConvUTF8, text.length), bSelect, imageId)?1:0;
 }
@@ -125,7 +125,7 @@ void wxListbook_SetImageList(wxListbook* self, wxImageList* imageList)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxListbook_IsVertical(wxListbook* self)
+dbit wxListbook_IsVertical(wxListbook* self)
 {
 	return self->IsVertical()?1:0;
 }
@@ -173,7 +173,7 @@ void wxListbook_SetPageSize(wxListbook* self, const wxSize* size)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxListbook_DeletePage(wxListbook* self, int nPage)
+dbit wxListbook_DeletePage(wxListbook* self, int nPage)
 {
 	return self->DeletePage(nPage)?1:0;
 }
@@ -181,7 +181,7 @@ bool wxListbook_DeletePage(wxListbook* self, int nPage)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxListbook_RemovePage(wxListbook* self, int nPage)
+dbit wxListbook_RemovePage(wxListbook* self, int nPage)
 {
 	return self->RemovePage(nPage)?1:0;
 }
@@ -189,7 +189,7 @@ bool wxListbook_RemovePage(wxListbook* self, int nPage)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxListbook_DeleteAllPages(wxListbook* self)
+dbit wxListbook_DeleteAllPages(wxListbook* self)
 {
 	return self->DeleteAllPages()?1:0;
 }
@@ -197,7 +197,7 @@ bool wxListbook_DeleteAllPages(wxListbook* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxListbook_AddPage(wxListbook* self, wxWindow* page, dstr text, bool bselect, int imageId)
+dbit wxListbook_AddPage(wxListbook* self, wxWindow* page, dstr text, dbit bselect, int imageId)
 {
 	return self->AddPage(page, wxString(text.data, wxConvUTF8, text.length), bselect, imageId)?1:0;
 }
@@ -205,7 +205,7 @@ bool wxListbook_AddPage(wxListbook* self, wxWindow* page, dstr text, bool bselec
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxListbook_AdvanceSelection(wxListbook* self, bool forward)
+void wxListbook_AdvanceSelection(wxListbook* self, dbit forward)
 {
 	self->AdvanceSelection(forward);
 }
@@ -259,7 +259,7 @@ void wxListbookEvent_Allow(wxListbookEvent* self)
 }
 
 extern "C" WXEXPORT
-bool wxListbookEvent_IsAllowed(wxListbookEvent* self)
+dbit wxListbookEvent_IsAllowed(wxListbookEvent* self)
 {
     return self->IsAllowed()?1:0;
 }

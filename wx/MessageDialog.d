@@ -4,7 +4,7 @@
 // based on
 // wx.NET - MessageDialog.cs
 //
-// The wxMessageDialog wrapper class.
+/// The wxMessageDialog wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
@@ -31,6 +31,7 @@ import wx.Dialog;
 
 		//! \endcond
 
+	alias MessageDialog wxMessageDialog;
 	public class MessageDialog : Dialog
 	{
 		public const string wxMessageBoxCaptionStr = "Message";

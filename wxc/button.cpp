@@ -37,7 +37,7 @@ wxButton* wxButton_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxButton_Create(wxButton *self, wxWindow* parent, wxWindowID id, dstr label, const wxPoint* pos, const wxSize* size, long style, const wxValidator* validator, dstr name)
+dbit wxButton_Create(wxButton *self, wxWindow* parent, wxWindowID id, dstr label, const wxPoint* pos, const wxSize* size, long style, const wxValidator* validator, dstr name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;

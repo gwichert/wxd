@@ -4,7 +4,7 @@
 // based on
 // wx.NET - SplitterWindow.cs
 //
-// The wxSplitterWindow wrapper class.
+/// The wxSplitterWindow wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
@@ -25,15 +25,13 @@ import wx.Window;
 	
 	//---------------------------------------------------------------------
 
+		//! \cond EXTERN
 		extern (C) {
 		alias void function(SplitterWindow obj, int x, int y) Virtual_OnDoubleClickSash;
 		alias void function(SplitterWindow obj, IntPtr removed) Virtual_OnUnsplit;
 		alias bool function(SplitterWindow obj, int newSashPosition) Virtual_OnSashPositionChange;
 		}
 		
-		//---------------------------------------------------------------------
-	
-		//! \cond EXTERN
 		static extern (C) IntPtr wxSplitWnd_ctor(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
 		static extern (C) void   wxSplitWnd_RegisterVirtual(IntPtr self, SplitterWindow obj, Virtual_OnDoubleClickSash onDoubleClickSash, Virtual_OnUnsplit onUnsplit, Virtual_OnSashPositionChange onSashPositionChange);
 		static extern (C) void   wxSplitWnd_OnDoubleClickSash(IntPtr self, int x, int y);
@@ -59,6 +57,7 @@ import wx.Window;
 
 		//---------------------------------------------------------------------
 
+	alias SplitterWindow wxSplitterWindow;
 	public class SplitterWindow : Window
 	{
 		enum {

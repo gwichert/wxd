@@ -1,12 +1,17 @@
 # from samples
 
+# Note: if you want to use GDC instead of DMD, you need to
+#       uncomment the second line below ("gdmd" and "gdc")
+
 WX_CONFIG = wx-config
+PLATFORM = $(shell cat $(TOPDIR)/wxc/platform)
 
 CXX = $(shell $(WX_CONFIG) --cxx)
 DMD = dmd
+#DMD = gdmd
 
-CXXFLAGS = -O2 `$(WX_CONFIG) --cxxflags`
-DFLAGS+= -O -I$(TOPDIR)
+CXXFLAGS = -O2 -g `$(WX_CONFIG) --cxxflags`
+DFLAGS+= -version=__$(PLATFORM)__ -O -g -I$(TOPDIR)
 
 WXVERSION = `$(WX_CONFIG) --version`
 WXLIBS = `$(WX_CONFIG) --libs`
@@ -25,6 +30,7 @@ all: $(TARGET)
 $(TARGET) : $(OBJECTS)
 #	dmd -g -of$@ $(OBJECTS) $(TOPDIR)/libwxd.a $(TOPDIR)/libwxd.a $(LDFLAGS)
 	gcc -o $@ $(OBJECTS) -L$(TOPDIR) -lwxd -lwxc -lm -lphobos $(LDFLAGS)
+#	gdc -o $@ $(OBJECTS) -L$(TOPDIR) -lwxd -lwxc -lm -lpthread $(LDFLAGS)
 
 clean:
 	-rm *.o

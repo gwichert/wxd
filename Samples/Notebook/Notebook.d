@@ -65,7 +65,7 @@ alias std.string.find indexOf;
 		public this( string title, Point pos, Size size )
 		{
 			super( title, pos, size );
-			Size imageSize = new_Size( 32, 32 );
+			Size imageSize = Size( 32, 32 );
 			
 			m_imageList = new ImageList( imageSize.Width, imageSize.Height );
 			
@@ -246,8 +246,8 @@ alias std.string.find indexOf;
 		public void OnButtonAddPage( Object sender, Event e )
 		{
 			Panel panel = new Panel( m_notebook, -1 );
-			new Button( panel, -1, "First button", new_Point( 10, 10 ), new_Size( -1, -1 ) );
-			new Button( panel, -1, "Second button", new_Point( 50, 100 ), new_Size( -1, -1 ) );
+			new Button( panel, -1, "First button", Point( 10, 10 ), Size( -1, -1 ) );
+			new Button( panel, -1, "Second button", Point( 50, 100 ), Size( -1, -1 ) );
 			
 			m_notebook.AddPage( panel, "Added " ~ .toString( ++s_pageAdded), true, m_notebook.IconIndex );
 		}
@@ -423,7 +423,7 @@ alias std.string.find indexOf;
 		{
 			Panel panel = new Panel( this );
 			
-			new Button( panel, -1, "Button", new_Point( 10, 10 ), new_Size( -1, -1 ) );
+			new Button( panel, -1, "Button", Point( 10, 10 ), Size( -1, -1 ) );
 			
 			return panel;
 		}
@@ -447,7 +447,7 @@ alias std.string.find indexOf;
 			
 			panel.BackgroundColour = new Colour( "MAROON" );
 			
-			new StaticText( panel, -1, "This page has been inserted, not added.", new_Point( 10, 10 ) );
+			new StaticText( panel, -1, "This page has been inserted, not added.", Point( 10, 10 ) );
 			
 			return panel;
 		}
@@ -478,7 +478,7 @@ alias std.string.find indexOf;
 		{
 			Panel panel = new Panel( this );
 			
-			new StaticText( panel, -1, "This page intentionally left blank", new_Point( 10, 10 ) );
+			new StaticText( panel, -1, "This page intentionally left blank", Point( 10, 10 ) );
 			
 			return panel;
 		}
@@ -487,7 +487,7 @@ alias std.string.find indexOf;
 		{
 			Panel panel = new Panel( this );
 			
-			Button buttonBig = new Button( panel, -1, "Maximized button", new_Point( 0, 0 ), new_Size( 480, 360 ) );
+			Button buttonBig = new Button( panel, -1, "Maximized button", Point( 0, 0 ), Size( 480, 360 ) );
 			
 			BoxSizer sizerPanel = new BoxSizer( Orientation.wxVERTICAL );
 			sizerPanel.Add( buttonBig, 1, Stretch.wxEXPAND );

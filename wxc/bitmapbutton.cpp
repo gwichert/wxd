@@ -68,7 +68,7 @@ void wxBitmapButton_RegisterDisposable(_BitmapButton* self, Virtual_Dispose onDi
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxBitmapButton_Create(_BitmapButton* self, wxWindow *parent, wxWindowID id, const wxBitmap *bitmap, const wxPoint* pos, const wxSize* size, long style, const wxValidator* validator, dstr name)
+dbit wxBitmapButton_Create(_BitmapButton* self, wxWindow *parent, wxWindowID id, const wxBitmap *bitmap, const wxPoint* pos, const wxSize* size, long style, const wxValidator* validator, dstr name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -109,7 +109,7 @@ dstrret wxBitmapButton_GetLabel(_BitmapButton* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxBitmapButton_Enable(_BitmapButton* self, bool enable)
+dbit wxBitmapButton_Enable(_BitmapButton* self, dbit enable)
 {
 	return self->Enable(enable)?1:0;
 }

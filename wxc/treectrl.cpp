@@ -129,7 +129,7 @@ void wxTreeCtrl_AssignButtonsImageList(wxTreeCtrl* self, wxImageList* imageList)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTreeCtrl_Create(wxTreeCtrl* self, wxWindow* parent, int id, const wxPoint* pos,
+dbit wxTreeCtrl_Create(wxTreeCtrl* self, wxWindow* parent, int id, const wxPoint* pos,
                        const wxSize* size, int style, const wxValidator* val,
                        dstr name)
 {
@@ -303,7 +303,7 @@ wxTreeItemId* wxTreeCtrl_GetSelection(wxTreeCtrl* self)
 }
 
 extern "C" WXEXPORT
-bool wxTreeCtrl_IsSelected(wxTreeCtrl* self, wxTreeItemId* item)
+dbit wxTreeCtrl_IsSelected(wxTreeCtrl* self, wxTreeItemId* item)
 {
     return self->IsSelected(*item)?1:0;
 }
@@ -347,7 +347,7 @@ wxTreeItemData* wxTreeCtrl_GetItemData(wxTreeCtrl* self, wxTreeItemId* item)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxTreeCtrl_SetItemHasChildren(wxTreeCtrl* self, wxTreeItemId* item, bool has)
+void wxTreeCtrl_SetItemHasChildren(wxTreeCtrl* self, wxTreeItemId* item, dbit has)
 {
 	self->SetItemHasChildren(*item, has);
 }
@@ -516,7 +516,7 @@ void wxTreeCtrl_ScrollTo(wxTreeCtrl* self, wxTreeItemId* item)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxTreeCtrl_GetChildrenCount(wxTreeCtrl* self, wxTreeItemId* item, bool recursively)
+int wxTreeCtrl_GetChildrenCount(wxTreeCtrl* self, wxTreeItemId* item, dbit recursively)
 {
     return self->GetChildrenCount(*item, recursively);
 }
@@ -530,7 +530,7 @@ int wxTreeCtrl_GetCount(wxTreeCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTreeCtrl_IsVisible(wxTreeCtrl* self, wxTreeItemId* item)
+dbit wxTreeCtrl_IsVisible(wxTreeCtrl* self, wxTreeItemId* item)
 {
     return self->IsVisible(*item)?1:0;
 }
@@ -538,7 +538,7 @@ bool wxTreeCtrl_IsVisible(wxTreeCtrl* self, wxTreeItemId* item)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTreeCtrl_ItemHasChildren(wxTreeCtrl* self, wxTreeItemId* item)
+dbit wxTreeCtrl_ItemHasChildren(wxTreeCtrl* self, wxTreeItemId* item)
 {
     return self->ItemHasChildren(*item)?1:0;
 }
@@ -546,7 +546,7 @@ bool wxTreeCtrl_ItemHasChildren(wxTreeCtrl* self, wxTreeItemId* item)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTreeCtrl_IsExpanded(wxTreeCtrl* self, wxTreeItemId* item)
+dbit wxTreeCtrl_IsExpanded(wxTreeCtrl* self, wxTreeItemId* item)
 {
     return self->IsExpanded(*item)?1:0;
 }
@@ -586,7 +586,7 @@ wxFont* wxTreeCtrl_GetItemFont(wxTreeCtrl* self, wxTreeItemId* item)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxTreeCtrl_SetItemBold(wxTreeCtrl* self, wxTreeItemId* item, bool bold)
+void wxTreeCtrl_SetItemBold(wxTreeCtrl* self, wxTreeItemId* item, dbit bold)
 {
 	self->SetItemBold(*item, bold);
 }
@@ -626,7 +626,7 @@ void wxTreeCtrl_EditLabel(wxTreeCtrl* self, wxTreeItemId* item)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTreeCtrl_GetBoundingRect(wxTreeCtrl* self, wxTreeItemId* item, wxRect* rect, bool textOnly)
+dbit wxTreeCtrl_GetBoundingRect(wxTreeCtrl* self, wxTreeItemId* item, wxRect* rect, dbit textOnly)
 {
 	return self->GetBoundingRect(*item, *rect, textOnly);
 }
@@ -634,7 +634,7 @@ bool wxTreeCtrl_GetBoundingRect(wxTreeCtrl* self, wxTreeItemId* item, wxRect* re
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTreeCtrl_IsBold(wxTreeCtrl* self, wxTreeItemId* item)
+dbit wxTreeCtrl_IsBold(wxTreeCtrl* self, wxTreeItemId* item)
 {
 	return self->IsBold(*item)?1:0;
 }
@@ -644,7 +644,11 @@ bool wxTreeCtrl_IsBold(wxTreeCtrl* self, wxTreeItemId* item)
 extern "C" WXEXPORT
 void wxTreeCtrl_SetItemSelectedImage(wxTreeCtrl* self, wxTreeItemId* item, int selImage)
 {
+#if WXWIN_COMPATIBILITY_2_4
 	self->SetItemSelectedImage(*item, selImage);
+#else
+	self->SetItemImage(*item, selImage);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -714,7 +718,7 @@ void wxTreeItemId_RegisterDisposable(_TreeItemId* self, Virtual_Dispose onDispos
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTreeItemId_Equal(wxTreeItemId* item1, wxTreeItemId* item2)
+dbit wxTreeItemId_Equal(wxTreeItemId* item1, wxTreeItemId* item2)
 {
 	return (item1 == item2)?1:0;
 }
@@ -722,7 +726,7 @@ bool wxTreeItemId_Equal(wxTreeItemId* item1, wxTreeItemId* item2)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTreeItemId_IsOk(wxTreeItemId* self)
+dbit wxTreeItemId_IsOk(wxTreeItemId* self)
 {
 	return self->IsOk()?1:0;
 }
@@ -827,7 +831,7 @@ void wxTreeEvent_SetLabel(wxTreeEvent* self, dstr label)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTreeEvent_IsEditCancelled(wxTreeEvent* self)
+dbit wxTreeEvent_IsEditCancelled(wxTreeEvent* self)
 {
     return self->IsEditCancelled()?1:0;
 }
@@ -835,7 +839,7 @@ bool wxTreeEvent_IsEditCancelled(wxTreeEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxTreeEvent_SetEditCanceled(wxTreeEvent* self, bool editCancelled)
+void wxTreeEvent_SetEditCanceled(wxTreeEvent* self, dbit editCancelled)
 {
     self->SetEditCanceled(editCancelled);
 }
@@ -855,7 +859,7 @@ void  wxTreeEvent_Allow( wxTreeEvent* self)
 }
 
 extern "C" WXEXPORT
-bool  wxTreeEvent_IsAllowed( wxTreeEvent* self)
+dbit  wxTreeEvent_IsAllowed( wxTreeEvent* self)
 {
     return self->IsAllowed()?1:0;
 }
@@ -994,7 +998,7 @@ void wxTreeItemAttr_SetFont(wxTreeItemAttr* self, wxFont* font)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTreeItemAttr_HasTextColour(wxTreeItemAttr* self)
+dbit wxTreeItemAttr_HasTextColour(wxTreeItemAttr* self)
 {
 	return self->HasTextColour()?1:0;
 }
@@ -1002,7 +1006,7 @@ bool wxTreeItemAttr_HasTextColour(wxTreeItemAttr* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTreeItemAttr_HasBackgroundColour(wxTreeItemAttr* self)
+dbit wxTreeItemAttr_HasBackgroundColour(wxTreeItemAttr* self)
 {
 	return self->HasBackgroundColour()?1:0;
 }
@@ -1010,7 +1014,7 @@ bool wxTreeItemAttr_HasBackgroundColour(wxTreeItemAttr* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTreeItemAttr_HasFont(wxTreeItemAttr* self)
+dbit wxTreeItemAttr_HasFont(wxTreeItemAttr* self)
 {
 	return self->HasFont()?1:0;
 }

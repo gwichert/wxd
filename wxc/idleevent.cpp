@@ -27,7 +27,7 @@ wxIdleEvent* wxIdleEvent_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxIdleEvent_RequestMore(wxIdleEvent* self, bool needMore)
+void wxIdleEvent_RequestMore(wxIdleEvent* self, dbit needMore)
 {
 	self->RequestMore(needMore);
 }
@@ -35,7 +35,7 @@ void wxIdleEvent_RequestMore(wxIdleEvent* self, bool needMore)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxIdleEvent_MoreRequested(wxIdleEvent* self)
+dbit wxIdleEvent_MoreRequested(wxIdleEvent* self)
 {
 	return self->MoreRequested()?1:0;
 }
@@ -59,7 +59,7 @@ wxIdleMode wxIdleEvent_GetMode()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxIdleEvent_CanSend(wxWindow* win)
+dbit wxIdleEvent_CanSend(wxWindow* win)
 {
 	return wxIdleEvent::CanSend(win)?1:0;
 }

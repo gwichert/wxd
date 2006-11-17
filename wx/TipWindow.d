@@ -3,7 +3,9 @@
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - tipwin.h
-// 
+//
+/// The wxTipWindow wrapper class
+//
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
@@ -23,6 +25,7 @@ import wx.Window;
 
         //-----------------------------------------------------------------------------
 
+    alias TipWindow wxTipWindow;
     public class TipWindow : Window
     {
         public this(IntPtr wxobj)

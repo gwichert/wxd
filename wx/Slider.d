@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Slider.cs
 //
-// The wxSlider wrapper class.
+/// The wxSlider wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -42,6 +42,7 @@ import wx.Control;
 	
 		//---------------------------------------------------------------------
 		
+    alias Slider wxSlider;
     public class Slider : Control
     {
 		enum {

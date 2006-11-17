@@ -115,6 +115,7 @@ OBJECTS = \
 	sizer.obj \
 	sizeritem.obj \
 	slider.obj \
+	sound.obj \
 	spinbutton.obj \
 	spinctrl.obj \
 	splashscreen.obj \
@@ -149,13 +150,14 @@ OBJECTS = \
 	wxdatetime.obj \
 	wxstring.obj \
 	wxversion.obj \
+	wxplatform.obj \
 	xmlresource.obj \
 	numdialog.obj
 	
 #	notifyevent.obj
 	
 
-all:  $(LIBTARGET) 
+all:  platform $(LIBTARGET)
 
 include $(WXDIR)/build/msw/config.dmc
 CXX = dmc
@@ -171,6 +173,8 @@ CXXFLAGS = -g -o+none -D__WXMSW__ -D__WXDEBUG__ -I$(WXDIR)\include \
 $(LIBTARGET) : $(OBJECTS)
 	lib -p512 -c -n $@ $(OBJECTS)
 
+platform:
+	echo WXMSW > $@
 
 .cpp.obj:
 	$(CXX) -mn -c $(CXXFLAGS) $< -o$@

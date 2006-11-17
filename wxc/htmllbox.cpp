@@ -183,7 +183,7 @@ void wxHtmlListBox_RegisterVirtual(_HtmlListBox* self, dobj obj,
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxHtmlListBox_Create(_HtmlListBox* self, wxWindow* parent, wxWindowID id, wxPoint* pos, wxSize* size, int style, dstr name)
+dbit wxHtmlListBox_Create(_HtmlListBox* self, wxWindow* parent, wxWindowID id, wxPoint* pos, wxSize* size, int style, dstr name)
 {
 	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
 }

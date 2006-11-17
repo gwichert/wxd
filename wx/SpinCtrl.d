@@ -4,7 +4,7 @@
 // based on
 // wx.NET - SpinCtrl.cs
 //
-// The wxSpinCtrl wrapper class.
+/// The wxSpinCtrl wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -30,6 +30,7 @@ import wx.Control;
 	
 		//---------------------------------------------------------------------
 		
+	alias SpinCtrl wxSpinCtrl;
 	public class SpinCtrl : Control 
 	{
 		// These are duplicated in SpinButton.cs (for easier access)

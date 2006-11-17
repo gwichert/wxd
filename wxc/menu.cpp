@@ -219,7 +219,7 @@ wxMenuItem* wxMenuBase_Remove2(wxMenuBase* self, wxMenuItem* item)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxMenuBase_Delete(wxMenuBase* self, int itemid)
+dbit wxMenuBase_Delete(wxMenuBase* self, int itemid)
 {
 	return self->Delete(itemid)?1:0;
 }
@@ -227,7 +227,7 @@ bool wxMenuBase_Delete(wxMenuBase* self, int itemid)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxMenuBase_Delete2(wxMenuBase* self, wxMenuItem* item)
+dbit wxMenuBase_Delete2(wxMenuBase* self, wxMenuItem* item)
 {
 	return self->Delete(item)?1:0;
 }
@@ -235,7 +235,7 @@ bool wxMenuBase_Delete2(wxMenuBase* self, wxMenuItem* item)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxMenuBase_Destroy(wxMenuBase* self, int itemid)
+dbit wxMenuBase_Destroy(wxMenuBase* self, int itemid)
 {
 	return self->Destroy(itemid)?1:0;
 }
@@ -243,7 +243,7 @@ bool wxMenuBase_Destroy(wxMenuBase* self, int itemid)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxMenuBase_Destroy2(wxMenuBase* self, wxMenuItem* item)
+dbit wxMenuBase_Destroy2(wxMenuBase* self, wxMenuItem* item)
 {
 	return self->Destroy(item)?1:0;
 }
@@ -291,7 +291,7 @@ wxMenuItem* wxMenuBase_FindItemByPosition(wxMenuBase* self, size_t position)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxMenuBase_Enable(wxMenuBase* self, int itemid, bool enable)
+void wxMenuBase_Enable(wxMenuBase* self, int itemid, dbit enable)
 {
 	self->Enable(itemid, enable);
 }
@@ -299,7 +299,7 @@ void wxMenuBase_Enable(wxMenuBase* self, int itemid, bool enable)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxMenuBase_IsEnabled(wxMenuBase* self, int itemid)
+dbit wxMenuBase_IsEnabled(wxMenuBase* self, int itemid)
 {
 	return self->IsEnabled(itemid)?1:0;
 }
@@ -307,7 +307,7 @@ bool wxMenuBase_IsEnabled(wxMenuBase* self, int itemid)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxMenuBase_Check(wxMenuBase* self, int itemid, bool check)
+void wxMenuBase_Check(wxMenuBase* self, int itemid, dbit check)
 {
     self->Check(itemid, check);
 }
@@ -315,7 +315,7 @@ void wxMenuBase_Check(wxMenuBase* self, int itemid, bool check)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxMenuBase_IsChecked(wxMenuBase* self, int itemid)
+dbit wxMenuBase_IsChecked(wxMenuBase* self, int itemid)
 {
 	return self->IsChecked(itemid)?1:0;
 }
@@ -427,7 +427,7 @@ wxMenuBar* wxMenuBase_GetMenuBar(wxMenuBase* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxMenuBase_IsAttached(wxMenuBase* self)
+dbit wxMenuBase_IsAttached(wxMenuBase* self)
 {
 	return self->IsAttached()?1:0;
 }
@@ -467,7 +467,7 @@ wxMenuItem* wxMenuBase_FindChildItem2(wxMenuBase* self, int itemid)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxMenuBase_SendEvent(wxMenuBase* self, int itemid, int checked)
+dbit wxMenuBase_SendEvent(wxMenuBase* self, int itemid, int checked)
 {
 	return self->SendEvent(itemid, checked)?1:0;
 }

@@ -39,7 +39,7 @@ wxFont* wxFont_ctorDef()
 }
 
 extern "C" WXEXPORT
-wxFont* wxFont_ctor(int pointSize, int family, int style, int weight, const bool underline, dstr faceName, wxFontEncoding encoding)
+wxFont* wxFont_ctor(int pointSize, int family, int style, int weight, const dbit underline, dstr faceName, wxFontEncoding encoding)
 {
 	return new wxFont(pointSize, family, style, weight, underline, wxString(faceName.data, wxConvUTF8, faceName.length), encoding);
 }
@@ -55,7 +55,7 @@ void wxFont_dtor(wxFont* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxFont_Ok(wxFont* self)
+dbit wxFont_Ok(wxFont* self)
 {
 	return self->Ok();
 }
@@ -95,7 +95,7 @@ int wxFont_GetWeight(wxFont* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxFont_GetUnderlined(wxFont* self)
+dbit wxFont_GetUnderlined(wxFont* self)
 {
 	return self->GetUnderlined();
 }
@@ -127,7 +127,7 @@ const wxNativeFontInfo* wxFont_GetNativeFontInfo(wxFont* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxFont_IsFixedWidth(wxFont* self)
+dbit wxFont_IsFixedWidth(wxFont* self)
 {
 	return self->IsFixedWidth();
 }
@@ -191,7 +191,7 @@ void wxFont_SetFaceName(wxFont* self, dstr faceName)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxFont_SetUnderlined(wxFont* self, bool underlined)
+void wxFont_SetUnderlined(wxFont* self, dbit underlined)
 {
 	self->SetUnderlined(underlined);
 }
@@ -239,7 +239,7 @@ dstrret wxFont_GetWeightString(wxFont* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxFont_SetNoAntiAliasing(wxFont* self, bool no)
+void wxFont_SetNoAntiAliasing(wxFont* self, dbit no)
 {
 	self->SetNoAntiAliasing(no);
 }
@@ -247,7 +247,7 @@ void wxFont_SetNoAntiAliasing(wxFont* self, bool no)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxFont_GetNoAntiAliasing(wxFont* self)
+dbit wxFont_GetNoAntiAliasing(wxFont* self)
 {
 	return self->GetNoAntiAliasing();
 }

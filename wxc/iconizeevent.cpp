@@ -19,13 +19,13 @@
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxIconizeEvent* wxIconizeEvent_ctor(int winid, bool iconized)
+wxIconizeEvent* wxIconizeEvent_ctor(int winid, dbit iconized)
 {
     return new wxIconizeEvent(winid,iconized);
 }
 
 extern "C" WXEXPORT
-bool wxIconizeEvent_Iconized(wxIconizeEvent* self)
+dbit wxIconizeEvent_Iconized(wxIconizeEvent* self)
 {
 	return self->Iconized()?1:0;
 }

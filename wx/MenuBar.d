@@ -4,7 +4,7 @@
 // based on
 // wx.NET - MenuBar.cs
 //
-// The wxMenuBar wrapper class.
+/// The wxMenuBar wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
@@ -53,6 +53,7 @@ import wx.Menu;
 		static extern (C) void   wxMenuBar_SetLabelTop(IntPtr self, int pos, string label);
 		//! \endcond
 
+	alias MenuBar wxMenuBar;
 	public class MenuBar : EvtHandler
 	{
 		//---------------------------------------------------------------------

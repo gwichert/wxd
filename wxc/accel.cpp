@@ -123,7 +123,7 @@ wxAcceleratorTable* wxAcceleratorTable_ctor2(int n, wxAcceleratorEntry* entries)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxAcceleratorTable_Ok(wxAcceleratorTable* self)
+dbit wxAcceleratorTable_Ok(wxAcceleratorTable* self)
 {
 	return self->Ok()?1:0;
 }

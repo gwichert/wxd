@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Window.cs
 //
-// The wxWindow wrapper class.
+/// The wxWindow wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
@@ -87,6 +87,7 @@ import wx.ToolTip;
 		
 		//---------------------------------------------------------------------
 
+	alias VisualAttributes wxVisualAttributes;
 	public class VisualAttributes : wxObject
 	{
 		public this(IntPtr wxobj)
@@ -317,6 +318,7 @@ import wx.ToolTip;
 
 		//---------------------------------------------------------------------
 
+	alias Window wxWindow;
 	public class Window : EvtHandler
 	{
 		enum {

@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Wizard.cs
 //
-// The wxWizard wrapper class.
+/// The wxWizard wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 379, Inc.
@@ -28,6 +28,7 @@ import wx.WizardPage;
 
 		//---------------------------------------------------------------------
 		
+	alias Wizard wxWizard;
 	public class Wizard : Dialog
 	{
 		public this(IntPtr wxobj) 
@@ -64,6 +65,7 @@ import wx.WizardPage;
 		//! \endcond
 
 /+
+	alias WizardEvent wxWizardEvent;
 	public class WizardEvent : NotifyEvent
 	{
 		static EventType wxEVT_WIZARD_PAGE_CHANGED;

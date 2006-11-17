@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Button.cs
 //
-// The wxButton wrapper class.
+/// The wxButton wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -32,6 +32,7 @@ import wx.Bitmap;
 
 		//---------------------------------------------------------------------
 
+	alias Button wxButton;
 	public class Button : Control
 	{
 		public const int wxBU_LEFT          =  0x0040;

@@ -1,6 +1,9 @@
 //-----------------------------------------------------------------------------
 // wxD - NumberDialog.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
+//
+/// The wxNumberEntryDialog wrapper class
+//
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
@@ -19,6 +22,7 @@ import wx.Dialog;
 
         //-----------------------------------------------------------------------------
 
+    alias NumberEntryDialog wxNumberEntryDialog;
     public class NumberEntryDialog : Dialog
     {
         public const int wxNumberEntryDialogStyle = (Dialog.wxOK | Dialog.wxCANCEL | Dialog.wxCENTRE );

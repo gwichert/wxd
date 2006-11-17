@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Utils.cs
 //
-// Common Utils wrapper classes.
+/// Common Utils wrapper classes.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2003 Alexander Olk
@@ -74,6 +74,7 @@ import wx.Window;
 			
 	//---------------------------------------------------------------------
 
+	alias BusyCursor wxBusyCursor;
 	public class BusyCursor : IDisposable
 	{
 		private bool disposed = false;
@@ -103,6 +104,7 @@ import wx.Window;
 		static extern (C) void wxWindowDisabler_dtor(IntPtr self);
 		//! \endcond
 		
+	alias WindowDisabler wxWindowDisabler;
 	public class WindowDisabler : wxObject
 	{
 		//---------------------------------------------------------------------
@@ -136,6 +138,7 @@ import wx.Window;
 		static extern (C) void   wxBusyInfo_dtor(IntPtr self);
 		//! \endcond
 		
+	alias BusyInfo wxBusyInfo;
 	public class BusyInfo : wxObject
 	{
 		//---------------------------------------------------------------------

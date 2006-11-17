@@ -63,7 +63,7 @@ void wxScrollWnd_PrepareDC(wxScrolledWindow* self, wxDC* dc)
 
 extern "C" WXEXPORT
 void wxScrollWnd_SetScrollbars(wxScrolledWindow* self, int pixelsPerUnitX, int pixelsPerUnitY,
-							   int noUnitsX, int noUnitsY, int xPos, int yPos, bool noRefresh)
+							   int noUnitsX, int noUnitsY, int xPos, int yPos, dbit noRefresh)
 {
 	self->SetScrollbars(pixelsPerUnitX, pixelsPerUnitY, noUnitsX, noUnitsY, xPos, yPos, noRefresh);
 }

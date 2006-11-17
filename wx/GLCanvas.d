@@ -2,7 +2,7 @@
 // wxD - GLCanvas.d
 // (C) 2006 afb <afb@users.sourceforge.net>
 // 
-// The wxGLCanvas wrapper classes.
+/// The wxGLCanvas wrapper classes. Optional, requires OpenGL.
 //
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
@@ -54,6 +54,7 @@ import wx.Palette;
 
 		//-----------------------------------------------------------------------------
 
+	alias GLContext wxGLContext;
 	public class GLContext : wxObject
 	{
 		public this(IntPtr wxobj)
@@ -103,6 +104,7 @@ import wx.Palette;
 		
 		//-----------------------------------------------------------------------------
 
+	alias GLCanvas wxGLCanvas;
 	public class GLCanvas : Window
 	{
 		public static Palette wxNullPalette = null;

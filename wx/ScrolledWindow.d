@@ -4,7 +4,7 @@
 // based on
 // wx.NET - ScrolledWindow.cs
 //
-// The wxScrolledWindow wrapper class.
+/// The wxScrolledWindow wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
@@ -34,6 +34,7 @@ import wx.Panel;
 
 		//---------------------------------------------------------------------
 
+	alias ScrolledWindow wxScrolledWindow;
 	public class ScrolledWindow : Panel
 	{
 		enum {

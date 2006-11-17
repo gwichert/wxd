@@ -153,4 +153,5 @@ import wx.wxDateTime;
 import wx.wxObject;
 import wx.wxString;
 import wx.wxVersion;
+import wx.wxPlatform;
 import wx.NumberDialog;

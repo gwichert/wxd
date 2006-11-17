@@ -4,7 +4,7 @@
 // based on
 // wx.NET - ToggleButton.cs
 //
-// The wxToggleToggleButton wrapper class.
+/// The wxToggleToggleButton wrapper class.
 //
 // Written by Florian Fankhauser (f.fankhauser@gmx.at)
 // (C) 2003 Florian Fankhauser
@@ -28,6 +28,7 @@ import wx.Control;
 
 		//---------------------------------------------------------------------
 		
+	alias ToggleButton wxToggleButton;
 	public class ToggleButton : Control
 	{
 		public this(IntPtr wxobj) 

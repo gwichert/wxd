@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Panel.cs
 //
-// The wxPanel wrapper class.
+/// The wxPanel wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -27,6 +27,7 @@ import wx.Button;
 		static extern (C) void wxPanel_SetDefaultItem(IntPtr self, IntPtr btn);
 		//! \endcond
 
+	alias Panel wxPanel;
 	public class Panel : Window
 	{
 		//---------------------------------------------------------------------

@@ -37,7 +37,7 @@ wxCheckBox* wxCheckBox_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxCheckBox_Create(wxCheckBox* self, wxWindow* parent, int id,
+dbit wxCheckBox_Create(wxCheckBox* self, wxWindow* parent, int id,
                        dstr label, const wxPoint* pos,
                        const wxSize* size, int style, const wxValidator* val,
                        dstr name)
@@ -62,7 +62,7 @@ bool wxCheckBox_Create(wxCheckBox* self, wxWindow* parent, int id,
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxCheckBox_GetValue(wxCheckBox* self)
+dbit wxCheckBox_GetValue(wxCheckBox* self)
 {
     return self->GetValue()?1:0;
 }
@@ -70,7 +70,7 @@ bool wxCheckBox_GetValue(wxCheckBox* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxCheckBox_SetValue(wxCheckBox* self, bool state)
+void wxCheckBox_SetValue(wxCheckBox* self, dbit state)
 {
     self->SetValue(state);
 }
@@ -78,7 +78,7 @@ void wxCheckBox_SetValue(wxCheckBox* self, bool state)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxCheckBox_IsChecked(wxCheckBox* self)
+dbit wxCheckBox_IsChecked(wxCheckBox* self)
 {
     return self->IsChecked()?1:0;
 }
@@ -102,7 +102,7 @@ void wxCheckBox_Set3StateValue(wxCheckBox* self, wxCheckBoxState state)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxCheckBox_Is3State(wxCheckBox* self)
+dbit wxCheckBox_Is3State(wxCheckBox* self)
 {
 	return self->Is3State()?1:0;
 }
@@ -110,7 +110,7 @@ bool wxCheckBox_Is3State(wxCheckBox* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxCheckBox_Is3rdStateAllowedForUser(wxCheckBox* self)
+dbit wxCheckBox_Is3rdStateAllowedForUser(wxCheckBox* self)
 {
 	return self->Is3rdStateAllowedForUser()?1:0;
 }

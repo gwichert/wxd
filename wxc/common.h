@@ -6,6 +6,9 @@
 #include <wx/string.h>
 
 
+// Can't use "bool", since the size varies...
+typedef char            dbit;  // D bit/bool
+
 typedef struct dstr     dstr;  // D string
 typedef void*           dobj;  // D object
 

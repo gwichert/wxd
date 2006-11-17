@@ -4,7 +4,7 @@
 // based on
 // wx.NET - MouseEvent.cs
 //
-// The wxMouseEvent wrapper class.
+/// The wxMouseEvent wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -59,6 +59,7 @@ import wx.DC;
 
 		//----------------------------------------------------------------------------
 
+    alias MouseEvent wxMouseEvent;
     public class MouseEvent : Event
     {
 		public this(IntPtr wxobj) 

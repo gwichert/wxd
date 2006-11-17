@@ -3,8 +3,8 @@
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - LayoutWin.cs
-// 
-// The wxSashLayoutWindow proxy interface.
+//
+/// The wxSashLayoutWindow proxy interface.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2004 by Alexander Olk
@@ -51,6 +51,7 @@ import wx.MDI;
 		
 		//-----------------------------------------------------------------------------
 	
+	alias SashLayoutWindow wxSashLayoutWindow;
 	public class SashLayoutWindow : SashWindow
 	{
 		public this(IntPtr wxobj)
@@ -107,6 +108,7 @@ import wx.MDI;
 		
 		//-----------------------------------------------------------------------------
 		
+	alias LayoutAlgorithm wxLayoutAlgorithm;
 	public class LayoutAlgorithm : wxObject
 	{
 		public this(IntPtr wxobj)
@@ -172,6 +174,7 @@ import wx.MDI;
 	
 		//-----------------------------------------------------------------------------
 		
+	alias QueryLayoutInfoEvent wxQueryLayoutInfoEvent;
 	public class QueryLayoutInfoEvent : Event
 	{
 		public this(IntPtr wxobj)
@@ -234,6 +237,7 @@ import wx.MDI;
 		
 		//-----------------------------------------------------------------------------
 	
+	alias CalculateLayoutEvent wxCalculateLayoutEvent;
 	public class CalculateLayoutEvent : Event
 	{
 		public this(IntPtr wxobj)

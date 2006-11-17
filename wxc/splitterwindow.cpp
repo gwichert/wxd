@@ -20,7 +20,7 @@
 
 typedef void (CALLBACK* Virtual_OnDoubleClickSash) (dobj obj, int, int);
 typedef void (CALLBACK* Virtual_OnUnsplit) (dobj obj, wxWindow*);
-typedef bool (CALLBACK* Virtual_OnSashPositionChange) (dobj obj, int);
+typedef dbit (CALLBACK* Virtual_OnSashPositionChange) (dobj obj, int);
 
 //-----------------------------------------------------------------------------
 
@@ -107,7 +107,7 @@ void wxSplitWnd_OnUnsplit(_SplitterWindow* self, wxWindow* removed)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxSplitWnd_OnSashPositionChange(_SplitterWindow* self, int newSashPosition)
+dbit wxSplitWnd_OnSashPositionChange(_SplitterWindow* self, int newSashPosition)
 {
 	return self->wxSplitterWindow::OnSashPositionChange(newSashPosition)?1:0;
 }
@@ -123,7 +123,7 @@ int wxSplitWnd_GetSplitMode(_SplitterWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxSplitWnd_IsSplit(_SplitterWindow* self)
+dbit wxSplitWnd_IsSplit(_SplitterWindow* self)
 {
 	return self->IsSplit()?1:0;
 }
@@ -131,7 +131,7 @@ bool wxSplitWnd_IsSplit(_SplitterWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxSplitWnd_SplitHorizontally(_SplitterWindow* self, wxWindow* window1, wxWindow* window2, int sashPosition)
+dbit wxSplitWnd_SplitHorizontally(_SplitterWindow* self, wxWindow* window1, wxWindow* window2, int sashPosition)
 {
 	return self->SplitHorizontally(window1, window2, sashPosition)?1:0;
 }
@@ -139,7 +139,7 @@ bool wxSplitWnd_SplitHorizontally(_SplitterWindow* self, wxWindow* window1, wxWi
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxSplitWnd_SplitVertically(_SplitterWindow* self, wxWindow* window1, wxWindow* window2, int sashPosition)
+dbit wxSplitWnd_SplitVertically(_SplitterWindow* self, wxWindow* window1, wxWindow* window2, int sashPosition)
 {
 	return self->SplitVertically(window1, window2, sashPosition)?1:0;
 }
@@ -147,7 +147,7 @@ bool wxSplitWnd_SplitVertically(_SplitterWindow* self, wxWindow* window1, wxWind
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxSplitWnd_Unsplit(_SplitterWindow* self, wxWindow* toRemove)
+dbit wxSplitWnd_Unsplit(_SplitterWindow* self, wxWindow* toRemove)
 {
 	return self->Unsplit(toRemove)?1:0;
 }
@@ -155,7 +155,7 @@ bool wxSplitWnd_Unsplit(_SplitterWindow* self, wxWindow* toRemove)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxSplitWnd_SetSashPosition(_SplitterWindow* self, int position, bool redraw)
+void wxSplitWnd_SetSashPosition(_SplitterWindow* self, int position, dbit redraw)
 {
     self->SetSashPosition(position, redraw);
 }
@@ -203,7 +203,7 @@ void wxSplitWnd_Initialize(_SplitterWindow* self, wxWindow* window)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxSplitWnd_ReplaceWindow(_SplitterWindow* self, wxWindow* winOld, wxWindow* winNew)
+dbit wxSplitWnd_ReplaceWindow(_SplitterWindow* self, wxWindow* winOld, wxWindow* winNew)
 {
 	return self->ReplaceWindow(winOld, winNew)?1:0;
 }

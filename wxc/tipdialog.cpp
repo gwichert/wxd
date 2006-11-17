@@ -46,7 +46,7 @@ wxTipProvider* wxCreateFileTipProvider_func(dstr filename, size_t currentTip)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxShowTip_func(wxWindow* parent, wxTipProvider *tipProvider, bool showAtStartup)
+dbit wxShowTip_func(wxWindow* parent, wxTipProvider *tipProvider, dbit showAtStartup)
 {
 	return wxShowTip(parent, tipProvider, showAtStartup)?1:0;
 }

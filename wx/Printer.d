@@ -4,7 +4,7 @@
 // based on
 // wx.NET - TextCtrl.cs
 //
-// The wxTextCtrl wrapper class.
+/// The wxTextCtrl wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -39,6 +39,7 @@ import wx.PrintData;
 
         //-----------------------------------------------------------------------------
 
+    alias Printer wxPrinter;
     public class Printer : wxObject
     {
         private this(IntPtr wxobj) 
@@ -97,6 +98,10 @@ import wx.PrintData;
         }
     }
 
+
+        //-----------------------------------------------------------------------------
+
+		//! \cond EXTERN
 	extern (C) {
         alias void function(Printout obj) Virtual_NoParams;
         alias bool function(Printout obj, int i) Virtual_ParamsInt;
@@ -104,9 +109,6 @@ import wx.PrintData;
         alias void function(Printout obj, inout int minPage, inout int maxPage, inout int pageFrom, inout int pageTo) Virtual_GetPageInfo;
 	}
 
-        //-----------------------------------------------------------------------------
-
-		//! \cond EXTERN
         static extern (C) IntPtr wxPrintout_ctor(string title);
         static extern (C) bool   wxPrintout_OnBeginDocument(IntPtr self, int startPage, int endPage);
         static extern (C) void   wxPrintout_OnEndDocument(IntPtr self);

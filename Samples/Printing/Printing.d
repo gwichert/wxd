@@ -143,7 +143,7 @@ import wx.wx;
 
             PreviewFrame frame = 
                 new PreviewFrame(preview, this, "Demo Print Preview", 
-                                 new_Point(100, 100), new_Size(600, 650));
+                                 Point(100, 100), Size(600, 650));
 
             frame.Centre();
             frame.Initialize();
@@ -266,7 +266,7 @@ import wx.wx;
 		public override bool OnInit()
 		{
 			MyFrame frame = new MyFrame("wxD Printing Demo", 
-                                        new_Point(50,50), new_Size(450,340));
+                                        Point(50,50), Size(450,340));
 			frame.Show(true);
 
 			return true;

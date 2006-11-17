@@ -37,7 +37,7 @@ wxPrintPreview* wxPrintPreview_ctorPrintData(wxPrintout* printout, wxPrintout* p
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxPrintPreview_SetCurrentPage(wxPrintPreview* self, int pageNum)
+dbit wxPrintPreview_SetCurrentPage(wxPrintPreview* self, int pageNum)
 {
     return self->SetCurrentPage(pageNum)?1:0;
 }
@@ -109,7 +109,7 @@ wxWindow* wxPrintPreview_GetCanvas(wxPrintPreview* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxPrintPreview_PaintPage(wxPrintPreview* self, wxPreviewCanvas* canvas, wxDC* dc)
+dbit wxPrintPreview_PaintPage(wxPrintPreview* self, wxPreviewCanvas* canvas, wxDC* dc)
 {
     return self->PaintPage(canvas, *dc)?1:0;
 }
@@ -117,7 +117,7 @@ bool wxPrintPreview_PaintPage(wxPrintPreview* self, wxPreviewCanvas* canvas, wxD
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxPrintPreview_DrawBlankPage(wxPrintPreview* self, wxPreviewCanvas* canvas, wxDC* dc)
+dbit wxPrintPreview_DrawBlankPage(wxPrintPreview* self, wxPreviewCanvas* canvas, wxDC* dc)
 {
     return self->DrawBlankPage(canvas, *dc)?1:0;
 }
@@ -125,7 +125,7 @@ bool wxPrintPreview_DrawBlankPage(wxPrintPreview* self, wxPreviewCanvas* canvas,
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxPrintPreview_RenderPage(wxPrintPreview* self, int pageNum)
+dbit wxPrintPreview_RenderPage(wxPrintPreview* self, int pageNum)
 {
     return self->RenderPage(pageNum)?1:0;
 }
@@ -173,7 +173,7 @@ int wxPrintPreview_GetMinPage(wxPrintPreview* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxPrintPreview_Ok(wxPrintPreview* self)
+dbit wxPrintPreview_Ok(wxPrintPreview* self)
 {
     return self->Ok()?1:0;
 }
@@ -181,7 +181,7 @@ bool wxPrintPreview_Ok(wxPrintPreview* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrintPreview_SetOk(wxPrintPreview* self, bool ok)
+void wxPrintPreview_SetOk(wxPrintPreview* self, dbit ok)
 {
     self->SetOk(ok);
 }
@@ -189,7 +189,7 @@ void wxPrintPreview_SetOk(wxPrintPreview* self, bool ok)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxPrintPreview_Print(wxPrintPreview* self, bool interactive)
+dbit wxPrintPreview_Print(wxPrintPreview* self, dbit interactive)
 {
     return self->Print(interactive)?1:0;
 }

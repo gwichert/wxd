@@ -4,7 +4,7 @@
 // based on
 // wx.NET - SystemSettings.cs
 //
-// The wxSystemSettings wrapper class.
+/// The wxSystemSettings wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -142,6 +142,7 @@ import wx.Font;
 
         //-----------------------------------------------------------------------------
 
+    alias SystemSettings wxSystemSettings;
     public class SystemSettings
     {
         public static Colour GetColour(SystemColour index)

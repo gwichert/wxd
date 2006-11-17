@@ -93,7 +93,7 @@ unsigned char wxColour_Green(wxColour* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxColour_Ok(wxColour* self)
+dbit wxColour_Ok(wxColour* self)
 {
 	return self->Ok()?1:0;
 }

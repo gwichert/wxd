@@ -29,7 +29,7 @@ import CompareModesDialog;
 		public override	bool OnInit()
 		{
 			MyFrame	frame =	new	MyFrame("Display Windows Sample", 
-				new_Point(-1, -1), new_Size(-1, -1));
+				Point(-1, -1), Size(-1, -1));
 			frame.Show(true);
 			return true;
 		}
@@ -184,7 +184,7 @@ import CompareModesDialog;
 
 		public void	OnFromPointError(Object sender, Event e)
 		{
-			ShowScreenFromPoint(new_Point(-9999, -9999));
+			ShowScreenFromPoint(Point(-9999, -9999));
 		}
 
 		public void	OnFullScreen(Object	sender,	Event e)

@@ -174,9 +174,9 @@ import wx.wx;
 
 			this.menuBar = menuBar ;	
 			
-			grid = new Grid( this, -1, new_Point( 0, 0 ), new_Size( 400, 300 ) );
+			grid = new Grid( this, -1, Point( 0, 0 ), Size( 400, 300 ) );
 			
-			logWin = new TextCtrl( this, -1, "", new_Point( 0, gridH + 20 ), new_Size( logW, logH ), TextCtrl.wxTE_MULTILINE );
+			logWin = new TextCtrl( this, -1, "", Point( 0, gridH + 20 ), Size( logW, logH ), TextCtrl.wxTE_MULTILINE );
 			
 			Log.SetActiveTarget( logWin ); 
 			
@@ -662,7 +662,7 @@ import wx.wx;
 				if ( colour.Ok() )
 				{
 					grid.DefaultCellBackgroundColour = colour;
-					Rectangle r = new_Rectangle( 0, 0, grid.size.Width, grid.size.Height );
+					Rectangle r = Rectangle( 0, 0, grid.size.Width, grid.size.Height );
 					grid.Refresh( true, r);
 				}
 			}													
@@ -704,9 +704,9 @@ import wx.wx;
 		
 		public void OnSmallGrid( Object sender, Event e )
 		{
-			Frame frame = new Frame( null, -1, "A Small Grid", wxDefaultPosition, new_Size( 640, 480 ) );
+			Frame frame = new Frame( null, -1, "A Small Grid", wxDefaultPosition, Size( 640, 480 ) );
 			Panel panel = new Panel( frame, -1 );
-			Grid agrid = new Grid( panel, -1, new_Point( 10, 10 ), new_Size( 400, 400 ), wxWANTS_CHARS | wxSIMPLE_BORDER );
+			Grid agrid = new Grid( panel, -1, Point( 10, 10 ), Size( 400, 400 ), wxWANTS_CHARS | wxSIMPLE_BORDER );
 			agrid.CreateGrid( 3, 3 );
 			frame.Show( true );
 		}		
@@ -964,7 +964,7 @@ import wx.wx;
 		
 		public this()
 		{
-			super( null, -1, "Bugs table", wxDefaultPosition, new_Size( 500, 300 ) );
+			super( null, -1, "Bugs table", wxDefaultPosition, Size( 500, 300 ) );
 			Grid grid = new Grid( this, -1, wxDefaultPosition );
 			GridTableBase table = new BugsGridTable();
 			table.SetAttrProvider( new MyGridCellAttrProvider() );
@@ -1334,7 +1334,7 @@ import wx.wx;
 		
 		public this(long sizeGrid)
 		{
-			super(null, -1, "Plugin Virtual Table", wxDefaultPosition, new_Size( 500, 450 ) );
+			super(null, -1, "Plugin Virtual Table", wxDefaultPosition, Size( 500, 450 ) );
 			m_grid = new Grid( this, -1, wxDefaultPosition, wxDefaultSize );
 			m_table = new BigGridTable( sizeGrid );
 			 

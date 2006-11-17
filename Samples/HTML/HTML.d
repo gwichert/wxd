@@ -152,7 +152,7 @@ import wx.wx;
             // Create the about html window
 
             HtmlWindow html = new HtmlWindow(this, -1, wxDefaultPosition,
-                                             new_Size(380,160), 
+                                             Size(380,160), 
                                              HtmlWindow.wxHW_SCROLLBAR_NEVER);
             html.Borders = 0;
             html.LoadPage("../Samples/HTML/Data/about.htm");
@@ -186,7 +186,7 @@ import wx.wx;
 
         public override bool OnInit()
         {
-            MyFrame frame = new MyFrame("HTML Sample", new_Point(50,50), new_Size(450,340));
+            MyFrame frame = new MyFrame("HTML Sample", Point(50,50), Size(450,340));
 
             frame.Show(true);
 

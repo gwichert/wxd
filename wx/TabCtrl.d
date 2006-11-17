@@ -4,7 +4,7 @@
 // based on
 // wx.NET - TabCtrl.cs
 //
-// The wxTabCtrl wrapper class.
+/// The wxTabCtrl wrapper class.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2004 by Alexander Olk
@@ -20,6 +20,8 @@ version(__WXMSW__) {
 import wx.common;
 import wx.Event;
 import wx.Control;
+import wx.ImageList;
+import wx.wxString;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxTabEvent_ctor(int commandType, int id, int nSel, int nOldSel);
@@ -34,6 +36,7 @@ import wx.Control;
 
 		//-----------------------------------------------------------------------------
 
+	alias TabEvent wxTabEvent;
 	public class TabEvent : Event
 	{
 		public this(IntPtr wxobj)
@@ -110,6 +113,7 @@ import wx.Control;
 		static extern (C) bool wxTabCtrl_InsertItem(IntPtr self, int item, string text, int imageId, IntPtr data);
 		//! \endcond
 
+	alias TabCtrl wxTabCtrl;
 	public class TabCtrl : Control
 	{
 		//-----------------------------------------------------------------------------
@@ -147,8 +151,8 @@ import wx.Control;
 		
 		//-----------------------------------------------------------------------------
 
-		public ImageList ImageList() { return cast(ImageList)FindObject(wxTabCtrl_GetImageList(wxobj), typeid(ImageList)); }
-		public void ImageList(ImageList value) { wxTabCtrl_SetImageList(wxobj, wxObject.SafePtr(value)); }
+		public wxImageList ImageList() { return cast(wxImageList)FindObject(wxTabCtrl_GetImageList(wxobj)); }
+		public void ImageList(wxImageList value) { wxTabCtrl_SetImageList(wxobj, wxObject.SafePtr(value)); }
 		
 		//-----------------------------------------------------------------------------
 
@@ -169,7 +173,8 @@ import wx.Control;
 
 		public string GetItemText(int item)
 		{
-			return new wxString(wxTabCtrl_GetItemText(wxobj, item), true);
+			wxString text = new wxString(wxTabCtrl_GetItemText(wxobj, item));
+			return text.toString();
 		}
 		
 		//-----------------------------------------------------------------------------
@@ -255,11 +260,11 @@ import wx.Control;
 
 		//---------------------------------------------------------------------
 
-		public void SelectionChange_Add(EventListner value) { AddCommandListener(Event.wxEVT_COMMAND_TAB_SEL_CHANGED, ID, value, this); }
-		public void SelectionChange_Remove(EventListner value) { RemoveHandler(value, this); }
+		public void SelectionChange_Add(EventListener value) { AddCommandListener(Event.wxEVT_COMMAND_TAB_SEL_CHANGED, ID, value, this); }
+		public void SelectionChange_Remove(EventListener value) { RemoveHandler(value, this); }
 
-		public void SelectionChanging_Add(EventListner value) { AddCommandListener(Event.wxEVT_COMMAND_TAB_SEL_CHANGING, ID, value, this); }
-		public void SelectionChanging_Remove(EventListner value) { RemoveHandler(value, this); }
+		public void SelectionChanging_Add(EventListener value) { AddCommandListener(Event.wxEVT_COMMAND_TAB_SEL_CHANGING, ID, value, this); }
+		public void SelectionChanging_Remove(EventListener value) { RemoveHandler(value, this); }
 	}
 
 }

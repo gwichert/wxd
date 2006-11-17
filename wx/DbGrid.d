@@ -4,7 +4,7 @@
 // based on
 // wx.NET - DbGrid
 //
-// The DbGrid class.
+/// The DbGrid class.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2003 by Alexander Olk
@@ -17,6 +17,7 @@ module wx.DbGrid;
 import wx.common;
 import wx.Grid;
 
+	alias Column wxColumn;
 	public class Column
 	{
 		private string dbcolumnname;
@@ -29,13 +30,13 @@ import wx.Grid;
 
 		//-----------------------------------------------------------------------------
 
-		public String dbColumnName() { return dbcolumnname; }
-		public void dbColumnName(String value) { dbcolumnname = value; }
+		public string dbColumnName() { return dbcolumnname; }
+		public void dbColumnName(string value) { dbcolumnname = value; }
 
 		//-----------------------------------------------------------------------------
 
-		public String newColumnName() { return newcolumnname; }
-		public void newColumnName(String value) { newcolumnname = value; }
+		public string newColumnName() { return newcolumnname; }
+		public void newColumnName(string value) { newcolumnname = value; }
 
 		//-----------------------------------------------------------------------------
 
@@ -45,6 +46,7 @@ import wx.Grid;
 
 	//-----------------------------------------------------------------------------
 
+	alias ColumnMapping wxColumnMapping;
 	public class ColumnMapping
 	{
 		private Column[] cols;
@@ -140,6 +142,7 @@ import wx.Grid;
 
 	//-----------------------------------------------------------------------------
 
+	alias DbGrid wxDbGrid;
 	public class DbGrid : Grid
 	{
 		private DataSet myDataSet = null;

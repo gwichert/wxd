@@ -5,7 +5,7 @@
 // based on
 // wx.NET - FileDialog.cs
 //
-// The wxFileDialog wrapper class.
+/// The wxFileDialog wrapper class.
 //
 // Written by Achim Breunig (achim.breunig@web.de)
 // (C) 2003 Achim Breunig
@@ -56,6 +56,7 @@ import std.string;
 
         //---------------------------------------------------------------------
 
+    alias FileDialog wxFileDialog;
     public class FileDialog : Dialog
     {
         public const int wxOPEN              = 0x0001;

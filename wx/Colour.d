@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Colour.cs
 //
-// The wxColour wrapper class.
+/// The wxColour wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
@@ -39,6 +39,7 @@ private import std.string;
 
 		//---------------------------------------------------------------------
 
+	alias Colour wxColour;
 	public class Colour : wxObject
 	{
 		public static Colour wxBLACK;

@@ -4,7 +4,7 @@
 // based on
 // wx.NET - ComboBox.cs
 //
-// The wxComboBox wrapper class.
+/// The wxComboBox wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -67,6 +67,7 @@ import wx.ClientData;
 		
 		//---------------------------------------------------------------------
 	
+	alias ComboBox wxComboBox;
 	public class ComboBox : Control
 	{
 		public const int wxCB_SIMPLE           = 0x0004;

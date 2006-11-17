@@ -67,7 +67,7 @@ wxToolBar* wxToolBarToolBase_GetToolBar(wxToolBarToolBase* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxToolBarToolBase_IsButton(wxToolBarToolBase* self)
+dbit wxToolBarToolBase_IsButton(wxToolBarToolBase* self)
 {
 	return self->IsButton()?1:0;
 }
@@ -75,7 +75,7 @@ bool wxToolBarToolBase_IsButton(wxToolBarToolBase* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxToolBarToolBase_IsControl(wxToolBarToolBase* self)
+dbit wxToolBarToolBase_IsControl(wxToolBarToolBase* self)
 {
 	return self->IsControl()?1:0;
 }
@@ -83,7 +83,7 @@ bool wxToolBarToolBase_IsControl(wxToolBarToolBase* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxToolBarToolBase_IsSeparator(wxToolBarToolBase* self)
+dbit wxToolBarToolBase_IsSeparator(wxToolBarToolBase* self)
 {
 	return self->IsSeparator()?1:0;
 }
@@ -107,7 +107,7 @@ wxItemKind wxToolBarToolBase_GetKind(wxToolBarToolBase* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxToolBarToolBase_IsEnabled(wxToolBarToolBase* self)
+dbit wxToolBarToolBase_IsEnabled(wxToolBarToolBase* self)
 {
 	return self->IsEnabled()?1:0;
 }
@@ -115,7 +115,7 @@ bool wxToolBarToolBase_IsEnabled(wxToolBarToolBase* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxToolBarToolBase_IsToggled(wxToolBarToolBase* self)
+dbit wxToolBarToolBase_IsToggled(wxToolBarToolBase* self)
 {
 	return self->IsToggled()?1:0;
 }
@@ -123,7 +123,7 @@ bool wxToolBarToolBase_IsToggled(wxToolBarToolBase* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxToolBarToolBase_CanBeToggled(wxToolBarToolBase* self)
+dbit wxToolBarToolBase_CanBeToggled(wxToolBarToolBase* self)
 {
 	return self->CanBeToggled()?1:0;
 }
@@ -163,7 +163,7 @@ wxObject* wxToolBarToolBase_GetClientData(wxToolBarToolBase* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxToolBarToolBase_Enable(wxToolBarToolBase* self, bool enable)
+dbit wxToolBarToolBase_Enable(wxToolBarToolBase* self, dbit enable)
 {
 	return self->Enable(enable)?1:0;
 }
@@ -171,7 +171,7 @@ bool wxToolBarToolBase_Enable(wxToolBarToolBase* self, bool enable)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxToolBarToolBase_Toggle(wxToolBarToolBase* self, bool toggle)
+dbit wxToolBarToolBase_Toggle(wxToolBarToolBase* self, dbit toggle)
 {
 	return self->Toggle(toggle)?1:0;
 }
@@ -179,7 +179,7 @@ bool wxToolBarToolBase_Toggle(wxToolBarToolBase* self, bool toggle)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxToolBarToolBase_SetToggle(wxToolBarToolBase* self, bool toggle)
+dbit wxToolBarToolBase_SetToggle(wxToolBarToolBase* self, dbit toggle)
 {
 	return self->SetToggle(toggle)?1:0;
 }
@@ -187,7 +187,7 @@ bool wxToolBarToolBase_SetToggle(wxToolBarToolBase* self, bool toggle)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxToolBarToolBase_SetShortHelp(wxToolBarToolBase* self, dstr help)
+dbit wxToolBarToolBase_SetShortHelp(wxToolBarToolBase* self, dstr help)
 {
 	return self->SetShortHelp(wxString(help.data, wxConvUTF8, help.length))?1:0;
 }
@@ -195,7 +195,7 @@ bool wxToolBarToolBase_SetShortHelp(wxToolBarToolBase* self, dstr help)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxToolBarToolBase_SetLongHelp(wxToolBarToolBase* self, dstr help)
+dbit wxToolBarToolBase_SetLongHelp(wxToolBarToolBase* self, dstr help)
 {
 	return self->SetLongHelp(wxString(help.data, wxConvUTF8, help.length))?1:0;
 }
@@ -362,7 +362,7 @@ wxToolBarToolBase* wxToolBar_RemoveTool(wxToolBar* self, int toolid)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxToolBar_DeleteToolByPos(wxToolBar* self, size_t pos)
+dbit wxToolBar_DeleteToolByPos(wxToolBar* self, size_t pos)
 {
 	return self->DeleteToolByPos(pos)?1:0;
 }
@@ -370,7 +370,7 @@ bool wxToolBar_DeleteToolByPos(wxToolBar* self, size_t pos)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxToolBar_DeleteTool(wxToolBar* self, int toolid)
+dbit wxToolBar_DeleteTool(wxToolBar* self, int toolid)
 {
 	return self->DeleteTool(toolid)?1:0;
 }
@@ -386,7 +386,7 @@ void wxToolBar_ClearTools(wxToolBar* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxToolBar_Realize(wxToolBar* self)
+dbit wxToolBar_Realize(wxToolBar* self)
 {
 	return self->Realize()?1:0;
 }
@@ -394,7 +394,7 @@ bool wxToolBar_Realize(wxToolBar* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxToolBar_EnableTool(wxToolBar* self, int toolid, bool enable)
+void wxToolBar_EnableTool(wxToolBar* self, int toolid, dbit enable)
 {
 	self->EnableTool(toolid, enable);
 }
@@ -402,7 +402,7 @@ void wxToolBar_EnableTool(wxToolBar* self, int toolid, bool enable)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxToolBar_ToggleTool(wxToolBar* self, int toolid, bool toggle)
+void wxToolBar_ToggleTool(wxToolBar* self, int toolid, dbit toggle)
 {
 	self->ToggleTool(toolid, toggle);
 }
@@ -436,7 +436,7 @@ int wxToolBar_GetToolPos(wxToolBar* self, int id)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxToolBar_GetToolState(wxToolBar* self, int toolid)
+dbit wxToolBar_GetToolState(wxToolBar* self, int toolid)
 {
 	return self->GetToolState(toolid)?1:0;
 }
@@ -444,7 +444,7 @@ bool wxToolBar_GetToolState(wxToolBar* self, int toolid)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxToolBar_GetToolEnabled(wxToolBar* self, int toolid)
+dbit wxToolBar_GetToolEnabled(wxToolBar* self, int toolid)
 {
 	return self->GetToolEnabled(toolid)?1:0;
 }
@@ -596,7 +596,7 @@ wxToolBarToolBase* wxToolBar_FindToolForPosition(wxToolBar* self, wxCoord x, wxC
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxToolBar_IsVertical(wxToolBar* self)
+dbit wxToolBar_IsVertical(wxToolBar* self)
 {
 	return self->IsVertical()?1:0;
 }
@@ -604,7 +604,7 @@ bool wxToolBar_IsVertical(wxToolBar* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxToolBarToolBase* wxToolBar_AddTool3(wxToolBar* self, int toolid, const wxBitmap* bitmap, const wxBitmap* bmpDisabled, bool toggle, wxObject *clientData, dstr shortHelpString, dstr longHelpString)
+wxToolBarToolBase* wxToolBar_AddTool3(wxToolBar* self, int toolid, const wxBitmap* bitmap, const wxBitmap* bmpDisabled, dbit toggle, wxObject *clientData, dstr shortHelpString, dstr longHelpString)
 {
 	return self->AddTool(toolid, *bitmap, *bmpDisabled, toggle, clientData, wxString(shortHelpString.data, wxConvUTF8, shortHelpString.length), wxString(longHelpString.data, wxConvUTF8, longHelpString.length));
 }
@@ -620,7 +620,7 @@ wxToolBarToolBase* wxToolBar_AddTool4(wxToolBar* self, int toolid, const wxBitma
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxToolBarToolBase* wxToolBar_AddTool5(wxToolBar* self, int toolid, const wxBitmap* bitmap, const wxBitmap* bmpDisabled, bool toggle, wxCoord xPos, wxCoord yPos, wxObject *clientData, dstr shortHelp, dstr longHelp)
+wxToolBarToolBase* wxToolBar_AddTool5(wxToolBar* self, int toolid, const wxBitmap* bitmap, const wxBitmap* bmpDisabled, dbit toggle, wxCoord xPos, wxCoord yPos, wxObject *clientData, dstr shortHelp, dstr longHelp)
 {
 	return self->AddTool(toolid, *bitmap, *bmpDisabled, toggle, xPos, yPos, clientData, wxString(shortHelp.data, wxConvUTF8, shortHelp.length), wxString(longHelp.data, wxConvUTF8, longHelp.length));
 }
@@ -628,7 +628,7 @@ wxToolBarToolBase* wxToolBar_AddTool5(wxToolBar* self, int toolid, const wxBitma
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxToolBarToolBase* wxToolBar_InsertTool(wxToolBar* self, size_t pos, int toolid, const wxBitmap* bitmap, const wxBitmap* bmpDisabled, bool toggle, wxObject *clientData, dstr shortHelp, dstr longHelp)
+wxToolBarToolBase* wxToolBar_InsertTool(wxToolBar* self, size_t pos, int toolid, const wxBitmap* bitmap, const wxBitmap* bmpDisabled, dbit toggle, wxObject *clientData, dstr shortHelp, dstr longHelp)
 {
 	if (bmpDisabled == NULL)
 		bmpDisabled = &wxNullBitmap;
@@ -655,7 +655,7 @@ size_t wxToolBar_GetToolsCount(wxToolBar* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxToolBar_AcceptsFocus(wxToolBar* self)
+dbit wxToolBar_AcceptsFocus(wxToolBar* self)
 {
 	return self->AcceptsFocus()?1:0;
 }

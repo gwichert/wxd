@@ -52,6 +52,7 @@ DECLARE_EVENT_TYPE(wxEVT_OBJECTDELETED, 0)
 
 // Calls a delegate when an object is deleted internally.
 
+#undef CALLBACK
 #if 0 //defined(_WINDOWS)
 #define CALLBACK __stdcall
 #else

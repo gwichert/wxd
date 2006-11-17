@@ -19,19 +19,19 @@
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxShowEvent* wxShowEvent_ctor(int winid, bool show)
+wxShowEvent* wxShowEvent_ctor(int winid, dbit show)
 {
     return new wxShowEvent(winid,show);
 }
 
 extern "C" WXEXPORT
-bool wxShowEvent_GetShow(wxShowEvent* self)
+dbit wxShowEvent_GetShow(wxShowEvent* self)
 {
 	return self->GetShow()?1:0;
 }
 
 extern "C" WXEXPORT
-void wxShowEvent_SetShow(wxShowEvent* self, bool show)
+void wxShowEvent_SetShow(wxShowEvent* self, dbit show)
 {
 	self->SetShow(show);
 }

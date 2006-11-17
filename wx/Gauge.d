@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Gauge.cs
 //
-// The wxGauge wrapper class.
+/// The wxGauge wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -35,6 +35,7 @@ import wx.Control;
 	
 		//---------------------------------------------------------------------
 		
+	alias Gauge wxGauge;
 	public class Gauge :  Control
 	{
 		enum {

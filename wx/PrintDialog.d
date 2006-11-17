@@ -4,7 +4,7 @@
 // based on
 // wx.NET - PrintDialog.cs
 //
-// The wxPrintDialog wrapper classes.
+/// The wxPrintDialog wrapper classes.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -25,6 +25,7 @@ import wx.PrintData;
 
         //-----------------------------------------------------------------------------
 
+    alias PageSetupDialog wxPageSetupDialog;
     public class PageSetupDialog : Dialog
     {
         private this(IntPtr wxobj)
@@ -50,6 +51,7 @@ import wx.PrintData;
 
         //-----------------------------------------------------------------------------
 
+    alias PrintDialog wxPrintDialog;
     public class PrintDialog : Dialog
     {
         private this(IntPtr wxobj)
@@ -76,7 +78,7 @@ import wx.PrintData;
         public DC PrintDC() { return cast(DC)FindObject(wxPrintDialog_GetPrintDC(wxobj), &DC.New); }
     }
 
-version(__WXGTK__){
+version(none) /*(__WXGTK__)*/{
     
 		//! \cond EXTERN
         static extern (C) IntPtr wxPrintSetupDialog_ctor(IntPtr parent, IntPtr data);
@@ -87,6 +89,7 @@ version(__WXGTK__){
 
         //-----------------------------------------------------------------------------
 
+    alias PrintSetupDialog wxPrintSetupDialog;
     public class PrintSetupDialog : Dialog
     {
         private this(IntPtr wxobj)

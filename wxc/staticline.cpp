@@ -39,7 +39,7 @@ wxStaticLine* wxStaticLine_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStaticLine_Create(wxStaticLine *self, wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, long style, dstr name)
+dbit wxStaticLine_Create(wxStaticLine *self, wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, long style, dstr name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -56,7 +56,7 @@ bool wxStaticLine_Create(wxStaticLine *self, wxWindow* parent, wxWindowID id, co
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStaticLine_IsVertical(wxStaticLine* self)
+dbit wxStaticLine_IsVertical(wxStaticLine* self)
 {
 	return self->IsVertical()?1:0;
 }

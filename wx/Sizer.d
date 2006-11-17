@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Sizer.cs
 //
-// The wxSizer wrapper class.
+/// The wxSizer wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten

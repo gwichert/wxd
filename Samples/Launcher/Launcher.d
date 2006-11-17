@@ -69,7 +69,7 @@ import std.c.process;
 	{
 		public this( LauncherFrame parent )
 		{
-			super( parent, -1, wxDefaultPosition, new_Size( 400, 144 ) );
+			super( parent, -1, wxDefaultPosition, Size( 400, 144 ) );
 			LoadPage( "../Samples/Launcher/launchertop.html" );
 		}
 	}
@@ -82,7 +82,7 @@ import std.c.process;
 	
 		public this( LauncherFrame parent )
 		{
-			super( parent, -1, wxDefaultPosition, new_Size( 400, 80 ) );
+			super( parent, -1, wxDefaultPosition, Size( 400, 80 ) );
 			this.parent = parent;
 			LoadPage( "../Samples/Launcher/launcherbottom.html" );
 		}
@@ -174,7 +174,7 @@ import std.c.process;
 	{
 		public override bool OnInit()
 		{
-			LauncherFrame frame = new LauncherFrame( "wxD Samples Launcher", new_Point( 10, 100 ), new_Size( 600, 600 ) );
+			LauncherFrame frame = new LauncherFrame( "wxD Samples Launcher", Point( 10, 100 ), Size( 600, 600 ) );
 			frame.Show( true );
 
 			return true;

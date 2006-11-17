@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Locale.cs
 //
-// The wxLocale wrapper class.
+/// The wxLocale wrapper class.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2004 by Alexander Olk
@@ -295,6 +295,7 @@ import wx.Font;
 		
 		//-----------------------------------------------------------------------------
 
+	alias LanguageInfo wxLanguageInfo;
 	public class LanguageInfo : wxObject
 	{
 		public this(IntPtr wxobj)
@@ -363,6 +364,7 @@ import wx.Font;
 		
 		//-----------------------------------------------------------------------------
 
+	alias Locale wxLocale;
 	public class Locale : wxObject
 	{
 		public this(IntPtr wxobj)

@@ -28,7 +28,7 @@ void wxDC_dtor(wxDC* dc)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxDC_DrawBitmap(wxDC* self, wxBitmap* bmp, wxCoord x, wxCoord y, bool transparent)
+void wxDC_DrawBitmap(wxDC* self, wxBitmap* bmp, wxCoord x, wxCoord y, dbit transparent)
 {
     self->DrawBitmap(*bmp, x, y, transparent);
 }
@@ -254,9 +254,9 @@ void wxDC_BeginDrawing(wxDC* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxDC_Blit(wxDC* self, wxCoord xdest, wxCoord ydest, wxCoord width, wxCoord height,
+dbit wxDC_Blit(wxDC* self, wxCoord xdest, wxCoord ydest, wxCoord width, wxCoord height,
 		  wxDC *source, wxCoord xsrc, wxCoord ysrc,
-		  int rop = wxCOPY, bool useMask = FALSE, wxCoord xsrcMask = -1, wxCoord ysrcMask = -1)
+		  int rop = wxCOPY, dbit useMask = FALSE, wxCoord xsrcMask = -1, wxCoord ysrcMask = -1)
 {
 	return self->Blit(xdest, ydest, width, height, source, xsrc, ysrc, rop, useMask, xsrcMask, ysrcMask)?1:0;
 }
@@ -272,7 +272,7 @@ void wxDC_EndDrawing(wxDC* self)
 //---------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxDC_FloodFill(wxDC* self, int x, int y, wxColour* col, int style)
+dbit wxDC_FloodFill(wxDC* self, int x, int y, wxColour* col, int style)
 {
 	return self->FloodFill(x, y, *col, style);
 }
@@ -280,7 +280,7 @@ bool wxDC_FloodFill(wxDC* self, int x, int y, wxColour* col, int style)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxDC_GetPixel(wxDC* self, int x, int y, wxColour* col)
+dbit wxDC_GetPixel(wxDC* self, int x, int y, wxColour* col)
 {
 	return self->GetPixel(x, y, col);
 }
@@ -384,7 +384,7 @@ void wxDC_DrawSpline2(wxDC* self, int n, wxPoint points[])
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxDC_StartDoc(wxDC* self, dstr message)
+dbit wxDC_StartDoc(wxDC* self, dstr message)
 {
 	return self->StartDoc(wxString(message.data, wxConvUTF8, message.length));
 }
@@ -440,7 +440,7 @@ void wxDC_GetMultiLineTextExtent(wxDC* self, dstr text, int *width, int *height,
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxDC_GetPartialTextExtents(wxDC* self, dstr text, wxArrayInt* widths)
+dbit wxDC_GetPartialTextExtents(wxDC* self, dstr text, wxArrayInt* widths)
 {
 	return self->GetPartialTextExtents(wxString(text.data, wxConvUTF8, text.length), *widths);
 }
@@ -544,7 +544,7 @@ int wxDC_LogicalToDeviceYRel(wxDC* self, int y)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxDC_Ok(wxDC* self)
+dbit wxDC_Ok(wxDC* self)
 {
 	return self->Ok();
 }
@@ -656,7 +656,7 @@ void wxDC_SetDeviceOrigin(wxDC* self, int x, int y)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxDC_SetAxisOrientation(wxDC* self, bool xLeftRight, bool yBottomUp)
+void wxDC_SetAxisOrientation(wxDC* self, dbit xLeftRight, dbit yBottomUp)
 {
 	self->SetAxisOrientation(xLeftRight, yBottomUp);
 }
@@ -729,7 +729,7 @@ wxWindowDC* wxWindowDC_ctor2(wxWindow* win)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxWindowDC_CanDrawBitmap(wxWindowDC* self)
+dbit wxWindowDC_CanDrawBitmap(wxWindowDC* self)
 {
 	return self->CanDrawBitmap()?1:0;
 }
@@ -737,7 +737,7 @@ bool wxWindowDC_CanDrawBitmap(wxWindowDC* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxWindowDC_CanGetTextExtent(wxWindowDC* self)
+dbit wxWindowDC_CanGetTextExtent(wxWindowDC* self)
 {
 	return self->CanGetTextExtent()?1:0;
 }

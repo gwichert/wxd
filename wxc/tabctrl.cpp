@@ -61,7 +61,7 @@ wxTabCtrl* wxTabCtrl_ctor2(wxWindow *parent, wxWindowID id, const wxPoint* pos, 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTabCtrl_Create(wxTabCtrl* self, wxWindow *parent, wxWindowID id, const wxPoint* pos, const wxSize* size,
+dbit wxTabCtrl_Create(wxTabCtrl* self, wxWindow *parent, wxWindowID id, const wxPoint* pos, const wxSize* size,
             long style, dstr name)
 {
 	if (pos == NULL)
@@ -111,7 +111,7 @@ int wxTabCtrl_GetItemCount(wxTabCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTabCtrl_GetItemRect(wxTabCtrl* self, int item, wxRect* rect)
+dbit wxTabCtrl_GetItemRect(wxTabCtrl* self, int item, wxRect* rect)
 {
 	return self->GetItemRect(item, *rect)?1:0;
 }
@@ -167,7 +167,7 @@ void wxTabCtrl_SetImageList(wxTabCtrl* self, wxImageList* imageList)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTabCtrl_SetItemText(wxTabCtrl* self, int item, dstr text)
+dbit wxTabCtrl_SetItemText(wxTabCtrl* self, int item, dstr text)
 {
 	return self->SetItemText(item, wxString(text.data, wxConvUTF8, text.length))?1:0;
 }
@@ -175,7 +175,7 @@ bool wxTabCtrl_SetItemText(wxTabCtrl* self, int item, dstr text)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTabCtrl_SetItemImage(wxTabCtrl* self, int item, int image)
+dbit wxTabCtrl_SetItemImage(wxTabCtrl* self, int item, int image)
 {
 	return self->SetItemImage(item, image)?1:0;
 }
@@ -183,7 +183,7 @@ bool wxTabCtrl_SetItemImage(wxTabCtrl* self, int item, int image)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTabCtrl_SetItemData(wxTabCtrl* self, int item, void* data)
+dbit wxTabCtrl_SetItemData(wxTabCtrl* self, int item, void* data)
 {
 	return self->SetItemData(item, data)?1:0;
 }
@@ -207,7 +207,7 @@ void wxTabCtrl_SetPadding(wxTabCtrl* self, const wxSize* padding)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTabCtrl_DeleteAllItems(wxTabCtrl* self)
+dbit wxTabCtrl_DeleteAllItems(wxTabCtrl* self)
 {
 	return self->DeleteAllItems()?1:0;
 }
@@ -215,7 +215,7 @@ bool wxTabCtrl_DeleteAllItems(wxTabCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTabCtrl_DeleteItem(wxTabCtrl* self, int item)
+dbit wxTabCtrl_DeleteItem(wxTabCtrl* self, int item)
 {
 	return self->DeleteItem(item)?1:0;
 }
@@ -231,7 +231,7 @@ int wxTabCtrl_HitTest(wxTabCtrl* self, const wxPoint* pt, long* flags)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTabCtrl_InsertItem(wxTabCtrl* self, int item, dstr text, int imageId, void* data)
+dbit wxTabCtrl_InsertItem(wxTabCtrl* self, int item, dstr text, int imageId, void* data)
 {
 	return self->InsertItem(item, wxString(text.data, wxConvUTF8, text.length), imageId, data)?1:0;
 }
@@ -293,7 +293,7 @@ void wxTabEvent_Allow(wxTabEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxTabEvent_IsAllowed(wxTabEvent* self)
+dbit wxTabEvent_IsAllowed(wxTabEvent* self)
 {
     return self->IsAllowed()?1:0;
 }

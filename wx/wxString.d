@@ -4,7 +4,7 @@
 // based on
 // wx.NET - wxString.cs
 //
-// The wxString wrapper class.
+/// The wxString wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten

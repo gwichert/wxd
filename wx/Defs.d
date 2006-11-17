@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Defs.cs
 //
-// Symbol definitions that do not belong to any particular class.
+/// Symbol definitions that do not belong to any particular class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.

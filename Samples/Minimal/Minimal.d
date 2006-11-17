@@ -65,7 +65,7 @@ import wx.wx;
 
 		public void OnDialog(Object sender, Event e)
 		{
-            Dialog dialog = new Dialog( this, -1, "Test dialog", new_Point(50,50), new_Size(450,340) );
+            Dialog dialog = new Dialog( this, -1, "Test dialog", Point(50,50), Size(450,340) );
             BoxSizer main_sizer = new BoxSizer( Orientation.wxVERTICAL );
             
             StaticBoxSizer top_sizer = new StaticBoxSizer( new StaticBox( dialog, -1, "Bitmaps" ), Orientation.wxHORIZONTAL );
@@ -107,7 +107,7 @@ import wx.wx;
 
 		public override bool OnInit()
 		{
-			MyFrame frame = new MyFrame("Minimal wxWidgets App", new_Point(50,50), new_Size(450,340));
+			MyFrame frame = new MyFrame("Minimal wxWidgets App", Point(50,50), Size(450,340));
 			frame.Show(true);
 
 			return true;

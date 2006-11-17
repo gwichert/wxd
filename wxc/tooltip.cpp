@@ -20,7 +20,7 @@
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxToolTip_Enable(bool flag)
+void wxToolTip_Enable(dbit flag)
 {
 	wxToolTip::Enable(flag);
 }

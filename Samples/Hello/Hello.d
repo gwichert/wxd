@@ -8,11 +8,11 @@ import wx.wx;
  /**
   * This class shows a window containing a statusbar with the text 'Hello World'
   */
-public class HelloWorldApp : App
+public class HelloWorldApp : wxApp
 {
 	public override bool OnInit()
 	{
-        Frame frame = new Frame(null, wxID_ANY, "Hello wxWidgets World");
+        wxFrame frame = new wxFrame(null, wxID_ANY, "Hello wxWidgets World");
         frame.CreateStatusBar();
         frame.SetStatusText("Hello World");
         frame.Show(true);

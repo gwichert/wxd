@@ -2,7 +2,7 @@
 // wxD - wxVersion.d
 // (C) 2005 afb <afb@users.sourceforge.net>
 //
-// The wxVersion constants
+/// The wxVersion constants
 //
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
@@ -13,7 +13,7 @@ module wx.wxVersion;
 import wx.common;
 
 //! \cond STD
-import std.string;
+private import std.string;
 //! \endcond
 
 		//! \cond EXTERN

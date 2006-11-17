@@ -4,7 +4,7 @@
 // based on
 // wx.NET - WizardPage.cs
 //
-// The wxWizardPage wrapper class.
+/// The wxWizardPage wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 379, Inc.
@@ -16,6 +16,7 @@
 module wx.WizardPage;
 import wx.Panel;
 
+	alias WizardPage wxWizardPage;
 	public class WizardPage : Panel
 	{
 		//---------------------------------------------------------------------

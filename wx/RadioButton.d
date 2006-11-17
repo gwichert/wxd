@@ -4,7 +4,7 @@
 // based on
 // wx.NET - RadioButton.cs
 //
-// The wxRadioButton wrapper class.
+/// The wxRadioButton wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -24,6 +24,7 @@ import wx.Control;
 	
 		//---------------------------------------------------------------------
 		
+	alias RadioButton wxRadioButton;
 	public class RadioButton : Control 
 	{
 		public const int wxRB_GROUP     = 0x0004;

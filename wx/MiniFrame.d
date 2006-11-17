@@ -3,8 +3,8 @@
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - MiniFrame.cs
-// 
-// The wxMiniFrame wrapper class.
+//
+/// The wxMiniFrame wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -24,6 +24,7 @@ import wx.Frame;
 
         //-----------------------------------------------------------------------------
 
+    alias MiniFrame wxMiniFrame;
     public class MiniFrame : Frame
     {
         enum { wxDEFAULT_MINIFRAME_STYLE = wxCAPTION | wxCLIP_CHILDREN | wxRESIZE_BORDER }

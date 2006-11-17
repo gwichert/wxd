@@ -3,8 +3,8 @@
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - StyledTextCtrl.h
-// 
-// The wxStyledTextCtrl wrapper class.
+//
+/// The wxStyledTextCtrl wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -384,6 +384,7 @@ import wx.CommandEvent;
 
         //-----------------------------------------------------------------------------
 
+    alias StyledTextCtrl wxStyledTextCtrl;
     public class StyledTextCtrl : Control 
     {
         //-----------------------------------------------------------------------------
@@ -3049,6 +3050,7 @@ import wx.CommandEvent;
 
         //-----------------------------------------------------------------------------
 
+    alias StyledTextEvent wxStyledTextEvent;
     public class StyledTextEvent : CommandEvent 
     {
 		public this(IntPtr wxobj) 

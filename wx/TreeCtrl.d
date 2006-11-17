@@ -4,7 +4,7 @@
 // based on
 // wx.NET - TreeCtrl.cs
 //
-// The wxTreeCtrl wrapper class.
+/// The wxTreeCtrl wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
@@ -41,6 +41,7 @@ import wx.KeyEvent;
 		
 		//-----------------------------------------------------------------------------
 
+	alias TreeItemData wxTreeItemData;
 	public class TreeItemData : ClientData
 	{
 		public this(IntPtr wxobj)
@@ -89,6 +90,7 @@ import wx.KeyEvent;
 		
 		//-----------------------------------------------------------------------------
 
+	alias TreeItemAttr wxTreeItemAttr;
 	public class TreeItemAttr : wxObject
 	{
 		public this(IntPtr wxobj)
@@ -160,6 +162,7 @@ import wx.KeyEvent;
 		//---------------------------------------------------------------------
 
 	//[StructLayout(LayoutKind.Sequential)]
+	alias TreeItemId wxTreeItemId;
 	public class TreeItemId : wxObject
 	{
 		public this(IntPtr wxobj)
@@ -232,13 +235,11 @@ import wx.KeyEvent;
 	
 	//-----------------------------------------------------------------------------
 
+		//! \cond EXTERN
 		extern (C) {
 		alias int function(TreeCtrl obj, IntPtr item1, IntPtr item2) Virtual_OnCompareItems;
 		}
 		
-		//-----------------------------------------------------------------------------
-
-		//! \cond EXTERN
 		static extern (C) uint   wxTreeCtrl_GetDefaultStyle();
 		static extern (C) IntPtr wxTreeCtrl_ctor();
 		static extern (C) void   wxTreeCtrl_RegisterVirtual(IntPtr self,TreeCtrl obj, Virtual_OnCompareItems onCompareItems);
@@ -353,6 +354,7 @@ import wx.KeyEvent;
 
 		//---------------------------------------------------------------------
 
+	alias TreeCtrl wxTreeCtrl;
 	public class TreeCtrl : Control
 	{
 		public const int wxTR_NO_BUTTONS                = 0x0000;
@@ -1161,6 +1163,7 @@ import wx.KeyEvent;
 
 		//-----------------------------------------------------------------------------
 
+	alias TreeEvent wxTreeEvent;
 	public class TreeEvent : Event
 	{
 		public this(IntPtr wxobj)
@@ -1282,6 +1285,7 @@ import wx.KeyEvent;
 		
 		//---------------------------------------------------------------------
 
+	alias ArrayTreeItemIds wxArrayTreeItemIds;
 	public class ArrayTreeItemIds : wxObject
 	{
 		public this(IntPtr wxobj)

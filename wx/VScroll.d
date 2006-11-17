@@ -4,7 +4,7 @@
 // based on
 // wx.NET - VScroll.cs
 //
-// The wxVScrolledWindow wrapper class.
+/// The wxVScrolledWindow wrapper class.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2004 by Alexander Olk
@@ -18,13 +18,13 @@ import wx.common;
 import wx.Panel;
 import wx.SizeEvent;
 
+		//-----------------------------------------------------------------------------
+		
+		//! \cond EXTERN
 		extern (C) {
 		alias int function(VScrolledWindow obj, int n) Virtual_IntInt;
 		}
 
-		//-----------------------------------------------------------------------------
-		
-		//! \cond EXTERN
 		static extern (C) IntPtr wxVScrolledWindow_ctor();
 		static extern (C) IntPtr wxVScrolledWindow_ctor2(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
 		static extern (C) void wxVScrolledWindow_RegisterVirtual(IntPtr self, VScrolledWindow obj, Virtual_IntInt onGetLineHeight);

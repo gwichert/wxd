@@ -184,7 +184,7 @@ int wxEvent_GetId(wxEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxEvent_GetSkipped(wxEvent* self)
+dbit wxEvent_GetSkipped(wxEvent* self)
 {
     return self->GetSkipped();
 }
@@ -200,7 +200,7 @@ int wxEvent_GetTimestamp(wxEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxEvent_Skip(wxEvent* self, bool skip)
+void wxEvent_Skip(wxEvent* self, dbit skip)
 {
     self->Skip(skip);
 }

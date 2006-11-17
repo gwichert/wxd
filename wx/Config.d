@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Config.cs
 //
-// The wxConfig wrapper class.
+/// The wxConfig wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -92,6 +92,7 @@ import wx.wxString;
 
     // although it wxConfig is not derived from wxobj we do not change it.
     // Use Config.Get() to get an instance.
+    alias Config wxConfig;
     public class Config : wxObject
     {
         public this(IntPtr wxobj)

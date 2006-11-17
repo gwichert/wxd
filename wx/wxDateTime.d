@@ -4,7 +4,7 @@
 // based on
 // wx.NET - DateTime.cs
 // 
-// The wxDateTime wrapper class.
+/// The wxDateTime wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten

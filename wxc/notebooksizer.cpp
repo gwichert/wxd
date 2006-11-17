@@ -17,6 +17,10 @@
 #include "common.h"
 #include <wx/sizer.h>
 
+#if WXWIN_COMPATIBILITY_2_4
+// NB: wxBookCtrlSizer and wxNotebookSizer are deprecated, they
+//     don't do anything. wxBookCtrlBase::DoGetBestSize does the job now.
+
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
@@ -50,3 +54,5 @@ wxNotebook* wxNotebookSizer_GetNotebook(wxNotebookSizer* self)
 }
 
 //-----------------------------------------------------------------------------
+
+#endif // WXWIN_COMPATIBILITY_2_4

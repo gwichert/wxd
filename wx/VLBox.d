@@ -4,7 +4,7 @@
 // based on
 // wx.NET - VLBox.cs
 //
-// The wxVListBox wrapper class.
+/// The wxVListBox wrapper class.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2004 by Alexander Olk
@@ -17,12 +17,12 @@ module wx.VLBox;
 import wx.common;
 import wx.VScroll;
 
+		//! \cond EXTERN
 		extern (C) {
 		alias int function(VListBox obj, int n) Virtual_IntInt;
 		alias void function(VListBox obj, IntPtr dc, Rectangle rect, int n) Virtual_VoidDcRectSizeT;
 		}
 
-		//! \cond EXTERN
 		static extern (C) IntPtr wxVListBox_ctor(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
 		static extern (C) void wxVListBox_RegisterVirtual(IntPtr self, VListBox obj, 
 			Virtual_VoidDcRectSizeT onDrawItem, 

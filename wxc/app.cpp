@@ -20,8 +20,8 @@
 
 #include <stdio.h>
 
-typedef bool (CALLBACK* Virtual_Initialize) (dobj obj,int* argc,char** argv);
-typedef bool (CALLBACK* Virtual_OnInit) (dobj obj);
+typedef dbit (CALLBACK* Virtual_Initialize) (dobj obj,int* argc,char** argv);
+typedef dbit (CALLBACK* Virtual_OnInit) (dobj obj);
 typedef int (CALLBACK* Virtual_OnExit) (dobj obj);
 
 //-----------------------------------------------------------------------------
@@ -93,7 +93,7 @@ void wxApp_RegisterVirtual(_App* self, dobj obj, Virtual_OnInit onInit, Virtual_
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxApp_OnInit(_App* self)
+dbit wxApp_OnInit(_App* self)
 {
 	return self->wxApp::OnInit()?1:0;
 }
@@ -109,7 +109,7 @@ int wxApp_OnExit(_App* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxApp_Initialize(_App* self,int& argc, char **argv)
+dbit wxApp_Initialize(_App* self,int& argc, char **argv)
 {
 	const wxChar* wargv[argc];
         for (int i=0; i < argc; i++)
@@ -169,7 +169,7 @@ void wxApp_SetAppName(wxApp* self, dstr name)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT 
-bool wxApp_SafeYield(wxWindow* win, bool onlyIfNeeded) 
+dbit wxApp_SafeYield(wxWindow* win, dbit onlyIfNeeded) 
 {
     return ::wxSafeYield(win, onlyIfNeeded)?1:0;
 }
@@ -178,7 +178,7 @@ bool wxApp_SafeYield(wxWindow* win, bool onlyIfNeeded)
     #undef Yield
 #endif
 extern "C" WXEXPORT
-bool wxApp_Yield(wxApp* self, bool onlyIfNeeded)
+dbit wxApp_Yield(wxApp* self, dbit onlyIfNeeded)
 {
     return self->Yield(onlyIfNeeded)?1:0;
 }

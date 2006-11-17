@@ -3,8 +3,8 @@
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - ColourDialog.cs
-// 
-// The wxColourDialog wrapper class.
+//
+/// The wxColourDialog wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -33,6 +33,7 @@ import wx.Dialog;
 
 		//---------------------------------------------------------------------
         
+	alias ColourData wxColourData;
 	public class ColourData : wxObject
 	{
 		private this(IntPtr wxobj) 
@@ -91,6 +92,7 @@ import wx.Dialog;
 	
 		//---------------------------------------------------------------------
 	
+	alias ColourDialog wxColourDialog;
 	public class ColourDialog : Dialog
 	{
 		public this(IntPtr wxobj)

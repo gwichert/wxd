@@ -113,6 +113,7 @@ OBJECTS = \
 	Sizer.obj \
 	SizerItem.obj \
 	Slider.obj \
+	Sound.obj \
 	SpinButton.obj \
 	SpinCtrl.obj \
 	SplashScreen.obj \
@@ -152,6 +153,7 @@ OBJECTS = \
 	wxObject.obj \
 	wxString.obj \
 	wxVersion.obj \
+	wxPlatform.obj \
 	Grid.obj \
 	GridCtrl.obj \
 	common.obj \
@@ -163,9 +165,10 @@ OBJECTS = \
 #	DbGrid.obj \
 #	NotifyEvent.obj \
 
-DMD=dmd
+all:  $(LIBTARGET)
 
-DFLAGS=-I..
+DMD=dmd
+DFLAGS=-version=__WXMSW__ -I..
 
 $(LIBTARGET): $(OBJECTS)
 	lib -p512 -c -n $@ $(OBJECTS)

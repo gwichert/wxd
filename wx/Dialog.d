@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Dialog.cs
 //
-// The wxDialog wrapper class.
+/// The wxDialog wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
@@ -42,6 +42,7 @@ import wx.Window;
 
 		//---------------------------------------------------------------------
 		
+	alias Dialog wxDialog;
 	public class Dialog : Window
 	{
 		enum {

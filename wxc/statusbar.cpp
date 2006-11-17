@@ -34,7 +34,7 @@ wxStatusBar* wxStatusBar_ctor()
 }
 
 extern "C" WXEXPORT
-bool wxStatusBar_Create(wxStatusBar* self, wxWindow* parent, wxWindowID id, unsigned int style, dstr name)
+dbit wxStatusBar_Create(wxStatusBar* self, wxWindow* parent, wxWindowID id, unsigned int style, dstr name)
 {
     if (name.data==NULL)
         name = dstr("statusBar",sizeof("statusBar")-1);
@@ -53,7 +53,7 @@ void wxStatusBar_SetFieldsCount(wxStatusBar* self, int number, int *widths)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStatusBar_GetFieldRect(wxStatusBar* self, int i, wxRect* rect)
+dbit wxStatusBar_GetFieldRect(wxStatusBar* self, int i, wxRect* rect)
 {
     return self->GetFieldRect(i, *rect)?1:0;
 }

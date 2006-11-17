@@ -4,7 +4,7 @@
 // based on
 // wx.NET - ImageList.cs
 //
-// The wxImageList wrapper class.
+/// The wxImageList wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
@@ -18,7 +18,8 @@ import wx.common;
 import wx.Bitmap;
 import wx.DC;
 
-	public enum wxImageList
+	// Flag values for Set/GetImageList
+	enum
 	{
 		wxIMAGE_LIST_NORMAL, // Normal icons
 		wxIMAGE_LIST_SMALL,  // Small icons
@@ -51,6 +52,7 @@ import wx.DC;
 
 		//---------------------------------------------------------------------
 
+	alias ImageList wxImageList;
 	public class ImageList : wxObject
 	{
 		public const int wxIMAGELIST_DRAW_NORMAL	= 0x0001;

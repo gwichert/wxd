@@ -3,8 +3,8 @@
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - KeyEvent.cs
-// 
-// The wxKeyEvent wrapper class.
+//
+/// The wxKeyEvent wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -40,6 +40,7 @@ import wx.Event;
 
         //-----------------------------------------------------------------------------
 
+    alias KeyEvent wxKeyEvent;
     public class KeyEvent : Event
     {
         public this(IntPtr wxobj) 

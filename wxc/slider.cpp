@@ -37,7 +37,7 @@ wxSlider* wxSlider_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxSlider_Create(wxSlider* self, wxWindow *parent, wxWindowID id, int value, int minValue, int maxValue, const wxPoint* pos, const wxSize* size, long style, const wxValidator* validator, dstr name)
+dbit wxSlider_Create(wxSlider* self, wxWindow *parent, wxWindowID id, int value, int minValue, int maxValue, const wxPoint* pos, const wxSize* size, long style, const wxValidator* validator, dstr name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;

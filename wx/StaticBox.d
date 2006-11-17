@@ -4,7 +4,7 @@
 // based on
 // wx.NET - StaticBox.cs
 //
-// The wxStaticBox wrapper class.
+/// The wxStaticBox wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -23,6 +23,7 @@ import wx.Control;
 	
 		//---------------------------------------------------------------------
 
+	alias StaticBox wxStaticBox;
 	public class StaticBox : Control
 	{
 		public const string wxStaticBoxNameStr = "groupBox";

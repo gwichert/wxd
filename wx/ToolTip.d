@@ -4,7 +4,7 @@
 // based on
 // wx.NET - ToolTip.cs
 //
-// The wxToolTip wrapper class.
+/// The wxToolTip wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -29,6 +29,7 @@ import wx.Window;
 
         //---------------------------------------------------------------------
 
+	alias ToolTip wxToolTip;
 	public class ToolTip : wxObject
 	{
         public this(IntPtr wxobj)

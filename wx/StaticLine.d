@@ -4,7 +4,7 @@
 // based on
 // wx.NET - StaticLine.cs
 //
-// The wxStaticLine wrapper class.
+/// The wxStaticLine wrapper class.
 //
 // Written by Robert Roebling
 // (C) 2003 by Robert Roebling
@@ -26,6 +26,7 @@ import wx.Control;
 
 		//---------------------------------------------------------------------
 
+	alias StaticLine wxStaticLine;
 	public class StaticLine : Control
 	{
 		enum {

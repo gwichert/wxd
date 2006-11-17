@@ -43,7 +43,7 @@ void wxDialog_dtor(wxDialog* self)
 }
 
 extern "C" WXEXPORT
-bool wxDialog_Create(wxDialog* self, wxWindow* parent, int id,
+dbit wxDialog_Create(wxDialog* self, wxWindow* parent, int id,
 				     dstr title, const wxPoint* pos, const wxSize* size,
 					 long style, dstr name)
 {
@@ -99,13 +99,13 @@ void wxDialog_EndModal(wxDialog* self, int retCode)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxDialog_IsModal(wxDialog* self)
+dbit wxDialog_IsModal(wxDialog* self)
 {
 	return self->IsModal()?1:0;
 }
     
 extern "C" WXEXPORT
-void wxDialog_SetModal(wxDialog* self, bool modal)
+void wxDialog_SetModal(wxDialog* self, dbit modal)
 {
 	self->SetModal(modal);
 }

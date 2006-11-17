@@ -4,7 +4,7 @@
 // based on
 // wx.NET - ChoiceDialog.cs
 //
-// The wxChoiceDialog wrapper classes.
+/// The wxChoiceDialog wrapper classes.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2003 Alexander Olk
@@ -29,6 +29,7 @@ import wx.ArrayInt;
 
         //-----------------------------------------------------------------------------
 
+    alias SingleChoiceDialog wxSingleChoiceDialog;
     public class SingleChoiceDialog : Dialog
     {
         enum {
@@ -85,6 +86,7 @@ import wx.ArrayInt;
 
         //-----------------------------------------------------------------------------
 
+    alias MultiChoiceDialog wxMultiChoiceDialog;
     public class MultiChoiceDialog : Dialog
     {
         public this(IntPtr wxobj)

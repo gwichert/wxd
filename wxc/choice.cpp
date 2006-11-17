@@ -34,7 +34,7 @@ wxChoice* wxChoice_ctor()
 }
 
 extern "C" WXEXPORT
-bool wxChoice_Create(wxChoice* self, wxWindow* parent, int id, const wxPoint* pos,
+dbit wxChoice_Create(wxChoice* self, wxWindow* parent, int id, const wxPoint* pos,
                      const wxSize* size, int n, dstr choices[],
                      long style, const wxValidator* validator,
                      dstr name)
@@ -225,7 +225,7 @@ wxClientData* wxChoice_GetClientObject(wxChoice* self, int n)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxChoice_HasClientObjectData(wxChoice* self)
+dbit wxChoice_HasClientObjectData(wxChoice* self)
 {
 	return self->HasClientObjectData()?1:0;
 }
@@ -233,7 +233,7 @@ bool wxChoice_HasClientObjectData(wxChoice* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxChoice_HasClientUntypedData(wxChoice* self)
+dbit wxChoice_HasClientUntypedData(wxChoice* self)
 {
 	return self->HasClientUntypedData()?1:0;
 }
@@ -249,7 +249,7 @@ void wxChoice_SetSelection(wxChoice* self, int n)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxChoice_SetStringSelection(wxChoice* self, dstr s)
+dbit wxChoice_SetStringSelection(wxChoice* self, dstr s)
 {
     return self->SetStringSelection(wxString(s.data, wxConvUTF8, s.length))?1:0;
 }
@@ -289,7 +289,7 @@ void wxChoice_Select(wxChoice* self, int n)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxChoice_ShouldInheritColours(wxChoice* self)
+dbit wxChoice_ShouldInheritColours(wxChoice* self)
 {
 	return self->ShouldInheritColours()?1:0; 
 }
@@ -297,7 +297,7 @@ bool wxChoice_ShouldInheritColours(wxChoice* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxChoice_IsEmpty(wxChoice* self)
+dbit wxChoice_IsEmpty(wxChoice* self)
 {
 	return self->IsEmpty()?1:0;
 }

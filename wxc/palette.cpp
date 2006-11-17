@@ -36,7 +36,7 @@ void wxPalette_dtor(wxPalette* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxPalette_Ok(wxPalette* self)
+dbit wxPalette_Ok(wxPalette* self)
 {
 	return self->Ok()?1:0;
 }
@@ -44,7 +44,7 @@ bool wxPalette_Ok(wxPalette* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxPalette_Create(wxPalette* self, int n, const unsigned char *red,
+dbit wxPalette_Create(wxPalette* self, int n, const unsigned char *red,
 					  const unsigned char *green, const unsigned char *blue)
 {
 	return self->Create(n, red, green, blue)?1:0;
@@ -62,7 +62,7 @@ int wxPalette_GetPixel(wxPalette* self, const unsigned char red,
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxPalette_GetRGB(wxPalette* self, int pixel, unsigned char *red,
+dbit wxPalette_GetRGB(wxPalette* self, int pixel, unsigned char *red,
 					  unsigned char *green, unsigned char *blue)
 {
 	return self->GetRGB(pixel, red, green, blue)?1:0;

@@ -123,7 +123,7 @@ void wxVListBox_RegisterVirtual(_VListBox* self, dobj obj,
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxVListBox_Create(_VListBox* self, wxWindow *parent, wxWindowID id, const wxPoint* pos,
+dbit wxVListBox_Create(_VListBox* self, wxWindow *parent, wxWindowID id, const wxPoint* pos,
 					               const wxSize* size, long style, dstr name)
 {
 	if (pos == NULL)
@@ -173,7 +173,7 @@ int wxVListBox_GetItemCount(_VListBox* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxVListBox_HasMultipleSelection(_VListBox* self)
+dbit wxVListBox_HasMultipleSelection(_VListBox* self)
 {
 	return self->HasMultipleSelection()?1:0;
 }
@@ -189,7 +189,7 @@ int wxVListBox_GetSelection(_VListBox* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxVListBox_IsCurrent(_VListBox* self, int item)
+dbit wxVListBox_IsCurrent(_VListBox* self, int item)
 {
 	return self->IsCurrent(item)?1:0;
 }
@@ -197,7 +197,7 @@ bool wxVListBox_IsCurrent(_VListBox* self, int item)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxVListBox_IsSelected(_VListBox* self, int item)
+dbit wxVListBox_IsSelected(_VListBox* self, int item)
 {
 	return self->IsSelected(item)?1:0;
 }
@@ -269,7 +269,7 @@ void wxVListBox_SetSelection(_VListBox* self, int selection)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxVListBox_Select(_VListBox* self, int item, bool select)
+dbit wxVListBox_Select(_VListBox* self, int item, dbit select)
 {
 	return self->Select(item, select)?1:0;
 }
@@ -277,7 +277,7 @@ bool wxVListBox_Select(_VListBox* self, int item, bool select)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxVListBox_SelectRange(_VListBox* self, int from, int to)
+dbit wxVListBox_SelectRange(_VListBox* self, int from, int to)
 {
 	return self->SelectRange(from, to)?1:0;
 }
@@ -293,7 +293,7 @@ void wxVListBox_Toggle(_VListBox* self, int item)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxVListBox_SelectAll(_VListBox* self)
+dbit wxVListBox_SelectAll(_VListBox* self)
 {
 	return self->SelectAll()?1:0;
 }
@@ -301,7 +301,7 @@ bool wxVListBox_SelectAll(_VListBox* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxVListBox_DeselectAll(_VListBox* self)
+dbit wxVListBox_DeselectAll(_VListBox* self)
 {
 	return self->DeselectAll()?1:0;
 }

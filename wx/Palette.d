@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Palette.cs
 //
-// The wxPalette wrapper class.
+/// The wxPalette wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -25,6 +25,7 @@ import wx.GDIObject;
 		static extern (C) bool wxPalette_GetRGB(IntPtr self, int pixel, out ubyte red, out ubyte green, out ubyte blue);
 		//! \endcond
 
+	alias Palette wxPalette;
 	public class Palette : GDIObject
 	{
 		public static Palette wxNullPalette;

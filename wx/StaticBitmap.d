@@ -4,7 +4,7 @@
 // based on
 // wx.NET - StaticBitmap.cs
 //
-// The wxStaticBitmap wrapper class.
+/// The wxStaticBitmap wrapper class.
 //
 // Written by Robert Roebling
 // (C) 2003 Robert Roebling
@@ -26,6 +26,7 @@ import wx.Control;
 
 		//---------------------------------------------------------------------
 
+	alias StaticBitmap wxStaticBitmap;
 	public class StaticBitmap : Control
 	{
 		public const string wxStaticBitmapNameStr = "message";

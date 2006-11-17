@@ -166,7 +166,7 @@ void wxStyledTextCtrl_Redo(wxStyledTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetUndoCollection(wxStyledTextCtrl* self, bool collectUndo)
+void wxStyledTextCtrl_SetUndoCollection(wxStyledTextCtrl* self, dbit collectUndo)
 {
     self->SetUndoCollection(collectUndo);
 }
@@ -198,7 +198,7 @@ wxMemoryBuffer* wxStyledTextCtrl_GetStyledText(wxStyledTextCtrl* self, int start
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_CanRedo(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_CanRedo(wxStyledTextCtrl* self)
 {
     return self->CanRedo()?1:0;
 }
@@ -222,7 +222,7 @@ void wxStyledTextCtrl_MarkerDeleteHandle(wxStyledTextCtrl* self, int handle)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_GetUndoCollection(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_GetUndoCollection(wxStyledTextCtrl* self)
 {
     return self->GetUndoCollection()?1:0;
 }
@@ -342,7 +342,7 @@ void wxStyledTextCtrl_SetStyling(wxStyledTextCtrl* self, int length, int style)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_GetBufferedDraw(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_GetBufferedDraw(wxStyledTextCtrl* self)
 {
     return self->GetBufferedDraw()?1:0;
 }
@@ -350,7 +350,7 @@ bool wxStyledTextCtrl_GetBufferedDraw(wxStyledTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetBufferedDraw(wxStyledTextCtrl* self, bool buffered)
+void wxStyledTextCtrl_SetBufferedDraw(wxStyledTextCtrl* self, dbit buffered)
 {
     self->SetBufferedDraw(buffered);
 }
@@ -513,7 +513,7 @@ int wxStyledTextCtrl_GetMarginMask(wxStyledTextCtrl* self, int margin)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetMarginSensitive(wxStyledTextCtrl* self, int margin, bool sensitive)
+void wxStyledTextCtrl_SetMarginSensitive(wxStyledTextCtrl* self, int margin, dbit sensitive)
 {
     self->SetMarginSensitive(margin, sensitive);
 }
@@ -521,7 +521,7 @@ void wxStyledTextCtrl_SetMarginSensitive(wxStyledTextCtrl* self, int margin, boo
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_GetMarginSensitive(wxStyledTextCtrl* self, int margin)
+dbit wxStyledTextCtrl_GetMarginSensitive(wxStyledTextCtrl* self, int margin)
 {
     return self->GetMarginSensitive(margin)?1:0;
 }
@@ -553,7 +553,7 @@ void wxStyledTextCtrl_StyleSetBackground(wxStyledTextCtrl* self, int style, wxCo
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_StyleSetBold(wxStyledTextCtrl* self, int style, bool bold)
+void wxStyledTextCtrl_StyleSetBold(wxStyledTextCtrl* self, int style, dbit bold)
 {
     self->StyleSetBold(style, bold);
 }
@@ -561,7 +561,7 @@ void wxStyledTextCtrl_StyleSetBold(wxStyledTextCtrl* self, int style, bool bold)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_StyleSetItalic(wxStyledTextCtrl* self, int style, bool italic)
+void wxStyledTextCtrl_StyleSetItalic(wxStyledTextCtrl* self, int style, dbit italic)
 {
     self->StyleSetItalic(style, italic);
 }
@@ -585,7 +585,7 @@ void wxStyledTextCtrl_StyleSetFaceName(wxStyledTextCtrl* self, int style, dstr f
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_StyleSetEOLFilled(wxStyledTextCtrl* self, int style, bool filled)
+void wxStyledTextCtrl_StyleSetEOLFilled(wxStyledTextCtrl* self, int style, dbit filled)
 {
     self->StyleSetEOLFilled(style, filled);
 }
@@ -601,7 +601,7 @@ void wxStyledTextCtrl_StyleResetDefault(wxStyledTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_StyleSetUnderline(wxStyledTextCtrl* self, int style, bool underline)
+void wxStyledTextCtrl_StyleSetUnderline(wxStyledTextCtrl* self, int style, dbit underline)
 {
     self->StyleSetUnderline(style, underline);
 }
@@ -625,7 +625,7 @@ void wxStyledTextCtrl_StyleSetCharacterSet(wxStyledTextCtrl* self, int style, in
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_StyleSetHotSpot(wxStyledTextCtrl* self, int style, bool hotspot)
+void wxStyledTextCtrl_StyleSetHotSpot(wxStyledTextCtrl* self, int style, dbit hotspot)
 {
     self->StyleSetHotSpot(style, hotspot);
 }
@@ -633,7 +633,7 @@ void wxStyledTextCtrl_StyleSetHotSpot(wxStyledTextCtrl* self, int style, bool ho
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetSelForeground(wxStyledTextCtrl* self, bool useSetting, wxColour* fore)
+void wxStyledTextCtrl_SetSelForeground(wxStyledTextCtrl* self, dbit useSetting, wxColour* fore)
 {
     self->SetSelForeground(useSetting, *fore);
 }
@@ -641,7 +641,7 @@ void wxStyledTextCtrl_SetSelForeground(wxStyledTextCtrl* self, bool useSetting, 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetSelBackground(wxStyledTextCtrl* self, bool useSetting, wxColour* back)
+void wxStyledTextCtrl_SetSelBackground(wxStyledTextCtrl* self, dbit useSetting, wxColour* back)
 {
     self->SetSelBackground(useSetting, *back);
 }
@@ -689,7 +689,7 @@ void wxStyledTextCtrl_SetStyleBytes(wxStyledTextCtrl* self, int length, dstr sty
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_StyleSetVisible(wxStyledTextCtrl* self, int style, bool visible)
+void wxStyledTextCtrl_StyleSetVisible(wxStyledTextCtrl* self, int style, dbit visible)
 {
     self->StyleSetVisible(style, visible);
 }
@@ -769,7 +769,7 @@ wxColour* wxStyledTextCtrl_IndicatorGetForeground(wxStyledTextCtrl* self, int in
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetWhitespaceForeground(wxStyledTextCtrl* self, bool useSetting, wxColour* fore)
+void wxStyledTextCtrl_SetWhitespaceForeground(wxStyledTextCtrl* self, dbit useSetting, wxColour* fore)
 {
     self->SetWhitespaceForeground(useSetting, *fore);
 }
@@ -777,7 +777,7 @@ void wxStyledTextCtrl_SetWhitespaceForeground(wxStyledTextCtrl* self, bool useSe
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetWhitespaceBackground(wxStyledTextCtrl* self, bool useSetting, wxColour* back)
+void wxStyledTextCtrl_SetWhitespaceBackground(wxStyledTextCtrl* self, dbit useSetting, wxColour* back)
 {
     self->SetWhitespaceBackground(useSetting, *back);
 }
@@ -825,7 +825,7 @@ int wxStyledTextCtrl_GetMaxLineState(wxStyledTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_GetCaretLineVisible(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_GetCaretLineVisible(wxStyledTextCtrl* self)
 {
     return self->GetCaretLineVisible()?1:0;
 }
@@ -833,7 +833,7 @@ bool wxStyledTextCtrl_GetCaretLineVisible(wxStyledTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetCaretLineVisible(wxStyledTextCtrl* self, bool show)
+void wxStyledTextCtrl_SetCaretLineVisible(wxStyledTextCtrl* self, dbit show)
 {
     self->SetCaretLineVisible(show);
 }
@@ -857,7 +857,7 @@ void wxStyledTextCtrl_SetCaretLineBack(wxStyledTextCtrl* self, wxColour* back)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_StyleSetChangeable(wxStyledTextCtrl* self, int style, bool changeable)
+void wxStyledTextCtrl_StyleSetChangeable(wxStyledTextCtrl* self, int style, dbit changeable)
 {
     self->StyleSetChangeable(style, changeable);
 }
@@ -881,7 +881,7 @@ void wxStyledTextCtrl_AutoCompCancel(wxStyledTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_AutoCompActive(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_AutoCompActive(wxStyledTextCtrl* self)
 {
     return self->AutoCompActive()?1:0;
 }
@@ -937,7 +937,7 @@ void wxStyledTextCtrl_AutoCompSelect(wxStyledTextCtrl* self, dstr text)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_AutoCompSetCancelAtStart(wxStyledTextCtrl* self, bool cancel)
+void wxStyledTextCtrl_AutoCompSetCancelAtStart(wxStyledTextCtrl* self, dbit cancel)
 {
     self->AutoCompSetCancelAtStart(cancel);
 }
@@ -945,7 +945,7 @@ void wxStyledTextCtrl_AutoCompSetCancelAtStart(wxStyledTextCtrl* self, bool canc
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_AutoCompGetCancelAtStart(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_AutoCompGetCancelAtStart(wxStyledTextCtrl* self)
 {
     return self->AutoCompGetCancelAtStart()?1:0;
 }
@@ -961,7 +961,7 @@ void wxStyledTextCtrl_AutoCompSetFillUps(wxStyledTextCtrl* self, dstr characterS
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_AutoCompSetChooseSingle(wxStyledTextCtrl* self, bool chooseSingle)
+void wxStyledTextCtrl_AutoCompSetChooseSingle(wxStyledTextCtrl* self, dbit chooseSingle)
 {
     self->AutoCompSetChooseSingle(chooseSingle);
 }
@@ -969,7 +969,7 @@ void wxStyledTextCtrl_AutoCompSetChooseSingle(wxStyledTextCtrl* self, bool choos
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_AutoCompGetChooseSingle(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_AutoCompGetChooseSingle(wxStyledTextCtrl* self)
 {
     return self->AutoCompGetChooseSingle()?1:0;
 }
@@ -977,7 +977,7 @@ bool wxStyledTextCtrl_AutoCompGetChooseSingle(wxStyledTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_AutoCompSetIgnoreCase(wxStyledTextCtrl* self, bool ignoreCase)
+void wxStyledTextCtrl_AutoCompSetIgnoreCase(wxStyledTextCtrl* self, dbit ignoreCase)
 {
     self->AutoCompSetIgnoreCase(ignoreCase);
 }
@@ -985,7 +985,7 @@ void wxStyledTextCtrl_AutoCompSetIgnoreCase(wxStyledTextCtrl* self, bool ignoreC
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_AutoCompGetIgnoreCase(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_AutoCompGetIgnoreCase(wxStyledTextCtrl* self)
 {
     return self->AutoCompGetIgnoreCase()?1:0;
 }
@@ -1001,7 +1001,7 @@ void wxStyledTextCtrl_UserListShow(wxStyledTextCtrl* self, int listType, dstr it
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_AutoCompSetAutoHide(wxStyledTextCtrl* self, bool autoHide)
+void wxStyledTextCtrl_AutoCompSetAutoHide(wxStyledTextCtrl* self, dbit autoHide)
 {
     self->AutoCompSetAutoHide(autoHide);
 }
@@ -1009,7 +1009,7 @@ void wxStyledTextCtrl_AutoCompSetAutoHide(wxStyledTextCtrl* self, bool autoHide)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_AutoCompGetAutoHide(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_AutoCompGetAutoHide(wxStyledTextCtrl* self)
 {
     return self->AutoCompGetAutoHide()?1:0;
 }
@@ -1017,7 +1017,7 @@ bool wxStyledTextCtrl_AutoCompGetAutoHide(wxStyledTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_AutoCompSetDropRestOfWord(wxStyledTextCtrl* self, bool dropRestOfWord)
+void wxStyledTextCtrl_AutoCompSetDropRestOfWord(wxStyledTextCtrl* self, dbit dropRestOfWord)
 {
     self->AutoCompSetDropRestOfWord(dropRestOfWord);
 }
@@ -1025,7 +1025,7 @@ void wxStyledTextCtrl_AutoCompSetDropRestOfWord(wxStyledTextCtrl* self, bool dro
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_AutoCompGetDropRestOfWord(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_AutoCompGetDropRestOfWord(wxStyledTextCtrl* self)
 {
     return self->AutoCompGetDropRestOfWord()?1:0;
 }
@@ -1081,7 +1081,7 @@ int wxStyledTextCtrl_GetIndent(wxStyledTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetUseTabs(wxStyledTextCtrl* self, bool useTabs)
+void wxStyledTextCtrl_SetUseTabs(wxStyledTextCtrl* self, dbit useTabs)
 {
     self->SetUseTabs(useTabs);
 }
@@ -1089,7 +1089,7 @@ void wxStyledTextCtrl_SetUseTabs(wxStyledTextCtrl* self, bool useTabs)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_GetUseTabs(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_GetUseTabs(wxStyledTextCtrl* self)
 {
     return self->GetUseTabs()?1:0;
 }
@@ -1129,7 +1129,7 @@ int wxStyledTextCtrl_GetColumn(wxStyledTextCtrl* self, int pos)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetUseHorizontalScrollBar(wxStyledTextCtrl* self, bool show)
+void wxStyledTextCtrl_SetUseHorizontalScrollBar(wxStyledTextCtrl* self, dbit show)
 {
     self->SetUseHorizontalScrollBar(show);
 }
@@ -1137,7 +1137,7 @@ void wxStyledTextCtrl_SetUseHorizontalScrollBar(wxStyledTextCtrl* self, bool sho
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_GetUseHorizontalScrollBar(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_GetUseHorizontalScrollBar(wxStyledTextCtrl* self)
 {
     return self->GetUseHorizontalScrollBar()?1:0;
 }
@@ -1145,7 +1145,7 @@ bool wxStyledTextCtrl_GetUseHorizontalScrollBar(wxStyledTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetIndentationGuides(wxStyledTextCtrl* self, bool show)
+void wxStyledTextCtrl_SetIndentationGuides(wxStyledTextCtrl* self, dbit show)
 {
     self->SetIndentationGuides(show);
 }
@@ -1153,7 +1153,7 @@ void wxStyledTextCtrl_SetIndentationGuides(wxStyledTextCtrl* self, bool show)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_GetIndentationGuides(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_GetIndentationGuides(wxStyledTextCtrl* self)
 {
     return self->GetIndentationGuides()?1:0;
 }
@@ -1201,7 +1201,7 @@ wxColour* wxStyledTextCtrl_GetCaretForeground(wxStyledTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_GetReadOnly(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_GetReadOnly(wxStyledTextCtrl* self)
 {
     return self->GetReadOnly()?1:0;
 }
@@ -1289,7 +1289,7 @@ int wxStyledTextCtrl_FindText(wxStyledTextCtrl* self, int minPos, int maxPos, ds
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxStyledTextCtrl_FormatRange(wxStyledTextCtrl* self, bool doDraw, int startPos, int endPos, wxDC* draw, wxDC* target, wxRect renderRect, wxRect pageRect)
+int wxStyledTextCtrl_FormatRange(wxStyledTextCtrl* self, dbit doDraw, int startPos, int endPos, wxDC* draw, wxDC* target, wxRect renderRect, wxRect pageRect)
 {
     return self->FormatRange(doDraw, startPos, endPos, draw, target, renderRect, pageRect);
 }
@@ -1353,7 +1353,7 @@ int wxStyledTextCtrl_GetMarginRight(wxStyledTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_GetModify(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_GetModify(wxStyledTextCtrl* self)
 {
     return self->GetModify()?1:0;
 }
@@ -1385,7 +1385,7 @@ dstrret wxStyledTextCtrl_GetTextRange(wxStyledTextCtrl* self, int startPos, int 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_HideSelection(wxStyledTextCtrl* self, bool normal)
+void wxStyledTextCtrl_HideSelection(wxStyledTextCtrl* self, dbit normal)
 {
     self->HideSelection(normal);
 }
@@ -1433,7 +1433,7 @@ void wxStyledTextCtrl_ReplaceSelection(wxStyledTextCtrl* self, dstr text)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetReadOnly(wxStyledTextCtrl* self, bool readOnly)
+void wxStyledTextCtrl_SetReadOnly(wxStyledTextCtrl* self, dbit readOnly)
 {
     self->SetReadOnly(readOnly);
 }
@@ -1441,7 +1441,7 @@ void wxStyledTextCtrl_SetReadOnly(wxStyledTextCtrl* self, bool readOnly)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_CanPaste(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_CanPaste(wxStyledTextCtrl* self)
 {
     return self->CanPaste()?1:0;
 }
@@ -1449,7 +1449,7 @@ bool wxStyledTextCtrl_CanPaste(wxStyledTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_CanUndo(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_CanUndo(wxStyledTextCtrl* self)
 {
     return self->CanUndo()?1:0;
 }
@@ -1529,7 +1529,7 @@ int wxStyledTextCtrl_GetTextLength(wxStyledTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetOvertype(wxStyledTextCtrl* self, bool overtype)
+void wxStyledTextCtrl_SetOvertype(wxStyledTextCtrl* self, dbit overtype)
 {
     self->SetOvertype(overtype);
 }
@@ -1537,7 +1537,7 @@ void wxStyledTextCtrl_SetOvertype(wxStyledTextCtrl* self, bool overtype)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_GetOvertype(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_GetOvertype(wxStyledTextCtrl* self)
 {
     return self->GetOvertype()?1:0;
 }
@@ -1649,7 +1649,7 @@ void wxStyledTextCtrl_CallTipCancel(wxStyledTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_CallTipActive(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_CallTipActive(wxStyledTextCtrl* self)
 {
     return self->CallTipActive()?1:0;
 }
@@ -1761,7 +1761,7 @@ void wxStyledTextCtrl_HideLines(wxStyledTextCtrl* self, int lineStart, int lineE
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_GetLineVisible(wxStyledTextCtrl* self, int line)
+dbit wxStyledTextCtrl_GetLineVisible(wxStyledTextCtrl* self, int line)
 {
     return self->GetLineVisible(line)?1:0;
 }
@@ -1769,7 +1769,7 @@ bool wxStyledTextCtrl_GetLineVisible(wxStyledTextCtrl* self, int line)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetFoldExpanded(wxStyledTextCtrl* self, int line, bool expanded)
+void wxStyledTextCtrl_SetFoldExpanded(wxStyledTextCtrl* self, int line, dbit expanded)
 {
     self->SetFoldExpanded(line, expanded);
 }
@@ -1777,7 +1777,7 @@ void wxStyledTextCtrl_SetFoldExpanded(wxStyledTextCtrl* self, int line, bool exp
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_GetFoldExpanded(wxStyledTextCtrl* self, int line)
+dbit wxStyledTextCtrl_GetFoldExpanded(wxStyledTextCtrl* self, int line)
 {
     return self->GetFoldExpanded(line)?1:0;
 }
@@ -1817,7 +1817,7 @@ void wxStyledTextCtrl_EnsureVisibleEnforcePolicy(wxStyledTextCtrl* self, int lin
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetTabIndents(wxStyledTextCtrl* self, bool tabIndents)
+void wxStyledTextCtrl_SetTabIndents(wxStyledTextCtrl* self, dbit tabIndents)
 {
     self->SetTabIndents(tabIndents);
 }
@@ -1825,7 +1825,7 @@ void wxStyledTextCtrl_SetTabIndents(wxStyledTextCtrl* self, bool tabIndents)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_GetTabIndents(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_GetTabIndents(wxStyledTextCtrl* self)
 {
     return self->GetTabIndents()?1:0;
 }
@@ -1833,7 +1833,7 @@ bool wxStyledTextCtrl_GetTabIndents(wxStyledTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetBackSpaceUnIndents(wxStyledTextCtrl* self, bool bsUnIndents)
+void wxStyledTextCtrl_SetBackSpaceUnIndents(wxStyledTextCtrl* self, dbit bsUnIndents)
 {
     self->SetBackSpaceUnIndents(bsUnIndents);
 }
@@ -1841,7 +1841,7 @@ void wxStyledTextCtrl_SetBackSpaceUnIndents(wxStyledTextCtrl* self, bool bsUnInd
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_GetBackSpaceUnIndents(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_GetBackSpaceUnIndents(wxStyledTextCtrl* self)
 {
     return self->GetBackSpaceUnIndents()?1:0;
 }
@@ -1865,7 +1865,7 @@ int wxStyledTextCtrl_GetMouseDwellTime(wxStyledTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxStyledTextCtrl_WordStartPosition(wxStyledTextCtrl* self, int pos, bool onlyWordCharacters)
+int wxStyledTextCtrl_WordStartPosition(wxStyledTextCtrl* self, int pos, dbit onlyWordCharacters)
 {
     return self->WordStartPosition(pos, onlyWordCharacters);
 }
@@ -1873,7 +1873,7 @@ int wxStyledTextCtrl_WordStartPosition(wxStyledTextCtrl* self, int pos, bool onl
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxStyledTextCtrl_WordEndPosition(wxStyledTextCtrl* self, int pos, bool onlyWordCharacters)
+int wxStyledTextCtrl_WordEndPosition(wxStyledTextCtrl* self, int pos, dbit onlyWordCharacters)
 {
     return self->WordEndPosition(pos, onlyWordCharacters);
 }
@@ -1937,7 +1937,7 @@ int wxStyledTextCtrl_TextWidth(wxStyledTextCtrl* self, int style, dstr text)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetEndAtLastLine(wxStyledTextCtrl* self, bool endAtLastLine)
+void wxStyledTextCtrl_SetEndAtLastLine(wxStyledTextCtrl* self, dbit endAtLastLine)
 {
     self->SetEndAtLastLine(endAtLastLine);
 }
@@ -1945,9 +1945,9 @@ void wxStyledTextCtrl_SetEndAtLastLine(wxStyledTextCtrl* self, bool endAtLastLin
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_GetEndAtLastLine(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_GetEndAtLastLine(wxStyledTextCtrl* self)
 {
-    return (bool)self->GetEndAtLastLine()?1:0;
+    return (dbit)self->GetEndAtLastLine()?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -1961,7 +1961,7 @@ int wxStyledTextCtrl_TextHeight(wxStyledTextCtrl* self, int line)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetUseVerticalScrollBar(wxStyledTextCtrl* self, bool show)
+void wxStyledTextCtrl_SetUseVerticalScrollBar(wxStyledTextCtrl* self, dbit show)
 {
     self->SetUseVerticalScrollBar(show);
 }
@@ -1969,7 +1969,7 @@ void wxStyledTextCtrl_SetUseVerticalScrollBar(wxStyledTextCtrl* self, bool show)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_GetUseVerticalScrollBar(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_GetUseVerticalScrollBar(wxStyledTextCtrl* self)
 {
     return self->GetUseVerticalScrollBar()?1:0;
 }
@@ -1985,7 +1985,7 @@ void wxStyledTextCtrl_AppendText(wxStyledTextCtrl* self, dstr text)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_GetTwoPhaseDraw(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_GetTwoPhaseDraw(wxStyledTextCtrl* self)
 {
     return self->GetTwoPhaseDraw()?1:0;
 }
@@ -1993,7 +1993,7 @@ bool wxStyledTextCtrl_GetTwoPhaseDraw(wxStyledTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetTwoPhaseDraw(wxStyledTextCtrl* self, bool twoPhase)
+void wxStyledTextCtrl_SetTwoPhaseDraw(wxStyledTextCtrl* self, dbit twoPhase)
 {
     self->SetTwoPhaseDraw(twoPhase);
 }
@@ -2025,7 +2025,7 @@ void wxStyledTextCtrl_LinesSplit(wxStyledTextCtrl* self, int pixelWidth)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetFoldMarginColour(wxStyledTextCtrl* self, bool useSetting, wxColour* back)
+void wxStyledTextCtrl_SetFoldMarginColour(wxStyledTextCtrl* self, dbit useSetting, wxColour* back)
 {
     self->SetFoldMarginColour(useSetting, *back);
 }
@@ -2033,7 +2033,7 @@ void wxStyledTextCtrl_SetFoldMarginColour(wxStyledTextCtrl* self, bool useSettin
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetFoldMarginHiColour(wxStyledTextCtrl* self, bool useSetting, wxColour* fore)
+void wxStyledTextCtrl_SetFoldMarginHiColour(wxStyledTextCtrl* self, dbit useSetting, wxColour* fore)
 {
     self->SetFoldMarginHiColour(useSetting, *fore);
 }
@@ -2121,7 +2121,7 @@ int wxStyledTextCtrl_BraceMatch(wxStyledTextCtrl* self, int pos)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_GetViewEOL(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_GetViewEOL(wxStyledTextCtrl* self)
 {
     return self->GetViewEOL()?1:0;
 }
@@ -2129,7 +2129,7 @@ bool wxStyledTextCtrl_GetViewEOL(wxStyledTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetViewEOL(wxStyledTextCtrl* self, bool visible)
+void wxStyledTextCtrl_SetViewEOL(wxStyledTextCtrl* self, dbit visible)
 {
     self->SetViewEOL(visible);
 }
@@ -2241,7 +2241,7 @@ int wxStyledTextCtrl_LinesOnScreen(wxStyledTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_UsePopUp(wxStyledTextCtrl* self, bool allowPopUp)
+void wxStyledTextCtrl_UsePopUp(wxStyledTextCtrl* self, dbit allowPopUp)
 {
     self->UsePopUp(allowPopUp);
 }
@@ -2249,7 +2249,7 @@ void wxStyledTextCtrl_UsePopUp(wxStyledTextCtrl* self, bool allowPopUp)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_SelectionIsRectangle(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_SelectionIsRectangle(wxStyledTextCtrl* self)
 {
     return self->SelectionIsRectangle()?1:0;
 }
@@ -2305,7 +2305,7 @@ int wxStyledTextCtrl_GetModEventMask(wxStyledTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetSTCFocus(wxStyledTextCtrl* self, bool focus)
+void wxStyledTextCtrl_SetSTCFocus(wxStyledTextCtrl* self, dbit focus)
 {
     self->SetSTCFocus(focus);
 }
@@ -2313,7 +2313,7 @@ void wxStyledTextCtrl_SetSTCFocus(wxStyledTextCtrl* self, bool focus)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_GetSTCFocus(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_GetSTCFocus(wxStyledTextCtrl* self)
 {
     return self->GetSTCFocus()?1:0;
 }
@@ -2337,7 +2337,7 @@ int wxStyledTextCtrl_GetStatus(wxStyledTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetMouseDownCaptures(wxStyledTextCtrl* self, bool captures)
+void wxStyledTextCtrl_SetMouseDownCaptures(wxStyledTextCtrl* self, dbit captures)
 {
     self->SetMouseDownCaptures(captures);
 }
@@ -2345,7 +2345,7 @@ void wxStyledTextCtrl_SetMouseDownCaptures(wxStyledTextCtrl* self, bool captures
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_GetMouseDownCaptures(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_GetMouseDownCaptures(wxStyledTextCtrl* self)
 {
     return self->GetMouseDownCaptures()?1:0;
 }
@@ -2497,7 +2497,7 @@ int wxStyledTextCtrl_GetPrintWrapMode(wxStyledTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetHotspotActiveForeground(wxStyledTextCtrl* self, bool useSetting, wxColour* fore)
+void wxStyledTextCtrl_SetHotspotActiveForeground(wxStyledTextCtrl* self, dbit useSetting, wxColour* fore)
 {
     self->SetHotspotActiveForeground(useSetting, *fore);
 }
@@ -2505,7 +2505,7 @@ void wxStyledTextCtrl_SetHotspotActiveForeground(wxStyledTextCtrl* self, bool us
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetHotspotActiveBackground(wxStyledTextCtrl* self, bool useSetting, wxColour* back)
+void wxStyledTextCtrl_SetHotspotActiveBackground(wxStyledTextCtrl* self, dbit useSetting, wxColour* back)
 {
     self->SetHotspotActiveBackground(useSetting, *back);
 }
@@ -2513,7 +2513,7 @@ void wxStyledTextCtrl_SetHotspotActiveBackground(wxStyledTextCtrl* self, bool us
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetHotspotActiveUnderline(wxStyledTextCtrl* self, bool underline)
+void wxStyledTextCtrl_SetHotspotActiveUnderline(wxStyledTextCtrl* self, dbit underline)
 {
     self->SetHotspotActiveUnderline(underline);
 }
@@ -2609,7 +2609,7 @@ void wxStyledTextCtrl_StyleSetFont(wxStyledTextCtrl* self, int styleNum, wxFont*
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_StyleSetFontAttr(wxStyledTextCtrl* self, int styleNum, int size, dstr faceName, bool bold, bool italic, bool underline)
+void wxStyledTextCtrl_StyleSetFontAttr(wxStyledTextCtrl* self, int styleNum, int size, dstr faceName, dbit bold, dbit italic, dbit underline)
 {
     self->StyleSetFontAttr(styleNum, size, wxString(faceName.data, wxConvUTF8, faceName.length), bold, italic, underline);
 }
@@ -2689,7 +2689,7 @@ void wxStyledTextCtrl_SetHScrollBar(wxStyledTextCtrl* self, wxScrollBar* bar)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_GetLastKeydownProcessed(wxStyledTextCtrl* self)
+dbit wxStyledTextCtrl_GetLastKeydownProcessed(wxStyledTextCtrl* self)
 {
     return self->GetLastKeydownProcessed()?1:0;
 }
@@ -2697,7 +2697,7 @@ bool wxStyledTextCtrl_GetLastKeydownProcessed(wxStyledTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextCtrl_SetLastKeydownProcessed(wxStyledTextCtrl* self, bool val)
+void wxStyledTextCtrl_SetLastKeydownProcessed(wxStyledTextCtrl* self, dbit val)
 {
     self->SetLastKeydownProcessed(val);
 }
@@ -2705,7 +2705,7 @@ void wxStyledTextCtrl_SetLastKeydownProcessed(wxStyledTextCtrl* self, bool val)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_SaveFile(wxStyledTextCtrl* self, dstr filename)
+dbit wxStyledTextCtrl_SaveFile(wxStyledTextCtrl* self, dstr filename)
 {
     return self->SaveFile(wxString(filename.data, wxConvUTF8, filename.length))?1:0;
 }
@@ -2713,7 +2713,7 @@ bool wxStyledTextCtrl_SaveFile(wxStyledTextCtrl* self, dstr filename)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextCtrl_LoadFile(wxStyledTextCtrl* self, dstr filename)
+dbit wxStyledTextCtrl_LoadFile(wxStyledTextCtrl* self, dstr filename)
 {
     return self->LoadFile(wxString(filename.data, wxConvUTF8, filename.length))?1:0;
 }
@@ -2873,7 +2873,7 @@ void wxStyledTextEvent_SetDragText(wxStyledTextEvent* self, dstr val)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxStyledTextEvent_SetDragAllowMove(wxStyledTextEvent* self, bool val)
+void wxStyledTextEvent_SetDragAllowMove(wxStyledTextEvent* self, dbit val)
 {
     self->SetDragAllowMove(val);
 }
@@ -3033,7 +3033,7 @@ dstrret wxStyledTextEvent_GetDragText(wxStyledTextEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextEvent_GetDragAllowMove(wxStyledTextEvent* self)
+dbit wxStyledTextEvent_GetDragAllowMove(wxStyledTextEvent* self)
 {
     return self->GetDragAllowMove()?1:0;
 }
@@ -3049,7 +3049,7 @@ wxDragResult* wxStyledTextEvent_GetDragResult(wxStyledTextEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextEvent_GetShift(wxStyledTextEvent* self)
+dbit wxStyledTextEvent_GetShift(wxStyledTextEvent* self)
 {
     return self->GetShift()?1:0;
 }
@@ -3057,7 +3057,7 @@ bool wxStyledTextEvent_GetShift(wxStyledTextEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextEvent_GetControl(wxStyledTextEvent* self)
+dbit wxStyledTextEvent_GetControl(wxStyledTextEvent* self)
 {
     return self->GetControl()?1:0;
 }
@@ -3065,7 +3065,7 @@ bool wxStyledTextEvent_GetControl(wxStyledTextEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStyledTextEvent_GetAlt(wxStyledTextEvent* self)
+dbit wxStyledTextEvent_GetAlt(wxStyledTextEvent* self)
 {
     return self->GetAlt()?1:0;
 }

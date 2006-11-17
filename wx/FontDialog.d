@@ -3,8 +3,8 @@
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - Fontdlg.cs
-// 
-// The wxFontDialog wrapper class.
+//
+/// The wxFontDialog wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -46,6 +46,7 @@ import wx.GdiCommon; //for nullobject
 
         //---------------------------------------------------------------------
 
+    alias FontData wxFontData;
     public class FontData : wxObject
     {
         public this(IntPtr wxobj) 
@@ -124,6 +125,7 @@ import wx.GdiCommon; //for nullobject
 
         //---------------------------------------------------------------------
 
+	alias FontDialog wxFontDialog;
 	public class FontDialog : Dialog
 	{
         public this(IntPtr wxobj)

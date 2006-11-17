@@ -4,7 +4,7 @@
 // based on
 // wx.NET - TipDialog.cs
 //
-// The wxTipProvider proxy interface.
+/// The wxTipProvider proxy interface.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2003 by Alexander Olk
@@ -23,6 +23,7 @@ import wx.Dialog;
 	static extern (C) int wxTipProvider_GetCurrentTip();
 	//! \endcond
 
+    alias TipProvider wxTipProvider;
     public class TipProvider
     {
 	public static IntPtr CreateFileTipProvider(string filename, int currentTip)

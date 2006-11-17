@@ -43,7 +43,7 @@ void wxStaticBox_dtor(wxStaticBox* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxStaticBox_Create(wxStaticBox* self, wxWindow* parent, wxWindowID id,
+dbit wxStaticBox_Create(wxStaticBox* self, wxWindow* parent, wxWindowID id,
                         dstr label,
                         const wxPoint* pos, const wxSize* size,
                         long style, dstr name)

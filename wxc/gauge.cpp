@@ -45,7 +45,7 @@ void wxGauge_dtor(wxGauge* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxGauge_Create(wxGauge* self, wxWindow *parent, wxWindowID id, int range, const wxPoint* pos, const wxSize* size, long style, const wxValidator* validator, dstr name)
+dbit wxGauge_Create(wxGauge* self, wxWindow *parent, wxWindowID id, int range, const wxPoint* pos, const wxSize* size, long style, const wxValidator* validator, dstr name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -129,7 +129,7 @@ int wxGauge_GetBezelFace(wxGauge* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxGauge_AcceptsFocus(wxGauge* self)
+dbit wxGauge_AcceptsFocus(wxGauge* self)
 {
 	return self->AcceptsFocus()?1:0;
 }
@@ -137,7 +137,7 @@ bool wxGauge_AcceptsFocus(wxGauge* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxGauge_IsVertical(wxGauge* self)
+dbit wxGauge_IsVertical(wxGauge* self)
 {
 	return self->IsVertical()?1:0;
 }

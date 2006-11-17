@@ -4,7 +4,7 @@
 // based on
 // wx.NET - ProgressDialog.cs
 //
-// The wxProgressDialog wrapper class.
+/// The wxProgressDialog wrapper class.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2003 Alexander Olk
@@ -27,6 +27,7 @@ import wx.Dialog;
 
         //-----------------------------------------------------------------------------
 
+    alias ProgressDialog wxProgressDialog;
     public class ProgressDialog : Dialog
     {
         public const int wxPD_CAN_ABORT      = 0x0001;

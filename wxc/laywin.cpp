@@ -40,7 +40,7 @@ wxSashLayoutWindow* wxSashLayoutWindow_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxSashLayoutWindow_Create(wxSashLayoutWindow* self, wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, long style, dstr name)
+dbit wxSashLayoutWindow_Create(wxSashLayoutWindow* self, wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, long style, dstr name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -106,7 +106,7 @@ wxLayoutAlgorithm* wxLayoutAlgorithm_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxLayoutAlgorithm_LayoutMDIFrame(wxLayoutAlgorithm* self, wxMDIParentFrame* frame, wxRect* rect)
+dbit wxLayoutAlgorithm_LayoutMDIFrame(wxLayoutAlgorithm* self, wxMDIParentFrame* frame, wxRect* rect)
 {
 	return self->LayoutMDIFrame(frame, rect)?1:0;
 }
@@ -114,7 +114,7 @@ bool wxLayoutAlgorithm_LayoutMDIFrame(wxLayoutAlgorithm* self, wxMDIParentFrame*
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxLayoutAlgorithm_LayoutFrame(wxLayoutAlgorithm* self, wxFrame* frame, wxWindow* mainWindow)
+dbit wxLayoutAlgorithm_LayoutFrame(wxLayoutAlgorithm* self, wxFrame* frame, wxWindow* mainWindow)
 {
 	return self->LayoutFrame(frame, mainWindow)?1:0;
 }
@@ -122,7 +122,7 @@ bool wxLayoutAlgorithm_LayoutFrame(wxLayoutAlgorithm* self, wxFrame* frame, wxWi
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxLayoutAlgorithm_LayoutWindow(wxLayoutAlgorithm* self, wxWindow* frame, wxWindow* mainWindow)
+dbit wxLayoutAlgorithm_LayoutWindow(wxLayoutAlgorithm* self, wxWindow* frame, wxWindow* mainWindow)
 {
 	return self->LayoutWindow(frame, mainWindow)?1:0;
 }

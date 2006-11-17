@@ -1,3 +1,4 @@
+/// The wxArrayInt wrapper class
 module wx.ArrayInt;
 import wx.common;
 
@@ -10,6 +11,7 @@ import wx.common;
 		static extern (C) int    wxArrayInt_GetCount(IntPtr self);
 		//! \endcond
 		
+	alias ArrayInt wxArrayInt;
 	public class ArrayInt : wxObject
 	{
 		//---------------------------------------------------------------------

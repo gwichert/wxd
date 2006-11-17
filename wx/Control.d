@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Control.cs
 //
-// The wxControl wrapper class.
+/// The wxControl wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -28,6 +28,7 @@ import wx.Window;
 
 		//---------------------------------------------------------------------
 
+	alias Control wxControl;
 	public class Control : Window
 	{
 		const string wxControlNameStr = "control";

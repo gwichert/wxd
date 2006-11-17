@@ -1,3 +1,4 @@
+/// The wxArrayString wrapper class
 module wx.ArrayString;
 import wx.common;
 
@@ -10,6 +11,7 @@ import wx.common;
 		static extern (C) int    wxArrayString_GetCount(IntPtr self);
 		//! \endcond
 		
+	alias ArrayString wxArrayString;
 	public class ArrayString : wxObject
 	{
 		//---------------------------------------------------------------------

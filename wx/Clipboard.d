@@ -5,7 +5,7 @@
 // based on
 // wx.NET - Clipboard.cs
 //
-// The wxClipboard wrapper class.
+/// The wxClipboard wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -36,6 +36,7 @@ import wx.DataObject;
 
 		//-----------------------------------------------------------------------------
 		
+	alias Clipboard wxClipboard;
 	public class Clipboard : wxObject
 	{
 		static Clipboard TheClipboard = null;

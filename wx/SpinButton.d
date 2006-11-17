@@ -4,7 +4,7 @@
 // based on
 // wx.NET - SpinButton.cs
 //
-// The wxSpinButton wrapper class.
+/// The wxSpinButton wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -28,6 +28,7 @@ import wx.Control;
 
 		//-----------------------------------------------------------------------------
 	
+	alias SpinEvent wxSpinEvent;
 	public class SpinEvent : CommandEvent
 	{
 		public this(IntPtr wxobj)
@@ -81,6 +82,7 @@ import wx.Control;
 		//! \endcond
 
 		//---------------------------------------------------------------------
+	alias SpinButton wxSpinButton;
 	public class SpinButton : Control
 	{
 		// These are duplicated in SpinCtrl.cs (for easier access)

@@ -709,7 +709,7 @@ alias std.string.find indexOf;
 	{
 		public override bool OnInit()
 		{
-			FontFrame frame = new FontFrame( "Font wxWidgets App", new_Point( 50, 50 ), new_Size( 600,400 ) );
+			FontFrame frame = new FontFrame( "Font wxWidgets App", Point( 50, 50 ), Size( 600,400 ) );
 			frame.Show( true );
 			
 			return true;

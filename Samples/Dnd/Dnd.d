@@ -125,9 +125,9 @@ import wx.wx;
 
             this.menuBar = menuBar;
 			
-	    Point apos = new_Point(0, 0);
-	    Size asize = new_Size(300, 200); 
-	    Size bsize = new_Size(600,100);
+	    Point apos = Point(0, 0);
+	    Size asize = Size(300, 200); 
+	    Size bsize = Size(600,100);
 	    
 	    const string[]  strFile = ["Drop files here!"];
 	    const string[]  strText = ["Drop text on me"];
@@ -426,7 +426,7 @@ import wx.wx;
 
         public override bool OnInit()
         {
-            DndFrame frame = new DndFrame("Dnd wxWidgets App", new_Point(10, 100), new_Size(650,340));
+            DndFrame frame = new DndFrame("Dnd wxWidgets App", Point(10, 100), Size(650,340));
             frame.Show(true);
 
             return true;

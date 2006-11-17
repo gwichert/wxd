@@ -4,7 +4,7 @@
 // based on
 // wx.NET - SizeEvent.cs
 //
-// The wxSizeEvent wrapper class.
+/// The wxSizeEvent wrapper class.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2004 by Alexander Olk
@@ -28,6 +28,7 @@ import wx.Event;
 		
 		//-----------------------------------------------------------------------------
 
+	alias SizeEvent wxSizeEvent;
 	public class SizeEvent : Event
 	{
 		public this(IntPtr wxobj) 

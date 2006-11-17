@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Dataobj.cs
 //
-// The wxDataObject wrapper class.
+/// The wxDataObject wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 by Bryan Bulten
@@ -56,6 +56,7 @@ import wx.common;
 		
 		//---------------------------------------------------------------------
 
+	alias DataObjectSimple wxDataObjectSimple;
 	public class DataObjectSimple : DataObject
 	{
 		public this(IntPtr wxobj)
@@ -87,6 +88,7 @@ import wx.common;
 		
 		//---------------------------------------------------------------------
 
+	alias TextDataObject wxTextDataObject;
 	public class TextDataObject : DataObjectSimple
 	{
 		public this(IntPtr wxobj)
@@ -135,6 +137,7 @@ import wx.common;
 		
 		//---------------------------------------------------------------------
 		
+	alias FileDataObject wxFileDataObject;
 	public class FileDataObject : DataObjectSimple
 	{
 		public this(IntPtr wxobj)

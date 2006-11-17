@@ -75,7 +75,7 @@ void wxEvtHandler_Disconnect(wxEvtHandler* self, int evtType, int id, int lastId
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxEvtHandler_ProcessEvent(wxEvtHandler* self, wxEvent* event)
+dbit wxEvtHandler_ProcessEvent(wxEvtHandler* self, wxEvent* event)
 {
     return self->ProcessEvent(*event);
 }

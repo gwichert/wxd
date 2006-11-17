@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Pen.cs
 //
-// The wxPen wrapper class.
+/// The wxPen wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
@@ -52,6 +52,7 @@ import wx.Colour;
 		static extern (C) IntPtr wxNullPen_Get();
 		//! \endcond
 
+	alias Pen wxPen;
 	public class Pen : GDIObject
 	{
 		public static Pen wxRED_PEN;

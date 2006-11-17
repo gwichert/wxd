@@ -4,7 +4,7 @@
 // based on
 // wx.NET - MenuItem.cs
 //
-// The wxMenuItem wrapper class.
+/// The wxMenuItem wrapper class.
 //
 // Written by Achim Breunig(achim.breunig@web.de)
 // (C) 2003 
@@ -56,6 +56,7 @@ import wx.EvtHandler;
 
 		//-----------------------------------------------------------------------------
 
+	alias MenuItem wxMenuItem;
 	public class MenuItem : wxObject
 	{
 		public this(IntPtr wxobj) 

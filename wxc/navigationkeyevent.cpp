@@ -25,25 +25,25 @@ wxNavigationKeyEvent* wxNavigationKeyEvent_ctor()
 }
 
 extern "C" WXEXPORT
-bool wxNavigationKeyEvent_GetDirection(wxNavigationKeyEvent* self)
+dbit wxNavigationKeyEvent_GetDirection(wxNavigationKeyEvent* self)
 {
 	return self->GetDirection()?1:0;
 }
 
 extern "C" WXEXPORT
-void wxNavigationKeyEvent_SetDirection(wxNavigationKeyEvent* self, bool bForward)
+void wxNavigationKeyEvent_SetDirection(wxNavigationKeyEvent* self, dbit bForward)
 {
 	self->SetDirection(bForward);
 }
 
 extern "C" WXEXPORT
-bool wxNavigationKeyEvent_IsWindowChange(wxNavigationKeyEvent* self)
+dbit wxNavigationKeyEvent_IsWindowChange(wxNavigationKeyEvent* self)
 {
 	return self->IsWindowChange()?1:0;
 }
 
 extern "C" WXEXPORT
-void wxNavigationKeyEvent_SetWindowChange(wxNavigationKeyEvent* self, bool bIs)
+void wxNavigationKeyEvent_SetWindowChange(wxNavigationKeyEvent* self, dbit bIs)
 {
 	self->SetWindowChange(bIs);
 }

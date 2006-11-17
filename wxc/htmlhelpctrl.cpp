@@ -42,7 +42,7 @@ void wxHtmlHelpController_SetTempDir(wxHtmlHelpController* self, dstr path)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxHtmlHelpController_AddBook(wxHtmlHelpController* self, dstr book_url)
+dbit wxHtmlHelpController_AddBook(wxHtmlHelpController* self, dstr book_url)
 {
 	return self->AddBook(wxString(book_url.data, wxConvUTF8, book_url.length))?1:0;
 }
@@ -50,7 +50,7 @@ bool wxHtmlHelpController_AddBook(wxHtmlHelpController* self, dstr book_url)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxHtmlHelpController_Display(wxHtmlHelpController* self, dstr x)
+dbit wxHtmlHelpController_Display(wxHtmlHelpController* self, dstr x)
 {
 	return self->Display(wxString(x.data, wxConvUTF8, x.length))?1:0;
 }
@@ -58,7 +58,7 @@ bool wxHtmlHelpController_Display(wxHtmlHelpController* self, dstr x)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxHtmlHelpController_DisplayInt(wxHtmlHelpController* self, int id)
+dbit wxHtmlHelpController_DisplayInt(wxHtmlHelpController* self, int id)
 {
 	return self->Display(id)?1:0;
 }
@@ -66,7 +66,7 @@ bool wxHtmlHelpController_DisplayInt(wxHtmlHelpController* self, int id)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxHtmlHelpController_DisplayContents(wxHtmlHelpController* self)
+dbit wxHtmlHelpController_DisplayContents(wxHtmlHelpController* self)
 {
 	return self->DisplayContents()?1:0;
 }
@@ -74,7 +74,7 @@ bool wxHtmlHelpController_DisplayContents(wxHtmlHelpController* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxHtmlHelpController_DisplayIndex(wxHtmlHelpController* self)
+dbit wxHtmlHelpController_DisplayIndex(wxHtmlHelpController* self)
 {
 	return self->DisplayIndex()?1:0;
 }
@@ -82,7 +82,7 @@ bool wxHtmlHelpController_DisplayIndex(wxHtmlHelpController* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxHtmlHelpController_KeywordSearch(wxHtmlHelpController* self, dstr keyword, wxHelpSearchMode mode)
+dbit wxHtmlHelpController_KeywordSearch(wxHtmlHelpController* self, dstr keyword, wxHelpSearchMode mode)
 {
 	return self->KeywordSearch(wxString(keyword.data, wxConvUTF8, keyword.length), mode)?1:0;
 }

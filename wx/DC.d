@@ -4,7 +4,7 @@
 // based on
 // wx.NET - DC.cs
 //
-// The wxDC wrapper class.
+/// The wxDC wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
@@ -152,6 +152,7 @@ import wx.ArrayInt;
 		static extern (C) int    wxDC_MaxY(IntPtr self);
 		//! \endcond
 
+	alias DC wxDC;
 	public class DC : wxObject
 	{
 		//---------------------------------------------------------------------
@@ -933,6 +934,7 @@ import wx.ArrayInt;
 		
 		//---------------------------------------------------------------------
 	
+	alias WindowDC wxWindowDC;
 	public class WindowDC : DC
 	{
 		public this(IntPtr wxobj) 
@@ -1087,6 +1089,7 @@ import wx.ArrayInt;
 
 		//---------------------------------------------------------------------
 		
+	alias ClientDC wxClientDC;
 	public class ClientDC : WindowDC
 	{
 		public this(IntPtr wxobj) 
@@ -1119,6 +1122,7 @@ import wx.ArrayInt;
 
 		//---------------------------------------------------------------------
 
+	alias PaintDC wxPaintDC;
 	public class PaintDC : WindowDC
 	{
 		public this(IntPtr wxobj) 

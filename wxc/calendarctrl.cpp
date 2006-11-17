@@ -37,7 +37,7 @@ wxCalendarCtrl* wxCalendarCtrl_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxCalendarCtrl_Create(wxCalendarCtrl* self, wxWindow* parent, wxWindowID id, const wxDateTime* date, const wxPoint* pos, const wxSize* size, int style, dstr name)
+dbit wxCalendarCtrl_Create(wxCalendarCtrl* self, wxWindow* parent, wxWindowID id, const wxDateTime* date, const wxPoint* pos, const wxSize* size, int style, dstr name)
 {
 	if (date == NULL)
 		date = &wxDefaultDateTime;
@@ -57,7 +57,7 @@ bool wxCalendarCtrl_Create(wxCalendarCtrl* self, wxWindow* parent, wxWindowID id
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxCalendarCtrl_SetDate(wxCalendarCtrl* self, wxDateTime* date)
+dbit wxCalendarCtrl_SetDate(wxCalendarCtrl* self, wxDateTime* date)
 {
     return self->SetDate(*date)?1:0;
 }
@@ -73,7 +73,7 @@ wxDateTime* wxCalendarCtrl_GetDate(wxCalendarCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxCalendarCtrl_SetLowerDateLimit(wxCalendarCtrl* self, wxDateTime* date)
+dbit wxCalendarCtrl_SetLowerDateLimit(wxCalendarCtrl* self, wxDateTime* date)
 {
     return self->SetLowerDateLimit(*date)?1:0;
 }
@@ -89,7 +89,7 @@ wxDateTime* wxCalendarCtrl_GetLowerDateLimit(wxCalendarCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxCalendarCtrl_SetUpperDateLimit(wxCalendarCtrl* self, wxDateTime* date)
+dbit wxCalendarCtrl_SetUpperDateLimit(wxCalendarCtrl* self, wxDateTime* date)
 {
     return self->SetUpperDateLimit(*date)?1:0;
 }
@@ -105,7 +105,7 @@ wxDateTime* wxCalendarCtrl_GetUpperDateLimit(wxCalendarCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxCalendarCtrl_SetDateRange(wxCalendarCtrl* self, wxDateTime* lowerdate, wxDateTime* upperdate)
+dbit wxCalendarCtrl_SetDateRange(wxCalendarCtrl* self, wxDateTime* lowerdate, wxDateTime* upperdate)
 {
     return self->SetDateRange(*lowerdate, *upperdate)?1:0;
 }
@@ -113,7 +113,7 @@ bool wxCalendarCtrl_SetDateRange(wxCalendarCtrl* self, wxDateTime* lowerdate, wx
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxCalendarCtrl_EnableYearChange(wxCalendarCtrl* self, bool enable)
+void wxCalendarCtrl_EnableYearChange(wxCalendarCtrl* self, dbit enable)
 {
     self->EnableYearChange(enable);
 }
@@ -121,7 +121,7 @@ void wxCalendarCtrl_EnableYearChange(wxCalendarCtrl* self, bool enable)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxCalendarCtrl_EnableMonthChange(wxCalendarCtrl* self, bool enable)
+void wxCalendarCtrl_EnableMonthChange(wxCalendarCtrl* self, dbit enable)
 {
     self->EnableMonthChange(enable);
 }
@@ -129,7 +129,7 @@ void wxCalendarCtrl_EnableMonthChange(wxCalendarCtrl* self, bool enable)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxCalendarCtrl_EnableHolidayDisplay(wxCalendarCtrl* self, bool display)
+void wxCalendarCtrl_EnableHolidayDisplay(wxCalendarCtrl* self, dbit display)
 {
     self->EnableHolidayDisplay(display);
 }
@@ -354,7 +354,7 @@ void wxCalendarDateAttr_SetBorder(wxCalendarDateAttr* self, wxCalendarDateBorder
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxCalendarDateAttr_SetHoliday(wxCalendarDateAttr* self, bool holiday)
+void wxCalendarDateAttr_SetHoliday(wxCalendarDateAttr* self, dbit holiday)
 {
     self->SetHoliday(holiday);
 }
@@ -362,7 +362,7 @@ void wxCalendarDateAttr_SetHoliday(wxCalendarDateAttr* self, bool holiday)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxCalendarDateAttr_HasTextColour(wxCalendarDateAttr* self)
+dbit wxCalendarDateAttr_HasTextColour(wxCalendarDateAttr* self)
 {
     return self->HasTextColour()?1:0;
 }
@@ -370,7 +370,7 @@ bool wxCalendarDateAttr_HasTextColour(wxCalendarDateAttr* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxCalendarDateAttr_HasBackgroundColour(wxCalendarDateAttr* self)
+dbit wxCalendarDateAttr_HasBackgroundColour(wxCalendarDateAttr* self)
 {
     return self->HasBackgroundColour()?1:0;
 }
@@ -378,7 +378,7 @@ bool wxCalendarDateAttr_HasBackgroundColour(wxCalendarDateAttr* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxCalendarDateAttr_HasBorderColour(wxCalendarDateAttr* self)
+dbit wxCalendarDateAttr_HasBorderColour(wxCalendarDateAttr* self)
 {
     return self->HasBorderColour()?1:0;
 }
@@ -386,7 +386,7 @@ bool wxCalendarDateAttr_HasBorderColour(wxCalendarDateAttr* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxCalendarDateAttr_HasFont(wxCalendarDateAttr* self)
+dbit wxCalendarDateAttr_HasFont(wxCalendarDateAttr* self)
 {
     return self->HasFont()?1:0;
 }
@@ -394,7 +394,7 @@ bool wxCalendarDateAttr_HasFont(wxCalendarDateAttr* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxCalendarDateAttr_HasBorder(wxCalendarDateAttr* self)
+dbit wxCalendarDateAttr_HasBorder(wxCalendarDateAttr* self)
 {
     return self->HasBorder()?1:0;
 }
@@ -402,7 +402,7 @@ bool wxCalendarDateAttr_HasBorder(wxCalendarDateAttr* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxCalendarDateAttr_IsHoliday(wxCalendarDateAttr* self)
+dbit wxCalendarDateAttr_IsHoliday(wxCalendarDateAttr* self)
 {
     return self->IsHoliday()?1:0;
 }

@@ -3,7 +3,9 @@
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - Display.cs
-// 
+//
+/// The wxDisplay wrapper class
+//
 // Michael S. Muegel mike _at_ muegel dot org
 //
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
@@ -52,6 +54,7 @@ import wx.VideoMode;
 		static extern (C) void wxDisplay_dtor(IntPtr self);
 		//! \endcond
 
+	alias Display wxDisplay;
 	public class Display : wxObject
 	{
 		//------------------------------------------------------------------------
@@ -108,7 +111,7 @@ import wx.VideoMode;
 		// An array of available VideoModes for this display.
 		/+virtual+/ public VideoMode[] GetModes()
 		{
-			return GetModes(new_VideoMode(0,0,0,0));
+			return GetModes(VideoMode(0,0,0,0));
 		}
 
 		// An array of the VideoModes that match mode. A match occurs when

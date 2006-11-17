@@ -38,7 +38,7 @@ void wxLog_dtor(wxLog* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxLog_IsEnabled()
+dbit wxLog_IsEnabled()
 {
     return wxLog::IsEnabled()?1:0;
 }
@@ -46,7 +46,7 @@ bool wxLog_IsEnabled()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxLog_EnableLogging(bool doit)
+dbit wxLog_EnableLogging(dbit doit)
 {
     return wxLog::EnableLogging(doit)?1:0;
 }
@@ -70,7 +70,7 @@ void wxLog_Flush(wxLog* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxLog_HasPendingMessages(wxLog* self)
+dbit wxLog_HasPendingMessages(wxLog* self)
 {
     return self->HasPendingMessages()?1:0;
 }
@@ -125,7 +125,7 @@ void wxLog_Resume()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxLog_SetVerbose(bool bVerbose)
+void wxLog_SetVerbose(dbit bVerbose)
 {
     wxLog::SetVerbose(bVerbose);
 }
@@ -197,7 +197,7 @@ void wxLog_SetTimestamp(dstr ts)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxLog_GetVerbose()
+dbit wxLog_GetVerbose()
 {
     return wxLog::GetVerbose()?1:0;
 }
@@ -213,7 +213,7 @@ wxTraceMask wxLog_GetTraceMask()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxLog_IsAllowedTraceMask(dstr mask)
+dbit wxLog_IsAllowedTraceMask(dstr mask)
 {
     return wxLog::IsAllowedTraceMask(wxString(mask.data, wxConvUTF8, mask.length).c_str())?1:0;
 }

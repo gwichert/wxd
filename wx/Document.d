@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Document.cs
 //
-// The wxDocument wrapper class.
+/// The wxDocument wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -57,6 +57,7 @@ version(NOT_READY_YET){
 
         //-----------------------------------------------------------------------------
 
+    alias Document wxDocument;
     public class Document : EvtHandler
     {
         public  this(Document parent)

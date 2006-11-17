@@ -3,7 +3,9 @@
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - gbsizer.h
-// 
+//
+/// The wxGridBagSizer wrapper classes
+//
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 // $Id$
 //-----------------------------------------------------------------------------
@@ -37,6 +39,7 @@ import wx.FlexGridSizer;
 
         //-----------------------------------------------------------------------------
 
+    alias GBSizerItem wxGBSizerItem;
     public class GBSizerItem : SizerItem
     {
         public this(int width, int height, GBPosition pos, GBSpan span, int flag, int border, wxObject userData)
@@ -103,6 +106,7 @@ import wx.FlexGridSizer;
 
         //-----------------------------------------------------------------------------
 
+    alias GBSpan wxGBSpan;
     public class GBSpan : wxObject
     {
         public this()
@@ -161,6 +165,7 @@ import wx.FlexGridSizer;
         static extern (C) bool   wxGridBagSizer_CheckForIntersectionPos(IntPtr self, IntPtr pos, IntPtr span, IntPtr excludeItem);
 		//! \endcond
 
+    alias GridBagSizer wxGridBagSizer;
     public class GridBagSizer : FlexGridSizer
     {
         //-----------------------------------------------------------------------------
@@ -332,6 +337,7 @@ import wx.FlexGridSizer;
 
         //-----------------------------------------------------------------------------
 
+    alias GBPosition wxGBPosition;
     public class GBPosition : wxObject
     {
 	private this(IntPtr ptr)

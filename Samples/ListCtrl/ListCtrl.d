@@ -397,7 +397,7 @@ import std.stdio;
 
 		public void InitWithReportItems()
 		{
-			m_listCtrl.SetImageList(m_imageListSmall, wxImageList.wxIMAGE_LIST_SMALL);
+			m_listCtrl.SetImageList(m_imageListSmall, wxIMAGE_LIST_SMALL);
 
 			ListItem itemCol = new ListItem();
 			itemCol.Text = "Column 1";
@@ -453,8 +453,8 @@ import std.stdio;
 
 		public void InitWithIconItems(bool withText, bool sameIcon)
 		{
-			m_listCtrl.SetImageList(m_imageListNormal, wxImageList.wxIMAGE_LIST_NORMAL);
-			m_listCtrl.SetImageList(m_imageListSmall, wxImageList.wxIMAGE_LIST_SMALL);
+			m_listCtrl.SetImageList(m_imageListNormal, wxIMAGE_LIST_NORMAL);
+			m_listCtrl.SetImageList(m_imageListSmall, wxIMAGE_LIST_SMALL);
 
 			for ( int i = 0; i < NUM_ICONS; i++ )
 			{
@@ -510,7 +510,7 @@ import std.stdio;
 
 		public void InitWithVirtualItems()
 		{
-			m_listCtrl.SetImageList(m_imageListSmall, wxImageList.wxIMAGE_LIST_SMALL);
+			m_listCtrl.SetImageList(m_imageListSmall, wxIMAGE_LIST_SMALL);
 
 			m_listCtrl.InsertColumn(0, _("First Column"));
 			m_listCtrl.InsertColumn(1, _("Second Column"));
@@ -1073,7 +1073,7 @@ import std.stdio;
 	{
 		public override bool OnInit()
 		{
-			MyFrame frame = new MyFrame("ListCtrl Test", new_Point(50, 50), new_Size(450,340));
+			MyFrame frame = new MyFrame("ListCtrl Test", Point(50, 50), Size(450,340));
 			frame.Show(true);
 
 			return true;

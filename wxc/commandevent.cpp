@@ -48,7 +48,7 @@ void wxCommandEvent_SetString(wxCommandEvent* self, dstr s)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxCommandEvent_IsChecked(wxCommandEvent* self)
+dbit wxCommandEvent_IsChecked(wxCommandEvent* self)
 {
 	return self->IsChecked()?1:0;
 }
@@ -56,7 +56,7 @@ bool wxCommandEvent_IsChecked(wxCommandEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxCommandEvent_IsSelection(wxCommandEvent* self)
+dbit wxCommandEvent_IsSelection(wxCommandEvent* self)
 {
 	return self->IsSelection()?1:0;
 }

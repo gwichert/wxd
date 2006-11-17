@@ -4,7 +4,7 @@
 // based on
 // wx.NET - FontMapper.cs
 //
-// The wxFontMapper wrapper class.
+/// The wxFontMapper wrapper class.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2003 Alexander Olk
@@ -41,6 +41,7 @@ import wx.ArrayString;
 		
 		//---------------------------------------------------------------------
 		
+	alias FontMapper wxFontMapper;
 	public class FontMapper : wxObject
 	{
 		private static FontMapper staticFontMapper;
@@ -179,6 +180,7 @@ import wx.ArrayString;
 		
 		//---------------------------------------------------------------------
 		
+	alias EncodingConverter wxEncodingConverter;
 	public class EncodingConverter : wxObject
 	{
 		enum CONVERT
@@ -215,6 +217,7 @@ import wx.ArrayString;
 	
 	//---------------------------------------------------------------------
 	
+		//! \cond EXTERN
 		extern (C) {
 		alias bool function(FontEnumerator obj, int encoding, bool fixedWidthOnly) Virtual_EnumerateFacenames;
 		alias bool function(FontEnumerator obj, string facename) Virtual_EnumerateEncodings;
@@ -222,7 +225,6 @@ import wx.ArrayString;
 		alias bool function(FontEnumerator obj, string facename, string encoding) Virtual_OnFontEncoding;
 		}
 
-		//! \cond EXTERN
 		static extern (C) IntPtr wxFontEnumerator_ctor();
 		static extern (C) void wxFontEnumerator_dtor(IntPtr self);
 		static extern (C) void wxFontEnumerator_RegisterVirtual(IntPtr self, FontEnumerator obj,Virtual_EnumerateFacenames enumerateFacenames, Virtual_EnumerateEncodings enumerateEncodings, Virtual_OnFacename onFacename, Virtual_OnFontEncoding onFontEncoding);
@@ -236,6 +238,7 @@ import wx.ArrayString;
 		
 		//---------------------------------------------------------------------
 		
+	alias FontEnumerator wxFontEnumerator;
 	public class FontEnumerator : wxObject
 	{
 		public this()

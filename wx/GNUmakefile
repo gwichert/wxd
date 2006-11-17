@@ -111,6 +111,7 @@ OBJECTS = \
 	Sizer.o  \
 	SizerItem.o  \
 	Slider.o  \
+	Sound.o  \
 	SpinButton.o  \
 	SpinCtrl.o  \
 	SplashScreen.o  \
@@ -150,6 +151,7 @@ OBJECTS = \
 	wxObject.o  \
 	wxString.o  \
 	wxVersion.o  \
+	wxPlatform.o  \
 	Grid.o  \
 	GridCtrl.o  \
 	common.o  \
@@ -161,10 +163,12 @@ OBJECTS = \
 
 #	DbGrid.o  \
 
+SOURCES = $(shell ls *.d | grep -v DbGrid.d)
+
 all:  $(LIBTARGET)
 
 DMD = dmd
-DFLAGS = -O -I..
+DFLAGS = -O -g -I..
 
 prefix=/usr/local
 exec_prefix=$(prefix)
@@ -182,7 +186,7 @@ install: $(LIBTARGET)
 	-$(RANLIB) $(DESTDIR)$(libdir)/`basename $(LIBTARGET)`
 
 ddoc:
-	$(DMD) -c -D $(DFLAGS) `ls *.d | grep -v DbGrid.d`
+	$(DMD) -c -o- -D $(DFLAGS) $(SOURCES)
 
 clean:
 	-rm *.o *.html

@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Log.cs
 //
-// The Log wrapper classes.
+/// The wxLog wrapper classes.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2003 Alexander Olk
@@ -29,7 +29,8 @@ private import std.format;
 		static extern (C) void wxLog_AddTraceMask(string tmask);
 		//! \endcond
 		
-	public class Log: wxObject
+	alias Log wxLog;
+	public class Log : wxObject
 	{
 		enum eLogLevel : int
 		{

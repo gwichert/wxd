@@ -754,7 +754,7 @@ alias std.string.rfind LastIndexOf;
 		public override bool OnInit()
 		{
 			MyFrame frame = new MyFrame("wxWidgets Dialogs Example",
-				new_Point(50,50), new_Size(450,340));
+				Point(50,50), Size(450,340));
 			frame.Show(true);
 
 			return true;

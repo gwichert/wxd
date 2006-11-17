@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Validator.cs
 //
-// The wxValidator wrapper class.
+/// The wxValidator wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
@@ -24,6 +24,7 @@ import wx.EvtHandler;
 		
 		//---------------------------------------------------------------------
 		
+	alias Validator wxValidator;
 	public class Validator : EvtHandler
 	{
 		static Validator wxDefaultValidator;

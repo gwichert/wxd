@@ -46,7 +46,7 @@ void wxListBox_dtor(wxListBox* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxListBox_Create(wxListBox* self, wxWindow *parent, wxWindowID id,
+dbit wxListBox_Create(wxListBox* self, wxWindow *parent, wxWindowID id,
 					  const wxPoint* pos, const wxSize* size, int n,
 					  dstr items[], long style,
 					  const wxValidator* validator, dstr name)
@@ -128,7 +128,7 @@ int wxListBox_FindString(wxListBox* self, dstr s)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxListBox_SetSelection(wxListBox* self, int n, bool select)
+void wxListBox_SetSelection(wxListBox* self, int n, dbit select)
 {
 	self->SetSelection(n, select);
 }
@@ -230,7 +230,7 @@ void wxListBox_DeselectAll(wxListBox* self, int itemToLeaveSelected)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxListBox_SetStringSelection(wxListBox* self, dstr s, bool select)
+dbit wxListBox_SetStringSelection(wxListBox* self, dstr s, dbit select)
 {
 	return self->SetStringSelection(wxString(s.data, wxConvUTF8, s.length), select)?1:0;
 }
@@ -254,7 +254,7 @@ void wxListBox_SetFirstItemText(wxListBox* self, dstr s)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxListBox_HasMultipleSelection(wxListBox* self)
+dbit wxListBox_HasMultipleSelection(wxListBox* self)
 {
 	return self->HasMultipleSelection()?1:0;
 }
@@ -262,7 +262,7 @@ bool wxListBox_HasMultipleSelection(wxListBox* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxListBox_IsSorted(wxListBox* self)
+dbit wxListBox_IsSorted(wxListBox* self)
 {
 	return self->IsSorted()?1:0;
 }
@@ -278,7 +278,7 @@ void wxListBox_Command(wxListBox* self, wxCommandEvent* event)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxListBox_Selected(wxListBox* self, int n)
+dbit wxListBox_Selected(wxListBox* self, int n)
 {
 	return self->Selected(n)?1:0;
 }
@@ -370,7 +370,7 @@ wxCheckListBox* wxCheckListBox_ctor2(wxWindow* parent, wxWindowID id, const wxPo
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxCheckListBox_IsChecked(wxCheckListBox* self, int index)
+dbit wxCheckListBox_IsChecked(wxCheckListBox* self, int index)
 {
 	return self->IsChecked(index)?1:0;
 }
@@ -378,7 +378,7 @@ bool wxCheckListBox_IsChecked(wxCheckListBox* self, int index)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxCheckListBox_Check(wxCheckListBox* self, int index, bool check)
+void wxCheckListBox_Check(wxCheckListBox* self, int index, dbit check)
 {
 	return self->Check(index, check);
 }

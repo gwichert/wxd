@@ -4,7 +4,7 @@
 // based on
 // wx.NET - ClientData.cs
 //
-// The wxClientData wrapper class.
+/// The wxClientData wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -24,6 +24,7 @@ import wx.common;
 		
 		//---------------------------------------------------------------------
         
+	alias ClientData wxClientData;
 	public class ClientData : wxObject
 	{
 		public this(IntPtr wxobj)
@@ -61,6 +62,7 @@ import wx.common;
 		
 		//---------------------------------------------------------------------
         
+	alias StringClientData wxStringClientData;
 	public class StringClientData : ClientData
 	{
 		public this()

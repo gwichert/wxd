@@ -322,7 +322,7 @@ void wxFontList_RemoveFont(wxFontList* self, wxFont* font)
 
 extern "C" WXEXPORT
 wxFont* wxFontList_FindOrCreateFont(wxFontList* self, int pointSize, int family, int style, int weight,
-                             bool underline,
+                             dbit underline,
                              dstr face,
                              wxFontEncoding encoding)
 {

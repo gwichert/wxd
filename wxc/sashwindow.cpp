@@ -39,7 +39,7 @@ void wxSashEdge_dtor(wxSashEdge* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxSashEdge_m_show(wxSashEdge* self)
+dbit wxSashEdge_m_show(wxSashEdge* self)
 {
 	return self->m_show?1:0;
 }
@@ -47,7 +47,7 @@ bool wxSashEdge_m_show(wxSashEdge* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxSashEdge_m_border(wxSashEdge* self)
+dbit wxSashEdge_m_border(wxSashEdge* self)
 {
 	return self->m_border?1:0;
 }
@@ -80,7 +80,7 @@ wxSashWindow* wxSashWindow_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxSashWindow_Create(wxSashWindow* self, wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, int style, dstr name)
+dbit wxSashWindow_Create(wxSashWindow* self, wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, int style, dstr name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -97,7 +97,7 @@ bool wxSashWindow_Create(wxSashWindow* self, wxWindow* parent, wxWindowID id, co
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxSashWindow_SetSashVisible(wxSashWindow* self, wxSashEdgePosition edge, bool sash)
+void wxSashWindow_SetSashVisible(wxSashWindow* self, wxSashEdgePosition edge, dbit sash)
 {
 	self->SetSashVisible(edge, sash);
 }
@@ -105,7 +105,7 @@ void wxSashWindow_SetSashVisible(wxSashWindow* self, wxSashEdgePosition edge, bo
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxSashWindow_GetSashVisible(wxSashWindow* self, wxSashEdgePosition edge)
+dbit wxSashWindow_GetSashVisible(wxSashWindow* self, wxSashEdgePosition edge)
 {
 	return self->GetSashVisible(edge)?1:0;
 }
@@ -113,7 +113,7 @@ bool wxSashWindow_GetSashVisible(wxSashWindow* self, wxSashEdgePosition edge)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxSashWindow_SetSashBorder(wxSashWindow* self, wxSashEdgePosition edge, bool border)
+void wxSashWindow_SetSashBorder(wxSashWindow* self, wxSashEdgePosition edge, dbit border)
 {
 	self->SetSashBorder(edge, border);
 }
@@ -121,7 +121,7 @@ void wxSashWindow_SetSashBorder(wxSashWindow* self, wxSashEdgePosition edge, boo
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxSashWindow_HasBorder(wxSashWindow* self, wxSashEdgePosition edge)
+dbit wxSashWindow_HasBorder(wxSashWindow* self, wxSashEdgePosition edge)
 {
 	return self->HasBorder(edge)?1:0;
 }

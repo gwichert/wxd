@@ -1,4 +1,5 @@
 MAKE=make
+export PLATFORM
 
 all:
 	$(MAKE) -C Controls
@@ -8,7 +9,7 @@ all:
 	$(MAKE) -C EventDemo
 	$(MAKE) -C Font
 	$(MAKE) -C Grid
-	$(MAKE) -C GLCube
+#	$(MAKE) -C GLCube
 	$(MAKE) -C Hello
 	$(MAKE) -C HTML
 	$(MAKE) -C HtmlHelp
@@ -21,8 +22,10 @@ all:
 	$(MAKE) -C Mdi
 	$(MAKE) -C Minimal
 	$(MAKE) -C Notebook
+	$(MAKE) -C Platform
 	$(MAKE) -C Printing
 	$(MAKE) -C SashWindow
+#	$(MAKE) -C Sound
 	$(MAKE) -C Splitter
 	$(MAKE) -C TreeCtrl
 #	$(MAKE) -C Tutorial
@@ -50,8 +53,10 @@ clean:
 	$(MAKE) clean -C Mdi
 	$(MAKE) clean -C Minimal
 	$(MAKE) clean -C Notebook
+	$(MAKE) clean -C Platform
 	$(MAKE) clean -C Printing
 	$(MAKE) clean -C SashWindow
+	$(MAKE) clean -C Sound
 	$(MAKE) clean -C Splitter
 	$(MAKE) clean -C TreeCtrl
 	$(MAKE) clean -C Tutorial

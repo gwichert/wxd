@@ -4,7 +4,7 @@
 // based on
 // wx.NET - CheckBox.cs
 //
-// The wxCheckBox wrapper class.
+/// The wxCheckBox wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
@@ -41,6 +41,7 @@ import wx.Control;
 
 		//---------------------------------------------------------------------
 		
+	alias CheckBox wxCheckBox;
 	public class CheckBox : Control
 	{
 		public const int wxCHK_2STATE           = 0x0000;

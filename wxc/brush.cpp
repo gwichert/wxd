@@ -32,7 +32,7 @@ wxBrush* wxBrush_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxBrush_Ok(wxBrush* self)
+dbit wxBrush_Ok(wxBrush* self)
 {
 	return self->Ok()?1:0;
 }

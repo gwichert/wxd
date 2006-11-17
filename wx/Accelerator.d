@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Accelerator.cs
 //
-// The wxAccelerator* interfaces
+/// The wxAcceleratorEntry and wxAcceleratorTable wrapper classes
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2004 by Alexander Olk
@@ -33,6 +33,7 @@ import wx.MenuItem;
 		
 		//-----------------------------------------------------------------------------
 
+	alias AcceleratorEntry wxAcceleratorEntry;
 	public class AcceleratorEntry : wxObject
 	{
 		public const int wxACCEL_NORMAL	= 0x0000;
@@ -123,6 +124,7 @@ import wx.MenuItem;
 
 		//-----------------------------------------------------------------------------
 
+	alias AcceleratorTable wxAcceleratorTable;
 	public class AcceleratorTable : wxObject
 	{
 		public this(IntPtr wxobj)

@@ -21,10 +21,16 @@ It is composed of two parts:
 
 * Status
 
+0.05 (afb)
+Fixed issue with D bool versus C++ bool
+Deprecated the new_ struct constructors
+Added wxSound class and the Sound sample
+Extra documentation comments for the modules
+
 0.04 (afb)
-removed the extra gcc linking for Darwin
-added wxGLCanvas class and the GLCube sample
-added Doxygen documentation (and \cond+\endcond)
+Removed the extra gcc linking for Darwin
+Added wxGLCanvas class and the GLCube sample
+Added Doxygen documentation (and \cond+\endcond)
 Extra configuration files for MinGW32 (Windows)
 
 0.03 (afb)
@@ -55,7 +61,13 @@ Some example program crashed.
 
 - get wxWidgets-2.6.1
 - extract
-- compile
+- regenerate, if needed
+windows: (Digital Mars)
+    cd build\bakefiles
+    bakefile_gen
+unix/mac: (GNU)
+    ./autogen.sh
+- compile and install
 windows: (Digital Mars)
   cd build\msw
   make -f makefile.dmc
@@ -85,9 +97,9 @@ unix/mac:
 Point,Size,Rect is native D struct instead of wxWidgets struct.
 in D, struct can't have constructor.
 for convenience, use constructor like function:
- Point new_Point(int x,int y);
- Size  new_Size(int w,int h);
- Rect  new_Rect(int x,int y,int w,int h)
+ Point Point(int x,int y);
+ Size  Size(int w,int h);
+ Rect  Rect(int x,int y,int w,int h)
 (Rect is an alias of Rectangle)
 
     C++ API passing array and number of element change to passing array only.

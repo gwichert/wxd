@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Brush.cs
 //
-// The wxBrush wrapper class.
+/// The wxBrush wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
@@ -41,6 +41,7 @@ import wx.Bitmap;
 
 		//---------------------------------------------------------------------
 
+	alias Brush wxBrush;
 	public class Brush : GDIObject
 	{
 		public static Brush wxBLUE_BRUSH;

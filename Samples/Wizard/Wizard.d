@@ -159,7 +159,7 @@ import wx.wx;
             super(parent);
             static string[] choices = [ "Forward", "Backward", "Both", "Neither" ];
 
-            radio = new RadioBox(this, -1, "Allow to proceed:", new_Point(5,5),
+            radio = new RadioBox(this, -1, "Allow to proceed:", Point(5,5),
                                     wxDefaultSize, choices,
                                     1, 0);
             radio.Selection = 2;

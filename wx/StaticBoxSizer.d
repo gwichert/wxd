@@ -4,7 +4,7 @@
 // based on
 // wx.NET - StaticBoxSizer.cs
 //
-// The wxStaticBoxSizer proxy interface.
+/// The wxStaticBoxSizer proxy interface.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -24,6 +24,7 @@ import wx.StaticBox;
 
 		//---------------------------------------------------------------------
 
+	alias StaticBoxSizer wxStaticBoxSizer;
 	public class StaticBoxSizer : BoxSizer
 	{
 		public this(IntPtr wxobj)

@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Image.cs
 //
-// The wxImage wrapper class.
+/// The wxImage wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
@@ -115,6 +115,7 @@ import wx.Colour;
 
 		//---------------------------------------------------------------------
 
+	alias Image wxImage;
 	public class Image : wxObject
 	{
 		private static bool handlersLoaded = false;
@@ -168,7 +169,7 @@ import wx.Colour;
 
 		public int Width() { return wxImage_GetWidth(wxobj); }
 		public int Height() { return wxImage_GetHeight(wxobj); }
-		public Size size() { return new_Size(Width,Height); }
+		public Size size() { return Size(Width,Height); }
 
 		//---------------------------------------------------------------------
 		
@@ -618,6 +619,7 @@ import wx.Colour;
 		
 		//---------------------------------------------------------------------
 	
+	alias ImageHandler wxImageHandler;
 	public class ImageHandler : wxObject
 	{
 		public this(IntPtr wxobj)
@@ -657,6 +659,7 @@ import wx.Colour;
 		
 		//---------------------------------------------------------------------
 		
+	alias ImageHistogramEntry wxImageHistogramEntry;
 	public class ImageHistogramEntry : wxObject
 	{
 		public this(IntPtr wxobj)
@@ -699,6 +702,7 @@ import wx.Colour;
 				
 		//---------------------------------------------------------------------
 		
+	alias ImageHistogram wxImageHistogram;
 	public class ImageHistogram : wxObject
 	{
 		public this(IntPtr wxobj)

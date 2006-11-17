@@ -36,7 +36,7 @@ wxFrame* wxFrame_ctor()
 }
 
 extern "C" WXEXPORT
-bool wxFrame_Create(wxFrame* self, wxWindow* parent, int id, dstr title, const wxPoint* pos, const wxSize* size, unsigned int style, dstr name)
+dbit wxFrame_Create(wxFrame* self, wxWindow* parent, int id, dstr title, const wxPoint* pos, const wxSize* size, unsigned int style, dstr name)
 {
     if (pos == NULL)
         pos = &wxDefaultPosition;
@@ -51,13 +51,13 @@ bool wxFrame_Create(wxFrame* self, wxWindow* parent, int id, dstr title, const w
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxFrame_ShowFullScreen(wxFrame *self, bool show, unsigned int style) 
+dbit wxFrame_ShowFullScreen(wxFrame *self, dbit show, unsigned int style) 
 {
     return self->ShowFullScreen(show, style)?1:0;
 }
 
 extern "C" WXEXPORT
-bool wxFrame_IsFullScreen(wxFrame* self)
+dbit wxFrame_IsFullScreen(wxFrame* self)
 {
     return self->IsFullScreen()?1:0;
 }
@@ -158,13 +158,13 @@ void wxFrame_SetToolBar(wxFrame* self, wxToolBar* toolbar)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxFrame_Maximize(wxFrame* self, bool iconize)
+void wxFrame_Maximize(wxFrame* self, dbit iconize)
 {
     self->Maximize(iconize);
 }
 
 extern "C" WXEXPORT
-bool wxFrame_IsMaximized(wxFrame* self)
+dbit wxFrame_IsMaximized(wxFrame* self)
 {
     return self->IsMaximized()?1:0;
 }
@@ -172,13 +172,13 @@ bool wxFrame_IsMaximized(wxFrame* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxFrame_Iconize(wxFrame* self, bool iconize)
+void wxFrame_Iconize(wxFrame* self, dbit iconize)
 {
     self->Iconize(iconize);
 }
 
 extern "C" WXEXPORT
-bool wxFrame_IsIconized(wxFrame* self)
+dbit wxFrame_IsIconized(wxFrame* self)
 {
     return self->IsIconized()?1:0;
 }
@@ -186,7 +186,7 @@ bool wxFrame_IsIconized(wxFrame* self)
 //-----------------------------------------------------------------------------
 
 /*extern "C" WXEXPORT
-bool wxFrame_SetShape(wxFrame* self, wxRegion* region)
+dbit wxFrame_SetShape(wxFrame* self, wxRegion* region)
 {
     return self->SetShape(region);
 }*/

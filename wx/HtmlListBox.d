@@ -4,7 +4,7 @@
 // based on
 // wx.NET - HtmlListBox.cs
 //
-// The wxHtmlListBox wrapper class.
+/// The wxHtmlListBox wrapper class.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2004 by Alexander Olk
@@ -17,6 +17,9 @@ module wx.HtmlListBox;
 import wx.common;
 import wx.VLBox;
 
+		//-----------------------------------------------------------------------------
+		
+		//! \cond EXTERN
 		extern (C) {
 		alias void function(HtmlListBox obj) Virtual_VoidNoParams;
 		alias void function(HtmlListBox obj, int n) Virtual_VoidSizeT;
@@ -26,9 +29,6 @@ import wx.VLBox;
 		alias int function(HtmlListBox obj, int n) Virtual_OnMeasureItem;
 		}
 
-		//-----------------------------------------------------------------------------
-		
-		//! \cond EXTERN
 		static extern (C) IntPtr wxHtmlListBox_ctor2(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
 		static extern (C) void wxHtmlListBox_RegisterVirtual(IntPtr self,HtmlListBox obj,
 			Virtual_VoidNoParams refreshAll,

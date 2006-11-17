@@ -67,7 +67,7 @@ wxPanel* wxPanel_ctor2(wxWindow *parent, wxWindowID id, const wxPoint* pos,
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxPanel_Create(wxPanel* self, wxWindow *parent, wxWindowID id, const wxPoint* pos,
+dbit wxPanel_Create(wxPanel* self, wxWindow *parent, wxWindowID id, const wxPoint* pos,
                     const wxSize* size, long style, dstr name)
 {
 	if (pos == NULL)

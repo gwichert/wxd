@@ -4,7 +4,7 @@
 // based on
 // wx.NET - ScrollBar.cs
 //
-// The wxScrollBar wrapper class.
+/// The wxScrollBar wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -31,6 +31,7 @@ import wx.Control;
 
 		//-----------------------------------------------------------------------------
 
+	alias ScrollBar wxScrollBar;
 	public class ScrollBar : Control
 	{
 		enum {

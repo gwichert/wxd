@@ -68,7 +68,7 @@ import ImageViewer;
          */
         public this()
         {
-            super("ImageView", wxDefaultPosition, new_Size(500, 500));
+            super("ImageView", wxDefaultPosition, Size(500, 500));
             // The menu bar is the bar where all the menus will be attached 
             // to.
             MenuBar menuBar = new MenuBar();

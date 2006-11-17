@@ -52,7 +52,7 @@ void wxProgressDialog_dtor(wxProgressDialog* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxProgressDialog_Update(wxProgressDialog* self, int value, dstr newmsg)
+dbit wxProgressDialog_Update(wxProgressDialog* self, int value, dstr newmsg)
 {
     return self->Update(value, wxString(newmsg.data, wxConvUTF8, newmsg.length))?1:0;
 }
@@ -68,7 +68,7 @@ void wxProgressDialog_Resume(wxProgressDialog* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxProgressDialog_Show(wxProgressDialog* self, bool show)
+dbit wxProgressDialog_Show(wxProgressDialog* self, dbit show)
 {
 	return self->Show(show)?1:0;
 }

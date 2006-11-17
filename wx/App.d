@@ -5,11 +5,11 @@
 // based on
 // wx.NET - App.cs
 //
-// The wxApp wrapper class.
+/// The wxApp wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
-// Licensed under the wxWidgtes license, see LICENSE.txt for details.
+// Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
 // $Id$
 //-----------------------------------------------------------------------------
@@ -24,15 +24,14 @@ import wx.GdiCommon;
 import std.string;
 //! \endcond
 
+		//! \cond EXTERN
 	extern (C) {
 	alias bool function(App o) Virtual_OnInit;
 	alias int  function(App o) Virtual_OnExit;
 	alias bool function(App o,inout int argc,char** argv) Virtual_Initialize;
 	}
-
-		//! \cond EXTERN
-        static extern (C) IntPtr wxApp_ctor();
 	
+	static extern (C) IntPtr wxApp_ctor();
 	static extern (C) void wxApp_RegisterVirtual(IntPtr self, App o, Virtual_OnInit onInit, Virtual_OnExit onExit, Virtual_Initialize initalize);
 	static extern (C) bool wxApp_Initialize(IntPtr self,inout int argc,char** argv);
 	static extern (C) bool wxApp_OnInit(IntPtr self);
@@ -53,6 +52,7 @@ import std.string;
 
         //---------------------------------------------------------------------
 
+    alias App wxApp;
     public abstract class App : EvtHandler
     {
         

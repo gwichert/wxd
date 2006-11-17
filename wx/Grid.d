@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Grid.cs
 //
-// The wxGrid wrapper class.
+/// The wxGrid wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 by Bryan Bulten
@@ -46,6 +46,7 @@ import wx.ScrolledWindow;
 
         //-----------------------------------------------------------------------------
 
+    alias GridEvent wxGridEvent;
     public class GridEvent : Event 
     {
         public this(IntPtr wxobj)
@@ -135,6 +136,7 @@ import wx.ScrolledWindow;
     
     //-----------------------------------------------------------------------------
 
+		//! \cond EXTERN
 	extern (C) {
         alias void   function(GridCellEditor obj, IntPtr parent, int id, IntPtr evtHandler) Virtual_Create;
         alias void   function(GridCellEditor obj, int row, int col, IntPtr grid) Virtual_BeginEdit;
@@ -152,9 +154,6 @@ import wx.ScrolledWindow;
         alias string function(GridCellEditor obj) Virtual_GetValue;
 	}
 
-        //-----------------------------------------------------------------------------
-        
-		//! \cond EXTERN
         static extern (C) IntPtr wxGridCellEditor_ctor();
 	static extern (C) void wxGridCellEditor_dtor(IntPtr self);
         static extern (C) void wxGridCellEditor_RegisterVirtual(IntPtr self, GridCellEditor obj,
@@ -392,6 +391,7 @@ import wx.ScrolledWindow;
         static extern (C) string wxGridCellTextEditor_GetValue(IntPtr self);
 		//! \endcond
 	
+    alias GridCellTextEditor wxGridCellTextEditor;
     public class GridCellTextEditor : GridCellEditor
     {
         public this()
@@ -485,6 +485,7 @@ import wx.ScrolledWindow;
         static extern (C) string wxGridCellNumberEditor_GetValue(IntPtr self);
 		//! \endcond
 	
+    alias GridCellNumberEditor wxGridCellNumberEditor;
     public class GridCellNumberEditor : GridCellTextEditor
     {
         public this()
@@ -577,6 +578,7 @@ import wx.ScrolledWindow;
         static extern (C) string wxGridCellFloatEditor_GetValue(IntPtr self);
 		//! \endcond
 	
+    alias GridCellFloatEditor wxGridCellFloatEditor;
     public class GridCellFloatEditor : GridCellTextEditor
     {
         public this()
@@ -667,6 +669,7 @@ import wx.ScrolledWindow;
         static extern (C) string wxGridCellBoolEditor_GetValue(IntPtr self);
 		//! \endcond
 	
+    alias GridCellBoolEditor wxGridCellBoolEditor;
     public class GridCellBoolEditor : GridCellEditor
     {
         public this()
@@ -753,6 +756,7 @@ import wx.ScrolledWindow;
         static extern (C) string wxGridCellChoiceEditor_GetValue(IntPtr self);
 		//! \endcond
 	
+    alias GridCellChoiceEditor wxGridCellChoiceEditor;
     public class GridCellChoiceEditor : GridCellEditor
     {
         public this()
@@ -846,6 +850,7 @@ import wx.ScrolledWindow;
     
         //-----------------------------------------------------------------------------
     
+    alias GridRangeSelectEvent wxGridRangeSelectEvent;
     public class GridRangeSelectEvent : Event
     {
         public this(IntPtr wxobj)
@@ -914,11 +919,11 @@ import wx.ScrolledWindow;
 	}
     }
 
+		//! \cond EXTERN
 	extern (C) {
         alias void function(GridCellWorker obj, string param) Virtual_SetParameters;
 	}
 
-		//! \cond EXTERN
         static extern (C) IntPtr wxGridCellWorker_ctor();
         static extern (C) void wxGridCellWorker_RegisterVirtual(IntPtr self, GridCellWorker obj, Virtual_SetParameters setParameters);
         static extern (C) void wxGridCellWorker_IncRef(IntPtr self);
@@ -928,6 +933,7 @@ import wx.ScrolledWindow;
 	
         //-----------------------------------------------------------------------------
         
+    alias GridCellWorker wxGridCellWorker;
     public class GridCellWorker : wxObject //ClientData
     {
         public this(IntPtr wxobj) 
@@ -990,6 +996,7 @@ import wx.ScrolledWindow;
 
             //-----------------------------------------------------------------------------
     
+    alias GridEditorCreatedEvent wxGridEditorCreatedEvent;
     public class GridEditorCreatedEvent : CommandEvent 
     {
             public this(IntPtr wxobj)
@@ -1242,6 +1249,7 @@ import wx.ScrolledWindow;
 
         //-----------------------------------------------------------------------------
 
+    alias Grid wxGrid;
     public class Grid : ScrolledWindow
     {
         public this(IntPtr wxobj)
@@ -2458,6 +2466,7 @@ version(NOT_IMPLEMENTED){
 	
         //-----------------------------------------------------------------------------
     
+    alias GridCellCoords wxGridCellCoords;
     public class GridCellCoords : wxObject
     {
         public this(IntPtr wxobj)
@@ -2540,6 +2549,7 @@ version(NOT_IMPLEMENTED){
 	
         //-----------------------------------------------------------------------------
     
+    alias GridCellAttr wxGridCellAttr;
     public class GridCellAttr : wxObject
     {
         public enum AttrKind
@@ -2709,6 +2719,7 @@ version(NOT_IMPLEMENTED){
     
         //-----------------------------------------------------------------------------
         
+    alias GridSizeEvent wxGridSizeEvent;
     public class GridSizeEvent : Event 
     {
         public this(IntPtr wxobj) 
@@ -2860,6 +2871,7 @@ version(NOT_IMPLEMENTED){
         static extern (C) IntPtr wxGridCellStringRenderer_Clone(IntPtr self);
         //! \endcond
 	
+    alias GridCellStringRenderer wxGridCellStringRenderer;
     public class GridCellStringRenderer : GridCellRenderer
     {
         public this()
@@ -2912,6 +2924,7 @@ version(NOT_IMPLEMENTED){
         static extern (C) void wxGridCellNumberRenderer_GetBestSize(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, int row, int col, out Size size);
         static extern (C) IntPtr wxGridCellNumberRenderer_Clone(IntPtr self);
 	
+    alias GridCellNumberRenderer wxGridCellNumberRenderer;
     public class GridCellNumberRenderer : GridCellStringRenderer
     {
         public this()
@@ -2966,6 +2979,7 @@ version(NOT_IMPLEMENTED){
         static extern (C) void wxGridCellFloatRenderer_SetParameters(IntPtr self, string parameter);
         //! \endcond
 	
+    alias GridCellFloatRenderer wxGridCellFloatRenderer;
     public class GridCellFloatRenderer : GridCellStringRenderer
     {
         public this()
@@ -3033,6 +3047,7 @@ version(NOT_IMPLEMENTED){
         static extern (C) IntPtr wxGridCellBoolRenderer_Clone(IntPtr self);
         //! \endcond
 	
+    alias GridCellBoolRenderer wxGridCellBoolRenderer;
     public class GridCellBoolRenderer : GridCellRenderer
     {
         public this()
@@ -3629,6 +3644,7 @@ version(NOT_IMPLEMENTED){
 	
         //-----------------------------------------------------------------------------
         
+    alias GridCellAttrProvider wxGridCellAttrProvider;
     public class GridCellAttrProvider : wxObject  // ClientData
     {
         public this(IntPtr wxobj) 

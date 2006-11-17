@@ -4,7 +4,7 @@
 // based on
 // wx.NET - SizerItem.cs
 //
-// The wxSizerItem wrapper class.
+/// The wxSizerItem wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -55,6 +55,7 @@ import wx.Window;
 
         //-----------------------------------------------------------------------------
 
+    alias SizerItem wxSizerItem;
     public class SizerItem : wxObject
     {
         public this(int width, int height, int proportion, int flag, int border, wxObject userData)

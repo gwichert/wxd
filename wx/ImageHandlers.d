@@ -4,7 +4,7 @@
 // based on
 // wx.NET - ImageHandlers.cs
 //
-// The wxImageHandlers wrapper classes.
+/// The wxImageHandlers wrapper classes.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2004 by Alexander Olk
@@ -33,6 +33,7 @@ import wx.Image;
   
   
   
+alias BMPHandler wxBMPHandler;
 public class BMPHandler : ImageHandler 
 {
   public this(IntPtr ptr) { super(ptr); }
@@ -43,6 +44,7 @@ public class BMPHandler : ImageHandler
   }
 }
 
+alias ICOHandler wxICOHandler;
 public class ICOHandler : BMPHandler 
 {
   public this(IntPtr ptr) { super(ptr); }
@@ -53,6 +55,7 @@ public class ICOHandler : BMPHandler
   }
 }
 
+alias CURHandler wxCURHandler;
 public class CURHandler : ICOHandler 
 {
   public this(IntPtr ptr) { super(ptr); }
@@ -63,6 +66,7 @@ public class CURHandler : ICOHandler
   }
 }
 
+alias ANIHandler wxANIHandler;
 public class ANIHandler : CURHandler 
 {
   public this(IntPtr ptr) { super(ptr); }
@@ -73,6 +77,7 @@ public class ANIHandler : CURHandler
   }
 }
 
+alias PNGHandler wxPNGHandler;
 public class PNGHandler : ImageHandler 
 {
   public this(IntPtr ptr) { super(ptr); }
@@ -83,6 +88,7 @@ public class PNGHandler : ImageHandler
   }
 }
 
+alias GIFHandler wxGIFHandler;
 public class GIFHandler : ImageHandler 
 {
   public this(IntPtr ptr) { super(ptr); }
@@ -93,6 +99,7 @@ public class GIFHandler : ImageHandler
   }
 }
 
+alias PCXHandler wxPCXHandler;
 public class PCXHandler : ImageHandler 
 {
   public this(IntPtr ptr) { super(ptr); }
@@ -103,6 +110,7 @@ public class PCXHandler : ImageHandler
   }
 }
 
+alias JPEGHandler wxJPEGHandler;
 public class JPEGHandler : ImageHandler 
 {
   public this(IntPtr ptr) { super(ptr); }
@@ -114,6 +122,7 @@ public class JPEGHandler : ImageHandler
 }
 
 
+alias PNMHandler wxPNMHandler;
 public class PNMHandler : ImageHandler 
 {
   public this(IntPtr ptr) { super(ptr); }
@@ -124,6 +133,7 @@ public class PNMHandler : ImageHandler
   }
 }
 
+alias XPMHandler wxXPMHandler;
 public class XPMHandler : ImageHandler 
 {
   public this(IntPtr ptr) { super(ptr); }
@@ -134,6 +144,7 @@ public class XPMHandler : ImageHandler
   }
 }
 
+alias TIFFHandler wxTIFFHandler;
 public class TIFFHandler : ImageHandler 
 {
   public this(IntPtr ptr) { super(ptr); }

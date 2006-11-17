@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Event.cs
 //
-// The wxEvent wrapper class.
+/// The wxEvent wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
@@ -273,6 +273,7 @@ version(__WXMSW__){
 		//! \endcond
 		//---------------------------------------------------------------------
 	
+	alias Event wxEvent;
 	public class Event : wxObject
 	{
 		public static /*readonly*/ EventType wxEVT_NULL;

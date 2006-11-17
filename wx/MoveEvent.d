@@ -4,7 +4,7 @@
 // based on
 // wx.NET - MoveEvent.cs
 //
-// The wxMoveEvent wrapper class.
+/// The wxMoveEvent wrapper class.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2004 by Alexander Olk
@@ -24,6 +24,7 @@ import wx.Event;
 		
 		//-----------------------------------------------------------------------------
 
+	alias MoveEvent wxMoveEvent;
 	public class MoveEvent : Event
 	{
 		public this(IntPtr wxobj) 

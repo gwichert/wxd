@@ -109,8 +109,8 @@ struct ArrayList /* for .NET compatibility */
 		public void OnNewWindow( Object sender, Event e )
 		{
 			writefln( "MyFrame: OnNewWindow");
-			MyChild subframe = new MyChild( this, "Canvas Frame", new_Point( -1, -1 ),
-					new_Size( -1, -1 ), wxDEFAULT_FRAME_STYLE );
+			MyChild subframe = new MyChild( this, "Canvas Frame", Point( -1, -1 ),
+					Size( -1, -1 ), wxDEFAULT_FRAME_STYLE );
 
 			subframe.Show( true );	
 		}
@@ -337,7 +337,7 @@ struct ArrayList /* for .NET compatibility */
 			MyFrame.frame.StatusText = title;
 
 			Size cs = ClientSize;
-			canvas = new MyCanvas( this, new_Point( 0, 0 ), new_Size( cs.Width, cs.Height ) );
+			canvas = new MyCanvas( this, Point( 0, 0 ), Size( cs.Width, cs.Height ) );
 			canvas.cursor = new Cursor( StockCursor.wxCURSOR_PENCIL );
 
 			canvas.SetScrollbars(20, 20, 50, 50);
@@ -399,7 +399,7 @@ struct ArrayList /* for .NET compatibility */
 
 		public void OnChangeSize( Object sender, Event e )
 		{
-			ClientSize = new_Size( 100, 100 );
+			ClientSize = Size( 100, 100 );
 		}
 
 		//---------------------------------------------------------------------
@@ -469,7 +469,7 @@ struct ArrayList /* for .NET compatibility */
 	{
 		public override bool OnInit()
 		{
-			MyFrame.frame = new MyFrame( null, "MDI Demo", new_Point( -1, -1 ), new_Size( 500, 400 ) );
+			MyFrame.frame = new MyFrame( null, "MDI Demo", Point( -1, -1 ), Size( 500, 400 ) );
 			MyFrame.frame.Show( true );
 
 			return true;

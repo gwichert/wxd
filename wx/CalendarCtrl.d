@@ -3,8 +3,8 @@
 // (C) 2005 bero <berobero.sourceforge.net>
 // based on
 // wx.NET - CalendarCtrl.cs
-// 
-// The wxCalendarCtrl wrapper class.
+//
+/// The wxCalendarCtrl wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -69,6 +69,7 @@ import wx.CommandEvent;
 
         //-----------------------------------------------------------------------------
 
+    alias CalendarCtrl wxCalendarCtrl;
     public class CalendarCtrl : Control
     {
         enum
@@ -273,6 +274,7 @@ import wx.CommandEvent;
 	
         //-----------------------------------------------------------------------------
 
+    alias CalendarDateAttr wxCalendarDateAttr;
     public class CalendarDateAttr : wxObject
     {
         public this(IntPtr wxobj)
@@ -364,6 +366,7 @@ import wx.CommandEvent;
 
         //-----------------------------------------------------------------------------
 	
+    alias CalendarEvent wxCalendarEvent;
     public class CalendarEvent : CommandEvent
     {
 	public this(IntPtr wxobj)

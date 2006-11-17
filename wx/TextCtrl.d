@@ -4,7 +4,7 @@
 // based on
 // wx.NET - TextCtrl.cs
 //
-// The wxTextCtrl wrapper class.
+/// The wxTextCtrl wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -77,6 +77,7 @@ import wx.KeyEvent;
 		
 		//---------------------------------------------------------------------
 		
+	alias TextAttr wxTextAttr;
 	public class TextAttr : wxObject
 	{
 		public const int wxTEXT_ATTR_TEXT_COLOUR =		0x0001;
@@ -284,6 +285,7 @@ import wx.KeyEvent;
 
 		//---------------------------------------------------------------------
         
+	alias TextCtrl wxTextCtrl;
 	public class TextCtrl : Control
 	{
 		public const int wxTE_NO_VSCROLL       = 0x0002;
@@ -713,6 +715,7 @@ import wx.KeyEvent;
 		static extern (C) uint   wxTextUrlEvent_GetURLEnd(IntPtr self);
 		//! \endcond
 	
+	alias TextUrlEvent wxTextUrlEvent;
 	public class TextUrlEvent : CommandEvent
     	{
 		// TODO: Replace Event with EventMouse

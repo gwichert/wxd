@@ -37,7 +37,7 @@ wxSpinCtrl* wxSpinCtrl_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxSpinCtrl_Create(wxSpinCtrl* self, wxWindow *parent, wxWindowID id, dstr value, const wxPoint* pos, const wxSize* size, long style, int min, int max, int initial, dstr name)
+dbit wxSpinCtrl_Create(wxSpinCtrl* self, wxWindow *parent, wxWindowID id, dstr value, const wxPoint* pos, const wxSize* size, long style, int min, int max, int initial, dstr name)
 {
 //	if (value == NULL)
 //		value = "";

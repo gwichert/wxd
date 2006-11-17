@@ -12,7 +12,7 @@
 //-----------------------------------------------------------------------------
 
 import wx.wx;
-import std.string;
+import std.string;
 
 	public class MyHtmlListBox : HtmlListBox
 	{
@@ -367,7 +367,7 @@ import std.string;
 	{
 		public override bool OnInit()
 		{
-			MyFrame frame = new MyFrame( null, "HtmListBox sample", new_Point( -1, -1 ), new_Size( 400, 500 ) );
+			MyFrame frame = new MyFrame( null, "HtmListBox sample", Point( -1, -1 ), Size( 400, 500 ) );
 			frame.Show( true );
 
 			return true;

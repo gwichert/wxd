@@ -4,7 +4,7 @@
 // based on
 // wx.NET - TextDialog.cs
 //
-// The wxTextEntryDialog wrapper class.
+/// The wxTextEntryDialog wrapper class.
 //
 // Written by Alexander Olk (xenomorph2@onlinehome.de)
 // (C) 2003 Alexander Olk
@@ -27,6 +27,7 @@ import wx.Dialog;
 
         //-----------------------------------------------------------------------------
 
+    alias TextEntryDialog wxTextEntryDialog;
     public class TextEntryDialog : Dialog
     {
     	enum {

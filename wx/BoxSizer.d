@@ -4,7 +4,7 @@
 // based on
 // wx.NET - BoxSizer.cs
 //
-// The wxBoxSizer wrapper class.
+/// The wxBoxSizer wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -35,6 +35,7 @@ import wx.Sizer;
 
 		//---------------------------------------------------------------------
 
+	alias BoxSizer wxBoxSizer;
 	public class BoxSizer : Sizer
 	{
 		public this(IntPtr wxobj)

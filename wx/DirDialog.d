@@ -3,8 +3,8 @@
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - DirDialog.cs
-// 
-// The wxDirDialog wrapper class.
+//
+/// The wxDirDialog wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -34,6 +34,7 @@ import wx.Dialog;
 
         //-----------------------------------------------------------------------------
 
+    alias DirDialog wxDirDialog;
     public class DirDialog : Dialog
     {
 	enum {  wxDD_NEW_DIR_BUTTON  = 0x0080 }

@@ -4,7 +4,7 @@
 // based on
 // wx.NET - wxObject.cs
 //
-// The wxobj wrapper class.
+/// The wxObject wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.

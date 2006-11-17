@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Dnd.cs
 //
-// The wxDND wrapper classes.
+/// The wxDND wrapper classes.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 by Bryan Bulten
@@ -39,11 +39,11 @@ import wx.Window;
 	
 	//---------------------------------------------------------------------
 
+		//! \cond EXTERN
 		extern (C) {
 		alias int function(DropSource obj, int flags) Virtual_DoDragDrop;
 		}
 
-		//! \cond EXTERN
 		static extern (C) IntPtr wxDropSource_Win_ctor(IntPtr win);
 		static extern (C) IntPtr wxDropSource_DataObject_ctor(IntPtr dataObject, IntPtr win);
 		static extern (C) void wxDropSource_dtor(IntPtr self);
@@ -54,6 +54,7 @@ import wx.Window;
 		
 		//---------------------------------------------------------------------
 
+	alias DropSource wxDropSource;
 	public class DropSource : wxObject
 	{
 		protected DataObject m_dataObject = null;
@@ -108,6 +109,7 @@ import wx.Window;
 	
 	//---------------------------------------------------------------------
 
+		//! \cond EXTERN
 		extern (C) {
 		alias int  function(DropTarget obj, int x, int y, int def) Virtual_OnDragOver;
 		alias bool function(DropTarget obj, int x, int y) Virtual_OnDrop;
@@ -116,6 +118,7 @@ import wx.Window;
 		alias void function(DropTarget obj) Virtual_OnLeave;
 		alias int  function(DropTarget obj, int x, int y, int def) Virtual_OnEnter;
 		}
+		//! \endcond
 
 		//---------------------------------------------------------------------
 		

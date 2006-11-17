@@ -4,7 +4,7 @@
 // based on
 // wx.NET - WizardPageSimple.cs
 //
-// The wxWizardPageSimple wrapper class.
+/// The wxWizardPageSimple wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 379, Inc.
@@ -24,6 +24,7 @@ import wx.Wizard;
 
 		//---------------------------------------------------------------------
 
+	alias WizardPageSimple wxWizardPageSimple;
 	public class WizardPageSimple : WizardPage
 	{
 		public this(Wizard parent, WizardPage prev = null, WizardPage next = null, Bitmap bitmap = Bitmap.wxNullBitmap, char* resource = null)

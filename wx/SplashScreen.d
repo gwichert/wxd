@@ -4,7 +4,7 @@
 // based on
 // wx.NET - SplashScreen.cs
 //
-// The wxSplashScreen wrapper class.
+/// The wxSplashScreen wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten 
@@ -26,6 +26,7 @@ import wx.Frame;
 
         //-----------------------------------------------------------------------------
 
+    alias SplashScreen wxSplashScreen;
     public class SplashScreen : Frame
     {
 	enum {
@@ -69,6 +70,7 @@ import wx.Frame;
 
         //-----------------------------------------------------------------------------
 
+    alias SplashScreenWindow wxSplashScreenWindow;
     public class SplashScreenWindow : Window
     {
         public this(IntPtr wxobj) 

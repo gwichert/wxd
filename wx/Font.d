@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Font.cs
 //
-// The wxFont wrapper class.
+/// The wxFont wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -198,6 +198,7 @@ import wx.GDIObject;
 
 		//---------------------------------------------------------------------
 
+	alias Font wxFont;
 	public class Font : GDIObject, ICloneable
 	{
 		public static Font wxNORMAL_FONT;

@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Notebook.cs
 //
-// The wxNotebook wrapper class.
+/// The wxNotebook wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
@@ -32,6 +32,7 @@ import wx.ImageList;
 
 		//-----------------------------------------------------------------------------
 
+	alias NotebookEvent wxNotebookEvent;
 	public class NotebookEvent : Event
 	{
 		public this(IntPtr wxobj)
@@ -108,6 +109,7 @@ import wx.ImageList;
 
 		//---------------------------------------------------------------------
 		
+	alias Notebook wxNotebook;
 	public class Notebook : Control
 	{
 		public const int wxNB_FIXEDWIDTH       = 0x0010;

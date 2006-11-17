@@ -4,7 +4,7 @@
 // based on
 // wx.NET - FindReplaceDialog.cs
 //
-// The wxFindReplaceDialog wrapper class.
+/// The wxFindReplaceDialog wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -28,6 +28,7 @@ import wx.CommandEvent;
 
         //-----------------------------------------------------------------------------
 
+    alias FindReplaceDialog wxFindReplaceDialog;
     public class FindReplaceDialog : Dialog
     {
         public const int wxFR_DOWN       = 1;
@@ -103,6 +104,7 @@ import wx.CommandEvent;
 
         //-----------------------------------------------------------------------------
 
+    alias FindDialogEvent wxFindDialogEvent;
     public class FindDialogEvent : CommandEvent
     {
 	static this()
@@ -166,6 +168,7 @@ import wx.CommandEvent;
 
         //-----------------------------------------------------------------------------
 
+    alias FindReplaceData wxFindReplaceData;
     public class FindReplaceData : wxObject
     {
         public this(IntPtr wxobj)

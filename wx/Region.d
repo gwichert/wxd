@@ -4,7 +4,7 @@
 // based on
 // wx.NET - Region.cs
 //
-// The wxRegion wrapper class.
+/// The wxRegion wrapper class.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -17,9 +17,6 @@ import wx.common;
 import wx.GDIObject;
 import wx.Bitmap;
 import wx.Colour;
-
-// this is bogus, but better than nothing
-version (darwin) { version = __WXMAC__; }
 
     public enum RegionContain {
         wxOutRegion = 0,
@@ -70,6 +67,7 @@ version (darwin) { version = __WXMAC__; }
 
         //---------------------------------------------------------------------
 
+    alias Region wxRegion;
     public class Region : GDIObject
     {
 
@@ -245,6 +243,7 @@ version (darwin) { version = __WXMAC__; }
 
         //---------------------------------------------------------------------
 
+    alias RegionIterator wxRegionIterator;
     public class RegionIterator : wxObject
     {
         public this(IntPtr wxobj) 

@@ -4,7 +4,7 @@
 // based on
 // wx.NET - BitMapButton.cs
 //
-// The wxBitmapButton wrapper class.
+/// The wxBitmapButton wrapper class.
 //
 // Written by Robert Roebling
 // (C) 2003 Robert Roebling
@@ -19,11 +19,11 @@ import wx.Bitmap;
 import wx.Button;
 import wx.Control;
 
+		//! \cond EXTERN
 		extern (C) {
 		alias void function(BitmapButton obj) Virtual_OnSetBitmap;
 		}
 		
-		//! \cond EXTERN
 		static extern (C) IntPtr wxBitmapButton_ctor();
 		static extern (C) void   wxBitmapButton_RegisterVirtual(IntPtr self, BitmapButton obj,Virtual_OnSetBitmap onSetBitmap);
 		//static extern (C) void   wxBitmapButton_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
@@ -58,6 +58,7 @@ import wx.Control;
 		
 		//---------------------------------------------------------------------
 		
+	alias BitmapButton wxBitmapButton;
 	public class BitmapButton : Control
 	{
 		public this(IntPtr wxobj) 

@@ -103,7 +103,7 @@ wxDC* wxPrintDialog_GetPrintDC(wxPrintDialog* self)
 
 //-----------------------------------------------------------------------------
 
-#if defined(__WXGTK_)
+#if 0 /*defined(__WXGTK__)*/
 
 extern "C" WXEXPORT
 wxPrintSetupDialog* wxPrintSetupDialog_ctorPrintData(wxWindow* parent, wxPrintData* data)
@@ -130,7 +130,7 @@ void wxPrintSetupDialog_Init(wxPrintSetupDialog* self, wxPrintData* data)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxPrintSetupDialog_TransferDataFromWindow(wxPrintSetupDialog* self)
+dbit wxPrintSetupDialog_TransferDataFromWindow(wxPrintSetupDialog* self)
 {
     return self->TransferDataFromWindow()?1:0;
 }
@@ -138,7 +138,7 @@ bool wxPrintSetupDialog_TransferDataFromWindow(wxPrintSetupDialog* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxPrintSetupDialog_TransferDataToWindow(wxPrintSetupDialog* self)
+dbit wxPrintSetupDialog_TransferDataToWindow(wxPrintSetupDialog* self)
 {
     return self->TransferDataToWindow()?1:0;
 }

@@ -3,7 +3,9 @@
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - VidMode.cs
-// 
+//
+/// The VideoMode class
+//
 // Michael S. Muegel mike _at_ muegel dot org
 //
 // Given this is such a simple structure I did a full port of it's C++ 
@@ -35,7 +37,15 @@ import std.string;
 
 //    [StructLayout(LayoutKind.Sequential)]
 
-        public VideoMode new_VideoMode(int width, int height, int depth, int freq)
+        deprecated public VideoMode new_VideoMode(int width, int height, int depth, int freq)
+        {
+            return VideoMode(width, height, depth, freq);
+        }
+
+    public struct VideoMode // : IComparable
+    {
+        /** struct constructor */
+        public static VideoMode opCall(int width, int height, int depth, int freq)
         {
             VideoMode v;
             v.w = width;
@@ -44,9 +54,6 @@ import std.string;
             v.refresh = freq;
             return v;
         }
-
-    public struct VideoMode // : IComparable
-    {
 /+
 		public int opCmp(VideoMode other)
 		{

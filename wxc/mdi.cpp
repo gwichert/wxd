@@ -67,7 +67,7 @@ wxMDIClientWindow* wxMDIParentFrame_OnCreateClient(_MDIParentFrame* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxMDIParentFrame_Create(_MDIParentFrame* self, wxWindow* parent, wxWindowID id, dstr title, const wxPoint* pos, const wxSize* size, int style, dstr name)
+dbit wxMDIParentFrame_Create(_MDIParentFrame* self, wxWindow* parent, wxWindowID id, dstr title, const wxPoint* pos, const wxSize* size, int style, dstr name)
 {
         if (pos == NULL)
         pos = &wxDefaultPosition;
@@ -179,7 +179,7 @@ void wxMDIChildFrame_Activate(wxMDIChildFrame* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxMDIChildFrame_Create(wxMDIChildFrame* self, wxMDIParentFrame* parent, wxWindowID id, dstr title, const wxPoint* pos, const wxSize* size, long style, dstr name)
+dbit wxMDIChildFrame_Create(wxMDIChildFrame* self, wxMDIParentFrame* parent, wxWindowID id, dstr title, const wxPoint* pos, const wxSize* size, long style, dstr name)
 {
     if (pos == NULL)
         pos = &wxDefaultPosition;
@@ -204,7 +204,7 @@ void wxMDIChildFrame_Restore(wxMDIChildFrame* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxMDIChildFrame_Maximize(wxMDIChildFrame* self, bool maximize)
+void wxMDIChildFrame_Maximize(wxMDIChildFrame* self, dbit maximize)
 {
     self->Maximize(maximize);
 }
@@ -229,7 +229,7 @@ wxMDIClientWindow* wxMDIClientWindow_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxMDIClientWindow_CreateClient(wxMDIClientWindow* self, wxMDIParentFrame* parent, int style)
+dbit wxMDIClientWindow_CreateClient(wxMDIClientWindow* self, wxMDIParentFrame* parent, int style)
 {
     return self->CreateClient(parent, style)?1:0;
 }

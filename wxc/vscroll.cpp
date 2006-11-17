@@ -84,7 +84,7 @@ void wxVScrolledWindow_RegisterVirtual(_VScrolledWindow* self, dobj obj, Virtual
 }
 
 extern "C" WXEXPORT
-bool wxVScrolledWindow_Create(_VScrolledWindow* self, wxWindow *parent, wxWindowID id, const wxPoint* pos,
+dbit wxVScrolledWindow_Create(_VScrolledWindow* self, wxWindow *parent, wxWindowID id, const wxPoint* pos,
 					               const wxSize* size, long style, dstr name)
 {
 	if (pos == NULL)
@@ -106,19 +106,19 @@ void wxVScrolledWindow_SetLineCount(_VScrolledWindow* self, int count)
 }
 
 extern "C" WXEXPORT
-bool wxVScrolledWindow_ScrollToLine(_VScrolledWindow* self, int line)
+dbit wxVScrolledWindow_ScrollToLine(_VScrolledWindow* self, int line)
 {
 	return self->ScrollToLine(line)?1:0;
 }
 
 extern "C" WXEXPORT
-bool wxVScrolledWindow_ScrollLines(_VScrolledWindow* self, int lines)
+dbit wxVScrolledWindow_ScrollLines(_VScrolledWindow* self, int lines)
 {
 	return self->ScrollLines(lines)?1:0;
 }
 
 extern "C" WXEXPORT
-bool wxVScrolledWindow_ScrollPages(_VScrolledWindow* self, int pages)
+dbit wxVScrolledWindow_ScrollPages(_VScrolledWindow* self, int pages)
 {
 	return self->ScrollPages(pages)?1:0;
 }
@@ -172,7 +172,7 @@ int wxVScrolledWindow_GetLastVisibleLine(_VScrolledWindow* self)
 }
 
 extern "C" WXEXPORT
-bool wxVScrolledWindow_IsVisible(_VScrolledWindow* self, int line)
+dbit wxVScrolledWindow_IsVisible(_VScrolledWindow* self, int line)
 {
 	return self->IsVisible(line)?1:0;
 }

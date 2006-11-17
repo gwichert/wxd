@@ -37,7 +37,7 @@ wxRadioButton* wxRadioButton_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxRadioButton_Create(wxRadioButton* self, wxWindow* parent, int id,
+dbit wxRadioButton_Create(wxRadioButton* self, wxWindow* parent, int id,
                        dstr label, const wxPoint* pos,
                        const wxSize* size, int style, const wxValidator* val,
                        dstr name)
@@ -61,7 +61,7 @@ bool wxRadioButton_Create(wxRadioButton* self, wxWindow* parent, int id,
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-bool wxRadioButton_GetValue(wxRadioButton* self)
+dbit wxRadioButton_GetValue(wxRadioButton* self)
 {
 	return self->GetValue()?1:0;
 }
@@ -69,7 +69,7 @@ bool wxRadioButton_GetValue(wxRadioButton* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxRadioButton_SetValue(wxRadioButton* self, bool state)
+void wxRadioButton_SetValue(wxRadioButton* self, dbit state)
 {
 	self->SetValue(state);
 }

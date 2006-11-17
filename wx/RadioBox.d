@@ -4,7 +4,7 @@
 // based on
 // wx.NET - RadioBox.cs
 //
-// The wxRadioBox wrapper class.
+/// The wxRadioBox wrapper class.
 //
 // Written by Jason Perkins (jason@379.com)
 // (C) 2003 by 379, Inc.
@@ -45,6 +45,7 @@ import wx.Control;
 
 		//---------------------------------------------------------------------
 		
+	alias RadioBox wxRadioBox;
 	public class RadioBox : Control
 	{
 		enum {

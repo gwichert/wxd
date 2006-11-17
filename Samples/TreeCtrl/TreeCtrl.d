@@ -31,7 +31,7 @@ import wx.wx;
 
 		public override bool OnInit()
 		{
-			MyFrame frame = new MyFrame("TreeCtrl Test", new_Point(50,50), new_Size(450,600));
+			MyFrame frame = new MyFrame("TreeCtrl Test", Point(50,50), Size(450,600));
 			frame.Show(true);
 			return true;
 		}
@@ -1059,13 +1059,13 @@ import wx.wx;
 			{
 				if (item.IsOk())
 				{
-					Rectangle rect = new_Rectangle(0, 0, 0, 0);
+					Rectangle rect = Rectangle(0, 0, 0, 0);
 					GetBoundingRect(item, rect, true); 
-					pt = new_Point(rect.Left, rect.Top);
+					pt = Point(rect.Left, rect.Top);
 				}
 				else
 				{
-					pt = new_Point(0, 0);
+					pt = Point(0, 0);
 				}
 			}
 			else

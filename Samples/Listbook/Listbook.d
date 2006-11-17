@@ -171,7 +171,7 @@ import std.string;
 
 		public override bool OnInit()
 		{
-			ListbookFrame frame = new ListbookFrame("Listbook wxWidgets Sample", new_Point(10, 100), new_Size(650,340));
+			ListbookFrame frame = new ListbookFrame("Listbook wxWidgets Sample", Point(10, 100), Size(650,340));
 			frame.Show(true);
 
 			return true;

@@ -3,8 +3,8 @@
 // (C) 2005 bero <berobero@users.sourceforge.net>
 // based on
 // wx.NET - HTML.cs
-// 
-// The wxHTML wrapper classes.
+//
+/// The wxHTML wrapper classes.
 //
 // Written by Bryan Bulten (bryan@bulten.ca)
 // (C) 2003 Bryan Bulten
@@ -67,6 +67,7 @@ import wx.MouseEvent;
 
         //-----------------------------------------------------------------------------
 
+    alias HtmlTag wxHtmlTag;
     public class HtmlTag : wxObject
     {
         public this(IntPtr wxobj) 
@@ -199,6 +200,7 @@ import wx.MouseEvent;
         static extern (C) IntPtr wxHtmlCell_FindCellByPos(IntPtr self, int x, int y);
         //! \endcond
 
+    alias HtmlCell wxHtmlCell;
     public class HtmlCell : wxObject
     {
         //-----------------------------------------------------------------------------
@@ -231,12 +233,12 @@ import wx.MouseEvent;
 	public int PosX() { return X; }
 	public int PosY() { return Y; }
 
-	public Point Position() { return new_Point(X,Y); }
+	public Point Position() { return Point(X,Y); }
 	public void  Position(Point pt) { SetPos(pt.X,pt.Y); }
 
-	public Size size() { return new_Size(Width,Height); }
+	public Size size() { return Size(Width,Height); }
 
-	public Rectangle rect() { return new_Rectangle(X,Y,Width,Height); }
+	public Rectangle rect() { return Rectangle(X,Y,Width,Height); }
 
         //-----------------------------------------------------------------------------
 
@@ -345,6 +347,7 @@ import wx.MouseEvent;
 		static extern (C) void   wxHtmlFontCell_DrawInvisible(IntPtr self, IntPtr dc, int x, int y, IntPtr info);
         //! \endcond
 
+	alias HtmlFontCell wxHtmlFontCell;
 	public class HtmlFontCell : HtmlCell
 	{
 		//-----------------------------------------------------------------------------
@@ -402,6 +405,7 @@ import wx.MouseEvent;
         static extern (C) IntPtr wxHtmlContainerCell_FindCellByPos(IntPtr self, int x, int y);
         //! \endcond
 
+    alias HtmlContainerCell wxHtmlContainerCell;
     public class HtmlContainerCell : HtmlCell
     {
         //-----------------------------------------------------------------------------
@@ -565,6 +569,7 @@ import wx.MouseEvent;
 		static extern (C) void   wxHtmlColourCell_DrawInvisible(IntPtr self, IntPtr dc, int x, int y, IntPtr info);
         //! \endcond
 
+	alias HtmlColourCell wxHtmlColourCell;
 	public class HtmlColourCell : HtmlCell
 	{
 		//-----------------------------------------------------------------------------
@@ -606,6 +611,7 @@ import wx.MouseEvent;
 		
 		//-----------------------------------------------------------------------------
 		
+	alias HtmlLinkInfo wxHtmlLinkInfo;
 	public class HtmlLinkInfo : wxObject
 	{
 		public this(IntPtr wxobj)
@@ -655,6 +661,7 @@ import wx.MouseEvent;
 
         //-----------------------------------------------------------------------------
 
+    alias HtmlWidgetCell wxHtmlWidgetCell;
     public class HtmlWidgetCell : HtmlCell
     {
 		public this(IntPtr wxobj)
@@ -694,6 +701,7 @@ import wx.MouseEvent;
 
         //-----------------------------------------------------------------------------
 
+    alias HtmlWordCell wxHtmlWordCell;
     public class HtmlWordCell : HtmlCell
     {
 		public this(IntPtr wxobj)
@@ -719,6 +727,7 @@ import wx.MouseEvent;
 
         //-----------------------------------------------------------------------------
 
+    alias HtmlFilterPlainText wxHtmlFilterPlainText;
     public class HtmlFilterPlainText : HtmlFilter
     {
         public this(IntPtr wxobj) 
@@ -748,6 +757,7 @@ import wx.MouseEvent;
 
         //-----------------------------------------------------------------------------
 
+    alias HtmlFilterHTML wxHtmlFilterHTML;
     public class HtmlFilterHTML : HtmlFilter
     {
         public this(IntPtr wxobj) 
@@ -779,6 +789,7 @@ import wx.MouseEvent;
         
         //-----------------------------------------------------------------------------
 
+    alias HtmlTagsModule wxHtmlTagsModule;
     public class HtmlTagsModule : wxObject // TODO: Module
     {
 		public this(IntPtr wxobj)
@@ -863,6 +874,7 @@ import wx.MouseEvent;
 
         //-----------------------------------------------------------------------------
 
+    alias HtmlWinParser wxHtmlWinParser;
     public class HtmlWinParser : HtmlParser
     {
 		public this(IntPtr wxobj)
@@ -1047,6 +1059,7 @@ import wx.MouseEvent;
 
         //-----------------------------------------------------------------------------
 
+    alias HtmlEntitiesParser wxHtmlEntitiesParser;
     public class HtmlEntitiesParser : wxObject
     {
 		public this(IntPtr wxobj)
@@ -1264,6 +1277,7 @@ import wx.MouseEvent;
 		
 		//-----------------------------------------------------------------------------
 		
+	alias HtmlRenderingInfo wxHtmlRenderingInfo;
 	public class HtmlRenderingInfo : wxObject
 	{
 		public this(IntPtr wxobj)
@@ -1311,6 +1325,7 @@ import wx.MouseEvent;
 		
 		//-----------------------------------------------------------------------------
 
+	alias HtmlSelection wxHtmlSelection;
 	public class HtmlSelection : wxObject
 	{
 		public this(IntPtr wxobj)
@@ -1415,6 +1430,7 @@ import wx.MouseEvent;
 		
 		//-----------------------------------------------------------------------------
 		
+	alias HtmlEasyPrinting wxHtmlEasyPrinting;
 	public class HtmlEasyPrinting : wxObject
 	{
 		public const int wxPAGE_ODD	= 0;
@@ -1556,6 +1572,7 @@ import wx.MouseEvent;
 
 	//-----------------------------------------------------------------------------
 
+        //! \cond EXTERN
 		extern (C) {
 		alias void function(HtmlWindow obj, IntPtr link) Virtual_OnLinkClicked;
 		alias void function(HtmlWindow obj, string title) Virtual_OnSetTitle;
@@ -1564,9 +1581,6 @@ import wx.MouseEvent;
 		alias int function(HtmlWindow obj, int type, string url, string redirect) Virtual_OnOpeningURL;
 		}
 
-		//-----------------------------------------------------------------------------
-
-        //! \cond EXTERN
 		static extern (C) IntPtr wxHtmlWindow_ctor();
 		static extern (C) void   wxHtmlWindow_RegisterVirtual(IntPtr self, HtmlWindow obj, 
 			Virtual_OnLinkClicked onLinkClicked,
@@ -1616,6 +1630,7 @@ import wx.MouseEvent;
 		
 		//-----------------------------------------------------------------------------
 
+	alias HtmlWindow wxHtmlWindow;
 	public class HtmlWindow : ScrolledWindow
 	{
 		public const int wxHW_SCROLLBAR_NEVER   = 0x0002;
