@@ -149,7 +149,7 @@ public:
 extern "C" WXEXPORT
 wxTextDataObject* wxTextDataObject_ctor(dstr text)
 {
-	return new _TextDataObject(wxString(text.data, wxConvUTF8, text.length));
+	return new _TextDataObject(wxstr(text));
 }
 
 extern "C" WXEXPORT
@@ -180,7 +180,7 @@ dstrret wxTextDataObject_GetText(wxTextDataObject* self)
 extern "C" WXEXPORT
 void wxTextDataObject_SetText(wxTextDataObject* self, dstr text)
 {
-	self->SetText(wxString(text.data, wxConvUTF8, text.length));
+	self->SetText(wxstr(text));
 }
 
 //-----------------------------------------------------------------------------
@@ -216,7 +216,7 @@ void wxFileDataObject_RegisterDisposable(_FileDataObject* self, Virtual_Dispose 
 extern "C" WXEXPORT
 void wxFileDataObject_AddFile(wxFileDataObject* self, dstr filename)
 {
-	self->AddFile(wxString(filename.data, wxConvUTF8, filename.length));
+	self->AddFile(wxstr(filename));
 }
 
 extern "C" WXEXPORT

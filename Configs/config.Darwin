@@ -1,26 +1,47 @@
 # from samples
 
-WX_CONFIG = wx-config
+# same as the regular GNU, but with Mac support
+
+WX_CONFIG ?= wx-config
+
+# D compiler to use (DMD or GDC)
+COMPILER = GDC
+
+# wx platform to use (e.g. WXGTK)
 PLATFORM = $(shell cat $(TOPDIR)/wxc/platform)
 
-CXX = $(shell $(WX_CONFIG) --cxx)
-DC = gdc
+# wx char encoding (ANSI/UNICODE)
+ENCODING = $(shell cat $(TOPDIR)/wxc/encoding)
 
-CXXFLAGS = -O2 -g
-DCFLAGS += -fversion=__$(PLATFORM)__ -O2 -g
+CXX = $(shell $(WX_CONFIG) --cxx)
+CXXFLAGS = -O2
+CXXLIBS = -lstdc++ `test -r /usr/lib/libcc_dynamic.a && echo -lcc_dynamic`
+
+DC = gdc
+DFLAGS = -O2 -g
 
 WXVERSION = `$(WX_CONFIG) --version`
+WXFLAGS = `$(WX_CONFIG) --cxxflags`
 WXLIBS = `$(WX_CONFIG) --libs`
 
-LDFLAGS = -lstdc++ `test -r /usr/lib/libcc_dynamic.a && echo -lcc_dynamic`
+ifeq ("$(STC)","1")
+WXLIBS = `$(WX_CONFIG) --libs stc`
+endif
+
 REZFLAGS = $(shell $(WX_CONFIG) --rezflags)
 
+# workaround for wxAUI 0.9.2 linking to gdk_window_get_pointer directly on wxGTK...
+ifeq ("$(PLATFORM)","WXGTK")
+LDFLAGS += `pkg-config --libs gtk+-2.0`
+endif
 
-.cpp.o: 
-	$(CXX) -c $(CXXFLAGS) `$(WX_CONFIG) --cxxflags` $<
+.cpp.o:
+	$(CXX) $(WXFLAGS) $(CXXFLAGS) -c -o $@ $<
+
+VERSION=-fversion=__$(PLATFORM)__ -fversion=$(ENCODING)
 
 %.o:%.d
-	$(DC) -c $(DCFLAGS) -I$(TOPDIR) $<
+	$(DC) $(VERSION) -I$(TOPDIR) $(DFLAGS) -c -o $@ $<
 
 
 BUNDLE_EXECUTABLE = $(shell basename $(TARGET))
@@ -45,9 +66,9 @@ $(TARGET).app: $(TARGET)
 	-touch -r $< $@
 
 $(TARGET) : $(OBJECTS)
-	$(DC) -o $@ $(OBJECTS) -L$(TOPDIR) -lwxd -lwxc $(WXLIBS) $(LDFLAGS)
-	-$(REZFLAGS) $@
-	
+	$(DC) -o $@ $(OBJECTS) -L$(TOPDIR) -lwxd -lwxc $(WXLIBS) $(CXXLIBS) $(LDFLAGS)
+	-test "$(PLATFORM)" = "WXMAC" && $(REZFLAGS) $@
+
 clean:
 	-rm *.o
 	-rm $(TARGET)

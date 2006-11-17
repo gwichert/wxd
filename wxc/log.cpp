@@ -56,7 +56,7 @@ dbit wxLog_EnableLogging(dbit doit)
 extern "C" WXEXPORT
 void wxLog_OnLog(unsigned long level, dstr szString, long t)
 {
-    wxLog::OnLog(level, wxString(szString.data, wxConvUTF8, szString.length).c_str(), t);
+    wxLog::OnLog(level, wxstr(szString).c_str(), t);
 }
 
 //-----------------------------------------------------------------------------
@@ -159,7 +159,7 @@ void wxLog_SetTraceMask(wxTraceMask ulMask)
 extern "C" WXEXPORT
 void wxLog_AddTraceMask(dstr str)
 {
-    wxLog::AddTraceMask(wxString(str.data, wxConvUTF8, str.length));
+    wxLog::AddTraceMask(wxstr(str));
 }
 
 //-----------------------------------------------------------------------------
@@ -167,7 +167,7 @@ void wxLog_AddTraceMask(dstr str)
 extern "C" WXEXPORT
 void wxLog_RemoveTraceMask(dstr str)
 {
-    wxLog::RemoveTraceMask(wxString(str.data, wxConvUTF8, str.length));
+    wxLog::RemoveTraceMask(wxstr(str));
 }
 
 //-----------------------------------------------------------------------------
@@ -191,7 +191,7 @@ wxArrayString* wxLog_GetTraceMasks()
 extern "C" WXEXPORT
 void wxLog_SetTimestamp(dstr ts)
 {
-    wxLog::SetTimestamp(wxString(ts.data, wxConvUTF8, ts.length).c_str());
+    wxLog::SetTimestamp(wxstr(ts).c_str());
 }
 
 //-----------------------------------------------------------------------------
@@ -215,7 +215,7 @@ wxTraceMask wxLog_GetTraceMask()
 extern "C" WXEXPORT
 dbit wxLog_IsAllowedTraceMask(dstr mask)
 {
-    return wxLog::IsAllowedTraceMask(wxString(mask.data, wxConvUTF8, mask.length).c_str())?1:0;
+    return wxLog::IsAllowedTraceMask(wxstr(mask).c_str())?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -239,7 +239,8 @@ dstrret wxLog_GetTimestamp()
 extern "C" WXEXPORT
 void wxLog_TimeStamp(dstr str)
 {
-    wxLog::TimeStamp(new wxString(str.data, wxConvUTF8, str.length));
+	wxString *wxs = new wxString(wxstr(str));
+    wxLog::TimeStamp(wxs);
 }
 
 //-----------------------------------------------------------------------------
@@ -258,7 +259,7 @@ enum {
 extern "C" WXEXPORT
 void wxLog_Log_Function(int what, dstr szFormat)
 {
-    wxString tmpstr = wxString(szFormat.data, wxConvUTF8, szFormat.length);
+    wxString tmpstr = wxstr(szFormat);
     // params are converted by csharp code
 
     switch (what) {

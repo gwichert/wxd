@@ -100,7 +100,7 @@ wxMenuItem* wxAcceleratorEntry_GetMenuItem(wxAcceleratorEntry* self)
 extern "C" WXEXPORT
 wxAcceleratorEntry* wxAcceleratorEntry_GetAccelFromString(dstr label)
 {
-	return wxGetAccelFromString(wxString(label.data, wxConvUTF8, label.length));
+	return wxGetAccelFromString(wxstr(label));
 }
 
 //-----------------------------------------------------------------------------

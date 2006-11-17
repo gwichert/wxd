@@ -40,7 +40,7 @@ wxDataFormat* wxDataFormat_ctorByType(wxDataFormatId type)
 extern "C" WXEXPORT
 wxDataFormat* wxDataFormat_ctorById(dstr id)
 {
-    return new wxDataFormat(wxString(id.data, wxConvUTF8, id.length).c_str());
+    return new wxDataFormat(wxstr(id).c_str());
 }
 
 //-----------------------------------------------------------------------------
@@ -54,7 +54,7 @@ dstrret wxDataFormat_GetId(wxDataFormat* self)
 extern "C" WXEXPORT
 void wxDataFormat_SetId(wxDataFormat* self, dstr id)
 {
-    self->SetId(wxString(id.data, wxConvUTF8, id.length).c_str());
+    self->SetId(wxstr(id).c_str());
 }
 
 //-----------------------------------------------------------------------------

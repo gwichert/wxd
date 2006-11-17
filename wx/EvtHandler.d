@@ -26,7 +26,7 @@ public import wx.Event;
 
 //! \cond VERSION
 version(WXD_STYLEDTEXTCTRL)
-//! \endcond VERSION
+//! \endcond
 public import wx.StyledTextCtrl;
 	
 	//---------------------------------------------------------------------
@@ -625,7 +625,7 @@ version(__WXMSW__){
 
 //! \cond VERSION
 version(WXD_STYLEDTEXTCTRL){
-//! \endcond VERSION
+//! \endcond
 
 		// StyledTextCtrl specific events
 		
@@ -690,6 +690,6 @@ version(WXD_STYLEDTEXTCTRL){
 			{ AddCommandListener(StyledTextCtrl.wxEVT_STC_CALLTIP_CLICK, id, lsnr); }			
 //! \cond VERSION
 } // version(WXD_STYLEDTEXTCTRL)
-//! \endcond VERSION
+//! \endcond
 		public static wxObject New(IntPtr ptr) { return new EvtHandler(ptr); }
 	}

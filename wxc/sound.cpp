@@ -31,7 +31,7 @@ wxSound* wxSound_ctor()
 extern "C" WXEXPORT
 wxSound* wxSound_ctor2(dstr fileName, dbit isResource)
 {
-	return new wxSound(wxString(fileName.data, wxConvUTF8, fileName.length), isResource);
+	return new wxSound(wxstr(fileName), isResource);
 }
 
 //-----------------------------------------------------------------------------

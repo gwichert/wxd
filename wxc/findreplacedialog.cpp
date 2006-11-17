@@ -39,7 +39,7 @@ wxFindReplaceDialog* wxFindReplaceDialog_ctor()
 extern "C" WXEXPORT
 dbit wxFindReplaceDialog_Create(wxFindReplaceDialog* self, wxWindow* parent, wxFindReplaceData* data, dstr title, int style)
 {
-    return self->Create(parent, data, wxString(title.data, wxConvUTF8, title.length), style);
+    return self->Create(parent, data, wxstr(title), style);
 }
 
 //-----------------------------------------------------------------------------
@@ -111,7 +111,7 @@ void wxFindDialogEvent_SetFlags(wxFindDialogEvent* self, int flags)
 extern "C" WXEXPORT
 void wxFindDialogEvent_SetFindString(wxFindDialogEvent* self, dstr str)
 {
-    self->SetFindString(wxString(str.data, wxConvUTF8, str.length));
+    self->SetFindString(wxstr(str));
 }
 
 //-----------------------------------------------------------------------------
@@ -119,7 +119,7 @@ void wxFindDialogEvent_SetFindString(wxFindDialogEvent* self, dstr str)
 extern "C" WXEXPORT
 void wxFindDialogEvent_SetReplaceString(wxFindDialogEvent* self, dstr str)
 {
-    self->SetReplaceString(wxString(str.data, wxConvUTF8, str.length));
+    self->SetReplaceString(wxstr(str));
 }
 
 //-----------------------------------------------------------------------------
@@ -167,7 +167,7 @@ void wxFindReplaceData_SetFlags(wxFindReplaceData* self, wxUint32 flags)
 extern "C" WXEXPORT
 void wxFindReplaceData_SetFindString(wxFindReplaceData* self, dstr str)
 {
-    self->SetFindString(wxString(str.data, wxConvUTF8, str.length));
+    self->SetFindString(wxstr(str));
 }
 
 //-----------------------------------------------------------------------------
@@ -175,7 +175,7 @@ void wxFindReplaceData_SetFindString(wxFindReplaceData* self, dstr str)
 extern "C" WXEXPORT
 void wxFindReplaceData_SetReplaceString(wxFindReplaceData* self, dstr str)
 {
-    self->SetReplaceString(wxString(str.data, wxConvUTF8, str.length));
+    self->SetReplaceString(wxstr(str));
 }
 
 //-----------------------------------------------------------------------------

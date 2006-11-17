@@ -72,7 +72,7 @@ wxVScrolledWindow* wxVScrolledWindow_ctor2(wxWindow *parent, wxWindowID id, cons
 	if (name.data==NULL)
 		name = dstr("vscrolled");
 
-	return new _VScrolledWindow(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
+	return new _VScrolledWindow(parent, id, *pos, *size, style, wxstr(name));
 }
 
 //-----------------------------------------------------------------------------
@@ -96,7 +96,7 @@ dbit wxVScrolledWindow_Create(_VScrolledWindow* self, wxWindow *parent, wxWindow
 	if (name.data==NULL)
 		name = dstr("vscrolled");
 			
-	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, *pos, *size, style, wxstr(name))?1:0;
 }
 
 extern "C" WXEXPORT

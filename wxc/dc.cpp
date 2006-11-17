@@ -62,7 +62,7 @@ void wxDC_DrawRectangle(wxDC* self, wxCoord x1, wxCoord y1, wxCoord x2, wxCoord 
 extern "C" WXEXPORT
 void wxDC_DrawText(wxDC* self, dstr text, int x, int y)
 {
-    self->DrawText(wxString(text.data, wxConvUTF8, text.length), x, y);
+    self->DrawText(wxstr(text), x, y);
 }
 
 //-----------------------------------------------------------------------------
@@ -186,7 +186,7 @@ void wxDC_SetFont(wxDC* self, wxFont* font)
 extern "C" WXEXPORT
 void wxDC_GetTextExtent(wxDC* self, dstr string, int *x, int *y, int *descent, int *externalLeading, wxFont *theFont)
 {
-    self->GetTextExtent(wxString(string.data, wxConvUTF8, string.length), x, y, descent, externalLeading, theFont);
+    self->GetTextExtent(wxstr(string), x, y, descent, externalLeading, theFont);
 }
 
 //-----------------------------------------------------------------------------
@@ -346,7 +346,7 @@ void wxDC_DrawIcon(wxDC* self, wxIcon* icon, int x, int y)
 extern "C" WXEXPORT
 void wxDC_DrawRotatedText(wxDC* self, dstr text, int x, int y, double angle)
 {
-	self->DrawRotatedText(wxString(text.data, wxConvUTF8, text.length), x, y, angle);
+	self->DrawRotatedText(wxstr(text), x, y, angle);
 }
 
 //-----------------------------------------------------------------------------
@@ -354,7 +354,7 @@ void wxDC_DrawRotatedText(wxDC* self, dstr text, int x, int y, double angle)
 extern "C" WXEXPORT
 void wxDC_DrawLabel(wxDC* self, dstr text, wxBitmap* image, wxRect* rect, int alignment, int indexAccel, wxRect* rectBounding)
 {
-	self->DrawLabel(wxString(text.data, wxConvUTF8, text.length), *image, *rect, alignment, indexAccel, rectBounding);
+	self->DrawLabel(wxstr(text), *image, *rect, alignment, indexAccel, rectBounding);
 }
 
 //-----------------------------------------------------------------------------
@@ -362,7 +362,7 @@ void wxDC_DrawLabel(wxDC* self, dstr text, wxBitmap* image, wxRect* rect, int al
 extern "C" WXEXPORT
 void wxDC_DrawLabel2(wxDC* self, dstr text, wxRect* rect, int alignment, int indexAccel)
 {
-	self->DrawLabel(wxString(text.data, wxConvUTF8, text.length), *rect, alignment, indexAccel);
+	self->DrawLabel(wxstr(text), *rect, alignment, indexAccel);
 }
 
 //-----------------------------------------------------------------------------
@@ -386,7 +386,7 @@ void wxDC_DrawSpline2(wxDC* self, int n, wxPoint points[])
 extern "C" WXEXPORT
 dbit wxDC_StartDoc(wxDC* self, dstr message)
 {
-	return self->StartDoc(wxString(message.data, wxConvUTF8, message.length));
+	return self->StartDoc(wxstr(message));
 }
 
 //-----------------------------------------------------------------------------
@@ -434,7 +434,7 @@ void wxDC_GetClippingBox2(wxDC* self, wxRect* rect)
 extern "C" WXEXPORT
 void wxDC_GetMultiLineTextExtent(wxDC* self, dstr text, int *width, int *height, int *heightLine, wxFont* font)
 {
-	self->GetMultiLineTextExtent(wxString(text.data, wxConvUTF8, text.length), width, height, heightLine, font);
+	self->GetMultiLineTextExtent(wxstr(text), width, height, heightLine, font);
 }
 
 //-----------------------------------------------------------------------------
@@ -442,7 +442,7 @@ void wxDC_GetMultiLineTextExtent(wxDC* self, dstr text, int *width, int *height,
 extern "C" WXEXPORT
 dbit wxDC_GetPartialTextExtents(wxDC* self, dstr text, wxArrayInt* widths)
 {
-	return self->GetPartialTextExtents(wxString(text.data, wxConvUTF8, text.length), *widths);
+	return self->GetPartialTextExtents(wxstr(text), *widths);
 }
 
 //-----------------------------------------------------------------------------

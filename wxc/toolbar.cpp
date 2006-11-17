@@ -29,7 +29,7 @@ wxToolBarToolBase* wxToolBarToolBase_ctor(wxToolBar *tbar, int toolid, dstr labe
 	if (bmpDisabled == NULL)
 		bmpDisabled = &wxNullBitmap;
 
-	return new wxToolBarToolBase(tbar, toolid, wxString(label.data, wxConvUTF8, label.length), *bmpNormal, *bmpDisabled, kind, clientData, wxString(shortHelpString.data, wxConvUTF8, shortHelpString.length), wxString(longHelpString.data, wxConvUTF8, longHelpString.length));
+	return new wxToolBarToolBase(tbar, toolid, wxstr(label), *bmpNormal, *bmpDisabled, kind, clientData, wxstr(shortHelpString), wxstr(longHelpString));
 }
 
 //-----------------------------------------------------------------------------
@@ -189,7 +189,7 @@ dbit wxToolBarToolBase_SetToggle(wxToolBarToolBase* self, dbit toggle)
 extern "C" WXEXPORT
 dbit wxToolBarToolBase_SetShortHelp(wxToolBarToolBase* self, dstr help)
 {
-	return self->SetShortHelp(wxString(help.data, wxConvUTF8, help.length))?1:0;
+	return self->SetShortHelp(wxstr(help))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -197,7 +197,7 @@ dbit wxToolBarToolBase_SetShortHelp(wxToolBarToolBase* self, dstr help)
 extern "C" WXEXPORT
 dbit wxToolBarToolBase_SetLongHelp(wxToolBarToolBase* self, dstr help)
 {
-	return self->SetLongHelp(wxString(help.data, wxConvUTF8, help.length))?1:0;
+	return self->SetLongHelp(wxstr(help))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -221,7 +221,7 @@ void wxToolBarToolBase_SetDisabledBitmap(wxToolBarToolBase* self, const wxBitmap
 extern "C" WXEXPORT
 void wxToolBarToolBase_SetLabel(wxToolBarToolBase* self, dstr label)
 {
-	self->SetLabel(wxString(label.data, wxConvUTF8, label.length));
+	self->SetLabel(wxstr(label));
 }
 
 //-----------------------------------------------------------------------------
@@ -278,7 +278,7 @@ wxToolBar* wxToolBar_ctor(wxWindow* parent, wxWindowID id, const wxPoint* pos, c
 extern "C" WXEXPORT
 wxToolBarToolBase* wxToolBar_AddTool1(wxToolBar* self, int toolid, dstr label, const wxBitmap* bitmap, const wxBitmap* bmpDisabled, wxItemKind kind, dstr shortHelp, dstr longHelp, wxObject *data)
 {
-	return self->AddTool(toolid, wxString(label.data, wxConvUTF8, label.length), *bitmap, *bmpDisabled, kind, wxString(shortHelp.data, wxConvUTF8, shortHelp.length), wxString(longHelp.data, wxConvUTF8, longHelp.length), data);
+	return self->AddTool(toolid, wxstr(label), *bitmap, *bmpDisabled, kind, wxstr(shortHelp), wxstr(longHelp), data);
 }
 
 //-----------------------------------------------------------------------------
@@ -286,7 +286,7 @@ wxToolBarToolBase* wxToolBar_AddTool1(wxToolBar* self, int toolid, dstr label, c
 extern "C" WXEXPORT
 wxToolBarToolBase* wxToolBar_AddTool2(wxToolBar* self, int toolid, dstr label, const wxBitmap* bitmap, dstr shortHelp, wxItemKind kind)
 {
-	return self->AddTool(toolid, wxString(label.data, wxConvUTF8, label.length), *bitmap, wxString(shortHelp.data, wxConvUTF8, shortHelp.length), kind);
+	return self->AddTool(toolid, wxstr(label), *bitmap, wxstr(shortHelp), kind);
 }
 
 //-----------------------------------------------------------------------------
@@ -297,7 +297,7 @@ wxToolBarToolBase* wxToolBar_AddCheckTool(wxToolBar* self, int toolid, dstr labe
 	if (bmpDisabled == NULL)
 		bmpDisabled = &wxNullBitmap;
 
-	return self->AddCheckTool(toolid, wxString(label.data, wxConvUTF8, label.length), *bitmap, *bmpDisabled, wxString(shortHelp.data, wxConvUTF8, shortHelp.length), wxString(longHelp.data, wxConvUTF8, longHelp.length), data);
+	return self->AddCheckTool(toolid, wxstr(label), *bitmap, *bmpDisabled, wxstr(shortHelp), wxstr(longHelp), data);
 }
 
 //-----------------------------------------------------------------------------
@@ -308,7 +308,7 @@ wxToolBarToolBase* wxToolBar_AddRadioTool(wxToolBar* self, int toolid, dstr labe
 	if (bmpDisabled == NULL)
 		bmpDisabled = &wxNullBitmap;
 
-	return self->AddRadioTool(toolid, wxString(label.data, wxConvUTF8, label.length), *bitmap, *bmpDisabled, wxString(shortHelp.data, wxConvUTF8, shortHelp.length), wxString(longHelp.data, wxConvUTF8, longHelp.length), data);
+	return self->AddRadioTool(toolid, wxstr(label), *bitmap, *bmpDisabled, wxstr(shortHelp), wxstr(longHelp), data);
 }
 
 //-----------------------------------------------------------------------------
@@ -454,7 +454,7 @@ dbit wxToolBar_GetToolEnabled(wxToolBar* self, int toolid)
 extern "C" WXEXPORT
 void wxToolBar_SetToolShortHelp(wxToolBar* self, int toolid, dstr helpString)
 {
-	self->SetToolShortHelp(toolid, wxString(helpString.data, wxConvUTF8, helpString.length));
+	self->SetToolShortHelp(toolid, wxstr(helpString));
 }
 
 //-----------------------------------------------------------------------------
@@ -470,7 +470,7 @@ dstrret wxToolBar_GetToolShortHelp(wxToolBar* self, int toolid)
 extern "C" WXEXPORT
 void wxToolBar_SetToolLongHelp(wxToolBar* self, int toolid, dstr helpString)
 {
-	self->SetToolLongHelp(toolid, wxString(helpString.data, wxConvUTF8, helpString.length));
+	self->SetToolLongHelp(toolid, wxstr(helpString));
 }
 
 //-----------------------------------------------------------------------------
@@ -606,7 +606,7 @@ dbit wxToolBar_IsVertical(wxToolBar* self)
 extern "C" WXEXPORT
 wxToolBarToolBase* wxToolBar_AddTool3(wxToolBar* self, int toolid, const wxBitmap* bitmap, const wxBitmap* bmpDisabled, dbit toggle, wxObject *clientData, dstr shortHelpString, dstr longHelpString)
 {
-	return self->AddTool(toolid, *bitmap, *bmpDisabled, toggle, clientData, wxString(shortHelpString.data, wxConvUTF8, shortHelpString.length), wxString(longHelpString.data, wxConvUTF8, longHelpString.length));
+	return self->AddTool(toolid, *bitmap, *bmpDisabled, toggle, clientData, wxstr(shortHelpString), wxstr(longHelpString));
 }
 
 //-----------------------------------------------------------------------------
@@ -614,7 +614,7 @@ wxToolBarToolBase* wxToolBar_AddTool3(wxToolBar* self, int toolid, const wxBitma
 extern "C" WXEXPORT
 wxToolBarToolBase* wxToolBar_AddTool4(wxToolBar* self, int toolid, const wxBitmap* bitmap, dstr shortHelpString, dstr longHelpString)
 {
-	return self->AddTool(toolid, *bitmap, wxString(shortHelpString.data, wxConvUTF8, shortHelpString.length), wxString(longHelpString.data, wxConvUTF8, longHelpString.length));
+	return self->AddTool(toolid, *bitmap, wxstr(shortHelpString), wxstr(longHelpString));
 }
 
 //-----------------------------------------------------------------------------
@@ -622,7 +622,7 @@ wxToolBarToolBase* wxToolBar_AddTool4(wxToolBar* self, int toolid, const wxBitma
 extern "C" WXEXPORT
 wxToolBarToolBase* wxToolBar_AddTool5(wxToolBar* self, int toolid, const wxBitmap* bitmap, const wxBitmap* bmpDisabled, dbit toggle, wxCoord xPos, wxCoord yPos, wxObject *clientData, dstr shortHelp, dstr longHelp)
 {
-	return self->AddTool(toolid, *bitmap, *bmpDisabled, toggle, xPos, yPos, clientData, wxString(shortHelp.data, wxConvUTF8, shortHelp.length), wxString(longHelp.data, wxConvUTF8, longHelp.length));
+	return self->AddTool(toolid, *bitmap, *bmpDisabled, toggle, xPos, yPos, clientData, wxstr(shortHelp), wxstr(longHelp));
 }
 
 //-----------------------------------------------------------------------------
@@ -633,7 +633,7 @@ wxToolBarToolBase* wxToolBar_InsertTool(wxToolBar* self, size_t pos, int toolid,
 	if (bmpDisabled == NULL)
 		bmpDisabled = &wxNullBitmap;
 
-	return self->InsertTool(pos, toolid, *bitmap, *bmpDisabled, toggle, clientData, wxString(shortHelp.data, wxConvUTF8, shortHelp.length), wxString(longHelp.data, wxConvUTF8, longHelp.length));
+	return self->InsertTool(pos, toolid, *bitmap, *bmpDisabled, toggle, clientData, wxstr(shortHelp), wxstr(longHelp));
 }
 
 //-----------------------------------------------------------------------------

@@ -118,7 +118,11 @@ extern "C" WXEXPORT int wxEvent_EVT_CLOSE_WINDOW()                  { return wxE
 extern "C" WXEXPORT int wxEvent_EVT_END_SESSION()                   { return wxEVT_END_SESSION; }
 extern "C" WXEXPORT int wxEvent_EVT_QUERY_END_SESSION()             { return wxEVT_QUERY_END_SESSION; }
 extern "C" WXEXPORT int wxEvent_EVT_ACTIVATE_APP()                  { return wxEVT_ACTIVATE_APP; }
+#if wxABI_VERSION < 20700
 extern "C" WXEXPORT int wxEvent_EVT_POWER()                         { return wxEVT_POWER; }
+#else
+extern "C" WXEXPORT int wxEvent_EVT_POWER()                         { return -1; /* prevent link error */ }
+#endif
 extern "C" WXEXPORT int wxEvent_EVT_ACTIVATE()                      { return wxEVT_ACTIVATE; }
 extern "C" WXEXPORT int wxEvent_EVT_CREATE()                        { return wxEVT_CREATE; }
 extern "C" WXEXPORT int wxEvent_EVT_DESTROY()                       { return wxEVT_DESTROY; }
@@ -211,4 +215,12 @@ extern "C" WXEXPORT
 wxObject* wxEvent_GetEventObject(wxEvent* self)
 {
     return self->GetEventObject();
+}
+
+//-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT
+void wxEvent_SetEventObject(wxEvent* self, wxObject* object)
+{
+    self->SetEventObject(object);
 }

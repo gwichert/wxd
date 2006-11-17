@@ -17,7 +17,7 @@ module wx.TabCtrl;
 
 //! \cond VERSION
 version(__WXMSW__) {
-//! \endcond VERSION
+//! \endcond
 
 public import wx.common;
 public import wx.Event;
@@ -271,4 +271,4 @@ public import wx.wxString;
 
 //! \cond VERSION
 } // version(__WXMSW__)
-//! \endcond VERSION
+//! \endcond

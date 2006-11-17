@@ -91,7 +91,7 @@ void wxTreeCtrl_SortChildren(wxTreeCtrl* self, wxTreeItemId* item)
 extern "C" WXEXPORT
 wxTreeItemId* wxTreeCtrl_AddRoot(wxTreeCtrl* self, dstr text, int image, int selImage, wxTreeItemData* data)
 {
-    return new wxTreeItemId(self->AddRoot(wxString(text.data, wxConvUTF8, text.length), image, selImage, data));
+    return new wxTreeItemId(self->AddRoot(wxstr(text), image, selImage, data));
 }
 
 //-----------------------------------------------------------------------------
@@ -99,7 +99,7 @@ wxTreeItemId* wxTreeCtrl_AddRoot(wxTreeCtrl* self, dstr text, int image, int sel
 extern "C" WXEXPORT
 wxTreeItemId* wxTreeCtrl_AppendItem(wxTreeCtrl* self, wxTreeItemId* parent, dstr text, int image, int selImage, wxTreeItemData* data)
 {
-    return new wxTreeItemId(self->AppendItem(*parent, wxString(text.data, wxConvUTF8, text.length), image, selImage, data));
+    return new wxTreeItemId(self->AppendItem(*parent, wxstr(text), image, selImage, data));
 }
 
 //-----------------------------------------------------------------------------
@@ -145,7 +145,7 @@ dbit wxTreeCtrl_Create(wxTreeCtrl* self, wxWindow* parent, int id, const wxPoint
     if (val == NULL)
         val = &wxDefaultValidator;
 
-    return self->Create(parent, id, *pos, *size, style, *val, wxString(name.data, wxConvUTF8, name.length))?1:0;
+    return self->Create(parent, id, *pos, *size, style, *val, wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -321,7 +321,7 @@ wxArrayTreeItemIds* wxTreeCtrl_GetSelections(wxTreeCtrl* self)
 extern "C" WXEXPORT
 void wxTreeCtrl_SetItemText(wxTreeCtrl* self, wxTreeItemId* item, dstr text)
 {
-    self->SetItemText(*item, wxString(text.data, wxConvUTF8, text.length));
+    self->SetItemText(*item, wxstr(text));
 }
 
 extern "C" WXEXPORT
@@ -454,7 +454,7 @@ wxTreeItemId* wxTreeCtrl_GetPrevVisible(wxTreeCtrl* self, wxTreeItemId* item)
 extern "C" WXEXPORT
 wxTreeItemId* wxTreeCtrl_PrependItem(wxTreeCtrl* self, wxTreeItemId* parent, dstr text, int image, int selectedImage, wxTreeItemData* data)
 {
-    return new wxTreeItemId(self->PrependItem(*parent, wxString(text.data, wxConvUTF8, text.length), image, selectedImage, data));
+    return new wxTreeItemId(self->PrependItem(*parent, wxstr(text), image, selectedImage, data));
 }
 
 //-----------------------------------------------------------------------------
@@ -462,7 +462,7 @@ wxTreeItemId* wxTreeCtrl_PrependItem(wxTreeCtrl* self, wxTreeItemId* parent, dst
 extern "C" WXEXPORT
 wxTreeItemId* wxTreeCtrl_InsertItem(wxTreeCtrl* self, wxTreeItemId* parent, wxTreeItemId* idPrevious, dstr text, int image, int selectedImage, wxTreeItemData* data)
 {
-    return new wxTreeItemId(self->InsertItem(*parent, *idPrevious, wxString(text.data, wxConvUTF8, text.length), image, selectedImage, data));
+    return new wxTreeItemId(self->InsertItem(*parent, *idPrevious, wxstr(text), image, selectedImage, data));
 }
 
 //-----------------------------------------------------------------------------
@@ -470,7 +470,7 @@ wxTreeItemId* wxTreeCtrl_InsertItem(wxTreeCtrl* self, wxTreeItemId* parent, wxTr
 extern "C" WXEXPORT
 wxTreeItemId* wxTreeCtrl_InsertItem2(wxTreeCtrl* self, wxTreeItemId* parent, size_t before, dstr text, int image, int selectedImage, wxTreeItemData* data)
 {
-    return new wxTreeItemId(self->InsertItem(*parent, before, wxString(text.data, wxConvUTF8, text.length), image, selectedImage, data));
+    return new wxTreeItemId(self->InsertItem(*parent, before, wxstr(text), image, selectedImage, data));
 }
 
 //-----------------------------------------------------------------------------
@@ -644,11 +644,7 @@ dbit wxTreeCtrl_IsBold(wxTreeCtrl* self, wxTreeItemId* item)
 extern "C" WXEXPORT
 void wxTreeCtrl_SetItemSelectedImage(wxTreeCtrl* self, wxTreeItemId* item, int selImage)
 {
-#if WXWIN_COMPATIBILITY_2_4
-	self->SetItemSelectedImage(*item, selImage);
-#else
 	self->SetItemImage(*item, selImage, wxTreeItemIcon_Selected);
-#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -825,7 +821,7 @@ dstrret wxTreeEvent_GetLabel(wxTreeEvent* self)
 extern "C" WXEXPORT
 void wxTreeEvent_SetLabel(wxTreeEvent* self, dstr label)
 {
-    self->SetLabel(wxString(label.data, wxConvUTF8, label.length));
+    self->SetLabel(wxstr(label));
 }
 
 //-----------------------------------------------------------------------------
@@ -869,7 +865,7 @@ dbit  wxTreeEvent_IsAllowed( wxTreeEvent* self)
 extern "C" WXEXPORT
 void wxTreeEvent_SetToolTip(wxTreeEvent* self, dstr toolTip)
 {
-	self->SetToolTip(wxString(toolTip.data, wxConvUTF8, toolTip.length));
+	self->SetToolTip(wxstr(toolTip));
 }
 
 //-----------------------------------------------------------------------------

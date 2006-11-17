@@ -71,7 +71,7 @@ alias std.string.rfind LastIndexOf;
 			fileMenu.AppendSeparator();
 			fileMenu.Append(Cmd.FileOpen, 		"&Open file\tCtrl-O");
 			fileMenu.Append(Cmd.FileOpen2, 	"&Second open file\tCtrl-2");
-			fileMenu.Append(Cmd.FilesOpen, 	"Open &files\tCtrl-Q");
+			fileMenu.Append(Cmd.FilesOpen, 	"Open &files\tCtrl-3");
 			fileMenu.Append(Cmd.FileSave, 		"Sa&ve file\tCtrl-S");
 			fileMenu.Append(Cmd.DirChoose, 	"Choose &Directory\tCtrl-D");
 			fileMenu.Append(Cmd.Progress, 		"Pro&gress dialog\tCtrl-G");

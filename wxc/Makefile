@@ -152,21 +152,27 @@ OBJECTS = \
 	wxversion.obj \
 	wxplatform.obj \
 	xmlresource.obj \
-	numdialog.obj
+	numdialog.obj \
+	manager.obj \
+	wxaui.obj
 	
 #	notifyevent.obj
 	
 
-all:  platform $(LIBTARGET)
+all:  platform encoding $(LIBTARGET)
 
 include $(WXDIR)/build/msw/config.dmc
 CXX = dmc
+
+COMPILER = DMD
+PLATFORM = WXMSW
+ENCODING = ANSI
 
 WX_RELEASE_NODOT = 26
 OBJS = dmc_mswd$(CFG)
 LIBDIRNAME = $(WXDIR)\lib\dmc_lib$(CFG)
 SETUPHDIR = $(LIBDIRNAME)\mswd
-CXXFLAGS = -g -o+none -D__WXMSW__ -D__WXDEBUG__ -I$(WXDIR)\include \
+CXXFLAGS = -g -o+none -D__$(PLATFORM)__ -D__WXDEBUG__ -I$(WXDIR)\include \
 	-I$(SETUPHDIR) -w- -I. -WA -DNOPCH -Ar -Ae $(CPPFLAGS) \
 	$(CXXFLAGS)
 
@@ -174,10 +180,13 @@ $(LIBTARGET) : $(OBJECTS)
 	lib -p512 -c -n $@ $(OBJECTS)
 
 platform:
-	echo WXMSW > $@
+	echo $(PLATFORM)>$@
+
+encoding:
+	echo $(ENCODING)>$@
 
 .cpp.obj:
-	$(CXX) -mn -c $(CXXFLAGS) $< -o$@
+	$(CXX) -D__$(COMPILER)__ -mn $(CXXFLAGS) -c -o$@ $<
 
 clean:
 	-del *.obj

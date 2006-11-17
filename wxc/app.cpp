@@ -22,6 +22,7 @@
 
 typedef dbit (CALLBACK* Virtual_Initialize) (dobj obj,int* argc,char** argv);
 typedef dbit (CALLBACK* Virtual_OnInit) (dobj obj);
+typedef int (CALLBACK* Virtual_OnRun) (dobj obj);
 typedef int (CALLBACK* Virtual_OnExit) (dobj obj);
 
 //-----------------------------------------------------------------------------
@@ -34,31 +35,32 @@ public:
 	{
 		const char* cargv[argc];
 		for (int i=0; i < argc; i++)
-		#if wxUSE_UNICODE
-			cargv[i] = wxString(argv[i],wxConvUTF8).mb_str(wxConvUTF8).data();
-		#else // ANSI
-			cargv[i] = wxString(argv[i]).data();
-		#endif
-
+		cargv[i] = (const char*) wxString(argv[i],wxConvUTF8).mb_str(wxConvUTF8);
+		
 		return m_Initialize(m_dobj,&argc,(char**)cargv); 
 	}
 
 	bool OnInit()
 	{ return m_OnInit(m_dobj); }
 	
+	int OnRun()
+	{ return m_OnRun(m_dobj); }
+	
 	int OnExit()
 	{ return m_OnExit(m_dobj); }
 	
-	void RegisterVirtual(dobj obj, Virtual_OnInit onInit, Virtual_OnExit onExit, Virtual_Initialize initialize)
+	void RegisterVirtual(dobj obj, Virtual_OnInit onInit, Virtual_OnRun onRun, Virtual_OnExit onExit, Virtual_Initialize initialize)
 	{
 		m_dobj = obj;
 		m_OnInit = onInit;
+		m_OnRun = onRun;
 		m_OnExit = onExit;
 		m_Initialize = initialize;
 	}
 	
 private:
 	Virtual_OnInit m_OnInit;
+	Virtual_OnRun m_OnRun;
 	Virtual_OnExit m_OnExit;
 	Virtual_Initialize m_Initialize;
 	dobj m_dobj;
@@ -68,7 +70,7 @@ private:
 // Replacement code for IMPLEMENT_APP_NO_MAIN()
 
 static _App* _app = NULL;
-wxApp* wxCreateApp() { return _app; }
+wxAppConsole* wxCreateApp() { return _app; }
 
 wxAppInitializer wxTheAppInitializer((wxAppInitializerFunction)wxCreateApp);
 
@@ -85,9 +87,9 @@ _App* wxApp_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxApp_RegisterVirtual(_App* self, dobj obj, Virtual_OnInit onInit, Virtual_OnExit onExit,Virtual_Initialize initalize)
+void wxApp_RegisterVirtual(_App* self, dobj obj, Virtual_OnInit onInit, Virtual_OnRun onRun, Virtual_OnExit onExit,Virtual_Initialize initalize)
 {
-	self->RegisterVirtual(obj, onInit, onExit ,initalize);
+	self->RegisterVirtual(obj, onInit, onRun, onExit, initalize);
 }
 
 //-----------------------------------------------------------------------------
@@ -96,6 +98,14 @@ extern "C" WXEXPORT
 dbit wxApp_OnInit(_App* self)
 {
 	return self->wxApp::OnInit()?1:0;
+}
+
+//-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT
+int wxApp_OnRun(_App* self)
+{
+	return self->wxApp::OnRun();
 }
 
 //-----------------------------------------------------------------------------
@@ -149,7 +159,7 @@ dstrret wxApp_GetVendorName(wxApp* self)
 extern "C" WXEXPORT 
 void wxApp_SetVendorName(wxApp* self, dstr name)
 {
-    self->SetVendorName(wxString(name.data, wxConvUTF8, name.length));
+    self->SetVendorName(wxstr(name));
 }
 
 //-----------------------------------------------------------------------------
@@ -163,7 +173,21 @@ dstrret wxApp_GetAppName(wxApp* self)
 extern "C" WXEXPORT 
 void wxApp_SetAppName(wxApp* self, dstr name)
 {
-    self->SetAppName(wxString(name.data, wxConvUTF8, name.length));
+    self->SetAppName(wxstr(name));
+}
+
+//-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT 
+wxWindow* wxApp_GetTopWindow(wxApp* self)
+{
+    return self->GetTopWindow();
+}
+
+extern "C" WXEXPORT 
+void wxApp_SetTopWindow(wxApp* self, wxWindow* window)
+{
+    self->SetTopWindow(window);
 }
 
 //-----------------------------------------------------------------------------

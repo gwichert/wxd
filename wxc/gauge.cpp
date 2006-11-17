@@ -59,7 +59,7 @@ dbit wxGauge_Create(wxGauge* self, wxWindow *parent, wxWindowID id, int range, c
 	if (name.data==NULL)
 		name = dstr("gauge");
 
-	return self->Create(parent, id, range, *pos, *size, style, *validator, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, range, *pos, *size, style, *validator, wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------

@@ -21,7 +21,7 @@
 extern "C" WXEXPORT
 wxPen* wxPen_ctorByName(dstr name, int width, int style)
 {
-	return new wxPen(wxString(name.data, wxConvUTF8, name.length), width, style);
+	return new wxPen(wxstr(name), width, style);
 }
 
 //-----------------------------------------------------------------------------

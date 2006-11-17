@@ -160,6 +160,8 @@ public import wx.ArrayInt;
 		public this(IntPtr wxobj) 
 			{ super(wxobj);}
 
+		override protected void dtor() { wxDC_dtor(wxobj); }
+
 		//---------------------------------------------------------------------
 
 		public void BackgroundMode(FillStyle value) { wxDC_SetBackgroundMode(wxobj, value); }
@@ -952,11 +954,6 @@ public import wx.ArrayInt;
 		public this(Window win)
 			{ this(wxWindowDC_ctor2(wxObject.SafePtr(win)), true);}
 			
-		~this()
-		{
-			Dispose();
-		}
-			
 		//---------------------------------------------------------------------
 		
 		public bool CanDrawBitmap()
@@ -1106,11 +1103,6 @@ public import wx.ArrayInt;
 
 		public this(Window window)
 			{ this(wxClientDC_ctor2(wxObject.SafePtr(window)), true); }
-			
-		~this()
-		{
-			Dispose();
-		}
 	}
     
 	//---------------------------------------------------------------------
@@ -1139,9 +1131,4 @@ public import wx.ArrayInt;
 			
 		public this(Window window)
 			{ this(wxPaintDC_ctor2(wxObject.SafePtr(window)), true); }
-			
-		~this()
-		{
-			Dispose();
-		}
 	}

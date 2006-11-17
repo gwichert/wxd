@@ -48,7 +48,7 @@ dbit wxListCtrl_Create(wxListCtrl *self, wxWindow *parent, wxWindowID id, const 
     if (name.data==NULL)
         name = dstr("listctrl");
 
-    return self->Create(parent, id, *pos, *size, style, *validator, wxString(name.data, wxConvUTF8, name.length))?1:0;
+    return self->Create(parent, id, *pos, *size, style, *validator, wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -121,7 +121,7 @@ dbit wxListCtrl_SetItem(wxListCtrl* self, wxListItem* info)
 extern "C" WXEXPORT
 int wxListCtrl_SetItem_By_Row_Col(wxListCtrl* self, int index, int col, dstr label, int imageId)
 {
-    return self->SetItem(index, col, wxString(label.data, wxConvUTF8, label.length), imageId);
+    return self->SetItem(index, col, wxstr(label), imageId);
 }
 
 
@@ -130,7 +130,7 @@ int wxListCtrl_SetItem_By_Row_Col(wxListCtrl* self, int index, int col, dstr lab
 extern "C" WXEXPORT
 int wxListCtrl_SetTextImageItem(wxListCtrl* self, int index, int col, dstr label, int imageId)
 {
-    return self->SetItem(index, col, wxString(label.data, wxConvUTF8, label.length), imageId);
+    return self->SetItem(index, col, wxstr(label), imageId);
 }
 
 //-----------------------------------------------------------------------------
@@ -170,7 +170,7 @@ dstrret wxListCtrl_GetItemText(wxListCtrl* self, int item)
 extern "C" WXEXPORT
 void wxListCtrl_SetItemText(wxListCtrl* self, int item, dstr str)
 {
-    self->SetItemText(item, wxString(str.data, wxConvUTF8, str.length));
+    self->SetItemText(item, wxstr(str));
 }
 
 //-----------------------------------------------------------------------------
@@ -426,7 +426,7 @@ dbit wxListCtrl_EnsureVisible(wxListCtrl* self, int item)
 extern "C" WXEXPORT
 int wxListCtrl_FindItem(wxListCtrl* self, int start, dstr str, dbit partial)
 {
-    return self->FindItem(start, wxString(str.data, wxConvUTF8, str.length), partial)?1:0;
+    return self->FindItem(start, wxstr(str), partial)?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -466,7 +466,7 @@ int wxListCtrl_InsertItem(wxListCtrl* self, wxListItem* info)
 extern "C" WXEXPORT
 int wxListCtrl_InsertTextItem(wxListCtrl* self, int index, dstr label)
 {
-    return self->InsertItem(index, wxString(label.data, wxConvUTF8, label.length));
+    return self->InsertItem(index, wxstr(label));
 }
 
 //-----------------------------------------------------------------------------
@@ -482,7 +482,7 @@ int wxListCtrl_InsertImageItem(wxListCtrl* self, int index, int imageIndex)
 extern "C" WXEXPORT
 int wxListCtrl_InsertTextImageItem(wxListCtrl* self, int index, dstr label, int imageIndex)
 {
-    return self->InsertItem(index, wxString(label.data, wxConvUTF8, label.length), imageIndex);
+    return self->InsertItem(index, wxstr(label), imageIndex);
 }
 
 //-----------------------------------------------------------------------------
@@ -498,7 +498,7 @@ int wxListCtrl_InsertColumn(wxListCtrl* self, int col, wxListItem* info)
 extern "C" WXEXPORT
 int wxListCtrl_InsertTextColumn(wxListCtrl* self, int col, dstr heading, int format, int width)
 {
-    return self->InsertColumn(col, wxString(heading.data, wxConvUTF8, heading.length), format, width);
+    return self->InsertColumn(col, wxstr(heading), format, width);
 }
 
 //-----------------------------------------------------------------------------
@@ -747,7 +747,7 @@ void wxListItem_SetStateMask(wxListItem* self, int stateMask)
 extern "C" WXEXPORT
 void wxListItem_SetText(wxListItem* self, dstr text)
 {
-    self->SetText(wxString(text.data, wxConvUTF8, text.length));
+    self->SetText(wxstr(text));
 }
 
 //-----------------------------------------------------------------------------
@@ -950,7 +950,7 @@ dbit wxListView_Create(wxListCtrl *self, wxWindow *parent, wxWindowID id, const 
     if (name.data==NULL)
         name = dstr("listview");
 
-    return self->Create(parent, id, *pos, *size, style, *validator, wxString(name.data, wxConvUTF8, name.length))?1:0;
+    return self->Create(parent, id, *pos, *size, style, *validator, wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -1145,8 +1145,13 @@ extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_BEGIN_LABEL_EDIT()       { retu
 extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_END_LABEL_EDIT()         { return wxEVT_COMMAND_LIST_END_LABEL_EDIT; }
 extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_DELETE_ITEM()            { return wxEVT_COMMAND_LIST_DELETE_ITEM; }
 extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_DELETE_ALL_ITEMS()       { return wxEVT_COMMAND_LIST_DELETE_ALL_ITEMS; }
+#if wxABI_VERSION < 20700
 extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_GET_INFO()			{ return wxEVT_COMMAND_LIST_GET_INFO; }
 extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_SET_INFO()			{ return wxEVT_COMMAND_LIST_SET_INFO; }
+#else
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_GET_INFO()			{ return -1; /* prevent link error */ }
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_SET_INFO()			{ return -1; /* prevent link error */ }
+#endif
 extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_ITEM_SELECTED()          { return wxEVT_COMMAND_LIST_ITEM_SELECTED; }
 extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_ITEM_DESELECTED()        { return wxEVT_COMMAND_LIST_ITEM_DESELECTED; }
 extern "C" WXEXPORT int wxEvent_EVT_COMMAND_LIST_ITEM_ACTIVATED()         { return wxEVT_COMMAND_LIST_ITEM_ACTIVATED; }

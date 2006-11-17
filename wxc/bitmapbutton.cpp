@@ -83,7 +83,7 @@ dbit wxBitmapButton_Create(_BitmapButton* self, wxWindow *parent, wxWindowID id,
 	if (name.data==NULL)
 		name = dstr("bitmapbutton");
 
-	return self->Create(parent, id, *bitmap, *pos, *size, style, *validator, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, *bitmap, *pos, *size, style, *validator, wxstr(name))?1:0;
 }
 
 extern "C" WXEXPORT
@@ -98,7 +98,7 @@ void wxBitmapButton_OnSetBitmap(_BitmapButton* self)
 extern "C" WXEXPORT
 void wxBitmapButton_SetLabel(_BitmapButton* self, dstr label)
 {
-	self->SetBitmapLabel(wxString(label.data, wxConvUTF8, label.length));
+	self->SetBitmapLabel(wxstr(label));
 }
 
 extern "C" WXEXPORT

@@ -44,7 +44,7 @@ dbit wxStaticBitmap_Create(wxStaticBitmap* self, wxWindow *parent, wxWindowID id
 	if (name.data==NULL)
 		name = dstr("staticbitmap");
 
-	return self->Create(parent, id, *bitmap, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, *bitmap, *pos, *size, style, wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------

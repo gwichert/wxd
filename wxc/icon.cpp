@@ -37,5 +37,5 @@ void wxIcon_CopyFromBitmap(wxIcon* self, const wxBitmap* bitmap)
 extern "C" WXEXPORT
 dbit wxIcon_LoadFile(wxIcon* self, dstr name, wxBitmapType type)
 {
-	return self->LoadFile(wxString(name.data, wxConvUTF8, name.length), type)?1:0;
+	return self->LoadFile(wxstr(name), type)?1:0;
 }

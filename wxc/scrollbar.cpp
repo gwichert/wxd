@@ -47,7 +47,7 @@ dbit wxScrollBar_Create(wxScrollBar* self, wxWindow* parent, wxWindowID id, cons
 	if (name.data==NULL)
 		name = dstr("scrollbar");
 		
-    return self->Create(parent, id, *pos, *size, style, *validator, wxString(name.data, wxConvUTF8, name.length))?1:0;
+    return self->Create(parent, id, *pos, *size, style, *validator, wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------

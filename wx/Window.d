@@ -185,9 +185,12 @@ public import wx.ToolTip;
 		static extern (C) void   wxWindow_SetVirtualSizeHints(IntPtr self, int minW, int minH, int maxW, int maxH);
 		static extern (C) int    wxWindow_GetMinWidth(IntPtr self);
 		static extern (C) int    wxWindow_GetMinHeight(IntPtr self);
+		static extern (C) void   wxWindow_GetMinSize(IntPtr self, out Size size);
+		static extern (C) void   wxWindow_SetMinSize(IntPtr self, Size* size);
 		static extern (C) int    wxWindow_GetMaxWidth(IntPtr self);
 		static extern (C) int    wxWindow_GetMaxHeight(IntPtr self);
 		static extern (C) void   wxWindow_GetMaxSize(IntPtr self, out Size size);
+		static extern (C) void   wxWindow_SetMaxSize(IntPtr self, Size* size);
 		static extern (C) void   wxWindow_SetVirtualSize(IntPtr self, inout Size size);
 		static extern (C) void   wxWindow_GetVirtualSize(IntPtr self, out Size size);
 		static extern (C) void   wxWindow_GetBestVirtualSize(IntPtr self, out Size size);
@@ -848,11 +851,28 @@ public import wx.ToolTip;
 
 		//---------------------------------------------------------------------
 
+		public /+virtual+/ Size MinSize()
+		{
+				Size size;
+				wxWindow_GetMinSize(wxobj, size);
+				return size;
+		}
+
+		public void MinSize(Size size)
+		{
+				wxWindow_SetMinSize(wxobj, &size);
+		}
+
 		public /+virtual+/ Size MaxSize()
 		{
 				Size size;
 				wxWindow_GetMaxSize(wxobj, size);
 				return size;
+		}
+
+		public void MaxSize(Size size)
+		{
+				wxWindow_SetMaxSize(wxobj, &size);
 		}
 
 		//---------------------------------------------------------------------
@@ -1176,6 +1196,11 @@ public import wx.ToolTip;
 		public /+virtual+/ void Refresh()
 		{
 			Refresh(true, ClientRect);
+		}
+
+		public /+virtual+/ void Refresh(bool eraseBackground)
+		{
+			Refresh(eraseBackground, ClientRect);
 		}
 
 		public /+virtual+/ void Refresh(bool eraseBackground, Rectangle rect)

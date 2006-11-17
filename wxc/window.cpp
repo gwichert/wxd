@@ -68,7 +68,7 @@ wxWindow* wxWindow_ctor(wxWindow *parent, wxWindowID id, const wxPoint* pos,
 	if (name.data==NULL)
 		name = dstr(wxPanelNameStr);
 
-	return new _Window(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
+	return new _Window(parent, id, *pos, *size, style, wxstr(name));
 }
 
 //-----------------------------------------------------------------------------
@@ -226,7 +226,7 @@ wxFont *wxWindow_GetFont(wxWindow* self)
 extern "C" WXEXPORT
 void wxWindow_SetToolTip(wxWindow* self, dstr tip)
 {
-	self->SetToolTip(wxString(tip.data, wxConvUTF8, tip.length));
+	self->SetToolTip(wxstr(tip));
 }
 
 //-----------------------------------------------------------------------------
@@ -249,7 +249,7 @@ dbit wxWindow_IsEnabled(wxWindow* self)
 extern "C" WXEXPORT
 dbit wxWindow_LoadFromResource(wxWindow* self, wxWindow *parent, dstr resourceName, const wxResourceTable *table)
 {
-	return self->LoadFromResource(parent, wxString(resourceName.data, wxConvUTF8, resourceName.length), table);
+	return self->LoadFromResource(parent, wxstr(resourceName), table);
 }
 #endif
 
@@ -284,7 +284,15 @@ dbit wxWindow_DestroyChildren(wxWindow* self)
 extern "C" WXEXPORT
 void wxWindow_SetTitle(wxWindow* self, dstr title)
 {
-	self->SetTitle(wxString(title.data, wxConvUTF8, title.length));
+#if wxABI_VERSION < 20700
+	self->SetTitle(wxstr(title));
+#else
+    if ((self->GetClassInfo())->IsKindOf(CLASSINFO(wxTopLevelWindow)))
+    {
+	wxTopLevelWindow *wind = (wxTopLevelWindow *) self;
+	wind->SetTitle(wxstr(title));
+    }
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -292,7 +300,17 @@ void wxWindow_SetTitle(wxWindow* self, dstr title)
 extern "C" WXEXPORT
 dstrret wxWindow_GetTitle(wxWindow* self)
 {
+#if wxABI_VERSION < 20700
 	return dstr_ret(self->GetTitle().c_str());
+#else
+    if ((self->GetClassInfo())->IsKindOf(CLASSINFO(wxTopLevelWindow)))
+    {
+	wxTopLevelWindow *wind = (wxTopLevelWindow *) self;
+	return dstr_ret(wind->GetTitle().c_str());
+    }
+    else
+        return dstr_ret(wxString());
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -300,7 +318,7 @@ dstrret wxWindow_GetTitle(wxWindow* self)
 extern "C" WXEXPORT
 void wxWindow_SetName(wxWindow* self, dstr name)
 {
-	self->SetName(wxString(name.data, wxConvUTF8, name.length));
+	self->SetName(wxstr(name));
 }
 
 extern "C" WXEXPORT
@@ -412,7 +430,15 @@ void wxWindow_Center(wxWindow* self, int direction)
 extern "C" WXEXPORT
 void wxWindow_CenterOnScreen(wxWindow* self, int dir)
 {
+#if wxABI_VERSION < 20700
 	self->CenterOnScreen(dir);
+#else
+    if ((self->GetClassInfo())->IsKindOf(CLASSINFO(wxTopLevelWindow)))
+    {
+	wxTopLevelWindow *wind = (wxTopLevelWindow *) self;
+	wind->CenterOnScreen(dir);
+    }
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -482,6 +508,24 @@ int wxWindow_GetMaxHeight(wxWindow* self)
 }
 
 //-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT
+void wxWindow_SetMinSize(wxWindow* self, const wxSize *size)
+{
+	self->SetMinSize(*size);
+}
+
+extern "C" WXEXPORT
+void wxWindow_GetMinSize(wxWindow* self, wxSize* size)
+{
+	*size = self->GetMinSize();
+}
+
+extern "C" WXEXPORT
+void wxWindow_SetMaxSize(wxWindow* self, const wxSize *size)
+{
+	self->SetMaxSize(*size);
+}
 
 extern "C" WXEXPORT
 void wxWindow_GetMaxSize(wxWindow* self, wxSize* size)
@@ -648,13 +692,33 @@ dbit wxWindow_AcceptsFocusFromKeyboard(wxWindow* self)
 extern "C" WXEXPORT
 wxWindow* wxWindow_GetDefaultItem(wxWindow* self)
 {
+#if wxABI_VERSION < 20700
 	return self->GetDefaultItem();
+#else
+    if ((self->GetClassInfo())->IsKindOf(CLASSINFO(wxTopLevelWindow)))
+    {
+	wxTopLevelWindow *wind = (wxTopLevelWindow *) self;
+	return wind->GetDefaultItem();
+    }
+    else
+	return NULL;
+#endif
 }
 
 extern "C" WXEXPORT
 wxWindow* wxWindow_SetDefaultItem(wxWindow* self, wxWindow *child)
 {
+#if wxABI_VERSION < 20700
 	return self->SetDefaultItem(child);
+#else
+    if ((self->GetClassInfo())->IsKindOf(CLASSINFO(wxTopLevelWindow)))
+    {
+	wxTopLevelWindow *wind = (wxTopLevelWindow *) self;
+	return wind->SetDefaultItem(child);
+    }
+    else
+	return NULL;
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -662,7 +726,15 @@ wxWindow* wxWindow_SetDefaultItem(wxWindow* self, wxWindow *child)
 extern "C" WXEXPORT
 void wxWindow_SetTmpDefaultItem(wxWindow* self, wxWindow *win)
 {
+#if wxABI_VERSION < 20700
 	self->SetTmpDefaultItem(win);
+#else
+    if ((self->GetClassInfo())->IsKindOf(CLASSINFO(wxTopLevelWindow)))
+    {
+	wxTopLevelWindow *wind = (wxTopLevelWindow *) self;
+	wind->SetTmpDefaultItem(win);
+    }
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -726,7 +798,7 @@ wxWindow* wxWindow_FindWindowId(wxWindow* self, long id)
 extern "C" WXEXPORT
 wxWindow* wxWindow_FindWindowName(wxWindow* self, dstr name)
 {
-	return self->FindWindow(wxString(name.data, wxConvUTF8, name.length));
+	return self->FindWindow(wxstr(name));
 }
 
 //-----------------------------------------------------------------------------
@@ -740,13 +812,13 @@ wxWindow* wxWindow_FindWindowById(long id, const wxWindow *parent)
 extern "C" WXEXPORT
 wxWindow* wxWindow_FindWindowByName(dstr name, const wxWindow *parent)
 {
-	return wxWindow::FindWindowByName(wxString(name.data, wxConvUTF8, name.length), parent);
+	return wxWindow::FindWindowByName(wxstr(name), parent);
 }
 
 extern "C" WXEXPORT
 wxWindow* wxWindow_FindWindowByLabel(dstr label, const wxWindow *parent)
 {
-	return wxWindow::FindWindowByLabel(wxString(label.data, wxConvUTF8, label.length), parent);
+	return wxWindow::FindWindowByLabel(wxstr(label), parent);
 }
 
 //-----------------------------------------------------------------------------
@@ -1014,7 +1086,7 @@ int wxWindow_GetCharWidth(wxWindow* self)
 extern "C" WXEXPORT
 void wxWindow_GetTextExtent(wxWindow* self, dstr string, int *x, int *y, int *descent, int *externalLeading, const wxFont *theFont)
 {
-	self->GetTextExtent(wxString(string.data, wxConvUTF8, string.length), x, y, descent, externalLeading, theFont);
+	self->GetTextExtent(wxstr(string), x, y, descent, externalLeading, theFont);
 }
 
 //-----------------------------------------------------------------------------
@@ -1168,13 +1240,13 @@ dbit wxWindow_PageDown(wxWindow* self)
 extern "C" WXEXPORT
 void wxWindow_SetHelpText(wxWindow* self, dstr text)
 {
-	self->SetHelpText(wxString(text.data, wxConvUTF8, text.length));
+	self->SetHelpText(wxstr(text));
 }
 
 extern "C" WXEXPORT
 void wxWindow_SetHelpTextForId(wxWindow* self, dstr text)
 {
-	self->SetHelpTextForId(wxString(text.data, wxConvUTF8, text.length));
+	self->SetHelpTextForId(wxstr(text));
 }
 
 extern "C" WXEXPORT

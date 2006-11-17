@@ -19,7 +19,10 @@ public import wx.Window;
 
 		//! \cond EXTERN
 		static extern (C) string wxGlobal_GetHomeDir();
+		static extern (C) string wxGlobal_GetCwd();
 		static extern (C) void wxSleep_func(int num);
+		static extern (C) void wxMilliSleep_func(uint num);
+		static extern (C) void wxMicroSleep_func(uint num);
 		static extern (C) void wxYield_func();
 		static extern (C) void wxBeginBusyCursor_func();
 		static extern (C) void wxEndBusyCursor_func();
@@ -33,11 +36,26 @@ public import wx.Window;
 			return wxGlobal_GetHomeDir().dup;
 		}
 		
+		public static string GetCwd()
+		{
+			return wxGlobal_GetCwd().dup;
+		}
+		
 		//---------------------------------------------------------------------
 
 		public static void wxSleep(int num)
 		{
 			wxSleep_func(num);
+		}
+
+		public static void wxMilliSleep(int num)
+		{
+			wxMilliSleep_func(num);
+		}
+
+		public static void wxMicroSleep(int num)
+		{
+			wxMicroSleep_func(num);
 		}
 		
 		//---------------------------------------------------------------------

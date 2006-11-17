@@ -46,6 +46,6 @@ void wxObject_dtor(wxObject* self)
 extern "C" WXEXPORT
 dstrret wxGetTranslation_func(dstr str)
 {
-	return dstr_ret(wxGetTranslation(wxString(str.data, wxConvUTF8, str.length)));
+	return dstr_ret(wxGetTranslation(wxstr(str)));
 }
 

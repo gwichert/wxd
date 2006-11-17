@@ -129,8 +129,7 @@ private import std.stdio;
 
         public void OnAbout(Object sender, Event e)
         {
-            string msg = "This is the wxWidgets controls sample written " ~
-                         "in C#.";
+            string msg = "This is the wxWidgets controls sample written in D.";
             MessageBox(this, msg, "About Controls",
                                        Dialog.wxOK);
         }

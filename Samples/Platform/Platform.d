@@ -27,7 +27,8 @@ public class MyFrame : wxFrame
 		CreateStatusBar();
 		SetStatusText(format("%s-%0x%s%0x", platform, major,".",minor));
 
-		wxStaticText text = new wxStaticText(this, wxGetOsDescription(),
+		wxStaticText text = new wxStaticText(this, wxGetOsDescription()
+			~ " " ~ (UNICODE ? "Unicode" : (ANSI ? "ANSI" : "Unknown")),
 			wxDefaultPosition, wxDefaultSize, Alignment.wxALIGN_CENTRE);
   	}
 }

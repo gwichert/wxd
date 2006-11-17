@@ -39,9 +39,9 @@ extern "C" WXEXPORT
 wxNumberEntryDialog* wxNumberEntryDialog_ctor(wxWindow* parent, dstr message,
         dstr prompt, dstr caption, long value, long min, long max, wxPoint* pos)
 {
-    return new _NumberEntryDialog(parent, wxString(message.data, wxConvUTF8, message.length),
-            wxString(prompt.data, wxConvUTF8, prompt.length),
-            wxString(caption.data, wxConvUTF8, caption.length),
+    return new _NumberEntryDialog(parent, wxstr(message),
+            wxstr(prompt),
+            wxstr(caption),
             value, min, max, *pos);
 }
 
@@ -77,9 +77,9 @@ extern "C" WXEXPORT
 long wxGetNumberFromUser_func(dstr message, dstr prompt, dstr caption,
                                      long value, long min, long max, wxWindow* parent, wxPoint* pos)
 {
-    return wxGetNumberFromUser(wxString(message.data, wxConvUTF8, message.length),
-                        wxString(prompt.data, wxConvUTF8, prompt.length),
-                        wxString(caption.data, wxConvUTF8, caption.length),
+    return wxGetNumberFromUser(wxstr(message),
+                        wxstr(prompt),
+                        wxstr(caption),
                         value, min, max, parent, *pos);
 }
 

@@ -41,10 +41,10 @@ wxFileDialog* wxFileDialog_ctor(wxWindow* parent, dstr message,
             dstr defaultDir, dstr defaultFile, 
             dstr wildcard, long style, const wxPoint* pos)
 {
-    return new _FileDialog(parent, wxString(message.data, wxConvUTF8, message.length), 
-                           wxString(defaultDir.data, wxConvUTF8, defaultDir.length), 
-                           wxString(defaultFile.data, wxConvUTF8, defaultFile.length), 
-                           wxString(wildcard.data, wxConvUTF8, wildcard.length), style, *pos);
+    return new _FileDialog(parent, wxstr(message), 
+                           wxstr(defaultDir), 
+                           wxstr(defaultFile), 
+                           wxstr(wildcard), style, *pos);
 }
 
 //-----------------------------------------------------------------------------
@@ -74,7 +74,7 @@ dstrret wxFileDialog_GetDirectory(wxFileDialog* self)
 extern "C" WXEXPORT
 void wxFileDialog_SetDirectory(wxFileDialog* self, dstr dir)
 {
-    self->SetDirectory(wxString(dir.data, wxConvUTF8, dir.length));
+    self->SetDirectory(wxstr(dir));
 }
 
 //-----------------------------------------------------------------------------
@@ -88,7 +88,7 @@ dstrret wxFileDialog_GetFilename(wxFileDialog* self)
 extern "C" WXEXPORT
 void wxFileDialog_SetFilename(wxFileDialog* self, dstr filename)
 {
-    self->SetFilename(wxString(filename.data, wxConvUTF8, filename.length));
+    self->SetFilename(wxstr(filename));
 }
 
 //-----------------------------------------------------------------------------
@@ -102,7 +102,7 @@ dstrret wxFileDialog_GetPath(wxFileDialog* self)
 extern "C" WXEXPORT
 void wxFileDialog_SetPath(wxFileDialog* self, dstr path)
 {
-    self->SetPath(wxString(path.data, wxConvUTF8, path.length));
+    self->SetPath(wxstr(path));
 }
 
 //-----------------------------------------------------------------------------
@@ -124,7 +124,7 @@ int wxFileDialog_GetFilterIndex(wxFileDialog *self)
 extern "C" WXEXPORT
 void wxFileDialog_SetMessage(wxFileDialog *self, dstr message)
 {
-    self->SetMessage(wxString(message.data, wxConvUTF8, message.length));
+    self->SetMessage(wxstr(message));
 }
 
 extern "C" WXEXPORT
@@ -144,7 +144,7 @@ dstrret wxFileDialog_GetWildcard(wxFileDialog* self)
 extern "C" WXEXPORT
 void wxFileDialog_SetWildcard(wxFileDialog* self, dstr wildcard)
 {
-    self->SetWildcard(wxString(wildcard.data, wxConvUTF8, wildcard.length));
+    self->SetWildcard(wxstr(wildcard));
 }
 
 //-----------------------------------------------------------------------------
@@ -152,13 +152,19 @@ void wxFileDialog_SetWildcard(wxFileDialog* self, dstr wildcard)
 extern "C" WXEXPORT
 void wxFileDialog_SetStyle(wxFileDialog *self, int style)
 {
+#if wxABI_VERSION < 20700
     self->SetStyle(style);
+#endif
 }
 
 extern "C" WXEXPORT
 int wxFileDialog_GetStyle(wxFileDialog *self)
 {
+#if wxABI_VERSION < 20700
     return self->GetStyle();
+#else
+    return wxDEFAULT_DIALOG_STYLE;
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -195,15 +201,15 @@ dstrret wxFileSelector_func(dstr message,
 	if (message.data==NULL)
 		wxmessage = wxString(wxFileSelectorPromptStr);
 	else
-		wxmessage = wxString(message.data, wxConvUTF8, message.length);
+		wxmessage = wxstr(message);
 	if (wildcard.data==NULL)
 		wxwildcard = wxString(wxFileSelectorDefaultWildcardStr);
 	else
-		wxwildcard = wxString(wildcard.data, wxConvUTF8, wildcard.length);
+		wxwildcard = wxstr(wildcard);
 	return dstr_ret(wxFileSelector(wxmessage,
-	    wxString(default_path.data, wxConvUTF8, default_path.length),
-	    wxString(default_filename.data, wxConvUTF8, default_filename.length),
-	    wxString(default_extension.data, wxConvUTF8, default_extension.length),
+	    wxstr(default_path),
+	    wxstr(default_filename),
+	    wxstr(default_extension),
 	    wxwildcard,
 	    flags, parent, x, y));
 }
@@ -222,14 +228,14 @@ dstrret wxFileSelectorEx_func(dstr message,
 	if (message.data==NULL)
 		wxmessage = wxString(wxFileSelectorPromptStr);
 	else
-		wxmessage = wxString(message.data, wxConvUTF8, message.length);
+		wxmessage = wxstr(message);
 	if (wildcard.data==NULL)
 		wxwildcard = wxString(wxFileSelectorDefaultWildcardStr);
 	else
-		wxwildcard = wxString(wildcard.data, wxConvUTF8, wildcard.length);
+		wxwildcard = wxstr(wildcard);
 	return dstr_ret(wxFileSelectorEx(wxmessage,
-	    wxString(default_path.data, wxConvUTF8, default_path.length),
-	    wxString(default_filename.data, wxConvUTF8, default_filename.length),
+	    wxstr(default_path),
+	    wxstr(default_filename),
 	    indexDefaultExtension,
 	    wxwildcard,
 	    flags, parent, x, y));
@@ -243,9 +249,9 @@ dstrret wxLoadFileSelector_func(dstr what,
                    dstr default_name,
                    wxWindow *parent)
 {
-	return dstr_ret(wxLoadFileSelector(wxString(what.data, wxConvUTF8, what.length),
-	    wxString(extension.data, wxConvUTF8, extension.length),
-	    wxString(default_name.data, wxConvUTF8, default_name.length),
+	return dstr_ret(wxLoadFileSelector(wxstr(what),
+	    wxstr(extension),
+	    wxstr(default_name),
 	    parent));
 }
 
@@ -256,8 +262,8 @@ dstrret wxSaveFileSelector_func(dstr what,
                    dstr default_name,
                    wxWindow *parent)
 {
-	return dstr_ret(wxSaveFileSelector(wxString(what.data, wxConvUTF8, what.length),
-	    wxString(extension.data, wxConvUTF8, extension.length),
-	    wxString(default_name.data, wxConvUTF8, default_name.length),
+	return dstr_ret(wxSaveFileSelector(wxstr(what),
+	    wxstr(extension),
+	    wxstr(default_name),
 	    parent));
 }

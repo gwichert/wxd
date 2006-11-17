@@ -50,6 +50,8 @@ all:
 #	make
 	cd ..\Splitter
 	make
+#	cd ..\StyledText
+#	make
 	cd ..\TreeCtrl
 	make
 #	cd ..\Tutorial
@@ -58,6 +60,8 @@ all:
 	make
 	cd ..\Xrc
 	make
+#	cd ..\Aui
+#	make
 	cd ..
 
 clean:
@@ -111,6 +115,8 @@ clean:
 	make clean
 	cd ..\Splitter
 	make clean
+	cd ..\StyledText
+	make clean
 	cd ..\TreeCtrl
 	make clean
 	cd ..\Tutorial
@@ -118,6 +124,8 @@ clean:
 	cd ..\Wizard
 	make clean
 	cd ..\Xrc
+	make clean
+	cd ..\Aui
 	make clean
 	cd ..
 

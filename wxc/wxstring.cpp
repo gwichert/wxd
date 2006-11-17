@@ -18,24 +18,26 @@
 class _wxString : public wxString
 {
 public:
-    _wxString(const char *psz, wxMBConv& conv)
-        : wxString(psz, conv) { }
-    _wxString(const char* psz, wxMBConv& conv,size_t length)
+    _wxString(const wxChar *psz)
+        : wxString(psz) { }
+    _wxString(const wxChar* psz, wxMBConv& conv,size_t length)
         : wxString(psz, conv, length) { }
+    _wxString(const wxString* str)
+        : wxString(*str) { }
 };
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxString_ctor(const char* str)
+wxString* wxString_ctor(const wxChar* str)
 {
-	return new _wxString(str, wxConvUTF8);
+	return new _wxString(str);
 }
 
 extern "C" WXEXPORT
 wxString* wxString_ctor2(dstr str)
 {
-	return new _wxString(str.data, wxConvUTF8, str.length);
+	return new _wxString(wxstr(str));
 }
 
 extern "C" WXEXPORT
@@ -47,18 +49,6 @@ void wxString_dtor(wxString *self)
 
 //-----------------------------------------------------------------------------
 
-/*
-extern "C" WXEXPORT
-const char* wxString_mb_str(wxString* self)
-{
-#if wxUSE_UNICODE
-	return self->mb_str(wxConvUTF8).data();
-#else // ANSI
-	return self->data();
-#endif
-}
-*/
-
 extern "C" WXEXPORT
 const size_t wxString_Length(wxString* self)
 {
@@ -66,31 +56,21 @@ const size_t wxString_Length(wxString* self)
 }
 
 extern "C" WXEXPORT
-const char wxString_CharAt(wxString* self, size_t i)
+const wxChar wxString_GetChar(wxString* self, size_t i)
 {
-	return (const char)self->GetChar(i);
+	return self->GetChar(i);
 }
 
 extern "C" WXEXPORT
-int wxString_CharAtInt(wxString* self, size_t i)
+const wxChar* wxString_c_str(wxString* self)
 {
-		return (int)self->GetChar(i);
+	return self->c_str();
 }
 
 extern "C" WXEXPORT
-const char* wxString_c_str(wxString* self, size_t i)
+dstrret wxString_d_str(wxString* self)
 {
-#if wxUSE_UNICODE
-	return self->mb_str(wxConvUTF8).data();
-#else // ANSI
-	return self->data();
-#endif
-}
-
-extern "C" WXEXPORT
-dstrret wxString_d_str(wxString* self, size_t i)
-{
-	return dstr_ret(self);
+	return dstr_ret(*self);
 }
 
 //-----------------------------------------------------------------------------

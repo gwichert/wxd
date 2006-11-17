@@ -16,7 +16,21 @@
 #include <wx/wx.h>
 #include "common.h"
 #include <wx/cmndata.h>
+#include <wx/generic/prntdlgg.h>
 
+#if wxUSE_POSTSCRIPT
+#if WXWIN_COMPATIBILITY_2_4
+    typedef wxPrintData PostScriptData;
+    static wxPrintData* PSData(wxPrintData *self) { return self; }
+#else
+    typedef wxPostScriptPrintNativeData PostScriptData;
+    static PostScriptData* PSData(wxPrintData *self) {
+	wxPostScriptPrintNativeData* data = (wxPostScriptPrintNativeData*)
+	wxCheckDynamicCast(self->GetNativeData(), CLASSINFO(wxPostScriptPrintNativeData));
+	return data;
+    }
+#endif // WXWIN_COMPATIBILITY
+#endif
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
@@ -394,7 +408,11 @@ dbit wxPrintDialogData_GetPrintToFile(wxPrintDialogData* self)
 extern "C" WXEXPORT
 dbit wxPrintDialogData_GetSetupDialog(wxPrintDialogData* self)
 {
+#if WXWIN_COMPATIBILITY_2_4
     return self->GetSetupDialog()?1:0;
+#else
+    return false;
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -474,7 +492,11 @@ void wxPrintDialogData_SetPrintToFile(wxPrintDialogData* self, dbit flag)
 extern "C" WXEXPORT
 void wxPrintDialogData_SetSetupDialog(wxPrintDialogData* self, dbit flag)
 {
+#if WXWIN_COMPATIBILITY_2_4
     self->SetSetupDialog(flag);
+#else
+    (void) flag;
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -690,7 +712,7 @@ void wxPrintData_SetOrientation(wxPrintData* self, int orient)
 extern "C" WXEXPORT
 void wxPrintData_SetPrinterName(wxPrintData* self, dstr name)
 {
-    self->SetPrinterName(wxString(name.data, wxConvUTF8, name.length));
+    self->SetPrinterName(wxstr(name));
 }
 
 //-----------------------------------------------------------------------------
@@ -738,7 +760,12 @@ void wxPrintData_SetQuality(wxPrintData* self, wxPrintQuality quality)
 extern "C" WXEXPORT
 dstrret wxPrintData_GetPrinterCommand(wxPrintData* self)
 {
-    return dstr_ret(self->GetPrinterCommand());
+#if wxUSE_POSTSCRIPT
+    PostScriptData* data = PSData(self);
+    if (data != NULL)
+    return dstr_ret(data->GetPrinterCommand());
+#endif
+    return dstr_ret(wxString());
 }
 
 //-----------------------------------------------------------------------------
@@ -746,7 +773,12 @@ dstrret wxPrintData_GetPrinterCommand(wxPrintData* self)
 extern "C" WXEXPORT
 dstrret wxPrintData_GetPrinterOptions(wxPrintData* self)
 {
-    return dstr_ret(self->GetPrinterOptions());
+#if wxUSE_POSTSCRIPT
+    PostScriptData* data = PSData(self);
+    if (data != NULL)
+    return dstr_ret(data->GetPrinterOptions());
+#endif
+    return dstr_ret(wxString());
 }
 
 //-----------------------------------------------------------------------------
@@ -754,7 +786,12 @@ dstrret wxPrintData_GetPrinterOptions(wxPrintData* self)
 extern "C" WXEXPORT
 dstrret wxPrintData_GetPreviewCommand(wxPrintData* self)
 {
-    return dstr_ret(self->GetPreviewCommand());
+#if wxUSE_POSTSCRIPT
+    PostScriptData* data = PSData(self);
+    if (data != NULL)
+    return dstr_ret(data->GetPreviewCommand());
+#endif
+    return dstr_ret(wxString());
 }
 
 //-----------------------------------------------------------------------------
@@ -770,7 +807,12 @@ dstrret wxPrintData_GetFilename(wxPrintData* self)
 extern "C" WXEXPORT
 dstrret wxPrintData_GetFontMetricPath(wxPrintData* self)
 {
-    return dstr_ret(self->GetFontMetricPath());
+#if wxUSE_POSTSCRIPT
+    PostScriptData* data = PSData(self);
+    if (data != NULL)
+    return dstr_ret(data->GetFontMetricPath());
+#endif
+    return dstr_ret(wxString());
 }
 
 //-----------------------------------------------------------------------------
@@ -778,7 +820,12 @@ dstrret wxPrintData_GetFontMetricPath(wxPrintData* self)
 extern "C" WXEXPORT
 double wxPrintData_GetPrinterScaleX(wxPrintData* self)
 {
-    return self->GetPrinterScaleX();
+#if wxUSE_POSTSCRIPT
+    PostScriptData* data = PSData(self);
+    if (data != NULL)
+    return data->GetPrinterScaleX();
+#endif
+    return 1.0;
 }
 
 //-----------------------------------------------------------------------------
@@ -786,7 +833,12 @@ double wxPrintData_GetPrinterScaleX(wxPrintData* self)
 extern "C" WXEXPORT
 double wxPrintData_GetPrinterScaleY(wxPrintData* self)
 {
-    return self->GetPrinterScaleY();
+#if wxUSE_POSTSCRIPT
+    PostScriptData* data = PSData(self);
+    if (data != NULL)
+    return data->GetPrinterScaleY();
+#endif
+    return 1.0;
 }
 
 //-----------------------------------------------------------------------------
@@ -794,7 +846,12 @@ double wxPrintData_GetPrinterScaleY(wxPrintData* self)
 extern "C" WXEXPORT
 int wxPrintData_GetPrinterTranslateX(wxPrintData* self)
 {
-    return self->GetPrinterTranslateX();
+#if wxUSE_POSTSCRIPT
+    PostScriptData* data = PSData(self);
+    if (data != NULL)
+    return data->GetPrinterTranslateX();
+#endif
+    return 0;
 }
 
 //-----------------------------------------------------------------------------
@@ -802,7 +859,12 @@ int wxPrintData_GetPrinterTranslateX(wxPrintData* self)
 extern "C" WXEXPORT
 int wxPrintData_GetPrinterTranslateY(wxPrintData* self)
 {
-    return self->GetPrinterTranslateY();
+#if wxUSE_POSTSCRIPT
+    PostScriptData* data = PSData(self);
+    if (data != NULL)
+    return data->GetPrinterTranslateY();
+#endif
+    return 0;
 }
 
 //-----------------------------------------------------------------------------
@@ -818,7 +880,11 @@ wxPrintMode wxPrintData_GetPrintMode(wxPrintData* self)
 extern "C" WXEXPORT
 void wxPrintData_SetPrinterCommand(wxPrintData* self, dstr command)
 {
-    self->SetPrinterCommand(wxString(command.data, wxConvUTF8, command.length));
+#if wxUSE_POSTSCRIPT
+    PostScriptData* data = PSData(self);
+    if (data != NULL)
+    data->SetPrinterCommand(wxstr(command));
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -826,7 +892,11 @@ void wxPrintData_SetPrinterCommand(wxPrintData* self, dstr command)
 extern "C" WXEXPORT
 void wxPrintData_SetPrinterOptions(wxPrintData* self, dstr options)
 {
-    self->SetPrinterOptions(wxString(options.data, wxConvUTF8, options.length));
+#if wxUSE_POSTSCRIPT
+    PostScriptData* data = PSData(self);
+    if (data != NULL)
+    data->SetPrinterOptions(wxstr(options));
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -834,7 +904,11 @@ void wxPrintData_SetPrinterOptions(wxPrintData* self, dstr options)
 extern "C" WXEXPORT
 void wxPrintData_SetPreviewCommand(wxPrintData* self, dstr command)
 {
-    self->SetPreviewCommand(wxString(command.data, wxConvUTF8, command.length));
+#if wxUSE_POSTSCRIPT
+    PostScriptData* data = PSData(self);
+    if (data != NULL)
+    data->SetPreviewCommand(wxstr(command));
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -842,7 +916,7 @@ void wxPrintData_SetPreviewCommand(wxPrintData* self, dstr command)
 extern "C" WXEXPORT
 void wxPrintData_SetFilename(wxPrintData* self, dstr filename)
 {
-    self->SetFilename(wxString(filename.data, wxConvUTF8, filename.length));
+    self->SetFilename(wxstr(filename));
 }
 
 //-----------------------------------------------------------------------------
@@ -850,7 +924,11 @@ void wxPrintData_SetFilename(wxPrintData* self, dstr filename)
 extern "C" WXEXPORT
 void wxPrintData_SetFontMetricPath(wxPrintData* self, dstr path)
 {
-    self->SetFontMetricPath(wxString(path.data, wxConvUTF8, path.length));
+#if wxUSE_POSTSCRIPT
+    PostScriptData* data = PSData(self);
+    if (data != NULL)
+    data->SetFontMetricPath(wxstr(path));
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -858,7 +936,11 @@ void wxPrintData_SetFontMetricPath(wxPrintData* self, dstr path)
 extern "C" WXEXPORT
 void wxPrintData_SetPrinterScaleX(wxPrintData* self, double x)
 {
-    self->SetPrinterScaleX(x);
+#if wxUSE_POSTSCRIPT
+    PostScriptData* data = PSData(self);
+    if (data != NULL)
+    data->SetPrinterScaleX(x);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -866,7 +948,11 @@ void wxPrintData_SetPrinterScaleX(wxPrintData* self, double x)
 extern "C" WXEXPORT
 void wxPrintData_SetPrinterScaleY(wxPrintData* self, double y)
 {
-    self->SetPrinterScaleY(y);
+#if wxUSE_POSTSCRIPT
+    PostScriptData* data = PSData(self);
+    if (data != NULL)
+    data->SetPrinterScaleY(y);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -874,7 +960,11 @@ void wxPrintData_SetPrinterScaleY(wxPrintData* self, double y)
 extern "C" WXEXPORT
 void wxPrintData_SetPrinterScaling(wxPrintData* self, double x, double y)
 {
-    self->SetPrinterScaling(x, y);
+#if wxUSE_POSTSCRIPT
+    PostScriptData* data = PSData(self);
+    if (data != NULL)
+    data->SetPrinterScaling(x, y);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -882,7 +972,11 @@ void wxPrintData_SetPrinterScaling(wxPrintData* self, double x, double y)
 extern "C" WXEXPORT
 void wxPrintData_SetPrinterTranslateX(wxPrintData* self, int x)
 {
-    self->SetPrinterTranslateX(x);
+#if wxUSE_POSTSCRIPT
+    PostScriptData* data = PSData(self);
+    if (data != NULL)
+    data->SetPrinterTranslateX(x);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -890,7 +984,11 @@ void wxPrintData_SetPrinterTranslateX(wxPrintData* self, int x)
 extern "C" WXEXPORT
 void wxPrintData_SetPrinterTranslateY(wxPrintData* self, int y)
 {
-    self->SetPrinterTranslateY(y);
+#if wxUSE_POSTSCRIPT
+    PostScriptData* data = PSData(self);
+    if (data != NULL)
+    data->SetPrinterTranslateY(y);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -898,7 +996,11 @@ void wxPrintData_SetPrinterTranslateY(wxPrintData* self, int y)
 extern "C" WXEXPORT
 void wxPrintData_SetPrinterTranslation(wxPrintData* self, int x, int y)
 {
-    self->SetPrinterTranslation(x, y);
+#if wxUSE_POSTSCRIPT
+    PostScriptData* data = PSData(self);
+    if (data != NULL)
+    data->SetPrinterTranslation(x, y);
+#endif
 }
 
 //-----------------------------------------------------------------------------

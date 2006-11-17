@@ -39,7 +39,7 @@ wxWindow* wxPrinter_CreateAbortWindow(wxPrinter* self, wxWindow* parent, wxPrint
 extern "C" WXEXPORT
 void wxPrinter_ReportError(wxPrinter* self, wxWindow* parent, wxPrintout* printout, dstr message)
 {
-    self->ReportError(parent, printout, wxString(message.data, wxConvUTF8, message.length));
+    self->ReportError(parent, printout, wxstr(message));
 }
 
 //-----------------------------------------------------------------------------
@@ -155,7 +155,7 @@ wxPrintout* wxPrintout_ctor(dstr title)
     if (title.data==NULL)
         title = dstr("Printout");
 
-    return new _Printout(wxString(title.data, wxConvUTF8, title.length));
+    return new _Printout(wxstr(title));
 }
 
 extern "C" WXEXPORT

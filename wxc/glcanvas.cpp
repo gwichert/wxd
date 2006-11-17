@@ -42,7 +42,7 @@ void wxGLContext_Update(wxGLContext* self)
 extern "C" WXEXPORT
 void wxGLContext_SetColour(wxGLContext* self, dstr colour)
 {
-	self->SetColour(wxString(colour.data, wxConvUTF8, colour.length));
+	self->SetColour(wxstr(colour));
 }
 
 //-----------------------------------------------------------------------------
@@ -105,7 +105,7 @@ wxGLCanvas* wxGLCanvas_ctor(wxWindow *parent, wxWindowID id, const wxPoint* pos,
 	if (palette == NULL)
 		palette = &wxNullPalette;
 
-	return new _GLCanvas(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length), attribList, *palette);
+	return new _GLCanvas(parent, id, *pos, *size, style, wxstr(name), attribList, *palette);
 }
 
 //-----------------------------------------------------------------------------
@@ -126,7 +126,7 @@ wxGLCanvas* wxGLCanvas_ctor2(wxWindow *parent, const wxGLContext *shared, wxWind
 	if (palette == NULL)
 		palette = &wxNullPalette;
 
-	return new _GLCanvas(parent, shared, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length), attribList, *palette);
+	return new _GLCanvas(parent, shared, id, *pos, *size, style, wxstr(name), attribList, *palette);
 }
 
 //-----------------------------------------------------------------------------
@@ -147,7 +147,7 @@ wxGLCanvas* wxGLCanvas_ctor3(wxWindow *parent, const wxGLCanvas *shared, wxWindo
 	if (palette == NULL)
 		palette = &wxNullPalette;
 
-	return new _GLCanvas(parent, shared, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length), attribList, *palette);
+	return new _GLCanvas(parent, shared, id, *pos, *size, style, wxstr(name), attribList, *palette);
 }
 
 //-----------------------------------------------------------------------------
@@ -173,7 +173,7 @@ void wxGLCanvas_UpdateContext(wxGLCanvas* self)
 extern "C" WXEXPORT
 void wxGLCanvas_SetColour(wxGLCanvas* self, dstr colour)
 {
-	self->SetColour(wxString(colour.data, wxConvUTF8, colour.length));
+	self->SetColour(wxstr(colour));
 }
 
 //-----------------------------------------------------------------------------

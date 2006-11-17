@@ -35,7 +35,7 @@ public import wx.DataObject;
 public import wx.Defs;
 public import wx.Dialog;
 public import wx.DirDialog;
-public import wx.Display;
+//public import wx.Display;
 public import wx.DisplayChangedEvent;
 public import wx.DocManager;
 public import wx.DocTemplate;

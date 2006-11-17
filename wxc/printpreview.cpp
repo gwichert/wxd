@@ -210,7 +210,7 @@ wxPreviewFrame* wxPreviewFrame_ctor(wxPrintPreviewBase* preview, wxFrame* parent
     if (name.data==NULL)
         name = dstr("PreviewFrame");
 
-    return new wxPreviewFrame(preview, parent, wxString(title.data, wxConvUTF8, title.length), *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
+    return new wxPreviewFrame(preview, parent, wxstr(title), *pos, *size, style, wxstr(name));
 }
 
 //-----------------------------------------------------------------------------
@@ -245,7 +245,7 @@ wxPreviewCanvas* wxPreviewCanvas_ctor(wxPrintPreviewBase* preview, wxWindow* par
     if (name.data==NULL)
         name = dstr("PreviewCanvas");
 
-    return new wxPreviewCanvas(preview, parent, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
+    return new wxPreviewCanvas(preview, parent, *pos, *size, style, wxstr(name));
 }
 
 //-----------------------------------------------------------------------------
@@ -275,9 +275,9 @@ wxPreviewControlBar* wxPreviewControlBar_ctor(wxPrintPreviewBase *preview,
                         dstr name)
 {
     if (name.data==NULL)
-        name = dstr("panel",sizeof("panel")-1);
+        name = dstr("panel");
 
-    return new _PreviewControlBar(preview,buttons,parent,*pos,*size,style,wxString(name.data, wxConvUTF8, name.length));
+    return new _PreviewControlBar(preview,buttons,parent,*pos,*size,style,wxstr(name));
 }
 
 extern "C" WXEXPORT

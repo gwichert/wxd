@@ -50,7 +50,7 @@ dbit wxToggleButton_Create(wxToggleButton *self, wxWindow* parent, wxWindowID id
 	if (name.data==NULL)
 		name = dstr("check");
 
-	return self->Create(parent, id, wxString(label.data, wxConvUTF8, label.length), *pos, *size, style, *validator, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, wxstr(label), *pos, *size, style, *validator, wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------

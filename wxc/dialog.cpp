@@ -56,8 +56,8 @@ dbit wxDialog_Create(wxDialog* self, wxWindow* parent, int id,
 	if (name.data==NULL)
 		name = dstr("dialogBox");
 
-	return self->Create(parent, id, wxString(title.data, wxConvUTF8, title.length), *pos,
-					    *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, wxstr(title), *pos,
+					    *size, style, wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -85,7 +85,7 @@ dstrret wxDialog_GetTitle(wxDialog* self)
 extern "C" WXEXPORT
 void wxDialog_SetTitle(wxDialog* self, dstr title)
 {
-	self->SetTitle(wxString(title.data, wxConvUTF8, title.length));
+	self->SetTitle(wxstr(title));
 }
 
 //-----------------------------------------------------------------------------

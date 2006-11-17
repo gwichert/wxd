@@ -5,6 +5,8 @@ all:
 	cd wx
 	make
 	cd ..
+
+test:
 	cd Samples
 	make
 	cd ..

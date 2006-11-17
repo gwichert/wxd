@@ -54,8 +54,8 @@ dbit wxRadioButton_Create(wxRadioButton* self, wxWindow* parent, int id,
 	if (name.data==NULL)
 		name = dstr("radioButton");
 
-	return self->Create(parent, id, wxString(label.data, wxConvUTF8, label.length), *pos, *size, style,
-	                    *val, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, wxstr(label), *pos, *size, style,
+	                    *val, wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------

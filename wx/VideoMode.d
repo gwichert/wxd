@@ -117,9 +117,9 @@ private import std.string;
         // not implemented -- seems impossible
         // bool IsOk() const { return w && h; }
 
-		public string toString()
+		public char[] toString()
 		{
-			string s;
+			char[] s;
 			s = .toString(w) ~ "x" ~ .toString(h);
 			if ( bpp > 0 )
 				s ~= ", " ~ .toString(bpp) ~ "bpp";

@@ -2156,7 +2156,7 @@ version(NOT_IMPLEMENTED){
             return wxGrid_GetSelectedCols(wxobj);
             }
 } // version(NOT_IMPLEMENTED)
-//! \endcond VERSION
+//! \endcond
             //-----------------------------------------------------------------------------
     
             public Rectangle BlockToDeviceRect(GridCellCoords topLeft, GridCellCoords bottomRight)

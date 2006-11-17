@@ -3,6 +3,9 @@
 //
 // A wxD version of the wxWidgets "opengl/cube" sample.
 //
+// wxGLCanvas demo program
+// (c) 1998 Julian Smart
+//
 // (C) 2006 afb <afb.sourceforge.net>
 // Licensed under the wxWidgets license, see LICENSE.txt for details.
 //
@@ -11,10 +14,9 @@
 
 import wx.wx;
 
-import opengl.gl;
-
 import wx.GLCanvas;
 
+import gl.gl;
 
 	public class TestGLCanvas : GLCanvas
 	{
@@ -38,6 +40,10 @@ import wx.GLCanvas;
 		private void Render()
 		{
 		    if (!context()) return;
+
+			// This is a dummy, to avoid an endless succession of paint messages.
+			// OnPaint handlers must always create a wxPaintDC.
+			auto wxPaintDC dc = new wxPaintDC(this);
 
 			SetCurrent();
 
@@ -178,7 +184,7 @@ import wx.GLCanvas;
    			if (isCloneWindow) str ~= " - Clone";
  
  		    MyFrame frame = new MyFrame(null, str, wxDefaultPosition,
-       			 Size(400, 300));
+ 		    	/* Size(400, 300) */ wxDefaultSize);
 
 			// Make a menubar
 			Menu winMenu = new Menu();
@@ -201,6 +207,10 @@ import wx.GLCanvas;
 					wxDefaultPosition, wxDefaultSize);
 			}
    
+			// moved the Frame sizing to after canvas was added,
+			// since otherwise the frame showed empty on wxMac ?
+			frame.size = Size(400, 300);
+
    			// Show the frame
     		frame.Show(true);
 

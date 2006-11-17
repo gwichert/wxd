@@ -110,9 +110,9 @@ private import std.stdarg;
 			wxLog_Log_Function(cast(int)eLogLevel.xSYSERROR, stringFormat(_arguments,_argptr));
 		}
 
-		private static char[] stringFormat(TypeInfo[] arguments, va_list argptr)
+		private static string stringFormat(TypeInfo[] arguments, va_list argptr)
 		{
-			char[] s;
+			string s;
 
 			void putc(dchar c)
 			{
@@ -126,7 +126,7 @@ private import std.stdarg;
 //! \cond VERSION
 version (none) {
 /* C# compatible */
-private static string stringFormat(string str,void* argptr,TypeInfo[] arguments)
+private static string stringFormat(char[] str,va_list argptr,TypeInfo[] arguments)
 {
 	if (arguments.length==0) return str;
 
@@ -181,6 +181,6 @@ private static string stringFormat(string str,void* argptr,TypeInfo[] arguments)
 }
 
 }
-//! \endcond VERSION
+//! \endcond
 	}
 

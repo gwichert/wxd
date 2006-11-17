@@ -152,16 +152,36 @@ OBJECTS = \
 	wxversion.o \
 	wxplatform.o \
 	xmlresource.o \
-	numdialog.o
+	numdialog.o \
+	manager.o \
+	wxaui.o
 	
 #	notifyevent.o
 	
+
 all:  platform $(LIBTARGET)
 
-WX_CONFIG = wx-config
+WX_CONFIG ?= wx-config
 
-CXX = $(shell $(WX_CONFIG) --cxx)
-CXXFLAGS = -O2 -Wall
+CXX ?= $(shell $(WX_CONFIG) --cxx)
+CXXFLAGS ?= -O2 -fno-strict-aliasing -Wall
+
+# Note: -g debugging symbols are off for "libwxc",
+#       since it makes it bigger for no good reason
+#       (the code in the C++ wrappers is "trivial",
+#       so it should be enough to debug the D layer)
+
+OS=$(shell uname)
+
+ifeq ("$(OS)","FreeBSD")
+CXXFLAGS += -I/usr/X11R6/include
+endif
+
+ifeq ("$(STC)","1")
+STCFLAGS = -DWXD_STYLEDTEXTCTRL
+endif
+
+WXFLAGS = `$(WX_CONFIG) --cxxflags`
 
 prefix=/usr/local
 exec_prefix=$(prefix)
@@ -171,21 +191,27 @@ libdir=$(exec_prefix)/lib
 INSTALL = install
 RANLIB = ranlib
 
+INSTALL_PROGRAM = $(INSTALL)
+INSTALL_DATA = ${INSTALL} -m 644
+
 install: $(LIBTARGET)
 	$(INSTALL) -d $(DESTDIR)$(libdir)
-	$(INSTALL) -p $(LIBTARGET) $(DESTDIR)$(libdir)
+	$(INSTALL_DATA) -p $(LIBTARGET) $(DESTDIR)$(libdir)
 	-$(RANLIB) $(DESTDIR)$(libdir)/`basename $(LIBTARGET)`
 
 platform:
-	$(WX_CONFIG) --cflags | sed -e 's/.*\-D__\(WX.*\)__.*/\1/' > $@
+	WX_CONFIG=$(WX_CONFIG) ./wx_platform.sh > $@
+
+encoding:
+	WX_CONFIG=$(WX_CONFIG) ./wx_encoding.sh > $@
+
+$(LIBTARGET) : $(OBJECTS)
+	ar rcs $@ $^
+
+%.o:%.cpp
+	$(CXX) -D__$(COMPILER)__ $(STCFLAGS) $(WXFLAGS) $(CXXFLAGS) -c -o $@ $<
 
 clean:
 	-rm *.o
 	-rm $(LIBTARGET)
 
-$(LIBTARGET) : $(OBJECTS)
-	ar rcs $@ $^
-
-
-%.o:%.cpp
-	$(CXX) -c $(CXXFLAGS) `$(WX_CONFIG) --cxxflags` $<

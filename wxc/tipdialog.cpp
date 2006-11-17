@@ -39,7 +39,7 @@ wxTipProvider* wxCreateFileTipProvider_func(dstr filename, size_t currentTip)
 		delete mpTipProvider;
 	}
 	
-	mpTipProvider = wxCreateFileTipProvider(wxString(filename.data, wxConvUTF8, filename.length), currentTip);
+	mpTipProvider = wxCreateFileTipProvider(wxstr(filename), currentTip);
 	return mpTipProvider;
 }
 

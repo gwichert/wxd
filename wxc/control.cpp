@@ -29,7 +29,7 @@ void wxControl_Command(wxControl *self, wxCommandEvent *event)
 extern "C" WXEXPORT
 void wxControl_SetLabel(wxControl *self, dstr label)
 {
-	self->SetLabel(wxString(label.data, wxConvUTF8, label.length));
+	self->SetLabel(wxstr(label));
 }
 
 //-----------------------------------------------------------------------------

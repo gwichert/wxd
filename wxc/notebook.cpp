@@ -43,7 +43,7 @@ wxNotebook* wxNotebook_ctor()
 extern "C" WXEXPORT
 dbit wxNotebook_AddPage(wxNotebook* self, wxNotebookPage* page, dstr text, dbit select, int imageId)
 {
-	return self->AddPage(page, wxString(text.data, wxConvUTF8, text.length), select, imageId)?1:0;
+	return self->AddPage(page, wxstr(text), select, imageId)?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -61,7 +61,7 @@ dbit wxNotebook_Create(wxNotebook* self, wxWindow* parent, int id, const wxPoint
 	if (name.data==NULL)
 		name = dstr("notebook");
 
-	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, *pos, *size, style, wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -101,7 +101,7 @@ int wxNotebook_GetSelection(wxNotebook* self)
 extern "C" WXEXPORT
 dbit wxNotebook_SetPageText(wxNotebook* self, int nPage, dstr strText)
 {
-	return self->SetPageText(nPage, wxString(strText.data, wxConvUTF8, strText.length))?1:0;
+	return self->SetPageText(nPage, wxstr(strText))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -205,7 +205,7 @@ dbit wxNotebook_DeleteAllPages(wxNotebook* self)
 extern "C" WXEXPORT
 dbit wxNotebook_InsertPage(wxNotebook* self, int nPage, wxNotebookPage *pPage, dstr strText, dbit bSelect, int imageId)
 {
-	return self->InsertPage(nPage, pPage, wxString(strText.data, wxConvUTF8, strText.length), bSelect, imageId)?1:0;
+	return self->InsertPage(nPage, pPage, wxstr(strText), bSelect, imageId)?1:0;
 }
 
 //-----------------------------------------------------------------------------

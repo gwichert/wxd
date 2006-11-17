@@ -117,4 +117,4 @@ version(none) /*(__WXGTK__)*/{
     }
 
 } // __WXGTK__
-//! \endcond VERSION
+//! \endcond

@@ -133,7 +133,7 @@ void wxUpdateUIEvent_SetMode(wxUpdateUIMode mode)
 extern "C" WXEXPORT
 void wxUpdateUIEvent_SetText(wxUpdateUIEvent* self, dstr text)
 {
-	self->SetText(wxString(text.data, wxConvUTF8, text.length));
+	self->SetText(wxstr(text));
 }
 
 //-----------------------------------------------------------------------------

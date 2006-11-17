@@ -32,8 +32,8 @@ int wxGlobal_GetNumberFromUser(
     }
 
     return wxGetNumberFromUser(
-                    wxString(msg.data, wxConvUTF8, msg.length), wxString(prompt.data, wxConvUTF8, prompt.length),
-                    wxString(caption.data, wxConvUTF8, caption.length), value, min, max, parent,
+                    wxstr(msg), wxstr(prompt),
+                    wxstr(caption), value, min, max, parent,
                     *pos
                 );
 }
@@ -44,6 +44,12 @@ extern "C" WXEXPORT
 dstrret wxGlobal_GetHomeDir()
 {
 	return dstr_ret(wxGetHomeDir());
+}
+
+extern "C" WXEXPORT
+dstrret wxGlobal_GetCwd()
+{
+	return dstr_ret(wxGetCwd());
 }
 
 //-----------------------------------------------------------------------------
@@ -149,7 +155,7 @@ void wxArrayString_RegisterDisposable(_ArrayString* self, Virtual_Dispose onDisp
 extern "C" WXEXPORT
 void wxArrayString_Add(wxArrayString* self, dstr toadd)
 {
-	wxString tmps(wxString(toadd.data, wxConvUTF8, toadd.length));
+	wxString tmps(wxstr(toadd));
 	self->Add(tmps);
 }
 
@@ -177,6 +183,18 @@ extern "C" WXEXPORT
 void wxSleep_func(int num)
 {
 	wxSleep(num);
+}
+
+extern "C" WXEXPORT
+void wxMilliSleep_func(unsigned int num)
+{
+	wxMilliSleep(num);
+}
+
+extern "C" WXEXPORT
+void wxMicroSleep_func(unsigned int num)
+{
+	wxMicroSleep(num);
 }
 
 //-----------------------------------------------------------------------------
@@ -221,7 +239,7 @@ void wxWindowDisabler_dtor(wxWindowDisabler* self)
 extern "C" WXEXPORT
 wxBusyInfo* wxBusyInfo_ctor(dstr message, wxWindow* parent)
 {
-	return new wxBusyInfo(wxString(message.data, wxConvUTF8, message.length), parent);
+	return new wxBusyInfo(wxstr(message), parent);
 }
 
 extern "C" WXEXPORT

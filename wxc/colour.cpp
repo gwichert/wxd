@@ -53,7 +53,7 @@ void wxColour_dtor(wxColour* self)
 extern "C" WXEXPORT
 wxColour* wxColour_ctorByName(dstr name)
 {
-	return new wxColour(wxString(name.data, wxConvUTF8, name.length));
+	return new wxColour(wxstr(name));
 }
 
 //-----------------------------------------------------------------------------
@@ -112,6 +112,10 @@ void wxColour_Set(wxColour* self, unsigned char red, unsigned char green, unsign
 extern "C" WXEXPORT
 wxColour* wxColour_CreateByName(dstr name)
 {
-	return new wxColour(wxColour::CreateByName(wxString(name.data, wxConvUTF8, name.length)));
+#if wxABI_VERSION < 20700
+	return new wxColour(wxColour::CreateByName(wxstr(name)));
+#else
+    return wxColour_ctorByName(name);
+#endif
 }
 #endif

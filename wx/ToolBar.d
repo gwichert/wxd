@@ -51,7 +51,7 @@ public import wx.ClientData;
 		static extern (C) void   wxToolBarToolBase_Attach(IntPtr self, IntPtr tbar);
 		//! \endcond
 
-        //---------------------------------------------------------------------
+       //---------------------------------------------------------------------
         
 	alias ToolBarTool wxToolBarTool;
 	public class ToolBarTool : wxObject
@@ -204,6 +204,8 @@ public import wx.ClientData;
 			wxTB_TEXT         = 0x0100,
 			wxTB_NODIVIDER    = 0x0200,
 			wxTB_NOALIGN      = 0x0400,
+			wxTB_HORZ_LAYOUT  = 0x0800,
+			wxTB_HORZ_TEXT    = wxTB_HORZ_LAYOUT | wxTB_TEXT
 		}
 	
 		//---------------------------------------------------------------------

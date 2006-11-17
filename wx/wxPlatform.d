@@ -22,8 +22,17 @@ private import std.string;
 		static extern (C) bool wxPlatform_WXGTK();
 		static extern (C) bool wxPlatform_WXMAC();
 		static extern (C) bool wxPlatform_WXX11();
+		static extern (C) bool wxPlatform_WXUNIVERSAL();
 
-		static extern (C) char *wxPlatform_wxGetOsDescription();
+		static extern (C) bool wxPlatform_WXDEBUG();
+		static extern (C) bool wxPlatform_UNIX();
+		static extern (C) bool wxPlatform_UNICODE();
+		static extern (C) bool wxPlatform_DISPLAY();
+		static extern (C) bool wxPlatform_POSTSCRIPT();
+		static extern (C) bool wxPlatform_GLCANVAS();
+		static extern (C) bool wxPlatform_SOUND();
+
+		static extern (C) string wxPlatform_wxGetOsDescription();
 		static extern (C) int wxPlatform_wxGetOsVersion(inout int major, inout int minor);
 
 		static extern (C) int wxPlatform_wxUNKNOWN_PLATFORM();
@@ -47,10 +56,29 @@ public bool __WXMAC__;
 /// X11 platform
 public bool __WXX11__;
 
-public char[] wxGetOsDescription()
+/// Universal widgets
+public bool __WXUNIVERSAL__;
+
+/// Get OS description as a user-readable string
+public string wxGetOsDescription()
 {
-	return toString(wxPlatform_wxGetOsDescription());
+	return wxPlatform_wxGetOsDescription();
 }
+
+public bool ANSI;
+public bool UNICODE;
+
+public bool DEBUG;
+public bool UNIX;
+
+/// wxUSE_DISPLAY
+public bool DISPLAY;
+/// wxUSE_POSTSCRIPT
+public bool POSTSCRIPT;
+/// wxUSE_GLCANVAS
+public bool GLCANVAS;
+/// wxUSE_SOUND
+public bool SOUND;
 
 // ------------------------------------------------------
 
@@ -77,6 +105,7 @@ public int wxUNIX;
 /// Plain X11 and Universal widgets
 public int wxX11;
 
+/// Get OS version
 public int wxGetOsVersion(inout int major, inout int minor)
 {
 	return wxPlatform_wxGetOsVersion(major, minor);
@@ -91,6 +120,39 @@ static this()
 	__WXMAC__ = wxPlatform_WXMAC();
 	__WXX11__ = wxPlatform_WXX11();
 
+	__WXUNIVERSAL__ = wxPlatform_WXUNIVERSAL();
+
+	// check that wxc matches wxd:
+version(__WXMSW__)
+	assert(__WXMSW__);
+version(__WXGTK__)
+	assert(__WXGTK__);
+version(__WXMAC__)
+	assert(__WXMAC__);
+version(__WXX11__)
+	assert(__WXX11__);
+
+	UNICODE = wxPlatform_UNICODE();
+	ANSI = !UNICODE;
+
+	DEBUG = wxPlatform_WXDEBUG();
+	UNIX = wxPlatform_UNIX();
+
+/+	//currently encoding is not used
+
+	// check that wxc matches wxd:
+version(UNICODE)
+	assert(UNICODE);
+else //version(ANSI)
+	assert(ANSI);
++/
+
+	DISPLAY = wxPlatform_DISPLAY();
+	POSTSCRIPT = wxPlatform_POSTSCRIPT();
+	GLCANVAS = wxPlatform_GLCANVAS();
+	SOUND = wxPlatform_SOUND();
+
+	// constants
 	wxUNKNOWN_PLATFORM = wxPlatform_wxUNKNOWN_PLATFORM();
 	wxWIN95 = wxPlatform_wxWIN95();
 	wxWINDOWS_NT = wxPlatform_wxWINDOWS_NT();

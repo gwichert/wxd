@@ -1,39 +1,70 @@
 # from samples
 
-# Note: if you want to use GDC instead of DMD, you need to
-#       uncomment the second line below ("gdmd" and "gdc")
+# same as the regular GNU , but with DMD support
 
-WX_CONFIG = wx-config
+WX_CONFIG ?= wx-config
+
+OS=Linux
+ARCH=$(shell arch | sed -e s/i.86/x86/ )
+
+# D compiler to use (DMD or GDC)
+ifeq ("$(OS) $(ARCH)","Linux x86")
+COMPILER = DMD
+else
+COMPILER = GDC
+endif
+
+# wx platform to use (e.g. WXGTK)
 PLATFORM = $(shell cat $(TOPDIR)/wxc/platform)
 
-CXX = $(shell $(WX_CONFIG) --cxx)
-DMD = dmd
-#DMD = gdmd
+# wx char encoding (ANSI/UNICODE)
+ENCODING = $(shell cat $(TOPDIR)/wxc/encoding)
 
-CXXFLAGS = -O2 -g
-DFLAGS += -version=__$(PLATFORM)__ -O -g
+CXX = $(shell $(WX_CONFIG) --cxx)
+CXXFLAGS = -O2
+CXXLIBS = -lstdc++
+
+ifeq ("$(COMPILER)","DMD")
+DC = dmd
+DFLAGS = -O -g
+version=-version
+output=-of$@
+else
+DC = gdc
+DFLAGS = -O2 -g
+version=-fversion
+output=-o $@
+endif
 
 WXVERSION = `$(WX_CONFIG) --version`
+WXFLAGS = `$(WX_CONFIG) --cxxflags`
 WXLIBS = `$(WX_CONFIG) --libs`
 
-LDFLAGS = -lstdc++
+ifeq ("$(STC)","1")
+WXLIBS = `$(WX_CONFIG) --libs stc`
+endif
 
-.cpp.o: 
-	$(CXX) -c $(CXXFLAGS) `$(WX_CONFIG) --cxxflags` $<
+.cpp.o:
+	$(CXX) $(WXFLAGS) $(CXXFLAGS) -c -o $@ $<
+
+VERSION=$(version)=__$(PLATFORM)__ $(version)=$(ENCODING)
 
 %.o:%.d
-	$(DMD) -c $(DFLAGS) -I$(TOPDIR) $<
+	$(DC) $(VERSION) -I$(TOPDIR) $(DFLAGS) -c $(output) $<
 
 
 all: $(TARGET)
 
+ifeq ("$(COMPILER)","DMD")
 # Note: "dmd" uses weird LDFLAGS syntax, so we use "gcc" directly instead,
 #       or it won't work with whatever we get back from "wx-config --libs"
-
 $(TARGET) : $(OBJECTS)
-#	dmd -g -of$@ $(OBJECTS) $(TOPDIR)/libwxd.a $(TOPDIR)/libwxd.a $(WXLIBS) $(LDFLAGS)
-	gcc -o $@ $(OBJECTS) -L$(TOPDIR) -lwxd -lwxc -lm -lphobos $(WXLIBS) $(LDFLAGS)
-#	gdc -o $@ $(OBJECTS) -L$(TOPDIR) -lwxd -lwxc -lm -lpthread $(WXLIBS) $(LDFLAGS) 
+#	dmd -of$@ $(OBJECTS) $(TOPDIR)/libwxd.a $(TOPDIR)/libwxd.a ... WX ... CXX ...
+	gcc -o $@ $(OBJECTS) -L$(TOPDIR) -lwxd -lwxc -lm -lphobos $(WXLIBS) $(CXXLIBS) $(LDFLAGS)
+else
+$(TARGET) : $(OBJECTS)
+	$(DC) -o $@ $(OBJECTS) -L$(TOPDIR) -lwxd -lwxc $(WXLIBS) $(CXXLIBS) $(LDFLAGS)
+endif
 
 clean:
 	-rm *.o

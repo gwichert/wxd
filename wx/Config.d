@@ -342,7 +342,7 @@ public import wx.wxString;
 
                 int r = (c>>16)&255;
                 int g = (c>>8)&255;
-                int b = (c)&255;
+                int b = c&255;
 
                 val = new Colour(cast(ubyte)r, cast(ubyte)g, cast(ubyte)b);
             }

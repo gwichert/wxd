@@ -36,7 +36,7 @@ wxBitmap* wxBitmap_ctorByImage(wxImage* image, int depth)
 extern "C" WXEXPORT
 wxBitmap* wxBitmap_ctorByName(dstr name, int type)
 {
-    return new wxBitmap(wxString(name.data, wxConvUTF8, name.length), (wxBitmapType)type);
+    return new wxBitmap(wxstr(name), (wxBitmapType)type);
 }
 
 extern "C" WXEXPORT
@@ -92,7 +92,7 @@ void wxBitmap_SetWidth(wxBitmap* self, int width)
 extern "C" WXEXPORT
 dbit wxBitmap_LoadFile(wxBitmap* self, dstr name, wxBitmapType type)
 {
-    return self->LoadFile(wxString(name.data, wxConvUTF8, name.length), type)?1:0;
+    return self->LoadFile(wxstr(name), type)?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -100,7 +100,7 @@ dbit wxBitmap_LoadFile(wxBitmap* self, dstr name, wxBitmapType type)
 extern "C" WXEXPORT
 dbit wxBitmap_SaveFile(wxBitmap* self, dstr name, wxBitmapType type, wxPalette* palette)
 {
-	return self->SaveFile(wxString(name.data, wxConvUTF8, name.length), type, palette)?1:0;
+	return self->SaveFile(wxstr(name), type, palette)?1:0;
 }
 
 //-----------------------------------------------------------------------------

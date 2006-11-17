@@ -44,7 +44,7 @@ dbit wxFrame_Create(wxFrame* self, wxWindow* parent, int id, dstr title, const w
     if (size == NULL)
         size = &wxDefaultSize;
 
-    return self->Create(parent, id, wxString(title.data, wxConvUTF8, title.length), *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+    return self->Create(parent, id, wxstr(title), *pos, *size, style, wxstr(name))?1:0;
 }
 
 
@@ -67,7 +67,7 @@ dbit wxFrame_IsFullScreen(wxFrame* self)
 extern "C" WXEXPORT
 wxStatusBar* wxFrame_CreateStatusBar(wxFrame* self, int number, unsigned int style, wxWindowID id, dstr name)
 {
-    return self->CreateStatusBar(number, style, id, wxString(name.data, wxConvUTF8, name.length));
+    return self->CreateStatusBar(number, style, id, wxstr(name));
 }
 
 extern "C" WXEXPORT
@@ -129,7 +129,7 @@ wxMenuBar* wxFrame_GetMenuBar(wxFrame* self)
 extern "C" WXEXPORT
 void wxFrame_SetStatusText(wxFrame* self, dstr text, int number)
 {
-    self->SetStatusText(wxString(text.data, wxConvUTF8, text.length), number);
+    self->SetStatusText(wxstr(text), number);
 }
 
 //-----------------------------------------------------------------------------
@@ -140,7 +140,7 @@ wxToolBar* wxFrame_CreateToolBar(wxFrame* self, unsigned int style, wxWindowID i
     if (name.data==NULL)
         name = dstr("toolBar");
 
-    return self->CreateToolBar(style, id, wxString(name.data, wxConvUTF8, name.length));
+    return self->CreateToolBar(style, id, wxstr(name));
 }
 
 extern "C" WXEXPORT

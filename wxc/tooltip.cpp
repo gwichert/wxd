@@ -38,7 +38,7 @@ void wxToolTip_SetDelay(long msecs)
 extern "C" WXEXPORT
 wxToolTip* wxToolTip_ctor(dstr tip)
 {
-	return new wxToolTip(wxString(tip.data, wxConvUTF8, tip.length));
+	return new wxToolTip(wxstr(tip));
 }
 
 //-----------------------------------------------------------------------------
@@ -46,7 +46,7 @@ wxToolTip* wxToolTip_ctor(dstr tip)
 extern "C" WXEXPORT
 void wxToolTip_SetTip(wxToolTip* self, dstr tip)
 {
-	self->SetTip(wxString(tip.data, wxConvUTF8, tip.length));
+	self->SetTip(wxstr(tip));
 }
 
 //-----------------------------------------------------------------------------

@@ -22,6 +22,12 @@ It is composed of two parts:
 
 * Status
 
+0.08 (afb)
+Added StyledText sample for wxSTC testing
+Cleaned up Makefiles, and "DFLAGS" usage
+Not build Samples by default ("make test")
+Added project files for Code::Blocks / GDC
+
 0.07 (afb)
 Updated imports for DMD 0.164 ("public")
 Moved all config files to a sub-directory
@@ -87,16 +93,18 @@ windows: (Digital Mars)
 unix/mac: (GNU)
   ./configure
   make
-  make install
+  sudo make install
 
 ** build wxD
 - extract
 - compile
 windows:
   set WXDIR=<path to wxWidgets>
-  make
+  make all test
 unix/mac:
-  make
+  make all test
+freebsd:
+  gmake all test
 
 
 * Naming rules
@@ -130,7 +138,7 @@ for convenience, use constructor like function:
     ListBox(Window parent, WindowID id,
             Point pos = wxDefaultPosition,
             Size size = wxDefaultSize,
-    -->     char[] choices[] = null,
+    -->     string choices[] = null,
             long style = 0,
             Validator validator = wxDefaultValidator,
             string name = wxListBoxNameStr)
@@ -149,6 +157,19 @@ Linux/GTK+     version=__WXGTK__
 Macintosh      version=__WXMAC__
 
 For checking the wx platform at runtime, see the wxPlatform class.
+
+* Strings
+
+There are two ways to compile wxWidgets, as "ansi" or as "unicode"
+
+In wxD, ANSI means to use UTF-8 and UNICODE means UTF-16 or UTF-32
+(depending on the OS, e.g. Windows does UTF-16 and Unix does UTF-32)
+
+wx-config:     DFLAGS:
+--unicode=no   version=ANSI
+--unicode=yes  version=UNICODE
+
+The alias "string" is used in wxD, for char[] strings (UTF-8 format)
 
 * Licence
 

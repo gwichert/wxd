@@ -42,7 +42,7 @@ dstrret wxCommandEvent_GetString(wxCommandEvent* self)
 extern "C" WXEXPORT
 void wxCommandEvent_SetString(wxCommandEvent* self, dstr s)
 {
-	self->SetString(wxString(s.data, wxConvUTF8, s.length));
+	self->SetString(wxstr(s));
 }
 
 //-----------------------------------------------------------------------------

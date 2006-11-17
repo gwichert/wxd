@@ -1,15 +1,20 @@
 # from samples
 
-include $(WXDIR)/build/msw/config.dmc
+# the regular Digital Mars Makefile
+
+PLATFORM = WXMSW
+
 CXX = dmc
-DMD = dmd
-DFLAGS =$(DFLAGS) -version=__WXMSW__ -I$(TOPDIR) -g
+DC = dmd
+DFLAGS = $(DFLAGS) -version=__$(PLATFORM)__ -I$(TOPDIR)
+
+include $(WXDIR)/build/msw/config.dmc
 
 WX_RELEASE_NODOT = 26
 OBJS = dmc_mswd$(CFG)
 LIBDIRNAME = $(WXDIR)\lib\dmc_lib$(CFG)
 SETUPHDIR = $(LIBDIRNAME)\mswd
-CXXFLAGS = -g -o+none -D__WXMSW__ -D__WXDEBUG__ -I$(WXDIR)\include \
+CXXFLAGS = -g -o+none -D__$(PLATFORM)__ -D__WXDEBUG__ -I$(WXDIR)\include \
 	-I$(SETUPHDIR) -w- -I. -WA -DNOPCH -Ar -Ae $(CPPFLAGS) \
 	$(CXXFLAGS)
 
@@ -17,7 +22,7 @@ CXXFLAGS = -g -o+none -D__WXMSW__ -D__WXDEBUG__ -I$(WXDIR)\include \
 	$(CXX) -mn -c $(CXXFLAGS) $< -o$@
 
 .d.obj:
-	$(DMD) -c $(DFLAGS) $<
+	$(DC) -c $(DFLAGS) $<
 
 WXLIBS = \
 	$(LIBDIRNAME)\wxbase$(WX_RELEASE_NODOT)d$(WX_LIB_FLAVOUR).lib \
@@ -38,7 +43,7 @@ all: $(TARGET)
 
 $(TARGET) : $(OBJECTS)
 #	link /NOLOGO /SILENT /NOI /DELEXECUTABLE /EXETYPE:NT $(LDFLAGS) /DEBUG /CODEVIEW  /su:windows $(OBJECTS),$@,$(TARGET).map, $(TOPDIR)\wxc.lib $(TOPDIR)\wxd.lib $(LIBDIRNAME)\  ,, $(RES)
-	dmd -g -of$(TARGET) $(OBJECTS) $(TOPDIR)\wxd.lib $(TOPDIR)\wxc.lib $(WXLIBS) $(GLLIBS) $(STCLIBS) -L/EXETYPE:NT -L/SU:WINDOWS:4.0
+	dmd -g -of$(TARGET) $(OBJECTS) $(TOPDIR)\wxd.lib $(TOPDIR)\wxc.lib $(WXLIBS) $(STCLIBS) $(GLLIBS) $(SDLLIBS) -L/EXETYPE:NT -L/SU:WINDOWS:4.0
 
 clean:
 	-del *.obj

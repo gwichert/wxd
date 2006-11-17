@@ -48,7 +48,7 @@ wxScrolledWindow* wxScrollWnd_ctor(wxWindow *parent, wxWindowID id, const wxPoin
 	if (name.data==NULL)
 		name = dstr("scrolled");
 
-	return new _ScrolledWindow(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
+	return new _ScrolledWindow(parent, id, *pos, *size, style, wxstr(name));
 }
 
 //-----------------------------------------------------------------------------

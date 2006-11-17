@@ -91,7 +91,7 @@ dbit wxSashWindow_Create(wxSashWindow* self, wxWindow* parent, wxWindowID id, co
 	if (name.data==NULL)
 		name = dstr("sashwindow");
 		
-	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, *pos, *size, style, wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------

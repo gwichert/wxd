@@ -24,6 +24,8 @@ public import wx.Colour;
 		static extern (C) IntPtr wxImage_ctor();
 		static extern (C) IntPtr wxImage_ctorByName(string name, BitmapType type);
 		static extern (C) IntPtr wxImage_ctorintintbool(int width, int height, bool clear);
+		static extern (C) IntPtr wxImage_ctorByData(int width, int height, ubyte* data, bool static_data);
+		static extern (C) IntPtr wxImage_ctorByDataAlpha(int width, int height, ubyte* data, ubyte* alpha, bool static_data);
 		static extern (C) IntPtr wxImage_ctorByImage(IntPtr image);
 		static extern (C) IntPtr wxImage_ctorByByteArray(IntPtr data, int length, BitmapType type);
 		static extern (C) void   wxImage_dtor(IntPtr self);
@@ -152,6 +154,12 @@ public import wx.Colour;
 			
 		public this(int width, int height, bool clear)
 			{ this(wxImage_ctorintintbool(width, height, clear));}
+
+		public this(int width, int height, ubyte *data, bool static_data)
+			{ this(wxImage_ctorByData(width, height, data, static_data));}
+
+		public this(int width, int height, ubyte *data, ubyte *alpha, bool static_data)
+			{ this(wxImage_ctorByDataAlpha(width, height, data, alpha, static_data));}
 
 		public this(Image image)
 			{ this(wxImage_ctorByImage(wxObject.SafePtr(image)));}

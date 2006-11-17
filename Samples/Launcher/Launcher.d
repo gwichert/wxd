@@ -125,10 +125,13 @@ private import std.c.process;
 			
 			version(__WXMSW__)
 			     app ~= ".exe";
+			version(__WXMAC__)
+			     app ~= ".app";
 
 			if ( std.file.exists( app ) )
 			{
 				string launch_command = app;
+				string[] launch_args = null;
 
                             /*
                                 // If we are on a Linux platform, use wxnet-run script to
@@ -147,10 +150,18 @@ private import std.c.process;
                                         launch_command = app ~ ".exe";
                            */
 
+				version(__WXMAC__)
+				{
+				    launch_command = "/bin/sh";
+				    launch_args ~= launch_command;
+				    launch_args ~= "-c";
+				    launch_args ~= "/usr/bin/open -a " ~ GetCwd() ~ "/" ~ app;
+				}
+
 				try
 				{
-					parent.StatusText = "Executing " ~ launch_command;		
-					std.process.spawnvp(_P_NOWAIT, launch_command ,null);
+					parent.StatusText = "Executing " ~ app;
+					std.process.spawnvp(_P_NOWAIT, launch_command, launch_args);
 				}
 				catch (Exception ex)
 				{

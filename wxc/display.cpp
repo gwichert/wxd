@@ -11,14 +11,14 @@
 //
 //-----------------------------------------------------------------------------
 
-#ifdef WXD_DISPLAY
-
 #include <wx/wx.h>
 #include "common.h"
 #include <wx/display.h>
-#include <iostream>
-using namespace std;
+//#include <iostream>
+//using namespace std;
 
+
+#if wxUSE_DISPLAY
 
 //-----------------------------------------------------------------------------
 
@@ -155,5 +155,10 @@ void wxDisplay_dtor(wxDisplay* self)
 	delete self;
 }
 
+
+#else
+#ifdef __GNUC__
+#warning "wxUSE_DISPLAY is not set"
+#endif
 #endif
 

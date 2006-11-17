@@ -51,7 +51,7 @@ public import wx.DC;
 		static extern (C) IntPtr wxBufferedDC_ctor();
 		static extern (C) IntPtr wxBufferedDC_ctorByBitmap(IntPtr dc, IntPtr buffer);
 		static extern (C) IntPtr wxBufferedDC_ctorBySize(IntPtr dc, inout Size area);
-
+		
 		static extern (C) void   wxBufferedDC_InitByBitmap(IntPtr self, IntPtr dc, IntPtr bitmap);
 		static extern (C) void   wxBufferedDC_InitBySize(IntPtr self, IntPtr dc, inout Size area);
 		static extern (C) void   wxBufferedDC_UnMask(IntPtr self);
@@ -65,14 +65,20 @@ public import wx.DC;
         public this(IntPtr wxobj) 
             { super(wxobj); }
 
+ 		private this(IntPtr wxobj, bool memOwn)
+		{ 
+			super(wxobj);
+			this.memOwn = memOwn;
+		}
+
         public this()
-            { this(wxBufferedDC_ctor()); }
+            { this(wxBufferedDC_ctor(), true); }
 
         public this(DC dc, Bitmap bitmap) 
-            { this(wxBufferedDC_ctorByBitmap(wxObject.SafePtr(dc), wxObject.SafePtr(bitmap))); }
+            { this(wxBufferedDC_ctorByBitmap(wxObject.SafePtr(dc), wxObject.SafePtr(bitmap)), true); }
 
         public this(DC dc, Size size)
-            { this(wxBufferedDC_ctorBySize(wxObject.SafePtr(dc), size)); }
+            { this(wxBufferedDC_ctorBySize(wxObject.SafePtr(dc), size), true); }
 
 		//---------------------------------------------------------------------
 
@@ -108,8 +114,14 @@ public import wx.DC;
         public this(IntPtr wxobj) 
             { super(wxobj); }
 
-        public this(Window window, Bitmap buffer)
-            { this(wxBufferedPaintDC_ctor(wxObject.SafePtr(window), wxObject.SafePtr(buffer))); }
+ 		private this(IntPtr wxobj, bool memOwn)
+		{ 
+			super(wxobj);
+			this.memOwn = memOwn;
+		}
+
+       public this(Window window, Bitmap buffer)
+            { this(wxBufferedPaintDC_ctor(wxObject.SafePtr(window), wxObject.SafePtr(buffer)), true); }
 
 		//---------------------------------------------------------------------
 	}

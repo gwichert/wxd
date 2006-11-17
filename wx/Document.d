@@ -222,4 +222,4 @@ version(NOT_READY_YET){
         public Window DocumentWindow() { return cast(Window)FindObject(wxDocument_GetDocumentWindow(wxobj)); }
     }
 } // version(NOT_READY_YET)
-//! \endcond VERSION
+//! \endcond

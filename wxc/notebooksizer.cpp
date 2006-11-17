@@ -16,6 +16,7 @@
 #include <wx/wx.h>
 #include "common.h"
 #include <wx/sizer.h>
+#include <wx/notebook.h>
 
 #if WXWIN_COMPATIBILITY_2_4
 // NB: wxBookCtrlSizer and wxNotebookSizer are deprecated, they
@@ -54,5 +55,26 @@ wxNotebook* wxNotebookSizer_GetNotebook(wxNotebookSizer* self)
 }
 
 //-----------------------------------------------------------------------------
+#else
+extern "C" WXEXPORT
+wxSizer* wxNotebookSizer_ctor(wxNotebook *nb)
+{
+	return nb->GetSizer();
+}
 
-#endif // WXWIN_COMPATIBILITY_2_4
+extern "C" WXEXPORT
+void wxNotebookSizer_RecalcSizes(wxObject* self)
+{
+}
+
+extern "C" WXEXPORT
+void wxNotebookSizer_CalcMin(wxObject* self, wxSize* size)
+{
+}
+
+extern "C" WXEXPORT
+wxNotebook* wxNotebookSizer_GetNotebook(wxSizer* self)
+{
+	return NULL;
+}
+#endif // WXWIN_COMPATIBILITY

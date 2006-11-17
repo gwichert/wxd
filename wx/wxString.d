@@ -16,16 +16,19 @@
 module wx.wxString;
 public import wx.common;
 
+//! \cond STD
+private import std.string;
+private import std.utf;
+//! \endcond
+
 		//! \cond EXTERN
-		static extern (C) IntPtr wxString_ctor(char* str);
-		static extern (C) IntPtr wxString_ctor2(char[] str);
-		static extern (C) void   wxString_dtor(IntPtr self);
-		static extern (C) string wxString_mb_str(IntPtr self);
-		static extern (C) uint   wxString_Length(IntPtr self);
-		static extern (C) char   wxString_CharAt(IntPtr self, uint i);
-		static extern (C) int    wxString_CharAtInt(IntPtr self, uint i);
-		static extern (C) char*  wxString_c_str(IntPtr self);
-		static extern (C) char[] wxString_d_str(IntPtr self);
+		static extern (C) IntPtr  wxString_ctor(char* str);
+		static extern (C) IntPtr  wxString_ctor2(string str);
+		static extern (C) void    wxString_dtor(IntPtr self);
+		static extern (C) size_t  wxString_Length(IntPtr self);
+		static extern (C) wxChar  wxString_GetChar(IntPtr self, size_t i);
+		static extern (C) wxChar* wxString_c_str(IntPtr self);
+		static extern (C) string  wxString_d_str(IntPtr self);
 		//! \endcond
 		
 		//---------------------------------------------------------------------
@@ -54,16 +57,10 @@ public import wx.common;
 		override protected void dtor() { wxString_dtor(wxobj); }				
 		//---------------------------------------------------------------------
 
-		public uint length() { return wxString_Length(wxobj); }
-		public char* c_str() { return wxString_c_str(wxobj); }
-		public char[] toString() { return wxString_d_str(wxobj).dup; }
-//version(__WXMSW__) {
-		public char opIndex(uint i)
-			{ return wxString_CharAt(wxobj, i); }
-//} else {
-//		public char opIndex(uint i)
-//			{ return System.Convert.ToChar(wxString_CharAtInt(wxobj, i)); }
-//} // version(__WXMSW__)			
-		
+		public size_t length() { return wxString_Length(wxobj); }
+		public char opIndex(size_t i) { return wxString_GetChar(wxobj, i); }
+		public wxChar* data() { return wxString_c_str(wxobj); }
+		public string opCast() { return wxString_d_str(wxobj).dup; }
+
 	}
 

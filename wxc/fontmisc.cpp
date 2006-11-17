@@ -66,25 +66,25 @@ dstrret wxFontMapper_GetEncodingName(wxFontEncoding encoding)
 extern "C" WXEXPORT
 wxFontEncoding wxFontMapper_GetEncodingFromName(dstr name)
 {
-	return wxFontMapper::GetEncodingFromName(wxString(name.data, wxConvUTF8, name.length));
+	return wxFontMapper::GetEncodingFromName(wxstr(name));
 }
 
 extern "C" WXEXPORT
 wxFontEncoding wxFontMapper_CharsetToEncoding(wxFontMapper* self, dstr charset, dbit interactive)
 {
-	return self->CharsetToEncoding(wxString(charset.data, wxConvUTF8, charset.length), interactive);
+	return self->CharsetToEncoding(wxstr(charset), interactive);
 }
 
 extern "C" WXEXPORT
 dbit wxFontMapper_IsEncodingAvailable(wxFontMapper* self, wxFontEncoding encoding, dstr facename)
 {
-	return self->IsEncodingAvailable(encoding, wxString(facename.data, wxConvUTF8, facename.length));
+	return self->IsEncodingAvailable(encoding, wxstr(facename));
 }
 
 extern "C" WXEXPORT
 dbit wxFontMapper_GetAltForEncoding(wxFontMapper* self, wxFontEncoding encoding, wxFontEncoding *alt_encoding, dstr facename, dbit interactive)
 {
-	return self->GetAltForEncoding(encoding, alt_encoding, wxString(facename.data, wxConvUTF8, facename.length), interactive);
+	return self->GetAltForEncoding(encoding, alt_encoding, wxstr(facename), interactive);
 }
 
 extern "C" WXEXPORT
@@ -102,7 +102,7 @@ void wxFontMapper_SetDialogParent(wxFontMapper* self, wxWindow* parent)
 extern "C" WXEXPORT
 void wxFontMapper_SetDialogTitle(wxFontMapper* self, dstr title)
 {
-	self->SetDialogTitle(wxString(title.data, wxConvUTF8, title.length));
+	self->SetDialogTitle(wxstr(title));
 }
 
 //-----------------------------------------------------------------------------
@@ -122,7 +122,7 @@ dbit wxEncodingConverter_Init(wxEncodingConverter* self, wxFontEncoding input_en
 extern "C" WXEXPORT
 dstrret wxEncodingConverter_Convert(wxEncodingConverter* self, dstr input)
 {
-	return dstr_ret(self->Convert(wxString(input.data, wxConvUTF8, input.length)));
+	return dstr_ret(self->Convert(wxstr(input)));
 }
 
 //-----------------------------------------------------------------------------
@@ -197,29 +197,37 @@ void wxFontEnumerator_RegisterVirtual(_FontEnumerator *self,dobj obj,
 extern "C" WXEXPORT
 wxArrayString* wxFontEnumerator_GetFacenames(_FontEnumerator* self)
 {
+#if wxABI_VERSION < 20700
 	wxArrayString* was = new wxArrayString();
 	was = self->GetFacenames();
+#else
+	wxArrayString* was = new wxArrayString(self->GetFacenames());
+#endif
 	return was;
 }
 
 extern "C" WXEXPORT
 wxArrayString* wxFontEnumerator_GetEncodings(_FontEnumerator* self)
 {
+#if wxABI_VERSION < 20700
 	wxArrayString* was = new wxArrayString();
 	was = self->GetEncodings();
+#else
+	wxArrayString* was = new wxArrayString(self->GetEncodings());
+#endif
 	return was;
 }
 
 extern "C" WXEXPORT
 dbit wxFontEnumerator_OnFacename(_FontEnumerator* self, dstr facename )
 {
-	return self->wxFontEnumerator::OnFacename(wxString(facename.data, wxConvUTF8, facename.length));
+	return self->wxFontEnumerator::OnFacename(wxstr(facename));
 }
 
 extern "C" WXEXPORT
 dbit wxFontEnumerator_OnFontEncoding(_FontEnumerator* self, dstr facename, dstr encoding)
 {
-	return self->wxFontEnumerator::OnFontEncoding(wxString(facename.data, wxConvUTF8, facename.length), wxString(encoding.data, wxConvUTF8, encoding.length));
+	return self->wxFontEnumerator::OnFontEncoding(wxstr(facename), wxstr(encoding));
 }
 
 extern "C" WXEXPORT
@@ -231,6 +239,6 @@ dbit wxFontEnumerator_EnumerateFacenames(_FontEnumerator* self, wxFontEncoding e
 extern "C" WXEXPORT
 dbit wxFontEnumerator_EnumerateEncodings(_FontEnumerator* self, dstr facename)
 {
-	return self->wxFontEnumerator::EnumerateEncodings(wxString(facename.data, wxConvUTF8, facename.length));
+	return self->wxFontEnumerator::EnumerateEncodings(wxstr(facename));
 }
 

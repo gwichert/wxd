@@ -55,26 +55,104 @@ dbit wxPlatform_WXX11()
 #endif
 }
 
-//-----------------------------------------------------------------------------
+extern "C" WXEXPORT
+dbit wxPlatform_WXUNIVERSAL()
+{
+#ifdef __WXUNIVERSAL__
+	return true;
+#else
+	return false;
+#endif
+}
 
 extern "C" WXEXPORT
-const char *wxPlatform_wxGetOsDescription()
+dbit wxPlatform_WXDEBUG()
 {
-	static wxString os = wxGetOsDescription();
-#if wxUSE_UNICODE
-	return os.mb_str(wxConvUTF8).data();
-#else // ANSI
-	return os.data();
+#ifdef __WXDEBUG__
+	return true;
+#else
+	return false;
 #endif
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
+dbit wxPlatform_UNIX()
+{
+#if wxUSE_UNIX
+	return true;
+#else
+	return false;
+#endif
+}
+
+extern "C" WXEXPORT
+dbit wxPlatform_UNICODE()
+{
+#if wxUSE_UNICODE
+	return true;
+#else
+	return false;
+#endif
+}
+
+extern "C" WXEXPORT
+dbit wxPlatform_DISPLAY()
+{
+#if wxUSE_DISPLAY
+	return true;
+#else
+	return false;
+#endif
+}
+
+extern "C" WXEXPORT
+dbit wxPlatform_POSTSCRIPT()
+{
+#if wxUSE_POSTSCRIPT
+	return true;
+#else
+	return false;
+#endif
+}
+
+extern "C" WXEXPORT
+dbit wxPlatform_GLCANVAS()
+{
+#if wxUSE_GLCANVAS
+	return true;
+#else
+	return false;
+#endif
+}
+
+extern "C" WXEXPORT
+dbit wxPlatform_SOUND()
+{
+#if wxUSE_SOUND
+	return true;
+#else
+	return false;
+#endif
+}
+
+//-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT
+dstrret wxPlatform_wxGetOsDescription()
+{
+	static wxString os = wxGetOsDescription();
+	return dstr_ret(os);
+}
+
+extern "C" WXEXPORT
 int wxPlatform_wxGetOsVersion(int *majorVsn, int *minorVsn)
 {
 	return wxGetOsVersion(majorVsn, minorVsn);
 }
+
+//-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT int wxPlatform_wxUNKNOWN_PLATFORM() { return wxUNKNOWN_PLATFORM; }
 

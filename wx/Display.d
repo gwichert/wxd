@@ -29,10 +29,6 @@
 module wx.Display;
 public import wx.common;
 
-//! \cond VERSION
-version(WXD_DISPLAY){
-//! \endcond VERSION
-
 public import wx.VideoMode;
 public import wx.Window;
 
@@ -198,6 +194,3 @@ public import wx.Window;
 
 	}
 
-//! \cond VERSION
-} // version(WXD_DISPLAY)
-//! \endcond VERSION

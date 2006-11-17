@@ -17,7 +17,7 @@ module wx.StyledTextCtrl;
 
 //! \cond VERSION
 version(WXD_STYLEDTEXTCTRL){
-//! \endcond VERSION
+//! \endcond
 
 public import wx.common;
 public import wx.Control;
@@ -3003,6 +3003,7 @@ public import wx.CommandEvent;
 		public void CalltipClick_Remove(EventListener value) { RemoveHandler(value, this); }
     }
 
+        //! \cond EXTERN
         static extern (C) IntPtr wxStyledTextEvent_ctor(int commandType, int id);
         static extern (C) void   wxStyledTextEvent_SetPosition(IntPtr self, int pos);
         static extern (C) void   wxStyledTextEvent_SetKey(IntPtr self, int k);
@@ -3047,6 +3048,7 @@ public import wx.CommandEvent;
         static extern (C) bool   wxStyledTextEvent_GetShift(IntPtr self);
         static extern (C) bool   wxStyledTextEvent_GetControl(IntPtr self);
         static extern (C) bool   wxStyledTextEvent_GetAlt(IntPtr self);
+        //! \endcond
 
         //-----------------------------------------------------------------------------
 
@@ -3171,4 +3173,4 @@ public import wx.CommandEvent;
 
 //! \cond VERSION
 } // version(WXD_STYLEDTEXTCTRL)
-//! \endcond VERSION
+//! \endcond

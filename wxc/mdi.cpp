@@ -78,7 +78,7 @@ dbit wxMDIParentFrame_Create(_MDIParentFrame* self, wxWindow* parent, wxWindowID
     if (name.data==NULL)
         name = dstr("mdiParentFrame");
 
-    return self->Create(parent, id, wxString(title.data, wxConvUTF8, title.length), *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+    return self->Create(parent, id, wxstr(title), *pos, *size, style, wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -190,7 +190,7 @@ dbit wxMDIChildFrame_Create(wxMDIChildFrame* self, wxMDIParentFrame* parent, wxW
     if (name.data==NULL)
         name = dstr("mdiChildFrame");
 
-    return self->Create(parent, id, wxString(title.data, wxConvUTF8, title.length), *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+    return self->Create(parent, id, wxstr(title), *pos, *size, style, wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------

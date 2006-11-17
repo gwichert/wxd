@@ -35,7 +35,7 @@ public:
 extern "C" WXEXPORT
 wxTipWindow* wxTipWindow_ctor(wxWindow* parent, dstr text, wxCoord maxLength, wxRect* rectBound)
 {
-    return new _TipWindow(parent, wxString(text.data, wxConvUTF8, text.length), maxLength, NULL, rectBound);
+    return new _TipWindow(parent, wxstr(text), maxLength, NULL, rectBound);
 }
 
 extern "C" WXEXPORT

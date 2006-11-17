@@ -48,7 +48,7 @@ dbit wxListbook_Create(wxListbook *self, wxWindow* parent, wxWindowID id, const 
 	if (name.data==NULL)
 		name = dstr("listbook");
 
-	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, *pos, *size, style, wxstr(name))?1:0;
 }
 //-----------------------------------------------------------------------------
 
@@ -63,7 +63,7 @@ int wxListbook_GetSelection(wxListbook* self)
 extern "C" WXEXPORT
 dbit wxListbook_SetPageText(wxListbook* self, size_t n, dstr strText)
 {
-	return self->SetPageText(n, wxString(strText.data, wxConvUTF8, strText.length))?1:0;
+	return self->SetPageText(n, wxstr(strText))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -103,7 +103,7 @@ void wxListbook_CalcSizeFromPage(wxListbook* self, const wxSize* sizePage, wxSiz
 extern "C" WXEXPORT
 dbit wxListbook_InsertPage(wxListbook* self, size_t n, wxWindow* page, dstr text, dbit bSelect, int imageId)
 {
-	return self->InsertPage(n, page, wxString(text.data, wxConvUTF8, text.length), bSelect, imageId)?1:0;
+	return self->InsertPage(n, page, wxstr(text), bSelect, imageId)?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -199,7 +199,7 @@ dbit wxListbook_DeleteAllPages(wxListbook* self)
 extern "C" WXEXPORT
 dbit wxListbook_AddPage(wxListbook* self, wxWindow* page, dstr text, dbit bselect, int imageId)
 {
-	return self->AddPage(page, wxString(text.data, wxConvUTF8, text.length), bselect, imageId)?1:0;
+	return self->AddPage(page, wxstr(text), bselect, imageId)?1:0;
 }
 
 //-----------------------------------------------------------------------------

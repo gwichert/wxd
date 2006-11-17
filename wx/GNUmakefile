@@ -159,16 +159,34 @@ OBJECTS = \
 	ArrayString.o  \
 	XmlResource.o  \
 	NumberDialog.o \
+	aui/FrameManager.o \
+	aui/DockArt.o \
+	aui/aui.o \
 	wx.o
 
 #	DbGrid.o  \
 
-SOURCES = $(shell ls *.d | grep -v DbGrid.d)
+SOURCES = $(shell ls *.d aui/*.d | grep -v DbGrid.d)
 
 all:  $(LIBTARGET)
 
-DMD = dmd
-DFLAGS = -O -w -g
+ifeq ("$(COMPILER)","DMD")
+DC=dmd
+DMD=dmd
+DFLAGS=-O -g
+version=-version
+output=-of$@
+else
+DC?=gdc
+DMD?=gdmd
+DFLAGS?=-O2 -g
+version=-fversion
+output=-o $@
+endif
+
+ifeq ("$(STC)","1")
+STCFLAGS = -$(version)=WXD_STYLEDTEXTCTRL
+endif
 
 prefix=/usr/local
 exec_prefix=$(prefix)
@@ -178,24 +196,33 @@ libdir=$(exec_prefix)/lib
 INSTALL = install
 RANLIB = ranlib
 
+INSTALL_PROGRAM = $(INSTALL)
+INSTALL_DATA = ${INSTALL} -m 644
+
 install: $(LIBTARGET)
 	$(INSTALL) -d $(DESTDIR)$(libdir)
-	$(INSTALL) -p $(LIBTARGET) $(DESTDIR)$(libdir)
+	$(INSTALL_DATA) -p $(LIBTARGET) $(DESTDIR)$(libdir)
 	$(INSTALL) -d $(DESTDIR)$(includedir)/d/wx
-	$(INSTALL) -p *.d $(DESTDIR)$(libdir)/d/wx
+	$(INSTALL_DATA) -p *.d $(DESTDIR)$(includedir)/d/wx
+	$(INSTALL) -d $(DESTDIR)$(includedir)/d/wx/aui
+	$(INSTALL_DATA) -p aui/*.d $(DESTDIR)$(includedir)/d/wx/aui
+	$(INSTALL) -d $(DESTDIR)$(includedir)/d/wx/ogl
+	$(INSTALL_DATA) -p ogl/*.d $(DESTDIR)$(includedir)/d/wx/ogl
 	-$(RANLIB) $(DESTDIR)$(libdir)/`basename $(LIBTARGET)`
 
 ddoc:
-	$(DMD) -c -o- -D $(DFLAGS) -I.. $(SOURCES)
-
-clean:
-	-rm *.o *.html
-	-rm $(LIBTARGET)
+	$(DMD) -c -o- -D -I.. $(SOURCES)
 
 $(LIBTARGET): $(OBJECTS)
-	ar rcs $@ $(OBJECTS)
+	ar rcs $@ $^
 
+VERSION=$(version)=__$(PLATFORM)__ $(version)=$(ENCODING)
 
 %.o:%.d
-	$(DMD) -c $(DFLAGS) -I.. $<
+	$(DC) $(VERSION) $(STCFLAGS) -I.. $(DFLAGS) -c $(output) $<
+
+clean:
+	-rm *.o aui/*.o ogl/*.o
+	-rm *.html aui/*.html ogl/*.html
+	-rm $(LIBTARGET)
 

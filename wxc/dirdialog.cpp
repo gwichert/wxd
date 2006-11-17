@@ -40,9 +40,9 @@ wxDirDialog* wxDirDialog_ctor(wxWindow* parent,  dstr message,
                               dstr defaultPath, int style, wxPoint* pos, 
                               wxSize* size, dstr name)
 {
-    return new _DirDialog(parent, wxString(message.data, wxConvUTF8, message.length), 
-                          wxString(defaultPath.data, wxConvUTF8, defaultPath.length), style, *pos, 
-                          *size, wxString(name.data, wxConvUTF8, name.length));
+    return new _DirDialog(parent, wxstr(message), 
+                          wxstr(defaultPath), style, *pos, 
+                          *size, wxstr(name));
 }
 
 //-----------------------------------------------------------------------------
@@ -50,13 +50,19 @@ wxDirDialog* wxDirDialog_ctor(wxWindow* parent,  dstr message,
 extern "C" WXEXPORT
 int wxDirDialog_GetStyle(wxDirDialog* self)
 {
+#if wxABI_VERSION < 20700
     return self->GetStyle();
+#else
+    return wxDEFAULT_DIALOG_STYLE;
+#endif
 }
 
 extern "C" WXEXPORT
 void wxDirDialog_SetStyle(wxDirDialog* self, int style)
 {
+#if wxABI_VERSION < 20700
     self->SetStyle(style);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -64,7 +70,7 @@ void wxDirDialog_SetStyle(wxDirDialog* self, int style)
 extern "C" WXEXPORT
 void wxDirDialog_SetMessage(wxDirDialog* self, dstr message)
 {
-    self->SetMessage(wxString(message.data, wxConvUTF8, message.length));
+    self->SetMessage(wxstr(message));
 }
 
 extern "C" WXEXPORT
@@ -86,7 +92,7 @@ int wxDirDialog_ShowModal(wxDirDialog* self)
 extern "C" WXEXPORT
 void wxDirDialog_SetPath(wxDirDialog* self, dstr path)
 {
-    self->SetPath(wxString(path.data, wxConvUTF8, path.length));
+    self->SetPath(wxstr(path));
 }
 
 extern "C" WXEXPORT
@@ -103,8 +109,8 @@ dstrret wxDirSelector_func(dstr message,
               wxWindow *parent)
 {
 	return dstr_ret(wxDirSelector(
-		message.length?wxString(message.data, wxConvUTF8, message.length):wxString(wxDirSelectorPromptStr),
-		wxString(defaultPath.data, wxConvUTF8, defaultPath.length),
+		message.length?wxstr(message):wxString(wxDirSelectorPromptStr),
+		wxstr(defaultPath),
 		style, 
 		pos?*pos:wxDefaultPosition, 
 		parent

@@ -37,9 +37,9 @@ extern "C" WXEXPORT
 dbit wxStatusBar_Create(wxStatusBar* self, wxWindow* parent, wxWindowID id, unsigned int style, dstr name)
 {
     if (name.data==NULL)
-        name = dstr("statusBar",sizeof("statusBar")-1);
+        name = dstr("statusBar");
 
-    return self->Create(parent, id, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+    return self->Create(parent, id, style, wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -87,7 +87,7 @@ int wxStatusBar_GetBorderX(wxStatusBar* self)
 extern "C" WXEXPORT
 void wxStatusBar_SetStatusText(wxStatusBar* self, dstr text, int number)
 {
-    self->SetStatusText(wxString(text.data, wxConvUTF8, text.length), number);
+    self->SetStatusText(wxstr(text), number);
 }
 
 //-----------------------------------------------------------------------------
@@ -119,7 +119,7 @@ void wxStatusBar_PopStatusText(wxStatusBar* self, int field)
 extern "C" WXEXPORT
 void wxStatusBar_PushStatusText(wxStatusBar* self, dstr xstring, int field)
 {
-	self->PushStatusText(wxString(xstring.data, wxConvUTF8, xstring.length), field);
+	self->PushStatusText(wxstr(xstring), field);
 }
 
 //-----------------------------------------------------------------------------

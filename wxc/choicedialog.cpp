@@ -43,10 +43,10 @@ wxSingleChoiceDialog* wxSingleChoiceDialog_ctor(wxWindow* parent, dstr message,
     wxString *pchoices = new wxString[n];
     for (int i = 0; i < n; ++i)
         {
-            pchoices[i] = wxString(choices[i].data, wxConvUTF8, choices[i].length);
+            pchoices[i] = wxstr(choices[i]);
         }
 
-    return new _SingleChoiceDialog(parent, wxString(message.data, wxConvUTF8, message.length), wxString(caption.data, wxConvUTF8, caption.length), n,
+    return new _SingleChoiceDialog(parent, wxstr(message), wxstr(caption), n,
                 pchoices, (char **)clientData, style, *pos);
 }
 
@@ -106,9 +106,9 @@ wxMultiChoiceDialog* wxMultiChoiceDialog_ctor(wxWindow* parent, dstr message,
     wxString *pchoices = new wxString[n];
     for (int i = 0; i < n; ++i)
         {
-            pchoices[i] = wxString(choices[i].data, wxConvUTF8, choices[i].length);
+            pchoices[i] = wxstr(choices[i]);
         }
-    return new _MultiChoiceDialog(parent, wxString(message.data, wxConvUTF8, message.length), wxString(caption.data, wxConvUTF8, caption.length), n,
+    return new _MultiChoiceDialog(parent, wxstr(message), wxstr(caption), n,
                 pchoices, style, *pos);
 }
 
@@ -144,12 +144,12 @@ dstrret wxGetSingleChoice_func(dstr message, dstr caption, int n, dstr choices[]
     was.Alloc(n);
     for (int i = 0; i < n; ++i)
         {
-            wxString ts = wxString(choices[i].data, wxConvUTF8, choices[i].length);
+            wxString ts = wxstr(choices[i]);
             was.Add(ts);
         }
 
-    return dstr_ret(wxGetSingleChoice(wxString(message.data, wxConvUTF8, message.length),
-                wxString(caption.data, wxConvUTF8, caption.length),
+    return dstr_ret(wxGetSingleChoice(wxstr(message),
+                wxstr(caption),
                 was, parent, x, y, centre,
                 width, height));
 }
@@ -163,12 +163,12 @@ int wxGetSingleChoiceIndex_func(dstr message, dstr caption, int n, dstr choices[
     was.Alloc(n);
     for (int i = 0; i < n; ++i)
         {
-            wxString ts = wxString(choices[i].data, wxConvUTF8, choices[i].length);
+            wxString ts = wxstr(choices[i]);
             was.Add(ts);
         }
 
-    return wxGetSingleChoiceIndex(wxString(message.data, wxConvUTF8, message.length),
-                wxString(caption.data, wxConvUTF8, caption.length),
+    return wxGetSingleChoiceIndex(wxstr(message),
+                wxstr(caption),
                 was, parent, x, y, centre,
                 width, height);
 }
@@ -183,12 +183,12 @@ void* wxGetSingleChoiceData_func(dstr message, dstr caption, int n, dstr choices
     was.Alloc(n);
     for (int i = 0; i < n; ++i)
         {
-            wxString ts = wxString(choices[i].data, wxConvUTF8, choices[i].length);
+            wxString ts = wxstr(choices[i]);
             was.Add(ts);
         }
 
-    return wxGetSingleChoiceData(wxString(message.data, wxConvUTF8, message.length),
-                wxString(caption.data, wxConvUTF8, caption.length),
+    return wxGetSingleChoiceData(wxstr(message),
+                wxstr(caption),
                 was, client_data, parent, x, y, centre,
                 width, height);
 }
@@ -202,12 +202,12 @@ size_t wxGetMultipleChoices_func(wxArrayInt* selections,dstr message, dstr capti
     was.Alloc(n);
     for (int i = 0; i < n; ++i)
         {
-            wxString ts = wxString(choices[i].data, wxConvUTF8, choices[i].length);
+            wxString ts = wxstr(choices[i]);
             was.Add(ts);
         }
 
-    return wxGetMultipleChoices(*selections, wxString(message.data, wxConvUTF8, message.length),
-                wxString(caption.data, wxConvUTF8, caption.length),
+    return wxGetMultipleChoices(*selections, wxstr(message),
+                wxstr(caption),
                 was, parent, x, y, centre,
                 width, height);
 

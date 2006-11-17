@@ -29,7 +29,7 @@ wxImage* wxImage_ctor()
 extern "C" WXEXPORT
 wxImage* wxImage_ctorByName(dstr name, int type)
 {
-	return new wxImage(wxString(name.data, wxConvUTF8, name.length), type);
+	return new wxImage(wxstr(name), type);
 }
 
 extern "C" WXEXPORT
@@ -49,9 +49,27 @@ wxImage* wxImage_ctorintintbool(int width, int height, dbit clear)
 }
 
 extern "C" WXEXPORT
+wxImage* wxImage_ctorByData(int width, int height, unsigned char* data, dbit static_data)
+{
+	return new wxImage(width, height, data, static_data);
+}
+
+extern "C" WXEXPORT
+wxImage* wxImage_ctorByDataAlpha(int width, int height, unsigned char* data, unsigned char* alpha, dbit static_data)
+{
+	return new wxImage(width, height, data, alpha, static_data);
+}
+
+extern "C" WXEXPORT
 wxImage* wxImage_ctorByImage(wxImage* image)
 {
+#if wxABI_VERSION < 20700
 	return new wxImage(image);
+#else
+	wxImage* copy = new wxImage();
+	*copy = image->Copy();
+	return copy;
+#endif
 }
 
 extern "C" WXEXPORT
@@ -98,26 +116,26 @@ void wxImage_InitAllHandlers()
 extern "C" WXEXPORT
 dbit wxImage_LoadFileByTypeId(wxImage* self, dstr name, int type, int index)
 {
-	return self->LoadFile(wxString(name.data, wxConvUTF8, name.length), type, index)?1:0;
+	return self->LoadFile(wxstr(name), type, index)?1:0;
 }
 
 extern "C" WXEXPORT
 dbit wxImage_LoadFileByMimeTypeId(wxImage* self, dstr name, dstr mimetype, int index)
 {
-	return self->LoadFile(wxString(name.data, wxConvUTF8, name.length), wxString(mimetype.data, wxConvUTF8, mimetype.length), index)?1:0;
+	return self->LoadFile(wxstr(name), wxstr(mimetype), index)?1:0;
 }
 
 
 extern "C" WXEXPORT
 dbit wxImage_SaveFileByType(wxImage* self, dstr name, int type)
 {
-    return self->SaveFile(wxString(name.data, wxConvUTF8, name.length), type)?1:0;
+    return self->SaveFile(wxstr(name), type)?1:0;
 }
 
 extern "C" WXEXPORT
 dbit wxImage_SaveFileByMimeType(wxImage* self, dstr name, dstr mimetype)
 {
-    return self->SaveFile(wxString(name.data, wxConvUTF8, name.length), wxString(mimetype.data, wxConvUTF8, mimetype.length))?1:0;
+    return self->SaveFile(wxstr(name), wxstr(mimetype))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -308,7 +326,7 @@ dbit wxImage_ConvertAlphaToMask(wxImage* self, unsigned char threshold)
 extern "C" WXEXPORT
 dbit wxImage_CanRead(dstr name)
 {
-	return wxImage::CanRead(wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return wxImage::CanRead(wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -316,7 +334,7 @@ dbit wxImage_CanRead(dstr name)
 extern "C" WXEXPORT
 int wxImage_GetImageCount(dstr name, int type)
 {
-	return wxImage::GetImageCount(wxString(name.data, wxConvUTF8, name.length), type);
+	return wxImage::GetImageCount(wxstr(name), type);
 }
 
 //-----------------------------------------------------------------------------
@@ -380,7 +398,7 @@ void wxImage_SetPalette(wxImage* self, wxPalette* palette)
 extern "C" WXEXPORT
 void wxImage_SetOption(wxImage* self, dstr name, dstr value)
 {
-	self->SetOption(wxString(name.data, wxConvUTF8, name.length), wxString(value.data, wxConvUTF8, value.length));
+	self->SetOption(wxstr(name), wxstr(value));
 }
 
 //-----------------------------------------------------------------------------
@@ -388,7 +406,7 @@ void wxImage_SetOption(wxImage* self, dstr name, dstr value)
 extern "C" WXEXPORT
 void wxImage_SetOption2(wxImage* self, dstr name, int value)
 {
-	self->SetOption(wxString(name.data, wxConvUTF8, name.length), value);
+	self->SetOption(wxstr(name), value);
 }
 
 //-----------------------------------------------------------------------------
@@ -396,7 +414,7 @@ void wxImage_SetOption2(wxImage* self, dstr name, int value)
 extern "C" WXEXPORT
 dstrret wxImage_GetOption(wxImage* self, dstr name)
 {
-	return dstr_ret(self->GetOption(wxString(name.data, wxConvUTF8, name.length)));
+	return dstr_ret(self->GetOption(wxstr(name)));
 }
 
 //-----------------------------------------------------------------------------
@@ -404,7 +422,7 @@ dstrret wxImage_GetOption(wxImage* self, dstr name)
 extern "C" WXEXPORT
 int wxImage_GetOptionInt(wxImage* self, dstr name)
 {
-	return self->GetOptionInt(wxString(name.data, wxConvUTF8, name.length));
+	return self->GetOptionInt(wxstr(name));
 }
 
 //-----------------------------------------------------------------------------
@@ -412,7 +430,7 @@ int wxImage_GetOptionInt(wxImage* self, dstr name)
 extern "C" WXEXPORT
 dbit wxImage_HasOption(wxImage* self, dstr name)
 {
-	return self->HasOption(wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->HasOption(wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -460,7 +478,7 @@ void wxImage_InsertHandler(wxImageHandler* handler)
 extern "C" WXEXPORT
 dbit wxImage_RemoveHandler(dstr name)
 {
-	return wxImage::RemoveHandler(wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return wxImage::RemoveHandler(wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -468,7 +486,7 @@ dbit wxImage_RemoveHandler(dstr name)
 extern "C" WXEXPORT
 wxImageHandler* wxImage_FindHandler(dstr name)
 {
-	return wxImage::FindHandler(wxString(name.data, wxConvUTF8, name.length));
+	return wxImage::FindHandler(wxstr(name));
 }
 
 //-----------------------------------------------------------------------------
@@ -476,7 +494,7 @@ wxImageHandler* wxImage_FindHandler(dstr name)
 extern "C" WXEXPORT
 wxImageHandler* wxImage_FindHandler2(dstr name, long imageType)
 {
-	return wxImage::FindHandler(wxString(name.data, wxConvUTF8, name.length), imageType);
+	return wxImage::FindHandler(wxstr(name), imageType);
 }
 
 //-----------------------------------------------------------------------------
@@ -492,7 +510,7 @@ wxImageHandler* wxImage_FindHandler3(long imageType)
 extern "C" WXEXPORT
 wxImageHandler* wxImage_FindHandlerMime(dstr mimetype)
 {
-	return wxImage::FindHandlerMime(wxString(mimetype.data, wxConvUTF8, mimetype.length));
+	return wxImage::FindHandlerMime(wxstr(mimetype));
 }
 
 //-----------------------------------------------------------------------------
@@ -526,7 +544,7 @@ void wxImage_InitStandardHandlers()
 extern "C" WXEXPORT
 void wxImageHandler_SetName(wxImageHandler* self, dstr name)
 {
-	self->SetName(wxString(name.data, wxConvUTF8, name.length));
+	self->SetName(wxstr(name));
 }
 
 //-----------------------------------------------------------------------------
@@ -534,7 +552,7 @@ void wxImageHandler_SetName(wxImageHandler* self, dstr name)
 extern "C" WXEXPORT
 void wxImageHandler_SetExtension(wxImageHandler* self, dstr ext)
 {
-	self->SetExtension(wxString(ext.data, wxConvUTF8, ext.length));
+	self->SetExtension(wxstr(ext));
 }
 
 //-----------------------------------------------------------------------------
@@ -550,7 +568,7 @@ void wxImageHandler_SetType(wxImageHandler* self, long type)
 extern "C" WXEXPORT
 void wxImageHandler_SetMimeType(wxImageHandler* self, dstr type)
 {
-	self->SetMimeType(wxString(type.data, wxConvUTF8, type.length));
+	self->SetMimeType(wxstr(type));
 }
 
 //-----------------------------------------------------------------------------

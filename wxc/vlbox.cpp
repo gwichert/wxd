@@ -104,7 +104,7 @@ wxVListBox* wxVListBox_ctor(wxWindow *parent, wxWindowID id, const wxPoint* pos,
 	if (name.data==NULL)
 		name = dstr("vlistbox");
 
-	return new _VListBox(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
+	return new _VListBox(parent, id, *pos, *size, style, wxstr(name));
 }
 
 //-----------------------------------------------------------------------------
@@ -135,7 +135,7 @@ dbit wxVListBox_Create(_VListBox* self, wxWindow *parent, wxWindowID id, const w
 	if (name.data==NULL)
 		name = dstr("vlistbox");
 			
-	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, *pos, *size, style, wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------

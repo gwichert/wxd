@@ -14,9 +14,9 @@ public class HelloWorldApp : wxApp
 	{
         wxFrame frame = new wxFrame(null, wxID_ANY, "Hello wxWidgets World");
         frame.CreateStatusBar();
-        frame.SetStatusText("Hello World");
+        frame.StatusText = "Hello World";
         frame.Show(true);
-        //SetTopWindow(frame);
+        TopWindow = frame;
         return true;
 	}
 }

@@ -55,7 +55,7 @@ wxTabCtrl* wxTabCtrl_ctor2(wxWindow *parent, wxWindowID id, const wxPoint* pos, 
 	if (name.data==NULL)
 		name = dstr("tabctrl");
 
-	return new _TabCtrl(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
+	return new _TabCtrl(parent, id, *pos, *size, style, wxstr(name));
 }
 
 //-----------------------------------------------------------------------------
@@ -73,7 +73,7 @@ dbit wxTabCtrl_Create(wxTabCtrl* self, wxWindow *parent, wxWindowID id, const wx
 	if (name.data==NULL)
 		name = dstr("tabctrl");
 
-	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, *pos, *size, style, wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -169,7 +169,7 @@ void wxTabCtrl_SetImageList(wxTabCtrl* self, wxImageList* imageList)
 extern "C" WXEXPORT
 dbit wxTabCtrl_SetItemText(wxTabCtrl* self, int item, dstr text)
 {
-	return self->SetItemText(item, wxString(text.data, wxConvUTF8, text.length))?1:0;
+	return self->SetItemText(item, wxstr(text))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -233,7 +233,7 @@ int wxTabCtrl_HitTest(wxTabCtrl* self, const wxPoint* pt, long* flags)
 extern "C" WXEXPORT
 dbit wxTabCtrl_InsertItem(wxTabCtrl* self, int item, dstr text, int imageId, void* data)
 {
-	return self->InsertItem(item, wxString(text.data, wxConvUTF8, text.length), imageId, data)?1:0;
+	return self->InsertItem(item, wxstr(text), imageId, data)?1:0;
 }
 
 //-----------------------------------------------------------------------------

@@ -21,7 +21,7 @@
 extern "C" WXEXPORT
 wxMenuItem* wxMenuItem_ctor(wxMenu* parentMenu, int id, dstr text, dstr help, wxItemKind kind, wxMenu* subMenu)
 {
-    return new wxMenuItem(parentMenu, id, wxString(text.data, wxConvUTF8, text.length), wxString(help.data, wxConvUTF8, help.length), kind, subMenu);
+    return new wxMenuItem(parentMenu, id, wxstr(text), wxstr(help), kind, subMenu);
 }
 
 //-----------------------------------------------------------------------------
@@ -69,7 +69,7 @@ dbit wxMenuItem_IsSeparator(wxMenuItem* self)
 extern "C" WXEXPORT
 void wxMenuItem_SetText(wxMenuItem* self, dstr str)
 {
-    self->SetText(wxString(str.data, wxConvUTF8, str.length));
+    self->SetText(wxstr(str));
 }
 
 //-----------------------------------------------------------------------------
@@ -93,7 +93,7 @@ dstrret wxMenuItem_GetText(wxMenuItem* self)
 extern "C" WXEXPORT
 dstrret wxMenuItem_GetLabelFromText(wxMenuItem* self, dstr text)
 {
-    return dstr_ret(self->GetLabelFromText(wxString(text.data, wxConvUTF8, text.length)));
+    return dstr_ret(self->GetLabelFromText(wxstr(text)));
 }
 
 //-----------------------------------------------------------------------------
@@ -189,7 +189,7 @@ void wxMenuItem_Toggle(wxMenuItem* self)
 extern "C" WXEXPORT
 void wxMenuItem_SetHelp(wxMenuItem* self, dstr str)
 {
-    self->SetHelp(wxString(str.data, wxConvUTF8, str.length));
+    self->SetHelp(wxstr(str));
 }
 
 //-----------------------------------------------------------------------------
@@ -221,7 +221,7 @@ void wxMenuItem_SetAccel(wxMenuItem* self, wxAcceleratorEntry* accel)
 extern "C" WXEXPORT
 void wxMenuItem_SetName(wxMenuItem* self, dstr str)
 {
-    self->SetText(wxString(str.data, wxConvUTF8, str.length));
+    self->SetText(wxstr(str));
 }
 
 //-----------------------------------------------------------------------------
@@ -237,13 +237,13 @@ dstrret wxMenuItem_GetName(wxMenuItem* self)
 extern "C" WXEXPORT
 wxMenuItem* wxMenuItem_NewCheck(wxMenu* parentMenu, int id, dstr text, dstr help, dbit isCheckable, wxMenu* subMenu)
 {
-    return wxMenuItem::New(parentMenu, id, wxString(text.data, wxConvUTF8, text.length), wxString(help.data, wxConvUTF8, help.length), isCheckable, subMenu);
+    return wxMenuItem::New(parentMenu, id, wxstr(text), wxstr(help), isCheckable, subMenu);
 }
 
 extern "C" WXEXPORT
 wxMenuItem* wxMenuItem_New(wxMenu* parentMenu, int id, dstr text, dstr help, wxItemKind kind, wxMenu* subMenu)
 {
-    return wxMenuItem::New(parentMenu, id, wxString(text.data, wxConvUTF8, text.length), wxString(help.data, wxConvUTF8, help.length), kind, subMenu);
+    return wxMenuItem::New(parentMenu, id, wxstr(text), wxstr(help), kind, subMenu);
 }
 
 //-----------------------------------------------------------------------------

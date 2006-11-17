@@ -19,10 +19,10 @@
 
 //-----------------------------------------------------------------------------
 
-extern "C" WXEXPORT wxFont* wxFont_NORMAL_FONT()	{ return wxNORMAL_FONT; }
-extern "C" WXEXPORT wxFont* wxFont_SMALL_FONT()		{ return wxSMALL_FONT; }
-extern "C" WXEXPORT wxFont* wxFont_ITALIC_FONT()	{ return wxITALIC_FONT; }
-extern "C" WXEXPORT wxFont* wxFont_SWISS_FONT()		{ return wxSWISS_FONT; }
+extern "C" WXEXPORT const wxFont* wxFont_NORMAL_FONT()  { return wxNORMAL_FONT; }
+extern "C" WXEXPORT const wxFont* wxFont_SMALL_FONT()   { return wxSMALL_FONT; }
+extern "C" WXEXPORT const wxFont* wxFont_ITALIC_FONT()  { return wxITALIC_FONT; }
+extern "C" WXEXPORT const wxFont* wxFont_SWISS_FONT()   { return wxSWISS_FONT; }
 
 //-----------------------------------------------------------------------------
 
@@ -41,7 +41,7 @@ wxFont* wxFont_ctorDef()
 extern "C" WXEXPORT
 wxFont* wxFont_ctor(int pointSize, int family, int style, int weight, const dbit underline, dstr faceName, wxFontEncoding encoding)
 {
-	return new wxFont(pointSize, family, style, weight, underline, wxString(faceName.data, wxConvUTF8, faceName.length), encoding);
+	return new wxFont(pointSize, family, style, weight, underline, wxstr(faceName), encoding);
 }
 
 //-----------------------------------------------------------------------------
@@ -185,7 +185,7 @@ void wxFont_SetWeight(wxFont* self, int weight)
 extern "C" WXEXPORT
 void wxFont_SetFaceName(wxFont* self, dstr faceName)
 {
-	self->SetFaceName(wxString(faceName.data, wxConvUTF8, faceName.length));
+	self->SetFaceName(wxstr(faceName));
 }
 
 //-----------------------------------------------------------------------------
@@ -209,7 +209,7 @@ void wxFont_SetEncoding(wxFont* self, wxFontEncoding encoding)
 extern "C" WXEXPORT
 void wxFont_SetNativeFontInfoUserDesc(wxFont* self, dstr info)
 {
-	self->SetNativeFontInfoUserDesc(wxString(info.data, wxConvUTF8, info.length));
+	self->SetNativeFontInfoUserDesc(wxstr(info));
 }
 
 //-----------------------------------------------------------------------------
@@ -273,5 +273,5 @@ void wxFont_SetDefaultEncoding(wxFontEncoding encoding)
 extern "C" WXEXPORT
 wxFont* wxFont_New(dstr strNativeFontDesc)
 {
-	return wxFont::New(wxString(strNativeFontDesc.data, wxConvUTF8, strNativeFontDesc.length));
+	return wxFont::New(wxstr(strNativeFontDesc));
 }

@@ -56,7 +56,7 @@ void wxClientData_RegisterDisposable(_ClientData* self, Virtual_Dispose onDispos
 extern "C" WXEXPORT
 wxStringClientData* wxStringClientData_ctor(dstr data)
 {
-	return new wxStringClientData(wxString(data.data, wxConvUTF8, data.length));
+	return new wxStringClientData(wxstr(data));
 }
 
 //-----------------------------------------------------------------------------
@@ -73,7 +73,7 @@ void wxStringClientData_dtor(wxStringClientData* self)
 extern "C" WXEXPORT
 void wxStringClientData_SetData(wxStringClientData* self, dstr data)
 {
-	self->SetData(wxString(data.data, wxConvUTF8, data.length));
+	self->SetData(wxstr(data));
 }
 
 //-----------------------------------------------------------------------------

@@ -28,7 +28,7 @@ wxHtmlHelpController* wxHtmlHelpController_ctor(int style)
 extern "C" WXEXPORT
 void wxHtmlHelpController_SetTitleFormat(wxHtmlHelpController* self, dstr format)
 {
-	self->SetTitleFormat(wxString(format.data, wxConvUTF8, format.length));
+	self->SetTitleFormat(wxstr(format));
 }
 
 //-----------------------------------------------------------------------------
@@ -36,7 +36,7 @@ void wxHtmlHelpController_SetTitleFormat(wxHtmlHelpController* self, dstr format
 extern "C" WXEXPORT
 void wxHtmlHelpController_SetTempDir(wxHtmlHelpController* self, dstr path)
 {
-	self->SetTempDir(wxString(path.data, wxConvUTF8, path.length));
+	self->SetTempDir(wxstr(path));
 }
 
 //-----------------------------------------------------------------------------
@@ -44,7 +44,7 @@ void wxHtmlHelpController_SetTempDir(wxHtmlHelpController* self, dstr path)
 extern "C" WXEXPORT
 dbit wxHtmlHelpController_AddBook(wxHtmlHelpController* self, dstr book_url)
 {
-	return self->AddBook(wxString(book_url.data, wxConvUTF8, book_url.length))?1:0;
+	return self->AddBook(wxstr(book_url))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -52,7 +52,7 @@ dbit wxHtmlHelpController_AddBook(wxHtmlHelpController* self, dstr book_url)
 extern "C" WXEXPORT
 dbit wxHtmlHelpController_Display(wxHtmlHelpController* self, dstr x)
 {
-	return self->Display(wxString(x.data, wxConvUTF8, x.length))?1:0;
+	return self->Display(wxstr(x))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -84,7 +84,7 @@ dbit wxHtmlHelpController_DisplayIndex(wxHtmlHelpController* self)
 extern "C" WXEXPORT
 dbit wxHtmlHelpController_KeywordSearch(wxHtmlHelpController* self, dstr keyword, wxHelpSearchMode mode)
 {
-	return self->KeywordSearch(wxString(keyword.data, wxConvUTF8, keyword.length), mode)?1:0;
+	return self->KeywordSearch(wxstr(keyword), mode)?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -92,7 +92,7 @@ dbit wxHtmlHelpController_KeywordSearch(wxHtmlHelpController* self, dstr keyword
 extern "C" WXEXPORT
 void wxHtmlHelpController_UseConfig(wxHtmlHelpController* self, wxConfigBase* config, dstr rootpath)
 {
-	self->UseConfig(config, wxString(rootpath.data, wxConvUTF8, rootpath.length));
+	self->UseConfig(config, wxstr(rootpath));
 }
 
 //-----------------------------------------------------------------------------
@@ -100,7 +100,7 @@ void wxHtmlHelpController_UseConfig(wxHtmlHelpController* self, wxConfigBase* co
 extern "C" WXEXPORT
 void wxHtmlHelpController_ReadCustomization(wxHtmlHelpController* self, wxConfigBase *cfg, dstr path)
 {
-	self->ReadCustomization(cfg, wxString(path.data, wxConvUTF8, path.length));
+	self->ReadCustomization(cfg, wxstr(path));
 }
 
 //-----------------------------------------------------------------------------
@@ -108,7 +108,7 @@ void wxHtmlHelpController_ReadCustomization(wxHtmlHelpController* self, wxConfig
 extern "C" WXEXPORT
 void wxHtmlHelpController_WriteCustomization(wxHtmlHelpController* self, wxConfigBase *cfg, dstr path)
 {
-	self->WriteCustomization(cfg, wxString(path.data, wxConvUTF8, path.length));
+	self->WriteCustomization(cfg, wxstr(path));
 }
 
 //-----------------------------------------------------------------------------

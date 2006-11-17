@@ -20,61 +20,61 @@
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxPen* wxGDIObj_GetRedPen()
+const wxPen* wxGDIObj_GetRedPen()
 {
 	return wxRED_PEN;
 }
 
 extern "C" WXEXPORT
-wxPen* wxGDIObj_GetCyanPen()
+const wxPen* wxGDIObj_GetCyanPen()
 {
 	return wxCYAN_PEN;
 }
 
 extern "C" WXEXPORT
-wxPen* wxGDIObj_GetGreenPen()
+const wxPen* wxGDIObj_GetGreenPen()
 {
 	return wxGREEN_PEN;
 }
 
 extern "C" WXEXPORT
-wxPen* wxGDIObj_GetBlackPen()
+const wxPen* wxGDIObj_GetBlackPen()
 {
 	return wxBLACK_PEN;
 }
 
 extern "C" WXEXPORT
-wxPen* wxGDIObj_GetWhitePen()
+const wxPen* wxGDIObj_GetWhitePen()
 {
 	return wxWHITE_PEN;
 }
 
 extern "C" WXEXPORT
-wxPen* wxGDIObj_GetTransparentPen()
+const wxPen* wxGDIObj_GetTransparentPen()
 {
 	return wxTRANSPARENT_PEN;
 }
 
 extern "C" WXEXPORT
-wxPen* wxGDIObj_GetBlackDashedPen()
+const wxPen* wxGDIObj_GetBlackDashedPen()
 {
 	return wxBLACK_DASHED_PEN;
 }
 
 extern "C" WXEXPORT
-wxPen* wxGDIObj_GetGreyPen()
+const wxPen* wxGDIObj_GetGreyPen()
 {
 	return wxGREY_PEN;
 }
 
 extern "C" WXEXPORT
-wxPen* wxGDIObj_GetMediumGreyPen()
+const wxPen* wxGDIObj_GetMediumGreyPen()
 {
 	return wxMEDIUM_GREY_PEN;
 }
 
 extern "C" WXEXPORT
-wxPen* wxGDIObj_GetLightGreyPen()
+const wxPen* wxGDIObj_GetLightGreyPen()
 {
 	return wxLIGHT_GREY_PEN;
 }
@@ -132,61 +132,61 @@ wxColour* wxNullColour_Get()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxBrush* wxBLUE_BRUSH_Get()
+const wxBrush* wxBLUE_BRUSH_Get()
 {
 	return wxBLUE_BRUSH;
 }
 
 extern "C" WXEXPORT
-wxBrush* wxGREEN_BRUSH_Get()
+const wxBrush* wxGREEN_BRUSH_Get()
 {
 	return wxGREEN_BRUSH;
 }
 
 extern "C" WXEXPORT
-wxBrush* wxWHITE_BRUSH_Get()
+const wxBrush* wxWHITE_BRUSH_Get()
 {
 	return wxWHITE_BRUSH;
 }
 
 extern "C" WXEXPORT
-wxBrush* wxBLACK_BRUSH_Get()
+const wxBrush* wxBLACK_BRUSH_Get()
 {
 	return wxBLACK_BRUSH;
 }
 
 extern "C" WXEXPORT
-wxBrush* wxGREY_BRUSH_Get()
+const wxBrush* wxGREY_BRUSH_Get()
 {
 	return wxGREY_BRUSH;
 }
 
 extern "C" WXEXPORT
-wxBrush* wxMEDIUM_GREY_BRUSH_Get()
+const wxBrush* wxMEDIUM_GREY_BRUSH_Get()
 {
 	return wxMEDIUM_GREY_BRUSH;
 }
 
 extern "C" WXEXPORT
-wxBrush* wxLIGHT_GREY_BRUSH_Get()
+const wxBrush* wxLIGHT_GREY_BRUSH_Get()
 {
 	return wxLIGHT_GREY_BRUSH;
 }
 
 extern "C" WXEXPORT
-wxBrush* wxTRANSPARENT_BRUSH_Get()
+const wxBrush* wxTRANSPARENT_BRUSH_Get()
 {
 	return wxTRANSPARENT_BRUSH;
 }
 
 extern "C" WXEXPORT
-wxBrush* wxCYAN_BRUSH_Get()
+const wxBrush* wxCYAN_BRUSH_Get()
 {
 	return wxCYAN_BRUSH;
 }
 
 extern "C" WXEXPORT
-wxBrush* wxRED_BRUSH_Get()
+const wxBrush* wxRED_BRUSH_Get()
 {
 	return wxRED_BRUSH;
 }
@@ -214,7 +214,7 @@ void wxColourDataBase_dtor(wxColourDatabase* self)
 extern "C" WXEXPORT
 wxColour* wxColourDatabase_Find(wxColourDatabase* self, dstr name)
 {
-	return new wxColour(self->Find(wxString(name.data, wxConvUTF8, name.length)));
+	return new wxColour(self->Find(wxstr(name)));
 }
 
 //-----------------------------------------------------------------------------
@@ -230,7 +230,7 @@ dstrret wxColourDatabase_FindName(wxColourDatabase* self, wxColour* colour)
 extern "C" WXEXPORT
 void wxColourDatabase_AddColour(wxColourDatabase* self, dstr name, wxColour* colour)
 {
-	self->AddColour(wxString(name.data, wxConvUTF8, name.length), *colour);
+	self->AddColour(wxstr(name), *colour);
 }
 
 //-----------------------------------------------------------------------------
@@ -247,7 +247,11 @@ wxPenList* wxPenList_ctor()
 extern "C" WXEXPORT
 void wxPenList_AddPen(wxPenList* self, wxPen* pen)
 {
+#if wxABI_VERSION < 20700
 	self->AddPen(pen);
+#else
+	self->Append(pen);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -255,7 +259,11 @@ void wxPenList_AddPen(wxPenList* self, wxPen* pen)
 extern "C" WXEXPORT
 void wxPenList_RemovePen(wxPenList* self, wxPen* pen)
 {
+#if wxABI_VERSION < 20700
 	self->RemovePen(pen);
+#else
+	self->DeleteObject(pen);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -280,7 +288,11 @@ wxBrushList* wxBrushList_ctor()
 extern "C" WXEXPORT
 void wxBrushList_AddBrush(wxBrushList* self, wxBrush* brush)
 {
+#if wxABI_VERSION < 20700
 	self->AddBrush(brush);
+#else
+	self->Append(brush);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -288,7 +300,11 @@ void wxBrushList_AddBrush(wxBrushList* self, wxBrush* brush)
 extern "C" WXEXPORT
 void wxBrushList_RemoveBrush(wxBrushList* self, wxBrush* brush)
 {
+#if wxABI_VERSION < 20700
 	self->RemoveBrush(brush);
+#else
+	self->DeleteObject(brush);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -311,13 +327,21 @@ wxFontList* wxFontList_ctor()
 extern "C" WXEXPORT
 void wxFontList_AddFont(wxFontList* self, wxFont* font)
 {
+#if wxABI_VERSION < 20700
 	self->AddFont(font);
+#else
+	self->Append(font);
+#endif
 }
 
 extern "C" WXEXPORT
 void wxFontList_RemoveFont(wxFontList* self, wxFont* font)
 {
+#if wxABI_VERSION < 20700
 	self->RemoveFont(font);
+#else
+	self->DeleteObject(font);
+#endif
 }
 
 extern "C" WXEXPORT
@@ -326,9 +350,10 @@ wxFont* wxFontList_FindOrCreateFont(wxFontList* self, int pointSize, int family,
                              dstr face,
                              wxFontEncoding encoding)
 {
-	return self->FindOrCreateFont(pointSize, family, style, weight, underline, wxString(face.data, wxConvUTF8, face.length), encoding);
+	return self->FindOrCreateFont(pointSize, family, style, weight, underline, wxstr(face), encoding);
 }
 
+#if wxABI_VERSION < 20700
 //-----------------------------------------------------------------------------
 // wxBitmapList
 
@@ -354,11 +379,34 @@ void wxBitmapList_RemoveBitmap(wxBitmapList* self, wxBitmap* bitmap)
 	self->RemoveBitmap(bitmap);
 }
 
+#else
+//-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT
+wxList* wxBitmapList_ctor()
+{
+	return new wxList();
+}
+
+extern "C" WXEXPORT
+void wxBitmapList_AddBitmap(wxList* self, wxBitmap* bitmap)
+{
+	self->Append(bitmap);
+}
+
+extern "C" WXEXPORT
+void wxBitmapList_RemoveBitmap(wxList* self, wxBitmap* bitmap)
+{
+	self->DeleteObject(bitmap);
+}
+
+#endif // wxABI_VERSION
+
 //-----------------------------------------------------------------------------
 // Stock cursors types
 
 extern "C" WXEXPORT
-wxCursor* wxSTANDARD_CURSOR_Get()
+const wxCursor* wxSTANDARD_CURSOR_Get()
 {
 	return wxSTANDARD_CURSOR;
 }
@@ -366,7 +414,7 @@ wxCursor* wxSTANDARD_CURSOR_Get()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxCursor* wxHOURGLASS_CURSOR_Get()
+const wxCursor* wxHOURGLASS_CURSOR_Get()
 {
 	return wxHOURGLASS_CURSOR;
 }
@@ -374,7 +422,7 @@ wxCursor* wxHOURGLASS_CURSOR_Get()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxCursor* wxCROSS_CURSOR_Get()
+const wxCursor* wxCROSS_CURSOR_Get()
 {
 	return wxCROSS_CURSOR;
 }

@@ -57,10 +57,10 @@ dbit wxRadioBox_Create(wxRadioBox* self, wxWindow* parent, int id, dstr label,
 
 	wxString* strings = new wxString[n];
 	for (i = 0; i < n; ++i)
-		strings[i] = wxString(choices[i].data, wxConvUTF8, choices[i].length);
+		strings[i] = wxstr(choices[i]);
 
-	dbit result = self->Create(parent, id, wxString(label.data, wxConvUTF8, label.length), *pos, *size, n,
-		                       strings, majorDimension, style, *val, wxString(name.data, wxConvUTF8, name.length));
+	dbit result = self->Create(parent, id, wxstr(label), *pos, *size, n,
+		                       strings, majorDimension, style, *val, wxstr(name));
 
 	delete[] strings;
 	return result?1:0;
@@ -95,7 +95,7 @@ dstrret wxRadioBox_GetStringSelection(wxRadioBox* self)
 extern "C" WXEXPORT
 dbit wxRadioBox_SetStringSelection(wxRadioBox* self, dstr s)
 {
-	return self->SetStringSelection(wxString(s.data, wxConvUTF8, s.length))?1:0;
+	return self->SetStringSelection(wxstr(s))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -111,7 +111,7 @@ int wxRadioBox_GetCount(wxRadioBox* self)
 extern "C" WXEXPORT
 int wxRadioBox_FindString(wxRadioBox* self, dstr s)
 {
-	return self->FindString(wxString(s.data, wxConvUTF8, s.length));
+	return self->FindString(wxstr(s));
 }
 
 //-----------------------------------------------------------------------------
@@ -127,7 +127,7 @@ dstrret wxRadioBox_GetString(wxRadioBox* self, int n)
 extern "C" WXEXPORT
 void wxRadioBox_SetString(wxRadioBox* self, int n, dstr label)
 {
-	self->SetString(n, wxString(label.data, wxConvUTF8, label.length));
+	self->SetString(n, wxstr(label));
 }
 
 //-----------------------------------------------------------------------------
@@ -159,6 +159,6 @@ dstrret wxRadioBox_GetLabel(wxRadioBox* self)
 extern "C" WXEXPORT
 void wxRadioBox_SetLabel(wxRadioBox* self, dstr label)
 {
-	self->SetLabel(wxString(label.data, wxConvUTF8, label.length));
+	self->SetLabel(wxstr(label));
 }
 

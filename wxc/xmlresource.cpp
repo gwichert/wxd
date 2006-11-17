@@ -53,7 +53,7 @@ void wxXmlSubclassFactory_ctor(XmlSubclassCreate create)
 extern "C" WXEXPORT
 wxXmlResource* wxXmlResource_ctorByFilemask(dstr filemask, int flags = wxXRC_USE_LOCALE)
 {
-	return new wxXmlResource(wxString(filemask.data, wxConvUTF8, filemask.length),flags);
+	return new wxXmlResource(wxstr(filemask),flags);
 }
 
 extern "C" WXEXPORT
@@ -75,7 +75,7 @@ void wxXmlResource_InitAllHandlers(wxXmlResource* self)
 extern "C" WXEXPORT
 dbit wxXmlResource_Load(wxXmlResource* self, dstr filemask)
 {
-	return self->Load(wxString(filemask.data, wxConvUTF8, filemask.length))?1:0;
+	return self->Load(wxstr(filemask))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -84,9 +84,9 @@ extern "C" WXEXPORT
 dbit wxXmlResource_LoadFromByteArray(wxXmlResource* self, dstr filemask, char* data, size_t length)
 {
 	wxFileSystem::AddHandler(new wxMemoryFSHandler());
-	wxMemoryFSHandler::AddFile(wxString(filemask.data, wxConvUTF8, filemask.length), data, length);
+	wxMemoryFSHandler::AddFile(wxstr(filemask), data, length);
 
-	wxString mem_name = wxString("memory:", wxConvUTF8) + wxString(filemask.data, wxConvUTF8, filemask.length) ;
+	wxString mem_name = wxString(wxT("memory:")) + wxstr(filemask) ;
 
 	return self->Load(mem_name)?1:0;
 }
@@ -96,13 +96,13 @@ dbit wxXmlResource_LoadFromByteArray(wxXmlResource* self, dstr filemask, char* d
 extern "C" WXEXPORT
 wxDialog* wxXmlResource_LoadDialog(wxXmlResource* self, wxWindow* parent, dstr name)
 {
-	return self->LoadDialog(parent, wxString(name.data, wxConvUTF8, name.length));
+	return self->LoadDialog(parent, wxstr(name));
 }
 
 extern "C" WXEXPORT
 dbit wxXmlResource_LoadDialogDlg(wxXmlResource* self, wxDialog* dlg, wxWindow* parent, dstr name)
 {
-	return self->LoadDialog(dlg, parent, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->LoadDialog(dlg, parent, wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -110,7 +110,7 @@ dbit wxXmlResource_LoadDialogDlg(wxXmlResource* self, wxDialog* dlg, wxWindow* p
 extern "C" WXEXPORT
 int wxXmlResource_GetXRCID(dstr str_id)
 {
-	return wxXmlResource::GetXRCID(wxString(str_id.data, wxConvUTF8, str_id.length));
+	return wxXmlResource::GetXRCID(wxstr(str_id));
 }
 
 //-----------------------------------------------------------------------------
@@ -126,13 +126,13 @@ long wxXmlResource_GetVersion(wxXmlResource* self)
 extern "C" WXEXPORT
 dbit wxXmlResource_LoadFrameWithFrame(wxXmlResource* self, wxFrame* frame, wxWindow* parent, dstr name)
 {
-	return self->LoadFrame(frame, parent, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->LoadFrame(frame, parent, wxstr(name))?1:0;
 }
 
 extern "C" WXEXPORT
 wxFrame* wxXmlResource_LoadFrame(wxXmlResource* self, wxWindow* parent, dstr name)
 {
-	return self->LoadFrame(parent, wxString(name.data, wxConvUTF8, name.length));
+	return self->LoadFrame(parent, wxstr(name));
 }
 
 //-----------------------------------------------------------------------------
@@ -140,7 +140,7 @@ wxFrame* wxXmlResource_LoadFrame(wxXmlResource* self, wxWindow* parent, dstr nam
 extern "C" WXEXPORT
 wxBitmap* wxXmlResource_LoadBitmap(wxXmlResource* self, dstr name)
 {
-	return new wxBitmap(self->LoadBitmap(wxString(name.data, wxConvUTF8, name.length)));
+	return new wxBitmap(self->LoadBitmap(wxstr(name)));
 }
 
 //-----------------------------------------------------------------------------
@@ -148,7 +148,7 @@ wxBitmap* wxXmlResource_LoadBitmap(wxXmlResource* self, dstr name)
 extern "C" WXEXPORT
 wxIcon* wxXmlResource_LoadIcon(wxXmlResource* self, dstr name)
 {
-	return new wxIcon(self->LoadIcon(wxString(name.data, wxConvUTF8, name.length)));
+	return new wxIcon(self->LoadIcon(wxstr(name)));
 }
 
 //-----------------------------------------------------------------------------
@@ -156,7 +156,7 @@ wxIcon* wxXmlResource_LoadIcon(wxXmlResource* self, dstr name)
 extern "C" WXEXPORT
 wxMenu* wxXmlResource_LoadMenu(wxXmlResource* self, dstr name)
 {
-	return self->LoadMenu(wxString(name.data, wxConvUTF8, name.length));
+	return self->LoadMenu(wxstr(name));
 }
 
 //-----------------------------------------------------------------------------
@@ -164,13 +164,13 @@ wxMenu* wxXmlResource_LoadMenu(wxXmlResource* self, dstr name)
 extern "C" WXEXPORT
 wxMenuBar* wxXmlResource_LoadMenuBarWithParent(wxXmlResource* self, wxWindow* parent, dstr name)
 {
-	return self->LoadMenuBar(parent,wxString(name.data, wxConvUTF8, name.length));
+	return self->LoadMenuBar(parent,wxstr(name));
 }
 
 extern "C" WXEXPORT
 wxMenuBar* wxXmlResource_LoadMenuBar(wxXmlResource* self, dstr name)
 {
-	return self->LoadMenuBar(wxString(name.data, wxConvUTF8, name.length));
+	return self->LoadMenuBar(wxstr(name));
 }
 
 //-----------------------------------------------------------------------------
@@ -178,13 +178,13 @@ wxMenuBar* wxXmlResource_LoadMenuBar(wxXmlResource* self, dstr name)
 extern "C" WXEXPORT
 dbit wxXmlResource_LoadPanelWithPanel(wxXmlResource* self, wxPanel* panel, wxWindow* parent, dstr name)
 {
-	return self->LoadPanel(panel, parent, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->LoadPanel(panel, parent, wxstr(name))?1:0;
 }
 
 extern "C" WXEXPORT
 wxPanel* wxXmlResource_LoadPanel(wxXmlResource* self, wxWindow* parent, dstr name)
 {
-	return self->LoadPanel(parent, wxString(name.data, wxConvUTF8, name.length));
+	return self->LoadPanel(parent, wxstr(name));
 }
 
 //-----------------------------------------------------------------------------
@@ -192,7 +192,7 @@ wxPanel* wxXmlResource_LoadPanel(wxXmlResource* self, wxWindow* parent, dstr nam
 extern "C" WXEXPORT
 wxToolBar* wxXmlResource_LoadToolBar(wxXmlResource* self, wxWindow* parent, dstr name)
 {
-	return self->LoadToolBar(parent, wxString(name.data, wxConvUTF8, name.length));
+	return self->LoadToolBar(parent, wxstr(name));
 }
 
 //-----------------------------------------------------------------------------
@@ -234,6 +234,6 @@ void wxXmlResource_UpdateResources(wxXmlResource* self)
 extern "C" WXEXPORT
 dbit wxXmlResource_AttachUnknownControl(wxXmlResource* self, dstr name, wxWindow* control, wxWindow* parent)
 {
-	return self->AttachUnknownControl(wxString(name.data, wxConvUTF8, name.length), control, parent)?1:0;
+	return self->AttachUnknownControl(wxstr(name), control, parent)?1:0;
 }
 

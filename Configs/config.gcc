@@ -1,0 +1,47 @@
+# from samples
+
+# the regular GNU Makefile
+
+WX_CONFIG ?= wx-config
+
+# D compiler to use (DMD or GDC)
+COMPILER = GDC
+
+# wx platform to use (e.g. WXGTK)
+PLATFORM = $(shell cat $(TOPDIR)/wxc/platform)
+
+# wx char encoding (ANSI/UNICODE)
+ENCODING = $(shell cat $(TOPDIR)/wxc/encoding)
+
+CXX ?= $(shell $(WX_CONFIG) --cxx)
+CXXFLAGS = -O2
+CXXLIBS = -lstdc++
+
+DC = gdc
+DFLAGS = -O2 -g
+
+WXVERSION = `$(WX_CONFIG) --version`
+WXFLAGS = `$(WX_CONFIG) --cxxflags`
+WXLIBS = `$(WX_CONFIG) --libs`
+
+ifeq ("$(STC)","1")
+WXLIBS = `$(WX_CONFIG) --libs stc`
+endif
+
+.cpp.o:
+	$(CXX) $(WXFLAGS) $(CXXFLAGS) -c -o $@ $<
+
+VERSION=-fversion=__$(PLATFORM)__ -fversion=$(ENCODING)
+
+%.o:%.d
+	$(DC) $(VERSION) -I$(TOPDIR) $(DFLAGS) -c -o $@ $<
+
+
+all: $(TARGET)
+
+$(TARGET) : $(OBJECTS)
+	$(DC) -o $@ $(OBJECTS) -L$(TOPDIR) -lwxd -lwxc $(WXLIBS) $(CXXLIBS) $(LDFLAGS)
+
+clean:
+	-rm *.o
+	-rm $(TARGET)

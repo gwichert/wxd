@@ -37,7 +37,7 @@ extern "C" WXEXPORT
 wxProgressDialog* wxProgressDialog_ctor(dstr title, dstr message,
         int maximum, wxWindow* parent, int style)
 {
-    return new _ProgressDialog(wxString(title.data, wxConvUTF8, title.length), wxString(message.data, wxConvUTF8, message.length),
+    return new _ProgressDialog(wxstr(title), wxstr(message),
             maximum, parent, style);
 }
 
@@ -54,7 +54,7 @@ void wxProgressDialog_dtor(wxProgressDialog* self)
 extern "C" WXEXPORT
 dbit wxProgressDialog_Update(wxProgressDialog* self, int value, dstr newmsg)
 {
-    return self->Update(value, wxString(newmsg.data, wxConvUTF8, newmsg.length))?1:0;
+    return self->Update(value, wxstr(newmsg))?1:0;
 }
 
 //-----------------------------------------------------------------------------

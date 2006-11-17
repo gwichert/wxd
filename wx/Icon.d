@@ -17,6 +17,11 @@ module wx.Icon;
 public import wx.common;
 public import wx.Bitmap;
 
+//! \cond STD
+private import std.string;
+private import std.utf;
+//! \endcond
+
 		//! \cond EXTERN
 		static extern (C) IntPtr wxIcon_ctor();
 		static extern (C) void   wxIcon_CopyFromBitmap(IntPtr self, IntPtr bitmap);
@@ -34,7 +39,7 @@ public import wx.Bitmap;
 			this();
 			Image img = new Image();
 			if (!img.LoadFile(name))
-				throw new ArgumentException("file '" ~ name ~ "' not found");
+				throw new ArgumentException("file '" ~ toUTF8(name) ~ "' not found");
 
 			Bitmap bmp = new Bitmap(img);
 			wxIcon_CopyFromBitmap(wxobj, bmp.wxobj);
@@ -46,7 +51,7 @@ public import wx.Bitmap;
 //			if (type == BitmapType.wxBITMAP_TYPE_RESOURCE)
 //			else
 			if (!wxIcon_LoadFile(wxobj, name, type))
-				throw new ArgumentException("file '" ~ name ~ "' can't load");
+				throw new ArgumentException("file '" ~ toUTF8(name) ~ "' can't load");
 		}
 
 		public this()

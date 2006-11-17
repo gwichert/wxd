@@ -54,7 +54,7 @@ dbit wxStaticText_Create(wxStaticText *self, wxWindow* parent, wxWindowID id, ds
 	if (name.data==NULL)
 		name = dstr("staticText");
 
-	return self->Create(parent, id, wxString(label.data, wxConvUTF8, label.length), *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, wxstr(label), *pos, *size, style, wxstr(name))?1:0;
 }
 
 // On WIN32 EVT_ENTER_WINDOW and EVT_LEAVE_WINDOW are broken in wxWidgets. And

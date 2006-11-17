@@ -18,6 +18,7 @@ public import wx.common;
 
 //! \cond STD
 private import std.string;
+private import std.utf;
 //! \endcond
 
 		//! \cond EXTERN
@@ -72,7 +73,7 @@ private import std.string;
 
 		public this(string name)
 		{ 
-			this(wxColour_ctorByName(toupper(name)), true);
+			this(wxColour_ctorByName(name), true); // toupper
 			//wxColour_RegisterDisposable(wxobj, &VirtualDispose);
 		}
 

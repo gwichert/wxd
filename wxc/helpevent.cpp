@@ -53,7 +53,7 @@ dstrret wxHelpEvent_GetLink(wxHelpEvent* self)
 extern "C" WXEXPORT
 void wxHelpEvent_SetLink(wxHelpEvent* self, dstr link)
 {
-	self->SetLink(wxString(link.data, wxConvUTF8, link.length));
+	self->SetLink(wxstr(link));
 }
 
 //-----------------------------------------------------------------------------
@@ -69,6 +69,6 @@ dstrret wxHelpEvent_GetTarget(wxHelpEvent* self)
 extern "C" WXEXPORT
 void wxHelpEvent_SetTarget(wxHelpEvent* self, dstr target)
 {
-	self->SetTarget(wxString(target.data, wxConvUTF8, target.length));
+	self->SetTarget(wxstr(target));
 }
 

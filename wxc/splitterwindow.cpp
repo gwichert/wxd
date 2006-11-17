@@ -76,7 +76,7 @@ wxSplitterWindow* wxSplitWnd_ctor(wxWindow *parent, wxWindowID id, const wxPoint
 	if (name.data==NULL)
 		name = dstr(wxPanelNameStr);
 
-	return new _SplitterWindow(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
+	return new _SplitterWindow(parent, id, *pos, *size, style, wxstr(name));
 }
 
 extern "C" WXEXPORT

@@ -28,7 +28,7 @@ public import wx.Notebook;
 		//---------------------------------------------------------------------
 
 	alias NotebookSizer wxNotebookSizer;
-	public class NotebookSizer : Sizer
+	/*deprecated*/ public class NotebookSizer : Sizer
 	{
 		public this(IntPtr wxobj)
 		{

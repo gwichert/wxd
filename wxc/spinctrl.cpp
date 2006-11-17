@@ -51,7 +51,7 @@ dbit wxSpinCtrl_Create(wxSpinCtrl* self, wxWindow *parent, wxWindowID id, dstr v
 	if (name.data==NULL)
 		name = dstr("spinctrl");
 
-	return self->Create(parent, id, wxString(value.data, wxConvUTF8, value.length), *pos, *size, style, min, max, initial, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, wxstr(value), *pos, *size, style, min, max, initial, wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -75,7 +75,7 @@ void wxSpinCtrl_SetValue(wxSpinCtrl* self, int val)
 extern "C" WXEXPORT
 void wxSpinCtrl_SetValueStr(wxSpinCtrl* self, dstr text)
 {
-	self->SetValue(wxString(text.data, wxConvUTF8, text.length));
+	self->SetValue(wxstr(text));
 }
 
 //-----------------------------------------------------------------------------

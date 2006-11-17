@@ -50,7 +50,7 @@ dbit wxStaticLine_Create(wxStaticLine *self, wxWindow* parent, wxWindowID id, co
 	if (name.data==NULL)
 		name = dstr("staticLine");
 
-	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, *pos, *size, style, wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------

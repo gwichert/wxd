@@ -30,7 +30,7 @@ wxDocument* wxDocument_ctor(wxDocument* parent)
 extern "C" WXEXPORT
 void wxDocument_SetFilename(wxDocument* self, dstr filename, dbit notifyViews)
 {
-    self->SetFilename(wxString(filename.data, wxConvUTF8, filename.length), notifyViews);
+    self->SetFilename(wxstr(filename), notifyViews);
 }
 
 //-----------------------------------------------------------------------------
@@ -46,7 +46,7 @@ dstrret wxDocument_GetFilename(wxDocument* self)
 extern "C" WXEXPORT
 void wxDocument_SetTitle(wxDocument* self, dstr title)
 {
-    self->SetTitle(wxString(title.data, wxConvUTF8, title.length));
+    self->SetTitle(wxstr(title));
 }
 
 //-----------------------------------------------------------------------------
@@ -62,7 +62,7 @@ dstrret wxDocument_GetTitle(wxDocument* self)
 extern "C" WXEXPORT
 void wxDocument_SetDocumentName(wxDocument* self, dstr name)
 {
-    self->SetDocumentName(wxString(name.data, wxConvUTF8, name.length));
+    self->SetDocumentName(wxstr(name));
 }
 
 //-----------------------------------------------------------------------------

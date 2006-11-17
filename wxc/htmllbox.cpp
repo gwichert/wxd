@@ -75,10 +75,10 @@ class _HtmlListBox : public wxHtmlListBox
 	protected:
 			
 		wxString OnGetItem( size_t n) const
-			{ dstr tmp = m_OnGetItem(m_dobj, n); return wxString(tmp.data, wxConvUTF8, tmp.length); }
+			{ dstr tmp = m_OnGetItem(m_dobj, n); return wxstr(tmp); }
 			
 		wxString OnGetItemMarkup( size_t n) const
-			{ dstr tmp = m_OnGetItemMarkup(m_dobj, n); return wxString(tmp.data, wxConvUTF8, tmp.length); }
+			{ dstr tmp = m_OnGetItemMarkup(m_dobj, n); return wxstr(tmp); }
 			
 		wxColour GetSelectedTextColour( const wxColour& colFg) const
 			{ return wxColour(*m_GetSelectedTextColour(m_dobj, new wxColour(colFg))); }
@@ -159,7 +159,7 @@ wxHtmlListBox* wxHtmlListBox_ctor2(wxWindow* parent, wxWindowID id, const wxPoin
 	if (name.data==NULL)
 		name = dstr("htmllistbox");
 		
-	return new _HtmlListBox(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
+	return new _HtmlListBox(parent, id, *pos, *size, style, wxstr(name));
 }
 
 extern "C" WXEXPORT
@@ -185,7 +185,7 @@ void wxHtmlListBox_RegisterVirtual(_HtmlListBox* self, dobj obj,
 extern "C" WXEXPORT
 dbit wxHtmlListBox_Create(_HtmlListBox* self, wxWindow* parent, wxWindowID id, wxPoint* pos, wxSize* size, int style, dstr name)
 {
-	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, *pos, *size, style, wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------

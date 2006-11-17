@@ -1,42 +1,60 @@
-MAKE=make
+SHELL=/bin/sh
+MAKE?=make
 
 OS=$(shell uname)
-ARCH=$(shell (arch 2>/dev/null || echo i386) | sed -e s/i.86/x86/ )
+ARCH=$(shell (arch 2>/dev/null || uname -m || echo i386) | sed -e s/i.86/x86/ )
 
+# D compiler to use (DMD or GDC)
 ifeq ("$(OS) $(ARCH)","Linux x86")
 COMPILER=DMD
-DMD=dmd
 else
 COMPILER=GDC
-DMD=gdmd
 endif
+export COMPILER
 
-PLATFORM=$(shell cat wxc/platform 2>/dev/null )
+# wx platform to use (e.g. WXGTK)
+PLATFORM=$(shell cat wxc/platform 2>/dev/null)
 export PLATFORM
 
-CXX_WXD = $(CXX) -D__$(COMPILER)__
-DMD_WXD = $(DMD) -version=__$(PLATFORM)__
+# wx char encoding (ANSI/UNICODE)
+ENCODING=$(shell cat wxc/encoding 2>/dev/null)
+export ENCODING
 
-all: wxc/platform
-	$(MAKE) CXX="$(CXX_WXD)" -C wxc
-	$(MAKE) DMD="$(DMD_WXD)" -C wx
-	$(MAKE) DMD="$(DMD_WXD)" -C Samples
+# set this to 1 if you have "stc"
+STC=0
+export STC
+
+# set this to 1 if you have "ogl"
+OGL=0
+export OGL
+
+all: wxc/platform wxc/encoding
+	$(MAKE) -C wxc
+	$(MAKE) -C wx
 
 install:
-	$(MAKE) CXX="$(CXX_WXD)" install -C wxc
-	$(MAKE) DMD="$(DMD_WXD)" install -C wx
+	$(MAKE) install -C wxc
+	$(MAKE) install -C wx
+
+test:
+	$(MAKE) -C Samples
 
 wxc/platform:
-	$(MAKE) CXX="$(CXX_WXD)" platform -C wxc 
+	$(MAKE) -C wxc platform
 
-ddoc: wxc/platform
-	$(MAKE) DMD="$(DMD_WXD)" ddoc -C wx
+wxc/encoding:
+	$(MAKE) -C wxc encoding
 
 docs: Doxyfile
 	doxygen
 
+ddoc: wxc/platform wxc/encoding
+	$(MAKE) -C wx ddoc
+
 clean:
-	$(MAKE) CXX="$(CXX_WXD)" clean -C wxc
-	$(MAKE) DMD="$(DMD_WXD)" clean -C wx
-	$(MAKE) DMD="$(DMD_WXD)" clean -C Samples
+	$(MAKE) clean -C wxc
+	$(MAKE) clean -C wx
+	$(MAKE) clean -C Samples
 	-rm wxc/platform
+	-rm wxc/encoding
+

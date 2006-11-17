@@ -135,7 +135,7 @@ public import wx.MenuItem;
 			
 		//! \cond VERSION
 		version(__WXMAC__) {} else {
-		//! \endcond VERSION
+		//! \endcond
 		//-----------------------------------------------------------------------------
 
 		/*public void Add(AcceleratorEntry entry)
@@ -165,7 +165,7 @@ public import wx.MenuItem;
 		}*/
 		//! \cond VERSION
 		} // version(__WXMAC__)
-		//! \endcond VERSION
+		//! \endcond
 
 		//-----------------------------------------------------------------------------
 

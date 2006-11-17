@@ -24,19 +24,22 @@ public import wx.FontMisc;
 
 //! \cond STD
 private import std.string;
+private import std.utf;
 //! \endcond
 
 		//! \cond EXTERN
 	extern (C) {
 	alias bool function(App o) Virtual_OnInit;
+	alias int  function(App o) Virtual_OnRun;
 	alias int  function(App o) Virtual_OnExit;
 	alias bool function(App o,inout int argc,char** argv) Virtual_Initialize;
 	}
 	
 	static extern (C) IntPtr wxApp_ctor();
-	static extern (C) void wxApp_RegisterVirtual(IntPtr self, App o, Virtual_OnInit onInit, Virtual_OnExit onExit, Virtual_Initialize initalize);
+	static extern (C) void wxApp_RegisterVirtual(IntPtr self, App o, Virtual_OnInit onInit, Virtual_OnRun onRun, Virtual_OnExit onExit, Virtual_Initialize initalize);
 	static extern (C) bool wxApp_Initialize(IntPtr self,inout int argc,char** argv);
 	static extern (C) bool wxApp_OnInit(IntPtr self);
+	static extern (C) bool wxApp_OnRun(IntPtr self);
 	static extern (C) int wxApp_OnExit(IntPtr self);
 	
         static extern (C) void   wxApp_Run(int argc, char** argv);
@@ -46,6 +49,9 @@ private import std.string;
 
         static extern (C) void   wxApp_SetAppName(IntPtr self, string name);
         static extern (C) string wxApp_GetAppName(IntPtr self);
+
+        static extern (C) void   wxApp_SetTopWindow(IntPtr self, IntPtr window);
+        static extern (C) IntPtr wxApp_GetTopWindow(IntPtr self);
 
         static extern (C) bool   wxApp_SafeYield(IntPtr win, bool onlyIfNeeded);
         static extern (C) bool   wxApp_Yield(IntPtr self, bool onlyIfNeeded);
@@ -78,7 +84,7 @@ private import std.string;
 		
 		FontMapper.initialize();
 	    
-	    wxApp_RegisterVirtual(wxobj, this, &staticOnInit, &staticOnExit, &staticInitialize);
+	    wxApp_RegisterVirtual(wxobj, this, &staticOnInit, &staticOnRun, &staticOnExit, &staticInitialize);
         }
 
         //---------------------------------------------------------------------
@@ -94,6 +100,11 @@ private import std.string;
 		try return o.OnInit();
 		catch(Object e) o.catchException(e);
 		return false;
+ 	}
+
+	extern (C) private static int  staticOnRun(App o)
+ 	{
+		return o.OnRun();
  	}
 
 	extern (C) private static int  staticOnExit(App o)
@@ -113,6 +124,11 @@ private import std.string;
 		return wxApp_OnInit(wxobj);
 	}
 	
+	public /+virtual+/ int OnRun()
+	{
+		return wxApp_OnRun(wxobj);
+	}
+
 	public /+virtual+/ int OnExit()
 	{
 		return wxApp_OnExit(wxobj);
@@ -138,8 +154,8 @@ private import std.string;
         public void Run(string[] args)
         {
 			char*[] c_args = new char*[args.length];
-			foreach (int i, char[] arg; args)
-				c_args[i] = toStringz(arg);
+			foreach (int i, string arg; args)
+				c_args[i] = toStringz(toUTF8(arg));
 			
             wxApp_Run(c_args.length, c_args.ptr);
 			
@@ -157,6 +173,12 @@ private import std.string;
         
         public string VendorName() { return wxApp_GetVendorName(wxobj).dup; }
         public string AppName() { return wxApp_GetAppName(wxobj).dup; }
+
+        //---------------------------------------------------------------------
+
+        public Window TopWindow() { return cast(Window) FindObject(wxApp_GetTopWindow(wxobj)); }
+        public void TopWindow(Window window) { wxApp_SetTopWindow(wxobj, window.wxobj); }
+
         //---------------------------------------------------------------------
 
         public static bool SafeYield() 

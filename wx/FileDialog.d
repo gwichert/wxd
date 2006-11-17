@@ -120,10 +120,10 @@ private import std.string;
     }
 
 	//! \cond EXTERN
-	static extern (C) string wxFileSelector_func(char[] message, char[] default_path,char[] default_filename,char[] default_extension, char[] wildcard, int flags, IntPtr parent, int x, int y);
-	static extern (C) string wxFileSelectorEx_func(char[] message, char[] default_path,char[] default_filename,int *indexDefaultExtension, char[] wildcard, int flags, IntPtr parent, int x, int y);
-	static extern (C) string wxLoadFileSelector_func(char[] what, char[] extension, char[] default_name, IntPtr parent);
-	static extern (C) string wxSaveFileSelector_func(char[] what, char[] extension, char[] default_name, IntPtr parent);
+	static extern (C) string wxFileSelector_func(string message, string default_path, string default_filename, string default_extension, string wildcard, int flags, IntPtr parent, int x, int y);
+	static extern (C) string wxFileSelectorEx_func(string message, string default_path, string default_filename,int *indexDefaultExtension, string wildcard, int flags, IntPtr parent, int x, int y);
+	static extern (C) string wxLoadFileSelector_func(string what, string extension, string default_name, IntPtr parent);
+	static extern (C) string wxSaveFileSelector_func(string what, string extension, string default_name, IntPtr parent);
 	//! \endcond
 
 string FileSelector(

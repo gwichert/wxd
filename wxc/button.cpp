@@ -51,7 +51,7 @@ dbit wxButton_Create(wxButton *self, wxWindow* parent, wxWindowID id, dstr label
 	if (name.data==NULL)
 		name = dstr("button");
 
-	return self->Create(parent, id, wxString(label.data, wxConvUTF8, label.length), *pos, *size, style, *validator, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, wxstr(label), *pos, *size, style, *validator, wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -91,7 +91,7 @@ void wxButton_SetImageMargins(wxButton* self, wxCoord x, wxCoord y)
 extern "C" WXEXPORT
 void wxButton_SetLabel(wxButton* self, dstr label)
 {
-	self->SetLabel(wxString(label.data, wxConvUTF8, label.length));
+	self->SetLabel(wxstr(label));
 }
 
 

@@ -2,9 +2,14 @@
 module wx.common;
 
 /*! \mainpage
- *  <p>wxD is <a href="http://www.wxwidgets.org/">wxWidgets</a> bindings for
- *  <a href="http://www.d-programming-language.org/">the D programming language</a>.</p>
+ *  <p><a href="http://wxd.sourceforge.net/"><b>wxD</b></a> is
+ *  <a href="http://www.wxwidgets.org/">wxWidgets</a> bindings for the
+ *  <a href="http://www.d-programming-language.org/">D programming language</a>.</p>
  */   
+
+//! \cond STD
+private import std.c.stddef;
+//! \endcond
 
 interface IDisposable
 {
@@ -42,11 +47,16 @@ class ArgumentNullException : Exception
 }
 
 
-	struct c_obj;
 	/// An implementation-specific type that is used to represent a pointer or a handle.
-	typedef c_obj* IntPtr;
+	typedef void* IntPtr;
+
+version(UNICODE)
+	alias wchar_t wxChar;
+else // ANSI
+	alias char wxChar;
 
 	alias char[] string;
+
 
 //public import wx.Defs;
 public public import wx.wxObject;

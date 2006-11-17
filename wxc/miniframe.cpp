@@ -48,7 +48,7 @@ dbit wxMiniFrame_Create(wxMiniFrame* self, wxWindow* parent, wxWindowID id, dstr
     if (name.data==NULL)
         name = dstr("miniFrame");
 
-    return self->Create(parent, id, wxString(title.data, wxConvUTF8, title.length), *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+    return self->Create(parent, id, wxstr(title), *pos, *size, style, wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------

@@ -57,8 +57,8 @@ dbit wxStaticBox_Create(wxStaticBox* self, wxWindow* parent, wxWindowID id,
     if (name.data==NULL)
         name = dstr("staticBox");
 
-    return self->Create(parent, id, wxString(label.data, wxConvUTF8, label.length),
-                        *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+    return self->Create(parent, id, wxstr(label),
+                        *pos, *size, style, wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------

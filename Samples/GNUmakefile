@@ -1,5 +1,5 @@
-MAKE=make
-export PLATFORM
+MAKE?=make
+export COMPILER PLATFORM ENCODING STC OGL
 
 all:
 	$(MAKE) -C Controls
@@ -25,12 +25,15 @@ all:
 	$(MAKE) -C Platform
 	$(MAKE) -C Printing
 	$(MAKE) -C SashWindow
+#	$(MAKE) -C SDLPanel
 #	$(MAKE) -C Sound
 	$(MAKE) -C Splitter
+#	$(MAKE) -C StyledText
 	$(MAKE) -C TreeCtrl
 #	$(MAKE) -C Tutorial
 	$(MAKE) -C Wizard
 	$(MAKE) -C Xrc
+#	$(MAKE) -C Aui
 
 clean:
 	$(MAKE) clean -C Controls
@@ -56,9 +59,12 @@ clean:
 	$(MAKE) clean -C Platform
 	$(MAKE) clean -C Printing
 	$(MAKE) clean -C SashWindow
+	$(MAKE) clean -C SDLPanel
 	$(MAKE) clean -C Sound
 	$(MAKE) clean -C Splitter
+	$(MAKE) clean -C StyledText
 	$(MAKE) clean -C TreeCtrl
 	$(MAKE) clean -C Tutorial
 	$(MAKE) clean -C Wizard
 	$(MAKE) clean -C Xrc
+	$(MAKE) clean -C Aui

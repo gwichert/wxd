@@ -61,7 +61,7 @@ wxPanel* wxPanel_ctor2(wxWindow *parent, wxWindowID id, const wxPoint* pos,
 	if (name.data==NULL)
 		name = dstr("panel");
 
-	return new _Panel(parent, id, *pos, *size, style);//, wxString(name.data, wxConvUTF8, name.length));
+	return new _Panel(parent, id, *pos, *size, style);//, wxstr(name));
 }
 
 //-----------------------------------------------------------------------------
@@ -79,7 +79,7 @@ dbit wxPanel_Create(wxPanel* self, wxWindow *parent, wxWindowID id, const wxPoin
 	if (name.data==NULL)
 		name = dstr("panel");
 
-	return self->Create(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+	return self->Create(parent, id, *pos, *size, style, wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -95,11 +95,29 @@ void wxPanel_InitDialog(wxPanel* self)
 extern "C" WXEXPORT
 void wxPanel_SetDefaultItem(wxPanel* self, wxButton* btn)
 {
+#if wxABI_VERSION < 20700
 	self->SetDefaultItem(btn);
+#else
+    if ((self->GetClassInfo())->IsKindOf(CLASSINFO(wxTopLevelWindow)))
+    {
+	wxTopLevelWindow *wind = (wxTopLevelWindow *) self;
+	wind->SetDefaultItem(btn);
+    }
+#endif
 }
 
 extern "C" WXEXPORT
 wxButton* wxPanel_GetDefaultItem(wxPanel* self)
 {
+#if wxABI_VERSION < 20700
 	return (wxButton*)self->GetDefaultItem();
+#else
+    if ((self->GetClassInfo())->IsKindOf(CLASSINFO(wxTopLevelWindow)))
+    {
+	wxTopLevelWindow *wind = (wxTopLevelWindow *) self;
+	return (wxButton*)wind->GetDefaultItem();
+    }
+    else
+    return NULL;
+#endif
 }

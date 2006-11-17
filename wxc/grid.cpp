@@ -289,7 +289,7 @@ void wxGridCellWorker_DecRef(_GridCellWorker* self)
 extern "C" WXEXPORT
 void wxGridCellWorker_SetParameters(_GridCellWorker* self, dstr params)
 {
-    self->wxGridCellWorker::SetParameters(wxString(params.data, wxConvUTF8, params.length));
+    self->wxGridCellWorker::SetParameters(wxstr(params));
 }
 
 //-----------------------------------------------------------------------------
@@ -375,7 +375,7 @@ wxGrid* wxGrid_ctor()
 extern "C" WXEXPORT
 wxGrid* wxGrid_ctorFull(wxWindow* parent, wxWindowID id, wxPoint* pos, wxSize* size, int style, dstr name)
 {
-    return new _Grid(parent, id, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length));
+    return new _Grid(parent, id, *pos, *size, style, wxstr(name));
 }
 
 //-----------------------------------------------------------------------------
@@ -995,7 +995,7 @@ void wxGrid_SetColLabelAlignment(wxGrid* self, int horiz, int vert)
 extern "C" WXEXPORT
 void wxGrid_SetRowLabelValue(wxGrid* self, int row, dstr val)
 {
-    self->SetRowLabelValue(row, wxString(val.data, wxConvUTF8, val.length));
+    self->SetRowLabelValue(row, wxstr(val));
 }
 
 //-----------------------------------------------------------------------------
@@ -1003,7 +1003,7 @@ void wxGrid_SetRowLabelValue(wxGrid* self, int row, dstr val)
 extern "C" WXEXPORT
 void wxGrid_SetColLabelValue(wxGrid* self, int col, dstr val)
 {
-    self->SetColLabelValue(col, wxString(val.data, wxConvUTF8, val.length));
+    self->SetColLabelValue(col, wxstr(val));
 }
 
 //-----------------------------------------------------------------------------
@@ -1163,7 +1163,7 @@ void wxGrid_SetColFormatFloat(wxGrid* self, int col, int width, int precision)
 extern "C" WXEXPORT
 void wxGrid_SetColFormatCustom(wxGrid* self, int col, dstr typeName)
 {
-    self->SetColFormatCustom(col, wxString(typeName.data, wxConvUTF8, typeName.length));
+    self->SetColFormatCustom(col, wxstr(typeName));
 }
 
 //-----------------------------------------------------------------------------
@@ -1571,7 +1571,7 @@ dstrret wxGrid_GetCellValue(wxGrid* self, int row, int col)
 extern "C" WXEXPORT
 void wxGrid_SetCellValue(wxGrid* self, int row, int col, dstr s)
 {
-    self->SetCellValue(row, col, wxString(s.data, wxConvUTF8, s.length));
+    self->SetCellValue(row, col, wxstr(s));
 }
 
 //-----------------------------------------------------------------------------
@@ -1757,7 +1757,7 @@ void wxGrid_SetSelectionForeground(wxGrid* self, wxColour* c)
 extern "C" WXEXPORT
 void wxGrid_RegisterDataType(wxGrid* self, dstr typeName, wxGridCellRenderer* renderer, wxGridCellEditor* editor)
 {
-    self->RegisterDataType(wxString(typeName.data, wxConvUTF8, typeName.length), renderer, editor);
+    self->RegisterDataType(wxstr(typeName), renderer, editor);
 }
 
 //-----------------------------------------------------------------------------
@@ -1781,7 +1781,7 @@ wxGridCellRenderer* wxGrid_GetDefaultRendererForCell(wxGrid* self, int row, int 
 extern "C" WXEXPORT
 wxGridCellEditor* wxGrid_GetDefaultEditorForType(wxGrid* self, dstr typeName)
 {
-    return self->GetDefaultEditorForType(wxString(typeName.data, wxConvUTF8, typeName.length));
+    return self->GetDefaultEditorForType(wxstr(typeName));
 }
 
 //-----------------------------------------------------------------------------
@@ -1789,7 +1789,7 @@ wxGridCellEditor* wxGrid_GetDefaultEditorForType(wxGrid* self, dstr typeName)
 extern "C" WXEXPORT
 wxGridCellRenderer* wxGrid_GetDefaultRendererForType(wxGrid* self, dstr typeName)
 {
-    return self->GetDefaultRendererForType(wxString(typeName.data, wxConvUTF8, typeName.length));
+    return self->GetDefaultRendererForType(wxstr(typeName));
 }
 
 //-----------------------------------------------------------------------------
@@ -1838,7 +1838,7 @@ wxWindow* wxGrid_GetGridCornerLabelWindow(wxGrid* self)
 extern "C" WXEXPORT
 wxGrid* wxGrid_ctor(wxWindow* parent, int x, int y, int w, int h, int style, dstr name)
 {
-    return new wxGrid(parent, x, y, w, h, style, wxString(name.data, wxConvUTF8, name.length));
+    return new wxGrid(parent, x, y, w, h, style, wxstr(name));
 }
 #endif
 
@@ -1991,7 +1991,7 @@ int wxGrid_GetLabelAlignment(wxGrid* self, int orientation, int align)
 extern "C" WXEXPORT
 void wxGrid_SetLabelValue(wxGrid* self, int orientation, dstr val, int pos)
 {
-    self->SetLabelValue(orientation, wxString(val.data, wxConvUTF8, val.length), pos);
+    self->SetLabelValue(orientation, wxstr(val), pos);
 }
 
 extern "C" WXEXPORT
@@ -2602,7 +2602,7 @@ public:
         { return m_Destroy(m_dobj);}
         
     wxString GetValue() const
-        { dstr tmp = m_GetValue(m_dobj); return wxString(tmp.data, wxConvUTF8, tmp.length);}
+        { dstr tmp = m_GetValue(m_dobj); return wxstr(tmp);}
 
     void RegisterVirtual(dobj obj, Virtual_Create create,
                             Virtual_BeginEdit beginEdit,
@@ -2826,13 +2826,13 @@ public:
         { return m_IsEmptyCell(m_dobj, row, col);}
 
     wxString GetValue(int row, int col)
-        { dstr tmp = m_GetValue(m_dobj, row, col); return wxString(tmp.data, wxConvUTF8, tmp.length);}
+        { dstr tmp = m_GetValue(m_dobj, row, col); return wxstr(tmp);}
 
     void SetValue(int row, int col, const wxString& value)
-        { m_SetValue(m_dobj, row, col, new wxString(value));}
+        { m_SetValue(m_dobj, row, col, wxString(value));}
     
     wxString GetTypeName(int row, int col)
-        { dstr tmp = m_GetTypeName(m_dobj, row, col); return wxString(tmp.data, wxConvUTF8, tmp.length);}
+        { dstr tmp = m_GetTypeName(m_dobj, row, col); return wxstr(tmp);}
     
     bool CanGetValueAs(int row, int col, const wxString& typeName)
         { return m_CanGetValueAs(m_dobj, row, col, dstr(typeName)); }
@@ -2892,16 +2892,16 @@ public:
         { return m_DeleteCols(m_dobj, pos, numCols);}
     
     wxString GetRowLabelValue(int col)
-        { dstr tmp = m_GetRowLabelValue(m_dobj, col); return wxString(tmp.data, wxConvUTF8, tmp.length);}
+        { dstr tmp = m_GetRowLabelValue(m_dobj, col); return wxstr(tmp);}
     
     wxString GetColLabelValue(int col)
-        { dstr tmp = m_GetColLabelValue(m_dobj, col); return wxString(tmp.data, wxConvUTF8, tmp.length);}
+        { dstr tmp = m_GetColLabelValue(m_dobj, col); return wxstr(tmp);}
     
     void SetRowLabelValue(int row, const wxString& value)
         { return m_SetRowLabelValue(m_dobj, row, dstr(value));}
     
     void SetColLabelValue(int row, const wxString& value)
-        { return m_SetColLabelValue(m_dobj, row, new wxString(value));}
+        { return m_SetColLabelValue(m_dobj, row, wxString(value));}
     
     void SetAttrProvider(wxGridCellAttrProvider* attrProvider)
         { return m_SetAttrProvider(m_dobj, attrProvider);}
@@ -3107,7 +3107,7 @@ dstrret wxGridTableBase_GetTypeName(_GridTableBase* self, int row, int col)
 extern "C" WXEXPORT
 dbit wxGridTableBase_CanGetValueAs(_GridTableBase* self, int row, int col, dstr typeName)
 {
-    return self->wxGridTableBase::CanGetValueAs(row, col, wxString(typeName.data, wxConvUTF8, typeName.length))?1:0;
+    return self->wxGridTableBase::CanGetValueAs(row, col, wxstr(typeName))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -3115,7 +3115,7 @@ dbit wxGridTableBase_CanGetValueAs(_GridTableBase* self, int row, int col, dstr 
 extern "C" WXEXPORT
 dbit wxGridTableBase_CanSetValueAs(_GridTableBase* self, int row, int col, dstr typeName)
 {
-    return self->wxGridTableBase::CanSetValueAs(row, col, wxString(typeName.data, wxConvUTF8, typeName.length))?1:0;
+    return self->wxGridTableBase::CanSetValueAs(row, col, wxstr(typeName))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -3171,7 +3171,7 @@ void wxGridTableBase_SetValueAsBool(_GridTableBase* self, int row, int col, dbit
 extern "C" WXEXPORT
 void* wxGridTableBase_GetValueAsCustom(_GridTableBase* self, int row, int col, dstr typeName)
 {
-    return self->wxGridTableBase::GetValueAsCustom(row, col, wxString(typeName.data, wxConvUTF8, typeName.length));
+    return self->wxGridTableBase::GetValueAsCustom(row, col, wxstr(typeName));
 }
 
 //-----------------------------------------------------------------------------
@@ -3179,7 +3179,7 @@ void* wxGridTableBase_GetValueAsCustom(_GridTableBase* self, int row, int col, d
 extern "C" WXEXPORT
 void wxGridTableBase_SetValueAsCustom(_GridTableBase* self, int row, int col, dstr typeName, void* value)
 {
-    self->wxGridTableBase::SetValueAsCustom(row, col, wxString(typeName.data, wxConvUTF8, typeName.length), value);
+    self->wxGridTableBase::SetValueAsCustom(row, col, wxstr(typeName), value);
 }
 
 //-----------------------------------------------------------------------------
@@ -3275,7 +3275,7 @@ dstrret wxGridTableBase_GetColLabelValue(_GridTableBase* self, int col)
 extern "C" WXEXPORT
 void wxGridTableBase_SetRowLabelValue(_GridTableBase* self, int row, dstr value)
 {
-    self->wxGridTableBase::SetRowLabelValue(row,  wxString(value.data, wxConvUTF8, value.length));
+    self->wxGridTableBase::SetRowLabelValue(row,  wxstr(value));
 }
 
 //-----------------------------------------------------------------------------
@@ -3283,7 +3283,7 @@ void wxGridTableBase_SetRowLabelValue(_GridTableBase* self, int row, dstr value)
 extern "C" WXEXPORT
 void wxGridTableBase_SetColLabelValue(_GridTableBase* self, int col, dstr value)
 {
-    self->wxGridTableBase::SetColLabelValue(col,  wxString(value.data, wxConvUTF8, value.length));
+    self->wxGridTableBase::SetColLabelValue(col,  wxstr(value));
 }
 
 //-----------------------------------------------------------------------------
@@ -3409,7 +3409,7 @@ void wxGridCellTextEditor_StartingKey(wxGridCellTextEditor* self, wxKeyEvent* ev
 extern "C" WXEXPORT
 void wxGridCellTextEditor_SetParameters(wxGridCellTextEditor* self, dstr params)
 {
-    self->SetParameters(wxString(params.data, wxConvUTF8, params.length));
+    self->SetParameters(wxstr(params));
 }
 
 extern "C" WXEXPORT
@@ -3602,7 +3602,7 @@ void wxGridCellNumberEditor_StartingKey(wxGridCellNumberEditor* self, wxKeyEvent
 extern "C" WXEXPORT
 void wxGridCellNumberEditor_SetParameters(wxGridCellNumberEditor* self, dstr params)
 {
-    self->SetParameters(wxString(params.data, wxConvUTF8, params.length));
+    self->SetParameters(wxstr(params));
 }
 
 extern "C" WXEXPORT
@@ -3672,7 +3672,7 @@ void wxGridCellFloatEditor_StartingKey(wxGridCellFloatEditor* self, wxKeyEvent* 
 extern "C" WXEXPORT
 void wxGridCellFloatEditor_SetParameters(wxGridCellFloatEditor* self, dstr params)
 {
-    self->SetParameters(wxString(params.data, wxConvUTF8, params.length));
+    self->SetParameters(wxstr(params));
 }
 
 extern "C" WXEXPORT
@@ -3790,7 +3790,7 @@ wxGridCellChoiceEditor* wxGridCellChoiceEditor_ctor(int n, dstr choices[], dbit 
     wxString *pchoices = new wxString[n];
     for (int i = 0; i < n; ++i)
     {
-        pchoices[i] = wxString(choices[i].data, wxConvUTF8, choices[i].length);
+        pchoices[i] = wxstr(choices[i]);
         }
 
     return new _GridCellChoiceEditor(n, pchoices, allowOthers);
@@ -3842,7 +3842,7 @@ void wxGridCellChoiceEditor_Reset(wxGridCellChoiceEditor* self)
 extern "C" WXEXPORT
 void wxGridCellChoiceEditor_SetParameters(wxGridCellChoiceEditor* self, dstr params)
 {
-    self->SetParameters(wxString(params.data, wxConvUTF8, params.length));
+    self->SetParameters(wxstr(params));
 }
 
 extern "C" WXEXPORT
@@ -4007,7 +4007,7 @@ void wxGridCellFloatRenderer_SetPrecision(wxGridCellFloatRenderer* self, int pre
 extern "C" WXEXPORT
 void wxGridCellFloatRenderer_SetParameters(wxGridCellFloatRenderer* self, dstr params)
 {
-    self->SetParameters(wxString(params.data, wxConvUTF8, params.length));
+    self->SetParameters(wxstr(params));
 }
 
 //-----------------------------------------------------------------------------

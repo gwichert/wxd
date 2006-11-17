@@ -42,7 +42,7 @@ wxWizard* wxWizard_ctor(wxWindow* parent, int id, dstr title, const wxBitmap* bi
 	if (bitmap == NULL)
 		bitmap = &wxNullBitmap;
 
-	return new _Wizard(parent, id, wxString(title.data, wxConvUTF8, title.length), *bitmap, *pos, style);
+	return new _Wizard(parent, id, wxstr(title), *bitmap, *pos, style);
 }
 
 //-----------------------------------------------------------------------------
@@ -81,9 +81,9 @@ public:
 // C stubs for class methods
 
 extern "C" WXEXPORT
-wxWizardPageSimple* wxWizardPageSimple_ctor(wxWizard* parent, wxWizardPage* prev, wxWizardPage* next, const wxBitmap* bitmap, const char* resource)
+wxWizardPageSimple* wxWizardPageSimple_ctor(wxWizard* parent, wxWizardPage* prev, wxWizardPage* next, const wxBitmap* bitmap, dstr resource)
 {
-	wxString wxresource = wxString(resource, wxConvUTF8);
+	wxString wxresource = wxstr(resource);
 	return new _WizardPageSimple(parent, prev, next, *bitmap, wxresource.c_str());
 }
 

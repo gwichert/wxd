@@ -157,28 +157,32 @@ OBJECTS = \
 	Grid.obj \
 	GridCtrl.obj \
 	common.obj \
-	NumberDialog.obj \
 	ArrayInt.obj \
 	ArrayString.obj \
 	XmlResource.obj \
+	NumberDialog.obj \
+	aui\FrameManager.obj \
+	aui\DockArt.obj \
+	aui\aui.obj \
+	wx.obj
 	
 #	DbGrid.obj \
-#	NotifyEvent.obj \
 
 all:  $(LIBTARGET)
 
 DMD=dmd
-DFLAGS=-version=__WXMSW__ -I..
+DFLAGS=-O -g
 
 $(LIBTARGET): $(OBJECTS)
 	lib -p512 -c -n $@ $(OBJECTS)
 
 
 .d.obj:
-	$(DMD) -c $(DFLAGS) $<
+	$(DMD) -version=__WXMSW__ -version=__ANSI__ -I.. $(DFLAGS) -c -of$@ $<
 
 clean:
-	-del *.obj
+	-del *.obj aui\*.obj
+	-del *.html aui\*.html
 	-del $(LIBTARGET)
 
 

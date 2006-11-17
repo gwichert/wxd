@@ -57,11 +57,11 @@ dbit wxComboBox_Create(wxComboBox* self, wxWindow* window, int id,
 
     wxString* strings = new wxString[n];
     for (i = 0; i < n; ++i)
-        strings[i] = wxString(choices[i].data, wxConvUTF8, choices[i].length);
+        strings[i] = wxstr(choices[i]);
 
-    return self->Create(window, id, wxString(value.data, wxConvUTF8, value.length), *pos, *size,
+    return self->Create(window, id, wxstr(value), *pos, *size,
                         n, strings, style, *validator,
-                        wxString(name.data, wxConvUTF8, name.length))?1:0;
+                        wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -69,13 +69,13 @@ dbit wxComboBox_Create(wxComboBox* self, wxWindow* window, int id,
 extern "C" WXEXPORT
 void wxComboBox_Append(wxComboBox* self, dstr item)
 {
-    self->Append(wxString(item.data, wxConvUTF8, item.length));
+    self->Append(wxstr(item));
 }
 
 extern "C" WXEXPORT
 void wxComboBox_AppendData(wxComboBox* self, dstr item, void* data)
 {
-    self->Append(wxString(item.data, wxConvUTF8, item.length), data);
+    self->Append(wxstr(item), data);
 }
 
 //-----------------------------------------------------------------------------
@@ -97,7 +97,7 @@ void wxComboBox_Delete(wxComboBox* self, int n)
 extern "C" WXEXPORT
 int wxComboBox_FindString(wxComboBox* self, dstr str)
 {
-    return self->FindString(wxString(str.data, wxConvUTF8, str.length));
+    return self->FindString(wxstr(str));
 }
 
 //-----------------------------------------------------------------------------
@@ -126,7 +126,7 @@ dstrret wxComboBox_GetString(wxComboBox* self, int n)
 extern "C" WXEXPORT
 void wxComboBox_SetString(wxComboBox* self, int n, dstr text)
 {
-    self->SetString(n, wxString(text.data, wxConvUTF8, text.length));
+    self->SetString(n, wxstr(text));
 }
 #endif
 
@@ -139,7 +139,7 @@ dstrret wxComboBox_GetStringSelection(wxComboBox* self)
 extern "C" WXEXPORT
 void wxComboBox_SetStringSelection(wxComboBox* self, dstr str)
 {
-    self->SetStringSelection(wxString(str.data, wxConvUTF8, str.length));
+    self->SetStringSelection(wxstr(str));
 }
 
 //-----------------------------------------------------------------------------
@@ -217,7 +217,7 @@ long wxComboBox_GetLastPosition(wxComboBox* self)
 extern "C" WXEXPORT
 void wxComboBox_Replace(wxComboBox* self, long from, long to, dstr value)
 {
-    self->Replace(from, to, wxString(value.data, wxConvUTF8, value.length));
+    self->Replace(from, to, wxstr(value));
 }
 
 //-----------------------------------------------------------------------------
@@ -263,7 +263,7 @@ dstrret wxComboBox_GetValue(wxComboBox* self)
 extern "C" WXEXPORT
 void wxComboBox_SetValue(wxComboBox* self, dstr text)
 {
-    self->SetValue(wxString(text.data, wxConvUTF8, text.length));
+    self->SetValue(wxstr(text));
 }
 
 //-----------------------------------------------------------------------------

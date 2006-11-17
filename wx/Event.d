@@ -25,6 +25,7 @@ typedef int EventType;
 		static extern (C) int    wxEvent_GetTimestamp(IntPtr self);
 		static extern (C) void   wxEvent_Skip(IntPtr self, bool skip);
 		static extern (C) IntPtr wxEvent_GetEventObject(IntPtr self);
+		static extern (C) void   wxEvent_SetEventObject(IntPtr self, IntPtr object);
 	
 		//---------------------------------------------------------------------
 		static extern (C) EventType wxEvent_EVT_NULL();
@@ -728,7 +729,12 @@ version(__WXMSW__){
 
 		public wxObject EventObject() { return FindObject(wxEvent_GetEventObject(wxobj)); }
 
+		public void EventObject(wxObject obj) { wxEvent_SetEventObject(wxobj, obj.wxobj); }
+
 		//---------------------------------------------------------------------
 
 		public IntPtr EventIntPtr() { return wxEvent_GetEventObject(wxobj); }
+
+		public void EventIntPtr(IntPtr ptr) { return wxEvent_SetEventObject(wxobj, ptr); }
+
 	}

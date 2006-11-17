@@ -12,6 +12,7 @@
 
 import wx.wx;
 import CompareModesDialog;
+import wx.Display;
 
 	// Client data class for the choice	control	containing the video modes
 	public class MyVideoModeClientData : ClientData

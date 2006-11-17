@@ -51,7 +51,7 @@ dbit wxCalendarCtrl_Create(wxCalendarCtrl* self, wxWindow* parent, wxWindowID id
     if (name.data==NULL)
         name = dstr("calendarCtrl");
 
-    return self->Create(parent, id, *date, *pos, *size, style, wxString(name.data, wxConvUTF8, name.length))?1:0;
+    return self->Create(parent, id, *date, *pos, *size, style, wxstr(name))?1:0;
 }
 
 //-----------------------------------------------------------------------------

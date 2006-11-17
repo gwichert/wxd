@@ -22,7 +22,7 @@
 extern "C" WXEXPORT
 int wxMessageBox_func(dstr msg, dstr cap, int style, wxWindow* parent,int x, int y)
 {
-	return wxMessageBox(wxString(msg.data, wxConvUTF8, msg.length), wxString(cap.data, wxConvUTF8, cap.length), style, parent, x, y);
+	return wxMessageBox(wxstr(msg), wxstr(cap), style, parent, x, y);
 }
 
 //-----------------------------------------------------------------------------
@@ -47,12 +47,12 @@ wxMessageDialog* wxMessageDialog_ctor(wxWindow *parent, dstr message, dstr capti
 	if (caption.data==NULL)
         cptn = wxMessageBoxCaptionStr;
     else 
-        cptn = wxString(caption.data, wxConvUTF8, caption.length);
+        cptn = wxstr(caption);
 
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
 
-	return new _MessageDialog(parent, wxString(message.data, wxConvUTF8, message.length), cptn, style, *pos);
+	return new _MessageDialog(parent, wxstr(message), cptn, style, *pos);
 }
 
 //-----------------------------------------------------------------------------

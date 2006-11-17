@@ -48,7 +48,7 @@ dbit wxLocale_Init(wxLocale* self, int language, int flags)
 extern "C" WXEXPORT
 dbit wxLocale_AddCatalog(wxLocale* self, dstr szDomain)
 {
-	return self->AddCatalog(wxString(szDomain.data, wxConvUTF8, szDomain.length))?1:0;
+	return self->AddCatalog(wxstr(szDomain))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -56,7 +56,7 @@ dbit wxLocale_AddCatalog(wxLocale* self, dstr szDomain)
 extern "C" WXEXPORT
 dbit wxLocale_AddCatalog2(wxLocale* self, dstr szDomain, wxLanguage msgIdLanguage, dstr msgIdCharset)
 {
-	return self->AddCatalog(wxString(szDomain.data, wxConvUTF8, szDomain.length), msgIdLanguage, wxString(msgIdCharset.data, wxConvUTF8, msgIdCharset.length));
+	return self->AddCatalog(wxstr(szDomain), msgIdLanguage, wxstr(msgIdCharset));
 }
 
 //-----------------------------------------------------------------------------
@@ -64,7 +64,7 @@ dbit wxLocale_AddCatalog2(wxLocale* self, dstr szDomain, wxLanguage msgIdLanguag
 extern "C" WXEXPORT
 void wxLocale_AddCatalogLookupPathPrefix(wxLocale* self, dstr prefix)
 {
-	self->AddCatalogLookupPathPrefix(wxString(prefix.data, wxConvUTF8, prefix.length));
+	self->AddCatalogLookupPathPrefix(wxstr(prefix));
 }
 
 //-----------------------------------------------------------------------------
@@ -80,7 +80,7 @@ void wxLocale_AddLanguage(wxLanguageInfo* info)
 extern "C" WXEXPORT
 const wxLanguageInfo* wxLocale_FindLanguageInfo(dstr locale)
 {
-	return wxLocale::FindLanguageInfo(wxString(locale.data, wxConvUTF8, locale.length));
+	return wxLocale::FindLanguageInfo(wxstr(locale));
 }
 
 //-----------------------------------------------------------------------------
@@ -135,7 +135,7 @@ dstrret wxLocale_GetName(wxLocale* self)
 extern "C" WXEXPORT
 dstrret wxLocale_GetString(wxLocale* self, dstr szOrigString, dstr szDomain)
 {
-	return dstr_ret(self->GetString(wxString(szOrigString.data, wxConvUTF8, szOrigString.length), wxString(szDomain.data, wxConvUTF8, szDomain.length)));
+	return dstr_ret(self->GetString(wxstr(szOrigString), wxstr(szDomain)));
 }
 
 //-----------------------------------------------------------------------------
@@ -143,7 +143,7 @@ dstrret wxLocale_GetString(wxLocale* self, dstr szOrigString, dstr szDomain)
 extern "C" WXEXPORT
 dstrret wxLocale_GetHeaderValue(wxLocale* self, dstr szHeader, dstr szDomain)
 {
-	return dstr_ret(self->GetHeaderValue(wxString(szHeader.data, wxConvUTF8, szHeader.length), wxString(szDomain.data, wxConvUTF8, szDomain.length)));
+	return dstr_ret(self->GetHeaderValue(wxstr(szHeader), wxstr(szDomain)));
 }
 
 //-----------------------------------------------------------------------------
@@ -183,7 +183,7 @@ int wxLocale_GetSystemLanguage()
 extern "C" WXEXPORT
 dbit wxLocale_IsLoaded(wxLocale* self, dstr domain)
 {
-	return self->IsLoaded(wxString(domain.data, wxConvUTF8, domain.length))?1:0;
+	return self->IsLoaded(wxstr(domain))?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -233,7 +233,7 @@ int wxLanguageInfo_GetLanguage(wxLanguageInfo* self)
 extern "C" WXEXPORT
 void wxLanguageInfo_SetCanonicalName(wxLanguageInfo* self, dstr name)
 {
-	self->CanonicalName = wxString(name.data, wxConvUTF8, name.length);
+	self->CanonicalName = wxstr(name);
 }
 
 //-----------------------------------------------------------------------------
@@ -249,7 +249,7 @@ dstrret wxLanguageInfo_GetCanonicalName(wxLanguageInfo* self)
 extern "C" WXEXPORT
 void wxLanguageInfo_SetDescription(wxLanguageInfo* self, dstr name)
 {
-	self->Description = wxString(name.data, wxConvUTF8, name.length);
+	self->Description = wxstr(name);
 }
 
 //-----------------------------------------------------------------------------

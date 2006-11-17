@@ -150,6 +150,6 @@ public import wx.Window;
 
 		//---------------------------------------------------------------------
 
-		public void Modal(bool value) { wxDialog_SetModal(wxobj, value); }
+		deprecated public void Modal(bool value) { wxDialog_SetModal(wxobj, value); }
 		public bool Modal() { return wxDialog_IsModal(wxobj); }
 	}
