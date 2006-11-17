@@ -15,6 +15,7 @@
 
 module wx.DataObject;
 import wx.common;
+import wx.ArrayString;
 
 	public abstract class DataObject : wxObject
 	{
@@ -40,7 +41,7 @@ import wx.common;
 		
 		//---------------------------------------------------------------------
 				
-		override private void dtor() {  }
+		override protected void dtor() {  }
 	}
 	
 	//---------------------------------------------------------------------
@@ -72,7 +73,7 @@ import wx.common;
 		
 		//---------------------------------------------------------------------
 				
-		override private void dtor() { wxDataObjectSimple_dtor(wxobj); }
+		override protected void dtor() { wxDataObjectSimple_dtor(wxobj); }
 	}
 	
 	//---------------------------------------------------------------------
@@ -113,7 +114,7 @@ import wx.common;
 			
 		//---------------------------------------------------------------------
 				
-		override private void dtor() { wxTextDataObject_dtor(wxobj); }
+		override protected void dtor() { wxTextDataObject_dtor(wxobj); }
 			
 		//---------------------------------------------------------------------
 
@@ -159,7 +160,7 @@ import wx.common;
 		
 		//---------------------------------------------------------------------
 		
-		override private void dtor() { wxFileDataObject_dtor(wxobj); }
+		override protected void dtor() { wxFileDataObject_dtor(wxobj); }
 			
 		//---------------------------------------------------------------------
 			
@@ -170,8 +171,13 @@ import wx.common;
 		
 		public string[] Filenames()
 		{
-		//	return new ArrayString(wxFileDataObject_GetFilenames(wxobj), true);
-			return null;
+			ArrayString a=new ArrayString(wxFileDataObject_GetFilenames(wxobj), true);
+			string[] res;
+			res.length=a.Count;
+			for(uint i=0; i<a.Count; ++i)
+				res[i]=a.Item(i);
+			
+			return res;
 		}
 	
 	}

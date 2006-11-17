@@ -41,7 +41,7 @@ import wx.VScroll;
 		static extern (C) bool wxVListBox_IsSelected(IntPtr self, int item);
 		static extern (C) int wxVListBox_GetSelectedCount(IntPtr self);
 		static extern (C) int wxVListBox_GetFirstSelected(IntPtr self, out uint cookie);
-		static extern (C) int wxVListBox_GetNextSelected(IntPtr self, out uint cookie);
+		static extern (C) int wxVListBox_GetNextSelected(IntPtr self, inout uint cookie);
 		static extern (C) void wxVListBox_GetMargins(IntPtr self, out Point pt);
 		static extern (C) IntPtr wxVListBox_GetSelectionBackground(IntPtr self);
 		static extern (C) void wxVListBox_SetItemCount(IntPtr self, int count);
@@ -186,7 +186,7 @@ import wx.VScroll;
 		
 		//-----------------------------------------------------------------------------
 		
-		public int GetNextSelected(out uint cookie)
+		public int GetNextSelected(inout uint cookie)
 		{
 			return wxVListBox_GetNextSelected(wxobj, cookie);
 		}

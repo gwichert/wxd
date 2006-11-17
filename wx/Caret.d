@@ -67,7 +67,7 @@ import wx.Window;
 		
 		//---------------------------------------------------------------------
 				
-		override private void dtor() { wxCaret_dtor(wxobj); }
+		override protected void dtor() { wxCaret_dtor(wxobj); }
 		
 		//---------------------------------------------------------------------
 
@@ -168,5 +168,5 @@ import wx.Window;
 		
 		//---------------------------------------------------------------------
 				
-		override private void dtor() { wxCaretSuspend_dtor(wxobj); }
+		override protected void dtor() { wxCaretSuspend_dtor(wxobj); }
 	}

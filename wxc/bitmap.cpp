@@ -36,7 +36,7 @@ wxBitmap* wxBitmap_ctorByImage(wxImage* image, int depth)
 extern "C" WXEXPORT
 wxBitmap* wxBitmap_ctorByName(dstr name, int type)
 {
-    return new wxBitmap(wxString(name.data, wxConvUTF8, name.length), type);
+    return new wxBitmap(wxString(name.data, wxConvUTF8, name.length), (wxBitmapType)type);
 }
 
 extern "C" WXEXPORT

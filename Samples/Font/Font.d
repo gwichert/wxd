@@ -149,8 +149,8 @@ alias std.string.find indexOf;
 		protected TextCtrl m_textctrl;
 		protected MyCanvas m_canvas;
 		
-		public static string s_dir;
-		public static string s_file;
+		public static string s_dir="";
+		public static string s_file="";
 		
 		//---------------------------------------------------------------------
 	
@@ -666,7 +666,7 @@ alias std.string.find indexOf;
 		
 		public override bool OnFacename( string facename )
 		{ 
-			m_facenames ~= facename;
+			m_facenames ~= facename.dup;
 			return true;
 		}
 		

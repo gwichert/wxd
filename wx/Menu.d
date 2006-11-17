@@ -576,6 +576,11 @@ import wx.MenuBar;
 
 		public this(IntPtr wxobj)
 			{ super(wxobj); }
+
+		public static wxObject New(IntPtr wxobj)
+		{
+			return new Menu(wxobj);
+		}
 			
 		//---------------------------------------------------------------------
 			

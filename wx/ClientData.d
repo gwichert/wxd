@@ -46,7 +46,7 @@ import wx.common;
 			
 		//---------------------------------------------------------------------
 				
-		override private void dtor() { wxClientData_dtor(wxobj); }
+		override protected void dtor() { wxClientData_dtor(wxobj); }
 
 		static wxObject New(IntPtr ptr) { return new ClientData(ptr); }
 	}
@@ -84,7 +84,7 @@ import wx.common;
 		
 		//---------------------------------------------------------------------
 				
-		override private void dtor() { wxStringClientData_dtor(wxobj); }
+		override protected void dtor() { wxStringClientData_dtor(wxobj); }
 		//---------------------------------------------------------------------
 		
 		public string Data() { return wxStringClientData_GetData(wxobj).dup; }

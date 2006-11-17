@@ -50,7 +50,7 @@ import wx.common;
 			{ this(wxString_ctor2(str), true); }
 		
 		//---------------------------------------------------------------------
-		override private void dtor() { wxString_dtor(wxobj); }				
+		override protected void dtor() { wxString_dtor(wxobj); }				
 		//---------------------------------------------------------------------
 
 		public uint length() { return wxString_Length(wxobj); }

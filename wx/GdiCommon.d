@@ -143,7 +143,7 @@ import wx.Colour;
 			
 		//---------------------------------------------------------------------
 				
-		override private void dtor() { wxColourDataBase_dtor(wxobj); }
+		override protected void dtor() { wxColourDataBase_dtor(wxobj); }
 			
 		//-----------------------------------------------------------------------------
 			

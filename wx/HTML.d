@@ -1296,7 +1296,7 @@ import wx.MouseEvent;
 			
 		//---------------------------------------------------------------------
 				
-		override private void dtor() { wxHtmlRenderingInfo_dtor(wxobj); }
+		override protected void dtor() { wxHtmlRenderingInfo_dtor(wxobj); }
 			
 		//-----------------------------------------------------------------------------
 		
@@ -1346,7 +1346,7 @@ import wx.MouseEvent;
 		
 		//---------------------------------------------------------------------
 				
-		override private void dtor() { wxHtmlSelection_dtor(wxobj); }
+		override protected void dtor() { wxHtmlSelection_dtor(wxobj); }
 			
 		//-----------------------------------------------------------------------------
 		

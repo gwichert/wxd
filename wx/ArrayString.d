@@ -58,6 +58,6 @@ import wx.common;
         
 		//---------------------------------------------------------------------
 
-		override private void dtor() { wxArrayString_dtor(wxobj); }
+		override protected void dtor() { wxArrayString_dtor(wxobj); }
 	}
 	

@@ -78,7 +78,7 @@ import wx.common;
 	    
 	//---------------------------------------------------------------------
 	
-	override private void dtor() { wxDataFormat_dtor(wxobj); }
+	override protected void dtor() { wxDataFormat_dtor(wxobj); }
 
         //-----------------------------------------------------------------------------
 

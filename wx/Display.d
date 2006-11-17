@@ -90,7 +90,7 @@ import wx.VideoMode;
 			
 		//---------------------------------------------------------------------
 
-		override private void dtor() { wxDisplay_dtor(wxobj); }
+		override protected void dtor() { wxDisplay_dtor(wxobj); }
 
 		//------------------------------------------------------------------------
 		static int Count() { return wxDisplay_GetCount(); }

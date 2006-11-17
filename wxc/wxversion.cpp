@@ -41,12 +41,10 @@ long wxVersion_SUBRELEASE_NUMBER()
 extern "C" WXEXPORT
 const char *wxVersion_VERSION_STRING()
 {
-	static wxString vers = wxVERSION_STRING;
-#if wxUSE_UNICODE
-	return vers.mb_str(wxConvUTF8).data();
-#else // ANSI
+	static wxCharBuffer vers = 
+		wxString(wxVERSION_STRING).mb_str(wxConvUTF8);
+	
 	return vers.data();
-#endif
 }
 
 //-----------------------------------------------------------------------------

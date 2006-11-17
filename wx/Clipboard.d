@@ -41,11 +41,13 @@ import wx.DataObject;
 	{
 		static Clipboard TheClipboard = null;
 
-		// this crashes in GTK+, since it needs a valid context first
-		/*static this()
+		// this crashed in GTK+, since it needs a valid context first
+		// so it's called by App in the OnInit() handler now
+		static void initialize()
 		{
-			TheClipboard = new Clipboard(wxClipboard_Get());
-		}*/
+			if(!TheClipboard)
+				TheClipboard = new Clipboard(wxClipboard_Get());
+		}
 
 		public this(IntPtr wxobj)
 			{ super(wxobj);}

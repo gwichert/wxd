@@ -105,7 +105,7 @@ import wx.Window;
 		//! \endcond
 		
 	alias WindowDisabler wxWindowDisabler;
-	public class WindowDisabler : wxObject
+	public auto class WindowDisabler : wxObject
 	{
 		//---------------------------------------------------------------------
 
@@ -128,7 +128,7 @@ import wx.Window;
 			
 		//---------------------------------------------------------------------
 		
-		override private void dtor() { wxWindowDisabler_dtor(wxobj); }
+		override protected void dtor() { wxWindowDisabler_dtor(wxobj); }
 	}
 	
 	//---------------------------------------------------------------------
@@ -139,7 +139,7 @@ import wx.Window;
 		//! \endcond
 		
 	alias BusyInfo wxBusyInfo;
-	public class BusyInfo : wxObject
+	public auto class BusyInfo : wxObject
 	{
 		//---------------------------------------------------------------------
 	
@@ -162,7 +162,7 @@ import wx.Window;
 		
 		//---------------------------------------------------------------------
 
-		override private void dtor() { wxBusyInfo_dtor(wxobj); }
+		override protected void dtor() { wxBusyInfo_dtor(wxobj); }
 	}
 	
 	//---------------------------------------------------------------------

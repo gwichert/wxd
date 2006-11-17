@@ -221,7 +221,7 @@ import wx.ScrolledWindow;
 //	public static wxObject New(IntPtr ptr) { return new GridCellEditor(ptr); }
 	//---------------------------------------------------------------------
 	
-	override private void dtor() { wxGridCellEditor_dtor(wxobj); }
+	override protected void dtor() { wxGridCellEditor_dtor(wxobj); }
             
         //-----------------------------------------------------------------------------
     
@@ -410,7 +410,7 @@ import wx.ScrolledWindow;
 	
 	//---------------------------------------------------------------------
 				
-	override private void dtor() { wxGridCellTextEditor_dtor(wxobj); }
+	override protected void dtor() { wxGridCellTextEditor_dtor(wxobj); }
 
         public override void Create(Window parent, int id, EvtHandler evtHandler)
         {
@@ -513,7 +513,7 @@ import wx.ScrolledWindow;
 	
 	//---------------------------------------------------------------------
 				
-	override private void dtor() { wxGridCellNumberEditor_dtor(wxobj); }
+	override protected void dtor() { wxGridCellNumberEditor_dtor(wxobj); }
 
         public override void Create(Window parent, int id, EvtHandler evtHandler)
         {
@@ -603,7 +603,7 @@ import wx.ScrolledWindow;
 	
 	//---------------------------------------------------------------------
 				
-	override private void dtor() { wxGridCellFloatEditor_dtor(wxobj); }
+	override protected void dtor() { wxGridCellFloatEditor_dtor(wxobj); }
 
         public override void Create(Window parent, int id, EvtHandler evtHandler)
         {
@@ -691,7 +691,7 @@ import wx.ScrolledWindow;
 	
 	//---------------------------------------------------------------------
 				
-	override private void dtor() { wxGridCellBoolEditor_dtor(wxobj); }
+	override protected void dtor() { wxGridCellBoolEditor_dtor(wxobj); }
 
         public override void Create(Window parent, int id, EvtHandler evtHandler)
         {
@@ -784,7 +784,7 @@ import wx.ScrolledWindow;
 	
 	//---------------------------------------------------------------------
 				
-	override private void dtor() { wxGridCellChoiceEditor_dtor(wxobj); }
+	override protected void dtor() { wxGridCellChoiceEditor_dtor(wxobj); }
 
         public override void Create(Window parent, int id, EvtHandler evtHandler)
         {
@@ -955,7 +955,7 @@ import wx.ScrolledWindow;
 	
 	//---------------------------------------------------------------------
 				
-	override private void dtor() {}
+	override protected void dtor() {}
         
         //-----------------------------------------------------------------------------
         
@@ -2491,7 +2491,7 @@ version(NOT_IMPLEMENTED){
 	
 	//---------------------------------------------------------------------
 				
-	override private void dtor() { wxGridCellCoords_dtor(wxobj); }
+	override protected void dtor() { wxGridCellCoords_dtor(wxobj); }
     
         //-----------------------------------------------------------------------------
     
@@ -2582,7 +2582,7 @@ version(NOT_IMPLEMENTED){
 	public static wxObject New(IntPtr ptr) { return new GridCellAttr(ptr); }
 	//---------------------------------------------------------------------
 				
-	override private void dtor() {}
+	override protected void dtor() {}
     
         //-----------------------------------------------------------------------------
     
@@ -2828,7 +2828,7 @@ version(NOT_IMPLEMENTED){
 	
 	//---------------------------------------------------------------------
 	
-	override private void dtor() { wxGridCellRenderer_dtor(wxobj); }
+	override protected void dtor() { wxGridCellRenderer_dtor(wxobj); }
         
         //-----------------------------------------------------------------------------
         
@@ -2893,7 +2893,7 @@ version(NOT_IMPLEMENTED){
 	
 	//---------------------------------------------------------------------
 	
-	override private void dtor() { wxGridCellStringRenderer_dtor(wxobj); }
+	override protected void dtor() { wxGridCellStringRenderer_dtor(wxobj); }
 
 	//---------------------------------------------------------------------
 
@@ -2943,7 +2943,7 @@ version(NOT_IMPLEMENTED){
 	
 	//---------------------------------------------------------------------
 				
-	override private void dtor() { wxGridCellNumberRenderer_dtor(wxobj); }
+	override protected void dtor() { wxGridCellNumberRenderer_dtor(wxobj); }
         
         public override void Draw(Grid grid, GridCellAttr attr, DC dc, Rectangle rect, int row, int col, bool isSelected)
         {
@@ -3004,7 +3004,7 @@ version(NOT_IMPLEMENTED){
 	
 	//---------------------------------------------------------------------
 				
-	override private void dtor() { wxGridCellFloatRenderer_dtor(wxobj); }
+	override protected void dtor() { wxGridCellFloatRenderer_dtor(wxobj); }
         
         public override void SetParameters(string parameter)
         {
@@ -3041,7 +3041,7 @@ version(NOT_IMPLEMENTED){
         //! \cond EXTERN
         static extern (C) IntPtr wxGridCellBoolRenderer_ctor();
 	static extern (C) void wxGridCellBoolRenderer_dtor(IntPtr self);
-	static extern (C) void wxGridCellBoolRenderer_RegisterDisposable(IntPtr self, wxObject obj, Virtual_Dispose onDispose);
+	static extern (C) void wxGridCellBoolRenderer_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
         static extern (C) void wxGridCellBoolRenderer_Draw(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, inout Rectangle rect, int row, int col, bool isSelected);
         static extern (C) void wxGridCellBoolRenderer_GetBestSize(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, int row, int col, out Size size);
         static extern (C) IntPtr wxGridCellBoolRenderer_Clone(IntPtr self);
@@ -3053,7 +3053,7 @@ version(NOT_IMPLEMENTED){
         public this()
 	{ 
 		this(wxGridCellBoolRenderer_ctor(), true);
-		wxGridCellBoolRenderer_RegisterDisposable(wxobj, this, &VirtualDispose);
+		wxGridCellBoolRenderer_RegisterDisposable(wxobj, &VirtualDispose);
 	}
             
         public this(IntPtr wxobj)
@@ -3069,7 +3069,7 @@ version(NOT_IMPLEMENTED){
 	
 	//---------------------------------------------------------------------
 				
-	override private void dtor() { wxGridCellBoolRenderer_dtor(wxobj); }
+	override protected void dtor() { wxGridCellBoolRenderer_dtor(wxobj); }
         
         public override void Draw(Grid grid, GridCellAttr attr, DC dc, Rectangle rect, int row, int col, bool isSelected)
         {
@@ -3634,6 +3634,7 @@ version(NOT_IMPLEMENTED){
             Virtual_SetAttr setAttr,
             Virtual_SetRowAttr setRowAttr,
             Virtual_SetRowAttr setColAttr);
+	static extern (C) void wxGridCellAttrProvider_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
         static extern (C) IntPtr wxGridCellAttrProvider_GetAttr(IntPtr self, int row, int col, int kind);
         static extern (C) void wxGridCellAttrProvider_SetAttr(IntPtr self, IntPtr attr, int row, int col); 
         static extern (C) void wxGridCellAttrProvider_SetRowAttr(IntPtr self, IntPtr attr, int row); 
@@ -3667,12 +3668,14 @@ version(NOT_IMPLEMENTED){
                 &staticDoSetAttr,
                 &staticDoSetRowAttr,
                 &staticDoSetColAttr);
+		
+		wxGridCellAttrProvider_RegisterDisposable(wxobj, &VirtualDispose);
         }
 	
 	public static wxObject New(IntPtr ptr) { return new GridCellAttrProvider(ptr); }
 	//---------------------------------------------------------------------
 				
-	override private void dtor() { wxGridCellAttrProvider_dtor(wxobj); }
+	override protected void dtor() { wxGridCellAttrProvider_dtor(wxobj); }
         
         //-----------------------------------------------------------------------------
         

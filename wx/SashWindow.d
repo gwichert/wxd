@@ -66,7 +66,7 @@ import wx.CommandEvent;
 			
 		//---------------------------------------------------------------------
 				
-		override private void dtor() { wxSashEdge_dtor(wxobj); }
+		override protected void dtor() { wxSashEdge_dtor(wxobj); }
 			
 		//-----------------------------------------------------------------------------
 		

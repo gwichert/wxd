@@ -46,9 +46,10 @@ import wx.ArrayString;
 	{
 		private static FontMapper staticFontMapper;
 		
-		static this()
+		static void initialize()
 		{
-			staticFontMapper = new FontMapper(wxFontMapper_Get());
+			if(!staticFontMapper)
+				staticFontMapper = new FontMapper(wxFontMapper_Get());
 		}
 		
 		//---------------------------------------------------------------------
@@ -69,7 +70,7 @@ import wx.ArrayString;
 			
 		//---------------------------------------------------------------------
 				
-		override private void dtor() { wxFontMapper_dtor(wxobj); }
+		override protected void dtor() { wxFontMapper_dtor(wxobj); }
 			
 		//---------------------------------------------------------------------
 		
@@ -265,7 +266,7 @@ import wx.ArrayString;
 		
 		//---------------------------------------------------------------------
 				
-		override private void dtor() { wxFontEnumerator_dtor(wxobj); }
+		override protected void dtor() { wxFontEnumerator_dtor(wxobj); }
 			
 		//---------------------------------------------------------------------
 		

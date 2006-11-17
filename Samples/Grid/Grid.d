@@ -433,7 +433,7 @@ import wx.wx;
 
 		public void SetLabelColour( Object sender, Event e )
 		{
-			ColourDialog dlg = new ColourDialog();
+			ColourDialog dlg = new ColourDialog(this);
 			if ( dlg.ShowModal() == wxID_OK )
 			{
 				ColourData retData = dlg.colourData;
@@ -445,7 +445,7 @@ import wx.wx;
 		
 		public void SetLabelTextColour( Object sender, Event e )
 		{
-			ColourDialog dlg = new ColourDialog();
+			ColourDialog dlg = new ColourDialog(this);
 			if ( dlg.ShowModal() == wxID_OK )
 			{
 				ColourData retData = dlg.colourData;
@@ -567,7 +567,7 @@ import wx.wx;
 
 		public void SetGridLineColour( Object sender, Event e )
 		{
-			ColourDialog dlg = new ColourDialog();
+			ColourDialog dlg = new ColourDialog(this);
 			if ( dlg.ShowModal() == wxID_OK )
 			{
 				ColourData retData = dlg.colourData;
@@ -637,7 +637,7 @@ import wx.wx;
 
 		public void SetCellFgColour( Object sender, Event e )
 		{
-			ColourDialog dlg = new ColourDialog();
+			ColourDialog dlg = new ColourDialog(this);
 			if ( dlg.ShowModal() == wxID_OK )
 			{
 				ColourData retData = dlg.colourData;
@@ -653,7 +653,7 @@ import wx.wx;
 
 		public void SetCellBgColour( Object sender, Event e )
 		{
-			ColourDialog dlg = new ColourDialog();
+			ColourDialog dlg = new ColourDialog(this);
 			if ( dlg.ShowModal() == wxID_OK )
 			{
 				ColourData retData = dlg.colourData;
@@ -907,7 +907,7 @@ import wx.wx;
 			if ( ( ge.Col == 4 ) &&
 				( ge.Row == 0 ) &&
 				( MessageBox( "Are you sure you wish to edit this cell",
-						"Checking", Dialog.wxYES_NO ) == wxID_NO ) ) 
+						"Checking", Dialog.wxYES_NO ) == Dialog.wxNO ) ) 
 			{
 
 				ge.Veto();
@@ -925,7 +925,7 @@ import wx.wx;
 			if ( ( ge.Col == 4 ) &&
 				( ge.Row == 0 ) &&
 				( MessageBox( "Are you sure you wish to finish editing this cell",
-						"Checking", Dialog.wxYES_NO ) == wxID_NO ) ) 
+						"Checking", Dialog.wxYES_NO ) == Dialog.wxNO ) ) 
 			{
 
 				ge.Veto();

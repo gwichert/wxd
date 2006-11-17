@@ -18,19 +18,28 @@ struct dstr {
 	const char*     data;
 
 	dstr(const wxString& str) {
-		length = str.length();
 	#if wxUSE_UNICODE
-		data = str.mb_str(wxConvUTF8).data();
+		//This buffer is needed to copy the charbuffer returned by mb_str(),
+		//which would otherwise be lost after the constructor returns
+		static wxCharBuffer _buffer;
+		_buffer = wxConvUTF8.cWC2MB(str.c_str(),str.length(),&length);
+		data = _buffer.data();
+		//Trailing \0 is bad for D
+		--length;
 	#else // ANSI
+		length = str.length();
 		data = str.data();
 	#endif
 	}
 
 	dstr(const wxString* str) {
-		length = str->length();
 	#if wxUSE_UNICODE
-		data = str->mb_str(wxConvUTF8).data();
+		static wxCharBuffer _buffer;
+		_buffer = wxConvUTF8.cWC2MB(str->c_str(),str->length(),&length);
+		data = _buffer.data();
+		--length;
 	#else // ANSI
+		length = str->length();
 		data = str->data();
 	#endif
 	}

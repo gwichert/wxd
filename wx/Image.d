@@ -678,7 +678,7 @@ import wx.Colour;
 			
 		//---------------------------------------------------------------------
 				
-		override private void dtor() { wxImageHistogramEntry_dtor(wxobj); }
+		override protected void dtor() { wxImageHistogramEntry_dtor(wxobj); }
 		
 		//---------------------------------------------------------------------
 		

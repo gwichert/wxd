@@ -27,6 +27,9 @@ LDFLAGS = $(WXLIBS) -lstdc++
 
 all: $(TARGET)
 
+# Note: "dmd" uses weird LDFLAGS syntax, so we use "gcc" directly instead,
+#       or it won't work with whatever we get back from "wx-config --libs"
+
 $(TARGET) : $(OBJECTS)
 #	dmd -g -of$@ $(OBJECTS) $(TOPDIR)/libwxd.a $(TOPDIR)/libwxd.a $(LDFLAGS)
 	gcc -o $@ $(OBJECTS) -L$(TOPDIR) -lwxd -lwxc -lm -lphobos $(LDFLAGS)

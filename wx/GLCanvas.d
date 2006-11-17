@@ -155,7 +155,8 @@ import wx.Palette;
 
 		public GLContext context()
 		{
-			return new GLContext( wxGLCanvas_GetContext(wxobj) );
+			IntPtr wxctx = wxGLCanvas_GetContext(wxobj);
+			return wxctx ? new GLContext(wxctx) : null;
 		}
 		
 	}

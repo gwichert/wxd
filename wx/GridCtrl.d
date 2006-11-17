@@ -51,7 +51,7 @@ import wx.Grid;
 		
 		//---------------------------------------------------------------------
 		
-		override private void dtor() { wxGridCellDateTimeRenderer_dtor(wxobj); }
+		override protected void dtor() { wxGridCellDateTimeRenderer_dtor(wxobj); }
 		
 		public override void SetParameters(string parameter)
 		{
@@ -219,7 +219,7 @@ import wx.Grid;
 		
 		//---------------------------------------------------------------------
 		
-		override private void dtor() { wxGridCellAutoWrapStringEditor_dtor(wxobj); }
+		override protected void dtor() { wxGridCellAutoWrapStringEditor_dtor(wxobj); }
 			
 		public override void Create(Window parent, int id, EvtHandler evtHandler)
 		{
@@ -267,7 +267,7 @@ import wx.Grid;
 		
 		//---------------------------------------------------------------------
 				
-		override private void dtor() { wxGridCellAutoWrapStringRenderer_dtor(wxobj); }
+		override protected void dtor() { wxGridCellAutoWrapStringRenderer_dtor(wxobj); }
 		
 		public override void Draw(Grid grid, GridCellAttr attr, DC dc, Rectangle rect, int row, int col, bool isSelected)
 		{

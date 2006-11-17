@@ -11,6 +11,7 @@ wxWidgets is a cross-platform GUI toolkit, which supports Windows,
 Mac OS X, *nix-like OSs - such as Linux,FreeBSD with X11/Motif/GTK.
 
 wxD is delivered work from wx.NET bindings 0.7.2 (wxWidgets 2.6.1)
+It should also work with the later minor versions of wxWidgets 2.6.
 
 It is composed of two parts:
    + wxc is a C++ library which exposes the wxWidgets API as a 
@@ -20,6 +21,12 @@ It is composed of two parts:
 
 
 * Status
+
+0.06 (afb)
+Lots of bugfixes by Matrix, thanks a lot!
+Fixed issue with wxValidator* constness
+Fixed issue with null GL context on Linux
+Added Launcher sample and continued port
 
 0.05 (afb)
 Fixed issue with D bool versus C++ bool
@@ -59,7 +66,7 @@ Some example program crashed.
 
 ** build wxWidgets
 
-- get wxWidgets-2.6.1
+- get wxWidgets-2.6.x
 - extract
 - regenerate, if needed
 windows: (Digital Mars)
@@ -122,6 +129,20 @@ for convenience, use constructor like function:
             Validator validator = wxDefaultValidator,
             string name = wxListBoxNameStr)
    
+* Platforms
+
+When compiling wxD programs, you need to tell it which version of
+wxWidgets that you want (i.e. what platform you are targetting)
+
+If you are using the GNU Makefiles and the wx-config script, then
+your platform name should be available in the file "wxc/platform".
+
+Here are the main supported ones:
+Windows XP     version=__WXMSW__
+Linux/GTK+     version=__WXGTK__
+Macintosh      version=__WXMAC__
+
+For checking the wx platform at runtime, see the wxPlatform class.
 
 * Licence
 
@@ -139,5 +160,7 @@ http://www.opensource.org/licenses/wxwindows.php
 
 - wxWidgets [http://www.wxwidgets.org/]
 - wx.NET [http://wxnet.sourceforge.net/]
-- D [http://www.digitalmars.com/d/]
+- DMD [http://www.digitalmars.com/d/]
+- GDC [http://dgcc.sourceforge.net/]
 - gdcmac [http://gdcmac.sourceforge.net/]
+- gdcwin [http://gdcwin.sourceforge.net/]

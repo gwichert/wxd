@@ -195,7 +195,7 @@ import wx.common;
 			wxobj = IntPtr.init;
 		}
 
-		private void dtor() { wxObject_dtor(wxobj); }
+		protected void dtor() { wxObject_dtor(wxobj); }
 
 		public /+virtual+/ void Dispose()
 		{

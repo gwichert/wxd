@@ -62,7 +62,7 @@ import wx.KeyEvent;
 		}
 		
 		//---------------------------------------------------------------------
-		override private void dtor() { wxTreeItemData_dtor(wxobj); }
+		override protected void dtor() { wxTreeItemData_dtor(wxobj); }
 				
 		//-----------------------------------------------------------------------------
 
@@ -118,7 +118,7 @@ import wx.KeyEvent;
 		
 		//---------------------------------------------------------------------
 				
-		override private void dtor() { wxTreeItemAttr_dtor(wxobj); }
+		override protected void dtor() { wxTreeItemAttr_dtor(wxobj); }
 		
 		//---------------------------------------------------------------------
 		
@@ -189,7 +189,7 @@ import wx.KeyEvent;
 		
 		//---------------------------------------------------------------------
 
-		override private void dtor() { wxTreeItemId_dtor(wxobj); }
+		override protected void dtor() { wxTreeItemId_dtor(wxobj); }
 		
 		//---------------------------------------------------------------------
 		
@@ -421,6 +421,11 @@ import wx.KeyEvent;
 			}
 		}
 		
+		public static wxObject New(IntPtr wxobj)
+		{
+			return new TreeCtrl(wxobj);
+		}
+
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
@@ -1330,5 +1335,5 @@ import wx.KeyEvent;
         
 		//---------------------------------------------------------------------
 
-		override private void dtor() { wxArrayTreeItemIds_dtor(wxobj); }
+		override protected void dtor() { wxArrayTreeItemIds_dtor(wxobj); }
 	}

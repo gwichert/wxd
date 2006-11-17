@@ -34,7 +34,7 @@ alias std.string.rfind LastIndexOf;
 		}
 
 		// for FileOpen2
-		public static string s_extDef;
+		public static string s_extDef="";
 
 		// for Find and Replace
 		public FindReplaceData m_findData;
@@ -482,9 +482,9 @@ alias std.string.rfind LastIndexOf;
 
 		public void OnBusyinfo(Object sender, Event e)
 		{
-			WindowDisabler disableAll = new WindowDisabler();
+			auto WindowDisabler disableAll = new WindowDisabler();
 
-			BusyInfo info = new BusyInfo("Working, please wait...", this);
+			auto BusyInfo info = new BusyInfo("Working, please wait...", this);
 
 			for ( int i = 0; i < 18; i++ )
 			{
@@ -494,9 +494,6 @@ alias std.string.rfind LastIndexOf;
 
 			wxSleep(1);
 
-			// how can this be done automatically ???
-			disableAll.Dispose();
-			info.Dispose();
 		}
 
 		public void OnFind(Object sender, Event e)

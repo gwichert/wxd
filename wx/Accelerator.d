@@ -98,7 +98,7 @@ import wx.MenuItem;
 		public int Command() { return wxAcceleratorEntry_GetCommand(wxobj); }		
 		//---------------------------------------------------------------------
 		
-		override private void dtor() { wxAcceleratorEntry_dtor(wxobj); }
+		override protected void dtor() { wxAcceleratorEntry_dtor(wxobj); }
 
 		//---------------------------------------------------------------------
 		

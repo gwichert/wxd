@@ -25,7 +25,7 @@ import wx.VLBox;
 		alias void function(HtmlListBox obj, int n) Virtual_VoidSizeT;
 		alias string function(HtmlListBox obj, int n) Virtual_wxStringSizeT;
 		alias IntPtr function(HtmlListBox obj, IntPtr colour) Virtual_wxColourwxColour;
-		alias void function(HtmlListBox obj, IntPtr dc, Rectangle rect, int n) Virtual_OnDrawItem;
+		alias void function(HtmlListBox obj, IntPtr dc, inout Rectangle rect, int n) Virtual_OnDrawItem;
 		alias int function(HtmlListBox obj, int n) Virtual_OnMeasureItem;
 		}
 
@@ -167,7 +167,7 @@ import wx.VLBox;
 		
 		//-----------------------------------------------------------------------------
 		
-		static extern(C) private void staticDoOnDrawItem(HtmlListBox obj, IntPtr dc, Rectangle rect, int n)
+		static extern(C) private void staticDoOnDrawItem(HtmlListBox obj, IntPtr dc, inout Rectangle rect, int n)
 		{
 			obj.OnDrawItem(cast(DC)FindObject(dc, &DC.New), rect, n);
 		}
@@ -216,7 +216,7 @@ import wx.VLBox;
 			wxHtmlListBox_OnDrawSeparator(wxobj, wxObject.SafePtr(dc), rect, n);
 		}
 		
-		static extern(C) private void staticDoOnDrawSeparator(HtmlListBox obj,IntPtr dc, Rectangle rect, int n)
+		static extern(C) private void staticDoOnDrawSeparator(HtmlListBox obj,IntPtr dc, inout Rectangle rect, int n)
 		{
 			obj.OnDrawSeparator(cast(DC)FindObject(dc, &DC.New), rect, n);
 		}
@@ -228,7 +228,7 @@ import wx.VLBox;
 			wxHtmlListBox_OnDrawBackground(wxobj, wxObject.SafePtr(dc), rect, n);
 		}
 		
-		static extern(C) private void staticDoOnDrawBackground(HtmlListBox obj,IntPtr dc, Rectangle rect, int n)
+		static extern(C) private void staticDoOnDrawBackground(HtmlListBox obj,IntPtr dc, inout Rectangle rect, int n)
 		{
 			obj.OnDrawBackground(cast(DC)FindObject(dc, &DC.New), rect, n);
 		}

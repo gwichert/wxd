@@ -45,6 +45,16 @@ dbit wxPlatform_WXMAC()
 #endif
 }
 
+extern "C" WXEXPORT
+dbit wxPlatform_WXX11()
+{
+#ifdef __WXX11__
+	return true;
+#else
+	return false;
+#endif
+}
+
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
@@ -77,4 +87,6 @@ extern "C" WXEXPORT int wxPlatform_wxGTK_WIN32()  { return wxGTK_WIN32; } /*  GT
 extern "C" WXEXPORT int wxPlatform_wxMAC()        { return wxMAC; } /*  Apple Mac OS 8/9/X with Mac paths */
 extern "C" WXEXPORT int wxPlatform_wxMAC_DARWIN() { return wxMAC_DARWIN; } /*  Apple Mac OS X with Unix paths */
 
+extern "C" WXEXPORT int wxPlatform_wxUNIX()       { return wxUNIX; } /* wxBase under Unix */
+extern "C" WXEXPORT int wxPlatform_wxX11()        { return wxX11; } /* Plain X11 and Universal widgets */
 

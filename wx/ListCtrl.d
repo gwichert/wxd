@@ -389,6 +389,7 @@ import wx.ImageList;
 			}
 		}
 	
+		public static wxObject New(IntPtr ptr) { return new ListCtrl(ptr); }
 		//---------------------------------------------------------------------
 		// ctors with self created id
 	

@@ -66,7 +66,7 @@ import wx.common;
 	    
 	//---------------------------------------------------------------------
 	
-	override private void dtor() { wxDateTime_dtor(wxobj); }
+	override protected void dtor() { wxDateTime_dtor(wxobj); }
 
         //-----------------------------------------------------------------------------
 

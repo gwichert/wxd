@@ -114,7 +114,7 @@ import wx.KeyEvent;
 			
 		//---------------------------------------------------------------------
 		
-		override private void dtor() { wxTextAttr_dtor(wxobj); }
+		override protected void dtor() { wxTextAttr_dtor(wxobj); }
 			    
 		//---------------------------------------------------------------------
 		
@@ -324,6 +324,11 @@ import wx.KeyEvent;
 			{
 				throw new InvalidOperationException("Failed to create TextCtrl");
 			}
+		}
+
+		public static wxObject New(IntPtr wxobj)
+		{
+			return new TextCtrl(wxobj);
 		}
 	
 		//---------------------------------------------------------------------

@@ -59,7 +59,7 @@ import std.string;
 		{
 			int level = ( n % 6 ) + 1;
 		
-			return std.string.format("<h%d><font color=#%02x%02x%02x>Item</font> <b>%u</b></h%d>",
+			return std.string.format("<h%d><font color=#%02x%02x%02x>Item</font> <b>%d</b></h%d>",
 				level,
 				abs(n - 192) % 256,
 				abs(n - 256) % 256,
@@ -340,7 +340,7 @@ import std.string;
 						s ~= ", ";
 					}
 					
-					s ~= item;
+					s ~= std.string.toString(item);
 					
 				}
 				

@@ -308,7 +308,7 @@ import wx.CommandEvent;
 	
 	//---------------------------------------------------------------------
 				
-	override private void dtor() { wxCalendarDateAttr_dtor(wxobj); }
+	override protected void dtor() { wxCalendarDateAttr_dtor(wxobj); }
 
         //-----------------------------------------------------------------------------
 

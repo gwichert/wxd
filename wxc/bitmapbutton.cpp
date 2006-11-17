@@ -27,18 +27,19 @@ public:
 	void POnSetBitmap()
 		{ wxBitmapButton::OnSetBitmap(); }
 
-	void RegisterVirtual(Virtual_OnSetBitmap onSetBitmap)
+	void RegisterVirtual(dobj obj, Virtual_OnSetBitmap onSetBitmap)
 	{
+		m_obj = obj;
 		m_OnSetBitmap = onSetBitmap;
 	}
 	
 protected:
 	void OnSetBitmap()
-		{ m_OnSetBitmap(obj); }
+		{ m_OnSetBitmap(m_obj); }
 		
 private:
 	Virtual_OnSetBitmap m_OnSetBitmap;
-	dobj obj;
+	dobj m_obj;
 public:
 	DECLARE_OBJECTDELETED(_BitmapButton)
 	
@@ -54,9 +55,9 @@ wxBitmapButton* wxBitmapButton_ctor()
 }
 
 extern "C" WXEXPORT
-void wxBitmapButton_RegisterVirtual(_BitmapButton* self, Virtual_OnSetBitmap onSetBitmap)
+void wxBitmapButton_RegisterVirtual(_BitmapButton* self, dobj obj, Virtual_OnSetBitmap onSetBitmap)
 {
-	self->RegisterVirtual(onSetBitmap);
+	self->RegisterVirtual(obj, onSetBitmap);
 }
 
 /*extern "C" WXEXPORT

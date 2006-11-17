@@ -19,6 +19,8 @@ public class MyFrame : wxFrame
 			platform = "GTK";
 		else if (p == wxMAC || p == wxMAC_DARWIN)
 			platform = "Mac";
+		else if (p == wxX11)
+			platform = "X11";
 		else
 			platform = "???";
 
@@ -48,6 +50,8 @@ int main()
 		writefln("__WXGTK__");
 	version(__WXMAC__)
 		writefln("__WXMAC__");
+	version(__WXX11__)
+		writefln("__WXX11__");
 
 	MyApp app = new MyApp();
 	app.Run();

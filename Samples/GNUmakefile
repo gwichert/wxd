@@ -8,14 +8,14 @@ all:
 	$(MAKE) -C Dnd
 	$(MAKE) -C EventDemo
 	$(MAKE) -C Font
-	$(MAKE) -C Grid
 #	$(MAKE) -C GLCube
+	$(MAKE) -C Grid
 	$(MAKE) -C Hello
 	$(MAKE) -C HTML
 	$(MAKE) -C HtmlHelp
 	$(MAKE) -C HtmlListBox
 	$(MAKE) -C Internat
-#	$(MAKE) -C Launcher
+	$(MAKE) -C Launcher
 	$(MAKE) -C ListCtrl
 	$(MAKE) -C ListView
 	$(MAKE) -C Listbook

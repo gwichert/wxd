@@ -59,7 +59,7 @@ import wx.common;
 			this.memOwn = memOwn;
 		}
 
-		override private void dtor() { wxSound_dtor(wxobj); }
+		override protected void dtor() { wxSound_dtor(wxobj); }
 
 		//---------------------------------------------------------------------
 				

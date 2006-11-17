@@ -87,7 +87,7 @@ import wx.Window;
 		}
 		
 		//---------------------------------------------------------------------
-		override private void dtor() { wxDropSource_dtor(wxobj); }
+		override protected void dtor() { wxDropSource_dtor(wxobj); }
 
 		//---------------------------------------------------------------------
 
@@ -119,10 +119,6 @@ import wx.Window;
 		alias int  function(DropTarget obj, int x, int y, int def) Virtual_OnEnter;
 		}
 		//! \endcond
-
-		//---------------------------------------------------------------------
-		
-		protected DataObject m_dataObject = null;
 		
 		//---------------------------------------------------------------------
 		
@@ -143,6 +139,8 @@ import wx.Window;
 
 	public abstract class DropTarget : wxObject
 	{
+		protected DataObject m_dataObject = null;
+		
 		public this(DataObject dataObject = null)
 		{ 
 			this(wxDropTarget_ctor(wxObject.SafePtr(dataObject)), true);
@@ -172,7 +170,7 @@ import wx.Window;
 		
 		//---------------------------------------------------------------------
 		
-		override private void dtor() { wxDropTarget_dtor(wxobj); }
+		override protected void dtor() { wxDropTarget_dtor(wxobj); }
 		
 		//---------------------------------------------------------------------
 

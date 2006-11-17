@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------------
 // wxD - App.d
 // (C) 2005 bero <berobero@users.sourceforge.net>
-// (C) 2005 afb <afb@users.sourceforge.net>
+// (C) 2006 afb <afb@users.sourceforge.net>
 // based on
 // wx.NET - App.cs
 //
@@ -19,6 +19,8 @@ import wx.common;
 import wx.EvtHandler;
 import wx.Window;
 import wx.GdiCommon;
+import wx.Clipboard;
+import wx.FontMisc;
 
 //! \cond STD
 import std.string;
@@ -57,6 +59,8 @@ import std.string;
     {
         
         private static App app;
+	private Object m_caughtException=null;
+	public void catchException(Object e) {m_caughtException=e;}
 
         //---------------------------------------------------------------------
 
@@ -64,17 +68,33 @@ import std.string;
         {
         	super(wxApp_ctor());
             app = this;
+		
+		FontMapper.initialize();
 	    
-	    wxApp_RegisterVirtual(wxobj, this, &staticOnInit, &staticOnExit, &staticInitalize);
+	    wxApp_RegisterVirtual(wxobj, this, &staticOnInit, &staticOnExit, &staticInitialize);
         }
 
         //---------------------------------------------------------------------
 
-	extern (C) private static bool staticInitalize(App o,inout int argc,char** argv) { return o.Initalize(argc,argv); }
-	extern (C) private static bool staticOnInit(App o) { return o.OnInit(); }
-	extern (C) private static int  staticOnExit(App o) { return o.OnExit(); }
+	extern (C) private static bool staticInitialize(App o,inout int argc,char** argv)
+ 	{
+		return o.Initialize(argc,argv);
+ 	}
 
-	private bool Initalize(inout int argc,char** argv)
+ 	extern (C) private static bool staticOnInit(App o)
+ 	{
+ 		Clipboard.initialize();
+		try return o.OnInit();
+		catch(Object e) o.catchException(e);
+		return false;
+ 	}
+
+	extern (C) private static int  staticOnExit(App o)
+ 	{
+		return o.OnExit();
+ 	}
+
+	private bool Initialize(inout int argc,char** argv)
 	{
 		bool ret = wxApp_Initialize(wxobj, argc,argv);
 		InitializeStockObjects();
@@ -85,8 +105,6 @@ import std.string;
 	{
 		return wxApp_OnInit(wxobj);
 	}
-	
-	//---------------------------------------------------------------------
 	
 	public /+virtual+/ int OnExit()
 	{
@@ -117,6 +135,15 @@ import std.string;
 				c_args[i] = toStringz(arg);
 			
             wxApp_Run(c_args.length, c_args.ptr);
+			
+			if(m_caughtException)
+			{
+				Object e=m_caughtException;
+				//Maybe the user catches this exception and runs
+				//the app again, so we have to clean up
+				m_caughtException=null;
+				throw e;
+			}
         }
 
         //---------------------------------------------------------------------

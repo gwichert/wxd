@@ -120,7 +120,7 @@ import wx.ToolTip;
 		public Colour colBg() { return new Colour(wxVisualAttributes_GetColourBg(wxobj), true); }		
 		//---------------------------------------------------------------------
 		
-		override private void dtor() { wxVisualAttributes_dtor(wxobj); }
+		override protected void dtor() { wxVisualAttributes_dtor(wxobj); }
 	}
 
 	//---------------------------------------------------------------------
@@ -401,7 +401,8 @@ import wx.ToolTip;
 		//---------------------------------------------------------------------
 
 		public this(Window parent, int id, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=0, string name=wxPanelNameStr)
-			{ this(wxWindow_ctor(wxObject.SafePtr(parent), id, pos, size, style, name), true);}
+			{ this(wxWindow_ctor(wxObject.SafePtr(parent), id, pos, size, style, name), 
+				false /*a Window will always be destroyed by its parent*/);}
 			
 		public this(Window parent, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=0, string name=wxPanelNameStr)
 			{ this(parent, Window.UniqueID, pos, size, style, name);}

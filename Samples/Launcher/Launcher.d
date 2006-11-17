@@ -50,16 +50,18 @@ import std.c.process;
 		
 		private void CheckEnvironment()
 		{
+		/*
 			// If we could determine they are running under PNET warn them
 			// things probably won't work (at cast(of)least v0.6.6)
 			string clr; //= Environment.GetEnvironmentVariable("CLR_LAUNCHER");
 			if (clr == "ilrun")
 			{
 				MessageDialog md = new MessageDialog(this, 
-					"There is a bug in DotGNU cast(of)PortableD v0.6.6 that does not allow the Launcher to work properly. Process.Start(\"ilrun example.exe\") does not work and results in a defunct process.\n\nYou may continue to use the Launcher; however, unless you have a newer version PNET samples probably won't launch when you click them.",
+					"There is a bug in DotGNU cast(of)Portable.NET v0.6.6 that does not allow the Launcher to work properly. Process.Start(\"ilrun example.exe\") does not work and results in a defunct process.\n\nYou may continue to use the Launcher; however, unless you have a newer version PNET samples probably won't launch when you click them.",
 					"Launcher Error", Dialog.wxOK | Dialog.wxICON_WARNING);
 				md.ShowModal();
 			}
+		*/
 		}
 	}   
 	
@@ -121,14 +123,18 @@ import std.c.process;
 		{
 			string app = link.Href;
 			
-			if ( std.file.exists( app ~ ".exe" ) )
-			{
-				string launch_command = "";
+			version(__WXMSW__)
+			     app ~= ".exe";
 
+			if ( std.file.exists( app ) )
+			{
+				string launch_command = app;
+
+                            /*
                                 // If we are on a Linux platform, use wxnet-run script to
                                 // launch samples. This is not used to pick up environment
                                 // as this gets inherited. The script ensures we use the
-                                // D runtime the user has selected.
+                                // .NET runtime the user has selected.
                                 if ( std.file.exists( "wxnet-run" ) )
                                         launch_command = "./wxnet-run " ~ app ~ ".exe";
 
@@ -139,6 +145,7 @@ import std.c.process;
                                 // Everything else (Windows for now) just execute the assembly
                                 else
                                         launch_command = app ~ ".exe";
+                           */
 
 				try
 				{
@@ -153,7 +160,7 @@ import std.c.process;
 			}
 			else
 			{
-				TellError("The sample " ~ app ~ " could not be found in the 'Bin' directory. The sample may not be available on your operating system or it could not be built because of missing development libraries.");
+				TellError("The sample " ~ app ~ " could not be found in the 'bin' directory. The sample may not be available on your operating system or it could not be built because of missing development libraries.");
 			}
 		}
 		

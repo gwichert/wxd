@@ -3456,6 +3456,8 @@ public:
             m_SetRowAttr = setRowAttr;
             m_SetColAttr = setColAttr;
         }
+	
+	DECLARE_DISPOSABLE(_GridCellAttrProvider)
 
 private:
     Virtual_GetAttr m_GetAttr;
@@ -3486,6 +3488,12 @@ void wxGridCellAttrProvider_RegisterVirtual(_GridCellAttrProvider* self, dobj ob
     Virtual_SetRowAttr setColAttr)
 {
     self->RegisterVirtual(obj, getAttr, setAttr, setRowAttr, setColAttr);
+}
+
+extern "C" WXEXPORT
+void wxGridCellAttrProvider_RegisterDisposable(_GridCellAttrProvider* self, Virtual_Dispose onDispose)
+{
+	self->RegisterDispose(onDispose);
 }
 
 extern "C" WXEXPORT

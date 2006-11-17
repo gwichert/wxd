@@ -316,7 +316,7 @@ import wx.Font;
 		public static wxObject New(IntPtr ptr) { return new LanguageInfo(ptr); }
 		//---------------------------------------------------------------------
 
-		override private void dtor() { wxLanguageInfo_dtor(wxobj); }
+		override protected void dtor() { wxLanguageInfo_dtor(wxobj); }
 		
 		//---------------------------------------------------------------------
 		
@@ -389,7 +389,7 @@ import wx.Font;
 		
 		//---------------------------------------------------------------------
 
-		override private void dtor() { wxLocale_dtor(wxobj); }
+		override protected void dtor() { wxLocale_dtor(wxobj); }
 		
 		//-----------------------------------------------------------------------------
 		

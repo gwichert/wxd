@@ -792,7 +792,7 @@ void wxWindow_SetValidator(wxWindow* self, const wxValidator *validator)
 }
 
 extern "C" WXEXPORT
-wxValidator* wxWindow_GetValidator(wxWindow* self)
+const wxValidator* wxWindow_GetValidator(wxWindow* self)
 {
     if (self == NULL)
             return &wxDefaultValidator;

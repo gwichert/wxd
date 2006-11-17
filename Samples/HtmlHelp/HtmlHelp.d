@@ -26,7 +26,8 @@ import wx.wx;
 		
 		public this( Window parent, string title, Point pos, Size size ) 
 		{
-			super( parent, -1, title, pos, size );
+			super( parent, -1, title, pos, size )
+;
 			Menu menuFile = new Menu();
 			
 			menuFile.AppendWL( Cmd.HtmlHelp_Help, "&Help", "Test Help...", & OnHelp ) ;
@@ -73,7 +74,7 @@ import wx.wx;
 		
 		public void OnClosing( Object sender, Event e )
 		{
-			if ( help.frame != null )
+			if ( help.frame )
 				help.frame.Close();
 			e.Skip();
 		}

@@ -75,6 +75,6 @@ import wx.Dialog;
 	
 	//---------------------------------------------------------------------
 	
-	override private void dtor() { wxProgressDialog_dtor(wxobj); }
+	override protected void dtor() { wxProgressDialog_dtor(wxobj); }
     }
 

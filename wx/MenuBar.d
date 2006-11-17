@@ -67,6 +67,11 @@ import wx.Menu;
 		public this(IntPtr wxobj)
 			{ super(wxobj); }
 
+		public static wxObject New(IntPtr wxobj)
+		{
+			return new MenuBar(wxobj);
+		}
+
 		//---------------------------------------------------------------------
 
 		public bool Append(Menu menu, string title)

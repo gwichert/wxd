@@ -24,7 +24,7 @@ import wx.ArrayInt;
 		//! \cond EXTERN
 		static extern (C) void   wxDC_dtor(IntPtr self);
 		static extern (C) void   wxDC_DrawBitmap(IntPtr self, IntPtr bmp, int x, int y, bool transparent);
-		static extern (C) void   wxDC_DrawPolygon(IntPtr self, int n, Point[] points, int xoffset, int yoffset, int fill_style);
+		static extern (C) void   wxDC_DrawPolygon(IntPtr self, int n, Point* points, int xoffset, int yoffset, int fill_style);
 		static extern (C) void   wxDC_DrawLine(IntPtr self, int x1, int y1, int x2, int y2);
 		static extern (C) void   wxDC_DrawRectangle(IntPtr self, int x1, int y1, int x2, int y2);
 		static extern (C) void   wxDC_DrawText(IntPtr self, string text, int x, int y);
@@ -80,7 +80,7 @@ import wx.ArrayInt;
 		
 		static extern (C) void   wxDC_DrawEllipticArc(IntPtr self, int x, int y, int w, int h, double sa, double ea);
 		
-		static extern (C) void   wxDC_DrawLines(IntPtr self, int n, Point[] points, int xoffset, int yoffset);
+		static extern (C) void   wxDC_DrawLines(IntPtr self, int n, Point* points, int xoffset, int yoffset);
 		
 		static extern (C) void   wxDC_DrawCircle(IntPtr self, int x, int y, int radius);
 		
@@ -92,7 +92,7 @@ import wx.ArrayInt;
 		static extern (C) void   wxDC_DrawLabel2(IntPtr self, string text, inout Rectangle rect, int alignment, int indexAccel);
 		
 		static extern (C) void   wxDC_DrawSpline(IntPtr self, int x1, int y1, int x2, int y2, int x3, int y3);
-		static extern (C) void   wxDC_DrawSpline2(IntPtr self, int n, Point[] points);
+		static extern (C) void   wxDC_DrawSpline2(IntPtr self, int n, Point* points);
 		
 		static extern (C) bool   wxDC_StartDoc(IntPtr self, string message);
 		static extern (C) void   wxDC_EndDoc(IntPtr self);

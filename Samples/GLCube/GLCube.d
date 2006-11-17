@@ -128,6 +128,7 @@ import wx.GLCanvas;
 
 		void OnPaint(Object sender, Event e)
 		{
+    		e.Skip();
     		Render();
 		}
 

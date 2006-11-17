@@ -186,6 +186,8 @@ import wx.Frame;
 			EVT_ACTIVATE( &OnActivate );
 		}
 		
+		static wxObject New(IntPtr ptr) { return new MDIChildFrame(ptr); }
+		
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
@@ -257,6 +259,8 @@ import wx.Frame;
 				throw new InvalidOperationException("Could not create MDIClientWindow");
 			}
 		}
+		
+		static wxObject New(IntPtr ptr) { return new MDIClientWindow(ptr); }
 		
 		//-----------------------------------------------------------------------------
 
