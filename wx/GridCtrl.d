@@ -95,7 +95,7 @@ public import wx.Grid;
 			{ this(cast(string[])null);}
 			
 		public this(string[] choices)
-			{ this(wxGridCellEnumRenderer_ctor(choices.length, choices), true);}
+			{ this(wxGridCellEnumRenderer_ctor(choices.length, choices.ptr), true);}
 				
 		public this(IntPtr wxobj)
 		{

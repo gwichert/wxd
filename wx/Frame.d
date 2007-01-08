@@ -211,7 +211,7 @@ public import wx.Icon;
 
 		public void SetStatusWidths(int n, int[] widths)
 		{
-			wxFrame_SetStatusWidths(wxobj, n, widths);
+			wxFrame_SetStatusWidths(wxobj, n, widths.ptr);
 		}
 
 		//---------------------------------------------------------------------

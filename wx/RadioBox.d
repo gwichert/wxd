@@ -67,7 +67,7 @@ public import wx.Control;
 		{
 			super(wxRadioBox_ctor());
 			if (!wxRadioBox_Create(wxobj, wxObject.SafePtr(parent), id, label, pos, size,
-			                       choices.length, choices, majorDimension, cast(uint)style, wxObject.SafePtr(val), name))
+			                       choices.length, choices.ptr, majorDimension, cast(uint)style, wxObject.SafePtr(val), name))
 			{
 				throw new InvalidOperationException("failed to create checkbox");
 			}

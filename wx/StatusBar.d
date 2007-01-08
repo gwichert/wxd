@@ -81,7 +81,7 @@ public import wx.Window;
         
 		public void SetFieldsCount(int number, int[] widths)
 		{
-			wxStatusBar_SetFieldsCount(wxobj, number, widths);
+			wxStatusBar_SetFieldsCount(wxobj, number, widths.ptr);
 		}
 		
 		public int FieldsCount() { return wxStatusBar_GetFieldsCount(wxobj); }
@@ -120,7 +120,7 @@ public import wx.Window;
 
 		public void StatusWidths(int[] value)
 		{
-			SetStatusWidths(value.length, value);
+			SetStatusWidths(value.length, value.ptr);
 		}
 
 		public void SetStatusWidths(int n, int* widths)
@@ -163,7 +163,7 @@ public import wx.Window;
 		
 		public void StatusStyles(int[] value)
 		{
-			wxStatusBar_SetStatusStyles(wxobj, value.length, value);
+			wxStatusBar_SetStatusStyles(wxobj, value.length, value.ptr);
 		}
 
 	}

@@ -942,7 +942,7 @@ public import wx.MouseEvent;
 
         public void SetFonts(string normal_face, string fixed_face, int[] sizes)
         {
-            wxHtmlWinParser_SetFonts(wxobj, normal_face, fixed_face, sizes);
+            wxHtmlWinParser_SetFonts(wxobj, normal_face, fixed_face, sizes.ptr);
         }
 
         //-----------------------------------------------------------------------------
@@ -1536,7 +1536,7 @@ public import wx.MouseEvent;
 		
 		public void SetFonts(string normal_face, string fixed_face, int[] sizes)
 		{
-			wxHtmlEasyPrinting_SetFonts(wxobj, normal_face, fixed_face, sizes);
+			wxHtmlEasyPrinting_SetFonts(wxobj, normal_face, fixed_face, sizes.ptr);
 		}
 		
 		//-----------------------------------------------------------------------------
@@ -1725,7 +1725,7 @@ public import wx.MouseEvent;
 		
 		public void SetFonts(string normal_face, string fixed_face, int[] sizes)
 		{
-			wxHtmlWindow_SetFonts(wxobj, normal_face, fixed_face, sizes);
+			wxHtmlWindow_SetFonts(wxobj, normal_face, fixed_face, sizes.ptr);
 		}
 		
 		//-----------------------------------------------------------------------------

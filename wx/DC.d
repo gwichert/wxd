@@ -267,7 +267,7 @@ public import wx.ArrayInt;
 		
 		public void DrawPolygon(int n, Point[] points, int xoffset, int yoffset, FillStyle fill_style)
 		{
-			wxDC_DrawPolygon(wxobj, n, points, xoffset, yoffset, cast(int)fill_style);
+			wxDC_DrawPolygon(wxobj, n, points.ptr, xoffset, yoffset, cast(int)fill_style);
 		}
 
 		//---------------------------------------------------------------------
@@ -543,7 +543,7 @@ public import wx.ArrayInt;
 		
 		public void DrawLines(Point[] points, int xoffset, int yoffset)
 		{
-			wxDC_DrawLines(wxobj, points.length, points, xoffset, yoffset);
+			wxDC_DrawLines(wxobj, points.length, points.ptr, xoffset, yoffset);
 		}
 		
 		public void DrawLines(Point[] points)
@@ -643,7 +643,7 @@ public import wx.ArrayInt;
 		
 		public void DrawSpline(Point[] points)
 		{
-			wxDC_DrawSpline2(wxobj, points.length, points);
+			wxDC_DrawSpline2(wxobj, points.length, points.ptr);
 		}
 		
 		//---------------------------------------------------------------------

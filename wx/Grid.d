@@ -767,7 +767,7 @@ public import wx.ScrolledWindow;
         
         public this(string[] choices, bool allowOthers)
 	{ 
-		this(wxGridCellChoiceEditor_ctor(choices.length, choices, allowOthers), true);
+		this(wxGridCellChoiceEditor_ctor(choices.length, choices.ptr, allowOthers), true);
 		wxGridCellChoiceEditor_RegisterDisposable(wxobj, &VirtualDispose);
 	}
 

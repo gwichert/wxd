@@ -58,7 +58,7 @@ alias std.string.find indexOf;
 			int y = 5;
 			
 			string fontinfo = "Font size is " ~ .toString(m_font.PointSize) ~ " points, family: " ~
-				.toString(m_font.FamilyString) ~ ", encoding: " ~ FontMapper.GetEncodingDescription( m_font.Encoding );
+				.toString(m_font.FamilyString.ptr) ~ ", encoding: " ~ FontMapper.GetEncodingDescription( m_font.Encoding );
 				
 			dc.DrawText( fontinfo, x, y );
 			y += hLine;
