@@ -164,7 +164,7 @@ all:  platform $(LIBTARGET)
 WX_CONFIG ?= wx-config
 
 CXX ?= $(shell $(WX_CONFIG) --cxx)
-CXXFLAGS ?= -O2 -fno-strict-aliasing -Wall
+CXXFLAGS ?= -O2 -Wall
 
 # Note: -g debugging symbols are off for "libwxc",
 #       since it makes it bigger for no good reason
@@ -174,6 +174,7 @@ CXXFLAGS ?= -O2 -fno-strict-aliasing -Wall
 OS=$(shell uname)
 
 ifeq ("$(OS)","FreeBSD")
+CXXFLAGS += -fno-strict-aliasing
 CXXFLAGS += -I/usr/X11R6/include
 endif
 
