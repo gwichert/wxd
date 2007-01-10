@@ -159,7 +159,7 @@ OBJECTS = \
 #	notifyevent.obj
 	
 
-all:  platform encoding $(LIBTARGET)
+all:  wx-config.exe platform encoding $(LIBTARGET)
 
 include $(WXDIR)/build/msw/config.dmc
 CXX = dmc
@@ -179,6 +179,10 @@ CXXFLAGS = -g -o+none -D__$(PLATFORM)__ -D__WXDEBUG__ -I$(WXDIR)\include \
 $(LIBTARGET) : $(OBJECTS)
 	lib -p512 -c -n $@ $(OBJECTS)
 
+wx-config.exe: wx-config-win.obj
+
+wx-release.exe: wx-release-win.obj
+
 platform:
 	echo $(PLATFORM)>$@
 
@@ -190,6 +194,7 @@ encoding:
 
 clean:
 	-del *.obj
+	-del *.exe
 	-del $(LIBTARGET)
 	-del $(TARGET)
 
