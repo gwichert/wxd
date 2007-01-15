@@ -213,7 +213,10 @@ $(LIBTARGET) : $(OBJECTS)
 	$(CXX) -D__$(COMPILER)__ $(STCFLAGS) $(WXFLAGS) $(CXXFLAGS) -c -o $@ $<
 
 wx-platform$(EXEEXT): wx-platform.o
+	$(CXX) $(LDFLAGS) -o $@ $<
+	
 wx-encoding$(EXEEXT): wx-encoding.o
+	$(CXX) $(LDFLAGS) -o $@ $<
 
 clean:
 	-rm *.o
