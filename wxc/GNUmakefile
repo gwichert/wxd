@@ -217,5 +217,7 @@ wx-encoding$(EXEEXT): wx-encoding.o
 
 clean:
 	-rm *.o
+	-rm wx-platform$(EXEEXT)
+	-rm wx-encoding$(EXEEXT)
 	-rm $(LIBTARGET)
 
