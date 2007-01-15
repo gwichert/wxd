@@ -22,6 +22,8 @@ It is composed of two parts:
 
 * Status
 
+0.09 (afb)
+
 0.08 (afb)
 Added StyledText sample for wxSTC testing
 Cleaned up Makefiles, and "DFLAGS" usage

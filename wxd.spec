@@ -1,8 +1,8 @@
 Summary: wxWidgets bindings for the D programming language
 Name: wxd
-Version: 0.08
+Version: 0.09
 Release: 0
-Source: http://dl.sourceforge.net/wxd/%{name}-%{version}.tgz
+Source: http://downloads.sourceforge.net/wxd/%{name}-%{version}.tgz
 Group: Development/Libraries
 URL: http://wxd.sourceforge.net/
 License: wxWindows Library Licence
@@ -27,7 +27,7 @@ scripting language, nor an interpreted language.
 %build
 export CXXFLAGS=$RPM_OPT_FLAGS 
 export DFLAGS=$RPM_OPT_FLAGS 
-make COMPILER=GDC
+make WX_CONFIG=wx-config COMPILER=GDC
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -39,8 +39,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
 %doc README.txt LICENCE.txt COPYING.LIB
-%dir %{_includedir}/d/wx
-%{_includedir}/d/wx/*
+%{_includedir}/d/wx
 %{_libdir}/libwxc.a
 %{_libdir}/libwxd.a
 
