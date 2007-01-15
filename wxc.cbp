@@ -36,10 +36,6 @@
 			<Add option="-fno-strict-aliasing" />
 			<Add option="-D__GDC__" />
 		</Compiler>
-		<ExtraCommands>
-			<Add before="wxc/wx_platform.sh &gt; wxc/platform" />
-			<Add before="wxc/wx_encoding.sh &gt; wxc/encoding" />
-		</ExtraCommands>
 		<Unit filename="wxc/accel.cpp">
 			<Option compilerVar="CPP" />
 			<Option target="Debug" />

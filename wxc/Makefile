@@ -1,4 +1,6 @@
-LIBTARGET=..\wxc.lib
+LIBTARGET = ..\wxc.lib
+
+MAKESTUB=..\config.mak
 
 OBJECTS = \
 	accel.obj \
@@ -159,21 +161,18 @@ OBJECTS = \
 #	notifyevent.obj
 	
 
-all:  wx-config.exe platform encoding $(LIBTARGET)
+all:  wx-config.exe $(MAKESTUB) $(LIBTARGET)
 
 include $(WXDIR)/build/msw/config.dmc
 CXX = dmc
 
 COMPILER = DMD
-PLATFORM = WXMSW
-ENCODING = ANSI
 
-WX_RELEASE_NODOT = 26
 OBJS = dmc_mswd$(CFG)
 LIBDIRNAME = $(WXDIR)\lib\dmc_lib$(CFG)
 SETUPHDIR = $(LIBDIRNAME)\mswd
-CXXFLAGS = -g -o+none -D__$(PLATFORM)__ -D__WXDEBUG__ -I$(WXDIR)\include \
-	-I$(SETUPHDIR) -w- -I. -WA -DNOPCH -Ar -Ae $(CPPFLAGS) \
+CXXFLAGS = -g -o+none -D__WXMSW__ -D__WXDEBUG__ -I$(WXDIR)\include \
+	-I$(SETUPHDIR) -w- -I. -WA -DNOPCH -HP90 -Ar -Ae $(CPPFLAGS) \
 	$(CXXFLAGS)
 
 $(LIBTARGET) : $(OBJECTS)
@@ -183,11 +182,21 @@ wx-config.exe: wx-config-win.obj
 
 wx-release.exe: wx-release-win.obj
 
-platform:
-	echo $(PLATFORM)>$@
+wx-platform.exe: wx-platform.obj
 
-encoding:
-	echo $(ENCODING)>$@
+wx-encoding.exe: wx-encoding.obj
+
+$(MAKESTUB): wx-release.exe wx-platform.exe wx-encoding.exe
+	echo "#autogen" >$@
+	wx-release.exe >>$@
+	wx-platform.exe -v >>$@
+	wx-encoding.exe -v >>$@
+
+PLATFORM: wx-platform.exe
+	wx-platform.exe >$@
+
+ENCODING: wx-encoding.exe
+	wx-encoding.exe >$@
 
 .cpp.obj:
 	$(CXX) -D__$(COMPILER)__ -mn $(CXXFLAGS) -c -o$@ $<
@@ -195,6 +204,7 @@ encoding:
 clean:
 	-del *.obj
 	-del *.exe
+	-del $(MAKESTUB)
 	-del $(LIBTARGET)
 	-del $(TARGET)
 

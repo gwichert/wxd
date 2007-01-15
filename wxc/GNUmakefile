@@ -159,7 +159,7 @@ OBJECTS = \
 #	notifyevent.o
 	
 
-all:  platform $(LIBTARGET)
+all:  PLATFORM ENCODING $(LIBTARGET)
 
 WX_CONFIG ?= wx-config
 
@@ -200,17 +200,20 @@ install: $(LIBTARGET)
 	$(INSTALL_DATA) -p $(LIBTARGET) $(DESTDIR)$(libdir)
 	-$(RANLIB) $(DESTDIR)$(libdir)/`basename $(LIBTARGET)`
 
-platform:
-	WX_CONFIG=$(WX_CONFIG) ./wx_platform.sh > $@
+PLATFORM: wx-platform$(EXEEXT)
+	WX_CONFIG=$(WX_CONFIG) ./wx-platform.sh > $@
 
-encoding:
-	WX_CONFIG=$(WX_CONFIG) ./wx_encoding.sh > $@
+ENCODING: wx-encoding$(EXEEXT)
+	WX_CONFIG=$(WX_CONFIG) ./wx-encoding.sh > $@
 
 $(LIBTARGET) : $(OBJECTS)
 	ar rcs $@ $^
 
 %.o:%.cpp
 	$(CXX) -D__$(COMPILER)__ $(STCFLAGS) $(WXFLAGS) $(CXXFLAGS) -c -o $@ $<
+
+wx-platform$(EXEEXT): wx-platform.o
+wx-encoding$(EXEEXT): wx-encoding.o
 
 clean:
 	-rm *.o

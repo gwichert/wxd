@@ -1,5 +1,7 @@
 LIBTARGET = ..\wxd.lib
 
+MAKESTUB=..\config.mak
+
 OBJECTS = \
 	Accelerator.obj \
 	ActivateEvent.obj \
@@ -168,6 +170,11 @@ OBJECTS = \
 	
 #	DbGrid.obj \
 
+PLATFORM = WXMSW
+ENCODING = ANSI
+
+include $(MAKESTUB)
+
 all:  $(LIBTARGET)
 
 DMD=dmd
@@ -178,7 +185,7 @@ $(LIBTARGET): $(OBJECTS)
 
 
 .d.obj:
-	$(DMD) -version=__WXMSW__ -version=__ANSI__ -I.. $(DFLAGS) -c -of$@ $<
+	$(DMD) -version=__$(PLATFORM)__ -version=__$(ENCODING)__ -I.. $(DFLAGS) -c -of$@ $<
 
 clean:
 	-del *.obj aui\*.obj

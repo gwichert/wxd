@@ -13,11 +13,11 @@ endif
 export COMPILER
 
 # wx platform to use (e.g. WXGTK)
-PLATFORM=$(shell cat wxc/platform 2>/dev/null)
+PLATFORM=$(shell cat wxc/PLATFORM 2>/dev/null)
 export PLATFORM
 
 # wx char encoding (ANSI/UNICODE)
-ENCODING=$(shell cat wxc/encoding 2>/dev/null)
+ENCODING=$(shell cat wxc/ENCODING 2>/dev/null)
 export ENCODING
 
 # set this to 1 if you have "stc"
@@ -28,7 +28,7 @@ export STC
 OGL=0
 export OGL
 
-all: wxc/platform wxc/encoding
+all: wxc/PLATFORM wxc/ENCODING
 	$(MAKE) -C wxc
 	$(MAKE) -C wx
 
@@ -39,22 +39,22 @@ install:
 test:
 	$(MAKE) -C Samples
 
-wxc/platform:
-	$(MAKE) -C wxc platform
+wxc/PLATFORM:
+	$(MAKE) -C wxc PLATFORM
 
-wxc/encoding:
-	$(MAKE) -C wxc encoding
+wxc/ENCODING:
+	$(MAKE) -C wxc ENCODING
 
 docs: Doxyfile
 	doxygen
 
-ddoc: wxc/platform wxc/encoding
+ddoc: wxc/PLATFORM wxc/ENCODING
 	$(MAKE) -C wx ddoc
 
 clean:
 	$(MAKE) clean -C wxc
 	$(MAKE) clean -C wx
 	$(MAKE) clean -C Samples
-	-rm wxc/platform
-	-rm wxc/encoding
+	-rm wxc/PLATFORM
+	-rm wxc/ENCODING
 
