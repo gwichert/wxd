@@ -37,7 +37,7 @@ wxSpinButton* wxSpinButton_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxSpinButton_Create(wxSpinButton* self, wxWindow *parent, wxWindowID id, const wxPoint* pos, const wxSize* size, long style, dstr name)
+wxc_bool wxSpinButton_Create(wxSpinButton* self, wxWindow *parent, wxWindowID id, const wxPoint* pos, const wxSize* size, long style, wxc_string name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -46,7 +46,7 @@ dbit wxSpinButton_Create(wxSpinButton* self, wxWindow *parent, wxWindowID id, co
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("spinbutton");
+		name = wxc_string("spinbutton");
 
 	return self->Create(parent, id, *pos, *size, style, wxstr(name))?1:0;
 }
@@ -124,7 +124,7 @@ void wxSpinEvent_Allow(wxSpinEvent* self)
 }
 
 extern "C" WXEXPORT
-dbit wxSpinEvent_IsAllowed(wxSpinEvent* self)
+wxc_bool wxSpinEvent_IsAllowed(wxSpinEvent* self)
 {
     return self->IsAllowed()?1:0;
 }

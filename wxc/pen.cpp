@@ -19,7 +19,7 @@
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxPen* wxPen_ctorByName(dstr name, int width, int style)
+wxPen* wxPen_ctorByName(wxc_string name, int width, int style)
 {
 	return new wxPen(wxstr(name), width, style);
 }
@@ -87,7 +87,7 @@ int wxPen_GetStyle(wxPen* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPen_Ok(wxPen* self)
+wxc_bool wxPen_Ok(wxPen* self)
 {
 	return self->Ok()?1:0;
 }

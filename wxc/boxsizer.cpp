@@ -17,8 +17,8 @@
 #include "common.h"
 #include "local_events.h"
 
-typedef void (CALLBACK* Virtual_voidvoid) (dobj obj);
-typedef void (CALLBACK* Virtual_sizevoid) (dobj obj,wxSize* size);
+typedef void (CALLBACK* Virtual_voidvoid) (wxc_object obj);
+typedef void (CALLBACK* Virtual_sizevoid) (wxc_object obj,wxSize* size);
 
 class _BoxSizer : public wxBoxSizer
 {
@@ -26,7 +26,7 @@ public:
 	_BoxSizer(int orient)
 		: wxBoxSizer(orient) {}
 		
-	void RegisterVirtual(dobj obj, Virtual_voidvoid recalcSizes, Virtual_sizevoid calcMin)
+	void RegisterVirtual(wxc_object obj, Virtual_voidvoid recalcSizes, Virtual_sizevoid calcMin)
 	{
 		m_dobj = obj;
 		m_RecalcSizes = recalcSizes;
@@ -42,14 +42,14 @@ public:
 private:
 	Virtual_voidvoid m_RecalcSizes;
 	Virtual_sizevoid m_CalcMin;
-	dobj m_dobj;
+	wxc_object m_dobj;
 
 public:
 	DECLARE_DISPOSABLE(_BoxSizer)
 };
 
 extern "C" WXEXPORT
-void wxBoxSizer_RegisterVirtual(_BoxSizer* self, dobj obj,Virtual_voidvoid recalcSizes, Virtual_sizevoid calcMin)
+void wxBoxSizer_RegisterVirtual(_BoxSizer* self, wxc_object obj,Virtual_voidvoid recalcSizes, Virtual_sizevoid calcMin)
 {
 	self->RegisterVirtual(obj, recalcSizes, calcMin);
 }

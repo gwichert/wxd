@@ -23,7 +23,7 @@
 // wxGridEvent
 
 extern "C" WXEXPORT
-wxGridEvent* wxGridEvent_ctor(int id, wxEventType type, wxObject* obj, int row, int col, int x, int y, dbit sel, dbit control, dbit shift, dbit alt, dbit meta)
+wxGridEvent* wxGridEvent_ctor(int id, wxEventType type, wxObject* obj, int row, int col, int x, int y, wxc_bool sel, wxc_bool control, wxc_bool shift, wxc_bool alt, wxc_bool meta)
 {
     return new wxGridEvent(id, type, obj, row, col, x, y, sel, control, shift, alt, meta);
 }
@@ -55,7 +55,7 @@ void wxGridEvent_GetPosition(wxGridEvent* self, wxPoint* pt)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridEvent_Selecting(wxGridEvent* self)
+wxc_bool wxGridEvent_Selecting(wxGridEvent* self)
 {
     return self->Selecting()?1:0;
 }
@@ -63,7 +63,7 @@ dbit wxGridEvent_Selecting(wxGridEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridEvent_ControlDown(wxGridEvent* self)
+wxc_bool wxGridEvent_ControlDown(wxGridEvent* self)
 {
     return self->ControlDown()?1:0;
 }
@@ -71,7 +71,7 @@ dbit wxGridEvent_ControlDown(wxGridEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridEvent_MetaDown(wxGridEvent* self)
+wxc_bool wxGridEvent_MetaDown(wxGridEvent* self)
 {
     return self->MetaDown()?1:0;
 }
@@ -79,7 +79,7 @@ dbit wxGridEvent_MetaDown(wxGridEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridEvent_ShiftDown(wxGridEvent* self)
+wxc_bool wxGridEvent_ShiftDown(wxGridEvent* self)
 {
     return self->ShiftDown()?1:0;
 }
@@ -87,7 +87,7 @@ dbit wxGridEvent_ShiftDown(wxGridEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridEvent_AltDown(wxGridEvent* self)
+wxc_bool wxGridEvent_AltDown(wxGridEvent* self)
 {
     return self->AltDown()?1:0;
 }
@@ -107,7 +107,7 @@ void wxGridEvent_Allow(wxGridEvent* self)
 }
 
 extern "C" WXEXPORT
-dbit wxGridEvent_IsAllowed(wxGridEvent* self)
+wxc_bool wxGridEvent_IsAllowed(wxGridEvent* self)
 {
     return self->IsAllowed()?1:0;
 }
@@ -116,7 +116,7 @@ dbit wxGridEvent_IsAllowed(wxGridEvent* self)
 // wxGridRangeSelectEvent
 
 extern "C" WXEXPORT
-wxGridRangeSelectEvent* wxGridRangeSelectEvent_ctor(int id, wxEventType type, wxObject* obj, wxGridCellCoords* topLeft, wxGridCellCoords* bottomRight, dbit sel, dbit control, dbit shift, dbit alt, dbit meta)
+wxGridRangeSelectEvent* wxGridRangeSelectEvent_ctor(int id, wxEventType type, wxObject* obj, wxGridCellCoords* topLeft, wxGridCellCoords* bottomRight, wxc_bool sel, wxc_bool control, wxc_bool shift, wxc_bool alt, wxc_bool meta)
 {
     return new wxGridRangeSelectEvent(id, type, obj, *topLeft, *bottomRight, sel, control, shift, alt, meta);
 }
@@ -172,7 +172,7 @@ int wxGridRangeSelectEvent_GetRightCol(wxGridRangeSelectEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridRangeSelectEvent_Selecting(wxGridRangeSelectEvent* self)
+wxc_bool wxGridRangeSelectEvent_Selecting(wxGridRangeSelectEvent* self)
 {
     return self->Selecting()?1:0;
 }
@@ -180,7 +180,7 @@ dbit wxGridRangeSelectEvent_Selecting(wxGridRangeSelectEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridRangeSelectEvent_ControlDown(wxGridRangeSelectEvent* self)
+wxc_bool wxGridRangeSelectEvent_ControlDown(wxGridRangeSelectEvent* self)
 {
     return self->ControlDown()?1:0;
 }
@@ -188,7 +188,7 @@ dbit wxGridRangeSelectEvent_ControlDown(wxGridRangeSelectEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridRangeSelectEvent_MetaDown(wxGridRangeSelectEvent* self)
+wxc_bool wxGridRangeSelectEvent_MetaDown(wxGridRangeSelectEvent* self)
 {
     return self->MetaDown()?1:0;
 }
@@ -196,7 +196,7 @@ dbit wxGridRangeSelectEvent_MetaDown(wxGridRangeSelectEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridRangeSelectEvent_ShiftDown(wxGridRangeSelectEvent* self)
+wxc_bool wxGridRangeSelectEvent_ShiftDown(wxGridRangeSelectEvent* self)
 {
     return self->ShiftDown()?1:0;
 }
@@ -204,7 +204,7 @@ dbit wxGridRangeSelectEvent_ShiftDown(wxGridRangeSelectEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridRangeSelectEvent_AltDown(wxGridRangeSelectEvent* self)
+wxc_bool wxGridRangeSelectEvent_AltDown(wxGridRangeSelectEvent* self)
 {
     return self->AltDown()?1:0;
 }
@@ -224,7 +224,7 @@ void wxGridRangeSelectEvent_Allow(wxGridRangeSelectEvent* self)
 }
 
 extern "C" WXEXPORT
-dbit wxGridRangeSelectEvent_IsAllowed(wxGridRangeSelectEvent* self)
+wxc_bool wxGridRangeSelectEvent_IsAllowed(wxGridRangeSelectEvent* self)
 {
     return self->IsAllowed()?1:0;
 }
@@ -232,7 +232,7 @@ dbit wxGridRangeSelectEvent_IsAllowed(wxGridRangeSelectEvent* self)
 //-----------------------------------------------------------------------------
 // wxGridCellWorker
 
-typedef void (CALLBACK* Virtual_SetParameters) (dobj, dstr);
+typedef void (CALLBACK* Virtual_SetParameters) (wxc_object, wxc_string);
 
 class _GridCellWorker : public wxGridCellWorker
 {
@@ -242,10 +242,10 @@ public:
 
     void SetParameters(const wxString& params)
         {
-            return m_SetParameters(m_dobj, dstr(params));
+            return m_SetParameters(m_dobj, wxc_string(params));
         }
 
-    void RegisterVirtual(dobj obj, Virtual_SetParameters setParameters)
+    void RegisterVirtual(wxc_object obj, Virtual_SetParameters setParameters)
         {
             obj = m_dobj;
             m_SetParameters = setParameters;
@@ -253,7 +253,7 @@ public:
 
 private:
     Virtual_SetParameters m_SetParameters;
-    dobj m_dobj;
+    wxc_object m_dobj;
 };
 
 extern "C" WXEXPORT
@@ -263,7 +263,7 @@ wxGridCellWorker* wxGridCellWorker_ctor()
 }
 
 extern "C" WXEXPORT
-void wxGridCellWorker_RegisterVirtual(_GridCellWorker* self, dobj obj, Virtual_SetParameters setParameters)
+void wxGridCellWorker_RegisterVirtual(_GridCellWorker* self, wxc_object obj, Virtual_SetParameters setParameters)
 {
     self->RegisterVirtual(obj, setParameters);
 }
@@ -287,7 +287,7 @@ void wxGridCellWorker_DecRef(_GridCellWorker* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGridCellWorker_SetParameters(_GridCellWorker* self, dstr params)
+void wxGridCellWorker_SetParameters(_GridCellWorker* self, wxc_string params)
 {
     self->wxGridCellWorker::SetParameters(wxstr(params));
 }
@@ -373,7 +373,7 @@ wxGrid* wxGrid_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxGrid* wxGrid_ctorFull(wxWindow* parent, wxWindowID id, wxPoint* pos, wxSize* size, int style, dstr name)
+wxGrid* wxGrid_ctorFull(wxWindow* parent, wxWindowID id, wxPoint* pos, wxSize* size, int style, wxc_string name)
 {
     return new _Grid(parent, id, *pos, *size, style, wxstr(name));
 }
@@ -389,7 +389,7 @@ void wxGrid_dtor(wxGrid* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_CreateGrid(wxGrid* self, int numRows, int numCols, wxGrid::wxGridSelectionModes selmode)
+wxc_bool wxGrid_CreateGrid(wxGrid* self, int numRows, int numCols, wxGrid::wxGridSelectionModes selmode)
 {
     return self->CreateGrid(numRows, numCols, selmode)?1:0;
 }
@@ -465,7 +465,7 @@ wxGridTableBase* wxGrid_GetTable(wxGrid* self)
 }
 
 extern "C" WXEXPORT
-dbit wxGrid_SetTable(wxGrid* self, wxGridTableBase* table, dbit takeOwnership, wxGrid::wxGridSelectionModes selmode)
+wxc_bool wxGrid_SetTable(wxGrid* self, wxGridTableBase* table, wxc_bool takeOwnership, wxGrid::wxGridSelectionModes selmode)
 {
     return self->SetTable(table, takeOwnership, selmode)?1:0;
 }
@@ -481,7 +481,7 @@ void wxGrid_ClearGrid(wxGrid* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_InsertRows(wxGrid* self, int pos, int numRows, dbit updateLabels)
+wxc_bool wxGrid_InsertRows(wxGrid* self, int pos, int numRows, wxc_bool updateLabels)
 {
     return self->InsertRows(pos, numRows, updateLabels)?1:0;
 }
@@ -489,7 +489,7 @@ dbit wxGrid_InsertRows(wxGrid* self, int pos, int numRows, dbit updateLabels)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_AppendRows(wxGrid* self, int numRows, dbit updateLabels)
+wxc_bool wxGrid_AppendRows(wxGrid* self, int numRows, wxc_bool updateLabels)
 {
     return self->AppendRows(numRows, updateLabels)?1:0;
 }
@@ -497,7 +497,7 @@ dbit wxGrid_AppendRows(wxGrid* self, int numRows, dbit updateLabels)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_DeleteRows(wxGrid* self, int pos, int numRows, dbit updateLabels)
+wxc_bool wxGrid_DeleteRows(wxGrid* self, int pos, int numRows, wxc_bool updateLabels)
 {
     return self->DeleteRows(pos, numRows, updateLabels)?1:0;
 }
@@ -505,7 +505,7 @@ dbit wxGrid_DeleteRows(wxGrid* self, int pos, int numRows, dbit updateLabels)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_InsertCols(wxGrid* self, int pos, int numCols, dbit updateLabels)
+wxc_bool wxGrid_InsertCols(wxGrid* self, int pos, int numCols, wxc_bool updateLabels)
 {
     return self->InsertCols(pos, numCols, updateLabels)?1:0;
 }
@@ -513,7 +513,7 @@ dbit wxGrid_InsertCols(wxGrid* self, int pos, int numCols, dbit updateLabels)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_AppendCols(wxGrid* self, int numCols, dbit updateLabels)
+wxc_bool wxGrid_AppendCols(wxGrid* self, int numCols, wxc_bool updateLabels)
 {
     return self->AppendCols(numCols, updateLabels)?1:0;
 }
@@ -521,7 +521,7 @@ dbit wxGrid_AppendCols(wxGrid* self, int numCols, dbit updateLabels)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_DeleteCols(wxGrid* self, int pos, int numCols, dbit updateLabels)
+wxc_bool wxGrid_DeleteCols(wxGrid* self, int pos, int numCols, wxc_bool updateLabels)
 {
     return self->DeleteCols(pos, numCols, updateLabels)?1:0;
 }
@@ -573,7 +573,7 @@ void wxGrid_ForceRefresh(wxGrid* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_IsEditable(wxGrid* self)
+wxc_bool wxGrid_IsEditable(wxGrid* self)
 {
     return self->IsEditable()?1:0;
 }
@@ -581,7 +581,7 @@ dbit wxGrid_IsEditable(wxGrid* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGrid_EnableEditing(wxGrid* self, dbit edit)
+void wxGrid_EnableEditing(wxGrid* self, wxc_bool edit)
 {
     self->EnableEditing(edit);
 }
@@ -589,7 +589,7 @@ void wxGrid_EnableEditing(wxGrid* self, dbit edit)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGrid_EnableCellEditControl(wxGrid* self, dbit enable)
+void wxGrid_EnableCellEditControl(wxGrid* self, wxc_bool enable)
 {
     self->EnableCellEditControl(enable);
 }
@@ -605,7 +605,7 @@ void wxGrid_DisableCellEditControl(wxGrid* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_CanEnableCellControl(wxGrid* self)
+wxc_bool wxGrid_CanEnableCellControl(wxGrid* self)
 {
     return self->CanEnableCellControl()?1:0;
 }
@@ -613,7 +613,7 @@ dbit wxGrid_CanEnableCellControl(wxGrid* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_IsCellEditControlEnabled(wxGrid* self)
+wxc_bool wxGrid_IsCellEditControlEnabled(wxGrid* self)
 {
     return self->IsCellEditControlEnabled()?1:0;
 }
@@ -621,7 +621,7 @@ dbit wxGrid_IsCellEditControlEnabled(wxGrid* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_IsCellEditControlShown(wxGrid* self)
+wxc_bool wxGrid_IsCellEditControlShown(wxGrid* self)
 {
     return self->IsCellEditControlShown()?1:0;
 }
@@ -629,7 +629,7 @@ dbit wxGrid_IsCellEditControlShown(wxGrid* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_IsCurrentCellReadOnly(wxGrid* self)
+wxc_bool wxGrid_IsCurrentCellReadOnly(wxGrid* self)
 {
     return self->IsCurrentCellReadOnly()?1:0;
 }
@@ -713,7 +713,7 @@ int wxGrid_GetGridCursorCol(wxGrid* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_IsVisible(wxGrid* self, int row, int col, dbit wholeCellVisible)
+wxc_bool wxGrid_IsVisible(wxGrid* self, int row, int col, wxc_bool wholeCellVisible)
 {
     return self->IsVisible(row, col, wholeCellVisible)?1:0;
 }
@@ -737,7 +737,7 @@ void wxGrid_SetGridCursor(wxGrid* self, int row, int col)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_MoveCursorUp(wxGrid* self, dbit expandSelection)
+wxc_bool wxGrid_MoveCursorUp(wxGrid* self, wxc_bool expandSelection)
 {
     return self->MoveCursorUp(expandSelection)?1:0;
 }
@@ -745,7 +745,7 @@ dbit wxGrid_MoveCursorUp(wxGrid* self, dbit expandSelection)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_MoveCursorDown(wxGrid* self, dbit expandSelection)
+wxc_bool wxGrid_MoveCursorDown(wxGrid* self, wxc_bool expandSelection)
 {
     return self->MoveCursorDown(expandSelection)?1:0;
 }
@@ -753,7 +753,7 @@ dbit wxGrid_MoveCursorDown(wxGrid* self, dbit expandSelection)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_MoveCursorLeft(wxGrid* self, dbit expandSelection)
+wxc_bool wxGrid_MoveCursorLeft(wxGrid* self, wxc_bool expandSelection)
 {
     return self->MoveCursorLeft(expandSelection)?1:0;
 }
@@ -761,7 +761,7 @@ dbit wxGrid_MoveCursorLeft(wxGrid* self, dbit expandSelection)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_MoveCursorRight(wxGrid* self, dbit expandSelection)
+wxc_bool wxGrid_MoveCursorRight(wxGrid* self, wxc_bool expandSelection)
 {
     return self->MoveCursorRight(expandSelection)?1:0;
 }
@@ -769,7 +769,7 @@ dbit wxGrid_MoveCursorRight(wxGrid* self, dbit expandSelection)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_MovePageDown(wxGrid* self)
+wxc_bool wxGrid_MovePageDown(wxGrid* self)
 {
     return self->MovePageDown()?1:0;
 }
@@ -777,7 +777,7 @@ dbit wxGrid_MovePageDown(wxGrid* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_MovePageUp(wxGrid* self)
+wxc_bool wxGrid_MovePageUp(wxGrid* self)
 {
     return self->MovePageUp()?1:0;
 }
@@ -785,7 +785,7 @@ dbit wxGrid_MovePageUp(wxGrid* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_MoveCursorUpBlock(wxGrid* self, dbit expandSelection)
+wxc_bool wxGrid_MoveCursorUpBlock(wxGrid* self, wxc_bool expandSelection)
 {
     return self->MoveCursorUpBlock(expandSelection)?1:0;
 }
@@ -793,7 +793,7 @@ dbit wxGrid_MoveCursorUpBlock(wxGrid* self, dbit expandSelection)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_MoveCursorDownBlock(wxGrid* self, dbit expandSelection)
+wxc_bool wxGrid_MoveCursorDownBlock(wxGrid* self, wxc_bool expandSelection)
 {
     return self->MoveCursorDownBlock(expandSelection)?1:0;
 }
@@ -801,7 +801,7 @@ dbit wxGrid_MoveCursorDownBlock(wxGrid* self, dbit expandSelection)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_MoveCursorLeftBlock(wxGrid* self, dbit expandSelection)
+wxc_bool wxGrid_MoveCursorLeftBlock(wxGrid* self, wxc_bool expandSelection)
 {
     return self->MoveCursorLeftBlock(expandSelection)?1:0;
 }
@@ -809,7 +809,7 @@ dbit wxGrid_MoveCursorLeftBlock(wxGrid* self, dbit expandSelection)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_MoveCursorRightBlock(wxGrid* self, dbit expandSelection)
+wxc_bool wxGrid_MoveCursorRightBlock(wxGrid* self, wxc_bool expandSelection)
 {
     return self->MoveCursorRightBlock(expandSelection)?1:0;
 }
@@ -993,7 +993,7 @@ void wxGrid_SetColLabelAlignment(wxGrid* self, int horiz, int vert)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGrid_SetRowLabelValue(wxGrid* self, int row, dstr val)
+void wxGrid_SetRowLabelValue(wxGrid* self, int row, wxc_string val)
 {
     self->SetRowLabelValue(row, wxstr(val));
 }
@@ -1001,7 +1001,7 @@ void wxGrid_SetRowLabelValue(wxGrid* self, int row, dstr val)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGrid_SetColLabelValue(wxGrid* self, int col, dstr val)
+void wxGrid_SetColLabelValue(wxGrid* self, int col, wxc_string val)
 {
     self->SetColLabelValue(col, wxstr(val));
 }
@@ -1041,7 +1041,7 @@ void wxGrid_SetCellHighlightROPenWidth(wxGrid* self, int width)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGrid_EnableDragRowSize(wxGrid* self, dbit enable)
+void wxGrid_EnableDragRowSize(wxGrid* self, wxc_bool enable)
 {
     self->EnableDragRowSize(enable);
 }
@@ -1057,7 +1057,7 @@ void wxGrid_DisableDragRowSize(wxGrid* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_CanDragRowSize(wxGrid* self)
+wxc_bool wxGrid_CanDragRowSize(wxGrid* self)
 {
     return self->CanDragRowSize()?1:0;
 }
@@ -1065,7 +1065,7 @@ dbit wxGrid_CanDragRowSize(wxGrid* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGrid_EnableDragColSize(wxGrid* self, dbit enable)
+void wxGrid_EnableDragColSize(wxGrid* self, wxc_bool enable)
 {
     self->EnableDragColSize(enable);
 }
@@ -1081,7 +1081,7 @@ void wxGrid_DisableDragColSize(wxGrid* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_CanDragColSize(wxGrid* self)
+wxc_bool wxGrid_CanDragColSize(wxGrid* self)
 {
     return self->CanDragColSize()?1:0;
 }
@@ -1089,7 +1089,7 @@ dbit wxGrid_CanDragColSize(wxGrid* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGrid_EnableDragGridSize(wxGrid* self, dbit enable)
+void wxGrid_EnableDragGridSize(wxGrid* self, wxc_bool enable)
 {
     self->EnableDragGridSize(enable);
 }
@@ -1105,7 +1105,7 @@ void wxGrid_DisableDragGridSize(wxGrid* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_CanDragGridSize(wxGrid* self)
+wxc_bool wxGrid_CanDragGridSize(wxGrid* self)
 {
     return self->CanDragGridSize()?1:0;
 }
@@ -1161,7 +1161,7 @@ void wxGrid_SetColFormatFloat(wxGrid* self, int col, int width, int precision)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGrid_SetColFormatCustom(wxGrid* self, int col, dstr typeName)
+void wxGrid_SetColFormatCustom(wxGrid* self, int col, wxc_string typeName)
 {
     self->SetColFormatCustom(col, wxstr(typeName));
 }
@@ -1169,7 +1169,7 @@ void wxGrid_SetColFormatCustom(wxGrid* self, int col, dstr typeName)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGrid_EnableGridLines(wxGrid* self, dbit enable)
+void wxGrid_EnableGridLines(wxGrid* self, wxc_bool enable)
 {
     self->EnableGridLines(enable);
 }
@@ -1177,7 +1177,7 @@ void wxGrid_EnableGridLines(wxGrid* self, dbit enable)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_GridLinesEnabled(wxGrid* self)
+wxc_bool wxGrid_GridLinesEnabled(wxGrid* self)
 {
     return self->GridLinesEnabled()?1:0;
 }
@@ -1281,7 +1281,7 @@ void wxGrid_GetCellAlignment(wxGrid* self, int row, int col, int* horiz, int* ve
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_GetDefaultCellOverflow(wxGrid* self)
+wxc_bool wxGrid_GetDefaultCellOverflow(wxGrid* self)
 {
     return self->GetDefaultCellOverflow()?1:0;
 }
@@ -1289,7 +1289,7 @@ dbit wxGrid_GetDefaultCellOverflow(wxGrid* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_GetCellOverflow(wxGrid* self, int row, int col)
+wxc_bool wxGrid_GetCellOverflow(wxGrid* self, int row, int col)
 {
     return self->GetCellOverflow(row, col)?1:0;
 }
@@ -1305,7 +1305,7 @@ void wxGrid_GetCellSize(wxGrid* self, int row, int col, int* num_rows, int* num_
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGrid_SetDefaultRowSize(wxGrid* self, int height, dbit resizeExistingRows)
+void wxGrid_SetDefaultRowSize(wxGrid* self, int height, wxc_bool resizeExistingRows)
 {
     self->SetDefaultRowSize(height, resizeExistingRows);
 }
@@ -1321,7 +1321,7 @@ void wxGrid_SetRowSize(wxGrid* self, int row, int height)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGrid_SetDefaultColSize(wxGrid* self, int width, dbit resizeExistingCols)
+void wxGrid_SetDefaultColSize(wxGrid* self, int width, wxc_bool resizeExistingCols)
 {
     self->SetDefaultColSize(width, resizeExistingCols);
 }
@@ -1337,7 +1337,7 @@ void wxGrid_SetColSize(wxGrid* self, int col, int width)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGrid_AutoSizeColumn(wxGrid* self, int col, dbit setAsMin)
+void wxGrid_AutoSizeColumn(wxGrid* self, int col, wxc_bool setAsMin)
 {
     self->AutoSizeColumn(col, setAsMin);
 }
@@ -1345,7 +1345,7 @@ void wxGrid_AutoSizeColumn(wxGrid* self, int col, dbit setAsMin)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGrid_AutoSizeRow(wxGrid* self, int row, dbit setAsMin)
+void wxGrid_AutoSizeRow(wxGrid* self, int row, wxc_bool setAsMin)
 {
     self->AutoSizeRow(row, setAsMin);
 }
@@ -1353,7 +1353,7 @@ void wxGrid_AutoSizeRow(wxGrid* self, int row, dbit setAsMin)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGrid_AutoSizeColumns(wxGrid* self, dbit setAsMin)
+void wxGrid_AutoSizeColumns(wxGrid* self, wxc_bool setAsMin)
 {
     self->AutoSizeColumns(setAsMin);
 }
@@ -1361,7 +1361,7 @@ void wxGrid_AutoSizeColumns(wxGrid* self, dbit setAsMin)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGrid_AutoSizeRows(wxGrid* self, dbit setAsMin)
+void wxGrid_AutoSizeRows(wxGrid* self, wxc_bool setAsMin)
 {
     self->AutoSizeRows(setAsMin);
 }
@@ -1473,7 +1473,7 @@ void wxGrid_SetCellAlignmentHV(wxGrid* self, int row, int col, int horiz, int ve
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGrid_SetDefaultCellOverflow(wxGrid* self, dbit allow)
+void wxGrid_SetDefaultCellOverflow(wxGrid* self, wxc_bool allow)
 {
     self->SetDefaultCellOverflow(allow);
 }
@@ -1481,7 +1481,7 @@ void wxGrid_SetDefaultCellOverflow(wxGrid* self, dbit allow)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGrid_SetCellOverflow(wxGrid* self, int row, int col, dbit allow)
+void wxGrid_SetCellOverflow(wxGrid* self, int row, int col, wxc_bool allow)
 {
     self->SetCellOverflow(row, col, allow);
 }
@@ -1569,7 +1569,7 @@ dstrret wxGrid_GetCellValue(wxGrid* self, int row, int col)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGrid_SetCellValue(wxGrid* self, int row, int col, dstr s)
+void wxGrid_SetCellValue(wxGrid* self, int row, int col, wxc_string s)
 {
     self->SetCellValue(row, col, wxstr(s));
 }
@@ -1577,7 +1577,7 @@ void wxGrid_SetCellValue(wxGrid* self, int row, int col, dstr s)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_IsReadOnly(wxGrid* self, int row, int col)
+wxc_bool wxGrid_IsReadOnly(wxGrid* self, int row, int col)
 {
     return self->IsReadOnly(row, col)?1:0;
 }
@@ -1585,7 +1585,7 @@ dbit wxGrid_IsReadOnly(wxGrid* self, int row, int col)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGrid_SetReadOnly(wxGrid* self, int row, int col, dbit isReadOnly)
+void wxGrid_SetReadOnly(wxGrid* self, int row, int col, wxc_bool isReadOnly)
 {
     self->SetReadOnly(row, col, isReadOnly);
 }
@@ -1593,7 +1593,7 @@ void wxGrid_SetReadOnly(wxGrid* self, int row, int col, dbit isReadOnly)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGrid_SelectRow(wxGrid* self, int row, dbit addToSelected)
+void wxGrid_SelectRow(wxGrid* self, int row, wxc_bool addToSelected)
 {
     self->SelectRow(row, addToSelected);
 }
@@ -1601,7 +1601,7 @@ void wxGrid_SelectRow(wxGrid* self, int row, dbit addToSelected)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGrid_SelectCol(wxGrid* self, int col, dbit addToSelected)
+void wxGrid_SelectCol(wxGrid* self, int col, wxc_bool addToSelected)
 {
     self->SelectCol(col, addToSelected);
 }
@@ -1609,7 +1609,7 @@ void wxGrid_SelectCol(wxGrid* self, int col, dbit addToSelected)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGrid_SelectBlock(wxGrid* self, int topRow, int leftCol, int bottomRow, int rightCol, dbit addToSelected)
+void wxGrid_SelectBlock(wxGrid* self, int topRow, int leftCol, int bottomRow, int rightCol, wxc_bool addToSelected)
 {
     self->SelectBlock(topRow, leftCol, bottomRow, rightCol, addToSelected);
 }
@@ -1625,7 +1625,7 @@ void wxGrid_SelectAll(wxGrid* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_IsSelection(wxGrid* self)
+wxc_bool wxGrid_IsSelection(wxGrid* self)
 {
     return self->IsSelection()?1:0;
 }
@@ -1665,7 +1665,7 @@ void wxGrid_ClearSelection(wxGrid* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_IsInSelection(wxGrid* self, int row, int col)
+wxc_bool wxGrid_IsInSelection(wxGrid* self, int row, int col)
 {
     return self->IsInSelection(row, col)?1:0;
 }
@@ -1755,7 +1755,7 @@ void wxGrid_SetSelectionForeground(wxGrid* self, wxColour* c)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGrid_RegisterDataType(wxGrid* self, dstr typeName, wxGridCellRenderer* renderer, wxGridCellEditor* editor)
+void wxGrid_RegisterDataType(wxGrid* self, wxc_string typeName, wxGridCellRenderer* renderer, wxGridCellEditor* editor)
 {
     self->RegisterDataType(wxstr(typeName), renderer, editor);
 }
@@ -1779,7 +1779,7 @@ wxGridCellRenderer* wxGrid_GetDefaultRendererForCell(wxGrid* self, int row, int 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxGridCellEditor* wxGrid_GetDefaultEditorForType(wxGrid* self, dstr typeName)
+wxGridCellEditor* wxGrid_GetDefaultEditorForType(wxGrid* self, wxc_string typeName)
 {
     return self->GetDefaultEditorForType(wxstr(typeName));
 }
@@ -1787,7 +1787,7 @@ wxGridCellEditor* wxGrid_GetDefaultEditorForType(wxGrid* self, dstr typeName)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxGridCellRenderer* wxGrid_GetDefaultRendererForType(wxGrid* self, dstr typeName)
+wxGridCellRenderer* wxGrid_GetDefaultRendererForType(wxGrid* self, wxc_string typeName)
 {
     return self->GetDefaultRendererForType(wxstr(typeName));
 }
@@ -1836,7 +1836,7 @@ wxWindow* wxGrid_GetGridCornerLabelWindow(wxGrid* self)
 
 #if 0
 extern "C" WXEXPORT
-wxGrid* wxGrid_ctor(wxWindow* parent, int x, int y, int w, int h, int style, dstr name)
+wxGrid* wxGrid_ctor(wxWindow* parent, int x, int y, int w, int h, int style, wxc_string name)
 {
     return new wxGrid(parent, x, y, w, h, style, wxstr(name));
 }
@@ -1989,7 +1989,7 @@ int wxGrid_GetLabelAlignment(wxGrid* self, int orientation, int align)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGrid_SetLabelValue(wxGrid* self, int orientation, dstr val, int pos)
+void wxGrid_SetLabelValue(wxGrid* self, int orientation, wxc_string val, int pos)
 {
     self->SetLabelValue(orientation, wxstr(val), pos);
 }
@@ -2059,7 +2059,7 @@ void wxGrid_SetCellBackgroundColour(wxGrid* self, int row, int col, wxColour* co
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_GetEditable(wxGrid* self)
+wxc_bool wxGrid_GetEditable(wxGrid* self)
 {
     return self->GetEditable()?1:0;
 }
@@ -2067,7 +2067,7 @@ dbit wxGrid_GetEditable(wxGrid* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGrid_SetEditable(wxGrid* self, dbit edit)
+void wxGrid_SetEditable(wxGrid* self, wxc_bool edit)
 {
     self->SetEditable(edit);
 }
@@ -2075,7 +2075,7 @@ void wxGrid_SetEditable(wxGrid* self, dbit edit)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGrid_GetEditInPlace(wxGrid* self)
+wxc_bool wxGrid_GetEditInPlace(wxGrid* self)
 {
     return self->GetEditInPlace()?1:0;
 }
@@ -2121,7 +2121,7 @@ wxPen* wxGrid_GetDividerPen(wxGrid* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGrid_OnActivate(wxGrid* self, dbit active)
+void wxGrid_OnActivate(wxGrid* self, wxc_bool active)
 {
     self->OnActivate(active);
 }
@@ -2288,7 +2288,7 @@ void wxGridCellAttr_SetSize(wxGridCellAttr* self, int num_rows, int num_cols)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGridCellAttr_SetOverflow(wxGridCellAttr* self, dbit allow)
+void wxGridCellAttr_SetOverflow(wxGridCellAttr* self, wxc_bool allow)
 {
     self->SetOverflow(allow);
 }
@@ -2296,7 +2296,7 @@ void wxGridCellAttr_SetOverflow(wxGridCellAttr* self, dbit allow)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGridCellAttr_SetReadOnly(wxGridCellAttr* self, dbit isReadOnly)
+void wxGridCellAttr_SetReadOnly(wxGridCellAttr* self, wxc_bool isReadOnly)
 {
     self->SetReadOnly(isReadOnly);
 }
@@ -2320,7 +2320,7 @@ void wxGridCellAttr_SetEditor(wxGridCellAttr* self, wxGridCellEditor* editor)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridCellAttr_HasTextColour(wxGridCellAttr* self)
+wxc_bool wxGridCellAttr_HasTextColour(wxGridCellAttr* self)
 {
     return self->HasTextColour()?1:0;
 }
@@ -2328,7 +2328,7 @@ dbit wxGridCellAttr_HasTextColour(wxGridCellAttr* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridCellAttr_HasBackgroundColour(wxGridCellAttr* self)
+wxc_bool wxGridCellAttr_HasBackgroundColour(wxGridCellAttr* self)
 {
     return self->HasBackgroundColour()?1:0;
 }
@@ -2336,7 +2336,7 @@ dbit wxGridCellAttr_HasBackgroundColour(wxGridCellAttr* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridCellAttr_HasFont(wxGridCellAttr* self)
+wxc_bool wxGridCellAttr_HasFont(wxGridCellAttr* self)
 {
     return self->HasFont()?1:0;
 }
@@ -2344,7 +2344,7 @@ dbit wxGridCellAttr_HasFont(wxGridCellAttr* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridCellAttr_HasAlignment(wxGridCellAttr* self)
+wxc_bool wxGridCellAttr_HasAlignment(wxGridCellAttr* self)
 {
     return self->HasAlignment()?1:0;
 }
@@ -2352,7 +2352,7 @@ dbit wxGridCellAttr_HasAlignment(wxGridCellAttr* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridCellAttr_HasRenderer(wxGridCellAttr* self)
+wxc_bool wxGridCellAttr_HasRenderer(wxGridCellAttr* self)
 {
     return self->HasRenderer()?1:0;
 }
@@ -2360,7 +2360,7 @@ dbit wxGridCellAttr_HasRenderer(wxGridCellAttr* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridCellAttr_HasEditor(wxGridCellAttr* self)
+wxc_bool wxGridCellAttr_HasEditor(wxGridCellAttr* self)
 {
     return self->HasEditor()?1:0;
 }
@@ -2368,7 +2368,7 @@ dbit wxGridCellAttr_HasEditor(wxGridCellAttr* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridCellAttr_HasReadWriteMode(wxGridCellAttr* self)
+wxc_bool wxGridCellAttr_HasReadWriteMode(wxGridCellAttr* self)
 {
     return self->HasReadWriteMode()?1:0;
 }
@@ -2416,7 +2416,7 @@ void wxGridCellAttr_GetSize(wxGridCellAttr* self, int* num_rows, int* num_cols)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridCellAttr_GetOverflow(wxGridCellAttr* self)
+wxc_bool wxGridCellAttr_GetOverflow(wxGridCellAttr* self)
 {
     return self->GetOverflow()?1:0;
 }
@@ -2440,7 +2440,7 @@ wxGridCellEditor* wxGridCellAttr_GetEditor(wxGridCellAttr* self, wxGrid* grid, i
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridCellAttr_IsReadOnly(wxGridCellAttr* self)
+wxc_bool wxGridCellAttr_IsReadOnly(wxGridCellAttr* self)
 {
     return self->IsReadOnly()?1:0;
 }
@@ -2465,7 +2465,7 @@ wxGridSizeEvent* wxGridSizeEvent_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxGridSizeEvent* wxGridSizeEvent_ctorParam(int id, wxEventType type, wxObject* obj, int rowOrCol, int x, int y, dbit control, dbit shift, dbit alt, dbit meta)
+wxGridSizeEvent* wxGridSizeEvent_ctorParam(int id, wxEventType type, wxObject* obj, int rowOrCol, int x, int y, wxc_bool control, wxc_bool shift, wxc_bool alt, wxc_bool meta)
 {
     return new wxGridSizeEvent(id, type, obj, rowOrCol, x, y, control, shift, alt, meta);
 }
@@ -2489,7 +2489,7 @@ void wxGridSizeEvent_GetPosition(wxGridSizeEvent* self, wxPoint* pt)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridSizeEvent_ControlDown(wxGridSizeEvent* self)
+wxc_bool wxGridSizeEvent_ControlDown(wxGridSizeEvent* self)
 {
     return self->ControlDown()?1:0;
 }
@@ -2497,7 +2497,7 @@ dbit wxGridSizeEvent_ControlDown(wxGridSizeEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridSizeEvent_MetaDown(wxGridSizeEvent* self)
+wxc_bool wxGridSizeEvent_MetaDown(wxGridSizeEvent* self)
 {
     return self->MetaDown()?1:0;
 }
@@ -2505,7 +2505,7 @@ dbit wxGridSizeEvent_MetaDown(wxGridSizeEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridSizeEvent_ShiftDown(wxGridSizeEvent* self)
+wxc_bool wxGridSizeEvent_ShiftDown(wxGridSizeEvent* self)
 {
     return self->ShiftDown()?1:0;
 }
@@ -2513,7 +2513,7 @@ dbit wxGridSizeEvent_ShiftDown(wxGridSizeEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridSizeEvent_AltDown(wxGridSizeEvent* self)
+wxc_bool wxGridSizeEvent_AltDown(wxGridSizeEvent* self)
 {
     return self->AltDown()?1:0;
 }
@@ -2533,7 +2533,7 @@ void wxGridSizeEvent_Allow(wxGridSizeEvent* self)
 }
 
 extern "C" WXEXPORT
-dbit wxGridSizeEvent_IsAllowed(wxGridSizeEvent* self)
+wxc_bool wxGridSizeEvent_IsAllowed(wxGridSizeEvent* self)
 {
     return self->IsAllowed()?1:0;
 }
@@ -2541,20 +2541,20 @@ dbit wxGridSizeEvent_IsAllowed(wxGridSizeEvent* self)
 //-----------------------------------------------------------------------------
 // wxGridCellEditor
 
-typedef void (CALLBACK* Virtual_Create) (dobj, wxWindow*, wxWindowID id, wxEvtHandler*);
-typedef void (CALLBACK* Virtual_BeginEdit) (dobj, int, int, wxGrid*);
-typedef dbit (CALLBACK* Virtual_EndEdit) (dobj, int, int, wxGrid*);
-typedef void (CALLBACK* Virtual_Reset) (dobj);
-typedef wxGridCellEditor* (CALLBACK* Virtual_Clone) (dobj);
-typedef void (CALLBACK* Virtual_SetSize) (dobj, const wxRect*);
-typedef void (CALLBACK* Virtual_Show) (dobj, dbit, wxGridCellAttr*);
-typedef void (CALLBACK* Virtual_PaintBackground) (dobj, const wxRect*, wxGridCellAttr*);
-typedef dbit (CALLBACK* Virtual_IsAcceptedKey) (dobj, wxKeyEvent*);
-typedef void (CALLBACK* Virtual_StartingKey) (dobj, wxKeyEvent*);
-typedef void (CALLBACK* Virtual_StartingClick) (dobj);
-typedef void (CALLBACK* Virtual_HandleReturn) (dobj, wxKeyEvent*);
-typedef void (CALLBACK* Virtual_Destroy) (dobj);
-typedef dstr (CALLBACK* Virtual_GetValue) (dobj);
+typedef void (CALLBACK* Virtual_Create) (wxc_object, wxWindow*, wxWindowID id, wxEvtHandler*);
+typedef void (CALLBACK* Virtual_BeginEdit) (wxc_object, int, int, wxGrid*);
+typedef wxc_bool (CALLBACK* Virtual_EndEdit) (wxc_object, int, int, wxGrid*);
+typedef void (CALLBACK* Virtual_Reset) (wxc_object);
+typedef wxGridCellEditor* (CALLBACK* Virtual_Clone) (wxc_object);
+typedef void (CALLBACK* Virtual_SetSize) (wxc_object, const wxRect*);
+typedef void (CALLBACK* Virtual_Show) (wxc_object, wxc_bool, wxGridCellAttr*);
+typedef void (CALLBACK* Virtual_PaintBackground) (wxc_object, const wxRect*, wxGridCellAttr*);
+typedef wxc_bool (CALLBACK* Virtual_IsAcceptedKey) (wxc_object, wxKeyEvent*);
+typedef void (CALLBACK* Virtual_StartingKey) (wxc_object, wxKeyEvent*);
+typedef void (CALLBACK* Virtual_StartingClick) (wxc_object);
+typedef void (CALLBACK* Virtual_HandleReturn) (wxc_object, wxKeyEvent*);
+typedef void (CALLBACK* Virtual_Destroy) (wxc_object);
+typedef wxc_string (CALLBACK* Virtual_GetValue) (wxc_object);
 
 class _GridCellEditor : public wxGridCellEditor
 {
@@ -2602,9 +2602,9 @@ public:
         { return m_Destroy(m_dobj);}
         
     wxString GetValue() const
-        { dstr tmp = m_GetValue(m_dobj); return wxstr(tmp);}
+        { wxc_string tmp = m_GetValue(m_dobj); return wxstr(tmp);}
 
-    void RegisterVirtual(dobj obj, Virtual_Create create,
+    void RegisterVirtual(wxc_object obj, Virtual_Create create,
                             Virtual_BeginEdit beginEdit,
                             Virtual_EndEdit endEdit,
                             Virtual_Reset reset,
@@ -2651,11 +2651,11 @@ private:
     Virtual_HandleReturn m_HandleReturn;
     Virtual_Destroy m_Destroy;
     Virtual_GetValue m_GetValue;
-    dobj m_dobj;
+    wxc_object m_dobj;
 };
 
 extern "C" WXEXPORT
-void wxGridCellEditor_RegisterVirtual(_GridCellEditor* self, dobj obj,
+void wxGridCellEditor_RegisterVirtual(_GridCellEditor* self, wxc_object obj,
                         Virtual_Create create,
                         Virtual_BeginEdit beginEdit,
                         Virtual_EndEdit endEdit,
@@ -2697,13 +2697,13 @@ void wxGridCellEditor_Create(_GridCellEditor* self, wxWindow* parent, wxWindowID
 }
 
 extern "C" WXEXPORT
-dbit wxGridCellEditor_IsCreated(_GridCellEditor* self)
+wxc_bool wxGridCellEditor_IsCreated(_GridCellEditor* self)
 {
     return self->IsCreated()?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxGridCellEditor_IsAcceptedKey(_GridCellEditor* self, wxKeyEvent* event)
+wxc_bool wxGridCellEditor_IsAcceptedKey(_GridCellEditor* self, wxKeyEvent* event)
 {
     return self->wxGridCellEditor::IsAcceptedKey(*event)?1:0;
 }
@@ -2719,7 +2719,7 @@ void wxGridCellEditor_SetSize(_GridCellEditor* self, wxRect* rect)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGridCellEditor_Show(_GridCellEditor* self, dbit show, wxGridCellAttr* attr)
+void wxGridCellEditor_Show(_GridCellEditor* self, wxc_bool show, wxGridCellAttr* attr)
 {
     self->wxGridCellEditor::Show(show, attr);
 }
@@ -2777,38 +2777,38 @@ wxGridCellEditor * wxGridCellEditor_Destroy(_GridCellEditor* self)
 extern "C" WXEXPORT
 dstrret wxGridCellEditor_Destroy(_GridCellEditor* self)
 {
-    dstr(self->GetValue());
+    wxc_string(self->GetValue());
 }
 */
 //-----------------------------------------------------------------------------
 // wxGridTableBase...
 
-typedef int (CALLBACK* Virtual_GetNumberRows) (dobj);
-typedef int (CALLBACK* Virtual_GetNumberCols) (dobj);
-typedef dbit (CALLBACK* Virtual_IsEmptyCell) (dobj, int, int);
-typedef dstr (CALLBACK* Virtual_GetValue2) (dobj, int, int);
-typedef void (CALLBACK* Virtual_SetValue) (dobj, int, int, dstr);
-typedef dbit (CALLBACK* Virtual_CanGetValueAs) (dobj, int, int, dstr);
-typedef long (CALLBACK* Virtual_GetValueAsLong) (dobj, int, int);
-typedef double (CALLBACK* Virtual_GetValueAsDouble) (dobj, int, int);
-typedef void (CALLBACK* Virtual_SetValueAsLong) (dobj, int, int, long);
-typedef void (CALLBACK* Virtual_SetValueAsDouble) (dobj, int, int, double);
-typedef void (CALLBACK* Virtual_SetValueAsBool) (dobj, int, int, dbit);
-typedef void* (CALLBACK* Virtual_GetValueAsCustom) (dobj, int, int, dstr);
-typedef void (CALLBACK* Virtual_SetValueAsCustom) (dobj, int, int, dstr, void*);
-typedef dstr (CALLBACK* Virtual_GetColLabelValue) (dobj, int);
-typedef void (CALLBACK* Virtual_SetView) (dobj, wxGrid*);
-typedef wxGrid* (CALLBACK* Virtual_GetView) (dobj);
-typedef void (CALLBACK* Virtual_Clear) (dobj);
-typedef dbit (CALLBACK* Virtual_InsertRows) (dobj, int, int);
-typedef dbit (CALLBACK* Virtual_AppendRows) (dobj, int);
-typedef void (CALLBACK* Virtual_SetRowLabelValue) (dobj, int, dstr);
-typedef void (CALLBACK* Virtual_SetAttrProvider) (dobj, wxGridCellAttrProvider*);
-typedef wxGridCellAttrProvider* (CALLBACK* Virtual_GetAttrProvider) (dobj);
-typedef dbit (CALLBACK* Virtual_CanHaveAttributes) (dobj);
-typedef wxGridCellAttr* (CALLBACK* Virtual_GetAttr) (dobj, int, int, wxGridCellAttr::wxAttrKind);
-typedef void (CALLBACK* Virtual_SetAttr) (dobj, wxGridCellAttr*, int, int);
-typedef void (CALLBACK* Virtual_SetRowAttr) (dobj, wxGridCellAttr*, int);
+typedef int (CALLBACK* Virtual_GetNumberRows) (wxc_object);
+typedef int (CALLBACK* Virtual_GetNumberCols) (wxc_object);
+typedef wxc_bool (CALLBACK* Virtual_IsEmptyCell) (wxc_object, int, int);
+typedef wxc_string (CALLBACK* Virtual_GetValue2) (wxc_object, int, int);
+typedef void (CALLBACK* Virtual_SetValue) (wxc_object, int, int, wxc_string);
+typedef wxc_bool (CALLBACK* Virtual_CanGetValueAs) (wxc_object, int, int, wxc_string);
+typedef long (CALLBACK* Virtual_GetValueAsLong) (wxc_object, int, int);
+typedef double (CALLBACK* Virtual_GetValueAsDouble) (wxc_object, int, int);
+typedef void (CALLBACK* Virtual_SetValueAsLong) (wxc_object, int, int, long);
+typedef void (CALLBACK* Virtual_SetValueAsDouble) (wxc_object, int, int, double);
+typedef void (CALLBACK* Virtual_SetValueAsBool) (wxc_object, int, int, wxc_bool);
+typedef void* (CALLBACK* Virtual_GetValueAsCustom) (wxc_object, int, int, wxc_string);
+typedef void (CALLBACK* Virtual_SetValueAsCustom) (wxc_object, int, int, wxc_string, void*);
+typedef wxc_string (CALLBACK* Virtual_GetColLabelValue) (wxc_object, int);
+typedef void (CALLBACK* Virtual_SetView) (wxc_object, wxGrid*);
+typedef wxGrid* (CALLBACK* Virtual_GetView) (wxc_object);
+typedef void (CALLBACK* Virtual_Clear) (wxc_object);
+typedef wxc_bool (CALLBACK* Virtual_InsertRows) (wxc_object, int, int);
+typedef wxc_bool (CALLBACK* Virtual_AppendRows) (wxc_object, int);
+typedef void (CALLBACK* Virtual_SetRowLabelValue) (wxc_object, int, wxc_string);
+typedef void (CALLBACK* Virtual_SetAttrProvider) (wxc_object, wxGridCellAttrProvider*);
+typedef wxGridCellAttrProvider* (CALLBACK* Virtual_GetAttrProvider) (wxc_object);
+typedef wxc_bool (CALLBACK* Virtual_CanHaveAttributes) (wxc_object);
+typedef wxGridCellAttr* (CALLBACK* Virtual_GetAttr) (wxc_object, int, int, wxGridCellAttr::wxAttrKind);
+typedef void (CALLBACK* Virtual_SetAttr) (wxc_object, wxGridCellAttr*, int, int);
+typedef void (CALLBACK* Virtual_SetRowAttr) (wxc_object, wxGridCellAttr*, int);
 
 class _GridTableBase : public wxGridTableBase
 {
@@ -2826,19 +2826,19 @@ public:
         { return m_IsEmptyCell(m_dobj, row, col);}
 
     wxString GetValue(int row, int col)
-        { dstr tmp = m_GetValue(m_dobj, row, col); return wxstr(tmp);}
+        { wxc_string tmp = m_GetValue(m_dobj, row, col); return wxstr(tmp);}
 
     void SetValue(int row, int col, const wxString& value)
         { m_SetValue(m_dobj, row, col, wxString(value));}
     
     wxString GetTypeName(int row, int col)
-        { dstr tmp = m_GetTypeName(m_dobj, row, col); return wxstr(tmp);}
+        { wxc_string tmp = m_GetTypeName(m_dobj, row, col); return wxstr(tmp);}
     
     bool CanGetValueAs(int row, int col, const wxString& typeName)
-        { return m_CanGetValueAs(m_dobj, row, col, dstr(typeName)); }
+        { return m_CanGetValueAs(m_dobj, row, col, wxc_string(typeName)); }
     
     bool CanSetValueAs(int row, int col, const wxString& typeName)
-        { return m_CanSetValueAs(m_dobj, row, col, dstr(typeName)); }
+        { return m_CanSetValueAs(m_dobj, row, col, wxc_string(typeName)); }
     
     long GetValueAsLong(int row, int col)
         { return m_GetValueAsLong(m_dobj, row, col);}
@@ -2859,10 +2859,10 @@ public:
         { return m_SetValueAsBool(m_dobj, row, col, value);}
     
     void* GetValueAsCustom(int row, int col, const wxString& typeName)
-        { return m_GetValueAsCustom(m_dobj, row, col, dstr(typeName));}
+        { return m_GetValueAsCustom(m_dobj, row, col, wxc_string(typeName));}
     
     void SetValueAsCustom(int row, int col, const wxString& typeName, void* value)
-        { return m_SetValueAsCustom(m_dobj, row, col, dstr(typeName), value);}
+        { return m_SetValueAsCustom(m_dobj, row, col, wxc_string(typeName), value);}
     
     void SetView(wxGrid* grid)
         { return m_SetView(m_dobj, grid);}
@@ -2892,13 +2892,13 @@ public:
         { return m_DeleteCols(m_dobj, pos, numCols);}
     
     wxString GetRowLabelValue(int col)
-        { dstr tmp = m_GetRowLabelValue(m_dobj, col); return wxstr(tmp);}
+        { wxc_string tmp = m_GetRowLabelValue(m_dobj, col); return wxstr(tmp);}
     
     wxString GetColLabelValue(int col)
-        { dstr tmp = m_GetColLabelValue(m_dobj, col); return wxstr(tmp);}
+        { wxc_string tmp = m_GetColLabelValue(m_dobj, col); return wxstr(tmp);}
     
     void SetRowLabelValue(int row, const wxString& value)
-        { return m_SetRowLabelValue(m_dobj, row, dstr(value));}
+        { return m_SetRowLabelValue(m_dobj, row, wxc_string(value));}
     
     void SetColLabelValue(int row, const wxString& value)
         { return m_SetColLabelValue(m_dobj, row, wxString(value));}
@@ -2924,7 +2924,7 @@ public:
     void SetColAttr(wxGridCellAttr* attr, int col)
         { return m_SetColAttr(m_dobj, attr, col); }
 
-    void RegisterVirtual(dobj obj, Virtual_GetNumberRows getNumberRows,
+    void RegisterVirtual(wxc_object obj, Virtual_GetNumberRows getNumberRows,
             Virtual_GetNumberCols getNumberCols,
             Virtual_IsEmptyCell isEmptyCell,
             Virtual_GetValue2 getValue,
@@ -3037,7 +3037,7 @@ private:
     Virtual_SetAttr m_SetAttr;
     Virtual_SetRowAttr m_SetRowAttr;
     Virtual_SetRowAttr m_SetColAttr;
-    dobj m_dobj;
+    wxc_object m_dobj;
 };
 
 extern "C" WXEXPORT
@@ -3047,7 +3047,7 @@ wxGridTableBase* wxGridTableBase_ctor()
 }
 
 extern "C" WXEXPORT
-void wxGridTableBase_RegisterVirtual(_GridTableBase* self, dobj obj, 
+void wxGridTableBase_RegisterVirtual(_GridTableBase* self, wxc_object obj, 
             Virtual_GetNumberRows getNumberRows,
             Virtual_GetNumberCols getNumberCols,
             Virtual_IsEmptyCell isEmptyCell,
@@ -3105,7 +3105,7 @@ dstrret wxGridTableBase_GetTypeName(_GridTableBase* self, int row, int col)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridTableBase_CanGetValueAs(_GridTableBase* self, int row, int col, dstr typeName)
+wxc_bool wxGridTableBase_CanGetValueAs(_GridTableBase* self, int row, int col, wxc_string typeName)
 {
     return self->wxGridTableBase::CanGetValueAs(row, col, wxstr(typeName))?1:0;
 }
@@ -3113,7 +3113,7 @@ dbit wxGridTableBase_CanGetValueAs(_GridTableBase* self, int row, int col, dstr 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridTableBase_CanSetValueAs(_GridTableBase* self, int row, int col, dstr typeName)
+wxc_bool wxGridTableBase_CanSetValueAs(_GridTableBase* self, int row, int col, wxc_string typeName)
 {
     return self->wxGridTableBase::CanSetValueAs(row, col, wxstr(typeName))?1:0;
 }
@@ -3137,7 +3137,7 @@ double wxGridTableBase_GetValueAsDouble(_GridTableBase* self, int row, int col)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridTableBase_GetValueAsBool(_GridTableBase* self, int row, int col)
+wxc_bool wxGridTableBase_GetValueAsBool(_GridTableBase* self, int row, int col)
 {
     return self->wxGridTableBase::GetValueAsBool(row, col)?1:0;
 }
@@ -3161,7 +3161,7 @@ void wxGridTableBase_SetValueAsDouble(_GridTableBase* self, int row, int col, do
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGridTableBase_SetValueAsBool(_GridTableBase* self, int row, int col, dbit value)
+void wxGridTableBase_SetValueAsBool(_GridTableBase* self, int row, int col, wxc_bool value)
 {
     self->wxGridTableBase::SetValueAsBool(row, col, value);
 }
@@ -3169,7 +3169,7 @@ void wxGridTableBase_SetValueAsBool(_GridTableBase* self, int row, int col, dbit
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void* wxGridTableBase_GetValueAsCustom(_GridTableBase* self, int row, int col, dstr typeName)
+void* wxGridTableBase_GetValueAsCustom(_GridTableBase* self, int row, int col, wxc_string typeName)
 {
     return self->wxGridTableBase::GetValueAsCustom(row, col, wxstr(typeName));
 }
@@ -3177,7 +3177,7 @@ void* wxGridTableBase_GetValueAsCustom(_GridTableBase* self, int row, int col, d
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGridTableBase_SetValueAsCustom(_GridTableBase* self, int row, int col, dstr typeName, void* value)
+void wxGridTableBase_SetValueAsCustom(_GridTableBase* self, int row, int col, wxc_string typeName, void* value)
 {
     self->wxGridTableBase::SetValueAsCustom(row, col, wxstr(typeName), value);
 }
@@ -3209,7 +3209,7 @@ void wxGridTableBase_Clear(_GridTableBase* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridTableBase_InsertRows(_GridTableBase* self, int pos, int numRows)
+wxc_bool wxGridTableBase_InsertRows(_GridTableBase* self, int pos, int numRows)
 {
     return self->wxGridTableBase::InsertRows(pos, numRows)?1:0;
 }
@@ -3217,7 +3217,7 @@ dbit wxGridTableBase_InsertRows(_GridTableBase* self, int pos, int numRows)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridTableBase_AppendRows(_GridTableBase* self, int numRows)
+wxc_bool wxGridTableBase_AppendRows(_GridTableBase* self, int numRows)
 {
     return self->wxGridTableBase::AppendRows(numRows)?1:0;
 }
@@ -3225,7 +3225,7 @@ dbit wxGridTableBase_AppendRows(_GridTableBase* self, int numRows)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridTableBase_DeleteRows(_GridTableBase* self, int pos, int numRows)
+wxc_bool wxGridTableBase_DeleteRows(_GridTableBase* self, int pos, int numRows)
 {
     return self->wxGridTableBase::DeleteRows(pos, numRows)?1:0;
 }
@@ -3233,7 +3233,7 @@ dbit wxGridTableBase_DeleteRows(_GridTableBase* self, int pos, int numRows)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridTableBase_InsertCols(_GridTableBase* self, int pos, int numCols)
+wxc_bool wxGridTableBase_InsertCols(_GridTableBase* self, int pos, int numCols)
 {
     return self->wxGridTableBase::InsertCols(pos, numCols)?1:0;
 }
@@ -3241,7 +3241,7 @@ dbit wxGridTableBase_InsertCols(_GridTableBase* self, int pos, int numCols)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridTableBase_AppendCols(_GridTableBase* self, int numCols)
+wxc_bool wxGridTableBase_AppendCols(_GridTableBase* self, int numCols)
 {
     return self->wxGridTableBase::AppendCols(numCols)?1:0;
 }
@@ -3249,7 +3249,7 @@ dbit wxGridTableBase_AppendCols(_GridTableBase* self, int numCols)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridTableBase_DeleteCols(_GridTableBase* self, int pos, int numCols)
+wxc_bool wxGridTableBase_DeleteCols(_GridTableBase* self, int pos, int numCols)
 {
     return self->wxGridTableBase::DeleteCols(pos, numCols)?1:0;
 }
@@ -3273,7 +3273,7 @@ dstrret wxGridTableBase_GetColLabelValue(_GridTableBase* self, int col)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGridTableBase_SetRowLabelValue(_GridTableBase* self, int row, dstr value)
+void wxGridTableBase_SetRowLabelValue(_GridTableBase* self, int row, wxc_string value)
 {
     self->wxGridTableBase::SetRowLabelValue(row,  wxstr(value));
 }
@@ -3281,7 +3281,7 @@ void wxGridTableBase_SetRowLabelValue(_GridTableBase* self, int row, dstr value)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGridTableBase_SetColLabelValue(_GridTableBase* self, int col, dstr value)
+void wxGridTableBase_SetColLabelValue(_GridTableBase* self, int col, wxc_string value)
 {
     self->wxGridTableBase::SetColLabelValue(col,  wxstr(value));
 }
@@ -3305,7 +3305,7 @@ wxGridCellAttrProvider* wxGridTableBase_GetAttrProvider(_GridTableBase* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridTableBase_CanHaveAttributes(_GridTableBase* self)
+wxc_bool wxGridTableBase_CanHaveAttributes(_GridTableBase* self)
 {
     return self->wxGridTableBase::CanHaveAttributes()?1:0;
 }
@@ -3377,7 +3377,7 @@ void wxGridCellTextEditor_PaintBackground(wxGridCellTextEditor* self, wxRect* re
 }
 
 extern "C" WXEXPORT
-dbit wxGridCellTextEditor_IsAcceptedKey(wxGridCellTextEditor* self, wxKeyEvent* event)
+wxc_bool wxGridCellTextEditor_IsAcceptedKey(wxGridCellTextEditor* self, wxKeyEvent* event)
 {
     return self->IsAcceptedKey(*event)?1:0;
 }
@@ -3389,7 +3389,7 @@ void wxGridCellTextEditor_BeginEdit(wxGridCellTextEditor* self, int row, int col
 }
 
 extern "C" WXEXPORT
-dbit wxGridCellTextEditor_EndEdit(wxGridCellTextEditor* self, int row, int col, wxGrid* grid)
+wxc_bool wxGridCellTextEditor_EndEdit(wxGridCellTextEditor* self, int row, int col, wxGrid* grid)
 {
     return self->EndEdit(row, col, grid)?1:0;
 }
@@ -3407,7 +3407,7 @@ void wxGridCellTextEditor_StartingKey(wxGridCellTextEditor* self, wxKeyEvent* ev
 }
 
 extern "C" WXEXPORT
-void wxGridCellTextEditor_SetParameters(wxGridCellTextEditor* self, dstr params)
+void wxGridCellTextEditor_SetParameters(wxGridCellTextEditor* self, wxc_string params)
 {
     self->SetParameters(wxstr(params));
 }
@@ -3445,7 +3445,7 @@ public:
     void SetColAttr(wxGridCellAttr* attr, int col)
         { return m_SetColAttr(m_dobj, attr, col); } 
 
-    void RegisterVirtual(dobj obj, Virtual_GetAttr getAttr,
+    void RegisterVirtual(wxc_object obj, Virtual_GetAttr getAttr,
         Virtual_SetAttr setAttr,
         Virtual_SetRowAttr setRowAttr,
         Virtual_SetRowAttr setColAttr)
@@ -3464,7 +3464,7 @@ private:
     Virtual_SetAttr m_SetAttr;
     Virtual_SetRowAttr m_SetRowAttr;
     Virtual_SetRowAttr m_SetColAttr;
-    dobj m_dobj;
+    wxc_object m_dobj;
 };
 
 extern "C" WXEXPORT
@@ -3481,7 +3481,7 @@ void wxGridCellAttrProvider_dtor(_GridCellAttrProvider* self)
 }
 
 extern "C" WXEXPORT
-void wxGridCellAttrProvider_RegisterVirtual(_GridCellAttrProvider* self, dobj obj,
+void wxGridCellAttrProvider_RegisterVirtual(_GridCellAttrProvider* self, wxc_object obj,
     Virtual_GetAttr getAttr,
     Virtual_SetAttr setAttr,
     Virtual_SetRowAttr setRowAttr,
@@ -3570,7 +3570,7 @@ void wxGridCellNumberEditor_Create(wxGridCellNumberEditor* self, wxWindow* paren
 }
 
 extern "C" WXEXPORT
-dbit wxGridCellNumberEditor_IsAcceptedKey(wxGridCellNumberEditor* self, wxKeyEvent* event)
+wxc_bool wxGridCellNumberEditor_IsAcceptedKey(wxGridCellNumberEditor* self, wxKeyEvent* event)
 {
     return self->IsAcceptedKey(*event)?1:0;
 }
@@ -3582,7 +3582,7 @@ void wxGridCellNumberEditor_BeginEdit(wxGridCellNumberEditor* self, int row, int
 }
 
 extern "C" WXEXPORT
-dbit wxGridCellNumberEditor_EndEdit(wxGridCellNumberEditor* self, int row, int col, wxGrid* grid)
+wxc_bool wxGridCellNumberEditor_EndEdit(wxGridCellNumberEditor* self, int row, int col, wxGrid* grid)
 {
     return self->EndEdit(row, col, grid)?1:0;
 }
@@ -3600,7 +3600,7 @@ void wxGridCellNumberEditor_StartingKey(wxGridCellNumberEditor* self, wxKeyEvent
 }
 
 extern "C" WXEXPORT
-void wxGridCellNumberEditor_SetParameters(wxGridCellNumberEditor* self, dstr params)
+void wxGridCellNumberEditor_SetParameters(wxGridCellNumberEditor* self, wxc_string params)
 {
     self->SetParameters(wxstr(params));
 }
@@ -3640,7 +3640,7 @@ void wxGridCellFloatEditor_Create(wxGridCellFloatEditor* self, wxWindow* parent,
 }
 
 extern "C" WXEXPORT
-dbit wxGridCellFloatEditor_IsAcceptedKey(wxGridCellFloatEditor* self, wxKeyEvent* event)
+wxc_bool wxGridCellFloatEditor_IsAcceptedKey(wxGridCellFloatEditor* self, wxKeyEvent* event)
 {
     return self->IsAcceptedKey(*event)?1:0;
 }
@@ -3652,7 +3652,7 @@ void wxGridCellFloatEditor_BeginEdit(wxGridCellFloatEditor* self, int row, int c
 }
 
 extern "C" WXEXPORT
-dbit wxGridCellFloatEditor_EndEdit(wxGridCellFloatEditor* self, int row, int col, wxGrid* grid)
+wxc_bool wxGridCellFloatEditor_EndEdit(wxGridCellFloatEditor* self, int row, int col, wxGrid* grid)
 {
     return self->EndEdit(row, col, grid)?1:0;
 }
@@ -3670,7 +3670,7 @@ void wxGridCellFloatEditor_StartingKey(wxGridCellFloatEditor* self, wxKeyEvent* 
 }
 
 extern "C" WXEXPORT
-void wxGridCellFloatEditor_SetParameters(wxGridCellFloatEditor* self, dstr params)
+void wxGridCellFloatEditor_SetParameters(wxGridCellFloatEditor* self, wxc_string params)
 {
     self->SetParameters(wxstr(params));
 }
@@ -3731,7 +3731,7 @@ void wxGridCellBoolEditor_SetSize(wxGridCellBoolEditor* self, wxRect* rect)
 }
 
 extern "C" WXEXPORT
-dbit wxGridCellBoolEditor_IsAcceptedKey(wxGridCellBoolEditor* self, wxKeyEvent* event)
+wxc_bool wxGridCellBoolEditor_IsAcceptedKey(wxGridCellBoolEditor* self, wxKeyEvent* event)
 {
     return self->IsAcceptedKey(*event)?1:0;
 }
@@ -3743,7 +3743,7 @@ void wxGridCellBoolEditor_BeginEdit(wxGridCellBoolEditor* self, int row, int col
 }
 
 extern "C" WXEXPORT
-dbit wxGridCellBoolEditor_EndEdit(wxGridCellBoolEditor* self, int row, int col, wxGrid* grid)
+wxc_bool wxGridCellBoolEditor_EndEdit(wxGridCellBoolEditor* self, int row, int col, wxGrid* grid)
 {
     return self->EndEdit(row, col, grid)?1:0;
 }
@@ -3778,14 +3778,14 @@ dstrret wxGridCellBoolEditor_GetValue(wxGridCellBoolEditor* self)
 class _GridCellChoiceEditor : public wxGridCellChoiceEditor
 {
 public:
-	_GridCellChoiceEditor(size_t count, const wxString choices[], dbit allowOthers)
+	_GridCellChoiceEditor(size_t count, const wxString choices[], wxc_bool allowOthers)
 		: wxGridCellChoiceEditor(count, choices, allowOthers) {}
 
 	DECLARE_DISPOSABLE(_GridCellChoiceEditor)
 };
 
 extern "C" WXEXPORT
-wxGridCellChoiceEditor* wxGridCellChoiceEditor_ctor(int n, dstr choices[], dbit allowOthers)
+wxGridCellChoiceEditor* wxGridCellChoiceEditor_ctor(int n, wxc_string choices[], wxc_bool allowOthers)
 {
     wxString *pchoices = new wxString[n];
     for (int i = 0; i < n; ++i)
@@ -3828,7 +3828,7 @@ void wxGridCellChoiceEditor_BeginEdit(wxGridCellChoiceEditor* self, int row, int
 }
 
 extern "C" WXEXPORT
-dbit wxGridCellChoiceEditor_EndEdit(wxGridCellChoiceEditor* self, int row, int col, wxGrid* grid)
+wxc_bool wxGridCellChoiceEditor_EndEdit(wxGridCellChoiceEditor* self, int row, int col, wxGrid* grid)
 {
     return self->EndEdit(row, col, grid)?1:0;
 }
@@ -3840,7 +3840,7 @@ void wxGridCellChoiceEditor_Reset(wxGridCellChoiceEditor* self)
 }
 
 extern "C" WXEXPORT
-void wxGridCellChoiceEditor_SetParameters(wxGridCellChoiceEditor* self, dstr params)
+void wxGridCellChoiceEditor_SetParameters(wxGridCellChoiceEditor* self, wxc_string params)
 {
     self->SetParameters(wxstr(params));
 }
@@ -3890,7 +3890,7 @@ void wxGridCellStringRenderer_RegisterDisposable(_GridCellStringRenderer* self, 
 
 extern "C" WXEXPORT
 void wxGridCellStringRenderer_Draw(wxGridCellStringRenderer* self, wxGrid* grid, wxGridCellAttr* attr,
-                wxDC* dc, wxRect* rect, int row, int col, dbit isSelected)
+                wxDC* dc, wxRect* rect, int row, int col, wxc_bool isSelected)
 {
     self->Draw(*grid, *attr, *dc, *rect, row, col, isSelected);
 }
@@ -3926,7 +3926,7 @@ void wxGridCellNumberRenderer_dtor(wxGridCellNumberRenderer* self)
 
 extern "C" WXEXPORT
 void wxGridCellNumberRenderer_Draw(wxGridCellNumberRenderer* self, wxGrid* grid, wxGridCellAttr* attr,
-                wxDC* dc, wxRect* rect, int row, int col, dbit isSelected)
+                wxDC* dc, wxRect* rect, int row, int col, wxc_bool isSelected)
 {
     self->Draw(*grid, *attr, *dc, *rect, row, col, isSelected);
 }
@@ -3962,7 +3962,7 @@ void wxGridCellFloatRenderer_dtor(wxGridCellFloatRenderer* self)
 
 extern "C" WXEXPORT
 void wxGridCellFloatRenderer_Draw(wxGridCellFloatRenderer* self, wxGrid* grid, wxGridCellAttr* attr,
-                wxDC* dc, wxRect* rect, int row, int col, dbit isSelected)
+                wxDC* dc, wxRect* rect, int row, int col, wxc_bool isSelected)
 {
     self->Draw(*grid, *attr, *dc, *rect, row, col, isSelected);
 }
@@ -4005,7 +4005,7 @@ void wxGridCellFloatRenderer_SetPrecision(wxGridCellFloatRenderer* self, int pre
 }
 
 extern "C" WXEXPORT
-void wxGridCellFloatRenderer_SetParameters(wxGridCellFloatRenderer* self, dstr params)
+void wxGridCellFloatRenderer_SetParameters(wxGridCellFloatRenderer* self, wxc_string params)
 {
     self->SetParameters(wxstr(params));
 }
@@ -4043,7 +4043,7 @@ void wxGridCellBoolRenderer_RegisterDisposable(_GridCellBoolRenderer* self, Virt
 
 extern "C" WXEXPORT
 void wxGridCellBoolRenderer_Draw(wxGridCellBoolRenderer* self, wxGrid* grid, wxGridCellAttr* attr,
-                wxDC* dc, wxRect* rect, int row, int col, dbit isSelected)
+                wxDC* dc, wxRect* rect, int row, int col, wxc_bool isSelected)
 {
     self->Draw(*grid, *attr, *dc, *rect, row, col, isSelected);
 }
@@ -4064,7 +4064,7 @@ wxGridCellRenderer* wxGridCellBoolRenderer_Clone(wxGridCellBoolRenderer* self)
 //-----------------------------------------------------------------------------
 // wxGridCellRenderer
 
-typedef void (CALLBACK* Virtual_Draw) (wxGrid*, wxGridCellAttr*, wxDC*, const wxRect*, int, int, dbit);
+typedef void (CALLBACK* Virtual_Draw) (wxGrid*, wxGridCellAttr*, wxDC*, const wxRect*, int, int, wxc_bool);
 typedef wxSize* (CALLBACK* Virtual_GetBestSize) (wxGrid*, wxGridCellAttr*, wxDC*, int, int);
 typedef wxGridCellRenderer* (CALLBACK* Virtual_RendererClone) ();
 

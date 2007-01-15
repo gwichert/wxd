@@ -22,7 +22,7 @@
 /*
 extern "C" WXEXPORT
 int wxGlobal_GetNumberFromUser(
-                    dstr msg, dstr prompt, dstr caption,
+                    wxc_string msg, wxc_string prompt, wxc_string caption,
                     int value, int min, int max, wxWindow* parent,
                     const wxPoint* pos
                 )
@@ -153,7 +153,7 @@ void wxArrayString_RegisterDisposable(_ArrayString* self, Virtual_Dispose onDisp
 }
 
 extern "C" WXEXPORT
-void wxArrayString_Add(wxArrayString* self, dstr toadd)
+void wxArrayString_Add(wxArrayString* self, wxc_string toadd)
 {
 	wxString tmps(wxstr(toadd));
 	self->Add(tmps);
@@ -237,7 +237,7 @@ void wxWindowDisabler_dtor(wxWindowDisabler* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxBusyInfo* wxBusyInfo_ctor(dstr message, wxWindow* parent)
+wxBusyInfo* wxBusyInfo_ctor(wxc_string message, wxWindow* parent)
 {
 	return new wxBusyInfo(wxstr(message), parent);
 }

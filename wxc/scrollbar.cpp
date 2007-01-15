@@ -33,7 +33,7 @@ wxScrollBar* wxScrollBar_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxScrollBar_Create(wxScrollBar* self, wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, int style, const wxValidator* validator, dstr name)
+wxc_bool wxScrollBar_Create(wxScrollBar* self, wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, int style, const wxValidator* validator, wxc_string name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -45,7 +45,7 @@ dbit wxScrollBar_Create(wxScrollBar* self, wxWindow* parent, wxWindowID id, cons
 		validator = &wxDefaultValidator;
 
 	if (name.data==NULL)
-		name = dstr("scrollbar");
+		name = wxc_string("scrollbar");
 		
     return self->Create(parent, id, *pos, *size, style, *validator, wxstr(name))?1:0;
 }
@@ -85,7 +85,7 @@ int wxScrollBar_GetRange(wxScrollBar* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxScrollBar_IsVertical(wxScrollBar* self)
+wxc_bool wxScrollBar_IsVertical(wxScrollBar* self)
 {
     return self->IsVertical()?1:0;
 }
@@ -101,7 +101,7 @@ void wxScrollBar_SetThumbPosition(wxScrollBar* self, int viewStart)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxScrollBar_SetScrollbar(wxScrollBar* self, int position, int thumbSize, int range, int pageSize, dbit refresh)
+void wxScrollBar_SetScrollbar(wxScrollBar* self, int position, int thumbSize, int range, int pageSize, wxc_bool refresh)
 {
     self->SetScrollbar(position, thumbSize, range, pageSize, refresh);
 }

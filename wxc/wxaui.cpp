@@ -41,121 +41,121 @@ void wxPaneInfo_Copy(wxPaneInfo* self, const wxPaneInfo* c)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPaneInfo_IsOk(wxPaneInfo* self)
+wxc_bool wxPaneInfo_IsOk(wxPaneInfo* self)
 {
   return self->IsOk();
 }
 
 extern "C" WXEXPORT
-dbit wxPaneInfo_IsFixed(wxPaneInfo* self)
+wxc_bool wxPaneInfo_IsFixed(wxPaneInfo* self)
 {
   return self->IsFixed();
 }
 
 extern "C" WXEXPORT
-dbit wxPaneInfo_IsResizable(wxPaneInfo* self)
+wxc_bool wxPaneInfo_IsResizable(wxPaneInfo* self)
 {
   return self->IsResizable();
 }
 
 extern "C" WXEXPORT
-dbit wxPaneInfo_IsShown(wxPaneInfo* self)
+wxc_bool wxPaneInfo_IsShown(wxPaneInfo* self)
 {
   return self->IsShown();
 }
 
 extern "C" WXEXPORT
-dbit wxPaneInfo_IsFloating(wxPaneInfo* self)
+wxc_bool wxPaneInfo_IsFloating(wxPaneInfo* self)
 {
   return self->IsFloating();
 }
 
 extern "C" WXEXPORT
-dbit wxPaneInfo_IsDocked(wxPaneInfo* self)
+wxc_bool wxPaneInfo_IsDocked(wxPaneInfo* self)
 {
   return self->IsDocked();
 }
 
 extern "C" WXEXPORT
-dbit wxPaneInfo_IsToolbar(wxPaneInfo* self)
+wxc_bool wxPaneInfo_IsToolbar(wxPaneInfo* self)
 {
   return self->IsToolbar();
 }
 
 extern "C" WXEXPORT
-dbit wxPaneInfo_IsTopDockable(wxPaneInfo* self)
+wxc_bool wxPaneInfo_IsTopDockable(wxPaneInfo* self)
 {
   return self->IsTopDockable();
 }
 
 extern "C" WXEXPORT
-dbit wxPaneInfo_IsBottomDockable(wxPaneInfo* self)
+wxc_bool wxPaneInfo_IsBottomDockable(wxPaneInfo* self)
 {
   return self->IsBottomDockable();
 }
 
 extern "C" WXEXPORT
-dbit wxPaneInfo_IsLeftDockable(wxPaneInfo* self)
+wxc_bool wxPaneInfo_IsLeftDockable(wxPaneInfo* self)
 {
   return self->IsLeftDockable();
 }
 
 extern "C" WXEXPORT
-dbit wxPaneInfo_IsRightDockable(wxPaneInfo* self)
+wxc_bool wxPaneInfo_IsRightDockable(wxPaneInfo* self)
 {
   return self->IsRightDockable();
 }
 
 extern "C" WXEXPORT
-dbit wxPaneInfo_IsFloatable(wxPaneInfo* self)
+wxc_bool wxPaneInfo_IsFloatable(wxPaneInfo* self)
 {
   return self->IsFloatable();
 }
 
 extern "C" WXEXPORT
-dbit wxPaneInfo_IsMovable(wxPaneInfo* self)
+wxc_bool wxPaneInfo_IsMovable(wxPaneInfo* self)
 {
   return self->IsMovable();
 }
 
 extern "C" WXEXPORT
-dbit wxPaneInfo_HasCaption(wxPaneInfo* self)
+wxc_bool wxPaneInfo_HasCaption(wxPaneInfo* self)
 {
   return self->HasCaption();
 }
 
 extern "C" WXEXPORT
-dbit wxPaneInfo_HasGripper(wxPaneInfo* self)
+wxc_bool wxPaneInfo_HasGripper(wxPaneInfo* self)
 {
   return self->HasGripper();
 }
 
 extern "C" WXEXPORT
-dbit wxPaneInfo_HasBorder(wxPaneInfo* self)
+wxc_bool wxPaneInfo_HasBorder(wxPaneInfo* self)
 {
   return self->HasBorder();
 }
 
 extern "C" WXEXPORT
-dbit wxPaneInfo_HasCloseButton(wxPaneInfo* self)
+wxc_bool wxPaneInfo_HasCloseButton(wxPaneInfo* self)
 {
   return self->HasCloseButton();
 }
 
 extern "C" WXEXPORT
-dbit wxPaneInfo_HasMaximizeButton(wxPaneInfo* self)
+wxc_bool wxPaneInfo_HasMaximizeButton(wxPaneInfo* self)
 {
   return self->HasMaximizeButton();
 }
 
 extern "C" WXEXPORT
-dbit wxPaneInfo_HasMinimizeButton(wxPaneInfo* self)
+wxc_bool wxPaneInfo_HasMinimizeButton(wxPaneInfo* self)
 {
   return self->HasMinimizeButton();
 }
 
 extern "C" WXEXPORT
-dbit wxPaneInfo_HasPinButton(wxPaneInfo* self)
+wxc_bool wxPaneInfo_HasPinButton(wxPaneInfo* self)
 {
   return self->HasPinButton();
 }
@@ -169,13 +169,13 @@ wxPaneInfo* wxPaneInfo_Window(wxPaneInfo* self, wxWindow* w)
 }
 
 extern "C" WXEXPORT
-wxPaneInfo* wxPaneInfo_Name(wxPaneInfo* self, const dstr n)
+wxPaneInfo* wxPaneInfo_Name(wxPaneInfo* self, const wxc_string n)
 {
   return &self->Name(wxstr(n));
 }
 
 extern "C" WXEXPORT
-wxPaneInfo* wxPaneInfo_Caption(wxPaneInfo* self, const dstr c)
+wxPaneInfo* wxPaneInfo_Caption(wxPaneInfo* self, const wxc_string c)
 {
   return &self->Caption(wxstr(c));
 }
@@ -307,7 +307,7 @@ wxPaneInfo* wxPaneInfo_Fixed(wxPaneInfo* self)
 }
 
 extern "C" WXEXPORT
-wxPaneInfo* wxPaneInfo_Resizable(wxPaneInfo* self, dbit resizable = true)
+wxPaneInfo* wxPaneInfo_Resizable(wxPaneInfo* self, wxc_bool resizable = true)
 {
   return &self->Resizable(resizable);
 }
@@ -331,97 +331,97 @@ wxPaneInfo* wxPaneInfo_Hide(wxPaneInfo* self)
 }
 
 extern "C" WXEXPORT
-wxPaneInfo* wxPaneInfo_Show(wxPaneInfo* self, dbit show = true)
+wxPaneInfo* wxPaneInfo_Show(wxPaneInfo* self, wxc_bool show = true)
 {
   return &self->Show(show);
 }
 
 extern "C" WXEXPORT
-wxPaneInfo* wxPaneInfo_CaptionVisible(wxPaneInfo* self, dbit visible = true)
+wxPaneInfo* wxPaneInfo_CaptionVisible(wxPaneInfo* self, wxc_bool visible = true)
 {
   return &self->CaptionVisible(visible);
 }
 
 extern "C" WXEXPORT
-wxPaneInfo* wxPaneInfo_PaneBorder(wxPaneInfo* self, dbit visible = true)
+wxPaneInfo* wxPaneInfo_PaneBorder(wxPaneInfo* self, wxc_bool visible = true)
 {
   return &self->PaneBorder(visible);
 }
 
 extern "C" WXEXPORT
-wxPaneInfo* wxPaneInfo_Gripper(wxPaneInfo* self, dbit visible = true)
+wxPaneInfo* wxPaneInfo_Gripper(wxPaneInfo* self, wxc_bool visible = true)
 {
   return &self->Gripper(visible);
 }
 
 extern "C" WXEXPORT
-wxPaneInfo* wxPaneInfo_CloseButton(wxPaneInfo* self, dbit visible = true)
+wxPaneInfo* wxPaneInfo_CloseButton(wxPaneInfo* self, wxc_bool visible = true)
 {
   return &self->CloseButton(visible);
 }
 
 extern "C" WXEXPORT
-wxPaneInfo* wxPaneInfo_MaximizeButton(wxPaneInfo* self, dbit visible = true)
+wxPaneInfo* wxPaneInfo_MaximizeButton(wxPaneInfo* self, wxc_bool visible = true)
 {
   return &self->MaximizeButton(visible);
 }
 
 extern "C" WXEXPORT
-wxPaneInfo* wxPaneInfo_MinimizeButton(wxPaneInfo* self, dbit visible = true)
+wxPaneInfo* wxPaneInfo_MinimizeButton(wxPaneInfo* self, wxc_bool visible = true)
 {
   return &self->MinimizeButton(visible);
 }
 
 extern "C" WXEXPORT
-wxPaneInfo* wxPaneInfo_PinButton(wxPaneInfo* self, dbit visible = true)
+wxPaneInfo* wxPaneInfo_PinButton(wxPaneInfo* self, wxc_bool visible = true)
 {
   return &self->PinButton(visible);
 }
 
 extern "C" WXEXPORT
-wxPaneInfo* wxPaneInfo_DestroyOnClose(wxPaneInfo* self, dbit b = true)
+wxPaneInfo* wxPaneInfo_DestroyOnClose(wxPaneInfo* self, wxc_bool b = true)
 {
   return &self->DestroyOnClose(b);
 }
 
 extern "C" WXEXPORT
-wxPaneInfo* wxPaneInfo_TopDockable(wxPaneInfo* self, dbit b = true)
+wxPaneInfo* wxPaneInfo_TopDockable(wxPaneInfo* self, wxc_bool b = true)
 {
   return &self->TopDockable(b);
 }
 
 extern "C" WXEXPORT
-wxPaneInfo* wxPaneInfo_BottomDockable(wxPaneInfo* self, dbit b = true)
+wxPaneInfo* wxPaneInfo_BottomDockable(wxPaneInfo* self, wxc_bool b = true)
 {
   return &self->BottomDockable(b);
 }
 
 extern "C" WXEXPORT
-wxPaneInfo* wxPaneInfo_LeftDockable(wxPaneInfo* self, dbit b = true)
+wxPaneInfo* wxPaneInfo_LeftDockable(wxPaneInfo* self, wxc_bool b = true)
 {
   return &self->LeftDockable(b);
 }
 
 extern "C" WXEXPORT
-wxPaneInfo* wxPaneInfo_RightDockable(wxPaneInfo* self, dbit b = true)
+wxPaneInfo* wxPaneInfo_RightDockable(wxPaneInfo* self, wxc_bool b = true)
 {
   return &self->RightDockable(b);
 }
 
 extern "C" WXEXPORT
-wxPaneInfo* wxPaneInfo_Floatable(wxPaneInfo* self, dbit b = true)
+wxPaneInfo* wxPaneInfo_Floatable(wxPaneInfo* self, wxc_bool b = true)
 {
   return &self->Floatable(b);
 }
 
 extern "C" WXEXPORT
-wxPaneInfo* wxPaneInfo_Movable(wxPaneInfo* self, dbit b = true)
+wxPaneInfo* wxPaneInfo_Movable(wxPaneInfo* self, wxc_bool b = true)
 {
   return &self->Movable(b);
 }
 
 extern "C" WXEXPORT
-wxPaneInfo* wxPaneInfo_Dockable(wxPaneInfo* self, dbit b = true)
+wxPaneInfo* wxPaneInfo_Dockable(wxPaneInfo* self, wxc_bool b = true)
 {
   return &self->Dockable(b);
 }
@@ -451,14 +451,14 @@ wxPaneInfo* wxPaneInfo_ToolbarPane(wxPaneInfo* self)
 }
 
 extern "C" WXEXPORT
-wxPaneInfo* wxPaneInfo_SetFlag(wxPaneInfo* self, unsigned int flag, dbit option_state)
+wxPaneInfo* wxPaneInfo_SetFlag(wxPaneInfo* self, unsigned int flag, wxc_bool option_state)
 
 {
   return &self->SetFlag(flag, option_state);
 }
 
 extern "C" WXEXPORT
-dbit wxPaneInfo_HasFlag(wxPaneInfo* self, unsigned int flag)
+wxc_bool wxPaneInfo_HasFlag(wxPaneInfo* self, unsigned int flag)
 
 {
   return self->HasFlag(flag)?1:0;
@@ -631,7 +631,7 @@ wxPaneInfo* wxFrameManager_GetPaneByWindow(wxFrameManager* self, wxWindow* windo
 }
 
 extern "C" WXEXPORT
-wxPaneInfo* wxFrameManager_GetPaneByName(wxFrameManager* self, const dstr name)
+wxPaneInfo* wxFrameManager_GetPaneByName(wxFrameManager* self, const wxc_string name)
 {
   return &self->GetPane(wxstr(name));
 }
@@ -649,22 +649,22 @@ wxPaneInfo* wxFrameManager_GetPane(wxFrameManager* self, int index)
 }
 
 extern "C" WXEXPORT
-dbit wxFrameManager_AddPane(wxFrameManager* self, wxWindow* window,
+wxc_bool wxFrameManager_AddPane(wxFrameManager* self, wxWindow* window,
              const wxPaneInfo* pane_info)
 {
   return self->AddPane(window, *pane_info)?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxFrameManager_AddPane2(wxFrameManager* self, wxWindow* window,
+wxc_bool wxFrameManager_AddPane2(wxFrameManager* self, wxWindow* window,
              int direction,
-             const dstr caption)
+             const wxc_string caption)
 {
   return self->AddPane(window, direction, wxstr(caption))?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxFrameManager_InsertPane(wxFrameManager* self, wxWindow* window,
+wxc_bool wxFrameManager_InsertPane(wxFrameManager* self, wxWindow* window,
              const wxPaneInfo* pane_info,
              int insert_level = wxAUI_INSERT_PANE)
 {
@@ -672,7 +672,7 @@ dbit wxFrameManager_InsertPane(wxFrameManager* self, wxWindow* window,
 }
 
 extern "C" WXEXPORT
-dbit wxFrameManager_DetachPane(wxFrameManager* self, wxWindow* window)
+wxc_bool wxFrameManager_DetachPane(wxFrameManager* self, wxWindow* window)
 {
   return self->DetachPane(window)?1:0;
 }
@@ -684,8 +684,8 @@ dstrret wxFrameManager_SavePerspective(wxFrameManager* self)
 }
 
 extern "C" WXEXPORT
-dbit wxFrameManager_LoadPerspective(wxFrameManager* self, const dstr perspective,
-             dbit update = true)
+wxc_bool wxFrameManager_LoadPerspective(wxFrameManager* self, const wxc_string perspective,
+             wxc_bool update = true)
 {
   return self->LoadPerspective(wxstr(perspective), update)?1:0;
 }
@@ -740,31 +740,31 @@ wxEvent* wxFrameManagerEvent_Clone(wxFrameManagerEvent* self)
 
 //-----------------------------------------------------------------------------
 
-typedef int (CALLBACK* Virtual_GetMetric) (dobj obj, int id);
-typedef void (CALLBACK* Virtual_SetMetric) (dobj obj, int id, int new_val);
-typedef void (CALLBACK* Virtual_SetFont) (dobj obj, int id, const wxFont* font);
-typedef wxFont* (CALLBACK* Virtual_GetFont) (dobj obj, int id);
-typedef wxColour* (CALLBACK* Virtual_GetColour) (dobj obj, int id);
-typedef void (CALLBACK* Virtual_SetColour) (dobj obj, int id, const wxColor* colour);
-typedef wxColour* (CALLBACK* Virtual_GetColor) (dobj obj, int id);
-typedef void (CALLBACK* Virtual_SetColor) (dobj obj, int id, const wxColor* color);
-typedef void (CALLBACK* Virtual_DrawSash) (dobj obj, wxDC* dc,
+typedef int (CALLBACK* Virtual_GetMetric) (wxc_object obj, int id);
+typedef void (CALLBACK* Virtual_SetMetric) (wxc_object obj, int id, int new_val);
+typedef void (CALLBACK* Virtual_SetFont) (wxc_object obj, int id, const wxFont* font);
+typedef wxFont* (CALLBACK* Virtual_GetFont) (wxc_object obj, int id);
+typedef wxColour* (CALLBACK* Virtual_GetColour) (wxc_object obj, int id);
+typedef void (CALLBACK* Virtual_SetColour) (wxc_object obj, int id, const wxColor* colour);
+typedef wxColour* (CALLBACK* Virtual_GetColor) (wxc_object obj, int id);
+typedef void (CALLBACK* Virtual_SetColor) (wxc_object obj, int id, const wxColor* color);
+typedef void (CALLBACK* Virtual_DrawSash) (wxc_object obj, wxDC* dc,
                       int orientation,
                       const wxRect* rect);
-typedef void (CALLBACK* Virtual_DrawBackground) (dobj obj, wxDC* dc,
+typedef void (CALLBACK* Virtual_DrawBackground) (wxc_object obj, wxDC* dc,
                       int orientation,
                       const wxRect* rect);
-typedef void (CALLBACK* Virtual_DrawCaption) (dobj obj, wxDC* dc,
-                      const dstr text,
+typedef void (CALLBACK* Virtual_DrawCaption) (wxc_object obj, wxDC* dc,
+                      const wxc_string text,
                       const wxRect* rect,
                       wxPaneInfo* pane);
-typedef void (CALLBACK* Virtual_DrawGripper) (dobj obj, wxDC* dc,
+typedef void (CALLBACK* Virtual_DrawGripper) (wxc_object obj, wxDC* dc,
                       const wxRect* rect,
                       wxPaneInfo* pane);
-typedef void (CALLBACK* Virtual_DrawBorder) (dobj obj, wxDC* dc,
+typedef void (CALLBACK* Virtual_DrawBorder) (wxc_object obj, wxDC* dc,
                       const wxRect* rect,
                       wxPaneInfo* pane);
-typedef void (CALLBACK* Virtual_DrawPaneButton) (dobj obj, wxDC* dc,
+typedef void (CALLBACK* Virtual_DrawPaneButton) (wxc_object obj, wxDC* dc,
                       int button,
                       int button_state,
                       const wxRect* rect,
@@ -830,7 +830,7 @@ public:
 
   void DrawCaption(wxDC& dc, const wxString& text, const wxRect& rect, wxPaneInfo& pane)
   {
-    m_DrawCaption(m_dobj, &dc, dstr(text), &rect, &pane);
+    m_DrawCaption(m_dobj, &dc, wxc_string(text), &rect, &pane);
   }
 
   void DrawGripper(wxDC& dc, const wxRect& rect, wxPaneInfo& pane)
@@ -848,7 +848,7 @@ public:
     m_DrawPaneButton(m_dobj, &dc, button, button_state, &rect, &pane);
   }
 
-  void RegisterVirtual(dobj obj,
+  void RegisterVirtual(wxc_object obj,
                       Virtual_GetMetric getMetric,
                       Virtual_SetMetric setMetric,
                       Virtual_SetFont setFont,
@@ -896,7 +896,7 @@ private:
   Virtual_DrawGripper m_DrawGripper;
   Virtual_DrawBorder m_DrawBorder;
   Virtual_DrawPaneButton m_DrawPaneButton;
-  dobj m_dobj;
+  wxc_object m_dobj;
 };
 
 extern "C" WXEXPORT
@@ -913,7 +913,7 @@ void wxDockArt_dtor(wxDockArt* self)
 }
 
 extern "C" WXEXPORT
-void wxDockArt_RegisterVirtual(_DockArt* self, dobj obj,
+void wxDockArt_RegisterVirtual(_DockArt* self, wxc_object obj,
                       Virtual_GetMetric getMetric,
                       Virtual_SetMetric setMetric,
                       Virtual_SetFont setFont,
@@ -1036,7 +1036,7 @@ void wxDockArt_DrawBackground(wxDockArt* self, wxDC* dc,
 
 extern "C" WXEXPORT
 void wxDockArt_DrawCaption(wxDockArt* self, wxDC* dc,
-                      const dstr text,
+                      const wxc_string text,
                       const wxRect* rect,
                       wxPaneInfo* pane)
 {

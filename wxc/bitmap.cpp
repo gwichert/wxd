@@ -34,7 +34,7 @@ wxBitmap* wxBitmap_ctorByImage(wxImage* image, int depth)
 }
 
 extern "C" WXEXPORT
-wxBitmap* wxBitmap_ctorByName(dstr name, int type)
+wxBitmap* wxBitmap_ctorByName(wxc_string name, int type)
 {
     return new wxBitmap(wxstr(name), (wxBitmapType)type);
 }
@@ -90,7 +90,7 @@ void wxBitmap_SetWidth(wxBitmap* self, int width)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxBitmap_LoadFile(wxBitmap* self, dstr name, wxBitmapType type)
+wxc_bool wxBitmap_LoadFile(wxBitmap* self, wxc_string name, wxBitmapType type)
 {
     return self->LoadFile(wxstr(name), type)?1:0;
 }
@@ -98,7 +98,7 @@ dbit wxBitmap_LoadFile(wxBitmap* self, dstr name, wxBitmapType type)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxBitmap_SaveFile(wxBitmap* self, dstr name, wxBitmapType type, wxPalette* palette)
+wxc_bool wxBitmap_SaveFile(wxBitmap* self, wxc_string name, wxBitmapType type, wxPalette* palette)
 {
 	return self->SaveFile(wxstr(name), type, palette)?1:0;
 }
@@ -106,7 +106,7 @@ dbit wxBitmap_SaveFile(wxBitmap* self, dstr name, wxBitmapType type, wxPalette* 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxBitmap_Ok(wxBitmap* self)
+wxc_bool wxBitmap_Ok(wxBitmap* self)
 {
     return self->Ok()?1:0;
 }
@@ -166,7 +166,7 @@ wxPalette* wxBitmap_GetColourMap(wxBitmap* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxBitmap_CopyFromIcon(wxBitmap* self, wxIcon* icon)
+wxc_bool wxBitmap_CopyFromIcon(wxBitmap* self, wxIcon* icon)
 {
 	return self->CopyFromIcon(*icon)?1:0;
 }
@@ -201,19 +201,19 @@ wxMask* wxMask_ctorByBitmap(wxBitmap* bitmap)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxMask_CreateByBitmapColour(wxMask* self, wxBitmap* bitmap, wxColour* colour)
+wxc_bool wxMask_CreateByBitmapColour(wxMask* self, wxBitmap* bitmap, wxColour* colour)
 {
 	return self->Create(*bitmap, *colour)?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxMask_CreateByBitmapIndex(wxMask* self, wxBitmap* bitmap, int paletteIndex)
+wxc_bool wxMask_CreateByBitmapIndex(wxMask* self, wxBitmap* bitmap, int paletteIndex)
 {
 	return self->Create(*bitmap, paletteIndex)?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxMask_CreateByBitmap(wxMask* self, wxBitmap* bitmap)
+wxc_bool wxMask_CreateByBitmap(wxMask* self, wxBitmap* bitmap)
 {
 	return self->Create(*bitmap)?1:0;
 }

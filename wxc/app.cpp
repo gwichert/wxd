@@ -20,10 +20,10 @@
 
 #include <stdio.h>
 
-typedef dbit (CALLBACK* Virtual_Initialize) (dobj obj,int* argc,char** argv);
-typedef dbit (CALLBACK* Virtual_OnInit) (dobj obj);
-typedef int (CALLBACK* Virtual_OnRun) (dobj obj);
-typedef int (CALLBACK* Virtual_OnExit) (dobj obj);
+typedef wxc_bool (CALLBACK* Virtual_Initialize) (wxc_object obj,int* argc,char** argv);
+typedef wxc_bool (CALLBACK* Virtual_OnInit) (wxc_object obj);
+typedef int (CALLBACK* Virtual_OnRun) (wxc_object obj);
+typedef int (CALLBACK* Virtual_OnExit) (wxc_object obj);
 
 //-----------------------------------------------------------------------------
 // The proxy class
@@ -49,7 +49,7 @@ public:
 	int OnExit()
 	{ return m_OnExit(m_dobj); }
 	
-	void RegisterVirtual(dobj obj, Virtual_OnInit onInit, Virtual_OnRun onRun, Virtual_OnExit onExit, Virtual_Initialize initialize)
+	void RegisterVirtual(wxc_object obj, Virtual_OnInit onInit, Virtual_OnRun onRun, Virtual_OnExit onExit, Virtual_Initialize initialize)
 	{
 		m_dobj = obj;
 		m_OnInit = onInit;
@@ -63,7 +63,7 @@ private:
 	Virtual_OnRun m_OnRun;
 	Virtual_OnExit m_OnExit;
 	Virtual_Initialize m_Initialize;
-	dobj m_dobj;
+	wxc_object m_dobj;
 };
 
 //-----------------------------------------------------------------------------
@@ -87,7 +87,7 @@ _App* wxApp_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxApp_RegisterVirtual(_App* self, dobj obj, Virtual_OnInit onInit, Virtual_OnRun onRun, Virtual_OnExit onExit,Virtual_Initialize initalize)
+void wxApp_RegisterVirtual(_App* self, wxc_object obj, Virtual_OnInit onInit, Virtual_OnRun onRun, Virtual_OnExit onExit,Virtual_Initialize initalize)
 {
 	self->RegisterVirtual(obj, onInit, onRun, onExit, initalize);
 }
@@ -95,7 +95,7 @@ void wxApp_RegisterVirtual(_App* self, dobj obj, Virtual_OnInit onInit, Virtual_
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxApp_OnInit(_App* self)
+wxc_bool wxApp_OnInit(_App* self)
 {
 	return self->wxApp::OnInit()?1:0;
 }
@@ -119,7 +119,7 @@ int wxApp_OnExit(_App* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxApp_Initialize(_App* self,int& argc, char **argv)
+wxc_bool wxApp_Initialize(_App* self,int& argc, char **argv)
 {
 	const wxChar* wargv[argc];
         for (int i=0; i < argc; i++)
@@ -157,7 +157,7 @@ dstrret wxApp_GetVendorName(wxApp* self)
 }
 
 extern "C" WXEXPORT 
-void wxApp_SetVendorName(wxApp* self, dstr name)
+void wxApp_SetVendorName(wxApp* self, wxc_string name)
 {
     self->SetVendorName(wxstr(name));
 }
@@ -171,7 +171,7 @@ dstrret wxApp_GetAppName(wxApp* self)
 }
 
 extern "C" WXEXPORT 
-void wxApp_SetAppName(wxApp* self, dstr name)
+void wxApp_SetAppName(wxApp* self, wxc_string name)
 {
     self->SetAppName(wxstr(name));
 }
@@ -193,7 +193,7 @@ void wxApp_SetTopWindow(wxApp* self, wxWindow* window)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT 
-dbit wxApp_SafeYield(wxWindow* win, dbit onlyIfNeeded) 
+wxc_bool wxApp_SafeYield(wxWindow* win, wxc_bool onlyIfNeeded) 
 {
     return ::wxSafeYield(win, onlyIfNeeded)?1:0;
 }
@@ -202,7 +202,7 @@ dbit wxApp_SafeYield(wxWindow* win, dbit onlyIfNeeded)
     #undef Yield
 #endif
 extern "C" WXEXPORT
-dbit wxApp_Yield(wxApp* self, dbit onlyIfNeeded)
+wxc_bool wxApp_Yield(wxApp* self, wxc_bool onlyIfNeeded)
 {
     return self->Yield(onlyIfNeeded)?1:0;
 }

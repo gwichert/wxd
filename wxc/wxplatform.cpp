@@ -16,7 +16,7 @@
 #include <wx/utils.h>
 
 extern "C" WXEXPORT
-dbit wxPlatform_WXMSW()
+wxc_bool wxPlatform_WXMSW()
 {
 #ifdef __WXMSW__
 	return true;
@@ -26,7 +26,7 @@ dbit wxPlatform_WXMSW()
 }
 
 extern "C" WXEXPORT
-dbit wxPlatform_WXGTK()
+wxc_bool wxPlatform_WXGTK()
 {
 #ifdef __WXGTK__
 	return true;
@@ -36,7 +36,7 @@ dbit wxPlatform_WXGTK()
 }
 
 extern "C" WXEXPORT
-dbit wxPlatform_WXMAC()
+wxc_bool wxPlatform_WXMAC()
 {
 #ifdef __WXMAC__
 	return true;
@@ -46,7 +46,7 @@ dbit wxPlatform_WXMAC()
 }
 
 extern "C" WXEXPORT
-dbit wxPlatform_WXX11()
+wxc_bool wxPlatform_WXX11()
 {
 #ifdef __WXX11__
 	return true;
@@ -56,7 +56,7 @@ dbit wxPlatform_WXX11()
 }
 
 extern "C" WXEXPORT
-dbit wxPlatform_WXUNIVERSAL()
+wxc_bool wxPlatform_WXUNIVERSAL()
 {
 #ifdef __WXUNIVERSAL__
 	return true;
@@ -66,7 +66,7 @@ dbit wxPlatform_WXUNIVERSAL()
 }
 
 extern "C" WXEXPORT
-dbit wxPlatform_WXDEBUG()
+wxc_bool wxPlatform_WXDEBUG()
 {
 #ifdef __WXDEBUG__
 	return true;
@@ -78,7 +78,7 @@ dbit wxPlatform_WXDEBUG()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPlatform_UNIX()
+wxc_bool wxPlatform_UNIX()
 {
 #if wxUSE_UNIX
 	return true;
@@ -88,7 +88,7 @@ dbit wxPlatform_UNIX()
 }
 
 extern "C" WXEXPORT
-dbit wxPlatform_UNICODE()
+wxc_bool wxPlatform_UNICODE()
 {
 #if wxUSE_UNICODE
 	return true;
@@ -98,7 +98,7 @@ dbit wxPlatform_UNICODE()
 }
 
 extern "C" WXEXPORT
-dbit wxPlatform_DISPLAY()
+wxc_bool wxPlatform_DISPLAY()
 {
 #if wxUSE_DISPLAY
 	return true;
@@ -108,7 +108,7 @@ dbit wxPlatform_DISPLAY()
 }
 
 extern "C" WXEXPORT
-dbit wxPlatform_POSTSCRIPT()
+wxc_bool wxPlatform_POSTSCRIPT()
 {
 #if wxUSE_POSTSCRIPT
 	return true;
@@ -118,7 +118,7 @@ dbit wxPlatform_POSTSCRIPT()
 }
 
 extern "C" WXEXPORT
-dbit wxPlatform_GLCANVAS()
+wxc_bool wxPlatform_GLCANVAS()
 {
 #if wxUSE_GLCANVAS
 	return true;
@@ -128,7 +128,7 @@ dbit wxPlatform_GLCANVAS()
 }
 
 extern "C" WXEXPORT
-dbit wxPlatform_SOUND()
+wxc_bool wxPlatform_SOUND()
 {
 #if wxUSE_SOUND
 	return true;

@@ -40,7 +40,7 @@ dstrret wxCommandEvent_GetString(wxCommandEvent* self)
 }
 
 extern "C" WXEXPORT
-void wxCommandEvent_SetString(wxCommandEvent* self, dstr s)
+void wxCommandEvent_SetString(wxCommandEvent* self, wxc_string s)
 {
 	self->SetString(wxstr(s));
 }
@@ -48,7 +48,7 @@ void wxCommandEvent_SetString(wxCommandEvent* self, dstr s)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxCommandEvent_IsChecked(wxCommandEvent* self)
+wxc_bool wxCommandEvent_IsChecked(wxCommandEvent* self)
 {
 	return self->IsChecked()?1:0;
 }
@@ -56,7 +56,7 @@ dbit wxCommandEvent_IsChecked(wxCommandEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxCommandEvent_IsSelection(wxCommandEvent* self)
+wxc_bool wxCommandEvent_IsSelection(wxCommandEvent* self)
 {
 	return self->IsSelection()?1:0;
 }

@@ -35,7 +35,7 @@ public:
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxMenuBase* wxMenuBase_ctor1(dstr title, long style)
+wxMenuBase* wxMenuBase_ctor1(wxc_string title, long style)
 {
 	return new _MenuBase(wxstr(title), style);
 }
@@ -51,7 +51,7 @@ wxMenuBase* wxMenuBase_ctor2(long style)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxMenuItem* wxMenuBase_Append(wxMenuBase* self, int id, dstr item, dstr helpString, wxItemKind kind)
+wxMenuItem* wxMenuBase_Append(wxMenuBase* self, int id, wxc_string item, wxc_string helpString, wxItemKind kind)
 {
 	return self->Append(id, wxstr(item), wxstr(helpString), kind);
 }
@@ -67,7 +67,7 @@ wxMenuItem* wxMenuBase_AppendSeparator(wxMenuBase* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxMenuItem* wxMenuBase_AppendCheckItem(wxMenuBase* self, int itemid, dstr text, dstr help)
+wxMenuItem* wxMenuBase_AppendCheckItem(wxMenuBase* self, int itemid, wxc_string text, wxc_string help)
 {
 	return self->AppendCheckItem(itemid, wxstr(text), wxstr(help));
 }
@@ -75,7 +75,7 @@ wxMenuItem* wxMenuBase_AppendCheckItem(wxMenuBase* self, int itemid, dstr text, 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxMenuItem* wxMenuBase_AppendRadioItem(wxMenuBase* self, int itemid, dstr text, dstr help)
+wxMenuItem* wxMenuBase_AppendRadioItem(wxMenuBase* self, int itemid, wxc_string text, wxc_string help)
 {
 	return self->AppendRadioItem(itemid, wxstr(text), wxstr(help));
 }
@@ -83,7 +83,7 @@ wxMenuItem* wxMenuBase_AppendRadioItem(wxMenuBase* self, int itemid, dstr text, 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxMenuItem* wxMenuBase_AppendSubMenu(wxMenuBase* self, int id, dstr item, wxMenu* subMenu, dstr helpString)
+wxMenuItem* wxMenuBase_AppendSubMenu(wxMenuBase* self, int id, wxc_string item, wxMenu* subMenu, wxc_string helpString)
 {
 	return self->Append(id, wxstr(item), subMenu, wxstr(helpString));
 }
@@ -115,7 +115,7 @@ wxMenuItem* wxMenuBase_Insert(wxMenuBase* self, size_t pos, wxMenuItem* item)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxMenuItem* wxMenuBase_Insert2(wxMenuBase* self, size_t pos, int itemid, dstr text, dstr help, wxItemKind kind)
+wxMenuItem* wxMenuBase_Insert2(wxMenuBase* self, size_t pos, int itemid, wxc_string text, wxc_string help, wxItemKind kind)
 {
 	return self->Insert(pos, itemid, wxstr(text), wxstr(help), kind);
 }
@@ -131,7 +131,7 @@ wxMenuItem* wxMenuBase_InsertSeparator(wxMenuBase* self, size_t pos)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxMenuItem* wxMenuBase_InsertCheckItem(wxMenuBase* self, size_t pos, int itemid, dstr text, dstr help)
+wxMenuItem* wxMenuBase_InsertCheckItem(wxMenuBase* self, size_t pos, int itemid, wxc_string text, wxc_string help)
 {
 	return self->InsertCheckItem(pos, itemid, wxstr(text), wxstr(help));
 }
@@ -139,7 +139,7 @@ wxMenuItem* wxMenuBase_InsertCheckItem(wxMenuBase* self, size_t pos, int itemid,
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxMenuItem* wxMenuBase_InsertRadioItem(wxMenuBase* self, size_t pos, int itemid, dstr text, dstr help)
+wxMenuItem* wxMenuBase_InsertRadioItem(wxMenuBase* self, size_t pos, int itemid, wxc_string text, wxc_string help)
 {
 	return self->InsertRadioItem(pos, itemid, wxstr(text), wxstr(help));
 }
@@ -147,7 +147,7 @@ wxMenuItem* wxMenuBase_InsertRadioItem(wxMenuBase* self, size_t pos, int itemid,
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxMenuItem* wxMenuBase_InsertSubMenu(wxMenuBase* self, size_t pos, int itemid, dstr text, wxMenu* submenu, dstr help)
+wxMenuItem* wxMenuBase_InsertSubMenu(wxMenuBase* self, size_t pos, int itemid, wxc_string text, wxMenu* submenu, wxc_string help)
 {
 	return self->Insert(pos, itemid,  wxstr(text), submenu, wxstr(help));
 }
@@ -163,7 +163,7 @@ wxMenuItem* wxMenuBase_Prepend(wxMenuBase* self, wxMenuItem* item)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxMenuItem* wxMenuBase_Prepend2(wxMenuBase* self, int itemid, dstr text, dstr help, wxItemKind kind)
+wxMenuItem* wxMenuBase_Prepend2(wxMenuBase* self, int itemid, wxc_string text, wxc_string help, wxItemKind kind)
 {
 	return self->Prepend(itemid, wxstr(text), wxstr(help), kind);
 }
@@ -179,7 +179,7 @@ wxMenuItem* wxMenuBase_PrependSeparator(wxMenuBase* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxMenuItem* wxMenuBase_PrependCheckItem(wxMenuBase* self, int itemid, dstr text, dstr help)
+wxMenuItem* wxMenuBase_PrependCheckItem(wxMenuBase* self, int itemid, wxc_string text, wxc_string help)
 {
 	return self->PrependCheckItem(itemid, wxstr(text), wxstr(help));
 }
@@ -187,7 +187,7 @@ wxMenuItem* wxMenuBase_PrependCheckItem(wxMenuBase* self, int itemid, dstr text,
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxMenuItem* wxMenuBase_PrependRadioItem(wxMenuBase* self, int itemid, dstr text, dstr help)
+wxMenuItem* wxMenuBase_PrependRadioItem(wxMenuBase* self, int itemid, wxc_string text, wxc_string help)
 {
 	return self->PrependRadioItem(itemid, wxstr(text), wxstr(help));
 }
@@ -195,7 +195,7 @@ wxMenuItem* wxMenuBase_PrependRadioItem(wxMenuBase* self, int itemid, dstr text,
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxMenuItem* wxMenuBase_PrependSubMenu(wxMenuBase* self, int itemid, dstr text, wxMenu* submenu, dstr help)
+wxMenuItem* wxMenuBase_PrependSubMenu(wxMenuBase* self, int itemid, wxc_string text, wxMenu* submenu, wxc_string help)
 {
 	return self->Prepend(itemid, wxstr(text), submenu, wxstr(help));
 }
@@ -219,7 +219,7 @@ wxMenuItem* wxMenuBase_Remove2(wxMenuBase* self, wxMenuItem* item)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxMenuBase_Delete(wxMenuBase* self, int itemid)
+wxc_bool wxMenuBase_Delete(wxMenuBase* self, int itemid)
 {
 	return self->Delete(itemid)?1:0;
 }
@@ -227,7 +227,7 @@ dbit wxMenuBase_Delete(wxMenuBase* self, int itemid)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxMenuBase_Delete2(wxMenuBase* self, wxMenuItem* item)
+wxc_bool wxMenuBase_Delete2(wxMenuBase* self, wxMenuItem* item)
 {
 	return self->Delete(item)?1:0;
 }
@@ -235,7 +235,7 @@ dbit wxMenuBase_Delete2(wxMenuBase* self, wxMenuItem* item)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxMenuBase_Destroy(wxMenuBase* self, int itemid)
+wxc_bool wxMenuBase_Destroy(wxMenuBase* self, int itemid)
 {
 	return self->Destroy(itemid)?1:0;
 }
@@ -243,7 +243,7 @@ dbit wxMenuBase_Destroy(wxMenuBase* self, int itemid)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxMenuBase_Destroy2(wxMenuBase* self, wxMenuItem* item)
+wxc_bool wxMenuBase_Destroy2(wxMenuBase* self, wxMenuItem* item)
 {
 	return self->Destroy(item)?1:0;
 }
@@ -267,7 +267,7 @@ wxMenuItem* wxMenuBase_GetMenuItem(wxMenuBase* self,int index)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxMenuBase_FindItem(wxMenuBase* self, dstr item)
+int wxMenuBase_FindItem(wxMenuBase* self, wxc_string item)
 {
 	return self->FindItem(wxstr(item));
 }
@@ -291,7 +291,7 @@ wxMenuItem* wxMenuBase_FindItemByPosition(wxMenuBase* self, size_t position)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxMenuBase_Enable(wxMenuBase* self, int itemid, dbit enable)
+void wxMenuBase_Enable(wxMenuBase* self, int itemid, wxc_bool enable)
 {
 	self->Enable(itemid, enable);
 }
@@ -299,7 +299,7 @@ void wxMenuBase_Enable(wxMenuBase* self, int itemid, dbit enable)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxMenuBase_IsEnabled(wxMenuBase* self, int itemid)
+wxc_bool wxMenuBase_IsEnabled(wxMenuBase* self, int itemid)
 {
 	return self->IsEnabled(itemid)?1:0;
 }
@@ -307,7 +307,7 @@ dbit wxMenuBase_IsEnabled(wxMenuBase* self, int itemid)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxMenuBase_Check(wxMenuBase* self, int itemid, dbit check)
+void wxMenuBase_Check(wxMenuBase* self, int itemid, wxc_bool check)
 {
     self->Check(itemid, check);
 }
@@ -315,7 +315,7 @@ void wxMenuBase_Check(wxMenuBase* self, int itemid, dbit check)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxMenuBase_IsChecked(wxMenuBase* self, int itemid)
+wxc_bool wxMenuBase_IsChecked(wxMenuBase* self, int itemid)
 {
 	return self->IsChecked(itemid)?1:0;
 }
@@ -323,7 +323,7 @@ dbit wxMenuBase_IsChecked(wxMenuBase* self, int itemid)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxMenuBase_SetLabel(wxMenuBase* self, int itemid, dstr label)
+void wxMenuBase_SetLabel(wxMenuBase* self, int itemid, wxc_string label)
 {
 	self->SetLabel(itemid, wxstr(label));
 }
@@ -339,7 +339,7 @@ dstrret wxMenuBase_GetLabel(wxMenuBase* self, int itemid)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxMenuBase_SetHelpString(wxMenuBase* self, int itemid, dstr helpString)
+void wxMenuBase_SetHelpString(wxMenuBase* self, int itemid, wxc_string helpString)
 {
 	self->SetHelpString(itemid, wxstr(helpString));
 }
@@ -355,7 +355,7 @@ dstrret wxMenuBase_GetHelpString(wxMenuBase* self, int itemid)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxMenuBase_SetTitle(wxMenuBase* self, dstr title)
+void wxMenuBase_SetTitle(wxMenuBase* self, wxc_string title)
 {
 	self->SetTitle(wxstr(title));
 }
@@ -427,7 +427,7 @@ wxMenuBar* wxMenuBase_GetMenuBar(wxMenuBase* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxMenuBase_IsAttached(wxMenuBase* self)
+wxc_bool wxMenuBase_IsAttached(wxMenuBase* self)
 {
 	return self->IsAttached()?1:0;
 }
@@ -467,7 +467,7 @@ wxMenuItem* wxMenuBase_FindChildItem2(wxMenuBase* self, int itemid)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxMenuBase_SendEvent(wxMenuBase* self, int itemid, int checked)
+wxc_bool wxMenuBase_SendEvent(wxMenuBase* self, int itemid, int checked)
 {
 	return self->SendEvent(itemid, checked)?1:0;
 }
@@ -490,7 +490,7 @@ public:
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxMenu* wxMenu_ctor(dstr titel, long style)
+wxMenu* wxMenu_ctor(wxc_string titel, long style)
 {
 	return new _Menu(wxstr(titel), style);
 }

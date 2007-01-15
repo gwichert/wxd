@@ -35,7 +35,7 @@ wxString* wxString_ctor(const wxChar* str)
 }
 
 extern "C" WXEXPORT
-wxString* wxString_ctor2(dstr str)
+wxString* wxString_ctor2(wxc_string str)
 {
 	return new _wxString(wxstr(str));
 }

@@ -36,7 +36,7 @@ wxFrame* wxFrame_ctor()
 }
 
 extern "C" WXEXPORT
-dbit wxFrame_Create(wxFrame* self, wxWindow* parent, int id, dstr title, const wxPoint* pos, const wxSize* size, unsigned int style, dstr name)
+wxc_bool wxFrame_Create(wxFrame* self, wxWindow* parent, int id, wxc_string title, const wxPoint* pos, const wxSize* size, unsigned int style, wxc_string name)
 {
     if (pos == NULL)
         pos = &wxDefaultPosition;
@@ -51,13 +51,13 @@ dbit wxFrame_Create(wxFrame* self, wxWindow* parent, int id, dstr title, const w
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxFrame_ShowFullScreen(wxFrame *self, dbit show, unsigned int style) 
+wxc_bool wxFrame_ShowFullScreen(wxFrame *self, wxc_bool show, unsigned int style) 
 {
     return self->ShowFullScreen(show, style)?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxFrame_IsFullScreen(wxFrame* self)
+wxc_bool wxFrame_IsFullScreen(wxFrame* self)
 {
     return self->IsFullScreen()?1:0;
 }
@@ -65,7 +65,7 @@ dbit wxFrame_IsFullScreen(wxFrame* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxStatusBar* wxFrame_CreateStatusBar(wxFrame* self, int number, unsigned int style, wxWindowID id, dstr name)
+wxStatusBar* wxFrame_CreateStatusBar(wxFrame* self, int number, unsigned int style, wxWindowID id, wxc_string name)
 {
     return self->CreateStatusBar(number, style, id, wxstr(name));
 }
@@ -127,7 +127,7 @@ wxMenuBar* wxFrame_GetMenuBar(wxFrame* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxFrame_SetStatusText(wxFrame* self, dstr text, int number)
+void wxFrame_SetStatusText(wxFrame* self, wxc_string text, int number)
 {
     self->SetStatusText(wxstr(text), number);
 }
@@ -135,10 +135,10 @@ void wxFrame_SetStatusText(wxFrame* self, dstr text, int number)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxToolBar* wxFrame_CreateToolBar(wxFrame* self, unsigned int style, wxWindowID id, dstr name)
+wxToolBar* wxFrame_CreateToolBar(wxFrame* self, unsigned int style, wxWindowID id, wxc_string name)
 {
     if (name.data==NULL)
-        name = dstr("toolBar");
+        name = wxc_string("toolBar");
 
     return self->CreateToolBar(style, id, wxstr(name));
 }
@@ -158,13 +158,13 @@ void wxFrame_SetToolBar(wxFrame* self, wxToolBar* toolbar)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxFrame_Maximize(wxFrame* self, dbit iconize)
+void wxFrame_Maximize(wxFrame* self, wxc_bool iconize)
 {
     self->Maximize(iconize);
 }
 
 extern "C" WXEXPORT
-dbit wxFrame_IsMaximized(wxFrame* self)
+wxc_bool wxFrame_IsMaximized(wxFrame* self)
 {
     return self->IsMaximized()?1:0;
 }
@@ -172,13 +172,13 @@ dbit wxFrame_IsMaximized(wxFrame* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxFrame_Iconize(wxFrame* self, dbit iconize)
+void wxFrame_Iconize(wxFrame* self, wxc_bool iconize)
 {
     self->Iconize(iconize);
 }
 
 extern "C" WXEXPORT
-dbit wxFrame_IsIconized(wxFrame* self)
+wxc_bool wxFrame_IsIconized(wxFrame* self)
 {
     return self->IsIconized()?1:0;
 }
@@ -186,7 +186,7 @@ dbit wxFrame_IsIconized(wxFrame* self)
 //-----------------------------------------------------------------------------
 
 /*extern "C" WXEXPORT
-dbit wxFrame_SetShape(wxFrame* self, wxRegion* region)
+wxc_bool wxFrame_SetShape(wxFrame* self, wxRegion* region)
 {
     return self->SetShape(region);
 }*/

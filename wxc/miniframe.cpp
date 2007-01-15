@@ -37,7 +37,7 @@ wxMiniFrame* wxMiniFrame_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxMiniFrame_Create(wxMiniFrame* self, wxWindow* parent, wxWindowID id, dstr title, const wxPoint* pos, const wxSize* size, int style, dstr name)
+wxc_bool wxMiniFrame_Create(wxMiniFrame* self, wxWindow* parent, wxWindowID id, wxc_string title, const wxPoint* pos, const wxSize* size, int style, wxc_string name)
 {
     if (pos == NULL)
         pos = &wxDefaultPosition;
@@ -46,7 +46,7 @@ dbit wxMiniFrame_Create(wxMiniFrame* self, wxWindow* parent, wxWindowID id, dstr
         size = &wxDefaultSize;
 
     if (name.data==NULL)
-        name = dstr("miniFrame");
+        name = wxc_string("miniFrame");
 
     return self->Create(parent, id, wxstr(title), *pos, *size, style, wxstr(name))?1:0;
 }

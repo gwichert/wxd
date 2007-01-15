@@ -98,7 +98,7 @@ wxMenuItem* wxAcceleratorEntry_GetMenuItem(wxAcceleratorEntry* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxAcceleratorEntry* wxAcceleratorEntry_GetAccelFromString(dstr label)
+wxAcceleratorEntry* wxAcceleratorEntry_GetAccelFromString(wxc_string label)
 {
 	return wxGetAccelFromString(wxstr(label));
 }
@@ -123,7 +123,7 @@ wxAcceleratorTable* wxAcceleratorTable_ctor2(int n, wxAcceleratorEntry* entries)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxAcceleratorTable_Ok(wxAcceleratorTable* self)
+wxc_bool wxAcceleratorTable_Ok(wxAcceleratorTable* self)
 {
 	return self->Ok()?1:0;
 }

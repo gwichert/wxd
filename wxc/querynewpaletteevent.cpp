@@ -31,13 +31,13 @@ wxQueryNewPaletteEvent* wxQueryNewPaletteEvent_ctor2(wxEventType type)
 }
 
 extern "C" WXEXPORT
-dbit wxQueryNewPaletteEvent_GetPaletteRealized(wxQueryNewPaletteEvent* self)
+wxc_bool wxQueryNewPaletteEvent_GetPaletteRealized(wxQueryNewPaletteEvent* self)
 {
 	return self->GetPaletteRealized()?1:0;
 }
 
 extern "C" WXEXPORT
-void wxQueryNewPaletteEvent_SetPaletteRealized(wxQueryNewPaletteEvent* self, dbit realized)
+void wxQueryNewPaletteEvent_SetPaletteRealized(wxQueryNewPaletteEvent* self, wxc_bool realized)
 {
 	self->SetPaletteRealized(realized);
 }

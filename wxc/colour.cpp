@@ -51,7 +51,7 @@ void wxColour_dtor(wxColour* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxColour* wxColour_ctorByName(dstr name)
+wxColour* wxColour_ctorByName(wxc_string name)
 {
 	return new wxColour(wxstr(name));
 }
@@ -93,7 +93,7 @@ unsigned char wxColour_Green(wxColour* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxColour_Ok(wxColour* self)
+wxc_bool wxColour_Ok(wxColour* self)
 {
 	return self->Ok()?1:0;
 }
@@ -110,7 +110,7 @@ void wxColour_Set(wxColour* self, unsigned char red, unsigned char green, unsign
 
 #ifdef __WXGTK__
 extern "C" WXEXPORT
-wxColour* wxColour_CreateByName(dstr name)
+wxColour* wxColour_CreateByName(wxc_string name)
 {
 #if wxABI_VERSION < 20700
 	return new wxColour(wxColour::CreateByName(wxstr(name)));

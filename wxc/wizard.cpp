@@ -34,7 +34,7 @@ public:
 // C stubs for class methods
 
 extern "C" WXEXPORT
-wxWizard* wxWizard_ctor(wxWindow* parent, int id, dstr title, const wxBitmap* bitmap, const wxPoint* pos, long style)
+wxWizard* wxWizard_ctor(wxWindow* parent, int id, wxc_string title, const wxBitmap* bitmap, const wxPoint* pos, long style)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -48,7 +48,7 @@ wxWizard* wxWizard_ctor(wxWindow* parent, int id, dstr title, const wxBitmap* bi
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxWizard_RunWizard(wxWizard* self, wxWizardPage* firstPage)
+wxc_bool wxWizard_RunWizard(wxWizard* self, wxWizardPage* firstPage)
 {
 	return self->RunWizard(firstPage)?1:0;
 }
@@ -81,7 +81,7 @@ public:
 // C stubs for class methods
 
 extern "C" WXEXPORT
-wxWizardPageSimple* wxWizardPageSimple_ctor(wxWizard* parent, wxWizardPage* prev, wxWizardPage* next, const wxBitmap* bitmap, dstr resource)
+wxWizardPageSimple* wxWizardPageSimple_ctor(wxWizard* parent, wxWizardPage* prev, wxWizardPage* next, const wxBitmap* bitmap, wxc_string resource)
 {
 	wxString wxresource = wxstr(resource);
 	return new _WizardPageSimple(parent, prev, next, *bitmap, wxresource.c_str());
@@ -97,13 +97,13 @@ void wxWizardPageSimple_Chain(wxWizardPageSimple* page1, wxWizardPageSimple* pag
 
 
 extern "C" WXEXPORT
-wxWizardEvent* wxWizardEvent_ctor(wxEventType type,int id,dbit direction, wxWizardPage* page)
+wxWizardEvent* wxWizardEvent_ctor(wxEventType type,int id,wxc_bool direction, wxWizardPage* page)
 {
 	return new wxWizardEvent(type,id,direction,page);
 }
 
 extern "C" WXEXPORT
-dbit wxWizardEvent_GetDirection(wxWizardEvent* self)
+wxc_bool wxWizardEvent_GetDirection(wxWizardEvent* self)
 {
 	return self->GetDirection();
 }

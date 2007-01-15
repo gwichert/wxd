@@ -37,7 +37,7 @@ wxColourDialog* wxColourDialog_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxColourDialog_Create(wxColourDialog* self, wxWindow *parent, wxColourData *data)
+wxc_bool wxColourDialog_Create(wxColourDialog* self, wxWindow *parent, wxColourData *data)
 {
 	return self->Create(parent, data)?1:0;
 }
@@ -78,7 +78,7 @@ wxColourData* wxColourData_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxColourData_SetChooseFull(wxColourData* self, dbit flag)
+void wxColourData_SetChooseFull(wxColourData* self, wxc_bool flag)
 {
 	self->SetChooseFull(flag);
 }
@@ -86,7 +86,7 @@ void wxColourData_SetChooseFull(wxColourData* self, dbit flag)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxColourData_GetChooseFull(wxColourData* self)
+wxc_bool wxColourData_GetChooseFull(wxColourData* self)
 {
 	return self->GetChooseFull()?1:0;
 }

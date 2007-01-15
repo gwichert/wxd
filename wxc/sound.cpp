@@ -29,7 +29,7 @@ wxSound* wxSound_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxSound* wxSound_ctor2(dstr fileName, dbit isResource)
+wxSound* wxSound_ctor2(wxc_string fileName, wxc_bool isResource)
 {
 	return new wxSound(wxstr(fileName), isResource);
 }
@@ -54,7 +54,7 @@ void wxSound_dtor(wxSound* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxSound_Play(wxSound* self, unsigned int flags)
+wxc_bool wxSound_Play(wxSound* self, unsigned int flags)
 {
 	return self->Play(flags);
 }
@@ -70,7 +70,7 @@ void wxSound_Stop(wxSound* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxSound_IsOk(wxSound* self)
+wxc_bool wxSound_IsOk(wxSound* self)
 {
 	return self->IsOk();
 }

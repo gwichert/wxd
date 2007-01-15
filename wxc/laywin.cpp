@@ -40,7 +40,7 @@ wxSashLayoutWindow* wxSashLayoutWindow_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxSashLayoutWindow_Create(wxSashLayoutWindow* self, wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, long style, dstr name)
+wxc_bool wxSashLayoutWindow_Create(wxSashLayoutWindow* self, wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, long style, wxc_string name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -49,7 +49,7 @@ dbit wxSashLayoutWindow_Create(wxSashLayoutWindow* self, wxWindow* parent, wxWin
 		size = &wxDefaultSize;
 		
 	if (name.data==NULL)
-		name = dstr("sashlayoutwindow");
+		name = wxc_string("sashlayoutwindow");
 		
 	return self->Create(parent, id, *pos, *size, style, wxstr(name))?1:0;
 }
@@ -106,7 +106,7 @@ wxLayoutAlgorithm* wxLayoutAlgorithm_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxLayoutAlgorithm_LayoutMDIFrame(wxLayoutAlgorithm* self, wxMDIParentFrame* frame, wxRect* rect)
+wxc_bool wxLayoutAlgorithm_LayoutMDIFrame(wxLayoutAlgorithm* self, wxMDIParentFrame* frame, wxRect* rect)
 {
 	return self->LayoutMDIFrame(frame, rect)?1:0;
 }
@@ -114,7 +114,7 @@ dbit wxLayoutAlgorithm_LayoutMDIFrame(wxLayoutAlgorithm* self, wxMDIParentFrame*
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxLayoutAlgorithm_LayoutFrame(wxLayoutAlgorithm* self, wxFrame* frame, wxWindow* mainWindow)
+wxc_bool wxLayoutAlgorithm_LayoutFrame(wxLayoutAlgorithm* self, wxFrame* frame, wxWindow* mainWindow)
 {
 	return self->LayoutFrame(frame, mainWindow)?1:0;
 }
@@ -122,7 +122,7 @@ dbit wxLayoutAlgorithm_LayoutFrame(wxLayoutAlgorithm* self, wxFrame* frame, wxWi
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxLayoutAlgorithm_LayoutWindow(wxLayoutAlgorithm* self, wxWindow* frame, wxWindow* mainWindow)
+wxc_bool wxLayoutAlgorithm_LayoutWindow(wxLayoutAlgorithm* self, wxWindow* frame, wxWindow* mainWindow)
 {
 	return self->LayoutWindow(frame, mainWindow)?1:0;
 }

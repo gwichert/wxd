@@ -33,13 +33,13 @@ public:
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxTipWindow* wxTipWindow_ctor(wxWindow* parent, dstr text, wxCoord maxLength, wxRect* rectBound)
+wxTipWindow* wxTipWindow_ctor(wxWindow* parent, wxc_string text, wxCoord maxLength, wxRect* rectBound)
 {
     return new _TipWindow(parent, wxstr(text), maxLength, NULL, rectBound);
 }
 
 extern "C" WXEXPORT
-wxTipWindow* wxTipWindow_ctorNoRect(wxWindow* parent, dstr text, wxCoord maxLength)
+wxTipWindow* wxTipWindow_ctorNoRect(wxWindow* parent, wxc_string text, wxCoord maxLength)
 {
     return wxTipWindow_ctor(parent, text, maxLength, NULL);
 }

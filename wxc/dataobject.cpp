@@ -61,7 +61,7 @@ size_t wxDataObject_GetDataSize(wxDataObject* self, const wxDataFormat* format)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxDataObject_GetDataHere(wxDataObject* self, const wxDataFormat* format, void *buf)
+wxc_bool wxDataObject_GetDataHere(wxDataObject* self, const wxDataFormat* format, void *buf)
 {
 	return self->GetDataHere(*format, buf)?1:0;
 }
@@ -69,7 +69,7 @@ dbit wxDataObject_GetDataHere(wxDataObject* self, const wxDataFormat* format, vo
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxDataObject_SetData(wxDataObject* self, const wxDataFormat* format, size_t len, const void * buf)
+wxc_bool wxDataObject_SetData(wxDataObject* self, const wxDataFormat* format, size_t len, const void * buf)
 {
 	return self->SetData(*format, len, buf)?1:0;
 }
@@ -77,7 +77,7 @@ dbit wxDataObject_SetData(wxDataObject* self, const wxDataFormat* format, size_t
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxDataObject_IsSupported(wxDataObject* self, const wxDataFormat* format, wxDataObject::Direction dir)
+wxc_bool wxDataObject_IsSupported(wxDataObject* self, const wxDataFormat* format, wxDataObject::Direction dir)
 {
 	return self->IsSupported(*format, dir)?1:0;
 }
@@ -121,7 +121,7 @@ size_t wxDataObjectSimple_GetDataSize(wxDataObjectSimple* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxDataObjectSimple_GetDataHere(wxDataObjectSimple* self, void *buf)
+wxc_bool wxDataObjectSimple_GetDataHere(wxDataObjectSimple* self, void *buf)
 {
 	return self->GetDataHere(buf)?1:0;
 }
@@ -129,7 +129,7 @@ dbit wxDataObjectSimple_GetDataHere(wxDataObjectSimple* self, void *buf)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxDataObjectSimple_SetData(wxDataObjectSimple* self, size_t len, const void *buf)
+wxc_bool wxDataObjectSimple_SetData(wxDataObjectSimple* self, size_t len, const void *buf)
 {
 	return self->SetData(len, buf)?1:0;
 }
@@ -147,7 +147,7 @@ public:
 };
 
 extern "C" WXEXPORT
-wxTextDataObject* wxTextDataObject_ctor(dstr text)
+wxTextDataObject* wxTextDataObject_ctor(wxc_string text)
 {
 	return new _TextDataObject(wxstr(text));
 }
@@ -178,7 +178,7 @@ dstrret wxTextDataObject_GetText(wxTextDataObject* self)
 }
 
 extern "C" WXEXPORT
-void wxTextDataObject_SetText(wxTextDataObject* self, dstr text)
+void wxTextDataObject_SetText(wxTextDataObject* self, wxc_string text)
 {
 	self->SetText(wxstr(text));
 }
@@ -214,7 +214,7 @@ void wxFileDataObject_RegisterDisposable(_FileDataObject* self, Virtual_Dispose 
 }
 
 extern "C" WXEXPORT
-void wxFileDataObject_AddFile(wxFileDataObject* self, dstr filename)
+void wxFileDataObject_AddFile(wxFileDataObject* self, wxc_string filename)
 {
 	self->AddFile(wxstr(filename));
 }

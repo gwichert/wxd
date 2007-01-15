@@ -38,7 +38,7 @@ void wxLog_dtor(wxLog* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxLog_IsEnabled()
+wxc_bool wxLog_IsEnabled()
 {
     return wxLog::IsEnabled()?1:0;
 }
@@ -46,7 +46,7 @@ dbit wxLog_IsEnabled()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxLog_EnableLogging(dbit doit)
+wxc_bool wxLog_EnableLogging(wxc_bool doit)
 {
     return wxLog::EnableLogging(doit)?1:0;
 }
@@ -54,7 +54,7 @@ dbit wxLog_EnableLogging(dbit doit)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxLog_OnLog(unsigned long level, dstr szString, long t)
+void wxLog_OnLog(unsigned long level, wxc_string szString, long t)
 {
     wxLog::OnLog(level, wxstr(szString).c_str(), t);
 }
@@ -70,7 +70,7 @@ void wxLog_Flush(wxLog* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxLog_HasPendingMessages(wxLog* self)
+wxc_bool wxLog_HasPendingMessages(wxLog* self)
 {
     return self->HasPendingMessages()?1:0;
 }
@@ -125,7 +125,7 @@ void wxLog_Resume()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxLog_SetVerbose(dbit bVerbose)
+void wxLog_SetVerbose(wxc_bool bVerbose)
 {
     wxLog::SetVerbose(bVerbose);
 }
@@ -157,7 +157,7 @@ void wxLog_SetTraceMask(wxTraceMask ulMask)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxLog_AddTraceMask(dstr str)
+void wxLog_AddTraceMask(wxc_string str)
 {
     wxLog::AddTraceMask(wxstr(str));
 }
@@ -165,7 +165,7 @@ void wxLog_AddTraceMask(dstr str)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxLog_RemoveTraceMask(dstr str)
+void wxLog_RemoveTraceMask(wxc_string str)
 {
     wxLog::RemoveTraceMask(wxstr(str));
 }
@@ -189,7 +189,7 @@ wxArrayString* wxLog_GetTraceMasks()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxLog_SetTimestamp(dstr ts)
+void wxLog_SetTimestamp(wxc_string ts)
 {
     wxLog::SetTimestamp(wxstr(ts).c_str());
 }
@@ -197,7 +197,7 @@ void wxLog_SetTimestamp(dstr ts)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxLog_GetVerbose()
+wxc_bool wxLog_GetVerbose()
 {
     return wxLog::GetVerbose()?1:0;
 }
@@ -213,7 +213,7 @@ wxTraceMask wxLog_GetTraceMask()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxLog_IsAllowedTraceMask(dstr mask)
+wxc_bool wxLog_IsAllowedTraceMask(wxc_string mask)
 {
     return wxLog::IsAllowedTraceMask(wxstr(mask).c_str())?1:0;
 }
@@ -237,7 +237,7 @@ dstrret wxLog_GetTimestamp()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxLog_TimeStamp(dstr str)
+void wxLog_TimeStamp(wxc_string str)
 {
 	wxString *wxs = new wxString(wxstr(str));
     wxLog::TimeStamp(wxs);
@@ -257,7 +257,7 @@ enum {
 };
 
 extern "C" WXEXPORT
-void wxLog_Log_Function(int what, dstr szFormat)
+void wxLog_Log_Function(int what, wxc_string szFormat)
 {
     wxString tmpstr = wxstr(szFormat);
     // params are converted by csharp code

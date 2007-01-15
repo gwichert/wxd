@@ -50,7 +50,7 @@ wxPanel* wxPanel_ctor()
 
 extern "C" WXEXPORT
 wxPanel* wxPanel_ctor2(wxWindow *parent, wxWindowID id, const wxPoint* pos,
-                    const wxSize* size, long style, dstr name)
+                    const wxSize* size, long style, wxc_string name)
 {
 	if (pos == NULL)
 	pos = &wxDefaultPosition;
@@ -59,7 +59,7 @@ wxPanel* wxPanel_ctor2(wxWindow *parent, wxWindowID id, const wxPoint* pos,
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("panel");
+		name = wxc_string("panel");
 
 	return new _Panel(parent, id, *pos, *size, style);//, wxstr(name));
 }
@@ -67,8 +67,8 @@ wxPanel* wxPanel_ctor2(wxWindow *parent, wxWindowID id, const wxPoint* pos,
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPanel_Create(wxPanel* self, wxWindow *parent, wxWindowID id, const wxPoint* pos,
-                    const wxSize* size, long style, dstr name)
+wxc_bool wxPanel_Create(wxPanel* self, wxWindow *parent, wxWindowID id, const wxPoint* pos,
+                    const wxSize* size, long style, wxc_string name)
 {
 	if (pos == NULL)
 	pos = &wxDefaultPosition;
@@ -77,7 +77,7 @@ dbit wxPanel_Create(wxPanel* self, wxWindow *parent, wxWindowID id, const wxPoin
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("panel");
+		name = wxc_string("panel");
 
 	return self->Create(parent, id, *pos, *size, style, wxstr(name))?1:0;
 }

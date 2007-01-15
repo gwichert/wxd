@@ -23,7 +23,7 @@
 // wxGridCellDateTimeRenderer
 
 extern "C" WXEXPORT
-wxGridCellDateTimeRenderer* wxGridCellDateTimeRenderer_ctor(dstr outformat, dstr informat)
+wxGridCellDateTimeRenderer* wxGridCellDateTimeRenderer_ctor(wxc_string outformat, wxc_string informat)
 {
 	return new wxGridCellDateTimeRenderer(wxstr(outformat), wxstr(informat));
 }
@@ -37,7 +37,7 @@ void wxGridCellDateTimeRenderer_dtor(wxGridCellDateTimeRenderer* self)
 
 extern "C" WXEXPORT
 void wxGridCellDateTimeRenderer_Draw(wxGridCellDateTimeRenderer* self, wxGrid* grid, wxGridCellAttr* attr,
-				wxDC* dc, wxRect* rect, int row, int col, dbit isSelected)
+				wxDC* dc, wxRect* rect, int row, int col, wxc_bool isSelected)
 {
 	self->Draw(*grid, *attr, *dc, *rect, row, col, isSelected);
 }
@@ -56,7 +56,7 @@ wxGridCellRenderer* wxGridCellDateTimeRenderer_Clone(wxGridCellDateTimeRenderer*
 }
 
 extern "C" WXEXPORT
-void wxGridCellDateTimeRenderer_SetParameters(wxGridCellDateTimeRenderer* self, dstr params)
+void wxGridCellDateTimeRenderer_SetParameters(wxGridCellDateTimeRenderer* self, wxc_string params)
 {
 	self->SetParameters(wxstr(params));
 }
@@ -65,7 +65,7 @@ void wxGridCellDateTimeRenderer_SetParameters(wxGridCellDateTimeRenderer* self, 
 // wxGridCellEnumRenderer
 
 extern "C" WXEXPORT
-wxGridCellEnumRenderer* wxGridCellEnumRenderer_ctor(int n, dstr choices[])
+wxGridCellEnumRenderer* wxGridCellEnumRenderer_ctor(int n, wxc_string choices[])
 {
 	wxString *pchoices = new wxString[n];
 	for (int i = 0; i < n; ++i)
@@ -85,7 +85,7 @@ void wxGridCellEnumRenderer_dtor(wxGridCellEnumRenderer* self)
 
 extern "C" WXEXPORT
 void wxGridCellEnumRenderer_Draw(wxGridCellEnumRenderer* self, wxGrid* grid, wxGridCellAttr* attr,
-				wxDC* dc, wxRect* rect, int row, int col, dbit isSelected)
+				wxDC* dc, wxRect* rect, int row, int col, wxc_bool isSelected)
 {
 	self->Draw(*grid, *attr, *dc, *rect, row, col, isSelected);
 }
@@ -104,7 +104,7 @@ wxGridCellRenderer* wxGridCellEnumRenderer_Clone(wxGridCellEnumRenderer* self)
 }
 
 extern "C" WXEXPORT
-void wxGridCellEnumRenderer_SetParameters(wxGridCellEnumRenderer* self, dstr params)
+void wxGridCellEnumRenderer_SetParameters(wxGridCellEnumRenderer* self, wxc_string params)
 {
 	self->SetParameters(wxstr(params));
 }
@@ -142,7 +142,7 @@ void wxGridCellAutoWrapStringRenderer_RegisterDisposable(_GridCellAutoWrapString
 
 extern "C" WXEXPORT
 void wxGridCellAutoWrapStringRenderer_Draw(wxGridCellAutoWrapStringRenderer* self, wxGrid* grid, wxGridCellAttr* attr,
-				wxDC* dc, wxRect* rect, int row, int col, dbit isSelected)
+				wxDC* dc, wxRect* rect, int row, int col, wxc_bool isSelected)
 {
 	self->Draw(*grid, *attr, *dc, *rect, row, col, isSelected);
 }
@@ -164,7 +164,7 @@ wxGridCellRenderer* wxGridCellAutoWrapStringRenderer_Clone(wxGridCellAutoWrapStr
 // wxGridCellEnumEditor
 
 extern "C" WXEXPORT
-wxGridCellEnumEditor* wxGridCellEnumEditor_ctor(int n, dstr choices[])
+wxGridCellEnumEditor* wxGridCellEnumEditor_ctor(int n, wxc_string choices[])
 {
 	wxString *pchoices = new wxString[n];
 	for (int i = 0; i < n; ++i)
@@ -189,7 +189,7 @@ void wxGridCellEnumEditor_BeginEdit(wxGridCellEnumEditor* self, int row, int col
 }
 
 extern "C" WXEXPORT
-dbit wxGridCellEnumEditor_EndEdit(wxGridCellEnumEditor* self, int row, int col, wxGrid* grid)
+wxc_bool wxGridCellEnumEditor_EndEdit(wxGridCellEnumEditor* self, int row, int col, wxGrid* grid)
 {
 	return self->EndEdit(row, col, grid)?1:0;
 }

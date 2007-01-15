@@ -38,7 +38,7 @@ void wxLocale_dtor(wxLocale* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxLocale_Init(wxLocale* self, int language, int flags)
+wxc_bool wxLocale_Init(wxLocale* self, int language, int flags)
 {
 	return self->Init(language, flags)?1:0;
 }
@@ -46,7 +46,7 @@ dbit wxLocale_Init(wxLocale* self, int language, int flags)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxLocale_AddCatalog(wxLocale* self, dstr szDomain)
+wxc_bool wxLocale_AddCatalog(wxLocale* self, wxc_string szDomain)
 {
 	return self->AddCatalog(wxstr(szDomain))?1:0;
 }
@@ -54,7 +54,7 @@ dbit wxLocale_AddCatalog(wxLocale* self, dstr szDomain)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxLocale_AddCatalog2(wxLocale* self, dstr szDomain, wxLanguage msgIdLanguage, dstr msgIdCharset)
+wxc_bool wxLocale_AddCatalog2(wxLocale* self, wxc_string szDomain, wxLanguage msgIdLanguage, wxc_string msgIdCharset)
 {
 	return self->AddCatalog(wxstr(szDomain), msgIdLanguage, wxstr(msgIdCharset));
 }
@@ -62,7 +62,7 @@ dbit wxLocale_AddCatalog2(wxLocale* self, dstr szDomain, wxLanguage msgIdLanguag
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxLocale_AddCatalogLookupPathPrefix(wxLocale* self, dstr prefix)
+void wxLocale_AddCatalogLookupPathPrefix(wxLocale* self, wxc_string prefix)
 {
 	self->AddCatalogLookupPathPrefix(wxstr(prefix));
 }
@@ -78,7 +78,7 @@ void wxLocale_AddLanguage(wxLanguageInfo* info)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-const wxLanguageInfo* wxLocale_FindLanguageInfo(dstr locale)
+const wxLanguageInfo* wxLocale_FindLanguageInfo(wxc_string locale)
 {
 	return wxLocale::FindLanguageInfo(wxstr(locale));
 }
@@ -133,7 +133,7 @@ dstrret wxLocale_GetName(wxLocale* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxLocale_GetString(wxLocale* self, dstr szOrigString, dstr szDomain)
+dstrret wxLocale_GetString(wxLocale* self, wxc_string szOrigString, wxc_string szDomain)
 {
 	return dstr_ret(self->GetString(wxstr(szOrigString), wxstr(szDomain)));
 }
@@ -141,7 +141,7 @@ dstrret wxLocale_GetString(wxLocale* self, dstr szOrigString, dstr szDomain)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxLocale_GetHeaderValue(wxLocale* self, dstr szHeader, dstr szDomain)
+dstrret wxLocale_GetHeaderValue(wxLocale* self, wxc_string szHeader, wxc_string szDomain)
 {
 	return dstr_ret(self->GetHeaderValue(wxstr(szHeader), wxstr(szDomain)));
 }
@@ -181,7 +181,7 @@ int wxLocale_GetSystemLanguage()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxLocale_IsLoaded(wxLocale* self, dstr domain)
+wxc_bool wxLocale_IsLoaded(wxLocale* self, wxc_string domain)
 {
 	return self->IsLoaded(wxstr(domain))?1:0;
 }
@@ -189,7 +189,7 @@ dbit wxLocale_IsLoaded(wxLocale* self, dstr domain)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxLocale_IsOk(wxLocale* self)
+wxc_bool wxLocale_IsOk(wxLocale* self)
 {
 	return self->IsOk()?1:0;
 }
@@ -231,7 +231,7 @@ int wxLanguageInfo_GetLanguage(wxLanguageInfo* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxLanguageInfo_SetCanonicalName(wxLanguageInfo* self, dstr name)
+void wxLanguageInfo_SetCanonicalName(wxLanguageInfo* self, wxc_string name)
 {
 	self->CanonicalName = wxstr(name);
 }
@@ -247,7 +247,7 @@ dstrret wxLanguageInfo_GetCanonicalName(wxLanguageInfo* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxLanguageInfo_SetDescription(wxLanguageInfo* self, dstr name)
+void wxLanguageInfo_SetDescription(wxLanguageInfo* self, wxc_string name)
 {
 	self->Description = wxstr(name);
 }

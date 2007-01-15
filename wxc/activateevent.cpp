@@ -19,13 +19,13 @@
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxActivateEvent* wxActivateEvent_ctor(wxEventType type, dbit active, int Id)
+wxActivateEvent* wxActivateEvent_ctor(wxEventType type, wxc_bool active, int Id)
 {
     return new wxActivateEvent(type,active,Id);
 }
 
 extern "C" WXEXPORT
-dbit wxActivateEvent_GetActive(wxActivateEvent* self)
+wxc_bool wxActivateEvent_GetActive(wxActivateEvent* self)
 {
 	return self->GetActive()?1:0;
 }

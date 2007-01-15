@@ -57,7 +57,7 @@ public:
 
 extern "C" WXEXPORT
 wxWindow* wxWindow_ctor(wxWindow *parent, wxWindowID id, const wxPoint* pos,
-					const wxSize* size, int style, dstr name)
+					const wxSize* size, int style, wxc_string name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -66,7 +66,7 @@ wxWindow* wxWindow_ctor(wxWindow *parent, wxWindowID id, const wxPoint* pos,
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr(wxPanelNameStr);
+		name = wxc_string(wxPanelNameStr);
 
 	return new _Window(parent, id, *pos, *size, style, wxstr(name));
 }
@@ -74,7 +74,7 @@ wxWindow* wxWindow_ctor(wxWindow *parent, wxWindowID id, const wxPoint* pos,
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxWindow_Close(wxWindow* self, dbit force)
+wxc_bool wxWindow_Close(wxWindow* self, wxc_bool force)
 {
 	return self->Close(force)?1:0;
 }
@@ -118,7 +118,7 @@ void wxWindow_Move(wxWindow* self, int x, int y, int flags)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxWindow_Show(wxWindow* self, dbit show)
+wxc_bool wxWindow_Show(wxWindow* self, wxc_bool show)
 {
 	return self->Show(show)?1:0;
 }
@@ -164,7 +164,7 @@ void wxWindow_Layout(wxWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxWindow_SetAutoLayout(wxWindow* self, dbit autoLayout)
+void wxWindow_SetAutoLayout(wxWindow* self, wxc_bool autoLayout)
 {
 	self->SetAutoLayout(autoLayout);
 }
@@ -194,7 +194,7 @@ void wxWindow_SetCursor(wxWindow* self, wxCursor* cursor)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxWindow_SetSizer(wxWindow *self, wxSizer *sizer, dbit deleteOld)
+void wxWindow_SetSizer(wxWindow *self, wxSizer *sizer, wxc_bool deleteOld)
 {
 	self->SetSizer(sizer, deleteOld);
 }
@@ -210,7 +210,7 @@ void wxWindow_SetWindowStyleFlag(wxWindow* self, int style)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxWindow_SetFont(wxWindow* self, wxFont* font)
+wxc_bool wxWindow_SetFont(wxWindow* self, wxFont* font)
 {
 	return self->SetFont(*font)?1:0;
 }
@@ -224,7 +224,7 @@ wxFont *wxWindow_GetFont(wxWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxWindow_SetToolTip(wxWindow* self, dstr tip)
+void wxWindow_SetToolTip(wxWindow* self, wxc_string tip)
 {
 	self->SetToolTip(wxstr(tip));
 }
@@ -232,13 +232,13 @@ void wxWindow_SetToolTip(wxWindow* self, dstr tip)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxWindow_Enable(wxWindow* self, dbit enable)
+wxc_bool wxWindow_Enable(wxWindow* self, wxc_bool enable)
 {
 	return self->Enable(enable)?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxWindow_IsEnabled(wxWindow* self)
+wxc_bool wxWindow_IsEnabled(wxWindow* self)
 {
 	return self->IsEnabled()?1:0;
 }
@@ -247,7 +247,7 @@ dbit wxWindow_IsEnabled(wxWindow* self)
 
 #if 0
 extern "C" WXEXPORT
-dbit wxWindow_LoadFromResource(wxWindow* self, wxWindow *parent, dstr resourceName, const wxResourceTable *table)
+wxc_bool wxWindow_LoadFromResource(wxWindow* self, wxWindow *parent, wxc_string resourceName, const wxResourceTable *table)
 {
 	return self->LoadFromResource(parent, wxstr(resourceName), table);
 }
@@ -266,7 +266,7 @@ wxControl* wxWindow_CreateItem(wxWindow* self, const wxItemResource* childResour
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxWindow_Destroy(wxWindow* self)
+wxc_bool wxWindow_Destroy(wxWindow* self)
 {
 	return self->Destroy()?1:0;
 }
@@ -274,7 +274,7 @@ dbit wxWindow_Destroy(wxWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxWindow_DestroyChildren(wxWindow* self)
+wxc_bool wxWindow_DestroyChildren(wxWindow* self)
 {
 	return self->DestroyChildren()?1:0;
 }
@@ -282,7 +282,7 @@ dbit wxWindow_DestroyChildren(wxWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxWindow_SetTitle(wxWindow* self, dstr title)
+void wxWindow_SetTitle(wxWindow* self, wxc_string title)
 {
 #if wxABI_VERSION < 20700
 	self->SetTitle(wxstr(title));
@@ -316,7 +316,7 @@ dstrret wxWindow_GetTitle(wxWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxWindow_SetName(wxWindow* self, dstr name)
+void wxWindow_SetName(wxWindow* self, wxc_string name)
 {
 	self->SetName(wxstr(name));
 }
@@ -558,7 +558,7 @@ void wxWindow_GetBestVirtualSize(wxWindow* self, wxSize* size)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxWindow_Hide(wxWindow* self)
+wxc_bool wxWindow_Hide(wxWindow* self)
 {
 	return self->Hide()?1:0;
 }
@@ -566,7 +566,7 @@ dbit wxWindow_Hide(wxWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxWindow_Disable(wxWindow* self)
+wxc_bool wxWindow_Disable(wxWindow* self)
 {
 	return self->Disable()?1:0;
 }
@@ -574,7 +574,7 @@ dbit wxWindow_Disable(wxWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxWindow_IsShown(wxWindow* self)
+wxc_bool wxWindow_IsShown(wxWindow* self)
 {
 	return self->IsShown()?1:0;
 }
@@ -596,7 +596,7 @@ long wxWindow_GetWindowStyle(wxWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxWindow_HasFlag(wxWindow* self, int flag)
+wxc_bool wxWindow_HasFlag(wxWindow* self, int flag)
 {
 	return self->HasFlag(flag)?1:0;
 }
@@ -604,7 +604,7 @@ dbit wxWindow_HasFlag(wxWindow* self, int flag)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxWindow_IsRetained(wxWindow* self)
+wxc_bool wxWindow_IsRetained(wxWindow* self)
 {
 	return self->IsRetained()?1:0;
 }
@@ -628,7 +628,7 @@ long wxWindow_GetExtraStyle(wxWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxWindow_MakeModal(wxWindow* self, dbit modal)
+void wxWindow_MakeModal(wxWindow* self, wxc_bool modal)
 {
 	self->MakeModal(modal);
 }
@@ -636,13 +636,13 @@ void wxWindow_MakeModal(wxWindow* self, dbit modal)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxWindow_SetThemeEnabled(wxWindow* self, dbit enableTheme)
+void wxWindow_SetThemeEnabled(wxWindow* self, wxc_bool enableTheme)
 {
 	self->SetThemeEnabled(enableTheme);
 }
 
 extern "C" WXEXPORT
-dbit wxWindow_GetThemeEnabled(wxWindow* self)
+wxc_bool wxWindow_GetThemeEnabled(wxWindow* self)
 {
 	return self->GetThemeEnabled()?1:0;
 }
@@ -674,7 +674,7 @@ wxWindow* wxWindow_FindFocus()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxWindow_AcceptsFocus(wxWindow* self)
+wxc_bool wxWindow_AcceptsFocus(wxWindow* self)
 {
 	return self->AcceptsFocus()?1:0;
 }
@@ -682,7 +682,7 @@ dbit wxWindow_AcceptsFocus(wxWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxWindow_AcceptsFocusFromKeyboard(wxWindow* self)
+wxc_bool wxWindow_AcceptsFocusFromKeyboard(wxWindow* self)
 {
 	return self->AcceptsFocusFromKeyboard()?1:0;
 }
@@ -754,7 +754,7 @@ wxWindow* wxWindow_GetGrandParent(wxWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxWindow_IsTopLevel(wxWindow* self)
+wxc_bool wxWindow_IsTopLevel(wxWindow* self)
 {
 	return self->IsTopLevel()?1:0;
 }
@@ -768,7 +768,7 @@ void wxWindow_SetParent(wxWindow* self, wxWindow *parent)
 }
 
 extern "C" WXEXPORT
-dbit wxWindow_Reparent(wxWindow* self, wxWindow *newParent)
+wxc_bool wxWindow_Reparent(wxWindow* self, wxWindow *newParent)
 {
 	return self->Reparent(newParent)?1:0;
 }
@@ -796,7 +796,7 @@ wxWindow* wxWindow_FindWindowId(wxWindow* self, long id)
 }
 
 extern "C" WXEXPORT
-wxWindow* wxWindow_FindWindowName(wxWindow* self, dstr name)
+wxWindow* wxWindow_FindWindowName(wxWindow* self, wxc_string name)
 {
 	return self->FindWindow(wxstr(name));
 }
@@ -810,13 +810,13 @@ wxWindow* wxWindow_FindWindowById(long id, const wxWindow *parent)
 }
 
 extern "C" WXEXPORT
-wxWindow* wxWindow_FindWindowByName(dstr name, const wxWindow *parent)
+wxWindow* wxWindow_FindWindowByName(wxc_string name, const wxWindow *parent)
 {
 	return wxWindow::FindWindowByName(wxstr(name), parent);
 }
 
 extern "C" WXEXPORT
-wxWindow* wxWindow_FindWindowByLabel(dstr label, const wxWindow *parent)
+wxWindow* wxWindow_FindWindowByLabel(wxc_string label, const wxWindow *parent)
 {
 	return wxWindow::FindWindowByLabel(wxstr(label), parent);
 }
@@ -844,13 +844,13 @@ void wxWindow_PushEventHandler(wxWindow* self, wxEvtHandler *handler)
 }
 
 extern "C" WXEXPORT
-wxEvtHandler* wxWindow_PopEventHandler(wxWindow* self, dbit deleteHandler)
+wxEvtHandler* wxWindow_PopEventHandler(wxWindow* self, wxc_bool deleteHandler)
 {
 	return self->PopEventHandler(deleteHandler);
 }
 
 extern "C" WXEXPORT
-dbit wxWindow_RemoveEventHandler(wxWindow* self, wxEvtHandler *handler)
+wxc_bool wxWindow_RemoveEventHandler(wxWindow* self, wxEvtHandler *handler)
 {
 	return self->RemoveEventHandler(handler)?1:0;
 }
@@ -872,7 +872,7 @@ const wxValidator* wxWindow_GetValidator(wxWindow* self)
 }
 
 extern "C" WXEXPORT
-dbit wxWindow_Validate(wxWindow* self)
+wxc_bool wxWindow_Validate(wxWindow* self)
 {
 	return self->Validate()?1:0;
 }
@@ -880,13 +880,13 @@ dbit wxWindow_Validate(wxWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxWindow_TransferDataToWindow(wxWindow* self)
+wxc_bool wxWindow_TransferDataToWindow(wxWindow* self)
 {
 	return self->TransferDataToWindow()?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxWindow_TransferDataFromWindow(wxWindow* self)
+wxc_bool wxWindow_TransferDataFromWindow(wxWindow* self)
 {
 	return self->TransferDataFromWindow()?1:0;
 }
@@ -972,7 +972,7 @@ wxWindow* wxWindow_GetCapture()
 }
 
 extern "C" WXEXPORT
-dbit wxWindow_HasCapture(wxWindow* self)
+wxc_bool wxWindow_HasCapture(wxWindow* self)
 {
 	return self->HasCapture()?1:0;
 }
@@ -980,7 +980,7 @@ dbit wxWindow_HasCapture(wxWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxWindow_Refresh(wxWindow* self, dbit eraseBackground, const wxRect *rect)
+void wxWindow_Refresh(wxWindow* self, wxc_bool eraseBackground, const wxRect *rect)
 {
 	self->Refresh(eraseBackground, rect);
 }
@@ -1034,7 +1034,7 @@ void wxWindow_PrepareDC(wxWindow* self, wxDC *dc)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxWindow_IsExposed(wxWindow* self, int x, int y, int w, int h)
+wxc_bool wxWindow_IsExposed(wxWindow* self, int x, int y, int w, int h)
 {
 	return self->IsExposed(x, y, w, h)?1:0;
 }
@@ -1084,7 +1084,7 @@ int wxWindow_GetCharWidth(wxWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxWindow_GetTextExtent(wxWindow* self, dstr string, int *x, int *y, int *descent, int *externalLeading, const wxFont *theFont)
+void wxWindow_GetTextExtent(wxWindow* self, wxc_string string, int *x, int *y, int *descent, int *externalLeading, const wxFont *theFont)
 {
 	self->GetTextExtent(wxstr(string), x, y, descent, externalLeading, theFont);
 }
@@ -1138,7 +1138,7 @@ void wxWindow_UpdateWindowUI(wxWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxWindow_PopupMenu(wxWindow* self, wxMenu *menu, const wxPoint* pos)
+wxc_bool wxWindow_PopupMenu(wxWindow* self, wxMenu *menu, const wxPoint* pos)
 {
 	return self->PopupMenu(menu, *pos)?1:0;
 }
@@ -1146,7 +1146,7 @@ dbit wxWindow_PopupMenu(wxWindow* self, wxMenu *menu, const wxPoint* pos)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxWindow_HasScrollbar(wxWindow* self, int orient)
+wxc_bool wxWindow_HasScrollbar(wxWindow* self, int orient)
 {
 	return self->HasScrollbar(orient)?1:0;
 }
@@ -1154,7 +1154,7 @@ dbit wxWindow_HasScrollbar(wxWindow* self, int orient)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxWindow_SetScrollbar(wxWindow* self, int orient, int pos, int thumbvisible, int range, dbit refresh)
+void wxWindow_SetScrollbar(wxWindow* self, int orient, int pos, int thumbvisible, int range, wxc_bool refresh)
 {
 	self->SetScrollbar(orient, pos, thumbvisible, range, refresh);
 }
@@ -1162,7 +1162,7 @@ void wxWindow_SetScrollbar(wxWindow* self, int orient, int pos, int thumbvisible
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxWindow_SetScrollPos(wxWindow* self, int orient, int pos, dbit refresh)
+void wxWindow_SetScrollPos(wxWindow* self, int orient, int pos, wxc_bool refresh)
 {
 	self->SetScrollPos(orient, pos, refresh);
 }
@@ -1196,13 +1196,13 @@ void wxWindow_ScrollWindow(wxWindow* self, int dx, int dy, const wxRect* rect)
 }
 
 extern "C" WXEXPORT
-dbit wxWindow_ScrollLines(wxWindow* self, int lines)
+wxc_bool wxWindow_ScrollLines(wxWindow* self, int lines)
 {
 	return self->ScrollLines(lines)?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxWindow_ScrollPages(wxWindow* self, int pages)
+wxc_bool wxWindow_ScrollPages(wxWindow* self, int pages)
 {
 	return self->ScrollPages(pages)?1:0;
 }
@@ -1210,13 +1210,13 @@ dbit wxWindow_ScrollPages(wxWindow* self, int pages)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxWindow_LineUp(wxWindow* self)
+wxc_bool wxWindow_LineUp(wxWindow* self)
 {
 	return self->LineUp()?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxWindow_LineDown(wxWindow* self)
+wxc_bool wxWindow_LineDown(wxWindow* self)
 {
 	return self->LineDown()?1:0;
 }
@@ -1224,13 +1224,13 @@ dbit wxWindow_LineDown(wxWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxWindow_PageUp(wxWindow* self)
+wxc_bool wxWindow_PageUp(wxWindow* self)
 {
 	return self->PageUp()?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxWindow_PageDown(wxWindow* self)
+wxc_bool wxWindow_PageDown(wxWindow* self)
 {
 	return self->PageDown()?1:0;
 }
@@ -1238,13 +1238,13 @@ dbit wxWindow_PageDown(wxWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxWindow_SetHelpText(wxWindow* self, dstr text)
+void wxWindow_SetHelpText(wxWindow* self, wxc_string text)
 {
 	self->SetHelpText(wxstr(text));
 }
 
 extern "C" WXEXPORT
-void wxWindow_SetHelpTextForId(wxWindow* self, dstr text)
+void wxWindow_SetHelpTextForId(wxWindow* self, wxc_string text)
 {
 	self->SetHelpTextForId(wxstr(text));
 }
@@ -1313,7 +1313,7 @@ wxLayoutConstraints* wxWindow_GetConstraints(wxWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxWindow_GetAutoLayout(wxWindow* self)
+wxc_bool wxWindow_GetAutoLayout(wxWindow* self)
 {
 	return self->GetAutoLayout()?1:0;
 }
@@ -1321,7 +1321,7 @@ dbit wxWindow_GetAutoLayout(wxWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxWindow_SetSizerAndFit(wxWindow* self, wxSizer *sizer, dbit deleteOld)
+void wxWindow_SetSizerAndFit(wxWindow* self, wxSizer *sizer, wxc_bool deleteOld)
 {
 	self->SetSizerAndFit(sizer, deleteOld);
 }
@@ -1363,7 +1363,7 @@ void wxWindow_SetPalette(wxWindow* self, const wxPalette* pal)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxWindow_HasCustomPalette(wxWindow* self)
+wxc_bool wxWindow_HasCustomPalette(wxWindow* self)
 {
 	return self->HasCustomPalette()?1:0;
 }
@@ -1395,7 +1395,7 @@ wxWindowVariant wxWindow_GetWindowVariant(wxWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxWindow_IsBeingDeleted(wxWindow* self)
+wxc_bool wxWindow_IsBeingDeleted(wxWindow* self)
 {
 	return self->IsBeingDeleted()?1:0;
 }
@@ -1493,7 +1493,7 @@ void wxWindow_InheritAttributes(wxWindow* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxWindow_ShouldInheritColours(wxWindow* self)
+wxc_bool wxWindow_ShouldInheritColours(wxWindow* self)
 {
 	return self->ShouldInheritColours()?1:0;
 }

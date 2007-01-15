@@ -20,7 +20,7 @@
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxMessageBox_func(dstr msg, dstr cap, int style, wxWindow* parent,int x, int y)
+int wxMessageBox_func(wxc_string msg, wxc_string cap, int style, wxWindow* parent,int x, int y)
 {
 	return wxMessageBox(wxstr(msg), wxstr(cap), style, parent, x, y);
 }
@@ -41,7 +41,7 @@ public:
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxMessageDialog* wxMessageDialog_ctor(wxWindow *parent, dstr message, dstr caption, int style, const wxPoint* pos)
+wxMessageDialog* wxMessageDialog_ctor(wxWindow *parent, wxc_string message, wxc_string caption, int style, const wxPoint* pos)
 {
     wxString cptn;
 	if (caption.data==NULL)

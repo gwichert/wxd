@@ -102,7 +102,7 @@ void wxPageSetupDialogData_GetMarginBottomRight(wxPageSetupDialogData* self, wxP
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPageSetupDialogData_GetDefaultMinMargins(wxPageSetupDialogData* self)
+wxc_bool wxPageSetupDialogData_GetDefaultMinMargins(wxPageSetupDialogData* self)
 {
     return self->GetDefaultMinMargins()?1:0;
 }
@@ -110,7 +110,7 @@ dbit wxPageSetupDialogData_GetDefaultMinMargins(wxPageSetupDialogData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPageSetupDialogData_GetEnableMargins(wxPageSetupDialogData* self)
+wxc_bool wxPageSetupDialogData_GetEnableMargins(wxPageSetupDialogData* self)
 {
     return self->GetEnableMargins()?1:0;
 }
@@ -118,7 +118,7 @@ dbit wxPageSetupDialogData_GetEnableMargins(wxPageSetupDialogData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPageSetupDialogData_GetEnableOrientation(wxPageSetupDialogData* self)
+wxc_bool wxPageSetupDialogData_GetEnableOrientation(wxPageSetupDialogData* self)
 {
     return self->GetEnableOrientation()?1:0;
 }
@@ -126,7 +126,7 @@ dbit wxPageSetupDialogData_GetEnableOrientation(wxPageSetupDialogData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPageSetupDialogData_GetEnablePaper(wxPageSetupDialogData* self)
+wxc_bool wxPageSetupDialogData_GetEnablePaper(wxPageSetupDialogData* self)
 {
     return self->GetEnablePaper()?1:0;
 }
@@ -134,7 +134,7 @@ dbit wxPageSetupDialogData_GetEnablePaper(wxPageSetupDialogData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPageSetupDialogData_GetEnablePrinter(wxPageSetupDialogData* self)
+wxc_bool wxPageSetupDialogData_GetEnablePrinter(wxPageSetupDialogData* self)
 {
     return self->GetEnablePrinter()?1:0;
 }
@@ -142,7 +142,7 @@ dbit wxPageSetupDialogData_GetEnablePrinter(wxPageSetupDialogData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPageSetupDialogData_GetDefaultInfo(wxPageSetupDialogData* self)
+wxc_bool wxPageSetupDialogData_GetDefaultInfo(wxPageSetupDialogData* self)
 {
     return self->GetDefaultInfo()?1:0;
 }
@@ -150,7 +150,7 @@ dbit wxPageSetupDialogData_GetDefaultInfo(wxPageSetupDialogData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPageSetupDialogData_GetEnableHelp(wxPageSetupDialogData* self)
+wxc_bool wxPageSetupDialogData_GetEnableHelp(wxPageSetupDialogData* self)
 {
     return self->GetEnableHelp()?1:0;
 }
@@ -158,7 +158,7 @@ dbit wxPageSetupDialogData_GetEnableHelp(wxPageSetupDialogData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPageSetupDialogData_Ok(wxPageSetupDialogData* self)
+wxc_bool wxPageSetupDialogData_Ok(wxPageSetupDialogData* self)
 {
     return self->Ok()?1:0;
 }
@@ -222,7 +222,7 @@ void wxPageSetupDialogData_SetMarginBottomRight(wxPageSetupDialogData* self, wxP
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPageSetupDialogData_SetDefaultMinMargins(wxPageSetupDialogData* self, dbit flag)
+void wxPageSetupDialogData_SetDefaultMinMargins(wxPageSetupDialogData* self, wxc_bool flag)
 {
     self->SetDefaultMinMargins(flag);
 }
@@ -230,7 +230,7 @@ void wxPageSetupDialogData_SetDefaultMinMargins(wxPageSetupDialogData* self, dbi
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPageSetupDialogData_SetDefaultInfo(wxPageSetupDialogData* self, dbit flag)
+void wxPageSetupDialogData_SetDefaultInfo(wxPageSetupDialogData* self, wxc_bool flag)
 {
     self->SetDefaultInfo(flag);
 }
@@ -238,7 +238,7 @@ void wxPageSetupDialogData_SetDefaultInfo(wxPageSetupDialogData* self, dbit flag
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPageSetupDialogData_EnableMargins(wxPageSetupDialogData* self, dbit flag)
+void wxPageSetupDialogData_EnableMargins(wxPageSetupDialogData* self, wxc_bool flag)
 {
     self->EnableMargins(flag);
 }
@@ -246,7 +246,7 @@ void wxPageSetupDialogData_EnableMargins(wxPageSetupDialogData* self, dbit flag)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPageSetupDialogData_EnableOrientation(wxPageSetupDialogData* self, dbit flag)
+void wxPageSetupDialogData_EnableOrientation(wxPageSetupDialogData* self, wxc_bool flag)
 {
     self->EnableOrientation(flag);
 }
@@ -254,7 +254,7 @@ void wxPageSetupDialogData_EnableOrientation(wxPageSetupDialogData* self, dbit f
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPageSetupDialogData_EnablePaper(wxPageSetupDialogData* self, dbit flag)
+void wxPageSetupDialogData_EnablePaper(wxPageSetupDialogData* self, wxc_bool flag)
 {
     self->EnablePaper(flag);
 }
@@ -262,7 +262,7 @@ void wxPageSetupDialogData_EnablePaper(wxPageSetupDialogData* self, dbit flag)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPageSetupDialogData_EnablePrinter(wxPageSetupDialogData* self, dbit flag)
+void wxPageSetupDialogData_EnablePrinter(wxPageSetupDialogData* self, wxc_bool flag)
 {
     self->EnablePrinter(flag);
 }
@@ -270,7 +270,7 @@ void wxPageSetupDialogData_EnablePrinter(wxPageSetupDialogData* self, dbit flag)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPageSetupDialogData_EnableHelp(wxPageSetupDialogData* self, dbit flag)
+void wxPageSetupDialogData_EnableHelp(wxPageSetupDialogData* self, wxc_bool flag)
 {
     self->EnableHelp(flag);
 }
@@ -374,7 +374,7 @@ int wxPrintDialogData_GetNoCopies(wxPrintDialogData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPrintDialogData_GetAllPages(wxPrintDialogData* self)
+wxc_bool wxPrintDialogData_GetAllPages(wxPrintDialogData* self)
 {
     return self->GetAllPages()?1:0;
 }
@@ -382,7 +382,7 @@ dbit wxPrintDialogData_GetAllPages(wxPrintDialogData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPrintDialogData_GetSelection(wxPrintDialogData* self)
+wxc_bool wxPrintDialogData_GetSelection(wxPrintDialogData* self)
 {
     return self->GetSelection()?1:0;
 }
@@ -390,7 +390,7 @@ dbit wxPrintDialogData_GetSelection(wxPrintDialogData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPrintDialogData_GetCollate(wxPrintDialogData* self)
+wxc_bool wxPrintDialogData_GetCollate(wxPrintDialogData* self)
 {
     return self->GetCollate()?1:0;
 }
@@ -398,7 +398,7 @@ dbit wxPrintDialogData_GetCollate(wxPrintDialogData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPrintDialogData_GetPrintToFile(wxPrintDialogData* self)
+wxc_bool wxPrintDialogData_GetPrintToFile(wxPrintDialogData* self)
 {
     return self->GetPrintToFile()?1:0;
 }
@@ -406,7 +406,7 @@ dbit wxPrintDialogData_GetPrintToFile(wxPrintDialogData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPrintDialogData_GetSetupDialog(wxPrintDialogData* self)
+wxc_bool wxPrintDialogData_GetSetupDialog(wxPrintDialogData* self)
 {
 #if WXWIN_COMPATIBILITY_2_4
     return self->GetSetupDialog()?1:0;
@@ -458,7 +458,7 @@ void wxPrintDialogData_SetNoCopies(wxPrintDialogData* self, int v)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrintDialogData_SetAllPages(wxPrintDialogData* self, dbit flag)
+void wxPrintDialogData_SetAllPages(wxPrintDialogData* self, wxc_bool flag)
 {
     self->SetAllPages(flag);
 }
@@ -466,7 +466,7 @@ void wxPrintDialogData_SetAllPages(wxPrintDialogData* self, dbit flag)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrintDialogData_SetSelection(wxPrintDialogData* self, dbit flag)
+void wxPrintDialogData_SetSelection(wxPrintDialogData* self, wxc_bool flag)
 {
     self->SetSelection(flag);
 }
@@ -474,7 +474,7 @@ void wxPrintDialogData_SetSelection(wxPrintDialogData* self, dbit flag)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrintDialogData_SetCollate(wxPrintDialogData* self, dbit flag)
+void wxPrintDialogData_SetCollate(wxPrintDialogData* self, wxc_bool flag)
 {
     self->SetCollate(flag);
 }
@@ -482,7 +482,7 @@ void wxPrintDialogData_SetCollate(wxPrintDialogData* self, dbit flag)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrintDialogData_SetPrintToFile(wxPrintDialogData* self, dbit flag)
+void wxPrintDialogData_SetPrintToFile(wxPrintDialogData* self, wxc_bool flag)
 {
     self->SetPrintToFile(flag);
 }
@@ -490,7 +490,7 @@ void wxPrintDialogData_SetPrintToFile(wxPrintDialogData* self, dbit flag)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrintDialogData_SetSetupDialog(wxPrintDialogData* self, dbit flag)
+void wxPrintDialogData_SetSetupDialog(wxPrintDialogData* self, wxc_bool flag)
 {
 #if WXWIN_COMPATIBILITY_2_4
     self->SetSetupDialog(flag);
@@ -502,7 +502,7 @@ void wxPrintDialogData_SetSetupDialog(wxPrintDialogData* self, dbit flag)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrintDialogData_EnablePrintToFile(wxPrintDialogData* self, dbit flag)
+void wxPrintDialogData_EnablePrintToFile(wxPrintDialogData* self, wxc_bool flag)
 {
     self->EnablePrintToFile(flag);
 }
@@ -510,7 +510,7 @@ void wxPrintDialogData_EnablePrintToFile(wxPrintDialogData* self, dbit flag)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrintDialogData_EnableSelection(wxPrintDialogData* self, dbit flag)
+void wxPrintDialogData_EnableSelection(wxPrintDialogData* self, wxc_bool flag)
 {
     self->EnableSelection(flag);
 }
@@ -518,7 +518,7 @@ void wxPrintDialogData_EnableSelection(wxPrintDialogData* self, dbit flag)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrintDialogData_EnablePageNumbers(wxPrintDialogData* self, dbit flag)
+void wxPrintDialogData_EnablePageNumbers(wxPrintDialogData* self, wxc_bool flag)
 {
     self->EnablePageNumbers(flag);
 }
@@ -526,7 +526,7 @@ void wxPrintDialogData_EnablePageNumbers(wxPrintDialogData* self, dbit flag)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrintDialogData_EnableHelp(wxPrintDialogData* self, dbit flag)
+void wxPrintDialogData_EnableHelp(wxPrintDialogData* self, wxc_bool flag)
 {
     self->EnableHelp(flag);
 }
@@ -534,7 +534,7 @@ void wxPrintDialogData_EnableHelp(wxPrintDialogData* self, dbit flag)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPrintDialogData_GetEnablePrintToFile(wxPrintDialogData* self)
+wxc_bool wxPrintDialogData_GetEnablePrintToFile(wxPrintDialogData* self)
 {
     return self->GetEnablePrintToFile()?1:0;
 }
@@ -542,7 +542,7 @@ dbit wxPrintDialogData_GetEnablePrintToFile(wxPrintDialogData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPrintDialogData_GetEnableSelection(wxPrintDialogData* self)
+wxc_bool wxPrintDialogData_GetEnableSelection(wxPrintDialogData* self)
 {
     return self->GetEnableSelection()?1:0;
 }
@@ -550,7 +550,7 @@ dbit wxPrintDialogData_GetEnableSelection(wxPrintDialogData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPrintDialogData_GetEnablePageNumbers(wxPrintDialogData* self)
+wxc_bool wxPrintDialogData_GetEnablePageNumbers(wxPrintDialogData* self)
 {
     return self->GetEnablePageNumbers()?1:0;
 }
@@ -558,7 +558,7 @@ dbit wxPrintDialogData_GetEnablePageNumbers(wxPrintDialogData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPrintDialogData_GetEnableHelp(wxPrintDialogData* self)
+wxc_bool wxPrintDialogData_GetEnableHelp(wxPrintDialogData* self)
 {
     return self->GetEnableHelp()?1:0;
 }
@@ -566,7 +566,7 @@ dbit wxPrintDialogData_GetEnableHelp(wxPrintDialogData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPrintDialogData_Ok(wxPrintDialogData* self)
+wxc_bool wxPrintDialogData_Ok(wxPrintDialogData* self)
 {
     return self->Ok()?1:0;
 }
@@ -614,7 +614,7 @@ int wxPrintData_GetNoCopies(wxPrintData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPrintData_GetCollate(wxPrintData* self)
+wxc_bool wxPrintData_GetCollate(wxPrintData* self)
 {
     return self->GetCollate()?1:0;
 }
@@ -630,7 +630,7 @@ int wxPrintData_GetOrientation(wxPrintData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPrintData_Ok(wxPrintData* self)
+wxc_bool wxPrintData_Ok(wxPrintData* self)
 {
     return self->Ok()?1:0;
 }
@@ -646,7 +646,7 @@ dstrret wxPrintData_GetPrinterName(wxPrintData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPrintData_GetColour(wxPrintData* self)
+wxc_bool wxPrintData_GetColour(wxPrintData* self)
 {
     return self->GetColour()?1:0;
 }
@@ -694,7 +694,7 @@ void wxPrintData_SetNoCopies(wxPrintData* self, int v)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrintData_SetCollate(wxPrintData* self, dbit flag)
+void wxPrintData_SetCollate(wxPrintData* self, wxc_bool flag)
 {
     self->SetCollate(flag);
 }
@@ -710,7 +710,7 @@ void wxPrintData_SetOrientation(wxPrintData* self, int orient)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrintData_SetPrinterName(wxPrintData* self, dstr name)
+void wxPrintData_SetPrinterName(wxPrintData* self, wxc_string name)
 {
     self->SetPrinterName(wxstr(name));
 }
@@ -718,7 +718,7 @@ void wxPrintData_SetPrinterName(wxPrintData* self, dstr name)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrintData_SetColour(wxPrintData* self, dbit colour)
+void wxPrintData_SetColour(wxPrintData* self, wxc_bool colour)
 {
     self->SetColour(colour);
 }
@@ -878,7 +878,7 @@ wxPrintMode wxPrintData_GetPrintMode(wxPrintData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrintData_SetPrinterCommand(wxPrintData* self, dstr command)
+void wxPrintData_SetPrinterCommand(wxPrintData* self, wxc_string command)
 {
 #if wxUSE_POSTSCRIPT
     PostScriptData* data = PSData(self);
@@ -890,7 +890,7 @@ void wxPrintData_SetPrinterCommand(wxPrintData* self, dstr command)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrintData_SetPrinterOptions(wxPrintData* self, dstr options)
+void wxPrintData_SetPrinterOptions(wxPrintData* self, wxc_string options)
 {
 #if wxUSE_POSTSCRIPT
     PostScriptData* data = PSData(self);
@@ -902,7 +902,7 @@ void wxPrintData_SetPrinterOptions(wxPrintData* self, dstr options)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrintData_SetPreviewCommand(wxPrintData* self, dstr command)
+void wxPrintData_SetPreviewCommand(wxPrintData* self, wxc_string command)
 {
 #if wxUSE_POSTSCRIPT
     PostScriptData* data = PSData(self);
@@ -914,7 +914,7 @@ void wxPrintData_SetPreviewCommand(wxPrintData* self, dstr command)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrintData_SetFilename(wxPrintData* self, dstr filename)
+void wxPrintData_SetFilename(wxPrintData* self, wxc_string filename)
 {
     self->SetFilename(wxstr(filename));
 }
@@ -922,7 +922,7 @@ void wxPrintData_SetFilename(wxPrintData* self, dstr filename)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrintData_SetFontMetricPath(wxPrintData* self, dstr path)
+void wxPrintData_SetFontMetricPath(wxPrintData* self, wxc_string path)
 {
 #if wxUSE_POSTSCRIPT
     PostScriptData* data = PSData(self);

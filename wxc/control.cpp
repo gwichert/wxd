@@ -27,7 +27,7 @@ void wxControl_Command(wxControl *self, wxCommandEvent *event)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxControl_SetLabel(wxControl *self, dstr label)
+void wxControl_SetLabel(wxControl *self, wxc_string label)
 {
 	self->SetLabel(wxstr(label));
 }
@@ -51,7 +51,7 @@ int wxControl_GetAlignment(wxControl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxControl_SetFont(wxControl* self, wxFont* font)
+wxc_bool wxControl_SetFont(wxControl* self, wxFont* font)
 {
 	return self->SetFont(*font)?1:0;
 }

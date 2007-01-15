@@ -27,25 +27,25 @@ wxKeyEvent* wxKeyEvent_ctor(wxEventType type)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxKeyEvent_ControlDown(wxKeyEvent* self)
+wxc_bool wxKeyEvent_ControlDown(wxKeyEvent* self)
 {
     return self->ControlDown()?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxKeyEvent_ShiftDown(wxKeyEvent* self)
+wxc_bool wxKeyEvent_ShiftDown(wxKeyEvent* self)
 {
     return self->ShiftDown()?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxKeyEvent_AltDown(wxKeyEvent* self)
+wxc_bool wxKeyEvent_AltDown(wxKeyEvent* self)
 {
     return self->AltDown()?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxKeyEvent_MetaDown(wxKeyEvent* self)
+wxc_bool wxKeyEvent_MetaDown(wxKeyEvent* self)
 {
     return self->MetaDown()?1:0;
 }
@@ -75,7 +75,7 @@ unsigned int wxKeyEvent_GetRawKeyFlags(wxKeyEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxKeyEvent_HasModifiers(wxKeyEvent* self)
+wxc_bool wxKeyEvent_HasModifiers(wxKeyEvent* self)
 {
     return self->HasModifiers()?1:0;
 }
@@ -105,7 +105,7 @@ int wxKeyEvent_GetY(wxKeyEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxKeyEvent_CmdDown(wxKeyEvent* self)
+wxc_bool wxKeyEvent_CmdDown(wxKeyEvent* self)
 {
 	return self->CmdDown()?1:0;
 }

@@ -34,7 +34,7 @@ class _ProgressDialog : public wxProgressDialog
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxProgressDialog* wxProgressDialog_ctor(dstr title, dstr message,
+wxProgressDialog* wxProgressDialog_ctor(wxc_string title, wxc_string message,
         int maximum, wxWindow* parent, int style)
 {
     return new _ProgressDialog(wxstr(title), wxstr(message),
@@ -52,7 +52,7 @@ void wxProgressDialog_dtor(wxProgressDialog* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxProgressDialog_Update(wxProgressDialog* self, int value, dstr newmsg)
+wxc_bool wxProgressDialog_Update(wxProgressDialog* self, int value, wxc_string newmsg)
 {
     return self->Update(value, wxstr(newmsg))?1:0;
 }
@@ -68,7 +68,7 @@ void wxProgressDialog_Resume(wxProgressDialog* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxProgressDialog_Show(wxProgressDialog* self, dbit show)
+wxc_bool wxProgressDialog_Show(wxProgressDialog* self, wxc_bool show)
 {
 	return self->Show(show)?1:0;
 }

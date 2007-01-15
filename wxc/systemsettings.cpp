@@ -44,7 +44,7 @@ int wxSystemSettings_GetMetric(wxSystemMetric index)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxSystemSettings_HasFeature(wxSystemFeature index)
+wxc_bool wxSystemSettings_HasFeature(wxSystemFeature index)
 {
     return wxSystemSettings::HasFeature(index)?1:0;
 }

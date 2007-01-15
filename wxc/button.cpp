@@ -37,7 +37,7 @@ wxButton* wxButton_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxButton_Create(wxButton *self, wxWindow* parent, wxWindowID id, dstr label, const wxPoint* pos, const wxSize* size, long style, const wxValidator* validator, dstr name)
+wxc_bool wxButton_Create(wxButton *self, wxWindow* parent, wxWindowID id, wxc_string label, const wxPoint* pos, const wxSize* size, long style, const wxValidator* validator, wxc_string name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -49,7 +49,7 @@ dbit wxButton_Create(wxButton *self, wxWindow* parent, wxWindowID id, dstr label
 		validator = &wxDefaultValidator;
 
 	if (name.data==NULL)
-		name = dstr("button");
+		name = wxc_string("button");
 
 	return self->Create(parent, id, wxstr(label), *pos, *size, style, *validator, wxstr(name))?1:0;
 }
@@ -89,7 +89,7 @@ void wxButton_SetImageMargins(wxButton* self, wxCoord x, wxCoord y)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxButton_SetLabel(wxButton* self, dstr label)
+void wxButton_SetLabel(wxButton* self, wxc_string label)
 {
 	self->SetLabel(wxstr(label));
 }

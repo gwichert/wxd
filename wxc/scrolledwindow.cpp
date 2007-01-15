@@ -37,7 +37,7 @@ public:
 
 extern "C" WXEXPORT
 wxScrolledWindow* wxScrollWnd_ctor(wxWindow *parent, wxWindowID id, const wxPoint* pos,
-					               const wxSize* size, long style, dstr name)
+					               const wxSize* size, long style, wxc_string name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -46,7 +46,7 @@ wxScrolledWindow* wxScrollWnd_ctor(wxWindow *parent, wxWindowID id, const wxPoin
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("scrolled");
+		name = wxc_string("scrolled");
 
 	return new _ScrolledWindow(parent, id, *pos, *size, style, wxstr(name));
 }
@@ -63,7 +63,7 @@ void wxScrollWnd_PrepareDC(wxScrolledWindow* self, wxDC* dc)
 
 extern "C" WXEXPORT
 void wxScrollWnd_SetScrollbars(wxScrolledWindow* self, int pixelsPerUnitX, int pixelsPerUnitY,
-							   int noUnitsX, int noUnitsY, int xPos, int yPos, dbit noRefresh)
+							   int noUnitsX, int noUnitsY, int xPos, int yPos, wxc_bool noRefresh)
 {
 	self->SetScrollbars(pixelsPerUnitX, pixelsPerUnitY, noUnitsX, noUnitsY, xPos, yPos, noRefresh);
 }

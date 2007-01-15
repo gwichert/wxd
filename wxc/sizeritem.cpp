@@ -118,7 +118,7 @@ float wxSizerItem_GetRatioFloat(wxSizerItem* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxSizerItem_IsWindow(wxSizerItem* self)
+wxc_bool wxSizerItem_IsWindow(wxSizerItem* self)
 {
     return self->IsWindow()?1:0;
 }
@@ -126,7 +126,7 @@ dbit wxSizerItem_IsWindow(wxSizerItem* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxSizerItem_IsSizer(wxSizerItem* self)
+wxc_bool wxSizerItem_IsSizer(wxSizerItem* self)
 {
     return self->IsSizer()?1:0;
 }
@@ -134,7 +134,7 @@ dbit wxSizerItem_IsSizer(wxSizerItem* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxSizerItem_IsSpacer(wxSizerItem* self)
+wxc_bool wxSizerItem_IsSpacer(wxSizerItem* self)
 {
     return self->IsSpacer()?1:0;
 }
@@ -226,7 +226,7 @@ void wxSizerItem_SetSpacer(wxSizerItem* self, wxSize* size)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxSizerItem_Show(wxSizerItem* self, dbit show)
+void wxSizerItem_Show(wxSizerItem* self, wxc_bool show)
 {
     self->Show(show);
 }
@@ -234,7 +234,7 @@ void wxSizerItem_Show(wxSizerItem* self, dbit show)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxSizerItem_IsShown(wxSizerItem* self)
+wxc_bool wxSizerItem_IsShown(wxSizerItem* self)
 {
     return self->IsShown()?1:0;
 }

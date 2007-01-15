@@ -40,7 +40,7 @@ wxCursor* wxCursor_ctorById(int id)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxCursor_Ok(wxCursor* self)
+wxc_bool wxCursor_Ok(wxCursor* self)
 {
 	return self->Ok()?1:0;
 }

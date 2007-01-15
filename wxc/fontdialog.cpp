@@ -37,7 +37,7 @@ wxFontDialog* wxFontDialog_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxFontDialog_Create(wxFontDialog* self, wxWindow *parent, const wxFontData* data)
+wxc_bool wxFontDialog_Create(wxFontDialog* self, wxWindow *parent, const wxFontData* data)
 {
     return self->Create(parent, *data)?1:0;
 }
@@ -85,13 +85,13 @@ void wxFontData_dtor(wxFontData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxFontData_SetAllowSymbols(wxFontData* self, dbit flag)
+void wxFontData_SetAllowSymbols(wxFontData* self, wxc_bool flag)
 {
 	self->SetAllowSymbols(flag);
 }
 
 extern "C" WXEXPORT
-dbit wxFontData_GetAllowSymbols(wxFontData* self)
+wxc_bool wxFontData_GetAllowSymbols(wxFontData* self)
 {
 	return self->GetAllowSymbols()?1:0;
 }
@@ -113,13 +113,13 @@ wxColour* wxFontData_GetColour(wxFontData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxFontData_SetShowHelp(wxFontData* self, dbit flag)
+void wxFontData_SetShowHelp(wxFontData* self, wxc_bool flag)
 {
 	self->SetShowHelp(flag);
 }
 
 extern "C" WXEXPORT
-dbit wxFontData_GetShowHelp(wxFontData* self)
+wxc_bool wxFontData_GetShowHelp(wxFontData* self)
 {
 	return self->GetShowHelp()?1:0;
 }
@@ -127,13 +127,13 @@ dbit wxFontData_GetShowHelp(wxFontData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxFontData_EnableEffects(wxFontData* self, dbit flag)
+void wxFontData_EnableEffects(wxFontData* self, wxc_bool flag)
 {
 	self->EnableEffects(flag);
 }
 
 extern "C" WXEXPORT
-dbit wxFontData_GetEnableEffects(wxFontData* self)
+wxc_bool wxFontData_GetEnableEffects(wxFontData* self)
 {
 	return self->GetEnableEffects()?1:0;
 }

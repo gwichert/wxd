@@ -7,13 +7,13 @@
 
 
 // Can't use "bool", since the size varies...
-typedef char            dbit;  // D bit/bool
+typedef char            wxc_bool;   // D bool
 
 // This is a char[] array, aliased "string"
-typedef struct dstr     dstr;  // D string
+typedef struct dstr     wxc_string; // D string
 
 // This is something inherited from "Object"
-typedef void*           dobj;  // D object
+typedef void*           wxc_object; // D object
 
 
 /// length-prefixed string in UTF-8 format

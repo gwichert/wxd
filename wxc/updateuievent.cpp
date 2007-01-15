@@ -27,7 +27,7 @@ wxUpdateUIEvent* wxUpdateUIEvent_ctor(wxWindowID commandId)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxUpdateUIEvent_CanUpdate(wxWindow* window)
+wxc_bool wxUpdateUIEvent_CanUpdate(wxWindow* window)
 {
 	return wxUpdateUIEvent::CanUpdate(window)?1:0;
 }
@@ -35,7 +35,7 @@ dbit wxUpdateUIEvent_CanUpdate(wxWindow* window)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxUpdUIEvt_Enable(wxUpdateUIEvent* self, dbit enable)
+void wxUpdUIEvt_Enable(wxUpdateUIEvent* self, wxc_bool enable)
 {
 	self->Enable(enable);
 }
@@ -43,7 +43,7 @@ void wxUpdUIEvt_Enable(wxUpdateUIEvent* self, dbit enable)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxUpdUIEvt_Check(wxUpdateUIEvent* self, dbit check)
+void wxUpdUIEvt_Check(wxUpdateUIEvent* self, wxc_bool check)
 {
 	self->Check(check);
 }
@@ -51,7 +51,7 @@ void wxUpdUIEvt_Check(wxUpdateUIEvent* self, dbit check)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxUpdateUIEvent_GetChecked(wxUpdateUIEvent* self)
+wxc_bool wxUpdateUIEvent_GetChecked(wxUpdateUIEvent* self)
 {
 	return self->GetChecked()?1:0;
 }
@@ -59,7 +59,7 @@ dbit wxUpdateUIEvent_GetChecked(wxUpdateUIEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxUpdateUIEvent_GetEnabled(wxUpdateUIEvent* self)
+wxc_bool wxUpdateUIEvent_GetEnabled(wxUpdateUIEvent* self)
 {
 	return self->GetEnabled()?1:0;
 }
@@ -67,7 +67,7 @@ dbit wxUpdateUIEvent_GetEnabled(wxUpdateUIEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxUpdateUIEvent_GetSetChecked(wxUpdateUIEvent* self)
+wxc_bool wxUpdateUIEvent_GetSetChecked(wxUpdateUIEvent* self)
 {
 	return self->GetSetChecked()?1:0;
 }
@@ -75,7 +75,7 @@ dbit wxUpdateUIEvent_GetSetChecked(wxUpdateUIEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxUpdateUIEvent_GetSetEnabled(wxUpdateUIEvent* self)
+wxc_bool wxUpdateUIEvent_GetSetEnabled(wxUpdateUIEvent* self)
 {
 	return self->GetSetEnabled()?1:0;
 }
@@ -83,7 +83,7 @@ dbit wxUpdateUIEvent_GetSetEnabled(wxUpdateUIEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxUpdateUIEvent_GetSetText(wxUpdateUIEvent* self)
+wxc_bool wxUpdateUIEvent_GetSetText(wxUpdateUIEvent* self)
 {
 	return self->GetSetText()?1:0;
 }
@@ -131,7 +131,7 @@ void wxUpdateUIEvent_SetMode(wxUpdateUIMode mode)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxUpdateUIEvent_SetText(wxUpdateUIEvent* self, dstr text)
+void wxUpdateUIEvent_SetText(wxUpdateUIEvent* self, wxc_string text)
 {
 	self->SetText(wxstr(text));
 }

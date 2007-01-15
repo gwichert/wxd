@@ -59,7 +59,7 @@ wxCursor* wxSetCursorEvent_GetCursor(wxSetCursorEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxSetCursorEvent_HasCursor(wxSetCursorEvent* self)
+wxc_bool wxSetCursorEvent_HasCursor(wxSetCursorEvent* self)
 {
 	return self->HasCursor()?1:0;
 }

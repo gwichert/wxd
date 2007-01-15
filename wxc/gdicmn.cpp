@@ -212,7 +212,7 @@ void wxColourDataBase_dtor(wxColourDatabase* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxColour* wxColourDatabase_Find(wxColourDatabase* self, dstr name)
+wxColour* wxColourDatabase_Find(wxColourDatabase* self, wxc_string name)
 {
 	return new wxColour(self->Find(wxstr(name)));
 }
@@ -228,7 +228,7 @@ dstrret wxColourDatabase_FindName(wxColourDatabase* self, wxColour* colour)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxColourDatabase_AddColour(wxColourDatabase* self, dstr name, wxColour* colour)
+void wxColourDatabase_AddColour(wxColourDatabase* self, wxc_string name, wxColour* colour)
 {
 	self->AddColour(wxstr(name), *colour);
 }
@@ -346,8 +346,8 @@ void wxFontList_RemoveFont(wxFontList* self, wxFont* font)
 
 extern "C" WXEXPORT
 wxFont* wxFontList_FindOrCreateFont(wxFontList* self, int pointSize, int family, int style, int weight,
-                             dbit underline,
-                             dstr face,
+                             wxc_bool underline,
+                             wxc_string face,
                              wxFontEncoding encoding)
 {
 	return self->FindOrCreateFont(pointSize, family, style, weight, underline, wxstr(face), encoding);

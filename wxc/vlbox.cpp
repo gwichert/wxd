@@ -20,8 +20,8 @@
 
 //-----------------------------------------------------------------------------
 
-typedef void (CALLBACK* Virtual_voidDcRectSizeT) (dobj, wxDC*, const wxRect*, size_t);
-typedef int (CALLBACK* Virtual_IntInt) (dobj, int);
+typedef void (CALLBACK* Virtual_voidDcRectSizeT) (wxc_object, wxDC*, const wxRect*, size_t);
+typedef int (CALLBACK* Virtual_IntInt) (wxc_object, int);
 
 class _VListBox : public wxVListBox
 {
@@ -30,7 +30,7 @@ public:
 					const wxSize& size, long style, const wxString& name)
 		: wxVListBox(parent, id, pos, size, style, name) { }
 		
-	void RegisterVirtual(dobj obj,
+	void RegisterVirtual(wxc_object obj,
 		Virtual_voidDcRectSizeT onDrawItem,
 		Virtual_IntInt onMeasureItem,
 		Virtual_voidDcRectSizeT onDrawSeparator,
@@ -82,7 +82,7 @@ private:
 	Virtual_voidDcRectSizeT m_OnDrawSeparator;
 	Virtual_voidDcRectSizeT m_OnDrawBackground;
 	Virtual_IntInt m_OnGetLineHeight;
-	dobj m_dobj;
+	wxc_object m_dobj;
 	
 public: 
 	DECLARE_OBJECTDELETED(_VListBox)
@@ -93,7 +93,7 @@ public:
 
 extern "C" WXEXPORT
 wxVListBox* wxVListBox_ctor(wxWindow *parent, wxWindowID id, const wxPoint* pos,
-					               const wxSize* size, long style, dstr name)
+					               const wxSize* size, long style, wxc_string name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -102,7 +102,7 @@ wxVListBox* wxVListBox_ctor(wxWindow *parent, wxWindowID id, const wxPoint* pos,
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("vlistbox");
+		name = wxc_string("vlistbox");
 
 	return new _VListBox(parent, id, *pos, *size, style, wxstr(name));
 }
@@ -110,7 +110,7 @@ wxVListBox* wxVListBox_ctor(wxWindow *parent, wxWindowID id, const wxPoint* pos,
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxVListBox_RegisterVirtual(_VListBox* self, dobj obj,
+void wxVListBox_RegisterVirtual(_VListBox* self, wxc_object obj,
 		Virtual_voidDcRectSizeT onDrawItem,
 		Virtual_IntInt onMeasureItem,
 		Virtual_voidDcRectSizeT onDrawSeparator,
@@ -123,8 +123,8 @@ void wxVListBox_RegisterVirtual(_VListBox* self, dobj obj,
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxVListBox_Create(_VListBox* self, wxWindow *parent, wxWindowID id, const wxPoint* pos,
-					               const wxSize* size, long style, dstr name)
+wxc_bool wxVListBox_Create(_VListBox* self, wxWindow *parent, wxWindowID id, const wxPoint* pos,
+					               const wxSize* size, long style, wxc_string name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -133,7 +133,7 @@ dbit wxVListBox_Create(_VListBox* self, wxWindow *parent, wxWindowID id, const w
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("vlistbox");
+		name = wxc_string("vlistbox");
 			
 	return self->Create(parent, id, *pos, *size, style, wxstr(name))?1:0;
 }
@@ -173,7 +173,7 @@ int wxVListBox_GetItemCount(_VListBox* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxVListBox_HasMultipleSelection(_VListBox* self)
+wxc_bool wxVListBox_HasMultipleSelection(_VListBox* self)
 {
 	return self->HasMultipleSelection()?1:0;
 }
@@ -189,7 +189,7 @@ int wxVListBox_GetSelection(_VListBox* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxVListBox_IsCurrent(_VListBox* self, int item)
+wxc_bool wxVListBox_IsCurrent(_VListBox* self, int item)
 {
 	return self->IsCurrent(item)?1:0;
 }
@@ -197,7 +197,7 @@ dbit wxVListBox_IsCurrent(_VListBox* self, int item)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxVListBox_IsSelected(_VListBox* self, int item)
+wxc_bool wxVListBox_IsSelected(_VListBox* self, int item)
 {
 	return self->IsSelected(item)?1:0;
 }
@@ -269,7 +269,7 @@ void wxVListBox_SetSelection(_VListBox* self, int selection)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxVListBox_Select(_VListBox* self, int item, dbit select)
+wxc_bool wxVListBox_Select(_VListBox* self, int item, wxc_bool select)
 {
 	return self->Select(item, select)?1:0;
 }
@@ -277,7 +277,7 @@ dbit wxVListBox_Select(_VListBox* self, int item, dbit select)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxVListBox_SelectRange(_VListBox* self, int from, int to)
+wxc_bool wxVListBox_SelectRange(_VListBox* self, int from, int to)
 {
 	return self->SelectRange(from, to)?1:0;
 }
@@ -293,7 +293,7 @@ void wxVListBox_Toggle(_VListBox* self, int item)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxVListBox_SelectAll(_VListBox* self)
+wxc_bool wxVListBox_SelectAll(_VListBox* self)
 {
 	return self->SelectAll()?1:0;
 }
@@ -301,7 +301,7 @@ dbit wxVListBox_SelectAll(_VListBox* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxVListBox_DeselectAll(_VListBox* self)
+wxc_bool wxVListBox_DeselectAll(_VListBox* self)
 {
 	return self->DeselectAll()?1:0;
 }

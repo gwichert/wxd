@@ -43,10 +43,10 @@ void wxStaticBox_dtor(wxStaticBox* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxStaticBox_Create(wxStaticBox* self, wxWindow* parent, wxWindowID id,
-                        dstr label,
+wxc_bool wxStaticBox_Create(wxStaticBox* self, wxWindow* parent, wxWindowID id,
+                        wxc_string label,
                         const wxPoint* pos, const wxSize* size,
-                        long style, dstr name)
+                        long style, wxc_string name)
 {
     if (pos == NULL)
         pos = &wxDefaultPosition;
@@ -55,7 +55,7 @@ dbit wxStaticBox_Create(wxStaticBox* self, wxWindow* parent, wxWindowID id,
         size = &wxDefaultSize;
 
     if (name.data==NULL)
-        name = dstr("staticBox");
+        name = wxc_string("staticBox");
 
     return self->Create(parent, id, wxstr(label),
                         *pos, *size, style, wxstr(name))?1:0;

@@ -55,25 +55,25 @@ wxGBSpan* wxGBSizerItem_GetSpan(wxGBSizerItem* self)
 }
 
 extern "C" WXEXPORT
-dbit wxGBSizerItem_SetPos(wxGBSizerItem* self, wxGBPosition* pos)
+wxc_bool wxGBSizerItem_SetPos(wxGBSizerItem* self, wxGBPosition* pos)
 {
     return self->SetPos(*pos)?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxGBSizerItem_SetSpan(wxGBSizerItem* self, wxGBSpan* span)
+wxc_bool wxGBSizerItem_SetSpan(wxGBSizerItem* self, wxGBSpan* span)
 {
     return self->SetSpan(*span)?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxGBSizerItem_IntersectsSizer(wxGBSizerItem* self, wxGBSizerItem* other)
+wxc_bool wxGBSizerItem_IntersectsSizer(wxGBSizerItem* self, wxGBSizerItem* other)
 {
     return self->Intersects(*other)?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxGBSizerItem_IntersectsSpan(wxGBSizerItem* self, wxGBPosition* pos, wxGBSpan* span)
+wxc_bool wxGBSizerItem_IntersectsSpan(wxGBSizerItem* self, wxGBPosition* pos, wxGBSpan* span)
 {
     return self->Intersects(*pos, *span)?1:0;
 }
@@ -145,25 +145,25 @@ wxGridBagSizer* wxGridBagSizer_ctor(int vgap, int hgap)
 }
 
 extern "C" WXEXPORT
-dbit wxGridBagSizer_AddWindow(wxGridBagSizer* self, wxWindow* window, wxGBPosition* pos, wxGBSpan* span, int flag, int border, wxObject* userData)
+wxc_bool wxGridBagSizer_AddWindow(wxGridBagSizer* self, wxWindow* window, wxGBPosition* pos, wxGBSpan* span, int flag, int border, wxObject* userData)
 {
     return self->Add(window, *pos, *span, flag, border, userData)?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxGridBagSizer_AddSizer(wxGridBagSizer* self, wxSizer* sizer, wxGBPosition* pos, wxGBSpan* span, int flag, int border, wxObject* userData)
+wxc_bool wxGridBagSizer_AddSizer(wxGridBagSizer* self, wxSizer* sizer, wxGBPosition* pos, wxGBSpan* span, int flag, int border, wxObject* userData)
 {
     return self->Add(sizer, *pos, *span, flag, border, userData)?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxGridBagSizer_Add(wxGridBagSizer* self, int width, int height, wxGBPosition* pos, wxGBSpan* span, int flag, int border, wxObject* userData)
+wxc_bool wxGridBagSizer_Add(wxGridBagSizer* self, int width, int height, wxGBPosition* pos, wxGBSpan* span, int flag, int border, wxObject* userData)
 {
     return self->Add(width, height, *pos, *span, flag, border, userData)?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxGridBagSizer_AddItem(wxGridBagSizer* self, wxGBSizerItem* item)
+wxc_bool wxGridBagSizer_AddItem(wxGridBagSizer* self, wxGBSizerItem* item)
 {
     return self->Add(item)?1:0;
 }
@@ -211,19 +211,19 @@ wxGBPosition* wxGridBagSizer_GetItemPositionIndex(wxGridBagSizer* self, int inde
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridBagSizer_SetItemPositionWindow(wxGridBagSizer* self, wxWindow* window, wxGBPosition* pos)
+wxc_bool wxGridBagSizer_SetItemPositionWindow(wxGridBagSizer* self, wxWindow* window, wxGBPosition* pos)
 {
     return self->SetItemPosition(window, *pos)?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxGridBagSizer_SetItemPositionSizer(wxGridBagSizer* self, wxSizer* sizer, wxGBPosition* pos)
+wxc_bool wxGridBagSizer_SetItemPositionSizer(wxGridBagSizer* self, wxSizer* sizer, wxGBPosition* pos)
 {
     return self->SetItemPosition(sizer, *pos)?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxGridBagSizer_SetItemPositionIndex(wxGridBagSizer* self, int index, wxGBPosition* pos)
+wxc_bool wxGridBagSizer_SetItemPositionIndex(wxGridBagSizer* self, int index, wxGBPosition* pos)
 {
     return self->SetItemPosition(index, *pos)?1:0;
 }
@@ -249,19 +249,19 @@ wxGBSpan* wxGridBagSizer_GetItemSpanIndex(wxGridBagSizer* self, int index)
 }
 
 extern "C" WXEXPORT
-dbit wxGridBagSizer_SetItemSpanWindow(wxGridBagSizer* self, wxWindow* window, wxGBSpan* span)
+wxc_bool wxGridBagSizer_SetItemSpanWindow(wxGridBagSizer* self, wxWindow* window, wxGBSpan* span)
 {
     return self->SetItemSpan(window, *span)?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxGridBagSizer_SetItemSpanSizer(wxGridBagSizer* self, wxSizer* sizer, wxGBSpan* span)
+wxc_bool wxGridBagSizer_SetItemSpanSizer(wxGridBagSizer* self, wxSizer* sizer, wxGBSpan* span)
 {
     return self->SetItemSpan(sizer, *span)?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxGridBagSizer_SetItemSpanIndex(wxGridBagSizer* self, int index, wxGBSpan* span)
+wxc_bool wxGridBagSizer_SetItemSpanIndex(wxGridBagSizer* self, int index, wxGBSpan* span)
 {
     return self->SetItemSpan(index, *span)?1:0;
 }
@@ -301,13 +301,13 @@ wxGBSizerItem* wxGridBagSizer_FindItemWithData(wxGridBagSizer* self, wxObject* u
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxGridBagSizer_CheckForIntersectionItem(wxGridBagSizer* self, wxGBSizerItem* item, wxGBSizerItem* excludeItem)
+wxc_bool wxGridBagSizer_CheckForIntersectionItem(wxGridBagSizer* self, wxGBSizerItem* item, wxGBSizerItem* excludeItem)
 {
     return self->CheckForIntersection(item, excludeItem)?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxGridBagSizer_CheckForIntersectionPos(wxGridBagSizer* self, wxGBPosition* pos, wxGBSpan* span, wxGBSizerItem* excludeItem)
+wxc_bool wxGridBagSizer_CheckForIntersectionPos(wxGridBagSizer* self, wxGBPosition* pos, wxGBSpan* span, wxGBSizerItem* excludeItem)
 {
     return self->CheckForIntersection(*pos, *span, excludeItem)?1:0;
 }

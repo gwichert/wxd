@@ -43,9 +43,9 @@ void wxDialog_dtor(wxDialog* self)
 }
 
 extern "C" WXEXPORT
-dbit wxDialog_Create(wxDialog* self, wxWindow* parent, int id,
-				     dstr title, const wxPoint* pos, const wxSize* size,
-					 long style, dstr name)
+wxc_bool wxDialog_Create(wxDialog* self, wxWindow* parent, int id,
+				     wxc_string title, const wxPoint* pos, const wxSize* size,
+					 long style, wxc_string name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -54,7 +54,7 @@ dbit wxDialog_Create(wxDialog* self, wxWindow* parent, int id,
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("dialogBox");
+		name = wxc_string("dialogBox");
 
 	return self->Create(parent, id, wxstr(title), *pos,
 					    *size, style, wxstr(name))?1:0;
@@ -83,7 +83,7 @@ dstrret wxDialog_GetTitle(wxDialog* self)
 }
 
 extern "C" WXEXPORT
-void wxDialog_SetTitle(wxDialog* self, dstr title)
+void wxDialog_SetTitle(wxDialog* self, wxc_string title)
 {
 	self->SetTitle(wxstr(title));
 }
@@ -99,13 +99,13 @@ void wxDialog_EndModal(wxDialog* self, int retCode)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxDialog_IsModal(wxDialog* self)
+wxc_bool wxDialog_IsModal(wxDialog* self)
 {
 	return self->IsModal()?1:0;
 }
     
 extern "C" WXEXPORT
-void wxDialog_SetModal(wxDialog* self, dbit modal)
+void wxDialog_SetModal(wxDialog* self, wxc_bool modal)
 {
 	self->SetModal(modal);
 }

@@ -37,7 +37,7 @@ wxPrintPreview* wxPrintPreview_ctorPrintData(wxPrintout* printout, wxPrintout* p
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPrintPreview_SetCurrentPage(wxPrintPreview* self, int pageNum)
+wxc_bool wxPrintPreview_SetCurrentPage(wxPrintPreview* self, int pageNum)
 {
     return self->SetCurrentPage(pageNum)?1:0;
 }
@@ -109,7 +109,7 @@ wxWindow* wxPrintPreview_GetCanvas(wxPrintPreview* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPrintPreview_PaintPage(wxPrintPreview* self, wxPreviewCanvas* canvas, wxDC* dc)
+wxc_bool wxPrintPreview_PaintPage(wxPrintPreview* self, wxPreviewCanvas* canvas, wxDC* dc)
 {
     return self->PaintPage(canvas, *dc)?1:0;
 }
@@ -117,7 +117,7 @@ dbit wxPrintPreview_PaintPage(wxPrintPreview* self, wxPreviewCanvas* canvas, wxD
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPrintPreview_DrawBlankPage(wxPrintPreview* self, wxPreviewCanvas* canvas, wxDC* dc)
+wxc_bool wxPrintPreview_DrawBlankPage(wxPrintPreview* self, wxPreviewCanvas* canvas, wxDC* dc)
 {
     return self->DrawBlankPage(canvas, *dc)?1:0;
 }
@@ -125,7 +125,7 @@ dbit wxPrintPreview_DrawBlankPage(wxPrintPreview* self, wxPreviewCanvas* canvas,
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPrintPreview_RenderPage(wxPrintPreview* self, int pageNum)
+wxc_bool wxPrintPreview_RenderPage(wxPrintPreview* self, int pageNum)
 {
     return self->RenderPage(pageNum)?1:0;
 }
@@ -173,7 +173,7 @@ int wxPrintPreview_GetMinPage(wxPrintPreview* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPrintPreview_Ok(wxPrintPreview* self)
+wxc_bool wxPrintPreview_Ok(wxPrintPreview* self)
 {
     return self->Ok()?1:0;
 }
@@ -181,7 +181,7 @@ dbit wxPrintPreview_Ok(wxPrintPreview* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrintPreview_SetOk(wxPrintPreview* self, dbit ok)
+void wxPrintPreview_SetOk(wxPrintPreview* self, wxc_bool ok)
 {
     self->SetOk(ok);
 }
@@ -189,7 +189,7 @@ void wxPrintPreview_SetOk(wxPrintPreview* self, dbit ok)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPrintPreview_Print(wxPrintPreview* self, dbit interactive)
+wxc_bool wxPrintPreview_Print(wxPrintPreview* self, wxc_bool interactive)
 {
     return self->Print(interactive)?1:0;
 }
@@ -205,10 +205,10 @@ void wxPrintPreview_DetermineScaling(wxPrintPreview* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxPreviewFrame* wxPreviewFrame_ctor(wxPrintPreviewBase* preview, wxFrame* parent, dstr title, wxPoint* pos, wxSize* size, int style, dstr name)
+wxPreviewFrame* wxPreviewFrame_ctor(wxPrintPreviewBase* preview, wxFrame* parent, wxc_string title, wxPoint* pos, wxSize* size, int style, wxc_string name)
 {
     if (name.data==NULL)
-        name = dstr("PreviewFrame");
+        name = wxc_string("PreviewFrame");
 
     return new wxPreviewFrame(preview, parent, wxstr(title), *pos, *size, style, wxstr(name));
 }
@@ -240,10 +240,10 @@ void wxPreviewFrame_CreateControlBar(wxPreviewFrame* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxPreviewCanvas* wxPreviewCanvas_ctor(wxPrintPreviewBase* preview, wxWindow* parent, wxPoint* pos, wxSize* size, int style, dstr name)
+wxPreviewCanvas* wxPreviewCanvas_ctor(wxPrintPreviewBase* preview, wxWindow* parent, wxPoint* pos, wxSize* size, int style, wxc_string name)
 {
     if (name.data==NULL)
-        name = dstr("PreviewCanvas");
+        name = wxc_string("PreviewCanvas");
 
     return new wxPreviewCanvas(preview, parent, *pos, *size, style, wxstr(name));
 }
@@ -272,10 +272,10 @@ wxPreviewControlBar* wxPreviewControlBar_ctor(wxPrintPreviewBase *preview,
                         const wxPoint* pos,
                         const wxSize* size,
                         long style,
-                        dstr name)
+                        wxc_string name)
 {
     if (name.data==NULL)
-        name = dstr("panel");
+        name = wxc_string("panel");
 
     return new _PreviewControlBar(preview,buttons,parent,*pos,*size,style,wxstr(name));
 }

@@ -34,10 +34,10 @@ wxChoice* wxChoice_ctor()
 }
 
 extern "C" WXEXPORT
-dbit wxChoice_Create(wxChoice* self, wxWindow* parent, int id, const wxPoint* pos,
-                     const wxSize* size, int n, dstr choices[],
+wxc_bool wxChoice_Create(wxChoice* self, wxWindow* parent, int id, const wxPoint* pos,
+                     const wxSize* size, int n, wxc_string choices[],
                      long style, const wxValidator* validator,
-                     dstr name)
+                     wxc_string name)
 {
     int i;
 
@@ -51,7 +51,7 @@ dbit wxChoice_Create(wxChoice* self, wxWindow* parent, int id, const wxPoint* po
         validator = &wxDefaultValidator;
 
     if (name.data==NULL)
-        name = dstr("choice");
+        name = wxc_string("choice");
 
     wxString* strings = new wxString[n];
     for (i = 0; i < n; ++i)
@@ -70,7 +70,7 @@ void wxChoice_dtor(wxChoice* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxChoice_SetString(wxChoice* self, int n, dstr text)
+void wxChoice_SetString(wxChoice* self, int n, wxc_string text)
 {
     self->SetString(n, wxstr(text));
 }
@@ -120,7 +120,7 @@ void wxChoice_SetClientData(wxChoice* self, int n, void* data)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxChoice_FindString(wxChoice* self, dstr string)
+int wxChoice_FindString(wxChoice* self, wxc_string string)
 {
     return self->FindString(wxstr(string));
 }
@@ -142,13 +142,13 @@ void wxChoice_Clear(wxChoice* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxChoice_Append(wxChoice* self, dstr item)
+int wxChoice_Append(wxChoice* self, wxc_string item)
 {
     return self->Append(wxstr(item));
 }
 
 extern "C" WXEXPORT
-int wxChoice_AppendData(wxChoice* self, dstr item, wxClientData* clientData)
+int wxChoice_AppendData(wxChoice* self, wxc_string item, wxClientData* clientData)
 {
     return self->Append(wxstr(item), clientData);
 }
@@ -156,7 +156,7 @@ int wxChoice_AppendData(wxChoice* self, dstr item, wxClientData* clientData)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxChoice_AppendString(wxChoice* self, dstr item)
+void wxChoice_AppendString(wxChoice* self, wxc_string item)
 {
 	self->AppendString(wxstr(item));
 }
@@ -164,7 +164,7 @@ void wxChoice_AppendString(wxChoice* self, dstr item)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxChoice_AppendArrayString(wxChoice* self, int n, dstr strings[])
+void wxChoice_AppendArrayString(wxChoice* self, int n, wxc_string strings[])
 {
 	for (int i = 0; i < n; ++i)
 	{
@@ -175,7 +175,7 @@ void wxChoice_AppendArrayString(wxChoice* self, int n, dstr strings[])
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxChoice_Insert(wxChoice* self, dstr item, int pos)
+int wxChoice_Insert(wxChoice* self, wxc_string item, int pos)
 {
 	return self->Insert(wxstr(item), pos);
 }
@@ -183,7 +183,7 @@ int wxChoice_Insert(wxChoice* self, dstr item, int pos)
 //-----------------------------------------------------------------------------
 
 /*extern "C" WXEXPORT
-int wxChoice_InsertVoidPointer(wxChoice* self, dstr item, int pos, void* clientData)
+int wxChoice_InsertVoidPointer(wxChoice* self, wxc_string item, int pos, void* clientData)
 {
 	return self->Insert(wxstr(item), pos, clientData);
 }*/
@@ -191,7 +191,7 @@ int wxChoice_InsertVoidPointer(wxChoice* self, dstr item, int pos, void* clientD
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxChoice_InsertClientData(wxChoice* self, dstr item, int pos, wxClientData* clientData)
+int wxChoice_InsertClientData(wxChoice* self, wxc_string item, int pos, wxClientData* clientData)
 {
 	return self->Insert(wxstr(item), pos, clientData);
 }
@@ -225,7 +225,7 @@ wxClientData* wxChoice_GetClientObject(wxChoice* self, int n)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxChoice_HasClientObjectData(wxChoice* self)
+wxc_bool wxChoice_HasClientObjectData(wxChoice* self)
 {
 	return self->HasClientObjectData()?1:0;
 }
@@ -233,7 +233,7 @@ dbit wxChoice_HasClientObjectData(wxChoice* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxChoice_HasClientUntypedData(wxChoice* self)
+wxc_bool wxChoice_HasClientUntypedData(wxChoice* self)
 {
 	return self->HasClientUntypedData()?1:0;
 }
@@ -249,7 +249,7 @@ void wxChoice_SetSelection(wxChoice* self, int n)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxChoice_SetStringSelection(wxChoice* self, dstr s)
+wxc_bool wxChoice_SetStringSelection(wxChoice* self, wxc_string s)
 {
     return self->SetStringSelection(wxstr(s))?1:0;
 }
@@ -289,7 +289,7 @@ void wxChoice_Select(wxChoice* self, int n)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxChoice_ShouldInheritColours(wxChoice* self)
+wxc_bool wxChoice_ShouldInheritColours(wxChoice* self)
 {
 	return self->ShouldInheritColours()?1:0; 
 }
@@ -297,7 +297,7 @@ dbit wxChoice_ShouldInheritColours(wxChoice* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxChoice_IsEmpty(wxChoice* self)
+wxc_bool wxChoice_IsEmpty(wxChoice* self)
 {
 	return self->IsEmpty()?1:0;
 }

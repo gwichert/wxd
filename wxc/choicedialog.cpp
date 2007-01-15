@@ -33,8 +33,8 @@ public:
 };
 
 extern "C" WXEXPORT
-wxSingleChoiceDialog* wxSingleChoiceDialog_ctor(wxWindow* parent, dstr message,
-        dstr caption, int n, dstr choices[], void * clientData,
+wxSingleChoiceDialog* wxSingleChoiceDialog_ctor(wxWindow* parent, wxc_string message,
+        wxc_string caption, int n, wxc_string choices[], void * clientData,
         int style, const wxPoint* pos)
 {
     if (pos == NULL)
@@ -96,8 +96,8 @@ public:
 };
 
 extern "C" WXEXPORT
-wxMultiChoiceDialog* wxMultiChoiceDialog_ctor(wxWindow* parent, dstr message,
-        dstr caption, int n, dstr choices[],
+wxMultiChoiceDialog* wxMultiChoiceDialog_ctor(wxWindow* parent, wxc_string message,
+        wxc_string caption, int n, wxc_string choices[],
         int style, const wxPoint* pos)
 {
     if (pos == NULL)
@@ -136,8 +136,8 @@ wxArrayInt* wxMultiChoiceDialog_GetSelections(wxMultiChoiceDialog* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxGetSingleChoice_func(dstr message, dstr caption, int n, dstr choices[],
-                wxWindow *parent, int x, int y, dbit centre,
+dstrret wxGetSingleChoice_func(wxc_string message, wxc_string caption, int n, wxc_string choices[],
+                wxWindow *parent, int x, int y, wxc_bool centre,
                 int width, int height)
 {
     wxArrayString was;
@@ -155,8 +155,8 @@ dstrret wxGetSingleChoice_func(dstr message, dstr caption, int n, dstr choices[]
 }
 
 extern "C" WXEXPORT
-int wxGetSingleChoiceIndex_func(dstr message, dstr caption, int n, dstr choices[],
-                wxWindow *parent, int x, int y, dbit centre,
+int wxGetSingleChoiceIndex_func(wxc_string message, wxc_string caption, int n, wxc_string choices[],
+                wxWindow *parent, int x, int y, wxc_bool centre,
                 int width, int height)
 {
     wxArrayString was;
@@ -174,9 +174,9 @@ int wxGetSingleChoiceIndex_func(dstr message, dstr caption, int n, dstr choices[
 }
 
 extern "C" WXEXPORT
-void* wxGetSingleChoiceData_func(dstr message, dstr caption, int n, dstr choices[],
+void* wxGetSingleChoiceData_func(wxc_string message, wxc_string caption, int n, wxc_string choices[],
                 void** client_data,
-                wxWindow *parent, int x, int y, dbit centre,
+                wxWindow *parent, int x, int y, wxc_bool centre,
                 int width, int height)
 {
     wxArrayString was;
@@ -194,8 +194,8 @@ void* wxGetSingleChoiceData_func(dstr message, dstr caption, int n, dstr choices
 }
 
 extern "C" WXEXPORT
-size_t wxGetMultipleChoices_func(wxArrayInt* selections,dstr message, dstr caption, int n, dstr choices[],
-                wxWindow *parent, int x, int y, dbit centre,
+size_t wxGetMultipleChoices_func(wxArrayInt* selections,wxc_string message, wxc_string caption, int n, wxc_string choices[],
+                wxWindow *parent, int x, int y, wxc_bool centre,
                 int width, int height)
 {
     wxArrayString was;

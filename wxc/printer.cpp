@@ -37,7 +37,7 @@ wxWindow* wxPrinter_CreateAbortWindow(wxPrinter* self, wxWindow* parent, wxPrint
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrinter_ReportError(wxPrinter* self, wxWindow* parent, wxPrintout* printout, dstr message)
+void wxPrinter_ReportError(wxPrinter* self, wxWindow* parent, wxPrintout* printout, wxc_string message)
 {
     self->ReportError(parent, printout, wxstr(message));
 }
@@ -53,7 +53,7 @@ wxPrintDialogData* wxPrinter_GetPrintDialogData(wxPrinter* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPrinter_GetAbort(wxPrinter* self)
+wxc_bool wxPrinter_GetAbort(wxPrinter* self)
 {
     return self->GetAbort()?1:0;
 }
@@ -69,7 +69,7 @@ wxPrinterError wxPrinter_GetLastError(wxPrinter* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPrinter_Setup(wxPrinter* self, wxWindow* parent)
+wxc_bool wxPrinter_Setup(wxPrinter* self, wxWindow* parent)
 {
     return self->Setup(parent)?1:0;
 }
@@ -77,7 +77,7 @@ dbit wxPrinter_Setup(wxPrinter* self, wxWindow* parent)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPrinter_Print(wxPrinter* self, wxWindow* parent, wxPrintout* printout, dbit prompt)
+wxc_bool wxPrinter_Print(wxPrinter* self, wxWindow* parent, wxPrintout* printout, wxc_bool prompt)
 {
     return self->Print(parent, printout, prompt)?1:0;
 }
@@ -93,10 +93,10 @@ wxDC* wxPrinter_PrintDialog(wxPrinter* self, wxWindow* parent)
 //-----------------------------------------------------------------------------
 
 // Virtual method delegate pointer types
-typedef void (CALLBACK* Virtual_NoParams)(dobj);
-typedef dbit (CALLBACK* Virtual_ParamsInt)(dobj, int);
-typedef dbit (CALLBACK* Virtual_OnBeginDocument)(dobj, int, int);
-typedef void (CALLBACK* Virtual_GetPageInfo)(dobj, int*, int*, int*, int*);
+typedef void (CALLBACK* Virtual_NoParams)(wxc_object);
+typedef wxc_bool (CALLBACK* Virtual_ParamsInt)(wxc_object, int);
+typedef wxc_bool (CALLBACK* Virtual_OnBeginDocument)(wxc_object, int, int);
+typedef void (CALLBACK* Virtual_GetPageInfo)(wxc_object, int*, int*, int*, int*);
 
 class _Printout : public wxPrintout
 {
@@ -114,7 +114,7 @@ public:
     void GetPageInfo(int *minPage, int *maxPage, int *pageFrom, int *pageTo)
         { m_getPageInfo(m_dobj, minPage, maxPage, pageFrom, pageTo); }
 
-    void RegisterVirtual(dobj obj, Virtual_OnBeginDocument onBeginDocument,
+    void RegisterVirtual(wxc_object obj, Virtual_OnBeginDocument onBeginDocument,
                          Virtual_NoParams onEndDocument, 
                          Virtual_NoParams onBeginPrinting,
                          Virtual_NoParams onEndPrinting,
@@ -144,22 +144,22 @@ private:
     Virtual_ParamsInt m_hasPage, m_onPrintPage;
     Virtual_OnBeginDocument m_onBeginDocument;
     Virtual_GetPageInfo m_getPageInfo;
-    dobj m_dobj;
+    wxc_object m_dobj;
 };
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxPrintout* wxPrintout_ctor(dstr title)
+wxPrintout* wxPrintout_ctor(wxc_string title)
 {
     if (title.data==NULL)
-        title = dstr("Printout");
+        title = wxc_string("Printout");
 
     return new _Printout(wxstr(title));
 }
 
 extern "C" WXEXPORT
-void wxPrintout_RegisterVirtual(_Printout *self,dobj obj,
+void wxPrintout_RegisterVirtual(_Printout *self,wxc_object obj,
         Virtual_OnBeginDocument onBeginDocument, Virtual_NoParams onEndDocument, 
         Virtual_NoParams onBeginPrinting, Virtual_NoParams onEndPrinting,
         Virtual_NoParams onPreparePrinting, Virtual_ParamsInt hasPage,
@@ -173,7 +173,7 @@ void wxPrintout_RegisterVirtual(_Printout *self,dobj obj,
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPrintout_OnBeginDocument(_Printout* self, int startPage, int endPage)
+wxc_bool wxPrintout_OnBeginDocument(_Printout* self, int startPage, int endPage)
 {
     return self->wxPrintout::OnBeginDocument(startPage, endPage)?1:0;
 }
@@ -213,7 +213,7 @@ void wxPrintout_OnPreparePrinting(_Printout* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPrintout_HasPage(_Printout* self, int page)
+wxc_bool wxPrintout_HasPage(_Printout* self, int page)
 {
     return self->wxPrintout::HasPage(page)?1:0;
 }
@@ -317,7 +317,7 @@ void wxPrintout_GetPPIPrinter(_Printout* self, int* x, int* y)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxPrintout_IsPreview(_Printout* self)
+wxc_bool wxPrintout_IsPreview(_Printout* self)
 {
     return self->IsPreview()?1:0;
 }
@@ -325,7 +325,7 @@ dbit wxPrintout_IsPreview(_Printout* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxPrintout_SetIsPreview(_Printout* self, dbit p)
+void wxPrintout_SetIsPreview(_Printout* self, wxc_bool p)
 {
     self->SetIsPreview(p);
 }

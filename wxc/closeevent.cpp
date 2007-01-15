@@ -25,37 +25,37 @@ wxCloseEvent* wxCloseEvent_ctor(wxEventType type, int winid)
 }
 
 extern "C" WXEXPORT
-void wxCloseEvent_SetLoggingOff(wxCloseEvent* self, dbit logOff)
+void wxCloseEvent_SetLoggingOff(wxCloseEvent* self, wxc_bool logOff)
 {
 	self->SetLoggingOff(logOff);
 }
 
 extern "C" WXEXPORT
-dbit wxCloseEvent_GetLoggingOff(wxCloseEvent* self)
+wxc_bool wxCloseEvent_GetLoggingOff(wxCloseEvent* self)
 {
 	return self->GetLoggingOff()?1:0;
 }
 
 extern "C" WXEXPORT
-void wxCloseEvent_Veto(wxCloseEvent* self, dbit veto)
+void wxCloseEvent_Veto(wxCloseEvent* self, wxc_bool veto)
 {
 	self->Veto(veto);
 }
 
 extern "C" WXEXPORT
-void wxCloseEvent_SetCanVeto(wxCloseEvent* self, dbit canVeto)
+void wxCloseEvent_SetCanVeto(wxCloseEvent* self, wxc_bool canVeto)
 {
 	self->SetCanVeto(canVeto);
 }
 
 extern "C" WXEXPORT
-dbit wxCloseEvent_CanVeto(wxCloseEvent* self)
+wxc_bool wxCloseEvent_CanVeto(wxCloseEvent* self)
 {
 	return self->CanVeto()?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxCloseEvent_GetVeto(wxCloseEvent* self)
+wxc_bool wxCloseEvent_GetVeto(wxCloseEvent* self)
 {
 	return self->GetVeto()?1:0;
 }

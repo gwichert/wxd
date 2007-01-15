@@ -37,7 +37,7 @@ wxListbook* wxListbook_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxListbook_Create(wxListbook *self, wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, long style, dstr name)
+wxc_bool wxListbook_Create(wxListbook *self, wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, long style, wxc_string name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -46,7 +46,7 @@ dbit wxListbook_Create(wxListbook *self, wxWindow* parent, wxWindowID id, const 
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("listbook");
+		name = wxc_string("listbook");
 
 	return self->Create(parent, id, *pos, *size, style, wxstr(name))?1:0;
 }
@@ -61,7 +61,7 @@ int wxListbook_GetSelection(wxListbook* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxListbook_SetPageText(wxListbook* self, size_t n, dstr strText)
+wxc_bool wxListbook_SetPageText(wxListbook* self, size_t n, wxc_string strText)
 {
 	return self->SetPageText(n, wxstr(strText))?1:0;
 }
@@ -85,7 +85,7 @@ int wxListbook_GetPageImage(wxListbook* self, size_t n)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxListbook_SetPageImage(wxListbook* self, size_t n, int imageId)
+wxc_bool wxListbook_SetPageImage(wxListbook* self, size_t n, int imageId)
 {
 	return self->SetPageImage(n, imageId)?1:0;
 }
@@ -101,7 +101,7 @@ void wxListbook_CalcSizeFromPage(wxListbook* self, const wxSize* sizePage, wxSiz
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxListbook_InsertPage(wxListbook* self, size_t n, wxWindow* page, dstr text, dbit bSelect, int imageId)
+wxc_bool wxListbook_InsertPage(wxListbook* self, size_t n, wxWindow* page, wxc_string text, wxc_bool bSelect, int imageId)
 {
 	return self->InsertPage(n, page, wxstr(text), bSelect, imageId)?1:0;
 }
@@ -125,7 +125,7 @@ void wxListbook_SetImageList(wxListbook* self, wxImageList* imageList)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxListbook_IsVertical(wxListbook* self)
+wxc_bool wxListbook_IsVertical(wxListbook* self)
 {
 	return self->IsVertical()?1:0;
 }
@@ -173,7 +173,7 @@ void wxListbook_SetPageSize(wxListbook* self, const wxSize* size)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxListbook_DeletePage(wxListbook* self, int nPage)
+wxc_bool wxListbook_DeletePage(wxListbook* self, int nPage)
 {
 	return self->DeletePage(nPage)?1:0;
 }
@@ -181,7 +181,7 @@ dbit wxListbook_DeletePage(wxListbook* self, int nPage)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxListbook_RemovePage(wxListbook* self, int nPage)
+wxc_bool wxListbook_RemovePage(wxListbook* self, int nPage)
 {
 	return self->RemovePage(nPage)?1:0;
 }
@@ -189,7 +189,7 @@ dbit wxListbook_RemovePage(wxListbook* self, int nPage)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxListbook_DeleteAllPages(wxListbook* self)
+wxc_bool wxListbook_DeleteAllPages(wxListbook* self)
 {
 	return self->DeleteAllPages()?1:0;
 }
@@ -197,7 +197,7 @@ dbit wxListbook_DeleteAllPages(wxListbook* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxListbook_AddPage(wxListbook* self, wxWindow* page, dstr text, dbit bselect, int imageId)
+wxc_bool wxListbook_AddPage(wxListbook* self, wxWindow* page, wxc_string text, wxc_bool bselect, int imageId)
 {
 	return self->AddPage(page, wxstr(text), bselect, imageId)?1:0;
 }
@@ -205,7 +205,7 @@ dbit wxListbook_AddPage(wxListbook* self, wxWindow* page, dstr text, dbit bselec
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxListbook_AdvanceSelection(wxListbook* self, dbit forward)
+void wxListbook_AdvanceSelection(wxListbook* self, wxc_bool forward)
 {
 	self->AdvanceSelection(forward);
 }
@@ -259,7 +259,7 @@ void wxListbookEvent_Allow(wxListbookEvent* self)
 }
 
 extern "C" WXEXPORT
-dbit wxListbookEvent_IsAllowed(wxListbookEvent* self)
+wxc_bool wxListbookEvent_IsAllowed(wxListbookEvent* self)
 {
     return self->IsAllowed()?1:0;
 }

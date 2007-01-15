@@ -37,7 +37,7 @@ wxFindReplaceDialog* wxFindReplaceDialog_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxFindReplaceDialog_Create(wxFindReplaceDialog* self, wxWindow* parent, wxFindReplaceData* data, dstr title, int style)
+wxc_bool wxFindReplaceDialog_Create(wxFindReplaceDialog* self, wxWindow* parent, wxFindReplaceData* data, wxc_string title, int style)
 {
     return self->Create(parent, data, wxstr(title), style);
 }
@@ -109,7 +109,7 @@ void wxFindDialogEvent_SetFlags(wxFindDialogEvent* self, int flags)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxFindDialogEvent_SetFindString(wxFindDialogEvent* self, dstr str)
+void wxFindDialogEvent_SetFindString(wxFindDialogEvent* self, wxc_string str)
 {
     self->SetFindString(wxstr(str));
 }
@@ -117,7 +117,7 @@ void wxFindDialogEvent_SetFindString(wxFindDialogEvent* self, dstr str)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxFindDialogEvent_SetReplaceString(wxFindDialogEvent* self, dstr str)
+void wxFindDialogEvent_SetReplaceString(wxFindDialogEvent* self, wxc_string str)
 {
     self->SetReplaceString(wxstr(str));
 }
@@ -165,7 +165,7 @@ void wxFindReplaceData_SetFlags(wxFindReplaceData* self, wxUint32 flags)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxFindReplaceData_SetFindString(wxFindReplaceData* self, dstr str)
+void wxFindReplaceData_SetFindString(wxFindReplaceData* self, wxc_string str)
 {
     self->SetFindString(wxstr(str));
 }
@@ -173,7 +173,7 @@ void wxFindReplaceData_SetFindString(wxFindReplaceData* self, dstr str)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxFindReplaceData_SetReplaceString(wxFindReplaceData* self, dstr str)
+void wxFindReplaceData_SetReplaceString(wxFindReplaceData* self, wxc_string str)
 {
     self->SetReplaceString(wxstr(str));
 }

@@ -75,11 +75,11 @@ dstrret wxDisplay_GetName(wxDisplay* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxDisplay_IsPrimary(wxDisplay*	self)
+wxc_bool wxDisplay_IsPrimary(wxDisplay*	self)
 {
 	// If I just return IsPrimary() it always returns true. I thought
 	// this had something to do with how it is defined:
-	//   dbit IsPrimary() const { return m_index == 0; }
+	//   wxc_bool IsPrimary() const { return m_index == 0; }
 	// The const causing problems with Interop? The version
 	// below works.
 	return self->IsPrimary() == true;
@@ -134,7 +134,7 @@ void wxDisplay_GetModes(wxDisplay* self, wxVideoMode mode, wxVideoMode modes[])
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxDisplay_ChangeMode(wxDisplay* self, const wxVideoMode mode)
+wxc_bool wxDisplay_ChangeMode(wxDisplay* self, const wxVideoMode mode)
 {
 	return self->ChangeMode(mode)?1:0;
 }

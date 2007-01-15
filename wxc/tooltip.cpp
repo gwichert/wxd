@@ -20,7 +20,7 @@
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxToolTip_Enable(dbit flag)
+void wxToolTip_Enable(wxc_bool flag)
 {
 	wxToolTip::Enable(flag);
 }
@@ -36,7 +36,7 @@ void wxToolTip_SetDelay(long msecs)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxToolTip* wxToolTip_ctor(dstr tip)
+wxToolTip* wxToolTip_ctor(wxc_string tip)
 {
 	return new wxToolTip(wxstr(tip));
 }
@@ -44,7 +44,7 @@ wxToolTip* wxToolTip_ctor(dstr tip)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxToolTip_SetTip(wxToolTip* self, dstr tip)
+void wxToolTip_SetTip(wxToolTip* self, wxc_string tip)
 {
 	self->SetTip(wxstr(tip));
 }

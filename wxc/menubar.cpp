@@ -48,7 +48,7 @@ wxMenuBar* wxMenuBar_ctor2(long style)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxMenuBar_Append(wxMenuBar* self, wxMenu* menu, dstr title)
+wxc_bool wxMenuBar_Append(wxMenuBar* self, wxMenu* menu, wxc_string title)
 {
 	return self->Append(menu, wxstr(title))?1:0;
 }
@@ -56,7 +56,7 @@ dbit wxMenuBar_Append(wxMenuBar* self, wxMenu* menu, dstr title)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxMenuBar_Check(wxMenuBar* self, int id, dbit check)
+void wxMenuBar_Check(wxMenuBar* self, int id, wxc_bool check)
 {
 	self->Check(id, check);
 }
@@ -64,7 +64,7 @@ void wxMenuBar_Check(wxMenuBar* self, int id, dbit check)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxMenuBar_IsChecked(wxMenuBar* self, int id)
+wxc_bool wxMenuBar_IsChecked(wxMenuBar* self, int id)
 {
 	return self->IsChecked(id)?1:0;
 }
@@ -72,7 +72,7 @@ dbit wxMenuBar_IsChecked(wxMenuBar* self, int id)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxMenuBar_Insert(wxMenuBar* self, int pos, wxMenu* menu, dstr title)
+wxc_bool wxMenuBar_Insert(wxMenuBar* self, int pos, wxMenu* menu, wxc_string title)
 {
     return self->Insert(pos, menu, wxstr(title))?1:0;
 }
@@ -104,7 +104,7 @@ wxMenu* wxMenuBar_GetMenu(wxMenuBar* self, size_t pos)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxMenu* wxMenuBar_Replace(wxMenuBar* self, int pos, wxMenu* menu, dstr title)
+wxMenu* wxMenuBar_Replace(wxMenuBar* self, int pos, wxMenu* menu, wxc_string title)
 {
 	return self->Replace(pos, menu, wxstr(title));
 }
@@ -120,7 +120,7 @@ wxMenu* wxMenuBar_Remove(wxMenuBar* self, int pos)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxMenuBar_EnableTop(wxMenuBar* self, int pos, dbit enable)
+void wxMenuBar_EnableTop(wxMenuBar* self, int pos, wxc_bool enable)
 {
 	self->EnableTop(pos, enable);
 }
@@ -128,7 +128,7 @@ void wxMenuBar_EnableTop(wxMenuBar* self, int pos, dbit enable)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxMenuBar_Enable(wxMenuBar* self, int id, const dbit enable)
+void wxMenuBar_Enable(wxMenuBar* self, int id, const wxc_bool enable)
 {
 	self->Enable(id, enable);
 }
@@ -136,7 +136,7 @@ void wxMenuBar_Enable(wxMenuBar* self, int id, const dbit enable)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxMenuBar_FindMenu(wxMenuBar* self, dstr title)
+int wxMenuBar_FindMenu(wxMenuBar* self, wxc_string title)
 {
 	return self->FindMenu(wxstr(title));
 }
@@ -144,7 +144,7 @@ int wxMenuBar_FindMenu(wxMenuBar* self, dstr title)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxMenuBar_FindMenuItem(wxMenuBar* self, dstr menustring, dstr itemString)
+int wxMenuBar_FindMenuItem(wxMenuBar* self, wxc_string menustring, wxc_string itemString)
 {
 	return self->FindMenuItem(wxstr(menustring), wxstr(itemString));
 }
@@ -176,7 +176,7 @@ dstrret wxMenuBar_GetLabelTop(wxMenuBar* self, int pos)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxMenuBar_IsEnabled(wxMenuBar* self, int id)
+wxc_bool wxMenuBar_IsEnabled(wxMenuBar* self, int id)
 {
 	return self->IsEnabled(id)?1:0;
 }
@@ -192,7 +192,7 @@ void wxMenuBar_Refresh(wxMenuBar* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxMenuBar_SetHelpString(wxMenuBar* self, int id, dstr helpstring)
+void wxMenuBar_SetHelpString(wxMenuBar* self, int id, wxc_string helpstring)
 {
 	self->SetHelpString(id, wxstr(helpstring));
 }
@@ -200,7 +200,7 @@ void wxMenuBar_SetHelpString(wxMenuBar* self, int id, dstr helpstring)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxMenuBar_SetLabel(wxMenuBar* self, int id, dstr label)
+void wxMenuBar_SetLabel(wxMenuBar* self, int id, wxc_string label)
 {
 	self->SetLabel(id, wxstr(label));
 }
@@ -208,7 +208,7 @@ void wxMenuBar_SetLabel(wxMenuBar* self, int id, dstr label)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxMenuBar_SetLabelTop(wxMenuBar* self, int pos, dstr label)
+void wxMenuBar_SetLabelTop(wxMenuBar* self, int pos, wxc_string label)
 {
 	self->SetLabelTop(pos, wxstr(label));
 }

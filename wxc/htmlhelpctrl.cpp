@@ -26,7 +26,7 @@ wxHtmlHelpController* wxHtmlHelpController_ctor(int style)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlHelpController_SetTitleFormat(wxHtmlHelpController* self, dstr format)
+void wxHtmlHelpController_SetTitleFormat(wxHtmlHelpController* self, wxc_string format)
 {
 	self->SetTitleFormat(wxstr(format));
 }
@@ -34,7 +34,7 @@ void wxHtmlHelpController_SetTitleFormat(wxHtmlHelpController* self, dstr format
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlHelpController_SetTempDir(wxHtmlHelpController* self, dstr path)
+void wxHtmlHelpController_SetTempDir(wxHtmlHelpController* self, wxc_string path)
 {
 	self->SetTempDir(wxstr(path));
 }
@@ -42,7 +42,7 @@ void wxHtmlHelpController_SetTempDir(wxHtmlHelpController* self, dstr path)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxHtmlHelpController_AddBook(wxHtmlHelpController* self, dstr book_url)
+wxc_bool wxHtmlHelpController_AddBook(wxHtmlHelpController* self, wxc_string book_url)
 {
 	return self->AddBook(wxstr(book_url))?1:0;
 }
@@ -50,7 +50,7 @@ dbit wxHtmlHelpController_AddBook(wxHtmlHelpController* self, dstr book_url)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxHtmlHelpController_Display(wxHtmlHelpController* self, dstr x)
+wxc_bool wxHtmlHelpController_Display(wxHtmlHelpController* self, wxc_string x)
 {
 	return self->Display(wxstr(x))?1:0;
 }
@@ -58,7 +58,7 @@ dbit wxHtmlHelpController_Display(wxHtmlHelpController* self, dstr x)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxHtmlHelpController_DisplayInt(wxHtmlHelpController* self, int id)
+wxc_bool wxHtmlHelpController_DisplayInt(wxHtmlHelpController* self, int id)
 {
 	return self->Display(id)?1:0;
 }
@@ -66,7 +66,7 @@ dbit wxHtmlHelpController_DisplayInt(wxHtmlHelpController* self, int id)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxHtmlHelpController_DisplayContents(wxHtmlHelpController* self)
+wxc_bool wxHtmlHelpController_DisplayContents(wxHtmlHelpController* self)
 {
 	return self->DisplayContents()?1:0;
 }
@@ -74,7 +74,7 @@ dbit wxHtmlHelpController_DisplayContents(wxHtmlHelpController* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxHtmlHelpController_DisplayIndex(wxHtmlHelpController* self)
+wxc_bool wxHtmlHelpController_DisplayIndex(wxHtmlHelpController* self)
 {
 	return self->DisplayIndex()?1:0;
 }
@@ -82,7 +82,7 @@ dbit wxHtmlHelpController_DisplayIndex(wxHtmlHelpController* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxHtmlHelpController_KeywordSearch(wxHtmlHelpController* self, dstr keyword, wxHelpSearchMode mode)
+wxc_bool wxHtmlHelpController_KeywordSearch(wxHtmlHelpController* self, wxc_string keyword, wxHelpSearchMode mode)
 {
 	return self->KeywordSearch(wxstr(keyword), mode)?1:0;
 }
@@ -90,7 +90,7 @@ dbit wxHtmlHelpController_KeywordSearch(wxHtmlHelpController* self, dstr keyword
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlHelpController_UseConfig(wxHtmlHelpController* self, wxConfigBase* config, dstr rootpath)
+void wxHtmlHelpController_UseConfig(wxHtmlHelpController* self, wxConfigBase* config, wxc_string rootpath)
 {
 	self->UseConfig(config, wxstr(rootpath));
 }
@@ -98,7 +98,7 @@ void wxHtmlHelpController_UseConfig(wxHtmlHelpController* self, wxConfigBase* co
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlHelpController_ReadCustomization(wxHtmlHelpController* self, wxConfigBase *cfg, dstr path)
+void wxHtmlHelpController_ReadCustomization(wxHtmlHelpController* self, wxConfigBase *cfg, wxc_string path)
 {
 	self->ReadCustomization(cfg, wxstr(path));
 }
@@ -106,7 +106,7 @@ void wxHtmlHelpController_ReadCustomization(wxHtmlHelpController* self, wxConfig
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlHelpController_WriteCustomization(wxHtmlHelpController* self, wxConfigBase *cfg, dstr path)
+void wxHtmlHelpController_WriteCustomization(wxHtmlHelpController* self, wxConfigBase *cfg, wxc_string path)
 {
 	self->WriteCustomization(cfg, wxstr(path));
 }

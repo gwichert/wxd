@@ -36,8 +36,8 @@ class _NumberEntryDialog : public wxNumberEntryDialog
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxNumberEntryDialog* wxNumberEntryDialog_ctor(wxWindow* parent, dstr message,
-        dstr prompt, dstr caption, long value, long min, long max, wxPoint* pos)
+wxNumberEntryDialog* wxNumberEntryDialog_ctor(wxWindow* parent, wxc_string message,
+        wxc_string prompt, wxc_string caption, long value, long min, long max, wxPoint* pos)
 {
     return new _NumberEntryDialog(parent, wxstr(message),
             wxstr(prompt),
@@ -74,7 +74,7 @@ long wxNumberEntryDialog_GetValue(wxNumberEntryDialog* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-long wxGetNumberFromUser_func(dstr message, dstr prompt, dstr caption,
+long wxGetNumberFromUser_func(wxc_string message, wxc_string prompt, wxc_string caption,
                                      long value, long min, long max, wxWindow* parent, wxPoint* pos)
 {
     return wxGetNumberFromUser(wxstr(message),

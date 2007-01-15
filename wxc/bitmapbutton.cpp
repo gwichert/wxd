@@ -16,7 +16,7 @@
 
 //-----------------------------------------------------------------------------
 
-typedef void (CALLBACK* Virtual_OnSetBitmap) (dobj obj);
+typedef void (CALLBACK* Virtual_OnSetBitmap) (wxc_object obj);
 
 class _BitmapButton : public wxBitmapButton
 {
@@ -27,7 +27,7 @@ public:
 	void POnSetBitmap()
 		{ wxBitmapButton::OnSetBitmap(); }
 
-	void RegisterVirtual(dobj obj, Virtual_OnSetBitmap onSetBitmap)
+	void RegisterVirtual(wxc_object obj, Virtual_OnSetBitmap onSetBitmap)
 	{
 		m_obj = obj;
 		m_OnSetBitmap = onSetBitmap;
@@ -39,7 +39,7 @@ protected:
 		
 private:
 	Virtual_OnSetBitmap m_OnSetBitmap;
-	dobj m_obj;
+	wxc_object m_obj;
 public:
 	DECLARE_OBJECTDELETED(_BitmapButton)
 	
@@ -55,7 +55,7 @@ wxBitmapButton* wxBitmapButton_ctor()
 }
 
 extern "C" WXEXPORT
-void wxBitmapButton_RegisterVirtual(_BitmapButton* self, dobj obj, Virtual_OnSetBitmap onSetBitmap)
+void wxBitmapButton_RegisterVirtual(_BitmapButton* self, wxc_object obj, Virtual_OnSetBitmap onSetBitmap)
 {
 	self->RegisterVirtual(obj, onSetBitmap);
 }
@@ -69,7 +69,7 @@ void wxBitmapButton_RegisterDisposable(_BitmapButton* self, Virtual_Dispose onDi
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxBitmapButton_Create(_BitmapButton* self, wxWindow *parent, wxWindowID id, const wxBitmap *bitmap, const wxPoint* pos, const wxSize* size, long style, const wxValidator* validator, dstr name)
+wxc_bool wxBitmapButton_Create(_BitmapButton* self, wxWindow *parent, wxWindowID id, const wxBitmap *bitmap, const wxPoint* pos, const wxSize* size, long style, const wxValidator* validator, wxc_string name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -81,7 +81,7 @@ dbit wxBitmapButton_Create(_BitmapButton* self, wxWindow *parent, wxWindowID id,
 		validator = &wxDefaultValidator;
 
 	if (name.data==NULL)
-		name = dstr("bitmapbutton");
+		name = wxc_string("bitmapbutton");
 
 	return self->Create(parent, id, *bitmap, *pos, *size, style, *validator, wxstr(name))?1:0;
 }
@@ -96,7 +96,7 @@ void wxBitmapButton_OnSetBitmap(_BitmapButton* self)
 
 // t9mike: SetLabel is private; use SetBitmapLabel
 extern "C" WXEXPORT
-void wxBitmapButton_SetLabel(_BitmapButton* self, dstr label)
+void wxBitmapButton_SetLabel(_BitmapButton* self, wxc_string label)
 {
 	self->SetBitmapLabel(wxstr(label));
 }
@@ -110,7 +110,7 @@ dstrret wxBitmapButton_GetLabel(_BitmapButton* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxBitmapButton_Enable(_BitmapButton* self, dbit enable)
+wxc_bool wxBitmapButton_Enable(_BitmapButton* self, wxc_bool enable)
 {
 	return self->Enable(enable)?1:0;
 }

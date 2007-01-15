@@ -37,7 +37,7 @@ wxSpinCtrl* wxSpinCtrl_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxSpinCtrl_Create(wxSpinCtrl* self, wxWindow *parent, wxWindowID id, dstr value, const wxPoint* pos, const wxSize* size, long style, int min, int max, int initial, dstr name)
+wxc_bool wxSpinCtrl_Create(wxSpinCtrl* self, wxWindow *parent, wxWindowID id, wxc_string value, const wxPoint* pos, const wxSize* size, long style, int min, int max, int initial, wxc_string name)
 {
 //	if (value == NULL)
 //		value = "";
@@ -49,7 +49,7 @@ dbit wxSpinCtrl_Create(wxSpinCtrl* self, wxWindow *parent, wxWindowID id, dstr v
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("spinctrl");
+		name = wxc_string("spinctrl");
 
 	return self->Create(parent, id, wxstr(value), *pos, *size, style, min, max, initial, wxstr(name))?1:0;
 }
@@ -73,7 +73,7 @@ void wxSpinCtrl_SetValue(wxSpinCtrl* self, int val)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxSpinCtrl_SetValueStr(wxSpinCtrl* self, dstr text)
+void wxSpinCtrl_SetValueStr(wxSpinCtrl* self, wxc_string text)
 {
 	self->SetValue(wxstr(text));
 }

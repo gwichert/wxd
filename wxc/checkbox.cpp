@@ -37,10 +37,10 @@ wxCheckBox* wxCheckBox_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxCheckBox_Create(wxCheckBox* self, wxWindow* parent, int id,
-                       dstr label, const wxPoint* pos,
+wxc_bool wxCheckBox_Create(wxCheckBox* self, wxWindow* parent, int id,
+                       wxc_string label, const wxPoint* pos,
                        const wxSize* size, int style, const wxValidator* val,
-                       dstr name)
+                       wxc_string name)
 {
     if (pos == NULL)
         pos = &wxDefaultPosition;
@@ -52,7 +52,7 @@ dbit wxCheckBox_Create(wxCheckBox* self, wxWindow* parent, int id,
         val = &wxDefaultValidator;
 	
    	if (name.data==NULL)
-		name = dstr("checkbox");
+		name = wxc_string("checkbox");
 
 
     return self->Create(parent, id, wxstr(label), *pos, *size, style,
@@ -62,7 +62,7 @@ dbit wxCheckBox_Create(wxCheckBox* self, wxWindow* parent, int id,
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxCheckBox_GetValue(wxCheckBox* self)
+wxc_bool wxCheckBox_GetValue(wxCheckBox* self)
 {
     return self->GetValue()?1:0;
 }
@@ -70,7 +70,7 @@ dbit wxCheckBox_GetValue(wxCheckBox* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxCheckBox_SetValue(wxCheckBox* self, dbit state)
+void wxCheckBox_SetValue(wxCheckBox* self, wxc_bool state)
 {
     self->SetValue(state);
 }
@@ -78,7 +78,7 @@ void wxCheckBox_SetValue(wxCheckBox* self, dbit state)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxCheckBox_IsChecked(wxCheckBox* self)
+wxc_bool wxCheckBox_IsChecked(wxCheckBox* self)
 {
     return self->IsChecked()?1:0;
 }
@@ -102,7 +102,7 @@ void wxCheckBox_Set3StateValue(wxCheckBox* self, wxCheckBoxState state)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxCheckBox_Is3State(wxCheckBox* self)
+wxc_bool wxCheckBox_Is3State(wxCheckBox* self)
 {
 	return self->Is3State()?1:0;
 }
@@ -110,7 +110,7 @@ dbit wxCheckBox_Is3State(wxCheckBox* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxCheckBox_Is3rdStateAllowedForUser(wxCheckBox* self)
+wxc_bool wxCheckBox_Is3rdStateAllowedForUser(wxCheckBox* self)
 {
 	return self->Is3rdStateAllowedForUser()?1:0;
 }

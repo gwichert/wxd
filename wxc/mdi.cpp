@@ -20,7 +20,7 @@
 
 //-----------------------------------------------------------------------------
 
-typedef wxMDIClientWindow* (CALLBACK* Virtual_OnCreateClient) (dobj obj);
+typedef wxMDIClientWindow* (CALLBACK* Virtual_OnCreateClient) (wxc_object obj);
 
 class _MDIParentFrame : public wxMDIParentFrame 
 {
@@ -31,7 +31,7 @@ public:
 	wxMDIClientWindow *OnCreateClient()
 	{ return m_OnCreateClient(m_dobj); }
 	
-	void Register_Virtual(dobj obj, Virtual_OnCreateClient onCreateClient)
+	void Register_Virtual(wxc_object obj, Virtual_OnCreateClient onCreateClient)
 	{
 		m_dobj = obj;
 		m_OnCreateClient = onCreateClient;
@@ -39,7 +39,7 @@ public:
 	
 private:
 	Virtual_OnCreateClient m_OnCreateClient;
-	dobj m_dobj;
+	wxc_object m_dobj;
 };
 
 //-----------------------------------------------------------------------------
@@ -51,7 +51,7 @@ wxMDIParentFrame* wxMDIParentFrame_ctor()
 }
 
 extern "C" WXEXPORT
-void wxMDIParentFrame_RegisterVirtual(_MDIParentFrame* self, dobj obj, Virtual_OnCreateClient onCreateClient)
+void wxMDIParentFrame_RegisterVirtual(_MDIParentFrame* self, wxc_object obj, Virtual_OnCreateClient onCreateClient)
 {
 	self->Register_Virtual(obj, onCreateClient);
 }
@@ -67,7 +67,7 @@ wxMDIClientWindow* wxMDIParentFrame_OnCreateClient(_MDIParentFrame* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxMDIParentFrame_Create(_MDIParentFrame* self, wxWindow* parent, wxWindowID id, dstr title, const wxPoint* pos, const wxSize* size, int style, dstr name)
+wxc_bool wxMDIParentFrame_Create(_MDIParentFrame* self, wxWindow* parent, wxWindowID id, wxc_string title, const wxPoint* pos, const wxSize* size, int style, wxc_string name)
 {
         if (pos == NULL)
         pos = &wxDefaultPosition;
@@ -76,7 +76,7 @@ dbit wxMDIParentFrame_Create(_MDIParentFrame* self, wxWindow* parent, wxWindowID
         size = &wxDefaultSize;
 
     if (name.data==NULL)
-        name = dstr("mdiParentFrame");
+        name = wxc_string("mdiParentFrame");
 
     return self->Create(parent, id, wxstr(title), *pos, *size, style, wxstr(name))?1:0;
 }
@@ -179,7 +179,7 @@ void wxMDIChildFrame_Activate(wxMDIChildFrame* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxMDIChildFrame_Create(wxMDIChildFrame* self, wxMDIParentFrame* parent, wxWindowID id, dstr title, const wxPoint* pos, const wxSize* size, long style, dstr name)
+wxc_bool wxMDIChildFrame_Create(wxMDIChildFrame* self, wxMDIParentFrame* parent, wxWindowID id, wxc_string title, const wxPoint* pos, const wxSize* size, long style, wxc_string name)
 {
     if (pos == NULL)
         pos = &wxDefaultPosition;
@@ -188,7 +188,7 @@ dbit wxMDIChildFrame_Create(wxMDIChildFrame* self, wxMDIParentFrame* parent, wxW
         size = &wxDefaultSize;
 
     if (name.data==NULL)
-        name = dstr("mdiChildFrame");
+        name = wxc_string("mdiChildFrame");
 
     return self->Create(parent, id, wxstr(title), *pos, *size, style, wxstr(name))?1:0;
 }
@@ -204,7 +204,7 @@ void wxMDIChildFrame_Restore(wxMDIChildFrame* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxMDIChildFrame_Maximize(wxMDIChildFrame* self, dbit maximize)
+void wxMDIChildFrame_Maximize(wxMDIChildFrame* self, wxc_bool maximize)
 {
     self->Maximize(maximize);
 }
@@ -229,7 +229,7 @@ wxMDIClientWindow* wxMDIClientWindow_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxMDIClientWindow_CreateClient(wxMDIClientWindow* self, wxMDIParentFrame* parent, int style)
+wxc_bool wxMDIClientWindow_CreateClient(wxMDIClientWindow* self, wxMDIParentFrame* parent, int style)
 {
     return self->CreateClient(parent, style)?1:0;
 }

@@ -86,7 +86,7 @@ void wxRegion_Clear(wxRegion* self)
 
 #ifndef __WXMAC__
 extern "C" WXEXPORT
-dbit wxRegion_Offset(wxRegion* self, wxCoord x, wxCoord y)
+wxc_bool wxRegion_Offset(wxRegion* self, wxCoord x, wxCoord y)
 {
 	return self->Offset(x, y)?1:0;
 }
@@ -95,19 +95,19 @@ dbit wxRegion_Offset(wxRegion* self, wxCoord x, wxCoord y)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxRegion_Union(wxRegion* self, wxCoord x, wxCoord y, wxCoord width, wxCoord height)
+wxc_bool wxRegion_Union(wxRegion* self, wxCoord x, wxCoord y, wxCoord width, wxCoord height)
 {
 	return self->Union(x, y, width, height)?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxRegion_UnionRect(wxRegion* self, const wxRect* rect)
+wxc_bool wxRegion_UnionRect(wxRegion* self, const wxRect* rect)
 {
 	return self->Union(*rect)?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxRegion_UnionRegion(wxRegion* self, const wxRegion* region)
+wxc_bool wxRegion_UnionRegion(wxRegion* self, const wxRegion* region)
 {
 	return self->Union(*region)?1:0;
 }
@@ -115,19 +115,19 @@ dbit wxRegion_UnionRegion(wxRegion* self, const wxRegion* region)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxRegion_Intersect(wxRegion* self, wxCoord x, wxCoord y, wxCoord width, wxCoord height)
+wxc_bool wxRegion_Intersect(wxRegion* self, wxCoord x, wxCoord y, wxCoord width, wxCoord height)
 {
 	return self->Intersect(x, y, width, height)?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxRegion_IntersectRect(wxRegion* self, const wxRect* rect)
+wxc_bool wxRegion_IntersectRect(wxRegion* self, const wxRect* rect)
 {
 	return self->Intersect(*rect)?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxRegion_IntersectRegion(wxRegion* self, const wxRegion* region)
+wxc_bool wxRegion_IntersectRegion(wxRegion* self, const wxRegion* region)
 {
 	return self->Intersect(*region)?1:0;
 }
@@ -135,19 +135,19 @@ dbit wxRegion_IntersectRegion(wxRegion* self, const wxRegion* region)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxRegion_Subtract(wxRegion* self, wxCoord x, wxCoord y, wxCoord width, wxCoord height)
+wxc_bool wxRegion_Subtract(wxRegion* self, wxCoord x, wxCoord y, wxCoord width, wxCoord height)
 {
 	return self->Subtract(x, y, width, height)?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxRegion_SubtractRect(wxRegion* self, const wxRect* rect)
+wxc_bool wxRegion_SubtractRect(wxRegion* self, const wxRect* rect)
 {
 	return self->Subtract(*rect)?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxRegion_SubtractRegion(wxRegion* self, const wxRegion* region)
+wxc_bool wxRegion_SubtractRegion(wxRegion* self, const wxRegion* region)
 {
 	return self->Subtract(*region)?1:0;
 }
@@ -155,19 +155,19 @@ dbit wxRegion_SubtractRegion(wxRegion* self, const wxRegion* region)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxRegion_Xor(wxRegion* self, wxCoord x, wxCoord y, wxCoord width, wxCoord height)
+wxc_bool wxRegion_Xor(wxRegion* self, wxCoord x, wxCoord y, wxCoord width, wxCoord height)
 {
 	return self->Xor(x, y, width, height)?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxRegion_XorRect(wxRegion* self, const wxRect* rect)
+wxc_bool wxRegion_XorRect(wxRegion* self, const wxRect* rect)
 {
 	return self->Xor(*rect)?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxRegion_XorRegion(wxRegion* self, const wxRegion* region)
+wxc_bool wxRegion_XorRegion(wxRegion* self, const wxRegion* region)
 {
 	return self->Xor(*region)?1:0;
 }
@@ -209,7 +209,7 @@ void wxRegion_GetBox(wxRegion* self, wxRect* rect)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxRegion_IsEmpty(wxRegion* self)
+wxc_bool wxRegion_IsEmpty(wxRegion* self)
 {
 	return self->IsEmpty()?1:0;
 }
@@ -225,7 +225,7 @@ wxBitmap* wxRegion_ConvertToBitmap(wxRegion* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxRegion_UnionBitmap(wxRegion* self, const wxBitmap* bmp, const wxColour* transColour, int tolerance)
+wxc_bool wxRegion_UnionBitmap(wxRegion* self, const wxBitmap* bmp, const wxColour* transColour, int tolerance)
 {
 	if (transColour == NULL)
 		transColour = &wxNullColour;
@@ -268,7 +268,7 @@ void wxRegionIterator_ResetToRegion(wxRegionIterator* self, const wxRegion* regi
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxRegionIterator_HaveRects(wxRegionIterator* self)
+wxc_bool wxRegionIterator_HaveRects(wxRegionIterator* self)
 {
 	return self->HaveRects()?1:0;
 }

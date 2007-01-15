@@ -44,7 +44,7 @@ wxTabCtrl* wxTabCtrl_ctor()
 
 extern "C" WXEXPORT
 wxTabCtrl* wxTabCtrl_ctor2(wxWindow *parent, wxWindowID id, const wxPoint* pos, const wxSize* size,
-            long style, dstr name)
+            long style, wxc_string name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -53,7 +53,7 @@ wxTabCtrl* wxTabCtrl_ctor2(wxWindow *parent, wxWindowID id, const wxPoint* pos, 
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("tabctrl");
+		name = wxc_string("tabctrl");
 
 	return new _TabCtrl(parent, id, *pos, *size, style, wxstr(name));
 }
@@ -61,8 +61,8 @@ wxTabCtrl* wxTabCtrl_ctor2(wxWindow *parent, wxWindowID id, const wxPoint* pos, 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTabCtrl_Create(wxTabCtrl* self, wxWindow *parent, wxWindowID id, const wxPoint* pos, const wxSize* size,
-            long style, dstr name)
+wxc_bool wxTabCtrl_Create(wxTabCtrl* self, wxWindow *parent, wxWindowID id, const wxPoint* pos, const wxSize* size,
+            long style, wxc_string name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -71,7 +71,7 @@ dbit wxTabCtrl_Create(wxTabCtrl* self, wxWindow *parent, wxWindowID id, const wx
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("tabctrl");
+		name = wxc_string("tabctrl");
 
 	return self->Create(parent, id, *pos, *size, style, wxstr(name))?1:0;
 }
@@ -111,7 +111,7 @@ int wxTabCtrl_GetItemCount(wxTabCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTabCtrl_GetItemRect(wxTabCtrl* self, int item, wxRect* rect)
+wxc_bool wxTabCtrl_GetItemRect(wxTabCtrl* self, int item, wxRect* rect)
 {
 	return self->GetItemRect(item, *rect)?1:0;
 }
@@ -167,7 +167,7 @@ void wxTabCtrl_SetImageList(wxTabCtrl* self, wxImageList* imageList)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTabCtrl_SetItemText(wxTabCtrl* self, int item, dstr text)
+wxc_bool wxTabCtrl_SetItemText(wxTabCtrl* self, int item, wxc_string text)
 {
 	return self->SetItemText(item, wxstr(text))?1:0;
 }
@@ -175,7 +175,7 @@ dbit wxTabCtrl_SetItemText(wxTabCtrl* self, int item, dstr text)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTabCtrl_SetItemImage(wxTabCtrl* self, int item, int image)
+wxc_bool wxTabCtrl_SetItemImage(wxTabCtrl* self, int item, int image)
 {
 	return self->SetItemImage(item, image)?1:0;
 }
@@ -183,7 +183,7 @@ dbit wxTabCtrl_SetItemImage(wxTabCtrl* self, int item, int image)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTabCtrl_SetItemData(wxTabCtrl* self, int item, void* data)
+wxc_bool wxTabCtrl_SetItemData(wxTabCtrl* self, int item, void* data)
 {
 	return self->SetItemData(item, data)?1:0;
 }
@@ -207,7 +207,7 @@ void wxTabCtrl_SetPadding(wxTabCtrl* self, const wxSize* padding)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTabCtrl_DeleteAllItems(wxTabCtrl* self)
+wxc_bool wxTabCtrl_DeleteAllItems(wxTabCtrl* self)
 {
 	return self->DeleteAllItems()?1:0;
 }
@@ -215,7 +215,7 @@ dbit wxTabCtrl_DeleteAllItems(wxTabCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTabCtrl_DeleteItem(wxTabCtrl* self, int item)
+wxc_bool wxTabCtrl_DeleteItem(wxTabCtrl* self, int item)
 {
 	return self->DeleteItem(item)?1:0;
 }
@@ -231,7 +231,7 @@ int wxTabCtrl_HitTest(wxTabCtrl* self, const wxPoint* pt, long* flags)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTabCtrl_InsertItem(wxTabCtrl* self, int item, dstr text, int imageId, void* data)
+wxc_bool wxTabCtrl_InsertItem(wxTabCtrl* self, int item, wxc_string text, int imageId, void* data)
 {
 	return self->InsertItem(item, wxstr(text), imageId, data)?1:0;
 }
@@ -293,7 +293,7 @@ void wxTabEvent_Allow(wxTabEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTabEvent_IsAllowed(wxTabEvent* self)
+wxc_bool wxTabEvent_IsAllowed(wxTabEvent* self)
 {
     return self->IsAllowed()?1:0;
 }

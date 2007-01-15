@@ -36,9 +36,9 @@ public:
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxDirDialog* wxDirDialog_ctor(wxWindow* parent,  dstr message, 
-                              dstr defaultPath, int style, wxPoint* pos, 
-                              wxSize* size, dstr name)
+wxDirDialog* wxDirDialog_ctor(wxWindow* parent,  wxc_string message, 
+                              wxc_string defaultPath, int style, wxPoint* pos, 
+                              wxSize* size, wxc_string name)
 {
     return new _DirDialog(parent, wxstr(message), 
                           wxstr(defaultPath), style, *pos, 
@@ -68,7 +68,7 @@ void wxDirDialog_SetStyle(wxDirDialog* self, int style)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxDirDialog_SetMessage(wxDirDialog* self, dstr message)
+void wxDirDialog_SetMessage(wxDirDialog* self, wxc_string message)
 {
     self->SetMessage(wxstr(message));
 }
@@ -90,7 +90,7 @@ int wxDirDialog_ShowModal(wxDirDialog* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxDirDialog_SetPath(wxDirDialog* self, dstr path)
+void wxDirDialog_SetPath(wxDirDialog* self, wxc_string path)
 {
     self->SetPath(wxstr(path));
 }
@@ -102,8 +102,8 @@ dstrret wxDirDialog_GetPath(wxDirDialog* self)
 }
 
 extern "C" WXEXPORT
-dstrret wxDirSelector_func(dstr message,
-              dstr defaultPath,
+dstrret wxDirSelector_func(wxc_string message,
+              wxc_string defaultPath,
               long style,
               wxPoint* pos,
               wxWindow *parent)

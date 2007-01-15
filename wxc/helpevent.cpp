@@ -51,7 +51,7 @@ dstrret wxHelpEvent_GetLink(wxHelpEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHelpEvent_SetLink(wxHelpEvent* self, dstr link)
+void wxHelpEvent_SetLink(wxHelpEvent* self, wxc_string link)
 {
 	self->SetLink(wxstr(link));
 }
@@ -67,7 +67,7 @@ dstrret wxHelpEvent_GetTarget(wxHelpEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHelpEvent_SetTarget(wxHelpEvent* self, dstr target)
+void wxHelpEvent_SetTarget(wxHelpEvent* self, wxc_string target)
 {
 	self->SetTarget(wxstr(target));
 }

@@ -37,9 +37,9 @@ wxRadioBox* wxRadioBox_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxRadioBox_Create(wxRadioBox* self, wxWindow* parent, int id, dstr label,
-                       const wxPoint* pos, const wxSize* size, int n, dstr choices[],
-                       int majorDimension, long style, const wxValidator* val, dstr name)
+wxc_bool wxRadioBox_Create(wxRadioBox* self, wxWindow* parent, int id, wxc_string label,
+                       const wxPoint* pos, const wxSize* size, int n, wxc_string choices[],
+                       int majorDimension, long style, const wxValidator* val, wxc_string name)
 {
 	int i;
 
@@ -53,13 +53,13 @@ dbit wxRadioBox_Create(wxRadioBox* self, wxWindow* parent, int id, dstr label,
 		val = &wxDefaultValidator;
 
 	if (name.data==NULL)
-		name = dstr("radioBox");
+		name = wxc_string("radioBox");
 
 	wxString* strings = new wxString[n];
 	for (i = 0; i < n; ++i)
 		strings[i] = wxstr(choices[i]);
 
-	dbit result = self->Create(parent, id, wxstr(label), *pos, *size, n,
+	wxc_bool result = self->Create(parent, id, wxstr(label), *pos, *size, n,
 		                       strings, majorDimension, style, *val, wxstr(name));
 
 	delete[] strings;
@@ -93,7 +93,7 @@ dstrret wxRadioBox_GetStringSelection(wxRadioBox* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxRadioBox_SetStringSelection(wxRadioBox* self, dstr s)
+wxc_bool wxRadioBox_SetStringSelection(wxRadioBox* self, wxc_string s)
 {
 	return self->SetStringSelection(wxstr(s))?1:0;
 }
@@ -109,7 +109,7 @@ int wxRadioBox_GetCount(wxRadioBox* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxRadioBox_FindString(wxRadioBox* self, dstr s)
+int wxRadioBox_FindString(wxRadioBox* self, wxc_string s)
 {
 	return self->FindString(wxstr(s));
 }
@@ -125,7 +125,7 @@ dstrret wxRadioBox_GetString(wxRadioBox* self, int n)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxRadioBox_SetString(wxRadioBox* self, int n, dstr label)
+void wxRadioBox_SetString(wxRadioBox* self, int n, wxc_string label)
 {
 	self->SetString(n, wxstr(label));
 }
@@ -133,7 +133,7 @@ void wxRadioBox_SetString(wxRadioBox* self, int n, dstr label)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxRadioBox_Enable(wxRadioBox* self, int n, dbit enable)
+void wxRadioBox_Enable(wxRadioBox* self, int n, wxc_bool enable)
 {
 	self->Enable(n, enable);
 }
@@ -141,7 +141,7 @@ void wxRadioBox_Enable(wxRadioBox* self, int n, dbit enable)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxRadioBox_Show(wxRadioBox* self, int n, dbit show)
+void wxRadioBox_Show(wxRadioBox* self, int n, wxc_bool show)
 {
 	self->Show(n, show);
 }
@@ -157,7 +157,7 @@ dstrret wxRadioBox_GetLabel(wxRadioBox* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxRadioBox_SetLabel(wxRadioBox* self, dstr label)
+void wxRadioBox_SetLabel(wxRadioBox* self, wxc_string label)
 {
 	self->SetLabel(wxstr(label));
 }

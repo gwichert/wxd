@@ -32,7 +32,7 @@ size_t wxTipProvider_GetCurrentTip()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxTipProvider* wxCreateFileTipProvider_func(dstr filename, size_t currentTip)
+wxTipProvider* wxCreateFileTipProvider_func(wxc_string filename, size_t currentTip)
 {
 	if ( mpTipProvider != NULL)
 	{
@@ -46,7 +46,7 @@ wxTipProvider* wxCreateFileTipProvider_func(dstr filename, size_t currentTip)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxShowTip_func(wxWindow* parent, wxTipProvider *tipProvider, dbit showAtStartup)
+wxc_bool wxShowTip_func(wxWindow* parent, wxTipProvider *tipProvider, wxc_bool showAtStartup)
 {
 	return wxShowTip(parent, tipProvider, showAtStartup)?1:0;
 }

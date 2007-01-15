@@ -18,12 +18,12 @@
 #include <wx/htmllbox.h>
 #include "local_events.h"
 
-typedef void (CALLBACK* Virtual_VoidNoParams) (dobj);
-typedef void (CALLBACK* Virtual_VoidSizeT) (dobj, size_t);
-typedef dstr (CALLBACK* Virtual_wxStringSizeT) (dobj, size_t);
-typedef wxColour* (CALLBACK* Virtual_wxColourwxColour) (dobj, wxColour*);
-typedef void (CALLBACK* Virtual_OnDrawItem) (dobj, wxDC*, const wxRect*, size_t);
-typedef wxCoord (CALLBACK* Virtual_OnMeasureItem) (dobj, size_t);
+typedef void (CALLBACK* Virtual_VoidNoParams) (wxc_object);
+typedef void (CALLBACK* Virtual_VoidSizeT) (wxc_object, size_t);
+typedef wxc_string (CALLBACK* Virtual_wxStringSizeT) (wxc_object, size_t);
+typedef wxColour* (CALLBACK* Virtual_wxColourwxColour) (wxc_object, wxColour*);
+typedef void (CALLBACK* Virtual_OnDrawItem) (wxc_object, wxDC*, const wxRect*, size_t);
+typedef wxCoord (CALLBACK* Virtual_OnMeasureItem) (wxc_object, size_t);
 
 class _HtmlListBox : public wxHtmlListBox
 {
@@ -75,10 +75,10 @@ class _HtmlListBox : public wxHtmlListBox
 	protected:
 			
 		wxString OnGetItem( size_t n) const
-			{ dstr tmp = m_OnGetItem(m_dobj, n); return wxstr(tmp); }
+			{ wxc_string tmp = m_OnGetItem(m_dobj, n); return wxstr(tmp); }
 			
 		wxString OnGetItemMarkup( size_t n) const
-			{ dstr tmp = m_OnGetItemMarkup(m_dobj, n); return wxstr(tmp); }
+			{ wxc_string tmp = m_OnGetItemMarkup(m_dobj, n); return wxstr(tmp); }
 			
 		wxColour GetSelectedTextColour( const wxColour& colFg) const
 			{ return wxColour(*m_GetSelectedTextColour(m_dobj, new wxColour(colFg))); }
@@ -103,7 +103,7 @@ class _HtmlListBox : public wxHtmlListBox
 			
 	public:
 			
-		void RegisterVirtual(dobj obj, Virtual_VoidNoParams refreshAll,
+		void RegisterVirtual(wxc_object obj, Virtual_VoidNoParams refreshAll,
 				Virtual_VoidSizeT setItemCount,
 				Virtual_wxStringSizeT onGetItem,
 				Virtual_wxStringSizeT onGetItemMarkup,
@@ -141,14 +141,14 @@ class _HtmlListBox : public wxHtmlListBox
 		Virtual_OnDrawItem m_OnDrawSeparator;
 		Virtual_OnDrawItem m_OnDrawBackground;
 		Virtual_OnMeasureItem m_OnGetLineHeight;
-		dobj m_dobj;
+		wxc_object m_dobj;
 		
 	public:
 		DECLARE_OBJECTDELETED(_HtmlListBox)
 };
 
 extern "C" WXEXPORT
-wxHtmlListBox* wxHtmlListBox_ctor2(wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, int style, dstr name)
+wxHtmlListBox* wxHtmlListBox_ctor2(wxWindow* parent, wxWindowID id, const wxPoint* pos, const wxSize* size, int style, wxc_string name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -157,13 +157,13 @@ wxHtmlListBox* wxHtmlListBox_ctor2(wxWindow* parent, wxWindowID id, const wxPoin
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("htmllistbox");
+		name = wxc_string("htmllistbox");
 		
 	return new _HtmlListBox(parent, id, *pos, *size, style, wxstr(name));
 }
 
 extern "C" WXEXPORT
-void wxHtmlListBox_RegisterVirtual(_HtmlListBox* self, dobj obj,
+void wxHtmlListBox_RegisterVirtual(_HtmlListBox* self, wxc_object obj,
 				Virtual_VoidNoParams refreshAll,
 				Virtual_VoidSizeT setItemCount,
 				Virtual_wxStringSizeT onGetItem,
@@ -183,7 +183,7 @@ void wxHtmlListBox_RegisterVirtual(_HtmlListBox* self, dobj obj,
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxHtmlListBox_Create(_HtmlListBox* self, wxWindow* parent, wxWindowID id, wxPoint* pos, wxSize* size, int style, dstr name)
+wxc_bool wxHtmlListBox_Create(_HtmlListBox* self, wxWindow* parent, wxWindowID id, wxPoint* pos, wxSize* size, int style, wxc_string name)
 {
 	return self->Create(parent, id, *pos, *size, style, wxstr(name))?1:0;
 }

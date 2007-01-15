@@ -37,7 +37,7 @@ void wxCaret_dtor(wxCaret* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxCaret_Create(wxCaret* self, wxWindow *window, int width, int height)
+wxc_bool wxCaret_Create(wxCaret* self, wxWindow *window, int width, int height)
 {
 	return self->Create(window, width, height)?1:0;
 }
@@ -45,7 +45,7 @@ dbit wxCaret_Create(wxCaret* self, wxWindow *window, int width, int height)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxCaret_IsOk(wxCaret* self)
+wxc_bool wxCaret_IsOk(wxCaret* self)
 {
 	return self->IsOk()?1:0;
 }
@@ -53,7 +53,7 @@ dbit wxCaret_IsOk(wxCaret* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxCaret_IsVisible(wxCaret* self)
+wxc_bool wxCaret_IsVisible(wxCaret* self)
 {
 	return self->IsVisible()?1:0;
 }
@@ -101,7 +101,7 @@ void wxCaret_Move(wxCaret* self, int x, int y)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxCaret_Show(wxCaret* self, dbit show)
+void wxCaret_Show(wxCaret* self, wxc_bool show)
 {
 	self->Show(show);
 }

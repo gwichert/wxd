@@ -41,7 +41,7 @@ wxNotebook* wxNotebook_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxNotebook_AddPage(wxNotebook* self, wxNotebookPage* page, dstr text, dbit select, int imageId)
+wxc_bool wxNotebook_AddPage(wxNotebook* self, wxNotebookPage* page, wxc_string text, wxc_bool select, int imageId)
 {
 	return self->AddPage(page, wxstr(text), select, imageId)?1:0;
 }
@@ -49,8 +49,8 @@ dbit wxNotebook_AddPage(wxNotebook* self, wxNotebookPage* page, dstr text, dbit 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxNotebook_Create(wxNotebook* self, wxWindow* parent, int id, const wxPoint* pos,
-                       const wxSize* size, long style, dstr name)
+wxc_bool wxNotebook_Create(wxNotebook* self, wxWindow* parent, int id, const wxPoint* pos,
+                       const wxSize* size, long style, wxc_string name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -59,7 +59,7 @@ dbit wxNotebook_Create(wxNotebook* self, wxWindow* parent, int id, const wxPoint
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("notebook");
+		name = wxc_string("notebook");
 
 	return self->Create(parent, id, *pos, *size, style, wxstr(name))?1:0;
 }
@@ -99,7 +99,7 @@ int wxNotebook_GetSelection(wxNotebook* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxNotebook_SetPageText(wxNotebook* self, int nPage, dstr strText)
+wxc_bool wxNotebook_SetPageText(wxNotebook* self, int nPage, wxc_string strText)
 {
 	return self->SetPageText(nPage, wxstr(strText))?1:0;
 }
@@ -139,7 +139,7 @@ int wxNotebook_GetPageImage(wxNotebook* self, int nPage)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxNotebook_SetPageImage(wxNotebook* self, int nPage, int nImage)
+wxc_bool wxNotebook_SetPageImage(wxNotebook* self, int nPage, int nImage)
 {
 	return self->SetPageImage(nPage, nImage)?1:0;
 }
@@ -179,7 +179,7 @@ void wxNotebook_SetTabSize(wxNotebook* self, const wxSize* sz)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxNotebook_DeletePage(wxNotebook* self, int nPage)
+wxc_bool wxNotebook_DeletePage(wxNotebook* self, int nPage)
 {
 	return self->DeletePage(nPage)?1:0;
 }
@@ -187,7 +187,7 @@ dbit wxNotebook_DeletePage(wxNotebook* self, int nPage)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxNotebook_RemovePage(wxNotebook* self, int nPage)
+wxc_bool wxNotebook_RemovePage(wxNotebook* self, int nPage)
 {
 	return self->RemovePage(nPage)?1:0;
 }
@@ -195,7 +195,7 @@ dbit wxNotebook_RemovePage(wxNotebook* self, int nPage)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxNotebook_DeleteAllPages(wxNotebook* self)
+wxc_bool wxNotebook_DeleteAllPages(wxNotebook* self)
 {
 	return self->DeleteAllPages()?1:0;
 }
@@ -203,7 +203,7 @@ dbit wxNotebook_DeleteAllPages(wxNotebook* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxNotebook_InsertPage(wxNotebook* self, int nPage, wxNotebookPage *pPage, dstr strText, dbit bSelect, int imageId)
+wxc_bool wxNotebook_InsertPage(wxNotebook* self, int nPage, wxNotebookPage *pPage, wxc_string strText, wxc_bool bSelect, int imageId)
 {
 	return self->InsertPage(nPage, pPage, wxstr(strText), bSelect, imageId)?1:0;
 }
@@ -219,7 +219,7 @@ int wxNotebook_SetSelection(wxNotebook* self, int nPage)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxNotebook_AdvanceSelection(wxNotebook* self, dbit forward)
+void wxNotebook_AdvanceSelection(wxNotebook* self, wxc_bool forward)
 {
 	self->AdvanceSelection(forward);
 }
@@ -273,7 +273,7 @@ void wxNotebookEvent_Allow(wxNotebookEvent* self)
 }
 
 extern "C" WXEXPORT
-dbit wxNotebookEvent_IsAllowed(wxNotebookEvent* self)
+wxc_bool wxNotebookEvent_IsAllowed(wxNotebookEvent* self)
 {
     return self->IsAllowed()?1:0;
 }

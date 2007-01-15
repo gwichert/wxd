@@ -19,13 +19,13 @@
 
 //-----------------------------------------------------------------------------
 
-typedef void (CALLBACK* EventListener)(dobj obj,wxEvent* event, int iListener);
+typedef void (CALLBACK* EventListener)(wxc_object obj,wxEvent* event, int iListener);
 
 //-----------------------------------------------------------------------------
 
 struct clientdata {
 	EventListener listener;
-	dobj obj;
+	wxc_object obj;
 };
 
 struct wxProxyData : public wxObject
@@ -75,7 +75,7 @@ void wxEvtHandler_Disconnect(wxEvtHandler* self, int evtType, int id, int lastId
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxEvtHandler_ProcessEvent(wxEvtHandler* self, wxEvent* event)
+wxc_bool wxEvtHandler_ProcessEvent(wxEvtHandler* self, wxEvent* event)
 {
     return self->ProcessEvent(*event);
 }

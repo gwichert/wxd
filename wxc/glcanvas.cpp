@@ -40,7 +40,7 @@ void wxGLContext_Update(wxGLContext* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGLContext_SetColour(wxGLContext* self, dstr colour)
+void wxGLContext_SetColour(wxGLContext* self, wxc_string colour)
 {
 	self->SetColour(wxstr(colour));
 }
@@ -91,7 +91,7 @@ public:
 
 extern "C" WXEXPORT
 wxGLCanvas* wxGLCanvas_ctor(wxWindow *parent, wxWindowID id, const wxPoint* pos,
-					const wxSize* size, int style, dstr name, int* attribList,  const wxPalette* palette)
+					const wxSize* size, int style, wxc_string name, int* attribList,  const wxPalette* palette)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -100,7 +100,7 @@ wxGLCanvas* wxGLCanvas_ctor(wxWindow *parent, wxWindowID id, const wxPoint* pos,
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("GLCanvas");
+		name = wxc_string("GLCanvas");
 
 	if (palette == NULL)
 		palette = &wxNullPalette;
@@ -112,7 +112,7 @@ wxGLCanvas* wxGLCanvas_ctor(wxWindow *parent, wxWindowID id, const wxPoint* pos,
 
 extern "C" WXEXPORT
 wxGLCanvas* wxGLCanvas_ctor2(wxWindow *parent, const wxGLContext *shared, wxWindowID id, const wxPoint* pos,
-					const wxSize* size, int style, dstr name, int* attribList,  const wxPalette* palette)
+					const wxSize* size, int style, wxc_string name, int* attribList,  const wxPalette* palette)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -121,7 +121,7 @@ wxGLCanvas* wxGLCanvas_ctor2(wxWindow *parent, const wxGLContext *shared, wxWind
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("GLCanvas");
+		name = wxc_string("GLCanvas");
 
 	if (palette == NULL)
 		palette = &wxNullPalette;
@@ -133,7 +133,7 @@ wxGLCanvas* wxGLCanvas_ctor2(wxWindow *parent, const wxGLContext *shared, wxWind
 
 extern "C" WXEXPORT
 wxGLCanvas* wxGLCanvas_ctor3(wxWindow *parent, const wxGLCanvas *shared, wxWindowID id, const wxPoint* pos,
-					const wxSize* size, int style, dstr name, int* attribList,  const wxPalette* palette)
+					const wxSize* size, int style, wxc_string name, int* attribList,  const wxPalette* palette)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -142,7 +142,7 @@ wxGLCanvas* wxGLCanvas_ctor3(wxWindow *parent, const wxGLCanvas *shared, wxWindo
 		size = &wxDefaultSize;
 
 	if (name.data==NULL)
-		name = dstr("GLCanvas");
+		name = wxc_string("GLCanvas");
 
 	if (palette == NULL)
 		palette = &wxNullPalette;
@@ -171,7 +171,7 @@ void wxGLCanvas_UpdateContext(wxGLCanvas* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxGLCanvas_SetColour(wxGLCanvas* self, dstr colour)
+void wxGLCanvas_SetColour(wxGLCanvas* self, wxc_string colour)
 {
 	self->SetColour(wxstr(colour));
 }

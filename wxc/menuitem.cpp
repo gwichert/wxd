@@ -19,7 +19,7 @@
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxMenuItem* wxMenuItem_ctor(wxMenu* parentMenu, int id, dstr text, dstr help, wxItemKind kind, wxMenu* subMenu)
+wxMenuItem* wxMenuItem_ctor(wxMenu* parentMenu, int id, wxc_string text, wxc_string help, wxItemKind kind, wxMenu* subMenu)
 {
     return new wxMenuItem(parentMenu, id, wxstr(text), wxstr(help), kind, subMenu);
 }
@@ -59,7 +59,7 @@ int wxMenuItem_GetId(wxMenuItem* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxMenuItem_IsSeparator(wxMenuItem* self)
+wxc_bool wxMenuItem_IsSeparator(wxMenuItem* self)
 {
     return self->IsSeparator()?1:0;
 }
@@ -67,7 +67,7 @@ dbit wxMenuItem_IsSeparator(wxMenuItem* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxMenuItem_SetText(wxMenuItem* self, dstr str)
+void wxMenuItem_SetText(wxMenuItem* self, wxc_string str)
 {
     self->SetText(wxstr(str));
 }
@@ -91,7 +91,7 @@ dstrret wxMenuItem_GetText(wxMenuItem* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxMenuItem_GetLabelFromText(wxMenuItem* self, dstr text)
+dstrret wxMenuItem_GetLabelFromText(wxMenuItem* self, wxc_string text)
 {
     return dstr_ret(self->GetLabelFromText(wxstr(text)));
 }
@@ -107,7 +107,7 @@ wxItemKind wxMenuItem_GetKind(wxMenuItem* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxMenuItem_SetCheckable(wxMenuItem* self, dbit checkable)
+void wxMenuItem_SetCheckable(wxMenuItem* self, wxc_bool checkable)
 {
     self->SetCheckable(checkable);
 }
@@ -115,7 +115,7 @@ void wxMenuItem_SetCheckable(wxMenuItem* self, dbit checkable)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxMenuItem_IsCheckable(wxMenuItem* self)
+wxc_bool wxMenuItem_IsCheckable(wxMenuItem* self)
 {
     return self->IsCheckable()?1:0;
 }
@@ -123,7 +123,7 @@ dbit wxMenuItem_IsCheckable(wxMenuItem* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxMenuItem_IsSubMenu(wxMenuItem* self)
+wxc_bool wxMenuItem_IsSubMenu(wxMenuItem* self)
 {
     return self->IsSubMenu()?1:0;
 }
@@ -147,7 +147,7 @@ wxMenu* wxMenuItem_GetSubMenu(wxMenuItem* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxMenuItem_Enable(wxMenuItem* self, dbit enable)
+void wxMenuItem_Enable(wxMenuItem* self, wxc_bool enable)
 {
     self->Enable(enable);
 }
@@ -155,7 +155,7 @@ void wxMenuItem_Enable(wxMenuItem* self, dbit enable)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxMenuItem_IsEnabled(wxMenuItem* self)
+wxc_bool wxMenuItem_IsEnabled(wxMenuItem* self)
 {
     return self->IsEnabled()?1:0;
 }
@@ -163,7 +163,7 @@ dbit wxMenuItem_IsEnabled(wxMenuItem* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxMenuItem_Check(wxMenuItem* self, dbit check)
+void wxMenuItem_Check(wxMenuItem* self, wxc_bool check)
 {
     self->Check(check);
 }
@@ -171,7 +171,7 @@ void wxMenuItem_Check(wxMenuItem* self, dbit check)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxMenuItem_IsChecked(wxMenuItem* self)
+wxc_bool wxMenuItem_IsChecked(wxMenuItem* self)
 {
     return self->IsChecked()?1:0;
 }
@@ -187,7 +187,7 @@ void wxMenuItem_Toggle(wxMenuItem* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxMenuItem_SetHelp(wxMenuItem* self, dstr str)
+void wxMenuItem_SetHelp(wxMenuItem* self, wxc_string str)
 {
     self->SetHelp(wxstr(str));
 }
@@ -219,7 +219,7 @@ void wxMenuItem_SetAccel(wxMenuItem* self, wxAcceleratorEntry* accel)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxMenuItem_SetName(wxMenuItem* self, dstr str)
+void wxMenuItem_SetName(wxMenuItem* self, wxc_string str)
 {
     self->SetText(wxstr(str));
 }
@@ -235,13 +235,13 @@ dstrret wxMenuItem_GetName(wxMenuItem* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxMenuItem* wxMenuItem_NewCheck(wxMenu* parentMenu, int id, dstr text, dstr help, dbit isCheckable, wxMenu* subMenu)
+wxMenuItem* wxMenuItem_NewCheck(wxMenu* parentMenu, int id, wxc_string text, wxc_string help, wxc_bool isCheckable, wxMenu* subMenu)
 {
     return wxMenuItem::New(parentMenu, id, wxstr(text), wxstr(help), isCheckable, subMenu);
 }
 
 extern "C" WXEXPORT
-wxMenuItem* wxMenuItem_New(wxMenu* parentMenu, int id, dstr text, dstr help, wxItemKind kind, wxMenu* subMenu)
+wxMenuItem* wxMenuItem_New(wxMenu* parentMenu, int id, wxc_string text, wxc_string help, wxItemKind kind, wxMenu* subMenu)
 {
     return wxMenuItem::New(parentMenu, id, wxstr(text), wxstr(help), kind, subMenu);
 }

@@ -27,7 +27,7 @@ wxImage* wxImage_ctor()
 }
 
 extern "C" WXEXPORT
-wxImage* wxImage_ctorByName(dstr name, int type)
+wxImage* wxImage_ctorByName(wxc_string name, int type)
 {
 	return new wxImage(wxstr(name), type);
 }
@@ -43,19 +43,19 @@ wxImage* wxImage_ctorByByteArray(const char* data, int length, int type)
 }
 
 extern "C" WXEXPORT
-wxImage* wxImage_ctorintintbool(int width, int height, dbit clear)
+wxImage* wxImage_ctorintintbool(int width, int height, wxc_bool clear)
 {
 	return new wxImage(width, height, (bool) clear);
 }
 
 extern "C" WXEXPORT
-wxImage* wxImage_ctorByData(int width, int height, unsigned char* data, dbit static_data)
+wxImage* wxImage_ctorByData(int width, int height, unsigned char* data, wxc_bool static_data)
 {
 	return new wxImage(width, height, data, static_data);
 }
 
 extern "C" WXEXPORT
-wxImage* wxImage_ctorByDataAlpha(int width, int height, unsigned char* data, unsigned char* alpha, dbit static_data)
+wxImage* wxImage_ctorByDataAlpha(int width, int height, unsigned char* data, unsigned char* alpha, wxc_bool static_data)
 {
 	return new wxImage(width, height, data, alpha, static_data);
 }
@@ -114,26 +114,26 @@ void wxImage_InitAllHandlers()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxImage_LoadFileByTypeId(wxImage* self, dstr name, int type, int index)
+wxc_bool wxImage_LoadFileByTypeId(wxImage* self, wxc_string name, int type, int index)
 {
 	return self->LoadFile(wxstr(name), type, index)?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxImage_LoadFileByMimeTypeId(wxImage* self, dstr name, dstr mimetype, int index)
+wxc_bool wxImage_LoadFileByMimeTypeId(wxImage* self, wxc_string name, wxc_string mimetype, int index)
 {
 	return self->LoadFile(wxstr(name), wxstr(mimetype), index)?1:0;
 }
 
 
 extern "C" WXEXPORT
-dbit wxImage_SaveFileByType(wxImage* self, dstr name, int type)
+wxc_bool wxImage_SaveFileByType(wxImage* self, wxc_string name, int type)
 {
     return self->SaveFile(wxstr(name), type)?1:0;
 }
 
 extern "C" WXEXPORT
-dbit wxImage_SaveFileByMimeType(wxImage* self, dstr name, dstr mimetype)
+wxc_bool wxImage_SaveFileByMimeType(wxImage* self, wxc_string name, wxc_string mimetype)
 {
     return self->SaveFile(wxstr(name), wxstr(mimetype))?1:0;
 }
@@ -166,13 +166,13 @@ void wxImage_SetMaskColour(wxImage* self, unsigned char r, unsigned char g, unsi
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxImage_SetMask(wxImage* self, dbit mask)
+void wxImage_SetMask(wxImage* self, wxc_bool mask)
 {
     self->SetMask(mask);
 }
 
 extern "C" WXEXPORT
-dbit wxImage_HasMask(wxImage* self)
+wxc_bool wxImage_HasMask(wxImage* self)
 {
     return self->HasMask()?1:0;
 }
@@ -212,7 +212,7 @@ wxImage* wxImage_ShrinkBy(wxImage* self, int xFactor, int yFactor)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxImage* wxImage_Rotate(wxImage* self, double angle, wxPoint* centre_of_rotation, dbit interpolating, wxPoint* offset_after_rotation)
+wxImage* wxImage_Rotate(wxImage* self, double angle, wxPoint* centre_of_rotation, wxc_bool interpolating, wxPoint* offset_after_rotation)
 {
 	return new wxImage(self->Rotate(angle, *centre_of_rotation, interpolating, offset_after_rotation));
 }
@@ -220,7 +220,7 @@ wxImage* wxImage_Rotate(wxImage* self, double angle, wxPoint* centre_of_rotation
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxImage* wxImage_Rotate90(wxImage* self, dbit clockwise)
+wxImage* wxImage_Rotate90(wxImage* self, wxc_bool clockwise)
 {
 	return new wxImage(self->Rotate90(clockwise));
 }
@@ -228,7 +228,7 @@ wxImage* wxImage_Rotate90(wxImage* self, dbit clockwise)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxImage* wxImage_Mirror(wxImage* self, dbit horizontally)
+wxImage* wxImage_Mirror(wxImage* self, wxc_bool horizontally)
 {
 	return new wxImage(self->Mirror(horizontally));
 }
@@ -300,7 +300,7 @@ unsigned char wxImage_GetAlpha(wxImage* self, int x, int y)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxImage_FindFirstUnusedColour(wxImage* self, unsigned char* r, unsigned char* g, unsigned char* b, unsigned char startR, unsigned char startG, unsigned char startB)
+wxc_bool wxImage_FindFirstUnusedColour(wxImage* self, unsigned char* r, unsigned char* g, unsigned char* b, unsigned char startR, unsigned char startG, unsigned char startB)
 {
 	return self->FindFirstUnusedColour(r, g, b, startR, startG, startB)?1:0;
 }
@@ -308,7 +308,7 @@ dbit wxImage_FindFirstUnusedColour(wxImage* self, unsigned char* r, unsigned cha
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxImage_SetMaskFromImage(wxImage* self, wxImage* mask, unsigned char mr, unsigned char mg, unsigned char mb)
+wxc_bool wxImage_SetMaskFromImage(wxImage* self, wxImage* mask, unsigned char mr, unsigned char mg, unsigned char mb)
 {
 	return self->SetMaskFromImage(*mask, mr, mg, mb)?1:0;
 }
@@ -316,7 +316,7 @@ dbit wxImage_SetMaskFromImage(wxImage* self, wxImage* mask, unsigned char mr, un
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxImage_ConvertAlphaToMask(wxImage* self, unsigned char threshold)
+wxc_bool wxImage_ConvertAlphaToMask(wxImage* self, unsigned char threshold)
 {
 	return self->ConvertAlphaToMask(threshold)?1:0;
 }
@@ -324,7 +324,7 @@ dbit wxImage_ConvertAlphaToMask(wxImage* self, unsigned char threshold)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxImage_CanRead(dstr name)
+wxc_bool wxImage_CanRead(wxc_string name)
 {
 	return wxImage::CanRead(wxstr(name))?1:0;
 }
@@ -332,7 +332,7 @@ dbit wxImage_CanRead(dstr name)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxImage_GetImageCount(dstr name, int type)
+int wxImage_GetImageCount(wxc_string name, int type)
 {
 	return wxImage::GetImageCount(wxstr(name), type);
 }
@@ -340,7 +340,7 @@ int wxImage_GetImageCount(dstr name, int type)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxImage_Ok(wxImage* self)
+wxc_bool wxImage_Ok(wxImage* self)
 {
 	return self->Ok()?1:0;
 }
@@ -372,7 +372,7 @@ unsigned char wxImage_GetMaskBlue(wxImage* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxImage_HasPalette(wxImage* self)
+wxc_bool wxImage_HasPalette(wxImage* self)
 {
 	return self->HasPalette()?1:0;
 }
@@ -396,7 +396,7 @@ void wxImage_SetPalette(wxImage* self, wxPalette* palette)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxImage_SetOption(wxImage* self, dstr name, dstr value)
+void wxImage_SetOption(wxImage* self, wxc_string name, wxc_string value)
 {
 	self->SetOption(wxstr(name), wxstr(value));
 }
@@ -404,7 +404,7 @@ void wxImage_SetOption(wxImage* self, dstr name, dstr value)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxImage_SetOption2(wxImage* self, dstr name, int value)
+void wxImage_SetOption2(wxImage* self, wxc_string name, int value)
 {
 	self->SetOption(wxstr(name), value);
 }
@@ -412,7 +412,7 @@ void wxImage_SetOption2(wxImage* self, dstr name, int value)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxImage_GetOption(wxImage* self, dstr name)
+dstrret wxImage_GetOption(wxImage* self, wxc_string name)
 {
 	return dstr_ret(self->GetOption(wxstr(name)));
 }
@@ -420,7 +420,7 @@ dstrret wxImage_GetOption(wxImage* self, dstr name)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxImage_GetOptionInt(wxImage* self, dstr name)
+int wxImage_GetOptionInt(wxImage* self, wxc_string name)
 {
 	return self->GetOptionInt(wxstr(name));
 }
@@ -428,7 +428,7 @@ int wxImage_GetOptionInt(wxImage* self, dstr name)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxImage_HasOption(wxImage* self, dstr name)
+wxc_bool wxImage_HasOption(wxImage* self, wxc_string name)
 {
 	return self->HasOption(wxstr(name))?1:0;
 }
@@ -476,7 +476,7 @@ void wxImage_InsertHandler(wxImageHandler* handler)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxImage_RemoveHandler(dstr name)
+wxc_bool wxImage_RemoveHandler(wxc_string name)
 {
 	return wxImage::RemoveHandler(wxstr(name))?1:0;
 }
@@ -484,7 +484,7 @@ dbit wxImage_RemoveHandler(dstr name)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxImageHandler* wxImage_FindHandler(dstr name)
+wxImageHandler* wxImage_FindHandler(wxc_string name)
 {
 	return wxImage::FindHandler(wxstr(name));
 }
@@ -492,7 +492,7 @@ wxImageHandler* wxImage_FindHandler(dstr name)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxImageHandler* wxImage_FindHandler2(dstr name, long imageType)
+wxImageHandler* wxImage_FindHandler2(wxc_string name, long imageType)
 {
 	return wxImage::FindHandler(wxstr(name), imageType);
 }
@@ -508,7 +508,7 @@ wxImageHandler* wxImage_FindHandler3(long imageType)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxImageHandler* wxImage_FindHandlerMime(dstr mimetype)
+wxImageHandler* wxImage_FindHandlerMime(wxc_string mimetype)
 {
 	return wxImage::FindHandlerMime(wxstr(mimetype));
 }
@@ -542,7 +542,7 @@ void wxImage_InitStandardHandlers()
 
 
 extern "C" WXEXPORT
-void wxImageHandler_SetName(wxImageHandler* self, dstr name)
+void wxImageHandler_SetName(wxImageHandler* self, wxc_string name)
 {
 	self->SetName(wxstr(name));
 }
@@ -550,7 +550,7 @@ void wxImageHandler_SetName(wxImageHandler* self, dstr name)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxImageHandler_SetExtension(wxImageHandler* self, dstr ext)
+void wxImageHandler_SetExtension(wxImageHandler* self, wxc_string ext)
 {
 	self->SetExtension(wxstr(ext));
 }
@@ -566,7 +566,7 @@ void wxImageHandler_SetType(wxImageHandler* self, long type)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxImageHandler_SetMimeType(wxImageHandler* self, dstr type)
+void wxImageHandler_SetMimeType(wxImageHandler* self, wxc_string type)
 {
 	self->SetMimeType(wxstr(type));
 }
@@ -678,7 +678,7 @@ unsigned long wxImageHistogram_MakeKey(unsigned char r, unsigned char g, unsigne
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxImageHistogram_FindFirstUnusedColour(wxImageHistogram* self, unsigned char* r, unsigned char* g, unsigned char* b, unsigned char startR, unsigned char startG, unsigned char startB)
+wxc_bool wxImageHistogram_FindFirstUnusedColour(wxImageHistogram* self, unsigned char* r, unsigned char* g, unsigned char* b, unsigned char startR, unsigned char startG, unsigned char startB)
 {
 	return self->FindFirstUnusedColour(r, g, b, startR, startG, startB)?1:0;
 }

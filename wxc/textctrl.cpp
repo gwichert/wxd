@@ -100,7 +100,7 @@ void wxTextAttr_SetFont(wxTextAttr* self, const wxFont* font)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextAttr_HasTextColour(wxTextAttr* self)
+wxc_bool wxTextAttr_HasTextColour(wxTextAttr* self)
 {
 	return self->HasTextColour()?1:0;
 }
@@ -108,7 +108,7 @@ dbit wxTextAttr_HasTextColour(wxTextAttr* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextAttr_HasBackgroundColour(wxTextAttr* self)
+wxc_bool wxTextAttr_HasBackgroundColour(wxTextAttr* self)
 {
 	return self->HasBackgroundColour()?1:0;
 }
@@ -116,7 +116,7 @@ dbit wxTextAttr_HasBackgroundColour(wxTextAttr* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextAttr_HasFont(wxTextAttr* self)
+wxc_bool wxTextAttr_HasFont(wxTextAttr* self)
 {
 	return self->HasFont()?1:0;
 }
@@ -124,7 +124,7 @@ dbit wxTextAttr_HasFont(wxTextAttr* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextAttr_HasAlignment(wxTextAttr* self)
+wxc_bool wxTextAttr_HasAlignment(wxTextAttr* self)
 {
 	return self->HasAlignment()?1:0;
 }
@@ -132,7 +132,7 @@ dbit wxTextAttr_HasAlignment(wxTextAttr* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextAttr_HasTabs(wxTextAttr* self)
+wxc_bool wxTextAttr_HasTabs(wxTextAttr* self)
 {
 	return self->HasTabs()?1:0;
 }
@@ -140,7 +140,7 @@ dbit wxTextAttr_HasTabs(wxTextAttr* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextAttr_HasLeftIndent(wxTextAttr* self)
+wxc_bool wxTextAttr_HasLeftIndent(wxTextAttr* self)
 {
 	return self->HasLeftIndent()?1:0;
 }
@@ -148,7 +148,7 @@ dbit wxTextAttr_HasLeftIndent(wxTextAttr* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextAttr_HasRightIndent(wxTextAttr* self)
+wxc_bool wxTextAttr_HasRightIndent(wxTextAttr* self)
 {
 	return self->HasRightIndent()?1:0;
 }
@@ -156,7 +156,7 @@ dbit wxTextAttr_HasRightIndent(wxTextAttr* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextAttr_HasFlag(wxTextAttr* self, long flag)
+wxc_bool wxTextAttr_HasFlag(wxTextAttr* self, long flag)
 {
 	return self->HasFlag(flag)?1:0;
 }
@@ -164,7 +164,7 @@ dbit wxTextAttr_HasFlag(wxTextAttr* self, long flag)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextAttr_IsDefault(wxTextAttr* self)
+wxc_bool wxTextAttr_IsDefault(wxTextAttr* self)
 {
 	return self->IsDefault()?1:0;
 }
@@ -295,7 +295,7 @@ dstrret wxTextCtrl_GetValue(wxTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxTextCtrl_SetValue(wxTextCtrl* self, dstr value)
+void wxTextCtrl_SetValue(wxTextCtrl* self, wxc_string value)
 {
 	self->SetValue(wxstr(value));
 }
@@ -335,7 +335,7 @@ int wxTextCtrl_GetNumberOfLines(wxTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextCtrl_IsModified(wxTextCtrl* self)
+wxc_bool wxTextCtrl_IsModified(wxTextCtrl* self)
 {
 	return self->IsModified()?1:0;
 }
@@ -343,7 +343,7 @@ dbit wxTextCtrl_IsModified(wxTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextCtrl_IsEditable(wxTextCtrl* self)
+wxc_bool wxTextCtrl_IsEditable(wxTextCtrl* self)
 {
 	return self->IsEditable()?1:0;
 }
@@ -351,7 +351,7 @@ dbit wxTextCtrl_IsEditable(wxTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextCtrl_IsSingleLine(wxTextCtrl* self)
+wxc_bool wxTextCtrl_IsSingleLine(wxTextCtrl* self)
 {
 	return self->IsSingleLine()?1:0;
 }
@@ -359,7 +359,7 @@ dbit wxTextCtrl_IsSingleLine(wxTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextCtrl_IsMultiLine(wxTextCtrl* self)
+wxc_bool wxTextCtrl_IsMultiLine(wxTextCtrl* self)
 {
 	return self->IsMultiLine()?1:0;
 }
@@ -391,7 +391,7 @@ void wxTextCtrl_Clear(wxTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxTextCtrl_Replace(wxTextCtrl* self, long from, long to, dstr value)
+void wxTextCtrl_Replace(wxTextCtrl* self, long from, long to, wxc_string value)
 {
 	self->Replace(from, to, wxstr(value));
 }
@@ -407,7 +407,7 @@ void wxTextCtrl_Remove(wxTextCtrl* self, long from, long to)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextCtrl_LoadFile(wxTextCtrl* self, dstr file)
+wxc_bool wxTextCtrl_LoadFile(wxTextCtrl* self, wxc_string file)
 {
 	return self->LoadFile(wxstr(file))?1:0;
 }
@@ -415,7 +415,7 @@ dbit wxTextCtrl_LoadFile(wxTextCtrl* self, dstr file)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextCtrl_SaveFile(wxTextCtrl* self, dstr file)
+wxc_bool wxTextCtrl_SaveFile(wxTextCtrl* self, wxc_string file)
 {
 	return self->SaveFile(wxstr(file))?1:0;
 }
@@ -439,7 +439,7 @@ void wxTextCtrl_SetMaxLength(wxTextCtrl* self, unsigned long len)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxTextCtrl_WriteText(wxTextCtrl* self, dstr text)
+void wxTextCtrl_WriteText(wxTextCtrl* self, wxc_string text)
 {
 	self->WriteText(wxstr(text));
 }
@@ -447,7 +447,7 @@ void wxTextCtrl_WriteText(wxTextCtrl* self, dstr text)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxTextCtrl_AppendText(wxTextCtrl* self, dstr text)
+void wxTextCtrl_AppendText(wxTextCtrl* self, wxc_string text)
 {
 	self->AppendText(wxstr(text));
 }
@@ -455,7 +455,7 @@ void wxTextCtrl_AppendText(wxTextCtrl* self, dstr text)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextCtrl_EmulateKeyPress(wxTextCtrl* self, const wxKeyEvent* event)
+wxc_bool wxTextCtrl_EmulateKeyPress(wxTextCtrl* self, const wxKeyEvent* event)
 {
 	return self->EmulateKeyPress(*event)?1:0;
 }
@@ -463,7 +463,7 @@ dbit wxTextCtrl_EmulateKeyPress(wxTextCtrl* self, const wxKeyEvent* event)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextCtrl_SetStyle(wxTextCtrl* self, long start, long end, const wxTextAttr* style)
+wxc_bool wxTextCtrl_SetStyle(wxTextCtrl* self, long start, long end, const wxTextAttr* style)
 {
 	return self->SetStyle(start, end, *style)?1:0;
 }
@@ -471,7 +471,7 @@ dbit wxTextCtrl_SetStyle(wxTextCtrl* self, long start, long end, const wxTextAtt
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextCtrl_GetStyle(wxTextCtrl* self, long position, wxTextAttr* style)
+wxc_bool wxTextCtrl_GetStyle(wxTextCtrl* self, long position, wxTextAttr* style)
 {
 	return self->GetStyle(position, *style)?1:0;
 }
@@ -479,7 +479,7 @@ dbit wxTextCtrl_GetStyle(wxTextCtrl* self, long position, wxTextAttr* style)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextCtrl_SetDefaultStyle(wxTextCtrl* self, const wxTextAttr* style)
+wxc_bool wxTextCtrl_SetDefaultStyle(wxTextCtrl* self, const wxTextAttr* style)
 {
 	return self->SetDefaultStyle(*style)?1:0;
 }
@@ -503,7 +503,7 @@ long wxTextCtrl_XYToPosition(wxTextCtrl* self, long x, long y)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextCtrl_PositionToXY(wxTextCtrl* self, long pos, long *x, long *y)
+wxc_bool wxTextCtrl_PositionToXY(wxTextCtrl* self, long pos, long *x, long *y)
 {
 	return self->PositionToXY(pos, x, y)?1:0;
 }
@@ -543,7 +543,7 @@ void wxTextCtrl_Paste(wxTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextCtrl_CanCopy(wxTextCtrl* self)
+wxc_bool wxTextCtrl_CanCopy(wxTextCtrl* self)
 {
 	return self->CanCopy()?1:0;
 }
@@ -551,7 +551,7 @@ dbit wxTextCtrl_CanCopy(wxTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextCtrl_CanCut(wxTextCtrl* self)
+wxc_bool wxTextCtrl_CanCut(wxTextCtrl* self)
 {
 	return self->CanCut()?1:0;
 }
@@ -559,7 +559,7 @@ dbit wxTextCtrl_CanCut(wxTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextCtrl_CanPaste(wxTextCtrl* self)
+wxc_bool wxTextCtrl_CanPaste(wxTextCtrl* self)
 {
 	return self->CanPaste()?1:0;
 }
@@ -583,7 +583,7 @@ void wxTextCtrl_Redo(wxTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextCtrl_CanUndo(wxTextCtrl* self)
+wxc_bool wxTextCtrl_CanUndo(wxTextCtrl* self)
 {
 	return self->CanUndo()?1:0;
 }
@@ -591,7 +591,7 @@ dbit wxTextCtrl_CanUndo(wxTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextCtrl_CanRedo(wxTextCtrl* self)
+wxc_bool wxTextCtrl_CanRedo(wxTextCtrl* self)
 {
 	return self->CanRedo()?1:0;
 }
@@ -647,7 +647,7 @@ void wxTextCtrl_SelectAll(wxTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxTextCtrl_SetEditable(wxTextCtrl* self, dbit editable)
+void wxTextCtrl_SetEditable(wxTextCtrl* self, wxc_bool editable)
 {
 	self->SetEditable(editable);
 }
@@ -687,7 +687,7 @@ wxTextCtrl* wxTextCtrl_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextCtrl_Create(wxTextCtrl* self, wxWindow *parent, wxWindowID id, dstr value, const wxPoint *pos, const wxSize *size, long style, const wxValidator* validator, dstr name)
+wxc_bool wxTextCtrl_Create(wxTextCtrl* self, wxWindow *parent, wxWindowID id, wxc_string value, const wxPoint *pos, const wxSize *size, long style, const wxValidator* validator, wxc_string name)
 {
 	if (pos == NULL)
 		pos = &wxDefaultPosition;
@@ -704,7 +704,7 @@ dbit wxTextCtrl_Create(wxTextCtrl* self, wxWindow *parent, wxWindowID id, dstr v
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextCtrl_Enable(wxTextCtrl* self, dbit enable)
+wxc_bool wxTextCtrl_Enable(wxTextCtrl* self, wxc_bool enable)
 {
 	return self->Enable(enable)?1:0;
 }
@@ -720,7 +720,7 @@ void wxTextCtrl_OnDropFiles(wxTextCtrl* self, wxDropFilesEvent *event)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextCtrl_SetFont(wxTextCtrl* self, const wxFont* font)
+wxc_bool wxTextCtrl_SetFont(wxTextCtrl* self, const wxFont* font)
 {
 	return self->SetFont(*font)?1:0;
 }
@@ -728,7 +728,7 @@ dbit wxTextCtrl_SetFont(wxTextCtrl* self, const wxFont* font)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextCtrl_SetForegroundColour(wxTextCtrl* self, const wxColour* colour)
+wxc_bool wxTextCtrl_SetForegroundColour(wxTextCtrl* self, const wxColour* colour)
 {
 	return self->SetForegroundColour(*colour)?1:0;
 }
@@ -736,7 +736,7 @@ dbit wxTextCtrl_SetForegroundColour(wxTextCtrl* self, const wxColour* colour)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextCtrl_SetBackgroundColour(wxTextCtrl* self, const wxColour* colour)
+wxc_bool wxTextCtrl_SetBackgroundColour(wxTextCtrl* self, const wxColour* colour)
 {
 	return self->SetBackgroundColour(*colour)?1:0;
 }
@@ -760,7 +760,7 @@ void wxTextCtrl_Thaw(wxTextCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextCtrl_ScrollLines(wxTextCtrl* self, int lines)
+wxc_bool wxTextCtrl_ScrollLines(wxTextCtrl* self, int lines)
 {
 	return self->ScrollLines(lines)?1:0;
 }
@@ -768,7 +768,7 @@ dbit wxTextCtrl_ScrollLines(wxTextCtrl* self, int lines)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxTextCtrl_ScrollPages(wxTextCtrl* self, int pages)
+wxc_bool wxTextCtrl_ScrollPages(wxTextCtrl* self, int pages)
 {
 	return self->ScrollPages(pages)?1:0;
 }

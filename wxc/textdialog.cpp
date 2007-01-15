@@ -35,8 +35,8 @@ class _TextEntryDialog : public wxTextEntryDialog
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxTextEntryDialog* wxTextEntryDialog_ctor(wxWindow* parent, dstr message,
-        dstr caption, dstr value, int style, wxPoint* pos)
+wxTextEntryDialog* wxTextEntryDialog_ctor(wxWindow* parent, wxc_string message,
+        wxc_string caption, wxc_string value, int style, wxPoint* pos)
 {
     return new _TextEntryDialog(parent, wxstr(message),
             wxstr(caption),
@@ -62,7 +62,7 @@ int wxTextEntryDialog_ShowModal(wxTextEntryDialog* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxTextEntryDialog_SetValue(wxTextEntryDialog* self, dstr val)
+void wxTextEntryDialog_SetValue(wxTextEntryDialog* self, wxc_string val)
 {
     self->SetValue(wxstr(val));
 }
@@ -78,8 +78,8 @@ dstrret wxTextEntryDialog_GetValue(wxTextEntryDialog* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxGetPasswordFromUser_func(dstr message, dstr caption,
-                                     dstr defaultValue, wxWindow* parent)
+dstrret wxGetPasswordFromUser_func(wxc_string message, wxc_string caption,
+                                     wxc_string defaultValue, wxWindow* parent)
 {
     return dstr_ret(wxGetPasswordFromUser(wxstr(message),
                         wxstr(caption),
@@ -90,9 +90,9 @@ dstrret wxGetPasswordFromUser_func(dstr message, dstr caption,
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxGetTextFromUser_func(dstr message, dstr caption,
-                                 dstr defaultValue, wxWindow* parent,
-                                 int x, int y, dbit centre)
+dstrret wxGetTextFromUser_func(wxc_string message, wxc_string caption,
+                                 wxc_string defaultValue, wxWindow* parent,
+                                 int x, int y, wxc_bool centre)
 {
     return dstr_ret(wxGetTextFromUser(wxstr(message),
                         wxstr(caption),

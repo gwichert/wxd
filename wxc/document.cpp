@@ -28,7 +28,7 @@ wxDocument* wxDocument_ctor(wxDocument* parent)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxDocument_SetFilename(wxDocument* self, dstr filename, dbit notifyViews)
+void wxDocument_SetFilename(wxDocument* self, wxc_string filename, wxc_bool notifyViews)
 {
     self->SetFilename(wxstr(filename), notifyViews);
 }
@@ -44,7 +44,7 @@ dstrret wxDocument_GetFilename(wxDocument* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxDocument_SetTitle(wxDocument* self, dstr title)
+void wxDocument_SetTitle(wxDocument* self, wxc_string title)
 {
     self->SetTitle(wxstr(title));
 }
@@ -60,7 +60,7 @@ dstrret wxDocument_GetTitle(wxDocument* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxDocument_SetDocumentName(wxDocument* self, dstr name)
+void wxDocument_SetDocumentName(wxDocument* self, wxc_string name)
 {
     self->SetDocumentName(wxstr(name));
 }
@@ -76,7 +76,7 @@ dstrret wxDocument_GetDocumentName(wxDocument* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxDocument_GetDocumentSaved(wxDocument* self)
+wxc_bool wxDocument_GetDocumentSaved(wxDocument* self)
 {
     return self->GetDocumentSaved();
 }
@@ -84,7 +84,7 @@ dbit wxDocument_GetDocumentSaved(wxDocument* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxDocument_SetDocumentSaved(wxDocument* self, dbit saved)
+void wxDocument_SetDocumentSaved(wxDocument* self, wxc_bool saved)
 {
     self->SetDocumentSaved(saved);
 }
@@ -92,7 +92,7 @@ void wxDocument_SetDocumentSaved(wxDocument* self, dbit saved)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxDocument_Close(wxDocument* self)
+wxc_bool wxDocument_Close(wxDocument* self)
 {
     return self->Close();
 }
@@ -100,7 +100,7 @@ dbit wxDocument_Close(wxDocument* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxDocument_Save(wxDocument* self)
+wxc_bool wxDocument_Save(wxDocument* self)
 {
     return self->Save();
 }
@@ -108,7 +108,7 @@ dbit wxDocument_Save(wxDocument* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxDocument_SaveAs(wxDocument* self)
+wxc_bool wxDocument_SaveAs(wxDocument* self)
 {
     return self->SaveAs();
 }
@@ -116,7 +116,7 @@ dbit wxDocument_SaveAs(wxDocument* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxDocument_Revert(wxDocument* self)
+wxc_bool wxDocument_Revert(wxDocument* self)
 {
     return self->Revert();
 }
@@ -154,7 +154,7 @@ void wxDocument_SetCommandProcessor(wxDocument* self, wxCommandProcessor* proc)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxDocument_DeleteContents(wxDocument* self)
+wxc_bool wxDocument_DeleteContents(wxDocument* self)
 {
     return self->DeleteContents();
 }
@@ -162,7 +162,7 @@ dbit wxDocument_DeleteContents(wxDocument* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxDocument_Draw(wxDocument* self, wxDC* dc)
+wxc_bool wxDocument_Draw(wxDocument* self, wxDC* dc)
 {
     return self->Draw(*dc);
 }
@@ -170,7 +170,7 @@ dbit wxDocument_Draw(wxDocument* self, wxDC* dc)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxDocument_IsModified(wxDocument* self)
+wxc_bool wxDocument_IsModified(wxDocument* self)
 {
     return self->IsModified();
 }
@@ -178,7 +178,7 @@ dbit wxDocument_IsModified(wxDocument* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxDocument_Modify(wxDocument* self, dbit mod)
+void wxDocument_Modify(wxDocument* self, wxc_bool mod)
 {
     self->Modify(mod);
 }
@@ -186,7 +186,7 @@ void wxDocument_Modify(wxDocument* self, dbit mod)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxDocument_AddView(wxDocument* self, wxView* view)
+wxc_bool wxDocument_AddView(wxDocument* self, wxView* view)
 {
     return self->AddView(view);
 }
@@ -194,7 +194,7 @@ dbit wxDocument_AddView(wxDocument* self, wxView* view)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxDocument_RemoveView(wxDocument* self, wxView* view)
+wxc_bool wxDocument_RemoveView(wxDocument* self, wxView* view)
 {
     return self->RemoveView(view);
 }
@@ -234,7 +234,7 @@ void wxDocument_NotifyClosing(wxDocument* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxDocument_DeleteAllViews(wxDocument* self)
+wxc_bool wxDocument_DeleteAllViews(wxDocument* self)
 {
     return self->DeleteAllViews();
 }
@@ -266,7 +266,7 @@ void wxDocument_SetDocumentTemplate(wxDocument* self, wxDocTemplate* temp)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dbit wxDocument_GetPrintableName(wxDocument* self, wxString* name)
+wxc_bool wxDocument_GetPrintableName(wxDocument* self, wxString* name)
 {
     return self->GetPrintableName(*name);
 }
