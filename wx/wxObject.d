@@ -21,7 +21,7 @@ public import wx.common;
 		alias void function(IntPtr ptr) Virtual_Dispose;
 		}
 	
-		static extern (C) string wxObject_GetTypeName(IntPtr obj);
+		static extern (C) IntPtr wxObject_GetTypeName(IntPtr obj);
 		static extern (C) void   wxObject_dtor(IntPtr self);
 		//! \endcond
 
@@ -29,19 +29,19 @@ public import wx.common;
 		// this is for Locale gettext support...
 		
 		//! \cond EXTERN
-		static extern (C) string wxGetTranslation_func(string str);
+		static extern (C) IntPtr wxGetTranslation_func(string str);
 		//! \endcond
 		
 		public static string GetTranslation(string str)
 		{
-			return wxGetTranslation_func(str).dup;
+			return cast(string) new wxString(wxGetTranslation_func(str), true);
 		}
 
 		// in wxWidgets it is a c/c++ macro
 				
 		public static string _(string str)
 		{
-			return wxGetTranslation_func(str).dup;
+			return cast(string) new wxString(wxGetTranslation_func(str), true);
 		}
 
 		//---------------------------------------------------------------------
@@ -105,12 +105,12 @@ public import wx.common;
 
 		private static string GetTypeName(IntPtr wxobj)
 		{
-			return wxObject_GetTypeName(wxobj).dup;
+			return cast(string) new wxString(wxObject_GetTypeName(wxobj), true);
 		}
 
 		public string GetTypeName()
 		{
-			return wxObject_GetTypeName(wxobj).dup;
+			return cast(string) new wxString(wxObject_GetTypeName(wxobj), true);
 		}
 
 		//---------------------------------------------------------------------

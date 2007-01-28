@@ -288,9 +288,9 @@ public import wx.Font;
 		static extern (C) void   wxLanguageInfo_SetLanguage(IntPtr self, int value);
 		static extern (C) int    wxLanguageInfo_GetLanguage(IntPtr self);
 		static extern (C) void   wxLanguageInfo_SetCanonicalName(IntPtr self, string name);
-		static extern (C) string wxLanguageInfo_GetCanonicalName(IntPtr self);
+		static extern (C) IntPtr wxLanguageInfo_GetCanonicalName(IntPtr self);
 		static extern (C) void   wxLanguageInfo_SetDescription(IntPtr self, string name);
-		static extern (C) string wxLanguageInfo_GetDescription(IntPtr self);
+		static extern (C) IntPtr wxLanguageInfo_GetDescription(IntPtr self);
 		//! \endcond
 		
 		//-----------------------------------------------------------------------------
@@ -325,12 +325,12 @@ public import wx.Font;
 		
 		//---------------------------------------------------------------------
 		
-		public string CanonicalName() { return wxLanguageInfo_GetCanonicalName(wxobj).dup; }
+		public string CanonicalName() { return cast(string) new wxString(wxLanguageInfo_GetCanonicalName(wxobj), true); }
 		public void CanonicalName(string value) { wxLanguageInfo_SetCanonicalName(wxobj, value); }
 		
 		//---------------------------------------------------------------------
 		
-		public string Description() { return wxLanguageInfo_GetDescription(wxobj).dup; }
+		public string Description() { return cast(string) new wxString(wxLanguageInfo_GetDescription(wxobj), true); }
 		public void Description(string value) { wxLanguageInfo_SetDescription(wxobj, value); }
 	}
 	
@@ -346,17 +346,17 @@ public import wx.Font;
 		static extern (C) void   wxLocale_AddCatalogLookupPathPrefix(IntPtr self, string prefix);
 		static extern (C) void   wxLocale_AddLanguage(IntPtr info);
 		static extern (C) IntPtr wxLocale_FindLanguageInfo(string locale);
-		static extern (C) string wxLocale_GetCanonicalName(IntPtr self);
+		static extern (C) IntPtr wxLocale_GetCanonicalName(IntPtr self);
 		static extern (C) int    wxLocale_GetLanguage(IntPtr self);
 		static extern (C) IntPtr wxLocale_GetLanguageInfo(int lang);
-		static extern (C) string wxLocale_GetLanguageName(int lang);
-		static extern (C) string wxLocale_GetLocale(IntPtr self);
-		static extern (C) string wxLocale_GetName(IntPtr self);
-		static extern (C) string wxLocale_GetString(IntPtr self, string szOrigString, string szDomain);
-		static extern (C) string wxLocale_GetHeaderValue(IntPtr self, string szHeader, string szDomain);
-		static extern (C) string wxLocale_GetSysName(IntPtr self);
+		static extern (C) IntPtr wxLocale_GetLanguageName(int lang);
+		static extern (C) IntPtr wxLocale_GetLocale(IntPtr self);
+		static extern (C) IntPtr wxLocale_GetName(IntPtr self);
+		static extern (C) IntPtr wxLocale_GetString(IntPtr self, string szOrigString, string szDomain);
+		static extern (C) IntPtr wxLocale_GetHeaderValue(IntPtr self, string szHeader, string szDomain);
+		static extern (C) IntPtr wxLocale_GetSysName(IntPtr self);
 		static extern (C) int    wxLocale_GetSystemEncoding();
-		static extern (C) string wxLocale_GetSystemEncodingName();
+		static extern (C) IntPtr wxLocale_GetSystemEncodingName();
 		static extern (C) int    wxLocale_GetSystemLanguage();
 		static extern (C) bool   wxLocale_IsLoaded(IntPtr self, string domain);
 		static extern (C) bool   wxLocale_IsOk(IntPtr self);
@@ -443,7 +443,7 @@ public import wx.Font;
 		
 		//-----------------------------------------------------------------------------
 		
-		public string CanonicalName() { return wxLocale_GetCanonicalName(wxobj).dup; }
+		public string CanonicalName() { return cast(string) new wxString(wxLocale_GetCanonicalName(wxobj), true); }
 		
 		//-----------------------------------------------------------------------------
 		
@@ -460,19 +460,19 @@ public import wx.Font;
 		
 		public static string GetLanguageName(Language lang)
 		{
-			return wxLocale_GetLanguageName(cast(int)lang).dup;
+			return cast(string) new wxString(wxLocale_GetLanguageName(cast(int)lang), true);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public string GetLocale()
 		{
-			return wxLocale_GetLocale(wxobj).dup;
+			return cast(string) new wxString(wxLocale_GetLocale(wxobj), true);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public string Name() { return wxLocale_GetName(wxobj).dup; }
+		public string Name() { return cast(string) new wxString(wxLocale_GetName(wxobj), true); }
 		
 		//-----------------------------------------------------------------------------
 		
@@ -483,7 +483,7 @@ public import wx.Font;
 		
 		public string GetString(string szOrigString, string szDomain)
 		{
-			return wxLocale_GetString(wxobj, szOrigString, szDomain).dup;
+			return cast(string) new wxString(wxLocale_GetString(wxobj, szOrigString, szDomain), true);
 		}
 		
 		//-----------------------------------------------------------------------------
@@ -495,12 +495,12 @@ public import wx.Font;
 		
 		public string GetHeaderValue(string szHeader, string szDomain)
 		{
-			return wxLocale_GetHeaderValue(wxobj, szHeader, szDomain).dup;
+			return cast(string) new wxString(wxLocale_GetHeaderValue(wxobj, szHeader, szDomain), true);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
-		public string SysName() { return wxLocale_GetSysName(wxobj).dup; }
+		public string SysName() { return cast(string) new wxString(wxLocale_GetSysName(wxobj), true); }
 		
 		//-----------------------------------------------------------------------------
 		
@@ -508,7 +508,7 @@ public import wx.Font;
 		
 		//-----------------------------------------------------------------------------
 		
-		static string SystemEncodingName() { return wxLocale_GetSystemEncodingName().dup; }
+		static string SystemEncodingName() { return cast(string) new wxString(wxLocale_GetSystemEncodingName(), true); }
 		
 		//-----------------------------------------------------------------------------
 		

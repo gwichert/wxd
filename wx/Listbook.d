@@ -86,7 +86,7 @@ public import wx.ImageList;
 		static extern (C) bool wxListbook_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
 		static extern (C) int wxListbook_GetSelection(IntPtr self);
 		static extern (C) bool wxListbook_SetPageText(IntPtr self, int n, string strText);
-		static extern (C) string wxListbook_GetPageText(IntPtr self, int n);
+		static extern (C) IntPtr wxListbook_GetPageText(IntPtr self, int n);
 		static extern (C) int wxListbook_GetPageImage(IntPtr self, int n);
 		static extern (C) bool wxListbook_SetPageImage(IntPtr self, int n, int imageId);
 		static extern (C) void wxListbook_CalcSizeFromPage(IntPtr self, inout Size sizePage, out Size outSize);
@@ -154,7 +154,7 @@ public import wx.ImageList;
 
 		public string GetPageText(int n)
 		{
-			return wxListbook_GetPageText(wxobj, n).dup;
+			return cast(string) new wxString(wxListbook_GetPageText(wxobj, n), true);
 		}
 		
 		//-----------------------------------------------------------------------------

@@ -27,9 +27,9 @@ public import wx.EvtHandler;
 		static extern (C) int    wxMenuItem_GetId(IntPtr self);
 		static extern (C) bool   wxMenuItem_IsSeparator(IntPtr self);
 		static extern (C) void   wxMenuItem_SetText(IntPtr self, string str);
-		static extern (C) string wxMenuItem_GetLabel(IntPtr self);
-		static extern (C) string wxMenuItem_GetText(IntPtr self);
-		static extern (C) string wxMenuItem_GetLabelFromText(IntPtr self, string text);
+		static extern (C) IntPtr wxMenuItem_GetLabel(IntPtr self);
+		static extern (C) IntPtr wxMenuItem_GetText(IntPtr self);
+		static extern (C) IntPtr wxMenuItem_GetLabelFromText(IntPtr self, string text);
 		static extern (C) int    wxMenuItem_GetKind(IntPtr self);
 		static extern (C) void   wxMenuItem_SetCheckable(IntPtr self, bool checkable);
 		static extern (C) bool   wxMenuItem_IsCheckable(IntPtr self);
@@ -42,11 +42,11 @@ public import wx.EvtHandler;
 		static extern (C) bool   wxMenuItem_IsChecked(IntPtr self);
 		static extern (C) void   wxMenuItem_Toggle(IntPtr self);
 		static extern (C) void   wxMenuItem_SetHelp(IntPtr self, string str);
-		static extern (C) string wxMenuItem_GetHelp(IntPtr self);
+		static extern (C) IntPtr wxMenuItem_GetHelp(IntPtr self);
 		static extern (C) IntPtr wxMenuItem_GetAccel(IntPtr self);
 		static extern (C) void   wxMenuItem_SetAccel(IntPtr self, IntPtr accel);
 		static extern (C) void   wxMenuItem_SetName(IntPtr self, string str);
-		static extern (C) string wxMenuItem_GetName(IntPtr self);
+		static extern (C) IntPtr wxMenuItem_GetName(IntPtr self);
 		static extern (C) IntPtr wxMenuItem_NewCheck(IntPtr parentMenu, int id, string text, string help, bool isCheckable, IntPtr subMenu);
 		static extern (C) IntPtr wxMenuItem_New(IntPtr parentMenu, int id, string text, string help, int kind, IntPtr subMenu);
 		static extern (C) void   wxMenuItem_SetBitmap(IntPtr self, IntPtr bitmap);
@@ -95,17 +95,17 @@ public import wx.EvtHandler;
 		//-----------------------------------------------------------------------------
 		
 		public void Text(string value) { wxMenuItem_SetText(wxobj, value); } 
-		public string Text() { return wxMenuItem_GetText(wxobj).dup; }
+		public string Text() { return cast(string) new wxString(wxMenuItem_GetText(wxobj), true); }
 
 		//-----------------------------------------------------------------------------
 
-		public string Label() { return wxMenuItem_GetLabel(wxobj).dup; }
+		public string Label() { return cast(string) new wxString(wxMenuItem_GetLabel(wxobj), true); }
 
 		//-----------------------------------------------------------------------------
 
 		public string GetLabelFromText(string text)
 		{
-			return wxMenuItem_GetLabelFromText(wxobj, text).dup;
+			return cast(string) new wxString(wxMenuItem_GetLabelFromText(wxobj, text), true);
 		}
 
 		//-----------------------------------------------------------------------------
@@ -144,7 +144,7 @@ public import wx.EvtHandler;
 		//-----------------------------------------------------------------------------
 
 		public void Help(string value) { wxMenuItem_SetHelp(wxobj, value); }
-		public string Help() { return wxMenuItem_GetHelp(wxobj).dup; }
+		public string Help() { return cast(string) new wxString(wxMenuItem_GetHelp(wxobj), true); }
 
 		//-----------------------------------------------------------------------------
 
@@ -154,7 +154,7 @@ public import wx.EvtHandler;
 		//-----------------------------------------------------------------------------
 		
 		public void Name(string value) { wxMenuItem_SetName(wxobj, value); }
-		public string Name() { return wxMenuItem_GetName(wxobj).dup; }
+		public string Name() { return cast(string) new wxString(wxMenuItem_GetName(wxobj), true); }
 		
 		//-----------------------------------------------------------------------------
 		

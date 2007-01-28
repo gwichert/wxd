@@ -27,19 +27,19 @@ public import wx.Control;
 		static extern (C) void   wxRadioBox_SetSelection(IntPtr self, int n);
 		static extern (C) int    wxRadioBox_GetSelection(IntPtr self);
 
-		static extern (C) string wxRadioBox_GetStringSelection(IntPtr self);
+		static extern (C) IntPtr wxRadioBox_GetStringSelection(IntPtr self);
 		static extern (C) bool   wxRadioBox_SetStringSelection(IntPtr self, string s);
 
 		static extern (C) int    wxRadioBox_GetCount(IntPtr self);
 		static extern (C) int    wxRadioBox_FindString(IntPtr self, string s);
 
-		static extern (C) string wxRadioBox_GetString(IntPtr self, int n);
+		static extern (C) IntPtr wxRadioBox_GetString(IntPtr self, int n);
 		static extern (C) void   wxRadioBox_SetString(IntPtr self, int n, string label);
 
 		static extern (C) void   wxRadioBox_Enable(IntPtr self, int n, bool enable);
 		static extern (C) void   wxRadioBox_Show(IntPtr self, int n, bool show);
 		
-		static extern (C) string wxRadioBox_GetLabel(IntPtr self);
+		static extern (C) IntPtr wxRadioBox_GetLabel(IntPtr self);
 		static extern (C) void   wxRadioBox_SetLabel(IntPtr self, string label);
 		//! \endcond
 
@@ -85,7 +85,7 @@ public import wx.Control;
 		public int Selection() { return wxRadioBox_GetSelection(wxobj); }
 
 		public void StringSelection(string value) { wxRadioBox_SetStringSelection(wxobj, value); }
-		public string StringSelection() { return wxRadioBox_GetStringSelection(wxobj).dup; }
+		public string StringSelection() { return cast(string) new wxString(wxRadioBox_GetStringSelection(wxobj), true); }
 
 		//---------------------------------------------------------------------
 
@@ -102,7 +102,7 @@ public import wx.Control;
 
 		public string GetString(int n)
 		{
-			return wxRadioBox_GetString(wxobj, n).dup;
+			return cast(string) new wxString(wxRadioBox_GetString(wxobj, n), true);
 		}
 
 		public void SetString(int n, string label)
@@ -124,7 +124,7 @@ public import wx.Control;
 
 		//---------------------------------------------------------------------
 		
-		public string Label() { return wxRadioBox_GetLabel(wxobj).dup; }
+		public string Label() { return cast(string) new wxString(wxRadioBox_GetLabel(wxobj), true); }
 		public void Label(string value) { wxRadioBox_SetLabel(wxobj, value); }
 		
 		//---------------------------------------------------------------------

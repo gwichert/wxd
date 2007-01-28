@@ -68,13 +68,13 @@ public import wx.MenuBar;
 		static extern (C) bool   wxMenuBase_IsChecked(IntPtr self, int itemid);
 		
 		static extern (C) void   wxMenuBase_SetLabel(IntPtr self, int itemid, string label);
-		static extern (C) string wxMenuBase_GetLabel(IntPtr self, int itemid);
+		static extern (C) IntPtr wxMenuBase_GetLabel(IntPtr self, int itemid);
 		
 		static extern (C) void   wxMenuBase_SetHelpString(IntPtr self, int itemid, string helpString);
-		static extern (C) string wxMenuBase_GetHelpString(IntPtr self, int itemid);		
+		static extern (C) IntPtr wxMenuBase_GetHelpString(IntPtr self, int itemid);		
 		
 		static extern (C) void   wxMenuBase_SetTitle(IntPtr self, string title);
-		static extern (C) string wxMenuBase_GetTitle(IntPtr self);		
+		static extern (C) IntPtr wxMenuBase_GetTitle(IntPtr self);		
 		
 		static extern (C) void   wxMenuBase_SetInvokingWindow(IntPtr self, IntPtr win);
 		static extern (C) IntPtr wxMenuBase_GetInvokingWindow(IntPtr self);
@@ -429,7 +429,7 @@ public import wx.MenuBar;
 		
 		public string GetLabel(int itemid)
 		{
-			return wxMenuBase_GetLabel(wxobj, itemid).dup;
+			return cast(string) new wxString(wxMenuBase_GetLabel(wxobj, itemid), true);
 		}
 		
 		//---------------------------------------------------------------------
@@ -441,12 +441,12 @@ public import wx.MenuBar;
 		
 		public string GetHelpString(int itemid)
 		{
-			return wxMenuBase_GetHelpString(wxobj, itemid).dup;
+			return cast(string) new wxString(wxMenuBase_GetHelpString(wxobj, itemid), true);
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public string Title() { return wxMenuBase_GetTitle(wxobj).dup; }
+		public string Title() { return cast(string) new wxString(wxMenuBase_GetTitle(wxobj), true); }
 		public void Title(string value) { wxMenuBase_SetTitle(wxobj, value); }
 		
 		//---------------------------------------------------------------------

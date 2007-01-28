@@ -140,10 +140,10 @@ wxc_bool wxPlatform_SOUND()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxPlatform_wxGetOsDescription()
+wxString* wxPlatform_wxGetOsDescription()
 {
 	static wxString os = wxGetOsDescription();
-	return dstr_ret(os);
+	return new wxString(os);
 }
 
 extern "C" WXEXPORT

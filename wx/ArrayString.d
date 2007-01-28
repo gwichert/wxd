@@ -7,7 +7,7 @@ public import wx.common;
 		static extern (C) void   wxArrayString_dtor(IntPtr self);
 		static extern (C) void   wxArrayString_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
 		static extern (C) void   wxArrayString_Add(IntPtr self, string toadd);
-		static extern (C) string wxArrayString_Item(IntPtr self, int num);
+		static extern (C) IntPtr wxArrayString_Item(IntPtr self, int num);
 		static extern (C) int    wxArrayString_GetCount(IntPtr self);
 		//! \endcond
 		
@@ -46,7 +46,7 @@ public import wx.common;
 	
 		public string Item(int num)
 		{
-			return wxArrayString_Item(wxobj, num).dup;
+			return cast(string) new wxString(wxArrayString_Item(wxobj, num), true);
 		}	
 	
 		public void Add(string toadd)

@@ -180,7 +180,7 @@ public import wx.ScrolledWindow;
         static extern (C) void   wxGridCellEditor_StartingClick(IntPtr self);
         static extern (C) void   wxGridCellEditor_HandleReturn(IntPtr self, IntPtr evt);
         static extern (C) void   wxGridCellEditor_Destroy(IntPtr self);
-        static extern (C) string wxGridCellEditor_GetValue(IntPtr self);
+        static extern (C) IntPtr wxGridCellEditor_GetValue(IntPtr self);
 		//! \endcond
 	
         //-----------------------------------------------------------------------------
@@ -369,7 +369,7 @@ public import wx.ScrolledWindow;
         }
         public abstract string GetValue();
 //        {
-//            return wxGridCellEditor_GetValue(wxobj).dup;
+//            return cast(string) new wxString(wxGridCellEditor_GetValue(wxobj), true);
 //        }
     }
     
@@ -388,7 +388,7 @@ public import wx.ScrolledWindow;
         static extern (C) void wxGridCellTextEditor_StartingKey(IntPtr self, IntPtr evt);
         static extern (C) void wxGridCellTextEditor_SetParameters(IntPtr self, string parameter);
         static extern (C) IntPtr wxGridCellTextEditor_Clone(IntPtr self);
-        static extern (C) string wxGridCellTextEditor_GetValue(IntPtr self);
+        static extern (C) IntPtr wxGridCellTextEditor_GetValue(IntPtr self);
 		//! \endcond
 	
     alias GridCellTextEditor wxGridCellTextEditor;
@@ -464,7 +464,7 @@ public import wx.ScrolledWindow;
         }
         public override string GetValue()
         {
-            return wxGridCellTextEditor_GetValue(wxobj).dup;
+            return cast(string) new wxString(wxGridCellTextEditor_GetValue(wxobj), true);
         }
     }
 
@@ -482,7 +482,7 @@ public import wx.ScrolledWindow;
         static extern (C) void wxGridCellNumberEditor_StartingKey(IntPtr self, IntPtr evt);
         static extern (C) void wxGridCellNumberEditor_SetParameters(IntPtr self, string parameter);
         static extern (C) IntPtr wxGridCellNumberEditor_Clone(IntPtr self);
-        static extern (C) string wxGridCellNumberEditor_GetValue(IntPtr self);
+        static extern (C) IntPtr wxGridCellNumberEditor_GetValue(IntPtr self);
 		//! \endcond
 	
     alias GridCellNumberEditor wxGridCellNumberEditor;
@@ -558,7 +558,7 @@ public import wx.ScrolledWindow;
 
         public override string GetValue()
         {
-            return wxGridCellNumberEditor_GetValue(wxobj).dup;
+            return cast(string) new wxString(wxGridCellNumberEditor_GetValue(wxobj), true);
         }
     }
 
@@ -575,7 +575,7 @@ public import wx.ScrolledWindow;
         static extern (C) void wxGridCellFloatEditor_StartingKey(IntPtr self, IntPtr evt);
         static extern (C) void wxGridCellFloatEditor_SetParameters(IntPtr self, string parameter);
         static extern (C) IntPtr wxGridCellFloatEditor_Clone(IntPtr self);
-        static extern (C) string wxGridCellFloatEditor_GetValue(IntPtr self);
+        static extern (C) IntPtr wxGridCellFloatEditor_GetValue(IntPtr self);
 		//! \endcond
 	
     alias GridCellFloatEditor wxGridCellFloatEditor;
@@ -648,7 +648,7 @@ public import wx.ScrolledWindow;
 
         public override string GetValue()
         {
-            return wxGridCellFloatEditor_GetValue(wxobj).dup;
+            return cast(string) new wxString(wxGridCellFloatEditor_GetValue(wxobj), true);
         }
     }
 
@@ -666,7 +666,7 @@ public import wx.ScrolledWindow;
         static extern (C) void wxGridCellBoolEditor_Reset(IntPtr self);
         static extern (C) void wxGridCellBoolEditor_StartingClick(IntPtr self);
         static extern (C) IntPtr wxGridCellBoolEditor_Clone(IntPtr self);
-        static extern (C) string wxGridCellBoolEditor_GetValue(IntPtr self);
+        static extern (C) IntPtr wxGridCellBoolEditor_GetValue(IntPtr self);
 		//! \endcond
 	
     alias GridCellBoolEditor wxGridCellBoolEditor;
@@ -736,7 +736,7 @@ public import wx.ScrolledWindow;
 
         public override string GetValue()
         {
-            return wxGridCellBoolEditor_GetValue(wxobj).dup;
+            return cast(string) new wxString(wxGridCellBoolEditor_GetValue(wxobj), true);
         }
     }
     
@@ -753,7 +753,7 @@ public import wx.ScrolledWindow;
         static extern (C) void wxGridCellChoiceEditor_Reset(IntPtr self);
         static extern (C) void wxGridCellChoiceEditor_SetParameters(IntPtr self, string parameter);
         static extern (C) IntPtr wxGridCellChoiceEditor_Clone(IntPtr self);
-        static extern (C) string wxGridCellChoiceEditor_GetValue(IntPtr self);
+        static extern (C) IntPtr wxGridCellChoiceEditor_GetValue(IntPtr self);
 		//! \endcond
 	
     alias GridCellChoiceEditor wxGridCellChoiceEditor;
@@ -824,7 +824,7 @@ public import wx.ScrolledWindow;
 
         public override string GetValue()
         {
-            return wxGridCellChoiceEditor_GetValue(wxobj).dup;
+            return cast(string) new wxString(wxGridCellChoiceEditor_GetValue(wxobj), true);
         }
     }
     
@@ -1090,8 +1090,8 @@ public import wx.ScrolledWindow;
             static extern (C) IntPtr wxGrid_GetLabelFont(IntPtr self);
             static extern (C) void   wxGrid_GetRowLabelAlignment(IntPtr self, out int horiz, out int vert);
             static extern (C) void   wxGrid_GetColLabelAlignment(IntPtr self, out int horiz, out int vert);
-            static extern (C) string wxGrid_GetRowLabelValue(IntPtr self, int row);
-            static extern (C) string wxGrid_GetColLabelValue(IntPtr self, int col);
+            static extern (C) IntPtr wxGrid_GetRowLabelValue(IntPtr self, int row);
+            static extern (C) IntPtr wxGrid_GetColLabelValue(IntPtr self, int col);
             static extern (C) IntPtr wxGrid_GetGridLineColour(IntPtr self);
             static extern (C) IntPtr wxGrid_GetCellHighlightColour(IntPtr self);
             static extern (C) int    wxGrid_GetCellHighlightPenWidth(IntPtr self);
@@ -1174,7 +1174,7 @@ public import wx.ScrolledWindow;
             static extern (C) void   wxGrid_SetCellEditor(IntPtr self, int row, int col, IntPtr editor);
             static extern (C) IntPtr wxGrid_GetDefaultEditor(IntPtr self);
             static extern (C) IntPtr wxGrid_GetCellEditor(IntPtr self, int row, int col);
-            static extern (C) string wxGrid_GetCellValue(IntPtr self, int row, int col);
+            static extern (C) IntPtr wxGrid_GetCellValue(IntPtr self, int row, int col);
             static extern (C) void   wxGrid_SetCellValue(IntPtr self, int row, int col, string s);
             static extern (C) bool   wxGrid_IsReadOnly(IntPtr self, int row, int col);
             static extern (C) void   wxGrid_SetReadOnly(IntPtr self, int row, int col, bool isReadOnly);
@@ -1227,7 +1227,7 @@ public import wx.ScrolledWindow;
             static extern (C) void   wxGrid_SetLabelAlignment(IntPtr self, int orientation, int alignment);
             static extern (C) int    wxGrid_GetLabelAlignment(IntPtr self, int orientation, int alignment);
             static extern (C) void   wxGrid_SetLabelValue(IntPtr self, int orientation, string val, int pos);
-            static extern (C) string wxGrid_GetLabelValue(IntPtr self, int orientation, int pos);
+            static extern (C) IntPtr wxGrid_GetLabelValue(IntPtr self, int orientation, int pos);
             static extern (C) IntPtr wxGrid_GetCellTextFontGrid(IntPtr self);
             static extern (C) IntPtr wxGrid_GetCellTextFont(IntPtr self, int row, int col);
             static extern (C) void   wxGrid_SetCellTextFontGrid(IntPtr self, IntPtr fnt);
@@ -1680,12 +1680,12 @@ public import wx.ScrolledWindow;
     
             public string GetRowLabelValue(int row)
             {
-            return wxGrid_GetRowLabelValue(wxobj, row).dup;
+            return cast(string) new wxString(wxGrid_GetRowLabelValue(wxobj, row), true);
             }
     
             public string GetColLabelValue(int col)
             {
-            return wxGrid_GetColLabelValue(wxobj, col).dup;
+            return cast(string) new wxString(wxGrid_GetColLabelValue(wxobj, col), true);
             }
     
             //-----------------------------------------------------------------------------
@@ -2031,7 +2031,7 @@ public import wx.ScrolledWindow;
     
             public string GetCellValue(int row, int col)
             {
-                return wxGrid_GetCellValue(wxobj, row, col).dup;
+                return cast(string) new wxString(wxGrid_GetCellValue(wxobj, row, col), true);
             }
     
             //-----------------------------------------------------------------------------
@@ -2313,7 +2313,7 @@ version(NOT_IMPLEMENTED){
     
             public string GetLabelValue(int orientation, int pos)
             {
-            return wxGrid_GetLabelValue(wxobj, orientation, pos).dup;
+            return cast(string) new wxString(wxGrid_GetLabelValue(wxobj, orientation, pos), true);
             }
     
             //-----------------------------------------------------------------------------
@@ -3099,22 +3099,22 @@ version(NOT_IMPLEMENTED){
         alias int  function(GridTableBase obj) Virtual_GetNumberCols;
         alias bool function(GridTableBase obj, int row, int col) Virtual_IsEmptyCell;
         alias string function(GridTableBase obj, int row, int col) Virtual_GetValue_gt;
-        alias void function(GridTableBase obj, int row, int col, string val) Virtual_SetValue;
-        alias bool function(GridTableBase obj, int row, int col, string typeName) Virtual_CanGetValueAs;
+        alias void function(GridTableBase obj, int row, int col, IntPtr val) Virtual_SetValue;
+        alias bool function(GridTableBase obj, int row, int col, IntPtr typeName) Virtual_CanGetValueAs;
         alias int  function(GridTableBase obj, int row, int col) Virtual_GetValueAsLong;
         alias double function(GridTableBase obj, int row, int col) Virtual_GetValueAsDouble;
         alias void function(GridTableBase obj, int row, int col, int value) Virtual_SetValueAsLong;
         alias void function(GridTableBase obj, int row, int col, double value) Virtual_SetValueAsDouble;
         alias void function(GridTableBase obj, int row, int col, bool value) Virtual_SetValueAsBool;
-        alias IntPtr function(GridTableBase obj, int row, int col, string typeName) Virtual_GetValueAsCustom;
-        alias void function(GridTableBase obj, int row, int col, string typeName, IntPtr value) Virtual_SetValueAsCustom;
+        alias IntPtr function(GridTableBase obj, int row, int col, IntPtr typeName) Virtual_GetValueAsCustom;
+        alias void function(GridTableBase obj, int row, int col, IntPtr typeName, IntPtr value) Virtual_SetValueAsCustom;
         alias string function(GridTableBase obj, int col) Virtual_GetColLabelValue;
         alias void function(GridTableBase obj, IntPtr grid) Virtual_SetView;
         alias IntPtr function(GridTableBase obj) Virtual_GetView;
         alias void function(GridTableBase obj) Virtual_Clear;
         alias bool function(GridTableBase obj, int pos, int numRows) Virtual_InsertRows;
         alias bool function(GridTableBase obj, int numRows) Virtual_AppendRows;
-        alias void function(GridTableBase obj, int row, string val) Virtual_SetRowLabelValue;
+        alias void function(GridTableBase obj, int row, IntPtr val) Virtual_SetRowLabelValue;
         alias void function(GridTableBase obj, IntPtr attrProvider) Virtual_SetAttrProvider;
         alias IntPtr function(GridTableBase obj) Virtual_GetAttrProvider;
         alias bool function(GridTableBase obj) Virtual_CanHaveAttributes;
@@ -3166,9 +3166,9 @@ version(NOT_IMPLEMENTED){
         static extern (C) int    wxGridTableBase_GetNumberRows(IntPtr self);
         static extern (C) int    wxGridTableBase_GetNumberCols(IntPtr self);
         static extern (C) bool   wxGridTableBase_IsEmptyCell(IntPtr self, int row, int col);
-        static extern (C) string wxGridTableBase_GetValue(IntPtr self, int row, int col);
-        static extern (C) void   wxGridTableBase_SetValue(IntPtr self, int row, int col, string val);
-        static extern (C) string wxGridTableBase_GetTypeName(IntPtr self, int row, int col);
+        static extern (C) IntPtr wxGridTableBase_GetValue(IntPtr self, int row, int col);
+        static extern (C) void   wxGridTableBase_SetValue(IntPtr self, int row, int col, IntPtr val);
+        static extern (C) IntPtr wxGridTableBase_GetTypeName(IntPtr self, int row, int col);
         static extern (C) bool   wxGridTableBase_CanGetValueAs(IntPtr self, int row, int col, string typeName);
         static extern (C) bool   wxGridTableBase_CanSetValueAs(IntPtr self, int row, int col, string typeName);
         static extern (C) int   wxGridTableBase_GetValueAsLong(IntPtr self, int row, int col);
@@ -3188,8 +3188,8 @@ version(NOT_IMPLEMENTED){
         static extern (C) bool   wxGridTableBase_InsertCols(IntPtr self, int pos, int numCols);
         static extern (C) bool   wxGridTableBase_AppendCols(IntPtr self, int numCols);
         static extern (C) bool   wxGridTableBase_DeleteCols(IntPtr self, int pos, int numCols);
-        static extern (C) string wxGridTableBase_GetRowLabelValue(IntPtr self, int row);
-        static extern (C) string wxGridTableBase_GetColLabelValue(IntPtr self, int col);
+        static extern (C) IntPtr wxGridTableBase_GetRowLabelValue(IntPtr self, int row);
+        static extern (C) IntPtr wxGridTableBase_GetColLabelValue(IntPtr self, int col);
         static extern (C) void   wxGridTableBase_SetRowLabelValue(IntPtr self, int row, string val);
         static extern (C) void   wxGridTableBase_SetColLabelValue(IntPtr self, int col, string val);
         static extern (C) void   wxGridTableBase_SetAttrProvider(IntPtr self, IntPtr attrProvider);
@@ -3291,12 +3291,12 @@ version(NOT_IMPLEMENTED){
         }
         public abstract string GetValue(int row, int col);
 //        {
-//            return wxGridTableBase_GetValue(wxobj, row, col).dup;
+//            return cast(string) new wxString(wxGridTableBase_GetValue(wxobj, row, col), true);
 //        }
 
-        static extern (C) private void staticDoSetValue(GridTableBase obj, int row, int col, string val)
+        static extern (C) private void staticDoSetValue(GridTableBase obj, int row, int col, IntPtr val)
         {
-            obj.SetValue(row, col, val);
+            obj.SetValue(row, col, cast(string) new wxString(val));
         }       
         
         public abstract void SetValue(int row, int col, string val);
@@ -3312,12 +3312,12 @@ version(NOT_IMPLEMENTED){
         }
         public /+virtual+/ string GetTypeName(int row, int col)
         {
-            return wxGridTableBase_GetTypeName(wxobj, row, col).dup;
+            return cast(string) new wxString(wxGridTableBase_GetTypeName(wxobj, row, col), true);
         }
         
-        static extern (C) private bool staticDoCanGetValueAs(GridTableBase obj, int row, int col, string typeName)
+        static extern (C) private bool staticDoCanGetValueAs(GridTableBase obj, int row, int col, IntPtr typeName)
         {
-            return obj.CanGetValueAs(row, col, typeName);
+            return obj.CanGetValueAs(row, col, cast(string) new wxString(typeName));
         }
         
         public /+virtual+/ bool CanGetValueAs(int row, int col, string typeName)
@@ -3325,9 +3325,9 @@ version(NOT_IMPLEMENTED){
             return wxGridTableBase_CanGetValueAs(wxobj, row, col, typeName);
         }
 
-        static extern (C) private bool staticDoCanSetValueAs(GridTableBase obj, int row, int col, string typeName)
+        static extern (C) private bool staticDoCanSetValueAs(GridTableBase obj, int row, int col, IntPtr typeName)
         {
-            return obj.CanSetValueAs(row, col, typeName);
+            return obj.CanSetValueAs(row, col, cast(string) new wxString(typeName));
         }
         
         public /+virtual+/ bool CanSetValueAs(int row, int col, string typeName)
@@ -3395,9 +3395,9 @@ version(NOT_IMPLEMENTED){
         
         //-----------------------------------------------------------------------------
         
-        static extern (C) private IntPtr staticDoGetValueAsCustom(GridTableBase obj, int row, int col, string typeName)
+        static extern (C) private IntPtr staticDoGetValueAsCustom(GridTableBase obj, int row, int col, IntPtr typeName)
         {
-            return wxObject.SafePtr(obj.GetValueAsCustom(row, col, typeName));
+            return wxObject.SafePtr(obj.GetValueAsCustom(row, col, cast(string) new wxString(typeName)));
         }
         
         public /+virtual+/ wxObject GetValueAsCustom(int row, int col, string typeName)
@@ -3405,9 +3405,9 @@ version(NOT_IMPLEMENTED){
             return FindObject(wxGridTableBase_GetValueAsCustom(wxobj, row, col, typeName));
         }
         
-        static extern (C) private void staticDoSetValueAsCustom(GridTableBase obj, int row, int col, string typeName, IntPtr val)
+        static extern (C) private void staticDoSetValueAsCustom(GridTableBase obj, int row, int col, IntPtr typeName, IntPtr val)
         {
-            obj.SetValueAsCustom(row, col, typeName, FindObject(val));
+            obj.SetValueAsCustom(row, col, cast(string) new wxString(typeName), FindObject(val));
         }
         
         public /+virtual+/ void SetValueAsCustom(int row, int col, string typeName, wxObject val)
@@ -3514,7 +3514,7 @@ version(NOT_IMPLEMENTED){
         }
         public /+virtual+/ string GetRowLabelValue(int row)
         {
-            return wxGridTableBase_GetRowLabelValue(wxobj, row).dup;
+            return cast(string) new wxString(wxGridTableBase_GetRowLabelValue(wxobj, row), true);
         }
         
         static extern (C) private string staticGetColLabelValue(GridTableBase obj, int col)
@@ -3523,12 +3523,12 @@ version(NOT_IMPLEMENTED){
         }
         public /+virtual+/ string GetColLabelValue(int col)
         {
-            return wxGridTableBase_GetColLabelValue(wxobj, col).dup;
+            return cast(string) new wxString(wxGridTableBase_GetColLabelValue(wxobj, col), true);
         }
         
-        static extern (C) private void staticDoSetRowLabelValue(GridTableBase obj, int row, string val)
+        static extern (C) private void staticDoSetRowLabelValue(GridTableBase obj, int row, IntPtr val)
         {
-            obj.SetRowLabelValue(row, val);
+            obj.SetRowLabelValue(row, cast(string) new wxString(val));
         }       
         
         public /+virtual+/ void SetRowLabelValue(int row, string val)
@@ -3536,9 +3536,9 @@ version(NOT_IMPLEMENTED){
             wxGridTableBase_SetRowLabelValue(wxobj, row, val);
         }
         
-        static extern (C) private void staticDoSetColLabelValue(GridTableBase obj, int col, string val)
+        static extern (C) private void staticDoSetColLabelValue(GridTableBase obj, int col, IntPtr val)
         {
-            obj.SetColLabelValue(col, val);
+            obj.SetColLabelValue(col, cast(string) new wxString(val));
         }       
         
         public /+virtual+/ void SetColLabelValue(int col, string val)

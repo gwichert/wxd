@@ -58,9 +58,9 @@ wxFontEncoding wxFontMapper_GetEncoding(size_t n)
 }
 
 extern "C" WXEXPORT
-dstrret wxFontMapper_GetEncodingName(wxFontEncoding encoding)
+wxString* wxFontMapper_GetEncodingName(wxFontEncoding encoding)
 {
-	return dstr_ret(wxFontMapper::GetEncodingName(encoding));
+	return new wxString(wxFontMapper::GetEncodingName(encoding));
 }
 
 extern "C" WXEXPORT
@@ -88,9 +88,9 @@ wxc_bool wxFontMapper_GetAltForEncoding(wxFontMapper* self, wxFontEncoding encod
 }
 
 extern "C" WXEXPORT
-dstrret wxFontMapper_GetEncodingDescription(wxFontEncoding encoding)
+wxString* wxFontMapper_GetEncodingDescription(wxFontEncoding encoding)
 {
-	return dstr_ret(wxFontMapper::GetEncodingDescription(encoding));
+	return new wxString(wxFontMapper::GetEncodingDescription(encoding));
 }
 
 extern "C" WXEXPORT
@@ -120,17 +120,17 @@ wxc_bool wxEncodingConverter_Init(wxEncodingConverter* self, wxFontEncoding inpu
 }
 
 extern "C" WXEXPORT
-dstrret wxEncodingConverter_Convert(wxEncodingConverter* self, wxc_string input)
+wxString* wxEncodingConverter_Convert(wxEncodingConverter* self, wxc_string input)
 {
-	return dstr_ret(self->Convert(wxstr(input)));
+	return new wxString(self->Convert(wxstr(input)));
 }
 
 //-----------------------------------------------------------------------------
 
 typedef wxc_bool (CALLBACK* Virtual_EnumerateFacenames) (wxc_object, wxFontEncoding, wxc_bool);
-typedef wxc_bool (CALLBACK* Virtual_EnumerateEncodings)(wxc_object, wxc_string);
-typedef wxc_bool (CALLBACK* Virtual_OnFacename) (wxc_object, wxc_string);
-typedef wxc_bool (CALLBACK* Virtual_OnFontEncoding) (wxc_object, wxc_string, wxc_string);
+typedef wxc_bool (CALLBACK* Virtual_EnumerateEncodings)(wxc_object, wxString*);
+typedef wxc_bool (CALLBACK* Virtual_OnFacename) (wxc_object, wxString*);
+typedef wxc_bool (CALLBACK* Virtual_OnFontEncoding) (wxc_object, wxString*, wxString*);
 
 class _FontEnumerator : public wxFontEnumerator
 {
@@ -142,13 +142,13 @@ public:
 		{ return m_EnumerateFacenames(m_dobj, encoding, fixedWidthOnly); }
 		
 	bool EnumerateEncodings(const wxString& facename)
-		{ return m_EnumerateEncodings(m_dobj, wxc_string(facename)); }
+		{ return m_EnumerateEncodings(m_dobj, new wxString(facename)); }
 		
 	bool OnFacename(const wxString& facename)
-		{ return m_OnFacename(m_dobj, wxc_string(facename)); }
+		{ return m_OnFacename(m_dobj, new wxString(facename)); }
 		
 	bool OnFontEncoding(const wxString& facename, const wxString& encoding)
-		{ return m_OnFontEncoding(m_dobj, wxc_string(facename), wxc_string(encoding)); }
+		{ return m_OnFontEncoding(m_dobj, new wxString(facename), new wxString(encoding)); }
 
 	void RegisterVirtual(wxc_object obj,
 		Virtual_EnumerateFacenames enumerateFacenames, 

@@ -220,9 +220,9 @@ wxColour* wxColourDatabase_Find(wxColourDatabase* self, wxc_string name)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxColourDatabase_FindName(wxColourDatabase* self, wxColour* colour)
+wxString* wxColourDatabase_FindName(wxColourDatabase* self, wxColour* colour)
 {
-	return dstr_ret(self->FindName(*colour));
+	return new wxString(self->FindName(*colour));
 }
 
 //-----------------------------------------------------------------------------

@@ -74,9 +74,9 @@ void wxDirDialog_SetMessage(wxDirDialog* self, wxc_string message)
 }
 
 extern "C" WXEXPORT
-dstrret wxDirDialog_GetMessage(wxDirDialog* self)
+wxString* wxDirDialog_GetMessage(wxDirDialog* self)
 {
-    return dstr_ret(self->GetMessage());
+    return new wxString(self->GetMessage());
 }
 
 //-----------------------------------------------------------------------------
@@ -96,19 +96,19 @@ void wxDirDialog_SetPath(wxDirDialog* self, wxc_string path)
 }
 
 extern "C" WXEXPORT
-dstrret wxDirDialog_GetPath(wxDirDialog* self)
+wxString* wxDirDialog_GetPath(wxDirDialog* self)
 {
-    return dstr_ret(self->GetPath());
+    return new wxString(self->GetPath());
 }
 
 extern "C" WXEXPORT
-dstrret wxDirSelector_func(wxc_string message,
+wxString* wxDirSelector_func(wxc_string message,
               wxc_string defaultPath,
               long style,
               wxPoint* pos,
               wxWindow *parent)
 {
-	return dstr_ret(wxDirSelector(
+	return new wxString(wxDirSelector(
 		message.length?wxstr(message):wxString(wxDirSelectorPromptStr),
 		wxstr(defaultPath),
 		style, 

@@ -40,9 +40,9 @@ public import wx.Menu;
 		static extern (C) int    wxMenuBar_FindMenu(IntPtr self, string title);
 		static extern (C) int    wxMenuBar_FindMenuItem(IntPtr self, string menustring, string itemString);
 		
-		static extern (C) string wxMenuBar_GetHelpString(IntPtr self, int id);
-		static extern (C) string wxMenuBar_GetLabel(IntPtr self, int id);
-		static extern (C) string wxMenuBar_GetLabelTop(IntPtr self, int pos);
+		static extern (C) IntPtr wxMenuBar_GetHelpString(IntPtr self, int id);
+		static extern (C) IntPtr wxMenuBar_GetLabel(IntPtr self, int id);
+		static extern (C) IntPtr wxMenuBar_GetLabelTop(IntPtr self, int pos);
 		
 		static extern (C) bool   wxMenuBar_IsEnabled(IntPtr self, int id);
 		
@@ -174,21 +174,21 @@ public import wx.Menu;
 		
 		public string GetHelpString(int id)
 		{
-			return wxMenuBar_GetHelpString(wxobj, id).dup;
+			return cast(string) new wxString(wxMenuBar_GetHelpString(wxobj, id), true);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public string GetLabel(int id)
 		{
-			return wxMenuBar_GetLabel(wxobj, id).dup;
+			return cast(string) new wxString(wxMenuBar_GetLabel(wxobj, id), true);
 		}
 		
 		//-----------------------------------------------------------------------------
 		
 		public string GetLabelTop(int pos)
 		{
-			return wxMenuBar_GetLabelTop(wxobj, pos).dup;
+			return cast(string) new wxString(wxMenuBar_GetLabelTop(wxobj, pos), true);
 		}
 		
 		//-----------------------------------------------------------------------------

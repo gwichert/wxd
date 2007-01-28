@@ -169,13 +169,13 @@ wxPaneInfo* wxPaneInfo_Window(wxPaneInfo* self, wxWindow* w)
 }
 
 extern "C" WXEXPORT
-wxPaneInfo* wxPaneInfo_Name(wxPaneInfo* self, const wxc_string n)
+wxPaneInfo* wxPaneInfo_Name(wxPaneInfo* self, wxc_string n)
 {
   return &self->Name(wxstr(n));
 }
 
 extern "C" WXEXPORT
-wxPaneInfo* wxPaneInfo_Caption(wxPaneInfo* self, const wxc_string c)
+wxPaneInfo* wxPaneInfo_Caption(wxPaneInfo* self, wxc_string c)
 {
   return &self->Caption(wxstr(c));
 }
@@ -467,15 +467,15 @@ wxc_bool wxPaneInfo_HasFlag(wxPaneInfo* self, unsigned int flag)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxPaneInfo_GetName(wxPaneInfo* self)
+wxString* wxPaneInfo_GetName(wxPaneInfo* self)
 {
-  return dstr_ret(self->name.c_str());
+  return new wxString(self->name.c_str());
 }
 
 extern "C" WXEXPORT
-dstrret wxPaneInfo_GetCaption(wxPaneInfo* self)
+wxString* wxPaneInfo_GetCaption(wxPaneInfo* self)
 {
-  return dstr_ret(self->caption.c_str());
+  return new wxString(self->caption.c_str());
 }
 
 extern "C" WXEXPORT
@@ -631,7 +631,7 @@ wxPaneInfo* wxFrameManager_GetPaneByWindow(wxFrameManager* self, wxWindow* windo
 }
 
 extern "C" WXEXPORT
-wxPaneInfo* wxFrameManager_GetPaneByName(wxFrameManager* self, const wxc_string name)
+wxPaneInfo* wxFrameManager_GetPaneByName(wxFrameManager* self, wxc_string name)
 {
   return &self->GetPane(wxstr(name));
 }
@@ -658,7 +658,7 @@ wxc_bool wxFrameManager_AddPane(wxFrameManager* self, wxWindow* window,
 extern "C" WXEXPORT
 wxc_bool wxFrameManager_AddPane2(wxFrameManager* self, wxWindow* window,
              int direction,
-             const wxc_string caption)
+             wxc_string caption)
 {
   return self->AddPane(window, direction, wxstr(caption))?1:0;
 }
@@ -678,13 +678,13 @@ wxc_bool wxFrameManager_DetachPane(wxFrameManager* self, wxWindow* window)
 }
 
 extern "C" WXEXPORT
-dstrret wxFrameManager_SavePerspective(wxFrameManager* self)
+wxString* wxFrameManager_SavePerspective(wxFrameManager* self)
 {
-  return dstr_ret(self->SavePerspective().c_str());
+  return new wxString(self->SavePerspective().c_str());
 }
 
 extern "C" WXEXPORT
-wxc_bool wxFrameManager_LoadPerspective(wxFrameManager* self, const wxc_string perspective,
+wxc_bool wxFrameManager_LoadPerspective(wxFrameManager* self, wxc_string perspective,
              wxc_bool update = true)
 {
   return self->LoadPerspective(wxstr(perspective), update)?1:0;
@@ -755,7 +755,7 @@ typedef void (CALLBACK* Virtual_DrawBackground) (wxc_object obj, wxDC* dc,
                       int orientation,
                       const wxRect* rect);
 typedef void (CALLBACK* Virtual_DrawCaption) (wxc_object obj, wxDC* dc,
-                      const wxc_string text,
+                      wxString* text,
                       const wxRect* rect,
                       wxPaneInfo* pane);
 typedef void (CALLBACK* Virtual_DrawGripper) (wxc_object obj, wxDC* dc,
@@ -830,7 +830,7 @@ public:
 
   void DrawCaption(wxDC& dc, const wxString& text, const wxRect& rect, wxPaneInfo& pane)
   {
-    m_DrawCaption(m_dobj, &dc, wxc_string(text), &rect, &pane);
+    m_DrawCaption(m_dobj, &dc, new wxString(text), &rect, &pane);
   }
 
   void DrawGripper(wxDC& dc, const wxRect& rect, wxPaneInfo& pane)
@@ -1036,7 +1036,7 @@ void wxDockArt_DrawBackground(wxDockArt* self, wxDC* dc,
 
 extern "C" WXEXPORT
 void wxDockArt_DrawCaption(wxDockArt* self, wxDC* dc,
-                      const wxc_string text,
+                     wxc_string text,
                       const wxRect* rect,
                       wxPaneInfo* pane)
 {

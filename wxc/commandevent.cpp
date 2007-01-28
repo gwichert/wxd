@@ -34,9 +34,9 @@ int wxCommandEvent_GetSelection(wxCommandEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxCommandEvent_GetString(wxCommandEvent* self)
+wxString* wxCommandEvent_GetString(wxCommandEvent* self)
 {
-	return dstr_ret(self->GetString());
+	return new wxString(self->GetString());
 }
 
 extern "C" WXEXPORT

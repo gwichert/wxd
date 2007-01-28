@@ -91,7 +91,7 @@ public import wx.Colour;
 		
 		static extern (C) void   wxImage_SetOption(IntPtr self, string name, string value);
 		static extern (C) void   wxImage_SetOption2(IntPtr self, string name, int value);
-		static extern (C) string wxImage_GetOption(IntPtr self, string name);
+		static extern (C) IntPtr wxImage_GetOption(IntPtr self, string name);
 		static extern (C) int    wxImage_GetOptionInt(IntPtr self, string name);
 		static extern (C) bool   wxImage_HasOption(IntPtr self, string name);
 		
@@ -108,7 +108,7 @@ public import wx.Colour;
 		static extern (C) IntPtr wxImage_FindHandler3(uint imageType);
 		static extern (C) IntPtr wxImage_FindHandlerMime(string mimetype);
 		
-		static extern (C) string wxImage_GetImageExtWildcard();
+		static extern (C) IntPtr wxImage_GetImageExtWildcard();
 		
 		static extern (C) void   wxImage_CleanUpHandlers();
 		
@@ -491,7 +491,7 @@ public import wx.Colour;
 		
 		public string GetOption(string name)
 		{
-			return wxImage_GetOption(wxobj, name).dup;
+			return cast(string) new wxString(wxImage_GetOption(wxobj, name), true);
 		}
 		
 		//---------------------------------------------------------------------
@@ -595,7 +595,7 @@ public import wx.Colour;
 		
 		//---------------------------------------------------------------------
 		
-		static string ImageExtWildcard() { return wxImage_GetImageExtWildcard().dup; }
+		static string ImageExtWildcard() { return cast(string) new wxString(wxImage_GetImageExtWildcard(), true); }
 		
 		//---------------------------------------------------------------------
 		
@@ -619,10 +619,10 @@ public import wx.Colour;
 		static extern (C) void   wxImageHandler_SetExtension(IntPtr self, string ext);
 		static extern (C) void   wxImageHandler_SetType(IntPtr self, uint type);
 		static extern (C) void   wxImageHandler_SetMimeType(IntPtr self, string type);
-		static extern (C) string wxImageHandler_GetName(IntPtr self);
-		static extern (C) string wxImageHandler_GetExtension(IntPtr self);
+		static extern (C) IntPtr wxImageHandler_GetName(IntPtr self);
+		static extern (C) IntPtr wxImageHandler_GetExtension(IntPtr self);
 		static extern (C) uint   wxImageHandler_GetType(IntPtr self);
-		static extern (C) string wxImageHandler_GetMimeType(IntPtr self);
+		static extern (C) IntPtr wxImageHandler_GetMimeType(IntPtr self);
 		//! \endcond
 		
 		//---------------------------------------------------------------------
@@ -635,12 +635,12 @@ public import wx.Colour;
 		
 		//---------------------------------------------------------------------
 		
-		public string Name() { return wxImageHandler_GetName(wxobj).dup; }
+		public string Name() { return cast(string) new wxString(wxImageHandler_GetName(wxobj), true); }
 		public void Name(string value) { wxImageHandler_SetName(wxobj, value); }
 		
 		//---------------------------------------------------------------------
 		
-		public string Extension() { return wxImageHandler_GetExtension(wxobj).dup; }
+		public string Extension() { return cast(string) new wxString(wxImageHandler_GetExtension(wxobj), true); }
 		public void Extension(string value) { wxImageHandler_SetExtension(wxobj, value); }
 		
 		//---------------------------------------------------------------------
@@ -650,7 +650,7 @@ public import wx.Colour;
 		
 		//---------------------------------------------------------------------
 		
-		public string MimeType() { return wxImageHandler_GetMimeType(wxobj).dup; }
+		public string MimeType() { return cast(string) new wxString(wxImageHandler_GetMimeType(wxobj), true); }
 		public void MimeType(string value) { wxImageHandler_SetMimeType(wxobj, value); }
 	}
 	

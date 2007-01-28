@@ -1,6 +1,7 @@
 //-----------------------------------------------------------------------------
 // wxD - wxString.d
 // (C) 2005 bero <berobero.sourceforge.net>
+// (C) 2006 afb <afb@users.sourceforge.net>
 // based on
 // wx.NET - wxString.cs
 //
@@ -22,13 +23,20 @@ private import std.utf;
 //! \endcond
 
 		//! \cond EXTERN
-		static extern (C) IntPtr  wxString_ctor(char* str);
-		static extern (C) IntPtr  wxString_ctor2(string str);
+		static extern (C) IntPtr  wxString_ctor(string str);
+		static extern (C) IntPtr  wxString_ctor2(wxChar* str, size_t len);
 		static extern (C) void    wxString_dtor(IntPtr self);
 		static extern (C) size_t  wxString_Length(IntPtr self);
+		static extern (C) wxChar* wxString_Data(IntPtr self);
 		static extern (C) wxChar  wxString_GetChar(IntPtr self, size_t i);
-		static extern (C) wxChar* wxString_c_str(IntPtr self);
-		static extern (C) string  wxString_d_str(IntPtr self);
+		static extern (C) void    wxString_SetChar(IntPtr self, size_t i, wxChar c);
+
+		static extern (C) size_t  wxString_ansi_len(IntPtr self);
+		static extern (C) size_t  wxString_ansi_str(IntPtr self, ubyte *buffer, size_t buflen);
+		static extern (C) size_t  wxString_wide_len(IntPtr self);
+		static extern (C) size_t  wxString_wide_str(IntPtr self, wchar_t *buffer, size_t buflen);
+		static extern (C) size_t  wxString_utf8_len(IntPtr self);
+		static extern (C) size_t  wxString_utf8_str(IntPtr self, char *buffer, size_t buflen);
 		//! \endcond
 		
 		//---------------------------------------------------------------------
@@ -41,7 +49,7 @@ private import std.utf;
 			super(wxobj);
 		}
 			
-		private this(IntPtr wxobj, bool memOwn)
+		package this(IntPtr wxobj, bool memOwn)
 		{ 
 			super(wxobj);
 			this.memOwn = memOwn;
@@ -51,16 +59,44 @@ private import std.utf;
 			{ this(""); }
 
 		public this(string str)
-			{ this(wxString_ctor2(str), true); }
+			{ this(wxString_ctor(str), true); }
+
+		public this(wxChar* wxstr, size_t wxlen)
+			{ this(wxString_ctor2(wxstr, wxlen), true); }
 		
 		//---------------------------------------------------------------------
 		override protected void dtor() { wxString_dtor(wxobj); }				
 		//---------------------------------------------------------------------
 
 		public size_t length() { return wxString_Length(wxobj); }
-		public char opIndex(size_t i) { return wxString_GetChar(wxobj, i); }
-		public wxChar* data() { return wxString_c_str(wxobj); }
-		public string opCast() { return wxString_d_str(wxobj).dup; }
+		public wxChar* data() { return wxString_Data(wxobj); }
+		public wxChar opIndex(size_t i) { return wxString_GetChar(wxobj, i); }
+		public void opIndexAssign(wxChar c, size_t i) { wxString_SetChar(wxobj, i, c); }
+		public string opCast() { return this.toString(); }
+		public ubyte[] toAnsi()
+		{
+			size_t len = wxString_ansi_len(wxobj);
+			ubyte[] buffer = new ubyte[len + 1]; // include NUL
+			len = wxString_ansi_str(wxobj, buffer.ptr, buffer.length);
+			buffer.length = len;
+			return buffer;
+		}
+		public wchar_t[] toWide()
+		{
+			size_t len = wxString_wide_len(wxobj);
+			wchar_t[] buffer = new wchar_t[len + 1]; // include NUL
+			len = wxString_wide_str(wxobj, buffer.ptr, buffer.length);
+			buffer.length = len;
+			return buffer;
+		}
+		public char[] toString()
+		{
+			size_t len = wxString_utf8_len(wxobj);
+			char[] buffer = new char[len + 1]; // include NUL
+			len = wxString_utf8_str(wxobj, buffer.ptr, buffer.length);
+			buffer.length = len;
+			return buffer;
+		}
 
 	}
 

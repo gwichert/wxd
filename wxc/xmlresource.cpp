@@ -23,7 +23,7 @@
 //-----------------------------------------------------------------------------
 // C stubs for class methods
 
-typedef wxObject* (CALLBACK* XmlSubclassCreate) (wxc_string);
+typedef wxObject* (CALLBACK* XmlSubclassCreate) (wxString*);
 
 class XmlSubclassFactoryCS : public wxXmlSubclassFactory
 {
@@ -31,7 +31,7 @@ public:
     XmlSubclassFactoryCS() { }
 
     wxObject *Create(const wxString& className)
-        { return m_create(wxc_string(className)); }
+        { return m_create(new wxString(className)); }
 
     void RegisterVirtual(XmlSubclassCreate create)
         { m_create = create; }

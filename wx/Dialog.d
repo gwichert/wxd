@@ -24,7 +24,7 @@ public import wx.Window;
 		static extern (C) void   wxDialog_SetReturnCode(IntPtr self, int returnCode);
 		static extern (C) int    wxDialog_GetReturnCode(IntPtr self);
 
-		static extern (C) string wxDialog_GetTitle(IntPtr self);
+		static extern (C) IntPtr wxDialog_GetTitle(IntPtr self);
 		static extern (C) void   wxDialog_SetTitle(IntPtr self, string title);
 
 		static extern (C) bool   wxDialog_Create(IntPtr self, IntPtr parent, int id, string title, inout Point pos, inout Size size, uint style, string name);
@@ -119,7 +119,7 @@ public import wx.Window;
 
 		//---------------------------------------------------------------------
 
-		public override string Title() { return wxDialog_GetTitle(wxobj).dup; }
+		public override string Title() { return cast(string) new wxString(wxDialog_GetTitle(wxobj), true); }
 		public override void Title(string value) { wxDialog_SetTitle(wxobj, value); }
 
 		//---------------------------------------------------------------------

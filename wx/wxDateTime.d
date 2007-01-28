@@ -80,24 +80,24 @@ public import wx.common;
 
         public ushort Year() { return wxDateTime_GetYear(wxobj); }
 
-        int Month() { return wxDateTime_GetMonth(wxobj); }
+        public int Month() { return wxDateTime_GetMonth(wxobj); }
 
-        ushort Day() { return wxDateTime_GetDay(wxobj); }
+        public ushort Day() { return wxDateTime_GetDay(wxobj); }
 
-        ushort Hour() { return wxDateTime_GetHour(wxobj); }
+        public ushort Hour() { return wxDateTime_GetHour(wxobj); }
 
-        ushort Minute() { return wxDateTime_GetMinute(wxobj); }
+        public ushort Minute() { return wxDateTime_GetMinute(wxobj); }
         
-        ushort Second() { return wxDateTime_GetSecond(wxobj); }
+        public ushort Second() { return wxDateTime_GetSecond(wxobj); }
 
-        ushort Millisecond() { return wxDateTime_GetMillisecond(wxobj); }
+        public ushort Millisecond() { return wxDateTime_GetMillisecond(wxobj); }
 
 	static wxDateTime Now() { return new wxDateTime(wxDateTime_Now()); }
         //-----------------------------------------------------------------------------
 /+
         public static implicit operator DateTime (wxDateTime wdt)
         {
-            DateTime dt = new DateTime(wdt.Year, cast(int)wdt.Month, cast(int)wdt.Day, 
+            DateTime dt = new DateTime(wdt.Year, cast(int)wdt.Month+1, cast(int)wdt.Day, 
                                        cast(int)wdt.Hour, cast(int)wdt.Minute, 
                                        cast(int)wdt.Second, cast(int)wdt.Millisecond);
             return dt;
@@ -105,8 +105,8 @@ public import wx.common;
 
         public static implicit operator wxDateTime (DateTime dt)
         {
-            wxDateTime wdt = new this();
-            wdt.Set((ushort)dt.Day, dt.Month, dt.Year, (ushort)dt.Hour, 
+            wxDateTime wdt = new wxDateTime();
+            wdt.Set((ushort)dt.Day, dt.Month-1, dt.Year, (ushort)dt.Hour, 
                     (ushort)dt.Minute, (ushort)dt.Second, 
                     (ushort)dt.Millisecond);
             return wdt;

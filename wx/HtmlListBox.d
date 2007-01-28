@@ -45,7 +45,7 @@ public import wx.VLBox;
 		static extern (C) bool wxHtmlListBox_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, int style, string name);
 		static extern (C) void wxHtmlListBox_RefreshAll(IntPtr self);
 		static extern (C) void wxHtmlListBox_SetItemCount(IntPtr self, int count);
-		static extern (C) string wxHtmlListBox_OnGetItemMarkup(IntPtr self, int n);
+		static extern (C) IntPtr wxHtmlListBox_OnGetItemMarkup(IntPtr self, int n);
 		static extern (C) IntPtr wxHtmlListBox_GetSelectedTextColour(IntPtr self, IntPtr colFg);
 		static extern (C) IntPtr wxHtmlListBox_GetSelectedTextBgColour(IntPtr self, IntPtr colBg);
 		static extern (C) void wxHtmlListBox_OnDrawItem(IntPtr self, IntPtr dc, inout Rectangle rect, int n);
@@ -138,7 +138,7 @@ public import wx.VLBox;
 		}
 		protected /+virtual+/ string OnGetItemMarkup(int n)
 		{
-			return wxHtmlListBox_OnGetItemMarkup(wxobj, n).dup;
+			return cast(string) new wxString(wxHtmlListBox_OnGetItemMarkup(wxobj, n), true);
 		}
 		
 		//-----------------------------------------------------------------------------

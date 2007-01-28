@@ -104,9 +104,9 @@ int wxListBox_GetCount(wxListBox* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxListBox_GetSingleString(wxListBox* self, int n)
+wxString* wxListBox_GetSingleString(wxListBox* self, int n)
 {
-	return dstr_ret(self->GetString(n).c_str());
+	return new wxString(self->GetString(n).c_str());
 }
 
 //-----------------------------------------------------------------------------
@@ -286,9 +286,9 @@ wxc_bool wxListBox_Selected(wxListBox* self, int n)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-const dstrret wxListBox_GetStringSelection(wxListBox* self)
+const wxString* wxListBox_GetStringSelection(wxListBox* self)
 {
-	return dstr_ret(self->GetStringSelection());
+	return new wxString(self->GetStringSelection());
 }
 
 //-----------------------------------------------------------------------------

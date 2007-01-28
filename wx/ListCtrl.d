@@ -32,7 +32,7 @@ public import wx.ImageList;
 		static extern (C) int    wxListItem_GetImage(IntPtr self);
 		static extern (C) int    wxListItem_GetMask(IntPtr self);
 		static extern (C) int    wxListItem_GetState(IntPtr self);
-		static extern (C) string wxListItem_GetText(IntPtr self);
+		static extern (C) IntPtr wxListItem_GetText(IntPtr self);
 		static extern (C) IntPtr wxListItem_GetTextColour(IntPtr self);
 		static extern (C) int    wxListItem_GetWidth(IntPtr self);
 		static extern (C) void   wxListItem_SetAlign(IntPtr self, int alignment);
@@ -129,7 +129,7 @@ public import wx.ImageList;
 
 		//---------------------------------------------------------------------
         
-		public string Text() { return wxListItem_GetText(wxobj).dup; }
+		public string Text() { return cast(string) new wxString(wxListItem_GetText(wxobj), true); }
 		public void Text(string value) { wxListItem_SetText(wxobj, value); }
 
 		//---------------------------------------------------------------------
@@ -254,7 +254,7 @@ public import wx.ImageList;
 		static extern (C) int    wxListCtrl_GetItemState(IntPtr self, int item, int stateMask);
 		static extern (C) bool   wxListCtrl_SetItemState(IntPtr self, int item, int state, int stateMask);
 		static extern (C) bool   wxListCtrl_SetItemImage(IntPtr self, int item, int image, int selImage);
-		static extern (C) string wxListCtrl_GetItemText(IntPtr self, int item);
+		static extern (C) IntPtr wxListCtrl_GetItemText(IntPtr self, int item);
 		static extern (C) void   wxListCtrl_SetItemText(IntPtr self, int item, string str);
 		static extern (C) IntPtr wxListCtrl_GetItemData(IntPtr self, int item);
 		static extern (C) bool   wxListCtrl_SetItemData(IntPtr self, int item, IntPtr data);
@@ -474,7 +474,7 @@ public import wx.ImageList;
 
 		public string GetItemText(int item)
 		{
-			return wxListCtrl_GetItemText(wxobj, item).dup;
+			return cast(string) new wxString(wxListCtrl_GetItemText(wxobj, item), true);
 		}
 
 		//---------------------------------------------------------------------
@@ -903,12 +903,12 @@ public import wx.ImageList;
 		//! \cond EXTERN
 		static extern (C) IntPtr wxListEvent_ctor(int commandType, int id);
 		static extern (C) IntPtr wxListEvent_GetItem(IntPtr self);
-		static extern (C) string wxListEvent_GetLabel(IntPtr self);
+		static extern (C) IntPtr wxListEvent_GetLabel(IntPtr self);
 		static extern (C) int   wxListEvent_GetIndex(IntPtr self);
 		static extern (C) int    wxListEvent_GetKeyCode(IntPtr self);
 		static extern (C) int    wxListEvent_GetColumn(IntPtr self);
 		static extern (C) void   wxListEvent_GetPoint(IntPtr self, inout Point pt);
-		static extern (C) string wxListEvent_GetText(IntPtr self);
+		static extern (C) IntPtr wxListEvent_GetText(IntPtr self);
 		static extern (C) int wxListEvent_GetImage(IntPtr self);
 		static extern (C) int wxListEvent_GetData(IntPtr self);
 		static extern (C) int wxListEvent_GetMask(IntPtr self);
@@ -935,7 +935,7 @@ public import wx.ImageList;
 		static Event New(IntPtr ptr) { return new ListEvent(ptr); }
 		//-----------------------------------------------------------------------------
 
-		public string Label() { return wxListEvent_GetLabel(wxobj).dup; }
+		public string Label() { return cast(string) new wxString(wxListEvent_GetLabel(wxobj), true); }
 
 		//-----------------------------------------------------------------------------
        
@@ -963,7 +963,7 @@ public import wx.ImageList;
 		
 		//---------------------------------------------------------------------
     
-		public string Text() { return wxListEvent_GetText(wxobj).dup; }
+		public string Text() { return cast(string) new wxString(wxListEvent_GetText(wxobj), true); }
 		
 		//---------------------------------------------------------------------
 	

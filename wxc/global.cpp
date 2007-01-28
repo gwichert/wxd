@@ -41,26 +41,26 @@ int wxGlobal_GetNumberFromUser(
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxGlobal_GetHomeDir()
+wxString* wxGlobal_GetHomeDir()
 {
-	return dstr_ret(wxGetHomeDir());
+	return new wxString(wxGetHomeDir());
 }
 
 extern "C" WXEXPORT
-dstrret wxGlobal_GetCwd()
+wxString* wxGlobal_GetCwd()
 {
-	return dstr_ret(wxGetCwd());
+	return new wxString(wxGetCwd());
 }
 
 //-----------------------------------------------------------------------------
 /*
 extern "C" WXEXPORT
-dstrret wxGlobal_FileSelector(const char* message, const char* default_path,
+wxString* wxGlobal_FileSelector(const char* message, const char* default_path,
 				const char* default_filename, const char* default_extension,
 				const char* wildcard, int flags,
 				wxWindow* parent, int x, int y)
 {
-	return dstr_ret(wxFileSelector(message,
+	return new wxString(wxFileSelector(message,
 						default_path,
 						default_filename,
 						default_extension,
@@ -166,9 +166,9 @@ void wxArrayString_Alloc(wxArrayString* self, int n)
 }
 
 extern "C" WXEXPORT
-dstrret wxArrayString_Item(wxArrayString* self, int num)
+wxString* wxArrayString_Item(wxArrayString* self, int num)
 {
-	return dstr_ret(self->Item(num));
+	return new wxString(self->Item(num));
 }
 
 extern "C" WXEXPORT

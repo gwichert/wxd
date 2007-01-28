@@ -22,7 +22,7 @@ public import wx.ClientData;
 		//! \cond EXTERN
 		static extern (C) IntPtr wxCommandEvent_ctor(int type,int winid);
 		static extern (C) int    wxCommandEvent_GetSelection(IntPtr self);
-		static extern (C) string wxCommandEvent_GetString(IntPtr self);
+		static extern (C) IntPtr wxCommandEvent_GetString(IntPtr self);
 		static extern (C) void wxCommandEvent_SetString(IntPtr self, string s);
 		static extern (C) bool   wxCommandEvent_IsChecked(IntPtr self);
 		static extern (C) bool   wxCommandEvent_IsSelection(IntPtr self);
@@ -54,7 +54,7 @@ public import wx.ClientData;
 
 		//-----------------------------------------------------------------------------
 
-		public string String() { return wxCommandEvent_GetString(wxobj).dup; }
+		public string String() { return cast(string) new wxString(wxCommandEvent_GetString(wxobj), true); }
 		public void String(string value) { wxCommandEvent_SetString(wxobj, value); }
 
 		//-----------------------------------------------------------------------------

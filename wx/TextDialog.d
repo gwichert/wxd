@@ -21,7 +21,7 @@ public import wx.Dialog;
         static extern (C) IntPtr wxTextEntryDialog_ctor(IntPtr parent, string message, string caption, string value, uint style, inout Point pos);
         static extern (C) void wxTextEntryDialog_dtor(IntPtr self);
         static extern (C) void wxTextEntryDialog_SetValue(IntPtr self, string val);
-        static extern (C) string wxTextEntryDialog_GetValue(IntPtr self);
+        static extern (C) IntPtr wxTextEntryDialog_GetValue(IntPtr self);
         static extern (C) int wxTextEntryDialog_ShowModal(IntPtr self);
 		//! \endcond
 
@@ -43,7 +43,7 @@ public import wx.Dialog;
 
         //-----------------------------------------------------------------------------
 
-        public string Value() { return wxTextEntryDialog_GetValue(wxobj); }
+        public string Value() { return cast(string) new wxString(wxTextEntryDialog_GetValue(wxobj), true); }
         public void Value(string value) { wxTextEntryDialog_SetValue(wxobj, value); }
 
         //---------------------------------------------------------------------
@@ -57,20 +57,20 @@ public import wx.Dialog;
     //-----------------------------------------------------------------------------
 
 		//! \cond EXTERN
-        static extern (C) string wxGetPasswordFromUser_func(string message, string caption, string defaultValue, IntPtr parent);
-        static extern (C) string wxGetTextFromUser_func(string message, string caption, string defaultValue, IntPtr parent, int x, int y, bool centre);
+        static extern (C) IntPtr wxGetPasswordFromUser_func(string message, string caption, string defaultValue, IntPtr parent);
+        static extern (C) IntPtr wxGetTextFromUser_func(string message, string caption, string defaultValue, IntPtr parent, int x, int y, bool centre);
 		//! \endcond
 
         //-----------------------------------------------------------------------------
 
         public string GetPasswordFromUser(string message, string caption=TextEntryDialog.wxGetTextFromUserPromptStr, string defaultValue="", Window parent=null)
         {
-            return wxGetPasswordFromUser_func(message, caption, defaultValue, wxObject.SafePtr(parent)).dup;
+            return cast(string) new wxString(wxGetPasswordFromUser_func(message, caption, defaultValue, wxObject.SafePtr(parent)), true);
         }
 
         //-----------------------------------------------------------------------------
 
         public string GetTextFromUser(string message, string caption=TextEntryDialog.wxGetTextFromUserPromptStr, string defaultValue="", Window parent=null, int x=-1, int y=-1, bool centre=true)
         {
-            return wxGetTextFromUser_func(message, caption, defaultValue, wxObject.SafePtr(parent), x, y, centre).dup;
+            return cast(string) new wxString(wxGetTextFromUser_func(message, caption, defaultValue, wxObject.SafePtr(parent), x, y, centre), true);
         }

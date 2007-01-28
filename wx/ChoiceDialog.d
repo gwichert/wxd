@@ -23,7 +23,7 @@ public import wx.ArrayInt;
         static extern (C) IntPtr wxSingleChoiceDialog_ctor(IntPtr parent, string message, string caption, int n, string* choices, IntPtr clientData, uint style, inout Point pos);
         static extern (C) void wxSingleChoiceDialog_SetSelection(IntPtr self, int sel);
         static extern (C) int wxSingleChoiceDialog_GetSelection(IntPtr self);
-        static extern (C) string wxSingleChoiceDialog_GetStringSelection(IntPtr self);
+        static extern (C) IntPtr wxSingleChoiceDialog_GetStringSelection(IntPtr self);
         static extern (C) IntPtr wxSingleChoiceDialog_GetSelectionClientData(IntPtr self);
 		//! \endcond
 
@@ -65,7 +65,7 @@ public import wx.ArrayInt;
 
         public string StringSelection()
         {
-            return wxSingleChoiceDialog_GetStringSelection(wxobj).dup;
+            return cast(string) new wxString(wxSingleChoiceDialog_GetStringSelection(wxobj), true);
         }
 
         //-----------------------------------------------------------------------------
@@ -114,7 +114,7 @@ public import wx.ArrayInt;
 	//-----------------------------------------------------------------------------
 
 	//! \cond EXTERN
-	static extern (C) string wxGetSingleChoice_func(string message, string caption, int n, string* choices, IntPtr parent, int x, int y, bool centre, int width, int height);
+	static extern (C) IntPtr wxGetSingleChoice_func(string message, string caption, int n, string* choices, IntPtr parent, int x, int y, bool centre, int width, int height);
 	static extern (C) int wxGetSingleChoiceIndex_func(string message, string caption, int n, string* choices, IntPtr parent, int x, int y, bool centre, int width, int height);
 	static extern (C) void* wxGetSingleChoiceData_func(string message, string caption, int n, string* choices, void **client_data, IntPtr parent, int x, int y, bool centre, int width, int height);
 	static extern (C) uint wxGetMultipleChoices_func(IntPtr selections,string message, string caption, int n, string* choices, IntPtr parent, int x, int y, bool centre, int width, int height);
@@ -122,7 +122,7 @@ public import wx.ArrayInt;
 
 	public string GetSingleChoice(string message, string caption, string[] choices, Window parent = null, int x = -1, int y= -1, bool centre = true, int width = SingleChoiceDialog.wxCHOICE_WIDTH, int height = SingleChoiceDialog.wxCHOICE_HEIGHT)
 	{
-		return wxGetSingleChoice_func(message, caption, choices.length, choices.ptr, wxObject.SafePtr(parent), x, y, centre, width, height).dup;
+		return cast(string) new wxString(wxGetSingleChoice_func(message, caption, choices.length, choices.ptr, wxObject.SafePtr(parent), x, y, centre, width, height), true);
 	}
 
 	public int GetSingleChoiceIndex(string message, string caption, string[] choices, Window parent = null, int x = -1, int y= -1, bool centre = true, int width = SingleChoiceDialog.wxCHOICE_WIDTH, int height = SingleChoiceDialog.wxCHOICE_HEIGHT)

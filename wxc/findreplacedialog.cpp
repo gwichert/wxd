@@ -77,17 +77,17 @@ int wxFindDialogEvent_GetFlags(wxFindDialogEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxFindDialogEvent_GetFindString(wxFindDialogEvent* self)
+wxString* wxFindDialogEvent_GetFindString(wxFindDialogEvent* self)
 {
-    return dstr_ret(self->GetFindString());
+    return new wxString(self->GetFindString());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxFindDialogEvent_GetReplaceString(wxFindDialogEvent* self)
+wxString* wxFindDialogEvent_GetReplaceString(wxFindDialogEvent* self)
 {
-    return dstr_ret(self->GetReplaceString());
+    return new wxString(self->GetReplaceString());
 }
 
 //-----------------------------------------------------------------------------
@@ -133,17 +133,17 @@ wxFindReplaceData* wxFindReplaceData_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxFindReplaceData_GetFindString(wxFindReplaceData* self)
+wxString* wxFindReplaceData_GetFindString(wxFindReplaceData* self)
 {
-    return dstr_ret(self->GetFindString());
+    return new wxString(self->GetFindString());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxFindReplaceData_GetReplaceString(wxFindReplaceData* self)
+wxString* wxFindReplaceData_GetReplaceString(wxFindReplaceData* self)
 {
-    return dstr_ret(self->GetReplaceString());
+    return new wxString(self->GetReplaceString());
 }
 
 //-----------------------------------------------------------------------------

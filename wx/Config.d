@@ -44,7 +44,7 @@ public import wx.wxString;
         static extern (C) IntPtr wxConfigBase_Create();
         static extern (C) void   wxConfigBase_DontCreateOnDemand();
         static extern (C) void   wxConfigBase_SetPath(IntPtr self, string strPath);
-        static extern (C) string wxConfigBase_GetPath(IntPtr self);
+        static extern (C) IntPtr wxConfigBase_GetPath(IntPtr self);
         static extern (C) bool   wxConfigBase_GetFirstGroup(IntPtr self, IntPtr str, inout int lIndex);
         static extern (C) bool   wxConfigBase_GetNextGroup(IntPtr self, IntPtr str, inout int lIndex);
         static extern (C) bool   wxConfigBase_GetFirstEntry(IntPtr self, IntPtr str, inout int lIndex);
@@ -63,7 +63,7 @@ public import wx.wxString;
         static extern (C) bool   wxConfigBase_ReadDblDef(IntPtr self, string key, inout double val, double defVal);
         static extern (C) bool   wxConfigBase_ReadBool(IntPtr self, string key, inout bool val);
         static extern (C) bool   wxConfigBase_ReadBoolDef(IntPtr self, string key, inout bool val, bool defVal);
-        static extern (C) string wxConfigBase_ReadStrRet(IntPtr self, string key, string defVal);
+        static extern (C) IntPtr wxConfigBase_ReadStrRet(IntPtr self, string key, string defVal);
         static extern (C) int    wxConfigBase_ReadIntRet(IntPtr self, string key, int defVal);
         static extern (C) bool   wxConfigBase_WriteStr(IntPtr self, string key, string val);
         static extern (C) bool   wxConfigBase_WriteInt(IntPtr self, string key, int val);
@@ -77,12 +77,12 @@ public import wx.wxString;
         static extern (C) bool   wxConfigBase_DeleteAll(IntPtr self);
         static extern (C) bool   wxConfigBase_IsExpandingEnvVars(IntPtr self);
         static extern (C) void   wxConfigBase_SetExpandEnvVars(IntPtr self, bool bDoIt);
-        static extern (C) string wxConfigBase_ExpandEnvVars(IntPtr self, string str);
+        static extern (C) IntPtr wxConfigBase_ExpandEnvVars(IntPtr self, string str);
         static extern (C) void   wxConfigBase_SetRecordDefaults(IntPtr self, bool bDoIt);
         static extern (C) bool   wxConfigBase_IsRecordingDefaults(IntPtr self);
-        static extern (C) string wxConfigBase_GetAppName(IntPtr self);
+        static extern (C) IntPtr wxConfigBase_GetAppName(IntPtr self);
         static extern (C) void   wxConfigBase_SetAppName(IntPtr self, string appName);
-        static extern (C) string wxConfigBase_GetVendorName(IntPtr self);
+        static extern (C) IntPtr wxConfigBase_GetVendorName(IntPtr self);
         static extern (C) void   wxConfigBase_SetVendorName(IntPtr self, string vendorName);
         static extern (C) void   wxConfigBase_SetStyle(IntPtr self, int style);
         static extern (C) int    wxConfigBase_GetStyle(IntPtr self);
@@ -130,7 +130,7 @@ public import wx.wxString;
 		//---------------------------------------------------------------------
 
         public void Path(string value) { wxConfigBase_SetPath(wxobj, value); }
-        public string Path() { return wxConfigBase_GetPath(wxobj).dup; }
+        public string Path() { return cast(string) new wxString(wxConfigBase_GetPath(wxobj), true); }
 
 		//---------------------------------------------------------------------
 
@@ -365,7 +365,7 @@ public import wx.wxString;
 /+
         public string Read(string key, string defVal)
         {
-            return wxConfigBase_ReadStrRet(wxobj, key, defVal).dup;
+            return cast(string) new wxString(wxConfigBase_ReadStrRet(wxobj, key, defVal), true);
         }
 +/
         public int Read(string key, int defVal)
@@ -497,7 +497,7 @@ public import wx.wxString;
 
         /*public string ExpandEnvVars(string str)
         {
-            return new wxString(wxConfigBase_ExpandEnvVars(wxobj, str));
+            return cast(string) new wxString(wxConfigBase_ExpandEnvVars(wxobj, str));
         }*/
 
 		//---------------------------------------------------------------------
@@ -507,12 +507,12 @@ public import wx.wxString;
 
 		//---------------------------------------------------------------------
 
-        public string AppName() { return wxConfigBase_GetAppName(wxobj).dup; }
+        public string AppName() { return cast(string) new wxString(wxConfigBase_GetAppName(wxobj), true); }
         public void AppName(string value) { wxConfigBase_SetAppName(wxobj, value); }
 
 		//---------------------------------------------------------------------
 
-        public string VendorName() { return wxConfigBase_GetVendorName(wxobj).dup; }
+        public string VendorName() { return cast(string) new wxString(wxConfigBase_GetVendorName(wxobj), true); }
         public void VendorName(string value) { wxConfigBase_SetVendorName(wxobj, value); }
 
 		//---------------------------------------------------------------------

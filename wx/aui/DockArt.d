@@ -65,7 +65,7 @@ static extern (C) IntPtr wxDockArt_GetColor(IntPtr self, int id);
 static extern (C) void wxDockArt_SetColor(IntPtr self, int id, IntPtr color);
 static extern (C) void wxDockArt_DrawSash(IntPtr self, IntPtr dc, int orientation, inout Rectangle rect);
 static extern (C) void wxDockArt_DrawBackground(IntPtr self, IntPtr dc, int orientation, inout Rectangle rect);
-static extern (C) void wxDockArt_DrawCaption(IntPtr self, IntPtr dc, char[] text, inout Rectangle rect, IntPtr pane);
+static extern (C) void wxDockArt_DrawCaption(IntPtr self, IntPtr dc, string text, inout Rectangle rect, IntPtr pane);
 static extern (C) void wxDockArt_DrawGripper(IntPtr self, IntPtr dc, inout Rectangle rect, IntPtr pane);
 static extern (C) void wxDockArt_DrawBorder(IntPtr self, IntPtr dc, inout Rectangle rect, IntPtr pane);
 static extern (C) void wxDockArt_DrawPaneButton(IntPtr self, IntPtr dc, int button, int button_state, inout Rectangle rect, IntPtr pane);
@@ -200,7 +200,7 @@ public class DockArt : wxObject
     public void SetColor(int id, Colour color) { wxDockArt_SetColor(wxobj, id, wxObject.SafePtr(color)); }
     public void DrawSash(DC dc, int orientation, Rectangle rect) { wxDockArt_DrawSash(wxobj, wxObject.SafePtr(dc), orientation, rect); }
     public void DrawBackground(DC dc, int orientation, Rectangle rect) { wxDockArt_DrawBackground(wxobj, wxObject.SafePtr(dc), orientation, rect); }
-    public void DrawCaption(DC dc, char[] text, Rectangle rect, PaneInfo pane) { wxDockArt_DrawCaption(wxobj, wxObject.SafePtr(dc), text, rect, wxObject.SafePtr(pane)); }
+    public void DrawCaption(DC dc, string text, Rectangle rect, PaneInfo pane) { wxDockArt_DrawCaption(wxobj, wxObject.SafePtr(dc), text, rect, wxObject.SafePtr(pane)); }
     public void DrawGripper(DC dc, Rectangle rect, PaneInfo pane) { wxDockArt_DrawGripper(wxobj, wxObject.SafePtr(dc), rect, wxObject.SafePtr(pane)); }
     public void DrawBorder(DC dc, Rectangle rect, PaneInfo pane) { wxDockArt_DrawBorder(wxobj, wxObject.SafePtr(dc), rect, wxObject.SafePtr(pane)); }
     public void DrawPaneButton(DC dc, int button, int button_state, Rectangle rect, PaneInfo pane) { wxDockArt_DrawPaneButton(wxobj, wxObject.SafePtr(dc), button, button_state, rect, wxObject.SafePtr(pane)); }

@@ -118,7 +118,7 @@ public import wx.Colour;
 		static extern (C) IntPtr wxColourDatabase_ctor();
 		static extern (C) void wxColourDataBase_dtor(IntPtr self);
 		static extern (C) IntPtr wxColourDatabase_Find(IntPtr self, string name);
-		static extern (C) string wxColourDatabase_FindName(IntPtr self, IntPtr colour);
+		static extern (C) IntPtr wxColourDatabase_FindName(IntPtr self, IntPtr colour);
 		static extern (C) void wxColourDatabase_AddColour(IntPtr self, string name, IntPtr colour);
 		//! \endcond
 		
@@ -156,7 +156,7 @@ public import wx.Colour;
 		
 		public string FindName(Colour colour)
 		{
-			return wxColourDatabase_FindName(wxobj, wxObject.SafePtr(colour)).dup;
+			return cast(string) new wxString(wxColourDatabase_FindName(wxobj, wxObject.SafePtr(colour)), true);
 		}
 		
 		//-----------------------------------------------------------------------------

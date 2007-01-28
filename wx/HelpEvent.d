@@ -22,9 +22,9 @@ public import wx.Window;
 		static extern (C) IntPtr wxHelpEvent_ctor(int type,int winid, inout Point pos);
 		static extern (C) void   wxHelpEvent_GetPosition(IntPtr self, inout Point pos);
 		static extern (C) void   wxHelpEvent_SetPosition(IntPtr self, inout Point pos);
-		static extern (C) string wxHelpEvent_GetLink(IntPtr self);
+		static extern (C) IntPtr wxHelpEvent_GetLink(IntPtr self);
 		static extern (C) void   wxHelpEvent_SetLink(IntPtr self, string link);
-		static extern (C) string wxHelpEvent_GetTarget(IntPtr self);
+		static extern (C) IntPtr wxHelpEvent_GetTarget(IntPtr self);
 		static extern (C) void   wxHelpEvent_SetTarget(IntPtr self, string target);
 		//! \endcond
 		
@@ -51,12 +51,12 @@ public import wx.Window;
 		
 		//-----------------------------------------------------------------------------	
 		
-		public string Link() { return wxHelpEvent_GetLink(wxobj).dup; }
+		public string Link() { return cast(string) new wxString(wxHelpEvent_GetLink(wxobj), true); }
 		public void Link(string value) { wxHelpEvent_SetLink(wxobj, value); }
 		
 		//-----------------------------------------------------------------------------	
 		
-		public string Target() { return wxHelpEvent_GetTarget(wxobj).dup; }
+		public string Target() { return cast(string) new wxString(wxHelpEvent_GetTarget(wxobj), true); }
 		public void Target(string value) { wxHelpEvent_SetTarget(wxobj, value); }
 
 

@@ -89,7 +89,7 @@ public import wx.ImageList;
 		static extern (C) IntPtr wxNotebook_GetPage(IntPtr self, int nPage);
 		static extern (C) int    wxNotebook_GetSelection(IntPtr self);
 		static extern (C) bool   wxNotebook_SetPageText(IntPtr self, int nPage, string strText);
-		static extern (C) string wxNotebook_GetPageText(IntPtr self, int nPage);
+		static extern (C) IntPtr wxNotebook_GetPageText(IntPtr self, int nPage);
 		static extern (C) void   wxNotebook_SetImageList(IntPtr self, IntPtr imageList);
 		static extern (C) void   wxNotebook_AssignImageList(IntPtr self, IntPtr imageList);
 		static extern (C) IntPtr wxNotebook_GetImageList(IntPtr self);
@@ -192,7 +192,7 @@ public import wx.ImageList;
 
 		public string GetPageText(int page)
 		{
-			return wxNotebook_GetPageText(wxobj, page).dup;
+			return cast(string) new wxString(wxNotebook_GetPageText(wxobj, page), true);
 		}
 
 		//---------------------------------------------------------------------

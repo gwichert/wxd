@@ -75,25 +75,25 @@ void wxMenuItem_SetText(wxMenuItem* self, wxc_string str)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxMenuItem_GetLabel(wxMenuItem* self)
+wxString* wxMenuItem_GetLabel(wxMenuItem* self)
 {
-    return dstr_ret(self->GetLabel());
+    return new wxString(self->GetLabel());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxMenuItem_GetText(wxMenuItem* self)
+wxString* wxMenuItem_GetText(wxMenuItem* self)
 {
-    return dstr_ret(self->GetText());
+    return new wxString(self->GetText());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxMenuItem_GetLabelFromText(wxMenuItem* self, wxc_string text)
+wxString* wxMenuItem_GetLabelFromText(wxMenuItem* self, wxc_string text)
 {
-    return dstr_ret(self->GetLabelFromText(wxstr(text)));
+    return new wxString(self->GetLabelFromText(wxstr(text)));
 }
 
 //-----------------------------------------------------------------------------
@@ -195,9 +195,9 @@ void wxMenuItem_SetHelp(wxMenuItem* self, wxc_string str)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxMenuItem_GetHelp(wxMenuItem* self)
+wxString* wxMenuItem_GetHelp(wxMenuItem* self)
 {
-    return dstr_ret(self->GetHelp());
+    return new wxString(self->GetHelp());
 }
 
 //-----------------------------------------------------------------------------
@@ -227,9 +227,9 @@ void wxMenuItem_SetName(wxMenuItem* self, wxc_string str)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxMenuItem_GetName(wxMenuItem* self)
+wxString* wxMenuItem_GetName(wxMenuItem* self)
 {
-    return dstr_ret(self->GetText());
+    return new wxString(self->GetText());
 }
 
 //-----------------------------------------------------------------------------

@@ -325,9 +325,9 @@ void wxTreeCtrl_SetItemText(wxTreeCtrl* self, wxTreeItemId* item, wxc_string tex
 }
 
 extern "C" WXEXPORT
-dstrret wxTreeCtrl_GetItemText(wxTreeCtrl* self, wxTreeItemId* item)
+wxString* wxTreeCtrl_GetItemText(wxTreeCtrl* self, wxTreeItemId* item)
 {
-    return dstr_ret(self->GetItemText(*item));
+    return new wxString(self->GetItemText(*item));
 }
 
 //-----------------------------------------------------------------------------
@@ -811,9 +811,9 @@ void wxTreeEvent_SetKeyEvent(wxTreeEvent* self, wxKeyEvent* evt)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxTreeEvent_GetLabel(wxTreeEvent* self)
+wxString* wxTreeEvent_GetLabel(wxTreeEvent* self)
 {
-    return dstr_ret(self->GetLabel());
+    return new wxString(self->GetLabel());
 }
 
 //-----------------------------------------------------------------------------

@@ -103,9 +103,9 @@ wxc_bool wxFont_GetUnderlined(wxFont* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxFont_GetFaceName(wxFont* self)
+wxString* wxFont_GetFaceName(wxFont* self)
 {
-	return dstr_ret(self->GetFaceName().c_str());
+	return new wxString(self->GetFaceName().c_str());
 }
 
 //-----------------------------------------------------------------------------
@@ -135,17 +135,17 @@ wxc_bool wxFont_IsFixedWidth(wxFont* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxFont_GetNativeFontInfoDesc(wxFont* self)
+wxString* wxFont_GetNativeFontInfoDesc(wxFont* self)
 {
-	return dstr_ret(self->GetNativeFontInfoDesc());
+	return new wxString(self->GetNativeFontInfoDesc());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxFont_GetNativeFontInfoUserDesc(wxFont* self)
+wxString* wxFont_GetNativeFontInfoUserDesc(wxFont* self)
 {
-	return dstr_ret(self->GetNativeFontInfoUserDesc());
+	return new wxString(self->GetNativeFontInfoUserDesc());
 }
 
 //-----------------------------------------------------------------------------
@@ -215,25 +215,25 @@ void wxFont_SetNativeFontInfoUserDesc(wxFont* self, wxc_string info)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxFont_GetFamilyString(wxFont* self)
+wxString* wxFont_GetFamilyString(wxFont* self)
 {
-	return dstr_ret(self->GetFamilyString());
+	return new wxString(self->GetFamilyString());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxFont_GetStyleString(wxFont* self)
+wxString* wxFont_GetStyleString(wxFont* self)
 {
-	return dstr_ret(self->GetStyleString());
+	return new wxString(self->GetStyleString());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxFont_GetWeightString(wxFont* self)
+wxString* wxFont_GetWeightString(wxFont* self)
 {
-	return dstr_ret(self->GetWeightString());
+	return new wxString(self->GetWeightString());
 }
 
 //-----------------------------------------------------------------------------

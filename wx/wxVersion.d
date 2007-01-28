@@ -21,7 +21,7 @@ private import std.string;
 		static extern (C) int wxVersion_MINOR_VERSION();
 		static extern (C) int wxVersion_RELEASE_NUMBER();
 		static extern (C) int wxVersion_SUBRELEASE_NUMBER();
-		static extern (C) string wxVersion_VERSION_STRING();
+		static extern (C) IntPtr wxVersion_VERSION_STRING();
 		static extern (C) int wxVersion_ABI_VERSION();
 		//! \endcond
 
@@ -30,7 +30,7 @@ public int wxMINOR_VERSION() { return wxVersion_MINOR_VERSION(); }
 public int wxRELEASE_NUMBER() { return wxVersion_RELEASE_NUMBER(); }
 public int wxSUBRELEASE_NUMBER() { return wxVersion_SUBRELEASE_NUMBER(); }
 
-public string wxVERSION_STRING() { return wxVersion_VERSION_STRING(); }
+public string wxVERSION_STRING() { return cast(string) new wxString(wxVersion_VERSION_STRING(), true); }
 
 public int wxABI_VERSION() { return wxVersion_ABI_VERSION(); }
 

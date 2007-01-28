@@ -32,7 +32,7 @@ private import std.string;
 		static extern (C) bool wxPlatform_GLCANVAS();
 		static extern (C) bool wxPlatform_SOUND();
 
-		static extern (C) string wxPlatform_wxGetOsDescription();
+		static extern (C) IntPtr wxPlatform_wxGetOsDescription();
 		static extern (C) int wxPlatform_wxGetOsVersion(inout int major, inout int minor);
 
 		static extern (C) int wxPlatform_wxUNKNOWN_PLATFORM();
@@ -62,7 +62,7 @@ public bool __WXUNIVERSAL__;
 /// Get OS description as a user-readable string
 public string wxGetOsDescription()
 {
-	return wxPlatform_wxGetOsDescription();
+	return cast(string) new wxString(wxPlatform_wxGetOsDescription(), true);
 }
 
 public bool ANSI;
@@ -138,14 +138,11 @@ version(__WXX11__)
 	DEBUG = wxPlatform_WXDEBUG();
 	UNIX = wxPlatform_UNIX();
 
-/+	//currently encoding is not used
-
 	// check that wxc matches wxd:
 version(UNICODE)
 	assert(UNICODE);
 else //version(ANSI)
 	assert(ANSI);
-+/
 
 	DISPLAY = wxPlatform_DISPLAY();
 	POSTSCRIPT = wxPlatform_POSTSCRIPT();

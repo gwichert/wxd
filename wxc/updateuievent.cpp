@@ -91,9 +91,9 @@ wxc_bool wxUpdateUIEvent_GetSetText(wxUpdateUIEvent* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxUpdateUIEvent_GetText(wxUpdateUIEvent* self)
+wxString* wxUpdateUIEvent_GetText(wxUpdateUIEvent* self)
 {
-	return dstr_ret(self->GetText());
+	return new wxString(self->GetText());
 }
 
 //-----------------------------------------------------------------------------

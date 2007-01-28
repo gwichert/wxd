@@ -27,23 +27,23 @@ private import std.string;
         static extern (C) IntPtr wxFileDialog_ctor(IntPtr parent, string message, string defaultDir, string defaultFile, string wildcard, uint style, inout Point pos);
         static extern (C) void   wxFileDialog_dtor(IntPtr self);
 
-        static extern (C) string wxFileDialog_GetDirectory(IntPtr self);
+        static extern (C) IntPtr wxFileDialog_GetDirectory(IntPtr self);
         static extern (C) void   wxFileDialog_SetDirectory(IntPtr self, string dir);
 
-        static extern (C) string wxFileDialog_GetFilename(IntPtr self);
+        static extern (C) IntPtr wxFileDialog_GetFilename(IntPtr self);
         static extern (C) void   wxFileDialog_SetFilename(IntPtr self, string filename);
 
-        static extern (C) string wxFileDialog_GetPath(IntPtr self);
+        static extern (C) IntPtr wxFileDialog_GetPath(IntPtr self);
         static extern (C) void   wxFileDialog_SetPath(IntPtr self, string path);
 
         static extern (C) void   wxFileDialog_SetFilterIndex(IntPtr self, int filterIndex);
         static extern (C) int    wxFileDialog_GetFilterIndex(IntPtr self);
 
-        static extern (C) string wxFileDialog_GetWildcard(IntPtr self);
+        static extern (C) IntPtr wxFileDialog_GetWildcard(IntPtr self);
         static extern (C) void   wxFileDialog_SetWildcard(IntPtr self, string wildcard);
 
         static extern (C) void   wxFileDialog_SetMessage(IntPtr self, string message);
-        static extern (C) string wxFileDialog_GetMessage(IntPtr self);
+        static extern (C) IntPtr wxFileDialog_GetMessage(IntPtr self);
 
         static extern (C) int    wxFileDialog_ShowModal(IntPtr self);
 
@@ -82,20 +82,20 @@ private import std.string;
 
         //---------------------------------------------------------------------
 
-        public string Directory() { return wxFileDialog_GetDirectory(wxobj).dup; }
+        public string Directory() { return cast(string) new wxString(wxFileDialog_GetDirectory(wxobj), true); }
         public void Directory(string value) { wxFileDialog_SetDirectory(wxobj, value); }
 
-        public string Filename() { return wxFileDialog_GetFilename(wxobj).dup; }
+        public string Filename() { return cast(string) new wxString(wxFileDialog_GetFilename(wxobj), true); }
         public void Filename(string value) { wxFileDialog_SetFilename(wxobj, value); }
 
-        public string Path() { return wxFileDialog_GetPath(wxobj).dup; }
+        public string Path() { return cast(string) new wxString(wxFileDialog_GetPath(wxobj), true); }
         public void Path(string value) { wxFileDialog_SetPath(wxobj, value); }
 
         public void FilterIndex(int value) { wxFileDialog_SetFilterIndex(wxobj,value); }
         public int FilterIndex() { return wxFileDialog_GetFilterIndex(wxobj); }
 
         public void Message(string value) { wxFileDialog_SetMessage(wxobj,value); }
-        public string Message() { return wxFileDialog_GetMessage(wxobj).dup; }
+        public string Message() { return cast(string) new wxString(wxFileDialog_GetMessage(wxobj), true); }
 
         //---------------------------------------------------------------------
 
@@ -106,7 +106,7 @@ private import std.string;
 
         //---------------------------------------------------------------------
 
-        public string Wildcard() { return wxFileDialog_GetWildcard(wxobj).dup; }
+        public string Wildcard() { return cast(string) new wxString(wxFileDialog_GetWildcard(wxobj), true); }
         public void Wildcard(string value) { wxFileDialog_SetWildcard(wxobj, value); }
 
         public int Style() { return cast(int)wxFileDialog_GetStyle(wxobj); }
@@ -120,10 +120,10 @@ private import std.string;
     }
 
 	//! \cond EXTERN
-	static extern (C) string wxFileSelector_func(string message, string default_path, string default_filename, string default_extension, string wildcard, int flags, IntPtr parent, int x, int y);
-	static extern (C) string wxFileSelectorEx_func(string message, string default_path, string default_filename,int *indexDefaultExtension, string wildcard, int flags, IntPtr parent, int x, int y);
-	static extern (C) string wxLoadFileSelector_func(string what, string extension, string default_name, IntPtr parent);
-	static extern (C) string wxSaveFileSelector_func(string what, string extension, string default_name, IntPtr parent);
+	static extern (C) IntPtr wxFileSelector_func(string message, string default_path, string default_filename, string default_extension, string wildcard, int flags, IntPtr parent, int x, int y);
+	static extern (C) IntPtr wxFileSelectorEx_func(string message, string default_path, string default_filename,int *indexDefaultExtension, string wildcard, int flags, IntPtr parent, int x, int y);
+	static extern (C) IntPtr wxLoadFileSelector_func(string what, string extension, string default_name, IntPtr parent);
+	static extern (C) IntPtr wxSaveFileSelector_func(string what, string extension, string default_name, IntPtr parent);
 	//! \endcond
 
 string FileSelector(
@@ -135,14 +135,14 @@ string FileSelector(
 	int flags = 0,
 	Window parent = null, int x = -1, int y = -1)
 {
-	return wxFileSelector_func(
+	return cast(string) new wxString(wxFileSelector_func(
 		message,
 		default_path,
 		default_filename,
 		default_extension,
 		wildcard,
 		flags,
-		wxObject.SafePtr(parent),x,y);
+		wxObject.SafePtr(parent),x,y), true);
 }
 
 string FileSelectorEx(
@@ -154,14 +154,14 @@ string FileSelectorEx(
 	int flags = 0,
 	Window parent = null, int x = -1, int y = -1)
 {
-	return wxFileSelectorEx_func(
+	return cast(string) new wxString(wxFileSelectorEx_func(
 		message,
 		default_path,
 		default_filename,
 		indexDefaultExtension,
 		wildcard,
 		flags,
-		wxObject.SafePtr(parent),x,y);
+		wxObject.SafePtr(parent),x,y), true);
 }
 
 string LoadFileSelector(
@@ -170,11 +170,11 @@ string LoadFileSelector(
 	string default_name = null,
 	Window parent = null)
 {
-	return wxLoadFileSelector_func(
+	return cast(string) new wxString(wxLoadFileSelector_func(
 		what,
 		extension,
 		default_name,
-		wxObject.SafePtr(parent));
+		wxObject.SafePtr(parent)), true);
 }
 
 string SaveFileSelector(
@@ -183,10 +183,10 @@ string SaveFileSelector(
 	string default_name = null,
 	Window parent = null)
 {
-	return wxSaveFileSelector_func(
+	return cast(string) new wxString(wxSaveFileSelector_func(
 		what,
 		extension,
 		default_name,
-		wxObject.SafePtr(parent));
+		wxObject.SafePtr(parent)), true);
 }
 

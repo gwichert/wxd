@@ -33,9 +33,9 @@ public import wx.ClientData;
 		static extern (C) bool   wxToolBarToolBase_IsEnabled(IntPtr self);
 		static extern (C) bool   wxToolBarToolBase_IsToggled(IntPtr self);
 		static extern (C) bool   wxToolBarToolBase_CanBeToggled(IntPtr self);
-		static extern (C) string wxToolBarToolBase_GetLabel(IntPtr self);
-		static extern (C) string wxToolBarToolBase_GetShortHelp(IntPtr self);
-		static extern (C) string wxToolBarToolBase_GetLongHelp(IntPtr self);
+		static extern (C) IntPtr wxToolBarToolBase_GetLabel(IntPtr self);
+		static extern (C) IntPtr wxToolBarToolBase_GetShortHelp(IntPtr self);
+		static extern (C) IntPtr wxToolBarToolBase_GetLongHelp(IntPtr self);
 		static extern (C) IntPtr wxToolBarToolBase_GetClientData(IntPtr self);
 		static extern (C) bool   wxToolBarToolBase_Enable(IntPtr self, bool enable);
 		static extern (C) bool   wxToolBarToolBase_Toggle(IntPtr self, bool toggle);
@@ -98,13 +98,13 @@ public import wx.ClientData;
 
         //---------------------------------------------------------------------
 
-		public string Label() { return wxToolBarToolBase_GetLabel(wxobj).dup; }
+		public string Label() { return cast(string) new wxString(wxToolBarToolBase_GetLabel(wxobj), true); }
 		public void Label(string value) { wxToolBarToolBase_SetLabel(wxobj, value); }
 
-		public string ShortHelp() { return wxToolBarToolBase_GetShortHelp(wxobj).dup; }
+		public string ShortHelp() { return cast(string) new wxString(wxToolBarToolBase_GetShortHelp(wxobj), true); }
 		public void ShortHelp(string value) { wxToolBarToolBase_SetShortHelp(wxobj, value); }
 
-		public string LongHelp() { return wxToolBarToolBase_GetLongHelp(wxobj).dup; }
+		public string LongHelp() { return cast(string) new wxString(wxToolBarToolBase_GetLongHelp(wxobj), true); }
 		public void LongHelp(string value) { wxToolBarToolBase_SetLongHelp(wxobj, value); }
 
         //---------------------------------------------------------------------
@@ -164,9 +164,9 @@ public import wx.ClientData;
 		static extern (C) bool   wxToolBar_GetToolState(IntPtr self, int toolid);
 		static extern (C) bool   wxToolBar_GetToolEnabled(IntPtr self, int toolid);
 		static extern (C) void   wxToolBar_SetToolShortHelp(IntPtr self, int toolid, string helpString);
-		static extern (C) string wxToolBar_GetToolShortHelp(IntPtr self, int toolid);
+		static extern (C) IntPtr wxToolBar_GetToolShortHelp(IntPtr self, int toolid);
 		static extern (C) void   wxToolBar_SetToolLongHelp(IntPtr self, int toolid, string helpString);
-		static extern (C) string wxToolBar_GetToolLongHelp(IntPtr self, int toolid);
+		static extern (C) IntPtr wxToolBar_GetToolLongHelp(IntPtr self, int toolid);
 		static extern (C) void   wxToolBar_SetMargins(IntPtr self, int x, int y);
 		static extern (C) void   wxToolBar_SetToolPacking(IntPtr self, int packing);
 		static extern (C) void   wxToolBar_SetToolSeparation(IntPtr self, int separation);
@@ -373,7 +373,7 @@ public import wx.ClientData;
 
         public string GetToolShortHelp(int toolid)
         {
-            return wxToolBar_GetToolShortHelp(wxobj, toolid).dup;
+            return cast(string) new wxString(wxToolBar_GetToolShortHelp(wxobj, toolid), true);
         }
 
         public void SetToolShortHelp(int toolid, string helpString)
@@ -385,7 +385,7 @@ public import wx.ClientData;
 
         public string GetToolLongHelp(int toolid)
         {
-            return wxToolBar_GetToolLongHelp(wxobj, toolid).dup;
+            return cast(string) new wxString(wxToolBar_GetToolLongHelp(wxobj, toolid), true);
         }
 
         public void SetToolLongHelp(int toolid, string helpString)

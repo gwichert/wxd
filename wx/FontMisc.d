@@ -27,8 +27,8 @@ public import wx.ArrayString;
 		static extern (C) IntPtr wxFontMapper_Set(IntPtr mapper);
 		static extern (C) int    wxFontMapper_GetSupportedEncodingsCount();
 		static extern (C) int    wxFontMapper_GetEncoding(int n);
-		static extern (C) string wxFontMapper_GetEncodingName(int encoding);
-		static extern (C) string wxFontMapper_GetEncodingDescription(int encoding);
+		static extern (C) IntPtr wxFontMapper_GetEncodingName(int encoding);
+		static extern (C) IntPtr wxFontMapper_GetEncodingDescription(int encoding);
 		static extern (C) int    wxFontMapper_GetEncodingFromName(string name);
 		
 		static extern (C) int    wxFontMapper_CharsetToEncoding(IntPtr self, string charset, bool interactive);
@@ -98,7 +98,7 @@ public import wx.ArrayString;
 		
 		public static string GetEncodingName(FontEncoding encoding)
 		{
-			return wxFontMapper_GetEncodingName(cast(int)encoding).dup;
+			return cast(string) new wxString(wxFontMapper_GetEncodingName(cast(int)encoding), true);
 		}
 		
 		//---------------------------------------------------------------------
@@ -153,7 +153,7 @@ public import wx.ArrayString;
 		
 		public static string GetEncodingDescription(FontEncoding encoding)
 		{
-			return wxFontMapper_GetEncodingDescription(cast(int)encoding).dup;
+			return cast(string) new wxString(wxFontMapper_GetEncodingDescription(cast(int)encoding), true);
 		}
 		
 		//---------------------------------------------------------------------
@@ -176,7 +176,7 @@ public import wx.ArrayString;
 		//! \cond EXTERN
 		static extern (C) IntPtr wxEncodingConverter_ctor();
 		static extern (C) bool wxEncodingConverter_Init(IntPtr self, int input_enc, int output_enc, int method);
-		static extern (C) string wxEncodingConverter_Convert(IntPtr self, string input);
+		static extern (C) IntPtr wxEncodingConverter_Convert(IntPtr self, string input);
 		//! \endcond
 		
 		//---------------------------------------------------------------------
@@ -212,7 +212,7 @@ public import wx.ArrayString;
 		
 		public string Convert(string input)
 		{
-			return wxEncodingConverter_Convert(wxobj, input).dup;
+			return cast(string) new wxString(wxEncodingConverter_Convert(wxobj, input), true);
 		}
 	}
 	
@@ -221,9 +221,9 @@ public import wx.ArrayString;
 		//! \cond EXTERN
 		extern (C) {
 		alias bool function(FontEnumerator obj, int encoding, bool fixedWidthOnly) Virtual_EnumerateFacenames;
-		alias bool function(FontEnumerator obj, string facename) Virtual_EnumerateEncodings;
-		alias bool function(FontEnumerator obj, string facename) Virtual_OnFacename;
-		alias bool function(FontEnumerator obj, string facename, string encoding) Virtual_OnFontEncoding;
+		alias bool function(FontEnumerator obj, IntPtr facename) Virtual_EnumerateEncodings;
+		alias bool function(FontEnumerator obj, IntPtr facename) Virtual_OnFacename;
+		alias bool function(FontEnumerator obj, IntPtr facename, IntPtr encoding) Virtual_OnFontEncoding;
 		}
 
 		static extern (C) IntPtr wxFontEnumerator_ctor();
@@ -289,9 +289,9 @@ public import wx.ArrayString;
 			return wxFontEnumerator_OnFacename(wxobj, facename);
 		}
 		
-		extern(C) private static bool staticDoOnFacename(FontEnumerator obj, string facename)
+		extern(C) private static bool staticDoOnFacename(FontEnumerator obj, IntPtr facename)
 		{
-			return obj.OnFacename(facename);
+			return obj.OnFacename(cast(string) new wxString(facename));
 		}
 		
 		//---------------------------------------------------------------------
@@ -301,9 +301,9 @@ public import wx.ArrayString;
 			return wxFontEnumerator_OnFontEncoding(wxobj, facename, encoding);
 		}
 		
-		extern(C) private static bool staticDoOnFontEncoding(FontEnumerator obj, string facename, string encoding)
+		extern(C) private static bool staticDoOnFontEncoding(FontEnumerator obj, IntPtr facename, IntPtr encoding)
 		{
-			return obj.OnFontEncoding(facename, encoding);
+			return obj.OnFontEncoding(cast(string) new wxString(facename), cast(string) new wxString(encoding));
 		}
 		
 		//---------------------------------------------------------------------
@@ -340,8 +340,8 @@ public import wx.ArrayString;
 			return wxFontEnumerator_EnumerateEncodings(wxobj, facename);
 		}
 		
-		extern(C) private static bool staticDoEnumerateEncodings(FontEnumerator obj, string facename)
+		extern(C) private static bool staticDoEnumerateEncodings(FontEnumerator obj, IntPtr facename)
 		{
-			return obj.EnumerateEncodings(facename);
+			return obj.EnumerateEncodings(cast(string) new wxString(facename));
 		}
 	}

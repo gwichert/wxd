@@ -28,7 +28,7 @@ public import wx.Window;
 		static extern (C) bool   wxUpdateUIEvent_GetSetChecked(IntPtr self);
 		static extern (C) bool   wxUpdateUIEvent_GetSetEnabled(IntPtr self);
 		static extern (C) bool   wxUpdateUIEvent_GetSetText(IntPtr self);
-		static extern (C) string wxUpdateUIEvent_GetText(IntPtr self);
+		static extern (C) IntPtr wxUpdateUIEvent_GetText(IntPtr self);
 		static extern (C) int    wxUpdateUIEvent_GetMode();
 		static extern (C) uint   wxUpdateUIEvent_GetUpdateInterval();
 		static extern (C) void   wxUpdateUIEvent_ResetUpdateTime();
@@ -88,7 +88,7 @@ public import wx.Window;
 		
 		//-----------------------------------------------------------------------------
 		
-		public string Text() { return wxUpdateUIEvent_GetText(wxobj).dup; }
+		public string Text() { return cast(string) new wxString(wxUpdateUIEvent_GetText(wxobj), true); }
 		public void Text(string value) { wxUpdateUIEvent_SetText(wxobj, value); }
 		
 		//-----------------------------------------------------------------------------

@@ -410,7 +410,7 @@ public import wx.common;
         static extern (C) bool wxPrintData_GetCollate(IntPtr self);
         static extern (C) int wxPrintData_GetOrientation(IntPtr self);
         static extern (C) bool wxPrintData_Ok(IntPtr self);
-        static extern (C) string wxPrintData_GetPrinterName(IntPtr self);
+        static extern (C) IntPtr wxPrintData_GetPrinterName(IntPtr self);
         static extern (C) bool wxPrintData_GetColour(IntPtr self);
         static extern (C) int wxPrintData_GetDuplex(IntPtr self);
         static extern (C) int wxPrintData_GetPaperId(IntPtr self);
@@ -425,11 +425,11 @@ public import wx.common;
         static extern (C) void wxPrintData_SetPaperId(IntPtr self, int sizeId);
         static extern (C) void wxPrintData_SetPaperSize(IntPtr self, inout Size sz);
         static extern (C) void wxPrintData_SetQuality(IntPtr self, int quality);
-        static extern (C) string wxPrintData_GetPrinterCommand(IntPtr self);
-        static extern (C) string wxPrintData_GetPrinterOptions(IntPtr self);
-        static extern (C) string wxPrintData_GetPreviewCommand(IntPtr self);
-        static extern (C) string wxPrintData_GetFilename(IntPtr self);
-        static extern (C) string wxPrintData_GetFontMetricPath(IntPtr self);
+        static extern (C) IntPtr wxPrintData_GetPrinterCommand(IntPtr self);
+        static extern (C) IntPtr wxPrintData_GetPrinterOptions(IntPtr self);
+        static extern (C) IntPtr wxPrintData_GetPreviewCommand(IntPtr self);
+        static extern (C) IntPtr wxPrintData_GetFilename(IntPtr self);
+        static extern (C) IntPtr wxPrintData_GetFontMetricPath(IntPtr self);
         static extern (C) double wxPrintData_GetPrinterScaleX(IntPtr self);
         static extern (C) double wxPrintData_GetPrinterScaleY(IntPtr self);
         static extern (C) int wxPrintData_GetPrinterTranslateX(IntPtr self);
@@ -488,7 +488,7 @@ public import wx.common;
 
         //-----------------------------------------------------------------------------
 
-        public string PrinterName() { return wxPrintData_GetPrinterName(wxobj).dup; }
+        public string PrinterName() { return cast(string) new wxString(wxPrintData_GetPrinterName(wxobj), true); }
         public void PrinterName(string value) { wxPrintData_SetPrinterName(wxobj, value); }
 
         //-----------------------------------------------------------------------------
@@ -522,27 +522,27 @@ public import wx.common;
 
         //-----------------------------------------------------------------------------
 
-        public string PrinterCommand() { return wxPrintData_GetPrinterCommand(wxobj).dup; }
+        public string PrinterCommand() { return cast(string) new wxString(wxPrintData_GetPrinterCommand(wxobj), true); }
         public void PrinterCommand(string value) { wxPrintData_SetPrinterCommand(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public string PrinterOptions() { return wxPrintData_GetPrinterOptions(wxobj).dup; }
+        public string PrinterOptions() { return cast(string) new wxString(wxPrintData_GetPrinterOptions(wxobj), true); }
         public void PrinterOptions(string value) { wxPrintData_SetPrinterOptions(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public string PreviewCommand() { return wxPrintData_GetPreviewCommand(wxobj).dup; }
+        public string PreviewCommand() { return cast(string) new wxString(wxPrintData_GetPreviewCommand(wxobj), true); }
         public void PreviewCommand(string value) { wxPrintData_SetPreviewCommand(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public string Filename() { return wxPrintData_GetFilename(wxobj).dup; }
+        public string Filename() { return cast(string) new wxString(wxPrintData_GetFilename(wxobj), true); }
         public void Filename(string value) { wxPrintData_SetFilename(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public string FontMetricPath() { return wxPrintData_GetFontMetricPath(wxobj).dup; }
+        public string FontMetricPath() { return cast(string) new wxString(wxPrintData_GetFontMetricPath(wxobj), true); }
         public void FontMetricPath(string value) { wxPrintData_SetFontMetricPath(wxobj, value); }
 
         //-----------------------------------------------------------------------------

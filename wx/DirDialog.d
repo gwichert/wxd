@@ -21,13 +21,13 @@ public import wx.Dialog;
         static extern (C) IntPtr wxDirDialog_ctor(IntPtr parent, string message, string defaultPath, uint style, inout Point pos, inout Size size, string name);
 
         static extern (C) void   wxDirDialog_SetPath(IntPtr self, string path);
-        static extern (C) string wxDirDialog_GetPath(IntPtr self);
+        static extern (C) IntPtr wxDirDialog_GetPath(IntPtr self);
 
         static extern (C) int    wxDirDialog_GetStyle(IntPtr self);
         static extern (C) void   wxDirDialog_SetStyle(IntPtr self, int style);
 
         static extern (C) void   wxDirDialog_SetMessage(IntPtr self, string message);
-        static extern (C) string wxDirDialog_GetMessage(IntPtr self);
+        static extern (C) IntPtr wxDirDialog_GetMessage(IntPtr self);
 
         static extern (C) int    wxDirDialog_ShowModal(IntPtr self);
 		//! \endcond
@@ -52,12 +52,12 @@ public import wx.Dialog;
         //-----------------------------------------------------------------------------
 
         public void Path(string value) { wxDirDialog_SetPath(wxobj, value); }
-        public string Path() { return wxDirDialog_GetPath(wxobj).dup; }
+        public string Path() { return cast(string) new wxString(wxDirDialog_GetPath(wxobj), true); }
 
         //-----------------------------------------------------------------------------
 
         public void Message(string value) { wxDirDialog_SetMessage(wxobj, value); }
-        public string Message() { return wxDirDialog_GetMessage(wxobj).dup; }
+        public string Message() { return cast(string) new wxString(wxDirDialog_GetMessage(wxobj), true); }
 
         //-----------------------------------------------------------------------------
 

@@ -70,18 +70,18 @@ void wxTextEntryDialog_SetValue(wxTextEntryDialog* self, wxc_string val)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxTextEntryDialog_GetValue(wxTextEntryDialog* self)
+wxString* wxTextEntryDialog_GetValue(wxTextEntryDialog* self)
 {
-    return dstr_ret(self->GetValue());
+    return new wxString(self->GetValue());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxGetPasswordFromUser_func(wxc_string message, wxc_string caption,
+wxString* wxGetPasswordFromUser_func(wxc_string message, wxc_string caption,
                                      wxc_string defaultValue, wxWindow* parent)
 {
-    return dstr_ret(wxGetPasswordFromUser(wxstr(message),
+    return new wxString(wxGetPasswordFromUser(wxstr(message),
                         wxstr(caption),
                         wxstr(defaultValue),
                         parent));
@@ -90,11 +90,11 @@ dstrret wxGetPasswordFromUser_func(wxc_string message, wxc_string caption,
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxGetTextFromUser_func(wxc_string message, wxc_string caption,
+wxString* wxGetTextFromUser_func(wxc_string message, wxc_string caption,
                                  wxc_string defaultValue, wxWindow* parent,
                                  int x, int y, wxc_bool centre)
 {
-    return dstr_ret(wxGetTextFromUser(wxstr(message),
+    return new wxString(wxGetTextFromUser(wxstr(message),
                         wxstr(caption),
                         wxstr(defaultValue),
                         parent, x, y, centre));

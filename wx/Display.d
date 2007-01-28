@@ -39,7 +39,7 @@ public import wx.Window;
 		static extern (C) int wxDisplay_GetFromPoint(inout Point pt);
 		static extern (C) int wxDisplay_GetFromWindow(IntPtr window);
 		static extern (C) void wxDisplay_GetGeometry(IntPtr self, out Rectangle rect);
-		static extern (C) string wxDisplay_GetName(IntPtr self);
+		static extern (C) IntPtr wxDisplay_GetName(IntPtr self);
 		static extern (C) bool wxDisplay_IsPrimary(IntPtr self);
 		static extern (C) void wxDisplay_GetCurrentMode(IntPtr self, out VideoMode mode);
 		static extern (C) bool wxDisplay_ChangeMode(IntPtr self, VideoMode mode);
@@ -156,7 +156,7 @@ public import wx.Window;
 
 		/+virtual+/ public string Name()
 		{
-			return wxDisplay_GetName(wxobj).dup;
+			return cast(string) new wxString(wxDisplay_GetName(wxobj), true);
 		}
 
 		//------------------------------------------------------------------------

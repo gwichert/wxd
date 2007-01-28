@@ -107,9 +107,9 @@ wxc_bool wxNotebook_SetPageText(wxNotebook* self, int nPage, wxc_string strText)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxNotebook_GetPageText(wxNotebook* self, int nPage)
+wxString* wxNotebook_GetPageText(wxNotebook* self, int nPage)
 {
-	return dstr_ret(self->GetPageText(nPage).c_str());;
+	return new wxString(self->GetPageText(nPage).c_str());;
 }
 
 //-----------------------------------------------------------------------------

@@ -35,9 +35,9 @@ void wxControl_SetLabel(wxControl *self, wxc_string label)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxControl_GetLabel(wxControl *self)
+wxString* wxControl_GetLabel(wxControl *self)
 {
-	return dstr_ret(self->GetLabel());
+	return new wxString(self->GetLabel());
 }
 
 //-----------------------------------------------------------------------------

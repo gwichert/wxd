@@ -72,15 +72,15 @@ version(NOT_READY_YET){
         }
 
         public void Filename(string value) { SetFilename(value, true); }
-        public string Filename() { return wxDocument_GetFilename(wxobj).dup; }
+        public string Filename() { return cast(string) new wxString(wxDocument_GetFilename(wxobj), true); }
 
         //-----------------------------------------------------------------------------
 
         public void Title(string value) { wxDocument_SetTitle(wxobj, value); }
-        public string Title() { return wxDocument_GetTitle(wxobj).dup; }
+        public string Title() { return cast(string) new wxString(wxDocument_GetTitle(wxobj), true); }
 
         public void DocumentName(string value) { wxDocument_SetDocumentName(wxobj, value); }
-        public string DocumentName() { return wxDocument_GetDocumentName(wxobj).dup; }
+        public string DocumentName() { return cast(string) new wxString(wxDocument_GetDocumentName(wxobj), true); }
 
         //-----------------------------------------------------------------------------
 

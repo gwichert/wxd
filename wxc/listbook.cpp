@@ -69,9 +69,9 @@ wxc_bool wxListbook_SetPageText(wxListbook* self, size_t n, wxc_string strText)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxListbook_GetPageText(wxListbook* self, size_t n)
+wxString* wxListbook_GetPageText(wxListbook* self, size_t n)
 {
-	return dstr_ret(self->GetPageText(n));
+	return new wxString(self->GetPageText(n));
 }
 
 //-----------------------------------------------------------------------------

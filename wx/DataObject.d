@@ -83,7 +83,7 @@ public import wx.ArrayString;
 		static extern (C) void wxTextDataObject_dtor(IntPtr self);
 		static extern (C) void wxTextDataObject_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
 		static extern (C) int wxTextDataObject_GetTextLength(IntPtr self);
-		static extern (C) string wxTextDataObject_GetText(IntPtr self);
+		static extern (C) IntPtr wxTextDataObject_GetText(IntPtr self);
 		static extern (C) void wxTextDataObject_SetText(IntPtr self, string text);
 		//! \endcond
 		
@@ -122,7 +122,7 @@ public import wx.ArrayString;
 		
 		//---------------------------------------------------------------------
 
-		public string Text() { return wxTextDataObject_GetText(wxobj).dup; }
+		public string Text() { return cast(string) new wxString(wxTextDataObject_GetText(wxobj), true); }
 		public void Text(string value) { wxTextDataObject_SetText(wxobj, value); }
 	}
 	

@@ -65,10 +65,13 @@ wxWindow* wxWindow_ctor(wxWindow *parent, wxWindowID id, const wxPoint* pos,
 	if (size == NULL)
 		size = &wxDefaultSize;
 
+/*
 	if (name.data==NULL)
-		name = wxc_string(wxPanelNameStr);
+		name = wxPanelNameStr;
+*/
 
-	return new _Window(parent, id, *pos, *size, style, wxstr(name));
+	return new _Window(parent, id, *pos, *size, style,
+	           (name.data != NULL) ? wxstr(name) : wxString(wxPanelNameStr));
 }
 
 //-----------------------------------------------------------------------------
@@ -298,18 +301,18 @@ void wxWindow_SetTitle(wxWindow* self, wxc_string title)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxWindow_GetTitle(wxWindow* self)
+wxString* wxWindow_GetTitle(wxWindow* self)
 {
 #if wxABI_VERSION < 20700
-	return dstr_ret(self->GetTitle().c_str());
+	return new wxString(self->GetTitle().c_str());
 #else
     if ((self->GetClassInfo())->IsKindOf(CLASSINFO(wxTopLevelWindow)))
     {
 	wxTopLevelWindow *wind = (wxTopLevelWindow *) self;
-	return dstr_ret(wind->GetTitle().c_str());
+	return new wxString(wind->GetTitle().c_str());
     }
     else
-        return dstr_ret(wxString());
+        return new wxString(wxString());
 #endif
 }
 
@@ -322,9 +325,9 @@ void wxWindow_SetName(wxWindow* self, wxc_string name)
 }
 
 extern "C" WXEXPORT
-dstrret wxWindow_GetName(wxWindow* self)
+wxString* wxWindow_GetName(wxWindow* self)
 {
-	return dstr_ret(self->GetName().c_str());
+	return new wxString(self->GetName().c_str());
 }
 
 //-----------------------------------------------------------------------------
@@ -1250,9 +1253,9 @@ void wxWindow_SetHelpTextForId(wxWindow* self, wxc_string text)
 }
 
 extern "C" WXEXPORT
-dstrret wxWindow_GetHelpText(wxWindow* self)
+wxString* wxWindow_GetHelpText(wxWindow* self)
 {
-	return dstr_ret(self->GetHelpText());
+	return new wxString(self->GetHelpText());
 }
 
 //-----------------------------------------------------------------------------
@@ -1268,9 +1271,9 @@ wxToolTip* wxWindow_GetToolTip(wxWindow* self)
 // TODO Not available in OS X
 #if 0
 extern "C" WXEXPORT
-dstrret wxWindow_GetToolTipText(wxWindow* self)
+wxString* wxWindow_GetToolTipText(wxWindow* self)
 {
-	return dstr_ret(self->GetToolTipText());
+	return new wxString(self->GetToolTipText());
 }
 #endif
 

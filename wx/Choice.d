@@ -27,14 +27,14 @@ public import wx.ArrayString;
 
 		static extern (C) void   wxChoice_SetSelection(IntPtr self, int n);
 		static extern (C) bool   wxChoice_SetStringSelection(IntPtr self, string s);
-		static extern (C) string wxChoice_GetStringSelection(IntPtr self);
+		static extern (C) IntPtr wxChoice_GetStringSelection(IntPtr self);
 
 		static extern (C) void   wxChoice_SetColumns(IntPtr self, int n);
 		static extern (C) int    wxChoice_GetColumns(IntPtr self);
 
 		static extern (C) void   wxChoice_Command(IntPtr self, IntPtr evt);
 		static extern (C) int    wxChoice_GetCount(IntPtr self);
-		static extern (C) string wxChoice_GetString(IntPtr self, int n);
+		static extern (C) IntPtr wxChoice_GetString(IntPtr self, int n);
 		static extern (C) int    wxChoice_GetSelection(IntPtr self);
 
 		static extern (C) IntPtr wxChoice_GetClientData(IntPtr self, int n);
@@ -195,7 +195,7 @@ public import wx.ArrayString;
 
 		//---------------------------------------------------------------------
 
-		public string StringSelection() { return wxChoice_GetStringSelection(wxobj).dup; }
+		public string StringSelection() { return cast(string) new wxString(wxChoice_GetStringSelection(wxobj), true); }
 		public void StringSelection(string value) { wxChoice_SetStringSelection(wxobj, value); }
 
 		//---------------------------------------------------------------------
@@ -218,7 +218,7 @@ public import wx.ArrayString;
 
 		public string GetString(int n)
 		{
-			return wxChoice_GetString(wxobj, n).dup;
+			return cast(string) new wxString(wxChoice_GetString(wxobj, n), true);
 		}
 
 		//---------------------------------------------------------------------

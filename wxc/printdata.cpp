@@ -638,9 +638,9 @@ wxc_bool wxPrintData_Ok(wxPrintData* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxPrintData_GetPrinterName(wxPrintData* self)
+wxString* wxPrintData_GetPrinterName(wxPrintData* self)
 {
-    return dstr_ret(self->GetPrinterName());
+    return new wxString(self->GetPrinterName());
 }
 
 //-----------------------------------------------------------------------------
@@ -758,61 +758,61 @@ void wxPrintData_SetQuality(wxPrintData* self, wxPrintQuality quality)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxPrintData_GetPrinterCommand(wxPrintData* self)
+wxString* wxPrintData_GetPrinterCommand(wxPrintData* self)
 {
 #if wxUSE_POSTSCRIPT
     PostScriptData* data = PSData(self);
     if (data != NULL)
-    return dstr_ret(data->GetPrinterCommand());
+    return new wxString(data->GetPrinterCommand());
 #endif
-    return dstr_ret(wxString());
+    return new wxString(wxString());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxPrintData_GetPrinterOptions(wxPrintData* self)
+wxString* wxPrintData_GetPrinterOptions(wxPrintData* self)
 {
 #if wxUSE_POSTSCRIPT
     PostScriptData* data = PSData(self);
     if (data != NULL)
-    return dstr_ret(data->GetPrinterOptions());
+    return new wxString(data->GetPrinterOptions());
 #endif
-    return dstr_ret(wxString());
+    return new wxString(wxString());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxPrintData_GetPreviewCommand(wxPrintData* self)
+wxString* wxPrintData_GetPreviewCommand(wxPrintData* self)
 {
 #if wxUSE_POSTSCRIPT
     PostScriptData* data = PSData(self);
     if (data != NULL)
-    return dstr_ret(data->GetPreviewCommand());
+    return new wxString(data->GetPreviewCommand());
 #endif
-    return dstr_ret(wxString());
+    return new wxString(wxString());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxPrintData_GetFilename(wxPrintData* self)
+wxString* wxPrintData_GetFilename(wxPrintData* self)
 {
-    return dstr_ret(self->GetFilename());
+    return new wxString(self->GetFilename());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxPrintData_GetFontMetricPath(wxPrintData* self)
+wxString* wxPrintData_GetFontMetricPath(wxPrintData* self)
 {
 #if wxUSE_POSTSCRIPT
     PostScriptData* data = PSData(self);
     if (data != NULL)
-    return dstr_ret(data->GetFontMetricPath());
+    return new wxString(data->GetFontMetricPath());
 #endif
-    return dstr_ret(wxString());
+    return new wxString(wxString());
 }
 
 //-----------------------------------------------------------------------------

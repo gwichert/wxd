@@ -33,13 +33,13 @@ public import wx.ClientData;
 		
 		static extern (C) int    wxComboBox_GetCount(IntPtr self);
 		static extern (C) int    wxComboBox_GetSelection(IntPtr self);
-		static extern (C) string wxComboBox_GetString(IntPtr self, int n);
+		static extern (C) IntPtr wxComboBox_GetString(IntPtr self, int n);
 		//static extern (C) void   wxComboBox_SetString(IntPtr self, int n, string text);
 		
-		static extern (C) string wxComboBox_GetValue(IntPtr self);
+		static extern (C) IntPtr wxComboBox_GetValue(IntPtr self);
 		static extern (C) void   wxComboBox_SetValue(IntPtr self, string text);
 		
-		static extern (C) string wxComboBox_GetStringSelection(IntPtr self);
+		static extern (C) IntPtr wxComboBox_GetStringSelection(IntPtr self);
 		static extern (C) void   wxComboBox_SetStringSelection(IntPtr self, string value);
 		
 		static extern (C) IntPtr wxComboBox_GetClientData(IntPtr self, int n);
@@ -125,7 +125,7 @@ public import wx.ClientData;
 
 		//---------------------------------------------------------------------
 
-		public string StringSelection() { return wxComboBox_GetStringSelection(wxobj).dup; }
+		public string StringSelection() { return cast(string) new wxString(wxComboBox_GetStringSelection(wxobj), true); }
 		public void StringSelection(string value) { wxComboBox_SetStringSelection(wxobj, value); }
 
 		//---------------------------------------------------------------------
@@ -136,7 +136,7 @@ public import wx.ClientData;
 
 		public string GetString(int n)
 		{
-			return wxComboBox_GetString(wxobj, n).dup;
+			return cast(string) new wxString(wxComboBox_GetString(wxobj, n), true);
 		}
 
 		//---------------------------------------------------------------------
@@ -254,7 +254,7 @@ public import wx.ClientData;
 
 		//---------------------------------------------------------------------
         
-		public string Value() { return wxComboBox_GetValue(wxobj).dup; }
+		public string Value() { return cast(string) new wxString(wxComboBox_GetValue(wxobj), true); }
 		public void Value(string value) { wxComboBox_SetValue(wxobj, value); }
 		
 		public void Select(int n)

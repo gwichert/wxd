@@ -18,8 +18,8 @@ public import wx.common;
 public import wx.Window;
 
 		//! \cond EXTERN
-		static extern (C) string wxGlobal_GetHomeDir();
-		static extern (C) string wxGlobal_GetCwd();
+		static extern (C) IntPtr wxGlobal_GetHomeDir();
+		static extern (C) IntPtr wxGlobal_GetCwd();
 		static extern (C) void wxSleep_func(int num);
 		static extern (C) void wxMilliSleep_func(uint num);
 		static extern (C) void wxMicroSleep_func(uint num);
@@ -33,12 +33,12 @@ public import wx.Window;
 		
 		public static string GetHomeDir()
 		{
-			return wxGlobal_GetHomeDir().dup;
+			return cast(string) new wxString(wxGlobal_GetHomeDir(), true);
 		}
 		
 		public static string GetCwd()
 		{
-			return wxGlobal_GetCwd().dup;
+			return cast(string) new wxString(wxGlobal_GetCwd(), true);
 		}
 		
 		//---------------------------------------------------------------------

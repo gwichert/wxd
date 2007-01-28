@@ -31,7 +31,7 @@ public import wx.Control;
 		static extern (C) void   wxBitmapButton_SetDefault(IntPtr self);
 		
 		static extern (C) void wxBitmapButton_SetLabel(IntPtr self, string label);
-		static extern (C) string wxBitmapButton_GetLabel(IntPtr self);
+		static extern (C) IntPtr wxBitmapButton_GetLabel(IntPtr self);
 		
 		static extern (C) bool wxBitmapButton_Enable(IntPtr self, bool enable);
 
@@ -132,7 +132,7 @@ public import wx.Control;
 		
 		//---------------------------------------------------------------------		
 		
-		public string StringLabel() { return wxBitmapButton_GetLabel(wxobj).dup; }
+		public string StringLabel() { return cast(string) new wxString(wxBitmapButton_GetLabel(wxobj), true); }
 		public void StringLabel(string value) { wxBitmapButton_SetLabel(wxobj, value); }
 		
 		public void SetLabel(string label)
@@ -142,7 +142,7 @@ public import wx.Control;
 		
 		public string GetLabel()
 		{
-			return wxBitmapButton_GetLabel(wxobj).dup;
+			return cast(string) new wxString(wxBitmapButton_GetLabel(wxobj), true);
 		}
 		
 		//---------------------------------------------------------------------

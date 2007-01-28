@@ -45,10 +45,10 @@ private import std.utf;
         static extern (C) void   wxApp_Run(int argc, char** argv);
 
         static extern (C) void   wxApp_SetVendorName(IntPtr self, string name);
-        static extern (C) string wxApp_GetVendorName(IntPtr self);
+        static extern (C) IntPtr wxApp_GetVendorName(IntPtr self);
 
         static extern (C) void   wxApp_SetAppName(IntPtr self, string name);
-        static extern (C) string wxApp_GetAppName(IntPtr self);
+        static extern (C) IntPtr wxApp_GetAppName(IntPtr self);
 
         static extern (C) void   wxApp_SetTopWindow(IntPtr self, IntPtr window);
         static extern (C) IntPtr wxApp_GetTopWindow(IntPtr self);
@@ -171,8 +171,8 @@ private import std.utf;
 
         //---------------------------------------------------------------------
         
-        public string VendorName() { return wxApp_GetVendorName(wxobj).dup; }
-        public string AppName() { return wxApp_GetAppName(wxobj).dup; }
+        public string VendorName() { return cast(string) new wxString(wxApp_GetVendorName(wxobj), true); }
+        public string AppName() { return cast(string) new wxString(wxApp_GetAppName(wxobj), true); }
 
         //---------------------------------------------------------------------
 

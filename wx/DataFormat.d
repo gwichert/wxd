@@ -44,7 +44,7 @@ public import wx.common;
         static extern (C) IntPtr wxDataFormat_ctorByType(int type);
         static extern (C) IntPtr wxDataFormat_ctorById(string id);
 
-        static extern (C) string wxDataFormat_GetId(IntPtr self);
+        static extern (C) IntPtr wxDataFormat_GetId(IntPtr self);
         static extern (C) void   wxDataFormat_SetId(IntPtr self, string id);
 
         static extern (C) int    wxDataFormat_GetType(IntPtr self);
@@ -82,7 +82,7 @@ public import wx.common;
 
         //-----------------------------------------------------------------------------
 
-        public string Id() { return wxDataFormat_GetId(wxobj); }
+        public string Id() { return cast(string) new wxString(wxDataFormat_GetId(wxobj), true); }
         public void Id(string value) { wxDataFormat_SetId(wxobj, value); }
 
         //-----------------------------------------------------------------------------

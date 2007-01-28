@@ -171,12 +171,12 @@ public import wx.GDIObject;
 		static extern (C) int    wxFont_GetStyle(IntPtr self);
 		static extern (C) int    wxFont_GetWeight(IntPtr self);
 		static extern (C) bool   wxFont_GetUnderlined(IntPtr self);
-		static extern (C) string wxFont_GetFaceName(IntPtr self);
+		static extern (C) IntPtr wxFont_GetFaceName(IntPtr self);
 		static extern (C) int    wxFont_GetEncoding(IntPtr self);
 		static extern (C)        IntPtr wxFont_GetNativeFontInfo(IntPtr self);
 		static extern (C) bool   wxFont_IsFixedWidth(IntPtr self);
-		static extern (C) string wxFont_GetNativeFontInfoDesc(IntPtr self);
-		static extern (C) string wxFont_GetNativeFontInfoUserDesc(IntPtr self);
+		static extern (C) IntPtr wxFont_GetNativeFontInfoDesc(IntPtr self);
+		static extern (C) IntPtr wxFont_GetNativeFontInfoUserDesc(IntPtr self);
 		static extern (C) void   wxFont_SetPointSize(IntPtr self, int pointSize);
 		static extern (C) void   wxFont_SetFamily(IntPtr self, int family);
 		static extern (C) void   wxFont_SetStyle(IntPtr self, int style);
@@ -185,9 +185,9 @@ public import wx.GDIObject;
 		static extern (C) void   wxFont_SetUnderlined(IntPtr self, bool underlined);
 		static extern (C) void   wxFont_SetEncoding(IntPtr self, int encoding);
 		static extern (C) void   wxFont_SetNativeFontInfoUserDesc(IntPtr self, IntPtr info);
-		static extern (C) string wxFont_GetFamilyString(IntPtr self);
-		static extern (C) string wxFont_GetStyleString(IntPtr self);
-		static extern (C) string wxFont_GetWeightString(IntPtr self);
+		static extern (C) IntPtr wxFont_GetFamilyString(IntPtr self);
+		static extern (C) IntPtr wxFont_GetStyleString(IntPtr self);
+		static extern (C) IntPtr wxFont_GetWeightString(IntPtr self);
 		static extern (C) void   wxFont_SetNoAntiAliasing(IntPtr self, bool no);
 		static extern (C) bool   wxFont_GetNoAntiAliasing(IntPtr self);
 		static extern (C) int    wxFont_GetDefaultEncoding();
@@ -271,14 +271,14 @@ public import wx.GDIObject;
 		public bool Underlined() { return wxFont_GetUnderlined(wxobj); }
 		public void Underlined(bool value) { wxFont_SetUnderlined(wxobj, value); }
 
-		public string FaceName() { return wxFont_GetFaceName(wxobj).dup; }
+		public string FaceName() { return cast(string) new wxString(wxFont_GetFaceName(wxobj), true); }
 		public void FaceName(string value) { wxFont_SetFaceName(wxobj, value); }
 	
-		public string FamilyString() { return wxFont_GetFamilyString(wxobj).dup; }
+		public string FamilyString() { return cast(string) new wxString(wxFont_GetFamilyString(wxobj), true); }
 	
-		public string StyleString() { return wxFont_GetStyleString(wxobj).dup; }
+		public string StyleString() { return cast(string) new wxString(wxFont_GetStyleString(wxobj), true); }
 	
-		public string WeightString() { return wxFont_GetStyleString(wxobj).dup; }
+		public string WeightString() { return cast(string) new wxString(wxFont_GetStyleString(wxobj), true); }
 	
 		public bool IsFixedWidth() { return wxFont_IsFixedWidth(wxobj); }
 	
@@ -286,9 +286,9 @@ public import wx.GDIObject;
 	
 		public IntPtr NativeFontInfo() { return wxFont_GetNativeFontInfo(wxobj); }
 	
-		public string NativeFontInfoUserDesc() { return wxFont_GetNativeFontInfoUserDesc(wxobj).dup; }
+		public string NativeFontInfoUserDesc() { return cast(string) new wxString(wxFont_GetNativeFontInfoUserDesc(wxobj), true); }
 	
-		public string NativeFontInfoDesc() { return wxFont_GetNativeFontInfoDesc(wxobj).dup; }
+		public string NativeFontInfoDesc() { return cast(string) new wxString(wxFont_GetNativeFontInfoDesc(wxobj), true); }
 	
 		public static Font New(string strNativeFontDesc)
 		{

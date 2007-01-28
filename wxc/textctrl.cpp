@@ -287,9 +287,9 @@ public:
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxTextCtrl_GetValue(wxTextCtrl* self)
+wxString* wxTextCtrl_GetValue(wxTextCtrl* self)
 {
-	return dstr_ret(self->GetValue().c_str());
+	return new wxString(self->GetValue().c_str());
 }
 
 //-----------------------------------------------------------------------------
@@ -303,9 +303,9 @@ void wxTextCtrl_SetValue(wxTextCtrl* self, wxc_string value)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxTextCtrl_GetRange(wxTextCtrl* self, long from, long to)
+wxString* wxTextCtrl_GetRange(wxTextCtrl* self, long from, long to)
 {
-	return dstr_ret(self->GetRange(from, to).c_str());
+	return new wxString(self->GetRange(from, to).c_str());
 }
 
 //-----------------------------------------------------------------------------
@@ -319,9 +319,9 @@ int wxTextCtrl_GetLineLength(wxTextCtrl* self, long lineNo)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxTextCtrl_GetLineText(wxTextCtrl* self, long lineNo)
+wxString* wxTextCtrl_GetLineText(wxTextCtrl* self, long lineNo)
 {
-	return dstr_ret(self->GetLineText(lineNo).c_str());
+	return new wxString(self->GetLineText(lineNo).c_str());
 }
 
 //-----------------------------------------------------------------------------
@@ -375,9 +375,9 @@ void wxTextCtrl_GetSelection(wxTextCtrl* self, long* from, long* to)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxTextCtrl_GetStringSelection(wxTextCtrl* self)
+wxString* wxTextCtrl_GetStringSelection(wxTextCtrl* self)
 {
-	return dstr_ret(self->GetStringSelection().c_str());
+	return new wxString(self->GetStringSelection().c_str());
 }
 
 //-----------------------------------------------------------------------------

@@ -19,7 +19,7 @@ public import wx.Window;
 
 		//! \cond EXTERN
 		static extern (C) void   wxControl_Command(IntPtr self, IntPtr evt);
-		static extern (C) string wxControl_GetLabel(IntPtr self);
+		static extern (C) IntPtr wxControl_GetLabel(IntPtr self);
 		static extern (C) void   wxControl_SetLabel(IntPtr self, string label);
 		
 		static extern (C) int wxControl_GetAlignment(IntPtr self);
@@ -51,7 +51,7 @@ public import wx.Window;
 
 		//---------------------------------------------------------------------
 
-		public string Label() { return wxControl_GetLabel(wxobj).dup; }
+		public string Label() { return cast(string) new wxString(wxControl_GetLabel(wxobj), true); }
 		public void Label(string value) { wxControl_SetLabel(wxobj, value); }
 		
 		//---------------------------------------------------------------------

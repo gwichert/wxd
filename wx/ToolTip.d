@@ -22,7 +22,7 @@ public import wx.Window;
 		static extern (C) void   wxToolTip_SetDelay(uint msecs);
 		static extern (C) IntPtr wxToolTip_ctor(string tip);
 		static extern (C) void   wxToolTip_SetTip(IntPtr self, string tip);
-		static extern (C) string wxToolTip_GetTip(IntPtr self);
+		static extern (C) IntPtr wxToolTip_GetTip(IntPtr self);
 		static extern (C) IntPtr wxToolTip_GetWindow(IntPtr self);
 		static extern (C) void   wxToolTip_SetWindow(IntPtr self,IntPtr win);
 		//! \endcond
@@ -56,7 +56,7 @@ public import wx.Window;
 
         public string Tip() 
             {
-                return wxToolTip_GetTip(wxobj).dup;
+                return cast(string) new wxString(wxToolTip_GetTip(wxobj), true);
             }
         public void Tip(string value) 
             {

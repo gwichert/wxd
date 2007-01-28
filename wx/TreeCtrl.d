@@ -270,7 +270,7 @@ public import wx.KeyEvent;
 		static extern (C) IntPtr wxTreeCtrl_GetSelection(IntPtr self);
 		static extern (C) void   wxTreeCtrl_SelectItem(IntPtr self, IntPtr item);
 
-		static extern (C) string wxTreeCtrl_GetItemText(IntPtr self, IntPtr item);
+		static extern (C) IntPtr wxTreeCtrl_GetItemText(IntPtr self, IntPtr item);
 		static extern (C) void   wxTreeCtrl_SetItemText(IntPtr self, IntPtr item, string text);
 
 		static extern (C) IntPtr wxTreeCtrl_HitTest(IntPtr self, inout Point pt, inout int flags);
@@ -621,7 +621,7 @@ public import wx.KeyEvent;
 
 		public string GetItemText(TreeItemId item)
 		{
-			return wxTreeCtrl_GetItemText(wxobj, wxObject.SafePtr(item)).dup;
+			return cast(string) new wxString(wxTreeCtrl_GetItemText(wxobj, wxObject.SafePtr(item)), true);
 		}
 
 		//---------------------------------------------------------------------
@@ -1154,7 +1154,7 @@ public import wx.KeyEvent;
 		static extern (C) IntPtr wxTreeEvent_GetKeyEvent(IntPtr self);
 		static extern (C) int    wxTreeEvent_GetKeyCode(IntPtr self);
 		static extern (C) void   wxTreeEvent_SetKeyEvent(IntPtr self, IntPtr evt);
-		static extern (C) string wxTreeEvent_GetLabel(IntPtr self);
+		static extern (C) IntPtr wxTreeEvent_GetLabel(IntPtr self);
 		static extern (C) void   wxTreeEvent_SetLabel(IntPtr self, string label);
 		static extern (C) bool   wxTreeEvent_IsEditCancelled(IntPtr self);
 		static extern (C) void   wxTreeEvent_SetEditCanceled(IntPtr self, bool editCancelled);
@@ -1205,7 +1205,7 @@ public import wx.KeyEvent;
 
 		//-----------------------------------------------------------------------------
 
-		public string Label() { return wxTreeEvent_GetLabel(wxobj).dup; }
+		public string Label() { return cast(string) new wxString(wxTreeEvent_GetLabel(wxobj), true); }
 		public void Label(string value) { wxTreeEvent_SetLabel(wxobj, value); }
 
 		//-----------------------------------------------------------------------------

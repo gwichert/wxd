@@ -117,7 +117,7 @@ public import wx.PrintData;
         static extern (C) void   wxPrintout_OnPreparePrinting(IntPtr self);
         static extern (C) bool   wxPrintout_HasPage(IntPtr self, int page);
         static extern (C) void   wxPrintout_GetPageInfo(IntPtr self, inout int minPage, inout int maxPage, inout int pageFrom, inout int pageTo);
-        static extern (C) string wxPrintout_GetTitle(IntPtr self);
+        static extern (C) IntPtr wxPrintout_GetTitle(IntPtr self);
         static extern (C) IntPtr wxPrintout_GetDC(IntPtr self);
         static extern (C) void   wxPrintout_SetDC(IntPtr self, IntPtr dc);
         static extern (C) void   wxPrintout_SetPageSizePixels(IntPtr self, int w, int h);
@@ -238,7 +238,7 @@ public import wx.PrintData;
 
         //-----------------------------------------------------------------------------
 
-        public string Title() { return wxPrintout_GetTitle(wxobj).dup; }
+        public string Title() { return cast(string) new wxString(wxPrintout_GetTitle(wxobj), true); }
 
         //-----------------------------------------------------------------------------
 

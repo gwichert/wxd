@@ -207,9 +207,9 @@ void wxHtmlListBox_SetItemCount(_HtmlListBox* self, int count)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxHtmlListBox_OnGetItemMarkup(_HtmlListBox* self, int n)
+wxString* wxHtmlListBox_OnGetItemMarkup(_HtmlListBox* self, int n)
 {
-    return dstr_ret(self->VPOnGetItemMarkup(n).c_str());
+    return new wxString(self->VPOnGetItemMarkup(n).c_str());
 }
 
 //-----------------------------------------------------------------------------

@@ -127,9 +127,9 @@ int wxTabCtrl_GetRowCount(wxTabCtrl* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxTabCtrl_GetItemText(wxTabCtrl* self, int item)
+wxString* wxTabCtrl_GetItemText(wxTabCtrl* self, int item)
 {
-	return dstr_ret(self->GetItemText(item));
+	return new wxString(self->GetItemText(item));
 }
 
 //-----------------------------------------------------------------------------

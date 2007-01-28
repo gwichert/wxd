@@ -46,9 +46,9 @@ wxDataFormat* wxDataFormat_ctorById(wxc_string id)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxDataFormat_GetId(wxDataFormat* self)
+wxString* wxDataFormat_GetId(wxDataFormat* self)
 {
-    return dstr_ret(self->GetId());
+    return new wxString(self->GetId());
 }
 
 extern "C" WXEXPORT

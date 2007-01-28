@@ -69,9 +69,9 @@ int wxSingleChoiceDialog_GetSelection(wxSingleChoiceDialog* self)
 }
 
 extern "C" WXEXPORT
-dstrret wxSingleChoiceDialog_GetStringSelection(wxSingleChoiceDialog* self)
+wxString* wxSingleChoiceDialog_GetStringSelection(wxSingleChoiceDialog* self)
 {
-    return dstr_ret(self->GetStringSelection());
+    return new wxString(self->GetStringSelection());
 }
 
 extern "C" WXEXPORT
@@ -136,7 +136,7 @@ wxArrayInt* wxMultiChoiceDialog_GetSelections(wxMultiChoiceDialog* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxGetSingleChoice_func(wxc_string message, wxc_string caption, int n, wxc_string choices[],
+wxString* wxGetSingleChoice_func(wxc_string message, wxc_string caption, int n, wxc_string choices[],
                 wxWindow *parent, int x, int y, wxc_bool centre,
                 int width, int height)
 {
@@ -148,7 +148,7 @@ dstrret wxGetSingleChoice_func(wxc_string message, wxc_string caption, int n, wx
             was.Add(ts);
         }
 
-    return dstr_ret(wxGetSingleChoice(wxstr(message),
+    return new wxString(wxGetSingleChoice(wxstr(message),
                 wxstr(caption),
                 was, parent, x, y, centre,
                 width, height));

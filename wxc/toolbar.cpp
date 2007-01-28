@@ -131,25 +131,25 @@ wxc_bool wxToolBarToolBase_CanBeToggled(wxToolBarToolBase* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxToolBarToolBase_GetLabel(wxToolBarToolBase* self)
+wxString* wxToolBarToolBase_GetLabel(wxToolBarToolBase* self)
 {
-	return dstr_ret(self->GetLabel());
+	return new wxString(self->GetLabel());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxToolBarToolBase_GetShortHelp(wxToolBarToolBase* self)
+wxString* wxToolBarToolBase_GetShortHelp(wxToolBarToolBase* self)
 {
-	return dstr_ret(self->GetShortHelp());
+	return new wxString(self->GetShortHelp());
 }
 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxToolBarToolBase_GetLongHelp(wxToolBarToolBase* self)
+wxString* wxToolBarToolBase_GetLongHelp(wxToolBarToolBase* self)
 {
-	return dstr_ret(self->GetLongHelp());
+	return new wxString(self->GetLongHelp());
 }
 
 //-----------------------------------------------------------------------------
@@ -460,9 +460,9 @@ void wxToolBar_SetToolShortHelp(wxToolBar* self, int toolid, wxc_string helpStri
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxToolBar_GetToolShortHelp(wxToolBar* self, int toolid)
+wxString* wxToolBar_GetToolShortHelp(wxToolBar* self, int toolid)
 {
-	return dstr_ret(self->GetToolShortHelp(toolid).c_str());
+	return new wxString(self->GetToolShortHelp(toolid).c_str());
 }
 
 //-----------------------------------------------------------------------------
@@ -476,9 +476,9 @@ void wxToolBar_SetToolLongHelp(wxToolBar* self, int toolid, wxc_string helpStrin
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxToolBar_GetToolLongHelp(wxToolBar* self, int toolid)
+wxString* wxToolBar_GetToolLongHelp(wxToolBar* self, int toolid)
 {
-	return dstr_ret(self->GetToolLongHelp(toolid).c_str());
+	return new wxString(self->GetToolLongHelp(toolid).c_str());
 }
 
 //-----------------------------------------------------------------------------

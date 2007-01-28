@@ -221,11 +221,11 @@ public import wx.KeyEvent;
 	//---------------------------------------------------------------------
 
 		//! \cond EXTERN
-		static extern (C) string wxTextCtrl_GetValue(IntPtr self);
+		static extern (C) IntPtr wxTextCtrl_GetValue(IntPtr self);
 		static extern (C) void   wxTextCtrl_SetValue(IntPtr self, string value);
-		static extern (C) string wxTextCtrl_GetRange(IntPtr self, uint from, uint to);
+		static extern (C) IntPtr wxTextCtrl_GetRange(IntPtr self, uint from, uint to);
 		static extern (C) int    wxTextCtrl_GetLineLength(IntPtr self, uint lineNo);
-		static extern (C) string wxTextCtrl_GetLineText(IntPtr self, uint lineNo);
+		static extern (C) IntPtr wxTextCtrl_GetLineText(IntPtr self, uint lineNo);
 		static extern (C) int    wxTextCtrl_GetNumberOfLines(IntPtr self);
 		static extern (C) bool   wxTextCtrl_IsModified(IntPtr self);
 		static extern (C) bool   wxTextCtrl_IsEditable(IntPtr self);
@@ -360,7 +360,7 @@ public import wx.KeyEvent;
 	
 		public string Value() 
 			{
-				return wxTextCtrl_GetValue(wxobj).dup;
+				return cast(string) new wxString(wxTextCtrl_GetValue(wxobj), true);
 			}
 		public void Value(string value) 
 			{
@@ -371,7 +371,7 @@ public import wx.KeyEvent;
 	
 		public string GetRange(int from, int to)
 		{
-			return wxTextCtrl_GetRange(wxobj, cast(uint)from, cast(uint)to).dup;
+			return cast(string) new wxString(wxTextCtrl_GetRange(wxobj, cast(uint)from, cast(uint)to), true);
 		}
 	
 		//---------------------------------------------------------------------
@@ -383,7 +383,7 @@ public import wx.KeyEvent;
 	
 		public string GetLineText(int lineNo)
 		{
-			return wxTextCtrl_GetLineText(wxobj, cast(uint)lineNo).dup;
+			return cast(string) new wxString(wxTextCtrl_GetLineText(wxobj, cast(uint)lineNo), true);
 		}
 	
 		public int GetNumberOfLines()

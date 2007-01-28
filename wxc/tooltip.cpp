@@ -52,9 +52,9 @@ void wxToolTip_SetTip(wxToolTip* self, wxc_string tip)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxToolTip_GetTip(wxToolTip* self)
+wxString* wxToolTip_GetTip(wxToolTip* self)
 {
-	return dstr_ret(self->GetTip());
+	return new wxString(self->GetTip());
 }
 
 //-----------------------------------------------------------------------------

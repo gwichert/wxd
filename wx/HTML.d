@@ -51,13 +51,13 @@ public import wx.MouseEvent;
         static extern (C) IntPtr wxHtmlTag_GetPreviousSibling(IntPtr self);
         static extern (C) IntPtr wxHtmlTag_GetNextSibling(IntPtr self);
         static extern (C) IntPtr wxHtmlTag_GetNextTag(IntPtr self);
-        static extern (C) string wxHtmlTag_GetName(IntPtr self);
+        static extern (C) IntPtr wxHtmlTag_GetName(IntPtr self);
         static extern (C) bool   wxHtmlTag_HasParam(IntPtr self, string par);
-        static extern (C) string wxHtmlTag_GetParam(IntPtr self, string par, bool with_commas);
+        static extern (C) IntPtr wxHtmlTag_GetParam(IntPtr self, string par, bool with_commas);
         static extern (C) bool   wxHtmlTag_GetParamAsColour(IntPtr self, string par, IntPtr clr);
         static extern (C) bool   wxHtmlTag_GetParamAsInt(IntPtr self, string par, inout int clr);
         static extern (C) int    wxHtmlTag_ScanParam(IntPtr self, string par, string format, IntPtr param);
-        static extern (C) string wxHtmlTag_GetAllParams(IntPtr self);
+        static extern (C) IntPtr wxHtmlTag_GetAllParams(IntPtr self);
         static extern (C) bool   wxHtmlTag_IsEnding(IntPtr self);
         static extern (C) bool   wxHtmlTag_HasEnding(IntPtr self);
         static extern (C) int    wxHtmlTag_GetBeginPos(IntPtr self);
@@ -97,7 +97,7 @@ public import wx.MouseEvent;
 
         //-----------------------------------------------------------------------------
 
-        public string Name() { return wxHtmlTag_GetName(wxobj).dup; }
+        public string Name() { return cast(string) new wxString(wxHtmlTag_GetName(wxobj), true); }
 
         //-----------------------------------------------------------------------------
 
@@ -108,7 +108,7 @@ public import wx.MouseEvent;
 
         public string GetParam(string par, bool with_commas)
         {
-            return wxHtmlTag_GetParam(wxobj, par, with_commas).dup;
+            return cast(string) new wxString(wxHtmlTag_GetParam(wxobj, par, with_commas), true);
         }
 
         //-----------------------------------------------------------------------------
@@ -135,7 +135,7 @@ public import wx.MouseEvent;
 
         //-----------------------------------------------------------------------------
 
-        public string AllParams() { return wxHtmlTag_GetAllParams(wxobj).dup; }
+        public string AllParams() { return cast(string) new wxString(wxHtmlTag_GetAllParams(wxobj), true); }
 
         //-----------------------------------------------------------------------------
 
@@ -182,7 +182,7 @@ public import wx.MouseEvent;
         static extern (C) int    wxHtmlCell_GetWidth(IntPtr self);
         static extern (C) int    wxHtmlCell_GetHeight(IntPtr self);
         static extern (C) int    wxHtmlCell_GetDescent(IntPtr self);
-        static extern (C) string wxHtmlCell_GetId(IntPtr self);
+        static extern (C) IntPtr wxHtmlCell_GetId(IntPtr self);
         static extern (C) void   wxHtmlCell_SetId(IntPtr self, string id);
         static extern (C) IntPtr wxHtmlCell_GetNext(IntPtr self);
         static extern (C) void   wxHtmlCell_SetPos(IntPtr self, int x, int y);
@@ -246,7 +246,7 @@ public import wx.MouseEvent;
 
         //-----------------------------------------------------------------------------
 
-        public /+virtual+/ string Id() { return wxHtmlCell_GetId(wxobj).dup; }
+        public /+virtual+/ string Id() { return cast(string) new wxString(wxHtmlCell_GetId(wxobj), true); }
         public /+virtual+/ void Id(string value) { wxHtmlCell_SetId(wxobj, value); }
 
         //-----------------------------------------------------------------------------
@@ -603,8 +603,8 @@ public import wx.MouseEvent;
 		static extern (C) IntPtr wxHtmlLinkInfo_ctor(IntPtr l);
 		static extern (C) void   wxHtmlLinkInfo_SetEvent(IntPtr self, IntPtr e);
 		static extern (C) void   wxHtmlLinkInfo_SetHtmlCell(IntPtr self, IntPtr e);
-		static extern (C) string wxHtmlLinkInfo_GetHref(IntPtr self);
-		static extern (C) string wxHtmlLinkInfo_GetTarget(IntPtr self);
+		static extern (C) IntPtr wxHtmlLinkInfo_GetHref(IntPtr self);
+		static extern (C) IntPtr wxHtmlLinkInfo_GetTarget(IntPtr self);
 		static extern (C) IntPtr wxHtmlLinkInfo_GetEvent(IntPtr self);
 		static extern (C) IntPtr wxHtmlLinkInfo_GetHtmlCell(IntPtr self);
         //! \endcond
@@ -638,11 +638,11 @@ public import wx.MouseEvent;
 		
 		//-----------------------------------------------------------------------------
 		
-		public string Href() { return wxHtmlLinkInfo_GetHref(wxobj).dup; }
+		public string Href() { return cast(string) new wxString(wxHtmlLinkInfo_GetHref(wxobj), true); }
 		
 		//-----------------------------------------------------------------------------
 		
-		public string Target() { return wxHtmlLinkInfo_GetTarget(wxobj).dup; }
+		public string Target() { return cast(string) new wxString(wxHtmlLinkInfo_GetTarget(wxobj), true); }
 		
 		//-----------------------------------------------------------------------------
 		
@@ -744,7 +744,7 @@ public import wx.MouseEvent;
 
         public override string ReadFile(FSFile file)
         {
-            return new wxString(wxHtmlFilterPlainText_ReadFile(wxobj, wxObject.SafePtr(file)));
+            return cast(string) new wxString(wxHtmlFilterPlainText_ReadFile(wxobj, wxObject.SafePtr(file)));
         }
     }
 
@@ -774,7 +774,7 @@ public import wx.MouseEvent;
 
         public override string ReadFile(FSFile file)
         {
-            return new wxString(wxHtmlFilterHTML_ReadFile(wxobj, wxObject.SafePtr(file)));
+            return cast(string) new wxString(wxHtmlFilterHTML_ReadFile(wxobj, wxObject.SafePtr(file)));
         }*/
     }
 
@@ -859,7 +859,7 @@ public import wx.MouseEvent;
         static extern (C) void   wxHtmlWinParser_SetFontUnderlined(IntPtr self, int x);
         static extern (C) int    wxHtmlWinParser_GetFontFixed(IntPtr self);
         static extern (C) void   wxHtmlWinParser_SetFontFixed(IntPtr self, int x);
-        static extern (C) string wxHtmlWinParser_GetFontFace(IntPtr self);
+        static extern (C) IntPtr wxHtmlWinParser_GetFontFace(IntPtr self);
         static extern (C) void   wxHtmlWinParser_SetFontFace(IntPtr self, string face);
         static extern (C) int    wxHtmlWinParser_GetAlign(IntPtr self);
         static extern (C) void   wxHtmlWinParser_SetAlign(IntPtr self, int a);
@@ -995,7 +995,7 @@ public import wx.MouseEvent;
         public int FontFixed() { return wxHtmlWinParser_GetFontFixed(wxobj); }
         public void FontFixed(int value) { wxHtmlWinParser_SetFontFixed(wxobj, value); }
 
-        public string FontFace() { return wxHtmlWinParser_GetFontFace(wxobj).dup; }
+        public string FontFace() { return cast(string) new wxString(wxHtmlWinParser_GetFontFace(wxobj), true); }
         public void FontFace(string value) { wxHtmlWinParser_SetFontFace(wxobj, value); }
 
         //-----------------------------------------------------------------------------
@@ -1052,7 +1052,7 @@ public import wx.MouseEvent;
         //! \cond EXTERN
         static extern (C) IntPtr wxHtmlEntitiesParser_ctor();
         static extern (C) void   wxHtmlEntitiesParser_SetEncoding(IntPtr self, int encoding);
-        static extern (C) string wxHtmlEntitiesParser_Parse(IntPtr self, string input);
+        static extern (C) IntPtr wxHtmlEntitiesParser_Parse(IntPtr self, string input);
         static extern (C) char   wxHtmlEntitiesParser_GetEntityChar(IntPtr self, string entity);
         static extern (C) char   wxHtmlEntitiesParser_GetCharForCode(IntPtr self, uint code);
         //! \endcond
@@ -1076,7 +1076,7 @@ public import wx.MouseEvent;
 
         public string Parse(string input)
         {
-            return wxHtmlEntitiesParser_Parse(wxobj, input).dup;
+            return cast(string) new wxString(wxHtmlEntitiesParser_Parse(wxobj, input), true);
         }
 
         //-----------------------------------------------------------------------------
@@ -1108,11 +1108,11 @@ public import wx.MouseEvent;
         static extern (C) void   wxHtmlParser_AddTagHandler(IntPtr self, IntPtr handler);
         static extern (C) void   wxHtmlParser_PushTagHandler(IntPtr self, IntPtr handler, string tags);
         static extern (C) void   wxHtmlParser_PopTagHandler(IntPtr self);
-        static extern (C) string wxHtmlParser_GetSource(IntPtr self);
+        static extern (C) IntPtr wxHtmlParser_GetSource(IntPtr self);
         static extern (C) void   wxHtmlParser_SetSource(IntPtr self, string src);
         static extern (C) void   wxHtmlParser_SetSourceAndSaveState(IntPtr self, string src);
         static extern (C) bool   wxHtmlParser_RestoreState(IntPtr self);
-        static extern (C) string wxHtmlParser_ExtractCharsetInformation(IntPtr self, string markup);
+        static extern (C) IntPtr wxHtmlParser_ExtractCharsetInformation(IntPtr self, string markup);
         //! \endcond
 
         //-----------------------------------------------------------------------------
@@ -1219,7 +1219,7 @@ public import wx.MouseEvent;
 
         //-----------------------------------------------------------------------------
 
-        public string Source() { return wxHtmlParser_GetSource(wxobj).dup; }
+        public string Source() { return cast(string) new wxString(wxHtmlParser_GetSource(wxobj), true); }
         public void Source(string value) { wxHtmlParser_SetSource(wxobj, value); }
 
         public void SourceAndSaveState(string value) { wxHtmlParser_SetSourceAndSaveState(wxobj, value); }
@@ -1233,7 +1233,7 @@ public import wx.MouseEvent;
 
         public string ExtractCharsetInformation(string markup)
         {
-            return wxHtmlParser_ExtractCharsetInformation(wxobj, markup).dup;
+            return cast(string) new wxString(wxHtmlParser_ExtractCharsetInformation(wxobj, markup), true);
         }
     }
 
@@ -1575,10 +1575,10 @@ public import wx.MouseEvent;
         //! \cond EXTERN
 		extern (C) {
 		alias void function(HtmlWindow obj, IntPtr link) Virtual_OnLinkClicked;
-		alias void function(HtmlWindow obj, string title) Virtual_OnSetTitle;
+		alias void function(HtmlWindow obj, IntPtr title) Virtual_OnSetTitle;
 		alias void function(HtmlWindow obj, IntPtr cell, int x, int y) Virtual_OnCellMouseHover;
 		alias void function(HtmlWindow obj, IntPtr cell, int x, int y, IntPtr mouseevent) Virtual_OnCellClicked;
-		alias int function(HtmlWindow obj, int type, string url, string redirect) Virtual_OnOpeningURL;
+		alias int function(HtmlWindow obj, int type, IntPtr url, IntPtr redirect) Virtual_OnOpeningURL;
 		}
 
 		static extern (C) IntPtr wxHtmlWindow_ctor();
@@ -1593,9 +1593,9 @@ public import wx.MouseEvent;
 		static extern (C) bool   wxHtmlWindow_AppendToPage(IntPtr self, string source);
 		static extern (C) bool   wxHtmlWindow_LoadPage(IntPtr self, string location);
 		static extern (C) bool   wxHtmlWindow_LoadFile(IntPtr self, string filename);
-		static extern (C) string wxHtmlWindow_GetOpenedPage(IntPtr self);
-		static extern (C) string wxHtmlWindow_GetOpenedAnchor(IntPtr self);
-		static extern (C) string wxHtmlWindow_GetOpenedPageTitle(IntPtr self);
+		static extern (C) IntPtr wxHtmlWindow_GetOpenedPage(IntPtr self);
+		static extern (C) IntPtr wxHtmlWindow_GetOpenedAnchor(IntPtr self);
+		static extern (C) IntPtr wxHtmlWindow_GetOpenedPageTitle(IntPtr self);
 		static extern (C) void   wxHtmlWindow_SetRelatedFrame(IntPtr self, IntPtr frame, string format);
 		static extern (C) IntPtr wxHtmlWindow_GetRelatedFrame(IntPtr self);
 		static extern (C) void   wxHtmlWindow_SetRelatedStatusBar(IntPtr self, int bar);
@@ -1623,9 +1623,9 @@ public import wx.MouseEvent;
 		static extern (C) void   wxHtmlWindow_SelectWord(IntPtr self, inout Point pos);
 		static extern (C) void   wxHtmlWindow_SelectLine(IntPtr self, inout Point pos);
 		
-		static extern (C) string wxHtmlWindow_ToText(IntPtr self);
+		static extern (C) IntPtr wxHtmlWindow_ToText(IntPtr self);
 		
-		static extern (C) string wxHtmlWindow_SelectionToText(IntPtr self);
+		static extern (C) IntPtr wxHtmlWindow_SelectionToText(IntPtr self);
         //! \endcond
 		
 		//-----------------------------------------------------------------------------
@@ -1702,11 +1702,11 @@ public import wx.MouseEvent;
 		
 		//-----------------------------------------------------------------------------
 		
-		public string OpenedPage() { return wxHtmlWindow_GetOpenedPage(wxobj).dup; } 
+		public string OpenedPage() { return cast(string) new wxString(wxHtmlWindow_GetOpenedPage(wxobj), true); } 
 		
-		public string OpenedAnchor() { return wxHtmlWindow_GetOpenedAnchor(wxobj).dup; }
+		public string OpenedAnchor() { return cast(string) new wxString(wxHtmlWindow_GetOpenedAnchor(wxobj), true); }
 		
-		public string OpenedPageTitle() { return wxHtmlWindow_GetOpenedPageTitle(wxobj).dup; }
+		public string OpenedPageTitle() { return cast(string) new wxString(wxHtmlWindow_GetOpenedPageTitle(wxobj), true); }
 		
 		//-----------------------------------------------------------------------------
 		
@@ -1809,9 +1809,9 @@ public import wx.MouseEvent;
 		
 		//-----------------------------------------------------------------------------
 		
-		static extern(C) private void staticDoOnSetTitle(HtmlWindow obj, string title)
+		static extern(C) private void staticDoOnSetTitle(HtmlWindow obj, IntPtr title)
 		{			
-			obj.OnSetTitle(title);
+			obj.OnSetTitle(cast(string) new wxString(title));
 		}
 		
 		public /+virtual+/ void OnSetTitle(string title)
@@ -1857,9 +1857,9 @@ public import wx.MouseEvent;
 		
 		//-----------------------------------------------------------------------------
 		
-		static extern(C) private int staticDoOnOpeningURL(HtmlWindow obj, int type, string url, string redirect)
+		static extern(C) private int staticDoOnOpeningURL(HtmlWindow obj, int type, IntPtr url, IntPtr redirect)
 		{
-			return cast(int)obj.OnOpeningURL(cast(HtmlURLType) type, url, redirect);
+			return cast(int)obj.OnOpeningURL(cast(HtmlURLType) type, cast(string) new wxString(url), cast(string) new wxString(redirect));
 		}
 		
 		public HtmlOpeningStatus OnOpeningURL(HtmlURLType type, string url, string redirect)
@@ -1890,10 +1890,10 @@ public import wx.MouseEvent;
 		
 		//-----------------------------------------------------------------------------
 		
-		public string Text() { return wxHtmlWindow_ToText(wxobj).dup; }
+		public string Text() { return cast(string) new wxString(wxHtmlWindow_ToText(wxobj), true); }
 		
 		//-----------------------------------------------------------------------------
 		
-		public string SelectionText() { return wxHtmlWindow_SelectionToText(wxobj).dup; }
+		public string SelectionText() { return cast(string) new wxString(wxHtmlWindow_SelectionToText(wxobj), true); }
 	}
 		

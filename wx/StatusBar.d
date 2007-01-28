@@ -32,7 +32,7 @@ public import wx.Window;
 		static extern (C) void   wxStatusBar_SetFieldsCount(IntPtr self, int number, int* widths);
 		static extern (C) bool   wxStatusBar_GetFieldRect(IntPtr self, int i, inout Rectangle rect);
 		static extern (C) int    wxStatusBar_GetBorderY(IntPtr self);
-		static extern (C) string wxStatusBar_GetStatusText(IntPtr self, int number);
+		static extern (C) IntPtr wxStatusBar_GetStatusText(IntPtr self, int number);
 		static extern (C) int    wxStatusBar_GetBorderX(IntPtr self);
 		static extern (C) void   wxStatusBar_SetStatusText(IntPtr self, string text, int number);
 		static extern (C) void   wxStatusBar_SetStatusWidths(IntPtr self, int n, int* widths);
@@ -113,7 +113,7 @@ public import wx.Window;
 
 		public string GetStatusText(int number)
 		{
-			return wxStatusBar_GetStatusText(wxobj, number).dup;
+			return cast(string) new wxString(wxStatusBar_GetStatusText(wxobj, number), true);
 		}
 
 		//-----------------------------------------------------------------------------

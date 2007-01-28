@@ -57,7 +57,7 @@ public import wx.common;
 		static extern (C) IntPtr wxStringClientData_ctor(string data);
 		static extern (C) void   wxStringClientData_dtor(IntPtr self);
 		static extern (C) void   wxStringClientData_SetData(IntPtr self, string data);
-		static extern (C) string wxStringClientData_GetData(IntPtr self);
+		static extern (C) IntPtr wxStringClientData_GetData(IntPtr self);
 		//! \endcond
 		
 		//---------------------------------------------------------------------
@@ -87,7 +87,7 @@ public import wx.common;
 		override protected void dtor() { wxStringClientData_dtor(wxobj); }
 		//---------------------------------------------------------------------
 		
-		public string Data() { return wxStringClientData_GetData(wxobj).dup; }
+		public string Data() { return cast(string) new wxString(wxStringClientData_GetData(wxobj), true); }
 		public void Data(string value) { wxStringClientData_SetData(wxobj, value); }
 	}
 

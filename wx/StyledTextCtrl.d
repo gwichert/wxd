@@ -78,7 +78,7 @@ public import wx.CommandEvent;
         static extern (C) void   wxStyledTextCtrl_GotoLine(IntPtr self, int line);
         static extern (C) void   wxStyledTextCtrl_GotoPos(IntPtr self, int pos);
         static extern (C) void   wxStyledTextCtrl_SetAnchor(IntPtr self, int posAnchor);
-        static extern (C) string wxStyledTextCtrl_GetCurLine(IntPtr self, inout int linePos);
+        static extern (C) IntPtr wxStyledTextCtrl_GetCurLine(IntPtr self, inout int linePos);
         static extern (C) int    wxStyledTextCtrl_GetEndStyled(IntPtr self);
         static extern (C) void   wxStyledTextCtrl_ConvertEOLs(IntPtr self, int eolMode);
         static extern (C) int    wxStyledTextCtrl_GetEOLMode(IntPtr self);
@@ -205,7 +205,7 @@ public import wx.CommandEvent;
         static extern (C) int    wxStyledTextCtrl_FindText(IntPtr self, int minPos, int maxPos, string text, int flags);
         static extern (C) int    wxStyledTextCtrl_FormatRange(IntPtr self, bool doDraw, int startPos, int endPos, IntPtr draw, IntPtr target, inout Rectangle renderRect, inout Rectangle pageRect);
         static extern (C) int    wxStyledTextCtrl_GetFirstVisibleLine(IntPtr self);
-        static extern (C) string wxStyledTextCtrl_GetLine(IntPtr self, int line);
+        static extern (C) IntPtr wxStyledTextCtrl_GetLine(IntPtr self, int line);
         static extern (C) int    wxStyledTextCtrl_GetLineCount(IntPtr self);
         static extern (C) void   wxStyledTextCtrl_SetMarginLeft(IntPtr self, int pixelWidth);
         static extern (C) int    wxStyledTextCtrl_GetMarginLeft(IntPtr self);
@@ -213,8 +213,8 @@ public import wx.CommandEvent;
         static extern (C) int    wxStyledTextCtrl_GetMarginRight(IntPtr self);
         static extern (C) bool   wxStyledTextCtrl_GetModify(IntPtr self);
         static extern (C) void   wxStyledTextCtrl_SetSelection(IntPtr self, int start, int end);
-        static extern (C) string wxStyledTextCtrl_GetSelectedText(IntPtr self);
-        static extern (C) string wxStyledTextCtrl_GetTextRange(IntPtr self, int startPos, int endPos);
+        static extern (C) IntPtr wxStyledTextCtrl_GetSelectedText(IntPtr self);
+        static extern (C) IntPtr wxStyledTextCtrl_GetTextRange(IntPtr self, int startPos, int endPos);
         static extern (C) void   wxStyledTextCtrl_HideSelection(IntPtr self, bool normal);
         static extern (C) int    wxStyledTextCtrl_LineFromPosition(IntPtr self, int pos);
         static extern (C) int    wxStyledTextCtrl_PositionFromLine(IntPtr self, int line);
@@ -231,7 +231,7 @@ public import wx.CommandEvent;
         static extern (C) void   wxStyledTextCtrl_Paste(IntPtr self);
         static extern (C) void   wxStyledTextCtrl_Clear(IntPtr self);
         static extern (C) void   wxStyledTextCtrl_SetText(IntPtr self, string text);
-        static extern (C) string wxStyledTextCtrl_GetText(IntPtr self);
+        static extern (C) IntPtr wxStyledTextCtrl_GetText(IntPtr self);
         static extern (C) int    wxStyledTextCtrl_GetTextLength(IntPtr self);
         static extern (C) void   wxStyledTextCtrl_SetOvertype(IntPtr self, bool overtype);
         static extern (C) bool   wxStyledTextCtrl_GetOvertype(IntPtr self);
@@ -1611,7 +1611,7 @@ public import wx.CommandEvent;
 
         public string GetCurLine(out int linePos)
         {
-            return wxStyledTextCtrl_GetCurLine(wxobj, linePos).dup;
+            return cast(string) new wxString(wxStyledTextCtrl_GetCurLine(wxobj, linePos), true);
         }
 
         //-----------------------------------------------------------------------------
@@ -2137,7 +2137,7 @@ public import wx.CommandEvent;
 
         public string GetLine(int line)
         {
-            return wxStyledTextCtrl_GetLine(wxobj, line).dup;
+            return cast(string) new wxString(wxStyledTextCtrl_GetLine(wxobj, line), true);
         }
 
         //-----------------------------------------------------------------------------
@@ -2163,13 +2163,13 @@ public import wx.CommandEvent;
             wxStyledTextCtrl_SetSelection(wxobj, start, end);
         }
 
-        public string SelectedText() { return wxStyledTextCtrl_GetSelectedText(wxobj).dup; }
+        public string SelectedText() { return cast(string) new wxString(wxStyledTextCtrl_GetSelectedText(wxobj), true); }
 
         //-----------------------------------------------------------------------------
 
         public string GetTextRange(int startPos, int endPos)
         {
-            return wxStyledTextCtrl_GetTextRange(wxobj, startPos, endPos).dup;
+            return cast(string) new wxString(wxStyledTextCtrl_GetTextRange(wxobj, startPos, endPos), true);
         }
 
         //-----------------------------------------------------------------------------
@@ -2252,7 +2252,7 @@ public import wx.CommandEvent;
         //-----------------------------------------------------------------------------
 
         public void Text(string value) { wxStyledTextCtrl_SetText(wxobj, value); } 
-        public string Text() { return wxStyledTextCtrl_GetText(wxobj).dup; }
+        public string Text() { return cast(string) new wxString(wxStyledTextCtrl_GetText(wxobj), true); }
 
         //-----------------------------------------------------------------------------
 
@@ -3029,7 +3029,7 @@ public import wx.CommandEvent;
         static extern (C) int    wxStyledTextEvent_GetKey(IntPtr self);
         static extern (C) int    wxStyledTextEvent_GetModifiers(IntPtr self);
         static extern (C) int    wxStyledTextEvent_GetModificationType(IntPtr self);
-        static extern (C) string wxStyledTextEvent_GetText(IntPtr self);
+        static extern (C) IntPtr wxStyledTextEvent_GetText(IntPtr self);
         static extern (C) int    wxStyledTextEvent_GetLength(IntPtr self);
         static extern (C) int    wxStyledTextEvent_GetLinesAdded(IntPtr self);
         static extern (C) int    wxStyledTextEvent_GetLine(IntPtr self);
@@ -3042,7 +3042,7 @@ public import wx.CommandEvent;
         static extern (C) int    wxStyledTextEvent_GetListType(IntPtr self);
         static extern (C) int    wxStyledTextEvent_GetX(IntPtr self);
         static extern (C) int    wxStyledTextEvent_GetY(IntPtr self);
-        static extern (C) string wxStyledTextEvent_GetDragText(IntPtr self);
+        static extern (C) IntPtr wxStyledTextEvent_GetDragText(IntPtr self);
         static extern (C) bool   wxStyledTextEvent_GetDragAllowMove(IntPtr self);
         //static extern (C) IntPtr wxStyledTextEvent_GetDragResult(IntPtr self);
         static extern (C) bool   wxStyledTextEvent_GetShift(IntPtr self);
@@ -3084,7 +3084,7 @@ public import wx.CommandEvent;
         //-----------------------------------------------------------------------------
 
         public void Text(string value) { wxStyledTextEvent_SetText(wxobj, value); } 
-        public string Text() { return wxStyledTextEvent_GetText(wxobj).dup; }
+        public string Text() { return cast(string) new wxString(wxStyledTextEvent_GetText(wxobj), true); }
 
         //-----------------------------------------------------------------------------
 
@@ -3147,7 +3147,7 @@ public import wx.CommandEvent;
         //-----------------------------------------------------------------------------
 
         public void DragText(string value) { wxStyledTextEvent_SetDragText(wxobj, value); }
-        public string DragText() { return wxStyledTextEvent_GetDragText(wxobj).dup; }
+        public string DragText() { return cast(string) new wxString(wxStyledTextEvent_GetDragText(wxobj), true); }
 
         //-----------------------------------------------------------------------------
 

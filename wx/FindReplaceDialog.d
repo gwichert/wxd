@@ -93,10 +93,10 @@ public import wx.CommandEvent;
         static extern (C) int    wxFindDialogEvent_GetFlags(IntPtr self);
         static extern (C) void   wxFindDialogEvent_SetFlags(IntPtr self, int flags);
 
-        static extern (C) string wxFindDialogEvent_GetFindString(IntPtr self);
+        static extern (C) IntPtr wxFindDialogEvent_GetFindString(IntPtr self);
         static extern (C) void   wxFindDialogEvent_SetFindString(IntPtr self, string str);
 
-        static extern (C) string wxFindDialogEvent_GetReplaceString(IntPtr self);
+        static extern (C) IntPtr wxFindDialogEvent_GetReplaceString(IntPtr self);
         static extern (C) void   wxFindDialogEvent_SetReplaceString(IntPtr self, string str);
 
         static extern (C) IntPtr wxFindDialogEvent_GetDialog(IntPtr self);
@@ -138,12 +138,12 @@ public import wx.CommandEvent;
 
         //-----------------------------------------------------------------------------
 
-        public string FindString() { return wxFindDialogEvent_GetFindString(wxobj).dup; }
+        public string FindString() { return cast(string) new wxString(wxFindDialogEvent_GetFindString(wxobj), true); }
         public void FindString(string value) { wxFindDialogEvent_SetFindString(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public string ReplaceString() { return wxFindDialogEvent_GetReplaceString(wxobj).dup; }
+        public string ReplaceString() { return cast(string) new wxString(wxFindDialogEvent_GetReplaceString(wxobj), true); }
         public void ReplaceString(string value) { wxFindDialogEvent_SetReplaceString(wxobj, value); }
 
         //-----------------------------------------------------------------------------
@@ -156,14 +156,14 @@ public import wx.CommandEvent;
 		//! \cond EXTERN
         static extern (C) IntPtr wxFindReplaceData_ctor(uint flags);
 
-        static extern (C) string wxFindReplaceData_GetFindString(IntPtr self);
+        static extern (C) IntPtr wxFindReplaceData_GetFindString(IntPtr self);
         static extern (C) void   wxFindReplaceData_SetFindString(IntPtr self, string str);
 
         static extern (C) int    wxFindReplaceData_GetFlags(IntPtr self);
         static extern (C) void   wxFindReplaceData_SetFlags(IntPtr self, int flags);
 
         static extern (C) void   wxFindReplaceData_SetReplaceString(IntPtr self, string str);
-        static extern (C) string wxFindReplaceData_GetReplaceString(IntPtr self);
+        static extern (C) IntPtr wxFindReplaceData_GetReplaceString(IntPtr self);
 		//! \endcond
 
         //-----------------------------------------------------------------------------
@@ -182,12 +182,12 @@ public import wx.CommandEvent;
 
         //-----------------------------------------------------------------------------
 
-        public string FindString() { return wxFindReplaceData_GetFindString(wxobj).dup; }
+        public string FindString() { return cast(string) new wxString(wxFindReplaceData_GetFindString(wxobj), true); }
         public void FindString(string value) { wxFindReplaceData_SetFindString(wxobj, value); }
 
         //-----------------------------------------------------------------------------
 
-        public string ReplaceString() { return wxFindReplaceData_GetReplaceString(wxobj).dup; }
+        public string ReplaceString() { return cast(string) new wxString(wxFindReplaceData_GetReplaceString(wxobj), true); }
         public void ReplaceString(string value) { wxFindReplaceData_SetReplaceString(wxobj, value); }
 
         //-----------------------------------------------------------------------------

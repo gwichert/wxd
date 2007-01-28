@@ -8,7 +8,7 @@ module wx.common;
  */   
 
 //! \cond STD
-private import std.c.stddef;
+public import std.c.stddef; // wchar_t
 //! \endcond
 
 interface IDisposable
@@ -52,15 +52,15 @@ class ArgumentNullException : Exception
 
 version(UNICODE)
 	alias wchar_t wxChar;
-else // ANSI
-	alias char wxChar;
+else //version(ANSI)
+	alias ubyte wxChar;
 
 	alias char[] string;
 
 
 //public import wx.Defs;
-public public import wx.wxObject;
-//public import wx.wxString;
+public import wx.wxObject;
+public import wx.wxString;
 //public import wx.Log;
 //public import wx.Event;
 //public import wx.EvtHandler;

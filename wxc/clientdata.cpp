@@ -79,9 +79,9 @@ void wxStringClientData_SetData(wxStringClientData* self, wxc_string data)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxStringClientData_GetData(wxStringClientData* self)
+wxString* wxStringClientData_GetData(wxStringClientData* self)
 {
-	return dstr_ret(self->GetData());
+	return new wxString(self->GetData());
 }
 
 

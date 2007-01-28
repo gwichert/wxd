@@ -160,9 +160,9 @@ public import wx.ToolTip;
 		static extern (C) bool   wxWindow_Destroy(IntPtr self);
 		static extern (C) bool   wxWindow_DestroyChildren(IntPtr self);
 		static extern (C) void   wxWindow_SetTitle(IntPtr self, string title);
-		static extern (C) string wxWindow_GetTitle(IntPtr self);
+		static extern (C) IntPtr wxWindow_GetTitle(IntPtr self);
 		static extern (C) void   wxWindow_SetName(IntPtr self, string name);
-		static extern (C) string wxWindow_GetName(IntPtr self);
+		static extern (C) IntPtr wxWindow_GetName(IntPtr self);
 		static extern (C) int    wxWindow_NewControlId();
 		static extern (C) int    wxWindow_NextControlId(int id);
 		static extern (C) int    wxWindow_PrevControlId(int id);
@@ -283,7 +283,7 @@ public import wx.ToolTip;
 		static extern (C) bool   wxWindow_PageDown(IntPtr self);
 		static extern (C) void   wxWindow_SetHelpText(IntPtr self, string text);
 		static extern (C) void   wxWindow_SetHelpTextForId(IntPtr self, string text);
-		static extern (C) string wxWindow_GetHelpText(IntPtr self);
+		static extern (C) IntPtr wxWindow_GetHelpText(IntPtr self);
 		//static extern (C) void wxWindow_SetToolTip(IntPtr self, IntPtr tip);
 		//static extern (C) IntPtr wxWindow_GetToolTip(IntPtr self);
 		static extern (C) void   wxWindow_SetDropTarget(IntPtr self, IntPtr dropTarget);
@@ -618,7 +618,7 @@ public import wx.ToolTip;
 		}
 		public /+virtual+/ string Title()
 		{
-			return wxWindow_GetTitle(wxobj).dup;
+			return cast(string) new wxString(wxWindow_GetTitle(wxobj), true);
 		}
 
 		//---------------------------------------------------------------------
@@ -629,7 +629,7 @@ public import wx.ToolTip;
 			}
 		public /+virtual+/ string Name()
 			{
-				return wxWindow_GetName(wxobj).dup;
+				return cast(string) new wxString(wxWindow_GetName(wxobj), true);
 			}
 
 		//---------------------------------------------------------------------
@@ -1404,7 +1404,7 @@ public import wx.ToolTip;
 
 		public /+virtual+/ string HelpText()
 			{
-				return wxWindow_GetHelpText(wxobj).dup;
+				return cast(string) new wxString(wxWindow_GetHelpText(wxobj), true);
 			}
 		public /+virtual+/ void HelpText(string value)
 			{
@@ -1625,7 +1625,7 @@ public import wx.ToolTip;
 		
                 // TODO Not available in OS X
                 /*
-		public string ToolTipText() { return wxWindow_GetToolTipText(wxobj).dup; }                */
+		public string ToolTipText() { return cast(string) new wxString(wxWindow_GetToolTipText(wxobj), true); }                */
 		
 		//---------------------------------------------------------------------
 		

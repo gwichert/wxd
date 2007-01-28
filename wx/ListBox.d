@@ -41,9 +41,9 @@ public import wx.ClientData;
 		static extern (C) void   wxListBox_Command(IntPtr self, IntPtr evt);
 		static extern (C) bool   wxListBox_Selected(IntPtr self, int n);
 		static extern (C) int    wxListBox_GetSelection(IntPtr self);
-		static extern (C) string wxListBox_GetStringSelection(IntPtr self);
+		static extern (C) IntPtr wxListBox_GetStringSelection(IntPtr self);
 		static extern (C) void   wxListBox_SetSingleString(IntPtr self, int n, string s);
-		static extern (C) string wxListBox_GetSingleString(IntPtr self, int n);
+		static extern (C) IntPtr wxListBox_GetSingleString(IntPtr self, int n);
 		static extern (C) void   wxListBox_Append(IntPtr self, string item);
 		static extern (C) void   wxListBox_AppendClientData(IntPtr self, string item, IntPtr cliendData);
 		static extern (C) void   wxListBox_Delete(IntPtr self, int n);
@@ -112,7 +112,7 @@ public import wx.ClientData;
 		
 		//---------------------------------------------------------------------
 	
-		public string StringSelection() { return wxListBox_GetStringSelection(wxobj).dup; }
+		public string StringSelection() { return cast(string) new wxString(wxListBox_GetStringSelection(wxobj), true); }
 		public void StringSelection(string value) { wxListBox_SetStringSelection(wxobj, value, true); }
 		
 		//---------------------------------------------------------------------
@@ -138,7 +138,7 @@ public import wx.ClientData;
 	
 		public string GetString(int n) 
 		{
-			return wxListBox_GetSingleString(wxobj, n).dup;
+			return cast(string) new wxString(wxListBox_GetSingleString(wxobj, n), true);
 		}
 	
 		public void SetString(int n, string str)

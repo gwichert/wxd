@@ -43,9 +43,9 @@ void wxHelpEvent_SetPosition(wxHelpEvent* self, wxPoint* pos)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxHelpEvent_GetLink(wxHelpEvent* self)
+wxString* wxHelpEvent_GetLink(wxHelpEvent* self)
 {
-	return dstr_ret(self->GetLink());
+	return new wxString(self->GetLink());
 }
 
 //-----------------------------------------------------------------------------
@@ -59,9 +59,9 @@ void wxHelpEvent_SetLink(wxHelpEvent* self, wxc_string link)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxHelpEvent_GetTarget(wxHelpEvent* self)
+wxString* wxHelpEvent_GetTarget(wxHelpEvent* self)
 {
-	return dstr_ret(self->GetTarget());
+	return new wxString(self->GetTarget());
 }
 
 //-----------------------------------------------------------------------------

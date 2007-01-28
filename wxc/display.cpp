@@ -67,9 +67,9 @@ void wxDisplay_GetGeometry(wxDisplay* self,	wxRect*	rect)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxDisplay_GetName(wxDisplay* self)
+wxString* wxDisplay_GetName(wxDisplay* self)
 {
-	return dstr_ret(self->GetName());
+	return new wxString(self->GetName());
 }
 
 //-----------------------------------------------------------------------------

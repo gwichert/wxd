@@ -151,9 +151,9 @@ wxc_bool wxApp_Initialize(_App* self,int& argc, char **argv)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT 
-dstrret wxApp_GetVendorName(wxApp* self)
+wxString* wxApp_GetVendorName(wxApp* self)
 {
-    return dstr_ret(self->GetVendorName());
+    return new wxString(self->GetVendorName());
 }
 
 extern "C" WXEXPORT 
@@ -165,9 +165,9 @@ void wxApp_SetVendorName(wxApp* self, wxc_string name)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT 
-dstrret wxApp_GetAppName(wxApp* self)
+wxString* wxApp_GetAppName(wxApp* self)
 {
-    return dstr_ret(self->GetAppName());
+    return new wxString(self->GetAppName());
 }
 
 extern "C" WXEXPORT 

@@ -229,9 +229,9 @@ wxLogLevel wxLog_GetLogLevel()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxLog_GetTimestamp()
+wxString* wxLog_GetTimestamp()
 {
-    return dstr_ret(wxLog::GetTimestamp());
+    return new wxString(wxLog::GetTimestamp());
 }
 
 //-----------------------------------------------------------------------------

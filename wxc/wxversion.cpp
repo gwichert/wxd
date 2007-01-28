@@ -39,10 +39,9 @@ long wxVersion_SUBRELEASE_NUMBER()
 }
 
 extern "C" WXEXPORT
-dstrret wxVersion_VERSION_STRING()
+wxString* wxVersion_VERSION_STRING()
 {
-	static wxString vers(wxVERSION_STRING);
-	return dstr_ret(vers);
+	return new wxString(wxVERSION_STRING);
 }
 
 /* Users can pre-define wxABI_VERSION to a lower value in their

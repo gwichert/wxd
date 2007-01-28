@@ -117,9 +117,9 @@ int wxComboBox_GetSelection(wxComboBox* self)
 }
 
 extern "C" WXEXPORT
-dstrret wxComboBox_GetString(wxComboBox* self, int n)
+wxString* wxComboBox_GetString(wxComboBox* self, int n)
 {
-    return dstr_ret(self->GetString(n).c_str());
+    return new wxString(self->GetString(n).c_str());
 }
 
 #if 0
@@ -131,9 +131,9 @@ void wxComboBox_SetString(wxComboBox* self, int n, wxc_string text)
 #endif
 
 extern "C" WXEXPORT
-dstrret wxComboBox_GetStringSelection(wxComboBox* self)
+wxString* wxComboBox_GetStringSelection(wxComboBox* self)
 {
-    return dstr_ret(self->GetStringSelection());
+    return new wxString(self->GetStringSelection());
 }
 
 extern "C" WXEXPORT
@@ -255,9 +255,9 @@ void wxComboBox_Remove(wxComboBox* self, long from, long to)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxComboBox_GetValue(wxComboBox* self)
+wxString* wxComboBox_GetValue(wxComboBox* self)
 {
-    return dstr_ret(self->GetValue());
+    return new wxString(self->GetValue());
 }
 
 extern "C" WXEXPORT

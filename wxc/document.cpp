@@ -36,9 +36,9 @@ void wxDocument_SetFilename(wxDocument* self, wxc_string filename, wxc_bool noti
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxDocument_GetFilename(wxDocument* self)
+wxString* wxDocument_GetFilename(wxDocument* self)
 {
-    return dstr_ret(self->GetFilename());
+    return new wxString(self->GetFilename());
 }
 
 //-----------------------------------------------------------------------------
@@ -52,9 +52,9 @@ void wxDocument_SetTitle(wxDocument* self, wxc_string title)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxDocument_GetTitle(wxDocument* self)
+wxString* wxDocument_GetTitle(wxDocument* self)
 {
-    return dstr_ret(self->GetTitle());
+    return new wxString(self->GetTitle());
 }
 
 //-----------------------------------------------------------------------------
@@ -68,9 +68,9 @@ void wxDocument_SetDocumentName(wxDocument* self, wxc_string name)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxDocument_GetDocumentName(wxDocument* self)
+wxString* wxDocument_GetDocumentName(wxDocument* self)
 {
-    return dstr_ret(self->GetDocumentName());
+    return new wxString(self->GetDocumentName());
 }
 
 //-----------------------------------------------------------------------------

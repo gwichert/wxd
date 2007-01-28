@@ -160,9 +160,9 @@ wxc_bool wxListCtrl_SetItemImage(wxListCtrl* self, int item, int image, int selI
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxListCtrl_GetItemText(wxListCtrl* self, int item)
+wxString* wxListCtrl_GetItemText(wxListCtrl* self, int item)
 {
-    return dstr_ret(self->GetItemText(item).c_str());
+    return new wxString(self->GetItemText(item).c_str());
 }
 
 //-----------------------------------------------------------------------------
@@ -641,9 +641,9 @@ int wxListItem_GetState(wxListItem* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxListItem_GetText(wxListItem* self)
+wxString* wxListItem_GetText(wxListItem* self)
 {
-    return dstr_ret(self->GetText());
+    return new wxString(self->GetText());
 }
 
 //-----------------------------------------------------------------------------
@@ -845,9 +845,9 @@ void wxListEvent_SetEditCanceled(wxListEvent* self, wxc_bool editCancelled)
 //----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-dstrret wxListEvent_GetLabel(wxListEvent* self)
+wxString* wxListEvent_GetLabel(wxListEvent* self)
 {
-    return dstr_ret(self->GetLabel());
+    return new wxString(self->GetLabel());
 }
 
 //-----------------------------------------------------------------------------
@@ -869,9 +869,9 @@ int wxListEvent_GetImage(wxListEvent* self)
 
 
 extern "C" WXEXPORT
-dstrret wxListEvent_GetText(wxListEvent* self)
+wxString* wxListEvent_GetText(wxListEvent* self)
 {
-    return dstr_ret(self->GetText());
+    return new wxString(self->GetText());
 }
 
 //-----------------------------------------------------------------------------
