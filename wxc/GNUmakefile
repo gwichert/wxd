@@ -212,6 +212,12 @@ $(LIBTARGET) : $(OBJECTS)
 %.o:%.cpp
 	$(CXX) -D__$(COMPILER)__ $(STCFLAGS) $(WXFLAGS) $(CXXFLAGS) -c -o $@ $<
 
+wx-config.exe: wx-config-win.o
+	$(CXX) $(LDFLAGS) -o $@ $<
+
+wx-release.exe: wx-release-win.o
+	$(CXX) $(LDFLAGS) -o $@ $<
+
 wx-platform$(EXEEXT): wx-platform.o
 	$(CXX) $(LDFLAGS) -o $@ $<
 	
