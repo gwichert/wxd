@@ -12,6 +12,7 @@
 module wx.ogl.ogl;
 public import wx.common;
 
+/+
 public import wx.ogl.Shape;
 public import wx.ogl.LineShape;
 public import wx.ogl.DividedShape;
@@ -24,4 +25,4 @@ public import wx.ogl.OGLConstraint;
 public import wx.ogl.DrawnShape;
 public import wx.ogl.MetaFile;
 public import wx.ogl.misc;
-
++/
