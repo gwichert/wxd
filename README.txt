@@ -23,7 +23,7 @@ It is composed of two parts:
 * Status
 
 0.09 (afb)
-Redo string handling with Unicode support
+Redid string handling with Unicode support
 Support for using wx-config.exe on Windows
 Merge changes / share code with new wx.NET
 Support for the DSSS (and bu[il]d) systems
