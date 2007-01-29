@@ -157,7 +157,6 @@ size_t wxString_utf8_str(wxString* self, char *buffer, size_t buflen)
 	    // convert local ansi encoding to wide chars first (fall-through)
 #endif
 	length = wxConvUTF8.WC2MB(buffer, (const wchar_t*) self->wc_str(*wxConvCurrent), buflen);
-	fprintf(stderr, "Converted %ls to %s\n", (const wchar_t*) self->wc_str(*wxConvCurrent), buffer);
 
 	return length;
 }
