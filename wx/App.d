@@ -172,7 +172,9 @@ private import std.utf;
         //---------------------------------------------------------------------
         
         public string VendorName() { return cast(string) new wxString(wxApp_GetVendorName(wxobj), true); }
+        public void VendorName(string name) { wxApp_SetVendorName(wxobj, name); }
         public string AppName() { return cast(string) new wxString(wxApp_GetAppName(wxobj), true); }
+        public void AppName(string name) { wxApp_SetAppName(wxobj, name); }
 
         //---------------------------------------------------------------------
 
