@@ -201,10 +201,10 @@ install: $(LIBTARGET)
 	-$(RANLIB) $(DESTDIR)$(libdir)/`basename $(LIBTARGET)`
 
 PLATFORM: wx-platform$(EXEEXT)
-	WX_CONFIG=$(WX_CONFIG) ./wx-platform.sh > $@
+	WX_CONFIG="$(WX_CONFIG)" ./wx-platform.sh > $@
 
 ENCODING: wx-encoding$(EXEEXT)
-	WX_CONFIG=$(WX_CONFIG) ./wx-encoding.sh > $@
+	WX_CONFIG="$(WX_CONFIG)" ./wx-encoding.sh > $@
 
 $(LIBTARGET) : $(OBJECTS)
 	ar rcs $@ $^
