@@ -179,12 +179,17 @@ $(LIBTARGET) : $(OBJECTS)
 	lib -p512 -c -n $@ $(OBJECTS)
 
 wx-config.exe: wx-config-win.obj
+	$(CXX) $(LDFLAGS) $< $@
 
 wx-release.exe: wx-release-win.obj
+	$(CXX) $(LDFLAGS) $< $@
 
 wx-platform.exe: wx-platform.obj
+	$(CXX) $(LDFLAGS) $< $@
 
 wx-encoding.exe: wx-encoding.obj
+	$(CXX) $(LDFLAGS) $< $@
+	
 
 $(MAKESTUB): wx-release.exe wx-platform.exe wx-encoding.exe
 	echo "#autogen" >$@
