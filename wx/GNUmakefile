@@ -170,6 +170,9 @@ SOURCES = $(shell ls *.d aui/*.d | grep -v DbGrid.d)
 
 all:  $(LIBTARGET)
 
+# FreeBSD uses this
+PREFIX ?= /usr/local
+
 ifeq ("$(COMPILER)","DMD")
 DC=dmd
 DMD=dmd
@@ -188,7 +191,7 @@ ifeq ("$(STC)","1")
 STCFLAGS = -$(version)=WXD_STYLEDTEXTCTRL
 endif
 
-prefix=/usr/local
+prefix=$(PREFIX)
 exec_prefix=$(prefix)
 includedir=$(prefix)/include
 libdir=$(exec_prefix)/lib

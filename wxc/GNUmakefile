@@ -156,12 +156,14 @@ OBJECTS = \
 	manager.o \
 	wxaui.o
 	
-#	notifyevent.o
-	
 
 all:  PLATFORM ENCODING $(LIBTARGET)
 
 WX_CONFIG ?= wx-config
+
+# FreeBSD uses this
+PREFIX ?= /usr/local
+X11BASE ?= /usr/X11R6
 
 CXX ?= $(shell $(WX_CONFIG) --cxx)
 CXXFLAGS ?= -O2 -Wall
@@ -175,7 +177,7 @@ OS=$(shell uname)
 
 ifeq ("$(OS)","FreeBSD")
 CXXFLAGS += -fno-strict-aliasing
-CXXFLAGS += -I/usr/X11R6/include
+CXXFLAGS += -I$(X11BASE)/include
 endif
 
 ifeq ("$(STC)","1")
@@ -184,7 +186,7 @@ endif
 
 WXFLAGS = `$(WX_CONFIG) --cxxflags`
 
-prefix=/usr/local
+prefix=$(PREFIX)
 exec_prefix=$(prefix)
 includedir=$(prefix)/include
 libdir=$(exec_prefix)/lib
