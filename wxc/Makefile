@@ -192,10 +192,9 @@ wx-encoding.exe: wx-encoding.obj
 	
 
 $(MAKESTUB): wx-release.exe wx-platform.exe wx-encoding.exe
-	echo "#autogen" >$@
-	wx-release.exe >>$@
-	wx-platform.exe -v >>$@
-	wx-encoding.exe -v >>$@
+	+wx-release.exe >$@
+	+wx-platform.exe -v >>$@
+	+wx-encoding.exe -v >>$@
 
 PLATFORM: wx-platform.exe
 	wx-platform.exe >$@
