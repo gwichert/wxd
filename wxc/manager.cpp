@@ -12,11 +12,14 @@
 #include <wx/wx.h>
 #include <wx/minifram.h>
 #include <wx/image.h>
-#include "manager.h"
 
 // Only compile this file for wxWidgets 2.6.x:
 
 #if wxABI_VERSION < 20700
+
+#define wxUSE_AUI 1
+#define WXMAKINGSTATIC_AUI 1
+#include "manager.h"
 
 // -- various array and event implementations --
 
@@ -30,7 +33,7 @@ WX_DEFINE_OBJARRAY(wxPaneInfoArray)
 
 wxPaneInfo wxNullPaneInfo;
 wxDockInfo wxNullDockInfo;
-DEFINE_EVENT_TYPE(wxEVT_AUI_PANEBUTTON)
+DEFINE_AUI_EVENT_TYPE(wxEVT_AUI_PANEBUTTON)
 
 #ifdef __WXMAC__
     // a few defines to avoid nameclashes

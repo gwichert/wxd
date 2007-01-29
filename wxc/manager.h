@@ -2,7 +2,7 @@
 // Name:        manager.h
 // Purpose:     wxaui: wx advanced user interface - docking window manager
 // Author:      Benjamin I. Williams
-// Modified by:
+// Modified by: afb
 // Created:     2005-05-17
 // RCS-ID:      
 // Copyright:   (C) Copyright 2005, Kirix Corporation, All Rights Reserved.
@@ -13,6 +13,28 @@
 #define __WXAUI_WXAUI_H
 
 #include "wx/defs.h"
+
+#if defined(WXMAKINGSTATIC_AUI) || defined(WXUSINGSTATIC_AUI)
+#    define WXDLLIMPEXP_AUI
+#    define WXDLLIMPEXP_DATA_AUI(type) type
+#    define DECLARE_AUI_EVENT_TYPE(name, value) DECLARE_LOCAL_EVENT_TYPE(name, value)
+#    define DEFINE_AUI_EVENT_TYPE(name) DEFINE_LOCAL_EVENT_TYPE(name)
+#elif WXMAKINGDLL_AUI
+#    define WXDLLIMPEXP_AUI WXEXPORT
+#    define WXDLLIMPEXP_DATA_AUI(type) WXEXPORT type
+#    define DECLARE_AUI_EVENT_TYPE(name, value) DECLARE_EVENT_TYPE(name, value)
+#    define DEFINE_AUI_EVENT_TYPE(name) DEFINE_EVENT_TYPE(name)
+#elif defined(WXUSINGDLL)
+#    define WXDLLIMPEXP_AUI WXIMPORT
+#    define WXDLLIMPEXP_DATA_AUI(type) WXIMPORT type
+#    define DECLARE_AUI_EVENT_TYPE(name, value) DECLARE_EVENT_TYPE(name, value)
+#    define DEFINE_AUI_EVENT_TYPE(name) DEFINE_EVENT_TYPE(name)
+#else /* not making nor using DLL */
+#    define WXDLLIMPEXP_AUI
+#    define WXDLLIMPEXP_DATA_AUI(type) type
+#    define DECLARE_AUI_EVENT_TYPE(name, value) DECLARE_LOCAL_EVENT_TYPE(name, value)
+#    define DEFINE_AUI_EVENT_TYPE(name) DEFINE_LOCAL_EVENT_TYPE(name)
+#endif
 
 enum wxFrameManagerDock
 {
@@ -103,7 +125,7 @@ extern wxPaneInfo wxNullPaneInfo;
 
 
 
-class WXDLLEXPORT wxPaneInfo
+class WXDLLIMPEXP_AUI wxPaneInfo
 {
 public:
 
@@ -338,7 +360,7 @@ public:
 
 
 
-class WXDLLEXPORT wxFrameManager : public wxEvtHandler
+class WXDLLIMPEXP_AUI wxFrameManager : public wxEvtHandler
 {
 friend class wxFloatingPane;
 
@@ -493,7 +515,7 @@ private:
 
 // event declarations/classes
 
-class WXDLLEXPORT wxFrameManagerEvent : public wxEvent
+class WXDLLIMPEXP_AUI wxFrameManagerEvent : public wxEvent
 {
 public:
     wxFrameManagerEvent(wxEventType type) : wxEvent(0, type)
@@ -757,7 +779,7 @@ public:
 // spectrum of events will be implemented in the next incremental version
 
 BEGIN_DECLARE_EVENT_TYPES()
-    DECLARE_EVENT_TYPE(wxEVT_AUI_PANEBUTTON, 0)   
+    DECLARE_AUI_EVENT_TYPE(wxEVT_AUI_PANEBUTTON, 0)   
 END_DECLARE_EVENT_TYPES()
 
 typedef void (wxEvtHandler::*wxFrameManagerEventFunction)(wxFrameManagerEvent&);

@@ -15,6 +15,7 @@
 #include "local_events.h"
 #if wxABI_VERSION < 20700
 #define wxUSE_AUI 1
+#define WXUSINGSTATIC_AUI 1
 #include "manager.h"
 #else
 #include <wx/aui/aui.h>
