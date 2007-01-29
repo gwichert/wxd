@@ -179,16 +179,16 @@ $(LIBTARGET) : $(OBJECTS)
 	lib -p512 -c -n $@ $(OBJECTS)
 
 wx-config.exe: wx-config-win.obj
-	$(CXX) $(LDFLAGS) $< $@
+	$(CXX) $(LDFLAGS) wx-config-win.obj $@
 
 wx-release.exe: wx-release-win.obj
-	$(CXX) $(LDFLAGS) $< $@
+	$(CXX) $(LDFLAGS) wx-release-win.obj $@
 
 wx-platform.exe: wx-platform.obj
-	$(CXX) $(LDFLAGS) $< $@
+	$(CXX) $(LDFLAGS) wx-platform.obj $@
 
 wx-encoding.exe: wx-encoding.obj
-	$(CXX) $(LDFLAGS) $< $@
+	$(CXX) $(LDFLAGS) wx-encoding.obj $@
 	
 
 $(MAKESTUB): wx-release.exe wx-platform.exe wx-encoding.exe
