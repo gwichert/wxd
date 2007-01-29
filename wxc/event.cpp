@@ -33,7 +33,7 @@
 //-----------------------------------------------------------------------------
 // Event type for virtual destructors
 
-DEFINE_EVENT_TYPE(wxEVT_OBJECTDELETED)    
+DEFINE_LOCAL_EVENT_TYPE(wxEVT_OBJECTDELETED)    
 
 extern "C" WXEXPORT int wxEvent_EVT_NULL()        { return wxEVT_NULL; }
 

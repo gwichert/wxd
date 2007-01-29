@@ -18,6 +18,8 @@
 #include "common.h"
 #include "local_events.h"
 
+DEFINE_LOCAL_EVENT_TYPE(wxEVT_APPINIT)    
+
 #include <stdio.h>
 
 typedef wxc_bool (CALLBACK* Virtual_Initialize) (wxc_object obj,int* argc,char** argv);
