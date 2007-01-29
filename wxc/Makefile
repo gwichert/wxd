@@ -158,8 +158,6 @@ OBJECTS = \
 	manager.obj \
 	wxaui.obj
 	
-#	notifyevent.obj
-	
 
 all:  $(MAKESTUB) $(LIBTARGET)
 
