@@ -155,8 +155,7 @@ void wxArrayString_RegisterDisposable(_ArrayString* self, Virtual_Dispose onDisp
 extern "C" WXEXPORT
 void wxArrayString_Add(wxArrayString* self, wxc_string toadd)
 {
-	wxString tmps(wxstr(toadd));
-	self->Add(tmps);
+	self->Add(wxstr(toadd));
 }
 
 extern "C" WXEXPORT
