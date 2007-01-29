@@ -32,6 +32,8 @@ import defsext;    // Additional definitions
 import Edit;       // Edit module
 import Prefs;      // Prefs
 
+const char [] mondrian = "../Samples/StyledText/mondrian.png";
+
 //============================================================================
 // declarations
 //============================================================================
@@ -54,7 +56,7 @@ const char[] NONAME = "<untitled>";
 
 //----------------------------------------------------------------------------
 //! global application name
-wxString g_appname = null;
+string g_appname = null;
 
 //! global print data, to remember settings during the session
 PrintData g_printData = null;
@@ -75,27 +77,24 @@ public:
 //! the main function called durning application start
 bool OnInit () {
 
-    wxInitAllImageHandlers();
+    wxImage.InitAllHandlers();
 
     // set application and vendor name
-    SetAppName (APP_NAME);
-    SetVendorName (APP_VENDOR);
-    g_appname = new wxString ();
-    g_appname.Append (APP_VENDOR);
-    g_appname.Append (_T("-"));
-    g_appname.Append (APP_NAME);
+    AppName = (APP_NAME);
+    VendorName = (APP_VENDOR);
+    g_appname = APP_VENDOR ~ "-" ~ APP_NAME;
 
     // initialize print data and setup
     g_printData = new wxPrintData;
     g_pageSetupData = new wxPageSetupDialogData;
 
     // create application frame
-    m_frame = new AppFrame (*g_appname);
+    m_frame = new AppFrame (g_appname);
 
     // open application frame
     m_frame.Layout ();
     m_frame.Show (true);
-    SetTopWindow (m_frame);
+    TopWindow = (m_frame);
 
     return true;
 }
@@ -128,7 +127,7 @@ class AppFrame: public wxFrame {
 public:
 
 //! constructor
-this (wxString title) {
+this (string title) {
 
     super(null, wxID_ANY, title, wxDefaultPosition, wxSize(750,550),
                     wxDEFAULT_FRAME_STYLE | wxNO_FULL_REPAINT_ON_RESIZE);
@@ -137,9 +136,9 @@ this (wxString title) {
     m_edit = null;
 
     // set icon and background
-    SetTitle (*g_appname);
-    SetIcon (wxICON (mondrian));
-    SetBackgroundColour (_T("WHITE"));
+    Title = g_appname;
+    icon = new Icon(mondrian);
+    BackgroundColour = new wxColour("WHITE");
 
     // about box shown for 1 seconds
     AppAbout dlg = new AppAbout(this, 1000);
@@ -152,7 +151,7 @@ this (wxString title) {
     m_edit = new Edit (this, wxID_ANY);
     m_edit.SetFocus();
 
-    FileOpen (_T("stctest.cpp"));
+    FileOpen ("stctest.cpp");
 
     // common
     EVT_CLOSE (                      &OnClose);
@@ -219,7 +218,7 @@ this (wxString title) {
 void OnClose (wxCloseEvent event) {
     wxCommandEvent evt;
     OnFileClose (evt);
-    if (m_edit & m_edit.Modified()) {
+    if (m_edit && m_edit.Modified()) {
         if (event.CanVeto()) event.Veto (true);
         return;
     }
@@ -456,7 +455,7 @@ void CreateMenu ()
     SetMenuBar (m_menuBar);
 }
 
-void FileOpen (wxString fname)
+void FileOpen (string fname)
 {
     wxFileName w(fname); w.Normalize(); fname = w.GetFullPath();
     m_edit.LoadFile (fname);
@@ -493,20 +492,22 @@ class AppAbout: public wxDialog {
 public:
 
 //! constructor
-this (wxWindow *parent,
+this (wxWindow parent,
                     int milliseconds,
-                    long style) {
+                    long style = wxDEFAULT_DIALOG_STYLE) {
 
     super(parent, wxID_ANY, wxEmptyString,
                     wxDefaultPosition, wxDefaultSize,
                     style | wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
 
+/+
     // set timer if any
     m_timer = null;
     if (milliseconds > 0) {
         m_timer = new wxTimer (this, myID_ABOUTTIMER);
         m_timer.Start (milliseconds, wxTIMER_ONE_SHOT);
     }
++/
 
     // sets the application title
     SetTitle ("About ..");
@@ -562,14 +563,17 @@ this (wxWindow *parent,
 
     //! destructor
 ~this () {
+/+
     if (m_timer)  {
         delete m_timer;
         m_timer = null;
     }
++/
 }
 
 //----------------------------------------------------------------------------
 // event handlers
+/+
 void OnTimerEvent (wxTimerEvent event) {
     if (m_timer) delete m_timer;
     m_timer = null;
@@ -579,7 +583,7 @@ void OnTimerEvent (wxTimerEvent event) {
 private:
     // timer
     wxTimer m_timer;
-
++/
 }
 
 

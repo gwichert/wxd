@@ -8,11 +8,8 @@
 // Licence:     wxWindows licence
 //////////////////////////////////////////////////////////////////////////////
 
-//----------------------------------------------------------------------------
-// headers
-//----------------------------------------------------------------------------
-
 //! wxWidgets headers
+public import wx.wx;
 
 //! wxWidgets/contrib headers
 public import wx.StyledTextCtrl;
@@ -107,8 +104,7 @@ struct CommonInfo {
     bool lineNumberEnable;
     bool longLineOnEnable;
     bool whiteSpaceEnable;
-};
-extern const CommonInfo g_CommonPrefs;
+}
 
 //----------------------------------------------------------------------------
 // LanguageInfo
@@ -117,15 +113,13 @@ struct LanguageInfo {
     wxChar *name;
     wxChar *filepattern;
     int lexer;
-    struct {
+    struct style {
         int type;
         const wxChar *words;
-    } styles [STYLE_TYPES_COUNT];
+    }
+    style styles [STYLE_TYPES_COUNT];
     int folds;
-};
-
-extern const LanguageInfo g_LanguagePrefs[];
-extern const int g_LanguagePrefsSize;
+}
 
 //----------------------------------------------------------------------------
 // StyleInfo
@@ -137,10 +131,7 @@ struct StyleInfo {
     int fontsize;
     int fontstyle;
     int lettercase;
-};
-
-extern const StyleInfo g_StylePrefs[];
-extern const int g_StylePrefsSize;
+}
 
 //============================================================================
 // declarations
@@ -167,7 +158,7 @@ const CommonInfo g_CommonPrefs = {
 //----------------------------------------------------------------------------
 // keywordlists
 // C++
-wxChar* CppWordlist1 =
+const wxChar* CppWordlist1 =
     "asm auto bool break case catch char class const const_cast "
     "continue default delete do double dynamic_cast else enum explicit "
     "export extern false float for friend goto if inline int long "
@@ -176,9 +167,9 @@ wxChar* CppWordlist1 =
     "struct switch template this throw true try typedef typeid "
     "typename union unsigned using virtual void volatile wchar_t "
     "while";
-wxChar* CppWordlist2 =
+const wxChar* CppWordlist2 =
     "file";
-wxChar* CppWordlist3 =
+const wxChar* CppWordlist3 =
     "a addindex addtogroup anchor arg attention author b brief bug c "
     "class code date def defgroup deprecated dontinclude e em endcode "
     "endhtmlonly endif endlatexonly endlink endverbatim enum example "
@@ -191,11 +182,11 @@ wxChar* CppWordlist3 =
     "verbinclude version warning weakgroup $ @ \"\" & < > # { }";
 
 // Python
-wxChar* PythonWordlist1 =
+const wxChar* PythonWordlist1 =
     "and assert break class continue def del elif else except exec "
     "finally for from global if import in is lambda None not or pass "
     "print raise return try while yield";
-wxChar* PythonWordlist2 =
+const wxChar* PythonWordlist2 =
     "ACCELERATORS ALT AUTO3STATE AUTOCHECKBOX AUTORADIOBUTTON BEGIN "
     "BITMAP BLOCK BUTTON CAPTION CHARACTERISTICS CHECKBOX CLASS "
     "COMBOBOX CONTROL CTEXT CURSOR DEFPUSHBUTTON DIALOG DIALOGEX "
@@ -204,128 +195,125 @@ wxChar* PythonWordlist2 =
     "RADIOBUTTON RCDATA RTEXT SCROLLBAR SEPARATOR SHIFT STATE3 "
     "STRINGTABLE STYLE TEXTINCLUDE VALUE VERSION VERSIONINFO VIRTKEY";
 
-
 //----------------------------------------------------------------------------
 //! languages
-const LanguageInfo g_LanguagePrefs [] = {
+const LanguageInfo g_LanguagePrefs [] = [
     // C++
     {"C++",
      "*.c;*.cc;*.cpp;*.cxx;*.cs;*.h;*.hh;*.hpp;*.hxx;*.sma",
-     wxSTC_LEX_CPP,
-     {{mySTC_TYPE_DEFAULT, NULL},
-      {mySTC_TYPE_COMMENT, NULL},
-      {mySTC_TYPE_COMMENT_LINE, NULL},
-      {mySTC_TYPE_COMMENT_DOC, NULL},
-      {mySTC_TYPE_NUMBER, NULL},
+     wxStyledTextCtrl.wxSTC_LEX_CPP,
+     [{mySTC_TYPE_DEFAULT, null},
+      {mySTC_TYPE_COMMENT, null},
+      {mySTC_TYPE_COMMENT_LINE, null},
+      {mySTC_TYPE_COMMENT_DOC, null},
+      {mySTC_TYPE_NUMBER, null},
       {mySTC_TYPE_WORD1, CppWordlist1}, // KEYWORDS
-      {mySTC_TYPE_STRING, NULL},
-      {mySTC_TYPE_CHARACTER, NULL},
-      {mySTC_TYPE_UUID, NULL},
-      {mySTC_TYPE_PREPROCESSOR, NULL},
-      {mySTC_TYPE_OPERATOR, NULL},
-      {mySTC_TYPE_IDENTIFIER, NULL},
-      {mySTC_TYPE_STRING_EOL, NULL},
-      {mySTC_TYPE_DEFAULT, NULL}, // VERBATIM
-      {mySTC_TYPE_REGEX, NULL},
-      {mySTC_TYPE_COMMENT_SPECIAL, NULL}, // DOXY
+      {mySTC_TYPE_STRING, null},
+      {mySTC_TYPE_CHARACTER, null},
+      {mySTC_TYPE_UUID, null},
+      {mySTC_TYPE_PREPROCESSOR, null},
+      {mySTC_TYPE_OPERATOR, null},
+      {mySTC_TYPE_IDENTIFIER, null},
+      {mySTC_TYPE_STRING_EOL, null},
+      {mySTC_TYPE_DEFAULT, null}, // VERBATIM
+      {mySTC_TYPE_REGEX, null},
+      {mySTC_TYPE_COMMENT_SPECIAL, null}, // DOXY
       {mySTC_TYPE_WORD2, CppWordlist2}, // EXTRA WORDS
       {mySTC_TYPE_WORD3, CppWordlist3}, // DOXY KEYWORDS
-      {mySTC_TYPE_ERROR, NULL}, // KEYWORDS ERROR
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL}},
+      {mySTC_TYPE_ERROR, null}, // KEYWORDS ERROR
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null}],
      mySTC_FOLD_COMMENT | mySTC_FOLD_COMPACT | mySTC_FOLD_PREPROC},
     // Python
     {"Python",
      "*.py;*.pyw",
-     wxSTC_LEX_PYTHON,
-     {{mySTC_TYPE_DEFAULT, NULL},
-      {mySTC_TYPE_COMMENT_LINE, NULL},
-      {mySTC_TYPE_NUMBER, NULL},
-      {mySTC_TYPE_STRING, NULL},
-      {mySTC_TYPE_CHARACTER, NULL},
+     wxStyledTextCtrl.wxSTC_LEX_PYTHON,
+     [{mySTC_TYPE_DEFAULT, null},
+      {mySTC_TYPE_COMMENT_LINE, null},
+      {mySTC_TYPE_NUMBER, null},
+      {mySTC_TYPE_STRING, null},
+      {mySTC_TYPE_CHARACTER, null},
       {mySTC_TYPE_WORD1, PythonWordlist1}, // KEYWORDS
-      {mySTC_TYPE_DEFAULT, NULL}, // TRIPLE
-      {mySTC_TYPE_DEFAULT, NULL}, // TRIPLEDOUBLE
-      {mySTC_TYPE_DEFAULT, NULL}, // CLASSNAME
+      {mySTC_TYPE_DEFAULT, null}, // TRIPLE
+      {mySTC_TYPE_DEFAULT, null}, // TRIPLEDOUBLE
+      {mySTC_TYPE_DEFAULT, null}, // CLASSNAME
       {mySTC_TYPE_DEFAULT, PythonWordlist2}, // DEFNAME
-      {mySTC_TYPE_OPERATOR, NULL},
-      {mySTC_TYPE_IDENTIFIER, NULL},
-      {mySTC_TYPE_DEFAULT, NULL}, // COMMENT_BLOCK
-      {mySTC_TYPE_STRING_EOL, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL}},
+      {mySTC_TYPE_OPERATOR, null},
+      {mySTC_TYPE_IDENTIFIER, null},
+      {mySTC_TYPE_DEFAULT, null}, // COMMENT_BLOCK
+      {mySTC_TYPE_STRING_EOL, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null}],
      mySTC_FOLD_COMMENTPY | mySTC_FOLD_QUOTESPY},
     // * (any)
-    {(wxChar *)DEFAULT_LANGUAGE,
+    {"<default>", //DEFAULT_LANGUAGE,
      "*.*",
-     wxSTC_LEX_PROPERTIES,
-     {{mySTC_TYPE_DEFAULT, NULL},
-      {mySTC_TYPE_DEFAULT, NULL},
-      {mySTC_TYPE_DEFAULT, NULL},
-      {mySTC_TYPE_DEFAULT, NULL},
-      {mySTC_TYPE_DEFAULT, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL},
-      {-1, NULL}},
+     wxStyledTextCtrl.wxSTC_LEX_PROPERTIES,
+     [{mySTC_TYPE_DEFAULT, null},
+      {mySTC_TYPE_DEFAULT, null},
+      {mySTC_TYPE_DEFAULT, null},
+      {mySTC_TYPE_DEFAULT, null},
+      {mySTC_TYPE_DEFAULT, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null}],
      0},
-    };
-
-const int g_LanguagePrefsSize = WXSIZEOF(g_LanguagePrefs);
+    ];
 
 //----------------------------------------------------------------------------
 //! style types
-const StyleInfo g_StylePrefs [] = {
+const StyleInfo g_StylePrefs [] = [
     // mySTC_TYPE_DEFAULT
     {"Default",
      "BLACK", "WHITE",
@@ -481,6 +469,4 @@ const StyleInfo g_StylePrefs [] = {
      "ORANGE", "WHITE",
      "", 10, 0, 0}
 
-    };
-
-const int g_StylePrefsSize = WXSIZEOF(g_StylePrefs);
+    ];

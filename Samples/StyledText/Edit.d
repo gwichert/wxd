@@ -8,33 +8,20 @@
 // Licence:     wxWindows licence
 //////////////////////////////////////////////////////////////////////////////
 
-//----------------------------------------------------------------------------
-// headers
-//----------------------------------------------------------------------------
-
 //! wxWidgets headers
-
-//! wxWidgets/contrib headers
-public import wx.StyledTextCtrl;
+import wx.wx;
+import wx.StyledTextCtrl;
 
 //! application headers
 public import Prefs;
 
 //! wxWidgets headers
-private import wx.File;     // raw file io support
-private import wx.Filename; // filename support
+//private import wx.File;     // raw file io support
+//private import wx.Filename; // filename support
 
 //! application headers
 private import defsext;     // additional definitions
 
-
-//============================================================================
-// implementations
-//============================================================================
-
-//----------------------------------------------------------------------------
-// Edit
-//----------------------------------------------------------------------------
 
 //----------------------------------------------------------------------------
 //! Edit
@@ -43,7 +30,7 @@ class Edit: public wxStyledTextCtrl {
 public:
 
 //! constructor
-this (wxWindow *parent, wxWindowID id = wxID_ANY,
+this (wxWindow parent, wxWindowID id = wxID_ANY,
             wxPoint pos = wxDefaultPosition,
             wxSize size= wxDefaultSize,
             long style = wxSUNKEN_BORDER|wxVSCROLL) {
@@ -343,7 +330,7 @@ void OnCharAdded (wxStyledTextEvent event) {
 // private functions
 wxString DeterminePrefs (wxString filename) {
 
-    LanguageInfo* curInfo;
+    Prefs.LanguageInfo* curInfo;
 
     // determine language from filepatterns
     int languageNr;
@@ -369,7 +356,7 @@ bool InitializePrefs (wxString name) {
 
     // initialize styles
     StyleClearAll();
-    LanguageInfo* curInfo = NULL;
+    Prefs.LanguageInfo* curInfo = NULL;
 
     // determine language
     bool found = false;
@@ -396,7 +383,7 @@ bool InitializePrefs (wxString name) {
     // default fonts for all styles!
     int Nr;
     for (Nr = 0; Nr < wxSTC_STYLE_LASTPREDEFINED; Nr++) {
-        wxFont font (10, wxMODERN, wxNORMAL, wxNORMAL);
+        wxFont font = new wxFont(10, wxMODERN, wxNORMAL, wxNORMAL);
         StyleSetFont (Nr, font);
     }
 
@@ -409,8 +396,8 @@ bool InitializePrefs (wxString name) {
         int keywordnr = 0;
         for (Nr = 0; Nr < STYLE_TYPES_COUNT; Nr++) {
             if (curInfo.styles[Nr].type == -1) continue;
-            const StyleInfo &curType = g_StylePrefs [curInfo.styles[Nr].type];
-            wxFont font (curType.fontsize, wxMODERN, wxNORMAL, wxNORMAL, false,
+            const StyleInfo curType = g_StylePrefs [curInfo.styles[Nr].type];
+            wxFont font = new wxFont(curType.fontsize, wxMODERN, wxNORMAL, wxNORMAL, false,
                          curType.fontname);
             StyleSetFont (Nr, font);
             if (curType.foreground) {
@@ -491,7 +478,7 @@ bool LoadFile ()
 {
     // get filname
     if (!m_filename) {
-        wxFileDialog dlg (this, "Open file", wxEmptyString, wxEmptyString,
+        wxFileDialog dlg = new wxFileDialog(this, "Open file", wxEmptyString, wxEmptyString,
                           "Any file (*)|*", wxOPEN | wxFILE_MUST_EXIST | wxCHANGE_DIR);
         if (dlg.ShowModal() != wxID_OK) return false;
         m_filename = dlg.GetPath();
@@ -518,7 +505,7 @@ bool LoadFile (wxString filename) {
 //     }
 //     file.Close();
 
-    wxStyledTextCtrl::LoadFile(m_filename);
+    wxStyledTextCtrl.LoadFile(m_filename);
 
     EmptyUndoBuffer();
 
@@ -536,7 +523,7 @@ bool SaveFile ()
 
     // get filname
     if (!m_filename) {
-        wxFileDialog dlg (this, "Save file", wxEmptyString, wxEmptyString, "Any file (*)|*",
+        wxFileDialog dlg = new wxFileDialog(this, "Save file", wxEmptyString, wxEmptyString, "Any file (*)|*",
                           wxSAVE | wxOVERWRITE_PROMPT);
         if (dlg.ShowModal() != wxID_OK) return false;
         m_filename = dlg.GetPath();
@@ -546,7 +533,7 @@ bool SaveFile ()
     return SaveFile (m_filename);
 }
 
-bool SaveFile (wxString &filename) {
+bool SaveFile (wxString filename) {
 
     // return if no change
     if (!Modified()) return true;
@@ -564,7 +551,7 @@ bool SaveFile (wxString &filename) {
 
 //     return true;
 
-    return wxStyledTextCtrl::SaveFile(filename);
+    return wxStyledTextCtrl.SaveFile(filename);
 
 }
 
@@ -575,17 +562,17 @@ bool Modified () {
 }
 
 
-    LanguageInfo const* GetLanguageInfo () {return m_language;}
+    Prefs.LanguageInfo* GetLanguageInfo () {return m_language;}
 
     wxString GetFilename () {return m_filename;}
-    void SetFilename (wxString &filename) {m_filename = filename;}
+    void SetFilename (wxString filename) {m_filename = filename;}
 
 private:
     // file
     wxString m_filename;
 
     // lanugage properties
-    LanguageInfo const* m_language;
+    Prefs.LanguageInfo* m_language;
 
     // margin variables
     int m_LineNrID;
@@ -635,7 +622,7 @@ this (Edit *edit,
     textinfo.Add (new wxStaticText (this, wxID_ANY, _("Lexer-ID: "),
                                      wxDefaultPosition, wxSize(80, wxDefaultCoord)),
                    0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxLEFT, 4);
-    text = wxString::Format ("%d", edit.GetLexer());
+    text = wxString.Format ("%d", edit.GetLexer());
     textinfo.Add (new wxStaticText (this, wxID_ANY, text),
                    0, wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxRIGHT, 4);
     wxString EOLtype = wxEmptyString;
@@ -662,25 +649,25 @@ this (Edit *edit,
     statistic.Add (new wxStaticText (this, wxID_ANY, _("Total lines"),
                                      wxDefaultPosition, wxSize(80, wxDefaultCoord)),
                     0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxLEFT, 4);
-    text = wxString::Format ("%d", edit.GetLineCount());
+    text = wxString.Format ("%d", edit.GetLineCount());
     statistic.Add (new wxStaticText (this, wxID_ANY, text),
                     0, wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxRIGHT, 4);
     statistic.Add (new wxStaticText (this, wxID_ANY, _("Total chars"),
                                      wxDefaultPosition, wxSize(80, wxDefaultCoord)),
                     0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxLEFT, 4);
-    text = wxString::Format ("%d", edit.GetTextLength());
+    text = wxString.Format ("%d", edit.GetTextLength());
     statistic.Add (new wxStaticText (this, wxID_ANY, text),
                     0, wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxRIGHT, 4);
     statistic.Add (new wxStaticText (this, wxID_ANY, _("Current line"),
                                      wxDefaultPosition, wxSize(80, wxDefaultCoord)),
                     0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxLEFT, 4);
-    text = wxString::Format ("%d", edit.GetCurrentLine());
+    text = wxString.Format ("%d", edit.GetCurrentLine());
     statistic.Add (new wxStaticText (this, wxID_ANY, text),
                     0, wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxRIGHT, 4);
     statistic.Add (new wxStaticText (this, wxID_ANY, _("Current pos"),
                                      wxDefaultPosition, wxSize(80, wxDefaultCoord)),
                     0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL|wxLEFT, 4);
-    text = wxString::Format ("%d", edit.GetCurrentPos());
+    text = wxString.Format ("%d", edit.GetCurrentPos());
     statistic.Add (new wxStaticText (this, wxID_ANY, text),
                     0, wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxRIGHT, 4);
 
@@ -708,6 +695,8 @@ this (Edit *edit,
     ShowModal();
 }
 
+}
+
 //----------------------------------------------------------------------------
 // EditPrint
 //----------------------------------------------------------------------------
@@ -728,7 +717,7 @@ this (Edit *edit, wxChar *title = "") {
 }
 
 //! event handlers
-bool EditPrint::OnPrintPage (int page) {
+bool OnPrintPage (int page) {
 
     wxDC *dc = GetDC();
     if (!dc) return false;
@@ -744,16 +733,16 @@ bool EditPrint::OnPrintPage (int page) {
     return true;
 }
 
-bool EditPrint::OnBeginDocument (int startPage, int endPage) {
+bool OnBeginDocument (int startPage, int endPage) {
 
-    if (!wxPrintout::OnBeginDocument (startPage, endPage)) {
+    if (!wxPrintout.OnBeginDocument (startPage, endPage)) {
         return false;
     }
 
     return true;
 }
 
-void EditPrint::GetPageInfo (int *minPage, int *maxPage, int *selPageFrom, int *selPageTo) {
+void GetPageInfo (int *minPage, int *maxPage, int *selPageFrom, int *selPageTo) {
 
     // initialize values
     *minPage = 0;
@@ -770,8 +759,8 @@ void EditPrint::GetPageInfo (int *minPage, int *maxPage, int *selPageFrom, int *
     wxSize ppiScr;
     GetPPIScreen (&ppiScr.x, &ppiScr.y);
     wxSize page = g_pageSetupData.GetPaperSize();
-    page.x = static_cast<int> (page.x * ppiScr.x / 25.4);
-    page.y = static_cast<int> (page.y * ppiScr.y / 25.4);
+    page.x = cast(int) (page.x * ppiScr.x / 25.4);
+    page.y = cast(int) (page.y * ppiScr.y / 25.4);
     m_pageRect = wxRect (0,
                          0,
                          page.x,
@@ -785,10 +774,10 @@ void EditPrint::GetPageInfo (int *minPage, int *maxPage, int *selPageFrom, int *
     int right = pt.x;
     int bottom = pt.y;
 
-    top = static_cast<int> (top * ppiScr.y / 25.4);
-    bottom = static_cast<int> (bottom * ppiScr.y / 25.4);
-    left = static_cast<int> (left * ppiScr.x / 25.4);
-    right = static_cast<int> (right * ppiScr.x / 25.4);
+    top = cast(int) (top * ppiScr.y / 25.4);
+    bottom = cast(int) (bottom * ppiScr.y / 25.4);
+    left = cast(int) (left * ppiScr.x / 25.4);
+    right = cast(int) (right * ppiScr.x / 25.4);
 
     m_printRect = wxRect (left,
                           top,
@@ -807,12 +796,12 @@ void EditPrint::GetPageInfo (int *minPage, int *maxPage, int *selPageFrom, int *
 }
 
 //! print functions
-bool EditPrint::HasPage (int page) {
+bool HasPage (int page) {
 
     return (m_printed < m_edit.GetLength());
 }
 
-bool EditPrint::PrintScaling (wxDC *dc){
+bool PrintScaling (wxDC *dc){
 
     // check for dc, return if none
     if (!dc) return false;
@@ -835,10 +824,10 @@ bool EditPrint::PrintScaling (wxDC *dc){
     GetPageSizePixels (&pageSize.x, &pageSize.y);
 
     // set user scale
-    float scale_x = (float)(ppiPrt.x * dcSize.x) /
-                    (float)(ppiScr.x * pageSize.x);
-    float scale_y = (float)(ppiPrt.y * dcSize.y) /
-                    (float)(ppiScr.y * pageSize.y);
+    float scale_x = cast(float)(ppiPrt.x * dcSize.x) /
+                    cast(float)(ppiScr.x * pageSize.x);
+    float scale_y = cast(float)(ppiPrt.y * dcSize.y) /
+                    cast(float)(ppiScr.y * pageSize.y);
     dc.SetUserScale (scale_x, scale_y);
 
     return true;
@@ -851,5 +840,4 @@ private:
     wxRect m_pageRect;
     wxRect m_printRect;
 
-    bool PrintScaling (wxDC *dc);
 }
