@@ -161,7 +161,7 @@ OBJECTS = \
 #	notifyevent.obj
 	
 
-all:  wx-config.exe $(MAKESTUB) $(LIBTARGET)
+all:  $(MAKESTUB) $(LIBTARGET)
 
 include $(WXDIR)/build/msw/config.dmc
 CXX = dmc
