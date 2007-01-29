@@ -136,6 +136,7 @@ public import wx.PrintData;
 
         //-----------------------------------------------------------------------------
 
+    alias Printout wxPrintout;
     public abstract class Printout : wxObject
     {
         private this(IntPtr wxobj) 
