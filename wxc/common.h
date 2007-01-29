@@ -31,26 +31,20 @@ struct dstr {
 		length = strlen(data);
 	}
 	
-	inline const wchar_t* wc_str()
-	{ 
-		size_t widelen;
-		return wxConvUTF8.cMB2WC(data, length, &widelen);
-	}
-
 	operator wxString ()
 	{
 #if wxUSE_UNICODE
 		return wxString(data, wxConvUTF8, length);
 #else
-		return wxString(wc_str());
+		size_t ignored;
+		// convert the UTF-8 to wide first, and then back to ansi:
+		return wxString(wxConvUTF8.cMB2WC(data, length, &ignored));
 #endif
 	}
 };
 
-#if wxUSE_UNICODE
-#define wxstr(str)    wxString(str.data, wxConvUTF8, str.length)
-#else
-#define wxstr(str)    wxString(str.wc_str())
-#endif
+// Macro, for compatibility with wx.NET etc
+// it converts a wxc_string into a wxString
+#define wxstr(str)    wxString(str)
 
 #endif /* _COMMON_H_ */
