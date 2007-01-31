@@ -28,7 +28,8 @@ ifeq ("$(STC)","1")
 WXLIBS = `$(WX_CONFIG) --libs stc`
 endif
 
-REZFLAGS = $(shell $(WX_CONFIG) --rezflags)
+#REZFLAGS = $(shell $(WX_CONFIG) --rezflags)
+REZFLAGS = /Developer/Tools/Rez -d __DARWIN__ -t APPL Carbon.r -o
 
 # workaround for wxAUI 0.9.2 linking to gdk_window_get_pointer directly on wxGTK...
 ifeq ("$(PLATFORM)","WXGTK")
