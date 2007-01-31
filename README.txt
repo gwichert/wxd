@@ -1,7 +1,7 @@
 wxD - wxWidgets bindings for D language
 
 	(c) 2005 BERO <berobero@users.sourceforge.net>
-	(c) 2006 afb <afb@users.sourceforge.net>
+	(c) 2007 afb <afb@users.sourceforge.net>
 
 * About
 
@@ -154,8 +154,7 @@ for convenience, use constructor like function:
 When compiling wxD programs, you need to tell it which version of
 wxWidgets that you want (i.e. what platform you are targetting)
 
-If you are using the GNU Makefiles and the wx-config script, then
-your platform name should be available in the file "wxc/platform".
+Your platform name should be available in the file "wxc/PLATFORM".
 
 Here are the main supported ones:
 Windows XP     version=__WXMSW__
@@ -167,9 +166,9 @@ For checking the wx platform at runtime, see the wxPlatform class.
 * Strings
 
 There are two ways to compile wxWidgets, as "ansi" or as "unicode"
+The former uses "char" characters, and the latter uses "wchar_t".
 
-In wxD, ANSI means to use UTF-8 and UNICODE means UTF-16 or UTF-32
-(depending on the OS, e.g. Windows does UTF-16 and Unix does UTF-32)
+Your encoding name should be available in the file "wxc/ENCODING".
 
 wx-config:     DFLAGS:
 --unicode=no   version=ANSI
@@ -181,6 +180,9 @@ The alias "string" is used in wxD, for char[] strings (UTF-8 format)
 
 wxD is licensed under the wxWindows Licence which is LGPL, with a
 special exception to allow distributing as a static linked binary.
+
+This is a solution that satisfies those who wish to produce GPL'ed
+software with wxD, and also those producing proprietary software.
 
 For more information, see files:
 LICENCE.txt and COPYING.LIB
@@ -195,5 +197,7 @@ http://www.opensource.org/licenses/wxwindows.php
 - wx.NET [http://wxnet.sourceforge.net/]
 - DMD [http://www.digitalmars.com/d/]
 - GDC [http://dgcc.sourceforge.net/]
+- D [http://www.d-programming-language.org/]
 - gdcmac [http://gdcmac.sourceforge.net/]
+- gdcgnu [http://gdcgnu.sourceforge.net/]
 - gdcwin [http://gdcwin.sourceforge.net/]
