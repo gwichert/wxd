@@ -69,6 +69,7 @@ module wx.Defs;
 		wxID_HELP,
 		wxID_PRINT,
 		wxID_PRINT_SETUP,
+//      wxID_PAGE_SETUP,	/* added in wxWidgets 2.7.1 */
 		wxID_PREVIEW,
 		wxID_ABOUT,
 		wxID_HELP_CONTENTS,
