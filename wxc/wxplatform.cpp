@@ -154,17 +154,29 @@ int wxPlatform_wxGetOsVersion(int *majorVsn, int *minorVsn)
 
 //-----------------------------------------------------------------------------
 
-extern "C" WXEXPORT int wxPlatform_wxUNKNOWN_PLATFORM() { return wxUNKNOWN_PLATFORM; }
+#if wxABI_VERSION < 20700
+#define wxOS_UNKNOWN        wxUNKNOWN_PLATFORM
+#define wxOS_WINDOWS_9X     wxWIN95
+#define wxOS_WINDOWS_NT     wxWINDOWS_NT
+#define wxOS_WINDOWS        (wxWIN95|wxWINDOWS_NT)
+#define wxOS_MAC_OS         wxMAC
+#define wxOS_MAC_OSX_DARWIN wxMAC_DARWIN
+#define wxOS_MAC            (wxMAC|wxMAC_DARWIN)
+#define wxOS_UNIX_LINUX     0
+#define wxOS_UNIX_FREEBSD   0
+#define wxOS_UNIX           (0|0)
+#endif
 
-extern "C" WXEXPORT int wxPlatform_wxWIN95()      { return wxWIN95; } /*  Windows 95 */
-extern "C" WXEXPORT int wxPlatform_wxWINDOWS_NT() { return wxWINDOWS_NT; } /*  Windows NT */
+extern "C" WXEXPORT int wxPlatform_OS_UNKNOWN()    { return wxOS_UNKNOWN; }
 
-extern "C" WXEXPORT int wxPlatform_wxGTK()        { return wxGTK; } /*  GTK on X */
-extern "C" WXEXPORT int wxPlatform_wxGTK_WIN32()  { return wxGTK_WIN32; } /*  GTK on Win32 */
+extern "C" WXEXPORT int wxPlatform_OS_WINDOWS()    { return wxOS_WINDOWS; }
+extern "C" WXEXPORT int wxPlatform_OS_WINDOWS_9X() { return wxOS_WINDOWS_9X; } /*  Windows 9x family */
+extern "C" WXEXPORT int wxPlatform_OS_WINDOWS_NT() { return wxOS_WINDOWS_NT; } /*  Windows NT family */
 
-extern "C" WXEXPORT int wxPlatform_wxMAC()        { return wxMAC; } /*  Apple Mac OS 8/9/X with Mac paths */
-extern "C" WXEXPORT int wxPlatform_wxMAC_DARWIN() { return wxMAC_DARWIN; } /*  Apple Mac OS X with Unix paths */
+extern "C" WXEXPORT int wxPlatform_OS_MAC()        { return wxOS_MAC; }
+extern "C" WXEXPORT int wxPlatform_OS_MAC_OS()     { return wxOS_MAC_OS; } /*  Apple Mac OS 8/9/X with Mac paths */
+extern "C" WXEXPORT int wxPlatform_OS_DARWIN()     { return wxOS_MAC_OSX_DARWIN; } /*  Apple Mac OS X with Unix paths */
 
-extern "C" WXEXPORT int wxPlatform_wxUNIX()       { return wxUNIX; } /* wxBase under Unix */
-extern "C" WXEXPORT int wxPlatform_wxX11()        { return wxX11; } /* Plain X11 and Universal widgets */
-
+extern "C" WXEXPORT int wxPlatform_OS_UNIX()       { return wxOS_UNIX; } 
+extern "C" WXEXPORT int wxPlatform_OS_LINUX()      { return wxOS_UNIX_LINUX; }
+extern "C" WXEXPORT int wxPlatform_OS_FREEBSD()    { return wxOS_UNIX_FREEBSD; }

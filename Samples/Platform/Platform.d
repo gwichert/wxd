@@ -13,14 +13,14 @@ public class MyFrame : wxFrame
 		char[] platform;
 		
 		p = wxGetOsVersion(major, minor);
-		if (p == wxWIN95 || p == wxWINDOWS_NT)
-			platform = "Win";
-		else if (p == wxGTK || p == wxGTK_WIN32)
-			platform = "GTK";
-		else if (p == wxMAC || p == wxMAC_DARWIN)
-			platform = "Mac";
-		else if (p == wxX11)
-			platform = "X11";
+		if (p == OS_WINDOWS_9X || p == OS_WINDOWS_NT)
+			platform = "Windows";
+		else if (p == OS_MAC_OS || p == OS_DARWIN)
+			platform = "Macintosh";
+		else if (p == OS_LINUX)
+			platform = "GNU/Linux";
+		else if (p == OS_FREEBSD)
+			platform = "FreeBSD";
 		else
 			platform = "???";
 

@@ -35,15 +35,16 @@ private import std.string;
 		static extern (C) IntPtr wxPlatform_wxGetOsDescription();
 		static extern (C) int wxPlatform_wxGetOsVersion(inout int major, inout int minor);
 
-		static extern (C) int wxPlatform_wxUNKNOWN_PLATFORM();
-		static extern (C) int wxPlatform_wxWIN95();
-		static extern (C) int wxPlatform_wxWINDOWS_NT();
-		static extern (C) int wxPlatform_wxGTK();
-		static extern (C) int wxPlatform_wxGTK_WIN32();
-		static extern (C) int wxPlatform_wxMAC();
-		static extern (C) int wxPlatform_wxMAC_DARWIN();
-		static extern (C) int wxPlatform_wxUNIX();
-		static extern (C) int wxPlatform_wxX11();
+		static extern (C) int wxPlatform_OS_UNKNOWN();
+		static extern (C) int wxPlatform_OS_WINDOWS();
+		static extern (C) int wxPlatform_OS_WINDOWS_9X();
+		static extern (C) int wxPlatform_OS_WINDOWS_NT();
+		static extern (C) int wxPlatform_OS_MAC();
+		static extern (C) int wxPlatform_OS_MAC_OS();
+		static extern (C) int wxPlatform_OS_DARWIN();
+		static extern (C) int wxPlatform_OS_UNIX();
+		static extern (C) int wxPlatform_OS_LINUX();
+		static extern (C) int wxPlatform_OS_FREEBSD();
 		//! \endcond
 		// ------------------------------------------------------
 
@@ -83,27 +84,34 @@ public bool SOUND;
 // ------------------------------------------------------
 
 /// Unknown Platform
-public int wxUNKNOWN_PLATFORM;
+public int OS_UNKNOWN;
+deprecated alias OS_UNKNOWN wxUNKNOWN_PLATFORM;
 
+/// Windows
+public int OS_WINDOWS;
 /// Windows 95/98/ME
-public int wxWIN95;
+public int OS_WINDOWS_9X;
+deprecated alias OS_WINDOWS_9X wxWIN95;
 /// Windows NT/2K/XP
-public int wxWINDOWS_NT;
+public int OS_WINDOWS_NT;
+deprecated alias OS_WINDOWS_NT wxWINDOWS_NT;
 
-/// GTK on X11
-public int wxGTK;
-/// GTK on Win32
-public int wxGTK_WIN32;
-
+/// Apple Mac OS
+public int OS_MAC;
 /// Apple Mac OS 8/9/X with Mac paths
-public int wxMAC;
+public int OS_MAC_OS;
+deprecated alias OS_MAC_OS wxMAC;
 /// Apple Mac OS X with Unix paths
-public int wxMAC_DARWIN;
+public int OS_DARWIN;
+deprecated alias OS_DARWIN wxMAC_DARWIN;
 
-/// wxBase under Unix
-public int wxUNIX;
-/// Plain X11 and Universal widgets
-public int wxX11;
+/// Unix
+public int OS_UNIX;
+deprecated public int wxUNIX;
+/// Linux
+public int OS_LINUX;
+/// FreeBSD
+public int OS_FREEBSD;
 
 /// Get OS version
 public int wxGetOsVersion(inout int major, inout int minor)
@@ -150,14 +158,16 @@ else //version(ANSI)
 	SOUND = wxPlatform_SOUND();
 
 	// constants
-	wxUNKNOWN_PLATFORM = wxPlatform_wxUNKNOWN_PLATFORM();
-	wxWIN95 = wxPlatform_wxWIN95();
-	wxWINDOWS_NT = wxPlatform_wxWINDOWS_NT();
-	wxGTK = wxPlatform_wxGTK();
-	wxGTK_WIN32 = wxPlatform_wxGTK_WIN32();
-	wxMAC = wxPlatform_wxMAC();
-	wxMAC_DARWIN = wxPlatform_wxMAC_DARWIN();
-	wxUNIX = wxPlatform_wxUNIX();
-	wxX11 = wxPlatform_wxX11();
+	OS_UNKNOWN = wxPlatform_OS_UNKNOWN();
+	OS_WINDOWS = wxPlatform_OS_WINDOWS();
+	OS_WINDOWS_9X = wxPlatform_OS_WINDOWS_9X();
+	OS_WINDOWS_NT = wxPlatform_OS_WINDOWS_NT();
+	OS_MAC = wxPlatform_OS_MAC();
+	OS_MAC_OS = wxPlatform_OS_MAC_OS();
+	OS_DARWIN = wxPlatform_OS_DARWIN();
+	OS_UNIX = wxPlatform_OS_UNIX();
+	OS_LINUX = wxPlatform_OS_LINUX();
+	OS_FREEBSD = wxPlatform_OS_FREEBSD();
+
 }
 
