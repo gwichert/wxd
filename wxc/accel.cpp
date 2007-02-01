@@ -100,7 +100,11 @@ wxMenuItem* wxAcceleratorEntry_GetMenuItem(wxAcceleratorEntry* self)
 extern "C" WXEXPORT
 wxAcceleratorEntry* wxAcceleratorEntry_GetAccelFromString(wxc_string label)
 {
+#if wxABI_VERSION < 20700
 	return wxGetAccelFromString(wxstr(label));
+#else
+	return wxAcceleratorEntry::Create(wxstr(label));
+#endif
 }
 
 //-----------------------------------------------------------------------------

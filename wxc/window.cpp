@@ -417,7 +417,11 @@ void wxWindow_GetClientRect(wxWindow* self, wxRect* rect)
 extern "C" WXEXPORT
 void wxWindow_GetAdjustedBestSize(wxWindow* self, wxSize* size)
 {
+#if wxABI_VERSION < 20700
 	*size = self->GetAdjustedBestSize();
+#else
+	*size = self->GetEffectiveMinSize();
+#endif
 }
 
 //-----------------------------------------------------------------------------

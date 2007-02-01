@@ -37,7 +37,10 @@ public:
 	{
 		const char* cargv[argc];
 		for (int i=0; i < argc; i++)
-		cargv[i] = (const char*) wxString(argv[i],wxConvUTF8).mb_str(wxConvUTF8);
+		{
+		const wxWX2MBbuf buf = wxString(argv[i]).mb_str(wxConvUTF8);
+		cargv[i] = (const char*) buf;
+		}
 		
 		return m_Initialize(m_dobj,&argc,(char**)cargv); 
 	}
@@ -71,10 +74,16 @@ private:
 //-----------------------------------------------------------------------------
 // Replacement code for IMPLEMENT_APP_NO_MAIN()
 
+#if wxABI_VERSION < 20700
 static _App* _app = NULL;
 wxAppConsole* wxCreateApp() { return _app; }
 
 wxAppInitializer wxTheAppInitializer((wxAppInitializerFunction)wxCreateApp);
+#else
+DECLARE_APP(_App)
+IMPLEMENT_APP_NO_MAIN(_App)
+static _App* _app = NULL;
+#endif
 
 //-----------------------------------------------------------------------------
 // C stubs for class methods
@@ -89,9 +98,9 @@ _App* wxApp_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxApp_RegisterVirtual(_App* self, wxc_object obj, Virtual_OnInit onInit, Virtual_OnRun onRun, Virtual_OnExit onExit,Virtual_Initialize initalize)
+void wxApp_RegisterVirtual(_App* self, wxc_object obj, Virtual_OnInit onInit, Virtual_OnRun onRun, Virtual_OnExit onExit,Virtual_Initialize initialize)
 {
-	self->RegisterVirtual(obj, onInit, onRun, onExit, initalize);
+	self->RegisterVirtual(obj, onInit, onRun, onExit, initialize);
 }
 
 //-----------------------------------------------------------------------------
@@ -121,13 +130,14 @@ int wxApp_OnExit(_App* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxc_bool wxApp_Initialize(_App* self,int& argc, char **argv)
+wxc_bool wxApp_Initialize(_App* self,int *argc, char **argv)
 {
-	const wxChar* wargv[argc];
-        for (int i=0; i < argc; i++)
-           wargv[i] = argv[i] ? wxString(argv[i],*wxConvCurrent).c_str() : NULL;
 
-	return self->wxApp::Initialize(argc,(wxChar**)wargv)?1:0;
+	const wxChar* wargv[*argc];
+        for (int i=0; i < *argc; i++)
+            wargv[i] = argv[i] ? wxString(argv[i],*wxConvCurrent).c_str() : NULL;
+		
+	return self->wxApp::Initialize(*argc,(wxChar**)wargv)?1:0;
 }
 
 //-----------------------------------------------------------------------------

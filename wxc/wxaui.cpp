@@ -19,6 +19,12 @@
 #include "manager.h"
 #else
 #include <wx/aui/aui.h>
+#define wxFrameManager wxAuiManager
+#define wxFrameManagerEvent wxAuiManagerEvent
+#define wxDockArt wxAuiDockArt
+#define wxDefaultDockArt wxAuiDefaultDockArt
+#define wxPaneInfo wxAuiPaneInfo
+#define wxPaneInfoArray wxAuiPaneInfoArray
 #endif
 
 #if wxUSE_AUI
@@ -697,7 +703,11 @@ void wxFrameManager_Update(wxFrameManager* self)
   self->Update();
 }
 
+#if wxABI_VERSION < 20700
 extern "C" WXEXPORT int wxEvent_EVT_AUI_PANEBUTTON()        { return wxEVT_AUI_PANEBUTTON; }
+#else
+extern "C" WXEXPORT int wxEvent_EVT_AUI_PANEBUTTON()        { return 0; }
+#endif
 
 //-----------------------------------------------------------------------------
 
@@ -750,22 +760,28 @@ typedef void (CALLBACK* Virtual_SetColour) (wxc_object obj, int id, const wxColo
 typedef wxColour* (CALLBACK* Virtual_GetColor) (wxc_object obj, int id);
 typedef void (CALLBACK* Virtual_SetColor) (wxc_object obj, int id, const wxColor* color);
 typedef void (CALLBACK* Virtual_DrawSash) (wxc_object obj, wxDC* dc,
+                      wxWindow* window,
                       int orientation,
                       const wxRect* rect);
 typedef void (CALLBACK* Virtual_DrawBackground) (wxc_object obj, wxDC* dc,
+                      wxWindow* window,
                       int orientation,
                       const wxRect* rect);
 typedef void (CALLBACK* Virtual_DrawCaption) (wxc_object obj, wxDC* dc,
+                      wxWindow* window,
                       wxString* text,
                       const wxRect* rect,
                       wxPaneInfo* pane);
 typedef void (CALLBACK* Virtual_DrawGripper) (wxc_object obj, wxDC* dc,
+                      wxWindow* window,
                       const wxRect* rect,
                       wxPaneInfo* pane);
 typedef void (CALLBACK* Virtual_DrawBorder) (wxc_object obj, wxDC* dc,
+                      wxWindow* window,
                       const wxRect* rect,
                       wxPaneInfo* pane);
 typedef void (CALLBACK* Virtual_DrawPaneButton) (wxc_object obj, wxDC* dc,
+                      wxWindow* window,
                       int button,
                       int button_state,
                       const wxRect* rect,
@@ -819,35 +835,67 @@ public:
     m_SetColor(m_dobj, id, &color);
   }
 
+#if wxABI_VERSION < 20700
   void DrawSash(wxDC& dc, int orientation, const wxRect& rect)
   {
-    m_DrawSash(m_dobj, &dc, orientation, &rect);
+    m_DrawSash(m_dobj, &dc, NULL, orientation, &rect);
   }
 
   void DrawBackground(wxDC& dc, int orientation, const wxRect& rect)
   {
-    m_DrawBackground(m_dobj, &dc, orientation, &rect);
+    m_DrawBackground(m_dobj, &dc, NULL, orientation, &rect);
   }
 
   void DrawCaption(wxDC& dc, const wxString& text, const wxRect& rect, wxPaneInfo& pane)
   {
-    m_DrawCaption(m_dobj, &dc, new wxString(text), &rect, &pane);
+    m_DrawCaption(m_dobj, &dc, NULL, new wxString(text), &rect, &pane);
   }
 
   void DrawGripper(wxDC& dc, const wxRect& rect, wxPaneInfo& pane)
   {
-    m_DrawGripper(m_dobj, &dc, &rect, &pane);
+    m_DrawGripper(m_dobj, &dc, NULL, &rect, &pane);
   }
 
   void DrawBorder(wxDC& dc, const wxRect& rect, wxPaneInfo& pane)
   {
-    m_DrawBorder(m_dobj, &dc, &rect, &pane);
+    m_DrawBorder(m_dobj, &dc, NULL, &rect, &pane);
   }
 
   void DrawPaneButton(wxDC& dc, int button, int button_state, const wxRect& rect, wxPaneInfo& pane)
   {
-    m_DrawPaneButton(m_dobj, &dc, button, button_state, &rect, &pane);
+    m_DrawPaneButton(m_dobj, &dc, NULL, button, button_state, &rect, &pane);
   }
+#else
+  void DrawSash(wxDC& dc, wxWindow *window, int orientation, const wxRect& rect)
+  {
+    m_DrawSash(m_dobj, &dc, window, orientation, &rect);
+  }
+
+  void DrawBackground(wxDC& dc, wxWindow *window, int orientation, const wxRect& rect)
+  {
+    m_DrawBackground(m_dobj, &dc, window, orientation, &rect);
+  }
+
+  void DrawCaption(wxDC& dc, wxWindow *window, const wxString& text, const wxRect& rect, wxPaneInfo& pane)
+  {
+    m_DrawCaption(m_dobj, &dc, window, new wxString(text), &rect, &pane);
+  }
+
+  void DrawGripper(wxDC& dc, wxWindow *window, const wxRect& rect, wxPaneInfo& pane)
+  {
+    m_DrawGripper(m_dobj, &dc, window, &rect, &pane);
+  }
+
+  void DrawBorder(wxDC& dc, wxWindow *window, const wxRect& rect, wxPaneInfo& pane)
+  {
+    m_DrawBorder(m_dobj, &dc, window, &rect, &pane);
+  }
+
+  void DrawPaneButton(wxDC& dc, wxWindow *window, int button, int button_state, const wxRect& rect, wxPaneInfo& pane)
+  {
+    m_DrawPaneButton(m_dobj, &dc, window, button, button_state, &rect, &pane);
+  }
+#endif
 
   void RegisterVirtual(wxc_object obj,
                       Virtual_GetMetric getMetric,
@@ -1021,53 +1069,83 @@ void wxDockArt_SetColor(wxDockArt* self, int id, const wxColor* color)
 
 extern "C" WXEXPORT
 void wxDockArt_DrawSash(wxDockArt* self, wxDC* dc,
+                      wxWindow* window,
                       int orientation,
                       const wxRect* rect)
 {
+#if wxABI_VERSION < 20700
   self->DrawSash(*dc, orientation, *rect);
+#else
+  self->DrawSash(*dc, window, orientation, *rect);
+#endif
 }
 
 extern "C" WXEXPORT
 void wxDockArt_DrawBackground(wxDockArt* self, wxDC* dc,
+                      wxWindow* window,
                       int orientation,
                       const wxRect* rect)
 {
+#if wxABI_VERSION < 20700
   self->DrawBackground(*dc, orientation, *rect);
+#else
+  self->DrawBackground(*dc, window, orientation, *rect);
+#endif
 }
 
 extern "C" WXEXPORT
 void wxDockArt_DrawCaption(wxDockArt* self, wxDC* dc,
-                     wxc_string text,
+                      wxWindow* window,
+                      wxString* text,
                       const wxRect* rect,
                       wxPaneInfo* pane)
 {
-  self->DrawCaption(*dc, wxstr(text), *rect, *pane);
+#if wxABI_VERSION < 20700
+  self->DrawCaption(*dc, *text, *rect, *pane);
+#else
+  self->DrawCaption(*dc, window, *text, *rect, *pane);
+#endif
 }
 
 extern "C" WXEXPORT
 void wxDockArt_DrawGripper(wxDockArt* self, wxDC* dc,
+                      wxWindow* window,
                       const wxRect* rect,
                       wxPaneInfo* pane)
 {
+#if wxABI_VERSION < 20700
   self->DrawGripper(*dc, *rect, *pane);
+#else
+  self->DrawGripper(*dc, window, *rect, *pane);
+#endif
 }
 
 extern "C" WXEXPORT
 void wxDockArt_DrawBorder(wxDockArt* self, wxDC* dc,
+                      wxWindow* window,
                       const wxRect* rect,
                       wxPaneInfo* pane)
 {
+#if wxABI_VERSION < 20700
   self->DrawBorder(*dc, *rect, *pane);
+#else
+  self->DrawBorder(*dc, window, *rect, *pane);
+#endif
 }
 
 extern "C" WXEXPORT
 void wxDockArt_DrawPaneButton(wxDockArt* self, wxDC* dc,
+                      wxWindow* window,
                       int button,
                       int button_state,
                       const wxRect* rect,
                       wxPaneInfo* pane)
 {
+#if wxABI_VERSION < 20700
   self->DrawPaneButton(*dc, button, button_state, *rect, *pane);
+#else
+  self->DrawPaneButton(*dc, window, button, button_state, *rect, *pane);
+#endif
 }
 
 //-----------------------------------------------------------------------------

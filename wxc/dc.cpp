@@ -248,7 +248,9 @@ void wxDC_SetLogicalFunction(wxDC* self, int function)
 extern "C" WXEXPORT
 void wxDC_BeginDrawing(wxDC* self)
 {
+#if wxABI_VERSION < 20700
 	self->BeginDrawing();
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -266,7 +268,9 @@ wxc_bool wxDC_Blit(wxDC* self, wxCoord xdest, wxCoord ydest, wxCoord width, wxCo
 extern "C" WXEXPORT
 void wxDC_EndDrawing(wxDC* self)
 {
+#if wxABI_VERSION < 20700
 	self->EndDrawing();
+#endif
 }
 
 //---------------------------------------------------------------------

@@ -245,13 +245,28 @@ wxPenList* wxPenList_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
+void wxPenList_dtor(wxPenList* self)
+{
+	if (self != NULL)
+		delete self;
+}
+
+//-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT
 void wxPenList_AddPen(wxPenList* self, wxPen* pen)
 {
-#if wxABI_VERSION < 20700
+#if WXWIN_COMPATIBILITY_2_6
 	self->AddPen(pen);
-#else
-	self->Append(pen);
 #endif
+}
+
+//-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT
+wxPenList* wxPenList_ThePenList(void)
+{
+    return wxThePenList;
 }
 
 //-----------------------------------------------------------------------------
@@ -259,10 +274,8 @@ void wxPenList_AddPen(wxPenList* self, wxPen* pen)
 extern "C" WXEXPORT
 void wxPenList_RemovePen(wxPenList* self, wxPen* pen)
 {
-#if wxABI_VERSION < 20700
+#if WXWIN_COMPATIBILITY_2_6
 	self->RemovePen(pen);
-#else
-	self->DeleteObject(pen);
 #endif
 }
 
@@ -286,12 +299,19 @@ wxBrushList* wxBrushList_ctor()
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
+void wxBrushList_dtor(wxBrushList* self)
+{
+	if (self != NULL)
+		delete self;
+}
+
+//-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT
 void wxBrushList_AddBrush(wxBrushList* self, wxBrush* brush)
 {
-#if wxABI_VERSION < 20700
+#if WXWIN_COMPATIBILITY_2_6
 	self->AddBrush(brush);
-#else
-	self->Append(brush);
 #endif
 }
 
@@ -300,10 +320,8 @@ void wxBrushList_AddBrush(wxBrushList* self, wxBrush* brush)
 extern "C" WXEXPORT
 void wxBrushList_RemoveBrush(wxBrushList* self, wxBrush* brush)
 {
-#if wxABI_VERSION < 20700
+#if WXWIN_COMPATIBILITY_2_6
 	self->RemoveBrush(brush);
-#else
-	self->DeleteObject(brush);
 #endif
 }
 
@@ -313,6 +331,14 @@ extern "C" WXEXPORT
 wxBrush* wxBrushList_FindOrCreateBrush(wxBrushList* self, wxColour* colour, int style)
 {
 	return self->FindOrCreateBrush(*colour, style);
+}
+
+//-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT
+wxBrushList* wxBrushList_TheBrushList(void)
+{
+    return wxTheBrushList;
 }
 
 //-----------------------------------------------------------------------------
@@ -327,20 +353,16 @@ wxFontList* wxFontList_ctor()
 extern "C" WXEXPORT
 void wxFontList_AddFont(wxFontList* self, wxFont* font)
 {
-#if wxABI_VERSION < 20700
+#if WXWIN_COMPATIBILITY_2_6
 	self->AddFont(font);
-#else
-	self->Append(font);
 #endif
 }
 
 extern "C" WXEXPORT
 void wxFontList_RemoveFont(wxFontList* self, wxFont* font)
 {
-#if wxABI_VERSION < 20700
+#if WXWIN_COMPATIBILITY_2_6
 	self->RemoveFont(font);
-#else
-	self->DeleteObject(font);
 #endif
 }
 
@@ -361,6 +383,15 @@ extern "C" WXEXPORT
 wxBitmapList* wxBitmapList_ctor()
 {
 	return new wxBitmapList();
+}
+
+//-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT
+void wxBitmapList_dtor(wxBitmapList* self)
+{
+	if (self != NULL)
+		delete self;
 }
 
 //-----------------------------------------------------------------------------

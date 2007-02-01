@@ -37,7 +37,11 @@ wxMemoryDC* wxMemoryDC_ctorByDC(wxDC *dc)
 extern "C" WXEXPORT
 void wxMemoryDC_SelectObject(wxMemoryDC* self, const wxBitmap* bitmap)
 {
+#if wxABI_VERSION < 20700
 	self->SelectObject(*bitmap);
+#else
+	self->SelectObject(*((wxBitmap *) bitmap));
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -51,7 +55,11 @@ wxBufferedDC* wxBufferedDC_ctor()
 extern "C" WXEXPORT
 wxBufferedDC* wxBufferedDC_ctorByBitmap(wxDC *dc, const wxBitmap *buffer)
 {
+#if wxABI_VERSION < 20700
 	return new wxBufferedDC(dc, *buffer);
+#else
+	return new wxBufferedDC(dc, *((wxBitmap *) buffer));
+#endif
 }
 
 extern "C" WXEXPORT

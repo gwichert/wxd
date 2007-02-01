@@ -46,9 +46,14 @@ public:
 	void OnCellMouseHover(wxHtmlCell* cell, wxCoord x, wxCoord y)
 	{ m_OnCellMouseHover(m_dobj, cell, x, y); }
 	
+#if wxABI_VERSION < 20700
 	void OnCellClicked(wxHtmlCell* cell, wxCoord x, wxCoord y, const wxMouseEvent& event)
 	{ m_OnCellClicked(m_dobj, cell, x, y, new wxMouseEvent(event)); }
-	
+#else
+	bool OnCellClicked(wxHtmlCell* cell, wxCoord x, wxCoord y, const wxMouseEvent& event)
+	{ return wxHtmlWindowMouseHelper::HandleMouseClick( cell, wxPoint(x, y), event); } 
+#endif
+
 	wxHtmlOpeningStatus OnOpeningURL(wxHtmlURLType type, const wxString& url, wxString * redirect) const
 	{ return m_OnOpeningURL(m_dobj, type, new wxString(url), redirect); }
 
@@ -326,12 +331,19 @@ void wxHtmlWindow_OnSetTitle(_HtmlWindow* self, wxc_string title)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
+#if wxABI_VERSION < 20700
 void wxHtmlWindow_OnCellClicked(_HtmlWindow* self, wxHtmlCell* cell, wxCoord x, wxCoord y, wxMouseEvent* event)
 {
-#if wxABI_VERSION < 20700
     self->wxHtmlWindow::OnCellClicked(cell, x, y, *event);
-#endif
 }
+#else
+bool wxHtmlWindow_OnCellClicked(_HtmlWindow* self, wxHtmlCell* cell, wxCoord x, wxCoord y, const wxMouseEvent& event)
+{
+	return wxHtmlCellEvent(wxEVT_COMMAND_HTML_CELL_CLICKED, wxID_ANY,
+                    cell, wxPoint(x, y),
+                    event).GetLinkClicked();
+}
+#endif
 
 //-----------------------------------------------------------------------------
 
@@ -1305,7 +1317,7 @@ wxHtmlWindow* wxHtmlWinParser_GetWindow(wxHtmlWinParser* self)
 #if wxABI_VERSION < 20700
     return self->GetWindow();
 #else
-    return self->GetWindowInterface()->GetHTMLWindow();
+    return (wxHtmlWindow*) self->GetWindowInterface()->GetHTMLWindow();
 #endif
 }
 
