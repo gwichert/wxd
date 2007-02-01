@@ -89,11 +89,6 @@ public import wx.Colour;
 			Brush.wxCYAN_BRUSH = new Brush(wxCYAN_BRUSH_Get());
 			Brush.wxRED_BRUSH = new Brush(wxRED_BRUSH_Get());
 
-			Font.wxNORMAL_FONT    = new Font(wxFont_NORMAL_FONT());
-			Font.wxSMALL_FONT     = new Font(wxFont_SMALL_FONT());
-			Font.wxITALIC_FONT    = new Font(wxFont_ITALIC_FONT());
-			Font.wxSWISS_FONT     = new Font(wxFont_SWISS_FONT());
-
 			Colour.wxBLACK       = new Colour("Black");
 			Colour.wxWHITE       = new Colour("White");
 			Colour.wxRED         = new Colour("Red");

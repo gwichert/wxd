@@ -201,10 +201,11 @@ public import wx.GDIObject;
 	alias Font wxFont;
 	public class Font : GDIObject, ICloneable
 	{
-		public static Font wxNORMAL_FONT;
-		public static Font wxSMALL_FONT;
-		public static Font wxITALIC_FONT;
-		public static Font wxSWISS_FONT;
+		// in wxWidgets 2.8 fonts are dynamic, and crash if accessed too early
+		public static Font wxNORMAL_FONT() { return new Font(wxFont_NORMAL_FONT()); }
+		public static Font wxSMALL_FONT()  { return new Font(wxFont_SMALL_FONT()); }
+		public static Font wxITALIC_FONT() { return new Font(wxFont_ITALIC_FONT()); }
+		public static Font wxSWISS_FONT()  { return new Font(wxFont_SWISS_FONT()); }
 		public static Font wxNullFont;
 
 /+
