@@ -21,6 +21,10 @@ COMPILER=GDC
 endif
 export COMPILER
 
+# wx version to use (e.g. 2.6.3)
+WX_VERSION=$(shell cat wxc/WX_VERSION 2>/dev/null)
+export WX_VERSION
+
 # wx platform to use (e.g. WXGTK)
 PLATFORM=$(shell cat wxc/PLATFORM 2>/dev/null)
 export PLATFORM
@@ -37,7 +41,7 @@ export STC
 OGL=0
 export OGL
 
-all: wxc/PLATFORM wxc/ENCODING
+all: wxc/WX_VERSION wxc/PLATFORM wxc/ENCODING
 	$(MAKE) -C wxc
 	$(MAKE) -C wx
 
@@ -47,6 +51,9 @@ install:
 
 test:
 	$(MAKE) -C Samples
+
+wxc/WX_VERSION:
+	$(MAKE) -C wxc WX_VERSION
 
 wxc/PLATFORM:
 	$(MAKE) -C wxc PLATFORM
@@ -64,6 +71,7 @@ clean:
 	$(MAKE) clean -C wxc
 	$(MAKE) clean -C wx
 	$(MAKE) clean -C Samples
+	-rm wxc/WX_VERSION
 	-rm wxc/PLATFORM
 	-rm wxc/ENCODING
 

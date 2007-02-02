@@ -208,13 +208,13 @@ wx-encoding.exe: wx-encoding.obj
 $(BUD_LIBS): wx-config.exe wx-libs.exe
 	+wx-libs.exe > $@
 
-$(MAKESTUB): wx-release.exe wx-platform.exe wx-encoding.exe
+$(MAKESTUB): wx-release.exe wx-version.exe wx-platform.exe wx-encoding.exe
 	+wx-release.exe >$@
 	+wx-version.exe -v >>$@
 	+wx-platform.exe -v >>$@
 	+wx-encoding.exe -v >>$@
 
-WXVERSION: wx-version.exe
+WX_VERSION: wx-version.exe
 	wx-version.exe >$@
 
 PLATFORM: wx-platform.exe

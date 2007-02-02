@@ -159,7 +159,7 @@ OBJECTS = \
 	wxaui.o
 	
 
-all:  PLATFORM ENCODING $(LIBTARGET)
+all:  WX_VERSION PLATFORM ENCODING $(LIBTARGET)
 bud:  $(BUD_LIBS)
 
 # Fortunately DMD or GDC doesn't matter anymore
@@ -210,7 +210,7 @@ install: $(LIBTARGET)
 	$(INSTALL_DATA) -p $(LIBTARGET) $(DESTDIR)$(libdir)
 	-$(RANLIB) $(DESTDIR)$(libdir)/`basename $(LIBTARGET)`
 
-WXVERSION: wx-version$(EXEEXT)
+WX_VERSION: wx-version$(EXEEXT)
 	WX_CONFIG="$(WX_CONFIG)" ./wx-version.sh > $@
 
 PLATFORM: wx-platform$(EXEEXT)
