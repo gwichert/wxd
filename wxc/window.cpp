@@ -1425,19 +1425,23 @@ void wxWindow_CacheBestSize(wxWindow* self, wxSize* size)
 
 //-----------------------------------------------------------------------------
 
+#ifdef WXWIN_COMPATIBILITY_2_6
 extern "C" WXEXPORT
 void wxWindow_GetBestFittingSize(wxWindow* self, wxSize* size)
 {
 	*size = self->GetBestFittingSize();
 }
+#endif
 
 //-----------------------------------------------------------------------------
 
+#ifdef WXWIN_COMPATIBILITY_2_6
 extern "C" WXEXPORT
 void wxWindow_SetBestFittingSize(wxWindow* self, wxSize* size)
 {
 	self->SetBestFittingSize(*size);
 }
+#endif
 
 //-----------------------------------------------------------------------------
 
