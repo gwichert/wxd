@@ -1,5 +1,7 @@
 LIBTARGET=../libwxc.a
 
+BUD_LIBS=../wx/libs.d
+
 OBJECTS = \
 	accel.o \
 	activateevent.o \
@@ -158,6 +160,7 @@ OBJECTS = \
 	
 
 all:  PLATFORM ENCODING $(LIBTARGET)
+bud:  $(BUD_LIBS)
 
 WX_CONFIG ?= wx-config
 
@@ -208,6 +211,9 @@ PLATFORM: wx-platform$(EXEEXT)
 ENCODING: wx-encoding$(EXEEXT)
 	WX_CONFIG="$(WX_CONFIG)" ./wx-encoding.sh > $@
 
+$(BUD_LIBS): wx-libs$(EXEEXT)
+	WX_CONFIG="$(WX_CONFIG)" ./wx-libs > $@
+
 $(LIBTARGET) : $(OBJECTS)
 	ar rcs $@ $^
 
@@ -216,6 +222,9 @@ $(LIBTARGET) : $(OBJECTS)
 
 wx-config.exe: wx-config-win.o
 	$(CXX) $(LDFLAGS) -o $@ $<
+
+wx-libs$(EXEEXT): wx-libs.o
+	$(CXX) $(LDFLAGS) `$(WX_CONFIG) --libs base` -o $@ $<
 
 wx-release.exe: wx-release-win.o
 	$(CXX) $(LDFLAGS) -o $@ $<
@@ -228,6 +237,7 @@ wx-encoding$(EXEEXT): wx-encoding.o
 
 clean:
 	-rm *.o
+	-rm wx-libs$(EXEEXT)
 	-rm wx-platform$(EXEEXT)
 	-rm wx-encoding$(EXEEXT)
 	-rm $(LIBTARGET)

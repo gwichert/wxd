@@ -1,6 +1,7 @@
 LIBTARGET = ..\wxc.lib
 
 MAKESTUB=..\config.mak
+BUD_LIBS=..\wx\libs.d
 
 OBJECTS = \
 	accel.obj \
@@ -160,6 +161,7 @@ OBJECTS = \
 	
 
 all:  $(MAKESTUB) $(LIBTARGET)
+bud:  $(BUD_LIBS)
 
 include $(WXDIR)/build/msw/config.dmc
 CXX = dmc
@@ -176,8 +178,17 @@ CXXFLAGS = -g -o+none -D__WXMSW__ -D__WXDEBUG__ -I$(WXDIR)\include \
 $(LIBTARGET) : $(OBJECTS)
 	lib -p512 -c -n $@ $(OBJECTS)
 
+# If wx-config.exe refuses to build, you can download a binary:
+# http://wx-config-win.googlecode.com/svn/binary/wx-config.exe
+
 wx-config.exe: wx-config-win.obj
 	$(CXX) $(LDFLAGS) wx-config-win.obj $@
+
+wx-libs.mak: wx-config.exe
+	+wx-config --libs base >$@
+
+wx-libs.exe: wx-libs.mak wx-libs.obj 
+	$(CXX) $(LDFLAGS) wx-libs.obj @wx-libs.mak $@
 
 wx-release.exe: wx-release-win.obj
 	$(CXX) $(LDFLAGS) wx-release-win.obj $@
@@ -188,6 +199,9 @@ wx-platform.exe: wx-platform.obj
 wx-encoding.exe: wx-encoding.obj
 	$(CXX) $(LDFLAGS) wx-encoding.obj $@
 	
+
+$(BUD_LIBS): wx-config.exe wx-libs.exe
+	+wx-libs.exe > $@
 
 $(MAKESTUB): wx-release.exe wx-platform.exe wx-encoding.exe
 	+wx-release.exe >$@
