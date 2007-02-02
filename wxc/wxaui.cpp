@@ -623,7 +623,7 @@ wxFrame* wxFrameManager_GetFrame(wxFrameManager* self)
 #if wxABI_VERSION < 20700
   return self->GetFrame();
 #else
-  return (wxFrame*) self->GetManagedWindow();
+  return wxDynamicCast(self->GetManagedWindow(), wxFrame);
 #endif
 }
 
