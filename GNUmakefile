@@ -1,5 +1,14 @@
 SHELL=/bin/sh
-MAKE?=make
+
+ifndef MAKE
+	BSD=$(shell uname | grep "BSD")
+	ifneq ("$(BSD)" "")
+		#this is a BSD OS
+		MAKE="gmake"
+	else
+		MAKE?="make"
+	endif
+endif
 
 OS=$(shell uname)
 ARCH=$(shell (arch 2>/dev/null || uname -m || echo i386) | sed -e s/i.86/x86/ )
