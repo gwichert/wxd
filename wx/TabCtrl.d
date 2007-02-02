@@ -16,7 +16,7 @@
 module wx.TabCtrl;
 
 //! \cond VERSION
-version(__WXMSW__) {
+version(none) {
 //! \endcond
 
 public import wx.common;
