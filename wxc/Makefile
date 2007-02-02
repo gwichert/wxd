@@ -168,6 +168,8 @@ CXX = dmc
 
 COMPILER = DMD
 
+WX_CONFIG = wx-config.exe
+
 OBJS = dmc_mswd$(CFG)
 LIBDIRNAME = $(WXDIR)\lib\dmc_lib$(CFG)
 SETUPHDIR = $(LIBDIRNAME)\mswd
@@ -185,7 +187,7 @@ wx-config.exe: wx-config-win.obj
 	$(CXX) $(LDFLAGS) wx-config-win.obj $@
 
 wx-libs.mak: wx-config.exe
-	+wx-config --libs base >$@
+	+$(WX_CONFIG) --libs base >$@
 
 wx-libs.exe: wx-libs.mak wx-libs.obj 
 	$(CXX) $(LDFLAGS) wx-libs.obj @wx-libs.mak $@
