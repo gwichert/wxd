@@ -210,6 +210,9 @@ install: $(LIBTARGET)
 	$(INSTALL_DATA) -p $(LIBTARGET) $(DESTDIR)$(libdir)
 	-$(RANLIB) $(DESTDIR)$(libdir)/`basename $(LIBTARGET)`
 
+WXVERSION: wx-version$(EXEEXT)
+	WX_CONFIG="$(WX_CONFIG)" ./wx-version.sh > $@
+
 PLATFORM: wx-platform$(EXEEXT)
 	WX_CONFIG="$(WX_CONFIG)" ./wx-platform.sh > $@
 
@@ -234,6 +237,9 @@ wx-libs$(EXEEXT): wx-libs.o
 wx-release.exe: wx-release-win.o
 	$(CXX) $(LDFLAGS) -o $@ $<
 
+wx-version$(EXEEXT): wx-version.o
+	$(CXX) $(LDFLAGS) -o $@ $<
+
 wx-platform$(EXEEXT): wx-platform.o
 	$(CXX) $(LDFLAGS) -o $@ $<
 	
@@ -243,6 +249,7 @@ wx-encoding$(EXEEXT): wx-encoding.o
 clean:
 	-rm *.o
 	-rm wx-libs$(EXEEXT)
+	-rm wx-version$(EXEEXT)
 	-rm wx-platform$(EXEEXT)
 	-rm wx-encoding$(EXEEXT)
 	-rm $(LIBTARGET)

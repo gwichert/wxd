@@ -195,6 +195,9 @@ wx-libs.exe: wx-libs.mak wx-libs.obj
 wx-release.exe: wx-release-win.obj
 	$(CXX) $(LDFLAGS) wx-release-win.obj $@
 
+wx-version.exe: wx-version.obj
+	$(CXX) $(LDFLAGS) wx-version.obj $@
+
 wx-platform.exe: wx-platform.obj
 	$(CXX) $(LDFLAGS) wx-platform.obj $@
 
@@ -207,8 +210,12 @@ $(BUD_LIBS): wx-config.exe wx-libs.exe
 
 $(MAKESTUB): wx-release.exe wx-platform.exe wx-encoding.exe
 	+wx-release.exe >$@
+	+wx-version.exe -v >>$@
 	+wx-platform.exe -v >>$@
 	+wx-encoding.exe -v >>$@
+
+WXVERSION: wx-version.exe
+	wx-version.exe >$@
 
 PLATFORM: wx-platform.exe
 	wx-platform.exe >$@
