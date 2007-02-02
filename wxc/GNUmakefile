@@ -162,6 +162,11 @@ OBJECTS = \
 all:  PLATFORM ENCODING $(LIBTARGET)
 bud:  $(BUD_LIBS)
 
+# Fortunately DMD or GDC doesn't matter anymore
+# "WXD" is bogus, but it looks better than ____
+
+COMPILER ?= WXD
+
 WX_CONFIG ?= wx-config
 
 # FreeBSD uses this
