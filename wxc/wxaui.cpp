@@ -610,13 +610,21 @@ unsigned int wxFrameManager_GetFlags(wxFrameManager* self)
 extern "C" WXEXPORT
 void wxFrameManager_SetFrame(wxFrameManager* self, wxFrame* frame)
 {
+#if wxABI_VERSION < 20700
   self->SetFrame(frame);
+#else
+  self->SetManagedWindow(frame);
+#endif
 }
 
 extern "C" WXEXPORT
 wxFrame* wxFrameManager_GetFrame(wxFrameManager* self)
 {
+#if wxABI_VERSION < 20700
   return self->GetFrame();
+#else
+  return self->GetManagedWindow();
+#endif
 }
 
 extern "C" WXEXPORT
