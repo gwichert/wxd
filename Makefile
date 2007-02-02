@@ -12,10 +12,10 @@ test:
 	cd ..
 
 clean:
-	cd wxc
+	cd wx
 	make clean
 	cd ..
-	cd wx
+	cd wxc
 	make clean
 	cd ..
 	cd Samples

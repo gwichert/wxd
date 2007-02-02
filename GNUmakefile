@@ -68,8 +68,8 @@ ddoc: wxc/PLATFORM wxc/ENCODING
 	$(MAKE) -C wx ddoc
 
 clean:
-	$(MAKE) clean -C wxc
 	$(MAKE) clean -C wx
+	$(MAKE) clean -C wxc
 	$(MAKE) clean -C Samples
 	-rm wxc/WX_VERSION
 	-rm wxc/PLATFORM
