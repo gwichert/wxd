@@ -3,14 +3,16 @@
 # the regular Digital Mars Makefile
 
 PLATFORM = WXMSW
+ENCODING = ANSI
+
+include $(TOPDIR)/config.mak
 
 CXX = dmc
 DC = dmd
-DFLAGS = $(DFLAGS) -version=__$(PLATFORM)__ -I$(TOPDIR)
+DFLAGS = $(DFLAGS) -version=__$(PLATFORM)__ -version=$(ENCODING)-I$(TOPDIR)
 
 include $(WXDIR)/build/msw/config.dmc
 
-WX_RELEASE_NODOT = 26
 OBJS = dmc_mswd$(CFG)
 LIBDIRNAME = $(WXDIR)\lib\dmc_lib$(CFG)
 SETUPHDIR = $(LIBDIRNAME)\mswd
