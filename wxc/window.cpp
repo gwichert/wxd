@@ -1425,23 +1425,27 @@ void wxWindow_CacheBestSize(wxWindow* self, wxSize* size)
 
 //-----------------------------------------------------------------------------
 
-#ifdef WXWIN_COMPATIBILITY_2_6
 extern "C" WXEXPORT
 void wxWindow_GetBestFittingSize(wxWindow* self, wxSize* size)
 {
+#if wxABI_VERSION < 20700
 	*size = self->GetBestFittingSize();
-}
+#else
+	*size = self->GetEffectiveMinSize();
 #endif
+}
 
 //-----------------------------------------------------------------------------
 
-#ifdef WXWIN_COMPATIBILITY_2_6
 extern "C" WXEXPORT
 void wxWindow_SetBestFittingSize(wxWindow* self, wxSize* size)
 {
+#if wxABI_VERSION < 20700
 	self->SetBestFittingSize(*size);
-}
+#else
+	self->SetInitialSize(*size);
 #endif
+}
 
 //-----------------------------------------------------------------------------
 
