@@ -37,8 +37,12 @@ struct dstr {
 		return wxString(data, wxConvUTF8, length);
 #else
 		size_t ignored;
+		//This buffer is needed to copy the charbuffer returned by cMB2WC,
+		//which would otherwise be lost after the constructor returns
+		static wxWCharBuffer buffer;
 		// convert the UTF-8 to wide first, and then back to ansi:
-		return wxString(wxConvUTF8.cMB2WC(data, length, &ignored));
+		buffer = wxConvUTF8.cMB2WC(data, length, &ignored);
+		return wxString(buffer);
 #endif
 	}
 };
