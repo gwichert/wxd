@@ -16,6 +16,8 @@ typedef struct dstr     wxc_string; // D string
 typedef void*           wxc_object; // D object
 
 
+#include <iconv.h>
+
 /// length-prefixed string in UTF-8 format
 struct dstr {
 	size_t          length;
@@ -37,12 +39,8 @@ struct dstr {
 		return wxString(data, wxConvUTF8, length);
 #else
 		size_t ignored;
-		//This buffer is needed to copy the charbuffer returned by cMB2WC,
-		//which would otherwise be lost after the constructor returns
-		static wxWCharBuffer buffer;
 		// convert the UTF-8 to wide first, and then back to ansi:
-		buffer = wxConvUTF8.cMB2WC(data, length, &ignored);
-		return wxString(buffer);
+		return wxString(wxConvUTF8.cMB2WC(data, length, &ignored));
 #endif
 	}
 };
