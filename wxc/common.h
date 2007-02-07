@@ -16,8 +16,6 @@ typedef struct dstr     wxc_string; // D string
 typedef void*           wxc_object; // D object
 
 
-#include <iconv.h>
-
 /// length-prefixed string in UTF-8 format
 struct dstr {
 	size_t          length;
