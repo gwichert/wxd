@@ -38,7 +38,7 @@ struct dstr {
 #else
 		size_t ignored;
 		// convert the UTF-8 to wide first, and then back to ansi:
-		return wxString(wxConvUTF8.cMB2WC(data, length, &ignored));
+		return wxString(wxConvUTF8.cMB2WC(data, length, &ignored), wxConvLocal);
 #endif
 	}
 };
