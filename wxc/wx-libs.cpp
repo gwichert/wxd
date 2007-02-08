@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
 	if (code != 0)
 		wxLogFatalError(errors[0]);
 	
+	// libraries
 	printf("version (build) { pragma(link, \"wxc\""); 
 	wxString libs = output[0];
 
@@ -36,5 +37,30 @@ int main(int argc, char *argv[])
 	}
 
 	printf("); }\n");
+
+	// platform
+	printf("version (build) { pragma(export_version, "); 
+#if defined(__WXMSW__)
+    printf("__WXMSW__");
+#elif defined(__WXGTK__)
+    printf("__WXGTK__");
+#elif defined(__WXMAC__)
+    printf("__WXMAC__");
+#else
+    #error unknown platform
+#endif
+	printf("); }\n");
+
+	// encoding
+	printf("version (build) { pragma(export_version, "); 
+#if wxUSE_UNICODE
+    printf("UNICODE");
+#elif !wxUSE_UNICODE
+    printf("ANSI");
+#else
+    #error unknown encoding
+#endif
+	printf("); }\n");
+
 	return 0;
 } 
