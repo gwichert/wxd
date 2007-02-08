@@ -11,6 +11,11 @@ test:
 	make
 	cd ..
 
+bud:
+	cd wxc
+	make bud
+	cd ..
+
 clean:
 	cd wx
 	make clean

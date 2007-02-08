@@ -67,6 +67,9 @@ docs: Doxyfile
 ddoc: wxc/PLATFORM wxc/ENCODING
 	$(MAKE) -C wx ddoc
 
+bud:
+	$(MAKE) -C wxc bud
+
 clean:
 	$(MAKE) clean -C wx
 	$(MAKE) clean -C wxc
