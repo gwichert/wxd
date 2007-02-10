@@ -95,6 +95,11 @@ public import wx.ArrayString;
 			}
 		}
 		
+		public static wxObject New(IntPtr wxobj)
+		{
+			return new Choice(wxobj);
+		}
+	
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
