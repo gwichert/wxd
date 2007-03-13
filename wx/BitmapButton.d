@@ -95,6 +95,8 @@ public import wx.Control;
 			}
 		}
 			
+		public static wxObject New(IntPtr wxobj) { return new BitmapButton(wxobj); }
+	
 		//---------------------------------------------------------------------
 		// ctors with self created id
 			

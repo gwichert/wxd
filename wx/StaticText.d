@@ -45,6 +45,8 @@ public import wx.Control;
 				throw new InvalidOperationException("Failed to create StaticText");
 			}
 		}
+
+		public static wxObject New(IntPtr wxobj) { return new StaticText(wxobj); }
 		
 		//---------------------------------------------------------------------
 		// ctors with self created id

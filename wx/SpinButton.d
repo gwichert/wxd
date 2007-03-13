@@ -112,6 +112,8 @@ public import wx.Control;
 			}
 		}
 		
+		public static wxObject New(IntPtr wxobj) { return new SpinButton(wxobj); }
+	
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		

@@ -132,6 +132,8 @@ public import wx.ImageList;
 			wxListbook_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name);
 		}
 		
+		public static wxObject New(IntPtr wxobj) { return new Listbook(wxobj); }
+	
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		

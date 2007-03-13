@@ -46,6 +46,8 @@ public import wx.Control;
 			}
 		}
 		
+	public static wxObject New(IntPtr ptr) { return new ToggleButton(ptr); }
+
 		//---------------------------------------------------------------------
 		
 		public this(Window parent, string label, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, Validator validator = null, string name = "checkbox")

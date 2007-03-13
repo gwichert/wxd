@@ -52,6 +52,8 @@ public import wx.Control;
 			}
 		}
 		
+		public static wxObject New(IntPtr wxobj) { return new StaticLine(wxobj); }
+	
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		

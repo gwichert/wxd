@@ -46,6 +46,8 @@ public import wx.Control;
 			}
 		}
 		
+		public static wxObject New(IntPtr wxobj) { return new StaticBitmap(wxobj); }
+	
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		

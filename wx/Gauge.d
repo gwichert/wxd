@@ -66,6 +66,8 @@ public import wx.Control;
 			}
 		}
 		
+		public static wxObject New(IntPtr wxobj) { return new Gauge(wxobj); }
+	
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		

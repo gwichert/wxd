@@ -1459,6 +1459,8 @@ public import wx.CommandEvent;
         public  this(Window parent, int id /*= wxID_ANY*/, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style =0, string name = wxSTCNameStr)
             { this(wxStyledTextCtrl_ctor(wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name)); }
 	    
+		public static wxObject New(IntPtr wxobj) { return new StyledTextCtrl(wxobj); }
+	
 	//---------------------------------------------------------------------
 	// ctors with self created id
 	    

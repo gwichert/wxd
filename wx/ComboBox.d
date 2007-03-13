@@ -96,6 +96,8 @@ public import wx.ClientData;
 			}
 		}
 		
+		public static wxObject New(IntPtr wxobj) { return new ComboBox(wxobj); }
+	
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		

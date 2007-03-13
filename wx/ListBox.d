@@ -88,6 +88,8 @@ public import wx.ClientData;
 			}
 		}
 		
+		public static wxObject New(IntPtr wxobj) { return new ListBox(wxobj); }
+	
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		

@@ -137,6 +137,8 @@ public import wx.ImageList;
 			}
 		}
 
+		public static wxObject New(IntPtr wxobj) { return new Notebook(wxobj); }
+	
 		//---------------------------------------------------------------------
 		// ctors with self created id
 			

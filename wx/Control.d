@@ -45,6 +45,8 @@ public import wx.Window;
 		public this(Window parent, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=0, string name=wxControlNameStr)
 			{ super(parent, Window.UniqueID, pos, size, style, name);}
 
+		public static wxObject New(IntPtr wxobj) { return new Control(wxobj); }
+	
 		//---------------------------------------------------------------------
 
 		public void Command() {}

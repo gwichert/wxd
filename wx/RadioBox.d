@@ -73,6 +73,8 @@ public import wx.Control;
 			}
 		}
 		
+		public static wxObject New(IntPtr wxobj) { return new RadioBox(wxobj); }
+	
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		

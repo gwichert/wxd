@@ -73,6 +73,8 @@ public import wx.Bitmap;
 			}
 		}
 		
+		public static wxObject New(IntPtr wxobj) { return new Button(wxobj); }
+	
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		

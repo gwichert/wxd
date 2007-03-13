@@ -129,6 +129,8 @@ public import wx.wxString;
 		public this(Window parent, int id, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style =0, string name = "tabCtrl")
 			{ super(wxTabCtrl_ctor2(wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name));}
 			
+		public static wxObject New(IntPtr wxobj) { return new TabCtrl(wxobj); }
+	
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
