@@ -137,7 +137,7 @@ wxc_bool wxApp_Initialize(_App* self,int *argc, char **argv)
         for (int i=0; i < *argc+1; i++)
             wargv[i] = argv[i] ? wxStrdup(wxString(argv[i],*wxConvCurrent).c_str()) : NULL;
 		
-	return self->wxApp::Initialize(*argc,wargv)?1:0;
+	return self->wxApp::Initialize(*argc,(wxChar**)wargv)?1:0;
 }
 
 //-----------------------------------------------------------------------------
