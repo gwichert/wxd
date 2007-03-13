@@ -133,11 +133,11 @@ extern "C" WXEXPORT
 wxc_bool wxApp_Initialize(_App* self,int *argc, char **argv)
 {
 
-	const wxChar* wargv[*argc];
-        for (int i=0; i < *argc; i++)
-            wargv[i] = argv[i] ? wxString(argv[i],*wxConvCurrent).c_str() : NULL;
+	const wxChar** wargv = new const wxChar*[*argc+1];
+        for (int i=0; i < *argc+1; i++)
+            wargv[i] = argv[i] ? wxStrdup(wxString(argv[i],*wxConvCurrent).c_str()) : NULL;
 		
-	return self->wxApp::Initialize(*argc,(wxChar**)wargv)?1:0;
+	return self->wxApp::Initialize(*argc,wargv)?1:0;
 }
 
 //-----------------------------------------------------------------------------
