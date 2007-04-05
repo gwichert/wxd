@@ -20,10 +20,14 @@ class _wxString : public wxString
 public:
     _wxString(const wxChar *psz)
         : wxString(psz) { }
-    _wxString(const wxChar* psz, wxMBConv& conv,size_t length)
+    _wxString(const char* psz, wxMBConv& conv = *wxConvCurrent, size_t length = npos)
+        : wxString(psz, conv, length) { }
+    _wxString(const wchar_t* psz, wxMBConv& conv = *wxConvCurrent, size_t length = npos)
         : wxString(psz, conv, length) { }
     _wxString(const wxString* str)
         : wxString(*str) { }
+    _wxString(const wxString& str)
+        : wxString(str) { }
 };
 
 //-----------------------------------------------------------------------------
@@ -31,7 +35,13 @@ public:
 extern "C" WXEXPORT
 wxString* wxString_ctor(wxc_string str)
 {
-	return new _wxString(wxstr(str));
+#if wxUSE_UNICODE
+	return new _wxString(str.data, wxConvUTF8, str.length);
+#else
+	size_t ignored;
+	// convert the UTF-8 to wide first, and then back to ansi:
+	return new _wxString(wxConvUTF8.cMB2WC(str.data, str.length, &ignored));	
+#endif
 }
 
 extern "C" WXEXPORT
