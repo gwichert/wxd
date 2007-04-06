@@ -9,7 +9,7 @@ include $(TOPDIR)/config.mak
 
 CXX = dmc
 DC = dmd
-DFLAGS = $(DFLAGS) -version=__$(PLATFORM)__ -version=$(ENCODING)-I$(TOPDIR)
+DFLAGS = $(DFLAGS) -version=__$(PLATFORM)__ -version=$(ENCODING) -I$(TOPDIR)
 
 include $(WXDIR)/build/msw/config.dmc
 
