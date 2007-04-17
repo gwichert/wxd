@@ -205,7 +205,7 @@ wx-encoding.exe: wx-encoding.obj
 	$(CXX) $(LDFLAGS) wx-encoding.obj $@
 	
 
-$(BUD_LIBS): wx-config.exe wx-libs.exe
+$(BUD_LIBS): wx-config.exe wx-libs.exe wx-platform.exe wx-encoding.exe
 	+wx-libs.exe > $@
 
 $(MAKESTUB): wx-release.exe wx-version.exe wx-platform.exe wx-encoding.exe

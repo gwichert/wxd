@@ -219,7 +219,7 @@ PLATFORM: wx-platform$(EXEEXT)
 ENCODING: wx-encoding$(EXEEXT)
 	WX_CONFIG="$(WX_CONFIG)" ./wx-encoding.sh > $@
 
-$(BUD_LIBS): wx-libs$(EXEEXT)
+$(BUD_LIBS): wx-libs$(EXEEXT) wx-platform$(EXEEXT) wx-encoding$(EXEEXT)
 	WX_CONFIG="$(WX_CONFIG)" ./wx-libs > $@
 
 $(LIBTARGET) : $(OBJECTS)
