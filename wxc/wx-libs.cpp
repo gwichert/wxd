@@ -11,6 +11,8 @@ int main(int argc, char *argv[])
 	wxArrayString output;
 	wxArrayString errors;
 
+	printf("module wx.libs; // generated for Bud\n"); 
+
 	wxString wxConfig = wxT("wx-config");
 	wxGetEnv(wxT("WX_CONFIG"), &wxConfig);
 
