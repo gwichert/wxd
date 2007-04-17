@@ -21,9 +21,13 @@
 // wxGLContext
 
 extern "C" WXEXPORT
-void wxGLContext_SetCurrent(wxGLContext* self)
+void wxGLContext_SetCurrent(wxGLContext* self, wxGLCanvas *canvas)
 {
+#if wxABI_VERSION < 20700 || defined(__WXMAC__)
 	self->SetCurrent();
+#else
+	self->SetCurrent(*canvas);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -42,7 +46,9 @@ void wxGLContext_Update(wxGLContext* self)
 extern "C" WXEXPORT
 void wxGLContext_SetColour(wxGLContext* self, wxc_string colour)
 {
+#if wxABI_VERSION < 20700 || defined(__WXMAC__)
 	self->SetColour(wxstr(colour));
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -50,7 +56,9 @@ void wxGLContext_SetColour(wxGLContext* self, wxc_string colour)
 extern "C" WXEXPORT
 void wxGLContext_SwapBuffers(wxGLContext* self)
 {
+#if wxABI_VERSION < 20700 || defined(__WXMAC__)
 	self->SwapBuffers();
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -58,7 +66,11 @@ void wxGLContext_SwapBuffers(wxGLContext* self)
 extern "C" WXEXPORT
 wxWindow* wxGLContext_GetWindow(wxGLContext* self)
 {
+#if wxABI_VERSION < 20700 || defined(__WXMAC__)
 	return self->GetWindow();
+#else
+	return NULL;
+#endif
 }
 
 //-----------------------------------------------------------------------------
