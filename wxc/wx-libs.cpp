@@ -27,15 +27,13 @@ int main(int argc, char *argv[])
 	wxString libs = output[0];
 
 	wxLogDebug(libs);
-	wxRegEx reLib(wxT("\\-l([[:alnum:]\\_\\.\\-]+)"));
-	if (reLib.Matches(libs))
+	wxRegEx reLib(wxT(".* \\-l([[:alnum:]\\_\\.\\-]+)"));
+	while (reLib.Matches(libs))
 	{
-		size_t count = reLib.GetMatchCount()-1;
-		for (size_t i = 0; i < count; i++)
-		{
-			wxString lib = reLib.GetMatch(libs, i+1);
-			printf(", \"%s\"", (const char*) lib.mb_str());
-		}
+		wxString lib = reLib.GetMatch(libs, 1);
+		printf(", \"%s\"", (const char*) lib.mb_str());
+		libs = libs.Mid( reLib.GetMatch(libs,0).Len());
+		libs = libs.Trim(false);
 	}
 
 	printf(", \"stdc++\"); }\n");
