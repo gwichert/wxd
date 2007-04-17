@@ -21,6 +21,9 @@ COMPILER=GDC
 endif
 export COMPILER
 
+BUD=bud
+REBUILD=rebuild
+
 # wx version to use (e.g. 2.6.3)
 WX_VERSION=$(shell cat wxc/WX_VERSION 2>/dev/null)
 export WX_VERSION
@@ -69,6 +72,17 @@ ddoc: wxc/PLATFORM wxc/ENCODING
 
 build:
 	$(MAKE) -C wxc build
+
+bud: build build.brf
+	$(MAKE) -C wxc
+	$(BUD) -v @build.brf -op -allobj
+	mv wx/wx.a libwxd.a
+
+rebuild: build build.brf
+	$(MAKE) -C wxc
+	#$(REBUILD) -v -rfbuild.brf -oqwx
+	@grep -v ^# < build.brf | tr -d '\r' | xargs $(REBUILD) -v -oqwx
+	mv wx.wx libwxd.a
 
 clean:
 	$(MAKE) clean -C wx
