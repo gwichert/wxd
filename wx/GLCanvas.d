@@ -45,7 +45,7 @@ public import wx.Palette;
 	//-----------------------------------------------------------------------------
 
 		//! \cond EXTERN
-		static extern (C) void wxGLContext_SetCurrent(IntPtr self);
+		static extern (C) void wxGLContext_SetCurrent(IntPtr self, IntPtr canvas);
 		static extern (C) void wxGLContext_Update(IntPtr self);
 		static extern (C) void wxGLContext_SetColour(IntPtr self, string colour);
 		static extern (C) void wxGLContext_SwapBuffers(IntPtr self);
@@ -62,9 +62,9 @@ public import wx.Palette;
 			super(wxobj);
 		}
 		
-		public void SetCurrent()
+		public void SetCurrent(GLCanvas canvas = null)
 		{
-			wxGLContext_SetCurrent(wxobj);
+			wxGLContext_SetCurrent(wxobj, wxObject.SafePtr(canvas));
 		}
 
 		public void Update()
