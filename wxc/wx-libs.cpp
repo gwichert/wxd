@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	printf("); }\n");
+	printf(", stdc++); }\n");
 
 	// platform
 	printf("version (build) { pragma(export_version, \""); 
