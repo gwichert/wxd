@@ -1,5 +1,9 @@
 module wxc.dssswxlibs;
 
+// This is the DSSS version of the wx-libs helper (wxWidgets/C++)
+//
+// Originally written for wxD by Gregor Richards, updated by afb
+
 version (Tango)
 {
 pragma(msg, "DSSS does not support Tango, try again with Phobos");
@@ -13,25 +17,30 @@ import std.file;
 import std.stdio;
 import std.string;
 
+import hcf.env;
 import hcf.process;
-
-char[] backticks(char[] command)
-{
-   PStream ps = new PStream(command);
-   char[] output = ps.readLine();
-   ps.close();
-   return output;
-}
 
 int main()
 {
     char[] pss, fout;
+    char[] wxconfig;
     char[][] libs;
+    
+    char[] backticks(char[] command)
+    {
+       PStream ps = new PStream(command);
+       char[] output = ps.readLine();
+       ps.close();
+       return output;
+    }
+    
+    wxconfig = getEnvVar("WX_CONFIG");
+    if (wxconfig == "") wxconfig = "wx-config";
     
     fout = "module wx.libs;\n";
     fout ~= "version (build) { pragma(link, \"wxc\"";
     
-    libs = split(backticks("wx-config --libs"));
+    libs = split(backticks(wxconfig ~ " --libs"));
     foreach (lib; libs) {
         if (lib.length < 2 ||
             lib[0..2] != "-l") continue;
