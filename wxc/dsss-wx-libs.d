@@ -37,7 +37,7 @@ int main()
             lib[0..2] != "-l") continue;
         fout ~= ", \"" ~ lib[2..$] ~ "\"";
     }
-    fout ~= ", stdc++); }\n";
+    fout ~= ", \"stdc++\"); }\n";
     
     fout ~= "version (build) { pragma(export_version, "
             "\"__" ~backticks("wxc/wx-platform")~ "__\"); }\n";
