@@ -232,7 +232,7 @@ wx-config.exe: wx-config-win.o
 	$(CXX) $(LDFLAGS) -o $@ $<
 
 wx-libs$(EXEEXT): wx-libs.o
-	$(CXX) $(LDFLAGS) `$(WX_CONFIG) --libs base` -o $@ $<
+	$(CXX) $(LDFLAGS) `$(WX_CONFIG) --libs base,core` -o $@ $<
 
 wx-release.exe: wx-release-win.o
 	$(CXX) $(LDFLAGS) -o $@ $<
