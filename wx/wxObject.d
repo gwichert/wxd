@@ -81,6 +81,9 @@ public import wx.common;
 				this.wxobj = wxobj;
 
 				if (wxobj == IntPtr.init) {
+					version (Tango)
+					throw new NullReferenceException("Unable to create instance of " ~ this.toUtf8());
+					else // Phobos
 					throw new NullReferenceException("Unable to create instance of " ~ this.toString());
 				}
 

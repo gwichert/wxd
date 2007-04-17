@@ -8,6 +8,9 @@ module wx.common;
  */   
 
 //! \cond STD
+version (Tango)
+public import tango.stdc.stddef;
+else // Phobos
 public import std.c.stddef; // wchar_t
 //! \endcond
 

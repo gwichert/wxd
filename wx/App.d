@@ -23,8 +23,20 @@ public import wx.Clipboard;
 public import wx.FontMisc;
 
 //! \cond STD
+version (Tango)
+{
+import tango.stdc.stringz;
+alias toUtf8z toStringz;
+import tango.text.convert.Utf;
+char[] toUTF8( char[] str) { return str; }
+char[] toUTF8(wchar[] str) { return toUtf8(str); }
+char[] toUTF8(dchar[] str) { return toUtf8(str); }
+}
+else // Phobos
+{
 private import std.string;
 private import std.utf;
+}
 //! \endcond
 
 		//! \cond EXTERN

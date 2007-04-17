@@ -16,9 +16,17 @@
 module wx.Log;
 public import wx.common;
 public import wx.TextCtrl;
+
 //! \cond STD
+version (Tango)
+{
+import tango.Core.Vararg;
+}
+else // Phobos
+{
 private import std.format;
 private import std.stdarg;
+}
 //! \endcond
 
 		//! \cond EXTERN
@@ -114,12 +122,20 @@ private import std.stdarg;
 		{
 			string s;
 
+		version (Tango)
+		{
+			assert(0);
+		}
+		else // Phobos
+		{
 			void putc(dchar c)
 			{
 				std.utf.encode(s, c);
 			}
 
 			std.format.doFormat(&putc, arguments, argptr);
+		}
+
 			return s;
 		}
 

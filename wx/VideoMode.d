@@ -32,7 +32,14 @@ module wx.VideoMode;
 public import wx.common;
 
 //! \cond STD
+version (Tango)
+{
+import tango.text.convert.Integer;
+}
+else // Phobos
+{
 private import std.string;
+}
 //! \endcond
 
 //    [StructLayout(LayoutKind.Sequential)]
@@ -117,6 +124,21 @@ private import std.string;
         // not implemented -- seems impossible
         // bool IsOk() const { return w && h; }
 
+	version (Tango)
+	{
+		public char[] toUtf8()
+		{
+			char[] s;
+			s = tango.text.convert.Integer.toUtf8(w) ~ "x" ~ tango.text.convert.Integer.toUtf8(h);
+			if ( bpp > 0 )
+				s ~= ", " ~ tango.text.convert.Integer.toUtf8(bpp) ~ "bpp";
+			if ( refresh > 0 )
+				s ~= ", " ~ tango.text.convert.Integer.toUtf8(refresh) ~ "Hz";
+			return s;
+		}
+	}
+	else // Phobos
+	{
 		public char[] toString()
 		{
 			char[] s;
@@ -129,6 +151,7 @@ private import std.string;
 
 			return s;
 		}
+	}
 
         // the screen size in pixels (e.g. 640*480), 0 means unspecified
         private int w, h;

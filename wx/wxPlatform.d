@@ -13,7 +13,13 @@ module wx.wxPlatform;
 public import wx.common;
 
 //! \cond STD
+version (Tango)
+{
+}
+else // Phobos
+{
 private import std.string;
+}
 //! \endcond
 
 		// ------------------------------------------------------

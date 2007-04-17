@@ -17,8 +17,14 @@ module wx.Colour;
 public import wx.common;
 
 //! \cond STD
+version (Tango)
+{
+}
+else // Phobos
+{
 private import std.string;
 private import std.utf;
+}
 //! \endcond
 
 		//! \cond EXTERN

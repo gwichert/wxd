@@ -30,8 +30,14 @@ public import wx.Panel;
 public import wx.ToolBar;
 
 //! \cond STD
+version (Tango)
+{
+}
+else // Phobos
+{
 private import std.stream;
 private import std.regexp;
+}
 //! \endcond
 
 	public enum XmlResourceFlags : int

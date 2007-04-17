@@ -20,7 +20,13 @@ public import wx.Dialog;
 public import wx.ArrayString;
 
 //! \cond STD
+version (Tango)
+{
+}
+else // Phobos
+{
 private import std.string;
+}
 //! \endcond
 
 		//! \cond EXTERN
