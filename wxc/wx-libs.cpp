@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 	wxArrayString output;
 	wxArrayString errors;
 
-	printf("module wx.libs; // generated for Bud\n"); 
+	printf("module wx.libs;\n"); 
 
 	wxString wxConfig = wxT("wx-config");
 	wxGetEnv(wxT("WX_CONFIG"), &wxConfig);
@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 	printf("); }\n");
 
 	// platform
-	printf("version (build) { pragma(export_version, "); 
+	printf("version (build) { pragma(export_version, \""); 
 #if defined(__WXMSW__)
     printf("__WXMSW__");
 #elif defined(__WXGTK__)
@@ -51,10 +51,10 @@ int main(int argc, char *argv[])
 #else
     #error unknown platform
 #endif
-	printf("); }\n");
+	printf("\"); }\n");
 
 	// encoding
-	printf("version (build) { pragma(export_version, "); 
+	printf("version (build) { pragma(export_version, \""); 
 #if wxUSE_UNICODE
     printf("UNICODE");
 #elif !wxUSE_UNICODE
@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
 #else
     #error unknown encoding
 #endif
-	printf("); }\n");
+	printf("\"); }\n");
 
 	return 0;
 } 

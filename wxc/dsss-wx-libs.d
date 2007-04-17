@@ -28,7 +28,7 @@ int main()
     char[] pss, fout;
     char[][] libs;
     
-    fout = "module wx.libs; // generated for DSSS\n";
+    fout = "module wx.libs;\n";
     fout ~= "version (build) { pragma(link, \"wxc\"";
     
     libs = split(backticks("wx-config --libs"));
