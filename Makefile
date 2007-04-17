@@ -11,9 +11,9 @@ test:
 	make
 	cd ..
 
-bud:
+build:
 	cd wxc
-	make bud
+	make build
 	cd ..
 
 clean:

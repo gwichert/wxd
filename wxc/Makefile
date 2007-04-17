@@ -161,7 +161,7 @@ OBJECTS = \
 	
 
 all:  $(MAKESTUB) $(LIBTARGET)
-bud:  $(BUD_LIBS)
+build:  $(BUD_LIBS)
 
 include $(WXDIR)/build/msw/config.dmc
 CXX = dmc

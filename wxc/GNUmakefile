@@ -160,7 +160,7 @@ OBJECTS = \
 	
 
 all:  WX_VERSION PLATFORM ENCODING $(LIBTARGET)
-bud:  $(BUD_LIBS)
+build:  $(BUD_LIBS)
 
 # Fortunately DMD or GDC doesn't matter anymore
 # "WXD" is bogus, but it looks better than ____
