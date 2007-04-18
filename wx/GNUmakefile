@@ -196,7 +196,7 @@ endif
 endif
 
 ifeq ("$(STC)","1")
-STCFLAGS = -$(version)=WXD_STYLEDTEXTCTRL
+STCFLAGS = $(version)=WXD_STYLEDTEXTCTRL
 endif
 
 prefix=$(PREFIX)
