@@ -3,8 +3,13 @@ OBJECTS=$(NAME).o defsext.o Prefs.o Edit.o
 TARGET=../../bin/$(NAME)
 TOPDIR=../..
 
-DFLAGS += -version WXD_STYLEDTEXTCTRL
+include $(TOPDIR)/Configs/config.$(shell uname)
+
+ifeq ("$(COMPILER)","DMD")
+DFLAGS += -version=WXD_STYLEDTEXTCTRL
+else
+DFLAGS += -fversion=WXD_STYLEDTEXTCTRL
+endif
 
 WXLIBS += `$(WX_CONFIG) --libs stc`
 
-include $(TOPDIR)/Configs/config.$(shell uname)
