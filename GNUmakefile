@@ -73,6 +73,9 @@ ddoc: wxc/PLATFORM wxc/ENCODING
 build:
 	$(MAKE) -C wxc build
 
+dsss:
+	$(MAKE) -C wxc dsss
+
 bud: build build.brf
 	$(MAKE) -C wxc
 	$(BUD) -v @build.brf -op -allobj

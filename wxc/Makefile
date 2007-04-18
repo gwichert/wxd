@@ -162,6 +162,7 @@ OBJECTS = \
 
 all:  $(MAKESTUB) $(LIBTARGET)
 build:  $(BUD_LIBS)
+dsss: wx-platform.exe wx-encoding.exe
 
 include $(WXDIR)/build/msw/config.dmc
 CXX = dmc

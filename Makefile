@@ -19,6 +19,11 @@ build:
 	make build
 	cd ..
 
+dsss:
+	cd wxc
+	make dsss
+	cd ..
+
 bud: build build.brf
 	cd wxc
 	make build
