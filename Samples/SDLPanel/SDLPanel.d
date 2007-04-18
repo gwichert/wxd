@@ -347,15 +347,8 @@ version (__WXMAC__) {} else {
 
 }
 
-extern(C)
-int SDL_main(int argc, char **argv)
-{
-	char[][] args = SDL_ApplicationArgs(argc, argv);
-	SDLApp.Main(args);
-	return 0;
-}
-
 int main(char[][] args)
 {
-	return SDL_InitApplication(args);
+	SDLApp.Main(args);
+	return 0;
 }

@@ -10,7 +10,7 @@ OS=$(shell uname)
 ifeq ("$(OS)","Darwin")
 
 DFLAGS += -I/usr/include/d
-LDFLAGS += -framework SDL -framework Cocoa -lSDL_d -lSDLmain_d
+LDFLAGS += -framework SDL -framework Cocoa -lSDL_d -lSDLmain
 
 else
 
