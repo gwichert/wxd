@@ -6,9 +6,42 @@ module wxc.dssswxlibs;
 
 version (Tango)
 {
-pragma(msg, "DSSS does not support Tango, try again with Phobos");
+import tango.io.File;
+import tango.io.Stdout;
+import tango.text.stream.LineIterator;
+import tango.text.Util;
 
-void main() {}
+import tango.sys.Environment;
+import tango.sys.Process;
+
+    char[] backticks(char[] command)
+    {
+        char[][] env;
+        foreach (key, value; Environment.get)
+            env ~= (key ~ "=" ~ value);
+
+        auto p = new Process(command, env);
+        p.execute();
+        char[] output;
+        foreach (line; new LineIterator!(char)(p.stdout))
+           output = line; // wrong for multiple lines
+        p.wait();
+        return output;
+    }
+
+    private void WRITE(char[] file, void[] buffer)
+    {
+        auto f = new File(file);
+        f.write(buffer);
+    }
+
+    private char[][] SPLIT(char[] s)
+    {
+        return split(s, " ");
+    }
+
+    alias Environment.get GETENV;
+
 }
 else // Phobos
 {
@@ -20,12 +53,6 @@ import std.string;
 import hcf.env;
 import hcf.process;
 
-int main()
-{
-    char[] pss, fout;
-    char[] wxconfig;
-    char[][] libs;
-    
     char[] backticks(char[] command)
     {
        PStream ps = new PStream(command);
@@ -33,14 +60,26 @@ int main()
        ps.close();
        return output;
     }
+
+    alias std.file.write WRITE;
+    alias std.string.split SPLIT;
+    alias hcf.env.getEnvVar GETENV;
+
+}
+
+int main()
+{
+    char[] pss, fout;
+    char[] wxconfig;
+    char[][] libs;
     
-    wxconfig = getEnvVar("WX_CONFIG");
+    wxconfig = GETENV("WX_CONFIG");
     if (wxconfig == "") wxconfig = "wx-config";
     
     fout = "module wx.libs;\n";
     fout ~= "version (build) { pragma(link, \"wxc\"";
     
-    libs = split(backticks(wxconfig ~ " --libs"));
+    libs = SPLIT(backticks(wxconfig ~ " --libs"));
     foreach (lib; libs) {
         if (lib.length < 2 ||
             lib[0..2] != "-l") continue;
@@ -54,9 +93,8 @@ int main()
     fout ~= "version (build) { pragma(export_version, "
             "\"" ~backticks("wxc/wx-encoding")~ "\"); }\n";
 
-    std.file.write("wx/libs.d", cast(void[]) fout);
+    WRITE("wx/libs.d", cast(void[]) fout);
     
     return 0;
 }
 
-}
