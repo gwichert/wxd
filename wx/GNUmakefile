@@ -187,6 +187,14 @@ version=-fversion
 output=-o $@
 endif
 
+OS=$(shell uname)
+
+ifeq ("$(OS)","FreeBSD")
+ifeq ("$(COMPILER)","GDC")
+DFLAGS += -fno-strict-aliasing
+endif
+endif
+
 ifeq ("$(STC)","1")
 STCFLAGS = -$(version)=WXD_STYLEDTEXTCTRL
 endif
