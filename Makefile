@@ -35,8 +35,7 @@ rebuild: build build.brf
 	cd wxc
 	make build
 	cd ..
-	$(REBUILD) -rfbuild.brf -oqwx
-	move wx.wx wxd.lib
+	$(REBUILD) -rfbuild.brf -oqwx -ofwxd.lib
 
 clean:
 	cd wx
