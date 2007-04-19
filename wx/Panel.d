@@ -28,11 +28,11 @@ public import wx.Button;
 		//! \endcond
 
 	alias Panel wxPanel;
-	//! \brief A panel is a window on which controls are placed. It is usually
-	//! placed within a frame. It contains minimal extra functionality over and
-	//! above its parent class wxWindow; its main purpose is to be similar in
-	//! appearance and functionality to a dialog, but with the flexibility of
-	//! having any window as a parent.
+	/// A panel is a window on which controls are placed. It is usually
+	/// placed within a frame. It contains minimal extra functionality over and
+	/// above its parent class wxWindow; its main purpose is to be similar in
+	/// appearance and functionality to a dialog, but with the flexibility of
+	/// having any window as a parent.
 	public class Panel : Window
 	{
 		//---------------------------------------------------------------------

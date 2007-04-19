@@ -76,9 +76,9 @@ public import wx.StyledTextCtrl;
 		
 
 	alias EvtHandler wxEvtHandler;
-	//! \brief A class that can handle events from the windowing system.
-	//! wxWindow (and therefore all window classes) are derived from this
-	//! class.
+	/// A class that can handle events from the windowing system.
+	/// wxWindow (and therefore all window classes) are derived from this
+	/// class.
 	public class EvtHandler : wxObject
 	{
 		private SListener[] listeners;

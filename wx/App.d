@@ -73,13 +73,14 @@ private import std.utf;
         //---------------------------------------------------------------------
 
     alias App wxApp;
-	//! \brief The wxApp class represents the application itself.
-	
-	//! It is used to:
-	//! - set and get application-wide properties;
-	//! - implement the windowing system message or event loop;
-	//! - initiate application processing via wxApp::OnInit;
-	//! - allow default processing of events not handled by other objects in the application.
+	/// The wxApp class represents the application itself.
+	/**
+	  * It is used to:
+	  * - set and get application-wide properties;
+	  * - implement the windowing system message or event loop;
+	  * - initiate application processing via wxApp::OnInit;
+	  * - allow default processing of events not handled by other objects in the application.
+	  **/
     public abstract class App : EvtHandler
     {
         

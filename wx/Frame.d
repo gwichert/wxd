@@ -65,10 +65,10 @@ public import wx.Icon;
 		//---------------------------------------------------------------------
 
 	alias Frame wxFrame;
-	//! \brief A frame is a window whose size and position can (usually) be
-	//! changed by the user. It usually has thick borders and a title bar,
-	//! and can optionally contain a menu bar, toolbar and status bar.
-	//! A frame can contain any window that is not a frame or dialog.
+	/// A frame is a window whose size and position can (usually) be
+	/// changed by the user. It usually has thick borders and a title bar,
+	/// and can optionally contain a menu bar, toolbar and status bar.
+	/// A frame can contain any window that is not a frame or dialog.
 	public class Frame : Window
 	{
 		public const int wxFULLSCREEN_NOMENUBAR   = 0x0001;

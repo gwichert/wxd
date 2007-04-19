@@ -322,10 +322,10 @@ public import wx.ToolTip;
 		//---------------------------------------------------------------------
 
 	alias Window wxWindow;
-	//! \brief wxWindow is the base class for all windows and represents any
-	//! visible object on screen. All controls, top level windows and so on
-	//! are windows. Sizers and device contexts are not, however, as they don't
-	//! appear on screen themselves.
+	/// wxWindow is the base class for all windows and represents any
+	/// visible object on screen. All controls, top level windows and so on
+	/// are windows. Sizers and device contexts are not, however, as they don't
+	/// appear on screen themselves.
 	public class Window : EvtHandler
 	{
 		enum {

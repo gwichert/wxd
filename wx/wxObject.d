@@ -53,13 +53,14 @@ public import wx.common;
 		else new T(ptr);
 	}
 +/
-	//! \brief This is the root class of all wxWidgets classes.
-	//! It declares a virtual destructor which ensures that destructors get
-	//! called for all derived class objects where necessary.
-	
-	//! wxObject is the hub of a dynamic object creation scheme, enabling a
-	//! program to create instances of a class only knowing its string class
-	//! name, and to query the class hierarchy.
+	/// This is the root class of all wxWidgets classes.
+	/// It declares a virtual destructor which ensures that destructors get
+	/// called for all derived class objects where necessary.
+	/**
+	  * wxObject is the hub of a dynamic object creation scheme, enabling a
+	  * program to create instances of a class only knowing its string class
+	  * name, and to query the class hierarchy.
+	  **/
 	public class wxObject : IDisposable
 	{
 		// Reference to the associated C++ object

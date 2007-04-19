@@ -47,7 +47,7 @@ private import std.utf;
 		
 		//---------------------------------------------------------------------
 
-	//! \brief wxString is a class representing a character string.
+	/// wxString is a class representing a character string.
 	public class wxString : wxObject
 	{
 		public this(IntPtr wxobj)

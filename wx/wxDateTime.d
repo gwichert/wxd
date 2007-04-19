@@ -42,7 +42,7 @@ public import wx.common;
 	
         //-----------------------------------------------------------------------------
 
-    //! \brief wxDateTime class represents an absolute moment in time.
+    /// wxDateTime class represents an absolute moment in time.
     public class wxDateTime : wxObject
     {
 	static wxDateTime wxDefaultDateTime;
