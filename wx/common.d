@@ -7,6 +7,12 @@ module wx.common;
  *  <a href="http://www.d-programming-language.org/">D programming language</a>.</p>
  */   
 
+/*! \namespace wx::libs 
+ *  \brief This module gets set to a pragma(link) for version(build).
+ *
+ *  It also does a pragma(export_version), for platform and encoding.
+ */   
+
 //! \cond STD
 version (Tango)
 public import tango.stdc.stddef;
