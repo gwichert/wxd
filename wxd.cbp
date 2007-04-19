@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_project_file>
-	<FileVersion major="1" minor="5" />
+	<FileVersion major="1" minor="6" />
 	<Project>
 		<Option title="wxd library" />
 		<Option pch_mode="2" />
-		<Option default_target="" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="libwxd.a" />
+				<Option output="libwxd.a" prefix_auto="0" extension_auto="0" />
 				<Option working_dir="" />
 				<Option object_output="obj/Debug/" />
 				<Option type="2" />
@@ -19,7 +18,7 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="libwxd.a" />
+				<Option output="libwxd.a" prefix_auto="0" extension_auto="0" />
 				<Option working_dir="" />
 				<Option object_output="obj/Release/" />
 				<Option type="2" />
@@ -33,8 +32,8 @@
 				</Linker>
 			</Target>
 			<Environment>
-				<Variable name="PLATFORM" value='`wxc/wx-platform`' />
-				<Variable name="ENCODING" value='`wxc/wx-encoding`' />
+				<Variable name="PLATFORM" value="`wxc/wx-platform`" />
+				<Variable name="ENCODING" value="`wxc/wx-encoding`" />
 			</Environment>
 		</Build>
 		<Compiler>
@@ -44,976 +43,493 @@
 			<Add option="-fversion=$(ENCODING)" />
 		</Compiler>
 		<Unit filename="wx/Accelerator.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/ActivateEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/App.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/ArrayInt.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/ArrayString.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/ArtProvider.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Bitmap.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/BitmapButton.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/BoxSizer.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Brush.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Button.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/CalendarCtrl.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Caret.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/CheckBox.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/ChildFocusEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Choice.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/ChoiceDialog.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/ClientData.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Clipboard.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/CloseEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Colour.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/ColourDialog.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/ComboBox.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/CommandEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Config.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/ContextMenuEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Control.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Cursor.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/DC.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/DND.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/DataFormat.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/DataObject.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Defs.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Dialog.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/DirDialog.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Display.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/DisplayChangedEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/DocManager.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/DocTemplate.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Document.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/EraseEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Event.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/EvtHandler.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/FileDialog.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/FindReplaceDialog.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/FlexGridSizer.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/FocusEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Font.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/FontDialog.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/FontMisc.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Frame.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/GDIObject.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/GLCanvas.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Gauge.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/GdiCommon.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Grid.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/GridBagSizer.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/GridCtrl.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/GridSizer.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/HTML.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/HelpEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/HtmlHelpController.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/HtmlListBox.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/IControlWithItems.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Icon.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/IconizeEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/IdleEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Image.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/ImageHandlers.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/ImageList.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/InitDialogEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/KeyEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/LayoutWin.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/ListBox.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/ListCtrl.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Listbook.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Locale.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Log.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/MDI.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/MaximizeEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/MemoryDC.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Menu.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/MenuBar.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/MenuItem.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/MessageDialog.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/MiniFrame.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/MouseCaptureChangedEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/MouseEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/MoveEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/NavigationKeyEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/NcPaintEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Notebook.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/NotebookSizer.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/NotifyEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/NumberDialog.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/PaintEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Palette.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/PaletteChangedEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Panel.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Pen.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/PrintData.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/PrintDialog.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/PrintPreview.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Printer.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/ProgressDialog.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/QueryNewPaletteEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/RadioBox.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/RadioButton.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Region.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/SashWindow.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/ScrollBar.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/ScrolledWindow.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/SetCursorEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/ShowEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/SizeEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Sizer.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/SizerItem.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Slider.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Sound.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/SpinButton.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/SpinCtrl.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/SplashScreen.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/SplitterWindow.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/StaticBitmap.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/StaticBox.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/StaticBoxSizer.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/StaticLine.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/StaticText.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/StatusBar.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/StyledTextCtrl.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/SysColourChangedEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/SystemSettings.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/TabCtrl.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/TextCtrl.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/TextDialog.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/TipDialog.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/TipWindow.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/ToggleButton.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/ToolBar.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/ToolTip.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/TreeCtrl.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/UpdateUIEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Utils.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/VLBox.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/VScroll.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Validator.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/VideoMode.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/View.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Window.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/WindowCreateEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/WindowDestroyEvent.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/Wizard.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/WizardPage.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/WizardPageSimple.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/XmlResource.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/common.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/wx.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/wxDateTime.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/wxObject.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/wxPlatform.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/wxString.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
 		<Unit filename="wx/wxVersion.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
+		<Extensions>
+			<code_completion />
+		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

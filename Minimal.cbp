@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_project_file>
-	<FileVersion major="1" minor="5" />
+	<FileVersion major="1" minor="6" />
 	<Project>
 		<Option title="Minimal Sample" />
 		<Option pch_mode="2" />
-		<Option default_target="" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/Minimal" />
+				<Option output="bin/Debug/Minimal" prefix_auto="0" extension_auto="0" />
 				<Option working_dir="bin" />
 				<Option object_output="obj/Debug/" />
 				<Option type="0" />
@@ -18,7 +17,7 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/Minimal" />
+				<Option output="bin/Release/Minimal" prefix_auto="0" extension_auto="0" />
 				<Option working_dir="bin" />
 				<Option object_output="obj/Release/" />
 				<Option type="0" />
@@ -41,10 +40,10 @@
 			<Add option="-lgphobos -lm -lpthread" />
 		</Linker>
 		<Unit filename="Samples/Minimal/Minimal.d">
-			<Option compilerVar="CPP" />
 			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-			<Option target="Debug" />
-			<Option target="Release" />
 		</Unit>
+		<Extensions>
+			<code_completion />
+		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

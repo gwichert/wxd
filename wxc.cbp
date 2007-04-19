@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_project_file>
-	<FileVersion major="1" minor="5" />
+	<FileVersion major="1" minor="6" />
 	<Project>
 		<Option title="wxc library" />
 		<Option pch_mode="2" />
-		<Option default_target="" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="libwxc.a" />
+				<Option output="libwxc.a" prefix_auto="0" extension_auto="0" />
 				<Option working_dir="" />
 				<Option object_output="obj/Debug/" />
 				<Option type="2" />
@@ -16,7 +15,7 @@
 				<Option createDefFile="1" />
 			</Target>
 			<Target title="Release">
-				<Option output="libwxc.a" />
+				<Option output="libwxc.a" prefix_auto="0" extension_auto="0" />
 				<Option working_dir="" />
 				<Option object_output="obj/Release/" />
 				<Option type="2" />
@@ -36,784 +35,163 @@
 			<Add option="-fno-strict-aliasing" />
 			<Add option="-D__GDC__" />
 		</Compiler>
-		<Unit filename="wxc/accel.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/activateevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/app.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/artprovider.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/bitmap.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/bitmapbutton.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/boxsizer.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/brush.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/button.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/calendarctrl.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/caret.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/checkbox.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/childfocusevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/choice.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/choicedialog.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/clientdata.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/clipboard.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/closeevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/colour.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/colourdialog.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/combobox.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/commandevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/common.h">
-			<Option compilerVar="CPP" />
-			<Option compile="0" />
-			<Option link="0" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/config.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/contextmenuevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/control.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/cursor.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/dataformat.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/dataobject.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/dc.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/dialog.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/dirdialog.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/display.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/displaychangedevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/dnd.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/docmanager.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/doctemplate.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/document.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/eraseevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/event.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/evthandler.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/filedialog.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/findreplacedialog.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/flexgridsizer.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/focusevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/font.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/fontdialog.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/fontmisc.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/frame.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/gauge.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/gdicmn.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/gdiobject.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/glcanvas.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/global.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/grid.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/gridbagsizer.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/gridctrl.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/gridsizer.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/helpevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/html.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/htmlhelpctrl.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/htmllbox.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/icon.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/iconizeevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/idleevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/image.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/imagelist.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/imghandler.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/initdialogevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/keyevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/laywin.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/listbook.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/listbox.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/listctrl.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/local_events.h">
-			<Option compilerVar="CPP" />
-			<Option compile="0" />
-			<Option link="0" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/locale.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/log.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/maximizeevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/mdi.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/memorydc.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/menu.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/menubar.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/menuitem.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/messagedialog.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/miniframe.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/mousecapturechangedevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/mouseevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/moveevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/navigationkeyevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/ncpaintevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/notebook.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/notebooksizer.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/numdialog.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/object.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/paintevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/palette.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/palettechangedevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/panel.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/pen.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/printdata.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/printdialog.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/printer.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/printpreview.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/progdlg.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/querynewpaletteevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/radiobox.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/radiobutton.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/region.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/sashwindow.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/scrollbar.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/scrolledwindow.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/setcursorevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/showevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/sizeevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/sizer.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/sizeritem.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/slider.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/sound.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/spinbutton.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/spinctrl.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/splashscreen.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/splitterwindow.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/staticbitmap.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/staticbox.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/staticboxsizer.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/staticline.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/statictext.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/statusbar.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/styledtextctrl.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/syscolourchangedevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/systemsettings.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/tabctrl.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/textctrl.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/textdialog.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/tipdialog.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/tipwindow.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/togglebutton.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/toolbar.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/tooltip.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/treectrl.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/updateuievent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/validator.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/view.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/vlbox.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/vscroll.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/window.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/windowcreateevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/windowdestroyevent.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/wizard.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/wizardpagesimple.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/wxdatetime.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/wxplatform.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/wxstring.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/wxversion.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="wxc/xmlresource.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Debug" />
-			<Option target="Release" />
-		</Unit>
+		<Unit filename="wxc/accel.cpp" />
+		<Unit filename="wxc/activateevent.cpp" />
+		<Unit filename="wxc/app.cpp" />
+		<Unit filename="wxc/artprovider.cpp" />
+		<Unit filename="wxc/bitmap.cpp" />
+		<Unit filename="wxc/bitmapbutton.cpp" />
+		<Unit filename="wxc/boxsizer.cpp" />
+		<Unit filename="wxc/brush.cpp" />
+		<Unit filename="wxc/button.cpp" />
+		<Unit filename="wxc/calendarctrl.cpp" />
+		<Unit filename="wxc/caret.cpp" />
+		<Unit filename="wxc/checkbox.cpp" />
+		<Unit filename="wxc/childfocusevent.cpp" />
+		<Unit filename="wxc/choice.cpp" />
+		<Unit filename="wxc/choicedialog.cpp" />
+		<Unit filename="wxc/clientdata.cpp" />
+		<Unit filename="wxc/clipboard.cpp" />
+		<Unit filename="wxc/closeevent.cpp" />
+		<Unit filename="wxc/colour.cpp" />
+		<Unit filename="wxc/colourdialog.cpp" />
+		<Unit filename="wxc/combobox.cpp" />
+		<Unit filename="wxc/commandevent.cpp" />
+		<Unit filename="wxc/common.h" />
+		<Unit filename="wxc/config.cpp" />
+		<Unit filename="wxc/contextmenuevent.cpp" />
+		<Unit filename="wxc/control.cpp" />
+		<Unit filename="wxc/cursor.cpp" />
+		<Unit filename="wxc/dataformat.cpp" />
+		<Unit filename="wxc/dataobject.cpp" />
+		<Unit filename="wxc/dc.cpp" />
+		<Unit filename="wxc/dialog.cpp" />
+		<Unit filename="wxc/dirdialog.cpp" />
+		<Unit filename="wxc/display.cpp" />
+		<Unit filename="wxc/displaychangedevent.cpp" />
+		<Unit filename="wxc/dnd.cpp" />
+		<Unit filename="wxc/docmanager.cpp" />
+		<Unit filename="wxc/doctemplate.cpp" />
+		<Unit filename="wxc/document.cpp" />
+		<Unit filename="wxc/eraseevent.cpp" />
+		<Unit filename="wxc/event.cpp" />
+		<Unit filename="wxc/evthandler.cpp" />
+		<Unit filename="wxc/filedialog.cpp" />
+		<Unit filename="wxc/findreplacedialog.cpp" />
+		<Unit filename="wxc/flexgridsizer.cpp" />
+		<Unit filename="wxc/focusevent.cpp" />
+		<Unit filename="wxc/font.cpp" />
+		<Unit filename="wxc/fontdialog.cpp" />
+		<Unit filename="wxc/fontmisc.cpp" />
+		<Unit filename="wxc/frame.cpp" />
+		<Unit filename="wxc/gauge.cpp" />
+		<Unit filename="wxc/gdicmn.cpp" />
+		<Unit filename="wxc/gdiobject.cpp" />
+		<Unit filename="wxc/glcanvas.cpp" />
+		<Unit filename="wxc/global.cpp" />
+		<Unit filename="wxc/grid.cpp" />
+		<Unit filename="wxc/gridbagsizer.cpp" />
+		<Unit filename="wxc/gridctrl.cpp" />
+		<Unit filename="wxc/gridsizer.cpp" />
+		<Unit filename="wxc/helpevent.cpp" />
+		<Unit filename="wxc/html.cpp" />
+		<Unit filename="wxc/htmlhelpctrl.cpp" />
+		<Unit filename="wxc/htmllbox.cpp" />
+		<Unit filename="wxc/icon.cpp" />
+		<Unit filename="wxc/iconizeevent.cpp" />
+		<Unit filename="wxc/idleevent.cpp" />
+		<Unit filename="wxc/image.cpp" />
+		<Unit filename="wxc/imagelist.cpp" />
+		<Unit filename="wxc/imghandler.cpp" />
+		<Unit filename="wxc/initdialogevent.cpp" />
+		<Unit filename="wxc/keyevent.cpp" />
+		<Unit filename="wxc/laywin.cpp" />
+		<Unit filename="wxc/listbook.cpp" />
+		<Unit filename="wxc/listbox.cpp" />
+		<Unit filename="wxc/listctrl.cpp" />
+		<Unit filename="wxc/local_events.h" />
+		<Unit filename="wxc/locale.cpp" />
+		<Unit filename="wxc/log.cpp" />
+		<Unit filename="wxc/maximizeevent.cpp" />
+		<Unit filename="wxc/mdi.cpp" />
+		<Unit filename="wxc/memorydc.cpp" />
+		<Unit filename="wxc/menu.cpp" />
+		<Unit filename="wxc/menubar.cpp" />
+		<Unit filename="wxc/menuitem.cpp" />
+		<Unit filename="wxc/messagedialog.cpp" />
+		<Unit filename="wxc/miniframe.cpp" />
+		<Unit filename="wxc/mousecapturechangedevent.cpp" />
+		<Unit filename="wxc/mouseevent.cpp" />
+		<Unit filename="wxc/moveevent.cpp" />
+		<Unit filename="wxc/navigationkeyevent.cpp" />
+		<Unit filename="wxc/ncpaintevent.cpp" />
+		<Unit filename="wxc/notebook.cpp" />
+		<Unit filename="wxc/notebooksizer.cpp" />
+		<Unit filename="wxc/numdialog.cpp" />
+		<Unit filename="wxc/object.cpp" />
+		<Unit filename="wxc/paintevent.cpp" />
+		<Unit filename="wxc/palette.cpp" />
+		<Unit filename="wxc/palettechangedevent.cpp" />
+		<Unit filename="wxc/panel.cpp" />
+		<Unit filename="wxc/pen.cpp" />
+		<Unit filename="wxc/printdata.cpp" />
+		<Unit filename="wxc/printdialog.cpp" />
+		<Unit filename="wxc/printer.cpp" />
+		<Unit filename="wxc/printpreview.cpp" />
+		<Unit filename="wxc/progdlg.cpp" />
+		<Unit filename="wxc/querynewpaletteevent.cpp" />
+		<Unit filename="wxc/radiobox.cpp" />
+		<Unit filename="wxc/radiobutton.cpp" />
+		<Unit filename="wxc/region.cpp" />
+		<Unit filename="wxc/sashwindow.cpp" />
+		<Unit filename="wxc/scrollbar.cpp" />
+		<Unit filename="wxc/scrolledwindow.cpp" />
+		<Unit filename="wxc/setcursorevent.cpp" />
+		<Unit filename="wxc/showevent.cpp" />
+		<Unit filename="wxc/sizeevent.cpp" />
+		<Unit filename="wxc/sizer.cpp" />
+		<Unit filename="wxc/sizeritem.cpp" />
+		<Unit filename="wxc/slider.cpp" />
+		<Unit filename="wxc/sound.cpp" />
+		<Unit filename="wxc/spinbutton.cpp" />
+		<Unit filename="wxc/spinctrl.cpp" />
+		<Unit filename="wxc/splashscreen.cpp" />
+		<Unit filename="wxc/splitterwindow.cpp" />
+		<Unit filename="wxc/staticbitmap.cpp" />
+		<Unit filename="wxc/staticbox.cpp" />
+		<Unit filename="wxc/staticboxsizer.cpp" />
+		<Unit filename="wxc/staticline.cpp" />
+		<Unit filename="wxc/statictext.cpp" />
+		<Unit filename="wxc/statusbar.cpp" />
+		<Unit filename="wxc/styledtextctrl.cpp" />
+		<Unit filename="wxc/syscolourchangedevent.cpp" />
+		<Unit filename="wxc/systemsettings.cpp" />
+		<Unit filename="wxc/tabctrl.cpp" />
+		<Unit filename="wxc/textctrl.cpp" />
+		<Unit filename="wxc/textdialog.cpp" />
+		<Unit filename="wxc/tipdialog.cpp" />
+		<Unit filename="wxc/tipwindow.cpp" />
+		<Unit filename="wxc/togglebutton.cpp" />
+		<Unit filename="wxc/toolbar.cpp" />
+		<Unit filename="wxc/tooltip.cpp" />
+		<Unit filename="wxc/treectrl.cpp" />
+		<Unit filename="wxc/updateuievent.cpp" />
+		<Unit filename="wxc/validator.cpp" />
+		<Unit filename="wxc/view.cpp" />
+		<Unit filename="wxc/vlbox.cpp" />
+		<Unit filename="wxc/vscroll.cpp" />
+		<Unit filename="wxc/window.cpp" />
+		<Unit filename="wxc/windowcreateevent.cpp" />
+		<Unit filename="wxc/windowdestroyevent.cpp" />
+		<Unit filename="wxc/wizard.cpp" />
+		<Unit filename="wxc/wizardpagesimple.cpp" />
+		<Unit filename="wxc/wxdatetime.cpp" />
+		<Unit filename="wxc/wxplatform.cpp" />
+		<Unit filename="wxc/wxstring.cpp" />
+		<Unit filename="wxc/wxversion.cpp" />
+		<Unit filename="wxc/xmlresource.cpp" />
+		<Extensions>
+			<code_completion />
+		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
