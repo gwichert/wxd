@@ -75,7 +75,7 @@ WARN_LOGFILE           =
 #---------------------------------------------------------------------------
 INPUT                  = wx
 INPUT_ENCODING         = UTF-8
-FILE_PATTERNS          = *.d
+FILE_PATTERNS          = *.d *.dox
 RECURSIVE              = YES
 EXCLUDE                = 
 EXCLUDE_SYMLINKS       = NO
