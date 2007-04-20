@@ -124,8 +124,8 @@ DSSS: (see http://dsource.org/projects/dsss/)
 
 * Linking
 
-When compiling programs using wxD, you need to make sure to include libraries:
-wxd (D library), wxc (C library), wxWidgets (C++ library), stdc++ library
+When compiling programs using wxD, you need to make sure to include all of:
+wxd (D linkage), wxc (C linkage), wxWidgets (C++ linkage), stdc++ libraries
 
 Unix systems can use the output from `wx-config --libs` to determine wx libs.
 Build systems should set up pragmas, in wx.libs module, by using "make build".
