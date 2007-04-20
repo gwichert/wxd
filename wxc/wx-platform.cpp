@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 #elif defined(__WXX11__)
     puts("WXX11");
 #else
-    fputs(stderr, "unsupported platform");
+    fputs("unsupported platform", stderr);
     err = 1;
 #endif
     return err;
