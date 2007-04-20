@@ -102,6 +102,7 @@ unix/mac: (GNU)
   sudo make install
 
 ** build wxD
+
 - extract
 - compile
 windows:
@@ -109,9 +110,18 @@ windows:
   make all test
 unix/mac:
   make all test
+  sudo make install
 freebsd:
   gmake all test
+  su -c "make install"
 
+bud: (see http://dsource.org/projects/build/)
+  make bud
+rebuild: (see http://dsource.org/projects/dsss/wiki/Rebuild)
+  make rebuild
+DSSS: (see http://dsource.org/projects/dsss/)
+  dsss build
+  dsss install
 
 * Naming rules
 
