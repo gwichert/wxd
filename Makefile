@@ -26,14 +26,14 @@ dsss:
 
 bud: build build.brf
 	cd wxc
-	make build
+	make
 	cd ..
 	$(BUD) @build.brf -op -allobj
 	move wx\wx.lib wxd.lib
 
 rebuild: build build.brf
 	cd wxc
-	make build
+	make
 	cd ..
 	$(REBUILD) -rfbuild.brf -oqwx -ofwxd.lib
 
