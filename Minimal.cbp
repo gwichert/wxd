@@ -4,27 +4,39 @@
 	<Project>
 		<Option title="Minimal Sample" />
 		<Option pch_mode="2" />
-		<Option compiler="gcc" />
+		<Option compiler="gdc" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/Minimal" prefix_auto="0" extension_auto="0" />
 				<Option working_dir="bin" />
 				<Option object_output="obj/Debug/" />
 				<Option type="0" />
-				<Option compiler="gcc" />
+				<Option compiler="gdc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add option="-fversion=$(PLATFORM)" />
+					<Add option="-fversion=$(ENCODING)" />
 				</Compiler>
+				<Environment>
+					<Variable name="PLATFORM" value="__`wxc/wx-platform`__" />
+					<Variable name="ENCODING" value="`wxc/wx-encoding`" />
+				</Environment>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/Minimal" prefix_auto="0" extension_auto="0" />
 				<Option working_dir="bin" />
 				<Option object_output="obj/Release/" />
 				<Option type="0" />
-				<Option compiler="gcc" />
+				<Option compiler="gdc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-fversion=$(PLATFORM)" />
+					<Add option="-fversion=$(ENCODING)" />
 				</Compiler>
+				<Environment>
+					<Variable name="PLATFORM" value="__`wxc/wx-platform`__" />
+					<Variable name="ENCODING" value="`wxc/wx-encoding`" />
+				</Environment>
 				<Linker>
 					<Add option="-s" />
 				</Linker>
@@ -39,9 +51,7 @@
 			<Add option="`wx-config --libs` -lstdc++" />
 			<Add option="-lgphobos -lm -lpthread" />
 		</Linker>
-		<Unit filename="Samples/Minimal/Minimal.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
+		<Unit filename="Samples/Minimal/Minimal.d" />
 		<Extensions>
 			<code_completion />
 		</Extensions>
