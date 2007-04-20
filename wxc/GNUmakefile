@@ -161,7 +161,7 @@ OBJECTS = \
 
 all:  WX_VERSION PLATFORM ENCODING $(LIBTARGET)
 build:  $(BUD_LIBS)
-dsss: wx-platform$(EXEEXT) wx-encoding$(EXEEXT)
+helpers: wx-platform$(EXEEXT) wx-encoding$(EXEEXT)
 
 # Fortunately DMD or GDC doesn't matter anymore
 # "WXD" is bogus, but it looks better than ____

@@ -70,11 +70,11 @@ docs: Doxyfile
 ddoc: wxc/PLATFORM wxc/ENCODING
 	$(MAKE) -C wx ddoc
 
+helpers:
+	$(MAKE) -C wxc helpers
+
 build:
 	$(MAKE) -C wxc build
-
-dsss:
-	$(MAKE) -C wxc dsss
 
 bud: build build.brf
 	$(MAKE) -C wxc

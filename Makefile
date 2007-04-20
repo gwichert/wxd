@@ -14,14 +14,14 @@ test:
 	make
 	cd ..
 
+helpers:
+	cd wxc
+	make helpers
+	cd ..
+
 build:
 	cd wxc
 	make build
-	cd ..
-
-dsss:
-	cd wxc
-	make dsss
 	cd ..
 
 bud: build build.brf
