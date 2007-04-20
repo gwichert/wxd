@@ -39,6 +39,9 @@
 					<Variable name="PLATFORM" value="__`wxc/wx-platform`__" />
 					<Variable name="ENCODING" value="`wxc/wx-encoding`" />
 				</Environment>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
 			</Target>
 		</Build>
 		<ExtraCommands>
