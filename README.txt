@@ -114,7 +114,6 @@ unix/mac:
 freebsd:
   gmake all test
   su -c "make install"
-
 bud: (see http://dsource.org/projects/build/)
   make bud
 rebuild: (see http://dsource.org/projects/dsss/wiki/Rebuild)
@@ -122,6 +121,14 @@ rebuild: (see http://dsource.org/projects/dsss/wiki/Rebuild)
 DSSS: (see http://dsource.org/projects/dsss/)
   dsss build
   dsss install
+
+* Linking
+
+When compiling programs using wxD, you need to make sure to include libraries:
+wxd (D library), wxc (C library), wxWidgets (C++ library), stdc++ library
+
+Unix systems can use the output from `wx-config --libs` to determine wx libs.
+Build systems should set up pragmas, in wx.libs module, by using "make build".
 
 * Naming rules
 
@@ -165,6 +172,7 @@ When compiling wxD programs, you need to tell it which version of
 wxWidgets that you want (i.e. what platform you are targetting)
 
 Your platform name should be available in the file "wxc/PLATFORM".
+(Build systems such as Bud/Rebuild will have it set by "wx.libs")
 
 Here are the main supported ones:
 Windows XP     version=__WXMSW__
@@ -173,12 +181,13 @@ Macintosh      version=__WXMAC__
 
 For checking the wx platform at runtime, see the wxPlatform class.
 
-* Strings
+* Encodings
 
 There are two ways to compile wxWidgets, as "ansi" or as "unicode"
 The former uses "char" characters, and the latter uses "wchar_t".
 
 Your encoding name should be available in the file "wxc/ENCODING".
+(Build systems such as Bud/Rebuild will have it set by "wx.libs")
 
 wx-config:     DFLAGS:
 --unicode=no   version=ANSI
