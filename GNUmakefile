@@ -83,8 +83,7 @@ bud: build build.brf
 
 rebuild: build build.brf
 	$(MAKE) -C wxc
-	#$(REBUILD) -v -rfbuild.brf -oqwx
-	@grep -v ^# < build.brf | tr -d '\r' | xargs $(REBUILD) -v -oqwx -oflibwxd.a
+	$(REBUILD) -v -rfbuild.brf -oqwx -oflibwxd.a
 
 clean:
 	$(MAKE) clean -C wx
