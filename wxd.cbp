@@ -4,530 +4,208 @@
 	<Project>
 		<Option title="wxd library" />
 		<Option pch_mode="2" />
-		<Option compiler="gcc" />
+		<Option compiler="gdc" />
 		<Build>
 			<Target title="Debug">
 				<Option output="libwxd.a" prefix_auto="0" extension_auto="0" />
 				<Option working_dir="" />
 				<Option object_output="obj/Debug/" />
 				<Option type="2" />
-				<Option compiler="gcc" />
+				<Option compiler="gdc" />
 				<Option createDefFile="1" />
 				<Compiler>
 					<Add option="-g" />
+					<Add option="-fversion=$(PLATFORM)" />
+					<Add option="-fversion=$(ENCODING)" />
 				</Compiler>
+				<Environment>
+					<Variable name="PLATFORM" value="__`wxc/wx-platform`__" />
+					<Variable name="ENCODING" value="`wxc/wx-encoding`" />
+				</Environment>
 			</Target>
 			<Target title="Release">
 				<Option output="libwxd.a" prefix_auto="0" extension_auto="0" />
 				<Option working_dir="" />
 				<Option object_output="obj/Release/" />
 				<Option type="2" />
-				<Option compiler="gcc" />
+				<Option compiler="gdc" />
 				<Option createDefFile="1" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-fversion=$(PLATFORM)" />
+					<Add option="-fversion=$(ENCODING)" />
 				</Compiler>
-				<Linker>
-					<Add option="-s" />
-				</Linker>
+				<Environment>
+					<Variable name="PLATFORM" value="__`wxc/wx-platform`__" />
+					<Variable name="ENCODING" value="`wxc/wx-encoding`" />
+				</Environment>
 			</Target>
-			<Environment>
-				<Variable name="PLATFORM" value="`wxc/wx-platform`" />
-				<Variable name="ENCODING" value="`wxc/wx-encoding`" />
-			</Environment>
 		</Build>
-		<Compiler>
-			<Add option="-O2" />
-			<Add option="-g" />
-			<Add option="-fversion=__$(PLATFORM)__" />
-			<Add option="-fversion=$(ENCODING)" />
-		</Compiler>
-		<Unit filename="wx/Accelerator.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/ActivateEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/App.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/ArrayInt.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/ArrayString.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/ArtProvider.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Bitmap.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/BitmapButton.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/BoxSizer.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Brush.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Button.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/CalendarCtrl.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Caret.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/CheckBox.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/ChildFocusEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Choice.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/ChoiceDialog.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/ClientData.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Clipboard.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/CloseEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Colour.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/ColourDialog.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/ComboBox.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/CommandEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Config.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/ContextMenuEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Control.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Cursor.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/DC.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/DND.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/DataFormat.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/DataObject.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Defs.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Dialog.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/DirDialog.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Display.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/DisplayChangedEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/DocManager.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/DocTemplate.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Document.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/EraseEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Event.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/EvtHandler.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/FileDialog.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/FindReplaceDialog.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/FlexGridSizer.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/FocusEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Font.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/FontDialog.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/FontMisc.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Frame.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/GDIObject.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/GLCanvas.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Gauge.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/GdiCommon.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Grid.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/GridBagSizer.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/GridCtrl.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/GridSizer.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/HTML.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/HelpEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/HtmlHelpController.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/HtmlListBox.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/IControlWithItems.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Icon.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/IconizeEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/IdleEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Image.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/ImageHandlers.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/ImageList.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/InitDialogEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/KeyEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/LayoutWin.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/ListBox.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/ListCtrl.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Listbook.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Locale.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Log.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/MDI.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/MaximizeEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/MemoryDC.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Menu.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/MenuBar.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/MenuItem.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/MessageDialog.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/MiniFrame.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/MouseCaptureChangedEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/MouseEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/MoveEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/NavigationKeyEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/NcPaintEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Notebook.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/NotebookSizer.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/NotifyEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/NumberDialog.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/PaintEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Palette.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/PaletteChangedEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Panel.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Pen.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/PrintData.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/PrintDialog.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/PrintPreview.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Printer.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/ProgressDialog.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/QueryNewPaletteEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/RadioBox.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/RadioButton.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Region.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/SashWindow.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/ScrollBar.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/ScrolledWindow.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/SetCursorEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/ShowEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/SizeEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Sizer.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/SizerItem.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Slider.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Sound.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/SpinButton.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/SpinCtrl.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/SplashScreen.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/SplitterWindow.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/StaticBitmap.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/StaticBox.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/StaticBoxSizer.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/StaticLine.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/StaticText.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/StatusBar.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/StyledTextCtrl.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/SysColourChangedEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/SystemSettings.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/TabCtrl.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/TextCtrl.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/TextDialog.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/TipDialog.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/TipWindow.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/ToggleButton.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/ToolBar.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/ToolTip.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/TreeCtrl.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/UpdateUIEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Utils.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/VLBox.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/VScroll.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Validator.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/VideoMode.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/View.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Window.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/WindowCreateEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/WindowDestroyEvent.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/Wizard.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/WizardPage.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/WizardPageSimple.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/XmlResource.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/common.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/wx.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/wxDateTime.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/wxObject.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/wxPlatform.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/wxString.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
-		<Unit filename="wx/wxVersion.d">
-			<Option compiler="gcc" use="1" buildCommand="gdc $options $includes -c $file -o $object" />
-		</Unit>
+		<ExtraCommands>
+			<Add before="make helpers" />
+		</ExtraCommands>
+		<Unit filename="wx/Accelerator.d" />
+		<Unit filename="wx/ActivateEvent.d" />
+		<Unit filename="wx/App.d" />
+		<Unit filename="wx/ArrayInt.d" />
+		<Unit filename="wx/ArrayString.d" />
+		<Unit filename="wx/ArtProvider.d" />
+		<Unit filename="wx/Bitmap.d" />
+		<Unit filename="wx/BitmapButton.d" />
+		<Unit filename="wx/BoxSizer.d" />
+		<Unit filename="wx/Brush.d" />
+		<Unit filename="wx/Button.d" />
+		<Unit filename="wx/CalendarCtrl.d" />
+		<Unit filename="wx/Caret.d" />
+		<Unit filename="wx/CheckBox.d" />
+		<Unit filename="wx/ChildFocusEvent.d" />
+		<Unit filename="wx/Choice.d" />
+		<Unit filename="wx/ChoiceDialog.d" />
+		<Unit filename="wx/ClientData.d" />
+		<Unit filename="wx/Clipboard.d" />
+		<Unit filename="wx/CloseEvent.d" />
+		<Unit filename="wx/Colour.d" />
+		<Unit filename="wx/ColourDialog.d" />
+		<Unit filename="wx/ComboBox.d" />
+		<Unit filename="wx/CommandEvent.d" />
+		<Unit filename="wx/Config.d" />
+		<Unit filename="wx/ContextMenuEvent.d" />
+		<Unit filename="wx/Control.d" />
+		<Unit filename="wx/Cursor.d" />
+		<Unit filename="wx/DC.d" />
+		<Unit filename="wx/DND.d" />
+		<Unit filename="wx/DataFormat.d" />
+		<Unit filename="wx/DataObject.d" />
+		<Unit filename="wx/Defs.d" />
+		<Unit filename="wx/Dialog.d" />
+		<Unit filename="wx/DirDialog.d" />
+		<Unit filename="wx/Display.d" />
+		<Unit filename="wx/DisplayChangedEvent.d" />
+		<Unit filename="wx/DocManager.d" />
+		<Unit filename="wx/DocTemplate.d" />
+		<Unit filename="wx/Document.d" />
+		<Unit filename="wx/EraseEvent.d" />
+		<Unit filename="wx/Event.d" />
+		<Unit filename="wx/EvtHandler.d" />
+		<Unit filename="wx/FileDialog.d" />
+		<Unit filename="wx/FindReplaceDialog.d" />
+		<Unit filename="wx/FlexGridSizer.d" />
+		<Unit filename="wx/FocusEvent.d" />
+		<Unit filename="wx/Font.d" />
+		<Unit filename="wx/FontDialog.d" />
+		<Unit filename="wx/FontMisc.d" />
+		<Unit filename="wx/Frame.d" />
+		<Unit filename="wx/GDIObject.d" />
+		<Unit filename="wx/GLCanvas.d" />
+		<Unit filename="wx/Gauge.d" />
+		<Unit filename="wx/GdiCommon.d" />
+		<Unit filename="wx/Grid.d" />
+		<Unit filename="wx/GridBagSizer.d" />
+		<Unit filename="wx/GridCtrl.d" />
+		<Unit filename="wx/GridSizer.d" />
+		<Unit filename="wx/HTML.d" />
+		<Unit filename="wx/HelpEvent.d" />
+		<Unit filename="wx/HtmlHelpController.d" />
+		<Unit filename="wx/HtmlListBox.d" />
+		<Unit filename="wx/IControlWithItems.d" />
+		<Unit filename="wx/Icon.d" />
+		<Unit filename="wx/IconizeEvent.d" />
+		<Unit filename="wx/IdleEvent.d" />
+		<Unit filename="wx/Image.d" />
+		<Unit filename="wx/ImageHandlers.d" />
+		<Unit filename="wx/ImageList.d" />
+		<Unit filename="wx/InitDialogEvent.d" />
+		<Unit filename="wx/KeyEvent.d" />
+		<Unit filename="wx/LayoutWin.d" />
+		<Unit filename="wx/ListBox.d" />
+		<Unit filename="wx/ListCtrl.d" />
+		<Unit filename="wx/Listbook.d" />
+		<Unit filename="wx/Locale.d" />
+		<Unit filename="wx/Log.d" />
+		<Unit filename="wx/MDI.d" />
+		<Unit filename="wx/MaximizeEvent.d" />
+		<Unit filename="wx/MemoryDC.d" />
+		<Unit filename="wx/Menu.d" />
+		<Unit filename="wx/MenuBar.d" />
+		<Unit filename="wx/MenuItem.d" />
+		<Unit filename="wx/MessageDialog.d" />
+		<Unit filename="wx/MiniFrame.d" />
+		<Unit filename="wx/MouseCaptureChangedEvent.d" />
+		<Unit filename="wx/MouseEvent.d" />
+		<Unit filename="wx/MoveEvent.d" />
+		<Unit filename="wx/NavigationKeyEvent.d" />
+		<Unit filename="wx/NcPaintEvent.d" />
+		<Unit filename="wx/Notebook.d" />
+		<Unit filename="wx/NotebookSizer.d" />
+		<Unit filename="wx/NotifyEvent.d" />
+		<Unit filename="wx/NumberDialog.d" />
+		<Unit filename="wx/PaintEvent.d" />
+		<Unit filename="wx/Palette.d" />
+		<Unit filename="wx/PaletteChangedEvent.d" />
+		<Unit filename="wx/Panel.d" />
+		<Unit filename="wx/Pen.d" />
+		<Unit filename="wx/PrintData.d" />
+		<Unit filename="wx/PrintDialog.d" />
+		<Unit filename="wx/PrintPreview.d" />
+		<Unit filename="wx/Printer.d" />
+		<Unit filename="wx/ProgressDialog.d" />
+		<Unit filename="wx/QueryNewPaletteEvent.d" />
+		<Unit filename="wx/RadioBox.d" />
+		<Unit filename="wx/RadioButton.d" />
+		<Unit filename="wx/Region.d" />
+		<Unit filename="wx/SashWindow.d" />
+		<Unit filename="wx/ScrollBar.d" />
+		<Unit filename="wx/ScrolledWindow.d" />
+		<Unit filename="wx/SetCursorEvent.d" />
+		<Unit filename="wx/ShowEvent.d" />
+		<Unit filename="wx/SizeEvent.d" />
+		<Unit filename="wx/Sizer.d" />
+		<Unit filename="wx/SizerItem.d" />
+		<Unit filename="wx/Slider.d" />
+		<Unit filename="wx/Sound.d" />
+		<Unit filename="wx/SpinButton.d" />
+		<Unit filename="wx/SpinCtrl.d" />
+		<Unit filename="wx/SplashScreen.d" />
+		<Unit filename="wx/SplitterWindow.d" />
+		<Unit filename="wx/StaticBitmap.d" />
+		<Unit filename="wx/StaticBox.d" />
+		<Unit filename="wx/StaticBoxSizer.d" />
+		<Unit filename="wx/StaticLine.d" />
+		<Unit filename="wx/StaticText.d" />
+		<Unit filename="wx/StatusBar.d" />
+		<Unit filename="wx/StyledTextCtrl.d" />
+		<Unit filename="wx/SysColourChangedEvent.d" />
+		<Unit filename="wx/SystemSettings.d" />
+		<Unit filename="wx/TabCtrl.d" />
+		<Unit filename="wx/TextCtrl.d" />
+		<Unit filename="wx/TextDialog.d" />
+		<Unit filename="wx/TipDialog.d" />
+		<Unit filename="wx/TipWindow.d" />
+		<Unit filename="wx/ToggleButton.d" />
+		<Unit filename="wx/ToolBar.d" />
+		<Unit filename="wx/ToolTip.d" />
+		<Unit filename="wx/TreeCtrl.d" />
+		<Unit filename="wx/UpdateUIEvent.d" />
+		<Unit filename="wx/Utils.d" />
+		<Unit filename="wx/VLBox.d" />
+		<Unit filename="wx/VScroll.d" />
+		<Unit filename="wx/Validator.d" />
+		<Unit filename="wx/VideoMode.d" />
+		<Unit filename="wx/View.d" />
+		<Unit filename="wx/Window.d" />
+		<Unit filename="wx/WindowCreateEvent.d" />
+		<Unit filename="wx/WindowDestroyEvent.d" />
+		<Unit filename="wx/Wizard.d" />
+		<Unit filename="wx/WizardPage.d" />
+		<Unit filename="wx/WizardPageSimple.d" />
+		<Unit filename="wx/XmlResource.d" />
+		<Unit filename="wx/common.d" />
+		<Unit filename="wx/wx.d" />
+		<Unit filename="wx/wxDateTime.d" />
+		<Unit filename="wx/wxObject.d" />
+		<Unit filename="wx/wxPlatform.d" />
+		<Unit filename="wx/wxString.d" />
+		<Unit filename="wx/wxVersion.d" />
 		<Extensions>
 			<code_completion />
 		</Extensions>
