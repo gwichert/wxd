@@ -77,10 +77,10 @@ wxd:
 	cvs -z3 -d:pserver:anonymous@wxd.cvs.sourceforge.net:/cvsroot/wxd co -P wxd
 	test -d wxd && find wxd -name CVS | xargs rm -r
 
-dist: src
+dist: wxd
 	tar cvzf wxd.tgz wxd
 
-zip: src
+zip: wxd
 	@rm -f wxd.zip
 	zip -r -y wxd.zip wxd
 	zip -r -l wxd.zip wxd -i '*.txt' -i '*.d' -i '*.cpp' -i '*.h'
