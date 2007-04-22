@@ -83,7 +83,7 @@ dist: wxd
 zip: wxd
 	@rm -f wxd.zip
 	zip -r -y wxd.zip wxd
-	zip -r -l wxd.zip wxd -i '*.txt' -i '*.d' -i '*.cpp' -i '*.h'
+	zip -r -l wxd.zip wxd -i '*.d' -i '*.cpp' -i '*.h'
 
 helpers:
 	$(MAKE) -C wxc helpers
