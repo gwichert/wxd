@@ -88,10 +88,10 @@ int main()
     fout ~= ", \"stdc++\"); }\n";
     
     fout ~= "version (build) { pragma(export_version, "
-            "\"__" ~backticks("wxc/wx-platform")~ "__\"); }\n";
+            "__" ~backticks("wxc/wx-platform")~ "__); }\n";
 
     fout ~= "version (build) { pragma(export_version, "
-            "\"" ~backticks("wxc/wx-encoding")~ "\"); }\n";
+            "" ~backticks("wxc/wx-encoding")~ "); }\n";
 
     WRITE("wx/libs.d", cast(void[]) fout);
     
