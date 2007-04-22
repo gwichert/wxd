@@ -215,7 +215,7 @@ this (string title) {
 }
 
 // common event handlers
-void OnClose (wxCloseEvent event) {
+void OnClose (Object sender, Event event) {
     wxCommandEvent evt;
     OnFileClose (evt);
     if (m_edit && m_edit.Modified()) {
@@ -225,7 +225,7 @@ void OnClose (wxCloseEvent event) {
     Destroy();
 }
 
-void OnAbout (wxCommandEvent event) {
+void OnAbout (Object sender, Event event) {
     auto AppAbout dlg = new AppAbout(this);
 }
 
@@ -234,17 +234,17 @@ void OnExit (wxCommandEvent event) {
 }
 
 // file event handlers
-void OnFileOpen (wxCommandEvent event) {
+void OnFileOpen (Object sender, Event event) {
     if (!m_edit) return;
     wxString fname;
-    auto wxFileDialog dlg = new wxFileDialog(this, _T("Open file"), wxEmptyString, wxEmptyString, _T("Any file (*)|*"),
+    auto wxFileDialog dlg = new wxFileDialog(this, "Open file", wxEmptyString, wxEmptyString, "Any file (*)|*",
                       wxOPEN | wxFILE_MUST_EXIST | wxCHANGE_DIR);
     if (dlg.ShowModal() != wxID_OK) return;
     fname = dlg.GetPath ();
     FileOpen (fname);
 }
 
-void OnFileSave (wxCommandEvent event) {
+void OnFileSave (Object sender, Event event) {
     if (!m_edit) return;
     if (!m_edit.Modified()) {
         wxMessageBox ("There is nothing to save!"), _("Save file",
@@ -254,16 +254,16 @@ void OnFileSave (wxCommandEvent event) {
     m_edit.SaveFile ();
 }
 
-void OnFileSaveAs (wxCommandEvent event) {
+void OnFileSaveAs (Object sender, Event event) {
     if (!m_edit) return;
     wxString filename = wxEmptyString;
-    auto wxFileDialog dlg = new wxFileDialog(this, _T("Save file"), wxEmptyString, wxEmptyString, _T("Any file (*)|*"), wxSAVE|wxOVERWRITE_PROMPT);
+    auto wxFileDialog dlg = new wxFileDialog(this, "Save file", wxEmptyString, wxEmptyString, "Any file (*)|*", wxSAVE|wxOVERWRITE_PROMPT);
     if (dlg.ShowModal() != wxID_OK) return;
     filename = dlg.GetPath();
     m_edit.SaveFile (filename);
 }
 
-void OnFileClose (wxCommandEvent event) {
+void OnFileClose (Object sender, Event event) {
     if (!m_edit) return;
     if (m_edit.Modified()) {
         if (wxMessageBox ("Text is not saved, save before closing?"), _("Close",
@@ -282,13 +282,13 @@ void OnFileClose (wxCommandEvent event) {
 }
 
 // properties event handlers
-void OnProperties (wxCommandEvent event) {
+void OnProperties (Object sender, Event event) {
     if (!m_edit) return;
     auto EditProperties dlg = new EditProperties(m_edit, 0);
 }
 
 // print event handlers
-void OnPrintSetup (wxCommandEvent event) {
+void OnPrintSetup (Object sender, Event event) {
     (*g_pageSetupData) = * g_printData;
     wxPageSetupDialog pageSetupDialog = new wxPageSetupDialog(this, g_pageSetupData);
     pageSetupDialog.ShowModal();
@@ -296,7 +296,7 @@ void OnPrintSetup (wxCommandEvent event) {
     (*g_pageSetupData) = pageSetupDialog.GetPageSetupData();
 }
 
-void OnPrintPreview (wxCommandEvent event) {
+void OnPrintPreview (Object sender, Event event) {
     wxPrintDialogData printDialogData = new wxPrintDialogData( *g_printData);
     wxPrintPreview *preview =
         new wxPrintPreview (new EditPrint (m_edit),
@@ -317,7 +317,7 @@ void OnPrintPreview (wxCommandEvent event) {
     frame.Show(true);
 }
 
-void OnPrint (wxCommandEvent event) {
+void OnPrint (Object sender, Event event) {
     wxPrintDialogData printDialogData = new wxPrintDialogData( *g_printData);
     wxPrinter printer = wxPrinter(&printDialogData);
     EditPrint printout = new EditPrint(m_edit);
@@ -333,7 +333,7 @@ void OnPrint (wxCommandEvent event) {
 }
 
 // edit events
-void OnEdit (wxCommandEvent event) {
+void OnEdit (Object sender, Event event) {
     if (m_edit) m_edit.ProcessEvent (event);
 }
 
@@ -345,7 +345,7 @@ private:
 void CreateMenu ()
 {
     // File menu
-    wxMenu *menuFile = new wxMenu;
+    wxMenu menuFile = new wxMenu;
     menuFile.Append (wxID_OPEN, "&Open ..\tCtrl+O");
     menuFile.Append (wxID_SAVE, "&Save\tCtrl+S");
     menuFile.Append (wxID_SAVEAS, "Save &as ..\tCtrl+Shift+S");
@@ -360,7 +360,7 @@ void CreateMenu ()
     menuFile.Append (wxID_EXIT, "&Quit\tCtrl+Q");
 
     // Edit menu
-    wxMenu *menuEdit = new wxMenu;
+    wxMenu menuEdit = new wxMenu;
     menuEdit.Append (wxID_UNDO, "&Undo\tCtrl+Z");
     menuEdit.Append (wxID_REDO, "&Redo\tCtrl+Shift+Z");
     menuEdit.AppendSeparator();
@@ -389,7 +389,7 @@ void CreateMenu ()
     menuEdit.Append (myID_SELECTLINE, "Select &line\tCtrl+L");
 
     // hilight submenu
-    wxMenu *menuHilight = new wxMenu;
+    wxMenu menuHilight = new wxMenu;
     int Nr;
     for (Nr = 0; Nr < g_LanguagePrefsSize; Nr++) {
         menuHilight.Append (myID_HILIGHTFIRST + Nr,
@@ -397,12 +397,12 @@ void CreateMenu ()
     }
 
     // charset submenu
-    wxMenu *menuCharset = new wxMenu;
+    wxMenu menuCharset = new wxMenu;
     menuCharset.Append (myID_CHARSETANSI, "&ANSI (Windows)");
     menuCharset.Append (myID_CHARSETMAC, "&MAC (Macintosh)");
 
     // View menu
-    wxMenu *menuView = new wxMenu;
+    wxMenu menuView = new wxMenu;
     menuView.Append (myID_HILIGHTLANG, "&Hilight language ..", menuHilight);
     menuView.AppendSeparator();
     menuView.AppendCheckItem (myID_FOLDTOGGLE, "&Toggle current fold\tCtrl+T");
@@ -418,18 +418,18 @@ void CreateMenu ()
     menuView.Append (myID_USECHARSET, "Use &code page of ..", menuCharset);
 
     // change case submenu
-    wxMenu *menuChangeCase = new wxMenu;
+    wxMenu menuChangeCase = new wxMenu;
     menuChangeCase.Append (myID_CHANGEUPPER, "&Upper case");
     menuChangeCase.Append (myID_CHANGELOWER, "&Lower case");
 
     // convert EOL submenu
-    wxMenu *menuConvertEOL = new wxMenu;
+    wwxMenu menuConvertEOL = new wxMenu;
     menuConvertEOL.Append (myID_CONVERTCR, "CR (&Linux)");
     menuConvertEOL.Append (myID_CONVERTCRLF, "CR+LF (&Windows)");
     menuConvertEOL.Append (myID_CONVERTLF, "LF (&Macintosh)");
 
     // Extra menu
-    wxMenu *menuExtra = new wxMenu;
+    wwxMenu menuExtra = new wxMenu;
     menuExtra.AppendCheckItem (myID_READONLY, "&Readonly mode");
     menuExtra.AppendSeparator();
     menuExtra.Append (myID_CHANGECASE, "Change &case to ..", menuChangeCase);
@@ -437,12 +437,12 @@ void CreateMenu ()
     menuExtra.Append (myID_CONVERTEOL, "Convert line &endings to ..", menuConvertEOL);
 
     // Window menu
-    wxMenu *menuWindow = new wxMenu;
+    wwxMenu menuWindow = new wxMenu;
     menuWindow.Append (myID_PAGEPREV, "&Previous\tCtrl+Shift+Tab");
     menuWindow.Append (myID_PAGENEXT, "&Next\tCtrl+Tab");
 
     // Help menu
-    wxMenu *menuHelp = new wxMenu;
+    wwxMenu menuHelp = new wxMenu;
     menuHelp.Append (wxID_ABOUT, "&About ..\tShift+F1");
 
     // construct menu

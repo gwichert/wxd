@@ -30,7 +30,7 @@ class Edit: public wxStyledTextCtrl {
 public:
 
 //! constructor
-this (wxWindow parent, wxWindowID id = wxID_ANY,
+this (wxWindow parent, int id = wxID_ANY,
             wxPoint pos = wxDefaultPosition,
             wxSize size= wxDefaultSize,
             long style = wxSUNKEN_BORDER|wxVSCROLL) {
