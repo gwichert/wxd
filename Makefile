@@ -9,10 +9,13 @@ all:
 	make
 	cd ..
 
-test:
+samp:
 	cd Samples
 	make
 	cd ..
+
+test: samp
+	
 
 helpers:
 	cd wxc

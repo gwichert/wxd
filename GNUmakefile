@@ -52,8 +52,11 @@ install:
 	$(MAKE) install -C wxc
 	$(MAKE) install -C wx
 
-test:
+samp:
 	$(MAKE) -C Samples
+
+test: samp
+	#TODO: unittesting
 
 wxc/WX_VERSION:
 	$(MAKE) -C wxc WX_VERSION
