@@ -11,7 +11,7 @@ wxWidgets is a cross-platform GUI toolkit, which supports Windows,
 Mac OS X, *nix-like OSs - such as Linux,FreeBSD with X11/Motif/GTK.
 
 wxD is delivered work from wx.NET bindings 0.7.2 (wxWidgets 2.6.1)
-It should also work with the later minor versions of wxWidgets 2.6.
+It should also work compiled with the later versions of wxWidgets.
 
 It is composed of two parts:
    + wxc is a C++ library which exposes the wxWidgets API as a 
@@ -21,6 +21,10 @@ It is composed of two parts:
 
 
 * Status
+
+0.10 (afb)
+Support for building with wxWidgets 2.8.x
+Support for compiling with Tango as well
 
 0.09 (afb)
 Redid string handling with Unicode support
