@@ -17,11 +17,7 @@ import tango.sys.Process;
 
     char[] backticks(char[] command)
     {
-        char[][] env;
-        foreach (key, value; Environment.get)
-            env ~= (key ~ "=" ~ value);
-
-        auto p = new Process(command, env);
+        auto p = new Process(command, Environment.get);
         p.execute();
         char[] output;
         foreach (line; new LineIterator!(char)(p.stdout))
