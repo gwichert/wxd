@@ -1,5 +1,5 @@
 
-// Outputs the current wxWidgets encoding
+/* Outputs the current wxWidgets encoding */
 
 #include <stdio.h>
 

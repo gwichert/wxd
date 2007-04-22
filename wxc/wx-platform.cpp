@@ -1,5 +1,5 @@
 
-// Outputs the current wxWidgets platform
+/* Outputs the current wxWidgets platform */
 
 #include <stdio.h>
 
