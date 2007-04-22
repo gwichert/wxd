@@ -52,6 +52,9 @@ import hcf.process;
 
     char[] backticks(char[] command)
     {
+       version (Unix) // make it inherit the current $PATH from the environment
+       command = "sh -c \"PATH="~GETENV("PATH")~" "~command~" \\$1\" "~command;
+
        PStream ps = new PStream(command);
        char[] output = ps.readLine();
        ps.close();
@@ -73,9 +76,6 @@ int main()
     wxconfig = GETENV("WX_CONFIG");
     if (wxconfig == "") wxconfig = "wx-config";
     
-    version (Unix) // make it inherit the current $PATH from the environment :
-    wxconfig = "sh -c \"PATH="~GETENV("PATH")~" "~wxconfig~" \\$1\" "~wxconfig;
-
     fout = "module wx.libs;\n";
     fout ~= "version (build) { pragma(link, \"wxc\"";
     
