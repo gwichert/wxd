@@ -7,6 +7,7 @@ module wxc.dssswxlibs;
 version (Tango)
 {
 
+import tango.core.Version;
 import tango.io.File;
 import tango.io.Stdout;
 import tango.text.stream.LineIterator;
@@ -17,7 +18,18 @@ import tango.sys.Process;
 
     char[] backticks(char[] command)
     {
-        auto p = new Process(command, Environment.get);
+        static if (tango.core.Version.Tango < 0.98)
+        {
+            char[][] env; 	         
+	        foreach (key, value; Environment.get) 	 
+	            env ~= (key ~ "=" ~ value); 	 
+        }
+        else
+        {
+            char[][char[]] env =  Environment.get;
+        }
+
+        auto p = new Process(command, env);
         p.execute();
         char[] output;
         foreach (line; new LineIterator!(char)(p.stdout))
