@@ -18,7 +18,7 @@
 #include <wx/tabctrl.h>
 #include "local_events.h"
 
-#if wxUSE_TAB_DIALOG
+#if wxUSE_TAB_DIALOG && (defined(__WXMSW__) || defined(__WXMAC__))
 
 //-----------------------------------------------------------------------------
 
