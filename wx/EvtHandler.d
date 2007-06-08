@@ -381,6 +381,8 @@ public import wx.StyledTextCtrl;
 			{ AddCommandListener(Event.wxEVT_UPDATE_UI, id, lsnr); }
 		public void EVT_MENU(int id, EventListener lsnr)
 			{ AddCommandListener(Event.wxEVT_COMMAND_MENU_SELECTED, id, lsnr); }
+		public void EVT_MENU_RANGE(int id, int lastId, EventListener lsnr) 
+			{ AddCommandRangeListener(Event.wxEVT_COMMAND_MENU_SELECTED, id, lastId, lsnr); } 
 		public void EVT_BUTTON(int id, EventListener lsnr)
 			{ AddCommandListener(Event.wxEVT_COMMAND_BUTTON_CLICKED, id, lsnr); }
 		public void EVT_CHECKBOX(int id, EventListener lsnr)
