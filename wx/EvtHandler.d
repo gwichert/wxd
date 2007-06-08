@@ -21,6 +21,7 @@
 module wx.EvtHandler;
 public import wx.common;
 public import wx.Event;
+private import wx.App;
 
 	alias void delegate(Object sender, Event e) EventListener;
 
@@ -247,27 +248,35 @@ public import wx.StyledTextCtrl;
 			// Only the new event system can handle more then one EventListener
 			// because the EventListener gets connected via its owner and not
 			// via a Frame, Dialog, etc...
-			if ( listener.owner )
+			try
 			{
-				int i = 0;
-				foreach ( SListener sl;listeners )
+				if ( listener.owner )
 				{
-					// continue if listener equals sl, because it will be handled below
-					if ( listener == sl ) continue;
-				
-					// if there is the same object in the list with the same
-					// EventType then call its listener also
-					if ( sl.owner )
+					int i = 0;
+					foreach ( SListener sl;listeners )
 					{
-						if ( sl.owner is listener.owner && sl.eventType == listener.eventType )
+						// continue if listener equals sl, because it will be handled below
+						if ( listener == sl ) continue;
+					
+						// if there is the same object in the list with the same
+						// EventType then call its listener also
+						if ( sl.owner )
 						{
-							if ( sl.active ) sl.listener(this, e);
+							if ( sl.owner is listener.owner && sl.eventType == listener.eventType )
+							{
+								if ( sl.active ) sl.listener(this, e);
+							}
 						}
 					}
 				}
+			
+				if ( listener.active ) listener.listener(this, e);
 			}
-		
-			if ( listener.active ) listener.listener(this, e);
+			catch(Exception e)
+			{
+				App.GetApp().catchException(e);
+				App.GetApp().ExitMainLoop();
+			}
 		}
 		
 		//---------------------------------------------------------------------

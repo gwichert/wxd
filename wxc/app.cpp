@@ -225,4 +225,10 @@ void wxApp_WakeUpIdle()
     //::wxWakeUpIdle();
 }
 
+extern "C" WXEXPORT 
+void wxApp_ExitMainLoop(wxApp* self)
+{
+    self->ExitMainLoop();
+}
+
 //-----------------------------------------------------------------------------

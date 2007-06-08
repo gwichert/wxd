@@ -68,6 +68,7 @@ private import std.utf;
         static extern (C) bool   wxApp_SafeYield(IntPtr win, bool onlyIfNeeded);
         static extern (C) bool   wxApp_Yield(IntPtr self, bool onlyIfNeeded);
         static extern (C) void   wxApp_WakeUpIdle();
+        static extern (C) void   wxApp_ExitMainLoop(IntPtr self);
 		//! \endcond
 
         //---------------------------------------------------------------------
@@ -214,6 +215,11 @@ private import std.utf;
         {
             wxApp_WakeUpIdle();
         }
+		
+		public void ExitMainLoop()
+		{
+			wxApp_ExitMainLoop(wxobj);
+		}
 
         //---------------------------------------------------------------------
     }
