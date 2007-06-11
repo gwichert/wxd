@@ -159,7 +159,7 @@ public:
 */
 
         // string path = pathList.FindValidPath(("pat4.bmp"));
-        string path = "pat4.bmp";
+        string path = "../Samples/Drawing/pat4.bmp";
         if ( !path )
             return false;
 
@@ -171,7 +171,7 @@ public:
         gs_bmp4_mono.mask(mask4);
 
         // path = pathList.FindValidPath(("pat36.bmp"));
-        path = "pat36.bmp";
+        path = "../Samples/Drawing/pat36.bmp";
         if ( !path )
             return false;
         gs_bmp36.LoadFile(path, BitmapType.wxBITMAP_TYPE_BMP);
@@ -179,7 +179,7 @@ public:
         gs_bmp36.mask(mask36);
 
         // path = pathList.FindValidPath(("image.bmp"));
-        path = "image.bmp";
+        path = "../Samples/Drawing/image.bmp";
         if ( !path )
             return false;
         gs_bmpNoMask.LoadFile(path, BitmapType.wxBITMAP_TYPE_BMP);
@@ -187,7 +187,7 @@ public:
         gs_bmpWithColMask.LoadFile(path, BitmapType.wxBITMAP_TYPE_BMP);
 
         // path = pathList.FindValidPath(("mask.bmp"));
-        path = "mask.bmp";
+        path = "../Samples/Drawing/mask.bmp";
         if ( !path )
             return false;
         gs_bmpMask.LoadFile(path, BitmapType.wxBITMAP_TYPE_BMP);
@@ -195,7 +195,7 @@ public:
         Mask mask = new Mask(gs_bmpMask, Colour.wxBLACK);
         gs_bmpWithMask.mask(mask);
 
-        mask = new wxMask(gs_bmpWithColMask, Colour.wxWHITE);
+        mask = new Mask(gs_bmpWithColMask, Colour.wxWHITE);
         gs_bmpWithColMask.mask(mask);
 
         return true;
@@ -546,7 +546,7 @@ class MyCanvas: public ScrolledWindow
     m_owner = parent;
     m_show = ScreenToShow.Show_Default;
     // m_smile_bmp = new Bitmap(smile_xpm);
-    m_smile_bmp = new Bitmap("smile.xpm", BitmapType.wxBITMAP_TYPE_XPM);
+    m_smile_bmp = new Bitmap("../Samples/Drawing/smile.xpm", BitmapType.wxBITMAP_TYPE_XPM);
     //m_smile_bmp = null;
 
     m_std_icon = ArtProvider.GetIcon( ArtID.wxART_INFORMATION );
@@ -902,16 +902,18 @@ class MyCanvas: public ScrolledWindow
         int cx = gs_bmpWithColMask.Width(),
             cy = gs_bmpWithColMask.Height();
 
-        MemoryDC memDC;
+        MemoryDC memDC = new MemoryDC();
+
+        memDC.SelectObject(gs_bmpWithColMask);
         for ( size_t n = 0; n < rasterOperations.length; n++ )
         {
             wxCoord x = cast(wxCoord) (120 + 150*(n%4)),
                     y =  cast(wxCoord) (20 + 100*(n/4));
 
             dc.DrawText(rasterOperations[n].name, x, y - 20);
-            memDC.SelectObject(gs_bmpWithColMask);
             dc.Blit(x, y, cx, cy, memDC, 0, 0, rasterOperations[n].rop, true);
         }
+        memDC.SelectObject(Bitmap.wxNullBitmap);
     }
 
 
@@ -1584,6 +1586,3 @@ static rasterOp[] rasterOperations =
     { "wxSRC_INVERT",   Logic.wxSRC_INVERT    },
     { "wxXOR",          Logic.wxXOR           },
 ];
-
-
- 
