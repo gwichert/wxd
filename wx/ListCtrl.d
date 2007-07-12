@@ -237,11 +237,20 @@ public import wx.ImageList;
 
 		//! \cond EXTERN
 		extern (C) {
+		alias IntPtr function (ListCtrl, int) Virtual_OnGetItemAttr;
+		alias int function (ListCtrl, int) Virtual_OnGetItemImage;
+		alias int function (ListCtrl, int, int) Virtual_OnGetItemColumnImage;
+		alias string function (ListCtrl, int, int) Virtual_OnGetItemText;
+
 		alias int function(int item1, int item2, int sortData) wxListCtrlCompare;
 		}
 	
 		static extern (C) IntPtr wxListCtrl_ctor();
 		static extern (C) void   wxListCtrl_dtor(IntPtr self);
+		static extern (C) void   wxListCtrl_RegisterVirtual(IntPtr self, ListCtrl obj, Virtual_OnGetItemAttr onGetItemAttr,
+			Virtual_OnGetItemImage onGetItemImage,
+			Virtual_OnGetItemColumnImage onGetItemColumnImage,
+			Virtual_OnGetItemText onGetItemText);
 		static extern (C) bool   wxListCtrl_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, IntPtr validator, string name);
 		static extern (C) bool   wxListCtrl_GetColumn(IntPtr self, int col, inout IntPtr item);
 		static extern (C) bool   wxListCtrl_SetColumn(IntPtr self, int col, IntPtr item);
@@ -387,6 +396,10 @@ public import wx.ImageList;
 			{
 				throw new InvalidOperationException("Failed to create ListCtrl");
 			}
+			
+			wxListCtrl_RegisterVirtual(wxobj, this, &staticOnGetItemAttr, 
+				&staticOnGetItemImage, &staticOnGetItemColumnImage, 
+				&staticOnGetItemText);
 		}
 	
 		public static wxObject New(IntPtr ptr) { return new ListCtrl(ptr); }
@@ -402,9 +415,53 @@ public import wx.ImageList;
 		{
 			return wxListCtrl_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, cast(uint)style, wxObject.SafePtr(validator), name);
 		}
-
+		
 		//---------------------------------------------------------------------
-
+		
+		static extern(C) private IntPtr staticOnGetItemAttr(ListCtrl obj, int item)
+		{
+			return wxObject.SafePtr(obj.OnGetItemAttr(item));
+		}
+		protected /+virtual+/ wxListItemAttr OnGetItemAttr(int item)
+		{
+			return null;
+		}
+		
+		//---------------------------------------------------------------------
+		
+		static extern(C) private int staticOnGetItemImage(ListCtrl obj, int item)
+		{
+			return obj.OnGetItemImage(item);
+		}
+		protected /+virtual+/ int OnGetItemImage(int item)
+		{
+			return -1;
+		}
+		
+		//---------------------------------------------------------------------
+		
+		static extern(C) private int staticOnGetItemColumnImage(ListCtrl obj, int item, int column)
+		{
+			return obj.OnGetItemColumnImage(item, column);
+		}
+		protected /+virtual+/ int OnGetItemColumnImage(int item, int column)
+		{
+			return -1;
+		}
+		
+		//---------------------------------------------------------------------
+		
+		static extern(C) private string staticOnGetItemText(ListCtrl obj, int item, int column)
+		{
+			return obj.OnGetItemText(item, column);
+		}
+		protected /+virtual+/ string OnGetItemText(int item, int column)
+		{
+			assert(0, "Generic OnGetItemText not supposed to be called");
+		}
+		
+		//---------------------------------------------------------------------
+		
 		public bool GetColumn(int col, out ListItem item)
 		{
 			item = new ListItem();
@@ -1065,6 +1122,10 @@ public import wx.ImageList;
 		//! \cond EXTERN
 		static extern (C) IntPtr wxListView_ctor();
 		static extern (C) bool wxListView_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, IntPtr validator, string name);
+		static extern (C) void   wxListView_RegisterVirtual(IntPtr self, ListCtrl obj, Virtual_OnGetItemAttr onGetItemAttr,
+			Virtual_OnGetItemImage onGetItemImage,
+			Virtual_OnGetItemColumnImage onGetItemColumnImage,
+			Virtual_OnGetItemText onGetItemText);
 		static extern (C) void wxListView_Select(IntPtr self, uint n, bool on);
 		static extern (C) void wxListView_Focus(IntPtr self, uint index);
 		static extern (C) uint wxListView_GetFocusedItem(IntPtr self);
@@ -1111,6 +1172,10 @@ public import wx.ImageList;
 			{
 				throw new InvalidOperationException("Failed to create ListView");
 			}
+			
+			wxListView_RegisterVirtual(wxobj, this, &staticOnGetItemAttr, 
+				&staticOnGetItemImage, &staticOnGetItemColumnImage, 
+				&staticOnGetItemText);
 		}
 		
 		//---------------------------------------------------------------------

@@ -17,10 +17,45 @@
 #include <wx/listctrl.h>
 #include "local_events.h"
 
+typedef wxListItemAttr* (CALLBACK* Virtual_OnGetItemAttr) (wxc_object, long);
+typedef int (CALLBACK* Virtual_OnGetItemImage) (wxc_object, long);
+typedef int (CALLBACK* Virtual_OnGetItemColumnImage) (wxc_object, long, long);
+typedef wxc_string (CALLBACK* Virtual_OnGetItemText) (wxc_object, long, long);
+
 //-----------------------------------------------------------------------------
 
 class _ListCtrl : public wxListCtrl
 {
+protected:
+    wxListItemAttr* OnGetItemAttr(long item) const
+        { return m_OnGetItemAttr(m_dobj, item); }
+    int OnGetItemImage(long item) const
+        { return m_OnGetItemImage(m_dobj, item); }
+    int OnGetItemColumnImage(long item, long column) const
+        { return m_OnGetItemColumnImage(m_dobj, item,column); }
+    wxString OnGetItemText(long item, long column) const
+        { wxc_string tmp=m_OnGetItemText(m_dobj, item,column); return wxstr(tmp); }
+        
+public:
+    void RegisterVirtual(wxc_object obj, Virtual_OnGetItemAttr onGetItemAttr,
+        Virtual_OnGetItemImage onGetItemImage,
+        Virtual_OnGetItemColumnImage onGetItemColumnImage,
+        Virtual_OnGetItemText onGetItemText)
+    {
+        m_dobj = obj;
+        m_OnGetItemAttr=onGetItemAttr;
+        m_OnGetItemImage=onGetItemImage;
+        m_OnGetItemColumnImage=onGetItemColumnImage;
+        m_OnGetItemText=onGetItemText;
+    }
+
+private:
+    Virtual_OnGetItemAttr m_OnGetItemAttr;
+    Virtual_OnGetItemImage m_OnGetItemImage;
+    Virtual_OnGetItemColumnImage m_OnGetItemColumnImage;
+    Virtual_OnGetItemText m_OnGetItemText;
+    wxc_object m_dobj;
+
 public:
     DECLARE_OBJECTDELETED(_ListCtrl)
 };
@@ -31,6 +66,15 @@ extern "C" WXEXPORT
 wxListCtrl* wxListCtrl_ctor()
 {
     return new _ListCtrl();
+}
+
+extern "C" WXEXPORT
+void wxListCtrl_RegisterVirtual(_ListCtrl* self, wxc_object obj, Virtual_OnGetItemAttr onGetItemAttr,
+        Virtual_OnGetItemImage onGetItemImage,
+        Virtual_OnGetItemColumnImage onGetItemColumnImage,
+        Virtual_OnGetItemText onGetItemText)
+{
+    self->RegisterVirtual(obj, onGetItemAttr, onGetItemImage, onGetItemColumnImage, onGetItemText);
 }
 
 extern "C" WXEXPORT
@@ -921,6 +965,36 @@ wxc_bool wxListEvent_IsAllowed(wxListEvent* self)
 
 class _ListView : public wxListView
 {
+protected:
+    wxListItemAttr* OnGetItemAttr(long item) const
+        { return m_OnGetItemAttr(m_dobj, item); }
+    int OnGetItemImage(long item) const
+        { return m_OnGetItemImage(m_dobj, item); }
+    int OnGetItemColumnImage(long item, long column) const
+        { return m_OnGetItemColumnImage(m_dobj, item,column); }
+    wxString OnGetItemText(long item, long column) const
+        { wxc_string tmp=m_OnGetItemText(m_dobj, item,column); return wxstr(tmp); }
+        
+public:
+    void RegisterVirtual(wxc_object obj, Virtual_OnGetItemAttr onGetItemAttr,
+        Virtual_OnGetItemImage onGetItemImage,
+        Virtual_OnGetItemColumnImage onGetItemColumnImage,
+        Virtual_OnGetItemText onGetItemText)
+    {
+        m_dobj = obj;
+        m_OnGetItemAttr=onGetItemAttr;
+        m_OnGetItemImage=onGetItemImage;
+        m_OnGetItemColumnImage=onGetItemColumnImage;
+        m_OnGetItemText=onGetItemText;
+    }
+
+private:
+    Virtual_OnGetItemAttr m_OnGetItemAttr;
+    Virtual_OnGetItemImage m_OnGetItemImage;
+    Virtual_OnGetItemColumnImage m_OnGetItemColumnImage;
+    Virtual_OnGetItemText m_OnGetItemText;
+    wxc_object m_dobj;
+
 public:
     DECLARE_OBJECTDELETED(_ListView)
 };
@@ -931,6 +1005,18 @@ extern "C" WXEXPORT
 wxListView* wxListView_ctor()
 {
     return new _ListView();
+}
+
+//-----------------------------------------------------------------------------
+
+
+extern "C" WXEXPORT
+void wxListView_RegisterVirtual(_ListView* self, wxc_object obj, Virtual_OnGetItemAttr onGetItemAttr,
+        Virtual_OnGetItemImage onGetItemImage,
+        Virtual_OnGetItemColumnImage onGetItemColumnImage,
+        Virtual_OnGetItemText onGetItemText)
+{
+    self->RegisterVirtual(obj, onGetItemAttr, onGetItemImage, onGetItemColumnImage, onGetItemText);
 }
 
 //-----------------------------------------------------------------------------
