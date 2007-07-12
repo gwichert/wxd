@@ -20,7 +20,7 @@ public import wx.TextCtrl;
 //! \cond STD
 version (Tango)
 {
-import tango.Core.Vararg;
+import tango.core.Vararg;
 }
 else // Phobos
 {
