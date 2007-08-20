@@ -49,22 +49,7 @@ public import wx.Bitmap;
 		public this()
 			{ this(wxButton_ctor()); }
 
-		public this(Window parent, int id, string label)
-			{ this(parent, id, label, wxDefaultPosition, wxDefaultSize, 0, null, null); }
-
-		public this(Window parent, int id, string label, Point pos)
-			{ this(parent, id, label, pos, wxDefaultSize, 0, null, null); }
-		
-		public this(Window parent, int id, string label, Point pos, Size size)
-			{ this(parent, id, label, pos, size, 0, null, null); }
-		
-		public this(Window parent, int id, string label, Point pos, Size size, int style)
-			{ this(parent, id, label, pos, size, style, null, null); }
-		
-		public this(Window parent, int id, string label, Point pos, Size size, int style, Validator validator)
-			{ this(parent, id, label, pos, size, style, validator, null); }
-
-		public this(Window parent, int id, string label, Point pos, Size size, int style, Validator validator, string name)
+		public this(Window parent, int id, string label = "", Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, Validator validator = null, string name = null)
 		{
 			this(wxButton_ctor());
 			if (!Create(parent, id, label, pos, size, style, validator, name))
@@ -78,23 +63,8 @@ public import wx.Bitmap;
 		//---------------------------------------------------------------------
 		// ctors with self created id
 		
-		public this(Window parent, string label)
-			{ this(parent, Window.UniqueID, label, wxDefaultPosition, wxDefaultSize, 0, null, null); }
-
-		public this(Window parent, string label, Point pos)
-			{ this(parent, Window.UniqueID, label, pos, wxDefaultSize, 0, null, null); }
-		
-		public this(Window parent, string label, Point pos, Size size)
-			{ this(parent, Window.UniqueID, label, pos, size, 0, null, null); }
-		
-		public this(Window parent, string label, Point pos, Size size, int style)
-			{ this(parent, Window.UniqueID, label, pos, size, style, null, null); }
-		
-		public this(Window parent, string label, Point pos, Size size, int style, Validator validator)
-			{ this(parent, Window.UniqueID, label, pos, size, style, validator, null); }
-
-		public this(Window parent, string label, Point pos, Size size, int style, Validator validator, string name)
-			{ this(parent, Window.UniqueID, label, pos, size, style, validator, null);}
+		public this(Window parent, string label, Point pos = wxDefaultPosition, Size size = wxDefaultSize, int style = 0, Validator validator = null, string name = null)
+			{ this(parent, Window.UniqueID, label, pos, size, style, validator, name);}
 			
 		//---------------------------------------------------------------------
 
