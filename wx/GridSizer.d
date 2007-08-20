@@ -46,6 +46,11 @@ public import wx.Sizer;
 			super(wxGridSizer_ctor(rows, cols, vgap, hgap));
 		}
 
+		public this(int cols, int vgap = 0, int hgap = 0)
+		{
+			this(cols == 0 ? 1 : 0, cols, vgap, hgap);
+		}
+
 		//---------------------------------------------------------------------
 
 		public override void RecalcSizes()

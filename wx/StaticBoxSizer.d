@@ -37,6 +37,11 @@ public import wx.StaticBox;
 			super(wxStaticBoxSizer_ctor(wxObject.SafePtr(box), orient));
 		}
 
+		public this(int orient, Window parent, string label)
+		{
+			this(new StaticBox(parent, -1, label), orient);
+		}
+
 		//---------------------------------------------------------------------
 
 		public StaticBox staticBox() 
