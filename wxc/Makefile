@@ -164,6 +164,14 @@ all:  $(MAKESTUB) $(LIBTARGET)
 build:  $(BUD_LIBS)
 helpers: wx-platform.exe wx-encoding.exe
 
+# hardcoded: DEBUG
+DEBUG_FLAG = -D__WXDEBUG__
+WXDEBUGFLAG = d
+
+# hardcoded: ANSI
+UNICODE_FLAG =
+WXUNICODEFLAG =
+
 include $(WXDIR)/build/msw/config.dmc
 CXX = dmc
 
@@ -171,10 +179,10 @@ COMPILER = DMD
 
 WX_CONFIG = wx-config.exe
 
-OBJS = dmc_mswd$(CFG)
+OBJS = dmc_msw$(WXUNICODEFLAG)$(WXDEBUGFLAG)$(CFG)
 LIBDIRNAME = $(WXDIR)\lib\dmc_lib$(CFG)
-SETUPHDIR = $(LIBDIRNAME)\mswd
-CXXFLAGS = -g -o+none -D__WXMSW__ -D__WXDEBUG__ -I$(WXDIR)\include \
+SETUPHDIR = $(LIBDIRNAME)\msw$(WXUNICODEFLAG)$(WXDEBUGFLAG)
+CXXFLAGS = -g -o+none -D__WXMSW__ $(DEBUG_FLAG) $(UNICODE_FLAG) -I$(WXDIR)\include \
 	-I$(SETUPHDIR) -w- -I. -WA -DNOPCH -HP90 -Ar -Ae $(CPPFLAGS) \
 	$(CXXFLAGS)
 
