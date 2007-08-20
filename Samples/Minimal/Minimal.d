@@ -16,7 +16,12 @@ import wx.wx;
 
 	public class MyFrame : Frame
 	{
-		enum Cmd { About = 1, Quit = 2, Dialog = 3 }
+		enum Cmd
+		{
+			About = MenuIDs.wxID_ABOUT,
+			Quit = MenuIDs.wxID_EXIT,
+			Dialog = MenuIDs.wxID_HIGHEST + 1
+		}
 
 		//---------------------------------------------------------------------
 
