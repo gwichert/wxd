@@ -3171,6 +3171,8 @@ public import wx.CommandEvent;
         public bool Control() { return wxStyledTextEvent_GetControl(wxobj); }
 
         public bool Alt() { return wxStyledTextEvent_GetAlt(wxobj); }
+
+        private static Event New(IntPtr obj) { return new StyledTextEvent(obj); }
     }
 
 //! \cond VERSION
