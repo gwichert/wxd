@@ -100,6 +100,18 @@ public import wx.Window;
 
 		//---------------------------------------------------------------------
 
+		public void AddSpacer(int size)
+		{
+			Add(size, size, 0);
+		}
+
+		public void AddStretchSpacer(int proportion = 1)
+		{
+			Add(0, 0, proportion);
+		}
+
+		//---------------------------------------------------------------------
+
 		public Size Fit(Window window)
 		{
 			Size size;
@@ -163,6 +175,18 @@ public import wx.Window;
 		{
 			wxSizer_Prepend(wxobj, width, height, proportion,
 							flag, border, wxObject.SafePtr(userData));
+		}
+
+		//---------------------------------------------------------------------
+
+		public void PrependSpacer(int size)
+		{
+			Prepend(size, size, 0);
+		}
+
+		public void PrependStretchSpacer(int proportion = 1)
+		{
+			Prepend(0, 0, proportion);
 		}
 
 		//---------------------------------------------------------------------
