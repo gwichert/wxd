@@ -227,7 +227,7 @@ ddoc:
 $(LIBTARGET): $(OBJECTS)
 	ar rcs $@ $^
 
-VERSION=$(version)=__$(PLATFORM)__ $(version)=$(ENCODING)
+VERSION=$(version)=wx$(WX_RELEASE_NODOT) $(version)=__$(PLATFORM)__ $(version)=$(ENCODING)
 
 %.o:%.d
 	$(DC) $(VERSION) $(STCFLAGS) -I.. $(DFLAGS) -c $(output) $<

@@ -24,7 +24,11 @@ export COMPILER
 BUD=bud
 REBUILD=rebuild
 
-# wx version to use (e.g. 2.6.3)
+# wx release to use (e.g. 26)
+WX_RELEASE_NODOT=$(shell cat wxc/WX_RELEASE 2>/dev/null)
+export WX_RELEASE_NODOT
+
+# wx version to use (e.g. 2.6.4)
 WX_VERSION=$(shell cat wxc/WX_VERSION 2>/dev/null)
 export WX_VERSION
 
@@ -44,7 +48,7 @@ export STC
 OGL=0
 export OGL
 
-all: wxc/WX_VERSION wxc/PLATFORM wxc/ENCODING
+all: wxc/WX_RELEASE wxc/WX_VERSION wxc/PLATFORM wxc/ENCODING
 	$(MAKE) -C wxc
 	$(MAKE) -C wx
 
@@ -57,6 +61,9 @@ samp:
 
 test: samp
 	#TODO: unittesting
+
+wxc/WX_RELEASE:
+	$(MAKE) -C wxc WX_RELEASE
 
 wxc/WX_VERSION:
 	$(MAKE) -C wxc WX_VERSION
@@ -90,7 +97,7 @@ zip: wxd
 helpers:
 	$(MAKE) -C wxc helpers
 
-build:
+build: wxc/WX_RELEASE wxc/WX_VERSION wxc/PLATFORM wxc/ENCODING
 	$(MAKE) -C wxc build
 
 bud: build build.brf
@@ -106,6 +113,7 @@ clean:
 	$(MAKE) clean -C wx
 	$(MAKE) clean -C wxc
 	$(MAKE) clean -C Samples
+	-rm wxc/WX_RELEASE
 	-rm wxc/WX_VERSION
 	-rm wxc/PLATFORM
 	-rm wxc/ENCODING

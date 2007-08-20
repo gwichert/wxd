@@ -159,9 +159,9 @@ OBJECTS = \
 	wxaui.o
 	
 
-all:  WX_VERSION PLATFORM ENCODING $(LIBTARGET)
+all:  WX_RELEASE WX_VERSION PLATFORM ENCODING $(LIBTARGET)
 build:  $(BUD_LIBS)
-helpers: wx-platform$(EXEEXT) wx-encoding$(EXEEXT)
+helpers: wx-platform$(EXEEXT) wx-encoding$(EXEEXT) wx-release$(EXEEXT)
 
 # Fortunately DMD or GDC doesn't matter anymore
 # "WXD" is bogus, but it looks better than ____
@@ -211,6 +211,9 @@ install: $(LIBTARGET)
 	$(INSTALL_DATA) -p $(LIBTARGET) $(DESTDIR)$(libdir)
 	-$(RANLIB) $(DESTDIR)$(libdir)/`basename $(LIBTARGET)`
 
+WX_RELEASE: wx-release$(EXEEXT)
+	WX_CONFIG="$(WX_CONFIG)" ./wx-release.sh > $@
+
 WX_VERSION: wx-version$(EXEEXT)
 	WX_CONFIG="$(WX_CONFIG)" ./wx-version.sh > $@
 
@@ -235,7 +238,7 @@ wx-config.exe: wx-config-win.o
 wx-libs$(EXEEXT): wx-libs.o
 	$(CXX) $(LDFLAGS) `$(WX_CONFIG) --libs base,core` -o $@ $<
 
-wx-release.exe: wx-release-win.o
+wx-release$(EXEEXT): wx-release.o
 	$(CXX) $(LDFLAGS) -o $@ $<
 
 wx-version$(EXEEXT): wx-version.o

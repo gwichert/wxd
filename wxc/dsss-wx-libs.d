@@ -105,6 +105,9 @@ int main()
     fout ~= "version (build) { pragma(export_version, "
             "" ~backticks("wxc/wx-encoding")~ "); }\n";
 
+    fout ~= "version (build) { pragma(export_version, "
+            "wx" ~backticks("wxc/wx-release")~ "); }\n";
+
     WRITE("wx/libs.d", cast(void[]) fout);
     
     return 0;

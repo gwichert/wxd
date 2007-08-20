@@ -20,9 +20,12 @@ CXXLIBS = -lstdc++
 DC = gdc
 DFLAGS = -O2 -g
 
+WXRELEASE = `$(WX_CONFIG) --release`
 WXVERSION = `$(WX_CONFIG) --version`
 WXFLAGS = `$(WX_CONFIG) --cxxflags`
 WXLIBS = `$(WX_CONFIG) --libs`
+
+WX_RELEASE_NODOT = $(shell echo "`$(WX_CONFIG) --release`" | sed -e 's/\.//')
 
 ifeq ("$(STC)","1")
 WXLIBS = `$(WX_CONFIG) --libs stc`
@@ -31,7 +34,7 @@ endif
 .cpp.o:
 	$(CXX) $(WXFLAGS) $(CXXFLAGS) -c -o $@ $<
 
-VERSION=-fversion=__$(PLATFORM)__ -fversion=$(ENCODING)
+VERSION=-fversion=wx$(WX_RELEASE_NODOT) -fversion=__$(PLATFORM)__ -fversion=$(ENCODING)
 
 %.o:%.d
 	$(DC) $(VERSION) -I$(TOPDIR) $(DFLAGS) -c -o $@ $<

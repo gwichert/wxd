@@ -64,5 +64,10 @@ int main(int argc, char *argv[])
 #endif
 	printf("); }\n");
 
+	// release
+	printf("version (build) { pragma(export_version, "); 
+    printf("wx%d%d", wxMAJOR_VERSION, wxMINOR_VERSION);
+	printf("); }\n");
+
 	return 0;
 } 

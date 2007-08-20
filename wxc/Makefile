@@ -162,7 +162,7 @@ OBJECTS = \
 
 all:  $(MAKESTUB) $(LIBTARGET)
 build:  $(BUD_LIBS)
-helpers: wx-platform.exe wx-encoding.exe
+helpers: wx-platform.exe wx-encoding.exe wx-release.exe
 
 # hardcoded: DEBUG
 DEBUG_FLAG = -D__WXDEBUG__
@@ -182,7 +182,7 @@ WX_CONFIG = wx-config.exe
 OBJS = dmc_msw$(WXUNICODEFLAG)$(WXDEBUGFLAG)$(CFG)
 LIBDIRNAME = $(WXDIR)\lib\dmc_lib$(CFG)
 SETUPHDIR = $(LIBDIRNAME)\msw$(WXUNICODEFLAG)$(WXDEBUGFLAG)
-CXXFLAGS = -g -o+none -D__WXMSW__ $(DEBUG_FLAG) $(UNICODE_FLAG) -I$(WXDIR)\include \
+CXXFLAGS = -g -o+none -D__$(PLATFORM)__ $(DEBUG_FLAG) $(UNICODE_FLAG) -I$(WXDIR)\include \
 	-I$(SETUPHDIR) -w- -I. -WA -DNOPCH -HP90 -Ar -Ae $(CPPFLAGS) \
 	$(CXXFLAGS)
 
@@ -201,8 +201,8 @@ wx-libs.mak: wx-config.exe
 wx-libs.exe: wx-libs.mak wx-libs.obj 
 	$(CXX) $(LDFLAGS) wx-libs.obj @wx-libs.mak $@
 
-wx-release.exe: wx-release-win.obj
-	$(CXX) $(LDFLAGS) wx-release-win.obj $@
+wx-release.exe: wx-release.obj
+	$(CXX) $(LDFLAGS) wx-release.obj $@
 
 wx-version.exe: wx-version.obj
 	$(CXX) $(LDFLAGS) wx-version.obj $@
@@ -222,6 +222,9 @@ $(MAKESTUB): wx-release.exe wx-version.exe wx-platform.exe wx-encoding.exe
 	+wx-version.exe -v >>$@
 	+wx-platform.exe -v >>$@
 	+wx-encoding.exe -v >>$@
+
+WX_RELEASE: wx-release.exe
+	wx-release.exe >$@
 
 WX_VERSION: wx-version.exe
 	wx-version.exe >$@

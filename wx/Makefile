@@ -170,6 +170,8 @@ OBJECTS = \
 	
 #	DbGrid.obj \
 
+WX_RELEASE_NODOT = 26
+WX_VERSION = 2.6.4
 PLATFORM = WXMSW
 ENCODING = ANSI
 
@@ -183,9 +185,10 @@ DFLAGS=-O -g
 $(LIBTARGET): $(OBJECTS)
 	lib -p512 -c -n $@ $(OBJECTS)
 
+VERSION=-version=wx$(WX_RELEASE_NODOT) -version=__$(PLATFORM)__ -version=$(ENCODING)
 
 .d.obj:
-	$(DMD) -version=__$(PLATFORM)__ -version=__$(ENCODING)__ -I.. $(DFLAGS) -c -of$@ $<
+	$(DMD) $(VERSION) -I.. $(DFLAGS) -c -of$@ $<
 
 clean:
 	-del *.obj aui\*.obj

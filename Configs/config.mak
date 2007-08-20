@@ -2,6 +2,9 @@
 
 # the regular Digital Mars Makefile
 
+WX_RELEASE_NODOT = 26
+WX_VERSION = 2.6.4
+
 # hardcoded: DEBUG
 PLATFORM = WXMSW
 DEBUG_FLAG = -D__WXDEBUG__
@@ -16,7 +19,7 @@ include $(TOPDIR)/config.mak
 
 CXX = dmc
 DC = dmd
-DFLAGS = $(DFLAGS) -version=__$(PLATFORM)__ -version=$(ENCODING) -I$(TOPDIR)
+DFLAGS = $(DFLAGS) -version=wx$(WX_RELEASE_NODOT) -version=__$(PLATFORM)__ -version=$(ENCODING) -I$(TOPDIR)
 
 include $(WXDIR)/build/msw/config.dmc
 
