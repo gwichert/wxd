@@ -10,6 +10,7 @@ version (Tango)
 import tango.core.Version;
 import tango.io.File;
 import tango.io.Stdout;
+import tango.io.Console;
 import tango.text.stream.LineIterator;
 import tango.text.Util;
 
@@ -18,6 +19,8 @@ import tango.sys.Process;
 
     char[] backticks(char[] command)
     {
+        if (!command) return null;
+
         static if (tango.core.Version.Tango < 0.98)
         {
             char[][] env; 	         
