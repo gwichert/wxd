@@ -843,7 +843,11 @@ void wxStyledTextCtrl_SetCaretLineVisible(wxStyledTextCtrl* self, wxc_bool show)
 extern "C" WXEXPORT
 wxColour* wxStyledTextCtrl_GetCaretLineBack(wxStyledTextCtrl* self)
 {
+#if wxABI_VERSION < 20700
     return new wxColour(self->GetCaretLineBack());
+#else
+    return new wxColour(self->GetCaretLineBackground());
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -851,7 +855,11 @@ wxColour* wxStyledTextCtrl_GetCaretLineBack(wxStyledTextCtrl* self)
 extern "C" WXEXPORT
 void wxStyledTextCtrl_SetCaretLineBack(wxStyledTextCtrl* self, wxColour* back)
 {
+#if wxABI_VERSION < 20700
     self->SetCaretLineBack(*back);
+#else
+    self->SetCaretLineBackground(*back);
+#endif
 }
 
 //-----------------------------------------------------------------------------
