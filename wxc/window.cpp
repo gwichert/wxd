@@ -110,6 +110,12 @@ void wxWindow_SetSize3(wxWindow* self, wxSize* size)
 	self->SetSize(*size);
 }
 
+extern "C" WXEXPORT
+void wxWindow_SetSize4(wxWindow* self, wxRect* rect)
+{
+	self->SetSize(*rect);
+}
+
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT

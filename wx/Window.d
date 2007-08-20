@@ -143,6 +143,7 @@ public import wx.ToolTip;
 		static extern (C) void   wxWindow_SetSize(IntPtr self, int x, int y, int width, int height, uint flags);
 		static extern (C) void   wxWindow_SetSize2(IntPtr self, int width, int height);
 		static extern (C) void   wxWindow_SetSize3(IntPtr self, inout Size size);
+		static extern (C) void   wxWindow_SetSize4(IntPtr self, inout Rectangle rect);
 		static extern (C) void   wxWindow_SetSizer(IntPtr self, IntPtr sizer, bool deleteOld);
 		static extern (C) void   wxWindow_SetWindowStyleFlag(IntPtr self, uint style);
 		static extern (C) bool   wxWindow_Show(IntPtr self, bool show);
@@ -537,6 +538,11 @@ public import wx.ToolTip;
 		public /+virtual+/ void SetSize(Size size)
 		{
 			wxWindow_SetSize3(wxobj, size);
+		}
+
+		public /+virtual+/ void SetSize(Rectangle rect)
+		{
+			wxWindow_SetSize4(wxobj, rect);
 		}
 
 		//---------------------------------------------------------------------
