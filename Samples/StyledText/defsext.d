@@ -1,20 +1,16 @@
-/////////////////////////////////////////////////////////////////////////////
-// Name:        defsext.h extensions
-// Purpose:     STC test declarations
-// Maintainer:  Wyo
-// Created:     2003-09-01
-// RCS-ID:      $Id$
-// Copyright:   (c) wxGuide
-// Licence:     wxWindows licence
-//////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------
+// wxD/Samples - Edit.d
+//
+// A wxD version of the wxWidgets "contrib/stc/edit" sample.
+//
+// (C) 2003 Wyo
+// (C) 2007
+// Licensed under the wxWidgets license, see LICENSE.txt for details.
+//
+// $Id$
+//-----------------------------------------------------------------------------
 
-//----------------------------------------------------------------------------
-// headers
-//----------------------------------------------------------------------------
-
-//! wxWidgets headers
 import wx.PrintDialog; // printing dialog
-
 
 //============================================================================
 // declarations
@@ -84,21 +80,3 @@ enum {
     myID_PREFS_STYLETYPE,
     myID_PREFS_KEYWORDS,
 };
-
-// ----------------------------------------------------------------------------
-// global items
-// ----------------------------------------------------------------------------
-
-/+
-//! global application name
-extern wxString *g_appname;
-
-#if wxUSE_PRINTING_ARCHITECTURE
-
-//! global print data, to remember settings during the session
-extern wxPrintData *g_printData;
-extern wxPageSetupData *g_pageSetupData;
-
-#endif // wxUSE_PRINTING_ARCHITECTURE
-+/
-

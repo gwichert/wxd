@@ -1,5 +1,5 @@
 NAME=StyledText
-OBJECTS=$(NAME).obj
+OBJECTS=$(NAME).obj defsext.obj Prefs.obj Edit.obj FileNameFunc.obj
 TARGET=..\..\bin\$(NAME).exe
 TOPDIR=..\..
 

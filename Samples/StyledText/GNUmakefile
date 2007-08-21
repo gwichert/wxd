@@ -1,5 +1,5 @@
 NAME=StyledText
-OBJECTS=$(NAME).o defsext.o Prefs.o Edit.o
+OBJECTS=$(NAME).o defsext.o Prefs.o Edit.o FileNameFunc.o
 TARGET=../../bin/$(NAME)
 TOPDIR=../..
 

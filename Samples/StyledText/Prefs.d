@@ -1,28 +1,26 @@
-//////////////////////////////////////////////////////////////////////////////
-// File:        prefs.h
-// Purpose:     STC test Preferences initialization
-// Maintainer:  Wyo
-// Created:     2003-09-01
-// RCS-ID:      $Id$
-// Copyright:   (c) wxGuide
-// Licence:     wxWindows licence
-//////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------
+// wxD/Samples - Edit.d
+//
+// A wxD version of the wxWidgets "contrib/stc/edit" sample.
+//
+// (C) 2003 Wyo
+// (C) 2007
+// Licensed under the wxWidgets license, see LICENSE.txt for details.
+//
+// $Id$
+//-----------------------------------------------------------------------------
 
-//! wxWidgets headers
-public import wx.wx;
+module Prefs;
 
-//! wxWidgets/contrib headers
-public import wx.StyledTextCtrl;
+import wx.wx;
 
-//! application headers
-private import defsext;    // Additional definitions
-
+import defsext;    // Additional definitions
 
 //============================================================================
 // declarations
 //============================================================================
 
-//! general style types
+// general style types
 const int mySTC_TYPE_DEFAULT = 0;
 
 const int mySTC_TYPE_WORD1 = 1;
@@ -65,14 +63,14 @@ const int mySTC_TYPE_SCRIPT = 28;
 const int mySTC_TYPE_ERROR = 29;
 
 //----------------------------------------------------------------------------
-//! style bits types
+// style bits types
 const int mySTC_STYLE_BOLD = 1;
 const int mySTC_STYLE_ITALIC = 2;
 const int mySTC_STYLE_UNDERL = 4;
 const int mySTC_STYLE_HIDDEN = 8;
 
 //----------------------------------------------------------------------------
-//! general folding types
+// general folding types
 const int mySTC_FOLD_COMMENT = 1;
 const int mySTC_FOLD_COMPACT = 2;
 const int mySTC_FOLD_PREPROC = 4;
@@ -84,7 +82,7 @@ const int mySTC_FOLD_COMMENTPY = 64;
 const int mySTC_FOLD_QUOTESPY = 128;
 
 //----------------------------------------------------------------------------
-//! flags
+// flags
 const int mySTC_FLAG_WRAPMODE = 16;
 
 //----------------------------------------------------------------------------
@@ -110,24 +108,24 @@ struct CommonInfo {
 // LanguageInfo
 
 struct LanguageInfo {
-    wxChar *name;
-    wxChar *filepattern;
+    char[] name;
+    char[] filepattern;
     int lexer;
     struct style {
         int type;
-        const wxChar *words;
+        const char[] words;
     }
-    style styles [STYLE_TYPES_COUNT];
+    style[] styles;
     int folds;
 }
 
 //----------------------------------------------------------------------------
 // StyleInfo
 struct StyleInfo {
-    wxChar *name;
-    wxChar *foreground;
-    wxChar *background;
-    wxChar *fontname;
+    char[] name;
+    char[] foreground;
+    char[] background;
+    char[] fontname;
     int fontsize;
     int fontstyle;
     int lettercase;
@@ -138,7 +136,7 @@ struct StyleInfo {
 //============================================================================
 
 //----------------------------------------------------------------------------
-//! language types
+// language types
 const CommonInfo g_CommonPrefs = {
     // editor functionality prefs
     true,  // syntaxEnable
@@ -158,7 +156,7 @@ const CommonInfo g_CommonPrefs = {
 //----------------------------------------------------------------------------
 // keywordlists
 // C++
-const wxChar* CppWordlist1 =
+const char[] CppWordlist1 =
     "asm auto bool break case catch char class const const_cast "
     "continue default delete do double dynamic_cast else enum explicit "
     "export extern false float for friend goto if inline int long "
@@ -167,9 +165,9 @@ const wxChar* CppWordlist1 =
     "struct switch template this throw true try typedef typeid "
     "typename union unsigned using virtual void volatile wchar_t "
     "while";
-const wxChar* CppWordlist2 =
+const char[] CppWordlist2 =
     "file";
-const wxChar* CppWordlist3 =
+const char[] CppWordlist3 =
     "a addindex addtogroup anchor arg attention author b brief bug c "
     "class code date def defgroup deprecated dontinclude e em endcode "
     "endhtmlonly endif endlatexonly endlink endverbatim enum example "
@@ -181,12 +179,26 @@ const wxChar* CppWordlist3 =
     "subsection test throw todo typedef union until var verbatim "
     "verbinclude version warning weakgroup $ @ \"\" & < > # { }";
 
+//D
+const char[] DWordlist1 =
+	"abstract alias align asm assert auto body bool	break byte case "
+	"cast catch cdouble cent cfloat char class const continue creal "
+	"dchar debug default delegate delete deprecated do double else "
+	"enum export extern false final finally float for foreach "
+	"foreach_reverse function goto idouble if ifloat import in "
+	"inout int interface invariant ireal is lazy long macro mixin "
+	"module new null out override package pragma private protected "
+	"public real ref return scope short static struct super switch "
+	"synchronized template this throw true try typedef typeid typeof "
+	"ubyte ucent uint ulong union unittest ushort version void "
+	"volatile wchar while with";
+
 // Python
-const wxChar* PythonWordlist1 =
+const char[] PythonWordlist1 =
     "and assert break class continue def del elif else except exec "
     "finally for from global if import in is lambda None not or pass "
     "print raise return try while yield";
-const wxChar* PythonWordlist2 =
+const char[] PythonWordlist2 =
     "ACCELERATORS ALT AUTO3STATE AUTOCHECKBOX AUTORADIOBUTTON BEGIN "
     "BITMAP BLOCK BUTTON CAPTION CHARACTERISTICS CHECKBOX CLASS "
     "COMBOBOX CONTROL CTEXT CURSOR DEFPUSHBUTTON DIALOG DIALOGEX "
@@ -196,7 +208,7 @@ const wxChar* PythonWordlist2 =
     "STRINGTABLE STYLE TEXTINCLUDE VALUE VERSION VERSIONINFO VIRTKEY";
 
 //----------------------------------------------------------------------------
-//! languages
+// languages
 const LanguageInfo g_LanguagePrefs [] = [
     // C++
     {"C++",
@@ -220,6 +232,43 @@ const LanguageInfo g_LanguagePrefs [] = [
       {mySTC_TYPE_COMMENT_SPECIAL, null}, // DOXY
       {mySTC_TYPE_WORD2, CppWordlist2}, // EXTRA WORDS
       {mySTC_TYPE_WORD3, CppWordlist3}, // DOXY KEYWORDS
+      {mySTC_TYPE_ERROR, null}, // KEYWORDS ERROR
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null},
+      {-1, null}],
+     mySTC_FOLD_COMMENT | mySTC_FOLD_COMPACT | mySTC_FOLD_PREPROC},
+    // D
+    {"D",
+     "*.d;*.di",
+     wxStyledTextCtrl.wxSTC_LEX_CPP,
+     [{mySTC_TYPE_DEFAULT, null},
+      {mySTC_TYPE_COMMENT, null},
+      {mySTC_TYPE_COMMENT_LINE, null},
+      {mySTC_TYPE_COMMENT_DOC, null},
+      {mySTC_TYPE_NUMBER, null},
+      {mySTC_TYPE_WORD1, DWordlist1}, // KEYWORDS
+      {mySTC_TYPE_STRING, null},
+      {mySTC_TYPE_CHARACTER, null},
+      {mySTC_TYPE_UUID, null},
+      {mySTC_TYPE_PREPROCESSOR, null},
+      {mySTC_TYPE_OPERATOR, null},
+      {mySTC_TYPE_IDENTIFIER, null},
+      {mySTC_TYPE_STRING_EOL, null},
+      {mySTC_TYPE_DEFAULT, null}, // VERBATIM
+      {mySTC_TYPE_REGEX, null},
+      {mySTC_TYPE_COMMENT_SPECIAL, null}, // DOXY
+      {mySTC_TYPE_WORD2, null}, // EXTRA WORDS
+      {mySTC_TYPE_WORD3, null}, // DOXY KEYWORDS
       {mySTC_TYPE_ERROR, null}, // KEYWORDS ERROR
       {-1, null},
       {-1, null},
@@ -312,8 +361,8 @@ const LanguageInfo g_LanguagePrefs [] = [
     ];
 
 //----------------------------------------------------------------------------
-//! style types
-const StyleInfo g_StylePrefs [] = [
+// style types
+/+const+/ StyleInfo g_StylePrefs [] = [
     // mySTC_TYPE_DEFAULT
     {"Default",
      "BLACK", "WHITE",
