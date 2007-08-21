@@ -140,6 +140,8 @@ wx/SystemSettings.d
 wx/TabCtrl.d
 wx/TextCtrl.d
 wx/TextDialog.d
+wx/Thread.d
+wx/Timer.d
 wx/TipDialog.d
 wx/TipWindow.d
 wx/ToggleButton.d
