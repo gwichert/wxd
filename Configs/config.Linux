@@ -15,10 +15,10 @@ COMPILER = GDC
 endif
 
 # wx platform to use (e.g. WXGTK)
-PLATFORM = $(shell cat $(TOPDIR)/wxc/PLATFORM)
+PLATFORM = $(shell cat $(TOPDIR)/wxc/PLATFORM 2>/dev/null)
 
 # wx char encoding (ANSI/UNICODE)
-ENCODING = $(shell cat $(TOPDIR)/wxc/ENCODING)
+ENCODING = $(shell cat $(TOPDIR)/wxc/ENCODING 2>/dev/null)
 
 CXX = $(shell $(WX_CONFIG) --cxx)
 CXXFLAGS = -O2
