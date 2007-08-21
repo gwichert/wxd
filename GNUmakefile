@@ -82,7 +82,7 @@ ddoc: wxc/PLATFORM wxc/ENCODING
 
 wxd:
 	cvs -z3 -d:pserver:anonymous@wxd.cvs.sourceforge.net:/cvsroot/wxd co -P wxd
-	test -d wxd && find wxd -name CVS | xargs rm -r
+	test -d wxd && find wxd -name CVS -o -name .cvsignore | xargs rm -r
 	-dos2unix -k wxd/wxc/*.cpp wxd/wxc/*.h wxd/*.txt
 	-dos2unix -k wxd/wx/*.d wxd/wx/*/*.d wxd/Samples/*/*.d wxd/Samples/*/*.txt
 
