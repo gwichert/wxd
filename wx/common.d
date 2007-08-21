@@ -15,9 +15,17 @@ module wx.common;
 
 //! \cond STD
 version (Tango)
+{
 public import tango.stdc.stddef;
+// "string" doesn't matter:
+const int version_major = 1;
+const int version_minor = 0;
+}
 else // Phobos
+{
 public import std.c.stddef; // wchar_t
+public import std.compiler; // version
+}
 //! \endcond
 
 interface IDisposable
@@ -64,6 +72,9 @@ version(UNICODE)
 else //version(ANSI)
 	alias ubyte wxChar;
 
+//! \cond D1
+static if (version_major <= 1 && version_minor <= 16)
+//! \endcond
 	alias char[] string;
 
 
