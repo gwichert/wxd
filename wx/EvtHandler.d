@@ -328,8 +328,6 @@ public import wx.StyledTextCtrl;
 			{ AddEventListener(Event.wxEVT_IDLE, lsnr); }
 		public void EVT_MOVE(EventListener lsnr)
 			{ AddEventListener(Event.wxEVT_MOVE, lsnr); }
-		public void EVT_TIMER(EventListener lsnr)
-			{ AddEventListener(Event.wxEVT_TIMER, lsnr); }
 		public void EVT_SOCKET(EventListener lsnr)
 			{ AddEventListener(Event.wxEVT_SOCKET, lsnr); }
 		public void EVT_KILL_FOCUS(EventListener lsnr)
@@ -388,6 +386,8 @@ public import wx.StyledTextCtrl;
 			
 		public void EVT_UPDATE_UI(int id, EventListener lsnr)
 			{ AddCommandListener(Event.wxEVT_UPDATE_UI, id, lsnr); }
+		public void EVT_TIMER(int id, EventListener lsnr)
+			{ AddCommandListener(Event.wxEVT_TIMER, id, lsnr); }
 		public void EVT_MENU(int id, EventListener lsnr)
 			{ AddCommandListener(Event.wxEVT_COMMAND_MENU_SELECTED, id, lsnr); }
 		public void EVT_MENU_RANGE(int id, int lastId, EventListener lsnr) 
