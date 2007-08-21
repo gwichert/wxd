@@ -131,6 +131,8 @@ public import wx.SystemSettings;
 public import wx.TabCtrl;
 public import wx.TextCtrl;
 public import wx.TextDialog;
+//public import wx.Thread;
+public import wx.Timer;
 public import wx.TipDialog;
 public import wx.TipWindow;
 public import wx.ToggleButton;

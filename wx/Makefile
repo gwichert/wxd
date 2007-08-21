@@ -132,6 +132,8 @@ OBJECTS = \
 	TabCtrl.obj \
 	TextCtrl.obj \
 	TextDialog.obj \
+	Thread.obj \
+	Timer.obj \
 	TipDialog.obj \
 	TipWindow.obj \
 	ToggleButton.obj \

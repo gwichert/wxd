@@ -134,6 +134,8 @@ OBJECTS = \
 	tabctrl.o \
 	textctrl.o \
 	textdialog.o \
+	thread.o \
+	timer.o \
 	tipdialog.o \
 	tipwindow.o \
 	togglebutton.o \

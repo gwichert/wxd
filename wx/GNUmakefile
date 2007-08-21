@@ -128,6 +128,8 @@ OBJECTS = \
 	TabCtrl.o  \
 	TextCtrl.o  \
 	TextDialog.o  \
+	Thread.o  \
+	Timer.o  \
 	TipDialog.o  \
 	TipWindow.o  \
 	ToggleButton.o  \
