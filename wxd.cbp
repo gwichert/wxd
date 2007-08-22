@@ -35,13 +35,13 @@
 					<Add option="-fversion=$(PLATFORM)" />
 					<Add option="-fversion=$(ENCODING)" />
 				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
 				<Environment>
 					<Variable name="PLATFORM" value="__`wxc/wx-platform`__" />
 					<Variable name="ENCODING" value="`wxc/wx-encoding`" />
 				</Environment>
-				<Linker>
-					<Add option="-s" />
-				</Linker>
 			</Target>
 		</Build>
 		<ExtraCommands>
@@ -182,6 +182,8 @@
 		<Unit filename="wx/TabCtrl.d" />
 		<Unit filename="wx/TextCtrl.d" />
 		<Unit filename="wx/TextDialog.d" />
+		<Unit filename="wx/Thread.d" />
+		<Unit filename="wx/Timer.d" />
 		<Unit filename="wx/TipDialog.d" />
 		<Unit filename="wx/TipWindow.d" />
 		<Unit filename="wx/ToggleButton.d" />
@@ -211,6 +213,8 @@
 		<Unit filename="wx/wxVersion.d" />
 		<Extensions>
 			<code_completion />
+			<envvars />
+			<debugger />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

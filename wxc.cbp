@@ -169,6 +169,8 @@
 		<Unit filename="wxc/tabctrl.cpp" />
 		<Unit filename="wxc/textctrl.cpp" />
 		<Unit filename="wxc/textdialog.cpp" />
+		<Unit filename="wxc/thread.cpp" />
+		<Unit filename="wxc/timer.cpp" />
 		<Unit filename="wxc/tipdialog.cpp" />
 		<Unit filename="wxc/tipwindow.cpp" />
 		<Unit filename="wxc/togglebutton.cpp" />
@@ -192,6 +194,8 @@
 		<Unit filename="wxc/xmlresource.cpp" />
 		<Extensions>
 			<code_completion />
+			<envvars />
+			<debugger />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
