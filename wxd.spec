@@ -26,7 +26,7 @@ scripting language, nor an interpreted language.
 
 %build
 export CXXFLAGS=$RPM_OPT_FLAGS 
-export DFLAGS=$RPM_OPT_FLAGS 
+export DFLAGS=`echo $RPM_OPT_FLAGS | sed -e s/-mtune=generic//`
 make WX_CONFIG=wx-config COMPILER=GDC
 
 %install
