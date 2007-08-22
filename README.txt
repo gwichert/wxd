@@ -22,6 +22,12 @@ It is composed of two parts:
 
 * Status
 
+0.11 (afb)
+Added "release" information to D versions
+Support for DMD 1.016+ and "string" alias
+Added new classes Thread (todo) and Timer
+StyledText sample completed, by Mike Wey
+
 0.10 (afb)
 Support for building with wxWidgets 2.8.x
 Support for compiling with Tango as well
