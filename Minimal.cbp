@@ -33,13 +33,13 @@
 					<Add option="-fversion=$(PLATFORM)" />
 					<Add option="-fversion=$(ENCODING)" />
 				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
 				<Environment>
 					<Variable name="PLATFORM" value="__`wxc/wx-platform`__" />
 					<Variable name="ENCODING" value="`wxc/wx-encoding`" />
 				</Environment>
-				<Linker>
-					<Add option="-s" />
-				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
@@ -54,6 +54,8 @@
 		<Unit filename="Samples/Minimal/Minimal.d" />
 		<Extensions>
 			<code_completion />
+			<envvars />
+			<debugger />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
