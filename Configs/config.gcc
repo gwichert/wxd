@@ -28,7 +28,7 @@ WXLIBS = `$(WX_CONFIG) --libs`
 WX_RELEASE_NODOT = $(shell echo "`$(WX_CONFIG) --release`" | sed -e 's/\.//')
 
 ifeq ("$(STC)","1")
-WXLIBS = `$(WX_CONFIG) --libs stc`
+WXLIBS += `$(WX_CONFIG) --libs stc`
 endif
 
 .cpp.o:
