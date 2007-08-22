@@ -28,7 +28,9 @@ all:
 #	$(MAKE) -C SDLPanel
 #	$(MAKE) -C Sound
 	$(MAKE) -C Splitter
-#	$(MAKE) -C StyledText
+ifeq ("$(STC)","1")
+	$(MAKE) -C StyledText
+endif
 	$(MAKE) -C TreeCtrl
 #	$(MAKE) -C Tutorial
 	$(MAKE) -C Wizard
