@@ -130,6 +130,7 @@ OBJECTS = \
 	SysColourChangedEvent.obj \
 	SystemSettings.obj \
 	TabCtrl.obj \
+	TaskBarIcon.obj \
 	TextCtrl.obj \
 	TextDialog.obj \
 	Thread.obj \

@@ -138,6 +138,7 @@ wx/StyledTextCtrl.d
 wx/SysColourChangedEvent.d
 wx/SystemSettings.d
 wx/TabCtrl.d
+wx/TaskBarIcon.d
 wx/TextCtrl.d
 wx/TextDialog.d
 wx/Thread.d

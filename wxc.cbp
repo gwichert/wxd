@@ -167,6 +167,7 @@
 		<Unit filename="wxc/syscolourchangedevent.cpp" />
 		<Unit filename="wxc/systemsettings.cpp" />
 		<Unit filename="wxc/tabctrl.cpp" />
+		<Unit filename="wxc/taskbaricon.cpp" />
 		<Unit filename="wxc/textctrl.cpp" />
 		<Unit filename="wxc/textdialog.cpp" />
 		<Unit filename="wxc/thread.cpp" />

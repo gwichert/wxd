@@ -126,6 +126,7 @@ OBJECTS = \
 	SysColourChangedEvent.o  \
 	SystemSettings.o  \
 	TabCtrl.o  \
+	TaskBarIcon.o \
 	TextCtrl.o  \
 	TextDialog.o  \
 	Thread.o  \

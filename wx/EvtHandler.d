@@ -21,6 +21,7 @@
 module wx.EvtHandler;
 public import wx.common;
 public import wx.Event;
+public import wx.TaskBarIcon;
 private import wx.App;
 
 	alias void delegate(Object sender, Event e) EventListener;
@@ -702,5 +703,21 @@ version(WXD_STYLEDTEXTCTRL){
 //! \cond VERSION
 } // version(WXD_STYLEDTEXTCTRL)
 //! \endcond
+
+		public void EVT_TASKBAR_MOVE(EventListener lsnr)    
+			{ AddEventListener(TaskBarIcon.wxEVT_TASKBAR_MOVE, lsnr); }
+		public void EVT_TASKBAR_LEFT_DOWN(EventListener lsnr)    
+			{ AddEventListener(TaskBarIcon.wxEVT_TASKBAR_LEFT_DOWN, lsnr); }
+		public void EVT_TASKBAR_LEFT_UP(EventListener lsnr)    
+			{ AddEventListener(TaskBarIcon.wxEVT_TASKBAR_LEFT_UP, lsnr); }
+		public void EVT_TASKBAR_RIGHT_DOWN(EventListener lsnr)    
+			{ AddEventListener(TaskBarIcon.wxEVT_TASKBAR_RIGHT_DOWN, lsnr); }
+		public void EVT_TASKBAR_RIGHT_UP(EventListener lsnr)    
+			{ AddEventListener(TaskBarIcon.wxEVT_TASKBAR_RIGHT_UP, lsnr); }
+		public void EVT_TASKBAR_LEFT_DCLICK(EventListener lsnr)    
+			{ AddEventListener(TaskBarIcon.wxEVT_TASKBAR_LEFT_DCLICK, lsnr); }
+		public void EVT_TASKBAR_RIGHT_DCLICK(EventListener lsnr)    
+			{ AddEventListener(TaskBarIcon.wxEVT_TASKBAR_RIGHT_DCLICK, lsnr); }
+
 		public static wxObject New(IntPtr ptr) { return new EvtHandler(ptr); }
 	}

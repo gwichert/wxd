@@ -129,6 +129,7 @@ public import wx.StyledTextCtrl;
 public import wx.SysColourChangedEvent;
 public import wx.SystemSettings;
 public import wx.TabCtrl;
+public import wx.TaskBarIcon;
 public import wx.TextCtrl;
 public import wx.TextDialog;
 //public import wx.Thread;

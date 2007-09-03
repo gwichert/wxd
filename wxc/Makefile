@@ -133,6 +133,7 @@ OBJECTS = \
 	syscolourchangedevent.obj \
 	systemsettings.obj \
 	tabctrl.obj \
+	taskbaricon.obj \
 	textctrl.obj \
 	textdialog.obj \
 	thread.obj \

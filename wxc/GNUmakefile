@@ -132,6 +132,7 @@ OBJECTS = \
 	syscolourchangedevent.o \
 	systemsettings.o \
 	tabctrl.o \
+	taskbaricon.o \
 	textctrl.o \
 	textdialog.o \
 	thread.o \
