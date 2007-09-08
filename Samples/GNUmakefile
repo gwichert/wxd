@@ -31,6 +31,7 @@ all:
 ifeq ("$(STC)","1")
 	$(MAKE) -C StyledText
 endif
+#	$(MAKE) -C TaskBar
 	$(MAKE) -C TreeCtrl
 #	$(MAKE) -C Tutorial
 	$(MAKE) -C Wizard
@@ -65,6 +66,7 @@ clean:
 	$(MAKE) clean -C Sound
 	$(MAKE) clean -C Splitter
 	$(MAKE) clean -C StyledText
+	$(MAKE) clean -C TaskBar
 	$(MAKE) clean -C TreeCtrl
 	$(MAKE) clean -C Tutorial
 	$(MAKE) clean -C Wizard

@@ -52,6 +52,8 @@ all:
 	make
 #	cd ..\StyledText
 #	make
+#	cd ..\TaskBar
+#	make
 	cd ..\TreeCtrl
 	make
 #	cd ..\Tutorial
@@ -116,6 +118,8 @@ clean:
 	cd ..\Splitter
 	make clean
 	cd ..\StyledText
+	make clean
+	cd ..\TaskBar
 	make clean
 	cd ..\TreeCtrl
 	make clean
