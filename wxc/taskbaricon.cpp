@@ -39,6 +39,9 @@ protected:
         
 public:
 	_TaskBarIcon():wxTaskBarIcon(){}
+#ifdef __WXMAC_OSX__
+	_TaskBarIcon(int iconType):wxTaskBarIcon((wxTaskBarIconType)iconType){}
+#endif
 	
     void RegisterVirtual(wxc_object obj, Virtual_CreatePopupMenu popmenu)
     {
@@ -68,6 +71,17 @@ wxTaskBarIcon* wxTaskBarIcon_ctor()
 
 //-----------------------------------------------------------------------------
 
+extern "C" WXEXPORT
+wxTaskBarIcon* wxTaskBarIcon_ctor2(int iconType)
+{
+#ifdef __WXMAC_OSX__
+	return new _TaskBarIcon(iconType);
+#else
+	return wxTaskBarIcon_ctor();
+#endif
+}
+
+//-----------------------------------------------------------------------------
 extern "C" WXEXPORT
 void wxTaskBarIcon_RegisterVirtual(_TaskBarIcon* self, wxc_object obj, 
 	Virtual_CreatePopupMenu popmenu)

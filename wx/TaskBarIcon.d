@@ -31,6 +31,7 @@ alias IntPtr function (TaskBarIcon) Virtual_CreatePopupMenu;
 		
 //! \cond EXTERN
 static extern (C) IntPtr wxTaskBarIcon_ctor();
+static extern (C) IntPtr wxTaskBarIcon_ctor2(int iconType);
 static extern (C) void   wxTaskBarIcon_RegisterVirtual(IntPtr self, TaskBarIcon obj, 
 	Virtual_CreatePopupMenu popmenu);
 static extern (C) IntPtr wxTaskBarIcon_dtor(IntPtr self);
@@ -49,6 +50,13 @@ static extern (C) IntPtr wxTaskBarIconEvent_Clone(IntPtr self);
 //! \endcond
 		
 //-----------------------------------------------------------------------------
+
+alias TaskBarIconType wxTaskBarIconType;
+/// type of taskbar item to create
+enum TaskBarIconType
+{
+	 DEFAULT_TYPE
+}
 
 alias TaskBarIcon wxTaskBarIcon;
 public class TaskBarIcon : EvtHandler
@@ -82,7 +90,10 @@ public class TaskBarIcon : EvtHandler
 
 	public this()
 		{ this(wxTaskBarIcon_ctor(), true); }
-		
+
+	public this(TaskBarIconType iconType)
+		{ this(wxTaskBarIcon_ctor2(cast(int)iconType), true); }
+
 	public this(IntPtr wxobj) 
 	{
 		super(wxobj);
