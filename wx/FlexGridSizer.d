@@ -17,6 +17,12 @@ module wx.FlexGridSizer;
 public import wx.common;
 public import wx.GridSizer;
 
+public enum FlexSizerGrowMode{
+  NONE = 0,
+  SPECIFIED,
+  ALL
+}
+
 		//! \cond EXTERN
 		static extern (C) IntPtr wxFlexGridSizer_ctor(int rows, int cols, int vgap, int hgap);
 		static extern (C) void wxFlexGridSizer_dtor(IntPtr self);
@@ -26,6 +32,10 @@ public import wx.GridSizer;
 		static extern (C) void wxFlexGridSizer_RemoveGrowableRow(IntPtr self, uint idx);
 		static extern (C) void wxFlexGridSizer_AddGrowableCol(IntPtr self, uint idx);
 		static extern (C) void wxFlexGridSizer_RemoveGrowableCol(IntPtr self, uint idx);
+                static extern (C) int wxFlexGridSizer_GetFlexibleDirection(IntPtr self);
+                static extern (C) void wxFlexGridSizer_SetFlexibleDirection(IntPtr self, int direction);
+static extern (C) FlexSizerGrowMode wxFlexGridSizer_GetNonFlexibleGrowMode(IntPtr self);
+static extern (C) void wxFlexGridSizer_SetNonFlexibleGrowMode(IntPtr self,FlexSizerGrowMode mode);
 		//! \endcond
 
 		//---------------------------------------------------------------------
@@ -83,4 +93,24 @@ public import wx.GridSizer;
 		}
 
 		//---------------------------------------------------------------------
+
+		public void SetFlexibleDirection(int direction)
+		{
+		  wxFlexGridSizer_SetFlexibleDirection(wxobj, direction);
+		}
+
+		public int GetFlexibleDirection()
+		{
+		  return wxFlexGridSizer_GetFlexibleDirection(wxobj);
+		}
+
+		//---------------------------------------------------------------------
+
+		public void SetNonFlexibleGrowMode(FlexSizerGrowMode mode){
+		  wxFlexGridSizer_SetNonFlexibleGrowMode(wxobj, mode);
+		}
+
+		public FlexSizerGrowMode  GetNonFlexibleGrowMode(){
+		  return wxFlexGridSizer_GetNonFlexibleGrowMode(wxobj);
+		}
 	}

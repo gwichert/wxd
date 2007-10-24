@@ -82,3 +82,36 @@ void wxFlexGridSizer_RemoveGrowableCol(wxFlexGridSizer* self, size_t idx)
 }
 
 //-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT
+int wxFlexGridSizer_GetFlexibleDirection(wxFlexGridSizer* self)
+{
+  return self->GetFlexibleDirection();
+}
+
+//-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT
+void wxFlexGridSizer_SetFlexibleDirection(wxFlexGridSizer* self, int direction)
+{
+  self->SetFlexibleDirection(direction);
+}
+
+//-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT
+void wxFlexGridSizer_SetNonFlexibleGrowMode(wxFlexGridSizer* self, 
+					    wxFlexSizerGrowMode mode)
+{
+  self->SetNonFlexibleGrowMode(mode);
+}
+
+//-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT
+wxFlexSizerGrowMode wxFlexGridSizer_GetNonFlexibleGrowMode(wxFlexGridSizer* self)
+{
+  return self->GetNonFlexibleGrowMode();
+}
+
+//-----------------------------------------------------------------------------
