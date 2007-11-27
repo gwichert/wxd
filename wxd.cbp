@@ -43,6 +43,7 @@
 				<Environment>
 					<Variable name="PLATFORM" value="__`wxc/wx-platform`__" />
 					<Variable name="ENCODING" value="`wxc/wx-encoding`" />
+					<Variable name="WX_VERSION" value="`wxc/wx-version`" />
 					<Variable name="WX_RELEASE_NODOT" value="`wxc/wx-release`" />
 				</Environment>
 			</Target>
