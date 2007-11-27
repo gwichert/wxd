@@ -77,6 +77,11 @@ static if (version_major <= 1 && version_minor <= 16)
 //! \endcond
 	alias char[] string;
 
+//! \cond D2
+static if (version_major < 2)
+//! \endcond
+	string assumeUnique(char[] s) { return s; }
+
 
 //public import wx.Defs;
 public import wx.wxObject;
