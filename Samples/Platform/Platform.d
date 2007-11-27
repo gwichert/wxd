@@ -1,5 +1,18 @@
+version (Tango)
+{
+import tango.io.Console;
+
+char[] FORMAT(char[] str, ...) { return "Tango"; }
+void PRINT(char[] str) { Cout(str).newline; }
+}
+else // Phobos
+{
 private import std.stdio;
 private import std.string;
+
+alias format FORMAT;
+alias writefln PRINT;
+}
 
 import wx.wx;
 
@@ -25,7 +38,7 @@ public class MyFrame : wxFrame
 			platform = "???";
 
 		CreateStatusBar();
-		SetStatusText(format("%s-%0x%s%0x", platform, major,".",minor));
+		SetStatusText(FORMAT("%s-%0x%s%0x", platform, major,".",minor));
 
 		wxStaticText text = new wxStaticText(this, wxGetOsDescription()
 			~ " " ~ (UNICODE ? "Unicode" : (ANSI ? "ANSI" : "Unknown")),
@@ -46,13 +59,13 @@ class MyApp : wxApp
 int main()
 {
 	version(__WXMSW__)
-		writefln("__WXMSW__");
+		PRINT("__WXMSW__");
 	version(__WXGTK__)
-		writefln("__WXGTK__");
+		PRINT("__WXGTK__");
 	version(__WXMAC__)
-		writefln("__WXMAC__");
+		PRINT("__WXMAC__");
 	version(__WXX11__)
-		writefln("__WXX11__");
+		PRINT("__WXX11__");
 
 	MyApp app = new MyApp();
 	app.Run();
