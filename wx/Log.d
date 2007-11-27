@@ -120,7 +120,7 @@ private import std.stdarg;
 
 		private static string stringFormat(TypeInfo[] arguments, va_list argptr)
 		{
-			string s;
+			char[] s;
 
 		version (Tango)
 		{
@@ -136,7 +136,7 @@ private import std.stdarg;
 			std.format.doFormat(&putc, arguments, argptr);
 		}
 
-			return s;
+			return assumeUnique(s);
 		}
 
 //! \cond VERSION

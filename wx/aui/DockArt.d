@@ -148,7 +148,7 @@ public class DockArt : wxObject
       DC d = (o)? cast(DC)o : new DC(dc);
       o = FindObject(pane);
       PaneInfo p = (o)? cast(PaneInfo)o : new PaneInfo(pane);
-      obj.DrawCaption(d, text, rect, p);
+      obj.DrawCaption(d, std.string.toString(text.ptr), rect, p);
     }
     extern (C) protected static void staticDrawGripper(DockArt obj, IntPtr dc, inout Rectangle rect, IntPtr pane)
     {

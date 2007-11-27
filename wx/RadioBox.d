@@ -126,8 +126,8 @@ public import wx.Control;
 
 		//---------------------------------------------------------------------
 		
-		public string Label() { return cast(string) new wxString(wxRadioBox_GetLabel(wxobj), true); }
-		public void Label(string value) { wxRadioBox_SetLabel(wxobj, value); }
+		public override string Label() { return cast(string) new wxString(wxRadioBox_GetLabel(wxobj), true); }
+		public override void Label(string value) { wxRadioBox_SetLabel(wxobj, value); }
 		
 		//---------------------------------------------------------------------
 

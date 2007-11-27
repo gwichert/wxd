@@ -95,13 +95,13 @@ private import std.utf;
 			buffer.length = len;
 			return buffer;
 		}
-		public char[] toString()
+		public override string toString()
 		{
 			size_t len = wxString_utf8_len(wxobj);
 			char[] buffer = new char[len + 1]; // include NUL
 			len = wxString_utf8_str(wxobj, buffer.ptr, buffer.length);
 			buffer.length = len;
-			return buffer;
+			return assumeUnique(buffer);
 		}
 
 	}

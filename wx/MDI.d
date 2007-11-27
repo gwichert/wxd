@@ -79,7 +79,7 @@ public import wx.Frame;
 		
 		//-----------------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, string title, inout Point pos, inout Size size, int style, string name)
+		public override bool Create(Window parent, int id, string title, inout Point pos, inout Size size, int style, string name)
 		{
 			return wxMDIParentFrame_Create(wxobj, wxObject.SafePtr(parent), id, title, pos, size, cast(uint)style, name);
 		}

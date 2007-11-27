@@ -70,7 +70,7 @@ public import wx.SizeEvent;
 		
 		//-----------------------------------------------------------------------------
 		
-		public bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
+		public override bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
 		{
 			return wxVScrolledWindow_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, style, name); 
 		//	return super.Create(parent, id, pos, size, style | wxVSCROLL, name);

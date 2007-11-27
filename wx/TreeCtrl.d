@@ -1124,8 +1124,8 @@ public import wx.KeyEvent;
 		public void SelectionChanging_Add(EventListener value) { AddCommandListener(Event.wxEVT_COMMAND_TREE_SEL_CHANGING, ID, value, this); }
 		public void SelectionChanging_Remove(EventListener value) { RemoveHandler(value, this); }
 
-		public void KeyDown_Add(EventListener value) { AddCommandListener(Event.wxEVT_COMMAND_TREE_KEY_DOWN, ID, value, this); }
-		public void KeyDown_Remove(EventListener value) { RemoveHandler(value, this); }
+		public override void KeyDown_Add(EventListener value) { AddCommandListener(Event.wxEVT_COMMAND_TREE_KEY_DOWN, ID, value, this); }
+		public override void KeyDown_Remove(EventListener value) { RemoveHandler(value, this); }
 
 		public void ItemActivate_Add(EventListener value) { AddCommandListener(Event.wxEVT_COMMAND_TREE_ITEM_ACTIVATED, ID, value, this); }
 		public void ItemActivate_Remove(EventListener value) { RemoveHandler(value, this); }

@@ -77,7 +77,7 @@ public import wx.MDI;
 		
 		//-----------------------------------------------------------------------------
 		
-		public bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
+		public override bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
 		{
 			return wxSashLayoutWindow_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name);
 		}

@@ -196,7 +196,7 @@ static extern (C) IntPtr wxFrameManager_GetPaneByName(IntPtr self, char[] name);
 static extern (C) int wxFrameManager_GetPaneCount(IntPtr self);
 static extern (C) IntPtr wxFrameManager_GetPane(IntPtr self, int index);
 static extern (C) bool wxFrameManager_AddPane(IntPtr self, IntPtr window, IntPtr pane_info);
-static extern (C) bool wxFrameManager_AddPane2(IntPtr self, IntPtr window, int direction, char[] caption);
+static extern (C) bool wxFrameManager_AddPane2(IntPtr self, IntPtr window, int direction, string caption);
 static extern (C) bool wxFrameManager_InsertPane(IntPtr self, IntPtr window, IntPtr pane_info, int insert_level = wxPaneInsertLevel.wxAUI_INSERT_PANE);
 static extern (C) bool wxFrameManager_DetachPane(IntPtr self, IntPtr window);
 static extern (C) char[] wxFrameManager_SavePerspective(IntPtr self);
@@ -271,15 +271,15 @@ public class PaneInfo : wxObject
     public PaneInfo Layer(int layer) { return cast(PaneInfo) FindObject(wxPaneInfo_Layer(wxobj, layer)); }
     public PaneInfo Row(int row) { return cast(PaneInfo) FindObject(wxPaneInfo_Row(wxobj, row)); }
     public PaneInfo Position(int pos) { return cast(PaneInfo) FindObject(wxPaneInfo_Position(wxobj, pos)); }
-    public PaneInfo BestSize(in Size size) { return cast(PaneInfo) FindObject(wxPaneInfo_BestSize(wxobj, size)); }
-    public PaneInfo MinSize(in Size size) { return cast(PaneInfo) FindObject(wxPaneInfo_MinSize(wxobj, size)); }
-    public PaneInfo MaxSize(in Size size) { return cast(PaneInfo) FindObject(wxPaneInfo_MaxSize(wxobj, size)); }
+    public PaneInfo BestSize(ref Size size) { return cast(PaneInfo) FindObject(wxPaneInfo_BestSize(wxobj, size)); }
+    public PaneInfo MinSize(ref Size size) { return cast(PaneInfo) FindObject(wxPaneInfo_MinSize(wxobj, size)); }
+    public PaneInfo MaxSize(ref Size size) { return cast(PaneInfo) FindObject(wxPaneInfo_MaxSize(wxobj, size)); }
     public PaneInfo BestSize(int x, int y) { return cast(PaneInfo) FindObject(wxPaneInfo_BestSizeXY(wxobj, x, y)); }
     public PaneInfo MinSize(int x, int y) { return cast(PaneInfo) FindObject(wxPaneInfo_MinSizeXY(wxobj, x, y)); }
     public PaneInfo MaxSize(int x, int y) { return cast(PaneInfo) FindObject(wxPaneInfo_MaxSizeXY(wxobj, x, y)); }
-    public PaneInfo FloatingPosition(in Point pos) { return cast(PaneInfo) FindObject(wxPaneInfo_FloatingPosition(wxobj, pos)); }
+    public PaneInfo FloatingPosition(ref Point pos) { return cast(PaneInfo) FindObject(wxPaneInfo_FloatingPosition(wxobj, pos)); }
     public PaneInfo FloatingPosition(int x, int y) { return cast(PaneInfo) FindObject(wxPaneInfo_FloatingPositionXY(wxobj, x, y)); }
-    public PaneInfo FloatingSize(in Size size) { return cast(PaneInfo) FindObject(wxPaneInfo_FloatingSize(wxobj, size)); }
+    public PaneInfo FloatingSize(ref Size size) { return cast(PaneInfo) FindObject(wxPaneInfo_FloatingSize(wxobj, size)); }
     public PaneInfo FloatingSize(int x, int y) { return cast(PaneInfo) FindObject(wxPaneInfo_FloatingSizeXY(wxobj, x, y)); }
     public PaneInfo Fixed() { return cast(PaneInfo) FindObject(wxPaneInfo_Fixed(wxobj)); }
     public PaneInfo Resizable(bool resizable = true) { return cast(PaneInfo) FindObject(wxPaneInfo_Resizable(wxobj, resizable)); }
@@ -468,7 +468,7 @@ public class FrameManager : EvtHandler
 
     public bool AddPane(Window window,
                  int direction = Direction.wxLEFT,
-                 char[] caption = "")
+                 string caption = "")
     {
       return wxFrameManager_AddPane2(wxobj, wxObject.SafePtr(window), direction, caption);
     }

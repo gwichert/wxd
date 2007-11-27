@@ -109,7 +109,7 @@ public import wx.Control;
 
 		//---------------------------------------------------------------------
 
-		public void UpdateUI_Add(EventListener value) { AddCommandListener(Event.wxEVT_COMMAND_SPINCTRL_UPDATED, ID, value, this); }
-		public void UpdateUI_Remove(EventListener value) { RemoveHandler(value, this); }
+		public override void UpdateUI_Add(EventListener value) { AddCommandListener(Event.wxEVT_COMMAND_SPINCTRL_UPDATED, ID, value, this); }
+		public override void UpdateUI_Remove(EventListener value) { RemoveHandler(value, this); }
 	}
 

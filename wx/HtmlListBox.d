@@ -95,7 +95,7 @@ public import wx.VLBox;
 		
 		//-----------------------------------------------------------------------------
 		
-		public bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
+		public override bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
 		{
 			return wxHtmlListBox_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, style, name);
 		}

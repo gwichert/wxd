@@ -139,9 +139,9 @@ private import std.string;
 	}
 	else // Phobos
 	{
-		public char[] toString()
+		public string toString()
 		{
-			char[] s;
+			string s;
 			s = .toString(w) ~ "x" ~ .toString(h);
 			if ( bpp > 0 )
 				s ~= ", " ~ .toString(bpp) ~ "bpp";

@@ -40,27 +40,27 @@ interface ICloneable
 
 class NullPointerException : Exception
 {
-	this(char[] msg) { super(msg); }
+	this(string msg) { super(msg); }
 }
 
 class NullReferenceException : Exception
 {
-	this(char[] msg) { super(msg); }
+	this(string msg) { super(msg); }
 }
 
 class ArgumentException : Exception
 {
-	this(char[] msg) { super(msg); }
+	this(string msg) { super(msg); }
 }
 
 class InvalidOperationException : Exception
 {
-	this(char[] msg) { super(msg); }
+	this(string msg) { super(msg); }
 }
 
 class ArgumentNullException : Exception
 {
-	this(char[] msg) { super(msg); }
+	this(string msg) { super(msg); }
 }
 
 

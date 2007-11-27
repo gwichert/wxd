@@ -555,7 +555,7 @@ public import wx.MouseEvent;
 
         //-----------------------------------------------------------------------------
 
-        public HtmlCell FindCellByPos(int x, int y)
+        public override HtmlCell FindCellByPos(int x, int y)
         {
             return HtmlCell.FindObj(wxHtmlContainerCell_FindCellByPos(wxobj, x, y));
         }
@@ -1671,7 +1671,7 @@ public import wx.MouseEvent;
 
 		//-----------------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
+		public override bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
 		{
 			return wxHtmlWindow_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name);
 		}

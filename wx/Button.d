@@ -106,7 +106,7 @@ public import wx.Bitmap;
 		//---------------------------------------------------------------------
 		// Do we need get also ?
 		
-		public void Label(string value)
+		public override void Label(string value)
 		{
 			wxButton_SetLabel(wxobj, value);
 		}

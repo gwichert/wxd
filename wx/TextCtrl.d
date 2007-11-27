@@ -705,8 +705,8 @@ public import wx.KeyEvent;
 	
 		//---------------------------------------------------------------------
 	
-		public void UpdateUI_Add(EventListener value) { AddCommandListener(Event.wxEVT_COMMAND_TEXT_UPDATED, ID, value, this); }
-		public void UpdateUI_Remove(EventListener value)	{ RemoveHandler(value, this); }
+		public override void UpdateUI_Add(EventListener value) { AddCommandListener(Event.wxEVT_COMMAND_TEXT_UPDATED, ID, value, this); }
+		public override void UpdateUI_Remove(EventListener value)	{ RemoveHandler(value, this); }
 
 		public void Enter_Add(EventListener value) { AddCommandListener(Event.wxEVT_COMMAND_TEXT_ENTER, ID, value, this); }
 		public void Enter_Remove(EventListener value) { RemoveHandler(value, this); }

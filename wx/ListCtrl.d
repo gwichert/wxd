@@ -916,8 +916,8 @@ public import wx.ImageList;
 		
 		//-----------------------------------------------------------------------------
 
-		public void KeyDown_Add(EventListener value) { AddCommandListener(Event.wxEVT_COMMAND_LIST_KEY_DOWN, ID, value, this); }
-		public void KeyDown_Remove(EventListener value) { RemoveHandler(value, this); }
+		public override void KeyDown_Add(EventListener value) { AddCommandListener(Event.wxEVT_COMMAND_LIST_KEY_DOWN, ID, value, this); }
+		public override void KeyDown_Remove(EventListener value) { RemoveHandler(value, this); }
 		
 		//-----------------------------------------------------------------------------
 
@@ -1198,7 +1198,7 @@ public import wx.ImageList;
 
 		//-----------------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, Point pos, Size size, int style, Validator validator, string name)
+		public override bool Create(Window parent, int id, Point pos, Size size, int style, Validator validator, string name)
 		{
 			return wxListView_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, cast(uint)style, wxObject.SafePtr(validator), name);
 		}

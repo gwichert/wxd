@@ -318,10 +318,11 @@ public import wx.wxString;
             return Read(key, val, def);
         }
 
-	private static int hex2int(char[] str)
+	private static int hex2int(string str)
 	{
 		int value = 0;
-		foreach(char ch; str) {
+		foreach(char foo; str) {
+			char ch = foo;
 			if (ch>='0' && ch<='9') ch-='0';
 			else if (ch>='A' && ch<='F') ch=ch-'A'+10;
 			else if (ch>='a' && ch<='f') ch=ch-'a'+10;
@@ -431,12 +432,12 @@ public import wx.wxString;
             ret &= Write(key ~ "/Green", cast(int)col.Green);
             return ret;
 */
-	    char buf[7];
+	    char[] buf = new char[7];
 	    buf[0] = '#';
 	    tohex(&buf[1],col.Red);
 	    tohex(&buf[3],col.Green);
 	    tohex(&buf[5],col.Blue);
-	    return Write(key,buf);
+	    return Write(key,assumeUnique(buf));
         }
 
         public bool Write(string key, Font val)
