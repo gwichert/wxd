@@ -221,7 +221,7 @@ $(BUD_LIBS): wx-config.exe wx-libs.exe wx-platform.exe wx-encoding.exe
 	+wx-libs.exe > $@
 
 $(MAKESTUB): wx-release.exe wx-version.exe wx-platform.exe wx-encoding.exe
-	+wx-release.exe >$@
+	+wx-release.exe -v >$@
 	+wx-version.exe -v >>$@
 	+wx-platform.exe -v >>$@
 	+wx-encoding.exe -v >>$@
