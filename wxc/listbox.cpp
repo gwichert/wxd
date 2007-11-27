@@ -280,7 +280,11 @@ void wxListBox_Command(wxListBox* self, wxCommandEvent* event)
 extern "C" WXEXPORT
 wxc_bool wxListBox_Selected(wxListBox* self, int n)
 {
+#if wxABI_VERSION < 20700
 	return self->Selected(n)?1:0;
+#else
+	return self->IsSelected(n)?1:0;
+#endif
 }
 
 //-----------------------------------------------------------------------------
