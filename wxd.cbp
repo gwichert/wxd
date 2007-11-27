@@ -17,6 +17,7 @@
 					<Add option="-g" />
 					<Add option="-fversion=$(PLATFORM)" />
 					<Add option="-fversion=$(ENCODING)" />
+					<Add option="-fversion=wx$(WX_RELEASE_NODOT)" />
 				</Compiler>
 				<Environment>
 					<Variable name="PLATFORM" value="__`wxc/wx-platform`__" />
@@ -34,6 +35,7 @@
 					<Add option="-O2" />
 					<Add option="-fversion=$(PLATFORM)" />
 					<Add option="-fversion=$(ENCODING)" />
+					<Add option="-fversion=wx$(WX_RELEASE_NODOT)" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -41,6 +43,7 @@
 				<Environment>
 					<Variable name="PLATFORM" value="__`wxc/wx-platform`__" />
 					<Variable name="ENCODING" value="`wxc/wx-encoding`" />
+					<Variable name="WX_RELEASE_NODOT" value="`wxc/wx-release`" />
 				</Environment>
 			</Target>
 		</Build>
