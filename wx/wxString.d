@@ -98,7 +98,7 @@ private import std.utf;
 			buffer.length = len;
 			return buffer;
 		}
-		public string toString()
+		public /*override*/ string toString()
 		{
 			size_t len = wxString_utf8_len(wxobj);
 			char[] buffer = new char[len + 1]; // include NUL
