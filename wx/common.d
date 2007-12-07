@@ -38,6 +38,26 @@ interface ICloneable
 	Object Clone();
 }
 
+
+	/// An implementation-specific type that is used to represent a pointer or a handle.
+	typedef void* IntPtr;
+
+version(UNICODE)
+	alias wchar_t wxChar;
+else //version(ANSI)
+	alias ubyte wxChar;
+
+//! \cond D1
+static if (version_major < 1 || (version_major == 1 && version_minor < 16))
+//! \endcond
+	alias char[] string; // added in DMD 1.016 and DMD 2.000
+
+//! \cond D2
+static if (version_major < 2 || (version_major == 2 && version_minor < 6))
+//! \endcond
+	string assumeUnique(char[] s) { return s; } // DMD 2.006
+
+
 class NullPointerException : Exception
 {
 	this(string msg) { super(msg); }
@@ -62,25 +82,6 @@ class ArgumentNullException : Exception
 {
 	this(string msg) { super(msg); }
 }
-
-
-	/// An implementation-specific type that is used to represent a pointer or a handle.
-	typedef void* IntPtr;
-
-version(UNICODE)
-	alias wchar_t wxChar;
-else //version(ANSI)
-	alias ubyte wxChar;
-
-//! \cond D1
-static if (version_major < 1 || (version_major == 1 && version_minor < 16))
-//! \endcond
-	alias char[] string; // added in DMD 1.016 and DMD 2.000
-
-//! \cond D2
-static if (version_major < 2 || (version_major == 2 && version_minor < 6))
-//! \endcond
-	string assumeUnique(char[] s) { return s; } // DMD 2.006
 
 
 //public import wx.Defs;
