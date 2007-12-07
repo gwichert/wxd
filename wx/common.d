@@ -25,6 +25,8 @@ else // Phobos
 {
 public import std.c.stddef; // wchar_t
 public import std.compiler; // version
+static if (version_major >= 2 && version_minor >= 6)
+public import std.contracts; // DMD 2.006
 }
 //! \endcond
 
