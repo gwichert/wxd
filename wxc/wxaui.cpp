@@ -1104,14 +1104,14 @@ void wxDockArt_DrawBackground(wxDockArt* self, wxDC* dc,
 extern "C" WXEXPORT
 void wxDockArt_DrawCaption(wxDockArt* self, wxDC* dc,
                       wxWindow* window,
-                      wxString* text,
+                      wxc_string text,
                       const wxRect* rect,
                       wxPaneInfo* pane)
 {
 #if wxABI_VERSION < 20700
-  self->DrawCaption(*dc, *text, *rect, *pane);
+  self->DrawCaption(*dc, wxstr(text), *rect, *pane);
 #else
-  self->DrawCaption(*dc, window, *text, *rect, *pane);
+  self->DrawCaption(*dc, window, wxstr(text), *rect, *pane);
 #endif
 }
 

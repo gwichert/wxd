@@ -29,7 +29,7 @@ extern (C) alias IntPtr function(DockArt obj, int id) Virtual_GetColor;
 extern (C) alias void function(DockArt obj, int id, IntPtr color) Virtual_SetColor;
 extern (C) alias void function(DockArt obj, IntPtr dc, int orientation, inout Rectangle rect) Virtual_DrawSash;
 extern (C) alias void function(DockArt obj, IntPtr dc, int orientation, inout Rectangle rect) Virtual_DrawBackground;
-extern (C) alias void function(DockArt obj, IntPtr dc, char[] text, inout Rectangle rect, IntPtr pane) Virtual_DrawCaption;
+extern (C) alias void function(DockArt obj, IntPtr dc, string text, inout Rectangle rect, IntPtr pane) Virtual_DrawCaption;
 extern (C) alias void function(DockArt obj, IntPtr dc, inout Rectangle rect, IntPtr pane) Virtual_DrawGripper;
 extern (C) alias void function(DockArt obj, IntPtr dc, inout Rectangle rect, IntPtr pane) Virtual_DrawBorder;
 extern (C) alias void function(DockArt obj, IntPtr dc, int button, int button_state, inout Rectangle rect, IntPtr pane) Virtual_DrawPaneButton;
@@ -142,13 +142,13 @@ public class DockArt : wxObject
       DC d = (o)? cast(DC)o : new DC(dc);
       obj.DrawBackground(d, orientation, rect);
     }
-    extern (C) protected static void staticDrawCaption(DockArt obj, IntPtr dc, char[] text, inout Rectangle rect, IntPtr pane)
+    extern (C) protected static void staticDrawCaption(DockArt obj, IntPtr dc, string text, inout Rectangle rect, IntPtr pane)
     {
       wxObject o = FindObject(dc);
       DC d = (o)? cast(DC)o : new DC(dc);
       o = FindObject(pane);
       PaneInfo p = (o)? cast(PaneInfo)o : new PaneInfo(pane);
-      obj.DrawCaption(d, std.string.toString(text.ptr), rect, p);
+      obj.DrawCaption(d, text, rect, p);
     }
     extern (C) protected static void staticDrawGripper(DockArt obj, IntPtr dc, inout Rectangle rect, IntPtr pane)
     {
