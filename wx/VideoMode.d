@@ -34,6 +34,7 @@ public import wx.common;
 //! \cond STD
 version (Tango)
 {
+import tango.core.Version;
 import tango.text.convert.Integer;
 }
 else // Phobos
@@ -126,6 +127,8 @@ private import std.string;
 
 	version (Tango)
 	{
+	  static if (Tango < 0.994f)
+	  {
 		public char[] toUtf8()
 		{
 			char[] s;
@@ -136,6 +139,22 @@ private import std.string;
 				s ~= ", " ~ tango.text.convert.Integer.toUtf8(refresh) ~ "Hz";
 			return s;
 		}
+	  }
+	  else
+	  {
+		public string toString()
+		{
+			string s;
+			s = tango.text.convert.Integer.toString(w) ~ "x" ~ tango.text.convert.Integer.toString(h);
+			if ( bpp > 0 )
+				s ~= ", " ~ tango.text.convert.Integer.toString(bpp) ~ "bpp";
+
+			if ( refresh > 0 )
+				s ~= ", " ~ tango.text.convert.Integer.toString(refresh) ~ "Hz";
+
+			return s;
+		}
+	  }
 	}
 	else // Phobos
 	{

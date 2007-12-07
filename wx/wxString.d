@@ -20,6 +20,9 @@ public import wx.common;
 //! \cond STD
 version (Tango)
 {
+import tango.core.Version;
+static if (Tango < 0.994f)
+alias Object.toUtf8 toString;
 }
 else // Phobos
 {
@@ -95,7 +98,7 @@ private import std.utf;
 			buffer.length = len;
 			return buffer;
 		}
-		public override string toString()
+		public string toString()
 		{
 			size_t len = wxString_utf8_len(wxobj);
 			char[] buffer = new char[len + 1]; // include NUL

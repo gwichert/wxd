@@ -25,12 +25,22 @@ public import wx.FontMisc;
 //! \cond STD
 version (Tango)
 {
+import tango.core.Version;
 import tango.stdc.stringz;
-alias toUtf8z toStringz;
 import tango.text.convert.Utf;
+ static if (Tango < 0.994f)
+ {
+alias toUtf8z toStringz;
 char[] toUTF8( char[] str) { return str; }
 char[] toUTF8(wchar[] str) { return toUtf8(str); }
 char[] toUTF8(dchar[] str) { return toUtf8(str); }
+ }
+ else
+ {
+char[] toUTF8( char[] str) { return str; }
+char[] toUTF8(wchar[] str) { return toString(str); }
+char[] toUTF8(dchar[] str) { return toString(str); }
+ }
 }
 else // Phobos
 {

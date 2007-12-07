@@ -20,7 +20,10 @@ public import wx.Bitmap;
 //! \cond STD
 version (Tango)
 {
+import tango.core.Version;
 import tango.text.convert.Utf;
+static if (Tango >= 0.994f)
+alias tango.text.convert.Utf.toString toUtf8;
 char[] toUTF8( char[] str) { return str; }
 char[] toUTF8(wchar[] str) { return toUtf8(str); }
 char[] toUTF8(dchar[] str) { return toUtf8(str); }
