@@ -22,6 +22,12 @@ It is composed of two parts:
 
 * Status
 
+0.12 (afb)
+Added new TaskBarIcon class, by Mike Wey
+Preliminary invariant string (D2) support
+Tango "toString()" support, for 0.99.4+
+Updated projects for Code::Blocks release
+
 0.11 (afb)
 Added "release" information to D versions
 Support for DMD 1.016+ and "string" alias
