@@ -16,6 +16,11 @@
 module wx.wxObject;
 public import wx.common;
 
+//! \cond STD
+version (Tango)
+import tango.core.Version;
+//! \endcond
+
 		//! \cond EXTERN
 		extern (C) {
 		alias void function(IntPtr ptr) Virtual_Dispose;
@@ -83,7 +88,10 @@ public import wx.common;
 
 				if (wxobj == IntPtr.init) {
 					version (Tango)
+					static if (Tango < 0.994f)
 					throw new NullReferenceException("Unable to create instance of " ~ this.toUtf8());
+					else
+					throw new NullReferenceException("Unable to create instance of " ~ this.toString());
 					else // Phobos
 					throw new NullReferenceException("Unable to create instance of " ~ this.toString());
 				}
