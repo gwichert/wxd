@@ -59,11 +59,12 @@ VERSION=$(version)=wx$(WX_RELEASE_NODOT) $(version)=__$(PLATFORM)__ $(version)=$
 all: $(TARGET)
 
 ifeq ("$(COMPILER)","DMD")
-# Note: "dmd" uses weird LDFLAGS syntax, so we use "gcc" directly instead,
+# Note: "dmd" uses weird LDFLAGS syntax, so we have to wrap params first,
 #       or it won't work with whatever we get back from "wx-config --libs"
+GCCLIBS=$(WXLIBS) $(CXXLIBS)
+DMDLIBS=$(shell for l in $(GCCLIBS); do test "$$l" = "-pthread" || echo -n "-L$$l "; done)
 $(TARGET) : $(OBJECTS)
-#	dmd -of$@ $(OBJECTS) $(TOPDIR)/libwxd.a $(TOPDIR)/libwxd.a ... WX ... CXX ...
-	gcc -o $@ $(OBJECTS) -L$(TOPDIR) -lwxd -lwxc -lm -lphobos $(WXLIBS) $(CXXLIBS) $(LDFLAGS)
+	$(DC) -of$@ $(OBJECTS) $(TOPDIR)/libwxd.a $(TOPDIR)/libwxc.a $(DMDLIBS) $(LDFLAGS)
 else
 $(TARGET) : $(OBJECTS)
 	$(DC) -o $@ $(OBJECTS) -L$(TOPDIR) -lwxd -lwxc $(WXLIBS) $(CXXLIBS) $(LDFLAGS)
