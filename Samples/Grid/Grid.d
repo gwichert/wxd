@@ -253,7 +253,7 @@ private import std.string;
 			grid.SetCellValue( 1, 7, "1415" );
 			grid.SetCellValue( 2, 7, "12345.67890" );
 
-			const string[] choices =
+			string[] choices =
 			[
 				"Please select a choice",
 				"This takes two cells",
@@ -760,7 +760,7 @@ private import std.string;
 
 		public void OnSetHighlightWidth( Object sender, Event e )
 		{
-			const string[] choices = [ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ];
+			string[] choices = [ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ];
 
 			SingleChoiceDialog dlg = new SingleChoiceDialog(this, "Choose the thickness of the highlight pen:",
 				"Pen Width", choices);
@@ -775,7 +775,7 @@ private import std.string;
 
 		public void OnSetROHighlightWidth( Object sender, Event e )
 		{
-			const string[] choices = [ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ];
+			string[] choices = [ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ];
 
 			SingleChoiceDialog dlg = new SingleChoiceDialog(this, "Choose the thickness of the highlight pen:",
 				"Pen Width", choices);

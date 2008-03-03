@@ -130,8 +130,8 @@ private import std.string;
 	    Size asize = Size(300, 200); 
 	    Size bsize = Size(600,100);
 	    
-	    const string[]  strFile = ["Drop files here!"];
-	    const string[]  strText = ["Drop text on me"];
+	    string[]  strFile = ["Drop files here!"];
+	    string[]  strText = ["Drop text on me"];
 			
 	    m_ctrlFile = new ListBox(this, -1, wxDefaultPosition, asize, strFile, ListBox.wxLB_HSCROLL | ListBox.wxLB_ALWAYS_SB);
 			

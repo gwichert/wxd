@@ -118,7 +118,7 @@ private import std.string;
 			
 			if ( lng == -1 )
 			{
-				const string[] langNames =
+				string[] langNames =
 				[
 					"System default",
 					"French",
