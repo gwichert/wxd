@@ -23,7 +23,7 @@ public class MyFrame : wxFrame
 		super(title, wxDefaultPosition, wxDefaultSize);
 
 		int p, major, minor;
-		char[] platform;
+		string platform;
 		
 		p = wxGetOsVersion(major, minor);
 		if (p == OS_WINDOWS_9X || p == OS_WINDOWS_NT)
