@@ -14,7 +14,7 @@ import wx.wx;
 
 import wx.Sound;
 
-const char[] WAV_FILE = "doggrowl.wav";
+string WAV_FILE = "doggrowl.wav";
 
 	public class MyFrame : Frame
 	{
@@ -84,9 +84,9 @@ const char[] WAV_FILE = "doggrowl.wav";
 
 		//---------------------------------------------------------------------
 
-		void NotifyUsingFile(char[] name)
+		void NotifyUsingFile(string name)
 		{
-			char[] msg;
+			string msg;
 			msg = "Using sound file: " ~ name ~ "\n";
 			m_tc.AppendText(msg);
 		}
