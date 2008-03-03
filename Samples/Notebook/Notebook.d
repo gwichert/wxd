@@ -80,7 +80,7 @@ alias std.string.find indexOf;
 			m_panel = new Panel( this, -1, wxDefaultPosition, wxDefaultSize,
 				wxTAB_TRAVERSAL | wxCLIP_CHILDREN | wxNO_BORDER );
 			
-			const string[] strOrientations =
+			string[] strOrientations =
 			[
 				"&Top",
 				"&Bottom",
@@ -456,12 +456,12 @@ alias std.string.find indexOf;
 		{
 			Panel panel = new Panel( this );
 			
-			const string[] animals = [ "Fox", "Hare", "Rabbit", "Sabre-toothed tiger", "Rex" ];
+			string[] animals = [ "Fox", "Hare", "Rabbit", "Sabre-toothed tiger", "Rex" ];
 			
 			RadioBox radiobox1 = new RadioBox( panel, -1, "Choose one", 
 				wxDefaultPosition, wxDefaultSize, animals, 2, RadioBox.wxRA_SPECIFY_ROWS );
 			
-			const string[] computers = [ "Amiga", "Commodore 64", "PET", "Another" ];
+			string[] computers = [ "Amiga", "Commodore 64", "PET", "Another" ];
 			
 			RadioBox radiobox2 = new RadioBox( panel, -1, "Choose your favourite",
 				wxDefaultPosition, wxDefaultSize, computers, 0, RadioBox.wxRA_SPECIFY_COLS );
