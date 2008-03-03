@@ -285,7 +285,7 @@ alias std.string.rfind LastIndexOf;
 
 		public void OnSingleChoice(Object sender, Event e)
 		{
-			const string[] choices = [ "One", "Two", "Three", "Four", "Five"];
+			string[] choices = [ "One", "Two", "Three", "Four", "Five"];
 
 			SingleChoiceDialog scd = new SingleChoiceDialog(this,"This is a small sample\n" ~
 				"A single-choice dialog",
@@ -303,7 +303,7 @@ alias std.string.rfind LastIndexOf;
 		public void OnMultiChoice(Object sender, Event e)
 		{
 			// OnMultiChoice uses MultiChoiceDialog instead of GetMultipleChoices which isn't implemented yet
-			const string[] choices = [
+			string[] choices = [
 														  "One", "Two", "Three", "Four", "Five",
 														  "Six", "Seven", "Eight", "Nine", "Ten",
 														  "Eleven", "Twelve", "Seventeen" ];

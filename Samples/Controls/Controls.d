@@ -285,11 +285,11 @@ private import std.stdio;
         public this(Frame frame, int x, int y, int w, int h)
         {
             super(frame, -1, Point(x, y), Size(w, h));
-            const string[] choices = [
+            string[] choices = [
                 "This", "is", "one of my", "wonderful", "examples"
             ];
 
-            const string[] choices2 = [
+            string[] choices2 = [
                     "First", "Second"
             ];
 
