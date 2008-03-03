@@ -169,17 +169,20 @@ private import std.utf;
 
         public void Run()
         {
-            string[] args; // = Environment.GetCommandLineArgs();
+            char[][] args; // = Environment.GetCommandLineArgs();
             args.length = 1;
-            args[0] = "wx";
+            args[0] = "wx".dup;
             Run(args);
         }
 
-        public void Run(string[] args)
+        public void Run(char[][] args)
         {
 			char*[] c_args = new char*[args.length];
-			foreach (int i, string arg; args)
-				c_args[i] = toStringz(toUTF8(arg));
+			foreach (int i, char[] arg; args)
+			{
+				string str = assumeUnique(arg);
+				c_args[i] = toStringz(toUTF8(str));
+			}
 			
             wxApp_Run(c_args.length, c_args.ptr);
 			
