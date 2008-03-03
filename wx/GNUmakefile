@@ -177,9 +177,9 @@ all:  $(LIBTARGET)
 PREFIX ?= /usr/local
 
 ifeq ("$(COMPILER)","DMD")
-DC=dmd
-DMD=dmd
-DFLAGS=-O -g
+DC?=dmd
+DMD?=dmd
+DFLAGS?=-O -g
 version=-version
 output=-of$@
 else
