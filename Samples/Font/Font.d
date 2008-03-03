@@ -483,7 +483,7 @@ alias std.string.find indexOf;
 				FontEncoding.wxFONTENCODING_CP1252,
 			];
 			
-			 const string[] encodingNames =
+			 string[] encodingNames =
 			 [
 				"Western European (ISO-8859-1)",
 				"Central European (ISO-8859-2)",
@@ -667,6 +667,9 @@ alias std.string.find indexOf;
 		
 		public override bool OnFacename( string facename )
 		{ 
+			version (D_Version2)
+			m_facenames ~= facename.idup;
+			else
 			m_facenames ~= facename.dup;
 			return true;
 		}
