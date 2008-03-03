@@ -178,7 +178,7 @@ import gl.gl;
     		EVT_MENU( MenuIDs.wxID_NEW, &OnNewWindow);
 		}
 		
-		public static MyFrame Create(MyFrame parentFrame = null, bool isCloneWindow = false)
+		public static MyFrame CreateWindow(MyFrame parentFrame = null, bool isCloneWindow = false)
 		{
 			string str = "wxWidgets OpenGL Cube Sample";
    			if (isCloneWindow) str ~= " - Clone";
@@ -229,7 +229,7 @@ import gl.gl;
 
 		public void OnNewWindow(Object sender, Event e)
 		{
-			Create(this, true);
+			CreateWindow(this, true);
 		}
 
 		//---------------------------------------------------------------------
@@ -245,7 +245,7 @@ import gl.gl;
 		public override bool OnInit()
 		{
    			 // Create the main frame window
-			MyFrame.Create(null);
+			MyFrame.CreateWindow(null);
 
 			return true;
 		}
