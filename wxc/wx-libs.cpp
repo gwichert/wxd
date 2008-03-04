@@ -38,6 +38,17 @@ int main(int argc, char *argv[])
 		libs = libs.Trim(false);
 	}
 
+	wxString frameworks = output[0];
+	wxRegEx reFw(wxT("\\-framework ([[:alnum:]\\-]+)"));
+	while (reFw.Matches(frameworks))
+	{
+		reFw.GetMatch(&start, &length, 1);
+		wxString fw = frameworks.Mid(start, length);
+		printf(", \"System -framework %s\"", (const char*) fw.mb_str());
+		frameworks = frameworks.Mid(start + length);
+		frameworks = frameworks.Trim(false);
+	}
+
 	printf(", \"stdc++\"); }\n");
 
 	// platform
