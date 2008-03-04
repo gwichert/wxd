@@ -98,7 +98,9 @@ private import std.utf;
 			buffer.length = len;
 			return buffer;
 		}
-		public /*override*/ string toString()
+version (D_Version2)
+{
+		public override string toString()
 		{
 			size_t len = wxString_utf8_len(wxobj);
 			char[] buffer = new char[len + 1]; // include NUL
@@ -106,6 +108,17 @@ private import std.utf;
 			buffer.length = len;
 			return assumeUnique(buffer);
 		}
-
+}
+else // D_Version1
+{
+		public string toString()
+		{
+			size_t len = wxString_utf8_len(wxobj);
+			char[] buffer = new char[len + 1]; // include NUL
+			len = wxString_utf8_str(wxobj, buffer.ptr, buffer.length);
+			buffer.length = len;
+			return assumeUnique(buffer);
+		}
+}
 	}
 
