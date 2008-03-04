@@ -95,10 +95,17 @@ int main()
     fout ~= "version (build) { pragma(link, \"wxc\"";
     
     libs = SPLIT(backticks(wxconfig ~ " --libs"));
+    bool saw_framework = false;
     foreach (lib; libs) {
-        if (lib.length < 2 ||
-            lib[0..2] != "-l") continue;
+        if (lib.length > 2 && lib[0..2] == "-l")
         fout ~= ", \"" ~ lib[2..$] ~ "\"";
+        if (lib.length == 10 && lib[0..10] == "-framework")
+        saw_framework = true;
+        else if (saw_framework)
+        {
+            fout ~= ", \"System -framework " ~ lib ~ "\"";
+            saw_framework = false;
+        }
     }
     fout ~= ", \"stdc++\"); }\n";
     
