@@ -213,9 +213,9 @@ public import wx.KeyEvent;
 		
 		//-----------------------------------------------------------------------------
 
-		public override uint toHash()
+		public override hash_t toHash()
 		{
-			return cast(uint)wxobj;
+			return cast(hash_t)wxobj;
 		}
 		
 		//-----------------------------------------------------------------------------
