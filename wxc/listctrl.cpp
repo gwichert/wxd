@@ -230,7 +230,7 @@ void* wxListCtrl_GetItemData(wxListCtrl* self, int item)
 extern "C" WXEXPORT
 wxc_bool wxListCtrl_SetItemData(wxListCtrl* self, int item, void* data)
 {
-    return self->SetItemData(item, (int)data)?1:0;
+    return self->SetItemData(item, (long)data)?1:0;
 }
 
 //-----------------------------------------------------------------------------
@@ -735,7 +735,7 @@ void wxListItem_SetColumn(wxListItem* self, int col)
 extern "C" WXEXPORT
 void wxListItem_SetData(wxListItem* self, void* data)
 {
-	self->SetData((int)data);
+	self->SetData((long)data);
 }
 
 //-----------------------------------------------------------------------------
