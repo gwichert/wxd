@@ -49,6 +49,12 @@ wxRegion* wxRegion_ctorByPoly(size_t n, const wxPoint *points, int fillStyle)
 {
 	return new wxRegion(n, points, fillStyle);
 }
+#else
+extern "C" WXEXPORT
+wxRegion* wxRegion_ctorByPoly(size_t n, const wxPoint *points, int fillStyle)
+{
+	return NULL; /* dummy symbol for library */
+}
 #endif
 
 extern "C" WXEXPORT
@@ -89,6 +95,12 @@ extern "C" WXEXPORT
 wxc_bool wxRegion_Offset(wxRegion* self, wxCoord x, wxCoord y)
 {
 	return self->Offset(x, y)?1:0;
+}
+#else
+extern "C" WXEXPORT
+wxc_bool wxRegion_Offset(wxRegion* self, wxCoord x, wxCoord y)
+{
+    return false; /* dummy symbol for library */
 }
 #endif
 

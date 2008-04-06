@@ -395,4 +395,10 @@ int wxCheckListBox_GetItemHeight(wxCheckListBox* self)
 {
 	return self->GetItemHeight();
 }
+#else
+extern "C" WXEXPORT
+int wxCheckListBox_GetItemHeight(wxCheckListBox* self)
+{
+	return 0; /* dummy symbol for library */
+}
 #endif

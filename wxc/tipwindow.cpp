@@ -18,6 +18,8 @@
 #include <wx/tipwin.h>
 #include "local_events.h"
 
+#if wxUSE_TIPWINDOW
+
 //-----------------------------------------------------------------------------
 
 class _TipWindow : public wxTipWindow
@@ -60,3 +62,11 @@ void wxTipWindow_SetBoundingRect(wxTipWindow* self, wxRect* rectBound)
     self->SetBoundingRect(*rectBound);
 }
 
+#else
+#ifdef __GNUC__
+#warning "wxUSE_TIPWINDOW is not set"
+#endif
+
+extern "C" WXEXPORT void* wxTipWindow_ctor(wxWindow* parent, wxc_string text, wxCoord maxLength, wxRect* rectBound) { return NULL; /* dummy symbol for library */ }
+extern "C" WXEXPORT void wxTipWindow_SetBoundingRect(void* self, wxRect* rectBound) {}
+#endif

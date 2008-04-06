@@ -17,6 +17,8 @@
 #include <wx/tglbtn.h>
 #include "local_events.h"
 
+#if wxUSE_TOGGLEBTN
+
 //-----------------------------------------------------------------------------
 
 class _ToggleButton : public wxToggleButton
@@ -71,3 +73,15 @@ void wxToggleButton_SetValue(wxToggleButton* self, const wxc_bool state)
 
 extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TOGGLEBUTTON_CLICKED()  { return wxEVT_COMMAND_TOGGLEBUTTON_CLICKED; }
 
+#else
+#ifdef __GNUC__
+#warning "wxUSE_TOGGLEBTN is not set"
+#endif
+
+extern "C" WXEXPORT void* wxToggleButton_ctor() { return NULL; /* dummy symbol for library */ }
+extern "C" WXEXPORT wxc_bool wxToggleButton_Create(void *self, wxWindow* parent, wxWindowID id, wxc_string label, const wxPoint* pos, const wxSize* size, long style, const wxValidator* validator, wxc_string name) { return false; }
+extern "C" WXEXPORT wxc_bool wxToggleButton_GetValue(void* self) { return false;}
+extern "C" WXEXPORT void wxToggleButton_SetValue(void* self, const wxc_bool state) {}
+
+extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TOGGLEBUTTON_CLICKED()  { return -1; /* dummy symbol for library */ }
+#endif
