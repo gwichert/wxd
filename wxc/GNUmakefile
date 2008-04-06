@@ -93,6 +93,7 @@ OBJECTS = \
 	ncpaintevent.o \
 	notebook.o \
 	notebooksizer.o \
+	notifyevent.o \
 	object.o \
 	paintevent.o \
 	palette.o \

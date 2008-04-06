@@ -94,6 +94,7 @@ OBJECTS = \
 	ncpaintevent.obj \
 	notebook.obj \
 	notebooksizer.obj \
+	notifyevent.obj \
 	object.obj \
 	paintevent.obj \
 	palette.obj \
