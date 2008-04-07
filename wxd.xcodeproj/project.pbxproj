@@ -1,0 +1,1730 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A46E62790DA92BEA00CFEFC6 /* accel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61D70DA92BEA00CFEFC6 /* accel.cpp */; };
+		A46E627A0DA92BEA00CFEFC6 /* activateevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61D80DA92BEA00CFEFC6 /* activateevent.cpp */; };
+		A46E627B0DA92BEA00CFEFC6 /* app.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61D90DA92BEA00CFEFC6 /* app.cpp */; };
+		A46E627C0DA92BEA00CFEFC6 /* artprovider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61DA0DA92BEA00CFEFC6 /* artprovider.cpp */; };
+		A46E627D0DA92BEA00CFEFC6 /* bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61DB0DA92BEA00CFEFC6 /* bitmap.cpp */; };
+		A46E627E0DA92BEA00CFEFC6 /* bitmapbutton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61DC0DA92BEA00CFEFC6 /* bitmapbutton.cpp */; };
+		A46E627F0DA92BEA00CFEFC6 /* boxsizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61DD0DA92BEA00CFEFC6 /* boxsizer.cpp */; };
+		A46E62800DA92BEA00CFEFC6 /* brush.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61DE0DA92BEA00CFEFC6 /* brush.cpp */; };
+		A46E62810DA92BEA00CFEFC6 /* button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61DF0DA92BEA00CFEFC6 /* button.cpp */; };
+		A46E62820DA92BEA00CFEFC6 /* calendarctrl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61E00DA92BEA00CFEFC6 /* calendarctrl.cpp */; };
+		A46E62830DA92BEA00CFEFC6 /* caret.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61E10DA92BEA00CFEFC6 /* caret.cpp */; };
+		A46E62840DA92BEA00CFEFC6 /* checkbox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61E20DA92BEA00CFEFC6 /* checkbox.cpp */; };
+		A46E62850DA92BEA00CFEFC6 /* childfocusevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61E30DA92BEA00CFEFC6 /* childfocusevent.cpp */; };
+		A46E62860DA92BEA00CFEFC6 /* choice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61E40DA92BEA00CFEFC6 /* choice.cpp */; };
+		A46E62870DA92BEA00CFEFC6 /* choicedialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61E50DA92BEA00CFEFC6 /* choicedialog.cpp */; };
+		A46E62880DA92BEA00CFEFC6 /* clientdata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61E60DA92BEA00CFEFC6 /* clientdata.cpp */; };
+		A46E62890DA92BEA00CFEFC6 /* clipboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61E70DA92BEA00CFEFC6 /* clipboard.cpp */; };
+		A46E628A0DA92BEA00CFEFC6 /* closeevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61E80DA92BEA00CFEFC6 /* closeevent.cpp */; };
+		A46E628B0DA92BEA00CFEFC6 /* colour.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61E90DA92BEA00CFEFC6 /* colour.cpp */; };
+		A46E628C0DA92BEA00CFEFC6 /* colourdialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61EA0DA92BEA00CFEFC6 /* colourdialog.cpp */; };
+		A46E628D0DA92BEA00CFEFC6 /* combobox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61EB0DA92BEA00CFEFC6 /* combobox.cpp */; };
+		A46E628E0DA92BEA00CFEFC6 /* commandevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61EC0DA92BEA00CFEFC6 /* commandevent.cpp */; };
+		A46E628F0DA92BEA00CFEFC6 /* common.h in Headers */ = {isa = PBXBuildFile; fileRef = A46E61ED0DA92BEA00CFEFC6 /* common.h */; };
+		A46E62900DA92BEA00CFEFC6 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61EE0DA92BEA00CFEFC6 /* config.cpp */; };
+		A46E62910DA92BEA00CFEFC6 /* contextmenuevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61EF0DA92BEA00CFEFC6 /* contextmenuevent.cpp */; };
+		A46E62920DA92BEA00CFEFC6 /* control.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61F00DA92BEA00CFEFC6 /* control.cpp */; };
+		A46E62930DA92BEA00CFEFC6 /* cursor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61F10DA92BEA00CFEFC6 /* cursor.cpp */; };
+		A46E62940DA92BEA00CFEFC6 /* dataformat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61F20DA92BEA00CFEFC6 /* dataformat.cpp */; };
+		A46E62950DA92BEA00CFEFC6 /* dataobject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61F30DA92BEA00CFEFC6 /* dataobject.cpp */; };
+		A46E62960DA92BEA00CFEFC6 /* dc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61F40DA92BEA00CFEFC6 /* dc.cpp */; };
+		A46E62970DA92BEA00CFEFC6 /* dialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61F50DA92BEA00CFEFC6 /* dialog.cpp */; };
+		A46E62980DA92BEA00CFEFC6 /* dirdialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61F60DA92BEA00CFEFC6 /* dirdialog.cpp */; };
+		A46E62990DA92BEA00CFEFC6 /* display.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61F70DA92BEA00CFEFC6 /* display.cpp */; };
+		A46E629A0DA92BEA00CFEFC6 /* displaychangedevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61F80DA92BEA00CFEFC6 /* displaychangedevent.cpp */; };
+		A46E629B0DA92BEA00CFEFC6 /* dnd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61F90DA92BEA00CFEFC6 /* dnd.cpp */; };
+		A46E629C0DA92BEA00CFEFC6 /* docmanager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61FA0DA92BEA00CFEFC6 /* docmanager.cpp */; };
+		A46E629D0DA92BEA00CFEFC6 /* doctemplate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61FB0DA92BEA00CFEFC6 /* doctemplate.cpp */; };
+		A46E629E0DA92BEA00CFEFC6 /* document.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61FC0DA92BEA00CFEFC6 /* document.cpp */; };
+		A46E629F0DA92BEA00CFEFC6 /* eraseevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61FD0DA92BEA00CFEFC6 /* eraseevent.cpp */; };
+		A46E62A00DA92BEA00CFEFC6 /* event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61FE0DA92BEA00CFEFC6 /* event.cpp */; };
+		A46E62A10DA92BEA00CFEFC6 /* evthandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61FF0DA92BEA00CFEFC6 /* evthandler.cpp */; };
+		A46E62A20DA92BEA00CFEFC6 /* filedialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62000DA92BEA00CFEFC6 /* filedialog.cpp */; };
+		A46E62A30DA92BEA00CFEFC6 /* findreplacedialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62010DA92BEA00CFEFC6 /* findreplacedialog.cpp */; };
+		A46E62A40DA92BEA00CFEFC6 /* flexgridsizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62020DA92BEA00CFEFC6 /* flexgridsizer.cpp */; };
+		A46E62A50DA92BEA00CFEFC6 /* focusevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62030DA92BEA00CFEFC6 /* focusevent.cpp */; };
+		A46E62A60DA92BEA00CFEFC6 /* font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62040DA92BEA00CFEFC6 /* font.cpp */; };
+		A46E62A70DA92BEA00CFEFC6 /* fontdialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62050DA92BEA00CFEFC6 /* fontdialog.cpp */; };
+		A46E62A80DA92BEA00CFEFC6 /* fontmisc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62060DA92BEA00CFEFC6 /* fontmisc.cpp */; };
+		A46E62A90DA92BEA00CFEFC6 /* frame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62070DA92BEA00CFEFC6 /* frame.cpp */; };
+		A46E62AA0DA92BEA00CFEFC6 /* gauge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62080DA92BEA00CFEFC6 /* gauge.cpp */; };
+		A46E62AB0DA92BEA00CFEFC6 /* gdicmn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62090DA92BEA00CFEFC6 /* gdicmn.cpp */; };
+		A46E62AC0DA92BEA00CFEFC6 /* gdiobject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E620A0DA92BEA00CFEFC6 /* gdiobject.cpp */; };
+		A46E62AD0DA92BEA00CFEFC6 /* glcanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E620B0DA92BEA00CFEFC6 /* glcanvas.cpp */; };
+		A46E62AE0DA92BEA00CFEFC6 /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E620C0DA92BEA00CFEFC6 /* global.cpp */; };
+		A46E62AF0DA92BEA00CFEFC6 /* grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E620D0DA92BEA00CFEFC6 /* grid.cpp */; };
+		A46E62B00DA92BEA00CFEFC6 /* gridbagsizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E620E0DA92BEA00CFEFC6 /* gridbagsizer.cpp */; };
+		A46E62B10DA92BEA00CFEFC6 /* gridctrl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E620F0DA92BEA00CFEFC6 /* gridctrl.cpp */; };
+		A46E62B20DA92BEA00CFEFC6 /* gridsizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62100DA92BEA00CFEFC6 /* gridsizer.cpp */; };
+		A46E62B30DA92BEA00CFEFC6 /* helpevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62110DA92BEA00CFEFC6 /* helpevent.cpp */; };
+		A46E62B40DA92BEA00CFEFC6 /* html.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62120DA92BEA00CFEFC6 /* html.cpp */; };
+		A46E62B50DA92BEA00CFEFC6 /* htmlhelpctrl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62130DA92BEA00CFEFC6 /* htmlhelpctrl.cpp */; };
+		A46E62B60DA92BEA00CFEFC6 /* htmllbox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62140DA92BEA00CFEFC6 /* htmllbox.cpp */; };
+		A46E62B70DA92BEA00CFEFC6 /* icon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62150DA92BEA00CFEFC6 /* icon.cpp */; };
+		A46E62B80DA92BEA00CFEFC6 /* iconizeevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62160DA92BEA00CFEFC6 /* iconizeevent.cpp */; };
+		A46E62B90DA92BEA00CFEFC6 /* idleevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62170DA92BEA00CFEFC6 /* idleevent.cpp */; };
+		A46E62BA0DA92BEA00CFEFC6 /* image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62180DA92BEA00CFEFC6 /* image.cpp */; };
+		A46E62BB0DA92BEA00CFEFC6 /* imagelist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62190DA92BEA00CFEFC6 /* imagelist.cpp */; };
+		A46E62BC0DA92BEA00CFEFC6 /* imghandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E621A0DA92BEA00CFEFC6 /* imghandler.cpp */; };
+		A46E62BD0DA92BEA00CFEFC6 /* initdialogevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E621B0DA92BEA00CFEFC6 /* initdialogevent.cpp */; };
+		A46E62BE0DA92BEA00CFEFC6 /* keyevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E621C0DA92BEA00CFEFC6 /* keyevent.cpp */; };
+		A46E62BF0DA92BEA00CFEFC6 /* laywin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E621D0DA92BEA00CFEFC6 /* laywin.cpp */; };
+		A46E62C00DA92BEA00CFEFC6 /* listbook.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E621E0DA92BEA00CFEFC6 /* listbook.cpp */; };
+		A46E62C10DA92BEA00CFEFC6 /* listbox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E621F0DA92BEA00CFEFC6 /* listbox.cpp */; };
+		A46E62C20DA92BEA00CFEFC6 /* listctrl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62200DA92BEA00CFEFC6 /* listctrl.cpp */; };
+		A46E62C30DA92BEA00CFEFC6 /* local_events.h in Headers */ = {isa = PBXBuildFile; fileRef = A46E62210DA92BEA00CFEFC6 /* local_events.h */; };
+		A46E62C40DA92BEA00CFEFC6 /* locale.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62220DA92BEA00CFEFC6 /* locale.cpp */; };
+		A46E62C50DA92BEA00CFEFC6 /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62230DA92BEA00CFEFC6 /* log.cpp */; };
+		A46E62C60DA92BEA00CFEFC6 /* manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62240DA92BEA00CFEFC6 /* manager.cpp */; };
+		A46E62C70DA92BEA00CFEFC6 /* manager.h in Headers */ = {isa = PBXBuildFile; fileRef = A46E62250DA92BEA00CFEFC6 /* manager.h */; };
+		A46E62C80DA92BEA00CFEFC6 /* maximizeevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62260DA92BEA00CFEFC6 /* maximizeevent.cpp */; };
+		A46E62C90DA92BEA00CFEFC6 /* mdi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62270DA92BEA00CFEFC6 /* mdi.cpp */; };
+		A46E62CA0DA92BEA00CFEFC6 /* memorydc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62280DA92BEA00CFEFC6 /* memorydc.cpp */; };
+		A46E62CB0DA92BEA00CFEFC6 /* menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62290DA92BEA00CFEFC6 /* menu.cpp */; };
+		A46E62CC0DA92BEA00CFEFC6 /* menubar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E622A0DA92BEA00CFEFC6 /* menubar.cpp */; };
+		A46E62CD0DA92BEA00CFEFC6 /* menuitem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E622B0DA92BEA00CFEFC6 /* menuitem.cpp */; };
+		A46E62CE0DA92BEA00CFEFC6 /* messagedialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E622C0DA92BEA00CFEFC6 /* messagedialog.cpp */; };
+		A46E62CF0DA92BEA00CFEFC6 /* miniframe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E622D0DA92BEA00CFEFC6 /* miniframe.cpp */; };
+		A46E62D00DA92BEA00CFEFC6 /* mousecapturechangedevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E622E0DA92BEA00CFEFC6 /* mousecapturechangedevent.cpp */; };
+		A46E62D10DA92BEA00CFEFC6 /* mouseevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E622F0DA92BEA00CFEFC6 /* mouseevent.cpp */; };
+		A46E62D20DA92BEA00CFEFC6 /* moveevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62300DA92BEA00CFEFC6 /* moveevent.cpp */; };
+		A46E62D30DA92BEA00CFEFC6 /* navigationkeyevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62310DA92BEA00CFEFC6 /* navigationkeyevent.cpp */; };
+		A46E62D40DA92BEA00CFEFC6 /* ncpaintevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62320DA92BEA00CFEFC6 /* ncpaintevent.cpp */; };
+		A46E62D50DA92BEA00CFEFC6 /* notebook.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62330DA92BEA00CFEFC6 /* notebook.cpp */; };
+		A46E62D60DA92BEA00CFEFC6 /* notebooksizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62340DA92BEA00CFEFC6 /* notebooksizer.cpp */; };
+		A46E62D70DA92BEA00CFEFC6 /* numdialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62350DA92BEA00CFEFC6 /* numdialog.cpp */; };
+		A46E62D80DA92BEA00CFEFC6 /* object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62360DA92BEA00CFEFC6 /* object.cpp */; };
+		A46E62D90DA92BEA00CFEFC6 /* paintevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62370DA92BEA00CFEFC6 /* paintevent.cpp */; };
+		A46E62DA0DA92BEA00CFEFC6 /* palette.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62380DA92BEA00CFEFC6 /* palette.cpp */; };
+		A46E62DB0DA92BEA00CFEFC6 /* palettechangedevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62390DA92BEA00CFEFC6 /* palettechangedevent.cpp */; };
+		A46E62DC0DA92BEA00CFEFC6 /* panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E623A0DA92BEA00CFEFC6 /* panel.cpp */; };
+		A46E62DD0DA92BEA00CFEFC6 /* pen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E623B0DA92BEA00CFEFC6 /* pen.cpp */; };
+		A46E62DE0DA92BEA00CFEFC6 /* printdata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E623C0DA92BEA00CFEFC6 /* printdata.cpp */; };
+		A46E62DF0DA92BEA00CFEFC6 /* printdialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E623D0DA92BEA00CFEFC6 /* printdialog.cpp */; };
+		A46E62E00DA92BEA00CFEFC6 /* printer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E623E0DA92BEA00CFEFC6 /* printer.cpp */; };
+		A46E62E10DA92BEA00CFEFC6 /* printpreview.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E623F0DA92BEA00CFEFC6 /* printpreview.cpp */; };
+		A46E62E20DA92BEA00CFEFC6 /* progdlg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62400DA92BEA00CFEFC6 /* progdlg.cpp */; };
+		A46E62E30DA92BEA00CFEFC6 /* querynewpaletteevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62410DA92BEA00CFEFC6 /* querynewpaletteevent.cpp */; };
+		A46E62E40DA92BEA00CFEFC6 /* radiobox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62420DA92BEA00CFEFC6 /* radiobox.cpp */; };
+		A46E62E50DA92BEA00CFEFC6 /* radiobutton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62430DA92BEA00CFEFC6 /* radiobutton.cpp */; };
+		A46E62E60DA92BEA00CFEFC6 /* region.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62440DA92BEA00CFEFC6 /* region.cpp */; };
+		A46E62E70DA92BEA00CFEFC6 /* sashwindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62450DA92BEA00CFEFC6 /* sashwindow.cpp */; };
+		A46E62E80DA92BEA00CFEFC6 /* scrollbar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62460DA92BEA00CFEFC6 /* scrollbar.cpp */; };
+		A46E62E90DA92BEA00CFEFC6 /* scrolledwindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62470DA92BEA00CFEFC6 /* scrolledwindow.cpp */; };
+		A46E62EA0DA92BEA00CFEFC6 /* setcursorevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62480DA92BEA00CFEFC6 /* setcursorevent.cpp */; };
+		A46E62EB0DA92BEA00CFEFC6 /* showevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62490DA92BEA00CFEFC6 /* showevent.cpp */; };
+		A46E62EC0DA92BEA00CFEFC6 /* sizeevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E624A0DA92BEA00CFEFC6 /* sizeevent.cpp */; };
+		A46E62ED0DA92BEA00CFEFC6 /* sizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E624B0DA92BEA00CFEFC6 /* sizer.cpp */; };
+		A46E62EE0DA92BEA00CFEFC6 /* sizeritem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E624C0DA92BEA00CFEFC6 /* sizeritem.cpp */; };
+		A46E62EF0DA92BEA00CFEFC6 /* slider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E624D0DA92BEA00CFEFC6 /* slider.cpp */; };
+		A46E62F00DA92BEA00CFEFC6 /* sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E624E0DA92BEA00CFEFC6 /* sound.cpp */; };
+		A46E62F10DA92BEA00CFEFC6 /* spinbutton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E624F0DA92BEA00CFEFC6 /* spinbutton.cpp */; };
+		A46E62F20DA92BEA00CFEFC6 /* spinctrl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62500DA92BEA00CFEFC6 /* spinctrl.cpp */; };
+		A46E62F30DA92BEA00CFEFC6 /* splashscreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62510DA92BEA00CFEFC6 /* splashscreen.cpp */; };
+		A46E62F40DA92BEA00CFEFC6 /* splitterwindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62520DA92BEA00CFEFC6 /* splitterwindow.cpp */; };
+		A46E62F50DA92BEA00CFEFC6 /* staticbitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62530DA92BEA00CFEFC6 /* staticbitmap.cpp */; };
+		A46E62F60DA92BEA00CFEFC6 /* staticbox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62540DA92BEA00CFEFC6 /* staticbox.cpp */; };
+		A46E62F70DA92BEA00CFEFC6 /* staticboxsizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62550DA92BEA00CFEFC6 /* staticboxsizer.cpp */; };
+		A46E62F80DA92BEA00CFEFC6 /* staticline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62560DA92BEA00CFEFC6 /* staticline.cpp */; };
+		A46E62F90DA92BEA00CFEFC6 /* statictext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62570DA92BEA00CFEFC6 /* statictext.cpp */; };
+		A46E62FA0DA92BEA00CFEFC6 /* statusbar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62580DA92BEA00CFEFC6 /* statusbar.cpp */; };
+		A46E62FB0DA92BEA00CFEFC6 /* styledtextctrl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62590DA92BEA00CFEFC6 /* styledtextctrl.cpp */; };
+		A46E62FC0DA92BEA00CFEFC6 /* syscolourchangedevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E625A0DA92BEA00CFEFC6 /* syscolourchangedevent.cpp */; };
+		A46E62FD0DA92BEA00CFEFC6 /* systemsettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E625B0DA92BEA00CFEFC6 /* systemsettings.cpp */; };
+		A46E62FE0DA92BEA00CFEFC6 /* tabctrl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E625C0DA92BEA00CFEFC6 /* tabctrl.cpp */; };
+		A46E62FF0DA92BEA00CFEFC6 /* taskbaricon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E625D0DA92BEA00CFEFC6 /* taskbaricon.cpp */; };
+		A46E63000DA92BEA00CFEFC6 /* textctrl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E625E0DA92BEA00CFEFC6 /* textctrl.cpp */; };
+		A46E63010DA92BEA00CFEFC6 /* textdialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E625F0DA92BEA00CFEFC6 /* textdialog.cpp */; };
+		A46E63020DA92BEA00CFEFC6 /* thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62600DA92BEA00CFEFC6 /* thread.cpp */; };
+		A46E63030DA92BEA00CFEFC6 /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62610DA92BEA00CFEFC6 /* timer.cpp */; };
+		A46E63040DA92BEA00CFEFC6 /* tipdialog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62630DA92BEA00CFEFC6 /* tipdialog.cpp */; };
+		A46E63050DA92BEA00CFEFC6 /* tipwindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62640DA92BEA00CFEFC6 /* tipwindow.cpp */; };
+		A46E63060DA92BEA00CFEFC6 /* togglebutton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62650DA92BEA00CFEFC6 /* togglebutton.cpp */; };
+		A46E63070DA92BEA00CFEFC6 /* toolbar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62660DA92BEA00CFEFC6 /* toolbar.cpp */; };
+		A46E63080DA92BEA00CFEFC6 /* tooltip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62670DA92BEA00CFEFC6 /* tooltip.cpp */; };
+		A46E63090DA92BEA00CFEFC6 /* treectrl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62680DA92BEA00CFEFC6 /* treectrl.cpp */; };
+		A46E630A0DA92BEA00CFEFC6 /* updateuievent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62690DA92BEA00CFEFC6 /* updateuievent.cpp */; };
+		A46E630B0DA92BEA00CFEFC6 /* validator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E626A0DA92BEA00CFEFC6 /* validator.cpp */; };
+		A46E630C0DA92BEA00CFEFC6 /* view.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E626B0DA92BEA00CFEFC6 /* view.cpp */; };
+		A46E630D0DA92BEA00CFEFC6 /* window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E626C0DA92BEA00CFEFC6 /* window.cpp */; };
+		A46E630E0DA92BEA00CFEFC6 /* windowcreateevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E626D0DA92BEA00CFEFC6 /* windowcreateevent.cpp */; };
+		A46E630F0DA92BEA00CFEFC6 /* windowdestroyevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E626E0DA92BEA00CFEFC6 /* windowdestroyevent.cpp */; };
+		A46E63100DA92BEA00CFEFC6 /* wizard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E626F0DA92BEA00CFEFC6 /* wizard.cpp */; };
+		A46E63110DA92BEA00CFEFC6 /* wizardpagesimple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62700DA92BEA00CFEFC6 /* wizardpagesimple.cpp */; };
+		A46E63120DA92BEA00CFEFC6 /* vlbox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62710DA92BEA00CFEFC6 /* vlbox.cpp */; };
+		A46E63130DA92BEA00CFEFC6 /* vscroll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62720DA92BEA00CFEFC6 /* vscroll.cpp */; };
+		A46E63140DA92BEA00CFEFC6 /* wxaui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62730DA92BEA00CFEFC6 /* wxaui.cpp */; };
+		A46E63150DA92BEA00CFEFC6 /* wxdatetime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62740DA92BEA00CFEFC6 /* wxdatetime.cpp */; };
+		A46E63160DA92BEA00CFEFC6 /* wxplatform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62750DA92BEA00CFEFC6 /* wxplatform.cpp */; };
+		A46E63170DA92BEA00CFEFC6 /* wxstring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62760DA92BEA00CFEFC6 /* wxstring.cpp */; };
+		A46E63180DA92BEA00CFEFC6 /* wxversion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62770DA92BEA00CFEFC6 /* wxversion.cpp */; };
+		A46E63190DA92BEA00CFEFC6 /* xmlresource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E62780DA92BEA00CFEFC6 /* xmlresource.cpp */; };
+		A46E63CD0DA92C3F00CFEFC6 /* Accelerator.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E631B0DA92C3E00CFEFC6 /* Accelerator.d */; };
+		A46E63CE0DA92C3F00CFEFC6 /* ActivateEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E631C0DA92C3E00CFEFC6 /* ActivateEvent.d */; };
+		A46E63CF0DA92C3F00CFEFC6 /* App.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E631D0DA92C3E00CFEFC6 /* App.d */; };
+		A46E63D00DA92C3F00CFEFC6 /* ArrayInt.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E631F0DA92C3E00CFEFC6 /* ArrayInt.d */; };
+		A46E63D10DA92C3F00CFEFC6 /* ArrayString.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63200DA92C3E00CFEFC6 /* ArrayString.d */; };
+		A46E63D20DA92C3F00CFEFC6 /* ArtProvider.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63210DA92C3E00CFEFC6 /* ArtProvider.d */; };
+		A46E63D30DA92C3F00CFEFC6 /* aui.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63230DA92C3E00CFEFC6 /* aui.d */; };
+		A46E63D40DA92C3F00CFEFC6 /* DockArt.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63240DA92C3E00CFEFC6 /* DockArt.d */; };
+		A46E63D50DA92C3F00CFEFC6 /* FrameManager.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63250DA92C3E00CFEFC6 /* FrameManager.d */; };
+		A46E63D60DA92C3F00CFEFC6 /* Bitmap.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63260DA92C3E00CFEFC6 /* Bitmap.d */; };
+		A46E63D70DA92C3F00CFEFC6 /* BitmapButton.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63270DA92C3E00CFEFC6 /* BitmapButton.d */; };
+		A46E63D80DA92C3F00CFEFC6 /* BoxSizer.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63280DA92C3E00CFEFC6 /* BoxSizer.d */; };
+		A46E63D90DA92C3F00CFEFC6 /* Brush.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63290DA92C3E00CFEFC6 /* Brush.d */; };
+		A46E63DA0DA92C3F00CFEFC6 /* Button.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E632A0DA92C3E00CFEFC6 /* Button.d */; };
+		A46E63DB0DA92C3F00CFEFC6 /* CalendarCtrl.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E632B0DA92C3E00CFEFC6 /* CalendarCtrl.d */; };
+		A46E63DC0DA92C3F00CFEFC6 /* Caret.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E632C0DA92C3E00CFEFC6 /* Caret.d */; };
+		A46E63DD0DA92C3F00CFEFC6 /* CheckBox.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E632D0DA92C3E00CFEFC6 /* CheckBox.d */; };
+		A46E63DE0DA92C3F00CFEFC6 /* ChildFocusEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E632E0DA92C3E00CFEFC6 /* ChildFocusEvent.d */; };
+		A46E63DF0DA92C3F00CFEFC6 /* Choice.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E632F0DA92C3E00CFEFC6 /* Choice.d */; };
+		A46E63E00DA92C3F00CFEFC6 /* ChoiceDialog.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63300DA92C3E00CFEFC6 /* ChoiceDialog.d */; };
+		A46E63E10DA92C3F00CFEFC6 /* ClientData.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63310DA92C3E00CFEFC6 /* ClientData.d */; };
+		A46E63E20DA92C3F00CFEFC6 /* Clipboard.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63320DA92C3E00CFEFC6 /* Clipboard.d */; };
+		A46E63E30DA92C3F00CFEFC6 /* CloseEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63330DA92C3E00CFEFC6 /* CloseEvent.d */; };
+		A46E63E40DA92C3F00CFEFC6 /* Colour.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63340DA92C3E00CFEFC6 /* Colour.d */; };
+		A46E63E50DA92C3F00CFEFC6 /* ColourDialog.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63350DA92C3E00CFEFC6 /* ColourDialog.d */; };
+		A46E63E60DA92C3F00CFEFC6 /* ComboBox.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63360DA92C3E00CFEFC6 /* ComboBox.d */; };
+		A46E63E70DA92C3F00CFEFC6 /* CommandEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63370DA92C3E00CFEFC6 /* CommandEvent.d */; };
+		A46E63E80DA92C3F00CFEFC6 /* common.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63380DA92C3E00CFEFC6 /* common.d */; };
+		A46E63E90DA92C3F00CFEFC6 /* Config.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63390DA92C3E00CFEFC6 /* Config.d */; };
+		A46E63EA0DA92C3F00CFEFC6 /* ContextMenuEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E633A0DA92C3E00CFEFC6 /* ContextMenuEvent.d */; };
+		A46E63EB0DA92C3F00CFEFC6 /* Control.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E633B0DA92C3E00CFEFC6 /* Control.d */; };
+		A46E63EC0DA92C3F00CFEFC6 /* Cursor.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E633C0DA92C3E00CFEFC6 /* Cursor.d */; };
+		A46E63ED0DA92C3F00CFEFC6 /* DataFormat.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E633D0DA92C3E00CFEFC6 /* DataFormat.d */; };
+		A46E63EE0DA92C3F00CFEFC6 /* DataObject.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E633E0DA92C3E00CFEFC6 /* DataObject.d */; };
+		A46E63F00DA92C3F00CFEFC6 /* DC.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63400DA92C3E00CFEFC6 /* DC.d */; };
+		A46E63F10DA92C3F00CFEFC6 /* Defs.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63410DA92C3E00CFEFC6 /* Defs.d */; };
+		A46E63F20DA92C3F00CFEFC6 /* Dialog.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63420DA92C3E00CFEFC6 /* Dialog.d */; };
+		A46E63F30DA92C3F00CFEFC6 /* DirDialog.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63440DA92C3E00CFEFC6 /* DirDialog.d */; };
+		A46E63F40DA92C3F00CFEFC6 /* Display.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63450DA92C3E00CFEFC6 /* Display.d */; };
+		A46E63F50DA92C3F00CFEFC6 /* DisplayChangedEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63460DA92C3E00CFEFC6 /* DisplayChangedEvent.d */; };
+		A46E63F60DA92C3F00CFEFC6 /* DND.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63470DA92C3E00CFEFC6 /* DND.d */; };
+		A46E63F70DA92C3F00CFEFC6 /* DocManager.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63480DA92C3E00CFEFC6 /* DocManager.d */; };
+		A46E63F80DA92C3F00CFEFC6 /* DocTemplate.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63490DA92C3E00CFEFC6 /* DocTemplate.d */; };
+		A46E63F90DA92C3F00CFEFC6 /* Document.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E634A0DA92C3E00CFEFC6 /* Document.d */; };
+		A46E63FA0DA92C3F00CFEFC6 /* EraseEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E634B0DA92C3E00CFEFC6 /* EraseEvent.d */; };
+		A46E63FB0DA92C3F00CFEFC6 /* Event.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E634C0DA92C3E00CFEFC6 /* Event.d */; };
+		A46E63FC0DA92C3F00CFEFC6 /* EvtHandler.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E634D0DA92C3E00CFEFC6 /* EvtHandler.d */; };
+		A46E63FD0DA92C3F00CFEFC6 /* FileDialog.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E634E0DA92C3E00CFEFC6 /* FileDialog.d */; };
+		A46E63FE0DA92C3F00CFEFC6 /* FindReplaceDialog.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E634F0DA92C3E00CFEFC6 /* FindReplaceDialog.d */; };
+		A46E63FF0DA92C3F00CFEFC6 /* FlexGridSizer.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63500DA92C3E00CFEFC6 /* FlexGridSizer.d */; };
+		A46E64000DA92C3F00CFEFC6 /* FocusEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63510DA92C3E00CFEFC6 /* FocusEvent.d */; };
+		A46E64010DA92C3F00CFEFC6 /* Font.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63520DA92C3E00CFEFC6 /* Font.d */; };
+		A46E64020DA92C3F00CFEFC6 /* FontDialog.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63530DA92C3E00CFEFC6 /* FontDialog.d */; };
+		A46E64030DA92C3F00CFEFC6 /* FontMisc.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63540DA92C3E00CFEFC6 /* FontMisc.d */; };
+		A46E64040DA92C3F00CFEFC6 /* Frame.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63550DA92C3E00CFEFC6 /* Frame.d */; };
+		A46E64050DA92C3F00CFEFC6 /* Gauge.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63570DA92C3E00CFEFC6 /* Gauge.d */; };
+		A46E64060DA92C3F00CFEFC6 /* GdiCommon.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63580DA92C3E00CFEFC6 /* GdiCommon.d */; };
+		A46E64070DA92C3F00CFEFC6 /* GDIObject.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63590DA92C3E00CFEFC6 /* GDIObject.d */; };
+		A46E64090DA92C3F00CFEFC6 /* Grid.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E635B0DA92C3E00CFEFC6 /* Grid.d */; };
+		A46E640A0DA92C3F00CFEFC6 /* GridBagSizer.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E635C0DA92C3E00CFEFC6 /* GridBagSizer.d */; };
+		A46E640B0DA92C3F00CFEFC6 /* GridCtrl.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E635D0DA92C3E00CFEFC6 /* GridCtrl.d */; };
+		A46E640C0DA92C3F00CFEFC6 /* GridSizer.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E635E0DA92C3E00CFEFC6 /* GridSizer.d */; };
+		A46E640D0DA92C3F00CFEFC6 /* HelpEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E635F0DA92C3E00CFEFC6 /* HelpEvent.d */; };
+		A46E640E0DA92C3F00CFEFC6 /* HTML.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63600DA92C3E00CFEFC6 /* HTML.d */; };
+		A46E640F0DA92C3F00CFEFC6 /* HtmlHelpController.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63610DA92C3E00CFEFC6 /* HtmlHelpController.d */; };
+		A46E64100DA92C3F00CFEFC6 /* HtmlListBox.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63620DA92C3E00CFEFC6 /* HtmlListBox.d */; };
+		A46E64110DA92C3F00CFEFC6 /* Icon.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63630DA92C3E00CFEFC6 /* Icon.d */; };
+		A46E64120DA92C3F00CFEFC6 /* IconizeEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63640DA92C3E00CFEFC6 /* IconizeEvent.d */; };
+		A46E64130DA92C3F00CFEFC6 /* IControlWithItems.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63650DA92C3E00CFEFC6 /* IControlWithItems.d */; };
+		A46E64140DA92C3F00CFEFC6 /* IdleEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63660DA92C3E00CFEFC6 /* IdleEvent.d */; };
+		A46E64150DA92C3F00CFEFC6 /* Image.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63670DA92C3E00CFEFC6 /* Image.d */; };
+		A46E64160DA92C3F00CFEFC6 /* ImageHandlers.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63680DA92C3E00CFEFC6 /* ImageHandlers.d */; };
+		A46E64170DA92C3F00CFEFC6 /* ImageList.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63690DA92C3E00CFEFC6 /* ImageList.d */; };
+		A46E64180DA92C3F00CFEFC6 /* InitDialogEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E636A0DA92C3E00CFEFC6 /* InitDialogEvent.d */; };
+		A46E64190DA92C3F00CFEFC6 /* KeyEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E636B0DA92C3E00CFEFC6 /* KeyEvent.d */; };
+		A46E641A0DA92C3F00CFEFC6 /* LayoutWin.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E636C0DA92C3E00CFEFC6 /* LayoutWin.d */; };
+		A46E641B0DA92C3F00CFEFC6 /* libs.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E636D0DA92C3E00CFEFC6 /* libs.d */; };
+		A46E641C0DA92C3F00CFEFC6 /* Listbook.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E636E0DA92C3E00CFEFC6 /* Listbook.d */; };
+		A46E641D0DA92C3F00CFEFC6 /* ListBox.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E636F0DA92C3E00CFEFC6 /* ListBox.d */; };
+		A46E641E0DA92C3F00CFEFC6 /* ListCtrl.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63700DA92C3E00CFEFC6 /* ListCtrl.d */; };
+		A46E641F0DA92C3F00CFEFC6 /* Locale.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63710DA92C3F00CFEFC6 /* Locale.d */; };
+		A46E64200DA92C3F00CFEFC6 /* Log.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63720DA92C3F00CFEFC6 /* Log.d */; };
+		A46E64210DA92C3F00CFEFC6 /* MaximizeEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63730DA92C3F00CFEFC6 /* MaximizeEvent.d */; };
+		A46E64220DA92C3F00CFEFC6 /* MDI.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63740DA92C3F00CFEFC6 /* MDI.d */; };
+		A46E64230DA92C3F00CFEFC6 /* MemoryDC.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63750DA92C3F00CFEFC6 /* MemoryDC.d */; };
+		A46E64240DA92C3F00CFEFC6 /* Menu.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63760DA92C3F00CFEFC6 /* Menu.d */; };
+		A46E64250DA92C3F00CFEFC6 /* MenuBar.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63770DA92C3F00CFEFC6 /* MenuBar.d */; };
+		A46E64260DA92C3F00CFEFC6 /* MenuItem.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63780DA92C3F00CFEFC6 /* MenuItem.d */; };
+		A46E64270DA92C3F00CFEFC6 /* MessageDialog.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63790DA92C3F00CFEFC6 /* MessageDialog.d */; };
+		A46E64280DA92C3F00CFEFC6 /* MiniFrame.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E637A0DA92C3F00CFEFC6 /* MiniFrame.d */; };
+		A46E64290DA92C3F00CFEFC6 /* MouseCaptureChangedEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E637B0DA92C3F00CFEFC6 /* MouseCaptureChangedEvent.d */; };
+		A46E642A0DA92C3F00CFEFC6 /* MouseEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E637C0DA92C3F00CFEFC6 /* MouseEvent.d */; };
+		A46E642B0DA92C3F00CFEFC6 /* MoveEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E637D0DA92C3F00CFEFC6 /* MoveEvent.d */; };
+		A46E642C0DA92C3F00CFEFC6 /* NavigationKeyEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E637E0DA92C3F00CFEFC6 /* NavigationKeyEvent.d */; };
+		A46E642D0DA92C3F00CFEFC6 /* NcPaintEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E637F0DA92C3F00CFEFC6 /* NcPaintEvent.d */; };
+		A46E642E0DA92C3F00CFEFC6 /* Notebook.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63800DA92C3F00CFEFC6 /* Notebook.d */; };
+		A46E642F0DA92C3F00CFEFC6 /* NotebookSizer.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63810DA92C3F00CFEFC6 /* NotebookSizer.d */; };
+		A46E64300DA92C3F00CFEFC6 /* NotifyEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63820DA92C3F00CFEFC6 /* NotifyEvent.d */; };
+		A46E64310DA92C3F00CFEFC6 /* NumberDialog.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63830DA92C3F00CFEFC6 /* NumberDialog.d */; };
+		A46E64320DA92C3F00CFEFC6 /* ogl.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63850DA92C3F00CFEFC6 /* ogl.d */; };
+		A46E64330DA92C3F00CFEFC6 /* PaintEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63860DA92C3F00CFEFC6 /* PaintEvent.d */; };
+		A46E64340DA92C3F00CFEFC6 /* Palette.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63870DA92C3F00CFEFC6 /* Palette.d */; };
+		A46E64350DA92C3F00CFEFC6 /* PaletteChangedEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63880DA92C3F00CFEFC6 /* PaletteChangedEvent.d */; };
+		A46E64360DA92C3F00CFEFC6 /* Panel.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63890DA92C3F00CFEFC6 /* Panel.d */; };
+		A46E64370DA92C3F00CFEFC6 /* Pen.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E638B0DA92C3F00CFEFC6 /* Pen.d */; };
+		A46E64380DA92C3F00CFEFC6 /* PrintData.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E638C0DA92C3F00CFEFC6 /* PrintData.d */; };
+		A46E64390DA92C3F00CFEFC6 /* PrintDialog.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E638D0DA92C3F00CFEFC6 /* PrintDialog.d */; };
+		A46E643A0DA92C3F00CFEFC6 /* Printer.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E638E0DA92C3F00CFEFC6 /* Printer.d */; };
+		A46E643B0DA92C3F00CFEFC6 /* PrintPreview.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E638F0DA92C3F00CFEFC6 /* PrintPreview.d */; };
+		A46E643C0DA92C3F00CFEFC6 /* ProgressDialog.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63900DA92C3F00CFEFC6 /* ProgressDialog.d */; };
+		A46E643D0DA92C3F00CFEFC6 /* QueryNewPaletteEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63910DA92C3F00CFEFC6 /* QueryNewPaletteEvent.d */; };
+		A46E643E0DA92C3F00CFEFC6 /* RadioBox.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63920DA92C3F00CFEFC6 /* RadioBox.d */; };
+		A46E643F0DA92C3F00CFEFC6 /* RadioButton.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63930DA92C3F00CFEFC6 /* RadioButton.d */; };
+		A46E64400DA92C3F00CFEFC6 /* Region.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63940DA92C3F00CFEFC6 /* Region.d */; };
+		A46E64410DA92C3F00CFEFC6 /* SashWindow.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63950DA92C3F00CFEFC6 /* SashWindow.d */; };
+		A46E64420DA92C3F00CFEFC6 /* ScrollBar.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63960DA92C3F00CFEFC6 /* ScrollBar.d */; };
+		A46E64430DA92C3F00CFEFC6 /* ScrolledWindow.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63970DA92C3F00CFEFC6 /* ScrolledWindow.d */; };
+		A46E64440DA92C3F00CFEFC6 /* SetCursorEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63980DA92C3F00CFEFC6 /* SetCursorEvent.d */; };
+		A46E64450DA92C3F00CFEFC6 /* ShowEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63990DA92C3F00CFEFC6 /* ShowEvent.d */; };
+		A46E64460DA92C3F00CFEFC6 /* SizeEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E639A0DA92C3F00CFEFC6 /* SizeEvent.d */; };
+		A46E64470DA92C3F00CFEFC6 /* Sizer.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E639B0DA92C3F00CFEFC6 /* Sizer.d */; };
+		A46E64480DA92C3F00CFEFC6 /* SizerItem.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E639C0DA92C3F00CFEFC6 /* SizerItem.d */; };
+		A46E64490DA92C3F00CFEFC6 /* Slider.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E639D0DA92C3F00CFEFC6 /* Slider.d */; };
+		A46E644A0DA92C3F00CFEFC6 /* Sound.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E639E0DA92C3F00CFEFC6 /* Sound.d */; };
+		A46E644B0DA92C3F00CFEFC6 /* SpinButton.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E639F0DA92C3F00CFEFC6 /* SpinButton.d */; };
+		A46E644C0DA92C3F00CFEFC6 /* SpinCtrl.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63A00DA92C3F00CFEFC6 /* SpinCtrl.d */; };
+		A46E644D0DA92C3F00CFEFC6 /* SplashScreen.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63A10DA92C3F00CFEFC6 /* SplashScreen.d */; };
+		A46E644E0DA92C3F00CFEFC6 /* SplitterWindow.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63A20DA92C3F00CFEFC6 /* SplitterWindow.d */; };
+		A46E644F0DA92C3F00CFEFC6 /* StaticBitmap.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63A30DA92C3F00CFEFC6 /* StaticBitmap.d */; };
+		A46E64500DA92C3F00CFEFC6 /* StaticBox.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63A40DA92C3F00CFEFC6 /* StaticBox.d */; };
+		A46E64510DA92C3F00CFEFC6 /* StaticBoxSizer.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63A50DA92C3F00CFEFC6 /* StaticBoxSizer.d */; };
+		A46E64520DA92C3F00CFEFC6 /* StaticLine.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63A60DA92C3F00CFEFC6 /* StaticLine.d */; };
+		A46E64530DA92C3F00CFEFC6 /* StaticText.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63A70DA92C3F00CFEFC6 /* StaticText.d */; };
+		A46E64540DA92C3F00CFEFC6 /* StatusBar.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63A80DA92C3F00CFEFC6 /* StatusBar.d */; };
+		A46E64550DA92C3F00CFEFC6 /* StyledTextCtrl.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63A90DA92C3F00CFEFC6 /* StyledTextCtrl.d */; };
+		A46E64560DA92C3F00CFEFC6 /* SysColourChangedEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63AA0DA92C3F00CFEFC6 /* SysColourChangedEvent.d */; };
+		A46E64570DA92C3F00CFEFC6 /* SystemSettings.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63AB0DA92C3F00CFEFC6 /* SystemSettings.d */; };
+		A46E64580DA92C3F00CFEFC6 /* TabCtrl.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63AC0DA92C3F00CFEFC6 /* TabCtrl.d */; };
+		A46E64590DA92C3F00CFEFC6 /* TaskBarIcon.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63AD0DA92C3F00CFEFC6 /* TaskBarIcon.d */; };
+		A46E645A0DA92C3F00CFEFC6 /* TextCtrl.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63AE0DA92C3F00CFEFC6 /* TextCtrl.d */; };
+		A46E645B0DA92C3F00CFEFC6 /* TextDialog.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63AF0DA92C3F00CFEFC6 /* TextDialog.d */; };
+		A46E645C0DA92C3F00CFEFC6 /* Thread.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63B00DA92C3F00CFEFC6 /* Thread.d */; };
+		A46E645D0DA92C3F00CFEFC6 /* Timer.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63B10DA92C3F00CFEFC6 /* Timer.d */; };
+		A46E645E0DA92C3F00CFEFC6 /* TipDialog.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63B20DA92C3F00CFEFC6 /* TipDialog.d */; };
+		A46E64610DA92C3F00CFEFC6 /* ToolBar.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63B50DA92C3F00CFEFC6 /* ToolBar.d */; };
+		A46E64620DA92C3F00CFEFC6 /* ToolTip.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63B60DA92C3F00CFEFC6 /* ToolTip.d */; };
+		A46E64630DA92C3F00CFEFC6 /* TreeCtrl.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63B70DA92C3F00CFEFC6 /* TreeCtrl.d */; };
+		A46E64640DA92C3F00CFEFC6 /* UpdateUIEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63B80DA92C3F00CFEFC6 /* UpdateUIEvent.d */; };
+		A46E64650DA92C3F00CFEFC6 /* Utils.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63B90DA92C3F00CFEFC6 /* Utils.d */; };
+		A46E64660DA92C3F00CFEFC6 /* Validator.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63BA0DA92C3F00CFEFC6 /* Validator.d */; };
+		A46E64670DA92C3F00CFEFC6 /* VideoMode.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63BB0DA92C3F00CFEFC6 /* VideoMode.d */; };
+		A46E64680DA92C3F00CFEFC6 /* View.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63BC0DA92C3F00CFEFC6 /* View.d */; };
+		A46E64690DA92C3F00CFEFC6 /* Window.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63BD0DA92C3F00CFEFC6 /* Window.d */; };
+		A46E646A0DA92C3F00CFEFC6 /* WindowCreateEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63BF0DA92C3F00CFEFC6 /* WindowCreateEvent.d */; };
+		A46E646B0DA92C3F00CFEFC6 /* WindowDestroyEvent.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63C00DA92C3F00CFEFC6 /* WindowDestroyEvent.d */; };
+		A46E646C0DA92C3F00CFEFC6 /* Wizard.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63C10DA92C3F00CFEFC6 /* Wizard.d */; };
+		A46E646D0DA92C3F00CFEFC6 /* WizardPage.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63C20DA92C3F00CFEFC6 /* WizardPage.d */; };
+		A46E646E0DA92C3F00CFEFC6 /* WizardPageSimple.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63C30DA92C3F00CFEFC6 /* WizardPageSimple.d */; };
+		A46E646F0DA92C3F00CFEFC6 /* VLBox.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63C40DA92C3F00CFEFC6 /* VLBox.d */; };
+		A46E64700DA92C3F00CFEFC6 /* VScroll.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63C50DA92C3F00CFEFC6 /* VScroll.d */; };
+		A46E64710DA92C3F00CFEFC6 /* wx.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63C60DA92C3F00CFEFC6 /* wx.d */; };
+		A46E64720DA92C3F00CFEFC6 /* wxDateTime.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63C70DA92C3F00CFEFC6 /* wxDateTime.d */; };
+		A46E64730DA92C3F00CFEFC6 /* wxObject.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63C80DA92C3F00CFEFC6 /* wxObject.d */; };
+		A46E64740DA92C3F00CFEFC6 /* wxPlatform.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63C90DA92C3F00CFEFC6 /* wxPlatform.d */; };
+		A46E64750DA92C3F00CFEFC6 /* wxString.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63CA0DA92C3F00CFEFC6 /* wxString.d */; };
+		A46E64760DA92C3F00CFEFC6 /* wxVersion.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63CB0DA92C3F00CFEFC6 /* wxVersion.d */; };
+		A46E64770DA92C3F00CFEFC6 /* XmlResource.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63CC0DA92C3F00CFEFC6 /* XmlResource.d */; };
+		A46E64F30DA947B200CFEFC6 /* libwxc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A46E61CC0DA92B4D00CFEFC6 /* libwxc.dylib */; };
+		A46E64FE0DA948E200CFEFC6 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A46E64FD0DA948E200CFEFC6 /* libstdc++.6.dylib */; };
+		A46E65470DA950DC00CFEFC6 /* notifyevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E65460DA950DC00CFEFC6 /* notifyevent.cpp */; };
+		A46E655A0DA9519400CFEFC6 /* TipWindow.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63B30DA92C3F00CFEFC6 /* TipWindow.d */; };
+		A46E655C0DA951A000CFEFC6 /* ToggleButton.d in Sources */ = {isa = PBXBuildFile; fileRef = A46E63B40DA92C3F00CFEFC6 /* ToggleButton.d */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A46E67F60DA959A500CFEFC6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A46E61CB0DA92B4D00CFEFC6;
+			remoteInfo = wxc;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		32BAE0B70371A74B00C91783 /* wxd_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wxd_Prefix.pch; sourceTree = "<group>"; };
+		A46E61CC0DA92B4D00CFEFC6 /* libwxc.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libwxc.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		A46E61D70DA92BEA00CFEFC6 /* accel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = accel.cpp; path = wxc/accel.cpp; sourceTree = "<group>"; };
+		A46E61D80DA92BEA00CFEFC6 /* activateevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = activateevent.cpp; path = wxc/activateevent.cpp; sourceTree = "<group>"; };
+		A46E61D90DA92BEA00CFEFC6 /* app.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = app.cpp; path = wxc/app.cpp; sourceTree = "<group>"; };
+		A46E61DA0DA92BEA00CFEFC6 /* artprovider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = artprovider.cpp; path = wxc/artprovider.cpp; sourceTree = "<group>"; };
+		A46E61DB0DA92BEA00CFEFC6 /* bitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bitmap.cpp; path = wxc/bitmap.cpp; sourceTree = "<group>"; };
+		A46E61DC0DA92BEA00CFEFC6 /* bitmapbutton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bitmapbutton.cpp; path = wxc/bitmapbutton.cpp; sourceTree = "<group>"; };
+		A46E61DD0DA92BEA00CFEFC6 /* boxsizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = boxsizer.cpp; path = wxc/boxsizer.cpp; sourceTree = "<group>"; };
+		A46E61DE0DA92BEA00CFEFC6 /* brush.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = brush.cpp; path = wxc/brush.cpp; sourceTree = "<group>"; };
+		A46E61DF0DA92BEA00CFEFC6 /* button.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = button.cpp; path = wxc/button.cpp; sourceTree = "<group>"; };
+		A46E61E00DA92BEA00CFEFC6 /* calendarctrl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = calendarctrl.cpp; path = wxc/calendarctrl.cpp; sourceTree = "<group>"; };
+		A46E61E10DA92BEA00CFEFC6 /* caret.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = caret.cpp; path = wxc/caret.cpp; sourceTree = "<group>"; };
+		A46E61E20DA92BEA00CFEFC6 /* checkbox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = checkbox.cpp; path = wxc/checkbox.cpp; sourceTree = "<group>"; };
+		A46E61E30DA92BEA00CFEFC6 /* childfocusevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = childfocusevent.cpp; path = wxc/childfocusevent.cpp; sourceTree = "<group>"; };
+		A46E61E40DA92BEA00CFEFC6 /* choice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = choice.cpp; path = wxc/choice.cpp; sourceTree = "<group>"; };
+		A46E61E50DA92BEA00CFEFC6 /* choicedialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = choicedialog.cpp; path = wxc/choicedialog.cpp; sourceTree = "<group>"; };
+		A46E61E60DA92BEA00CFEFC6 /* clientdata.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = clientdata.cpp; path = wxc/clientdata.cpp; sourceTree = "<group>"; };
+		A46E61E70DA92BEA00CFEFC6 /* clipboard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = clipboard.cpp; path = wxc/clipboard.cpp; sourceTree = "<group>"; };
+		A46E61E80DA92BEA00CFEFC6 /* closeevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = closeevent.cpp; path = wxc/closeevent.cpp; sourceTree = "<group>"; };
+		A46E61E90DA92BEA00CFEFC6 /* colour.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = colour.cpp; path = wxc/colour.cpp; sourceTree = "<group>"; };
+		A46E61EA0DA92BEA00CFEFC6 /* colourdialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = colourdialog.cpp; path = wxc/colourdialog.cpp; sourceTree = "<group>"; };
+		A46E61EB0DA92BEA00CFEFC6 /* combobox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = combobox.cpp; path = wxc/combobox.cpp; sourceTree = "<group>"; };
+		A46E61EC0DA92BEA00CFEFC6 /* commandevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = commandevent.cpp; path = wxc/commandevent.cpp; sourceTree = "<group>"; };
+		A46E61ED0DA92BEA00CFEFC6 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = common.h; path = wxc/common.h; sourceTree = "<group>"; };
+		A46E61EE0DA92BEA00CFEFC6 /* config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = config.cpp; path = wxc/config.cpp; sourceTree = "<group>"; };
+		A46E61EF0DA92BEA00CFEFC6 /* contextmenuevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = contextmenuevent.cpp; path = wxc/contextmenuevent.cpp; sourceTree = "<group>"; };
+		A46E61F00DA92BEA00CFEFC6 /* control.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = control.cpp; path = wxc/control.cpp; sourceTree = "<group>"; };
+		A46E61F10DA92BEA00CFEFC6 /* cursor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cursor.cpp; path = wxc/cursor.cpp; sourceTree = "<group>"; };
+		A46E61F20DA92BEA00CFEFC6 /* dataformat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dataformat.cpp; path = wxc/dataformat.cpp; sourceTree = "<group>"; };
+		A46E61F30DA92BEA00CFEFC6 /* dataobject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dataobject.cpp; path = wxc/dataobject.cpp; sourceTree = "<group>"; };
+		A46E61F40DA92BEA00CFEFC6 /* dc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dc.cpp; path = wxc/dc.cpp; sourceTree = "<group>"; };
+		A46E61F50DA92BEA00CFEFC6 /* dialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dialog.cpp; path = wxc/dialog.cpp; sourceTree = "<group>"; };
+		A46E61F60DA92BEA00CFEFC6 /* dirdialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dirdialog.cpp; path = wxc/dirdialog.cpp; sourceTree = "<group>"; };
+		A46E61F70DA92BEA00CFEFC6 /* display.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = display.cpp; path = wxc/display.cpp; sourceTree = "<group>"; };
+		A46E61F80DA92BEA00CFEFC6 /* displaychangedevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = displaychangedevent.cpp; path = wxc/displaychangedevent.cpp; sourceTree = "<group>"; };
+		A46E61F90DA92BEA00CFEFC6 /* dnd.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dnd.cpp; path = wxc/dnd.cpp; sourceTree = "<group>"; };
+		A46E61FA0DA92BEA00CFEFC6 /* docmanager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = docmanager.cpp; path = wxc/docmanager.cpp; sourceTree = "<group>"; };
+		A46E61FB0DA92BEA00CFEFC6 /* doctemplate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = doctemplate.cpp; path = wxc/doctemplate.cpp; sourceTree = "<group>"; };
+		A46E61FC0DA92BEA00CFEFC6 /* document.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = document.cpp; path = wxc/document.cpp; sourceTree = "<group>"; };
+		A46E61FD0DA92BEA00CFEFC6 /* eraseevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = eraseevent.cpp; path = wxc/eraseevent.cpp; sourceTree = "<group>"; };
+		A46E61FE0DA92BEA00CFEFC6 /* event.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = event.cpp; path = wxc/event.cpp; sourceTree = "<group>"; };
+		A46E61FF0DA92BEA00CFEFC6 /* evthandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = evthandler.cpp; path = wxc/evthandler.cpp; sourceTree = "<group>"; };
+		A46E62000DA92BEA00CFEFC6 /* filedialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = filedialog.cpp; path = wxc/filedialog.cpp; sourceTree = "<group>"; };
+		A46E62010DA92BEA00CFEFC6 /* findreplacedialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = findreplacedialog.cpp; path = wxc/findreplacedialog.cpp; sourceTree = "<group>"; };
+		A46E62020DA92BEA00CFEFC6 /* flexgridsizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = flexgridsizer.cpp; path = wxc/flexgridsizer.cpp; sourceTree = "<group>"; };
+		A46E62030DA92BEA00CFEFC6 /* focusevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = focusevent.cpp; path = wxc/focusevent.cpp; sourceTree = "<group>"; };
+		A46E62040DA92BEA00CFEFC6 /* font.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = font.cpp; path = wxc/font.cpp; sourceTree = "<group>"; };
+		A46E62050DA92BEA00CFEFC6 /* fontdialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fontdialog.cpp; path = wxc/fontdialog.cpp; sourceTree = "<group>"; };
+		A46E62060DA92BEA00CFEFC6 /* fontmisc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fontmisc.cpp; path = wxc/fontmisc.cpp; sourceTree = "<group>"; };
+		A46E62070DA92BEA00CFEFC6 /* frame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = frame.cpp; path = wxc/frame.cpp; sourceTree = "<group>"; };
+		A46E62080DA92BEA00CFEFC6 /* gauge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gauge.cpp; path = wxc/gauge.cpp; sourceTree = "<group>"; };
+		A46E62090DA92BEA00CFEFC6 /* gdicmn.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gdicmn.cpp; path = wxc/gdicmn.cpp; sourceTree = "<group>"; };
+		A46E620A0DA92BEA00CFEFC6 /* gdiobject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gdiobject.cpp; path = wxc/gdiobject.cpp; sourceTree = "<group>"; };
+		A46E620B0DA92BEA00CFEFC6 /* glcanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = glcanvas.cpp; path = wxc/glcanvas.cpp; sourceTree = "<group>"; };
+		A46E620C0DA92BEA00CFEFC6 /* global.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = global.cpp; path = wxc/global.cpp; sourceTree = "<group>"; };
+		A46E620D0DA92BEA00CFEFC6 /* grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = grid.cpp; path = wxc/grid.cpp; sourceTree = "<group>"; };
+		A46E620E0DA92BEA00CFEFC6 /* gridbagsizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gridbagsizer.cpp; path = wxc/gridbagsizer.cpp; sourceTree = "<group>"; };
+		A46E620F0DA92BEA00CFEFC6 /* gridctrl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gridctrl.cpp; path = wxc/gridctrl.cpp; sourceTree = "<group>"; };
+		A46E62100DA92BEA00CFEFC6 /* gridsizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = gridsizer.cpp; path = wxc/gridsizer.cpp; sourceTree = "<group>"; };
+		A46E62110DA92BEA00CFEFC6 /* helpevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = helpevent.cpp; path = wxc/helpevent.cpp; sourceTree = "<group>"; };
+		A46E62120DA92BEA00CFEFC6 /* html.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = html.cpp; path = wxc/html.cpp; sourceTree = "<group>"; };
+		A46E62130DA92BEA00CFEFC6 /* htmlhelpctrl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = htmlhelpctrl.cpp; path = wxc/htmlhelpctrl.cpp; sourceTree = "<group>"; };
+		A46E62140DA92BEA00CFEFC6 /* htmllbox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = htmllbox.cpp; path = wxc/htmllbox.cpp; sourceTree = "<group>"; };
+		A46E62150DA92BEA00CFEFC6 /* icon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = icon.cpp; path = wxc/icon.cpp; sourceTree = "<group>"; };
+		A46E62160DA92BEA00CFEFC6 /* iconizeevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = iconizeevent.cpp; path = wxc/iconizeevent.cpp; sourceTree = "<group>"; };
+		A46E62170DA92BEA00CFEFC6 /* idleevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = idleevent.cpp; path = wxc/idleevent.cpp; sourceTree = "<group>"; };
+		A46E62180DA92BEA00CFEFC6 /* image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = image.cpp; path = wxc/image.cpp; sourceTree = "<group>"; };
+		A46E62190DA92BEA00CFEFC6 /* imagelist.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imagelist.cpp; path = wxc/imagelist.cpp; sourceTree = "<group>"; };
+		A46E621A0DA92BEA00CFEFC6 /* imghandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imghandler.cpp; path = wxc/imghandler.cpp; sourceTree = "<group>"; };
+		A46E621B0DA92BEA00CFEFC6 /* initdialogevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = initdialogevent.cpp; path = wxc/initdialogevent.cpp; sourceTree = "<group>"; };
+		A46E621C0DA92BEA00CFEFC6 /* keyevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = keyevent.cpp; path = wxc/keyevent.cpp; sourceTree = "<group>"; };
+		A46E621D0DA92BEA00CFEFC6 /* laywin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = laywin.cpp; path = wxc/laywin.cpp; sourceTree = "<group>"; };
+		A46E621E0DA92BEA00CFEFC6 /* listbook.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = listbook.cpp; path = wxc/listbook.cpp; sourceTree = "<group>"; };
+		A46E621F0DA92BEA00CFEFC6 /* listbox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = listbox.cpp; path = wxc/listbox.cpp; sourceTree = "<group>"; };
+		A46E62200DA92BEA00CFEFC6 /* listctrl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = listctrl.cpp; path = wxc/listctrl.cpp; sourceTree = "<group>"; };
+		A46E62210DA92BEA00CFEFC6 /* local_events.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = local_events.h; path = wxc/local_events.h; sourceTree = "<group>"; };
+		A46E62220DA92BEA00CFEFC6 /* locale.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = locale.cpp; path = wxc/locale.cpp; sourceTree = "<group>"; };
+		A46E62230DA92BEA00CFEFC6 /* log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = log.cpp; path = wxc/log.cpp; sourceTree = "<group>"; };
+		A46E62240DA92BEA00CFEFC6 /* manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = manager.cpp; path = wxc/manager.cpp; sourceTree = "<group>"; };
+		A46E62250DA92BEA00CFEFC6 /* manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = manager.h; path = wxc/manager.h; sourceTree = "<group>"; };
+		A46E62260DA92BEA00CFEFC6 /* maximizeevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = maximizeevent.cpp; path = wxc/maximizeevent.cpp; sourceTree = "<group>"; };
+		A46E62270DA92BEA00CFEFC6 /* mdi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mdi.cpp; path = wxc/mdi.cpp; sourceTree = "<group>"; };
+		A46E62280DA92BEA00CFEFC6 /* memorydc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = memorydc.cpp; path = wxc/memorydc.cpp; sourceTree = "<group>"; };
+		A46E62290DA92BEA00CFEFC6 /* menu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = menu.cpp; path = wxc/menu.cpp; sourceTree = "<group>"; };
+		A46E622A0DA92BEA00CFEFC6 /* menubar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = menubar.cpp; path = wxc/menubar.cpp; sourceTree = "<group>"; };
+		A46E622B0DA92BEA00CFEFC6 /* menuitem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = menuitem.cpp; path = wxc/menuitem.cpp; sourceTree = "<group>"; };
+		A46E622C0DA92BEA00CFEFC6 /* messagedialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = messagedialog.cpp; path = wxc/messagedialog.cpp; sourceTree = "<group>"; };
+		A46E622D0DA92BEA00CFEFC6 /* miniframe.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = miniframe.cpp; path = wxc/miniframe.cpp; sourceTree = "<group>"; };
+		A46E622E0DA92BEA00CFEFC6 /* mousecapturechangedevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mousecapturechangedevent.cpp; path = wxc/mousecapturechangedevent.cpp; sourceTree = "<group>"; };
+		A46E622F0DA92BEA00CFEFC6 /* mouseevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mouseevent.cpp; path = wxc/mouseevent.cpp; sourceTree = "<group>"; };
+		A46E62300DA92BEA00CFEFC6 /* moveevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moveevent.cpp; path = wxc/moveevent.cpp; sourceTree = "<group>"; };
+		A46E62310DA92BEA00CFEFC6 /* navigationkeyevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = navigationkeyevent.cpp; path = wxc/navigationkeyevent.cpp; sourceTree = "<group>"; };
+		A46E62320DA92BEA00CFEFC6 /* ncpaintevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ncpaintevent.cpp; path = wxc/ncpaintevent.cpp; sourceTree = "<group>"; };
+		A46E62330DA92BEA00CFEFC6 /* notebook.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = notebook.cpp; path = wxc/notebook.cpp; sourceTree = "<group>"; };
+		A46E62340DA92BEA00CFEFC6 /* notebooksizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = notebooksizer.cpp; path = wxc/notebooksizer.cpp; sourceTree = "<group>"; };
+		A46E62350DA92BEA00CFEFC6 /* numdialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = numdialog.cpp; path = wxc/numdialog.cpp; sourceTree = "<group>"; };
+		A46E62360DA92BEA00CFEFC6 /* object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = object.cpp; path = wxc/object.cpp; sourceTree = "<group>"; };
+		A46E62370DA92BEA00CFEFC6 /* paintevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = paintevent.cpp; path = wxc/paintevent.cpp; sourceTree = "<group>"; };
+		A46E62380DA92BEA00CFEFC6 /* palette.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = palette.cpp; path = wxc/palette.cpp; sourceTree = "<group>"; };
+		A46E62390DA92BEA00CFEFC6 /* palettechangedevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = palettechangedevent.cpp; path = wxc/palettechangedevent.cpp; sourceTree = "<group>"; };
+		A46E623A0DA92BEA00CFEFC6 /* panel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = panel.cpp; path = wxc/panel.cpp; sourceTree = "<group>"; };
+		A46E623B0DA92BEA00CFEFC6 /* pen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pen.cpp; path = wxc/pen.cpp; sourceTree = "<group>"; };
+		A46E623C0DA92BEA00CFEFC6 /* printdata.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = printdata.cpp; path = wxc/printdata.cpp; sourceTree = "<group>"; };
+		A46E623D0DA92BEA00CFEFC6 /* printdialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = printdialog.cpp; path = wxc/printdialog.cpp; sourceTree = "<group>"; };
+		A46E623E0DA92BEA00CFEFC6 /* printer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = printer.cpp; path = wxc/printer.cpp; sourceTree = "<group>"; };
+		A46E623F0DA92BEA00CFEFC6 /* printpreview.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = printpreview.cpp; path = wxc/printpreview.cpp; sourceTree = "<group>"; };
+		A46E62400DA92BEA00CFEFC6 /* progdlg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = progdlg.cpp; path = wxc/progdlg.cpp; sourceTree = "<group>"; };
+		A46E62410DA92BEA00CFEFC6 /* querynewpaletteevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = querynewpaletteevent.cpp; path = wxc/querynewpaletteevent.cpp; sourceTree = "<group>"; };
+		A46E62420DA92BEA00CFEFC6 /* radiobox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = radiobox.cpp; path = wxc/radiobox.cpp; sourceTree = "<group>"; };
+		A46E62430DA92BEA00CFEFC6 /* radiobutton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = radiobutton.cpp; path = wxc/radiobutton.cpp; sourceTree = "<group>"; };
+		A46E62440DA92BEA00CFEFC6 /* region.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = region.cpp; path = wxc/region.cpp; sourceTree = "<group>"; };
+		A46E62450DA92BEA00CFEFC6 /* sashwindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sashwindow.cpp; path = wxc/sashwindow.cpp; sourceTree = "<group>"; };
+		A46E62460DA92BEA00CFEFC6 /* scrollbar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scrollbar.cpp; path = wxc/scrollbar.cpp; sourceTree = "<group>"; };
+		A46E62470DA92BEA00CFEFC6 /* scrolledwindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scrolledwindow.cpp; path = wxc/scrolledwindow.cpp; sourceTree = "<group>"; };
+		A46E62480DA92BEA00CFEFC6 /* setcursorevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = setcursorevent.cpp; path = wxc/setcursorevent.cpp; sourceTree = "<group>"; };
+		A46E62490DA92BEA00CFEFC6 /* showevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = showevent.cpp; path = wxc/showevent.cpp; sourceTree = "<group>"; };
+		A46E624A0DA92BEA00CFEFC6 /* sizeevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sizeevent.cpp; path = wxc/sizeevent.cpp; sourceTree = "<group>"; };
+		A46E624B0DA92BEA00CFEFC6 /* sizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sizer.cpp; path = wxc/sizer.cpp; sourceTree = "<group>"; };
+		A46E624C0DA92BEA00CFEFC6 /* sizeritem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sizeritem.cpp; path = wxc/sizeritem.cpp; sourceTree = "<group>"; };
+		A46E624D0DA92BEA00CFEFC6 /* slider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = slider.cpp; path = wxc/slider.cpp; sourceTree = "<group>"; };
+		A46E624E0DA92BEA00CFEFC6 /* sound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sound.cpp; path = wxc/sound.cpp; sourceTree = "<group>"; };
+		A46E624F0DA92BEA00CFEFC6 /* spinbutton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = spinbutton.cpp; path = wxc/spinbutton.cpp; sourceTree = "<group>"; };
+		A46E62500DA92BEA00CFEFC6 /* spinctrl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = spinctrl.cpp; path = wxc/spinctrl.cpp; sourceTree = "<group>"; };
+		A46E62510DA92BEA00CFEFC6 /* splashscreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = splashscreen.cpp; path = wxc/splashscreen.cpp; sourceTree = "<group>"; };
+		A46E62520DA92BEA00CFEFC6 /* splitterwindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = splitterwindow.cpp; path = wxc/splitterwindow.cpp; sourceTree = "<group>"; };
+		A46E62530DA92BEA00CFEFC6 /* staticbitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = staticbitmap.cpp; path = wxc/staticbitmap.cpp; sourceTree = "<group>"; };
+		A46E62540DA92BEA00CFEFC6 /* staticbox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = staticbox.cpp; path = wxc/staticbox.cpp; sourceTree = "<group>"; };
+		A46E62550DA92BEA00CFEFC6 /* staticboxsizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = staticboxsizer.cpp; path = wxc/staticboxsizer.cpp; sourceTree = "<group>"; };
+		A46E62560DA92BEA00CFEFC6 /* staticline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = staticline.cpp; path = wxc/staticline.cpp; sourceTree = "<group>"; };
+		A46E62570DA92BEA00CFEFC6 /* statictext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = statictext.cpp; path = wxc/statictext.cpp; sourceTree = "<group>"; };
+		A46E62580DA92BEA00CFEFC6 /* statusbar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = statusbar.cpp; path = wxc/statusbar.cpp; sourceTree = "<group>"; };
+		A46E62590DA92BEA00CFEFC6 /* styledtextctrl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = styledtextctrl.cpp; path = wxc/styledtextctrl.cpp; sourceTree = "<group>"; };
+		A46E625A0DA92BEA00CFEFC6 /* syscolourchangedevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = syscolourchangedevent.cpp; path = wxc/syscolourchangedevent.cpp; sourceTree = "<group>"; };
+		A46E625B0DA92BEA00CFEFC6 /* systemsettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = systemsettings.cpp; path = wxc/systemsettings.cpp; sourceTree = "<group>"; };
+		A46E625C0DA92BEA00CFEFC6 /* tabctrl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tabctrl.cpp; path = wxc/tabctrl.cpp; sourceTree = "<group>"; };
+		A46E625D0DA92BEA00CFEFC6 /* taskbaricon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = taskbaricon.cpp; path = wxc/taskbaricon.cpp; sourceTree = "<group>"; };
+		A46E625E0DA92BEA00CFEFC6 /* textctrl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = textctrl.cpp; path = wxc/textctrl.cpp; sourceTree = "<group>"; };
+		A46E625F0DA92BEA00CFEFC6 /* textdialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = textdialog.cpp; path = wxc/textdialog.cpp; sourceTree = "<group>"; };
+		A46E62600DA92BEA00CFEFC6 /* thread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = thread.cpp; path = wxc/thread.cpp; sourceTree = "<group>"; };
+		A46E62610DA92BEA00CFEFC6 /* timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = timer.cpp; path = wxc/timer.cpp; sourceTree = "<group>"; };
+		A46E62620DA92BEA00CFEFC6 /* timer.cpp.old */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = timer.cpp.old; path = wxc/timer.cpp.old; sourceTree = "<group>"; };
+		A46E62630DA92BEA00CFEFC6 /* tipdialog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tipdialog.cpp; path = wxc/tipdialog.cpp; sourceTree = "<group>"; };
+		A46E62640DA92BEA00CFEFC6 /* tipwindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tipwindow.cpp; path = wxc/tipwindow.cpp; sourceTree = "<group>"; };
+		A46E62650DA92BEA00CFEFC6 /* togglebutton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = togglebutton.cpp; path = wxc/togglebutton.cpp; sourceTree = "<group>"; };
+		A46E62660DA92BEA00CFEFC6 /* toolbar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = toolbar.cpp; path = wxc/toolbar.cpp; sourceTree = "<group>"; };
+		A46E62670DA92BEA00CFEFC6 /* tooltip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tooltip.cpp; path = wxc/tooltip.cpp; sourceTree = "<group>"; };
+		A46E62680DA92BEA00CFEFC6 /* treectrl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = treectrl.cpp; path = wxc/treectrl.cpp; sourceTree = "<group>"; };
+		A46E62690DA92BEA00CFEFC6 /* updateuievent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = updateuievent.cpp; path = wxc/updateuievent.cpp; sourceTree = "<group>"; };
+		A46E626A0DA92BEA00CFEFC6 /* validator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = validator.cpp; path = wxc/validator.cpp; sourceTree = "<group>"; };
+		A46E626B0DA92BEA00CFEFC6 /* view.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = view.cpp; path = wxc/view.cpp; sourceTree = "<group>"; };
+		A46E626C0DA92BEA00CFEFC6 /* window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = window.cpp; path = wxc/window.cpp; sourceTree = "<group>"; };
+		A46E626D0DA92BEA00CFEFC6 /* windowcreateevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = windowcreateevent.cpp; path = wxc/windowcreateevent.cpp; sourceTree = "<group>"; };
+		A46E626E0DA92BEA00CFEFC6 /* windowdestroyevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = windowdestroyevent.cpp; path = wxc/windowdestroyevent.cpp; sourceTree = "<group>"; };
+		A46E626F0DA92BEA00CFEFC6 /* wizard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wizard.cpp; path = wxc/wizard.cpp; sourceTree = "<group>"; };
+		A46E62700DA92BEA00CFEFC6 /* wizardpagesimple.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wizardpagesimple.cpp; path = wxc/wizardpagesimple.cpp; sourceTree = "<group>"; };
+		A46E62710DA92BEA00CFEFC6 /* vlbox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vlbox.cpp; path = wxc/vlbox.cpp; sourceTree = "<group>"; };
+		A46E62720DA92BEA00CFEFC6 /* vscroll.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = vscroll.cpp; path = wxc/vscroll.cpp; sourceTree = "<group>"; };
+		A46E62730DA92BEA00CFEFC6 /* wxaui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wxaui.cpp; path = wxc/wxaui.cpp; sourceTree = "<group>"; };
+		A46E62740DA92BEA00CFEFC6 /* wxdatetime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wxdatetime.cpp; path = wxc/wxdatetime.cpp; sourceTree = "<group>"; };
+		A46E62750DA92BEA00CFEFC6 /* wxplatform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wxplatform.cpp; path = wxc/wxplatform.cpp; sourceTree = "<group>"; };
+		A46E62760DA92BEA00CFEFC6 /* wxstring.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wxstring.cpp; path = wxc/wxstring.cpp; sourceTree = "<group>"; };
+		A46E62770DA92BEA00CFEFC6 /* wxversion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wxversion.cpp; path = wxc/wxversion.cpp; sourceTree = "<group>"; };
+		A46E62780DA92BEA00CFEFC6 /* xmlresource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = xmlresource.cpp; path = wxc/xmlresource.cpp; sourceTree = "<group>"; };
+		A46E631B0DA92C3E00CFEFC6 /* Accelerator.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Accelerator.d; path = wxd/wx/Accelerator.d; sourceTree = "<group>"; };
+		A46E631C0DA92C3E00CFEFC6 /* ActivateEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = ActivateEvent.d; path = wxd/wx/ActivateEvent.d; sourceTree = "<group>"; };
+		A46E631D0DA92C3E00CFEFC6 /* App.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = App.d; path = wxd/wx/App.d; sourceTree = "<group>"; };
+		A46E631F0DA92C3E00CFEFC6 /* ArrayInt.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = ArrayInt.d; path = wxd/wx/ArrayInt.d; sourceTree = "<group>"; };
+		A46E63200DA92C3E00CFEFC6 /* ArrayString.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = ArrayString.d; path = wxd/wx/ArrayString.d; sourceTree = "<group>"; };
+		A46E63210DA92C3E00CFEFC6 /* ArtProvider.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = ArtProvider.d; path = wxd/wx/ArtProvider.d; sourceTree = "<group>"; };
+		A46E63230DA92C3E00CFEFC6 /* aui.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; path = aui.d; sourceTree = "<group>"; };
+		A46E63240DA92C3E00CFEFC6 /* DockArt.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; path = DockArt.d; sourceTree = "<group>"; };
+		A46E63250DA92C3E00CFEFC6 /* FrameManager.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; path = FrameManager.d; sourceTree = "<group>"; };
+		A46E63260DA92C3E00CFEFC6 /* Bitmap.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Bitmap.d; path = wxd/wx/Bitmap.d; sourceTree = "<group>"; };
+		A46E63270DA92C3E00CFEFC6 /* BitmapButton.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = BitmapButton.d; path = wxd/wx/BitmapButton.d; sourceTree = "<group>"; };
+		A46E63280DA92C3E00CFEFC6 /* BoxSizer.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = BoxSizer.d; path = wxd/wx/BoxSizer.d; sourceTree = "<group>"; };
+		A46E63290DA92C3E00CFEFC6 /* Brush.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Brush.d; path = wxd/wx/Brush.d; sourceTree = "<group>"; };
+		A46E632A0DA92C3E00CFEFC6 /* Button.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Button.d; path = wxd/wx/Button.d; sourceTree = "<group>"; };
+		A46E632B0DA92C3E00CFEFC6 /* CalendarCtrl.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = CalendarCtrl.d; path = wxd/wx/CalendarCtrl.d; sourceTree = "<group>"; };
+		A46E632C0DA92C3E00CFEFC6 /* Caret.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Caret.d; path = wxd/wx/Caret.d; sourceTree = "<group>"; };
+		A46E632D0DA92C3E00CFEFC6 /* CheckBox.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = CheckBox.d; path = wxd/wx/CheckBox.d; sourceTree = "<group>"; };
+		A46E632E0DA92C3E00CFEFC6 /* ChildFocusEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = ChildFocusEvent.d; path = wxd/wx/ChildFocusEvent.d; sourceTree = "<group>"; };
+		A46E632F0DA92C3E00CFEFC6 /* Choice.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Choice.d; path = wxd/wx/Choice.d; sourceTree = "<group>"; };
+		A46E63300DA92C3E00CFEFC6 /* ChoiceDialog.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = ChoiceDialog.d; path = wxd/wx/ChoiceDialog.d; sourceTree = "<group>"; };
+		A46E63310DA92C3E00CFEFC6 /* ClientData.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = ClientData.d; path = wxd/wx/ClientData.d; sourceTree = "<group>"; };
+		A46E63320DA92C3E00CFEFC6 /* Clipboard.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Clipboard.d; path = wxd/wx/Clipboard.d; sourceTree = "<group>"; };
+		A46E63330DA92C3E00CFEFC6 /* CloseEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = CloseEvent.d; path = wxd/wx/CloseEvent.d; sourceTree = "<group>"; };
+		A46E63340DA92C3E00CFEFC6 /* Colour.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Colour.d; path = wxd/wx/Colour.d; sourceTree = "<group>"; };
+		A46E63350DA92C3E00CFEFC6 /* ColourDialog.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = ColourDialog.d; path = wxd/wx/ColourDialog.d; sourceTree = "<group>"; };
+		A46E63360DA92C3E00CFEFC6 /* ComboBox.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = ComboBox.d; path = wxd/wx/ComboBox.d; sourceTree = "<group>"; };
+		A46E63370DA92C3E00CFEFC6 /* CommandEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = CommandEvent.d; path = wxd/wx/CommandEvent.d; sourceTree = "<group>"; };
+		A46E63380DA92C3E00CFEFC6 /* common.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = common.d; path = wxd/wx/common.d; sourceTree = "<group>"; };
+		A46E63390DA92C3E00CFEFC6 /* Config.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Config.d; path = wxd/wx/Config.d; sourceTree = "<group>"; };
+		A46E633A0DA92C3E00CFEFC6 /* ContextMenuEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = ContextMenuEvent.d; path = wxd/wx/ContextMenuEvent.d; sourceTree = "<group>"; };
+		A46E633B0DA92C3E00CFEFC6 /* Control.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Control.d; path = wxd/wx/Control.d; sourceTree = "<group>"; };
+		A46E633C0DA92C3E00CFEFC6 /* Cursor.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Cursor.d; path = wxd/wx/Cursor.d; sourceTree = "<group>"; };
+		A46E633D0DA92C3E00CFEFC6 /* DataFormat.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = DataFormat.d; path = wxd/wx/DataFormat.d; sourceTree = "<group>"; };
+		A46E633E0DA92C3E00CFEFC6 /* DataObject.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = DataObject.d; path = wxd/wx/DataObject.d; sourceTree = "<group>"; };
+		A46E633F0DA92C3E00CFEFC6 /* DbGrid.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = DbGrid.d; path = wxd/wx/DbGrid.d; sourceTree = "<group>"; };
+		A46E63400DA92C3E00CFEFC6 /* DC.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = DC.d; path = wxd/wx/DC.d; sourceTree = "<group>"; };
+		A46E63410DA92C3E00CFEFC6 /* Defs.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Defs.d; path = wxd/wx/Defs.d; sourceTree = "<group>"; };
+		A46E63420DA92C3E00CFEFC6 /* Dialog.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Dialog.d; path = wxd/wx/Dialog.d; sourceTree = "<group>"; };
+		A46E63440DA92C3E00CFEFC6 /* DirDialog.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = DirDialog.d; path = wxd/wx/DirDialog.d; sourceTree = "<group>"; };
+		A46E63450DA92C3E00CFEFC6 /* Display.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Display.d; path = wxd/wx/Display.d; sourceTree = "<group>"; };
+		A46E63460DA92C3E00CFEFC6 /* DisplayChangedEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = DisplayChangedEvent.d; path = wxd/wx/DisplayChangedEvent.d; sourceTree = "<group>"; };
+		A46E63470DA92C3E00CFEFC6 /* DND.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = DND.d; path = wxd/wx/DND.d; sourceTree = "<group>"; };
+		A46E63480DA92C3E00CFEFC6 /* DocManager.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = DocManager.d; path = wxd/wx/DocManager.d; sourceTree = "<group>"; };
+		A46E63490DA92C3E00CFEFC6 /* DocTemplate.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = DocTemplate.d; path = wxd/wx/DocTemplate.d; sourceTree = "<group>"; };
+		A46E634A0DA92C3E00CFEFC6 /* Document.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Document.d; path = wxd/wx/Document.d; sourceTree = "<group>"; };
+		A46E634B0DA92C3E00CFEFC6 /* EraseEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = EraseEvent.d; path = wxd/wx/EraseEvent.d; sourceTree = "<group>"; };
+		A46E634C0DA92C3E00CFEFC6 /* Event.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Event.d; path = wxd/wx/Event.d; sourceTree = "<group>"; };
+		A46E634D0DA92C3E00CFEFC6 /* EvtHandler.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = EvtHandler.d; path = wxd/wx/EvtHandler.d; sourceTree = "<group>"; };
+		A46E634E0DA92C3E00CFEFC6 /* FileDialog.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = FileDialog.d; path = wxd/wx/FileDialog.d; sourceTree = "<group>"; };
+		A46E634F0DA92C3E00CFEFC6 /* FindReplaceDialog.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = FindReplaceDialog.d; path = wxd/wx/FindReplaceDialog.d; sourceTree = "<group>"; };
+		A46E63500DA92C3E00CFEFC6 /* FlexGridSizer.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = FlexGridSizer.d; path = wxd/wx/FlexGridSizer.d; sourceTree = "<group>"; };
+		A46E63510DA92C3E00CFEFC6 /* FocusEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = FocusEvent.d; path = wxd/wx/FocusEvent.d; sourceTree = "<group>"; };
+		A46E63520DA92C3E00CFEFC6 /* Font.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Font.d; path = wxd/wx/Font.d; sourceTree = "<group>"; };
+		A46E63530DA92C3E00CFEFC6 /* FontDialog.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = FontDialog.d; path = wxd/wx/FontDialog.d; sourceTree = "<group>"; };
+		A46E63540DA92C3E00CFEFC6 /* FontMisc.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = FontMisc.d; path = wxd/wx/FontMisc.d; sourceTree = "<group>"; };
+		A46E63550DA92C3E00CFEFC6 /* Frame.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Frame.d; path = wxd/wx/Frame.d; sourceTree = "<group>"; };
+		A46E63570DA92C3E00CFEFC6 /* Gauge.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Gauge.d; path = wxd/wx/Gauge.d; sourceTree = "<group>"; };
+		A46E63580DA92C3E00CFEFC6 /* GdiCommon.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = GdiCommon.d; path = wxd/wx/GdiCommon.d; sourceTree = "<group>"; };
+		A46E63590DA92C3E00CFEFC6 /* GDIObject.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = GDIObject.d; path = wxd/wx/GDIObject.d; sourceTree = "<group>"; };
+		A46E635A0DA92C3E00CFEFC6 /* GLCanvas.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = GLCanvas.d; path = wxd/wx/GLCanvas.d; sourceTree = "<group>"; };
+		A46E635B0DA92C3E00CFEFC6 /* Grid.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Grid.d; path = wxd/wx/Grid.d; sourceTree = "<group>"; };
+		A46E635C0DA92C3E00CFEFC6 /* GridBagSizer.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = GridBagSizer.d; path = wxd/wx/GridBagSizer.d; sourceTree = "<group>"; };
+		A46E635D0DA92C3E00CFEFC6 /* GridCtrl.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = GridCtrl.d; path = wxd/wx/GridCtrl.d; sourceTree = "<group>"; };
+		A46E635E0DA92C3E00CFEFC6 /* GridSizer.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = GridSizer.d; path = wxd/wx/GridSizer.d; sourceTree = "<group>"; };
+		A46E635F0DA92C3E00CFEFC6 /* HelpEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = HelpEvent.d; path = wxd/wx/HelpEvent.d; sourceTree = "<group>"; };
+		A46E63600DA92C3E00CFEFC6 /* HTML.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = HTML.d; path = wxd/wx/HTML.d; sourceTree = "<group>"; };
+		A46E63610DA92C3E00CFEFC6 /* HtmlHelpController.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = HtmlHelpController.d; path = wxd/wx/HtmlHelpController.d; sourceTree = "<group>"; };
+		A46E63620DA92C3E00CFEFC6 /* HtmlListBox.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = HtmlListBox.d; path = wxd/wx/HtmlListBox.d; sourceTree = "<group>"; };
+		A46E63630DA92C3E00CFEFC6 /* Icon.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Icon.d; path = wxd/wx/Icon.d; sourceTree = "<group>"; };
+		A46E63640DA92C3E00CFEFC6 /* IconizeEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = IconizeEvent.d; path = wxd/wx/IconizeEvent.d; sourceTree = "<group>"; };
+		A46E63650DA92C3E00CFEFC6 /* IControlWithItems.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = IControlWithItems.d; path = wxd/wx/IControlWithItems.d; sourceTree = "<group>"; };
+		A46E63660DA92C3E00CFEFC6 /* IdleEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = IdleEvent.d; path = wxd/wx/IdleEvent.d; sourceTree = "<group>"; };
+		A46E63670DA92C3E00CFEFC6 /* Image.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Image.d; path = wxd/wx/Image.d; sourceTree = "<group>"; };
+		A46E63680DA92C3E00CFEFC6 /* ImageHandlers.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = ImageHandlers.d; path = wxd/wx/ImageHandlers.d; sourceTree = "<group>"; };
+		A46E63690DA92C3E00CFEFC6 /* ImageList.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = ImageList.d; path = wxd/wx/ImageList.d; sourceTree = "<group>"; };
+		A46E636A0DA92C3E00CFEFC6 /* InitDialogEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = InitDialogEvent.d; path = wxd/wx/InitDialogEvent.d; sourceTree = "<group>"; };
+		A46E636B0DA92C3E00CFEFC6 /* KeyEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = KeyEvent.d; path = wxd/wx/KeyEvent.d; sourceTree = "<group>"; };
+		A46E636C0DA92C3E00CFEFC6 /* LayoutWin.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = LayoutWin.d; path = wxd/wx/LayoutWin.d; sourceTree = "<group>"; };
+		A46E636D0DA92C3E00CFEFC6 /* libs.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = libs.d; path = wxd/wx/libs.d; sourceTree = "<group>"; };
+		A46E636E0DA92C3E00CFEFC6 /* Listbook.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Listbook.d; path = wxd/wx/Listbook.d; sourceTree = "<group>"; };
+		A46E636F0DA92C3E00CFEFC6 /* ListBox.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = ListBox.d; path = wxd/wx/ListBox.d; sourceTree = "<group>"; };
+		A46E63700DA92C3E00CFEFC6 /* ListCtrl.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = ListCtrl.d; path = wxd/wx/ListCtrl.d; sourceTree = "<group>"; };
+		A46E63710DA92C3F00CFEFC6 /* Locale.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Locale.d; path = wxd/wx/Locale.d; sourceTree = "<group>"; };
+		A46E63720DA92C3F00CFEFC6 /* Log.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Log.d; path = wxd/wx/Log.d; sourceTree = "<group>"; };
+		A46E63730DA92C3F00CFEFC6 /* MaximizeEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = MaximizeEvent.d; path = wxd/wx/MaximizeEvent.d; sourceTree = "<group>"; };
+		A46E63740DA92C3F00CFEFC6 /* MDI.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = MDI.d; path = wxd/wx/MDI.d; sourceTree = "<group>"; };
+		A46E63750DA92C3F00CFEFC6 /* MemoryDC.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = MemoryDC.d; path = wxd/wx/MemoryDC.d; sourceTree = "<group>"; };
+		A46E63760DA92C3F00CFEFC6 /* Menu.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Menu.d; path = wxd/wx/Menu.d; sourceTree = "<group>"; };
+		A46E63770DA92C3F00CFEFC6 /* MenuBar.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = MenuBar.d; path = wxd/wx/MenuBar.d; sourceTree = "<group>"; };
+		A46E63780DA92C3F00CFEFC6 /* MenuItem.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = MenuItem.d; path = wxd/wx/MenuItem.d; sourceTree = "<group>"; };
+		A46E63790DA92C3F00CFEFC6 /* MessageDialog.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = MessageDialog.d; path = wxd/wx/MessageDialog.d; sourceTree = "<group>"; };
+		A46E637A0DA92C3F00CFEFC6 /* MiniFrame.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = MiniFrame.d; path = wxd/wx/MiniFrame.d; sourceTree = "<group>"; };
+		A46E637B0DA92C3F00CFEFC6 /* MouseCaptureChangedEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = MouseCaptureChangedEvent.d; path = wxd/wx/MouseCaptureChangedEvent.d; sourceTree = "<group>"; };
+		A46E637C0DA92C3F00CFEFC6 /* MouseEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = MouseEvent.d; path = wxd/wx/MouseEvent.d; sourceTree = "<group>"; };
+		A46E637D0DA92C3F00CFEFC6 /* MoveEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = MoveEvent.d; path = wxd/wx/MoveEvent.d; sourceTree = "<group>"; };
+		A46E637E0DA92C3F00CFEFC6 /* NavigationKeyEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = NavigationKeyEvent.d; path = wxd/wx/NavigationKeyEvent.d; sourceTree = "<group>"; };
+		A46E637F0DA92C3F00CFEFC6 /* NcPaintEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = NcPaintEvent.d; path = wxd/wx/NcPaintEvent.d; sourceTree = "<group>"; };
+		A46E63800DA92C3F00CFEFC6 /* Notebook.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Notebook.d; path = wxd/wx/Notebook.d; sourceTree = "<group>"; };
+		A46E63810DA92C3F00CFEFC6 /* NotebookSizer.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = NotebookSizer.d; path = wxd/wx/NotebookSizer.d; sourceTree = "<group>"; };
+		A46E63820DA92C3F00CFEFC6 /* NotifyEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = NotifyEvent.d; path = wxd/wx/NotifyEvent.d; sourceTree = "<group>"; };
+		A46E63830DA92C3F00CFEFC6 /* NumberDialog.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = NumberDialog.d; path = wxd/wx/NumberDialog.d; sourceTree = "<group>"; };
+		A46E63850DA92C3F00CFEFC6 /* ogl.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; path = ogl.d; sourceTree = "<group>"; };
+		A46E63860DA92C3F00CFEFC6 /* PaintEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = PaintEvent.d; path = wxd/wx/PaintEvent.d; sourceTree = "<group>"; };
+		A46E63870DA92C3F00CFEFC6 /* Palette.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Palette.d; path = wxd/wx/Palette.d; sourceTree = "<group>"; };
+		A46E63880DA92C3F00CFEFC6 /* PaletteChangedEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = PaletteChangedEvent.d; path = wxd/wx/PaletteChangedEvent.d; sourceTree = "<group>"; };
+		A46E63890DA92C3F00CFEFC6 /* Panel.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Panel.d; path = wxd/wx/Panel.d; sourceTree = "<group>"; };
+		A46E638B0DA92C3F00CFEFC6 /* Pen.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Pen.d; path = wxd/wx/Pen.d; sourceTree = "<group>"; };
+		A46E638C0DA92C3F00CFEFC6 /* PrintData.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = PrintData.d; path = wxd/wx/PrintData.d; sourceTree = "<group>"; };
+		A46E638D0DA92C3F00CFEFC6 /* PrintDialog.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = PrintDialog.d; path = wxd/wx/PrintDialog.d; sourceTree = "<group>"; };
+		A46E638E0DA92C3F00CFEFC6 /* Printer.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Printer.d; path = wxd/wx/Printer.d; sourceTree = "<group>"; };
+		A46E638F0DA92C3F00CFEFC6 /* PrintPreview.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = PrintPreview.d; path = wxd/wx/PrintPreview.d; sourceTree = "<group>"; };
+		A46E63900DA92C3F00CFEFC6 /* ProgressDialog.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = ProgressDialog.d; path = wxd/wx/ProgressDialog.d; sourceTree = "<group>"; };
+		A46E63910DA92C3F00CFEFC6 /* QueryNewPaletteEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = QueryNewPaletteEvent.d; path = wxd/wx/QueryNewPaletteEvent.d; sourceTree = "<group>"; };
+		A46E63920DA92C3F00CFEFC6 /* RadioBox.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = RadioBox.d; path = wxd/wx/RadioBox.d; sourceTree = "<group>"; };
+		A46E63930DA92C3F00CFEFC6 /* RadioButton.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = RadioButton.d; path = wxd/wx/RadioButton.d; sourceTree = "<group>"; };
+		A46E63940DA92C3F00CFEFC6 /* Region.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Region.d; path = wxd/wx/Region.d; sourceTree = "<group>"; };
+		A46E63950DA92C3F00CFEFC6 /* SashWindow.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = SashWindow.d; path = wxd/wx/SashWindow.d; sourceTree = "<group>"; };
+		A46E63960DA92C3F00CFEFC6 /* ScrollBar.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = ScrollBar.d; path = wxd/wx/ScrollBar.d; sourceTree = "<group>"; };
+		A46E63970DA92C3F00CFEFC6 /* ScrolledWindow.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = ScrolledWindow.d; path = wxd/wx/ScrolledWindow.d; sourceTree = "<group>"; };
+		A46E63980DA92C3F00CFEFC6 /* SetCursorEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = SetCursorEvent.d; path = wxd/wx/SetCursorEvent.d; sourceTree = "<group>"; };
+		A46E63990DA92C3F00CFEFC6 /* ShowEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = ShowEvent.d; path = wxd/wx/ShowEvent.d; sourceTree = "<group>"; };
+		A46E639A0DA92C3F00CFEFC6 /* SizeEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = SizeEvent.d; path = wxd/wx/SizeEvent.d; sourceTree = "<group>"; };
+		A46E639B0DA92C3F00CFEFC6 /* Sizer.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Sizer.d; path = wxd/wx/Sizer.d; sourceTree = "<group>"; };
+		A46E639C0DA92C3F00CFEFC6 /* SizerItem.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = SizerItem.d; path = wxd/wx/SizerItem.d; sourceTree = "<group>"; };
+		A46E639D0DA92C3F00CFEFC6 /* Slider.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Slider.d; path = wxd/wx/Slider.d; sourceTree = "<group>"; };
+		A46E639E0DA92C3F00CFEFC6 /* Sound.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Sound.d; path = wxd/wx/Sound.d; sourceTree = "<group>"; };
+		A46E639F0DA92C3F00CFEFC6 /* SpinButton.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = SpinButton.d; path = wxd/wx/SpinButton.d; sourceTree = "<group>"; };
+		A46E63A00DA92C3F00CFEFC6 /* SpinCtrl.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = SpinCtrl.d; path = wxd/wx/SpinCtrl.d; sourceTree = "<group>"; };
+		A46E63A10DA92C3F00CFEFC6 /* SplashScreen.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = SplashScreen.d; path = wxd/wx/SplashScreen.d; sourceTree = "<group>"; };
+		A46E63A20DA92C3F00CFEFC6 /* SplitterWindow.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = SplitterWindow.d; path = wxd/wx/SplitterWindow.d; sourceTree = "<group>"; };
+		A46E63A30DA92C3F00CFEFC6 /* StaticBitmap.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = StaticBitmap.d; path = wxd/wx/StaticBitmap.d; sourceTree = "<group>"; };
+		A46E63A40DA92C3F00CFEFC6 /* StaticBox.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = StaticBox.d; path = wxd/wx/StaticBox.d; sourceTree = "<group>"; };
+		A46E63A50DA92C3F00CFEFC6 /* StaticBoxSizer.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = StaticBoxSizer.d; path = wxd/wx/StaticBoxSizer.d; sourceTree = "<group>"; };
+		A46E63A60DA92C3F00CFEFC6 /* StaticLine.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = StaticLine.d; path = wxd/wx/StaticLine.d; sourceTree = "<group>"; };
+		A46E63A70DA92C3F00CFEFC6 /* StaticText.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = StaticText.d; path = wxd/wx/StaticText.d; sourceTree = "<group>"; };
+		A46E63A80DA92C3F00CFEFC6 /* StatusBar.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = StatusBar.d; path = wxd/wx/StatusBar.d; sourceTree = "<group>"; };
+		A46E63A90DA92C3F00CFEFC6 /* StyledTextCtrl.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = StyledTextCtrl.d; path = wxd/wx/StyledTextCtrl.d; sourceTree = "<group>"; };
+		A46E63AA0DA92C3F00CFEFC6 /* SysColourChangedEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = SysColourChangedEvent.d; path = wxd/wx/SysColourChangedEvent.d; sourceTree = "<group>"; };
+		A46E63AB0DA92C3F00CFEFC6 /* SystemSettings.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = SystemSettings.d; path = wxd/wx/SystemSettings.d; sourceTree = "<group>"; };
+		A46E63AC0DA92C3F00CFEFC6 /* TabCtrl.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = TabCtrl.d; path = wxd/wx/TabCtrl.d; sourceTree = "<group>"; };
+		A46E63AD0DA92C3F00CFEFC6 /* TaskBarIcon.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = TaskBarIcon.d; path = wxd/wx/TaskBarIcon.d; sourceTree = "<group>"; };
+		A46E63AE0DA92C3F00CFEFC6 /* TextCtrl.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = TextCtrl.d; path = wxd/wx/TextCtrl.d; sourceTree = "<group>"; };
+		A46E63AF0DA92C3F00CFEFC6 /* TextDialog.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = TextDialog.d; path = wxd/wx/TextDialog.d; sourceTree = "<group>"; };
+		A46E63B00DA92C3F00CFEFC6 /* Thread.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Thread.d; path = wxd/wx/Thread.d; sourceTree = "<group>"; };
+		A46E63B10DA92C3F00CFEFC6 /* Timer.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Timer.d; path = wxd/wx/Timer.d; sourceTree = "<group>"; };
+		A46E63B20DA92C3F00CFEFC6 /* TipDialog.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = TipDialog.d; path = wxd/wx/TipDialog.d; sourceTree = "<group>"; };
+		A46E63B30DA92C3F00CFEFC6 /* TipWindow.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = TipWindow.d; path = wxd/wx/TipWindow.d; sourceTree = "<group>"; };
+		A46E63B40DA92C3F00CFEFC6 /* ToggleButton.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = ToggleButton.d; path = wxd/wx/ToggleButton.d; sourceTree = "<group>"; };
+		A46E63B50DA92C3F00CFEFC6 /* ToolBar.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = ToolBar.d; path = wxd/wx/ToolBar.d; sourceTree = "<group>"; };
+		A46E63B60DA92C3F00CFEFC6 /* ToolTip.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = ToolTip.d; path = wxd/wx/ToolTip.d; sourceTree = "<group>"; };
+		A46E63B70DA92C3F00CFEFC6 /* TreeCtrl.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = TreeCtrl.d; path = wxd/wx/TreeCtrl.d; sourceTree = "<group>"; };
+		A46E63B80DA92C3F00CFEFC6 /* UpdateUIEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = UpdateUIEvent.d; path = wxd/wx/UpdateUIEvent.d; sourceTree = "<group>"; };
+		A46E63B90DA92C3F00CFEFC6 /* Utils.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Utils.d; path = wxd/wx/Utils.d; sourceTree = "<group>"; };
+		A46E63BA0DA92C3F00CFEFC6 /* Validator.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Validator.d; path = wxd/wx/Validator.d; sourceTree = "<group>"; };
+		A46E63BB0DA92C3F00CFEFC6 /* VideoMode.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = VideoMode.d; path = wxd/wx/VideoMode.d; sourceTree = "<group>"; };
+		A46E63BC0DA92C3F00CFEFC6 /* View.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = View.d; path = wxd/wx/View.d; sourceTree = "<group>"; };
+		A46E63BD0DA92C3F00CFEFC6 /* Window.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Window.d; path = wxd/wx/Window.d; sourceTree = "<group>"; };
+		A46E63BF0DA92C3F00CFEFC6 /* WindowCreateEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = WindowCreateEvent.d; path = wxd/wx/WindowCreateEvent.d; sourceTree = "<group>"; };
+		A46E63C00DA92C3F00CFEFC6 /* WindowDestroyEvent.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = WindowDestroyEvent.d; path = wxd/wx/WindowDestroyEvent.d; sourceTree = "<group>"; };
+		A46E63C10DA92C3F00CFEFC6 /* Wizard.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = Wizard.d; path = wxd/wx/Wizard.d; sourceTree = "<group>"; };
+		A46E63C20DA92C3F00CFEFC6 /* WizardPage.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = WizardPage.d; path = wxd/wx/WizardPage.d; sourceTree = "<group>"; };
+		A46E63C30DA92C3F00CFEFC6 /* WizardPageSimple.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = WizardPageSimple.d; path = wxd/wx/WizardPageSimple.d; sourceTree = "<group>"; };
+		A46E63C40DA92C3F00CFEFC6 /* VLBox.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = VLBox.d; path = wxd/wx/VLBox.d; sourceTree = "<group>"; };
+		A46E63C50DA92C3F00CFEFC6 /* VScroll.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = VScroll.d; path = wxd/wx/VScroll.d; sourceTree = "<group>"; };
+		A46E63C60DA92C3F00CFEFC6 /* wx.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = wx.d; path = wxd/wx/wx.d; sourceTree = "<group>"; };
+		A46E63C70DA92C3F00CFEFC6 /* wxDateTime.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = wxDateTime.d; path = wxd/wx/wxDateTime.d; sourceTree = "<group>"; };
+		A46E63C80DA92C3F00CFEFC6 /* wxObject.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = wxObject.d; path = wxd/wx/wxObject.d; sourceTree = "<group>"; };
+		A46E63C90DA92C3F00CFEFC6 /* wxPlatform.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = wxPlatform.d; path = wxd/wx/wxPlatform.d; sourceTree = "<group>"; };
+		A46E63CA0DA92C3F00CFEFC6 /* wxString.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = wxString.d; path = wxd/wx/wxString.d; sourceTree = "<group>"; };
+		A46E63CB0DA92C3F00CFEFC6 /* wxVersion.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = wxVersion.d; path = wxd/wx/wxVersion.d; sourceTree = "<group>"; };
+		A46E63CC0DA92C3F00CFEFC6 /* XmlResource.d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.d; name = XmlResource.d; path = wxd/wx/XmlResource.d; sourceTree = "<group>"; };
+		A46E64FD0DA948E200CFEFC6 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "/usr/lib/libstdc++.6.dylib"; sourceTree = "<absolute>"; };
+		A46E65460DA950DC00CFEFC6 /* notifyevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = notifyevent.cpp; path = wxc/notifyevent.cpp; sourceTree = "<group>"; };
+		D2AAC09D05546B4700DB518D /* libwxd.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libwxd.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A46E61CA0DA92B4D00CFEFC6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2AAC09B05546B4700DB518D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A46E64F30DA947B200CFEFC6 /* libwxc.dylib in Frameworks */,
+				A46E64FE0DA948E200CFEFC6 /* libstdc++.6.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DDFF38A45A11DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A46E61CC0DA92B4D00CFEFC6 /* libwxc.dylib */,
+				D2AAC09D05546B4700DB518D /* libwxd.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* wxd */ = {
+			isa = PBXGroup;
+			children = (
+				08FB77ACFE841707C02AAC07 /* wxc */,
+				A46E631A0DA92C0100CFEFC6 /* wxd */,
+				0867D69AFE84028FC02AAC07 /* Frameworks */,
+				034768DDFF38A45A11DB9C8B /* Products */,
+			);
+			name = wxd;
+			sourceTree = "<group>";
+		};
+		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A46E64FD0DA948E200CFEFC6 /* libstdc++.6.dylib */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		08FB77ACFE841707C02AAC07 /* wxc */ = {
+			isa = PBXGroup;
+			children = (
+				A46E61D70DA92BEA00CFEFC6 /* accel.cpp */,
+				A46E61D80DA92BEA00CFEFC6 /* activateevent.cpp */,
+				A46E61D90DA92BEA00CFEFC6 /* app.cpp */,
+				A46E61DA0DA92BEA00CFEFC6 /* artprovider.cpp */,
+				A46E61DB0DA92BEA00CFEFC6 /* bitmap.cpp */,
+				A46E61DC0DA92BEA00CFEFC6 /* bitmapbutton.cpp */,
+				A46E61DD0DA92BEA00CFEFC6 /* boxsizer.cpp */,
+				A46E61DE0DA92BEA00CFEFC6 /* brush.cpp */,
+				A46E61DF0DA92BEA00CFEFC6 /* button.cpp */,
+				A46E61E00DA92BEA00CFEFC6 /* calendarctrl.cpp */,
+				A46E61E10DA92BEA00CFEFC6 /* caret.cpp */,
+				A46E61E20DA92BEA00CFEFC6 /* checkbox.cpp */,
+				A46E61E30DA92BEA00CFEFC6 /* childfocusevent.cpp */,
+				A46E61E40DA92BEA00CFEFC6 /* choice.cpp */,
+				A46E61E50DA92BEA00CFEFC6 /* choicedialog.cpp */,
+				A46E61E60DA92BEA00CFEFC6 /* clientdata.cpp */,
+				A46E61E70DA92BEA00CFEFC6 /* clipboard.cpp */,
+				A46E61E80DA92BEA00CFEFC6 /* closeevent.cpp */,
+				A46E61E90DA92BEA00CFEFC6 /* colour.cpp */,
+				A46E61EA0DA92BEA00CFEFC6 /* colourdialog.cpp */,
+				A46E61EB0DA92BEA00CFEFC6 /* combobox.cpp */,
+				A46E61EC0DA92BEA00CFEFC6 /* commandevent.cpp */,
+				A46E61ED0DA92BEA00CFEFC6 /* common.h */,
+				A46E61EE0DA92BEA00CFEFC6 /* config.cpp */,
+				A46E61EF0DA92BEA00CFEFC6 /* contextmenuevent.cpp */,
+				A46E61F00DA92BEA00CFEFC6 /* control.cpp */,
+				A46E61F10DA92BEA00CFEFC6 /* cursor.cpp */,
+				A46E61F20DA92BEA00CFEFC6 /* dataformat.cpp */,
+				A46E61F30DA92BEA00CFEFC6 /* dataobject.cpp */,
+				A46E61F40DA92BEA00CFEFC6 /* dc.cpp */,
+				A46E61F50DA92BEA00CFEFC6 /* dialog.cpp */,
+				A46E61F60DA92BEA00CFEFC6 /* dirdialog.cpp */,
+				A46E61F70DA92BEA00CFEFC6 /* display.cpp */,
+				A46E61F80DA92BEA00CFEFC6 /* displaychangedevent.cpp */,
+				A46E61F90DA92BEA00CFEFC6 /* dnd.cpp */,
+				A46E61FA0DA92BEA00CFEFC6 /* docmanager.cpp */,
+				A46E61FB0DA92BEA00CFEFC6 /* doctemplate.cpp */,
+				A46E61FC0DA92BEA00CFEFC6 /* document.cpp */,
+				A46E61FD0DA92BEA00CFEFC6 /* eraseevent.cpp */,
+				A46E61FE0DA92BEA00CFEFC6 /* event.cpp */,
+				A46E61FF0DA92BEA00CFEFC6 /* evthandler.cpp */,
+				A46E62000DA92BEA00CFEFC6 /* filedialog.cpp */,
+				A46E62010DA92BEA00CFEFC6 /* findreplacedialog.cpp */,
+				A46E62020DA92BEA00CFEFC6 /* flexgridsizer.cpp */,
+				A46E62030DA92BEA00CFEFC6 /* focusevent.cpp */,
+				A46E62040DA92BEA00CFEFC6 /* font.cpp */,
+				A46E62050DA92BEA00CFEFC6 /* fontdialog.cpp */,
+				A46E62060DA92BEA00CFEFC6 /* fontmisc.cpp */,
+				A46E62070DA92BEA00CFEFC6 /* frame.cpp */,
+				A46E62080DA92BEA00CFEFC6 /* gauge.cpp */,
+				A46E62090DA92BEA00CFEFC6 /* gdicmn.cpp */,
+				A46E620A0DA92BEA00CFEFC6 /* gdiobject.cpp */,
+				A46E620B0DA92BEA00CFEFC6 /* glcanvas.cpp */,
+				A46E620C0DA92BEA00CFEFC6 /* global.cpp */,
+				A46E620D0DA92BEA00CFEFC6 /* grid.cpp */,
+				A46E620E0DA92BEA00CFEFC6 /* gridbagsizer.cpp */,
+				A46E620F0DA92BEA00CFEFC6 /* gridctrl.cpp */,
+				A46E62100DA92BEA00CFEFC6 /* gridsizer.cpp */,
+				A46E62110DA92BEA00CFEFC6 /* helpevent.cpp */,
+				A46E62120DA92BEA00CFEFC6 /* html.cpp */,
+				A46E62130DA92BEA00CFEFC6 /* htmlhelpctrl.cpp */,
+				A46E62140DA92BEA00CFEFC6 /* htmllbox.cpp */,
+				A46E62150DA92BEA00CFEFC6 /* icon.cpp */,
+				A46E62160DA92BEA00CFEFC6 /* iconizeevent.cpp */,
+				A46E62170DA92BEA00CFEFC6 /* idleevent.cpp */,
+				A46E62180DA92BEA00CFEFC6 /* image.cpp */,
+				A46E62190DA92BEA00CFEFC6 /* imagelist.cpp */,
+				A46E621A0DA92BEA00CFEFC6 /* imghandler.cpp */,
+				A46E621B0DA92BEA00CFEFC6 /* initdialogevent.cpp */,
+				A46E621C0DA92BEA00CFEFC6 /* keyevent.cpp */,
+				A46E621D0DA92BEA00CFEFC6 /* laywin.cpp */,
+				A46E621E0DA92BEA00CFEFC6 /* listbook.cpp */,
+				A46E621F0DA92BEA00CFEFC6 /* listbox.cpp */,
+				A46E62200DA92BEA00CFEFC6 /* listctrl.cpp */,
+				A46E62210DA92BEA00CFEFC6 /* local_events.h */,
+				A46E62220DA92BEA00CFEFC6 /* locale.cpp */,
+				A46E62230DA92BEA00CFEFC6 /* log.cpp */,
+				A46E62240DA92BEA00CFEFC6 /* manager.cpp */,
+				A46E62250DA92BEA00CFEFC6 /* manager.h */,
+				A46E62260DA92BEA00CFEFC6 /* maximizeevent.cpp */,
+				A46E62270DA92BEA00CFEFC6 /* mdi.cpp */,
+				A46E62280DA92BEA00CFEFC6 /* memorydc.cpp */,
+				A46E62290DA92BEA00CFEFC6 /* menu.cpp */,
+				A46E622A0DA92BEA00CFEFC6 /* menubar.cpp */,
+				A46E622B0DA92BEA00CFEFC6 /* menuitem.cpp */,
+				A46E622C0DA92BEA00CFEFC6 /* messagedialog.cpp */,
+				A46E622D0DA92BEA00CFEFC6 /* miniframe.cpp */,
+				A46E622E0DA92BEA00CFEFC6 /* mousecapturechangedevent.cpp */,
+				A46E622F0DA92BEA00CFEFC6 /* mouseevent.cpp */,
+				A46E62300DA92BEA00CFEFC6 /* moveevent.cpp */,
+				A46E62310DA92BEA00CFEFC6 /* navigationkeyevent.cpp */,
+				A46E62320DA92BEA00CFEFC6 /* ncpaintevent.cpp */,
+				A46E62330DA92BEA00CFEFC6 /* notebook.cpp */,
+				A46E62340DA92BEA00CFEFC6 /* notebooksizer.cpp */,
+				A46E65460DA950DC00CFEFC6 /* notifyevent.cpp */,
+				A46E62350DA92BEA00CFEFC6 /* numdialog.cpp */,
+				A46E62360DA92BEA00CFEFC6 /* object.cpp */,
+				A46E62370DA92BEA00CFEFC6 /* paintevent.cpp */,
+				A46E62380DA92BEA00CFEFC6 /* palette.cpp */,
+				A46E62390DA92BEA00CFEFC6 /* palettechangedevent.cpp */,
+				A46E623A0DA92BEA00CFEFC6 /* panel.cpp */,
+				A46E623B0DA92BEA00CFEFC6 /* pen.cpp */,
+				A46E623C0DA92BEA00CFEFC6 /* printdata.cpp */,
+				A46E623D0DA92BEA00CFEFC6 /* printdialog.cpp */,
+				A46E623E0DA92BEA00CFEFC6 /* printer.cpp */,
+				A46E623F0DA92BEA00CFEFC6 /* printpreview.cpp */,
+				A46E62400DA92BEA00CFEFC6 /* progdlg.cpp */,
+				A46E62410DA92BEA00CFEFC6 /* querynewpaletteevent.cpp */,
+				A46E62420DA92BEA00CFEFC6 /* radiobox.cpp */,
+				A46E62430DA92BEA00CFEFC6 /* radiobutton.cpp */,
+				A46E62440DA92BEA00CFEFC6 /* region.cpp */,
+				A46E62450DA92BEA00CFEFC6 /* sashwindow.cpp */,
+				A46E62460DA92BEA00CFEFC6 /* scrollbar.cpp */,
+				A46E62470DA92BEA00CFEFC6 /* scrolledwindow.cpp */,
+				A46E62480DA92BEA00CFEFC6 /* setcursorevent.cpp */,
+				A46E62490DA92BEA00CFEFC6 /* showevent.cpp */,
+				A46E624A0DA92BEA00CFEFC6 /* sizeevent.cpp */,
+				A46E624B0DA92BEA00CFEFC6 /* sizer.cpp */,
+				A46E624C0DA92BEA00CFEFC6 /* sizeritem.cpp */,
+				A46E624D0DA92BEA00CFEFC6 /* slider.cpp */,
+				A46E624E0DA92BEA00CFEFC6 /* sound.cpp */,
+				A46E624F0DA92BEA00CFEFC6 /* spinbutton.cpp */,
+				A46E62500DA92BEA00CFEFC6 /* spinctrl.cpp */,
+				A46E62510DA92BEA00CFEFC6 /* splashscreen.cpp */,
+				A46E62520DA92BEA00CFEFC6 /* splitterwindow.cpp */,
+				A46E62530DA92BEA00CFEFC6 /* staticbitmap.cpp */,
+				A46E62540DA92BEA00CFEFC6 /* staticbox.cpp */,
+				A46E62550DA92BEA00CFEFC6 /* staticboxsizer.cpp */,
+				A46E62560DA92BEA00CFEFC6 /* staticline.cpp */,
+				A46E62570DA92BEA00CFEFC6 /* statictext.cpp */,
+				A46E62580DA92BEA00CFEFC6 /* statusbar.cpp */,
+				A46E62590DA92BEA00CFEFC6 /* styledtextctrl.cpp */,
+				A46E625A0DA92BEA00CFEFC6 /* syscolourchangedevent.cpp */,
+				A46E625B0DA92BEA00CFEFC6 /* systemsettings.cpp */,
+				A46E625C0DA92BEA00CFEFC6 /* tabctrl.cpp */,
+				A46E625D0DA92BEA00CFEFC6 /* taskbaricon.cpp */,
+				A46E625E0DA92BEA00CFEFC6 /* textctrl.cpp */,
+				A46E625F0DA92BEA00CFEFC6 /* textdialog.cpp */,
+				A46E62600DA92BEA00CFEFC6 /* thread.cpp */,
+				A46E62610DA92BEA00CFEFC6 /* timer.cpp */,
+				A46E62620DA92BEA00CFEFC6 /* timer.cpp.old */,
+				A46E62630DA92BEA00CFEFC6 /* tipdialog.cpp */,
+				A46E62640DA92BEA00CFEFC6 /* tipwindow.cpp */,
+				A46E62650DA92BEA00CFEFC6 /* togglebutton.cpp */,
+				A46E62660DA92BEA00CFEFC6 /* toolbar.cpp */,
+				A46E62670DA92BEA00CFEFC6 /* tooltip.cpp */,
+				A46E62680DA92BEA00CFEFC6 /* treectrl.cpp */,
+				A46E62690DA92BEA00CFEFC6 /* updateuievent.cpp */,
+				A46E626A0DA92BEA00CFEFC6 /* validator.cpp */,
+				A46E626B0DA92BEA00CFEFC6 /* view.cpp */,
+				A46E626C0DA92BEA00CFEFC6 /* window.cpp */,
+				A46E626D0DA92BEA00CFEFC6 /* windowcreateevent.cpp */,
+				A46E626E0DA92BEA00CFEFC6 /* windowdestroyevent.cpp */,
+				A46E626F0DA92BEA00CFEFC6 /* wizard.cpp */,
+				A46E62700DA92BEA00CFEFC6 /* wizardpagesimple.cpp */,
+				A46E62710DA92BEA00CFEFC6 /* vlbox.cpp */,
+				A46E62720DA92BEA00CFEFC6 /* vscroll.cpp */,
+				A46E62730DA92BEA00CFEFC6 /* wxaui.cpp */,
+				A46E62740DA92BEA00CFEFC6 /* wxdatetime.cpp */,
+				A46E62750DA92BEA00CFEFC6 /* wxplatform.cpp */,
+				A46E62760DA92BEA00CFEFC6 /* wxstring.cpp */,
+				A46E62770DA92BEA00CFEFC6 /* wxversion.cpp */,
+				A46E62780DA92BEA00CFEFC6 /* xmlresource.cpp */,
+				32BAE0B70371A74B00C91783 /* wxd_Prefix.pch */,
+			);
+			name = wxc;
+			sourceTree = "<group>";
+		};
+		A46E631A0DA92C0100CFEFC6 /* wxd */ = {
+			isa = PBXGroup;
+			children = (
+				A46E631B0DA92C3E00CFEFC6 /* Accelerator.d */,
+				A46E631C0DA92C3E00CFEFC6 /* ActivateEvent.d */,
+				A46E631D0DA92C3E00CFEFC6 /* App.d */,
+				A46E631F0DA92C3E00CFEFC6 /* ArrayInt.d */,
+				A46E63200DA92C3E00CFEFC6 /* ArrayString.d */,
+				A46E63210DA92C3E00CFEFC6 /* ArtProvider.d */,
+				A46E63220DA92C3E00CFEFC6 /* aui */,
+				A46E63260DA92C3E00CFEFC6 /* Bitmap.d */,
+				A46E63270DA92C3E00CFEFC6 /* BitmapButton.d */,
+				A46E63280DA92C3E00CFEFC6 /* BoxSizer.d */,
+				A46E63290DA92C3E00CFEFC6 /* Brush.d */,
+				A46E632A0DA92C3E00CFEFC6 /* Button.d */,
+				A46E632B0DA92C3E00CFEFC6 /* CalendarCtrl.d */,
+				A46E632C0DA92C3E00CFEFC6 /* Caret.d */,
+				A46E632D0DA92C3E00CFEFC6 /* CheckBox.d */,
+				A46E632E0DA92C3E00CFEFC6 /* ChildFocusEvent.d */,
+				A46E632F0DA92C3E00CFEFC6 /* Choice.d */,
+				A46E63300DA92C3E00CFEFC6 /* ChoiceDialog.d */,
+				A46E63310DA92C3E00CFEFC6 /* ClientData.d */,
+				A46E63320DA92C3E00CFEFC6 /* Clipboard.d */,
+				A46E63330DA92C3E00CFEFC6 /* CloseEvent.d */,
+				A46E63340DA92C3E00CFEFC6 /* Colour.d */,
+				A46E63350DA92C3E00CFEFC6 /* ColourDialog.d */,
+				A46E63360DA92C3E00CFEFC6 /* ComboBox.d */,
+				A46E63370DA92C3E00CFEFC6 /* CommandEvent.d */,
+				A46E63380DA92C3E00CFEFC6 /* common.d */,
+				A46E63390DA92C3E00CFEFC6 /* Config.d */,
+				A46E633A0DA92C3E00CFEFC6 /* ContextMenuEvent.d */,
+				A46E633B0DA92C3E00CFEFC6 /* Control.d */,
+				A46E633C0DA92C3E00CFEFC6 /* Cursor.d */,
+				A46E633D0DA92C3E00CFEFC6 /* DataFormat.d */,
+				A46E633E0DA92C3E00CFEFC6 /* DataObject.d */,
+				A46E633F0DA92C3E00CFEFC6 /* DbGrid.d */,
+				A46E63400DA92C3E00CFEFC6 /* DC.d */,
+				A46E63410DA92C3E00CFEFC6 /* Defs.d */,
+				A46E63420DA92C3E00CFEFC6 /* Dialog.d */,
+				A46E63440DA92C3E00CFEFC6 /* DirDialog.d */,
+				A46E63450DA92C3E00CFEFC6 /* Display.d */,
+				A46E63460DA92C3E00CFEFC6 /* DisplayChangedEvent.d */,
+				A46E63470DA92C3E00CFEFC6 /* DND.d */,
+				A46E63480DA92C3E00CFEFC6 /* DocManager.d */,
+				A46E63490DA92C3E00CFEFC6 /* DocTemplate.d */,
+				A46E634A0DA92C3E00CFEFC6 /* Document.d */,
+				A46E634B0DA92C3E00CFEFC6 /* EraseEvent.d */,
+				A46E634C0DA92C3E00CFEFC6 /* Event.d */,
+				A46E634D0DA92C3E00CFEFC6 /* EvtHandler.d */,
+				A46E634E0DA92C3E00CFEFC6 /* FileDialog.d */,
+				A46E634F0DA92C3E00CFEFC6 /* FindReplaceDialog.d */,
+				A46E63500DA92C3E00CFEFC6 /* FlexGridSizer.d */,
+				A46E63510DA92C3E00CFEFC6 /* FocusEvent.d */,
+				A46E63520DA92C3E00CFEFC6 /* Font.d */,
+				A46E63530DA92C3E00CFEFC6 /* FontDialog.d */,
+				A46E63540DA92C3E00CFEFC6 /* FontMisc.d */,
+				A46E63550DA92C3E00CFEFC6 /* Frame.d */,
+				A46E63570DA92C3E00CFEFC6 /* Gauge.d */,
+				A46E63580DA92C3E00CFEFC6 /* GdiCommon.d */,
+				A46E63590DA92C3E00CFEFC6 /* GDIObject.d */,
+				A46E635A0DA92C3E00CFEFC6 /* GLCanvas.d */,
+				A46E635B0DA92C3E00CFEFC6 /* Grid.d */,
+				A46E635C0DA92C3E00CFEFC6 /* GridBagSizer.d */,
+				A46E635D0DA92C3E00CFEFC6 /* GridCtrl.d */,
+				A46E635E0DA92C3E00CFEFC6 /* GridSizer.d */,
+				A46E635F0DA92C3E00CFEFC6 /* HelpEvent.d */,
+				A46E63600DA92C3E00CFEFC6 /* HTML.d */,
+				A46E63610DA92C3E00CFEFC6 /* HtmlHelpController.d */,
+				A46E63620DA92C3E00CFEFC6 /* HtmlListBox.d */,
+				A46E63630DA92C3E00CFEFC6 /* Icon.d */,
+				A46E63640DA92C3E00CFEFC6 /* IconizeEvent.d */,
+				A46E63650DA92C3E00CFEFC6 /* IControlWithItems.d */,
+				A46E63660DA92C3E00CFEFC6 /* IdleEvent.d */,
+				A46E63670DA92C3E00CFEFC6 /* Image.d */,
+				A46E63680DA92C3E00CFEFC6 /* ImageHandlers.d */,
+				A46E63690DA92C3E00CFEFC6 /* ImageList.d */,
+				A46E636A0DA92C3E00CFEFC6 /* InitDialogEvent.d */,
+				A46E636B0DA92C3E00CFEFC6 /* KeyEvent.d */,
+				A46E636C0DA92C3E00CFEFC6 /* LayoutWin.d */,
+				A46E636D0DA92C3E00CFEFC6 /* libs.d */,
+				A46E636E0DA92C3E00CFEFC6 /* Listbook.d */,
+				A46E636F0DA92C3E00CFEFC6 /* ListBox.d */,
+				A46E63700DA92C3E00CFEFC6 /* ListCtrl.d */,
+				A46E63710DA92C3F00CFEFC6 /* Locale.d */,
+				A46E63720DA92C3F00CFEFC6 /* Log.d */,
+				A46E63730DA92C3F00CFEFC6 /* MaximizeEvent.d */,
+				A46E63740DA92C3F00CFEFC6 /* MDI.d */,
+				A46E63750DA92C3F00CFEFC6 /* MemoryDC.d */,
+				A46E63760DA92C3F00CFEFC6 /* Menu.d */,
+				A46E63770DA92C3F00CFEFC6 /* MenuBar.d */,
+				A46E63780DA92C3F00CFEFC6 /* MenuItem.d */,
+				A46E63790DA92C3F00CFEFC6 /* MessageDialog.d */,
+				A46E637A0DA92C3F00CFEFC6 /* MiniFrame.d */,
+				A46E637B0DA92C3F00CFEFC6 /* MouseCaptureChangedEvent.d */,
+				A46E637C0DA92C3F00CFEFC6 /* MouseEvent.d */,
+				A46E637D0DA92C3F00CFEFC6 /* MoveEvent.d */,
+				A46E637E0DA92C3F00CFEFC6 /* NavigationKeyEvent.d */,
+				A46E637F0DA92C3F00CFEFC6 /* NcPaintEvent.d */,
+				A46E63800DA92C3F00CFEFC6 /* Notebook.d */,
+				A46E63810DA92C3F00CFEFC6 /* NotebookSizer.d */,
+				A46E63820DA92C3F00CFEFC6 /* NotifyEvent.d */,
+				A46E63830DA92C3F00CFEFC6 /* NumberDialog.d */,
+				A46E63840DA92C3F00CFEFC6 /* ogl */,
+				A46E63860DA92C3F00CFEFC6 /* PaintEvent.d */,
+				A46E63870DA92C3F00CFEFC6 /* Palette.d */,
+				A46E63880DA92C3F00CFEFC6 /* PaletteChangedEvent.d */,
+				A46E63890DA92C3F00CFEFC6 /* Panel.d */,
+				A46E638B0DA92C3F00CFEFC6 /* Pen.d */,
+				A46E638C0DA92C3F00CFEFC6 /* PrintData.d */,
+				A46E638D0DA92C3F00CFEFC6 /* PrintDialog.d */,
+				A46E638E0DA92C3F00CFEFC6 /* Printer.d */,
+				A46E638F0DA92C3F00CFEFC6 /* PrintPreview.d */,
+				A46E63900DA92C3F00CFEFC6 /* ProgressDialog.d */,
+				A46E63910DA92C3F00CFEFC6 /* QueryNewPaletteEvent.d */,
+				A46E63920DA92C3F00CFEFC6 /* RadioBox.d */,
+				A46E63930DA92C3F00CFEFC6 /* RadioButton.d */,
+				A46E63940DA92C3F00CFEFC6 /* Region.d */,
+				A46E63950DA92C3F00CFEFC6 /* SashWindow.d */,
+				A46E63960DA92C3F00CFEFC6 /* ScrollBar.d */,
+				A46E63970DA92C3F00CFEFC6 /* ScrolledWindow.d */,
+				A46E63980DA92C3F00CFEFC6 /* SetCursorEvent.d */,
+				A46E63990DA92C3F00CFEFC6 /* ShowEvent.d */,
+				A46E639A0DA92C3F00CFEFC6 /* SizeEvent.d */,
+				A46E639B0DA92C3F00CFEFC6 /* Sizer.d */,
+				A46E639C0DA92C3F00CFEFC6 /* SizerItem.d */,
+				A46E639D0DA92C3F00CFEFC6 /* Slider.d */,
+				A46E639E0DA92C3F00CFEFC6 /* Sound.d */,
+				A46E639F0DA92C3F00CFEFC6 /* SpinButton.d */,
+				A46E63A00DA92C3F00CFEFC6 /* SpinCtrl.d */,
+				A46E63A10DA92C3F00CFEFC6 /* SplashScreen.d */,
+				A46E63A20DA92C3F00CFEFC6 /* SplitterWindow.d */,
+				A46E63A30DA92C3F00CFEFC6 /* StaticBitmap.d */,
+				A46E63A40DA92C3F00CFEFC6 /* StaticBox.d */,
+				A46E63A50DA92C3F00CFEFC6 /* StaticBoxSizer.d */,
+				A46E63A60DA92C3F00CFEFC6 /* StaticLine.d */,
+				A46E63A70DA92C3F00CFEFC6 /* StaticText.d */,
+				A46E63A80DA92C3F00CFEFC6 /* StatusBar.d */,
+				A46E63A90DA92C3F00CFEFC6 /* StyledTextCtrl.d */,
+				A46E63AA0DA92C3F00CFEFC6 /* SysColourChangedEvent.d */,
+				A46E63AB0DA92C3F00CFEFC6 /* SystemSettings.d */,
+				A46E63AC0DA92C3F00CFEFC6 /* TabCtrl.d */,
+				A46E63AD0DA92C3F00CFEFC6 /* TaskBarIcon.d */,
+				A46E63AE0DA92C3F00CFEFC6 /* TextCtrl.d */,
+				A46E63AF0DA92C3F00CFEFC6 /* TextDialog.d */,
+				A46E63B00DA92C3F00CFEFC6 /* Thread.d */,
+				A46E63B10DA92C3F00CFEFC6 /* Timer.d */,
+				A46E63B20DA92C3F00CFEFC6 /* TipDialog.d */,
+				A46E63B30DA92C3F00CFEFC6 /* TipWindow.d */,
+				A46E63B40DA92C3F00CFEFC6 /* ToggleButton.d */,
+				A46E63B50DA92C3F00CFEFC6 /* ToolBar.d */,
+				A46E63B60DA92C3F00CFEFC6 /* ToolTip.d */,
+				A46E63B70DA92C3F00CFEFC6 /* TreeCtrl.d */,
+				A46E63B80DA92C3F00CFEFC6 /* UpdateUIEvent.d */,
+				A46E63B90DA92C3F00CFEFC6 /* Utils.d */,
+				A46E63BA0DA92C3F00CFEFC6 /* Validator.d */,
+				A46E63BB0DA92C3F00CFEFC6 /* VideoMode.d */,
+				A46E63BC0DA92C3F00CFEFC6 /* View.d */,
+				A46E63BD0DA92C3F00CFEFC6 /* Window.d */,
+				A46E63BF0DA92C3F00CFEFC6 /* WindowCreateEvent.d */,
+				A46E63C00DA92C3F00CFEFC6 /* WindowDestroyEvent.d */,
+				A46E63C10DA92C3F00CFEFC6 /* Wizard.d */,
+				A46E63C20DA92C3F00CFEFC6 /* WizardPage.d */,
+				A46E63C30DA92C3F00CFEFC6 /* WizardPageSimple.d */,
+				A46E63C40DA92C3F00CFEFC6 /* VLBox.d */,
+				A46E63C50DA92C3F00CFEFC6 /* VScroll.d */,
+				A46E63C60DA92C3F00CFEFC6 /* wx.d */,
+				A46E63C70DA92C3F00CFEFC6 /* wxDateTime.d */,
+				A46E63C80DA92C3F00CFEFC6 /* wxObject.d */,
+				A46E63C90DA92C3F00CFEFC6 /* wxPlatform.d */,
+				A46E63CA0DA92C3F00CFEFC6 /* wxString.d */,
+				A46E63CB0DA92C3F00CFEFC6 /* wxVersion.d */,
+				A46E63CC0DA92C3F00CFEFC6 /* XmlResource.d */,
+			);
+			name = wxd;
+			sourceTree = "<group>";
+		};
+		A46E63220DA92C3E00CFEFC6 /* aui */ = {
+			isa = PBXGroup;
+			children = (
+				A46E63230DA92C3E00CFEFC6 /* aui.d */,
+				A46E63240DA92C3E00CFEFC6 /* DockArt.d */,
+				A46E63250DA92C3E00CFEFC6 /* FrameManager.d */,
+			);
+			name = aui;
+			path = wxd/wx/aui;
+			sourceTree = "<group>";
+		};
+		A46E63840DA92C3F00CFEFC6 /* ogl */ = {
+			isa = PBXGroup;
+			children = (
+				A46E63850DA92C3F00CFEFC6 /* ogl.d */,
+			);
+			name = ogl;
+			path = wxd/wx/ogl;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		A46E61C80DA92B4D00CFEFC6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A46E628F0DA92BEA00CFEFC6 /* common.h in Headers */,
+				A46E62C30DA92BEA00CFEFC6 /* local_events.h in Headers */,
+				A46E62C70DA92BEA00CFEFC6 /* manager.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2AAC09905546B4700DB518D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		A46E61CB0DA92B4D00CFEFC6 /* wxc */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A46E61D20DA92B7700CFEFC6 /* Build configuration list for PBXNativeTarget "wxc" */;
+			buildPhases = (
+				A46E61C80DA92B4D00CFEFC6 /* Headers */,
+				A46E61C90DA92B4D00CFEFC6 /* Sources */,
+				A46E61CA0DA92B4D00CFEFC6 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = wxc;
+			productName = libwxc;
+			productReference = A46E61CC0DA92B4D00CFEFC6 /* libwxc.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		D2AAC09C05546B4700DB518D /* wxd */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB916008733D950010E9CD /* Build configuration list for PBXNativeTarget "wxd" */;
+			buildPhases = (
+				D2AAC09905546B4700DB518D /* Headers */,
+				D2AAC09A05546B4700DB518D /* Sources */,
+				D2AAC09B05546B4700DB518D /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A46E67F70DA959A500CFEFC6 /* PBXTargetDependency */,
+			);
+			name = wxd;
+			productName = libwxd;
+			productReference = D2AAC09D05546B4700DB518D /* libwxd.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB916408733D950010E9CD /* Build configuration list for PBXProject "wxd" */;
+			hasScannedForEncodings = 1;
+			mainGroup = 0867D691FE84028FC02AAC07 /* wxd */;
+			productRefGroup = 034768DDFF38A45A11DB9C8B /* Products */;
+			projectDirPath = "";
+			targets = (
+				A46E61CB0DA92B4D00CFEFC6 /* wxc */,
+				D2AAC09C05546B4700DB518D /* wxd */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A46E61C90DA92B4D00CFEFC6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A46E62790DA92BEA00CFEFC6 /* accel.cpp in Sources */,
+				A46E627A0DA92BEA00CFEFC6 /* activateevent.cpp in Sources */,
+				A46E627B0DA92BEA00CFEFC6 /* app.cpp in Sources */,
+				A46E627C0DA92BEA00CFEFC6 /* artprovider.cpp in Sources */,
+				A46E627D0DA92BEA00CFEFC6 /* bitmap.cpp in Sources */,
+				A46E627E0DA92BEA00CFEFC6 /* bitmapbutton.cpp in Sources */,
+				A46E627F0DA92BEA00CFEFC6 /* boxsizer.cpp in Sources */,
+				A46E62800DA92BEA00CFEFC6 /* brush.cpp in Sources */,
+				A46E62810DA92BEA00CFEFC6 /* button.cpp in Sources */,
+				A46E62820DA92BEA00CFEFC6 /* calendarctrl.cpp in Sources */,
+				A46E62830DA92BEA00CFEFC6 /* caret.cpp in Sources */,
+				A46E62840DA92BEA00CFEFC6 /* checkbox.cpp in Sources */,
+				A46E62850DA92BEA00CFEFC6 /* childfocusevent.cpp in Sources */,
+				A46E62860DA92BEA00CFEFC6 /* choice.cpp in Sources */,
+				A46E62870DA92BEA00CFEFC6 /* choicedialog.cpp in Sources */,
+				A46E62880DA92BEA00CFEFC6 /* clientdata.cpp in Sources */,
+				A46E62890DA92BEA00CFEFC6 /* clipboard.cpp in Sources */,
+				A46E628A0DA92BEA00CFEFC6 /* closeevent.cpp in Sources */,
+				A46E628B0DA92BEA00CFEFC6 /* colour.cpp in Sources */,
+				A46E628C0DA92BEA00CFEFC6 /* colourdialog.cpp in Sources */,
+				A46E628D0DA92BEA00CFEFC6 /* combobox.cpp in Sources */,
+				A46E628E0DA92BEA00CFEFC6 /* commandevent.cpp in Sources */,
+				A46E62900DA92BEA00CFEFC6 /* config.cpp in Sources */,
+				A46E62910DA92BEA00CFEFC6 /* contextmenuevent.cpp in Sources */,
+				A46E62920DA92BEA00CFEFC6 /* control.cpp in Sources */,
+				A46E62930DA92BEA00CFEFC6 /* cursor.cpp in Sources */,
+				A46E62940DA92BEA00CFEFC6 /* dataformat.cpp in Sources */,
+				A46E62950DA92BEA00CFEFC6 /* dataobject.cpp in Sources */,
+				A46E62960DA92BEA00CFEFC6 /* dc.cpp in Sources */,
+				A46E62970DA92BEA00CFEFC6 /* dialog.cpp in Sources */,
+				A46E62980DA92BEA00CFEFC6 /* dirdialog.cpp in Sources */,
+				A46E62990DA92BEA00CFEFC6 /* display.cpp in Sources */,
+				A46E629A0DA92BEA00CFEFC6 /* displaychangedevent.cpp in Sources */,
+				A46E629B0DA92BEA00CFEFC6 /* dnd.cpp in Sources */,
+				A46E629C0DA92BEA00CFEFC6 /* docmanager.cpp in Sources */,
+				A46E629D0DA92BEA00CFEFC6 /* doctemplate.cpp in Sources */,
+				A46E629E0DA92BEA00CFEFC6 /* document.cpp in Sources */,
+				A46E629F0DA92BEA00CFEFC6 /* eraseevent.cpp in Sources */,
+				A46E62A00DA92BEA00CFEFC6 /* event.cpp in Sources */,
+				A46E62A10DA92BEA00CFEFC6 /* evthandler.cpp in Sources */,
+				A46E62A20DA92BEA00CFEFC6 /* filedialog.cpp in Sources */,
+				A46E62A30DA92BEA00CFEFC6 /* findreplacedialog.cpp in Sources */,
+				A46E62A40DA92BEA00CFEFC6 /* flexgridsizer.cpp in Sources */,
+				A46E62A50DA92BEA00CFEFC6 /* focusevent.cpp in Sources */,
+				A46E62A60DA92BEA00CFEFC6 /* font.cpp in Sources */,
+				A46E62A70DA92BEA00CFEFC6 /* fontdialog.cpp in Sources */,
+				A46E62A80DA92BEA00CFEFC6 /* fontmisc.cpp in Sources */,
+				A46E62A90DA92BEA00CFEFC6 /* frame.cpp in Sources */,
+				A46E62AA0DA92BEA00CFEFC6 /* gauge.cpp in Sources */,
+				A46E62AB0DA92BEA00CFEFC6 /* gdicmn.cpp in Sources */,
+				A46E62AC0DA92BEA00CFEFC6 /* gdiobject.cpp in Sources */,
+				A46E62AD0DA92BEA00CFEFC6 /* glcanvas.cpp in Sources */,
+				A46E62AE0DA92BEA00CFEFC6 /* global.cpp in Sources */,
+				A46E62AF0DA92BEA00CFEFC6 /* grid.cpp in Sources */,
+				A46E62B00DA92BEA00CFEFC6 /* gridbagsizer.cpp in Sources */,
+				A46E62B10DA92BEA00CFEFC6 /* gridctrl.cpp in Sources */,
+				A46E62B20DA92BEA00CFEFC6 /* gridsizer.cpp in Sources */,
+				A46E62B30DA92BEA00CFEFC6 /* helpevent.cpp in Sources */,
+				A46E62B40DA92BEA00CFEFC6 /* html.cpp in Sources */,
+				A46E62B50DA92BEA00CFEFC6 /* htmlhelpctrl.cpp in Sources */,
+				A46E62B60DA92BEA00CFEFC6 /* htmllbox.cpp in Sources */,
+				A46E62B70DA92BEA00CFEFC6 /* icon.cpp in Sources */,
+				A46E62B80DA92BEA00CFEFC6 /* iconizeevent.cpp in Sources */,
+				A46E62B90DA92BEA00CFEFC6 /* idleevent.cpp in Sources */,
+				A46E62BA0DA92BEA00CFEFC6 /* image.cpp in Sources */,
+				A46E62BB0DA92BEA00CFEFC6 /* imagelist.cpp in Sources */,
+				A46E62BC0DA92BEA00CFEFC6 /* imghandler.cpp in Sources */,
+				A46E62BD0DA92BEA00CFEFC6 /* initdialogevent.cpp in Sources */,
+				A46E62BE0DA92BEA00CFEFC6 /* keyevent.cpp in Sources */,
+				A46E62BF0DA92BEA00CFEFC6 /* laywin.cpp in Sources */,
+				A46E62C00DA92BEA00CFEFC6 /* listbook.cpp in Sources */,
+				A46E62C10DA92BEA00CFEFC6 /* listbox.cpp in Sources */,
+				A46E62C20DA92BEA00CFEFC6 /* listctrl.cpp in Sources */,
+				A46E62C40DA92BEA00CFEFC6 /* locale.cpp in Sources */,
+				A46E62C50DA92BEA00CFEFC6 /* log.cpp in Sources */,
+				A46E62C60DA92BEA00CFEFC6 /* manager.cpp in Sources */,
+				A46E62C80DA92BEA00CFEFC6 /* maximizeevent.cpp in Sources */,
+				A46E62C90DA92BEA00CFEFC6 /* mdi.cpp in Sources */,
+				A46E62CA0DA92BEA00CFEFC6 /* memorydc.cpp in Sources */,
+				A46E62CB0DA92BEA00CFEFC6 /* menu.cpp in Sources */,
+				A46E62CC0DA92BEA00CFEFC6 /* menubar.cpp in Sources */,
+				A46E62CD0DA92BEA00CFEFC6 /* menuitem.cpp in Sources */,
+				A46E62CE0DA92BEA00CFEFC6 /* messagedialog.cpp in Sources */,
+				A46E62CF0DA92BEA00CFEFC6 /* miniframe.cpp in Sources */,
+				A46E62D00DA92BEA00CFEFC6 /* mousecapturechangedevent.cpp in Sources */,
+				A46E62D10DA92BEA00CFEFC6 /* mouseevent.cpp in Sources */,
+				A46E62D20DA92BEA00CFEFC6 /* moveevent.cpp in Sources */,
+				A46E62D30DA92BEA00CFEFC6 /* navigationkeyevent.cpp in Sources */,
+				A46E62D40DA92BEA00CFEFC6 /* ncpaintevent.cpp in Sources */,
+				A46E62D50DA92BEA00CFEFC6 /* notebook.cpp in Sources */,
+				A46E62D60DA92BEA00CFEFC6 /* notebooksizer.cpp in Sources */,
+				A46E62D70DA92BEA00CFEFC6 /* numdialog.cpp in Sources */,
+				A46E62D80DA92BEA00CFEFC6 /* object.cpp in Sources */,
+				A46E62D90DA92BEA00CFEFC6 /* paintevent.cpp in Sources */,
+				A46E62DA0DA92BEA00CFEFC6 /* palette.cpp in Sources */,
+				A46E62DB0DA92BEA00CFEFC6 /* palettechangedevent.cpp in Sources */,
+				A46E62DC0DA92BEA00CFEFC6 /* panel.cpp in Sources */,
+				A46E62DD0DA92BEA00CFEFC6 /* pen.cpp in Sources */,
+				A46E62DE0DA92BEA00CFEFC6 /* printdata.cpp in Sources */,
+				A46E62DF0DA92BEA00CFEFC6 /* printdialog.cpp in Sources */,
+				A46E62E00DA92BEA00CFEFC6 /* printer.cpp in Sources */,
+				A46E62E10DA92BEA00CFEFC6 /* printpreview.cpp in Sources */,
+				A46E62E20DA92BEA00CFEFC6 /* progdlg.cpp in Sources */,
+				A46E62E30DA92BEA00CFEFC6 /* querynewpaletteevent.cpp in Sources */,
+				A46E62E40DA92BEA00CFEFC6 /* radiobox.cpp in Sources */,
+				A46E62E50DA92BEA00CFEFC6 /* radiobutton.cpp in Sources */,
+				A46E62E60DA92BEA00CFEFC6 /* region.cpp in Sources */,
+				A46E62E70DA92BEA00CFEFC6 /* sashwindow.cpp in Sources */,
+				A46E62E80DA92BEA00CFEFC6 /* scrollbar.cpp in Sources */,
+				A46E62E90DA92BEA00CFEFC6 /* scrolledwindow.cpp in Sources */,
+				A46E62EA0DA92BEA00CFEFC6 /* setcursorevent.cpp in Sources */,
+				A46E62EB0DA92BEA00CFEFC6 /* showevent.cpp in Sources */,
+				A46E62EC0DA92BEA00CFEFC6 /* sizeevent.cpp in Sources */,
+				A46E62ED0DA92BEA00CFEFC6 /* sizer.cpp in Sources */,
+				A46E62EE0DA92BEA00CFEFC6 /* sizeritem.cpp in Sources */,
+				A46E62EF0DA92BEA00CFEFC6 /* slider.cpp in Sources */,
+				A46E62F00DA92BEA00CFEFC6 /* sound.cpp in Sources */,
+				A46E62F10DA92BEA00CFEFC6 /* spinbutton.cpp in Sources */,
+				A46E62F20DA92BEA00CFEFC6 /* spinctrl.cpp in Sources */,
+				A46E62F30DA92BEA00CFEFC6 /* splashscreen.cpp in Sources */,
+				A46E62F40DA92BEA00CFEFC6 /* splitterwindow.cpp in Sources */,
+				A46E62F50DA92BEA00CFEFC6 /* staticbitmap.cpp in Sources */,
+				A46E62F60DA92BEA00CFEFC6 /* staticbox.cpp in Sources */,
+				A46E62F70DA92BEA00CFEFC6 /* staticboxsizer.cpp in Sources */,
+				A46E62F80DA92BEA00CFEFC6 /* staticline.cpp in Sources */,
+				A46E62F90DA92BEA00CFEFC6 /* statictext.cpp in Sources */,
+				A46E62FA0DA92BEA00CFEFC6 /* statusbar.cpp in Sources */,
+				A46E62FB0DA92BEA00CFEFC6 /* styledtextctrl.cpp in Sources */,
+				A46E62FC0DA92BEA00CFEFC6 /* syscolourchangedevent.cpp in Sources */,
+				A46E62FD0DA92BEA00CFEFC6 /* systemsettings.cpp in Sources */,
+				A46E62FE0DA92BEA00CFEFC6 /* tabctrl.cpp in Sources */,
+				A46E62FF0DA92BEA00CFEFC6 /* taskbaricon.cpp in Sources */,
+				A46E63000DA92BEA00CFEFC6 /* textctrl.cpp in Sources */,
+				A46E63010DA92BEA00CFEFC6 /* textdialog.cpp in Sources */,
+				A46E63020DA92BEA00CFEFC6 /* thread.cpp in Sources */,
+				A46E63030DA92BEA00CFEFC6 /* timer.cpp in Sources */,
+				A46E63040DA92BEA00CFEFC6 /* tipdialog.cpp in Sources */,
+				A46E63050DA92BEA00CFEFC6 /* tipwindow.cpp in Sources */,
+				A46E63060DA92BEA00CFEFC6 /* togglebutton.cpp in Sources */,
+				A46E63070DA92BEA00CFEFC6 /* toolbar.cpp in Sources */,
+				A46E63080DA92BEA00CFEFC6 /* tooltip.cpp in Sources */,
+				A46E63090DA92BEA00CFEFC6 /* treectrl.cpp in Sources */,
+				A46E630A0DA92BEA00CFEFC6 /* updateuievent.cpp in Sources */,
+				A46E630B0DA92BEA00CFEFC6 /* validator.cpp in Sources */,
+				A46E630C0DA92BEA00CFEFC6 /* view.cpp in Sources */,
+				A46E630D0DA92BEA00CFEFC6 /* window.cpp in Sources */,
+				A46E630E0DA92BEA00CFEFC6 /* windowcreateevent.cpp in Sources */,
+				A46E630F0DA92BEA00CFEFC6 /* windowdestroyevent.cpp in Sources */,
+				A46E63100DA92BEA00CFEFC6 /* wizard.cpp in Sources */,
+				A46E63110DA92BEA00CFEFC6 /* wizardpagesimple.cpp in Sources */,
+				A46E63120DA92BEA00CFEFC6 /* vlbox.cpp in Sources */,
+				A46E63130DA92BEA00CFEFC6 /* vscroll.cpp in Sources */,
+				A46E63140DA92BEA00CFEFC6 /* wxaui.cpp in Sources */,
+				A46E63150DA92BEA00CFEFC6 /* wxdatetime.cpp in Sources */,
+				A46E63160DA92BEA00CFEFC6 /* wxplatform.cpp in Sources */,
+				A46E63170DA92BEA00CFEFC6 /* wxstring.cpp in Sources */,
+				A46E63180DA92BEA00CFEFC6 /* wxversion.cpp in Sources */,
+				A46E63190DA92BEA00CFEFC6 /* xmlresource.cpp in Sources */,
+				A46E65470DA950DC00CFEFC6 /* notifyevent.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2AAC09A05546B4700DB518D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A46E63CD0DA92C3F00CFEFC6 /* Accelerator.d in Sources */,
+				A46E63CE0DA92C3F00CFEFC6 /* ActivateEvent.d in Sources */,
+				A46E63CF0DA92C3F00CFEFC6 /* App.d in Sources */,
+				A46E63D00DA92C3F00CFEFC6 /* ArrayInt.d in Sources */,
+				A46E63D10DA92C3F00CFEFC6 /* ArrayString.d in Sources */,
+				A46E63D20DA92C3F00CFEFC6 /* ArtProvider.d in Sources */,
+				A46E63D30DA92C3F00CFEFC6 /* aui.d in Sources */,
+				A46E63D40DA92C3F00CFEFC6 /* DockArt.d in Sources */,
+				A46E63D50DA92C3F00CFEFC6 /* FrameManager.d in Sources */,
+				A46E63D60DA92C3F00CFEFC6 /* Bitmap.d in Sources */,
+				A46E63D70DA92C3F00CFEFC6 /* BitmapButton.d in Sources */,
+				A46E63D80DA92C3F00CFEFC6 /* BoxSizer.d in Sources */,
+				A46E63D90DA92C3F00CFEFC6 /* Brush.d in Sources */,
+				A46E63DA0DA92C3F00CFEFC6 /* Button.d in Sources */,
+				A46E63DB0DA92C3F00CFEFC6 /* CalendarCtrl.d in Sources */,
+				A46E63DC0DA92C3F00CFEFC6 /* Caret.d in Sources */,
+				A46E63DD0DA92C3F00CFEFC6 /* CheckBox.d in Sources */,
+				A46E63DE0DA92C3F00CFEFC6 /* ChildFocusEvent.d in Sources */,
+				A46E63DF0DA92C3F00CFEFC6 /* Choice.d in Sources */,
+				A46E63E00DA92C3F00CFEFC6 /* ChoiceDialog.d in Sources */,
+				A46E63E10DA92C3F00CFEFC6 /* ClientData.d in Sources */,
+				A46E63E20DA92C3F00CFEFC6 /* Clipboard.d in Sources */,
+				A46E63E30DA92C3F00CFEFC6 /* CloseEvent.d in Sources */,
+				A46E63E40DA92C3F00CFEFC6 /* Colour.d in Sources */,
+				A46E63E50DA92C3F00CFEFC6 /* ColourDialog.d in Sources */,
+				A46E63E60DA92C3F00CFEFC6 /* ComboBox.d in Sources */,
+				A46E63E70DA92C3F00CFEFC6 /* CommandEvent.d in Sources */,
+				A46E63E80DA92C3F00CFEFC6 /* common.d in Sources */,
+				A46E63E90DA92C3F00CFEFC6 /* Config.d in Sources */,
+				A46E63EA0DA92C3F00CFEFC6 /* ContextMenuEvent.d in Sources */,
+				A46E63EB0DA92C3F00CFEFC6 /* Control.d in Sources */,
+				A46E63EC0DA92C3F00CFEFC6 /* Cursor.d in Sources */,
+				A46E63ED0DA92C3F00CFEFC6 /* DataFormat.d in Sources */,
+				A46E63EE0DA92C3F00CFEFC6 /* DataObject.d in Sources */,
+				A46E63F00DA92C3F00CFEFC6 /* DC.d in Sources */,
+				A46E63F10DA92C3F00CFEFC6 /* Defs.d in Sources */,
+				A46E63F20DA92C3F00CFEFC6 /* Dialog.d in Sources */,
+				A46E63F30DA92C3F00CFEFC6 /* DirDialog.d in Sources */,
+				A46E63F40DA92C3F00CFEFC6 /* Display.d in Sources */,
+				A46E63F50DA92C3F00CFEFC6 /* DisplayChangedEvent.d in Sources */,
+				A46E63F60DA92C3F00CFEFC6 /* DND.d in Sources */,
+				A46E63F70DA92C3F00CFEFC6 /* DocManager.d in Sources */,
+				A46E63F80DA92C3F00CFEFC6 /* DocTemplate.d in Sources */,
+				A46E63F90DA92C3F00CFEFC6 /* Document.d in Sources */,
+				A46E63FA0DA92C3F00CFEFC6 /* EraseEvent.d in Sources */,
+				A46E63FB0DA92C3F00CFEFC6 /* Event.d in Sources */,
+				A46E63FC0DA92C3F00CFEFC6 /* EvtHandler.d in Sources */,
+				A46E63FD0DA92C3F00CFEFC6 /* FileDialog.d in Sources */,
+				A46E63FE0DA92C3F00CFEFC6 /* FindReplaceDialog.d in Sources */,
+				A46E63FF0DA92C3F00CFEFC6 /* FlexGridSizer.d in Sources */,
+				A46E64000DA92C3F00CFEFC6 /* FocusEvent.d in Sources */,
+				A46E64010DA92C3F00CFEFC6 /* Font.d in Sources */,
+				A46E64020DA92C3F00CFEFC6 /* FontDialog.d in Sources */,
+				A46E64030DA92C3F00CFEFC6 /* FontMisc.d in Sources */,
+				A46E64040DA92C3F00CFEFC6 /* Frame.d in Sources */,
+				A46E64050DA92C3F00CFEFC6 /* Gauge.d in Sources */,
+				A46E64060DA92C3F00CFEFC6 /* GdiCommon.d in Sources */,
+				A46E64070DA92C3F00CFEFC6 /* GDIObject.d in Sources */,
+				A46E64090DA92C3F00CFEFC6 /* Grid.d in Sources */,
+				A46E640A0DA92C3F00CFEFC6 /* GridBagSizer.d in Sources */,
+				A46E640B0DA92C3F00CFEFC6 /* GridCtrl.d in Sources */,
+				A46E640C0DA92C3F00CFEFC6 /* GridSizer.d in Sources */,
+				A46E640D0DA92C3F00CFEFC6 /* HelpEvent.d in Sources */,
+				A46E640E0DA92C3F00CFEFC6 /* HTML.d in Sources */,
+				A46E640F0DA92C3F00CFEFC6 /* HtmlHelpController.d in Sources */,
+				A46E64100DA92C3F00CFEFC6 /* HtmlListBox.d in Sources */,
+				A46E64110DA92C3F00CFEFC6 /* Icon.d in Sources */,
+				A46E64120DA92C3F00CFEFC6 /* IconizeEvent.d in Sources */,
+				A46E64130DA92C3F00CFEFC6 /* IControlWithItems.d in Sources */,
+				A46E64140DA92C3F00CFEFC6 /* IdleEvent.d in Sources */,
+				A46E64150DA92C3F00CFEFC6 /* Image.d in Sources */,
+				A46E64160DA92C3F00CFEFC6 /* ImageHandlers.d in Sources */,
+				A46E64170DA92C3F00CFEFC6 /* ImageList.d in Sources */,
+				A46E64180DA92C3F00CFEFC6 /* InitDialogEvent.d in Sources */,
+				A46E64190DA92C3F00CFEFC6 /* KeyEvent.d in Sources */,
+				A46E641A0DA92C3F00CFEFC6 /* LayoutWin.d in Sources */,
+				A46E641B0DA92C3F00CFEFC6 /* libs.d in Sources */,
+				A46E641C0DA92C3F00CFEFC6 /* Listbook.d in Sources */,
+				A46E641D0DA92C3F00CFEFC6 /* ListBox.d in Sources */,
+				A46E641E0DA92C3F00CFEFC6 /* ListCtrl.d in Sources */,
+				A46E641F0DA92C3F00CFEFC6 /* Locale.d in Sources */,
+				A46E64200DA92C3F00CFEFC6 /* Log.d in Sources */,
+				A46E64210DA92C3F00CFEFC6 /* MaximizeEvent.d in Sources */,
+				A46E64220DA92C3F00CFEFC6 /* MDI.d in Sources */,
+				A46E64230DA92C3F00CFEFC6 /* MemoryDC.d in Sources */,
+				A46E64240DA92C3F00CFEFC6 /* Menu.d in Sources */,
+				A46E64250DA92C3F00CFEFC6 /* MenuBar.d in Sources */,
+				A46E64260DA92C3F00CFEFC6 /* MenuItem.d in Sources */,
+				A46E64270DA92C3F00CFEFC6 /* MessageDialog.d in Sources */,
+				A46E64280DA92C3F00CFEFC6 /* MiniFrame.d in Sources */,
+				A46E64290DA92C3F00CFEFC6 /* MouseCaptureChangedEvent.d in Sources */,
+				A46E642A0DA92C3F00CFEFC6 /* MouseEvent.d in Sources */,
+				A46E642B0DA92C3F00CFEFC6 /* MoveEvent.d in Sources */,
+				A46E642C0DA92C3F00CFEFC6 /* NavigationKeyEvent.d in Sources */,
+				A46E642D0DA92C3F00CFEFC6 /* NcPaintEvent.d in Sources */,
+				A46E642E0DA92C3F00CFEFC6 /* Notebook.d in Sources */,
+				A46E642F0DA92C3F00CFEFC6 /* NotebookSizer.d in Sources */,
+				A46E64300DA92C3F00CFEFC6 /* NotifyEvent.d in Sources */,
+				A46E64310DA92C3F00CFEFC6 /* NumberDialog.d in Sources */,
+				A46E64320DA92C3F00CFEFC6 /* ogl.d in Sources */,
+				A46E64330DA92C3F00CFEFC6 /* PaintEvent.d in Sources */,
+				A46E64340DA92C3F00CFEFC6 /* Palette.d in Sources */,
+				A46E64350DA92C3F00CFEFC6 /* PaletteChangedEvent.d in Sources */,
+				A46E64360DA92C3F00CFEFC6 /* Panel.d in Sources */,
+				A46E64370DA92C3F00CFEFC6 /* Pen.d in Sources */,
+				A46E64380DA92C3F00CFEFC6 /* PrintData.d in Sources */,
+				A46E64390DA92C3F00CFEFC6 /* PrintDialog.d in Sources */,
+				A46E643A0DA92C3F00CFEFC6 /* Printer.d in Sources */,
+				A46E643B0DA92C3F00CFEFC6 /* PrintPreview.d in Sources */,
+				A46E643C0DA92C3F00CFEFC6 /* ProgressDialog.d in Sources */,
+				A46E643D0DA92C3F00CFEFC6 /* QueryNewPaletteEvent.d in Sources */,
+				A46E643E0DA92C3F00CFEFC6 /* RadioBox.d in Sources */,
+				A46E643F0DA92C3F00CFEFC6 /* RadioButton.d in Sources */,
+				A46E64400DA92C3F00CFEFC6 /* Region.d in Sources */,
+				A46E64410DA92C3F00CFEFC6 /* SashWindow.d in Sources */,
+				A46E64420DA92C3F00CFEFC6 /* ScrollBar.d in Sources */,
+				A46E64430DA92C3F00CFEFC6 /* ScrolledWindow.d in Sources */,
+				A46E64440DA92C3F00CFEFC6 /* SetCursorEvent.d in Sources */,
+				A46E64450DA92C3F00CFEFC6 /* ShowEvent.d in Sources */,
+				A46E64460DA92C3F00CFEFC6 /* SizeEvent.d in Sources */,
+				A46E64470DA92C3F00CFEFC6 /* Sizer.d in Sources */,
+				A46E64480DA92C3F00CFEFC6 /* SizerItem.d in Sources */,
+				A46E64490DA92C3F00CFEFC6 /* Slider.d in Sources */,
+				A46E644A0DA92C3F00CFEFC6 /* Sound.d in Sources */,
+				A46E644B0DA92C3F00CFEFC6 /* SpinButton.d in Sources */,
+				A46E644C0DA92C3F00CFEFC6 /* SpinCtrl.d in Sources */,
+				A46E644D0DA92C3F00CFEFC6 /* SplashScreen.d in Sources */,
+				A46E644E0DA92C3F00CFEFC6 /* SplitterWindow.d in Sources */,
+				A46E644F0DA92C3F00CFEFC6 /* StaticBitmap.d in Sources */,
+				A46E64500DA92C3F00CFEFC6 /* StaticBox.d in Sources */,
+				A46E64510DA92C3F00CFEFC6 /* StaticBoxSizer.d in Sources */,
+				A46E64520DA92C3F00CFEFC6 /* StaticLine.d in Sources */,
+				A46E64530DA92C3F00CFEFC6 /* StaticText.d in Sources */,
+				A46E64540DA92C3F00CFEFC6 /* StatusBar.d in Sources */,
+				A46E64550DA92C3F00CFEFC6 /* StyledTextCtrl.d in Sources */,
+				A46E64560DA92C3F00CFEFC6 /* SysColourChangedEvent.d in Sources */,
+				A46E64570DA92C3F00CFEFC6 /* SystemSettings.d in Sources */,
+				A46E64580DA92C3F00CFEFC6 /* TabCtrl.d in Sources */,
+				A46E64590DA92C3F00CFEFC6 /* TaskBarIcon.d in Sources */,
+				A46E645A0DA92C3F00CFEFC6 /* TextCtrl.d in Sources */,
+				A46E645B0DA92C3F00CFEFC6 /* TextDialog.d in Sources */,
+				A46E645C0DA92C3F00CFEFC6 /* Thread.d in Sources */,
+				A46E645D0DA92C3F00CFEFC6 /* Timer.d in Sources */,
+				A46E645E0DA92C3F00CFEFC6 /* TipDialog.d in Sources */,
+				A46E64610DA92C3F00CFEFC6 /* ToolBar.d in Sources */,
+				A46E64620DA92C3F00CFEFC6 /* ToolTip.d in Sources */,
+				A46E64630DA92C3F00CFEFC6 /* TreeCtrl.d in Sources */,
+				A46E64640DA92C3F00CFEFC6 /* UpdateUIEvent.d in Sources */,
+				A46E64650DA92C3F00CFEFC6 /* Utils.d in Sources */,
+				A46E64660DA92C3F00CFEFC6 /* Validator.d in Sources */,
+				A46E64670DA92C3F00CFEFC6 /* VideoMode.d in Sources */,
+				A46E64680DA92C3F00CFEFC6 /* View.d in Sources */,
+				A46E64690DA92C3F00CFEFC6 /* Window.d in Sources */,
+				A46E646A0DA92C3F00CFEFC6 /* WindowCreateEvent.d in Sources */,
+				A46E646B0DA92C3F00CFEFC6 /* WindowDestroyEvent.d in Sources */,
+				A46E646C0DA92C3F00CFEFC6 /* Wizard.d in Sources */,
+				A46E646D0DA92C3F00CFEFC6 /* WizardPage.d in Sources */,
+				A46E646E0DA92C3F00CFEFC6 /* WizardPageSimple.d in Sources */,
+				A46E646F0DA92C3F00CFEFC6 /* VLBox.d in Sources */,
+				A46E64700DA92C3F00CFEFC6 /* VScroll.d in Sources */,
+				A46E64710DA92C3F00CFEFC6 /* wx.d in Sources */,
+				A46E64720DA92C3F00CFEFC6 /* wxDateTime.d in Sources */,
+				A46E64730DA92C3F00CFEFC6 /* wxObject.d in Sources */,
+				A46E64740DA92C3F00CFEFC6 /* wxPlatform.d in Sources */,
+				A46E64750DA92C3F00CFEFC6 /* wxString.d in Sources */,
+				A46E64760DA92C3F00CFEFC6 /* wxVersion.d in Sources */,
+				A46E64770DA92C3F00CFEFC6 /* XmlResource.d in Sources */,
+				A46E655A0DA9519400CFEFC6 /* TipWindow.d in Sources */,
+				A46E655C0DA951A000CFEFC6 /* ToggleButton.d in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A46E67F70DA959A500CFEFC6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A46E61CB0DA92B4D00CFEFC6 /* wxc */;
+			targetProxy = A46E67F60DA959A500CFEFC6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB916108733D950010E9CD /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = "@executable_path";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_1)",
+				);
+				LIBRARY_SEARCH_PATHS_QUOTED_1 = "\"$(WXWIN)/src/build/Development\"";
+				OTHER_LDFLAGS = "-lwx_mac";
+				PRODUCT_NAME = libwxd;
+				ZERO_LINK = YES;
+			};
+			name = Development;
+		};
+		1DEB916208733D950010E9CD /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				INSTALL_PATH = "@executable_path";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_1)",
+				);
+				LIBRARY_SEARCH_PATHS_QUOTED_1 = "\"$(WXWIN)/src/build/Deployment\"";
+				OTHER_LDFLAGS = "-lwx_mac";
+				PRODUCT_NAME = libwxd;
+			};
+			name = Deployment;
+		};
+		1DEB916508733D950010E9CD /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				WXWIN = "$(HOME)/wxWidgets-2.8.7";
+			};
+			name = Development;
+		};
+		1DEB916608733D950010E9CD /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				WXWIN = "$(HOME)/wxWidgets-2.8.7";
+			};
+			name = Deployment;
+		};
+		A46E61D30DA92B7700CFEFC6 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(WXWIN)/include/wx/wxprec.h";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__WXMAC__,
+					"_FILE_OFFSET_BITS=64",
+					_LARGE_FILES,
+					"__WXMAC_XCODE__=1",
+					"WX_PRECOMP=1",
+					"__WXDEBUG__=1",
+				);
+				GCC_VERSION_i386 = 4.0;
+				GCC_VERSION_ppc = 3.3;
+				HEADER_SEARCH_PATHS = (
+					"$(WXWIN)/include",
+					"$(WXWIN)/src/build/include",
+				);
+				INSTALL_PATH = "@executable_path";
+				LIBRARY_SEARCH_PATHS = (
+					"$(WXWIN)/lib",
+					"$(WXWIN)/src/build/Development",
+				);
+				MACOSX_DEPLOYMENT_TARGET_i386 = 10.4;
+				MACOSX_DEPLOYMENT_TARGET_ppc = 10.3;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+					"-lwx_mac",
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = libwxc;
+				USE_SEPARATE_HEADERMAPS = YES;
+				ZERO_LINK = YES;
+			};
+			name = Development;
+		};
+		A46E61D40DA92B7700CFEFC6 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				COPY_PHASE_STRIP = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(WXWIN)/include/wx/wxprec.h";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__WXMAC__,
+					"_FILE_OFFSET_BITS=64",
+					_LARGE_FILES,
+					"__WXMAC_XCODE__=1",
+					"WX_PRECOMP=1",
+				);
+				GCC_VERSION_i386 = 4.0;
+				GCC_VERSION_ppc = 3.3;
+				HEADER_SEARCH_PATHS = (
+					"$(WXWIN)/include",
+					"$(WXWIN)/src/build/include",
+				);
+				INSTALL_PATH = "@executable_path";
+				LIBRARY_SEARCH_PATHS = (
+					"$(WXWIN)/lib",
+					"$(WXWIN)/src/build/Deployment",
+				);
+				MACOSX_DEPLOYMENT_TARGET_i386 = 10.4;
+				MACOSX_DEPLOYMENT_TARGET_ppc = 10.3;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Carbon,
+					"-lwx_mac",
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = libwxc;
+				USE_SEPARATE_HEADERMAPS = YES;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB916008733D950010E9CD /* Build configuration list for PBXNativeTarget "wxd" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB916108733D950010E9CD /* Development */,
+				1DEB916208733D950010E9CD /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Deployment;
+		};
+		1DEB916408733D950010E9CD /* Build configuration list for PBXProject "wxd" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB916508733D950010E9CD /* Development */,
+				1DEB916608733D950010E9CD /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Deployment;
+		};
+		A46E61D20DA92B7700CFEFC6 /* Build configuration list for PBXNativeTarget "wxc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A46E61D30DA92B7700CFEFC6 /* Development */,
+				A46E61D40DA92B7700CFEFC6 /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Deployment;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}
