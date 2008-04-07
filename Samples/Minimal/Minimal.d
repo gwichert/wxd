@@ -30,6 +30,9 @@ import wx.wx;
 			super(title, pos, size);
 			// Set the window icon
 
+			version (__WXMAC_XCODE__)
+			icon = new Icon("Minimal.app/Contents/Resources/mondrian.png");
+			else
 			icon = new Icon("../Samples/Minimal/mondrian.png");
 
 			// Set up a menu
