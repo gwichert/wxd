@@ -7,8 +7,8 @@
 		<Option compiler="gdc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/Minimal" prefix_auto="0" extension_auto="0" />
-				<Option working_dir="bin" />
+				<Option output="../../bin/Debug/Minimal" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="../../bin" />
 				<Option object_output="obj/Debug/" />
 				<Option type="0" />
 				<Option compiler="gdc" />
@@ -18,13 +18,13 @@
 					<Add option="-fversion=$(ENCODING)" />
 				</Compiler>
 				<Environment>
-					<Variable name="PLATFORM" value="__`wxc/wx-platform`__" />
-					<Variable name="ENCODING" value="`wxc/wx-encoding`" />
+					<Variable name="PLATFORM" value="__`../../wxc/wx-platform`__" />
+					<Variable name="ENCODING" value="`../../wxc/wx-encoding`" />
 				</Environment>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/Minimal" prefix_auto="0" extension_auto="0" />
-				<Option working_dir="bin" />
+				<Option output="../../bin/Release/Minimal" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="../../bin" />
 				<Option object_output="obj/Release/" />
 				<Option type="0" />
 				<Option compiler="gdc" />
@@ -37,21 +37,27 @@
 					<Add option="-s" />
 				</Linker>
 				<Environment>
-					<Variable name="PLATFORM" value="__`wxc/wx-platform`__" />
-					<Variable name="ENCODING" value="`wxc/wx-encoding`" />
+					<Variable name="PLATFORM" value="__`../../wxc/wx-platform`__" />
+					<Variable name="ENCODING" value="`../../wxc/wx-encoding`" />
 				</Environment>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-O2" />
 			<Add option="-g" />
+			<Add directory="../.." />
 		</Compiler>
 		<Linker>
-			<Add option="-L. -lwxd -lwxc" />
+			<Add option="-lwxd -lwxc" />
 			<Add option="`wx-config --libs` -lstdc++" />
 			<Add option="-lgphobos -lm -lpthread" />
+			<Add directory="../.." />
 		</Linker>
-		<Unit filename="Samples/Minimal/Minimal.d" />
+		<ExtraCommands>
+			<Add after="# in wxMac, programs need to either have be bundled or have a resource fork" />
+			<Add after="`wx-config --basename | grep wx_mac &gt;/dev/null &amp;&amp; /Developer/Tools/Rez -d __DARWIN__ -t APPL Carbon.r -o $(TARGET_OUTPUT_FILE)`" />
+		</ExtraCommands>
+		<Unit filename="Minimal.d" />
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -3,6 +3,6 @@
 	<Workspace title="Workspace">
 		<Project filename="wxc.cbp" />
 		<Project filename="wxd.cbp" />
-		<Project filename="Minimal.cbp" active="1" />
+		<Project filename="Samples/Minimal/Minimal.cbp" active="1" />
 	</Workspace>
 </CodeBlocks_workspace_file>
