@@ -353,7 +353,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		32BAE0B70371A74B00C91783 /* wxd_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wxd_Prefix.pch; sourceTree = "<group>"; };
 		A46E61CC0DA92B4D00CFEFC6 /* libwxc.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libwxc.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		A46E61D70DA92BEA00CFEFC6 /* accel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = accel.cpp; path = wxc/accel.cpp; sourceTree = "<group>"; };
 		A46E61D80DA92BEA00CFEFC6 /* activateevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = activateevent.cpp; path = wxc/activateevent.cpp; sourceTree = "<group>"; };
@@ -907,7 +906,6 @@
 				A46E62760DA92BEA00CFEFC6 /* wxstring.cpp */,
 				A46E62770DA92BEA00CFEFC6 /* wxversion.cpp */,
 				A46E62780DA92BEA00CFEFC6 /* xmlresource.cpp */,
-				32BAE0B70371A74B00C91783 /* wxd_Prefix.pch */,
 			);
 			name = wxc;
 			sourceTree = "<group>";
