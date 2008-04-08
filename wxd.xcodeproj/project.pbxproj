@@ -1544,6 +1544,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GDC_VERSION_IDENTIFIERS = "wx28 __WXMAC__ ANSI";
 				INSTALL_PATH = "@executable_path";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1566,6 +1567,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GDC_VERSION_IDENTIFIERS = "wx28 __WXMAC__ ANSI";
 				INSTALL_PATH = "@executable_path";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1613,12 +1615,16 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(WXWIN)/include/wx/wxprec.h";
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					NO_GCC_PRAGMA,
+					"wxUSE_BASE=1",
+					"__WXDEBUG__=1",
+					MACOS_CLASSIC,
+					WXUSINGDLL,
 					__WXMAC__,
 					"_FILE_OFFSET_BITS=64",
 					_LARGE_FILES,
 					"__WXMAC_XCODE__=1",
 					"WX_PRECOMP=1",
-					"__WXDEBUG__=1",
 				);
 				GCC_VERSION_i386 = 4.0;
 				GCC_VERSION_ppc = 3.3;
@@ -1642,6 +1648,7 @@
 				PRODUCT_NAME = libwxc;
 				USE_SEPARATE_HEADERMAPS = YES;
 				ZERO_LINK = YES;
+				wxDylib = "$(WXWIN)/src/build/Development/libwx_mac.dylib";
 			};
 			name = Development;
 		};
@@ -1661,11 +1668,15 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(WXWIN)/include/wx/wxprec.h";
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					NO_GCC_PRAGMA,
+					"wxUSE_BASE=1",
+					WXUSINGDLL,
 					__WXMAC__,
 					"_FILE_OFFSET_BITS=64",
 					_LARGE_FILES,
 					"__WXMAC_XCODE__=1",
 					"WX_PRECOMP=1",
+					MACOS_CLASSIC,
 				);
 				GCC_VERSION_i386 = 4.0;
 				GCC_VERSION_ppc = 3.3;
@@ -1689,6 +1700,7 @@
 				PRODUCT_NAME = libwxc;
 				USE_SEPARATE_HEADERMAPS = YES;
 				ZERO_LINK = NO;
+				wxDylib = "$(WXWIN)/src/build/Deployment/libwx_mac.dylib";
 			};
 			name = Deployment;
 		};
