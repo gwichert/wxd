@@ -118,3 +118,4 @@ clean:
 	-rm wxc/PLATFORM
 	-rm wxc/ENCODING
 
+.PHONY: build
