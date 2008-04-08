@@ -116,7 +116,7 @@ unix: (GNU)
   ./configure
   make
   sudo make install
-mac: (Xcode)
+macosx: (Xcode)
   cd src; open wxWindows.xcodeproj and "Build" /or/
   xcodebuild -target dynamic -configuration Deployment
 
@@ -130,7 +130,7 @@ windows:
 unix:
   make all test
   sudo make install
-mac: (Xcode)
+macosx: (Xcode)
   set WXWIN=<path to wxWidgets>
   xcodebuild -alltargets
 freebsd:
