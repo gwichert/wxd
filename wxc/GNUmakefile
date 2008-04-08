@@ -257,6 +257,7 @@ wx-encoding$(EXEEXT): wx-encoding.o
 clean:
 	-rm *.o
 	-rm wx-libs$(EXEEXT)
+	-rm wx-release$(EXEEXT)
 	-rm wx-version$(EXEEXT)
 	-rm wx-platform$(EXEEXT)
 	-rm wx-encoding$(EXEEXT)
