@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A46DEBC30DAB94C400CB99BD /* wx-config-mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46DEBC20DAB94C400CB99BD /* wx-config-mac.cpp */; };
 		A46E62790DA92BEA00CFEFC6 /* accel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61D70DA92BEA00CFEFC6 /* accel.cpp */; };
 		A46E627A0DA92BEA00CFEFC6 /* activateevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61D80DA92BEA00CFEFC6 /* activateevent.cpp */; };
 		A46E627B0DA92BEA00CFEFC6 /* app.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46E61D90DA92BEA00CFEFC6 /* app.cpp */; };
@@ -353,6 +354,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A46DEBBC0DAB946C00CB99BD /* wx-config */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "wx-config"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A46DEBC20DAB94C400CB99BD /* wx-config-mac.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "wx-config-mac.cpp"; path = "wxc/wx-config-mac.cpp"; sourceTree = "<group>"; };
 		A46E61CC0DA92B4D00CFEFC6 /* libwxc.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libwxc.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		A46E61D70DA92BEA00CFEFC6 /* accel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = accel.cpp; path = wxc/accel.cpp; sourceTree = "<group>"; };
 		A46E61D80DA92BEA00CFEFC6 /* activateevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = activateevent.cpp; path = wxc/activateevent.cpp; sourceTree = "<group>"; };
@@ -693,6 +696,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A46DEBBA0DAB946C00CB99BD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A46E61CA0DA92B4D00CFEFC6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -717,6 +727,7 @@
 			children = (
 				A46E61CC0DA92B4D00CFEFC6 /* libwxc.dylib */,
 				D2AAC09D05546B4700DB518D /* libwxd.dylib */,
+				A46DEBBC0DAB946C00CB99BD /* wx-config */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -743,6 +754,7 @@
 		08FB77ACFE841707C02AAC07 /* wxc */ = {
 			isa = PBXGroup;
 			children = (
+				A46DEBC20DAB94C400CB99BD /* wx-config-mac.cpp */,
 				A46E61D70DA92BEA00CFEFC6 /* accel.cpp */,
 				A46E61D80DA92BEA00CFEFC6 /* activateevent.cpp */,
 				A46E61D90DA92BEA00CFEFC6 /* app.cpp */,
@@ -1129,6 +1141,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		A46DEBBB0DAB946C00CB99BD /* wx-config */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A46DEBBF0DAB947500CB99BD /* Build configuration list for PBXNativeTarget "wx-config" */;
+			buildPhases = (
+				A46DEBB90DAB946C00CB99BD /* Sources */,
+				A46DEBBA0DAB946C00CB99BD /* Frameworks */,
+				A46DEBC80DAB960800CB99BD /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "wx-config";
+			productName = "wx-config";
+			productReference = A46DEBBC0DAB946C00CB99BD /* wx-config */;
+			productType = "com.apple.product-type.tool";
+		};
 		A46E61CB0DA92B4D00CFEFC6 /* wxc */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A46E61D20DA92B7700CFEFC6 /* Build configuration list for PBXNativeTarget "wxc" */;
@@ -1177,11 +1206,36 @@
 			targets = (
 				A46E61CB0DA92B4D00CFEFC6 /* wxc */,
 				D2AAC09C05546B4700DB518D /* wxd */,
+				A46DEBBB0DAB946C00CB99BD /* wx-config */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		A46DEBC80DAB960800CB99BD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp -p $WXWIN/src/build/$CONFIGURATION/libwx_mac.dylib $BUILT_PRODUCTS_DIR/$EXECUTABLE_FOLDER_PATH\ninstall_name_tool -id @executable_path/libwx_mac.dylib \\\n                  $BUILT_PRODUCTS_DIR/$EXECUTABLE_FOLDER_PATH/libwx_mac.dylib\n# relocate library from $FRAMEWORKS_FOLDER_PATH to $EXECUTABLE_FOLDER_PATH, for unbundled program\ninstall_name_tool -change @executable_path/../Frameworks/libwx_mac.dylib @executable_path/libwx_mac.dylib \\\n                  $BUILT_PRODUCTS_DIR/$EXECUTABLE_FOLDER_PATH/$EXECUTABLE_NAME\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		A46DEBB90DAB946C00CB99BD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A46DEBC30DAB94C400CB99BD /* wx-config-mac.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A46E61C90DA92B4D00CFEFC6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1601,6 +1655,85 @@
 			};
 			name = Deployment;
 		};
+		A46DEBC00DAB947500CB99BD /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "$(WXWIN)/include/wx/wxprec.h";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NO_GCC_PRAGMA,
+					"wxUSE_BASE=1",
+					"__WXDEBUG__=1",
+					MACOS_CLASSIC,
+					WXUSINGDLL,
+					__WXMAC__,
+					"_FILE_OFFSET_BITS=64",
+					_LARGE_FILES,
+					"__WXMAC_XCODE__=1",
+					"WX_PRECOMP=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(WXWIN)/include",
+					"$(WXWIN)/src/build/include",
+				);
+				INSTALL_PATH = "$(HOME)/bin";
+				LIBRARY_SEARCH_PATHS = (
+					"$(WXWIN)/lib",
+					"$(WXWIN)/src/build/Development",
+				);
+				OTHER_LDFLAGS = (
+					"-lwx_mac",
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "wx-config";
+				ZERO_LINK = YES;
+			};
+			name = Development;
+		};
+		A46DEBC10DAB947500CB99BD /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "$(WXWIN)/include/wx/wxprec.h";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NO_GCC_PRAGMA,
+					"wxUSE_BASE=1",
+					WXUSINGDLL,
+					__WXMAC__,
+					"_FILE_OFFSET_BITS=64",
+					_LARGE_FILES,
+					"__WXMAC_XCODE__=1",
+					"WX_PRECOMP=1",
+					MACOS_CLASSIC,
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(WXWIN)/include",
+					"$(WXWIN)/src/build/include",
+				);
+				INSTALL_PATH = "$(HOME)/bin";
+				LIBRARY_SEARCH_PATHS = (
+					"$(WXWIN)/lib",
+					"$(WXWIN)/src/build/Deployment",
+				);
+				OTHER_LDFLAGS = (
+					"-lwx_mac",
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "wx-config";
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
 		A46E61D30DA92B7700CFEFC6 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1721,6 +1854,15 @@
 			buildConfigurations = (
 				1DEB916508733D950010E9CD /* Development */,
 				1DEB916608733D950010E9CD /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Deployment;
+		};
+		A46DEBBF0DAB947500CB99BD /* Build configuration list for PBXNativeTarget "wx-config" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A46DEBC00DAB947500CB99BD /* Development */,
+				A46DEBC10DAB947500CB99BD /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
