@@ -106,16 +106,19 @@ Some example program crashed.
 windows: (Digital Mars)
     cd build\bakefiles
     bakefile_gen
-unix/mac: (GNU)
+unix: (GNU)
     ./autogen.sh
 - compile and install
 windows: (Digital Mars)
   cd build\msw
   make -f makefile.dmc
-unix/mac: (GNU)
+unix: (GNU)
   ./configure
   make
   sudo make install
+mac: (Xcode)
+  cd src; open wxWindows.xcodeproj and "Build" /or/
+  xcodebuild -target dynamic -configuration Deployment
 
 ** build wxD
 
@@ -124,9 +127,12 @@ unix/mac: (GNU)
 windows:
   set WXDIR=<path to wxWidgets>
   make all test
-unix/mac:
+unix:
   make all test
   sudo make install
+mac: (Xcode)
+  set WXWIN=<path to wxWidgets>
+  xcodebuild -alltargets
 freebsd:
   gmake all test
   su -c "make install"
@@ -137,6 +143,9 @@ rebuild: (see http://dsource.org/projects/dsss/wiki/Rebuild)
 DSSS: (see http://dsource.org/projects/dsss/)
   dsss build
   dsss install
+Code::Blocks: (see http://codeblocks.org)
+  codeblocks --build wxc.cbp
+  codeblocks --build wxd.cbp
 
 * Linking
 
