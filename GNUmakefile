@@ -113,6 +113,7 @@ clean:
 	$(MAKE) clean -C wx
 	$(MAKE) clean -C wxc
 	$(MAKE) clean -C Samples
+	-cp -p wx/libs.txt wx/libs.d
 	-rm wxc/WX_RELEASE
 	-rm wxc/WX_VERSION
 	-rm wxc/PLATFORM
