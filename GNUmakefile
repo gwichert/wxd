@@ -119,4 +119,8 @@ clean:
 	-rm wxc/PLATFORM
 	-rm wxc/ENCODING
 
+distclean: clean
+	-rm -r html
+	-rm -r wxd
+
 .PHONY: build
