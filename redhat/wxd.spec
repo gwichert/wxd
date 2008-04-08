@@ -28,6 +28,7 @@ scripting language, nor an interpreted language.
 export CXXFLAGS=$RPM_OPT_FLAGS 
 export DFLAGS=`echo $RPM_OPT_FLAGS | sed -e s/-mtune=generic//`
 make WX_CONFIG=wx-config COMPILER=GDC
+make WX_CONFIG=wx-config build
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -43,3 +44,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libwxc.a
 %{_libdir}/libwxd.a
 
+%changelog
+* Fri Nov 17 2006 Anders F Bjorklund <afb@users.sourceforge.net> 0.08-0
+- Initial rpm package
