@@ -83,6 +83,7 @@ ddoc: wxc/PLATFORM wxc/ENCODING
 wxd:
 	cvs -z3 -d:pserver:anonymous@wxd.cvs.sourceforge.net:/cvsroot/wxd co -P wxd
 	test -d wxd && find wxd -name CVS -o -name .cvsignore | xargs rm -r
+	@test -d wxd/debian && rm -r wxd/debian || true
 	-dos2unix -k wxd/wxc/*.cpp wxd/wxc/*.h wxd/*.txt
 	-dos2unix -k wxd/wx/*.d wxd/wx/*/*.d wxd/Samples/*/*.d wxd/Samples/*/*.txt
 
@@ -93,6 +94,12 @@ zip: wxd
 	@rm -f wxd.zip
 	zip -r -y wxd.zip wxd
 	zip -r -l wxd.zip wxd -i '*.cpp' -i '*.h' -i '*.txt '-i '*.d'
+
+rpm: dist
+	rpmbuild -ba redhat/wxd.spec
+
+deb:
+	dpkg-buildpackage -uc -us -rfakeroot
 
 helpers:
 	$(MAKE) -C wxc helpers
