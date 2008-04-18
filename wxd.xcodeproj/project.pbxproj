@@ -1223,7 +1223,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp -p $WXWIN/src/build/$CONFIGURATION/libwx_mac.dylib $BUILT_PRODUCTS_DIR/$EXECUTABLE_FOLDER_PATH\ninstall_name_tool -id @executable_path/libwx_mac.dylib \\\n                  $BUILT_PRODUCTS_DIR/$EXECUTABLE_FOLDER_PATH/libwx_mac.dylib\n# relocate library from $FRAMEWORKS_FOLDER_PATH to $EXECUTABLE_FOLDER_PATH, for unbundled program\ninstall_name_tool -change @executable_path/../Frameworks/libwx_mac.dylib @executable_path/libwx_mac.dylib \\\n                  $BUILT_PRODUCTS_DIR/$EXECUTABLE_FOLDER_PATH/$EXECUTABLE_NAME\n";
+			shellScript = "cp -p $WXWIN/src/build/$CONFIGURATION/libwx_mac.dylib \\\n                  $BUILT_PRODUCTS_DIR/$EXECUTABLE_FOLDER_PATH/libwx_mac_local.dylib\ninstall_name_tool -id @executable_path/libwx_mac_local.dylib \\\n                  $BUILT_PRODUCTS_DIR/$EXECUTABLE_FOLDER_PATH/libwx_mac_local.dylib\n# relocate library from $FRAMEWORKS_FOLDER_PATH to $EXECUTABLE_FOLDER_PATH, for unbundled program\ninstall_name_tool -change @executable_path/../Frameworks/libwx_mac.dylib @executable_path/libwx_mac_local.dylib \\\n                  $BUILT_PRODUCTS_DIR/$EXECUTABLE_FOLDER_PATH/$EXECUTABLE_NAME\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
