@@ -197,7 +197,11 @@ ifeq ("$(STC)","1")
 STCFLAGS = -DWXD_STYLEDTEXTCTRL
 endif
 
+# Note: wxMac has some ugly library linking bugs,
+#       so that "base" needs symbols from "core".
+
 WXFLAGS = `$(WX_CONFIG) --cxxflags`
+WXBASE = `$(WX_CONFIG) --libs base,core`
 
 prefix=$(PREFIX)
 exec_prefix=$(prefix)
@@ -240,7 +244,7 @@ wx-config.exe: wx-config-win.o
 	$(CXX) $(LDFLAGS) -o $@ $<
 
 wx-libs$(EXEEXT): wx-libs.o
-	$(CXX) $(LDFLAGS) `$(WX_CONFIG) --libs base,core` -o $@ $<
+	$(CXX) $(LDFLAGS) -o $@ $< $(WXBASE)
 
 wx-release$(EXEEXT): wx-release.o
 	$(CXX) $(LDFLAGS) -o $@ $<
