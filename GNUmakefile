@@ -130,4 +130,4 @@ distclean: clean
 	-rm -r html
 	-rm -r wxd
 
-.PHONY: build
+.PHONY: build docs
