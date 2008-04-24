@@ -929,7 +929,7 @@ private import std.string;
 					GetItem(info);
 
 					ListItemAttr attr = info.Attributes;
-					if ( !attr || !attr.HasTextColour )
+					if ( attr == null || !attr.HasTextColour )
 					{
 						info.TextColour = Colour.wxCYAN;
 
