@@ -13,11 +13,11 @@ PLATFORM = $(shell cat $(TOPDIR)/wxc/PLATFORM 2>/dev/null)
 # wx char encoding (ANSI/UNICODE)
 ENCODING = $(shell cat $(TOPDIR)/wxc/ENCODING 2>/dev/null)
 
-CXX = $(shell $(WX_CONFIG) --cxx)
+CXX ?= $(shell $(WX_CONFIG) --cxx)
 CXXFLAGS = -O2
 CXXLIBS = -lstdc++ `test -r /usr/lib/libcc_dynamic.a && echo -lcc_dynamic`
 
-DC = gdc
+DC ?= gdc
 DFLAGS = -O2 -g
 
 WXRELEASE = `$(WX_CONFIG) --release`

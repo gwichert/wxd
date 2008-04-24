@@ -20,17 +20,17 @@ PLATFORM = $(shell cat $(TOPDIR)/wxc/PLATFORM 2>/dev/null)
 # wx char encoding (ANSI/UNICODE)
 ENCODING = $(shell cat $(TOPDIR)/wxc/ENCODING 2>/dev/null)
 
-CXX = $(shell $(WX_CONFIG) --cxx)
+CXX ?= $(shell $(WX_CONFIG) --cxx)
 CXXFLAGS = -O2
 CXXLIBS = -lstdc++
 
 ifeq ("$(COMPILER)","DMD")
-DC = dmd
+DC ?= dmd
 DFLAGS = -O -g
 version=-version
 output=-of$@
 else
-DC = gdc
+DC ?= gdc
 DFLAGS = -O2 -g
 version=-fversion
 output=-o $@
