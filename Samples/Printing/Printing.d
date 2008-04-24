@@ -219,7 +219,7 @@ import wx.wx;
         public override bool OnPrintPage(int page)
         {
             DC dc = this.Dc;
-            if (dc != null) {
+            if (dc) {
                 if (page == 1)
                     DrawPageOne(dc);
                 else 

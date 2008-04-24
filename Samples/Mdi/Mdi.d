@@ -372,7 +372,7 @@ struct ArrayList /* for .NET compatibility */
 		
 		public void OnRefresh( Object sender, Event e )
 		{
-			if ( canvas != null ) 
+			if ( canvas ) 
 				canvas.Refresh();
 		}
 
@@ -438,7 +438,7 @@ struct ArrayList /* for .NET compatibility */
 			writefln( "MyChild: OnClose" );
 			CloseEvent ce = cast(CloseEvent) e;
 
-			if ( canvas != null && canvas.IsDirty )
+			if ( canvas && canvas.IsDirty )
 			{
 				MessageDialog md = new MessageDialog( null, "Really close ?", "Please confirm", 
 						Dialog.wxICON_QUESTION | Dialog.wxYES_NO );
@@ -459,7 +459,7 @@ struct ArrayList /* for .NET compatibility */
 		public override void OnActivate( Object sender, Event e )
 		{
 			ActivateEvent ae = cast(ActivateEvent) e;
-			if ( ae.Active && canvas != null )
+			if ( ae.Active && canvas )
 				canvas.SetFocus();
 		}
 	}

@@ -313,7 +313,7 @@ private import std.string;
 		{
 			UpdateUIEvent evt = cast(UpdateUIEvent) e;
 			
-			evt.Enabled = ( m_hlbox != null ) && m_hlbox.HasMultipleSelection;
+			evt.Enabled = m_hlbox && m_hlbox.HasMultipleSelection;
 		}
 		
 		//---------------------------------------------------------------------

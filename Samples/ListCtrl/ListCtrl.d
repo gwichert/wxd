@@ -231,7 +231,7 @@ private import std.string;
 
 		public void DoSize()
 		{
-			if ( m_logWindow == null ) return;
+			if ( !m_logWindow ) return;
 
 			Size size = ClientSize;
 			int y = (2*size.Height)/3;
@@ -929,7 +929,7 @@ private import std.string;
 					GetItem(info);
 
 					ListItemAttr attr = info.Attributes;
-					if ( attr == null || !attr.HasTextColour )
+					if ( !attr || !attr.HasTextColour )
 					{
 						info.TextColour = Colour.wxCYAN;
 
