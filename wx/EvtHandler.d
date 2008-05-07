@@ -349,6 +349,8 @@ public import wx.StyledTextCtrl;
 			EVT_RIGHT_DCLICK(lsnr);
 			EVT_MIDDLE_DCLICK(lsnr);
 			
+			EVT_MOUSEWHEEL(lsnr); 
+			
 			EVT_MOTION(lsnr); 
 			
 			EVT_LEFT_UP(lsnr); 
@@ -374,6 +376,9 @@ public import wx.StyledTextCtrl;
 			{ AddEventListener(Event.wxEVT_RIGHT_DCLICK, lsnr); }
 		public void EVT_MIDDLE_DCLICK(EventListener lsnr)
 			{ AddEventListener(Event.wxEVT_MIDDLE_DCLICK, lsnr); }
+		
+		public void EVT_MOUSEWHEEL(EventListener lsnr)
+			{ AddEventListener(Event.wxEVT_MOUSEWHEEL, lsnr); }
 		
 		public void EVT_MOTION(EventListener lsnr)
 			{ AddEventListener(Event.wxEVT_MOTION, lsnr); }

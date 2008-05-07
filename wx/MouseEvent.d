@@ -219,6 +219,7 @@ public import wx.DC;
 			AddEventType(wxEVT_LEFT_DCLICK,                     &MouseEvent.New);
 			AddEventType(wxEVT_RIGHT_DCLICK,                    &MouseEvent.New);
 			AddEventType(wxEVT_MIDDLE_DCLICK,                   &MouseEvent.New);
+			AddEventType(wxEVT_MOUSEWHEEL,                      &MouseEvent.New);
 			AddEventType(wxEVT_MOTION,                              &MouseEvent.New);   		}
     }
 
