@@ -21,6 +21,7 @@ public import wx.TextCtrl;
 version (Tango)
 {
 import tango.core.Vararg;
+import tango.text.convert.Format;
 }
 else // Phobos
 {
@@ -124,7 +125,11 @@ private import std.stdarg;
 
 		version (Tango)
 		{
-			assert(0);
+			char[] fmts = "";
+			for(int i=0; i < arguments.length; i++) {
+				fmts ~= "{}";
+			}
+			s = Format.convert(arguments, argptr, fmts);
 		}
 		else // Phobos
 		{
