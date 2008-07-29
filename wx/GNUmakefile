@@ -198,6 +198,13 @@ DFLAGS += -fno-strict-aliasing
 endif
 endif
 
+ifeq ("$(LIBRARY)","Tango")
+DFLAGS += $(version)=Tango
+ifneq ("$(OS)","MINGW32_NT-5.1")
+DFLAGS += $(version)=Posix
+endif
+endif
+
 ifeq ("$(STC)","1")
 STCFLAGS = $(version)=WXD_STYLEDTEXTCTRL
 endif

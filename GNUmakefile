@@ -21,6 +21,10 @@ COMPILER=GDC
 endif
 export COMPILER
 
+# D library to use (Phobos/Tango)
+LIBRARY=Phobos
+export LIBRARY
+
 BUD=bud
 REBUILD=rebuild
 
