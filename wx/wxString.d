@@ -21,7 +21,7 @@ public import wx.common;
 version (Tango)
 {
 import tango.core.Version;
-static if (Tango < 0.994f)
+static if (Tango.Major == 0 && Tango.Minor < 994)
 alias Object.toUtf8 toString;
 }
 else // Phobos

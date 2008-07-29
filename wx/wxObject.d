@@ -88,7 +88,7 @@ import tango.core.Version;
 
 				if (wxobj == IntPtr.init) {
 					version (Tango)
-					static if (Tango < 0.994f)
+					static if (Tango.Major == 0 && Tango.Minor < 994)
 					throw new NullReferenceException("Unable to create instance of " ~ this.toUtf8());
 					else
 					throw new NullReferenceException("Unable to create instance of " ~ this.toString());

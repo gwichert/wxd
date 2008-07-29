@@ -28,7 +28,7 @@ version (Tango)
 import tango.core.Version;
 import tango.stdc.stringz;
 import tango.text.convert.Utf;
- static if (Tango < 0.994f)
+ static if (Tango.Major == 0 && Tango.Minor < 994)
  {
 alias toUtf8z toStringz;
 char[] toUTF8( char[] str) { return str; }

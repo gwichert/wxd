@@ -127,7 +127,7 @@ private import std.string;
 
 	version (Tango)
 	{
-	  static if (Tango < 0.994f)
+	  static if (Tango.Major == 0 && Tango.Minor < 994)
 	  {
 		public char[] toUtf8()
 		{
