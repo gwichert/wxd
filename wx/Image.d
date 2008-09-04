@@ -150,7 +150,7 @@ public import wx.Colour;
 			{ this(width, height, true);}
 		
 		public this(byte[] data, BitmapType type)
-			{ /* this(wxImage_ctorByByteArray(data.ptr, data.length, type)); */ debug assert(0); this(wxImage_ctor()); }
+			{ this(wxImage_ctorByByteArray(cast(IntPtr)data.ptr, data.length, type));}
 			
 		public this(int width, int height, bool clear)
 			{ this(wxImage_ctorintintbool(width, height, clear));}
