@@ -14,6 +14,9 @@ else
 COMPILER = GDC
 endif
 
+# D library to use (Phobos/Tango)
+LIBRARY = Phobos
+
 # wx platform to use (e.g. WXGTK)
 PLATFORM = $(shell cat $(TOPDIR)/wxc/PLATFORM 2>/dev/null)
 
@@ -34,6 +37,18 @@ DC ?= gdc
 DFLAGS = -O2 -g
 version=-fversion
 output=-o $@
+endif
+
+ifeq ("$(LIBRARY)","Tango")
+DFLAGS += $(version)=Tango
+ifneq ("$(OS)","MINGW32_NT-5.1")
+DFLAGS += $(version)=Posix
+endif
+ifeq ("$(COMPILER)","DMD")
+DLIBS += -L-lgtango
+else
+DLIBS += -lgtango
+endif
 endif
 
 WXRELEASE = `$(WX_CONFIG) --release`
@@ -66,10 +81,10 @@ DMDLIBS=$(shell for l in $(GCCLIBS); do test "$$l" = "-pthread" || echo -n "-L$$
 GCCFLAGS=$(LDFLAGS)
 DMDFLAGS=$(shell for l in $(GCCFLAGS); do echo -n "-L$$l "; done)
 $(TARGET) : $(OBJECTS)
-	$(DC) -of$@ $(OBJECTS) $(TOPDIR)/libwxd.a $(TOPDIR)/libwxc.a $(DMDLIBS) $(DMDFLAGS)
+	$(DC) -of$@ $(OBJECTS) $(TOPDIR)/libwxd.a $(DLIBS) $(TOPDIR)/libwxc.a $(DMDLIBS) $(DMDFLAGS)
 else
 $(TARGET) : $(OBJECTS)
-	$(DC) -o $@ $(OBJECTS) -L$(TOPDIR) -lwxd -lwxc $(WXLIBS) $(CXXLIBS) $(LDFLAGS)
+	$(DC) -o $@ $(OBJECTS) -L$(TOPDIR) -lwxd $(DLIBS) -lwxc $(WXLIBS) $(CXXLIBS) $(LDFLAGS)
 endif
 
 clean:

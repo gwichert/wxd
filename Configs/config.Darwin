@@ -7,6 +7,9 @@ WX_CONFIG ?= wx-config
 # D compiler to use (DMD or GDC)
 COMPILER = GDC
 
+# D library to use (Phobos/Tango)
+LIBRARY = Phobos
+
 # wx platform to use (e.g. WXGTK)
 PLATFORM = $(shell cat $(TOPDIR)/wxc/PLATFORM 2>/dev/null)
 
@@ -19,6 +22,11 @@ CXXLIBS = -lstdc++ `test -r /usr/lib/libcc_dynamic.a && echo -lcc_dynamic`
 
 DC ?= gdc
 DFLAGS = -O2 -g
+
+ifeq ("$(LIBRARY)","Tango")
+DFLAGS += -fversion=Tango -fversion=Posix
+DLIBS += -lgtango
+endif
 
 WXRELEASE = `$(WX_CONFIG) --release`
 WXVERSION = `$(WX_CONFIG) --version`
@@ -70,7 +78,7 @@ $(TARGET).app: $(TARGET)
 	-touch -r $< $@
 
 $(TARGET) : $(OBJECTS)
-	$(DC) -o $@ $(OBJECTS) -L$(TOPDIR) -lwxd -lwxc $(WXLIBS) $(CXXLIBS) $(LDFLAGS)
+	$(DC) -o $@ $(OBJECTS) -L$(TOPDIR) -lwxd $(DLIBS) -lwxc $(WXLIBS) $(CXXLIBS) $(LDFLAGS)
 	-test "$(PLATFORM)" = "WXMAC" && $(REZFLAGS) $@
 
 clean:
