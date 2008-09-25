@@ -21,7 +21,7 @@ import tango.sys.Process;
     {
         if (!command) return null;
 
-        static if (tango.core.Version.Tango < 0.98)
+        static if (is(tango.core.Version.Tango == double) && tango.core.Version.Tango < 0.98)
         {
             char[][] env; 	         
 	        foreach (key, value; Environment.get) 	 
