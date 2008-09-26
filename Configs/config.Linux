@@ -45,7 +45,14 @@ ifneq ("$(OS)","MINGW32_NT-5.1")
 DFLAGS += $(version)=Posix
 endif
 ifeq ("$(COMPILER)","DMD")
+# TODO: Tango version
+ifeq ("$(shell true && echo new || echo old)", "new")
+# Since Tango 0.99.3 
+DLIBS += -L-ltango-user-dmd
+else
+# Prior to Tango 0.99.3 
 DLIBS += -L-ltango
+endif
 else
 DLIBS += -lgtango
 endif
