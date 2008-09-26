@@ -26,31 +26,31 @@ import Edit;	       // Edit module
 import Prefs;	       // Prefs
 import FileNameFunc;   // Normalize file path.
 
-const char [] mondrian = "../Samples/StyledText/mondrian.png";
+string mondrian = "../Samples/StyledText/mondrian.png";
 
 //============================================================================
 // declarations
 //============================================================================
 
-const char[] APP_NAME = "STC-Test";
-const char[] APP_DESCR = "See http://wxguide.sourceforge.net/";
+string APP_NAME = "STC-Test";
+string APP_DESCR = "See http://wxguide.sourceforge.net/";
 
-const char[] APP_MAINT = "Otto Wyss";
-const char[] APP_VENDOR = "wxWidgets";
-const char[] APP_COPYRIGHT = "(C) 2003 Otto Wyss";
-const char[] APP_LICENCE = "wxWidgets";
+string APP_MAINT = "Otto Wyss";
+string APP_VENDOR = "wxWidgets";
+string APP_COPYRIGHT = "(C) 2003 Otto Wyss";
+string APP_LICENCE = "wxWidgets";
 
-const char[] APP_VERSION = "0.1.alpha";
-const char[] APP_BUILD = __DATE__;
+string APP_VERSION = "0.1.alpha";
+string APP_BUILD = __DATE__;
 
-const char[] APP_WEBSITE = "http://www.wxWidgets.org";
-const char[] APP_MAIL = "mailto://???";
+string APP_WEBSITE = "http://www.wxWidgets.org";
+string APP_MAIL = "mailto://???";
 
-const char[] NONAME = "<untitled>";
+string NONAME = "<untitled>";
 
 //----------------------------------------------------------------------------
 // global application name
-char[] g_appname = null;
+string g_appname = null;
 
 // global print data, to remember settings during the session
 PrintData g_printData = null;
@@ -90,7 +90,7 @@ public class StyledTextApp : App {
 		g_pageSetupData = new PageSetupDialogData;
 
 		// create application frame
-		frame = new AppFrame (g_appname);
+		frame = new AppFrame (assumeUnique(g_appname));
 
 		// open application frame
 		frame.Layout ();
@@ -112,7 +112,7 @@ public class AppFrame : Frame
 	private MenuBar m_menuBar;
 
 	// constructor
-	public this (char[] title)
+	public this (string title)
 	{
 		super(null, wxID_ANY, title, wxDefaultPosition, Size(750,550),
 					wxDEFAULT_FRAME_STYLE | wxNO_FULL_REPAINT_ON_RESIZE);
@@ -221,7 +221,7 @@ public class AppFrame : Frame
 	{
 		if (!edit) return;
 		
-		char[] fname;
+		string fname;
 		scope FileDialog dlg = new FileDialog(this, "Open file", "", "", "Any file (*)|*",
 			FileDialog.wxOPEN | FileDialog.wxFILE_MUST_EXIST | FileDialog.wxCHANGE_DIR);
 		
@@ -246,7 +246,7 @@ public class AppFrame : Frame
 	{
 		if (!edit) return;
 
-		char[] filename;
+		string filename;
 		scope FileDialog dlg = new FileDialog(this, "Save file", "", "", "Any file (*)|*",
 		
 			FileDialog.wxSAVE | FileDialog.wxOVERWRITE_PROMPT);
@@ -455,7 +455,7 @@ public class AppFrame : Frame
 		this.menuBar = m_menuBar;
 	}
 
-	private void FileOpen (char[] fname)
+	private void FileOpen (string fname)
 	{
 		fname = absPath(fname);
 		edit.LoadFile (fname);

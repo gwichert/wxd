@@ -26,7 +26,7 @@ import StyledText;
 public class Edit : StyledTextCtrl {
 
 	// file
-	private char[] m_filename;
+	private string m_filename;
 
 	// lanugage properties
 	private Prefs.LanguageInfo m_language;
@@ -360,7 +360,7 @@ public class Edit : StyledTextCtrl {
 		}
 	}
 
-	public char[] DeterminePrefs (char[] filename)
+	public string DeterminePrefs (string filename)
 	{
 		//nested functions used to replace some wxSring functions.
 		char[] AfterFirst(char[] str, char ch)
@@ -420,7 +420,7 @@ public class Edit : StyledTextCtrl {
 		return "";
 	}
 
-	public bool InitializePrefs (char[] name)
+	public bool InitializePrefs (string name)
 	{
 		// initialize styles
 		StyleClearAll();
@@ -560,7 +560,7 @@ public class Edit : StyledTextCtrl {
 		return LoadFile (m_filename);
 	}
 
-	public bool LoadFile (char[] filename)
+	public bool LoadFile (string filename)
 	{
 		// load file in edit and clear undo
 		if (!filename.length < 1) m_filename = filename;
@@ -594,7 +594,7 @@ public class Edit : StyledTextCtrl {
 		return SaveFile (m_filename);
 	}
 
-	public bool SaveFile (char[] filename)
+	public bool SaveFile (string filename)
 	{
 		// return if no change
 		if (!Modified()) return true;
@@ -610,8 +610,8 @@ public class Edit : StyledTextCtrl {
 
 	//Properties
 	public Prefs.LanguageInfo GetLanguageInfo () {return m_language;}
-	public char[] GetFilename () {return m_filename;}
-	public void SetFilename (char[] filename) {m_filename = filename;}
+	public string GetFilename () {return m_filename;}
+	public void SetFilename (string filename) {m_filename = filename;}
 }
 
 //----------------------------------------------------------------------------
@@ -627,7 +627,7 @@ public class EditProperties : Dialog {
 
 		// sets the application title
 		Title ("Properties");
-		char[] text;
+		string text;
 
 		// fullname
 		BoxSizer fullname = new BoxSizer (Orientation.wxHORIZONTAL);
@@ -648,7 +648,7 @@ public class EditProperties : Dialog {
 		text = format("%d", edit.Lexer());
 		textinfo.Add (new StaticText (this, wxID_ANY, text),
 					   0, Alignment.wxALIGN_RIGHT|Alignment.wxALIGN_CENTER_VERTICAL|Direction.wxRIGHT, 4);
-		char[] EOLtype = "";
+		string EOLtype = "";
 		switch (edit.EOLMode) {
 			case StyledTextCtrl.wxSTC_EOL_CR: {EOLtype = "CR (Unix)"; break; }
 			case StyledTextCtrl.wxSTC_EOL_CRLF: {EOLtype = "CRLF (Windows)"; break; }
@@ -726,7 +726,7 @@ public class EditPrint : Printout {
 	private Rectangle pageRect;
 	private Rectangle printRect;
 
-	public this (Edit edit, char[] title = "")
+	public this (Edit edit, string title = "")
 	{
 		super(title);
 

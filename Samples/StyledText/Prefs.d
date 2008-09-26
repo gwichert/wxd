@@ -108,12 +108,12 @@ struct CommonInfo {
 // LanguageInfo
 
 struct LanguageInfo {
-    char[] name;
-    char[] filepattern;
+    string name;
+    string filepattern;
     int lexer;
     struct style {
         int type;
-        const char[] words;
+        string words;
     }
     style[] styles;
     int folds;
@@ -122,10 +122,10 @@ struct LanguageInfo {
 //----------------------------------------------------------------------------
 // StyleInfo
 struct StyleInfo {
-    char[] name;
-    char[] foreground;
-    char[] background;
-    char[] fontname;
+    string name;
+    string foreground;
+    string background;
+    string fontname;
     int fontsize;
     int fontstyle;
     int lettercase;
@@ -156,7 +156,7 @@ const CommonInfo g_CommonPrefs = {
 //----------------------------------------------------------------------------
 // keywordlists
 // C++
-const char[] CppWordlist1 =
+const string CppWordlist1 =
     "asm auto bool break case catch char class const const_cast "
     "continue default delete do double dynamic_cast else enum explicit "
     "export extern false float for friend goto if inline int long "
@@ -165,9 +165,9 @@ const char[] CppWordlist1 =
     "struct switch template this throw true try typedef typeid "
     "typename union unsigned using virtual void volatile wchar_t "
     "while";
-const char[] CppWordlist2 =
+const string CppWordlist2 =
     "file";
-const char[] CppWordlist3 =
+const string CppWordlist3 =
     "a addindex addtogroup anchor arg attention author b brief bug c "
     "class code date def defgroup deprecated dontinclude e em endcode "
     "endhtmlonly endif endlatexonly endlink endverbatim enum example "
@@ -180,7 +180,7 @@ const char[] CppWordlist3 =
     "verbinclude version warning weakgroup $ @ \"\" & < > # { }";
 
 //D
-const char[] DWordlist1 =
+const string DWordlist1 =
 	"abstract alias align asm assert auto body bool	break byte case "
 	"cast catch cdouble cent cfloat char class const continue creal "
 	"dchar debug default delegate delete deprecated do double else "
@@ -194,11 +194,11 @@ const char[] DWordlist1 =
 	"volatile wchar while with";
 
 // Python
-const char[] PythonWordlist1 =
+const string PythonWordlist1 =
     "and assert break class continue def del elif else except exec "
     "finally for from global if import in is lambda None not or pass "
     "print raise return try while yield";
-const char[] PythonWordlist2 =
+const string PythonWordlist2 =
     "ACCELERATORS ALT AUTO3STATE AUTOCHECKBOX AUTORADIOBUTTON BEGIN "
     "BITMAP BLOCK BUTTON CAPTION CHARACTERISTICS CHECKBOX CLASS "
     "COMBOBOX CONTROL CTEXT CURSOR DEFPUSHBUTTON DIALOG DIALOGEX "
