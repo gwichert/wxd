@@ -202,6 +202,19 @@ public import wx.KeyEvent;
 
 		//-----------------------------------------------------------------------------
 
+version (D_Version2) // changed in DMD 2.016
+{
+		public override bool opEquals(Object o)
+		{
+			if (o is null) return false;
+			TreeItemId id = cast(TreeItemId)o;
+			if (id is null) return false;
+			if (id is this || wxobj == id.wxobj) return true;
+			return wxTreeItemId_Equal(wxobj, id.wxobj);
+		}
+}
+else // D_Version1
+{
 		public override int opEquals(Object o)
 		{
 			if (o is null) return false;
@@ -210,6 +223,7 @@ public import wx.KeyEvent;
 			if (id is this || wxobj == id.wxobj) return true;
 			return wxTreeItemId_Equal(wxobj, id.wxobj);
 		}
+}
 		
 		//-----------------------------------------------------------------------------
 
