@@ -355,7 +355,7 @@
 
 /* Begin PBXFileReference section */
 		A4315AF50DB8B83F00F18843 /* libwx_mac_local.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; path = libwx_mac_local.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
-		A46DEBBC0DAB946C00CB99BD /* wx-config */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "wx-config"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A46DEBBC0DAB946C00CB99BD /* wx-config */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "compiled.mach-o.executable"; path = "wx-config"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A46DEBC20DAB94C400CB99BD /* wx-config-mac.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "wx-config-mac.cpp"; path = "wxc/wx-config-mac.cpp"; sourceTree = "<group>"; };
 		A46E61CC0DA92B4D00CFEFC6 /* libwxc.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libwxc.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		A46E61D70DA92BEA00CFEFC6 /* accel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = accel.cpp; path = wxc/accel.cpp; sourceTree = "<group>"; };
