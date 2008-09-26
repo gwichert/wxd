@@ -181,7 +181,7 @@ private import std.utf;
 			foreach (int i, char[] arg; args)
 			{
 				string str = assumeUnique(arg);
-				c_args[i] = toStringz(toUTF8(str));
+				c_args[i] = cast(char*) toStringz(toUTF8(str));
 			}
 			
             wxApp_Run(c_args.length, c_args.ptr);
