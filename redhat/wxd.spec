@@ -27,6 +27,7 @@ scripting language, nor an interpreted language.
 %build
 export CXXFLAGS=$RPM_OPT_FLAGS 
 export DFLAGS=`echo $RPM_OPT_FLAGS | sed -e s/-mtune=generic//`
+if [ "`arch`" = "x86_64" -a "%{_arch}" = "i386" ]; then DFLAGS="$DFLAGS -Wa,--32"; fi
 make WX_CONFIG=wx-config COMPILER=GDC
 make WX_CONFIG=wx-config build
 
