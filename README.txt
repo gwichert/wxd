@@ -22,6 +22,12 @@ It is composed of two parts:
 
 * Status
 
+0.13 (afb)
+Fixed linking with DMD 2 under Linux (-L)
+Converted more of the samples to D2 syntax
+Added projects for Xcode 2 (with D plugin)
+Tested with SVN GDC, and DMD 1.030 / 2.019
+
 0.12 (afb)
 Added new TaskBarIcon class, by Mike Wey
 Preliminary invariant string (D2) support
