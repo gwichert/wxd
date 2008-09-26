@@ -45,7 +45,7 @@ ifneq ("$(OS)","MINGW32_NT-5.1")
 DFLAGS += $(version)=Posix
 endif
 ifeq ("$(COMPILER)","DMD")
-DLIBS += -L-lgtango
+DLIBS += -L-ltango
 else
 DLIBS += -lgtango
 endif
