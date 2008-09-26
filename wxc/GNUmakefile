@@ -241,22 +241,22 @@ $(LIBTARGET) : $(OBJECTS)
 	$(CXX) -D__$(COMPILER)__ $(STCFLAGS) $(WXFLAGS) $(CXXFLAGS) -c -o $@ $<
 
 wx-config.exe: wx-config-win.o
-	$(CXX) $(LDFLAGS) -o $@ $<
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $<
 
 wx-libs$(EXEEXT): wx-libs.o
-	$(CXX) $(LDFLAGS) -o $@ $< $(WXBASE)
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $< $(WXBASE)
 
 wx-release$(EXEEXT): wx-release.o
-	$(CXX) $(LDFLAGS) -o $@ $<
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $<
 
 wx-version$(EXEEXT): wx-version.o
-	$(CXX) $(LDFLAGS) -o $@ $<
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $<
 
 wx-platform$(EXEEXT): wx-platform.o
-	$(CXX) $(LDFLAGS) -o $@ $<
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $<
 	
 wx-encoding$(EXEEXT): wx-encoding.o
-	$(CXX) $(LDFLAGS) -o $@ $<
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $<
 
 clean:
 	-rm *.o
