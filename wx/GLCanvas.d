@@ -92,8 +92,8 @@ public import wx.Palette;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxGLCanvas_ctor(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name, int* attribList, inout Palette palette);
-		static extern (C) IntPtr wxGLCanvas_ctor2(IntPtr parent, IntPtr shared, int id, inout Point pos, inout Size size, uint style, string name, int* attribList, inout Palette palette);
-		static extern (C) IntPtr wxGLCanvas_ctor3(IntPtr parent, IntPtr shared, int id, inout Point pos, inout Size size, uint style, string name, int* attribList, inout Palette palette);
+		static extern (C) IntPtr wxGLCanvas_ctor2(IntPtr parent, IntPtr shared_, int id, inout Point pos, inout Size size, uint style, string name, int* attribList, inout Palette palette);
+		static extern (C) IntPtr wxGLCanvas_ctor3(IntPtr parent, IntPtr shared_, int id, inout Point pos, inout Size size, uint style, string name, int* attribList, inout Palette palette);
 
 		static extern (C) void wxGLCanvas_SetCurrent(IntPtr self);
 		static extern (C) void wxGLCanvas_UpdateContext(IntPtr self);
@@ -113,11 +113,11 @@ public import wx.Palette;
 		public this(Window parent, int id, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=0, string name=wxGLCanvasStr,int* attribList=null, Palette palette=wxNullPalette)
 			{ this(wxGLCanvas_ctor(wxObject.SafePtr(parent), id, pos, size, style, name, attribList, palette), true); }
 		
-		public this(Window parent, GLContext shared, int id, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=0, string name=wxGLCanvasStr,int* attribList=null, Palette palette=wxNullPalette)
-			{ this(wxGLCanvas_ctor2(wxObject.SafePtr(parent), wxObject.SafePtr(shared), id, pos, size, style, name, attribList, palette), true); }
+		public this(Window parent, GLContext shared_, int id, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=0, string name=wxGLCanvasStr,int* attribList=null, Palette palette=wxNullPalette)
+			{ this(wxGLCanvas_ctor2(wxObject.SafePtr(parent), wxObject.SafePtr(shared_), id, pos, size, style, name, attribList, palette), true); }
 		
-		public this(Window parent, GLCanvas shared, int id, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=0, string name=wxGLCanvasStr,int* attribList=null, Palette palette=wxNullPalette)
-			{ this(wxGLCanvas_ctor3(wxObject.SafePtr(parent), wxObject.SafePtr(shared), id, pos, size, style, name, attribList, palette), true); }
+		public this(Window parent, GLCanvas shared_, int id, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=0, string name=wxGLCanvasStr,int* attribList=null, Palette palette=wxNullPalette)
+			{ this(wxGLCanvas_ctor3(wxObject.SafePtr(parent), wxObject.SafePtr(shared_), id, pos, size, style, name, attribList, palette), true); }
 
 		public this(Window parent, Point pos=wxDefaultPosition, Size size=wxDefaultSize, int style=0, string name=wxGLCanvasStr,int* attribList=null, Palette palette=wxNullPalette)
 			{ this(parent, Window.UniqueID, pos, size, style, name, attribList, palette); }
