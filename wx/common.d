@@ -55,6 +55,7 @@ else //version(ANSI)
 //! \cond D1
 static if (version_major < 1 || (version_major == 1 && version_minor < 16))
 //! \endcond
+	static if (is(object.string)) { /*already added*/ } else
 	alias char[] string; // added in DMD 1.016 and DMD 2.000
 
 //! \cond D2
