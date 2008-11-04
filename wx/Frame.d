@@ -182,12 +182,15 @@ public import wx.Icon;
 		public void menuBar(MenuBar value) { 
 				wxFrame_SetMenuBar(wxobj, wxObject.SafePtr(value)); 
 				// add menu events...
+			if (value)
+			{
 				for ( int i = 0; i < menuBar.MenuCount; ++i )
 				{
 					Menu menu = value.GetMenu(i);
 					menu.ConnectEvents(this);
 				}
 			}
+		}
 		public MenuBar menuBar() { return cast(MenuBar)FindObject(wxFrame_GetMenuBar(wxobj), &MenuBar.New); }
 
 		//---------------------------------------------------------------------
