@@ -84,7 +84,7 @@ ifeq ("$(COMPILER)","DMD")
 # Note: "dmd" uses weird LDFLAGS syntax, so we have to wrap params first,
 #       or it won't work with whatever we get back from "wx-config --libs"
 GCCLIBS=$(WXLIBS) $(CXXLIBS)
-DMDLIBS=$(shell for l in $(GCCLIBS); do test "$$l" = "-pthread" || echo -n "-L$$l "; done)
+DMDLIBS=$(shell for l in $(GCCLIBS); do test "$$l" = "-pthread" -o "$$l" = "-Wl,-Bsymbolic-functions" || echo -n "-L$$l "; done)
 GCCFLAGS=$(LDFLAGS)
 DMDFLAGS=$(shell for l in $(GCCFLAGS); do echo -n "-L$$l "; done)
 $(TARGET) : $(OBJECTS)
