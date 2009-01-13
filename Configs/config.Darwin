@@ -20,12 +20,25 @@ CXX ?= $(shell $(WX_CONFIG) --cxx)
 CXXFLAGS = -O2
 CXXLIBS = -lstdc++ `test -r /usr/lib/libcc_dynamic.a && echo -lcc_dynamic`
 
+ifeq ("$(COMPILER)","LDC")
+DC ?= ldc
+DFLAGS = -O
+version=-version
+output=-of$@
+endif
+ifeq ("$(COMPILER)","GDC")
 DC ?= gdc
 DFLAGS = -O2 -g
+version=-fversion
+output=-o $@
+endif
 
 ifeq ("$(LIBRARY)","Tango")
-DFLAGS += -fversion=Tango -fversion=Posix
+DFLAGS += $(version)=Tango
+ifeq ("$(COMPILER)","GDC")
+DFLAGS += $(version)=Posix
 DLIBS += -lgtango
+endif
 endif
 
 WXRELEASE = `$(WX_CONFIG) --release`
@@ -50,10 +63,10 @@ endif
 .cpp.o:
 	$(CXX) $(WXFLAGS) $(CXXFLAGS) -c -o $@ $<
 
-VERSION=-fversion=wx$(WX_RELEASE_NODOT) -fversion=__$(PLATFORM)__ -fversion=$(ENCODING)
+VERSION=$(version)=wx$(WX_RELEASE_NODOT) $(version)=__$(PLATFORM)__ $(version)=$(ENCODING)
 
 %.o:%.d
-	$(DC) $(VERSION) -I$(TOPDIR) $(DFLAGS) -c -o $@ $<
+	$(DC) $(VERSION) -I$(TOPDIR) $(DFLAGS) -c $(output) $<
 
 
 BUNDLE_EXECUTABLE = $(shell basename $(TARGET))
@@ -77,9 +90,22 @@ $(TARGET).app: $(TARGET)
 	cp -f $(BUNDLE_ICONS) $@/Contents/Resources/
 	-touch -r $< $@
 
+ifeq ("$(COMPILER)","LDC")
+# Note: "ldc" uses weird LDFLAGS syntax, so we have to wrap params first,
+#       or it won't work with whatever we get back from "wx-config --libs"
+GCCLIBS=$(WXLIBS) $(CXXLIBS)
+LDCLIBS=$(shell for l in $(GCCLIBS); do echo -n "-L$$l "; done)
+GCCFLAGS=$(LDFLAGS)
+LDCFLAGS=$(shell for l in $(GCCFLAGS); do echo -n "-L$$l "; done)
 $(TARGET) : $(OBJECTS)
-	$(DC) -o $@ $(OBJECTS) -L$(TOPDIR) -lwxd $(DLIBS) -lwxc $(WXLIBS) $(CXXLIBS) $(LDFLAGS)
+	$(DC) $(output) $(OBJECTS) -L-L$(TOPDIR) -L-lwxd $(DLIBS) -L-L$(TOPDIR) -L-lwxc $(LDCLIBS) $(LDCFLAGS)
 	-test "$(PLATFORM)" = "WXMAC" && $(REZFLAGS) $@
+endif
+ifeq ("$(COMPILER)","GDC")
+$(TARGET) : $(OBJECTS)
+	$(DC) $(output) $(OBJECTS) -L$(TOPDIR) -lwxd $(DLIBS) -lwxc $(WXLIBS) $(CXXLIBS) $(LDFLAGS)
+	-test "$(PLATFORM)" = "WXMAC" && $(REZFLAGS) $@
+endif
 
 clean:
 	-rm *.o

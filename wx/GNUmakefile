@@ -182,7 +182,15 @@ DMD?=dmd
 DFLAGS?=-O -g
 version=-version
 output=-of$@
-else
+endif
+ifeq ("$(COMPILER)","LDC")
+DC?=ldc
+DMD?=ldc
+DFLAGS?=-O
+version=-version
+output=-of$@
+endif
+ifeq ("$(COMPILER)","GDC")
 DC?=gdc
 DMD?=gdmd
 DFLAGS?=-O2 -g
@@ -200,8 +208,10 @@ endif
 
 ifeq ("$(LIBRARY)","Tango")
 DFLAGS += $(version)=Tango
+ifeq ("$(COMPILER)","GDC")
 ifneq ("$(OS)","MINGW32_NT-5.1")
 DFLAGS += $(version)=Posix
+endif
 endif
 endif
 

@@ -32,7 +32,14 @@ DC ?= dmd
 DFLAGS = -O -g
 version=-version
 output=-of$@
-else
+endif
+ifeq ("$(COMPILER)","LDC")
+DC ?= ldc
+DFLAGS = -O
+version=-version
+output=-of$@
+endif
+ifeq ("$(COMPILER)","GDC")
 DC ?= gdc
 DFLAGS = -O2 -g
 version=-fversion
@@ -41,8 +48,10 @@ endif
 
 ifeq ("$(LIBRARY)","Tango")
 DFLAGS += $(version)=Tango
+ifeq ("$(COMPILER)","GDC")
 ifneq ("$(OS)","MINGW32_NT-5.1")
 DFLAGS += $(version)=Posix
+endif
 endif
 ifeq ("$(COMPILER)","DMD")
 # TODO: Tango version
@@ -53,7 +62,7 @@ else
 # Prior to Tango 0.99.3 
 DLIBS += -L-ltango
 endif
-else
+else ifeq ("$(COMPILER)","GDC")
 DLIBS += -lgtango
 endif
 endif
@@ -80,15 +89,21 @@ VERSION=$(version)=wx$(WX_RELEASE_NODOT) $(version)=__$(PLATFORM)__ $(version)=$
 
 all: $(TARGET)
 
-ifeq ("$(COMPILER)","DMD")
+ifneq ("$(COMPILER)","GDC")
 # Note: "dmd" uses weird LDFLAGS syntax, so we have to wrap params first,
 #       or it won't work with whatever we get back from "wx-config --libs"
 GCCLIBS=$(WXLIBS) $(CXXLIBS)
 DMDLIBS=$(shell for l in $(GCCLIBS); do test "$$l" = "-pthread" -o "$$l" = "-Wl,-Bsymbolic-functions" || echo -n "-L$$l "; done)
 GCCFLAGS=$(LDFLAGS)
 DMDFLAGS=$(shell for l in $(GCCFLAGS); do echo -n "-L$$l "; done)
+ifeq ("$(COMPILER)","DMD")
 $(TARGET) : $(OBJECTS)
 	$(DC) -of$@ $(OBJECTS) $(TOPDIR)/libwxd.a $(DLIBS) $(TOPDIR)/libwxc.a $(DMDLIBS) $(DMDFLAGS)
+endif
+ifeq ("$(COMPILER)","LDC")
+$(TARGET) : $(OBJECTS)
+	$(DC) -of$@ $(OBJECTS) -L-L$(TOPDIR) -L-lwxd $(DLIBS) -L-L$(TOPDIR) -L-lwxc $(DMDLIBS) $(DMDFLAGS)
+endif
 else
 $(TARGET) : $(OBJECTS)
 	$(DC) -o $@ $(OBJECTS) -L$(TOPDIR) -lwxd $(DLIBS) -lwxc $(WXLIBS) $(CXXLIBS) $(LDFLAGS)

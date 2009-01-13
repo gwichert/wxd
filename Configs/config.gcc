@@ -25,10 +25,12 @@ DFLAGS = -O2 -g
 
 ifeq ("$(LIBRARY)","Tango")
 DFLAGS += -fversion=Tango
+ifeq ("$(COMPILER)","GDC")
 ifneq ("$(OS)","MINGW32_NT-5.1")
 DFLAGS += -fversion=Posix
 endif
 DLIBS += -lgtango
+endif
 endif
 
 WXRELEASE = `$(WX_CONFIG) --release`
