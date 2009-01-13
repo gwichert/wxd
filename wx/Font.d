@@ -243,17 +243,6 @@ public import wx.GDIObject;
 
 		//---------------------------------------------------------------------
 
-		public override void Dispose()
-		{
-			if ((this != Font.wxNORMAL_FONT) && (this != Font.wxSWISS_FONT) &&
-				(this != Font.wxSMALL_FONT) && (this != Font.wxITALIC_FONT)) 
-			{
-				super.Dispose(/*true*/);
-			}
-		}
-
-		//---------------------------------------------------------------------
-
 		public int PointSize() { return wxFont_GetPointSize(wxobj); }
 		public void PointSize(int value) { wxFont_SetPointSize(wxobj, value); }
 
