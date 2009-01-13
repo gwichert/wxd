@@ -15,6 +15,8 @@ public import wx.common;
 public import wx.SizerItem;
 public import wx.FlexGridSizer;
 
+//version(LDC) pragma(ldc, "verbose")
+
 		//! \cond EXTERN
         static extern (C) IntPtr wxGBSizerItem_ctor(int width, int height, IntPtr pos, IntPtr span, int flag, int border, IntPtr userData);
         static extern (C) IntPtr wxGBSizerItem_ctorWindow(IntPtr window, IntPtr pos, IntPtr span, int flag, int border, IntPtr userData);
@@ -24,7 +26,7 @@ public import wx.FlexGridSizer;
         static extern (C) IntPtr wxGBSizerItem_GetPos(IntPtr self);
 
         static extern (C) IntPtr wxGBSizerItem_GetSpan(IntPtr self);
-        static extern (C) void   wxGBSizerItem_GetSpan(IntPtr self, IntPtr rowspan, IntPtr colspan);
+        //static extern (C) void   wxGBSizerItem_GetSpan(IntPtr self, IntPtr rowspan, IntPtr colspan);
 
         static extern (C) bool   wxGBSizerItem_SetPos(IntPtr self, IntPtr pos);
         static extern (C) bool   wxGBSizerItem_SetSpan(IntPtr self, IntPtr span);
@@ -328,7 +330,7 @@ public import wx.FlexGridSizer;
 
 		//! \cond EXTERN
         static extern (C) IntPtr wxGBPosition_ctor();
-        static extern (C) IntPtr wxGBPosition_ctor(int row, int col);
+        static extern (C) IntPtr wxGBPosition_ctorPos(int row, int col);
         static extern (C) int    wxGBPosition_GetRow(IntPtr self);
         static extern (C) int    wxGBPosition_GetCol(IntPtr self);
         static extern (C) void   wxGBPosition_SetRow(IntPtr self, int row);
@@ -348,8 +350,8 @@ public import wx.FlexGridSizer;
 
         //-----------------------------------------------------------------------------
 
-        public this(int row, int col)
-            { super(wxGBPosition_ctor(row, col)); }
+        //public this(int row, int col)
+        //    { super(wxGBPosition_ctorPos(row, col)); }
 
         //-----------------------------------------------------------------------------
 

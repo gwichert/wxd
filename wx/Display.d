@@ -32,9 +32,11 @@ public import wx.common;
 public import wx.VideoMode;
 public import wx.Window;
 
+//version(LDC) pragma(ldc, "verbose")
+
 		//! \cond EXTERN
 		static extern (C) IntPtr wxDisplay_ctor(int index);
-		static extern (C) IntPtr wxDisplay_ctor(inout VideoMode mode);
+		//static extern (C) IntPtr wxDisplay_ctor(inout VideoMode mode);
 		static extern (C) int wxDisplay_GetCount();
 		static extern (C) int wxDisplay_GetFromPoint(inout Point pt);
 		static extern (C) int wxDisplay_GetFromWindow(IntPtr window);
@@ -84,8 +86,8 @@ public import wx.Window;
 
 		//------------------------------------------------------------------------
 
-		public this(VideoMode mode)
-			{ this(wxDisplay_ctor(mode), true); }
+		//public this(VideoMode mode)
+		//	{ this(wxDisplay_ctor(mode), true); }
 			
 		//---------------------------------------------------------------------
 

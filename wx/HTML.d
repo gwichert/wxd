@@ -21,6 +21,8 @@ public import wx.Config;
 public import wx.PrintData;
 public import wx.MouseEvent;
 
+//version(LDC) pragma(ldc, "verbose")
+
 //class HtmlContainerCell;
 //class HtmlFilter;
 //class HtmlTag;
@@ -599,8 +601,8 @@ public import wx.MouseEvent;
 
         //! \cond EXTERN
 		static extern (C) IntPtr wxHtmlLinkInfo_ctor();
-		static extern (C) IntPtr wxHtmlLinkInfo_ctor(string href, string target);
-		static extern (C) IntPtr wxHtmlLinkInfo_ctor(IntPtr l);
+		/*static extern (C) IntPtr wxHtmlLinkInfo_ctor(string href, string target);*/
+		/*static extern (C) IntPtr wxHtmlLinkInfo_ctor(IntPtr l);*/
 		static extern (C) void   wxHtmlLinkInfo_SetEvent(IntPtr self, IntPtr e);
 		static extern (C) void   wxHtmlLinkInfo_SetHtmlCell(IntPtr self, IntPtr e);
 		static extern (C) IntPtr wxHtmlLinkInfo_GetHref(IntPtr self);
@@ -622,15 +624,15 @@ public import wx.MouseEvent;
 		
 		//-----------------------------------------------------------------------------
 		
-		public  this(string href, string target)
-			{ super(wxHtmlLinkInfo_ctor(href, target)); }
+		/*public  this(string href, string target)
+			{ super(wxHtmlLinkInfo_ctor(href, target)); }*/
 
 		public static wxObject New(IntPtr ptr) { return new HtmlCell(ptr); }
 		
 		//-----------------------------------------------------------------------------
 		
-		public  this(HtmlLinkInfo l)
-			{ super(wxHtmlLinkInfo_ctor(wxObject.SafePtr(l))); }
+		/*public  this(HtmlLinkInfo l)
+			{ super(wxHtmlLinkInfo_ctor(wxObject.SafePtr(l))); }*/
 		//-----------------------------------------------------------------------------
 		
 		public void event(MouseEvent value) { wxHtmlLinkInfo_SetEvent(wxobj, wxObject.SafePtr(value)); }
