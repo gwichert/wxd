@@ -16,8 +16,23 @@
 //-----------------------------------------------------------------------------
 
 import wx.wx;
+version (Tango)
+{
+import tango.core.Version;
+private import tango.text.convert.Integer;
+static if (Tango.Major == 0 && Tango.Minor < 994)
+alias tango.text.convert.Integer.toUtf8 toString;
+else
+alias tango.text.convert.Integer.toString toString;
+private import tango.io.Console;
+void PRINT(string s) { Cout(s).newline; }
+}
+else // Phobos
+{
 private import std.string;
 private import std.stdio;
+alias writefln PRINT;
+}
 
     //-------------------------------------------------------------------------
     // Application entry class
@@ -676,7 +691,7 @@ private import std.stdio;
 	
 	public void OnClicked2( Object sender, Event e )
 	{
-		writefln( "OnClicked2");
+		PRINT( "OnClicked2");
 	}
 
         //---------------------------------------------------------------------
@@ -721,7 +736,7 @@ private import std.stdio;
             switch(e.ID)
             {
             case ID_LISTBOX_SEL_NUM:
-	    	writefln( "OnListBoxButtons");
+	    	PRINT( "OnListBoxButtons");
                 listbox.Selection = 2;
                 listboxSorted.Selection = 2;
                 break;
@@ -914,7 +929,7 @@ private import std.stdio;
         {
             CommandEvent ce = cast(CommandEvent)e;
 
-	    	writefln( ce.String );
+	    	PRINT( ce.String );
 
             Log.LogMessage( "Text in the combobox changed: now is '{0}'", ce.String);
         }

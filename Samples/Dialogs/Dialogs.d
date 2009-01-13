@@ -12,10 +12,31 @@
 //-----------------------------------------------------------------------------
 
 import wx.wx;
+version (Tango)
+{
+import tango.core.Version;
+private import tango.text.convert.Integer;
+static if (Tango.Major == 0 && Tango.Minor < 994)
+alias tango.text.convert.Integer.toUtf8 toString;
+else
+alias tango.text.convert.Integer.toString toString;
+private import tango.text.util;
+ptrdiff_t indexOf(string a, string b) { return 0 /*TODO*/; }
+ptrdiff_t LastIndexOf(string a, string b) { return 0 /*TODO*/; }
+private import tango.math.Random;
+private import tango.io.FileSystem;
+alias FileSystem.getDirectory GETCWD;
+uint RAND() { return 0 /*Random.shared.next*/; }
+}
+else // Phobos
+{
 private import std.string;
 private import std.random;
 alias std.string.find indexOf;
 alias std.string.rfind LastIndexOf;
+alias std.file.getcwd GETCWD;
+alias std.random.rand RAND;
+}
 
 	public class MyFrame : Frame
 	{
@@ -180,7 +201,7 @@ alias std.string.rfind LastIndexOf;
 
 		public void OnDirChoose(Object sender, Event e)
 		{
-			string dirHome = std.file.getcwd();
+			string dirHome = GETCWD();
 			DirDialog dlg = new DirDialog(this, "Testing directory picker",
 				dirHome);
 
@@ -332,7 +353,7 @@ alias std.string.rfind LastIndexOf;
 		public void OnTip(Object sender, Event e)
 		{
 			// we have to use a IntPtr, class wxTipProvider is abstract and wxFileTipProvider private
-			IntPtr tp = TipProvider.CreateFileTipProvider("../Samples/Dialogs/tips.txt", std.random.rand());
+			IntPtr tp = TipProvider.CreateFileTipProvider("../Samples/Dialogs/tips.txt", RAND());
 
 			bool showAtStartup = TipProvider.ShowTip(this, tp);
 
