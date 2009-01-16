@@ -32,7 +32,7 @@ public import wx.common;
 public import wx.VideoMode;
 public import wx.Window;
 
-//version(LDC) pragma(ldc, "verbose")
+//version(LDC) { pragma(ldc, "verbose") }
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxDisplay_ctor(int index);

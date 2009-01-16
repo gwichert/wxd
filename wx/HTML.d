@@ -21,7 +21,7 @@ public import wx.Config;
 public import wx.PrintData;
 public import wx.MouseEvent;
 
-//version(LDC) pragma(ldc, "verbose")
+//version(LDC) { pragma(ldc, "verbose") }
 
 //class HtmlContainerCell;
 //class HtmlFilter;

@@ -15,7 +15,7 @@ public import wx.common;
 public import wx.SizerItem;
 public import wx.FlexGridSizer;
 
-//version(LDC) pragma(ldc, "verbose")
+//version(LDC) { pragma(ldc, "verbose") }
 
 		//! \cond EXTERN
         static extern (C) IntPtr wxGBSizerItem_ctor(int width, int height, IntPtr pos, IntPtr span, int flag, int border, IntPtr userData);
