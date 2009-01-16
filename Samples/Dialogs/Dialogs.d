@@ -20,7 +20,7 @@ static if (Tango.Major == 0 && Tango.Minor < 994)
 alias tango.text.convert.Integer.toUtf8 toString;
 else
 alias tango.text.convert.Integer.toString toString;
-private import tango.text.util;
+private import tango.text.Util;
 ptrdiff_t indexOf(string a, string b) { return 0 /*TODO*/; }
 ptrdiff_t LastIndexOf(string a, string b) { return 0 /*TODO*/; }
 private import tango.math.Random;
