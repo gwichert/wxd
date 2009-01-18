@@ -22,6 +22,10 @@ It is composed of two parts:
 
 * Status
 
+0.14 (afb)
+Handled strange wxWidgets --libs, on Ubuntu
+Fixed building with LDC 0.9 (LLVM) compiler
+
 0.13 (afb)
 Fixed linking with DMD 2 under Linux (-L)
 Converted more of the samples to D2 syntax
