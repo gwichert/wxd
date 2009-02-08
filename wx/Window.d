@@ -204,7 +204,7 @@ public import wx.ToolTip;
 		static extern (C) bool   wxWindow_IsRetained(IntPtr self);
 		static extern (C) void   wxWindow_SetExtraStyle(IntPtr self, uint exStyle);
 		static extern (C) uint   wxWindow_GetExtraStyle(IntPtr self);
-		//static extern (C) void wxWindow_MakeModal(IntPtr self, bool modal);
+		static extern (C) void   wxWindow_MakeModal(IntPtr self, bool modal);
 		static extern (C) void   wxWindow_SetThemeEnabled(IntPtr self, bool enableTheme);
 		static extern (C) bool   wxWindow_GetThemeEnabled(IntPtr self);
 		static extern (C) void   wxWindow_SetFocus(IntPtr self);
@@ -953,6 +953,13 @@ public import wx.ToolTip;
 			{
 				wxWindow_SetExtraStyle(wxobj, value);
 			}
+
+		//---------------------------------------------------------------------
+
+		public void MakeModal(bool value)
+		{
+			wxWindow_MakeModal(wxobj, value);
+		}
 
 		//---------------------------------------------------------------------
 
