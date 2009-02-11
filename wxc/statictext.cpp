@@ -69,3 +69,11 @@ long _StaticText::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam)
         return wxStaticText::MSWWindowProc( nMsg, wParam, lParam );
 }
 #endif
+
+//-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT
+void wxStaticText_Wrap(wxStaticText* self, int width)
+{
+	self->Wrap(width);
+}
