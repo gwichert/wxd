@@ -36,9 +36,13 @@ struct dstr {
 #if wxUSE_UNICODE
 		return wxString(data, wxConvUTF8, length);
 #else
-		size_t ignored;
+		char *zero = (char*) malloc(length+1);
+		memcpy(zero, data, length);
+		zero[length] = '\0';
 		// convert the UTF-8 to wide first, and then back to ansi:
-		return wxString(wxConvUTF8.cMB2WC(data, length, &ignored), wxConvLocal);
+		wxString str = wxString(wxConvUTF8.cMB2WC(zero), wxConvLocal);
+		free(zero);
+		return str;
 #endif
 	}
 };
