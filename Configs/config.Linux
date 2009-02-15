@@ -1,18 +1,11 @@
 # from samples
 
-# same as the regular GNU , but with DMD support
+# same as the regular GNU, but with DMD support
 
 WX_CONFIG ?= wx-config
 
-OS=Linux
-ARCH=$(shell (arch 2>/dev/null || uname -m || echo i386) | sed -e s/i.86/x86/ )
-
 # D compiler to use (DMD or GDC)
-ifeq ("$(OS) $(ARCH)","Linux x86")
-COMPILER = DMD
-else
 COMPILER = GDC
-endif
 
 # D library to use (Phobos/Tango)
 LIBRARY = Phobos
@@ -96,17 +89,18 @@ GCCLIBS=$(WXLIBS) $(CXXLIBS)
 DMDLIBS=$(shell for l in $(GCCLIBS); do test "$$l" = "-pthread" -o "$$l" = "-Wl,-Bsymbolic-functions" || echo -n "-L$$l "; done)
 GCCFLAGS=$(LDFLAGS)
 DMDFLAGS=$(shell for l in $(GCCFLAGS); do echo -n "-L$$l "; done)
+endif
 ifeq ("$(COMPILER)","DMD")
 $(TARGET) : $(OBJECTS)
 	$(DC) -of$@ $(OBJECTS) $(TOPDIR)/libwxd.a $(DLIBS) $(TOPDIR)/libwxc.a $(DMDLIBS) $(DMDFLAGS)
 endif
 ifeq ("$(COMPILER)","LDC")
 $(TARGET) : $(OBJECTS)
-	$(DC) -of$@ $(OBJECTS) -L-L$(TOPDIR) -L-lwxd $(DLIBS) -L-L$(TOPDIR) -L-lwxc $(DMDLIBS) $(DMDFLAGS)
+	$(DC) $(output) $(OBJECTS) -L-L$(TOPDIR) -L-lwxd $(DLIBS) -L-L$(TOPDIR) -L-lwxc $(DMDLIBS) $(DMDFLAGS)
 endif
-else
+ifeq ("$(COMPILER)","GDC")
 $(TARGET) : $(OBJECTS)
-	$(DC) -o $@ $(OBJECTS) -L$(TOPDIR) -lwxd $(DLIBS) -lwxc $(WXLIBS) $(CXXLIBS) $(LDFLAGS)
+	$(DC) $(output) $(OBJECTS) -L$(TOPDIR) -lwxd $(DLIBS) -lwxc $(WXLIBS) $(CXXLIBS) $(LDFLAGS)
 endif
 
 clean:
