@@ -20,6 +20,12 @@ CXX ?= $(shell $(WX_CONFIG) --cxx)
 CXXFLAGS = -O2
 CXXLIBS = -lstdc++ `test -r /usr/lib/libcc_dynamic.a && echo -lcc_dynamic`
 
+ifeq ("$(COMPILER)","DMD")
+DC ?= dmd
+DFLAGS = -O -g
+version=-version
+output=-of$@
+endif
 ifeq ("$(COMPILER)","LDC")
 DC ?= ldc
 DFLAGS = -O
@@ -37,6 +43,17 @@ ifeq ("$(LIBRARY)","Tango")
 DFLAGS += $(version)=Tango
 ifeq ("$(COMPILER)","GDC")
 DFLAGS += $(version)=Posix
+endif
+ifeq ("$(COMPILER)","DMD")
+# TODO: Tango version
+ifeq ("$(shell true && echo new || echo old)", "new")
+# Since Tango 0.99.3 
+DLIBS += -L-ltango-user-dmd
+else
+# Prior to Tango 0.99.3 
+DLIBS += -L-ltango
+endif
+else ifeq ("$(COMPILER)","GDC")
 DLIBS += -lgtango
 endif
 endif
@@ -90,15 +107,21 @@ $(TARGET).app: $(TARGET)
 	cp -f $(BUNDLE_ICONS) $@/Contents/Resources/
 	-touch -r $< $@
 
-ifeq ("$(COMPILER)","LDC")
-# Note: "ldc" uses weird LDFLAGS syntax, so we have to wrap params first,
+ifneq ("$(COMPILER)","GDC")
+# Note: "dmd" uses weird LDFLAGS syntax, so we have to wrap params first,
 #       or it won't work with whatever we get back from "wx-config --libs"
 GCCLIBS=$(WXLIBS) $(CXXLIBS)
-LDCLIBS=$(shell for l in $(GCCLIBS); do echo -n "-L$$l "; done)
+DMDLIBS=$(shell for l in $(GCCLIBS); do echo "-L$$l "; done)
 GCCFLAGS=$(LDFLAGS)
-LDCFLAGS=$(shell for l in $(GCCFLAGS); do echo -n "-L$$l "; done)
+DMDFLAGS=$(shell for l in $(GCCFLAGS); do echo -n "-L$$l "; done)
+endif
+ifeq ("$(COMPILER)","DMD")
 $(TARGET) : $(OBJECTS)
-	$(DC) $(output) $(OBJECTS) -L-L$(TOPDIR) -L-lwxd $(DLIBS) -L-L$(TOPDIR) -L-lwxc $(LDCLIBS) $(LDCFLAGS)
+	$(DC) -of$@ $(OBJECTS) $(TOPDIR)/libwxd.a $(DLIBS) $(TOPDIR)/libwxc.a $(DMDLIBS) $(DMDFLAGS)
+endif
+ifeq ("$(COMPILER)","LDC")
+$(TARGET) : $(OBJECTS)
+	$(DC) $(output) $(OBJECTS) -L-L$(TOPDIR) -L-lwxd $(DLIBS) -L-L$(TOPDIR) -L-lwxc $(DMDLIBS) $(DMDFLAGS)
 	-test "$(PLATFORM)" = "WXMAC" && $(REZFLAGS) $@
 endif
 ifeq ("$(COMPILER)","GDC")
