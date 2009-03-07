@@ -187,7 +187,7 @@ ifeq ("$(COMPILER)","LDC")
 DC?=ldc
 DMD?=ldc
 DFLAGS?=-O
-version=-version
+version=$(shell $(DC) | grep 0.9 >/dev/null && echo "-version" || echo "-d-version")
 output=-of$@
 endif
 ifeq ("$(COMPILER)","GDC")
