@@ -1,18 +1,25 @@
 MAKE?=make
-export COMPILER PLATFORM ENCODING STC OGL
+export COMPILER LIBRARY PLATFORM ENCODING STC OGL
 
 all:
 	$(MAKE) -C Controls
 	$(MAKE) -C Dialogs
 #	$(MAKE) -C Display
+ifeq ("$(Library)","Phobos")
 	$(MAKE) -C Dnd
+endif
 	$(MAKE) -C EventDemo
+ifeq ("$(Library)","Phobos")
 	$(MAKE) -C Font
+endif
 #	$(MAKE) -C GLCube
+ifeq ("$(Library)","Phobos")
 	$(MAKE) -C Grid
+endif
 	$(MAKE) -C Hello
 	$(MAKE) -C HTML
 	$(MAKE) -C HtmlHelp
+ifeq ("$(Library)","Phobos")
 	$(MAKE) -C HtmlListBox
 	$(MAKE) -C Internat
 	$(MAKE) -C Launcher
@@ -20,11 +27,16 @@ all:
 	$(MAKE) -C ListView
 	$(MAKE) -C Listbook
 	$(MAKE) -C Mdi
+endif
 	$(MAKE) -C Minimal
+ifeq ("$(Library)","Phobos")
 	$(MAKE) -C Notebook
+endif
 	$(MAKE) -C Platform
 	$(MAKE) -C Printing
+ifeq ("$(Library)","Phobos")
 	$(MAKE) -C SashWindow
+endif
 #	$(MAKE) -C SDLPanel
 #	$(MAKE) -C Sound
 	$(MAKE) -C Splitter
@@ -32,7 +44,9 @@ ifeq ("$(STC)","1")
 	$(MAKE) -C StyledText
 endif
 #	$(MAKE) -C TaskBar
+ifeq ("$(Library)","Phobos")
 	$(MAKE) -C TreeCtrl
+endif
 #	$(MAKE) -C Tutorial
 	$(MAKE) -C Wizard
 	$(MAKE) -C Xrc
