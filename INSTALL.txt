@@ -1,0 +1,74 @@
+Build Instructions
+
+    These are instructions how to build wxD using the standard GNU toolsets.
+    It is also possible to build from the DOS prompt or using an graphic IDE.
+    You are assumed to already have your compilers and wx libraries installed.
+    See the README file for details, and the LICENCE file for legal conditions.
+
+    cd wxd
+    make
+	Run this from a shell (i.e. MSYS for Windows, Terminal for Mac OS X)
+	See below for available variables and targets, to the "make" command.
+
+Supported platforms
+
+    GNU/Linux
+    FreeBSD
+	version(__WXGTK__)
+
+    Windows
+	version(__WXMSW__)
+
+    Macintosh
+	version(__WXMAC__)
+
+Required software
+
+    Make program
+
+    C++ compiler
+
+    D compiler
+
+    wxWidgets
+
+Make variables
+
+    COMPILER = [ GDC | DMD | LDC ]
+
+    LIBRARY = [ Phobos | Tango ]
+
+    MAKE = make
+
+    CXX = g++
+    CXXFLAGS = -O2 -Wall
+
+    DC = gdc
+    DFLAGS = -O2 -g
+
+    WX_CONFIG = wx-config
+    LDFLAGS = 
+
+    INSTALL = install
+    PREFIX = /usr/local
+
+Make targets
+
+    all
+	This will build the required wxc (in C++) and wxd (in D) libraries.
+
+    build
+	This will generate the wx.libs module, for use with version(build).
+
+    install
+	This will install all import modules and static libraries, for wxD.
+
+    samp
+	This will build the Samples, results end up in the "bin" directory.
+
+    docs
+	This will build the embedded documentation to the "html" directory.
+
+    clean
+	This will remove the objects and libraries, and the generated files.
+
