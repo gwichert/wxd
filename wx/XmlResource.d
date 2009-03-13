@@ -90,6 +90,7 @@ private import std.regexp;
     
 		static this()
 		{
+			m_create = cast(XmlSubclassCreate)&XmlSubclassCreateCS;
 			wxXmlSubclassFactory_ctor(m_create);
 		}
 		private static void SetSubclassDefaults() {}
@@ -377,7 +378,7 @@ private import std.regexp;
 		//---------------------------------------------------------------------
 		// XmlResource control subclassing
         
-		private static XmlSubclassCreate m_create = cast(XmlSubclassCreate)&XmlSubclassCreateCS;
+		private static XmlSubclassCreate m_create; // = cast(XmlSubclassCreate)&XmlSubclassCreateCS;
 		//private static IntPtr function(string className) m_create = &XmlSubclassCreateCS;
 
 		extern(C) private static IntPtr XmlSubclassCreateCS(string className)
