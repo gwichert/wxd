@@ -164,12 +164,12 @@ private import std.conv;
 			string s;
 			version (D_Version2)
 			{
-			s = to!string(w) ~ "x" ~ to!string(h);
+			s = to!(string)(w) ~ "x" ~ to!(string)(h);
 			if ( bpp > 0 )
-				s ~= ", " ~ to!string(bpp) ~ "bpp";
+				s ~= ", " ~ to!(string)(bpp) ~ "bpp";
 
 			if ( refresh > 0 )
-				s ~= ", " ~ to!string(refresh) ~ "Hz";
+				s ~= ", " ~ to!(string)(refresh) ~ "Hz";
 			}
 			else
 			{
