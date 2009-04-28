@@ -40,6 +40,7 @@ import tango.text.convert.Integer;
 else // Phobos
 {
 private import std.string;
+private import std.conv;
 }
 //! \endcond
 
@@ -161,12 +162,24 @@ private import std.string;
 		public string toString()
 		{
 			string s;
+			version (D_Version2)
+			{
+			s = to!string(w) ~ "x" ~ to!string(h);
+			if ( bpp > 0 )
+				s ~= ", " ~ to!string(bpp) ~ "bpp";
+
+			if ( refresh > 0 )
+				s ~= ", " ~ to!string(refresh) ~ "Hz";
+			}
+			else
+			{
 			s = .toString(w) ~ "x" ~ .toString(h);
 			if ( bpp > 0 )
 				s ~= ", " ~ .toString(bpp) ~ "bpp";
 
 			if ( refresh > 0 )
 				s ~= ", " ~ .toString(refresh) ~ "Hz";
+			}
 
 			return s;
 		}
