@@ -1,0 +1,77 @@
+MAKE?=mingw32-make
+
+MAKEFILE=makefile.gcc
+
+# D compiler to use (GDC or DMD)
+COMPILER=GDC
+export COMPILER
+
+# D library to use (Phobos/Tango)
+LIBRARY=Phobos
+export LIBRARY
+
+BUD=bud
+REBUILD=rebuild
+
+# wx release to use (e.g. 26)
+WX_RELEASE_NODOT=$(shell type wxc\WX_RELEASE)
+export WX_RELEASE_NODOT
+
+# wx version to use (e.g. 2.6.4)
+WX_VERSION=$(shell type wxc\WX_VERSION)
+export WX_VERSION
+
+# wx platform to use (e.g. WXGTK)
+PLATFORM=$(shell type wxc\PLATFORM)
+export PLATFORM
+
+# wx char encoding (ANSI/UNICODE)
+ENCODING=$(shell type wxc\ENCODING)
+export ENCODING
+
+# set this to 1 if you have "stc"
+STC=0
+export STC
+
+# set this to 1 if you have "ogl"
+OGL=0
+export OGL
+
+all: wxc/WX_RELEASE wxc/WX_VERSION wxc/PLATFORM wxc/ENCODING
+	$(MAKE) -C wxc -f $(MAKEFILE)
+	$(MAKE) -C wx -f $(MAKEFILE)
+
+samp:
+	$(MAKE) -C Samples
+
+test: samp
+	#TODO: unittesting
+
+wxc/WX_RELEASE:
+	$(MAKE) -C wxc -f $(MAKEFILE) WX_RELEASE
+
+wxc/WX_VERSION:
+	$(MAKE) -C wxc -f $(MAKEFILE) WX_VERSION
+
+wxc/PLATFORM:
+	$(MAKE) -C wxc -f $(MAKEFILE) PLATFORM
+
+wxc/ENCODING:
+	$(MAKE) -C wxc -f $(MAKEFILE) ENCODING
+
+helpers:
+	$(MAKE) -C wxc -f $(MAKEFILE) helpers
+
+build: wxc/WX_RELEASE wxc/WX_VERSION wxc/PLATFORM wxc/ENCODING
+	$(MAKE) -C wxc -f $(MAKEFILE) build
+
+clean:
+	$(MAKE) clean -C wx -f $(MAKEFILE)
+	$(MAKE) clean -C wxc -f $(MAKEFILE)
+	$(MAKE) clean -C Samples
+	-copy /y wx\libs.txt wx\libs.d
+	-del wxc/WX_RELEASE
+	-del wxc/WX_VERSION
+	-del wxc/PLATFORM
+	-del wxc/ENCODING
+
