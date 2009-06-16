@@ -180,7 +180,6 @@ DFLAGS?=-O -g
 version=-version
 output=-of$@
 endif
-endif
 ifeq ("$(COMPILER)","LDC")
 DC?=ldc
 DMD?=ldmd
