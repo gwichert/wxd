@@ -3,9 +3,9 @@ OBJECTS=$(NAME).o
 TARGET=../../bin/$(NAME)
 TOPDIR=../..
 
-include $(TOPDIR)/Configs/config.$(shell uname)
+include $(TOPDIR)/Configs/config.$(shell uname || echo Windows)
 
-OS=$(shell uname)
+OS=$(shell uname || echo Windows)
 
 ifeq ("$(OS)","Darwin")
 

@@ -3,7 +3,7 @@ OBJECTS=$(NAME).o defsext.o Prefs.o Edit.o FileNameFunc.o
 TARGET=../../bin/$(NAME)
 TOPDIR=../..
 
-include $(TOPDIR)/Configs/config.$(shell uname)
+include $(TOPDIR)/Configs/config.$(shell uname || echo Windows)
 
 ifeq ("$(COMPILER)","DMD")
 DFLAGS += -version=WXD_STYLEDTEXTCTRL

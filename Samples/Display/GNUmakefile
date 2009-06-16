@@ -3,4 +3,4 @@ OBJECTS=$(NAME).o CompareModesDialog.o
 TARGET=../../bin/$(NAME)
 TOPDIR=../..
 
-include $(TOPDIR)/Configs/config.$(shell uname)
+include $(TOPDIR)/Configs/config.$(shell uname || echo Windows)

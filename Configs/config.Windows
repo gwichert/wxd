@@ -1,0 +1,99 @@
+# from samples
+
+# same as the regular GNU, but with Windows syntax
+
+WX_CONFIG ?= wx-config
+
+# D compiler to use (DMD or GDC)
+COMPILER = GDC
+
+# D library to use (Phobos/Tango)
+LIBRARY = Phobos
+
+TOPDIR_DOS = $(subst /,\,$(TOPDIR))
+
+# wx release to use (e.g. 26)
+WX_RELEASE_NODOT=$(shell type $(TOPDIR_DOS)\wxc\WX_RELEASE)
+export WX_RELEASE_NODOT
+
+# wx version to use (e.g. 2.6.4)
+WX_VERSION=$(shell type $(TOPDIR_DOS)\wxc\WX_VERSION)
+export WX_VERSION
+
+# wx platform to use (e.g. WXGTK)
+PLATFORM = $(shell type $(TOPDIR_DOS)\wxc\PLATFORM)
+
+# wx char encoding (ANSI/UNICODE)
+ENCODING = $(shell type $(TOPDIR_DOS)\wxc\ENCODING)
+
+CXX ?= g++
+CXXFLAGS = -O2
+CXXLIBS = -lstdc++
+
+ifeq ("$(COMPILER)","DMD")
+DC ?= dmd
+DFLAGS = -O -g
+version=-version
+output=-of$@
+endif
+ifeq ("$(COMPILER)","LDC")
+DC ?= ldc
+DFLAGS = -O
+version=-d-version
+output=-of$@
+endif
+ifeq ("$(COMPILER)","GDC")
+DC ?= gdc
+DFLAGS = -O2 -g
+version=-fversion
+output=-o $@
+endif
+
+ifeq ("$(LIBRARY)","Tango")
+DFLAGS += $(version)=Tango
+ifeq ("$(COMPILER)","DMD")
+DLIBS += -ltango-user-dmd
+endif
+ifeq ("$(COMPILER)","GDC")
+DLIBS += -lgtango
+endif
+endif
+
+WXFLAGS = $(shell $(WX_CONFIG) --cxxflags)
+# xrc seems to be missing from wx-config.exe:
+WXLIBS = -lwxmsw$(WX_RELEASE_NODOT)_xrc
+WXLIBS += $(shell $(WX_CONFIG) --libs)
+
+ifeq ("$(STC)","1")
+WXLIBS += $(shell $(WX_CONFIG) --libs stc)
+endif
+
+.cpp.o:
+	$(CXX) $(WXFLAGS) $(CXXFLAGS) -c -o $@ $<
+
+VERSION=$(version)=wx$(WX_RELEASE_NODOT) $(version)=__$(PLATFORM)__ $(version)=$(ENCODING)
+
+%.o:%.d
+	$(DC) $(VERSION) -I$(TOPDIR) $(DFLAGS) -c $(output) $<
+
+
+all: $(TARGET)
+
+ifeq ("$(COMPILER)","DMD")
+$(TARGET) : $(OBJECTS)
+	$(DC) -of$@ $(OBJECTS) $(TOPDIR)/libwxd.a $(DLIBS) $(TOPDIR)/libwxc.a $(WXLIBS) $(CXXLIBS) $(LDFLAGS)
+endif
+ifeq ("$(COMPILER)","LDC")
+$(TARGET) : $(OBJECTS)
+	$(DC) $(output) $(OBJECTS) -L-L$(TOPDIR) -L-lwxd $(DLIBS) -L-L$(TOPDIR) -L-lwxc $(WXLIBS) $(CXXLIBS) $(LDFLAGS)
+endif
+ifeq ("$(COMPILER)","GDC")
+$(TARGET) : $(OBJECTS)
+	$(DC) $(output) $(OBJECTS) -L$(TOPDIR) -lwxd $(DLIBS) -lwxc $(WXLIBS) $(CXXLIBS) $(LDFLAGS)
+endif
+
+RM = del
+
+clean:
+	-$(RM) *.o
+	-$(RM) $(TARGET)
