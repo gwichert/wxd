@@ -5,13 +5,13 @@
 
 int main(int argc, char *argv[])
 {
+    char *param;
     for (int i = 1; i < argc; i++)
     {
-        if (argv[i][0] == '-' && argv[i][1] == 'L')
-            continue;
         if (i != 1)
             printf(" ");
-        printf("-L%s", argv[i]);
+        param = argv[i];
+        printf("-L%s", param);
     }
     printf("\n");
     return 0;
