@@ -1,3 +1,9 @@
+wxd (0.15-0) hardy; urgency=low
+
+  * Updated deb package
+
+ -- Anders F Bjorklund <afb@users.sourceforge.net>  Tue, 30 Jun 2009 19:00:00 +0200
+
 wxd (0.14-0) hardy; urgency=low
 
   * Updated deb package

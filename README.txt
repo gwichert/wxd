@@ -22,6 +22,11 @@ It is composed of two parts:
 
 * Status
 
+0.15 (afb)
+Add support for DMD on Mac OS X (i386 only)
+Fix setting of version=Posix and ldmd usage
+Support for building on Windows without MSYS
+
 0.14 (afb)
 Handled strange wxWidgets --libs, on Ubuntu
 Fixed building with LDC 0.9 (LLVM) compiler

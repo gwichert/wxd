@@ -1,6 +1,6 @@
 Summary: wxWidgets bindings for the D programming language
 Name: wxd
-Version: 0.14
+Version: 0.15
 Release: 0
 Source: http://downloads.sourceforge.net/wxd/%{name}-%{version}.tgz
 Group: Development/Libraries
