@@ -41,7 +41,7 @@ all: wxc/WX_RELEASE wxc/WX_VERSION wxc/PLATFORM wxc/ENCODING
 	$(MAKE) -C wxc -f $(MAKEFILE)
 	$(MAKE) -C wx -f $(MAKEFILE)
 
-samp:
+samp: dmdwrap
 	$(MAKE) -C Samples
 
 test: samp
@@ -61,6 +61,9 @@ wxc/ENCODING:
 
 helpers:
 	$(MAKE) -C wxc -f $(MAKEFILE) helpers
+
+dmdwrap:
+	$(MAKE) -C wxc -f $(MAKEFILE) dmd-wrap-libs.exe
 
 build: wxc/WX_RELEASE wxc/WX_VERSION wxc/PLATFORM wxc/ENCODING
 	$(MAKE) -C wxc -f $(MAKEFILE) build
