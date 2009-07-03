@@ -53,7 +53,7 @@ endif
 ifeq ("$(LIBRARY)","Tango")
 DFLAGS += $(version)=Tango
 ifeq ("$(COMPILER)","DMD")
-DLIBS += -L-ltango-user-dmd
+DLIBS += -L+tango-user-dmd.lib
 endif
 ifeq ("$(COMPILER)","GDC")
 DLIBS += -lgtango
@@ -96,7 +96,7 @@ DMDFLAGS=$(shell $(WRAP) $(GCCFLAGS))
 endif
 ifeq ("$(COMPILER)","DMD")
 $(TARGET_DOS) : $(OBJECTS)
-	$(DC) -of$@ $(OBJECTS) -L-L$(TOPDIR) -L-lwxd $(DLIBS) -L-L$(TOPDIR) -L-lwxc $(DMDLIBS) $(DMDFLAGS)
+	$(DC) -of$@ $(OBJECTS) -L-lwxd $(DLIBS) -L-lwxc $(DMDLIBS) $(DMDFLAGS)
 endif
 ifeq ("$(COMPILER)","LDC")
 $(TARGET_DOS) : $(OBJECTS)
