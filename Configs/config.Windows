@@ -83,13 +83,24 @@ VERSION=$(version)=wx$(WX_RELEASE_NODOT) $(version)=__$(PLATFORM)__ $(version)=$
 all: $(TARGET)
 $(TARGET): $(TARGET_DOS)
 
+CWD = $(shell cd)
+WRAP= $(CWD)\$(TOPDIR_DOS)\wxc\dmd-wrap-libs.exe
+
+ifneq ("$(COMPILER)","GDC")
+# Note: "dmd" uses weird LDFLAGS syntax, so we have to wrap params first,
+#       or it won't work with whatever we get back from "wx-config --libs"
+GCCLIBS=$(WXLIBS) $(CXXLIBS)
+DMDLIBS=$(shell $(WRAP) $(GCCLIBS))
+GCCFLAGS=$(LDFLAGS)
+DMDFLAGS=$(shell $(WRAP) $(GCCFLAGS))
+endif
 ifeq ("$(COMPILER)","DMD")
 $(TARGET_DOS) : $(OBJECTS)
-	$(DC) -of$@ $(OBJECTS) $(TOPDIR)/libwxd.a $(DLIBS) $(TOPDIR)/libwxc.a $(WXLIBS) $(CXXLIBS) $(LDFLAGS)
+	$(DC) -of$@ $(OBJECTS) -L-L$(TOPDIR) -L-lwxd $(DLIBS) -L-L$(TOPDIR) -L-lwxc $(DMDLIBS) $(DMDFLAGS)
 endif
 ifeq ("$(COMPILER)","LDC")
 $(TARGET_DOS) : $(OBJECTS)
-	$(DC) $(output) $(OBJECTS) -L-L$(TOPDIR) -L-lwxd $(DLIBS) -L-L$(TOPDIR) -L-lwxc $(WXLIBS) $(CXXLIBS) $(LDFLAGS)
+	$(DC) $(output) $(OBJECTS) -L-L$(TOPDIR) -L-lwxd $(DLIBS) -L-L$(TOPDIR) -L-lwxc $(DMDLIBS) $(DMDFLAGS)
 endif
 ifeq ("$(COMPILER)","GDC")
 $(TARGET_DOS) : $(OBJECTS)
