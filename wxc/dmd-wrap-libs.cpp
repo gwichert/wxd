@@ -11,7 +11,10 @@ int main(int argc, char *argv[])
         if (i != 1)
             printf(" ");
         param = argv[i];
-        printf("-L%s", param);
+        if (param[0] == '-' && param[1] == 'l')
+            printf("-L%s.lib", param+2);
+        else
+            printf("-L%s", param);
     }
     printf("\n");
     return 0;
