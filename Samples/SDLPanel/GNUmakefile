@@ -1,5 +1,5 @@
 NAME=SDLPanel
-OBJECTS=$(NAME).o
+OBJECTS=$(NAME).$(OBJEXT)
 TARGET=../../bin/$(NAME)
 TOPDIR=../..
 

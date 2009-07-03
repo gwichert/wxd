@@ -1,5 +1,5 @@
 NAME=Hello
-OBJECTS=$(NAME).o
+OBJECTS=$(NAME).$(OBJEXT)
 TARGET=../../bin/$(NAME)
 TOPDIR=../..
 

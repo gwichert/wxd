@@ -72,6 +72,8 @@ ifeq ("$(STC)","1")
 WXLIBS += `$(WX_CONFIG) --libs stc`
 endif
 
+OBJEXT ?= o
+
 .cpp.o:
 	$(CXX) $(WXFLAGS) $(CXXFLAGS) -c -o $@ $<
 

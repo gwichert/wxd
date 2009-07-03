@@ -1,5 +1,5 @@
 NAME=Wizard
-OBJECTS=$(NAME).o
+OBJECTS=$(NAME).$(OBJEXT)
 TARGET=../../bin/$(NAME)
 TOPDIR=../..
 

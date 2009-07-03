@@ -1,5 +1,5 @@
 NAME=Display
-OBJECTS=$(NAME).o CompareModesDialog.o
+OBJECTS=$(NAME).o CompareModesDialog.$(OBJEXT)
 TARGET=../../bin/$(NAME)
 TOPDIR=../..
 

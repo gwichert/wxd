@@ -78,6 +78,8 @@ ifeq ("$(PLATFORM)","WXGTK")
 LDFLAGS += `pkg-config --libs gtk+-2.0`
 endif
 
+OBJEXT ?= o
+
 .cpp.o:
 	$(CXX) $(WXFLAGS) $(CXXFLAGS) -c -o $@ $<
 

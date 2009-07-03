@@ -68,12 +68,14 @@ ifeq ("$(STC)","1")
 WXLIBS += $(shell $(WX_CONFIG) --libs stc)
 endif
 
-.cpp.o:
+OBJEXT = obj
+
+.cpp.obj:
 	$(CXX) $(WXFLAGS) $(CXXFLAGS) -c -o $@ $<
 
 VERSION=$(version)=wx$(WX_RELEASE_NODOT) $(version)=__$(PLATFORM)__ $(version)=$(ENCODING)
 
-%.o:%.d
+%.obj:%.d
 	$(DC) $(VERSION) -I$(TOPDIR) $(DFLAGS) -c $(output) $<
 
 
@@ -95,5 +97,5 @@ endif
 RM = del
 
 clean:
-	-$(RM) *.o
+	-$(RM) *.obj
 	-$(RM) $(TARGET)
