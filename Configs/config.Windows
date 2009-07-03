@@ -52,7 +52,7 @@ endif
 ifeq ("$(LIBRARY)","Tango")
 DFLAGS += $(version)=Tango
 ifeq ("$(COMPILER)","DMD")
-DLIBS += -ltango-user-dmd
+DLIBS += -L-ltango-user-dmd
 endif
 ifeq ("$(COMPILER)","GDC")
 DLIBS += -lgtango
