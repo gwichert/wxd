@@ -55,7 +55,8 @@ else
 # Prior to Tango 0.99.3 
 DLIBS += -L-ltango
 endif
-else ifeq ("$(COMPILER)","GDC")
+endif
+ifeq ("$(COMPILER)","GDC")
 DLIBS += -lgtango
 endif
 endif
