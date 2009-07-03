@@ -69,14 +69,18 @@ ifeq ("$(STC)","1")
 WXLIBS += $(shell $(WX_CONFIG) --libs stc)
 endif
 
+ifeq ("$(COMPILER)","DMD")
 OBJEXT = obj
+else
+OBJEXT = o
+endif
 
-.cpp.obj:
+.cpp.o:
 	$(CXX) $(WXFLAGS) $(CXXFLAGS) -c -o $@ $<
 
 VERSION=$(version)=wx$(WX_RELEASE_NODOT) $(version)=__$(PLATFORM)__ $(version)=$(ENCODING)
 
-%.obj:%.d
+%.$(OBJEXT):%.d
 	$(DC) $(VERSION) -I$(TOPDIR) $(DFLAGS) -c $(output) $<
 
 
@@ -110,5 +114,5 @@ endif
 RM = del
 
 clean:
-	-$(RM) *.obj
+	-$(RM) *.obj *.o
 	-$(RM) $(TARGET)
