@@ -11,6 +11,7 @@ COMPILER = GDC
 LIBRARY = Phobos
 
 TOPDIR_DOS = $(subst /,\,$(TOPDIR))
+TARGET_DOS = $(subst /,\,$(TARGET))
 
 # wx release to use (e.g. 26)
 WX_RELEASE_NODOT=$(shell type $(TOPDIR_DOS)\wxc\WX_RELEASE)
@@ -80,17 +81,18 @@ VERSION=$(version)=wx$(WX_RELEASE_NODOT) $(version)=__$(PLATFORM)__ $(version)=$
 
 
 all: $(TARGET)
+$(TARGET): $(TARGET_DOS)
 
 ifeq ("$(COMPILER)","DMD")
-$(TARGET) : $(OBJECTS)
+$(TARGET_DOS) : $(OBJECTS)
 	$(DC) -of$@ $(OBJECTS) $(TOPDIR)/libwxd.a $(DLIBS) $(TOPDIR)/libwxc.a $(WXLIBS) $(CXXLIBS) $(LDFLAGS)
 endif
 ifeq ("$(COMPILER)","LDC")
-$(TARGET) : $(OBJECTS)
+$(TARGET_DOS) : $(OBJECTS)
 	$(DC) $(output) $(OBJECTS) -L-L$(TOPDIR) -L-lwxd $(DLIBS) -L-L$(TOPDIR) -L-lwxc $(WXLIBS) $(CXXLIBS) $(LDFLAGS)
 endif
 ifeq ("$(COMPILER)","GDC")
-$(TARGET) : $(OBJECTS)
+$(TARGET_DOS) : $(OBJECTS)
 	$(DC) $(output) $(OBJECTS) -L$(TOPDIR) -lwxd $(DLIBS) -lwxc $(WXLIBS) $(CXXLIBS) $(LDFLAGS)
 endif
 
