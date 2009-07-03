@@ -69,6 +69,8 @@ ifeq ("$(STC)","1")
 WXLIBS += $(shell $(WX_CONFIG) --libs stc)
 endif
 
+WINFLAGS = -Wl,--subsystem,windows -mwindows
+
 ifeq ("$(COMPILER)","DMD")
 OBJEXT = obj
 else
@@ -108,7 +110,7 @@ $(TARGET_DOS) : $(OBJECTS)
 endif
 ifeq ("$(COMPILER)","GDC")
 $(TARGET_DOS) : $(OBJECTS)
-	$(DC) $(output) $(OBJECTS) -L$(TOPDIR) -lwxd $(DLIBS) -lwxc $(WXLIBS) $(CXXLIBS) $(LDFLAGS)
+	$(DC) $(output) $(OBJECTS) -L$(TOPDIR) -lwxd $(DLIBS) -lwxc $(WXLIBS) $(CXXLIBS) $(WINFLAGS) $(LDFLAGS)
 endif
 
 RM = del
