@@ -243,6 +243,9 @@ $(LIBTARGET) : $(OBJECTS)
 wx-config.exe: wx-config-win.o
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $<
 
+dmd-wrap-libs.exe: dmd-wrap-libs.o
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $<
+
 wx-libs$(EXEEXT): wx-libs.o
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $< $(WXBASE)
 
