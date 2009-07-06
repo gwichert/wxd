@@ -324,8 +324,8 @@ public import wx.wxString;
 		foreach(char foo; str) {
 			char ch = foo;
 			if (ch>='0' && ch<='9') ch-='0';
-			else if (ch>='A' && ch<='F') ch=ch-'A'+10;
-			else if (ch>='a' && ch<='f') ch=ch-'a'+10;
+			else if (ch>='A' && ch<='F') ch=cast(char)(ch-'A'+10);
+			else if (ch>='a' && ch<='f') ch=cast(char)(ch-'a'+10);
 			else return -1;
 			value = value*10 + ch;
 		}
