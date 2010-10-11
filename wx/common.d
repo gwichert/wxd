@@ -5,13 +5,13 @@ module wx.common;
  *  <p><a href="http://wxd.sourceforge.net/"><b>wxD</b></a> is
  *  <a href="http://www.wxwidgets.org/">wxWidgets</a> bindings for the
  *  <a href="http://www.d-programming-language.org/">D programming language</a>.</p>
- */   
+ */
 
-/*! \namespace wx::libs 
+/*! \namespace wx::libs
  *  \brief This module gets set to a pragma(link) for version(build).
  *
  *  It also does a pragma(export_version), for platform and encoding.
- */   
+ */
 
 //! \cond STD
 version (Tango)
