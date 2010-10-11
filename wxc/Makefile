@@ -166,7 +166,7 @@ OBJECTS = \
 
 all:  $(MAKESTUB) $(LIBTARGET)
 build:  $(BUD_LIBS)
-helpers: wx-platform.exe wx-encoding.exe wx-release.exe
+helpers: wx-libraries.exe wx-platform.exe wx-encoding.exe wx-release.exe
 
 # hardcoded: DEBUG
 DEBUG_FLAG = -D__WXDEBUG__
@@ -203,6 +203,9 @@ wx-libs.mak: wx-config.exe
 	+$(WX_CONFIG) --libs base >$@
 
 wx-libs.exe: wx-libs.mak wx-libs.obj 
+	$(CXX) $(LDFLAGS) wx-libs.obj @wx-libs.mak $@
+
+wx-libraries.exe: wx-libs.mak wx-libs.obj 
 	$(CXX) $(LDFLAGS) wx-libs.obj @wx-libs.mak $@
 
 wx-release.exe: wx-release.obj

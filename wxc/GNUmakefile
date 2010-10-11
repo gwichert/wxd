@@ -165,7 +165,7 @@ OBJECTS = \
 
 all:  WX_RELEASE WX_VERSION PLATFORM ENCODING $(LIBTARGET)
 build:  $(BUD_LIBS)
-helpers: wx-platform$(EXEEXT) wx-encoding$(EXEEXT) wx-release$(EXEEXT)
+helpers: wx-libraries$(EXEEXT) wx-platform$(EXEEXT) wx-encoding$(EXEEXT) wx-release$(EXEEXT)
 
 # Fortunately DMD or GDC doesn't matter anymore
 # "WXD" is bogus, but it looks better than ____
@@ -247,6 +247,9 @@ dmd-wrap-libs.exe: dmd-wrap-libs.o
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $<
 
 wx-libs$(EXEEXT): wx-libs.o
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $< $(WXBASE)
+
+wx-libraries$(EXEEXT): wx-libraries.o
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $< $(WXBASE)
 
 wx-release$(EXEEXT): wx-release.o
