@@ -123,7 +123,7 @@ public import wx.Window;
 		//! \endcond
 		
 	alias WindowDisabler wxWindowDisabler;
-	public auto class WindowDisabler : wxObject
+	public class WindowDisabler : wxObject
 	{
 		//---------------------------------------------------------------------
 
@@ -157,7 +157,7 @@ public import wx.Window;
 		//! \endcond
 		
 	alias BusyInfo wxBusyInfo;
-	public auto class BusyInfo : wxObject
+	public class BusyInfo : wxObject
 	{
 		//---------------------------------------------------------------------
 	

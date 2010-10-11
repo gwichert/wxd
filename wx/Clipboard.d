@@ -129,7 +129,7 @@ public import wx.DataObject;
 		//-----------------------------------------------------------------------------
 		
 	/* re-implement using D */
-	public auto class ClipboardLocker // not wxObject
+	public class ClipboardLocker // not wxObject
 	{
 		public this(Clipboard clipboard = null)
 		{
