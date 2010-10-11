@@ -142,7 +142,7 @@ public import wx.ClientData;
 	}
 
 		//! \cond EXTERN
-		static extern (C) IntPtr wxToolBar_ctor(IntPtr parent, int id, inout Point pos, inout Size size, uint style);
+		static extern (C) IntPtr wxToolBar_ctor(IntPtr parent, int id, ref Point pos, ref Size size, uint style);
 		static extern (C) IntPtr wxToolBar_AddTool1(IntPtr self, int toolid, string label, IntPtr bitmap, IntPtr bmpDisabled, int kind, string shortHelp, string longHelp, IntPtr data);
 		static extern (C) IntPtr wxToolBar_AddTool2(IntPtr self, int toolid, string label, IntPtr bitmap, string shortHelp, int kind);
 		static extern (C) IntPtr wxToolBar_AddCheckTool(IntPtr self, int toolid, string label, IntPtr bitmap, IntPtr bmpDisabled, string shortHelp, string longHelp, IntPtr data);
@@ -170,16 +170,16 @@ public import wx.ClientData;
 		static extern (C) void   wxToolBar_SetMargins(IntPtr self, int x, int y);
 		static extern (C) void   wxToolBar_SetToolPacking(IntPtr self, int packing);
 		static extern (C) void   wxToolBar_SetToolSeparation(IntPtr self, int separation);
-		static extern (C) void   wxToolBar_GetToolMargins(IntPtr self, inout Size size);
+		static extern (C) void   wxToolBar_GetToolMargins(IntPtr self, ref Size size);
 		static extern (C) int    wxToolBar_GetToolPacking(IntPtr self);
 		static extern (C) int    wxToolBar_GetToolSeparation(IntPtr self);
 		static extern (C) void   wxToolBar_SetRows(IntPtr self, int nRows);
 		static extern (C) void   wxToolBar_SetMaxRowsCols(IntPtr self, int rows, int cols);
 		static extern (C) int    wxToolBar_GetMaxRows(IntPtr self);
 		static extern (C) int    wxToolBar_GetMaxCols(IntPtr self);
-		static extern (C) void   wxToolBar_SetToolBitmapSize(IntPtr self, inout Size size);
-		static extern (C) void   wxToolBar_GetToolBitmapSize(IntPtr self, inout Size size);
-		static extern (C) void   wxToolBar_GetToolSize(IntPtr self, inout Size size);
+		static extern (C) void   wxToolBar_SetToolBitmapSize(IntPtr self, ref Size size);
+		static extern (C) void   wxToolBar_GetToolBitmapSize(IntPtr self, ref Size size);
+		static extern (C) void   wxToolBar_GetToolSize(IntPtr self, ref Size size);
 		static extern (C) IntPtr wxToolBar_FindToolForPosition(IntPtr self, int x, int y);
 		static extern (C) bool   wxToolBar_IsVertical(IntPtr self);
 		static extern (C) IntPtr wxToolBar_AddTool3(IntPtr self, int toolid, IntPtr bitmap, IntPtr bmpDisabled, bool toggle, IntPtr clientData, string shortHelpString, string longHelpString);

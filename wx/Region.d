@@ -27,9 +27,9 @@ public import wx.Colour;
 		//! \cond EXTERN
         static extern (C) IntPtr wxRegion_ctor();
         static extern (C) IntPtr wxRegion_ctorByCoords(int x, int y, int w, int h);
-        static extern (C) IntPtr wxRegion_ctorByCorners(inout Point topLeft, inout Point bottomRight);
-        static extern (C) IntPtr wxRegion_ctorByRect(inout Rectangle rect);
-        static extern (C) IntPtr wxRegion_ctorByPoly(int n, inout Point[] points, int fillStyle);
+        static extern (C) IntPtr wxRegion_ctorByCorners(ref Point topLeft, ref Point bottomRight);
+        static extern (C) IntPtr wxRegion_ctorByRect(ref Rectangle rect);
+        static extern (C) IntPtr wxRegion_ctorByPoly(int n, ref Point[] points, int fillStyle);
         static extern (C) IntPtr wxRegion_ctorByBitmap(IntPtr bmp, IntPtr transColour, int tolerance);
         static extern (C) IntPtr wxRegion_ctorByRegion(IntPtr region);
 
@@ -39,28 +39,28 @@ public import wx.Colour;
         static extern (C) bool   wxRegion_Offset(IntPtr self, int x, int y);
 
         static extern (C) bool   wxRegion_Union(IntPtr self, int x, int y, int width, int height);
-        static extern (C) bool   wxRegion_UnionRect(IntPtr self, inout Rectangle rect);
+        static extern (C) bool   wxRegion_UnionRect(IntPtr self, ref Rectangle rect);
         static extern (C) bool   wxRegion_UnionRegion(IntPtr self, IntPtr region);
         static extern (C) bool   wxRegion_UnionBitmap(IntPtr self, IntPtr bmp, IntPtr transColour, int tolerance);
 
         static extern (C) bool   wxRegion_Intersect(IntPtr self, int x, int y, int width, int height);
-        static extern (C) bool   wxRegion_IntersectRect(IntPtr self, inout Rectangle rect);
+        static extern (C) bool   wxRegion_IntersectRect(IntPtr self, ref Rectangle rect);
         static extern (C) bool   wxRegion_IntersectRegion(IntPtr self, IntPtr region);
 
         static extern (C) bool   wxRegion_Subtract(IntPtr self, int x, int y, int width, int height);
-        static extern (C) bool   wxRegion_SubtractRect(IntPtr self, inout Rectangle rect);
+        static extern (C) bool   wxRegion_SubtractRect(IntPtr self, ref Rectangle rect);
         static extern (C) bool   wxRegion_SubtractRegion(IntPtr self, IntPtr region);
 
         static extern (C) bool   wxRegion_Xor(IntPtr self, int x, int y, int width, int height);
-        static extern (C) bool   wxRegion_XorRect(IntPtr self, inout Rectangle rect);
+        static extern (C) bool   wxRegion_XorRect(IntPtr self, ref Rectangle rect);
         static extern (C) bool   wxRegion_XorRegion(IntPtr self, IntPtr region);
 
         static extern (C) RegionContain wxRegion_ContainsCoords(IntPtr self, int x, int y);
-        static extern (C) RegionContain wxRegion_ContainsPoint(IntPtr self, inout Point pt);
+        static extern (C) RegionContain wxRegion_ContainsPoint(IntPtr self, ref Point pt);
         static extern (C) RegionContain wxRegion_ContainsRectCoords(IntPtr self, int x, int y, int width, int height);
-        static extern (C) RegionContain wxRegion_ContainsRect(IntPtr self, inout Rectangle rect);
+        static extern (C) RegionContain wxRegion_ContainsRect(IntPtr self, ref Rectangle rect);
 
-        static extern (C) void   wxRegion_GetBox(IntPtr self, inout Rectangle rect);
+        static extern (C) void   wxRegion_GetBox(IntPtr self, ref Rectangle rect);
         static extern (C) bool   wxRegion_IsEmpty(IntPtr self);
         static extern (C) IntPtr wxRegion_ConvertToBitmap(IntPtr self);
 		//! \endcond
@@ -238,7 +238,7 @@ public import wx.Colour;
         static extern (C) int    wxRegionIterator_GetH(IntPtr self);
         static extern (C) int    wxRegionIterator_GetHeight(IntPtr self);
 
-        static extern (C) void   wxRegionIterator_GetRect(IntPtr self, inout Rectangle rect);
+        static extern (C) void   wxRegionIterator_GetRect(IntPtr self, ref Rectangle rect);
 		//! \endcond
 
         //---------------------------------------------------------------------

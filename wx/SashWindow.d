@@ -85,7 +85,7 @@ public import wx.CommandEvent;
 	
 		//! \cond EXTERN
 		static extern (C) IntPtr wxSashWindow_ctor();
-		static extern (C) bool wxSashWindow_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
+		static extern (C) bool wxSashWindow_Create(IntPtr self, IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
 		static extern (C) void wxSashWindow_SetSashVisible(IntPtr self, SashEdgePosition edge, bool sash);
 		static extern (C) bool wxSashWindow_GetSashVisible(IntPtr self, SashEdgePosition edge);
 		static extern (C) void wxSashWindow_SetSashBorder(IntPtr self, SashEdgePosition edge, bool border);
@@ -148,7 +148,7 @@ public import wx.CommandEvent;
 		
 		//-----------------------------------------------------------------------------
 		
-		public bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
+		public bool Create(Window parent, int id, ref Point pos, ref Size size, int style, string name)
 		{
 			return wxSashWindow_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, style, name);
 		}
@@ -218,7 +218,7 @@ public import wx.CommandEvent;
 		static extern (C) IntPtr wxSashEvent_ctor(int id, SashEdgePosition edge);
 		static extern (C) void wxSashEvent_SetEdge(IntPtr self, SashEdgePosition edge);
 		static extern (C) SashEdgePosition wxSashEvent_GetEdge(IntPtr self);
-		static extern (C) void wxSashEvent_SetDragRect(IntPtr self, inout Rectangle rect);
+		static extern (C) void wxSashEvent_SetDragRect(IntPtr self, ref Rectangle rect);
 		static extern (C) void wxSashEvent_GetDragRect(IntPtr self, out Rectangle rect);
 		static extern (C) void wxSashEvent_SetDragStatus(IntPtr self, SashDragStatus status);
 		static extern (C) SashDragStatus wxSashEvent_GetDragStatus(IntPtr self);

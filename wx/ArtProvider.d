@@ -71,8 +71,8 @@ public import wx.Window;
 	//---------------------------------------------------------------------
 	
 		//! \cond EXTERN
-		static extern (C) IntPtr wxArtProvider_GetBitmap(int artid, int artclient, inout Size size);
-		static extern (C) IntPtr wxArtProvider_GetIcon(int artid, int artclient, inout Size size);
+		static extern (C) IntPtr wxArtProvider_GetBitmap(int artid, int artclient, ref Size size);
+		static extern (C) IntPtr wxArtProvider_GetIcon(int artid, int artclient, ref Size size);
 		//! \endcond
 		
 		//---------------------------------------------------------------------

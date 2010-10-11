@@ -17,7 +17,7 @@ public import wx.Control;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxRadioButton_ctor();
-		static extern (C) bool   wxRadioButton_Create(IntPtr self, IntPtr parent, int id, string label, inout Point pos, inout Size size, uint style, IntPtr val, string name);
+		static extern (C) bool   wxRadioButton_Create(IntPtr self, IntPtr parent, int id, string label, ref Point pos, ref Size size, uint style, IntPtr val, string name);
 		static extern (C) bool   wxRadioButton_GetValue(IntPtr self);
 		static extern (C) void   wxRadioButton_SetValue(IntPtr self, bool state);
 		//! \endcond
@@ -59,7 +59,7 @@ public import wx.Control;
 
 		//---------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, string label, inout Point pos, inout Size size, int style, Validator val, string name)
+		public bool Create(Window parent, int id, string label, ref Point pos, ref Size size, int style, Validator val, string name)
 		{
 			return wxRadioButton_Create(wxobj, wxObject.SafePtr(parent), id,
 					label, pos, size, cast(uint)style, wxObject.SafePtr(val), name);

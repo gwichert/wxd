@@ -39,7 +39,7 @@ private import std.string;
 		static extern (C) bool wxPlatform_SOUND();
 
 		static extern (C) IntPtr wxPlatform_wxGetOsDescription();
-		static extern (C) int wxPlatform_wxGetOsVersion(inout int major, inout int minor);
+		static extern (C) int wxPlatform_wxGetOsVersion(ref int major, ref int minor);
 
 		static extern (C) int wxPlatform_OS_UNKNOWN();
 		static extern (C) int wxPlatform_OS_WINDOWS();
@@ -120,7 +120,7 @@ public int OS_LINUX;
 public int OS_FREEBSD;
 
 /// Get OS version
-public int wxGetOsVersion(inout int major, inout int minor)
+public int wxGetOsVersion(ref int major, ref int minor)
 {
 	return wxPlatform_wxGetOsVersion(major, minor);
 }

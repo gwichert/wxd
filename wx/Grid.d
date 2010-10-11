@@ -33,7 +33,7 @@ public import wx.ScrolledWindow;
         static extern (C) IntPtr wxGridEvent_ctor(int id, int type, IntPtr obj, int row, int col, int x, int y, bool sel, bool control, bool shift, bool alt, bool meta);
         static extern (C) int    wxGridEvent_GetRow(IntPtr self);
         static extern (C) int    wxGridEvent_GetCol(IntPtr self);
-        static extern (C) void   wxGridEvent_GetPosition(IntPtr self, inout Point pt);
+        static extern (C) void   wxGridEvent_GetPosition(IntPtr self, ref Point pt);
         static extern (C) bool   wxGridEvent_Selecting(IntPtr self);
         static extern (C) bool   wxGridEvent_ControlDown(IntPtr self);
         static extern (C) bool   wxGridEvent_MetaDown(IntPtr self);
@@ -172,9 +172,9 @@ public import wx.ScrolledWindow;
             Virtual_Destroy destroy,
             Virtual_GetValue getvalue);
         static extern (C) bool   wxGridCellEditor_IsCreated(IntPtr self);
-        static extern (C) void   wxGridCellEditor_SetSize(IntPtr self, inout Rectangle rect);
+        static extern (C) void   wxGridCellEditor_SetSize(IntPtr self, ref Rectangle rect);
         static extern (C) void   wxGridCellEditor_Show(IntPtr self, bool show, IntPtr attr);
-        static extern (C) void   wxGridCellEditor_PaintBackground(IntPtr self, inout Rectangle rectCell, IntPtr attr);
+        static extern (C) void   wxGridCellEditor_PaintBackground(IntPtr self, ref Rectangle rectCell, IntPtr attr);
         static extern (C) bool   wxGridCellEditor_IsAcceptedKey(IntPtr self, IntPtr evt);
         static extern (C) void   wxGridCellEditor_StartingKey(IntPtr self, IntPtr evt);
         static extern (C) void   wxGridCellEditor_StartingClick(IntPtr self);
@@ -379,8 +379,8 @@ public import wx.ScrolledWindow;
         static extern (C) IntPtr wxGridCellTextEditor_ctor();
 	static extern (C) void wxGridCellTextEditor_dtor(IntPtr self);
         static extern (C) void wxGridCellTextEditor_Create(IntPtr self, IntPtr parent, int id, IntPtr evtHandler);
-        static extern (C) void wxGridCellTextEditor_SetSize(IntPtr self, inout Rectangle rect);
-        static extern (C) void wxGridCellTextEditor_PaintBackground(IntPtr self, inout Rectangle rectCell, IntPtr attr);
+        static extern (C) void wxGridCellTextEditor_SetSize(IntPtr self, ref Rectangle rect);
+        static extern (C) void wxGridCellTextEditor_PaintBackground(IntPtr self, ref Rectangle rectCell, IntPtr attr);
         static extern (C) bool wxGridCellTextEditor_IsAcceptedKey(IntPtr self, IntPtr evt);
         static extern (C) void wxGridCellTextEditor_BeginEdit(IntPtr self, int row, int col, IntPtr grid);
         static extern (C) bool wxGridCellTextEditor_EndEdit(IntPtr self, int row, int col, IntPtr grid);
@@ -659,7 +659,7 @@ public import wx.ScrolledWindow;
 	static extern (C) void wxGridCellBoolEditor_dtor(IntPtr self);
 	static extern (C) void wxGridCellBoolEditor_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
         static extern (C) void wxGridCellBoolEditor_Create(IntPtr self, IntPtr parent, int id, IntPtr evtHandler);
-        static extern (C) void wxGridCellBoolEditor_SetSize(IntPtr self, inout Rectangle rect);
+        static extern (C) void wxGridCellBoolEditor_SetSize(IntPtr self, ref Rectangle rect);
         static extern (C) bool wxGridCellBoolEditor_IsAcceptedKey(IntPtr self, IntPtr evt);
         static extern (C) void wxGridCellBoolEditor_BeginEdit(IntPtr self, int row, int col, IntPtr grid);
         static extern (C) bool wxGridCellBoolEditor_EndEdit(IntPtr self, int row, int col, IntPtr grid);
@@ -747,7 +747,7 @@ public import wx.ScrolledWindow;
 	static extern (C) void wxGridCellChoiceEditor_dtor(IntPtr self);
 	static extern (C) void wxGridCellChoiceEditor_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
         static extern (C) void wxGridCellChoiceEditor_Create(IntPtr self, IntPtr parent, int id, IntPtr evtHandler);
-        static extern (C) void wxGridCellChoiceEditor_PaintBackground(IntPtr self, inout Rectangle rectCell, IntPtr attr);
+        static extern (C) void wxGridCellChoiceEditor_PaintBackground(IntPtr self, ref Rectangle rectCell, IntPtr attr);
         static extern (C) void wxGridCellChoiceEditor_BeginEdit(IntPtr self, int row, int col, IntPtr grid);
         static extern (C) bool wxGridCellChoiceEditor_EndEdit(IntPtr self, int row, int col, IntPtr grid);
         static extern (C) void wxGridCellChoiceEditor_Reset(IntPtr self);
@@ -1032,7 +1032,7 @@ public import wx.ScrolledWindow;
 
             //! \cond EXTERN
             static extern (C) IntPtr wxGrid_ctor();
-            static extern (C) IntPtr wxGrid_ctorFull(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
+            static extern (C) IntPtr wxGrid_ctorFull(IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
             static extern (C) bool   wxGrid_CreateGrid(IntPtr self, int numRows, int numCols,  int selmode);
             static extern (C) void   wxGrid_SetSelectionMode(IntPtr self, int selmode);
             static extern (C) int    wxGrid_GetNumberRows(IntPtr self);
@@ -1065,7 +1065,7 @@ public import wx.ScrolledWindow;
             static extern (C) int    wxGrid_XToCol(IntPtr self, int x);
             static extern (C) int    wxGrid_YToEdgeOfRow(IntPtr self, int y);
             static extern (C) int    wxGrid_XToEdgeOfCol(IntPtr self, int x);
-            static extern (C) void   wxGrid_CellToRect(IntPtr self, int row, int col, inout Rectangle rect);
+            static extern (C) void   wxGrid_CellToRect(IntPtr self, int row, int col, ref Rectangle rect);
             static extern (C) int    wxGrid_GetGridCursorRow(IntPtr self);
             static extern (C) int    wxGrid_GetGridCursorCol(IntPtr self);
             static extern (C) bool   wxGrid_IsVisible(IntPtr self, int row, int col, bool wholeCellVisible);
@@ -1137,11 +1137,11 @@ public import wx.ScrolledWindow;
             static extern (C) IntPtr wxGrid_GetCellTextColour(IntPtr self, int row, int col);
             static extern (C) IntPtr wxGrid_GetDefaultCellFont(IntPtr self);
             static extern (C) IntPtr wxGrid_GetCellFont(IntPtr self, int row, int col);
-            static extern (C) void   wxGrid_GetDefaultCellAlignment(IntPtr self, inout int horiz, inout int vert);
-            static extern (C) void   wxGrid_GetCellAlignment(IntPtr self, int row, int col, inout int horiz, inout int vert);
+            static extern (C) void   wxGrid_GetDefaultCellAlignment(IntPtr self, ref int horiz, ref int vert);
+            static extern (C) void   wxGrid_GetCellAlignment(IntPtr self, int row, int col, ref int horiz, ref int vert);
             static extern (C) bool   wxGrid_GetDefaultCellOverflow(IntPtr self);
             static extern (C) bool   wxGrid_GetCellOverflow(IntPtr self, int row, int col);
-            static extern (C) void   wxGrid_GetCellSize(IntPtr self, int row, int col, inout int num_rows, inout int num_cols);
+            static extern (C) void   wxGrid_GetCellSize(IntPtr self, int row, int col, ref int num_rows, ref int num_cols);
             static extern (C) void   wxGrid_SetDefaultRowSize(IntPtr self, int height, bool resizeExistingRows);
             static extern (C) void   wxGrid_SetRowSize(IntPtr self, int row, int height);
             static extern (C) void   wxGrid_SetDefaultColSize(IntPtr self, int width, bool resizeExistingCols);
@@ -1193,7 +1193,7 @@ public import wx.ScrolledWindow;
             //static extern (C) IntPtr wxGrid_GetSelectionBlockBottomRight(IntPtr self);
             //static extern (C) IntPtr wxGrid_GetSelectedRows(IntPtr self);
             //static extern (C) IntPtr wxGrid_GetSelectedCols(IntPtr self);
-            static extern (C) void   wxGrid_BlockToDeviceRect(IntPtr self, IntPtr topLeft, IntPtr bottomRight, inout Rectangle rect);
+            static extern (C) void   wxGrid_BlockToDeviceRect(IntPtr self, IntPtr topLeft, IntPtr bottomRight, ref Rectangle rect);
             static extern (C) IntPtr wxGrid_GetSelectionBackground(IntPtr self);
             static extern (C) IntPtr wxGrid_GetSelectionForeground(IntPtr self);
             static extern (C) void   wxGrid_SetSelectionBackground(IntPtr self, IntPtr c);
@@ -1846,14 +1846,14 @@ public import wx.ScrolledWindow;
     
             //-----------------------------------------------------------------------------
     
-            public void GetDefaultCellAlignment(inout int horiz, inout int vert)
+            public void GetDefaultCellAlignment(ref int horiz, ref int vert)
             {
             wxGrid_GetDefaultCellAlignment(wxobj, horiz, vert);
             }
     
             //-----------------------------------------------------------------------------
     
-            public void GetCellAlignment(int row, int col, inout int horiz, inout int vert)
+            public void GetCellAlignment(int row, int col, ref int horiz, ref int vert)
             {
             wxGrid_GetCellAlignment(wxobj, row, col, horiz, vert);
             }
@@ -1870,7 +1870,7 @@ public import wx.ScrolledWindow;
     
             //-----------------------------------------------------------------------------
     
-            public void GetCellSize(int row, int col, inout int num_rows, inout int num_cols)
+            public void GetCellSize(int row, int col, ref int num_rows, ref int num_cols)
             {
             wxGrid_GetCellSize(wxobj, row, col, num_rows, num_cols);
             }
@@ -2540,8 +2540,8 @@ version(NOT_IMPLEMENTED){
         static extern (C) IntPtr wxGridCellAttr_GetTextColour(IntPtr self);
         static extern (C) IntPtr wxGridCellAttr_GetBackgroundColour(IntPtr self);
         static extern (C) IntPtr wxGridCellAttr_GetFont(IntPtr self);
-        static extern (C) void   wxGridCellAttr_GetAlignment(IntPtr self, inout int hAlign, inout int vAlign);
-        static extern (C) void   wxGridCellAttr_GetSize(IntPtr self, inout int num_rows, inout int num_cols);
+        static extern (C) void   wxGridCellAttr_GetAlignment(IntPtr self, ref int hAlign, ref int vAlign);
+        static extern (C) void   wxGridCellAttr_GetSize(IntPtr self, ref int num_rows, ref int num_cols);
         static extern (C) bool   wxGridCellAttr_GetOverflow(IntPtr self);
         static extern (C) IntPtr wxGridCellAttr_GetRenderer(IntPtr self, IntPtr grid, int row, int col);
         static extern (C) IntPtr wxGridCellAttr_GetEditor(IntPtr self, IntPtr grid, int row, int col);
@@ -2636,7 +2636,7 @@ version(NOT_IMPLEMENTED){
             wxGridCellAttr_SetAlignment(wxobj, hAlign, vAlign);
         }
         
-        public void GetAlignment(inout int hAlign, inout int vAlign)
+        public void GetAlignment(ref int hAlign, ref int vAlign)
         {
             wxGridCellAttr_GetAlignment(wxobj, hAlign, vAlign);
         }
@@ -2646,7 +2646,7 @@ version(NOT_IMPLEMENTED){
             wxGridCellAttr_SetSize(wxobj, num_rows, num_cols);
         }
         
-        public void GetSize(inout int num_rows, inout int num_cols)
+        public void GetSize(ref int num_rows, ref int num_cols)
         {
             wxGridCellAttr_GetSize(wxobj, num_rows, num_cols);
         }
@@ -2709,7 +2709,7 @@ version(NOT_IMPLEMENTED){
         static extern (C) IntPtr wxGridSizeEvent_ctor();
         static extern (C) IntPtr wxGridSizeEvent_ctorParam(int id, int type, IntPtr obj, int rowOrCol, int x, int y, bool control, bool shift, bool alt, bool meta);
         static extern (C) int    wxGridSizeEvent_GetRowOrCol(IntPtr self);
-        static extern (C) void   wxGridSizeEvent_GetPosition(IntPtr self, inout Point pt);
+        static extern (C) void   wxGridSizeEvent_GetPosition(IntPtr self, ref Point pt);
         static extern (C) bool   wxGridSizeEvent_ControlDown(IntPtr self);
         static extern (C) bool   wxGridSizeEvent_MetaDown(IntPtr self);
         static extern (C) bool   wxGridSizeEvent_ShiftDown(IntPtr self);
@@ -2868,7 +2868,7 @@ version(NOT_IMPLEMENTED){
         static extern (C) IntPtr wxGridCellStringRenderer_ctor();
 	static extern (C) void wxGridCellStringRenderer_dtor(IntPtr self);
 	static extern (C) void wxGridCellStringRenderer_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
-        static extern (C) void wxGridCellStringRenderer_Draw(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, inout Rectangle rect, int row, int col, bool isSelected);
+        static extern (C) void wxGridCellStringRenderer_Draw(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, ref Rectangle rect, int row, int col, bool isSelected);
         static extern (C) void wxGridCellStringRenderer_GetBestSize(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, int row, int col, out Size size);
         static extern (C) IntPtr wxGridCellStringRenderer_Clone(IntPtr self);
         //! \endcond
@@ -2922,7 +2922,7 @@ version(NOT_IMPLEMENTED){
     
         static extern (C) IntPtr wxGridCellNumberRenderer_ctor();
 	static extern (C) void wxGridCellNumberRenderer_dtor(IntPtr self);
-        static extern (C) void wxGridCellNumberRenderer_Draw(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, inout Rectangle rect, int row, int col, bool isSelected);
+        static extern (C) void wxGridCellNumberRenderer_Draw(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, ref Rectangle rect, int row, int col, bool isSelected);
         static extern (C) void wxGridCellNumberRenderer_GetBestSize(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, int row, int col, out Size size);
         static extern (C) IntPtr wxGridCellNumberRenderer_Clone(IntPtr self);
 	
@@ -2971,7 +2971,7 @@ version(NOT_IMPLEMENTED){
         //! \cond EXTERN
         static extern (C) IntPtr wxGridCellFloatRenderer_ctor(int width, int precision);
 	static extern (C) void wxGridCellFloatRenderer_dtor(IntPtr self);
-        static extern (C) void wxGridCellFloatRenderer_Draw(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, inout Rectangle rect, int row, int col, bool isSelected);
+        static extern (C) void wxGridCellFloatRenderer_Draw(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, ref Rectangle rect, int row, int col, bool isSelected);
         static extern (C) void wxGridCellFloatRenderer_GetBestSize(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, int row, int col, out Size size);
         static extern (C) IntPtr wxGridCellFloatRenderer_Clone(IntPtr self);
         static extern (C) int wxGridCellFloatRenderer_GetWidth(IntPtr self);
@@ -3044,7 +3044,7 @@ version(NOT_IMPLEMENTED){
         static extern (C) IntPtr wxGridCellBoolRenderer_ctor();
 	static extern (C) void wxGridCellBoolRenderer_dtor(IntPtr self);
 	static extern (C) void wxGridCellBoolRenderer_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
-        static extern (C) void wxGridCellBoolRenderer_Draw(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, inout Rectangle rect, int row, int col, bool isSelected);
+        static extern (C) void wxGridCellBoolRenderer_Draw(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, ref Rectangle rect, int row, int col, bool isSelected);
         static extern (C) void wxGridCellBoolRenderer_GetBestSize(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, int row, int col, out Size size);
         static extern (C) IntPtr wxGridCellBoolRenderer_Clone(IntPtr self);
         //! \endcond

@@ -19,7 +19,7 @@ public import wx.Control;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxStaticText_ctor();
-		static extern (C) bool   wxStaticText_Create(IntPtr self, IntPtr parent, int id, string label, inout Point pos, inout Size size, uint style, string name);
+		static extern (C) bool   wxStaticText_Create(IntPtr self, IntPtr parent, int id, string label, ref Point pos, ref Size size, uint style, string name);
 		static extern (C) void   wxStaticText_Wrap(IntPtr self, int width);
 		//! \endcond
 
@@ -57,7 +57,7 @@ public import wx.Control;
 		
 		//---------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, string label, inout Point pos, inout Size size, int style, string name)
+		public bool Create(Window parent, int id, string label, ref Point pos, ref Size size, int style, string name)
 		{
 			return wxStaticText_Create(wxobj, wxObject.SafePtr(parent), id, label, pos, size, cast(uint)style, name);
 		}

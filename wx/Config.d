@@ -45,10 +45,10 @@ public import wx.wxString;
         static extern (C) void   wxConfigBase_DontCreateOnDemand();
         static extern (C) void   wxConfigBase_SetPath(IntPtr self, string strPath);
         static extern (C) IntPtr wxConfigBase_GetPath(IntPtr self);
-        static extern (C) bool   wxConfigBase_GetFirstGroup(IntPtr self, IntPtr str, inout int lIndex);
-        static extern (C) bool   wxConfigBase_GetNextGroup(IntPtr self, IntPtr str, inout int lIndex);
-        static extern (C) bool   wxConfigBase_GetFirstEntry(IntPtr self, IntPtr str, inout int lIndex);
-        static extern (C) bool   wxConfigBase_GetNextEntry(IntPtr self, IntPtr str, inout int lIndex);
+        static extern (C) bool   wxConfigBase_GetFirstGroup(IntPtr self, IntPtr str, ref int lIndex);
+        static extern (C) bool   wxConfigBase_GetNextGroup(IntPtr self, IntPtr str, ref int lIndex);
+        static extern (C) bool   wxConfigBase_GetFirstEntry(IntPtr self, IntPtr str, ref int lIndex);
+        static extern (C) bool   wxConfigBase_GetNextEntry(IntPtr self, IntPtr str, ref int lIndex);
         static extern (C) int    wxConfigBase_GetNumberOfEntries(IntPtr self, bool bRecursive);
         static extern (C) int    wxConfigBase_GetNumberOfGroups(IntPtr self, bool bRecursive);
         static extern (C) bool   wxConfigBase_HasGroup(IntPtr self, string strName);
@@ -57,12 +57,12 @@ public import wx.wxString;
         static extern (C) int    wxConfigBase_GetEntryType(IntPtr self, string name);
         static extern (C) bool   wxConfigBase_ReadStr(IntPtr self, string key, IntPtr pStr);
         static extern (C) bool   wxConfigBase_ReadStrDef(IntPtr self, string key, IntPtr pStr, string defVal);
-        static extern (C) bool   wxConfigBase_ReadInt(IntPtr self, string key, inout int pl);
-        static extern (C) bool   wxConfigBase_ReadIntDef(IntPtr self, string key, inout int pl, int defVal);
-        static extern (C) bool   wxConfigBase_ReadDbl(IntPtr self, string key, inout double val);
-        static extern (C) bool   wxConfigBase_ReadDblDef(IntPtr self, string key, inout double val, double defVal);
-        static extern (C) bool   wxConfigBase_ReadBool(IntPtr self, string key, inout bool val);
-        static extern (C) bool   wxConfigBase_ReadBoolDef(IntPtr self, string key, inout bool val, bool defVal);
+        static extern (C) bool   wxConfigBase_ReadInt(IntPtr self, string key, ref int pl);
+        static extern (C) bool   wxConfigBase_ReadIntDef(IntPtr self, string key, ref int pl, int defVal);
+        static extern (C) bool   wxConfigBase_ReadDbl(IntPtr self, string key, ref double val);
+        static extern (C) bool   wxConfigBase_ReadDblDef(IntPtr self, string key, ref double val, double defVal);
+        static extern (C) bool   wxConfigBase_ReadBool(IntPtr self, string key, ref bool val);
+        static extern (C) bool   wxConfigBase_ReadBoolDef(IntPtr self, string key, ref bool val, bool defVal);
         static extern (C) IntPtr wxConfigBase_ReadStrRet(IntPtr self, string key, string defVal);
         static extern (C) int    wxConfigBase_ReadIntRet(IntPtr self, string key, int defVal);
         static extern (C) bool   wxConfigBase_WriteStr(IntPtr self, string key, string val);
@@ -134,7 +134,7 @@ public import wx.wxString;
 
 		//---------------------------------------------------------------------
 
-        public bool GetFirstGroup(inout string str, inout int lIndex)
+        public bool GetFirstGroup(ref string str, ref int lIndex)
         {
             bool ret;
             wxString wstr = new wxString(str);
@@ -145,7 +145,7 @@ public import wx.wxString;
             return ret;
         }
 
-        public bool GetNextGroup(inout string str, inout int lIndex)
+        public bool GetNextGroup(ref string str, ref int lIndex)
         {
             bool ret;
             wxString wstr = new wxString(str);
@@ -158,7 +158,7 @@ public import wx.wxString;
 
 		//---------------------------------------------------------------------
 
-        public bool GetFirstEntry(inout string str, inout int lIndex)
+        public bool GetFirstEntry(ref string str, ref int lIndex)
         {
             bool ret;
             wxString wstr = new wxString(str);
@@ -169,7 +169,7 @@ public import wx.wxString;
             return ret;
         }
 
-        public bool GetNextEntry(inout string str, inout int lIndex)
+        public bool GetNextEntry(ref string str, ref int lIndex)
         {
             bool ret;
             wxString wstr = new wxString(str);
@@ -218,7 +218,7 @@ public import wx.wxString;
 
 		//---------------------------------------------------------------------
 
-        public bool Read(string key, inout string str)
+        public bool Read(string key, ref string str)
         {
             bool ret;
             wxString wstr = new wxString(str);
@@ -229,7 +229,7 @@ public import wx.wxString;
             return ret;
         }
 
-        public bool Read(string key, inout string str, string defVal)
+        public bool Read(string key, ref string str, string defVal)
         {
             bool ret;
             wxString wstr = new wxString(str);
@@ -242,48 +242,48 @@ public import wx.wxString;
 
 		//---------------------------------------------------------------------
 
-        public bool Read(string key, inout int pl)
+        public bool Read(string key, ref int pl)
         {
             return wxConfigBase_ReadInt(wxobj, key, pl);
         }
 
-        public bool Read(string key, inout int pl, int defVal)
+        public bool Read(string key, ref int pl, int defVal)
         {
             return wxConfigBase_ReadIntDef(wxobj, key, pl, defVal);
         }
 
 		//---------------------------------------------------------------------
 
-        public bool Read(string key, inout double val)
+        public bool Read(string key, ref double val)
         {
             return wxConfigBase_ReadDbl(wxobj, key, val);
         }
 
-        public bool Read(string key, inout double val, double defVal)
+        public bool Read(string key, ref double val, double defVal)
         {
             return wxConfigBase_ReadDblDef(wxobj, key, val, defVal);
         }
 
 		//---------------------------------------------------------------------
 
-        public bool Read(string key, inout bool val)
+        public bool Read(string key, ref bool val)
         {
             return wxConfigBase_ReadBool(wxobj, key, val);
         }
 
-        public bool Read(string key, inout bool val, bool defVal)
+        public bool Read(string key, ref bool val, bool defVal)
         {
             return wxConfigBase_ReadBoolDef(wxobj, key, val, defVal);
         }
 
 		//---------------------------------------------------------------------
 
-        public bool Read(string key, inout Font val)
+        public bool Read(string key, ref Font val)
         {
             return Read(key, val, Font.wxNORMAL_FONT);
         }
 
-        public bool Read(string key, inout Font val, Font defVal)
+        public bool Read(string key, ref Font val, Font defVal)
         {
             bool ret = true;
 
@@ -312,7 +312,7 @@ public import wx.wxString;
 
 		//---------------------------------------------------------------------
 
-        public bool Read(string key, inout Colour val)
+        public bool Read(string key, ref Colour val)
         {
             Colour def = new Colour(0, 0, 0);
             return Read(key, val, def);
@@ -332,7 +332,7 @@ public import wx.wxString;
 		return value;
 	}
 
-        public bool Read(string key, inout Colour val, Colour defVal)
+        public bool Read(string key, ref Colour val, Colour defVal)
         {
             string str;
             bool ret = Read(key,str);

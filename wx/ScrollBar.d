@@ -19,7 +19,7 @@ public import wx.Control;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxScrollBar_ctor();
-		static extern (C) bool   wxScrollBar_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, IntPtr validator, string name);
+		static extern (C) bool   wxScrollBar_Create(IntPtr self, IntPtr parent, int id, ref Point pos, ref Size size, uint style, IntPtr validator, string name);
 		static extern (C) int    wxScrollBar_GetThumbPosition(IntPtr self);
 		static extern (C) int    wxScrollBar_GetThumbSize(IntPtr self);
 		static extern (C) int    wxScrollBar_GetPageSize(IntPtr self);

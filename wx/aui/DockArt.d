@@ -27,12 +27,12 @@ extern (C) alias IntPtr function(DockArt obj, int id) Virtual_GetColour;
 extern (C) alias void function(DockArt obj, int id, IntPtr colour) Virtual_SetColour;
 extern (C) alias IntPtr function(DockArt obj, int id) Virtual_GetColor;
 extern (C) alias void function(DockArt obj, int id, IntPtr color) Virtual_SetColor;
-extern (C) alias void function(DockArt obj, IntPtr dc, int orientation, inout Rectangle rect) Virtual_DrawSash;
-extern (C) alias void function(DockArt obj, IntPtr dc, int orientation, inout Rectangle rect) Virtual_DrawBackground;
-extern (C) alias void function(DockArt obj, IntPtr dc, string text, inout Rectangle rect, IntPtr pane) Virtual_DrawCaption;
-extern (C) alias void function(DockArt obj, IntPtr dc, inout Rectangle rect, IntPtr pane) Virtual_DrawGripper;
-extern (C) alias void function(DockArt obj, IntPtr dc, inout Rectangle rect, IntPtr pane) Virtual_DrawBorder;
-extern (C) alias void function(DockArt obj, IntPtr dc, int button, int button_state, inout Rectangle rect, IntPtr pane) Virtual_DrawPaneButton;
+extern (C) alias void function(DockArt obj, IntPtr dc, int orientation, ref Rectangle rect) Virtual_DrawSash;
+extern (C) alias void function(DockArt obj, IntPtr dc, int orientation, ref Rectangle rect) Virtual_DrawBackground;
+extern (C) alias void function(DockArt obj, IntPtr dc, string text, ref Rectangle rect, IntPtr pane) Virtual_DrawCaption;
+extern (C) alias void function(DockArt obj, IntPtr dc, ref Rectangle rect, IntPtr pane) Virtual_DrawGripper;
+extern (C) alias void function(DockArt obj, IntPtr dc, ref Rectangle rect, IntPtr pane) Virtual_DrawBorder;
+extern (C) alias void function(DockArt obj, IntPtr dc, int button, int button_state, ref Rectangle rect, IntPtr pane) Virtual_DrawPaneButton;
 
 //-----------------------------------------------------------------------------
 
@@ -63,12 +63,12 @@ static extern (C) IntPtr wxDockArt_GetColour(IntPtr self, int id);
 static extern (C) void wxDockArt_SetColour(IntPtr self, int id, IntPtr colour);
 static extern (C) IntPtr wxDockArt_GetColor(IntPtr self, int id);
 static extern (C) void wxDockArt_SetColor(IntPtr self, int id, IntPtr color);
-static extern (C) void wxDockArt_DrawSash(IntPtr self, IntPtr dc, int orientation, inout Rectangle rect);
-static extern (C) void wxDockArt_DrawBackground(IntPtr self, IntPtr dc, int orientation, inout Rectangle rect);
-static extern (C) void wxDockArt_DrawCaption(IntPtr self, IntPtr dc, string text, inout Rectangle rect, IntPtr pane);
-static extern (C) void wxDockArt_DrawGripper(IntPtr self, IntPtr dc, inout Rectangle rect, IntPtr pane);
-static extern (C) void wxDockArt_DrawBorder(IntPtr self, IntPtr dc, inout Rectangle rect, IntPtr pane);
-static extern (C) void wxDockArt_DrawPaneButton(IntPtr self, IntPtr dc, int button, int button_state, inout Rectangle rect, IntPtr pane);
+static extern (C) void wxDockArt_DrawSash(IntPtr self, IntPtr dc, int orientation, ref Rectangle rect);
+static extern (C) void wxDockArt_DrawBackground(IntPtr self, IntPtr dc, int orientation, ref Rectangle rect);
+static extern (C) void wxDockArt_DrawCaption(IntPtr self, IntPtr dc, string text, ref Rectangle rect, IntPtr pane);
+static extern (C) void wxDockArt_DrawGripper(IntPtr self, IntPtr dc, ref Rectangle rect, IntPtr pane);
+static extern (C) void wxDockArt_DrawBorder(IntPtr self, IntPtr dc, ref Rectangle rect, IntPtr pane);
+static extern (C) void wxDockArt_DrawPaneButton(IntPtr self, IntPtr dc, int button, int button_state, ref Rectangle rect, IntPtr pane);
 //! \endcond
 
 //-----------------------------------------------------------------------------
@@ -130,19 +130,19 @@ public class DockArt : wxObject
       Colour c = (o)? cast(Colour)o : new Colour(color);
       obj.SetColor(id, c);
     }
-    extern (C) protected static void staticDrawSash(DockArt obj, IntPtr dc, int orientation, inout Rectangle rect)
+    extern (C) protected static void staticDrawSash(DockArt obj, IntPtr dc, int orientation, ref Rectangle rect)
     {
       wxObject o = FindObject(dc);
       DC d = (o)? cast(DC)o : new DC(dc);
       obj.DrawSash(d, orientation, rect);
     }
-    extern (C) protected static void staticDrawBackground(DockArt obj, IntPtr dc, int orientation, inout Rectangle rect)
+    extern (C) protected static void staticDrawBackground(DockArt obj, IntPtr dc, int orientation, ref Rectangle rect)
     {
       wxObject o = FindObject(dc);
       DC d = (o)? cast(DC)o : new DC(dc);
       obj.DrawBackground(d, orientation, rect);
     }
-    extern (C) protected static void staticDrawCaption(DockArt obj, IntPtr dc, string text, inout Rectangle rect, IntPtr pane)
+    extern (C) protected static void staticDrawCaption(DockArt obj, IntPtr dc, string text, ref Rectangle rect, IntPtr pane)
     {
       wxObject o = FindObject(dc);
       DC d = (o)? cast(DC)o : new DC(dc);
@@ -150,7 +150,7 @@ public class DockArt : wxObject
       PaneInfo p = (o)? cast(PaneInfo)o : new PaneInfo(pane);
       obj.DrawCaption(d, text, rect, p);
     }
-    extern (C) protected static void staticDrawGripper(DockArt obj, IntPtr dc, inout Rectangle rect, IntPtr pane)
+    extern (C) protected static void staticDrawGripper(DockArt obj, IntPtr dc, ref Rectangle rect, IntPtr pane)
     {
       wxObject o = FindObject(dc);
       DC d = (o)? cast(DC)o : new DC(dc);
@@ -158,7 +158,7 @@ public class DockArt : wxObject
       PaneInfo p = (o)? cast(PaneInfo)o : new PaneInfo(pane);
       obj.DrawGripper(d, rect, p);
     }
-    extern (C) protected static void staticDrawBorder(DockArt obj, IntPtr dc, inout Rectangle rect, IntPtr pane)
+    extern (C) protected static void staticDrawBorder(DockArt obj, IntPtr dc, ref Rectangle rect, IntPtr pane)
     {
       wxObject o = FindObject(dc);
       DC d = (o)? cast(DC)o : new DC(dc);
@@ -166,7 +166,7 @@ public class DockArt : wxObject
       PaneInfo p = (o)? cast(PaneInfo)o : new PaneInfo(pane);
       obj.DrawBorder(d, rect, p);
     }
-    extern (C) protected static void staticDrawPaneButton(DockArt obj, IntPtr dc, int button, int button_state, inout Rectangle rect, IntPtr pane)
+    extern (C) protected static void staticDrawPaneButton(DockArt obj, IntPtr dc, int button, int button_state, ref Rectangle rect, IntPtr pane)
     {
       wxObject o = FindObject(dc);
       DC d = (o)? cast(DC)o : new DC(dc);

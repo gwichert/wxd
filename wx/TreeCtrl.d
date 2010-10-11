@@ -263,7 +263,7 @@ else // D_Version1
 		static extern (C) void   wxTreeCtrl_AssignImageList(IntPtr self, IntPtr imageList);
 		static extern (C) void   wxTreeCtrl_AssignStateImageList(IntPtr self, IntPtr imageList);
 		//static extern (C) void   wxTreeCtrl_AssignButtonsImageList(IntPtr self, IntPtr imageList);
-		static extern (C) bool   wxTreeCtrl_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, IntPtr val, string name);
+		static extern (C) bool   wxTreeCtrl_Create(IntPtr self, IntPtr parent, int id, ref Point pos, ref Size size, uint style, IntPtr val, string name);
 		static extern (C) IntPtr wxTreeCtrl_GetImageList(IntPtr self);
 		static extern (C) IntPtr wxTreeCtrl_GetStateImageList(IntPtr self);
 		//static extern (C) IntPtr wxTreeCtrl_GetButtonsImageList(IntPtr self);
@@ -287,7 +287,7 @@ else // D_Version1
 		static extern (C) IntPtr wxTreeCtrl_GetItemText(IntPtr self, IntPtr item);
 		static extern (C) void   wxTreeCtrl_SetItemText(IntPtr self, IntPtr item, string text);
 
-		static extern (C) IntPtr wxTreeCtrl_HitTest(IntPtr self, inout Point pt, inout int flags);
+		static extern (C) IntPtr wxTreeCtrl_HitTest(IntPtr self, ref Point pt, ref int flags);
 
 		static extern (C) void   wxTreeCtrl_SetItemData(IntPtr self, IntPtr item, IntPtr data);
 		static extern (C) IntPtr wxTreeCtrl_GetItemData(IntPtr self, IntPtr item);
@@ -342,7 +342,7 @@ else // D_Version1
 		
 		static extern (C) void   wxTreeCtrl_EditLabel(IntPtr self, IntPtr item);
 		
-		static extern (C) bool   wxTreeCtrl_GetBoundingRect(IntPtr self, IntPtr item, inout Rectangle rect, bool textOnly);
+		static extern (C) bool   wxTreeCtrl_GetBoundingRect(IntPtr self, IntPtr item, ref Rectangle rect, bool textOnly);
 		
 		static extern (C) IntPtr wxTreeCtrl_InsertItem(IntPtr self, IntPtr parent, IntPtr idPrevious, string text, int image, int selectedImage, IntPtr data);
 		static extern (C) IntPtr wxTreeCtrl_InsertItem2(IntPtr self, IntPtr parent, int before, string text, int image, int selectedImage, IntPtr data);
@@ -448,7 +448,7 @@ else // D_Version1
 		
 		//---------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, inout Point pos, inout Size size, int style, Validator val, string name)
+		public bool Create(Window parent, int id, ref Point pos, ref Size size, int style, Validator val, string name)
 		{
 			return wxTreeCtrl_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, cast(uint)style, wxObject.SafePtr(val), name);
 		}
@@ -668,7 +668,7 @@ else // D_Version1
 
 		//---------------------------------------------------------------------
         
-		public TreeItemId GetFirstChild(TreeItemId item, inout IntPtr cookie)
+		public TreeItemId GetFirstChild(TreeItemId item, ref IntPtr cookie)
 		{
 			TreeItemId id = new TreeItemId(wxTreeCtrl_GetFirstChild(wxobj, wxObject.SafePtr(item)), true);
 			
@@ -677,7 +677,7 @@ else // D_Version1
 			return id;
 		}
 
-		public TreeItemId GetNextChild(TreeItemId item, inout IntPtr cookie)
+		public TreeItemId GetNextChild(TreeItemId item, ref IntPtr cookie)
 		{
 			wxTreeCtrl_SetMyCookie(wxobj, cookie);
 			
@@ -987,12 +987,12 @@ else // D_Version1
 		
 		//---------------------------------------------------------------------
 		
-		public bool GetBoundingRect(TreeItemId item, inout Rectangle rect)
+		public bool GetBoundingRect(TreeItemId item, ref Rectangle rect)
 		{
 			return GetBoundingRect(item, rect, false);
 		}
 		
-		public bool GetBoundingRect(TreeItemId item, inout Rectangle rect, bool textOnly)
+		public bool GetBoundingRect(TreeItemId item, ref Rectangle rect, bool textOnly)
 		{
 			return wxTreeCtrl_GetBoundingRect(wxobj, wxObject.SafePtr(item), rect, textOnly);
 		}
@@ -1163,8 +1163,8 @@ else // D_Version1
 		static extern (C) void   wxTreeEvent_SetItem(IntPtr self, IntPtr item);
 		static extern (C) IntPtr wxTreeEvent_GetOldItem(IntPtr self);
 		static extern (C) void   wxTreeEvent_SetOldItem(IntPtr self, IntPtr item);
-		static extern (C) void   wxTreeEvent_GetPoint(IntPtr self, inout Point pt);
-		static extern (C) void   wxTreeEvent_SetPoint(IntPtr self, inout Point pt);
+		static extern (C) void   wxTreeEvent_GetPoint(IntPtr self, ref Point pt);
+		static extern (C) void   wxTreeEvent_SetPoint(IntPtr self, ref Point pt);
 		static extern (C) IntPtr wxTreeEvent_GetKeyEvent(IntPtr self);
 		static extern (C) int    wxTreeEvent_GetKeyCode(IntPtr self);
 		static extern (C) void   wxTreeEvent_SetKeyEvent(IntPtr self, IntPtr evt);

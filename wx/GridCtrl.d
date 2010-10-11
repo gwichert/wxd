@@ -20,7 +20,7 @@ public import wx.Grid;
 		//! \cond EXTERN
 		static extern (C) IntPtr wxGridCellDateTimeRenderer_ctor(string outformat, string informat);
 		static extern (C) void wxGridCellDateTimeRenderer_dtor(IntPtr self);
-		static extern (C) void wxGridCellDateTimeRenderer_Draw(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, inout Rectangle rect, int row, int col, bool isSelected);
+		static extern (C) void wxGridCellDateTimeRenderer_Draw(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, ref Rectangle rect, int row, int col, bool isSelected);
 		static extern (C) void wxGridCellDateTimeRenderer_GetBestSize(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, int row, int col, out Size size);
 		static extern (C) IntPtr wxGridCellDateTimeRenderer_Clone(IntPtr self);
 		static extern (C) void wxGridCellDateTimeRenderer_SetParameters(IntPtr self, string parameter);
@@ -82,7 +82,7 @@ public import wx.Grid;
 		//! \cond EXTERN
 		static extern (C) IntPtr wxGridCellEnumRenderer_ctor(int n, string* choices);
 		static extern (C) void wxGridCellEnumRenderer_dtor(IntPtr self);
-		static extern (C) void wxGridCellEnumRenderer_Draw(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, inout Rectangle rect, int row, int col, bool isSelected);
+		static extern (C) void wxGridCellEnumRenderer_Draw(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, ref Rectangle rect, int row, int col, bool isSelected);
 		static extern (C) void wxGridCellEnumRenderer_GetBestSize(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, int row, int col, out Size size);
 		static extern (C) IntPtr wxGridCellEnumRenderer_Clone(IntPtr self);
 		static extern (C) void wxGridCellEnumRenderer_SetParameters(IntPtr self, string parameter);
@@ -240,7 +240,7 @@ public import wx.Grid;
 		static extern (C) IntPtr wxGridCellAutoWrapStringRenderer_ctor();
 		static extern (C) void wxGridCellAutoWrapStringRenderer_dtor(IntPtr self);
 		static extern (C) void   wxGridCellAutoWrapStringRenderer_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
-		static extern (C) void wxGridCellAutoWrapStringRenderer_Draw(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, inout Rectangle rect, int row, int col, bool isSelected);
+		static extern (C) void wxGridCellAutoWrapStringRenderer_Draw(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, ref Rectangle rect, int row, int col, bool isSelected);
 		static extern (C) void wxGridCellAutoWrapStringRenderer_GetBestSize(IntPtr self, IntPtr grid, IntPtr attr, IntPtr dc, int row, int col, out Size size);
 		static extern (C) IntPtr wxGridCellAutoWrapStringRenderer_Clone(IntPtr self);
 		//! \endcond

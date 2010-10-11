@@ -19,7 +19,7 @@ public import wx.Control;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxSpinCtrl_ctor();
-		static extern (C) bool   wxSpinCtrl_Create(IntPtr self, IntPtr parent, int id, string value, inout Point pos, inout Size size, uint style, int min, int max, int initial, string name);
+		static extern (C) bool   wxSpinCtrl_Create(IntPtr self, IntPtr parent, int id, string value, ref Point pos, ref Size size, uint style, int min, int max, int initial, string name);
 		static extern (C) int    wxSpinCtrl_GetValue(IntPtr self);
 		static extern (C) int    wxSpinCtrl_GetMin(IntPtr self);
 		static extern (C) int    wxSpinCtrl_GetMax(IntPtr self);

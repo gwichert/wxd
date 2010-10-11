@@ -47,7 +47,7 @@ public import wx.DC;
 		
 		//static extern (C) IntPtr wxImageList_GetBitmap(IntPtr self, int index);
 		
-		static extern (C) bool   wxImageList_GetSize(IntPtr self, int index, inout int width, inout int height);
+		static extern (C) bool   wxImageList_GetSize(IntPtr self, int index, ref int width, ref int height);
 		//! \endcond
 
 		//---------------------------------------------------------------------
@@ -162,7 +162,7 @@ public import wx.DC;
 		
 		//---------------------------------------------------------------------
 		
-		public bool GetSize(int index, inout int width, inout int height)
+		public bool GetSize(int index, ref int width, ref int height)
 		{
 			return wxImageList_GetSize(wxobj, index, width, height);
 		}

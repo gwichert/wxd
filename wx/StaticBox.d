@@ -18,7 +18,7 @@ public import wx.Control;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxStaticBox_ctor();
-		static extern (C) bool wxStaticBox_Create(IntPtr self, IntPtr parent, int id, string label, inout Point pos, inout Size size, uint style, string name);
+		static extern (C) bool wxStaticBox_Create(IntPtr self, IntPtr parent, int id, string label, ref Point pos, ref Size size, uint style, string name);
 		//! \endcond
 	
 		//---------------------------------------------------------------------
@@ -53,7 +53,7 @@ public import wx.Control;
 
 		//---------------------------------------------------------------------
 
-		public bool Create(Window window, int id, string label, inout Point pos, inout Size size, int style, string name)
+		public bool Create(Window window, int id, string label, ref Point pos, ref Size size, int style, string name)
 		{
 			return wxStaticBox_Create(wxobj, wxObject.SafePtr(window), 
 					id, label, pos, size, 

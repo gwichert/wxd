@@ -19,7 +19,7 @@ public import wx.Frame;
 
 		//! \cond EXTERN
         static extern (C) IntPtr wxMiniFrame_ctor();
-        static extern (C) bool   wxMiniFrame_Create(IntPtr self, IntPtr parent, int id, string title, inout Point pos, inout Size size, uint style, string name);
+        static extern (C) bool   wxMiniFrame_Create(IntPtr self, IntPtr parent, int id, string title, ref Point pos, ref Size size, uint style, string name);
 		//! \endcond
 
         //-----------------------------------------------------------------------------
@@ -52,7 +52,7 @@ public import wx.Frame;
 	
 	//-----------------------------------------------------------------------------
 
-        public override bool Create(Window parent, int id, string title, inout Point pos, inout Size size, int style, string name)
+        public override bool Create(Window parent, int id, string title, ref Point pos, ref Size size, int style, string name)
         {
             return wxMiniFrame_Create(wxobj, wxObject.SafePtr(parent), id, title, pos, size, style, name);
         }

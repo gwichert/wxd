@@ -57,7 +57,7 @@ public import wx.MouseEvent;
         static extern (C) bool   wxHtmlTag_HasParam(IntPtr self, string par);
         static extern (C) IntPtr wxHtmlTag_GetParam(IntPtr self, string par, bool with_commas);
         static extern (C) bool   wxHtmlTag_GetParamAsColour(IntPtr self, string par, IntPtr clr);
-        static extern (C) bool   wxHtmlTag_GetParamAsInt(IntPtr self, string par, inout int clr);
+        static extern (C) bool   wxHtmlTag_GetParamAsInt(IntPtr self, string par, ref int clr);
         static extern (C) int    wxHtmlTag_ScanParam(IntPtr self, string par, string format, IntPtr param);
         static extern (C) IntPtr wxHtmlTag_GetAllParams(IntPtr self);
         static extern (C) bool   wxHtmlTag_IsEnding(IntPtr self);
@@ -195,9 +195,9 @@ public import wx.MouseEvent;
         static extern (C) void   wxHtmlCell_DrawInvisible(IntPtr self, IntPtr dc, int x, int y, IntPtr info);
         static extern (C) IntPtr wxHtmlCell_Find(IntPtr self, int condition, IntPtr param);
         static extern (C) void   wxHtmlCell_OnMouseClick(IntPtr self, IntPtr parent, int x, int y, IntPtr evt);
-        static extern (C) bool   wxHtmlCell_AdjustPagebreak(IntPtr self, inout int pagebreak);
+        static extern (C) bool   wxHtmlCell_AdjustPagebreak(IntPtr self, ref int pagebreak);
         static extern (C) void   wxHtmlCell_SetCanLiveOnPagebreak(IntPtr self, bool can);
-        static extern (C) void   wxHtmlCell_GetHorizontalConstraints(IntPtr self, inout int left, inout int right);
+        static extern (C) void   wxHtmlCell_GetHorizontalConstraints(IntPtr self, ref int left, ref int right);
         static extern (C) bool   wxHtmlCell_IsTerminalCell(IntPtr self);
         static extern (C) IntPtr wxHtmlCell_FindCellByPos(IntPtr self, int x, int y);
         //! \endcond
@@ -304,7 +304,7 @@ public import wx.MouseEvent;
 
         //-----------------------------------------------------------------------------
 
-        public /+virtual+/ bool AdjustPagebreak(inout int pagebreak)
+        public /+virtual+/ bool AdjustPagebreak(ref int pagebreak)
         {
             return wxHtmlCell_AdjustPagebreak(wxobj, pagebreak);
         }
@@ -382,7 +382,7 @@ public import wx.MouseEvent;
         static extern (C) void   wxHtmlContainerCell_Layout(IntPtr self, int w);
         static extern (C) void   wxHtmlContainerCell_Draw(IntPtr self, IntPtr dc, int x, int y, int view_y1, int view_y2, IntPtr info);
         static extern (C) void   wxHtmlContainerCell_DrawInvisible(IntPtr self, IntPtr dc, int x, int y, IntPtr info);
-        static extern (C) bool   wxHtmlContainerCell_AdjustPagebreak(IntPtr self, inout int pagebreak);
+        static extern (C) bool   wxHtmlContainerCell_AdjustPagebreak(IntPtr self, ref int pagebreak);
         static extern (C) void   wxHtmlContainerCell_InsertCell(IntPtr self, IntPtr cell);
         static extern (C) void   wxHtmlContainerCell_SetAlignHor(IntPtr self, int al);
         static extern (C) int    wxHtmlContainerCell_GetAlignHor(IntPtr self);
@@ -401,7 +401,7 @@ public import wx.MouseEvent;
         static extern (C) IntPtr wxHtmlContainerCell_GetLink(IntPtr self, int x, int y);
         static extern (C) IntPtr wxHtmlContainerCell_Find(IntPtr self, int condition, IntPtr param);
         static extern (C) void   wxHtmlContainerCell_OnMouseClick(IntPtr self, IntPtr parent, int x, int y, IntPtr evt);
-        static extern (C) void   wxHtmlContainerCell_GetHorizontalConstraints(IntPtr self, inout int left, inout int right);
+        static extern (C) void   wxHtmlContainerCell_GetHorizontalConstraints(IntPtr self, ref int left, ref int right);
         static extern (C) IntPtr wxHtmlContainerCell_GetFirstCell(IntPtr self);
         static extern (C) bool   wxHtmlContainerCell_IsTerminalCell(IntPtr self);
         static extern (C) IntPtr wxHtmlContainerCell_FindCellByPos(IntPtr self, int x, int y);
@@ -443,7 +443,7 @@ public import wx.MouseEvent;
 
         //-----------------------------------------------------------------------------
 
-        public override bool AdjustPagebreak(inout int pagebreak)
+        public override bool AdjustPagebreak(ref int pagebreak)
         {
             return wxHtmlContainerCell_AdjustPagebreak(wxobj, pagebreak);
         }
@@ -1311,7 +1311,7 @@ public import wx.MouseEvent;
         //! \cond EXTERN
 		static extern (C) IntPtr wxHtmlSelection_ctor();
 		static extern (C) void wxHtmlSelection_dtor(IntPtr self);
-		static extern (C) void wxHtmlSelection_Set(IntPtr self, inout Point fromPos, IntPtr fromCell, inout Point toPos, IntPtr toCell);
+		static extern (C) void wxHtmlSelection_Set(IntPtr self, ref Point fromPos, IntPtr fromCell, ref Point toPos, IntPtr toCell);
 		static extern (C) void wxHtmlSelection_Set2(IntPtr self, IntPtr fromCell, IntPtr toCell);
 		static extern (C) IntPtr wxHtmlSelection_GetFromCell(IntPtr self);
 		static extern (C) IntPtr wxHtmlSelection_GetToCell(IntPtr self);
@@ -1319,8 +1319,8 @@ public import wx.MouseEvent;
 		static extern (C) void wxHtmlSelection_GetToPos(IntPtr self, out Point toPos);
 		static extern (C) void wxHtmlSelection_GetFromPrivPos(IntPtr self, out Point fromPrivPos);
 		static extern (C) void wxHtmlSelection_GetToPrivPos(IntPtr self, out Point toPrivPos);
-		static extern (C) void wxHtmlSelection_SetFromPrivPos(IntPtr self, inout Point pos);
-		static extern (C) void wxHtmlSelection_SetToPrivPos(IntPtr self, inout Point pos);
+		static extern (C) void wxHtmlSelection_SetFromPrivPos(IntPtr self, ref Point pos);
+		static extern (C) void wxHtmlSelection_SetToPrivPos(IntPtr self, ref Point pos);
 		static extern (C) void wxHtmlSelection_ClearPrivPos(IntPtr self);
 		static extern (C) bool wxHtmlSelection_IsEmpty(IntPtr self);
         //! \endcond
@@ -1590,7 +1590,7 @@ public import wx.MouseEvent;
 			Virtual_OnCellMouseHover onCellMouseHover,
 			Virtual_OnCellClicked onCellClicked,
 			Virtual_OnOpeningURL onOpeningURL);
-		static extern (C) bool   wxHtmlWindow_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
+		static extern (C) bool   wxHtmlWindow_Create(IntPtr self, IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
 		static extern (C) bool   wxHtmlWindow_SetPage(IntPtr self, string source);
 		static extern (C) bool   wxHtmlWindow_AppendToPage(IntPtr self, string source);
 		static extern (C) bool   wxHtmlWindow_LoadPage(IntPtr self, string location);
@@ -1622,8 +1622,8 @@ public import wx.MouseEvent;
 		static extern (C) int    wxHtmlWindow_OnOpeningURL(IntPtr self, int type, string url, string redirect);
 		
 		static extern (C) void   wxHtmlWindow_SelectAll(IntPtr self);
-		static extern (C) void   wxHtmlWindow_SelectWord(IntPtr self, inout Point pos);
-		static extern (C) void   wxHtmlWindow_SelectLine(IntPtr self, inout Point pos);
+		static extern (C) void   wxHtmlWindow_SelectWord(IntPtr self, ref Point pos);
+		static extern (C) void   wxHtmlWindow_SelectLine(IntPtr self, ref Point pos);
 		
 		static extern (C) IntPtr wxHtmlWindow_ToText(IntPtr self);
 		
@@ -1673,7 +1673,7 @@ public import wx.MouseEvent;
 
 		//-----------------------------------------------------------------------------
 
-		public override bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
+		public override bool Create(Window parent, int id, ref Point pos, ref Size size, int style, string name)
 		{
 			return wxHtmlWindow_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name);
 		}

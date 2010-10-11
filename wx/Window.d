@@ -126,7 +126,7 @@ public import wx.ToolTip;
 	//---------------------------------------------------------------------
 
 		//! \cond EXTERN
-		static extern (C) IntPtr wxWindow_ctor(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
+		static extern (C) IntPtr wxWindow_ctor(IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
 		static extern (C) bool   wxWindow_Close(IntPtr self, bool force);
 		static extern (C) void   wxWindow_GetBestSize(IntPtr self, out Size size);
 		static extern (C) void   wxWindow_GetClientSize(IntPtr self, out Size size);
@@ -142,8 +142,8 @@ public import wx.ToolTip;
 		static extern (C) void   wxWindow_SetId(IntPtr self, int id);
 		static extern (C) void   wxWindow_SetSize(IntPtr self, int x, int y, int width, int height, uint flags);
 		static extern (C) void   wxWindow_SetSize2(IntPtr self, int width, int height);
-		static extern (C) void   wxWindow_SetSize3(IntPtr self, inout Size size);
-		static extern (C) void   wxWindow_SetSize4(IntPtr self, inout Rectangle rect);
+		static extern (C) void   wxWindow_SetSize3(IntPtr self, ref Size size);
+		static extern (C) void   wxWindow_SetSize4(IntPtr self, ref Rectangle rect);
 		static extern (C) void   wxWindow_SetSizer(IntPtr self, IntPtr sizer, bool deleteOld);
 		static extern (C) void   wxWindow_SetWindowStyleFlag(IntPtr self, uint style);
 		static extern (C) bool   wxWindow_Show(IntPtr self, bool show);
@@ -192,7 +192,7 @@ public import wx.ToolTip;
 		static extern (C) int    wxWindow_GetMaxHeight(IntPtr self);
 		static extern (C) void   wxWindow_GetMaxSize(IntPtr self, out Size size);
 		static extern (C) void   wxWindow_SetMaxSize(IntPtr self, Size* size);
-		static extern (C) void   wxWindow_SetVirtualSize(IntPtr self, inout Size size);
+		static extern (C) void   wxWindow_SetVirtualSize(IntPtr self, ref Size size);
 		static extern (C) void   wxWindow_GetVirtualSize(IntPtr self, out Size size);
 		static extern (C) void   wxWindow_GetBestVirtualSize(IntPtr self, out Size size);
 		static extern (C) bool   wxWindow_Hide(IntPtr self);
@@ -237,17 +237,17 @@ public import wx.ToolTip;
 		static extern (C) void   wxWindow_InitDialog(IntPtr self);
 		static extern (C) void   wxWindow_SetAcceleratorTable(IntPtr self, IntPtr accel);
 		static extern (C) IntPtr wxWindow_GetAcceleratorTable(IntPtr self);
-		static extern (C) void   wxWindow_ConvertPixelsToDialogPoint(IntPtr self, inout Point pt, out Point point);
-		static extern (C) void   wxWindow_ConvertDialogToPixelsPoint(IntPtr self, inout Point pt, out Point point);
-		static extern (C) void   wxWindow_ConvertPixelsToDialogSize(IntPtr self, inout Size sz, out Size size);
-		static extern (C) void   wxWindow_ConvertDialogToPixelsSize(IntPtr self, inout Size sz, out Size size);
+		static extern (C) void   wxWindow_ConvertPixelsToDialogPoint(IntPtr self, ref Point pt, out Point point);
+		static extern (C) void   wxWindow_ConvertDialogToPixelsPoint(IntPtr self, ref Point pt, out Point point);
+		static extern (C) void   wxWindow_ConvertPixelsToDialogSize(IntPtr self, ref Size sz, out Size size);
+		static extern (C) void   wxWindow_ConvertDialogToPixelsSize(IntPtr self, ref Size sz, out Size size);
 		static extern (C) void   wxWindow_WarpPointer(IntPtr self, int x, int y);
 		static extern (C) void   wxWindow_CaptureMouse(IntPtr self);
 		static extern (C) void   wxWindow_ReleaseMouse(IntPtr self);
 		static extern (C) IntPtr wxWindow_GetCapture();
 		static extern (C) bool   wxWindow_HasCapture(IntPtr self);
-		static extern (C) void   wxWindow_Refresh(IntPtr self, bool eraseBackground, inout Rectangle rect);
-		static extern (C) void   wxWindow_RefreshRect(IntPtr self, inout Rectangle rect);
+		static extern (C) void   wxWindow_Refresh(IntPtr self, bool eraseBackground, ref Rectangle rect);
+		static extern (C) void   wxWindow_RefreshRect(IntPtr self, ref Rectangle rect);
 		static extern (C) void   wxWindow_Update(IntPtr self);
 		static extern (C) void   wxWindow_ClearBackground(IntPtr self);
 		static extern (C) void   wxWindow_Freeze(IntPtr self);
@@ -259,23 +259,23 @@ public import wx.ToolTip;
 		static extern (C) int    wxWindow_GetCharHeight(IntPtr self);
 		static extern (C) int    wxWindow_GetCharWidth(IntPtr self);
 		static extern (C) void   wxWindow_GetTextExtent(IntPtr self, string str, out int x, out int y, out int descent, out int externalLeading, IntPtr theFont);
-		static extern (C) void   wxWindow_ClientToScreen(IntPtr self, inout int x, inout int y);
-		static extern (C) void   wxWindow_ScreenToClient(IntPtr self, inout int x, inout int y);
-		static extern (C) void   wxWindow_ClientToScreen(IntPtr self, inout Point pt, out Point point);
-		static extern (C) void   wxWindow_ScreenToClient(IntPtr self, inout Point pt, out Point point);
+		static extern (C) void   wxWindow_ClientToScreen(IntPtr self, ref int x, ref int y);
+		static extern (C) void   wxWindow_ScreenToClient(IntPtr self, ref int x, ref int y);
+		static extern (C) void   wxWindow_ClientToScreen(IntPtr self, ref Point pt, out Point point);
+		static extern (C) void   wxWindow_ScreenToClient(IntPtr self, ref Point pt, out Point point);
 		//static extern (C) wxHitTest wxWindow_HitTest(IntPtr self, Coord x, Coord y);
-		//static extern (C) wxHitTest wxWindow_HitTest(IntPtr self, inout Point pt);
+		//static extern (C) wxHitTest wxWindow_HitTest(IntPtr self, ref Point pt);
 		static extern (C) int    wxWindow_GetBorder(IntPtr self);
 		static extern (C) int    wxWindow_GetBorderByFlags(IntPtr self, uint flags);
 		static extern (C) void   wxWindow_UpdateWindowUI(IntPtr self);
-		static extern (C) bool   wxWindow_PopupMenu(IntPtr self, IntPtr menu, inout Point pos);
+		static extern (C) bool   wxWindow_PopupMenu(IntPtr self, IntPtr menu, ref Point pos);
 		static extern (C) bool   wxWindow_HasScrollbar(IntPtr self, int orient);
 		static extern (C) void   wxWindow_SetScrollbar(IntPtr self, int orient, int pos, int thumbvisible, int range, bool refresh);
 		static extern (C) void   wxWindow_SetScrollPos(IntPtr self, int orient, int pos, bool refresh);
 		static extern (C) int    wxWindow_GetScrollPos(IntPtr self, int orient);
 		static extern (C) int    wxWindow_GetScrollThumb(IntPtr self, int orient);
 		static extern (C) int    wxWindow_GetScrollRange(IntPtr self, int orient);
-		static extern (C) void   wxWindow_ScrollWindow(IntPtr self, int dx, int dy, inout Rectangle rect);
+		static extern (C) void   wxWindow_ScrollWindow(IntPtr self, int dx, int dy, ref Rectangle rect);
 		static extern (C) bool   wxWindow_ScrollLines(IntPtr self, int lines);
 		static extern (C) bool   wxWindow_ScrollPages(IntPtr self, int pages);
 		static extern (C) bool   wxWindow_LineUp(IntPtr self);
@@ -306,8 +306,8 @@ public import wx.ToolTip;
 		static extern (C) bool   wxWindow_IsBeingDeleted(IntPtr self);
 		static extern (C) void   wxWindow_InvalidateBestSize(IntPtr self);
 		static extern (C) void   wxWindow_CacheBestSize(IntPtr self, Size size);
-		static extern (C) void   wxWindow_GetBestFittingSize(IntPtr self, inout Size size);
-		static extern (C) void   wxWindow_SetBestFittingSize(IntPtr self, inout Size size);
+		static extern (C) void   wxWindow_GetBestFittingSize(IntPtr self, ref Size size);
+		static extern (C) void   wxWindow_SetBestFittingSize(IntPtr self, ref Size size);
 		static extern (C) IntPtr wxWindow_GetChildren(IntPtr self, int num);
 		static extern (C) int    wxWindow_GetChildrenCount(IntPtr self);
 		static extern (C) IntPtr wxWindow_GetDefaultAttributes(IntPtr self);
@@ -1298,7 +1298,7 @@ public import wx.ToolTip;
 
 		//---------------------------------------------------------------------
 
-		public void ClientToScreen(inout int x, inout int y)
+		public void ClientToScreen(ref int x, ref int y)
 		{
 			wxWindow_ClientToScreen(wxobj, x, y);
 		}
@@ -1310,7 +1310,7 @@ public import wx.ToolTip;
 			return screenPoint;
 		}
 
-		public /+virtual+/ void ScreenToClient(inout int x, inout int y)
+		public /+virtual+/ void ScreenToClient(ref int x, ref int y)
 		{
 			wxWindow_ScreenToClient(wxobj, x, y);
 		}

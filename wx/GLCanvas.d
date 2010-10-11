@@ -91,9 +91,9 @@ public import wx.Palette;
 		//-----------------------------------------------------------------------------
 
 		//! \cond EXTERN
-		static extern (C) IntPtr wxGLCanvas_ctor(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name, int* attribList, inout Palette palette);
-		static extern (C) IntPtr wxGLCanvas_ctor2(IntPtr parent, IntPtr shared_, int id, inout Point pos, inout Size size, uint style, string name, int* attribList, inout Palette palette);
-		static extern (C) IntPtr wxGLCanvas_ctor3(IntPtr parent, IntPtr shared_, int id, inout Point pos, inout Size size, uint style, string name, int* attribList, inout Palette palette);
+		static extern (C) IntPtr wxGLCanvas_ctor(IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name, int* attribList, ref Palette palette);
+		static extern (C) IntPtr wxGLCanvas_ctor2(IntPtr parent, IntPtr shared_, int id, ref Point pos, ref Size size, uint style, string name, int* attribList, ref Palette palette);
+		static extern (C) IntPtr wxGLCanvas_ctor3(IntPtr parent, IntPtr shared_, int id, ref Point pos, ref Size size, uint style, string name, int* attribList, ref Palette palette);
 
 		static extern (C) void wxGLCanvas_SetCurrent(IntPtr self);
 		static extern (C) void wxGLCanvas_UpdateContext(IntPtr self);

@@ -18,7 +18,7 @@ public import wx.common;
 public import wx.Dialog;
 
 		//! \cond EXTERN
-        static extern (C) IntPtr wxDirDialog_ctor(IntPtr parent, string message, string defaultPath, uint style, inout Point pos, inout Size size, string name);
+        static extern (C) IntPtr wxDirDialog_ctor(IntPtr parent, string message, string defaultPath, uint style, ref Point pos, ref Size size, string name);
 
         static extern (C) void   wxDirDialog_SetPath(IntPtr self, string path);
         static extern (C) IntPtr wxDirDialog_GetPath(IntPtr self);
@@ -78,7 +78,7 @@ public import wx.Dialog;
 	extern (C) string wxDirSelector_func(string message,
               string defaultPath,
               int style,
-              inout Point pos,
+              ref Point pos,
               IntPtr parent);
 	//! \endcond
 

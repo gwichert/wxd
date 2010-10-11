@@ -41,12 +41,12 @@ public import wx.MDI;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxSashLayoutWindow_ctor();
-		static extern (C) bool wxSashLayoutWindow_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
+		static extern (C) bool wxSashLayoutWindow_Create(IntPtr self, IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
 		static extern (C) LayoutAlignment wxSashLayoutWindow_GetAlignment(IntPtr self);
 		static extern (C) LayoutOrientation wxSashLayoutWindow_GetOrientation(IntPtr self);
 		static extern (C) void wxSashLayoutWindow_SetAlignment(IntPtr self, LayoutAlignment alignment);
 		static extern (C) void wxSashLayoutWindow_SetOrientation(IntPtr self, LayoutOrientation orient);
-		static extern (C) void wxSashLayoutWindow_SetDefaultSize(IntPtr self, inout Size size);
+		static extern (C) void wxSashLayoutWindow_SetDefaultSize(IntPtr self, ref Size size);
 		//! \endcond
 		
 		//-----------------------------------------------------------------------------
@@ -77,7 +77,7 @@ public import wx.MDI;
 		
 		//-----------------------------------------------------------------------------
 		
-		public override bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
+		public override bool Create(Window parent, int id, ref Point pos, ref Size size, int style, string name)
 		{
 			return wxSashLayoutWindow_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name);
 		}
@@ -101,7 +101,7 @@ public import wx.MDI;
 	
 		//! \cond EXTERN
 		static extern (C) IntPtr wxLayoutAlgorithm_ctor();
-		static extern (C) bool wxLayoutAlgorithm_LayoutMDIFrame(IntPtr self, IntPtr frame, inout Rectangle rect);
+		static extern (C) bool wxLayoutAlgorithm_LayoutMDIFrame(IntPtr self, IntPtr frame, ref Rectangle rect);
 		static extern (C) bool wxLayoutAlgorithm_LayoutFrame(IntPtr self, IntPtr frame, IntPtr mainWindow);
 		static extern (C) bool wxLayoutAlgorithm_LayoutWindow(IntPtr self, IntPtr frame, IntPtr mainWindow);
 		//! \endcond
@@ -164,7 +164,7 @@ public import wx.MDI;
 		static extern (C) int wxQueryLayoutInfoEvent_GetRequestedLength(IntPtr self);
 		static extern (C) void wxQueryLayoutInfoEvent_SetFlags(IntPtr self, int flags);
 		static extern (C) int wxQueryLayoutInfoEvent_GetFlags(IntPtr self);
-		static extern (C) void wxQueryLayoutInfoEvent_SetSize(IntPtr self, inout Size size);
+		static extern (C) void wxQueryLayoutInfoEvent_SetSize(IntPtr self, ref Size size);
 		static extern (C) void wxQueryLayoutInfoEvent_GetSize(IntPtr self, out Size size);
 		static extern (C) void wxQueryLayoutInfoEvent_SetOrientation(IntPtr self, LayoutOrientation orient);
 		static extern (C) LayoutOrientation wxQueryLayoutInfoEvent_GetOrientation(IntPtr self);
@@ -231,7 +231,7 @@ public import wx.MDI;
 		static extern (C) IntPtr wxCalculateLayoutEvent_ctor(int id);
 		static extern (C) void wxCalculateLayoutEvent_SetFlags(IntPtr self, int flags);
 		static extern (C) int wxCalculateLayoutEvent_GetFlags(IntPtr self);
-		static extern (C) void wxCalculateLayoutEvent_SetRect(IntPtr self, inout Rectangle rect);
+		static extern (C) void wxCalculateLayoutEvent_SetRect(IntPtr self, ref Rectangle rect);
 		static extern (C) void wxCalculateLayoutEvent_GetRect(IntPtr self, out Rectangle rect);
 		//! \endcond
 		

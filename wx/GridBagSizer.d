@@ -34,7 +34,7 @@ public import wx.FlexGridSizer;
         static extern (C) bool   wxGBSizerItem_IntersectsSizer(IntPtr self, IntPtr other);
         static extern (C) bool   wxGBSizerItem_IntersectsSpan(IntPtr self, IntPtr pos, IntPtr span);
 
-        static extern (C) void   wxGBSizerItem_GetEndPos(IntPtr self, inout int row, inout int col);
+        static extern (C) void   wxGBSizerItem_GetEndPos(IntPtr self, ref int row, ref int col);
         static extern (C) IntPtr wxGBSizerItem_GetGBSizer(IntPtr self);
         static extern (C) void   wxGBSizerItem_SetGBSizer(IntPtr self, IntPtr sizer);
 		//! \endcond
@@ -83,7 +83,7 @@ public import wx.FlexGridSizer;
 
         //-----------------------------------------------------------------------------
 
-        public void GetEndPos(inout int row, inout int col)
+        public void GetEndPos(ref int row, ref int col)
         {
             wxGBSizerItem_GetEndPos(wxobj, row, col);
         }
@@ -139,9 +139,9 @@ public import wx.FlexGridSizer;
         static extern (C) bool   wxGridBagSizer_Add(IntPtr self, int width, int height, IntPtr pos, IntPtr span, int flag, int border, IntPtr userData);
         static extern (C) bool   wxGridBagSizer_AddItem(IntPtr self, IntPtr item);
 
-        static extern (C) void   wxGridBagSizer_GetEmptyCellSize(IntPtr self, inout Size size);
-        static extern (C) void   wxGridBagSizer_SetEmptyCellSize(IntPtr self, inout Size sz);
-        static extern (C) void   wxGridBagSizer_GetCellSize(IntPtr self, int row, int col, inout Size size);
+        static extern (C) void   wxGridBagSizer_GetEmptyCellSize(IntPtr self, ref Size size);
+        static extern (C) void   wxGridBagSizer_SetEmptyCellSize(IntPtr self, ref Size sz);
+        static extern (C) void   wxGridBagSizer_GetCellSize(IntPtr self, int row, int col, ref Size size);
 
         static extern (C) IntPtr wxGridBagSizer_GetItemPositionWindow(IntPtr self, IntPtr window);
         static extern (C) IntPtr wxGridBagSizer_GetItemPositionSizer(IntPtr self, IntPtr sizer);
@@ -160,7 +160,7 @@ public import wx.FlexGridSizer;
         static extern (C) IntPtr wxGridBagSizer_FindItemWindow(IntPtr self, IntPtr window);
         static extern (C) IntPtr wxGridBagSizer_FindItemSizer(IntPtr self, IntPtr sizer);
         static extern (C) IntPtr wxGridBagSizer_FindItemAtPosition(IntPtr self, IntPtr pos);
-        static extern (C) IntPtr wxGridBagSizer_FindItemAtPoint(IntPtr self, inout Point pt);
+        static extern (C) IntPtr wxGridBagSizer_FindItemAtPoint(IntPtr self, ref Point pt);
         static extern (C) IntPtr wxGridBagSizer_FindItemWithData(IntPtr self, IntPtr userData);
 
         static extern (C) bool   wxGridBagSizer_CheckForIntersectionItem(IntPtr self, IntPtr item, IntPtr excludeItem);

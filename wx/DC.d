@@ -57,8 +57,8 @@ public import wx.ArrayInt;
 	
 		static extern (C) void   wxDC_DestroyClippingRegion(IntPtr self);
 		static extern (C) void   wxDC_SetClippingRegion(IntPtr self, int x, int y, int width, int height);
-		static extern (C) void   wxDC_SetClippingRegionPos(IntPtr self, inout Point pos, inout Size size);
-		static extern (C) void   wxDC_SetClippingRegionRect(IntPtr self, inout Rectangle rect);
+		static extern (C) void   wxDC_SetClippingRegionPos(IntPtr self, ref Point pos, ref Size size);
+		static extern (C) void   wxDC_SetClippingRegionRect(IntPtr self, ref Rectangle rect);
 		static extern (C) void   wxDC_SetClippingRegionReg(IntPtr self, IntPtr reg);
 	
 		static extern (C) int    wxDC_GetLogicalFunction(IntPtr self);
@@ -88,8 +88,8 @@ public import wx.ArrayInt;
 		
 		static extern (C) void   wxDC_DrawRotatedText(IntPtr self, string text, int x, int y, double angle);
 		
-		static extern (C) void   wxDC_DrawLabel(IntPtr self, string text, IntPtr image, inout Rectangle rect, int alignment, int indexAccel, inout Rectangle rectBounding);
-		static extern (C) void   wxDC_DrawLabel2(IntPtr self, string text, inout Rectangle rect, int alignment, int indexAccel);
+		static extern (C) void   wxDC_DrawLabel(IntPtr self, string text, IntPtr image, ref Rectangle rect, int alignment, int indexAccel, ref Rectangle rectBounding);
+		static extern (C) void   wxDC_DrawLabel2(IntPtr self, string text, ref Rectangle rect, int alignment, int indexAccel);
 		
 		static extern (C) void   wxDC_DrawSpline(IntPtr self, int x1, int y1, int x2, int y2, int x3, int y3);
 		static extern (C) void   wxDC_DrawSpline2(IntPtr self, int n, Point* points);
@@ -107,9 +107,9 @@ public import wx.ArrayInt;
 		static extern (C) bool   wxDC_GetPartialTextExtents(IntPtr self, string text, IntPtr widths);
 		
 		static extern (C) void   wxDC_GetSize(IntPtr self, out int width, out int height);
-		static extern (C) void   wxDC_GetSize2(IntPtr self, inout Size size);
+		static extern (C) void   wxDC_GetSize2(IntPtr self, ref Size size);
 		static extern (C) void   wxDC_GetSizeMM(IntPtr self, out int width, out int height);
-		static extern (C) void   wxDC_GetSizeMM2(IntPtr self, inout Size size);
+		static extern (C) void   wxDC_GetSizeMM2(IntPtr self, ref Size size);
 		
 		static extern (C) int    wxDC_DeviceToLogicalX(IntPtr self, int x);
 		static extern (C) int    wxDC_DeviceToLogicalY(IntPtr self, int y);
@@ -134,11 +134,11 @@ public import wx.ArrayInt;
 		static extern (C) void   wxDC_SetLogicalScale(IntPtr self, double x, double y);
 		
 		static extern (C) void   wxDC_GetLogicalOrigin(IntPtr self, out int x, out int y);
-		static extern (C) void   wxDC_GetLogicalOrigin2(IntPtr self, inout Point pt);
+		static extern (C) void   wxDC_GetLogicalOrigin2(IntPtr self, ref Point pt);
 		static extern (C) void   wxDC_SetLogicalOrigin(IntPtr self, int x, int y);
 		
 		static extern (C) void   wxDC_GetDeviceOrigin(IntPtr self, out int x, out int y);
-		static extern (C) void   wxDC_GetDeviceOrigin2(IntPtr self, inout Point pt);
+		static extern (C) void   wxDC_GetDeviceOrigin2(IntPtr self, ref Point pt);
 		static extern (C) void   wxDC_SetDeviceOrigin(IntPtr self, int x, int y);
 		
 		static extern (C) void   wxDC_SetAxisOrientation(IntPtr self, bool xLeftRight, bool yBottomUp);
@@ -594,7 +594,7 @@ public import wx.ArrayInt;
 		
 		//---------------------------------------------------------------------
 		
-		public /+virtual+/ void DrawLabel(string text, Bitmap image, Rectangle rect, int alignment, int indexAccel, inout Rectangle rectBounding)
+		public /+virtual+/ void DrawLabel(string text, Bitmap image, Rectangle rect, int alignment, int indexAccel, ref Rectangle rectBounding)
 		{
 			wxDC_DrawLabel(wxobj, text, wxObject.SafePtr(image), rect, alignment, indexAccel, rectBounding);
 		}
@@ -930,7 +930,7 @@ public import wx.ArrayInt;
 		static extern (C) void wxWindowDC_SetTextBackground(IntPtr self, IntPtr colour);
 		static extern (C) void wxWindowDC_SetBackgroundMode(IntPtr self, int mode);
 		static extern (C) void wxWindowDC_SetPalette(IntPtr self, IntPtr palette);
-		static extern (C) void wxWindowDC_GetPPI(IntPtr self, inout Size size);
+		static extern (C) void wxWindowDC_GetPPI(IntPtr self, ref Size size);
 		static extern (C) int wxWindowDC_GetDepth(IntPtr self);
 		//! \endcond
 		

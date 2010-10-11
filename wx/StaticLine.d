@@ -19,7 +19,7 @@ public import wx.Control;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxStaticLine_ctor();
-		static extern (C) bool wxStaticLine_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
+		static extern (C) bool wxStaticLine_Create(IntPtr self, IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
 		static extern (C) bool wxStaticLine_IsVertical(IntPtr self);
 		static extern (C) int  wxStaticLine_GetDefaultSize(IntPtr self);
 		//! \endcond
@@ -62,7 +62,7 @@ public import wx.Control;
 		
 		//---------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
+		public bool Create(Window parent, int id, ref Point pos, ref Size size, int style, string name)
 		{
 			return wxStaticLine_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name);
 		}

@@ -50,10 +50,10 @@ public import wx.DC;
 		//! \cond EXTERN
 		static extern (C) IntPtr wxBufferedDC_ctor();
 		static extern (C) IntPtr wxBufferedDC_ctorByBitmap(IntPtr dc, IntPtr buffer);
-		static extern (C) IntPtr wxBufferedDC_ctorBySize(IntPtr dc, inout Size area);
+		static extern (C) IntPtr wxBufferedDC_ctorBySize(IntPtr dc, ref Size area);
 		
 		static extern (C) void   wxBufferedDC_InitByBitmap(IntPtr self, IntPtr dc, IntPtr bitmap);
-		static extern (C) void   wxBufferedDC_InitBySize(IntPtr self, IntPtr dc, inout Size area);
+		static extern (C) void   wxBufferedDC_InitBySize(IntPtr self, IntPtr dc, ref Size area);
 		static extern (C) void   wxBufferedDC_UnMask(IntPtr self);
 		//! \endcond
 

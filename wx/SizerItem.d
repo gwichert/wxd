@@ -24,10 +24,10 @@ public import wx.Window;
         static extern (C) IntPtr wxSizerItem_ctor();
         static extern (C) void   wxSizerItem_DeleteWindows(IntPtr self);
         static extern (C) void   wxSizerItem_DetachSizer(IntPtr self);
-        static extern (C) void   wxSizerItem_GetSize(IntPtr self, inout Size size);
-        static extern (C) void   wxSizerItem_CalcMin(IntPtr self, inout Size min);
-        static extern (C) void   wxSizerItem_SetDimension(IntPtr self, inout Point pos, inout Size size);
-        static extern (C) void   wxSizerItem_GetMinSize(IntPtr self, inout Size size);
+        static extern (C) void   wxSizerItem_GetSize(IntPtr self, ref Size size);
+        static extern (C) void   wxSizerItem_CalcMin(IntPtr self, ref Size min);
+        static extern (C) void   wxSizerItem_SetDimension(IntPtr self, ref Point pos, ref Size size);
+        static extern (C) void   wxSizerItem_GetMinSize(IntPtr self, ref Size size);
         static extern (C) void   wxSizerItem_SetInitSize(IntPtr self, int x, int y);
         static extern (C) void   wxSizerItem_SetRatio(IntPtr self, int width, int height);
         static extern (C) void   wxSizerItem_SetRatioFloat(IntPtr self, float ratio);
@@ -45,12 +45,12 @@ public import wx.Window;
         static extern (C) void   wxSizerItem_SetWindow(IntPtr self, IntPtr window);
         static extern (C) IntPtr wxSizerItem_GetSizer(IntPtr self);
         static extern (C) void   wxSizerItem_SetSizer(IntPtr self, IntPtr sizer);
-        static extern (C) void   wxSizerItem_GetSpacer(IntPtr self, inout Size size);
-        static extern (C) void   wxSizerItem_SetSpacer(IntPtr self, inout Size size);
+        static extern (C) void   wxSizerItem_GetSpacer(IntPtr self, ref Size size);
+        static extern (C) void   wxSizerItem_SetSpacer(IntPtr self, ref Size size);
         static extern (C) void   wxSizerItem_Show(IntPtr self, bool show);
         static extern (C) bool   wxSizerItem_IsShown(IntPtr self);
         static extern (C) IntPtr wxSizerItem_GetUserData(IntPtr self);
-        static extern (C) void   wxSizerItem_GetPosition(IntPtr self, inout Point pos);
+        static extern (C) void   wxSizerItem_GetPosition(IntPtr self, ref Point pos);
 		//! \endcond
 
         //-----------------------------------------------------------------------------

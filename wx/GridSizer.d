@@ -20,7 +20,7 @@ public import wx.Sizer;
 		//! \cond EXTERN
 		static extern (C) IntPtr wxGridSizer_ctor(int rows, int cols, int vgap, int hgap);
 		static extern (C) void wxGridSizer_RecalcSizes(IntPtr self);
-		static extern (C) void wxGridSizer_CalcMin(IntPtr self, inout Size size);
+		static extern (C) void wxGridSizer_CalcMin(IntPtr self, ref Size size);
 		static extern (C) void wxGridSizer_SetCols(IntPtr self, int cols);
 		static extern (C) void wxGridSizer_SetRows(IntPtr self, int rows);
 		static extern (C) void wxGridSizer_SetVGap(IntPtr self, int gap);

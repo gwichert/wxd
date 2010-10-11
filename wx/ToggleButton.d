@@ -20,7 +20,7 @@ public import wx.Control;
 		//! \cond EXTERN
 		static extern (C) IntPtr wxToggleButton_ctor();
 		static extern (C) bool   wxToggleButton_Create(IntPtr self, IntPtr parent,
-			int id, string label, inout Point pos, inout Size size, uint style,
+			int id, string label, ref Point pos, ref Size size, uint style,
 			IntPtr validator, string name);
 		static extern (C) bool wxToggleButton_GetValue(IntPtr self);
 		static extern (C) bool wxToggleButton_SetValue(IntPtr self, bool state);
@@ -55,7 +55,7 @@ public import wx.Control;
 		
 		//---------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, string label, inout Point pos, inout Size size,
+		public bool Create(Window parent, int id, string label, ref Point pos, ref Size size,
 			int style, Validator validator, string name)
 		{
 			return wxToggleButton_Create(wxobj, wxObject.SafePtr(parent), id, label, pos, size,

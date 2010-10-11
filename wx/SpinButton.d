@@ -73,7 +73,7 @@ public import wx.Control;
 	
 		//! \cond EXTERN
 		static extern (C) IntPtr wxSpinButton_ctor();
-		static extern (C) bool   wxSpinButton_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
+		static extern (C) bool   wxSpinButton_Create(IntPtr self, IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
 		static extern (C) int    wxSpinButton_GetValue(IntPtr self);
 		static extern (C) int    wxSpinButton_GetMin(IntPtr self);
 		static extern (C) int    wxSpinButton_GetMax(IntPtr self);
@@ -122,7 +122,7 @@ public import wx.Control;
 		
 		//---------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, inout Point pos, inout Size size,  int style, string name)
+		public bool Create(Window parent, int id, ref Point pos, ref Size size,  int style, string name)
 		{
 			return wxSpinButton_Create(wxobj, wxObject.SafePtr(parent), id,
 						pos, size, cast(uint)style, name);

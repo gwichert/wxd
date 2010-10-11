@@ -19,7 +19,7 @@ public import wx.Window;
         static extern (C) IntPtr wxTipWindow_ctor(IntPtr parent, string text, int maxLength, Rectangle* rectBound);
         //static extern (C) IntPtr wxTipWindow_ctorNoRect(IntPtr parent, string text, int maxLength);
         //static extern (C) void   wxTipWindow_SetTipWindowPtr(IntPtr self, IntPtr wxTipWindow* windowPtr);
-        static extern (C) void   wxTipWindow_SetBoundingRect(IntPtr self, inout Rectangle rectBound);
+        static extern (C) void   wxTipWindow_SetBoundingRect(IntPtr self, ref Rectangle rectBound);
         static extern (C) void   wxTipWindow_Close(IntPtr self);
 		//! \endcond
 

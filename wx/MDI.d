@@ -25,7 +25,7 @@ public import wx.Frame;
 		static extern (C) IntPtr wxMDIParentFrame_ctor();
 		static extern (C) void wxMDIParentFrame_RegisterVirtual(IntPtr self, MDIParentFrame obj, Virtual_OnCreateClient onCreateClient);
 		static extern (C) IntPtr wxMDIParentFrame_OnCreateClient(IntPtr self);
-		static extern (C) bool   wxMDIParentFrame_Create(IntPtr self, IntPtr parent, int id, string title, inout Point pos, inout Size size, uint style, string name);
+		static extern (C) bool   wxMDIParentFrame_Create(IntPtr self, IntPtr parent, int id, string title, ref Point pos, ref Size size, uint style, string name);
 	
 		static extern (C) IntPtr wxMDIParentFrame_GetActiveChild(IntPtr self);
 		//static extern (C) void   wxMDIParentFrame_SetActiveChild(IntPtr self, IntPtr pChildFrame);
@@ -79,7 +79,7 @@ public import wx.Frame;
 		
 		//-----------------------------------------------------------------------------
 
-		public override bool Create(Window parent, int id, string title, inout Point pos, inout Size size, int style, string name)
+		public override bool Create(Window parent, int id, string title, ref Point pos, ref Size size, int style, string name)
 		{
 			return wxMDIParentFrame_Create(wxobj, wxObject.SafePtr(parent), id, title, pos, size, cast(uint)style, name);
 		}
@@ -158,7 +158,7 @@ public import wx.Frame;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxMDIChildFrame_ctor();
-		static extern (C) bool   wxMDIChildFrame_Create(IntPtr self, IntPtr parent, int id, string title, inout  Point pos, inout Size size, uint style, string name);
+		static extern (C) bool   wxMDIChildFrame_Create(IntPtr self, IntPtr parent, int id, string title, ref  Point pos, ref Size size, uint style, string name);
 		static extern (C) void   wxMDIChildFrame_Activate(IntPtr self);
 		static extern (C) void   wxMDIChildFrame_Restore(IntPtr self);
 		static extern (C) void   wxMDIChildFrame_Maximize(IntPtr self, bool maximize);
@@ -196,7 +196,7 @@ public import wx.Frame;
 		
 		//-----------------------------------------------------------------------------
 
-		public bool Create(MDIParentFrame parent, int id, string title, inout Point pos, inout Size size, int style, string name)
+		public bool Create(MDIParentFrame parent, int id, string title, ref Point pos, ref Size size, int style, string name)
 		{
 			bool ret = wxMDIChildFrame_Create(wxobj, wxObject.SafePtr(parent), id, title, pos, size, style, name);
 			version(__WXMAC__){

@@ -20,7 +20,7 @@ public import wx.ClientData;
 public import wx.ArrayInt;
 
 		//! \cond EXTERN
-        static extern (C) IntPtr wxSingleChoiceDialog_ctor(IntPtr parent, string message, string caption, int n, string* choices, IntPtr clientData, uint style, inout Point pos);
+        static extern (C) IntPtr wxSingleChoiceDialog_ctor(IntPtr parent, string message, string caption, int n, string* choices, IntPtr clientData, uint style, ref Point pos);
         static extern (C) void wxSingleChoiceDialog_SetSelection(IntPtr self, int sel);
         static extern (C) int wxSingleChoiceDialog_GetSelection(IntPtr self);
         static extern (C) IntPtr wxSingleChoiceDialog_GetStringSelection(IntPtr self);
@@ -79,7 +79,7 @@ public import wx.ArrayInt;
 	//-----------------------------------------------------------------------------
 
 		//! \cond EXTERN
-        static extern (C) IntPtr wxMultiChoiceDialog_ctor(IntPtr parent, string message, string caption, int n, string* choices, uint style, inout Point pos);
+        static extern (C) IntPtr wxMultiChoiceDialog_ctor(IntPtr parent, string message, string caption, int n, string* choices, uint style, ref Point pos);
         static extern (C) void wxMultiChoiceDialog_SetSelections(IntPtr self, int* sel, int numsel);
         static extern (C) IntPtr wxMultiChoiceDialog_GetSelections(IntPtr self);
 		//! \endcond

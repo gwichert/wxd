@@ -48,13 +48,13 @@ public import wx.Colour;
 		static extern (C) bool   wxImage_SaveFileByMimeType(IntPtr self, string name, string mimetype);
 		
 		static extern (C) IntPtr wxImage_Copy(IntPtr self);
-		static extern (C) IntPtr wxImage_GetSubImage(IntPtr self, inout Rectangle rect);
+		static extern (C) IntPtr wxImage_GetSubImage(IntPtr self, ref Rectangle rect);
 		
 		static extern (C) void   wxImage_Paste(IntPtr self, IntPtr image, int x, int y);
 		
 		static extern (C) IntPtr wxImage_ShrinkBy(IntPtr self, int xFactor, int yFactor);
 		
-		static extern (C) IntPtr wxImage_Rotate(IntPtr self, double angle, inout Point centre_of_rotation, bool interpolating, inout Point offset_after_rotation);
+		static extern (C) IntPtr wxImage_Rotate(IntPtr self, double angle, ref Point centre_of_rotation, bool interpolating, ref Point offset_after_rotation);
 		static extern (C) IntPtr wxImage_Rotate90(IntPtr self, bool clockwise);
 		static extern (C) IntPtr wxImage_Mirror(IntPtr self, bool horizontally);
 		
@@ -71,7 +71,7 @@ public import wx.Colour;
 		static extern (C) void   wxImage_SetAlpha(IntPtr self, int x, int y, ubyte alpha);
 		static extern (C) ubyte   wxImage_GetAlpha(IntPtr self, int x, int y);
 		
-		static extern (C) bool   wxImage_FindFirstUnusedColour(IntPtr self, inout ubyte r, inout ubyte g, inout ubyte b, ubyte startR, ubyte startG, ubyte startB);
+		static extern (C) bool   wxImage_FindFirstUnusedColour(IntPtr self, ref ubyte r, ref ubyte g, ref ubyte b, ubyte startR, ubyte startG, ubyte startB);
 		static extern (C) bool   wxImage_SetMaskFromImage(IntPtr self, IntPtr mask, ubyte mr, ubyte mg, ubyte mb);
 		
 		static extern (C) bool   wxImage_ConvertAlphaToMask(IntPtr self, ubyte threshold);
@@ -387,22 +387,22 @@ public import wx.Colour;
 		
 		//---------------------------------------------------------------------
 		
-		public bool FindFirstUnusedColour(inout ubyte r, inout ubyte g, inout ubyte b)
+		public bool FindFirstUnusedColour(ref ubyte r, ref ubyte g, ref ubyte b)
 		{
 			return FindFirstUnusedColour(r, g, b, 1, 0, 0);
 		}
 		
-		public bool FindFirstUnusedColour(inout ubyte r, inout ubyte g, inout ubyte b, ubyte startR)
+		public bool FindFirstUnusedColour(ref ubyte r, ref ubyte g, ref ubyte b, ubyte startR)
 		{
 			return FindFirstUnusedColour(r, g, b, startR, 0, 0);
 		}
 		
-		public bool FindFirstUnusedColour(inout ubyte r, inout ubyte g, inout ubyte b, ubyte startR, ubyte startG)
+		public bool FindFirstUnusedColour(ref ubyte r, ref ubyte g, ref ubyte b, ubyte startR, ubyte startG)
 		{
 			return FindFirstUnusedColour(r, g, b, startR, startG, 0);
 		}
 		
-		public bool FindFirstUnusedColour(inout ubyte r, inout ubyte g, inout ubyte b, ubyte startR, ubyte startG, ubyte startB)
+		public bool FindFirstUnusedColour(ref ubyte r, ref ubyte g, ref ubyte b, ubyte startR, ubyte startG, ubyte startB)
 		{
 			return wxImage_FindFirstUnusedColour(wxobj, r, g, b, startR, startG, startB);
 		}
@@ -705,7 +705,7 @@ public import wx.Colour;
 		static extern (C) IntPtr wxImageHistogram_ctor();	
 		static extern (C) void   wxImageHistogram_dtor(IntPtr self);
 		static extern (C) uint  wxImageHistogram_MakeKey(ubyte r, ubyte g, ubyte b);
-		static extern (C) bool   wxImageHistogram_FindFirstUnusedColour(IntPtr self, inout ubyte r, inout ubyte g, inout ubyte b, ubyte startR, ubyte startG, ubyte startB);
+		static extern (C) bool   wxImageHistogram_FindFirstUnusedColour(IntPtr self, ref ubyte r, ref ubyte g, ref ubyte b, ubyte startR, ubyte startG, ubyte startB);
 		//! \endcond
 				
 		//---------------------------------------------------------------------
@@ -728,22 +728,22 @@ public import wx.Colour;
 		
 		//---------------------------------------------------------------------
 		
-		public bool FindFirstUnusedColour(inout ubyte r, inout ubyte g, inout ubyte b)
+		public bool FindFirstUnusedColour(ref ubyte r, ref ubyte g, ref ubyte b)
 		{
 			return FindFirstUnusedColour(r, g, b, 1, 0, 0);
 		}
 		
-		public bool FindFirstUnusedColour(inout ubyte r, inout ubyte g, inout ubyte b, ubyte startR)
+		public bool FindFirstUnusedColour(ref ubyte r, ref ubyte g, ref ubyte b, ubyte startR)
 		{
 			return FindFirstUnusedColour(r, g, b, startR, 0, 0);
 		}
 		
-		public bool FindFirstUnusedColour(inout ubyte r, inout ubyte g, inout ubyte b, ubyte startR, ubyte startG)
+		public bool FindFirstUnusedColour(ref ubyte r, ref ubyte g, ref ubyte b, ubyte startR, ubyte startG)
 		{
 			return FindFirstUnusedColour(r, g, b, startR, startG, 0);
 		}
 		
-		public bool FindFirstUnusedColour(inout ubyte r, inout ubyte g, inout ubyte b, ubyte startR, ubyte startG, ubyte startB)
+		public bool FindFirstUnusedColour(ref ubyte r, ref ubyte g, ref ubyte b, ubyte startR, ubyte startG, ubyte startB)
 		{
 			return wxImageHistogram_FindFirstUnusedColour(wxobj, r, g, b, startR, startG, startB);
 		}

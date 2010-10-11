@@ -27,7 +27,7 @@ public enum FlexSizerGrowMode{
 		static extern (C) IntPtr wxFlexGridSizer_ctor(int rows, int cols, int vgap, int hgap);
 		static extern (C) void wxFlexGridSizer_dtor(IntPtr self);
 		static extern (C) void wxFlexGridSizer_RecalcSizes(IntPtr self);
-		static extern (C) void wxFlexGridSizer_CalcMin(IntPtr self, inout Size size);
+		static extern (C) void wxFlexGridSizer_CalcMin(IntPtr self, ref Size size);
 		static extern (C) void wxFlexGridSizer_AddGrowableRow(IntPtr self, uint idx);
 		static extern (C) void wxFlexGridSizer_RemoveGrowableRow(IntPtr self, uint idx);
 		static extern (C) void wxFlexGridSizer_AddGrowableCol(IntPtr self, uint idx);

@@ -26,9 +26,9 @@ public import wx.SizeEvent;
 		}
 
 		static extern (C) IntPtr wxVScrolledWindow_ctor();
-		static extern (C) IntPtr wxVScrolledWindow_ctor2(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
+		static extern (C) IntPtr wxVScrolledWindow_ctor2(IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
 		static extern (C) void wxVScrolledWindow_RegisterVirtual(IntPtr self, VScrolledWindow obj, Virtual_IntInt onGetLineHeight);
-		static extern (C) bool wxVScrolledWindow_Create(IntPtr self,IntPtr parent, int id, inout Point pos, inout Size size, int style, string name);
+		static extern (C) bool wxVScrolledWindow_Create(IntPtr self,IntPtr parent, int id, ref Point pos, ref Size size, int style, string name);
 		static extern (C) void wxVScrolledWindow_SetLineCount(IntPtr self, int count);
 		static extern (C) bool wxVScrolledWindow_ScrollToLine(IntPtr self, int line);
 		static extern (C) bool wxVScrolledWindow_ScrollLines(IntPtr self, int lines);
@@ -36,7 +36,7 @@ public import wx.SizeEvent;
 		static extern (C) void wxVScrolledWindow_RefreshLine(IntPtr self, int line);
 		static extern (C) void wxVScrolledWindow_RefreshLines(IntPtr self, int from, int to);
 		static extern (C) int wxVScrolledWindow_HitTest(IntPtr self, int x, int y);
-		static extern (C) int wxVScrolledWindow_HitTest2(IntPtr self, inout Point pt);
+		static extern (C) int wxVScrolledWindow_HitTest2(IntPtr self, ref Point pt);
 		static extern (C) void wxVScrolledWindow_RefreshAll(IntPtr self);
 		static extern (C) int wxVScrolledWindow_GetLineCount(IntPtr self);
 		static extern (C) int wxVScrolledWindow_GetFirstVisibleLine(IntPtr self);
@@ -70,7 +70,7 @@ public import wx.SizeEvent;
 		
 		//-----------------------------------------------------------------------------
 		
-		public override bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
+		public override bool Create(Window parent, int id, ref Point pos, ref Size size, int style, string name)
 		{
 			return wxVScrolledWindow_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, style, name); 
 		//	return super.Create(parent, id, pos, size, style | wxVSCROLL, name);

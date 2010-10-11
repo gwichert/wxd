@@ -58,7 +58,7 @@ public import wx.MenuBar;
 		static extern (C) bool   wxMenuBase_Destroy2(IntPtr self, IntPtr item);
 		
 		static extern (C) int    wxMenuBase_FindItem(IntPtr self, string item);
-		static extern (C) IntPtr wxMenuBase_FindItem2(IntPtr self, int itemid, inout IntPtr menu); 
+		static extern (C) IntPtr wxMenuBase_FindItem2(IntPtr self, int itemid, ref IntPtr menu); 
 		static extern (C) IntPtr wxMenuBase_FindItemByPosition(IntPtr self, int position);
 		
 		static extern (C) void   wxMenuBase_Enable(IntPtr self, int itemid, bool enable);
@@ -384,7 +384,7 @@ public import wx.MenuBar;
 			return FindItem(itemid, menuRef);
 		}
 		
-		public MenuItem FindItem(int itemid, inout Menu menu)
+		public MenuItem FindItem(int itemid, ref Menu menu)
 		{
 			IntPtr menuRef = IntPtr.init;
 			if (menu) 

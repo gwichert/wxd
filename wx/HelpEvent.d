@@ -19,9 +19,9 @@ public import wx.CommandEvent;
 public import wx.Window;
 
 		//! \cond EXTERN
-		static extern (C) IntPtr wxHelpEvent_ctor(int type,int winid, inout Point pos);
-		static extern (C) void   wxHelpEvent_GetPosition(IntPtr self, inout Point pos);
-		static extern (C) void   wxHelpEvent_SetPosition(IntPtr self, inout Point pos);
+		static extern (C) IntPtr wxHelpEvent_ctor(int type,int winid, ref Point pos);
+		static extern (C) void   wxHelpEvent_GetPosition(IntPtr self, ref Point pos);
+		static extern (C) void   wxHelpEvent_SetPosition(IntPtr self, ref Point pos);
 		static extern (C) IntPtr wxHelpEvent_GetLink(IntPtr self);
 		static extern (C) void   wxHelpEvent_SetLink(IntPtr self, string link);
 		static extern (C) IntPtr wxHelpEvent_GetTarget(IntPtr self);

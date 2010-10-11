@@ -20,7 +20,7 @@ public import wx.GDIObject;
 		static extern (C) IntPtr wxPalette_ctor();
 		static extern (C) void wxPalette_dtor(IntPtr self);
 		static extern (C) bool wxPalette_Ok(IntPtr self);
-		static extern (C) bool wxPalette_Create(IntPtr self, int n, inout ubyte red, inout ubyte green, inout ubyte blue);
+		static extern (C) bool wxPalette_Create(IntPtr self, int n, ref ubyte red, ref ubyte green, ref ubyte blue);
 		static extern (C) int wxPalette_GetPixel(IntPtr self, ubyte red, ubyte green, ubyte blue);
 		static extern (C) bool wxPalette_GetRGB(IntPtr self, int pixel, out ubyte red, out ubyte green, out ubyte blue);
 		//! \endcond
@@ -37,7 +37,7 @@ public import wx.GDIObject;
 		public this(IntPtr wxobj)
 			{ super(wxobj);}
 
-		public this(int n, inout ubyte r, inout ubyte g, inout ubyte b)
+		public this(int n, ref ubyte r, ref ubyte g, ref ubyte b)
 		{
 			this(wxPalette_ctor());
 			if (!wxPalette_Create(wxobj, n, r, g, b))
@@ -46,7 +46,7 @@ public import wx.GDIObject;
 			}
 		}
 
-		public bool Create(int n, inout ubyte r, inout ubyte g, inout ubyte b)
+		public bool Create(int n, ref ubyte r, ref ubyte g, ref ubyte b)
 		{
 			return wxPalette_Create(wxobj, n, r, g, b);
 		}

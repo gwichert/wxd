@@ -251,13 +251,13 @@ public import wx.ImageList;
 			Virtual_OnGetItemImage onGetItemImage,
 			Virtual_OnGetItemColumnImage onGetItemColumnImage,
 			Virtual_OnGetItemText onGetItemText);
-		static extern (C) bool   wxListCtrl_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, IntPtr validator, string name);
-		static extern (C) bool   wxListCtrl_GetColumn(IntPtr self, int col, inout IntPtr item);
+		static extern (C) bool   wxListCtrl_Create(IntPtr self, IntPtr parent, int id, ref Point pos, ref Size size, uint style, IntPtr validator, string name);
+		static extern (C) bool   wxListCtrl_GetColumn(IntPtr self, int col, ref IntPtr item);
 		static extern (C) bool   wxListCtrl_SetColumn(IntPtr self, int col, IntPtr item);
 		static extern (C) int    wxListCtrl_GetColumnWidth(IntPtr self, int col);
 		static extern (C) bool   wxListCtrl_SetColumnWidth(IntPtr self, int col, int width);
 		static extern (C) int    wxListCtrl_GetCountPerPage(IntPtr self);
-		static extern (C) IntPtr wxListCtrl_GetItem(IntPtr self, IntPtr info, inout bool retval);
+		static extern (C) IntPtr wxListCtrl_GetItem(IntPtr self, IntPtr info, ref bool retval);
 		static extern (C) bool   wxListCtrl_SetItem(IntPtr self, IntPtr info);
 		static extern (C) int    wxListCtrl_SetItem_By_Row_Col(IntPtr self, int index, int col, string label, int imageId);
 		static extern (C) int    wxListCtrl_GetItemState(IntPtr self, int item, int stateMask);
@@ -270,7 +270,7 @@ public import wx.ImageList;
 		static extern (C) bool   wxListCtrl_SetItemData2(IntPtr self, int item, int data);
 		static extern (C) bool   wxListCtrl_GetItemRect(IntPtr self, int item, out Rectangle rect, int code);
 		static extern (C) bool   wxListCtrl_GetItemPosition(IntPtr self, int item, out Point pos);
-		static extern (C) bool   wxListCtrl_SetItemPosition(IntPtr self, int item, inout Point pos);
+		static extern (C) bool   wxListCtrl_SetItemPosition(IntPtr self, int item, ref Point pos);
 		static extern (C) int    wxListCtrl_GetItemCount(IntPtr self);
 		static extern (C) int    wxListCtrl_GetColumnCount(IntPtr self);
 		static extern (C) void   wxListCtrl_SetItemTextColour(IntPtr self, int item, IntPtr col);
@@ -298,8 +298,8 @@ public import wx.ImageList;
 		static extern (C) bool   wxListCtrl_EnsureVisible(IntPtr self, int item);
 		static extern (C) int    wxListCtrl_FindItem(IntPtr self, int start, string str, bool partial);
 		static extern (C) int    wxListCtrl_FindItemData(IntPtr self, int start, IntPtr data);
-		static extern (C) int    wxListCtrl_FindItemPoint(IntPtr self, int start, inout Point pt, int direction);
-		static extern (C) int    wxListCtrl_HitTest(IntPtr self, inout Point point, int flags);
+		static extern (C) int    wxListCtrl_FindItemPoint(IntPtr self, int start, ref Point pt, int direction);
+		static extern (C) int    wxListCtrl_HitTest(IntPtr self, ref Point point, int flags);
 		static extern (C) int    wxListCtrl_InsertItem(IntPtr self, IntPtr info);
 		static extern (C) int    wxListCtrl_InsertTextItem(IntPtr self, int index, string label);
 		static extern (C) int    wxListCtrl_InsertImageItem(IntPtr self, int index, int imageIndex);
@@ -309,7 +309,7 @@ public import wx.ImageList;
 		static extern (C) bool   wxListCtrl_ScrollList(IntPtr self, int dx, int dy);
 		static extern (C) bool   wxListCtrl_SortItems(IntPtr self, wxListCtrlCompare fn, int data);
 		
-		static extern (C) void   wxListCtrl_GetViewRect(IntPtr self, inout Rectangle rect);
+		static extern (C) void   wxListCtrl_GetViewRect(IntPtr self, ref Rectangle rect);
 		
 		static extern (C) void   wxListCtrl_RefreshItem(IntPtr self, int item);
 		static extern (C) void   wxListCtrl_RefreshItems(IntPtr self, int itemFrom, int itemTo);
@@ -495,7 +495,7 @@ public import wx.ImageList;
 
 		//---------------------------------------------------------------------
 
-		public bool GetItem(inout ListItem info)
+		public bool GetItem(ref ListItem info)
 		{
 			bool retval = false;
 			info  = cast(ListItem)FindObject(wxListCtrl_GetItem(wxobj, wxObject.SafePtr(info), retval), &ListItem.New);
@@ -964,7 +964,7 @@ public import wx.ImageList;
 		static extern (C) int   wxListEvent_GetIndex(IntPtr self);
 		static extern (C) int    wxListEvent_GetKeyCode(IntPtr self);
 		static extern (C) int    wxListEvent_GetColumn(IntPtr self);
-		static extern (C) void   wxListEvent_GetPoint(IntPtr self, inout Point pt);
+		static extern (C) void   wxListEvent_GetPoint(IntPtr self, ref Point pt);
 		static extern (C) IntPtr wxListEvent_GetText(IntPtr self);
 		static extern (C) int wxListEvent_GetImage(IntPtr self);
 		static extern (C) int wxListEvent_GetData(IntPtr self);
@@ -1121,7 +1121,7 @@ public import wx.ImageList;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxListView_ctor();
-		static extern (C) bool wxListView_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, IntPtr validator, string name);
+		static extern (C) bool wxListView_Create(IntPtr self, IntPtr parent, int id, ref Point pos, ref Size size, uint style, IntPtr validator, string name);
 		static extern (C) void   wxListView_RegisterVirtual(IntPtr self, ListCtrl obj, Virtual_OnGetItemAttr onGetItemAttr,
 			Virtual_OnGetItemImage onGetItemImage,
 			Virtual_OnGetItemColumnImage onGetItemColumnImage,

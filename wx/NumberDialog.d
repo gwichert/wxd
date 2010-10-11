@@ -14,7 +14,7 @@ public import wx.common;
 public import wx.Dialog;
 
 		//! \cond EXTERN
-        static extern (C) IntPtr wxNumberEntryDialog_ctor(IntPtr parent, string message, string prompt, string caption, int value, int min, int max, inout Point pos);
+        static extern (C) IntPtr wxNumberEntryDialog_ctor(IntPtr parent, string message, string prompt, string caption, int value, int min, int max, ref Point pos);
         static extern (C) void wxNumberEntryDialog_dtor(IntPtr self);
         static extern (C) int wxNumberEntryDialog_GetValue(IntPtr self);
         static extern (C) int wxNumberEntryDialog_ShowModal(IntPtr self);
@@ -48,7 +48,7 @@ public import wx.Dialog;
     //-----------------------------------------------------------------------------
 
 		//! \cond EXTERN
-        static extern (C) int wxGetNumberFromUser_func(string message, string prompt, string caption, int value, int min, int max, IntPtr parent, inout Point pos);
+        static extern (C) int wxGetNumberFromUser_func(string message, string prompt, string caption, int value, int min, int max, IntPtr parent, ref Point pos);
 		//! \endcond
 
         //-----------------------------------------------------------------------------

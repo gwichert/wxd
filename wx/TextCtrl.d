@@ -245,14 +245,14 @@ public import wx.KeyEvent;
 		static extern (C) void   wxTextCtrl_AppendText(IntPtr self, string text);
 		static extern (C) bool   wxTextCtrl_EmulateKeyPress(IntPtr self, IntPtr evt);
 		static extern (C) bool   wxTextCtrl_SetStyle(IntPtr self, uint start, uint end, IntPtr style);
-		static extern (C) bool   wxTextCtrl_GetStyle(IntPtr self, uint position, inout IntPtr style);
+		static extern (C) bool   wxTextCtrl_GetStyle(IntPtr self, uint position, ref IntPtr style);
 		static extern (C) bool   wxTextCtrl_SetDefaultStyle(IntPtr self, IntPtr style);
 		static extern (C) IntPtr wxTextCtrl_GetDefaultStyle(IntPtr self);
 		static extern (C) uint   wxTextCtrl_XYToPosition(IntPtr self, uint x, uint y);
 		static extern (C) bool   wxTextCtrl_PositionToXY(IntPtr self, uint pos, out int x, out int y);
 		static extern (C) void   wxTextCtrl_ShowPosition(IntPtr self, uint pos);
-		static extern (C) int    wxTextCtrl_HitTest(IntPtr self, inout Point pt, out int pos);
-		static extern (C) int    wxTextCtrl_HitTest2(IntPtr self, inout Point pt, out int col, out int row);
+		static extern (C) int    wxTextCtrl_HitTest(IntPtr self, ref Point pt, out int pos);
+		static extern (C) int    wxTextCtrl_HitTest2(IntPtr self, ref Point pt, out int col, out int row);
 		static extern (C) void   wxTextCtrl_Copy(IntPtr self);
 		static extern (C) void   wxTextCtrl_Cut(IntPtr self);
 		static extern (C) void   wxTextCtrl_Paste(IntPtr self);
@@ -271,7 +271,7 @@ public import wx.KeyEvent;
 		static extern (C) void   wxTextCtrl_SelectAll(IntPtr self);
 		static extern (C) void   wxTextCtrl_SetEditable(IntPtr self, bool editable);
 		static extern (C)        IntPtr wxTextCtrl_ctor();
-		static extern (C) bool   wxTextCtrl_Create(IntPtr self, IntPtr parent, int id, string value, inout Point pos, inout Size size, uint style, IntPtr validator, string name);
+		static extern (C) bool   wxTextCtrl_Create(IntPtr self, IntPtr parent, int id, string value, ref Point pos, ref Size size, uint style, IntPtr validator, string name);
 		static extern (C) bool   wxTextCtrl_Enable(IntPtr self, bool enable);
 		static extern (C) void   wxTextCtrl_OnDropFiles(IntPtr self, IntPtr evt);
 		static extern (C) bool   wxTextCtrl_SetFont(IntPtr self, IntPtr font);
@@ -518,7 +518,7 @@ public import wx.KeyEvent;
 			return wxTextCtrl_SetStyle(wxobj, cast(uint)start, cast(uint)end, wxObject.SafePtr(style));
 		}
 		
-		public bool GetStyle(int position, inout TextAttr style)
+		public bool GetStyle(int position, ref TextAttr style)
 		{
 			IntPtr tmp = wxObject.SafePtr(style);
 			bool retval = wxTextCtrl_GetStyle(wxobj, cast(uint)position, tmp);

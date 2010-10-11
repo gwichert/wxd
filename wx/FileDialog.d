@@ -30,7 +30,7 @@ private import std.string;
 //! \endcond
 
 		//! \cond EXTERN
-        static extern (C) IntPtr wxFileDialog_ctor(IntPtr parent, string message, string defaultDir, string defaultFile, string wildcard, uint style, inout Point pos);
+        static extern (C) IntPtr wxFileDialog_ctor(IntPtr parent, string message, string defaultDir, string defaultFile, string wildcard, uint style, ref Point pos);
         static extern (C) void   wxFileDialog_dtor(IntPtr self);
 
         static extern (C) IntPtr wxFileDialog_GetDirectory(IntPtr self);

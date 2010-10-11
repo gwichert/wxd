@@ -22,7 +22,7 @@ public import wx.ClientData;
 		static extern (C) IntPtr wxListBox_ctor();
 		static extern (C) void   wxListBox_dtor(IntPtr self);
 		static extern (C) void   wxListBox_Clear(IntPtr self);
-		static extern (C) bool   wxListBox_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, int n, string* choices, uint style, IntPtr validator, string name);
+		static extern (C) bool   wxListBox_Create(IntPtr self, IntPtr parent, int id, ref Point pos, ref Size size, int n, string* choices, uint style, IntPtr validator, string name);
 		static extern (C) void   wxListBox_InsertText(IntPtr self, string item, int pos);
 		static extern (C) void   wxListBox_InsertTextData(IntPtr self, string item, int pos, IntPtr data);
 		static extern (C) void   wxListBox_InsertTextClientData(IntPtr self, string item, int pos, IntPtr clientData);
@@ -99,7 +99,7 @@ public import wx.ClientData;
 		
 		//---------------------------------------------------------------------
 	
-		public bool Create(Window parent, int id, inout Point pos, inout Size size, int n,
+		public bool Create(Window parent, int id, ref Point pos, ref Size size, int n,
 				string[] choices, int style, Validator validator, string name)
 		{
 			return wxListBox_Create(wxobj, wxObject.SafePtr(parent), id,
@@ -278,8 +278,8 @@ public import wx.ClientData;
 		static extern (C) IntPtr wxCheckListBox_ctor1();
 		static extern (C) IntPtr wxCheckListBox_ctor2(IntPtr parent, 
 			int id,
-			inout Point pos,
-			inout Size size,
+			ref Point pos,
+			ref Size size,
 			int nStrings,
 			string* choices,
 			uint style,

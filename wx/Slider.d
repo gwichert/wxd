@@ -18,7 +18,7 @@ public import wx.Control;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxSlider_ctor();
-		static extern (C) bool   wxSlider_Create(IntPtr self, IntPtr parent, int id, int value, int minValue, int maxValue, inout Point pos, inout Size size, uint style, IntPtr validator, string name);
+		static extern (C) bool   wxSlider_Create(IntPtr self, IntPtr parent, int id, int value, int minValue, int maxValue, ref Point pos, ref Size size, uint style, IntPtr validator, string name);
 		static extern (C) int    wxSlider_GetValue(IntPtr self);
 		static extern (C) void   wxSlider_SetValue(IntPtr self, int value);
 		static extern (C) void   wxSlider_SetRange(IntPtr self, int minValue, int maxValue);
@@ -89,7 +89,7 @@ public import wx.Control;
 		
 		//---------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, int value, int minValue, int maxValue, inout Point pos, inout Size size, int style, Validator validator, string name)
+		public bool Create(Window parent, int id, int value, int minValue, int maxValue, ref Point pos, ref Size size, int style, Validator validator, string name)
 		{
 			return wxSlider_Create(wxobj, wxObject.SafePtr(parent), id, value, minValue, maxValue, pos, size, cast(uint)style, wxObject.SafePtr(validator), name);
 		}

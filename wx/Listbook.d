@@ -83,13 +83,13 @@ public import wx.ImageList;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxListbook_ctor();
-		static extern (C) bool wxListbook_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
+		static extern (C) bool wxListbook_Create(IntPtr self, IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
 		static extern (C) int wxListbook_GetSelection(IntPtr self);
 		static extern (C) bool wxListbook_SetPageText(IntPtr self, int n, string strText);
 		static extern (C) IntPtr wxListbook_GetPageText(IntPtr self, int n);
 		static extern (C) int wxListbook_GetPageImage(IntPtr self, int n);
 		static extern (C) bool wxListbook_SetPageImage(IntPtr self, int n, int imageId);
-		static extern (C) void wxListbook_CalcSizeFromPage(IntPtr self, inout Size sizePage, out Size outSize);
+		static extern (C) void wxListbook_CalcSizeFromPage(IntPtr self, ref Size sizePage, out Size outSize);
 		static extern (C) bool wxListbook_InsertPage(IntPtr self, int n, IntPtr page, string text, bool bSelect, int imageId);
 		static extern (C) int wxListbook_SetSelection(IntPtr self, int n);
 		static extern (C) void wxListbook_SetImageList(IntPtr self, IntPtr imageList);
@@ -98,7 +98,7 @@ public import wx.ImageList;
 		static extern (C) IntPtr wxListbook_GetPage(IntPtr self, int n);
 		static extern (C) void wxListbook_AssignImageList(IntPtr self, IntPtr imageList);
 		static extern (C) IntPtr wxListbook_GetImageList(IntPtr self);
-		static extern (C) void wxListbook_SetPageSize(IntPtr self, inout Size size);
+		static extern (C) void wxListbook_SetPageSize(IntPtr self, ref Size size);
 		static extern (C) bool wxListbook_DeletePage(IntPtr self, int nPage);
 		static extern (C) bool wxListbook_RemovePage(IntPtr self, int nPage);
 		static extern (C) bool wxListbook_DeleteAllPages(IntPtr self);

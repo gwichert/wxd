@@ -43,7 +43,7 @@ public import wx.Icon;
 		static extern (C) int    wxBitmap_GetDepth(IntPtr self);
 		static extern (C) void   wxBitmap_SetDepth(IntPtr self, int depth);
 		
-		static extern (C) IntPtr wxBitmap_GetSubBitmap(IntPtr self, inout Rectangle rect);
+		static extern (C) IntPtr wxBitmap_GetSubBitmap(IntPtr self, ref Rectangle rect);
 		
 		static extern (C) IntPtr wxBitmap_GetMask(IntPtr self);
 		static extern (C) IntPtr wxBitmap_SetMask(IntPtr self, IntPtr mask);

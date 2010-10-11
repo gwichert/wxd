@@ -40,7 +40,7 @@ public import wx.CommandEvent;
 
 		//! \cond EXTERN
         static extern (C) IntPtr wxCalendarCtrl_ctor();
-        static extern (C) bool   wxCalendarCtrl_Create(IntPtr self, IntPtr parent, int id, IntPtr date, inout Point pos, inout Size size, uint style, string name);
+        static extern (C) bool   wxCalendarCtrl_Create(IntPtr self, IntPtr parent, int id, IntPtr date, ref Point pos, ref Size size, uint style, string name);
         static extern (C) bool   wxCalendarCtrl_SetDate(IntPtr self, IntPtr date);
         static extern (C) IntPtr wxCalendarCtrl_GetDate(IntPtr self);
         static extern (C) bool   wxCalendarCtrl_SetLowerDateLimit(IntPtr self, IntPtr date);
@@ -64,7 +64,7 @@ public import wx.CommandEvent;
         static extern (C) void   wxCalendarCtrl_SetAttr(IntPtr self, int day, IntPtr attr);
         static extern (C) void   wxCalendarCtrl_SetHoliday(IntPtr self, int day);
         static extern (C) void   wxCalendarCtrl_ResetAttr(IntPtr self, int day);
-        static extern (C) int    wxCalendarCtrl_HitTest(IntPtr self, inout Point pos, IntPtr date, inout DayOfWeek wd);
+        static extern (C) int    wxCalendarCtrl_HitTest(IntPtr self, ref Point pos, IntPtr date, ref DayOfWeek wd);
 		//! \endcond
 
         //-----------------------------------------------------------------------------
@@ -123,7 +123,7 @@ public import wx.CommandEvent;
 		
 	//-----------------------------------------------------------------------------
 
-        public bool Create(Window parent, int id, wxDateTime date, inout Point pos, inout Size size, int style, string name)
+        public bool Create(Window parent, int id, wxDateTime date, ref Point pos, ref Size size, int style, string name)
         {
             return wxCalendarCtrl_Create(wxobj, wxObject.SafePtr(parent), id, wxObject.SafePtr(date), pos, size, cast(uint)style, name);
         }
@@ -217,7 +217,7 @@ public import wx.CommandEvent;
 
         //-----------------------------------------------------------------------------
 
-        public CalendarHitTestResult HitTest(Point pos, inout DateTime date, inout DayOfWeek wd)
+        public CalendarHitTestResult HitTest(Point pos, ref DateTime date, ref DayOfWeek wd)
         {
             wxDateTime dt = date;
             CalendarHitTestResult res = cast(CalendarHitTestResult)wxCalendarCtrl_HitTest(wxobj, pos, wxObject.SafePtr(dt), wd);

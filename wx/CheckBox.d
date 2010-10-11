@@ -28,7 +28,7 @@ public import wx.Control;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxCheckBox_ctor();
-		static extern (C) bool   wxCheckBox_Create(IntPtr self, IntPtr parent, int id, string label, inout Point pos, inout Size size, uint style, IntPtr val, string name);
+		static extern (C) bool   wxCheckBox_Create(IntPtr self, IntPtr parent, int id, string label, ref Point pos, ref Size size, uint style, IntPtr val, string name);
 		static extern (C) bool   wxCheckBox_GetValue(IntPtr self);
 		static extern (C) void   wxCheckBox_SetValue(IntPtr self, bool state);
 		static extern (C) bool   wxCheckBox_IsChecked(IntPtr self);
@@ -78,7 +78,7 @@ public import wx.Control;
 		
 		//---------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, string label, inout Point pos, inout Size size,
+		public bool Create(Window parent, int id, string label, ref Point pos, ref Size size,
 			int style, Validator val, string name)
 		{
 			return wxCheckBox_Create(wxobj, wxObject.SafePtr(parent), id,

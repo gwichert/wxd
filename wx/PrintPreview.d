@@ -95,14 +95,14 @@ public import wx.Printer;
 
         //-----------------------------------------------------------------------------
 
-        public bool PaintPage(Window canvas, inout DC dc)
+        public bool PaintPage(Window canvas, ref DC dc)
         {
             return wxPrintPreview_PaintPage(wxobj, wxObject.SafePtr(canvas), wxObject.SafePtr(dc));
         }
 
         //-----------------------------------------------------------------------------
 
-        public bool DrawBlankPage(Window canvas, inout DC dc)
+        public bool DrawBlankPage(Window canvas, ref DC dc)
         {
             return wxPrintPreview_DrawBlankPage(wxobj, wxObject.SafePtr(canvas), wxObject.SafePtr(dc));
         }
@@ -150,7 +150,7 @@ public import wx.Printer;
     }
 
 		//! \cond EXTERN
-        static extern (C) IntPtr wxPreviewFrame_ctor(IntPtr preview, IntPtr parent, string title, inout Point pos, inout Size size, uint style, string name);
+        static extern (C) IntPtr wxPreviewFrame_ctor(IntPtr preview, IntPtr parent, string title, ref Point pos, ref Size size, uint style, string name);
         static extern (C) void   wxPreviewFrame_Initialize(IntPtr self);
         static extern (C) void   wxPreviewFrame_CreateCanvas(IntPtr self);
         static extern (C) void   wxPreviewFrame_CreateControlBar(IntPtr self);
@@ -190,7 +190,7 @@ public import wx.Printer;
     }
 
 		//! \cond EXTERN
-        static extern (C) IntPtr wxPreviewControlBar_ctor(IntPtr preview, int buttons, IntPtr parent, inout Point pos, inout Size size, uint style, string name);
+        static extern (C) IntPtr wxPreviewControlBar_ctor(IntPtr preview, int buttons, IntPtr parent, ref Point pos, ref Size size, uint style, string name);
         static extern (C) void   wxPreviewControlBar_CreateButtons(IntPtr self);
         static extern (C) void   wxPreviewControlBar_SetZoomControl(IntPtr self, int zoom);
         static extern (C) int    wxPreviewControlBar_GetZoomControl(IntPtr self);
@@ -247,7 +247,7 @@ public import wx.Printer;
     }
 
 		//! \cond EXTERN
-        static extern (C) IntPtr wxPreviewCanvas_ctor(IntPtr preview, IntPtr parent, inout Point pos, inout Size size, uint style, string name);
+        static extern (C) IntPtr wxPreviewCanvas_ctor(IntPtr preview, IntPtr parent, ref Point pos, ref Size size, uint style, string name);
 		//! \endcond
 
         //-----------------------------------------------------------------------------

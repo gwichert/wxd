@@ -23,10 +23,10 @@ public import wx.Dialog;
 		//! \cond EXTERN
 
 		// MessageBox function
-		static extern (C) int    wxMsgBox(IntPtr parent, string msg, string cap, uint style, inout Point pos);
+		static extern (C) int    wxMsgBox(IntPtr parent, string msg, string cap, uint style, ref Point pos);
 
 		// Message dialog methods
-		static extern (C) IntPtr wxMessageDialog_ctor(IntPtr parent, string message, string caption, uint style, inout Point pos);
+		static extern (C) IntPtr wxMessageDialog_ctor(IntPtr parent, string message, string caption, uint style, ref Point pos);
 		static extern (C) int    wxMessageDialog_ShowModal(IntPtr self);
 
 		//! \endcond

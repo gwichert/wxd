@@ -25,7 +25,7 @@ public import wx.Menu;
 		static extern (C) void   wxMenuBar_Check(IntPtr self, int id, bool check);
 		static extern (C) bool   wxMenuBar_IsChecked(IntPtr self, int id);
         	static extern (C) bool   wxMenuBar_Insert(IntPtr self, int pos, IntPtr menu, string title);
-        	static extern (C) IntPtr wxMenuBar_FindItem(IntPtr self, int id, inout IntPtr menu);
+        	static extern (C) IntPtr wxMenuBar_FindItem(IntPtr self, int id, ref IntPtr menu);
 		
 		static extern (C) int    wxMenuBar_GetMenuCount(IntPtr self);
 		static extern (C) IntPtr wxMenuBar_GetMenu(IntPtr self, int pos);
@@ -106,7 +106,7 @@ public import wx.Menu;
 			return FindItem(id, menu); 
 		}
 		
-		public MenuItem FindItem(int id, inout Menu menu)
+		public MenuItem FindItem(int id, ref Menu menu)
 		{
 			IntPtr menuRef = IntPtr.init;
 			if (menu) 

@@ -21,7 +21,7 @@ public import wx.ClientData;
 		
 		//! \cond EXTERN
 		static extern (C) IntPtr wxComboBox_ctor();
-		static extern (C) bool   wxComboBox_Create(IntPtr self, IntPtr window, int id, string value, inout Point pos, inout Size size, int n, string* choices, uint style, IntPtr validator, string name);
+		static extern (C) bool   wxComboBox_Create(IntPtr self, IntPtr window, int id, string value, ref Point pos, ref Size size, int n, string* choices, uint style, IntPtr validator, string name);
 		
 		static extern (C) void   wxComboBox_Append(IntPtr self, string item);
 		static extern (C) void   wxComboBox_AppendData(IntPtr self, string item, IntPtr data);

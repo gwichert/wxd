@@ -18,7 +18,7 @@ public import wx.common;
 public import wx.Dialog;
 
 		//! \cond EXTERN
-        static extern (C) IntPtr wxTextEntryDialog_ctor(IntPtr parent, string message, string caption, string value, uint style, inout Point pos);
+        static extern (C) IntPtr wxTextEntryDialog_ctor(IntPtr parent, string message, string caption, string value, uint style, ref Point pos);
         static extern (C) void wxTextEntryDialog_dtor(IntPtr self);
         static extern (C) void wxTextEntryDialog_SetValue(IntPtr self, string val);
         static extern (C) IntPtr wxTextEntryDialog_GetValue(IntPtr self);

@@ -36,9 +36,9 @@ public import wx.Window;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxDisplay_ctor(int index);
-		//static extern (C) IntPtr wxDisplay_ctor(inout VideoMode mode);
+		//static extern (C) IntPtr wxDisplay_ctor(ref VideoMode mode);
 		static extern (C) int wxDisplay_GetCount();
-		static extern (C) int wxDisplay_GetFromPoint(inout Point pt);
+		static extern (C) int wxDisplay_GetFromPoint(ref Point pt);
 		static extern (C) int wxDisplay_GetFromWindow(IntPtr window);
 		static extern (C) void wxDisplay_GetGeometry(IntPtr self, out Rectangle rect);
 		static extern (C) IntPtr wxDisplay_GetName(IntPtr self);
@@ -48,7 +48,7 @@ public import wx.Window;
 
 
 		static extern (C) int wxDisplay_GetNumModes(IntPtr self, VideoMode mode);
-		static extern (C) void wxDisplay_GetModes(IntPtr self, VideoMode mode, inout VideoMode[] modes);
+		static extern (C) void wxDisplay_GetModes(IntPtr self, VideoMode mode, ref VideoMode[] modes);
 
 		
 		static extern (C) void wxDisplay_ResetMode(IntPtr self);

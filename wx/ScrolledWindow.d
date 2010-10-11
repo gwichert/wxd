@@ -18,15 +18,15 @@ public import wx.common;
 public import wx.Panel;
 
 		//! \cond EXTERN
-		static extern (C) IntPtr wxScrollWnd_ctor(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
+		static extern (C) IntPtr wxScrollWnd_ctor(IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
 		static extern (C) void   wxScrollWnd_PrepareDC(IntPtr self, IntPtr dc);
 		static extern (C) void   wxScrollWnd_SetScrollbars(IntPtr self, int pixX, int pixY, int numX, int numY, int x, int y, bool noRefresh);
-		static extern (C) void   wxScrollWnd_GetViewStart(IntPtr self, inout int x, inout int y);
-		static extern (C) void   wxScrollWnd_GetScrollPixelsPerUnit(IntPtr self, inout int xUnit, inout int yUnit);
+		static extern (C) void   wxScrollWnd_GetViewStart(IntPtr self, ref int x, ref int y);
+		static extern (C) void   wxScrollWnd_GetScrollPixelsPerUnit(IntPtr self, ref int xUnit, ref int yUnit);
 		
-		static extern (C) void   wxScrollWnd_CalcScrolledPosition(IntPtr self, int x, int y, inout int xx, inout int yy);
-		static extern (C) void   wxScrollWnd_CalcUnscrolledPosition(IntPtr self, int x, int y, inout int xx, inout int yy);
-		static extern (C) void   wxScrollWnd_GetVirtualSize(IntPtr self, inout int x, inout int y);
+		static extern (C) void   wxScrollWnd_CalcScrolledPosition(IntPtr self, int x, int y, ref int xx, ref int yy);
+		static extern (C) void   wxScrollWnd_CalcUnscrolledPosition(IntPtr self, int x, int y, ref int xx, ref int yy);
+		static extern (C) void   wxScrollWnd_GetVirtualSize(IntPtr self, ref int x, ref int y);
 		static extern (C) void   wxScrollWnd_Scroll(IntPtr self, int x, int y);
 		static extern (C) void   wxScrollWnd_SetScrollRate(IntPtr self, int xstep, int ystep);
 		static extern (C) void   wxScrollWnd_SetTargetWindow(IntPtr self, IntPtr window);
@@ -104,35 +104,35 @@ public import wx.Panel;
 			return pt;
 		}
 
-		public void GetViewStart(inout int x, inout int y)
+		public void GetViewStart(ref int x, ref int y)
 		{
 			wxScrollWnd_GetViewStart(wxobj, x, y);
 		}
 
 		//---------------------------------------------------------------------
 
-		public void GetScrollPixelsPerUnit(inout int xUnit, inout int yUnit)
+		public void GetScrollPixelsPerUnit(ref int xUnit, ref int yUnit)
 		{
 			wxScrollWnd_GetScrollPixelsPerUnit(wxobj, xUnit, yUnit);
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void CalcScrolledPosition(int x, int y, inout int xx, inout int yy)
+		public void CalcScrolledPosition(int x, int y, ref int xx, ref int yy)
 		{
 			wxScrollWnd_CalcScrolledPosition(wxobj, x, y, xx, yy);
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void CalcUnscrolledPosition(int x, int y, inout int xx, inout int yy)
+		public void CalcUnscrolledPosition(int x, int y, ref int xx, ref int yy)
 		{
 			wxScrollWnd_CalcUnscrolledPosition(wxobj, x, y, xx, yy);
 		}
 		
 		//---------------------------------------------------------------------
 		
-		public void GetVirtualSize(inout int x, inout int y)
+		public void GetVirtualSize(ref int x, ref int y)
 		{
 			wxScrollWnd_GetVirtualSize(wxobj, x, y);
 		}

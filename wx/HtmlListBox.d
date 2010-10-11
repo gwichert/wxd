@@ -25,11 +25,11 @@ public import wx.VLBox;
 		alias void function(HtmlListBox obj, int n) Virtual_VoidSizeT;
 		alias string function(HtmlListBox obj, int n) Virtual_wxStringSizeT;
 		alias IntPtr function(HtmlListBox obj, IntPtr colour) Virtual_wxColourwxColour;
-		alias void function(HtmlListBox obj, IntPtr dc, inout Rectangle rect, int n) Virtual_OnDrawItem;
+		alias void function(HtmlListBox obj, IntPtr dc, ref Rectangle rect, int n) Virtual_OnDrawItem;
 		alias int function(HtmlListBox obj, int n) Virtual_OnMeasureItem;
 		}
 
-		static extern (C) IntPtr wxHtmlListBox_ctor2(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
+		static extern (C) IntPtr wxHtmlListBox_ctor2(IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
 		static extern (C) void wxHtmlListBox_RegisterVirtual(IntPtr self,HtmlListBox obj,
 			Virtual_VoidNoParams refreshAll,
 			Virtual_VoidSizeT setItemCount,
@@ -42,20 +42,20 @@ public import wx.VLBox;
 			Virtual_OnDrawItem onDrawSeparator,
 			Virtual_OnDrawItem onDrawBackground,
 			Virtual_OnMeasureItem onGetLineHeight);
-		static extern (C) bool wxHtmlListBox_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, int style, string name);
+		static extern (C) bool wxHtmlListBox_Create(IntPtr self, IntPtr parent, int id, ref Point pos, ref Size size, int style, string name);
 		static extern (C) void wxHtmlListBox_RefreshAll(IntPtr self);
 		static extern (C) void wxHtmlListBox_SetItemCount(IntPtr self, int count);
 		static extern (C) IntPtr wxHtmlListBox_OnGetItemMarkup(IntPtr self, int n);
 		static extern (C) IntPtr wxHtmlListBox_GetSelectedTextColour(IntPtr self, IntPtr colFg);
 		static extern (C) IntPtr wxHtmlListBox_GetSelectedTextBgColour(IntPtr self, IntPtr colBg);
-		static extern (C) void wxHtmlListBox_OnDrawItem(IntPtr self, IntPtr dc, inout Rectangle rect, int n);
+		static extern (C) void wxHtmlListBox_OnDrawItem(IntPtr self, IntPtr dc, ref Rectangle rect, int n);
 		static extern (C) int wxHtmlListBox_OnMeasureItem(IntPtr self, int n);
 		static extern (C) void wxHtmlListBox_OnSize(IntPtr self, IntPtr evt);
 		static extern (C) void wxHtmlListBox_Init(IntPtr self);
 		static extern (C) void wxHtmlListBox_CacheItem(IntPtr self, int n);
 		
-		static extern (C) void wxHtmlListBox_OnDrawSeparator(IntPtr self, IntPtr dc, inout Rectangle rect, int n);
-		static extern (C) void wxHtmlListBox_OnDrawBackground(IntPtr self, IntPtr dc, inout Rectangle rect, int n);
+		static extern (C) void wxHtmlListBox_OnDrawSeparator(IntPtr self, IntPtr dc, ref Rectangle rect, int n);
+		static extern (C) void wxHtmlListBox_OnDrawBackground(IntPtr self, IntPtr dc, ref Rectangle rect, int n);
 		static extern (C) int wxHtmlListBox_OnGetLineHeight(IntPtr self, int line);		
 		//! \endcond
 		
@@ -95,7 +95,7 @@ public import wx.VLBox;
 		
 		//-----------------------------------------------------------------------------
 		
-		public override bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
+		public override bool Create(Window parent, int id, ref Point pos, ref Size size, int style, string name)
 		{
 			return wxHtmlListBox_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, style, name);
 		}
@@ -167,7 +167,7 @@ public import wx.VLBox;
 		
 		//-----------------------------------------------------------------------------
 		
-		static extern(C) private void staticDoOnDrawItem(HtmlListBox obj, IntPtr dc, inout Rectangle rect, int n)
+		static extern(C) private void staticDoOnDrawItem(HtmlListBox obj, IntPtr dc, ref Rectangle rect, int n)
 		{
 			obj.OnDrawItem(cast(DC)FindObject(dc, &DC.New), rect, n);
 		}
@@ -216,7 +216,7 @@ public import wx.VLBox;
 			wxHtmlListBox_OnDrawSeparator(wxobj, wxObject.SafePtr(dc), rect, n);
 		}
 		
-		static extern(C) private void staticDoOnDrawSeparator(HtmlListBox obj,IntPtr dc, inout Rectangle rect, int n)
+		static extern(C) private void staticDoOnDrawSeparator(HtmlListBox obj,IntPtr dc, ref Rectangle rect, int n)
 		{
 			obj.OnDrawSeparator(cast(DC)FindObject(dc, &DC.New), rect, n);
 		}
@@ -228,7 +228,7 @@ public import wx.VLBox;
 			wxHtmlListBox_OnDrawBackground(wxobj, wxObject.SafePtr(dc), rect, n);
 		}
 		
-		static extern(C) private void staticDoOnDrawBackground(HtmlListBox obj,IntPtr dc, inout Rectangle rect, int n)
+		static extern(C) private void staticDoOnDrawBackground(HtmlListBox obj,IntPtr dc, ref Rectangle rect, int n)
 		{
 			obj.OnDrawBackground(cast(DC)FindObject(dc, &DC.New), rect, n);
 		}

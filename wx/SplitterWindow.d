@@ -32,7 +32,7 @@ public import wx.Window;
 		alias bool function(SplitterWindow obj, int newSashPosition) Virtual_OnSashPositionChange;
 		}
 		
-		static extern (C) IntPtr wxSplitWnd_ctor(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
+		static extern (C) IntPtr wxSplitWnd_ctor(IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
 		static extern (C) void   wxSplitWnd_RegisterVirtual(IntPtr self, SplitterWindow obj, Virtual_OnDoubleClickSash onDoubleClickSash, Virtual_OnUnsplit onUnsplit, Virtual_OnSashPositionChange onSashPositionChange);
 		static extern (C) void   wxSplitWnd_OnDoubleClickSash(IntPtr self, int x, int y);
 		static extern (C) void   wxSplitWnd_OnUnsplit(IntPtr self, IntPtr removed);

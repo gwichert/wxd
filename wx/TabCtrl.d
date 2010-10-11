@@ -91,7 +91,7 @@ public import wx.wxString;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxTabCtrl_ctor();
-		static extern (C) IntPtr wxTabCtrl_ctor2(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
+		static extern (C) IntPtr wxTabCtrl_ctor2(IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
 		static extern (C) int wxTabCtrl_GetSelection(IntPtr self);
 		static extern (C) int wxTabCtrl_GetCurFocus(IntPtr self);
 		static extern (C) IntPtr wxTabCtrl_GetImageList(IntPtr self);
@@ -106,12 +106,12 @@ public import wx.wxString;
 		static extern (C) bool wxTabCtrl_SetItemText(IntPtr self, int item, string text);
 		static extern (C) bool wxTabCtrl_SetItemImage(IntPtr self, int item, int image);
 		static extern (C) bool wxTabCtrl_SetItemData(IntPtr self, int item, IntPtr data);
-		static extern (C) void wxTabCtrl_SetItemSize(IntPtr self, inout Size size);
-		static extern (C) bool wxTabCtrl_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
-		static extern (C) void wxTabCtrl_SetPadding(IntPtr self, inout Size padding);
+		static extern (C) void wxTabCtrl_SetItemSize(IntPtr self, ref Size size);
+		static extern (C) bool wxTabCtrl_Create(IntPtr self, IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
+		static extern (C) void wxTabCtrl_SetPadding(IntPtr self, ref Size padding);
 		static extern (C) bool wxTabCtrl_DeleteAllItems(IntPtr self);
 		static extern (C) bool wxTabCtrl_DeleteItem(IntPtr self, int item);
-		static extern (C) int wxTabCtrl_HitTest(IntPtr self, inout Point pt, out int flags);
+		static extern (C) int wxTabCtrl_HitTest(IntPtr self, ref Point pt, out int flags);
 		static extern (C) bool wxTabCtrl_InsertItem(IntPtr self, int item, string text, int imageId, IntPtr data);
 		//! \endcond
 
@@ -139,7 +139,7 @@ public import wx.wxString;
 
 		//-----------------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
+		public bool Create(Window parent, int id, ref Point pos, ref Size size, int style, string name)
 		{
 			return wxTabCtrl_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, cast(uint)style, name);
 		}

@@ -20,8 +20,8 @@ public import wx.Button;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxPanel_ctor();
-		static extern (C) IntPtr wxPanel_ctor2(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
-		static extern (C) bool wxPanel_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
+		static extern (C) IntPtr wxPanel_ctor2(IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
+		static extern (C) bool wxPanel_Create(IntPtr self, IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
 		static extern (C) void wxPanel_InitDialog(IntPtr self);
 		static extern (C) IntPtr wxPanel_GetDefaultItem(IntPtr self);
 		static extern (C) void wxPanel_SetDefaultItem(IntPtr self, IntPtr btn);
@@ -54,7 +54,7 @@ public import wx.Button;
 		
 		//---------------------------------------------------------------------
 		
-		public bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
+		public bool Create(Window parent, int id, ref Point pos, ref Size size, int style, string name)
 		{
 			return wxPanel_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, style, name);
 		}

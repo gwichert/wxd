@@ -23,16 +23,16 @@ public import wx.VScroll;
 		alias void function(VListBox obj, IntPtr dc, Rectangle rect, int n) Virtual_VoidDcRectSizeT;
 		}
 
-		static extern (C) IntPtr wxVListBox_ctor(IntPtr parent, int id, inout Point pos, inout Size size, uint style, string name);
+		static extern (C) IntPtr wxVListBox_ctor(IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
 		static extern (C) void wxVListBox_RegisterVirtual(IntPtr self, VListBox obj, 
 			Virtual_VoidDcRectSizeT onDrawItem, 
 			Virtual_IntInt onMeasureItem, 
 			Virtual_VoidDcRectSizeT onDrawSeparator,
 			Virtual_VoidDcRectSizeT onDrawBackground,
 			Virtual_IntInt onGetLineHeight);
-		static extern (C) bool wxVListBox_Create(IntPtr self,IntPtr parent, int id, inout Point pos, inout Size size, int style, string name);		
-		static extern (C) void wxVListBox_OnDrawSeparator(IntPtr self, IntPtr dc, inout Rectangle rect, int n);
-		static extern (C) void wxVListBox_OnDrawBackground(IntPtr self, IntPtr dc, inout Rectangle rect, int n);
+		static extern (C) bool wxVListBox_Create(IntPtr self,IntPtr parent, int id, ref Point pos, ref Size size, int style, string name);		
+		static extern (C) void wxVListBox_OnDrawSeparator(IntPtr self, IntPtr dc, ref Rectangle rect, int n);
+		static extern (C) void wxVListBox_OnDrawBackground(IntPtr self, IntPtr dc, ref Rectangle rect, int n);
 		static extern (C) int wxVListBox_OnGetLineHeight(IntPtr self, int line);
 		static extern (C) int wxVListBox_GetItemCount(IntPtr self);
 		static extern (C) bool wxVListBox_HasMultipleSelection(IntPtr self);
@@ -41,7 +41,7 @@ public import wx.VScroll;
 		static extern (C) bool wxVListBox_IsSelected(IntPtr self, int item);
 		static extern (C) int wxVListBox_GetSelectedCount(IntPtr self);
 		static extern (C) int wxVListBox_GetFirstSelected(IntPtr self, out uint cookie);
-		static extern (C) int wxVListBox_GetNextSelected(IntPtr self, inout uint cookie);
+		static extern (C) int wxVListBox_GetNextSelected(IntPtr self, ref uint cookie);
 		static extern (C) void wxVListBox_GetMargins(IntPtr self, out Point pt);
 		static extern (C) IntPtr wxVListBox_GetSelectionBackground(IntPtr self);
 		static extern (C) void wxVListBox_SetItemCount(IntPtr self, int count);
@@ -52,7 +52,7 @@ public import wx.VScroll;
 		static extern (C) void wxVListBox_Toggle(IntPtr self, int item);
 		static extern (C) bool wxVListBox_SelectAll(IntPtr self);
 		static extern (C) bool wxVListBox_DeselectAll(IntPtr self);
-		static extern (C) void wxVListBox_SetMargins(IntPtr self, inout Point pt);
+		static extern (C) void wxVListBox_SetMargins(IntPtr self, ref Point pt);
 		static extern (C) void wxVListBox_SetMargins2(IntPtr self, int x, int y);
 		static extern (C) void wxVListBox_SetSelectionBackground(IntPtr self, IntPtr col);
 		//! \endcond
@@ -86,7 +86,7 @@ public import wx.VScroll;
 		
 		//-----------------------------------------------------------------------------
 		
-		public override bool Create(Window parent, int id, inout Point pos, inout Size size, int style, string name)
+		public override bool Create(Window parent, int id, ref Point pos, ref Size size, int style, string name)
 		{
 			return wxVListBox_Create(wxobj, wxObject.SafePtr(parent), id, pos, size, style, name); 
 		}
@@ -186,7 +186,7 @@ public import wx.VScroll;
 		
 		//-----------------------------------------------------------------------------
 		
-		public int GetNextSelected(inout uint cookie)
+		public int GetNextSelected(ref uint cookie)
 		{
 			return wxVListBox_GetNextSelected(wxobj, cookie);
 		}

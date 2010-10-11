@@ -20,7 +20,7 @@ public import wx.Control;
 		//! \cond EXTERN
 		static extern (C) IntPtr wxRadioBox_ctor();
 		static extern (C) bool   wxRadioBox_Create(IntPtr self, IntPtr parent, int id,
-		                                                           string label, inout Point pos, inout Size size,
+		                                                           string label, ref Point pos, ref Size size,
 		                                                           int n, string* choices, int majorDimension,
 		                                                           uint style, IntPtr val, string name);
 

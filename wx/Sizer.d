@@ -22,7 +22,7 @@ public import wx.Window;
 		static extern (C) void wxSizer_AddSizer(IntPtr self, IntPtr sizer, int proportion, int flag, int border, IntPtr userData);
 		static extern (C) void wxSizer_Add(IntPtr self, int width, int height, int proportion, int flag, int border, IntPtr userData);
 
-		static extern (C) void wxSizer_Fit(IntPtr self, IntPtr window, inout Size size);
+		static extern (C) void wxSizer_Fit(IntPtr self, IntPtr window, ref Size size);
 		static extern (C) void wxSizer_FitInside(IntPtr self, IntPtr window);
 		static extern (C) void wxSizer_Layout(IntPtr self);
 
@@ -41,11 +41,11 @@ public import wx.Window;
 		static extern (C) void wxSizer_Clear(IntPtr self, bool delete_windows);
 		static extern (C) void wxSizer_DeleteWindows(IntPtr self);
 
-		static extern (C) void wxSizer_SetMinSize(IntPtr self, inout Size size);
+		static extern (C) void wxSizer_SetMinSize(IntPtr self, ref Size size);
 
-		static extern (C) bool wxSizer_SetItemMinSizeWindow(IntPtr self, IntPtr window, inout Size size);
-		static extern (C) bool wxSizer_SetItemMinSizeSizer(IntPtr self, IntPtr sizer, inout Size size);
-		static extern (C) bool wxSizer_SetItemMinSize(IntPtr self, int pos, inout Size size);
+		static extern (C) bool wxSizer_SetItemMinSizeWindow(IntPtr self, IntPtr window, ref Size size);
+		static extern (C) bool wxSizer_SetItemMinSizeSizer(IntPtr self, IntPtr sizer, ref Size size);
+		static extern (C) bool wxSizer_SetItemMinSize(IntPtr self, int pos, ref Size size);
 
 		static extern (C) void wxSizer_GetSize(IntPtr self, out Size size);
 		static extern (C) void wxSizer_GetPosition(IntPtr self, out Point pt);

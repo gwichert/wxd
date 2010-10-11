@@ -27,7 +27,7 @@ public import wx.Window;
 		static extern (C) IntPtr wxDialog_GetTitle(IntPtr self);
 		static extern (C) void   wxDialog_SetTitle(IntPtr self, string title);
 
-		static extern (C) bool   wxDialog_Create(IntPtr self, IntPtr parent, int id, string title, inout Point pos, inout Size size, uint style, string name);
+		static extern (C) bool   wxDialog_Create(IntPtr self, IntPtr parent, int id, string title, ref Point pos, ref Size size, uint style, string name);
 
 		static extern (C) void   wxDialog_EndModal(IntPtr self, int retCode);
 
@@ -105,8 +105,8 @@ public import wx.Window;
 		
 		//---------------------------------------------------------------------
 
-		public bool Create(Window window, int id, string title, inout Point pos,
-						   inout Size size, int style, string name)
+		public bool Create(Window window, int id, string title, ref Point pos,
+						   ref Size size, int style, string name)
 		{
 			return wxDialog_Create(wxobj, wxObject.SafePtr(window), id, title,
 								   pos, size, cast(uint)style, name);

@@ -54,12 +54,12 @@ private import std.utf;
 	alias bool function(App o) Virtual_OnInit;
 	alias int  function(App o) Virtual_OnRun;
 	alias int  function(App o) Virtual_OnExit;
-	alias bool function(App o,inout int argc,char** argv) Virtual_Initialize;
+	alias bool function(App o,ref int argc,char** argv) Virtual_Initialize;
 	}
 	
 	static extern (C) IntPtr wxApp_ctor();
 	static extern (C) void wxApp_RegisterVirtual(IntPtr self, App o, Virtual_OnInit onInit, Virtual_OnRun onRun, Virtual_OnExit onExit, Virtual_Initialize initalize);
-	static extern (C) bool wxApp_Initialize(IntPtr self,inout int argc,char** argv);
+	static extern (C) bool wxApp_Initialize(IntPtr self,ref int argc,char** argv);
 	static extern (C) bool wxApp_OnInit(IntPtr self);
 	static extern (C) bool wxApp_OnRun(IntPtr self);
 	static extern (C) int wxApp_OnExit(IntPtr self);
@@ -113,7 +113,7 @@ private import std.utf;
 
         //---------------------------------------------------------------------
 
-	extern (C) private static bool staticInitialize(App o,inout int argc,char** argv)
+	extern (C) private static bool staticInitialize(App o,ref int argc,char** argv)
  	{
 		return o.Initialize(argc,argv);
  	}
@@ -136,7 +136,7 @@ private import std.utf;
 		return o.OnExit();
  	}
 
-	private bool Initialize(inout int argc,char** argv)
+	private bool Initialize(ref int argc,char** argv)
 	{
 		bool ret = wxApp_Initialize(wxobj, argc,argv);
 		InitializeStockObjects();

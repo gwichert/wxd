@@ -22,7 +22,7 @@ public import wx.ArrayString;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxChoice_ctor();
-		static extern (C) bool   wxChoice_Create(IntPtr self, IntPtr parent, int id, inout Point pos, inout Size size, int n, string* choices, int style, IntPtr validator, string name);
+		static extern (C) bool   wxChoice_Create(IntPtr self, IntPtr parent, int id, ref Point pos, ref Size size, int n, string* choices, int style, IntPtr validator, string name);
 		static extern (C) void   wxChoice_dtor(IntPtr self);
 
 		static extern (C) void   wxChoice_SetSelection(IntPtr self, int n);
@@ -108,7 +108,7 @@ public import wx.ArrayString;
 		
 		//---------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, inout Point pos, inout Size size,
+		public bool Create(Window parent, int id, ref Point pos, ref Size size,
 						   string[] choices, int style, Validator validator,
 						   string name)
 		{

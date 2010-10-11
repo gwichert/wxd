@@ -20,7 +20,7 @@ public import wx.Control;
 		//! \cond EXTERN
 		static extern (C) IntPtr wxGauge_ctor();
 		static extern (C) void   wxGauge_dtor(IntPtr self);
-		static extern (C) bool   wxGauge_Create(IntPtr self, IntPtr parent, int id, int range, inout Point pos, inout Size size, uint style, IntPtr validator, string name);
+		static extern (C) bool   wxGauge_Create(IntPtr self, IntPtr parent, int id, int range, ref Point pos, ref Size size, uint style, IntPtr validator, string name);
 		static extern (C) void   wxGauge_SetRange(IntPtr self, int range);
 		static extern (C) int    wxGauge_GetRange(IntPtr self);
 		static extern (C) void   wxGauge_SetValue(IntPtr self, int pos);
@@ -77,8 +77,8 @@ public import wx.Control;
 		
 		//---------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, int range, inout Point pos, 
-				inout Size size, int style, Validator validator, 
+		public bool Create(Window parent, int id, int range, ref Point pos, 
+				ref Size size, int style, Validator validator, 
 				string name)
 		{
 			return wxGauge_Create(wxobj, wxObject.SafePtr(parent), id, range, 

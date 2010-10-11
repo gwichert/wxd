@@ -21,9 +21,9 @@ public import wx.Panel;
 public import wx.WizardPage;
 
 		//! \cond EXTERN
-		static extern (C) IntPtr wxWizard_ctor(IntPtr parent, int id, string title, IntPtr bitmap, inout Point pos, int style);
+		static extern (C) IntPtr wxWizard_ctor(IntPtr parent, int id, string title, IntPtr bitmap, ref Point pos, int style);
 		static extern (C) bool   wxWizard_RunWizard(IntPtr self, IntPtr firstPage);
-		static extern (C) void   wxWizard_SetPageSize(IntPtr self, inout Size size);
+		static extern (C) void   wxWizard_SetPageSize(IntPtr self, ref Size size);
 		//! \endcond
 
 		//---------------------------------------------------------------------

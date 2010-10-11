@@ -31,7 +31,7 @@ public import wx.Event;
         static extern (C) uint   wxKeyEvent_GetRawKeyFlags(IntPtr self);
         static extern (C) bool   wxKeyEvent_HasModifiers(IntPtr self);
 
-        static extern (C) void   wxKeyEvent_GetPosition(IntPtr self, inout Point pt);
+        static extern (C) void   wxKeyEvent_GetPosition(IntPtr self, ref Point pt);
         static extern (C) int    wxKeyEvent_GetX(IntPtr self);
         static extern (C) int    wxKeyEvent_GetY(IntPtr self);
 	

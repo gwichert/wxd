@@ -23,7 +23,7 @@ public import wx.Icon;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxFrame_ctor();
-		static extern (C) bool   wxFrame_Create(IntPtr self, IntPtr parent, int id, string title, inout Point pos, inout Size size, uint style, string name);
+		static extern (C) bool   wxFrame_Create(IntPtr self, IntPtr parent, int id, string title, ref Point pos, ref Size size, uint style, string name);
 
 		static extern (C) IntPtr wxFrame_CreateStatusBar(IntPtr self, int number, uint style, int id, string name);
 
@@ -59,7 +59,7 @@ public import wx.Icon;
 
 		//static extern (C) bool   wxFrame_SetShape(IntPtr self, IntPtr region);
 		
-		static extern (C) void   wxFrame_GetClientAreaOrigin(IntPtr self, inout Point pt);
+		static extern (C) void   wxFrame_GetClientAreaOrigin(IntPtr self, ref Point pt);
 		//! \endcond
             
 		//---------------------------------------------------------------------
@@ -107,7 +107,7 @@ public import wx.Icon;
 		
 		//---------------------------------------------------------------------
 
-		public bool Create(Window parent, int id, string title, inout Point pos, inout Size size, int style, string name)
+		public bool Create(Window parent, int id, string title, ref Point pos, ref Size size, int style, string name)
 		{
 			return wxFrame_Create(wxobj, wxObject.SafePtr(parent), id, title, pos, size, style, name);
 		}

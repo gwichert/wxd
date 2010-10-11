@@ -30,7 +30,7 @@ public import wx.Window;
 		static extern (C) bool   wxStatusBar_Create(IntPtr self, IntPtr parent, int id, uint style, string name);
 	
 		static extern (C) void   wxStatusBar_SetFieldsCount(IntPtr self, int number, int* widths);
-		static extern (C) bool   wxStatusBar_GetFieldRect(IntPtr self, int i, inout Rectangle rect);
+		static extern (C) bool   wxStatusBar_GetFieldRect(IntPtr self, int i, ref Rectangle rect);
 		static extern (C) int    wxStatusBar_GetBorderY(IntPtr self);
 		static extern (C) IntPtr wxStatusBar_GetStatusText(IntPtr self, int number);
 		static extern (C) int    wxStatusBar_GetBorderX(IntPtr self);
@@ -94,7 +94,7 @@ public import wx.Window;
 
 		//-----------------------------------------------------------------------------
 
-		public bool GetFieldRect(int i, inout Rectangle rect)
+		public bool GetFieldRect(int i, ref Rectangle rect)
 		{
 			return wxStatusBar_GetFieldRect(wxobj, i, rect);
 		}

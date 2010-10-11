@@ -106,7 +106,7 @@ public import wx.PrintData;
         alias void function(Printout obj) Virtual_NoParams;
         alias bool function(Printout obj, int i) Virtual_ParamsInt;
         alias bool function(Printout obj, int startPage, int endPage) Virtual_OnBeginDocument;
-        alias void function(Printout obj, inout int minPage, inout int maxPage, inout int pageFrom, inout int pageTo) Virtual_GetPageInfo;
+        alias void function(Printout obj, ref int minPage, ref int maxPage, ref int pageFrom, ref int pageTo) Virtual_GetPageInfo;
 	}
 
         static extern (C) IntPtr wxPrintout_ctor(string title);
@@ -116,18 +116,18 @@ public import wx.PrintData;
         static extern (C) void   wxPrintout_OnEndPrinting(IntPtr self);
         static extern (C) void   wxPrintout_OnPreparePrinting(IntPtr self);
         static extern (C) bool   wxPrintout_HasPage(IntPtr self, int page);
-        static extern (C) void   wxPrintout_GetPageInfo(IntPtr self, inout int minPage, inout int maxPage, inout int pageFrom, inout int pageTo);
+        static extern (C) void   wxPrintout_GetPageInfo(IntPtr self, ref int minPage, ref int maxPage, ref int pageFrom, ref int pageTo);
         static extern (C) IntPtr wxPrintout_GetTitle(IntPtr self);
         static extern (C) IntPtr wxPrintout_GetDC(IntPtr self);
         static extern (C) void   wxPrintout_SetDC(IntPtr self, IntPtr dc);
         static extern (C) void   wxPrintout_SetPageSizePixels(IntPtr self, int w, int h);
-        static extern (C) void   wxPrintout_GetPageSizePixels(IntPtr self, inout int w, inout int h);
+        static extern (C) void   wxPrintout_GetPageSizePixels(IntPtr self, ref int w, ref int h);
         static extern (C) void   wxPrintout_SetPageSizeMM(IntPtr self, int w, int h);
-        static extern (C) void   wxPrintout_GetPageSizeMM(IntPtr self, inout int w, inout int h);
+        static extern (C) void   wxPrintout_GetPageSizeMM(IntPtr self, ref int w, ref int h);
         static extern (C) void   wxPrintout_SetPPIScreen(IntPtr self, int x, int y);
-        static extern (C) void   wxPrintout_GetPPIScreen(IntPtr self, inout int x, inout int y);
+        static extern (C) void   wxPrintout_GetPPIScreen(IntPtr self, ref int x, ref int y);
         static extern (C) void   wxPrintout_SetPPIPrinter(IntPtr self, int x, int y);
-        static extern (C) void   wxPrintout_GetPPIPrinter(IntPtr self, inout int x, inout int y);
+        static extern (C) void   wxPrintout_GetPPIPrinter(IntPtr self, ref int x, ref int y);
         static extern (C) bool   wxPrintout_IsPreview(IntPtr self);
         static extern (C) void   wxPrintout_SetIsPreview(IntPtr self, bool p);
 
@@ -228,11 +228,11 @@ public import wx.PrintData;
 
         //-----------------------------------------------------------------------------
 
-        static extern(C) private void staticGetPageInfo(Printout obj, inout int minPage, inout int maxPage, inout int pageFrom, inout int pageTo)
+        static extern(C) private void staticGetPageInfo(Printout obj, ref int minPage, ref int maxPage, ref int pageFrom, ref int pageTo)
         {
             obj.GetPageInfo(minPage, maxPage, pageFrom, pageTo);
         }
-        public /+virtual+/ void GetPageInfo(inout int minPage, inout int maxPage, inout int pageFrom, inout int pageTo)
+        public /+virtual+/ void GetPageInfo(ref int minPage, ref int maxPage, ref int pageFrom, ref int pageTo)
         {
             wxPrintout_GetPageInfo(wxobj, minPage, maxPage, pageFrom, pageTo);
         }

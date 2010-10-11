@@ -27,7 +27,7 @@ public import wx.Control;
 		static extern (C) IntPtr wxBitmapButton_ctor();
 		static extern (C) void   wxBitmapButton_RegisterVirtual(IntPtr self, BitmapButton obj,Virtual_OnSetBitmap onSetBitmap);
 		//static extern (C) void   wxBitmapButton_RegisterDisposable(IntPtr self, Virtual_Dispose onDispose);
-		static extern (C) bool   wxBitmapButton_Create(IntPtr self, IntPtr parent, int id, IntPtr label, inout Point pos, inout Size size, uint style, IntPtr validator, string name);
+		static extern (C) bool   wxBitmapButton_Create(IntPtr self, IntPtr parent, int id, IntPtr label, ref Point pos, ref Size size, uint style, IntPtr validator, string name);
 		static extern (C) void   wxBitmapButton_SetDefault(IntPtr self);
 		
 		static extern (C) void wxBitmapButton_SetLabel(IntPtr self, string label);
