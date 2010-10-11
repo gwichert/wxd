@@ -141,7 +141,7 @@ private import std.stdarg;
 			std.format.doFormat(&putc, arguments, argptr);
 		}
 
-			return assumeUnique(s);
+			return cast(string) s;
 		}
 
 //! \cond VERSION

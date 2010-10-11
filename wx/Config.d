@@ -437,7 +437,7 @@ public import wx.wxString;
 	    tohex(&buf[1],col.Red);
 	    tohex(&buf[3],col.Green);
 	    tohex(&buf[5],col.Blue);
-	    return Write(key,assumeUnique(buf));
+	    return Write(key, cast(string) buf);
         }
 
         public bool Write(string key, Font val)

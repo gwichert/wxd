@@ -106,7 +106,7 @@ version (D_Version2)
 			char[] buffer = new char[len + 1]; // include NUL
 			len = wxString_utf8_str(wxobj, buffer.ptr, buffer.length);
 			buffer.length = len;
-			return assumeUnique(buffer);
+			return cast(string) buffer;
 		}
 }
 else // D_Version1
@@ -117,7 +117,7 @@ else // D_Version1
 			char[] buffer = new char[len + 1]; // include NUL
 			len = wxString_utf8_str(wxobj, buffer.ptr, buffer.length);
 			buffer.length = len;
-			return assumeUnique(buffer);
+			return cast(string) buffer;
 		}
 }
 	}

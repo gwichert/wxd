@@ -22,11 +22,6 @@ alias char[] string;
 else // Phobos
 {
 public import std.c.stddef; // wchar_t
-  version (D_Version2)
-  {
-static if (__VERSION__ >= 2006)
-public import std.contracts; // DMD 2.006
-  }
 }
 //! \endcond
 
@@ -54,11 +49,6 @@ static if (__VERSION__ < 1016)
 //! \endcond
 	static if (is(object.string)) { /*already added*/ } else
 	alias char[] string; // added in DMD 1.016 and DMD 2.000
-
-//! \cond D2
-static if (__VERSION__ < 2006)
-//! \endcond
-	string assumeUnique(char[] s) { return s; } // DMD 2.006
 
 
 class NullPointerException : Exception

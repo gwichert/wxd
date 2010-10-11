@@ -180,7 +180,7 @@ private import std.utf;
 			char*[] c_args = new char*[args.length];
 			foreach (int i, char[] arg; args)
 			{
-				string str = assumeUnique(arg);
+				string str = cast(string) arg;
 				c_args[i] = cast(char*) toStringz(toUTF8(str));
 			}
 			
