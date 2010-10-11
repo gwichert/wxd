@@ -17,6 +17,7 @@ module wx.common;
 version (Tango)
 {
 public import tango.stdc.stddef;
+alias char[] string;
 }
 else // Phobos
 {
