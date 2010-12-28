@@ -437,11 +437,13 @@ wxThreadIdType wxThread_GetId(wxThread* self)
 
 //-----------------------------------------------------------------------------
 
+#if wxABI_VERSION < 20900
 extern "C" WXEXPORT
 void wxThread_OnExit(wxThread* self)
 {
     self->OnExit();
 }
+#endif
 
 //-----------------------------------------------------------------------------
 
@@ -457,7 +459,11 @@ wxc_bool wxThread_TestDestroy(wxThread* self)
 extern "C" WXEXPORT
 wxThreadHelperThread* wxThreadHelperThread_ctor(wxThreadHelper* owner)
 {
+#if wxABI_VERSION < 20900
     return new wxThreadHelperThread(*owner);
+#else
+    return new wxThreadHelperThread(*owner, wxTHREAD_DETACHED);
+#endif
 }
 
 //-----------------------------------------------------------------------------

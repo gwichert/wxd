@@ -114,13 +114,21 @@ wxc_bool wxVScrolledWindow_ScrollToLine(_VScrolledWindow* self, int line)
 extern "C" WXEXPORT
 wxc_bool wxVScrolledWindow_ScrollLines(_VScrolledWindow* self, int lines)
 {
+#if wxABI_VERSION < 20900
 	return self->ScrollLines(lines)?1:0;
+#else
+	return self->ScrollRows(lines)?1:0;
+#endif
 }
 
 extern "C" WXEXPORT
 wxc_bool wxVScrolledWindow_ScrollPages(_VScrolledWindow* self, int pages)
 {
+#if wxABI_VERSION < 20900
 	return self->ScrollPages(pages)?1:0;
+#else
+	return self->ScrollRowPages(pages)?1:0;
+#endif
 }
 
 extern "C" WXEXPORT

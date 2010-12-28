@@ -191,7 +191,13 @@ void wxGridCellEnumEditor_BeginEdit(wxGridCellEnumEditor* self, int row, int col
 extern "C" WXEXPORT
 wxc_bool wxGridCellEnumEditor_EndEdit(wxGridCellEnumEditor* self, int row, int col, wxGrid* grid)
 {
+#if wxABI_VERSION < 20900
 	return self->EndEdit(row, col, grid)?1:0;
+#else
+    wxString oldVal;
+    wxString newVal;
+	return self->EndEdit(row, col, grid, oldVal, &newVal)?1:0;
+#endif
 }
 
 extern "C" WXEXPORT

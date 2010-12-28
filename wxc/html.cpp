@@ -707,7 +707,9 @@ const wxHtmlCell* wxHtmlCell_Find(wxHtmlCell* self, int condition, void* param)
 extern "C" WXEXPORT
 void wxHtmlCell_OnMouseClick(wxHtmlCell* self, wxWindow* parent, int x, int y, wxMouseEvent* event)
 {
+#if wxABI_VERSION < 20900
     self->OnMouseClick(parent, x, y, *event);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -957,7 +959,9 @@ const wxHtmlCell* wxHtmlContainerCell_Find(wxHtmlContainerCell* self, int condit
 extern "C" WXEXPORT
 void wxHtmlContainerCell_OnMouseClick(wxHtmlContainerCell* self, wxWindow* parent, int x, int y, wxMouseEvent* event)
 {
+#if wxABI_VERSION < 20900
     self->OnMouseClick(parent, x, y, *event);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -1094,7 +1098,7 @@ extern "C" WXEXPORT
 int wxHtmlTag_ScanParam(wxHtmlTag* self, wxc_string par, wxc_string format, void* param)
 {
 	wxString wxformat = wxstr(format);
-    return self->ScanParam(wxstr(par), wxformat.c_str(), param);
+    return self->ScanParam(wxstr(par), (const wxChar *) wxformat.c_str(), param);
 }
 
 //-----------------------------------------------------------------------------
@@ -1670,7 +1674,11 @@ void wxHtmlParser_StopParsing(wxHtmlParser* self)
 extern "C" WXEXPORT
 void wxHtmlParser_DoParsing(wxHtmlParser* self, int begin_pos, int end_pos)
 {
+#if wxABI_VERSION < 20900
     self->DoParsing(begin_pos, end_pos);
+#else
+    self->DoParsing();
+#endif
 }
 
 extern "C" WXEXPORT
@@ -1724,7 +1732,11 @@ void wxHtmlParser_PopTagHandler(wxHtmlParser* self)
 extern "C" WXEXPORT
 wxString* wxHtmlParser_GetSource(wxHtmlParser* self)
 {
+#if wxABI_VERSION < 20900
 	wxString *src = self->GetSource();
+#else
+	const wxString *src = self->GetSource();
+#endif
     return new wxString(*src);
 }
 

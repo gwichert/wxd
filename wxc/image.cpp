@@ -334,7 +334,11 @@ wxc_bool wxImage_CanRead(wxc_string name)
 extern "C" WXEXPORT
 int wxImage_GetImageCount(wxc_string name, int type)
 {
+#if wxABI_VERSION < 20900
 	return wxImage::GetImageCount(wxstr(name), type);
+#else
+	return wxImage::GetImageCount(wxstr(name), (wxBitmapType) type);
+#endif
 }
 
 //-----------------------------------------------------------------------------

@@ -460,7 +460,14 @@ wxCalendarEvent* wxCalendarEvent_ctor()
 extern "C" WXEXPORT
 wxCalendarEvent* wxCalendarEvent_ctor2(wxCalendarCtrl* cal, wxEventType type)
 {
+#if wxABI_VERSION < 20900
     return new wxCalendarEvent(cal, type);
+#else
+    wxCalendarEvent *evt = new wxCalendarEvent();
+    evt->SetEventObject(cal);
+    evt->SetEventType(type);
+    return evt;
+#endif
 }
 
 //-----------------------------------------------------------------------------

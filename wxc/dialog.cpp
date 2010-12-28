@@ -107,7 +107,9 @@ wxc_bool wxDialog_IsModal(wxDialog* self)
 extern "C" WXEXPORT
 void wxDialog_SetModal(wxDialog* self, wxc_bool modal)
 {
+#if wxABI_VERSION < 20900
 	self->SetModal(modal);
+#endif
 }
 
 //-----------------------------------------------------------------------------

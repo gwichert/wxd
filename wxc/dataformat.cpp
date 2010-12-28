@@ -40,7 +40,8 @@ wxDataFormat* wxDataFormat_ctorByType(wxDataFormatId type)
 extern "C" WXEXPORT
 wxDataFormat* wxDataFormat_ctorById(wxc_string id)
 {
-    return new wxDataFormat(wxstr(id).c_str());
+    wxString str = wxstr(id);
+    return new wxDataFormat((const wxChar *) str.c_str());
 }
 
 //-----------------------------------------------------------------------------

@@ -25,9 +25,11 @@
 #include <wx/grid.h>
 #include <wx/sashwin.h>
 #include <wx/laywin.h>
-#ifndef __WXGTK__
+#if wxABI_VERSION < 20900 && !defined(__WXGTK__)
 #include <wx/tabctrl.h>
 #endif
+#include <wx/spinctrl.h>
+#include <wx/socket.h>
 #include "local_events.h"
 
 //-----------------------------------------------------------------------------
@@ -77,6 +79,7 @@ extern "C" WXEXPORT int wxEvent_EVT_SET_FOCUS()                     { return wxE
 extern "C" WXEXPORT int wxEvent_EVT_KILL_FOCUS()                    { return wxEVT_KILL_FOCUS; }
 extern "C" WXEXPORT int wxEvent_EVT_CHILD_FOCUS()                   { return wxEVT_CHILD_FOCUS; }
 extern "C" WXEXPORT int wxEvent_EVT_MOUSEWHEEL()                    { return wxEVT_MOUSEWHEEL; }
+#if wxABI_VERSION < 20900
 extern "C" WXEXPORT int wxEvent_EVT_NC_LEFT_DOWN()                  { return wxEVT_NC_LEFT_DOWN; }
 extern "C" WXEXPORT int wxEvent_EVT_NC_LEFT_UP()                    { return wxEVT_NC_LEFT_UP; }
 extern "C" WXEXPORT int wxEvent_EVT_NC_MIDDLE_DOWN()                { return wxEVT_NC_MIDDLE_DOWN; }
@@ -89,6 +92,7 @@ extern "C" WXEXPORT int wxEvent_EVT_NC_LEAVE_WINDOW()               { return wxE
 extern "C" WXEXPORT int wxEvent_EVT_NC_LEFT_DCLICK()                { return wxEVT_NC_LEFT_DCLICK; }
 extern "C" WXEXPORT int wxEvent_EVT_NC_MIDDLE_DCLICK()              { return wxEVT_NC_MIDDLE_DCLICK; }
 extern "C" WXEXPORT int wxEvent_EVT_NC_RIGHT_DCLICK()               { return wxEVT_NC_RIGHT_DCLICK; }
+#endif
 extern "C" WXEXPORT int wxEvent_EVT_CHAR()                          { return wxEVT_CHAR; }
 extern "C" WXEXPORT int wxEvent_EVT_CHAR_HOOK()                     { return wxEVT_CHAR_HOOK; }
 extern "C" WXEXPORT int wxEvent_EVT_NAVIGATION_KEY()                { return wxEVT_NAVIGATION_KEY; }
@@ -103,7 +107,11 @@ extern "C" WXEXPORT int wxEvent_EVT_SCROLL_PAGEUP()                 { return wxE
 extern "C" WXEXPORT int wxEvent_EVT_SCROLL_PAGEDOWN()               { return wxEVT_SCROLL_PAGEDOWN; }
 extern "C" WXEXPORT int wxEvent_EVT_SCROLL_THUMBTRACK()             { return wxEVT_SCROLL_THUMBTRACK; }
 extern "C" WXEXPORT int wxEvent_EVT_SCROLL_THUMBRELEASE()           { return wxEVT_SCROLL_THUMBRELEASE; }
+#if wxABI_VERSION < 20700
 extern "C" WXEXPORT int wxEvent_EVT_SCROLL_ENDSCROLL()              { return wxEVT_SCROLL_ENDSCROLL; }
+#else
+extern "C" WXEXPORT int wxEvent_EVT_SCROLL_ENDSCROLL()              { return wxEVT_SCROLL_CHANGED; }
+#endif
 extern "C" WXEXPORT int wxEvent_EVT_SCROLLWIN_TOP()                 { return wxEVT_SCROLLWIN_TOP; }
 extern "C" WXEXPORT int wxEvent_EVT_SCROLLWIN_BOTTOM()              { return wxEVT_SCROLLWIN_BOTTOM; }
 extern "C" WXEXPORT int wxEvent_EVT_SCROLLWIN_LINEUP()              { return wxEVT_SCROLLWIN_LINEUP; }
@@ -133,14 +141,18 @@ extern "C" WXEXPORT int wxEvent_EVT_MOUSE_CAPTURE_CHANGED()         { return wxE
 extern "C" WXEXPORT int wxEvent_EVT_PAINT()                         { return wxEVT_PAINT; }
 extern "C" WXEXPORT int wxEvent_EVT_ERASE_BACKGROUND()              { return wxEVT_ERASE_BACKGROUND; }
 extern "C" WXEXPORT int wxEvent_EVT_NC_PAINT()                      { return wxEVT_NC_PAINT; }
+#if wxABI_VERSION < 20900
 extern "C" WXEXPORT int wxEvent_EVT_PAINT_ICON()                    { return wxEVT_PAINT_ICON; }
+#endif
 extern "C" WXEXPORT int wxEvent_EVT_MENU_OPEN()                     { return wxEVT_MENU_OPEN; }
 extern "C" WXEXPORT int wxEvent_EVT_MENU_CLOSE()                    { return wxEVT_MENU_CLOSE; }
 extern "C" WXEXPORT int wxEvent_EVT_MENU_HIGHLIGHT()                { return wxEVT_MENU_HIGHLIGHT; }
 extern "C" WXEXPORT int wxEvent_EVT_CONTEXT_MENU()                  { return wxEVT_CONTEXT_MENU; }
 extern "C" WXEXPORT int wxEvent_EVT_SYS_COLOUR_CHANGED()            { return wxEVT_SYS_COLOUR_CHANGED; }
 extern "C" WXEXPORT int wxEvent_EVT_DISPLAY_CHANGED()               { return wxEVT_DISPLAY_CHANGED; }
+#if wxABI_VERSION < 20900
 extern "C" WXEXPORT int wxEvent_EVT_SETTING_CHANGED()               { return wxEVT_SETTING_CHANGED; }
+#endif
 extern "C" WXEXPORT int wxEvent_EVT_QUERY_NEW_PALETTE()             { return wxEVT_QUERY_NEW_PALETTE; }
 extern "C" WXEXPORT int wxEvent_EVT_PALETTE_CHANGED()               { return wxEVT_PALETTE_CHANGED; }
 extern "C" WXEXPORT int wxEvent_EVT_JOY_BUTTON_DOWN()               { return wxEVT_JOY_BUTTON_DOWN; }
@@ -148,9 +160,11 @@ extern "C" WXEXPORT int wxEvent_EVT_JOY_BUTTON_UP()                 { return wxE
 extern "C" WXEXPORT int wxEvent_EVT_JOY_MOVE()                      { return wxEVT_JOY_MOVE; }
 extern "C" WXEXPORT int wxEvent_EVT_JOY_ZMOVE()                     { return wxEVT_JOY_ZMOVE; }
 extern "C" WXEXPORT int wxEvent_EVT_DROP_FILES()                    { return wxEVT_DROP_FILES; }
+#if wxABI_VERSION < 20900
 extern "C" WXEXPORT int wxEvent_EVT_DRAW_ITEM()                     { return wxEVT_DRAW_ITEM; }
 extern "C" WXEXPORT int wxEvent_EVT_MEASURE_ITEM()                  { return wxEVT_MEASURE_ITEM; }
 extern "C" WXEXPORT int wxEvent_EVT_COMPARE_ITEM()                  { return wxEVT_COMPARE_ITEM; }
+#endif
 extern "C" WXEXPORT int wxEvent_EVT_INIT_DIALOG()                   { return wxEVT_INIT_DIALOG; }
 extern "C" WXEXPORT int wxEvent_EVT_IDLE()                          { return wxEVT_IDLE; }
 extern "C" WXEXPORT int wxEvent_EVT_UPDATE_UI()                     { return wxEVT_UPDATE_UI; }

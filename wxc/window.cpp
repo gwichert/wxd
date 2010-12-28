@@ -347,13 +347,21 @@ int wxWindow_NewControlId()
 extern "C" WXEXPORT
 int wxWindow_NextControlId(int id)
 {
+#if wxABI_VERSION < 20900
 	return wxWindow::NextControlId(id);
+#else
+	return -1;
+#endif
 }
 
 extern "C" WXEXPORT
 int wxWindow_PrevControlId(int id)
 {
+#if wxABI_VERSION < 20900
 	return wxWindow::PrevControlId(id);
+#else
+	return -1;
+#endif
 }
 
 //-----------------------------------------------------------------------------

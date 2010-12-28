@@ -327,7 +327,9 @@ wxc_bool wxPrintout_IsPreview(_Printout* self)
 extern "C" WXEXPORT
 void wxPrintout_SetIsPreview(_Printout* self, wxc_bool p)
 {
+#if wxABI_VERSION < 20900
     self->SetIsPreview(p);
+#endif
 }
 
 

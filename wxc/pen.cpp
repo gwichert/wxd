@@ -97,7 +97,11 @@ wxc_bool wxPen_Ok(wxPen* self)
 extern "C" WXEXPORT
 void wxPen_SetCap(wxPen* self, int capStyle)
 {
+#if wxABI_VERSION < 20900
 	self->SetCap(capStyle);
+#else
+	self->SetCap((wxPenCap) capStyle);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -105,7 +109,11 @@ void wxPen_SetCap(wxPen* self, int capStyle)
 extern "C" WXEXPORT
 void wxPen_SetJoin(wxPen* self, int join_style)
 {
+#if wxABI_VERSION < 20900
 	self->SetJoin(join_style);
+#else
+	self->SetJoin((wxPenJoin) join_style);
+#endif
 }
 
 //-----------------------------------------------------------------------------

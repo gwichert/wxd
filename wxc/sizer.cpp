@@ -103,7 +103,11 @@ void wxSizer_Prepend(wxSizer* self, int width, int height, int option,
 extern "C" WXEXPORT
 wxc_bool wxSizer_RemoveWindow(wxSizer* self, wxWindow *window)
 {
+#if wxABI_VERSION < 20900
 	return self->Remove(window)?1:0;
+#else
+	return self->Detach(window)?1:0;
+#endif
 }
 
 extern "C" WXEXPORT

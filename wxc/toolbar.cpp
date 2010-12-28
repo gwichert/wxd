@@ -37,7 +37,11 @@ wxToolBarToolBase* wxToolBarToolBase_ctor(wxToolBar *tbar, int toolid, wxc_strin
 extern "C" WXEXPORT
 wxToolBarToolBase* wxToolBarToolBase_ctorCtrl(wxToolBar *tbar, wxControl *control)
 {
+#if wxABI_VERSION < 20900
 	return new wxToolBarToolBase(tbar, control);
+#else
+	return new wxToolBarToolBase(tbar, control, wxEmptyString);
+#endif
 }
 
 //-----------------------------------------------------------------------------

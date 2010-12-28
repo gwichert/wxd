@@ -135,7 +135,15 @@ wxc_bool wxApp_Initialize(_App* self,int *argc, char **argv)
 
 	const wxChar** wargv = new const wxChar*[*argc];
         for (int i=0; i < *argc; i++)
-            wargv[i] = argv[i] ? wxStrdup(wxString(argv[i],*wxConvCurrent).c_str()) : NULL;
+        {
+            if (argv[i])
+            {
+                wxString arg = wxString(argv[i],*wxConvCurrent);
+                wargv[i] = (const wxChar *) arg.c_str();
+            }
+            else
+                wargv[i] = NULL;
+        }
 		
 	return self->wxApp::Initialize(*argc,(wxChar**)wargv)?1:0;
 }

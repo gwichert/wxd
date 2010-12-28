@@ -49,7 +49,11 @@ wxc_bool wxSashEdge_m_show(wxSashEdge* self)
 extern "C" WXEXPORT
 wxc_bool wxSashEdge_m_border(wxSashEdge* self)
 {
+#if wxABI_VERSION < 20900
 	return self->m_border?1:0;
+#else
+    return 0;
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -115,7 +119,9 @@ wxc_bool wxSashWindow_GetSashVisible(wxSashWindow* self, wxSashEdgePosition edge
 extern "C" WXEXPORT
 void wxSashWindow_SetSashBorder(wxSashWindow* self, wxSashEdgePosition edge, wxc_bool border)
 {
+#if wxABI_VERSION < 20900
 	self->SetSashBorder(edge, border);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -123,7 +129,11 @@ void wxSashWindow_SetSashBorder(wxSashWindow* self, wxSashEdgePosition edge, wxc
 extern "C" WXEXPORT
 wxc_bool wxSashWindow_HasBorder(wxSashWindow* self, wxSashEdgePosition edge)
 {
+#if wxABI_VERSION < 20900
 	return self->HasBorder(edge)?1:0;
+#else
+    return false;
+#endif
 }
 
 //-----------------------------------------------------------------------------

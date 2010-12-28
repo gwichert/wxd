@@ -14,6 +14,7 @@
 //-----------------------------------------------------------------------------
 
 #include <wx/wx.h>
+#if wxABI_VERSION < 20900
 #include "common.h"
 #include <wx/tabctrl.h>
 #include "local_events.h"
@@ -302,4 +303,4 @@ extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TAB_SEL_CHANGED()		{ return wxEVT_CO
 extern "C" WXEXPORT int wxEvent_EVT_COMMAND_TAB_SEL_CHANGING()		{ return wxEVT_COMMAND_TAB_SEL_CHANGING; }
 
 #endif
- 
+#endif 

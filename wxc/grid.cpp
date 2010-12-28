@@ -429,7 +429,9 @@ int wxGrid_GetNumberCols(wxGrid* self)
 extern "C" WXEXPORT
 void wxGrid_ProcessRowLabelMouseEvent(wxGrid* self, wxMouseEvent* event)
 {
+#if wxABI_VERSION < 20900
     self->ProcessRowLabelMouseEvent(*event);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -437,7 +439,9 @@ void wxGrid_ProcessRowLabelMouseEvent(wxGrid* self, wxMouseEvent* event)
 extern "C" WXEXPORT
 void wxGrid_ProcessColLabelMouseEvent(wxGrid* self, wxMouseEvent* event)
 {
+#if wxABI_VERSION < 20900
     self->ProcessColLabelMouseEvent(*event);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -445,7 +449,9 @@ void wxGrid_ProcessColLabelMouseEvent(wxGrid* self, wxMouseEvent* event)
 extern "C" WXEXPORT
 void wxGrid_ProcessCornerLabelMouseEvent(wxGrid* self, wxMouseEvent* event)
 {
+#if wxABI_VERSION < 20900
     self->ProcessCornerLabelMouseEvent(*event);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -453,7 +459,9 @@ void wxGrid_ProcessCornerLabelMouseEvent(wxGrid* self, wxMouseEvent* event)
 extern "C" WXEXPORT
 void wxGrid_ProcessGridCellMouseEvent(wxGrid* self, wxMouseEvent* event)
 {
+#if wxABI_VERSION < 20900
     self->ProcessGridCellMouseEvent(*event);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -2568,9 +2576,17 @@ public:
     void BeginEdit(int row, int col, wxGrid* grid)
         { return m_BeginEdit(m_dobj, row, col, grid); }
         
+#if wxABI_VERSION < 20900
     bool EndEdit(int row, int col, wxGrid* grid)
         { return m_EndEdit(m_dobj, row, col, grid); }
+#else
+    bool EndEdit(int row, int col, const wxGrid* grid, const wxString &oldval, wxString *newval)
+        { return m_EndEdit(m_dobj, row, col, (wxGrid*) grid); }
+#endif
             
+    void ApplyEdit(int row, int col, wxGrid* grid)
+        { }
+
     void Reset()
         { return m_Reset(m_dobj); }
         
@@ -3391,7 +3407,13 @@ void wxGridCellTextEditor_BeginEdit(wxGridCellTextEditor* self, int row, int col
 extern "C" WXEXPORT
 wxc_bool wxGridCellTextEditor_EndEdit(wxGridCellTextEditor* self, int row, int col, wxGrid* grid)
 {
+#if wxABI_VERSION < 20900
     return self->EndEdit(row, col, grid)?1:0;
+#else
+    wxString oldVal;
+    wxString newVal;
+    return self->EndEdit(row, col, grid, oldVal, &newVal)?1:0;
+#endif
 }
 
 extern "C" WXEXPORT
@@ -3584,7 +3606,13 @@ void wxGridCellNumberEditor_BeginEdit(wxGridCellNumberEditor* self, int row, int
 extern "C" WXEXPORT
 wxc_bool wxGridCellNumberEditor_EndEdit(wxGridCellNumberEditor* self, int row, int col, wxGrid* grid)
 {
+#if wxABI_VERSION < 20900
     return self->EndEdit(row, col, grid)?1:0;
+#else
+    wxString oldVal;
+    wxString newVal;
+    return self->EndEdit(row, col, grid, oldVal, &newVal)?1:0;
+#endif
 }
 
 extern "C" WXEXPORT
@@ -3654,7 +3682,13 @@ void wxGridCellFloatEditor_BeginEdit(wxGridCellFloatEditor* self, int row, int c
 extern "C" WXEXPORT
 wxc_bool wxGridCellFloatEditor_EndEdit(wxGridCellFloatEditor* self, int row, int col, wxGrid* grid)
 {
+#if wxABI_VERSION < 20900
     return self->EndEdit(row, col, grid)?1:0;
+#else
+    wxString oldVal;
+    wxString newVal;
+    return self->EndEdit(row, col, grid, oldVal, &newVal)?1:0;
+#endif
 }
 
 extern "C" WXEXPORT
@@ -3745,7 +3779,13 @@ void wxGridCellBoolEditor_BeginEdit(wxGridCellBoolEditor* self, int row, int col
 extern "C" WXEXPORT
 wxc_bool wxGridCellBoolEditor_EndEdit(wxGridCellBoolEditor* self, int row, int col, wxGrid* grid)
 {
+#if wxABI_VERSION < 20900
     return self->EndEdit(row, col, grid)?1:0;
+#else
+    wxString oldVal;
+    wxString newVal;
+    return self->EndEdit(row, col, grid, oldVal, &newVal)?1:0;
+#endif
 }
 
 extern "C" WXEXPORT
@@ -3830,7 +3870,13 @@ void wxGridCellChoiceEditor_BeginEdit(wxGridCellChoiceEditor* self, int row, int
 extern "C" WXEXPORT
 wxc_bool wxGridCellChoiceEditor_EndEdit(wxGridCellChoiceEditor* self, int row, int col, wxGrid* grid)
 {
+#if wxABI_VERSION < 20900
     return self->EndEdit(row, col, grid)?1:0;
+#else
+    wxString oldVal;
+    wxString newVal;
+    return self->EndEdit(row, col, grid, oldVal, &newVal)?1:0;
+#endif
 }
 
 extern "C" WXEXPORT

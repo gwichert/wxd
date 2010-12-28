@@ -104,7 +104,11 @@ void wxMDIParentFrame_SetActiveChild(wxMDIParentFrame* self, wxMDIChildFrame* pC
 extern "C" WXEXPORT
 wxMDIClientWindow* wxMDIParentFrame_GetClientWindow(_MDIParentFrame* self)
 {
+#if wxABI_VERSION < 20900
     return self->GetClientWindow();
+#else
+    return wxDynamicCast(self->GetClientWindow(), wxMDIClientWindow);
+#endif
 }
 
 //-----------------------------------------------------------------------------

@@ -65,7 +65,11 @@ wxc_bool wxMouseEvent_Button(wxMouseEvent* self, int but)
 extern "C" WXEXPORT
 wxc_bool wxMouseEvent_ButtonIsDown(wxMouseEvent* self, int but)
 {
+#if wxABI_VERSION < 20900
     return self->ButtonIsDown(but)?1:0;
+#else
+    return self->ButtonIsDown((wxMouseButton) but)?1:0;
+#endif
 }
 
 extern "C" WXEXPORT

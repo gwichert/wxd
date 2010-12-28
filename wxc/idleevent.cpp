@@ -61,7 +61,11 @@ wxIdleMode wxIdleEvent_GetMode()
 extern "C" WXEXPORT
 wxc_bool wxIdleEvent_CanSend(wxWindow* win)
 {
+#if wxABI_VERSION < 20900
 	return wxIdleEvent::CanSend(win)?1:0;
+#else
+    return true;
+#endif
 }
 
 

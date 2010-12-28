@@ -38,7 +38,12 @@ void wxDC_DrawBitmap(wxDC* self, wxBitmap* bmp, wxCoord x, wxCoord y, wxc_bool t
 extern "C" WXEXPORT
 void wxDC_DrawPolygon(wxDC* self, int n, wxPoint points[], wxCoord xoffset, wxCoord yoffset, int fill_style)
 {
+#if wxABI_VERSION < 20900
     self->DrawPolygon(n, points, xoffset, yoffset, fill_style);
+#else
+    self->DrawPolygon(n, points, xoffset, yoffset, (wxPolygonFillMode) fill_style);
+#endif
+
 }
 
 //-----------------------------------------------------------------------------
@@ -240,7 +245,11 @@ int wxDC_GetLogicalFunction(wxDC* self)
 extern "C" WXEXPORT
 void wxDC_SetLogicalFunction(wxDC* self, int function)
 {
+#if wxABI_VERSION < 20900
     self->SetLogicalFunction(function);
+#else
+    self->SetLogicalFunction((wxRasterOperationMode) function);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -260,7 +269,11 @@ wxc_bool wxDC_Blit(wxDC* self, wxCoord xdest, wxCoord ydest, wxCoord width, wxCo
 		  wxDC *source, wxCoord xsrc, wxCoord ysrc,
 		  int rop = wxCOPY, wxc_bool useMask = FALSE, wxCoord xsrcMask = -1, wxCoord ysrcMask = -1)
 {
+#if wxABI_VERSION < 20900
 	return self->Blit(xdest, ydest, width, height, source, xsrc, ysrc, rop, useMask, xsrcMask, ysrcMask)?1:0;
+#else
+	return self->Blit(xdest, ydest, width, height, source, xsrc, ysrc, (wxRasterOperationMode) rop, useMask, xsrcMask, ysrcMask)?1:0;
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -278,7 +291,11 @@ void wxDC_EndDrawing(wxDC* self)
 extern "C" WXEXPORT
 wxc_bool wxDC_FloodFill(wxDC* self, int x, int y, wxColour* col, int style)
 {
+#if wxABI_VERSION < 20900
 	return self->FloodFill(x, y, *col, style);
+#else
+	return self->FloodFill(x, y, *col, (wxFloodFillStyle) style);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -550,7 +567,11 @@ int wxDC_LogicalToDeviceYRel(wxDC* self, int y)
 extern "C" WXEXPORT
 wxc_bool wxDC_Ok(wxDC* self)
 {
+#if wxABI_VERSION < 20900
 	return self->Ok();
+#else
+	return self->IsOk();
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -574,7 +595,11 @@ int wxDC_GetMapMode(wxDC* self)
 extern "C" WXEXPORT
 void wxDC_SetMapMode(wxDC* self, int mode)
 {
+#if wxABI_VERSION < 20900
 	self->SetMapMode(mode);
+#else
+	self->SetMapMode((wxMappingMode) mode);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -719,7 +744,11 @@ int wxDC_MaxY(wxDC* self)
 extern "C" WXEXPORT
 wxWindowDC* wxWindowDC_ctor()
 {
+#if wxABI_VERSION < 20900
 	return new wxWindowDC();
+#else
+	return new wxWindowDC((wxWindow *) NULL);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -781,7 +810,7 @@ void wxWindowDC_SetFont(wxWindowDC* self, wxFont* font)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxFont* wxWindowDC_GetFont(wxDCBase* self)
+wxFont* wxWindowDC_GetFont(wxWindowDC* self)
 {
 	return new wxFont(self->GetFont());
 }
@@ -821,7 +850,7 @@ void wxWindowDC_SetBackground(wxWindowDC* self, wxBrush* brush)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxBrush* wxWindowDC_GetBackground(wxDCBase* self)
+wxBrush* wxWindowDC_GetBackground(wxWindowDC* self)
 {
 	return new wxBrush(self->GetBackground());
 }
@@ -831,7 +860,11 @@ wxBrush* wxWindowDC_GetBackground(wxDCBase* self)
 extern "C" WXEXPORT
 void wxWindowDC_SetLogicalFunction(wxWindowDC* self, int function)
 {
+#if wxABI_VERSION < 20900
 	self->SetLogicalFunction(function);
+#else
+	self->SetLogicalFunction((wxRasterOperationMode) function);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -845,7 +878,7 @@ void wxWindowDC_SetTextForeground(wxWindowDC* self, wxColour* colour)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxColour* wxWindowDC_GetTextForeground(wxDCBase* self)
+wxColour* wxWindowDC_GetTextForeground(wxWindowDC* self)
 {
 	return new wxColour(self->GetTextForeground());
 }
@@ -869,7 +902,7 @@ void wxWindowDC_SetBackgroundMode(wxWindowDC* self, int mode)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxWindowDC_GetBackgroundMode(wxDCBase* self)
+int wxWindowDC_GetBackgroundMode(wxWindowDC* self)
 {
 	return self->GetBackgroundMode();
 }
@@ -904,7 +937,11 @@ int wxWindowDC_GetDepth(wxWindowDC* self)
 extern "C" WXEXPORT
 wxClientDC* wxClientDC_ctor()
 {
+#if wxABI_VERSION < 20900
     return new wxClientDC();
+#else
+    return new wxClientDC((wxWindow *) NULL);
+#endif
 }
 
 extern "C" WXEXPORT
@@ -919,7 +956,11 @@ wxClientDC* wxClientDC_ctor2(wxWindow *win)
 extern "C" WXEXPORT
 wxPaintDC* wxPaintDC_ctor()
 {
+#if wxABI_VERSION < 20900
     return new wxPaintDC();
+#else
+    return new wxPaintDC((wxWindow *) NULL);
+#endif
 }
 
 extern "C" WXEXPORT

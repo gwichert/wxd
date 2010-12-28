@@ -67,8 +67,13 @@ void wxWizard_SetPageSize(wxWizard* self, const wxSize* size)
 class _WizardPageSimple : public wxWizardPageSimple
 {
 public:
+#if wxABI_VERSION < 20900
 	_WizardPageSimple(wxWizard* parent, wxWizardPage* prev, wxWizardPage* next,const wxBitmap& bitmap,const wxChar* resource)
 		: wxWizardPageSimple(parent, prev, next, bitmap, resource)
+#else
+	_WizardPageSimple(wxWizard* parent, wxWizardPage* prev, wxWizardPage* next,const wxBitmap& bitmap)
+		: wxWizardPageSimple(parent, prev, next, bitmap)
+#endif
 	{
 	}
 
@@ -84,7 +89,11 @@ extern "C" WXEXPORT
 wxWizardPageSimple* wxWizardPageSimple_ctor(wxWizard* parent, wxWizardPage* prev, wxWizardPage* next, const wxBitmap* bitmap, wxc_string resource)
 {
 	wxString wxresource = wxstr(resource);
+#if wxABI_VERSION < 20900
 	return new _WizardPageSimple(parent, prev, next, *bitmap, wxresource.c_str());
+#else
+	return new _WizardPageSimple(parent, prev, next, *bitmap);
+#endif
 }
 
 //-----------------------------------------------------------------------------

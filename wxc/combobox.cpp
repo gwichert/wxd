@@ -147,13 +147,23 @@ void wxComboBox_SetStringSelection(wxComboBox* self, wxc_string str)
 extern "C" WXEXPORT
 void* wxComboBox_GetClientData(wxComboBox* self, int n)
 {
+#if wxABI_VERSION < 20900
     return self->GetClientData(n);
+#else
+    wxItemContainer *cont = self;
+    return cont->GetClientData(n);
+#endif
 }
 
 extern "C" WXEXPORT
 void wxComboBox_SetClientData(wxComboBox* self, int n, void* data)
 {
+#if wxABI_VERSION < 20900
     self->SetClientData(n, data);
+#else
+    wxItemContainer *cont = self;
+    cont->SetClientData(n, data);
+#endif
 }
 
 //-----------------------------------------------------------------------------

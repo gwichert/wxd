@@ -24,8 +24,10 @@ public:
 	_BitmapButton()
 		: wxBitmapButton() {}
 		
+#if wxABI_VERSION < 20900 || !defined(wxHAS_BUTTON_BITMAP)
 	void POnSetBitmap()
 		{ wxBitmapButton::OnSetBitmap(); }
+#endif
 
 	void RegisterVirtual(wxc_object obj, Virtual_OnSetBitmap onSetBitmap)
 	{
@@ -89,7 +91,9 @@ wxc_bool wxBitmapButton_Create(_BitmapButton* self, wxWindow *parent, wxWindowID
 extern "C" WXEXPORT
 void wxBitmapButton_OnSetBitmap(_BitmapButton* self)
 {
+#if wxABI_VERSION < 20900 || !defined(wxHAS_BUTTON_BITMAP)
 	self->POnSetBitmap();
+#endif
 }
 
 //-----------------------------------------------------------------------------
