@@ -92,6 +92,19 @@ extern "C" WXEXPORT int wxEvent_EVT_NC_LEAVE_WINDOW()               { return wxE
 extern "C" WXEXPORT int wxEvent_EVT_NC_LEFT_DCLICK()                { return wxEVT_NC_LEFT_DCLICK; }
 extern "C" WXEXPORT int wxEvent_EVT_NC_MIDDLE_DCLICK()              { return wxEVT_NC_MIDDLE_DCLICK; }
 extern "C" WXEXPORT int wxEvent_EVT_NC_RIGHT_DCLICK()               { return wxEVT_NC_RIGHT_DCLICK; }
+#else
+extern "C" WXEXPORT int wxEvent_EVT_NC_LEFT_DOWN()                  { return -1; /* prevent link error */ }
+extern "C" WXEXPORT int wxEvent_EVT_NC_LEFT_UP()                    { return -1; /* prevent link error */ }
+extern "C" WXEXPORT int wxEvent_EVT_NC_MIDDLE_DOWN()                { return -1; /* prevent link error */ }
+extern "C" WXEXPORT int wxEvent_EVT_NC_MIDDLE_UP()                  { return -1; /* prevent link error */ }
+extern "C" WXEXPORT int wxEvent_EVT_NC_RIGHT_DOWN()                 { return -1; /* prevent link error */ }
+extern "C" WXEXPORT int wxEvent_EVT_NC_RIGHT_UP()                   { return -1; /* prevent link error */ }
+extern "C" WXEXPORT int wxEvent_EVT_NC_MOTION()                     { return -1; /* prevent link error */ }
+extern "C" WXEXPORT int wxEvent_EVT_NC_ENTER_WINDOW()               { return -1; /* prevent link error */ }
+extern "C" WXEXPORT int wxEvent_EVT_NC_LEAVE_WINDOW()               { return -1; /* prevent link error */ }
+extern "C" WXEXPORT int wxEvent_EVT_NC_LEFT_DCLICK()                { return -1; /* prevent link error */ }
+extern "C" WXEXPORT int wxEvent_EVT_NC_MIDDLE_DCLICK()              { return -1; /* prevent link error */ }
+extern "C" WXEXPORT int wxEvent_EVT_NC_RIGHT_DCLICK()               { return -1; /* prevent link error */ }
 #endif
 extern "C" WXEXPORT int wxEvent_EVT_CHAR()                          { return wxEVT_CHAR; }
 extern "C" WXEXPORT int wxEvent_EVT_CHAR_HOOK()                     { return wxEVT_CHAR_HOOK; }
@@ -143,6 +156,8 @@ extern "C" WXEXPORT int wxEvent_EVT_ERASE_BACKGROUND()              { return wxE
 extern "C" WXEXPORT int wxEvent_EVT_NC_PAINT()                      { return wxEVT_NC_PAINT; }
 #if wxABI_VERSION < 20900
 extern "C" WXEXPORT int wxEvent_EVT_PAINT_ICON()                    { return wxEVT_PAINT_ICON; }
+#else
+extern "C" WXEXPORT int wxEvent_EVT_PAINT_ICON()                    { return -1; /* prevent link error */ }
 #endif
 extern "C" WXEXPORT int wxEvent_EVT_MENU_OPEN()                     { return wxEVT_MENU_OPEN; }
 extern "C" WXEXPORT int wxEvent_EVT_MENU_CLOSE()                    { return wxEVT_MENU_CLOSE; }
@@ -152,6 +167,8 @@ extern "C" WXEXPORT int wxEvent_EVT_SYS_COLOUR_CHANGED()            { return wxE
 extern "C" WXEXPORT int wxEvent_EVT_DISPLAY_CHANGED()               { return wxEVT_DISPLAY_CHANGED; }
 #if wxABI_VERSION < 20900
 extern "C" WXEXPORT int wxEvent_EVT_SETTING_CHANGED()               { return wxEVT_SETTING_CHANGED; }
+#else
+extern "C" WXEXPORT int wxEvent_EVT_SETTING_CHANGED()               { return -1; /* prevent link error */ }
 #endif
 extern "C" WXEXPORT int wxEvent_EVT_QUERY_NEW_PALETTE()             { return wxEVT_QUERY_NEW_PALETTE; }
 extern "C" WXEXPORT int wxEvent_EVT_PALETTE_CHANGED()               { return wxEVT_PALETTE_CHANGED; }
@@ -164,6 +181,10 @@ extern "C" WXEXPORT int wxEvent_EVT_DROP_FILES()                    { return wxE
 extern "C" WXEXPORT int wxEvent_EVT_DRAW_ITEM()                     { return wxEVT_DRAW_ITEM; }
 extern "C" WXEXPORT int wxEvent_EVT_MEASURE_ITEM()                  { return wxEVT_MEASURE_ITEM; }
 extern "C" WXEXPORT int wxEvent_EVT_COMPARE_ITEM()                  { return wxEVT_COMPARE_ITEM; }
+#else
+extern "C" WXEXPORT int wxEvent_EVT_DRAW_ITEM()                     { return -1; /* prevent link error */ }
+extern "C" WXEXPORT int wxEvent_EVT_MEASURE_ITEM()                  { return -1; /* prevent link error */ }
+extern "C" WXEXPORT int wxEvent_EVT_COMPARE_ITEM()                  { return -1; /* prevent link error */ }
 #endif
 extern "C" WXEXPORT int wxEvent_EVT_INIT_DIALOG()                   { return wxEVT_INIT_DIALOG; }
 extern "C" WXEXPORT int wxEvent_EVT_IDLE()                          { return wxEVT_IDLE; }
