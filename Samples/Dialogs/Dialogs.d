@@ -503,9 +503,9 @@ alias std.random.rand RAND;
 
 		public void OnBusyinfo(Object sender, Event e)
 		{
-			auto WindowDisabler disableAll = new WindowDisabler();
+			scope WindowDisabler disableAll = new WindowDisabler();
 
-			auto BusyInfo info = new BusyInfo("Working, please wait...", this);
+			scope BusyInfo info = new BusyInfo("Working, please wait...", this);
 
 			for ( int i = 0; i < 18; i++ )
 			{
