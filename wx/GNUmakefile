@@ -244,8 +244,13 @@ install: $(LIBTARGET)
 ddoc:
 	$(DMD) -c -o- -D -I.. $(SOURCES)
 
+ifeq ("$(COMPILER) $(OS)","DMD Darwin")
+$(LIBTARGET): $(OBJECTS)
+	$(DMD) -lib -of$@ $^
+else
 $(LIBTARGET): $(OBJECTS)
 	ar rcs $@ $^
+endif
 
 VERSION=$(version)=wx$(WX_RELEASE_NODOT) $(version)=__$(PLATFORM)__ $(version)=$(ENCODING)
 
