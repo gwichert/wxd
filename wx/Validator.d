@@ -27,10 +27,13 @@ public import wx.EvtHandler;
 	alias Validator wxValidator;
 	public class Validator : EvtHandler
 	{
-		static Validator wxDefaultValidator;
-		static this()
+		private static Validator DefaultValidator;
+		
+		static Validator wxDefaultValidator()
 		{
-			wxDefaultValidator = new Validator(wxDefaultValidator_Get());
+			if (!DefaultValidator)
+				DefaultValidator = new Validator(wxDefaultValidator_Get());
+			return DefaultValidator;
 		}
 	
 		public this()
