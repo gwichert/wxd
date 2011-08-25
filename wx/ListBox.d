@@ -81,7 +81,7 @@ public import wx.ClientData;
 		{
 			super(wxListBox_ctor());
 			if(!wxListBox_Create(wxobj, wxObject.SafePtr(parent), id,
-					pos, size, choices.length, choices.ptr, cast(uint)style,
+					pos, size, cast(int) choices.length, choices.ptr, cast(uint)style,
 					wxObject.SafePtr(validator), name))
 			{
 				throw new InvalidOperationException("Failed to create ListBox");
@@ -188,19 +188,19 @@ public import wx.ClientData;
 	
 		public void InsertItems(string[] items, int pos)
 		{
-			wxListBox_InsertItems(wxobj, items.length, items.ptr, pos);
+			wxListBox_InsertItems(wxobj, cast(int) items.length, items.ptr, pos);
 		}
 	
 		//---------------------------------------------------------------------
 	
 		public void Set(string[] items, ClientData data)
 		{
-			wxListBox_Set(wxobj, items.length, items.ptr, wxObject.SafePtr(data));
+			wxListBox_Set(wxobj, cast(int) items.length, items.ptr, wxObject.SafePtr(data));
 		}
 	
 		public void Set(string[] items)
 		{
-			wxListBox_Set(wxobj, items.length, items.ptr, wxObject.SafePtr(null));
+			wxListBox_Set(wxobj, cast(int) items.length, items.ptr, wxObject.SafePtr(null));
 		}
 	
 		//---------------------------------------------------------------------
@@ -304,7 +304,7 @@ public import wx.ClientData;
 			{ super(wxCheckListBox_ctor1());}
 			
 		public this(Window parent, int id, Point pos = wxDefaultPosition, Size size = wxDefaultSize, string[] choices = null, int style = 0, Validator validator = null, string name = wxListBoxNameStr)
-			{ super(wxCheckListBox_ctor2(wxObject.SafePtr(parent), id, pos, size, choices.length, choices.ptr, cast(uint)style, wxObject.SafePtr(validator), name));}
+			{ super(wxCheckListBox_ctor2(wxObject.SafePtr(parent), id, pos, size, cast(int) choices.length, choices.ptr, cast(uint)style, wxObject.SafePtr(validator), name));}
 			
 		//---------------------------------------------------------------------
 		// ctors with self created id

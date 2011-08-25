@@ -89,7 +89,7 @@ public import wx.ClientData;
 			super(wxComboBox_ctor());
 			if(!wxComboBox_Create(wxobj, wxObject.SafePtr(parent), id, 
 						value, pos, size, 
-						choices.length, choices.ptr, cast(uint)style, 
+						cast(int) choices.length, choices.ptr, cast(uint)style, 
 						wxObject.SafePtr(validator), name)) 
 			{
 				throw new InvalidOperationException("Failed to create ListBox");
@@ -116,7 +116,7 @@ public import wx.ClientData;
 		{
 			return wxComboBox_Create(wxobj, wxObject.SafePtr(parent), id,
 					value, pos, size, 
-					choices.length, choices.ptr, 
+					cast(int) choices.length, choices.ptr, 
 					cast(uint)style, wxObject.SafePtr(validator), name);
 		}
 

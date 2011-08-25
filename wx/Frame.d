@@ -209,7 +209,7 @@ public import wx.Icon;
 
 		public void StatusWidths(int[] value)
 		{
-			SetStatusWidths(value.length, value);
+			SetStatusWidths(cast(int) value.length, value);
 		}
 
 		public void SetStatusWidths(int n, int[] widths)

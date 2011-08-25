@@ -184,7 +184,7 @@ private import std.utf;
 				c_args[i] = cast(char*) toStringz(toUTF8(str));
 			}
 			
-            wxApp_Run(c_args.length, c_args.ptr);
+            wxApp_Run(cast(int) c_args.length, c_args.ptr);
 			
 			if(m_caughtException)
 			{

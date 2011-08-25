@@ -45,7 +45,7 @@ public import wx.ArrayInt;
             { super(wxobj);}
 
         public  this(Window parent, string message, string caption, string[] choices, ClientData clientData = null, int style =  wxCHOICEDLG_STYLE, Point pos = wxDefaultPosition)
-            { super(wxSingleChoiceDialog_ctor(wxObject.SafePtr(parent), message, caption, choices.length, choices.ptr, wxObject.SafePtr(clientData), style, pos));}
+            { super(wxSingleChoiceDialog_ctor(wxObject.SafePtr(parent), message, caption, cast(int) choices.length, choices.ptr, wxObject.SafePtr(clientData), style, pos));}
 
         //-----------------------------------------------------------------------------
 
@@ -93,13 +93,13 @@ public import wx.ArrayInt;
             { super(wxobj);}
 
         public  this(Window parent, string message, string caption, string[] choices, int style = SingleChoiceDialog.wxCHOICEDLG_STYLE, Point pos = wxDefaultPosition)
-            { super(wxMultiChoiceDialog_ctor(wxObject.SafePtr(parent), message, caption, choices.length, choices.ptr, style, pos));}
+            { super(wxMultiChoiceDialog_ctor(wxObject.SafePtr(parent), message, caption, cast(int) choices.length, choices.ptr, style, pos));}
 
         //-----------------------------------------------------------------------------
 
         public void SetSelections(int[] sel)
         {
-            wxMultiChoiceDialog_SetSelections(wxobj, sel.ptr, sel.length);
+            wxMultiChoiceDialog_SetSelections(wxobj, sel.ptr, cast(int) sel.length);
         }
 
         //-----------------------------------------------------------------------------
@@ -122,22 +122,22 @@ public import wx.ArrayInt;
 
 	public string GetSingleChoice(string message, string caption, string[] choices, Window parent = null, int x = -1, int y= -1, bool centre = true, int width = SingleChoiceDialog.wxCHOICE_WIDTH, int height = SingleChoiceDialog.wxCHOICE_HEIGHT)
 	{
-		return cast(string) new wxString(wxGetSingleChoice_func(message, caption, choices.length, choices.ptr, wxObject.SafePtr(parent), x, y, centre, width, height), true);
+		return cast(string) new wxString(wxGetSingleChoice_func(message, caption, cast(int) choices.length, choices.ptr, wxObject.SafePtr(parent), x, y, centre, width, height), true);
 	}
 
 	public int GetSingleChoiceIndex(string message, string caption, string[] choices, Window parent = null, int x = -1, int y= -1, bool centre = true, int width = SingleChoiceDialog.wxCHOICE_WIDTH, int height = SingleChoiceDialog.wxCHOICE_HEIGHT)
 	{
-		return wxGetSingleChoiceIndex_func(message, caption, choices.length, choices.ptr, wxObject.SafePtr(parent), x, y, centre, width, height);
+		return wxGetSingleChoiceIndex_func(message, caption, cast(int) choices.length, choices.ptr, wxObject.SafePtr(parent), x, y, centre, width, height);
 	}
 
 	public void* GetSingleChoiceData(string message, string caption, string[] choices, void **client_data, Window parent = null, int x = -1, int y= -1, bool centre = true, int width = SingleChoiceDialog.wxCHOICE_WIDTH, int height = SingleChoiceDialog.wxCHOICE_HEIGHT)
 	{
-		return wxGetSingleChoiceData_func(message, caption, choices.length, choices.ptr, client_data, wxObject.SafePtr(parent), x, y, centre, width, height);
+		return wxGetSingleChoiceData_func(message, caption, cast(int) choices.length, choices.ptr, client_data, wxObject.SafePtr(parent), x, y, centre, width, height);
 	}
 
 	public int[] GetMultipleChoices(string message, string caption, string[] choices, Window parent = null, int x = -1, int y= -1, bool centre = true, int width = SingleChoiceDialog.wxCHOICE_WIDTH, int height = SingleChoiceDialog.wxCHOICE_HEIGHT)
 	{
 		ArrayInt ari = new ArrayInt();
-		uint sz = wxGetMultipleChoices_func(wxObject.SafePtr(ari), message, caption, choices.length, choices.ptr, wxObject.SafePtr(parent), x, y, centre, width, height);
+		uint sz = wxGetMultipleChoices_func(wxObject.SafePtr(ari), message, caption, cast(int) choices.length, choices.ptr, wxObject.SafePtr(parent), x, y, centre, width, height);
 		return ari.toArray();
 	}

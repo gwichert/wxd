@@ -120,7 +120,7 @@ public import wx.Window;
 
 		public void StatusWidths(int[] value)
 		{
-			SetStatusWidths(value.length, value.ptr);
+			SetStatusWidths(cast(int) value.length, value.ptr);
 		}
 
 		public void SetStatusWidths(int n, int* widths)
@@ -163,7 +163,7 @@ public import wx.Window;
 		
 		public void StatusStyles(int[] value)
 		{
-			wxStatusBar_SetStatusStyles(wxobj, value.length, value.ptr);
+			wxStatusBar_SetStatusStyles(wxobj, cast(int) value.length, value.ptr);
 		}
 
 	}

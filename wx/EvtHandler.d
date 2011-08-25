@@ -22,7 +22,7 @@ module wx.EvtHandler;
 public import wx.common;
 public import wx.Event;
 public import wx.TaskBarIcon;
-private import wx.App;
+public import wx.App;
 
 	alias void delegate(Object sender, Event e) EventListener;
 
@@ -142,7 +142,7 @@ public import wx.StyledTextCtrl;
 			// crashed) so I pass the index into the listeners array instead.
 			// Works like a charm so far.
 			listeners ~= new SListener(listener, null, eventType);
-			wxEvtHandler_Connect(wxobj, eventType, id, lastId, listeners.length - 1);
+			wxEvtHandler_Connect(wxobj, eventType, id, lastId, cast(int) listeners.length - 1);
 		}
 		
 		public void AddCommandRangeListener(int eventType, int id, int lastId, EventListener listener, wxObject owner)
@@ -165,7 +165,7 @@ public import wx.StyledTextCtrl;
 			}
 			
 			listeners ~= new SListener(listener, owner, eventType);
-			wxEvtHandler_Connect(wxobj, eventType, id, lastId, listeners.length - 1);
+			wxEvtHandler_Connect(wxobj, eventType, id, lastId, cast(int) listeners.length - 1);
 		}
 		
 		//---------------------------------------------------------------------

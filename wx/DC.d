@@ -242,17 +242,17 @@ public import wx.ArrayInt;
 
 		public void DrawPolygon(Point[] points)
 		{ 
-			DrawPolygon(points.length, points, 0, 0, FillStyle.wxODDEVEN_RULE); 
+			DrawPolygon(cast(int) points.length, points, 0, 0, FillStyle.wxODDEVEN_RULE); 
 		}
 		
 		public void DrawPolygon(Point[] points, int xoffset, int yoffset)
 		{ 
-			DrawPolygon(points.length, points, xoffset, yoffset, FillStyle.wxODDEVEN_RULE); 
+			DrawPolygon(cast(int) points.length, points, xoffset, yoffset, FillStyle.wxODDEVEN_RULE); 
 		}
 		
 		public void DrawPolygon(Point[] points, int xoffset, int yoffset, FillStyle fill_style)
 		{ 
-			DrawPolygon(points.length, points, xoffset, yoffset, fill_style); 
+			DrawPolygon(cast(int) points.length, points, xoffset, yoffset, fill_style); 
 		}
 
 		public void DrawPolygon(int n, Point[] points)
@@ -543,7 +543,7 @@ public import wx.ArrayInt;
 		
 		public void DrawLines(Point[] points, int xoffset, int yoffset)
 		{
-			wxDC_DrawLines(wxobj, points.length, points.ptr, xoffset, yoffset);
+			wxDC_DrawLines(wxobj, cast(int) points.length, points.ptr, xoffset, yoffset);
 		}
 		
 		public void DrawLines(Point[] points)
@@ -643,7 +643,7 @@ public import wx.ArrayInt;
 		
 		public void DrawSpline(Point[] points)
 		{
-			wxDC_DrawSpline2(wxobj, points.length, points.ptr);
+			wxDC_DrawSpline2(wxobj, cast(int) points.length, points.ptr);
 		}
 		
 		//---------------------------------------------------------------------

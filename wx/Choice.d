@@ -88,7 +88,7 @@ public import wx.ArrayString;
 		{
 			super(wxChoice_ctor());
 			if(!wxChoice_Create(wxobj, wxObject.SafePtr(parent), id, pos,
-								size, choices.length, choices.ptr, style, 
+								size, cast(int) choices.length, choices.ptr, style, 
 								wxObject.SafePtr(validator), name)) 
 			{
 				throw new InvalidOperationException("Failed to create ListBox");
@@ -113,7 +113,7 @@ public import wx.ArrayString;
 						   string name)
 		{
 			return wxChoice_Create(wxobj, wxObject.SafePtr(parent), id,
-								   pos, size, choices.length, choices.ptr, 
+								   pos, size, cast(int) choices.length, choices.ptr, 
 								   cast(uint)style, wxObject.SafePtr(validator), name);
 		}
 		
@@ -140,7 +140,7 @@ public import wx.ArrayString;
 		
 		public void Append(string[] strings)
 		{
-			wxChoice_AppendArrayString(wxobj, strings.length, strings.ptr);
+			wxChoice_AppendArrayString(wxobj, cast(int) strings.length, strings.ptr);
 		}
 		
 		//-----------------------------------------------------------------------------

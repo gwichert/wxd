@@ -88,7 +88,7 @@ public import wx.Colour;
 
         version(__WXMAC__) {} else
         public this(Point[] points, int fillStyle)
-            { this(wxRegion_ctorByPoly(points.length, points, fillStyle)); }
+            { this(wxRegion_ctorByPoly(cast(int) points.length, points, fillStyle)); }
 
         public this(Bitmap bmp, Colour transColour, int tolerance)
             { this(wxRegion_ctorByBitmap(wxObject.SafePtr(bmp), wxObject.SafePtr(transColour), tolerance)); }

@@ -46,7 +46,7 @@ public import wx.common;
 			{ this(wxSound_ctor2(fileName, isResource), true); }
 		
 		public this(ubyte[] data)
-			{ this(wxSound_ctor3(data.length, data.ptr), true); }
+			{ this(wxSound_ctor3(cast(int) data.length, data.ptr), true); }
 
 		public this(IntPtr wxobj) 
 		{
