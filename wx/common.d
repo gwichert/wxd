@@ -50,6 +50,9 @@ static if (__VERSION__ < 1016)
 	static if (is(object.string)) { /*already added*/ } else
 	alias char[] string; // added in DMD 1.016 and DMD 2.000
 
+version (D_Version2) {} else {
+	alias Object Throwable;
+}
 
 class NullPointerException : Exception
 {
