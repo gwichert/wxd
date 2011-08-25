@@ -22,7 +22,7 @@ else
 alias tango.text.convert.Integer.toString toString;
 private import tango.text.Util;
 ptrdiff_t indexOf(string a, string b) { return 0 /*TODO*/; }
-ptrdiff_t LastIndexOf(string a, string b) { return 0 /*TODO*/; }
+ptrdiff_t lastIndexOf(string a, string b) { return 0 /*TODO*/; }
 private import tango.math.Random;
 private import tango.io.FileSystem;
 alias FileSystem.getDirectory GETCWD;
@@ -32,8 +32,10 @@ else // Phobos
 {
 private import std.string;
 private import std.random;
+static if (__VERSION__ < 2031) {
 alias std.string.find indexOf;
-alias std.string.rfind LastIndexOf;
+alias std.string.rfind lastIndexOf;
+}
 alias std.file.getcwd GETCWD;
 alias std.random.rand RAND;
 }
@@ -396,7 +398,7 @@ alias std.random.rand RAND;
 				this );
 			if (path.length == 0) return;
 
-			s_extDef = path[path.LastIndexOf(".") + 1..path.length];
+			s_extDef = path[path.lastIndexOf(".") + 1..path.length];
 
 			MessageDialog md = new MessageDialog(this,
 				"You selected the file '" ~ path ~
