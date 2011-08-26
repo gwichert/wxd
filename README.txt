@@ -1,7 +1,7 @@
 wxD - wxWidgets bindings for D language
 
 	(c) 2005 BERO <berobero@users.sourceforge.net>
-	(c) 2007 afb <afb@users.sourceforge.net>
+	(c) 2010 afb <afb@users.sourceforge.net>
 
 * About
 
@@ -21,6 +21,11 @@ It is composed of two parts:
 
 
 * Status
+
+0.16 (afb)
+Fixed building with LDC 0.9.2 and DMD 2.054
+Allow building with wxWidgets 2.9.2 / Cocoa
+Tested with GDC/LDC/DMD 1.064 on 3 platforms
 
 0.15 (afb)
 Add support for DMD on Mac OS X (i386 only)
