@@ -14,6 +14,13 @@
 #include <wx/bmpbuttn.h>
 #include "local_events.h"
 
+#if defined(__GNUC__) && defined(__GNUC_MINOR__)
+#if __GNUC__ >= 4 && __GNUC_MINOR__ >= 6
+/* allow casting a reference to a pointer */
+#pragma GCC diagnostic warning "-fpermissive"
+#endif
+#endif
+
 //-----------------------------------------------------------------------------
 
 typedef void (CALLBACK* Virtual_OnSetBitmap) (wxc_object obj);
