@@ -140,7 +140,7 @@ public import wx.VScroll;
 			return wxVListBox_OnGetLineHeight(wxobj, line);
 		}
 		
-		static extern(C) private override int staticOnGetLineHeight(VListBox obj, int line)
+		static extern(C) private int staticOnGetLineHeight(VListBox obj, int line)
 		{
 			return obj.OnGetLineHeight(line);
 		}
