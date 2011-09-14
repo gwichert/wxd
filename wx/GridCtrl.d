@@ -110,7 +110,7 @@ public import wx.Grid;
 		
 		//---------------------------------------------------------------------
 		
-		private override void dtor() { wxGridCellEnumRenderer_dtor(wxobj); }
+		protected override void dtor() { wxGridCellEnumRenderer_dtor(wxobj); }
 		
 		public override void SetParameters(string parameter)
 		{
@@ -168,7 +168,7 @@ public import wx.Grid;
 		
 		//---------------------------------------------------------------------
 				
-		private override void dtor() { wxGridCellEnumEditor_dtor(wxobj); }
+		protected override void dtor() { wxGridCellEnumEditor_dtor(wxobj); }
 			
 		public override void BeginEdit(int row, int col, Grid grid)
 		{

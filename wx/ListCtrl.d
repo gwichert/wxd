@@ -203,7 +203,7 @@ public import wx.ImageList;
 		public static wxObject New(IntPtr ptr) { return new ListItemAttr(ptr); }
 		//---------------------------------------------------------------------
 		
-		private override void dtor() { wxListItemAttr_dtor(wxobj); }
+		protected override void dtor() { wxListItemAttr_dtor(wxobj); }
 
 		//---------------------------------------------------------------------
 		
