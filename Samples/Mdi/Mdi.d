@@ -301,7 +301,7 @@ struct ArrayList /* for .NET compatibility */
 		
 		//---------------------------------------------------------------------
 		
-		public this( MDIParentFrame parent, string title, Point pos, Size size, long style )
+		public this( MDIParentFrame parent, string title, Point pos, Size size, int style )
 		{
 			super( parent, -1, title, pos, size, style | wxNO_FULL_REPAINT_ON_RESIZE );
 			MyFrame.my_children.Add( this );

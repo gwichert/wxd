@@ -83,7 +83,7 @@ version(D_Version2) mixin("alias to!string toString;");
 		
 		public bool m_addToSel = false;
 		
-		public static long s_sizeGrid = 10000;
+		public static int s_sizeGrid = 10000;
 		
 		//-----------------------------------------------------------------------------
 		
@@ -1352,7 +1352,7 @@ version(D_Version2) mixin("alias to!string toString;");
 		private Grid m_grid;
 		private BigGridTable m_table;
 		
-		public this(long sizeGrid)
+		public this(int sizeGrid)
 		{
 			super(null, -1, "Plugin Virtual Table", wxDefaultPosition, Size( 500, 450 ) );
 			m_grid = new Grid( this, -1, wxDefaultPosition, wxDefaultSize );
@@ -1366,9 +1366,9 @@ version(D_Version2) mixin("alias to!string toString;");
 	
 	public class BigGridTable : GridTableBase
 	{
-		private long m_sizeGrid;
+		private int m_sizeGrid;
 		
-		public this( long sizeGrid)
+		public this( int sizeGrid)
 		{
 			super();
 			m_sizeGrid = sizeGrid;

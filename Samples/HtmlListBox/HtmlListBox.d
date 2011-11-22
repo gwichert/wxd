@@ -204,7 +204,7 @@ version(D_Version2) mixin("alias to!string toString;");
 		
 		public void OnSetMargins( Object sender, Event e )
 		{
-			long margin = GetNumberFromUser(
+			int margin = GetNumberFromUser(
 				"Enter the margins to use for the listbox items.",
 				"Margin: ",
 				"HtmlLbox: Set the margins",

@@ -275,7 +275,7 @@ version(D_Version2) mixin("alias to!string toString;");
 
 		public void OnFocusLast( Object sender, Event e )
 		{
-			long index = m_listCtrl.ItemCount - 1;
+			int index = m_listCtrl.ItemCount - 1;
 			if ( index == -1 )
 			{
 				return;
@@ -330,12 +330,12 @@ version(D_Version2) mixin("alias to!string toString;");
 		
 		//---------------------------------------------------------------------	
 		
-		public void RecreateList(long flags)
+		public void RecreateList(int flags)
 		{
 			RecreateList(flags, true);
 		}
 		
-		public void RecreateList(long flags, bool withText)
+		public void RecreateList(int flags, bool withText)
 		{
 			//delete m_listCtrl;
 
@@ -599,7 +599,7 @@ version(D_Version2) mixin("alias to!string toString;");
 
 		public void OnToggleMultiSel(Object sender, Event e)
 		{
-			long flags = m_listCtrl.StyleFlags;
+			int flags = m_listCtrl.StyleFlags;
 			if ( (flags & ListCtrl.wxLC_SINGLE_SEL) > 0 )
 				flags &= ~ListCtrl.wxLC_SINGLE_SEL;
 			else
@@ -693,7 +693,7 @@ version(D_Version2) mixin("alias to!string toString;");
 		
 		//---------------------------------------------------------------------
 		
-		public this( Window parent, int id, Point pos, Size size, long style )
+		public this( Window parent, int id, Point pos, Size size, int style )
 		{
 			super( parent, id, pos, size, style );
 			EVT_LIST_BEGIN_DRAG(Cmd.LIST_CTRL, &OnBeginDrag);
@@ -1037,7 +1037,7 @@ version(D_Version2) mixin("alias to!string toString;");
 		
 		//---------------------------------------------------------------------	
 
-		public string OnGetItemText(long item, long column)
+		public string OnGetItemText(int item, int column)
 		{
 			string s = "Column " ~ .toString(column) ~ " of item " ~ .toString(item);
 			return s;
@@ -1045,14 +1045,14 @@ version(D_Version2) mixin("alias to!string toString;");
 		
 		//---------------------------------------------------------------------	
 
-		public int OnGetItemImage(long item)
+		public int OnGetItemImage(int item)
 		{
 			return 0;
 		}
 		
 		//---------------------------------------------------------------------	
 
-		public ListItemAttr OnGetItemAttr(long item)
+		public ListItemAttr OnGetItemAttr(int item)
 		{
 			return (item % 2) > 0 ? null : m_attr;
 		}

@@ -182,7 +182,7 @@ version(D_Version2) mixin("alias to!string toString;");
 		
 		public void ReInitNotebook()
 		{
-			long flags = 0;
+			int flags = 0;
 			
 			switch ( m_radioOrient.Selection )
 			{
@@ -371,7 +371,7 @@ version(D_Version2) mixin("alias to!string toString;");
 		public this( Window parent, int id )
 			{ this( parent, id, wxDefaultPosition, wxDefaultSize, 0 ); }
 		
-		public this( Window parent, int id, Point pos, Size size, long style )
+		public this( Window parent, int id, Point pos, Size size, int style )
 		{
 			super ( parent, id, pos, size, style );
 		}

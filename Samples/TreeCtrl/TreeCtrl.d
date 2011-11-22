@@ -267,7 +267,7 @@ version(D_Version2) mixin("alias to!string toString;");
 
 		public void CreateTreeWithDefaultStyle()
 		{
-			long style = TreeCtrl.wxTR_DEFAULT_STYLE | TreeCtrl.wxTR_EDIT_LABELS;
+			int style = TreeCtrl.wxTR_DEFAULT_STYLE | TreeCtrl.wxTR_EDIT_LABELS;
 			CreateTree(style | Border.wxBORDER_SUNKEN);
 			
 			MenuBar mbar = menuBar;
@@ -284,7 +284,7 @@ version(D_Version2) mixin("alias to!string toString;");
 
 		//---------------------------------------------------------------------
 
-		public void CreateTree(long style)
+		public void CreateTree(int style)
 		{
 			m_treeCtrl = new MyTreeCtrl(this, Cmd.TreeTest_Ctrl, wxDefaultPosition, wxDefaultSize, style);
 			Resize();
@@ -292,9 +292,9 @@ version(D_Version2) mixin("alias to!string toString;");
 		
 		//---------------------------------------------------------------------
 		
-		public void TogStyle(int id, long flag)
+		public void TogStyle(int id, int flag)
 		{
-			long style = m_treeCtrl.WindowStyle ^ flag;
+			int style = m_treeCtrl.WindowStyle ^ flag;
 			//delete m_treeCtrl;
 			CreateTree(style);
 

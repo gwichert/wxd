@@ -221,7 +221,7 @@ import wx.wx;
 		
 		//---------------------------------------------------------------------	
 	
-		public this( Window parent, int id, Point pos, Size size, long style, Validator validator)
+		public this( Window parent, int id, Point pos, Size size, int style, Validator validator)
 		{
 			super( parent, id, pos, size, style, validator, "myResizableListCtrl" );
 			InsertColumn( COL.RECORD_COLUMN, "Record", ListCtrl.wxLIST_FORMAT_LEFT, 140 );
