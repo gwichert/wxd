@@ -934,7 +934,7 @@ version(D_Version2) mixin("alias to!string toString;");
 					GetItem(info);
 
 					ListItemAttr attr = info.Attributes;
-					if ( attr == null || !attr.HasTextColour )
+					if ( !attr || !attr.HasTextColour )
 					{
 						info.TextColour = Colour.wxCYAN;
 
