@@ -240,6 +240,15 @@ import wx.wx;
             return (page == 1 || page == 2);
         }
 
+        version(D_Version2)
+        public override void GetPageInfo(ref int minPage, ref int maxPage, 
+                                         ref int selPageFrom, 
+                                         ref int selPageTo)
+        {
+            minPage = 1; maxPage = 2;
+            selPageFrom = 1; selPageTo = 2;
+        }
+        else // !D_Version2
         public override void GetPageInfo(inout int minPage, inout int maxPage, 
                                          inout int selPageFrom, 
                                          inout int selPageTo)
