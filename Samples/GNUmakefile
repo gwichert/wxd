@@ -5,21 +5,21 @@ all:
 	$(MAKE) -C Controls
 	$(MAKE) -C Dialogs
 #	$(MAKE) -C Display
-ifeq ("$(Library)","Phobos")
+ifeq ("$(LIBRARY)","Phobos")
 	$(MAKE) -C Dnd
 endif
 	$(MAKE) -C EventDemo
-ifeq ("$(Library)","Phobos")
+ifeq ("$(LIBRARY)","Phobos")
 	$(MAKE) -C Font
 endif
 #	$(MAKE) -C GLCube
-ifeq ("$(Library)","Phobos")
+ifeq ("$(LIBRARY)","Phobos")
 	$(MAKE) -C Grid
 endif
 	$(MAKE) -C Hello
 	$(MAKE) -C HTML
 	$(MAKE) -C HtmlHelp
-ifeq ("$(Library)","Phobos")
+ifeq ("$(LIBRARY)","Phobos")
 	$(MAKE) -C HtmlListBox
 	$(MAKE) -C Internat
 	$(MAKE) -C Launcher
@@ -29,12 +29,12 @@ ifeq ("$(Library)","Phobos")
 	$(MAKE) -C Mdi
 endif
 	$(MAKE) -C Minimal
-ifeq ("$(Library)","Phobos")
+ifeq ("$(LIBRARY)","Phobos")
 	$(MAKE) -C Notebook
 endif
 	$(MAKE) -C Platform
 	$(MAKE) -C Printing
-ifeq ("$(Library)","Phobos")
+ifeq ("$(LIBRARY)","Phobos")
 	$(MAKE) -C SashWindow
 endif
 #	$(MAKE) -C SDLPanel
@@ -44,7 +44,7 @@ ifeq ("$(STC)","1")
 	$(MAKE) -C StyledText
 endif
 #	$(MAKE) -C TaskBar
-ifeq ("$(Library)","Phobos")
+ifeq ("$(LIBRARY)","Phobos")
 	$(MAKE) -C TreeCtrl
 endif
 #	$(MAKE) -C Tutorial
