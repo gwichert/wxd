@@ -497,6 +497,8 @@ version(D_Version2) mixin("alias to!string toString;");
 				case Alignment.wxALIGN_RIGHT:
 					horiz = Alignment.wxALIGN_LEFT;
 				break;
+
+				default:
 			}
 
 			grid.SetRowLabelAlignment( horiz, -1 );			
@@ -520,6 +522,8 @@ version(D_Version2) mixin("alias to!string toString;");
 				case Alignment.wxALIGN_BOTTOM:
 					vert = Alignment.wxALIGN_TOP;
 				break;
+
+				default:
 			}
 
 			grid.SetRowLabelAlignment( -1, vert );			
@@ -543,6 +547,8 @@ version(D_Version2) mixin("alias to!string toString;");
 				case Alignment.wxALIGN_RIGHT:
 					horiz = Alignment.wxALIGN_LEFT;
 				break;
+
+				default:
 			}
 
 			grid.SetColLabelAlignment( horiz, -1 );			
@@ -566,6 +572,8 @@ version(D_Version2) mixin("alias to!string toString;");
 				case Alignment.wxALIGN_BOTTOM:
 				vert = Alignment.wxALIGN_TOP;
 				break;
+
+				default:
 			}
 
 			grid.SetColLabelAlignment( -1, vert );			
@@ -1106,6 +1114,8 @@ version(D_Version2) mixin("alias to!string toString;");
 
 				case Columns.Col_Platform:
 					return gd.platform;
+
+				default:
 			}
 
 			return "";				
@@ -1150,6 +1160,8 @@ version(D_Version2) mixin("alias to!string toString;");
 				case Columns.Col_Platform:
 					gd.platform = value;
 				break;
+
+				default:
 			}			
 		}
 		
@@ -1179,6 +1191,8 @@ version(D_Version2) mixin("alias to!string toString;");
 
 				case Columns.Col_Opened:
 					return "bool";
+
+				default:
 			}
 
 			return "";			

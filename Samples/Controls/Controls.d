@@ -798,6 +798,8 @@ alias writefln PRINT;
                 listbox.font = Font.wxITALIC_FONT;
                 listboxSorted.font = Font.wxITALIC_FONT;
                 break;
+
+            default:
             }
         }
 
@@ -865,6 +867,8 @@ alias writefln PRINT;
                 choice.Enabled = (ce.Int == 0);  
                 choiceSorted.Enabled = (ce.Int == 0);
                 break;
+
+            default:
             }
         }
 
@@ -916,6 +920,8 @@ alias writefln PRINT;
             case ID_COMBO_ENABLE:
                 combo.Enabled = (ce.Int == 0);
                 break;
+
+            default:
             }
         }
 
@@ -974,6 +980,8 @@ alias writefln PRINT;
                 radiobox.ForegroundColour = new Colour("Green");
                 radiobox.font = Font.wxITALIC_FONT;
                 break;
+
+            default:
             }
         }
 
@@ -1025,6 +1033,7 @@ alias writefln PRINT;
     				m_hsizer.Show ( m_bigBtn, ce.IsChecked );
     				m_hsizer.Layout ();
     			break;				
+    			default:				
 			}
 		}
 

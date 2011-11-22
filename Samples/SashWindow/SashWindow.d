@@ -157,6 +157,8 @@ version(D_Version2) mixin("alias to!string toString;");
 				case Cmd.ID_WINDOW_BOTTOM:
 					bottomWindow.DefaultSize = Size( 1000, se.DragRect.Height );
 				break;
+
+				default:
 			}
 
 			la.LayoutWindow( this, remainingSpace );
