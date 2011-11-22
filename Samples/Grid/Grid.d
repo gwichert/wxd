@@ -990,7 +990,7 @@ version(D_Version2) mixin("alias to!string toString;");
 
 			attrRO.ReadOnly  = true;
 			attrRange.Editor = new GridCellNumberEditor( 1, 5 );
-			attrCombo.Editor = new GridCellChoiceEditor( severities );
+			attrCombo.Editor = new GridCellChoiceEditor( cast(string[]) severities );
 
 			grid.SetColAttr(Columns.Col_Id,       attrRO);
 			grid.SetColAttr(Columns.Col_Priority, attrRange);
