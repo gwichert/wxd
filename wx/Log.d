@@ -26,7 +26,11 @@ import tango.text.convert.Format;
 else // Phobos
 {
 private import std.format;
+static if (__VERSION__ < 2052) {
 private import std.stdarg;
+} else {
+private import core.vararg;
+}
 }
 //! \endcond
 
