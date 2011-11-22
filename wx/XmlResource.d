@@ -36,7 +36,11 @@ version (Tango)
 else // Phobos
 {
 private import std.stream;
+static if (__VERSION__ < 2054) {
 private import std.regexp;
+} else {
+private import std.regex;
+}
 }
 //! \endcond
 
