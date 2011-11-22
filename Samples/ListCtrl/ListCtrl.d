@@ -15,6 +15,11 @@ import wx.wx;
 private import std.stdio;
 private import std.string;
 
+static if (__VERSION__ >= 2050) {
+import std.conv : to;
+version(D_Version2) mixin("alias to!string toString;");
+}
+
 	public enum Cmd
 	{
 		LIST_ABOUT,

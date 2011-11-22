@@ -14,6 +14,10 @@
 import wx.wx;
 private import std.string;
 
+static if (__VERSION__ >= 2050) {
+import std.conv : to;
+version(D_Version2) mixin("alias to!string toString;");
+}
 	public class ListViewFrame : Frame
 	{
 		enum Cmd 
@@ -170,7 +174,9 @@ private import std.string;
 		}
 	}
 
-void main(char[][] argv)
-{
+void main(char[][] argv)
+
+{
+
 	ListViewApp.Main();
 }

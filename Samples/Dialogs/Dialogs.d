@@ -36,8 +36,17 @@ static if (__VERSION__ < 2031) {
 alias std.string.find indexOf;
 alias std.string.rfind lastIndexOf;
 }
-alias std.file.getcwd GETCWD;
+static if (__VERSION__ < 2039) {
 alias std.random.rand RAND;
+} else {
+import std.random : uniform;
+version(D_Version2) mixin("alias uniform!uint RAND;");
+}
+static if (__VERSION__ >= 2050) {
+import std.conv : to;
+version(D_Version2) mixin("alias to!string toString;");
+}
+alias std.file.getcwd GETCWD;
 }
 
 	public class MyFrame : Frame

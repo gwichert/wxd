@@ -14,7 +14,13 @@
 import wx.wx;
 private import std.stream;
 private import std.string;
+static if (__VERSION__ < 2031) {
 alias std.string.find indexOf;
+}
+static if (__VERSION__ >= 2050) {
+import std.conv : to;
+version(D_Version2) mixin("alias to!string toString;");
+}
 
 	public class MyCanvas : Window
 	{

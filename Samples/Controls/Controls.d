@@ -31,6 +31,10 @@ else // Phobos
 {
 private import std.string;
 private import std.stdio;
+static if (__VERSION__ >= 2050) {
+import std.conv : to;
+version(D_Version2) mixin("alias to!string toString;");
+}
 alias writefln PRINT;
 }
 
