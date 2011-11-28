@@ -85,8 +85,8 @@ ddoc: wxc/PLATFORM wxc/ENCODING
 	$(MAKE) -C wx ddoc
 
 wxd:
-	cvs -z3 -d:pserver:anonymous@wxd.cvs.sourceforge.net:/cvsroot/wxd co -P wxd
-	test -d wxd && find wxd -name CVS -o -name .cvsignore | xargs rm -r
+	git clone git://wxd.git.sourceforge.net/gitroot/wxd/wxd wxd --reference .
+	test -d wxd && find wxd -name .git -o -name .gitignore | xargs rm -r
 	@test -d wxd/debian && rm -r wxd/debian || true
 	-dos2unix -k wxd/wxc/*.cpp wxd/wxc/*.h wxd/*.txt
 	-dos2unix -k wxd/wx/*.d wxd/wx/*/*.d wxd/Samples/*/*.d wxd/Samples/*/*.txt
