@@ -16,7 +16,7 @@
 module wx.Event;
 public import wx.common;
 
-typedef int EventType;
+alias int EventType;
 
 		//! \cond EXTERN
 		static extern (C) EventType wxEvent_GetEventType(IntPtr self);

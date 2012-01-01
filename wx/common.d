@@ -37,7 +37,7 @@ interface ICloneable
 
 
 	/// An implementation-specific type that is used to represent a pointer or a handle.
-	typedef void* IntPtr;
+	alias void* IntPtr;
 
 version(UNICODE)
 	alias wchar_t wxChar;
