@@ -1469,8 +1469,7 @@ wxWindow* wxWindow_GetChildren(wxWindow* self, int num)
 	if (num >= (int)self->GetChildren().GetCount())
 		return NULL;
 
-	wxWindowListNode* node = self->GetChildren().Item(num);
-	return node->GetData();
+	return self->GetChildren().Item(num)->GetData();
 }
 
 extern "C" WXEXPORT
