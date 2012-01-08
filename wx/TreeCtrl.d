@@ -182,9 +182,9 @@ public import wx.KeyEvent;
 			this(wxTreeItemId_ctor(), true);
 		}
 		
-		public this(/*ClientData*/void* pItem)
+		public this(/*ClientData*/VoidPtr pItem)
 		{
-			this(wxTreeItemId_ctor2(pItem), true);
+			this(wxTreeItemId_ctor2(pItem.ptr), true);
 		}
 		
 		//---------------------------------------------------------------------

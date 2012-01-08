@@ -36,8 +36,19 @@ interface ICloneable
 }
 
 
-	/// An implementation-specific type that is used to represent a pointer or a handle.
-	alias void* IntPtr;
+/// An implementation-specific type that is used to represent a pointer or a handle.
+alias void* IntPtr;
+
+///encapsulation of void pointer as workaround for cases when changing deprecated typedef to alias
+///leads to multiple definition linker errors.
+struct VoidPtr 
+{
+    public void* ptr;
+    this( void* value) { ptr = value; }            
+    bool opCast(T)() if (is(T == bool)) {return ptr != null;}
+}
+
+
 
 version(UNICODE)
 	alias wchar_t wxChar;
