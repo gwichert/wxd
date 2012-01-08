@@ -68,7 +68,7 @@ class _HtmlListBox : public wxHtmlListBox
 		void POnDrawBackground(wxDC& dc, wxRect& rect, size_t n)
 			{ wxHtmlListBox::OnDrawBackground(dc, rect, n); }		
 			
-		wxCoord POnGetLineHeight(int n) 
+		wxCoord POnGetLineHeight(size_t n) 
 			{ return wxHtmlListBox::OnGetLineHeight(n); }
 		
 			
@@ -199,7 +199,7 @@ void wxHtmlListBox_RefreshAll(_HtmlListBox* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlListBox_SetItemCount(_HtmlListBox* self, int count)
+void wxHtmlListBox_SetItemCount(_HtmlListBox* self, size_t count)
 {
     self->wxHtmlListBox::SetItemCount(count);
 }
@@ -207,7 +207,7 @@ void wxHtmlListBox_SetItemCount(_HtmlListBox* self, int count)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxString* wxHtmlListBox_OnGetItemMarkup(_HtmlListBox* self, int n)
+wxString* wxHtmlListBox_OnGetItemMarkup(_HtmlListBox* self, size_t n)
 {
     return new wxString(self->VPOnGetItemMarkup(n).c_str());
 }
@@ -231,7 +231,7 @@ wxColour* wxHtmlListBox_GetSelectedTextBgColour(_HtmlListBox* self, const wxColo
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlListBox_OnDrawItem(_HtmlListBox* self, wxDC* dc, wxRect* rect, int n)
+void wxHtmlListBox_OnDrawItem(_HtmlListBox* self, wxDC* dc, wxRect* rect, size_t n)
 {
     return self->VPOnDrawItem(*dc, *rect, n);
 }
@@ -239,7 +239,7 @@ void wxHtmlListBox_OnDrawItem(_HtmlListBox* self, wxDC* dc, wxRect* rect, int n)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxCoord wxHtmlListBox_OnMeasureItem(_HtmlListBox* self, int n)
+wxCoord wxHtmlListBox_OnMeasureItem(_HtmlListBox* self, size_t n)
 {
     return self->VPOnMeasureItem(n);
 }
@@ -263,7 +263,7 @@ void wxHtmlListBox_Init(_HtmlListBox* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlListBox_CacheItem(_HtmlListBox* self, int n)
+void wxHtmlListBox_CacheItem(_HtmlListBox* self, size_t n)
 {
     return self->PCacheItem(n);
 }
@@ -271,7 +271,7 @@ void wxHtmlListBox_CacheItem(_HtmlListBox* self, int n)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlListBox_OnDrawSeparator(_HtmlListBox* self, wxDC* dc, wxRect* rect, int n)
+void wxHtmlListBox_OnDrawSeparator(_HtmlListBox* self, wxDC* dc, wxRect* rect, size_t n)
 {
 	self->POnDrawSeparator(*dc, *rect, n);
 }
@@ -279,7 +279,7 @@ void wxHtmlListBox_OnDrawSeparator(_HtmlListBox* self, wxDC* dc, wxRect* rect, i
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxHtmlListBox_OnDrawBackground(_HtmlListBox* self, wxDC* dc, wxRect* rect, int n)
+void wxHtmlListBox_OnDrawBackground(_HtmlListBox* self, wxDC* dc, wxRect* rect, size_t n)
 {
 	self->POnDrawBackground(*dc, *rect, n);
 }
@@ -287,7 +287,7 @@ void wxHtmlListBox_OnDrawBackground(_HtmlListBox* self, wxDC* dc, wxRect* rect, 
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxCoord wxHtmlListBox_OnGetLineHeight(_HtmlListBox* self, int line)
+wxCoord wxHtmlListBox_OnGetLineHeight(_HtmlListBox* self, size_t line)
 {
 	return self->POnGetLineHeight(line);
 }

@@ -23,25 +23,26 @@ public import wx.SizeEvent;
 		//! \cond EXTERN
 		extern (C) {
 		alias int function(VScrolledWindow obj, int n) Virtual_IntInt;
+        alias int function(VScrolledWindow obj, size_t n) Virtual_IntSizeT;
 		}
 
 		static extern (C) IntPtr wxVScrolledWindow_ctor();
 		static extern (C) IntPtr wxVScrolledWindow_ctor2(IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
-		static extern (C) void wxVScrolledWindow_RegisterVirtual(IntPtr self, VScrolledWindow obj, Virtual_IntInt onGetLineHeight);
+		static extern (C) void wxVScrolledWindow_RegisterVirtual(IntPtr self, VScrolledWindow obj, Virtual_IntSizeT onGetLineHeight);
 		static extern (C) bool wxVScrolledWindow_Create(IntPtr self,IntPtr parent, int id, ref Point pos, ref Size size, int style, string name);
-		static extern (C) void wxVScrolledWindow_SetLineCount(IntPtr self, int count);
-		static extern (C) bool wxVScrolledWindow_ScrollToLine(IntPtr self, int line);
+		static extern (C) void wxVScrolledWindow_SetLineCount(IntPtr self, size_t count);
+		static extern (C) bool wxVScrolledWindow_ScrollToLine(IntPtr self, size_t line);
 		static extern (C) bool wxVScrolledWindow_ScrollLines(IntPtr self, int lines);
 		static extern (C) bool wxVScrolledWindow_ScrollPages(IntPtr self, int pages);
-		static extern (C) void wxVScrolledWindow_RefreshLine(IntPtr self, int line);
-		static extern (C) void wxVScrolledWindow_RefreshLines(IntPtr self, int from, int to);
+		static extern (C) void wxVScrolledWindow_RefreshLine(IntPtr self, size_t line);
+		static extern (C) void wxVScrolledWindow_RefreshLines(IntPtr self, size_t from, size_t to);
 		static extern (C) int wxVScrolledWindow_HitTest(IntPtr self, int x, int y);
 		static extern (C) int wxVScrolledWindow_HitTest2(IntPtr self, ref Point pt);
 		static extern (C) void wxVScrolledWindow_RefreshAll(IntPtr self);
-		static extern (C) int wxVScrolledWindow_GetLineCount(IntPtr self);
-		static extern (C) int wxVScrolledWindow_GetFirstVisibleLine(IntPtr self);
-		static extern (C) int wxVScrolledWindow_GetLastVisibleLine(IntPtr self);
-		static extern (C) bool wxVScrolledWindow_IsVisible(IntPtr self, int line);
+		static extern (C) size_t wxVScrolledWindow_GetLineCount(IntPtr self);
+		static extern (C) size_t wxVScrolledWindow_GetFirstVisibleLine(IntPtr self);
+		static extern (C) size_t wxVScrolledWindow_GetLastVisibleLine(IntPtr self);
+		static extern (C) bool wxVScrolledWindow_IsVisible(IntPtr self, size_t line);
 		//! \endcond
 		
 		//-----------------------------------------------------------------------------
@@ -78,16 +79,16 @@ public import wx.SizeEvent;
 		
 		//-----------------------------------------------------------------------------
 		
-		static extern(C) private int staticOnGetLineHeight(VScrolledWindow obj, int n)
+		static extern(C) private int staticOnGetLineHeight(VScrolledWindow obj, size_t n)
 		{
 			return obj.OnGetLineHeight(n);
 		}
-		protected abstract int OnGetLineHeight(int n);
+		protected abstract int OnGetLineHeight(size_t n);
 		
-		public void LineCount(int value) { wxVScrolledWindow_SetLineCount(wxobj, value); }
-		public int LineCount() { return wxVScrolledWindow_GetLineCount(wxobj); }
+		public void LineCount(size_t value) { wxVScrolledWindow_SetLineCount(wxobj, value); }
+		public size_t LineCount() { return wxVScrolledWindow_GetLineCount(wxobj); }
 		
-		public void ScrollToLine(int line)
+		public void ScrollToLine(size_t line)
 		{
 			wxVScrolledWindow_ScrollToLine(wxobj, line);
 		}
@@ -102,12 +103,12 @@ public import wx.SizeEvent;
 			return wxVScrolledWindow_ScrollPages(wxobj, pages);
 		}
 		
-		public void RefreshLine(int line)
+		public void RefreshLine(size_t line)
 		{
 			wxVScrolledWindow_RefreshLine(wxobj, line);
 		}
 		
-		public void RefreshLines(int from, int to)
+		public void RefreshLines(size_t from, size_t to)
 		{
 			wxVScrolledWindow_RefreshLines(wxobj, from, to);
 		}
@@ -127,17 +128,17 @@ public import wx.SizeEvent;
 			wxVScrolledWindow_RefreshAll(wxobj);
 		}
 		
-		public int GetFirstVisibleLine()
+		public size_t GetFirstVisibleLine()
 		{
 			return wxVScrolledWindow_GetFirstVisibleLine(wxobj);
 		}
 		
-		public int GetLastVisibleLine()
+		public size_t GetLastVisibleLine()
 		{
 			return wxVScrolledWindow_GetLastVisibleLine(wxobj);
 		}	
 		
-		public bool IsVisible(int line)
+		public bool IsVisible(size_t line)
 		{
 			return wxVScrolledWindow_IsVisible(wxobj, line);
 		}

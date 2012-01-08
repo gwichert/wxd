@@ -21,6 +21,7 @@
 //-----------------------------------------------------------------------------
 
 typedef int (CALLBACK* Virtual_IntInt) (wxc_object, int);
+typedef int (CALLBACK* Virtual_IntSizeT) (wxc_object, size_t);
 
 class _VScrolledWindow : public wxVScrolledWindow
 {
@@ -32,7 +33,7 @@ public:
 					const wxSize& size, long style, const wxString& name)
 		: wxVScrolledWindow(parent, id, pos, size, style, name) { }
 		
-	void RegisterVirtual(wxc_object obj, Virtual_IntInt onGetLineHeight)
+	void RegisterVirtual(wxc_object obj, Virtual_IntSizeT onGetLineHeight)
 		{
 			m_dobj = obj;
 			m_OnGetLineHeight = onGetLineHeight;
@@ -43,7 +44,7 @@ protected:
 		{ return m_OnGetLineHeight(m_dobj, n); }	
 		
 private:
-	Virtual_IntInt m_OnGetLineHeight;
+	Virtual_IntSizeT m_OnGetLineHeight;
 	wxc_object m_dobj;
 	
 public:
@@ -78,7 +79,7 @@ wxVScrolledWindow* wxVScrolledWindow_ctor2(wxWindow *parent, wxWindowID id, cons
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxVScrolledWindow_RegisterVirtual(_VScrolledWindow* self, wxc_object obj, Virtual_IntInt onGetLineHeight)
+void wxVScrolledWindow_RegisterVirtual(_VScrolledWindow* self, wxc_object obj, Virtual_IntSizeT onGetLineHeight)
 {
 	self->RegisterVirtual(obj, onGetLineHeight);
 }
@@ -100,13 +101,13 @@ wxc_bool wxVScrolledWindow_Create(_VScrolledWindow* self, wxWindow *parent, wxWi
 }
 
 extern "C" WXEXPORT
-void wxVScrolledWindow_SetLineCount(_VScrolledWindow* self, int count)
+void wxVScrolledWindow_SetLineCount(_VScrolledWindow* self, size_t count)
 {
 	self->SetLineCount(count);
 }
 
 extern "C" WXEXPORT
-wxc_bool wxVScrolledWindow_ScrollToLine(_VScrolledWindow* self, int line)
+wxc_bool wxVScrolledWindow_ScrollToLine(_VScrolledWindow* self, size_t line)
 {
 	return self->ScrollToLine(line)?1:0;
 }
@@ -132,13 +133,13 @@ wxc_bool wxVScrolledWindow_ScrollPages(_VScrolledWindow* self, int pages)
 }
 
 extern "C" WXEXPORT
-void wxVScrolledWindow_RefreshLine(_VScrolledWindow* self, int line)
+void wxVScrolledWindow_RefreshLine(_VScrolledWindow* self, size_t line)
 {
 	self->RefreshLine(line);
 }
 
 extern "C" WXEXPORT
-void wxVScrolledWindow_RefreshLines(_VScrolledWindow* self, int from, int to)
+void wxVScrolledWindow_RefreshLines(_VScrolledWindow* self, size_t from, size_t to)
 {
 	self->RefreshLines(from, to);
 }
@@ -162,25 +163,25 @@ void wxVScrolledWindow_RefreshAll(_VScrolledWindow* self)
 }
 
 extern "C" WXEXPORT
-int wxVScrolledWindow_GetLineCount(_VScrolledWindow* self)
+size_t wxVScrolledWindow_GetLineCount(_VScrolledWindow* self)
 {
 	return self->GetLineCount();
 }
 
 extern "C" WXEXPORT
-int wxVScrolledWindow_GetFirstVisibleLine(_VScrolledWindow* self)
+size_t wxVScrolledWindow_GetFirstVisibleLine(_VScrolledWindow* self)
 {
 	return self->GetFirstVisibleLine();
 }
 
 extern "C" WXEXPORT
-int wxVScrolledWindow_GetLastVisibleLine(_VScrolledWindow* self)
+size_t wxVScrolledWindow_GetLastVisibleLine(_VScrolledWindow* self)
 {
 	return self->GetLastVisibleLine();
 }
 
 extern "C" WXEXPORT
-wxc_bool wxVScrolledWindow_IsVisible(_VScrolledWindow* self, int line)
+wxc_bool wxVScrolledWindow_IsVisible(_VScrolledWindow* self, size_t line)
 {
 	return self->IsVisible(line)?1:0;
 }

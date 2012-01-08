@@ -22,6 +22,7 @@
 
 typedef void (CALLBACK* Virtual_voidDcRectSizeT) (wxc_object, wxDC*, const wxRect*, size_t);
 typedef int (CALLBACK* Virtual_IntInt) (wxc_object, int);
+typedef int (CALLBACK* Virtual_IntSizeT) (wxc_object, size_t);
 
 class _VListBox : public wxVListBox
 {
@@ -32,10 +33,10 @@ public:
 		
 	void RegisterVirtual(wxc_object obj,
 		Virtual_voidDcRectSizeT onDrawItem,
-		Virtual_IntInt onMeasureItem,
+		Virtual_IntSizeT onMeasureItem,
 		Virtual_voidDcRectSizeT onDrawSeparator,
 		Virtual_voidDcRectSizeT onDrawBackground,
-		Virtual_IntInt onGetLineHeight)
+		Virtual_IntSizeT onGetLineHeight)
 		{
 			m_dobj = obj;
 			m_OnDrawItem = onDrawItem;
@@ -55,7 +56,7 @@ public:
 			wxVListBox::OnDrawBackground(dc, rect, n);
 		}
 		
-	wxCoord POnGetLineHeight(int n)
+	wxCoord POnGetLineHeight(size_t n)
 		{
 			return wxVListBox::OnGetLineHeight(n); 
 		}
@@ -78,10 +79,10 @@ protected:
 				
 private:
 	Virtual_voidDcRectSizeT m_OnDrawItem;
-	Virtual_IntInt m_OnMeasureItem;
+	Virtual_IntSizeT m_OnMeasureItem;
 	Virtual_voidDcRectSizeT m_OnDrawSeparator;
 	Virtual_voidDcRectSizeT m_OnDrawBackground;
-	Virtual_IntInt m_OnGetLineHeight;
+	Virtual_IntSizeT m_OnGetLineHeight;
 	wxc_object m_dobj;
 	
 public: 
@@ -112,10 +113,10 @@ wxVListBox* wxVListBox_ctor(wxWindow *parent, wxWindowID id, const wxPoint* pos,
 extern "C" WXEXPORT
 void wxVListBox_RegisterVirtual(_VListBox* self, wxc_object obj,
 		Virtual_voidDcRectSizeT onDrawItem,
-		Virtual_IntInt onMeasureItem,
+		Virtual_IntSizeT onMeasureItem,
 		Virtual_voidDcRectSizeT onDrawSeparator,
 		Virtual_voidDcRectSizeT onDrawBackground,
-		Virtual_IntInt onGetLineHeight)
+		Virtual_IntSizeT onGetLineHeight)
 {
 	self->RegisterVirtual(obj, onDrawItem, onMeasureItem, onDrawSeparator, onDrawBackground, onGetLineHeight);
 }
@@ -141,7 +142,7 @@ wxc_bool wxVListBox_Create(_VListBox* self, wxWindow *parent, wxWindowID id, con
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxVListBox_OnDrawSeparator(_VListBox* self, wxDC* dc, wxRect* rect, int n)
+void wxVListBox_OnDrawSeparator(_VListBox* self, wxDC* dc, wxRect* rect, size_t n)
 {
 	self->POnDrawSeparator(*dc, *rect, n);
 }
@@ -149,7 +150,7 @@ void wxVListBox_OnDrawSeparator(_VListBox* self, wxDC* dc, wxRect* rect, int n)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxVListBox_OnDrawBackground(_VListBox* self, wxDC* dc, wxRect* rect, int n)
+void wxVListBox_OnDrawBackground(_VListBox* self, wxDC* dc, wxRect* rect, size_t n)
 {
 	self->POnDrawBackground(*dc, *rect, n);
 }
@@ -157,7 +158,7 @@ void wxVListBox_OnDrawBackground(_VListBox* self, wxDC* dc, wxRect* rect, int n)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxCoord wxVListBox_OnGetLineHeight(_VListBox* self, int line)
+wxCoord wxVListBox_OnGetLineHeight(_VListBox* self, size_t line)
 {
 	return self->POnGetLineHeight(line);
 }
@@ -165,7 +166,7 @@ wxCoord wxVListBox_OnGetLineHeight(_VListBox* self, int line)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxVListBox_GetItemCount(_VListBox* self)
+size_t wxVListBox_GetItemCount(_VListBox* self)
 {
 	return self->GetItemCount();
 }
@@ -189,7 +190,7 @@ int wxVListBox_GetSelection(_VListBox* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxc_bool wxVListBox_IsCurrent(_VListBox* self, int item)
+wxc_bool wxVListBox_IsCurrent(_VListBox* self, size_t item)
 {
 	return self->IsCurrent(item)?1:0;
 }
@@ -197,7 +198,7 @@ wxc_bool wxVListBox_IsCurrent(_VListBox* self, int item)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxc_bool wxVListBox_IsSelected(_VListBox* self, int item)
+wxc_bool wxVListBox_IsSelected(_VListBox* self, size_t item)
 {
 	return self->IsSelected(item)?1:0;
 }
@@ -205,7 +206,7 @@ wxc_bool wxVListBox_IsSelected(_VListBox* self, int item)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-int wxVListBox_GetSelectedCount(_VListBox* self)
+size_t wxVListBox_GetSelectedCount(_VListBox* self)
 {
 	return self->GetSelectedCount();
 }
@@ -245,7 +246,7 @@ wxColour* wxVListBox_GetSelectionBackground(_VListBox* self)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxVListBox_SetItemCount(_VListBox* self, int count)
+void wxVListBox_SetItemCount(_VListBox* self, size_t count)
 {
 	self->SetItemCount(count);
 }
@@ -269,7 +270,7 @@ void wxVListBox_SetSelection(_VListBox* self, int selection)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxc_bool wxVListBox_Select(_VListBox* self, int item, wxc_bool select)
+wxc_bool wxVListBox_Select(_VListBox* self, size_t item, wxc_bool select)
 {
 	return self->Select(item, select)?1:0;
 }
@@ -277,7 +278,7 @@ wxc_bool wxVListBox_Select(_VListBox* self, int item, wxc_bool select)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-wxc_bool wxVListBox_SelectRange(_VListBox* self, int from, int to)
+wxc_bool wxVListBox_SelectRange(_VListBox* self, size_t from, size_t to)
 {
 	return self->SelectRange(from, to)?1:0;
 }
@@ -285,7 +286,7 @@ wxc_bool wxVListBox_SelectRange(_VListBox* self, int from, int to)
 //-----------------------------------------------------------------------------
 
 extern "C" WXEXPORT
-void wxVListBox_Toggle(_VListBox* self, int item)
+void wxVListBox_Toggle(_VListBox* self, size_t item)
 {
 	self->Toggle(item);
 }
