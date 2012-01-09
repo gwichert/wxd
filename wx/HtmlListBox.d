@@ -23,7 +23,7 @@ public import wx.VLBox;
 		extern (C) {
 		alias void function(HtmlListBox obj) Virtual_VoidNoParams;
 		alias void function(HtmlListBox obj, size_t n) Virtual_VoidSizeT;
-		alias string function(HtmlListBox obj, size_t n) Virtual_wxStringSizeT;
+		alias TempStr function(HtmlListBox obj, size_t n) Virtual_wxStringSizeT;
 		alias IntPtr function(HtmlListBox obj, IntPtr colour) Virtual_wxColourwxColour;
 		alias void function(HtmlListBox obj, IntPtr dc, ref Rectangle rect, size_t n) Virtual_OnDrawItem;
 		alias int function(HtmlListBox obj, size_t n) Virtual_OnMeasureItem;
@@ -124,17 +124,17 @@ public import wx.VLBox;
 		
 		//-----------------------------------------------------------------------------
 		
-		static extern(C) private string staticOnGetItem(HtmlListBox obj, size_t n)
+		static extern(C) private TempStr staticOnGetItem(HtmlListBox obj, size_t n)
 		{
-			return obj.OnGetItem(n);
+			return TempStr( obj.OnGetItem( n));
 		}
 		protected abstract string OnGetItem(size_t n);
 		
 		//-----------------------------------------------------------------------------
 		
-		static extern(C) private string staticOnGetItemMarkup(HtmlListBox obj, size_t n)
+		static extern(C) private TempStr staticOnGetItemMarkup(HtmlListBox obj, size_t n)
 		{
-			return obj.OnGetItemMarkup(n);
+			return TempStr( obj.OnGetItemMarkup( n));
 		}
 		protected /+virtual+/ string OnGetItemMarkup(size_t n)
 		{

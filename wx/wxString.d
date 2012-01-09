@@ -31,6 +31,15 @@ private import std.utf;
 }
 //! \endcond
 
+struct TempStr {
+    const char[] str;
+    
+    this( string str) {
+        this.str = str;
+    }
+    alias str this;
+};
+
 		//! \cond EXTERN
 		static extern (C) IntPtr  wxString_ctor(string str);
 		static extern (C) IntPtr  wxString_ctor2(wxChar* str, size_t len);
