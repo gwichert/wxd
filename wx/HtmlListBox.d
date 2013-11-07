@@ -27,6 +27,8 @@ public import wx.VLBox;
 		alias IntPtr function(HtmlListBox obj, IntPtr colour) Virtual_wxColourwxColour;
 		alias void function(HtmlListBox obj, IntPtr dc, ref Rectangle rect, size_t n) Virtual_OnDrawItem;
 		alias int function(HtmlListBox obj, size_t n) Virtual_OnMeasureItem;
+
+		alias TempStr* function(HtmlListBox obj, size_t n) Virtual_wxStringPSizeT;
 		}
 
 		static extern (C) IntPtr wxHtmlListBox_ctor2(IntPtr parent, int id, ref Point pos, ref Size size, uint style, string name);
@@ -34,7 +36,8 @@ public import wx.VLBox;
 			Virtual_VoidNoParams refreshAll,
 			Virtual_VoidSizeT setItemCount,
 			Virtual_wxStringSizeT onGetItem,
-			Virtual_wxStringSizeT onGetItemMarkup,
+            //Virtual_wxStringSizeT onGetItemMarkup,
+			Virtual_wxStringPSizeT onGetItemMarkup,
 			Virtual_wxColourwxColour getSelectedTextColour,
 			Virtual_wxColourwxColour getSelectedTextBgColour,
 			Virtual_OnDrawItem onDrawItem,
@@ -132,9 +135,14 @@ public import wx.VLBox;
 		
 		//-----------------------------------------------------------------------------
 		
-		static extern(C) private TempStr staticOnGetItemMarkup(HtmlListBox obj, size_t n)
+		// static extern(C) private TempStr staticOnGetItemMarkup(HtmlListBox obj, size_t n)
+		// {
+		// 	return TempStr( obj.OnGetItemMarkup( n));
+		// }
+		static extern(C) private TempStr* staticOnGetItemMarkup(HtmlListBox obj, size_t n)
 		{
-			return TempStr( obj.OnGetItemMarkup( n));
+			TempStr* x = new TempStr( obj.OnGetItemMarkup( n));
+            return x;
 		}
 		protected /+virtual+/ string OnGetItemMarkup(size_t n)
 		{

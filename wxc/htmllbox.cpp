@@ -24,6 +24,9 @@ typedef wxc_string (CALLBACK* Virtual_wxStringSizeT) (wxc_object, size_t);
 typedef wxColour* (CALLBACK* Virtual_wxColourwxColour) (wxc_object, wxColour*);
 typedef void (CALLBACK* Virtual_OnDrawItem) (wxc_object, wxDC*, const wxRect*, size_t);
 typedef wxCoord (CALLBACK* Virtual_OnMeasureItem) (wxc_object, size_t);
+//workaround for linux 64bit ABI problem
+typedef wxc_string* (CALLBACK* Virtual_wxStringPSizeT) (wxc_object, size_t);
+
 
 class _HtmlListBox : public wxHtmlListBox
 {
@@ -77,8 +80,10 @@ class _HtmlListBox : public wxHtmlListBox
 		wxString OnGetItem( size_t n) const
 			{ wxc_string tmp = m_OnGetItem(m_dobj, n); return wxstr(tmp); }
 			
+		// wxString OnGetItemMarkup( size_t n) const
+		// 	{ wxc_string tmp = m_OnGetItemMarkup(m_dobj, n); return wxstr(tmp); }
 		wxString OnGetItemMarkup( size_t n) const
-			{ wxc_string tmp = m_OnGetItemMarkup(m_dobj, n); return wxstr(tmp); }
+			{ wxc_string tmp = *m_OnGetItemMarkup(m_dobj, n); return wxstr(tmp); }
 			
 		wxColour GetSelectedTextColour( const wxColour& colFg) const
 			{ return wxColour(*m_GetSelectedTextColour(m_dobj, new wxColour(colFg))); }
@@ -106,7 +111,8 @@ class _HtmlListBox : public wxHtmlListBox
 		void RegisterVirtual(wxc_object obj, Virtual_VoidNoParams refreshAll,
 				Virtual_VoidSizeT setItemCount,
 				Virtual_wxStringSizeT onGetItem,
-				Virtual_wxStringSizeT onGetItemMarkup,
+                //Virtual_wxStringSizeT onGetItemMarkup,
+				Virtual_wxStringPSizeT onGetItemMarkup,
 				Virtual_wxColourwxColour getSelectedTextColour,
 				Virtual_wxColourwxColour getSelectedTextBgColour,
 				Virtual_OnDrawItem onDrawItem,
@@ -133,7 +139,8 @@ class _HtmlListBox : public wxHtmlListBox
 		Virtual_VoidNoParams m_RefreshAll;
 		Virtual_VoidSizeT m_SetItemCount;
 		Virtual_wxStringSizeT m_OnGetItem;
-		Virtual_wxStringSizeT m_OnGetItemMarkup;
+        //Virtual_wxStringSizeT m_OnGetItemMarkup;
+		Virtual_wxStringPSizeT m_OnGetItemMarkup;
 		Virtual_wxColourwxColour m_GetSelectedTextColour;
 		Virtual_wxColourwxColour m_GetSelectedTextBgColour;
 		Virtual_OnDrawItem m_OnDrawItem;
@@ -167,7 +174,8 @@ void wxHtmlListBox_RegisterVirtual(_HtmlListBox* self, wxc_object obj,
 				Virtual_VoidNoParams refreshAll,
 				Virtual_VoidSizeT setItemCount,
 				Virtual_wxStringSizeT onGetItem,
-				Virtual_wxStringSizeT onGetItemMarkup,
+              //Virtual_wxStringSizeT onGetItemMarkup,
+				Virtual_wxStringPSizeT onGetItemMarkup,
 				Virtual_wxColourwxColour getSelectedTextColour,
 				Virtual_wxColourwxColour getSelectedTextBgColour,
 				Virtual_OnDrawItem onDrawItem,
