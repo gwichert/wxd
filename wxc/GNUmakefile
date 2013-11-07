@@ -179,7 +179,8 @@ PREFIX ?= /usr/local
 X11BASE ?= /usr/X11R6
 
 CXX ?= $(shell $(WX_CONFIG) --cxx)
-CXXFLAGS ?= -O2 -Wall
+#CXXFLAGS ?= -O2 -Wall
+CXXFLAGS ?= -g -Wall
 
 # Note: -g debugging symbols are off for "libwxc",
 #       since it makes it bigger for no good reason

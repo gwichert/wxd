@@ -96,7 +96,7 @@ public import wx.Event;
 	
 	public bool CmdDown() { return wxKeyEvent_CmdDown(wxobj); }
 
-		private static Event New(IntPtr obj) { return new KeyEvent(obj); }
+		public static Event New(IntPtr obj) { return new KeyEvent(obj); }
 
 		static this()
 		{

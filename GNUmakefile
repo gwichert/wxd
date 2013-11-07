@@ -11,7 +11,7 @@ ifndef MAKE
 endif
 
 OS=$(shell uname)
-ARCH=$(shell (arch 2>/dev/null || uname -m || echo i386) | sed -e s/i.86/x86/ )
+ARCH=$(shell (arch 2>/dev/null || uname -m || echo i386) | sed -e s/i.86/x86/ | sed -e s/_64// )
 
 # D compiler to use (DMD or GDC)
 ifeq ("$(OS) $(ARCH)","Linux x86")

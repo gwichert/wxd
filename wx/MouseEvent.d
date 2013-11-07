@@ -204,7 +204,7 @@ public import wx.DC;
         public bool IsPageScroll() { return wxMouseEvent_IsPageScroll(wxobj); }
 
 		//----------------------------------------------------------------------------
-		private static Event New(IntPtr obj) { return new MouseEvent(obj); }
+		public static Event New(IntPtr obj) { return new MouseEvent(obj); }
 
 		static this()
 		{
