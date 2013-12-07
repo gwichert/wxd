@@ -132,11 +132,25 @@ import tango.core.Version;
         
 		private static void AddObject(wxObject obj)
 		{
+            cleanObjects();
 			if (obj.wxobj != IntPtr.init) {
 				objects[obj.wxobj] = obj;
 			}
 		}
-	
+
+        private static bool shouldCleanObjects = false;
+		private static void cleanObjects()
+		{
+          if (shouldCleanObjects) {
+            foreach (key, val; objects) {
+              if (!val) {
+                objects.remove( key);
+              }
+			}
+            shouldCleanObjects = false;
+          }
+		}
+        
 		//---------------------------------------------------------------------
 
 		// Locates the registered object that references the given C++ object
@@ -192,8 +206,9 @@ import tango.core.Version;
 			if (ptr != IntPtr.init)
 			{
 				if(ptr in objects) {
-					objects.remove(ptr);
-					retval = true;
+                  objects[ptr] = null;
+                  shouldCleanObjects = true;
+                  retval = true;
 				}
 			}
 			

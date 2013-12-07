@@ -297,8 +297,22 @@ public import wx.StyledTextCtrl;
 
 		//---------------------------------------------------------------------
 
+        private static bool shouldCleanEvtHandlers = false;
+		private static void cleanEvtHanders()
+		{
+          if (shouldCleanEvtHandlers) {
+            foreach (key, val; evtHandlers) {
+              if (!val) {
+                evtHandlers.remove( key);
+              }
+			}
+            shouldCleanEvtHandlers = false;
+          }
+		}
+
 		private static void AddEvtHander(EvtHandler eh)
 		{
+            cleanEvtHanders();
 			if (eh.wxobj != IntPtr.init && !(eh.wxobj in evtHandlers)) 
 			{
 				evtHandlers[eh.wxobj] = eh;
@@ -309,7 +323,8 @@ public import wx.StyledTextCtrl;
 		{
 			if ( ptr != IntPtr.init)
 			{
-				evtHandlers.remove(ptr);
+                evtHandlers[ptr] = null;
+                shouldCleanEvtHandlers = true;
 				RemoveObject(ptr);
 				ptr = IntPtr.init;
 			}
