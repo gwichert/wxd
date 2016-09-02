@@ -44,6 +44,7 @@ OBJECTS = \
 	event.o \
 	evthandler.o \
 	filedialog.o \
+	filepickerctrl.o \
 	findreplacedialog.o \
 	flexgridsizer.o \
 	focusevent.o \
@@ -100,6 +101,7 @@ OBJECTS = \
 	palettechangedevent.o \
 	panel.o \
 	pen.o \
+	pickerbase.o \
 	printdata.o \
 	printdialog.o \
 	printer.o \

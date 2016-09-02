@@ -35,8 +35,8 @@ public import wx.ArrayInt;
         enum {
             wxCHOICEDLG_STYLE	= (wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER | wxOK | wxCANCEL | wxCENTRE)
         }
-	public const int wxCHOICE_HEIGHT = 150;
-	public const int wxCHOICE_WIDTH  = 200;
+	public static const int wxCHOICE_HEIGHT = 150;
+	public static const int wxCHOICE_WIDTH  = 200;
 
 
         // TODO: ClientData... !?!

@@ -31,14 +31,14 @@ public import wx.CommandEvent;
     alias FindReplaceDialog wxFindReplaceDialog;
     public class FindReplaceDialog : Dialog
     {
-        public const int wxFR_DOWN       = 1;
-        public const int wxFR_WHOLEWORD  = 2;
-        public const int wxFR_MATCHCASE  = 4;
+        public static const int wxFR_DOWN       = 1;
+        public static const int wxFR_WHOLEWORD  = 2;
+        public static const int wxFR_MATCHCASE  = 4;
 
-        public const int wxFR_REPLACEDIALOG = 1;
-        public const int wxFR_NOUPDOWN      = 2;
-        public const int wxFR_NOMATCHCASE   = 4;
-        public const int wxFR_NOWHOLEWORD   = 8;
+        public static const int wxFR_REPLACEDIALOG = 1;
+        public static const int wxFR_NOUPDOWN      = 2;
+        public static const int wxFR_NOMATCHCASE   = 4;
+        public static const int wxFR_NOWHOLEWORD   = 8;
 
         //-----------------------------------------------------------------------------
 

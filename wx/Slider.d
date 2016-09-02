@@ -61,7 +61,7 @@ public import wx.Control;
 			wxSL_SELRANGE        = 0x0800,
 		}
 
-		public const string wxSliderNameStr = "slider";
+		public static const string wxSliderNameStr = "slider";
 		//---------------------------------------------------------------------
 
 		public this(IntPtr wxobj) 

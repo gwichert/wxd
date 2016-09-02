@@ -44,6 +44,7 @@ public import wx.EraseEvent;
 public import wx.Event;
 public import wx.EvtHandler;
 public import wx.FileDialog;
+public import wx.FilePicker;
 public import wx.FindReplaceDialog;
 public import wx.FlexGridSizer;
 public import wx.FocusEvent;

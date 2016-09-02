@@ -28,9 +28,9 @@ public import wx.Control;
 	alias StaticText wxStaticText;
 	public class StaticText : Control
 	{
-		public const int wxST_NO_AUTORESIZE = 0x0001;
+		public static const int wxST_NO_AUTORESIZE = 0x0001;
 	
-		public const string wxStaticTextNameStr = "message";
+		public static const string wxStaticTextNameStr = "message";
 	
 		public this(IntPtr wxobj) 
 			{ super(wxobj);}

@@ -35,11 +35,11 @@ public import wx.Bitmap;
 	alias Button wxButton;
 	public class Button : Control
 	{
-		public const int wxBU_LEFT          =  0x0040;
-		public const int wxBU_TOP           =  0x0080;
-		public const int wxBU_RIGHT         =  0x0100;
-		public const int wxBU_BOTTOM        =  0x0200;
-		public const int wxBU_EXACTFIT      =  0x0001;
+		public static const int wxBU_LEFT          =  0x0040;
+		public static const int wxBU_TOP           =  0x0080;
+		public static const int wxBU_RIGHT         =  0x0100;
+		public static const int wxBU_BOTTOM        =  0x0200;
+		public static const int wxBU_EXACTFIT      =  0x0001;
 		
 		//---------------------------------------------------------------------
 		

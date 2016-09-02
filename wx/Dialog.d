@@ -16,6 +16,8 @@
 module wx.Dialog;
 public import wx.common;
 public import wx.Window;
+public import wx.BoxSizer;
+public import core.stdc.config;
 
 		//! \cond EXTERN
 		static extern (C) IntPtr wxDialog_ctor();
@@ -38,7 +40,11 @@ public import wx.Window;
 		static extern (C) void   wxDialog_SetIcons(IntPtr self, IntPtr icons);
 
 		static extern (C) int    wxDialog_ShowModal(IntPtr self);
-		//! \endcond
+
+        static extern (C) IntPtr wxDialog_CreateButtonSizer(IntPtr self, c_long flags);
+        static extern (C) IntPtr wxDialog_CreateSeparatedButtonSizer(IntPtr self, c_long flags);
+
+        //! \endcond
 
 		//---------------------------------------------------------------------
 		
@@ -80,7 +86,7 @@ public import wx.Window;
 		}
 
 		//---------------------------------------------------------------------
-		const string wxDialogNameStr="dialog";
+		const static string wxDialogNameStr="dialog";
 
 		public this(IntPtr wxobj) 
 			{ super(wxobj);}
@@ -152,4 +158,17 @@ public import wx.Window;
 
 		deprecated public void Modal(bool value) { wxDialog_SetModal(wxobj, value); }
 		public bool Modal() { return wxDialog_IsModal(wxobj); }
+
+
+        public Sizer CreateButtonSizer( c_long flags) 
+        {
+          return new BoxSizer( wxDialog_CreateButtonSizer(wxobj, flags));
+        }
+
+        public Sizer CreateSeparatedButtonSizer( c_long flags) 
+        {
+          return new BoxSizer( wxDialog_CreateSeparatedButtonSizer(wxobj, flags));
+        }
+        
+
 	}

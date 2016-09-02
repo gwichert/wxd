@@ -39,7 +39,7 @@ public import wx.Control;
 			wxSB_VERTICAL     = Orientation.wxVERTICAL,
 		}
 
-		public const string wxScrollBarNameStr = "scrollBar";
+		public static const string wxScrollBarNameStr = "scrollBar";
 		//-----------------------------------------------------------------------------
 
 		public this(IntPtr wxobj)

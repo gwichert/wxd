@@ -97,7 +97,7 @@ public import wx.CommandEvent;
             wxCAL_SHOW_SURROUNDING_WEEKS     = 0x0020
         }
         
-	public const string wxCalendarNameStr  = "CalendarCtrl";
+	public static const string wxCalendarNameStr  = "CalendarCtrl";
         //-----------------------------------------------------------------------------
 
         public this(IntPtr wxobj)

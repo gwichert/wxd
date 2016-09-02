@@ -70,12 +70,12 @@ public import wx.ClientData;
 	alias ComboBox wxComboBox;
 	public class ComboBox : Control
 	{
-		public const int wxCB_SIMPLE           = 0x0004;
-		public const int wxCB_SORT             = 0x0008;
-		public const int wxCB_READONLY         = 0x0010;
-		public const int wxCB_DROPDOWN         = 0x0020;
+		public static const int wxCB_SIMPLE           = 0x0004;
+		public static const int wxCB_SORT             = 0x0008;
+		public static const int wxCB_READONLY         = 0x0010;
+		public static const int wxCB_DROPDOWN         = 0x0020;
 		
-		public const string wxComboBoxNameStr = "comboBox";
+		public static const string wxComboBoxNameStr = "comboBox";
 		//---------------------------------------------------------------------
 
 		public this(IntPtr wxobj) 

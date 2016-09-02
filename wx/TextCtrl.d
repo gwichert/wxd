@@ -80,20 +80,20 @@ public import wx.KeyEvent;
 	alias TextAttr wxTextAttr;
 	public class TextAttr : wxObject
 	{
-		public const int wxTEXT_ATTR_TEXT_COLOUR =		0x0001;
-		public const int wxTEXT_ATTR_BACKGROUND_COLOUR =	0x0002;
-		public const int wxTEXT_ATTR_FONT_FACE =		0x0004;
-		public const int wxTEXT_ATTR_FONT_SIZE = 		0x0008;
-		public const int wxTEXT_ATTR_FONT_WEIGHT =		0x0010;
-		public const int wxTEXT_ATTR_FONT_ITALIC =		0x0020;
-		public const int wxTEXT_ATTR_FONT_UNDERLINE =		0x0040;
-		public const int wxTEXT_ATTR_FONT = wxTEXT_ATTR_FONT_FACE | wxTEXT_ATTR_FONT_SIZE | 
+		public static const int wxTEXT_ATTR_TEXT_COLOUR =		0x0001;
+		public static const int wxTEXT_ATTR_BACKGROUND_COLOUR =	0x0002;
+		public static const int wxTEXT_ATTR_FONT_FACE =		0x0004;
+		public static const int wxTEXT_ATTR_FONT_SIZE = 		0x0008;
+		public static const int wxTEXT_ATTR_FONT_WEIGHT =		0x0010;
+		public static const int wxTEXT_ATTR_FONT_ITALIC =		0x0020;
+		public static const int wxTEXT_ATTR_FONT_UNDERLINE =		0x0040;
+		public static const int wxTEXT_ATTR_FONT = wxTEXT_ATTR_FONT_FACE | wxTEXT_ATTR_FONT_SIZE | 
 							wxTEXT_ATTR_FONT_WEIGHT | wxTEXT_ATTR_FONT_ITALIC | 
 							wxTEXT_ATTR_FONT_UNDERLINE;
-		public const int wxTEXT_ATTR_ALIGNMENT =		0x0080;
-		public const int wxTEXT_ATTR_LEFT_INDENT =		0x0100;
-		public const int wxTEXT_ATTR_RIGHT_INDENT =		0x0200;
-		public const int wxTEXT_ATTR_TABS =			0x0400;
+		public static const int wxTEXT_ATTR_ALIGNMENT =		0x0080;
+		public static const int wxTEXT_ATTR_LEFT_INDENT =		0x0100;
+		public static const int wxTEXT_ATTR_RIGHT_INDENT =		0x0200;
+		public static const int wxTEXT_ATTR_TABS =			0x0400;
 
 	
 		//---------------------------------------------------------------------
@@ -288,30 +288,30 @@ public import wx.KeyEvent;
 	alias TextCtrl wxTextCtrl;
 	public class TextCtrl : Control
 	{
-		public const int wxTE_NO_VSCROLL       = 0x0002;
-		public const int wxTE_AUTO_SCROLL      = 0x0008;
+		public static const int wxTE_NO_VSCROLL       = 0x0002;
+		public static const int wxTE_AUTO_SCROLL      = 0x0008;
 	
-		public const int wxTE_READONLY         = 0x0010;
-		public const int wxTE_MULTILINE        = 0x0020;
-		public const int wxTE_PROCESS_TAB      = 0x0040;
+		public static const int wxTE_READONLY         = 0x0010;
+		public static const int wxTE_MULTILINE        = 0x0020;
+		public static const int wxTE_PROCESS_TAB      = 0x0040;
 	
-		public const int wxTE_LEFT             = 0x0000;
-		public const int wxTE_CENTER           = Alignment.wxALIGN_CENTER;
-		public const int wxTE_RIGHT            = Alignment.wxALIGN_RIGHT;
+		public static const int wxTE_LEFT             = 0x0000;
+		public static const int wxTE_CENTER           = Alignment.wxALIGN_CENTER;
+		public static const int wxTE_RIGHT            = Alignment.wxALIGN_RIGHT;
 	
-		public const int wxTE_RICH             = 0x0080;
-		public const int wxTE_PROCESS_ENTER    = 0x0400;
-		public const int wxTE_PASSWORD         = 0x0800;
+		public static const int wxTE_RICH             = 0x0080;
+		public static const int wxTE_PROCESS_ENTER    = 0x0400;
+		public static const int wxTE_PASSWORD         = 0x0800;
 	
-		public const int wxTE_AUTO_URL         = 0x1000;
-		public const int wxTE_NOHIDESEL        = 0x2000;
-		public const int wxTE_DONTWRAP         = Window.wxHSCROLL;
-		public const int wxTE_LINEWRAP         = 0x4000;
-		public const int wxTE_WORDWRAP         = 0x0000;
-		public const int wxTE_RICH2            = 0x8000;
+		public static const int wxTE_AUTO_URL         = 0x1000;
+		public static const int wxTE_NOHIDESEL        = 0x2000;
+		public static const int wxTE_DONTWRAP         = Window.wxHSCROLL;
+		public static const int wxTE_LINEWRAP         = 0x4000;
+		public static const int wxTE_WORDWRAP         = 0x0000;
+		public static const int wxTE_RICH2            = 0x8000;
 
 
-		public const string wxTextCtrlNameStr = "text";
+		public static const string wxTextCtrlNameStr = "text";
 		//---------------------------------------------------------------------
 
 		public this(IntPtr wxobj)

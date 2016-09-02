@@ -146,7 +146,7 @@ public import wx.ArrayString;
 		
 		public bool GetAltForEncoding(FontEncoding encoding, out FontEncoding alt_encoding, string facename, bool interactive)
 		{
-			return wxFontMapper_GetAltForEncoding(wxobj, cast(int)encoding, alt_encoding, facename, interactive);
+          return wxFontMapper_GetAltForEncoding(wxobj, cast(int)encoding, cast(int)alt_encoding, facename, interactive);
 		}
 		
 		//---------------------------------------------------------------------

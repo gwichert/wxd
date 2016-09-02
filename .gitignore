@@ -1,6 +1,7 @@
 *~
 *.o
 *.a
+*.orig
 bin/Aui
 bin/Controls
 bin/Dialogs

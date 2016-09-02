@@ -54,7 +54,7 @@ public import wx.Control;
 
 		//---------------------------------------------------------------------
 		
-		public const int wxBU_AUTODRAW      =  0x0004;
+		public static const int wxBU_AUTODRAW      =  0x0004;
 		
 		//---------------------------------------------------------------------
 		

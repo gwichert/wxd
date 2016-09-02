@@ -45,9 +45,9 @@ public import wx.Control;
 		}
 	
 		// Windows only
-		public const int wxGA_SMOOTH           = 0x0020;
+		public static const int wxGA_SMOOTH           = 0x0020;
 	
-		public const string wxGaugeNameStr = "gauge";
+		public static const string wxGaugeNameStr = "gauge";
 		//---------------------------------------------------------------------
 		
 		public this(IntPtr wxobj) 

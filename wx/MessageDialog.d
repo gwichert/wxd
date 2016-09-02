@@ -34,7 +34,7 @@ public import wx.Dialog;
 	alias MessageDialog wxMessageDialog;
 	public class MessageDialog : Dialog
 	{
-		public const string wxMessageBoxCaptionStr = "Message";
+		public static const string wxMessageBoxCaptionStr = "Message";
 		//---------------------------------------------------------------------
 	
 		private this(IntPtr wxobj) 

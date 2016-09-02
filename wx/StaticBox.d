@@ -26,7 +26,7 @@ public import wx.Control;
 	alias StaticBox wxStaticBox;
 	public class StaticBox : Control
 	{
-		public const string wxStaticBoxNameStr = "groupBox";
+		public static const string wxStaticBoxNameStr = "groupBox";
 
 		public this()
 			{ super(wxStaticBox_ctor()); }

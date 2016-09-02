@@ -36,10 +36,10 @@ public import wx.MenuItem;
 	alias AcceleratorEntry wxAcceleratorEntry;
 	public class AcceleratorEntry : wxObject
 	{
-		public const int wxACCEL_NORMAL	= 0x0000;
-		public const int wxACCEL_ALT	= 0x0001;
-		public const int wxACCEL_CTRL	= 0x0002;
-		public const int wxACCEL_SHIFT	= 0x0004;
+		public static const int wxACCEL_NORMAL	= 0x0000;
+		public static const int wxACCEL_ALT	= 0x0001;
+		public static const int wxACCEL_CTRL	= 0x0002;
+		public static const int wxACCEL_SHIFT	= 0x0004;
 		
 		//-----------------------------------------------------------------------------
 		

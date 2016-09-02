@@ -65,19 +65,19 @@ private import std.string;
     alias FileDialog wxFileDialog;
     public class FileDialog : Dialog
     {
-        public const int wxOPEN              = 0x0001;
-        public const int wxSAVE              = 0x0002;
-        public const int wxOVERWRITE_PROMPT  = 0x0004;
-        public const int wxHIDE_READONLY     = 0x0008;
-        public const int wxFILE_MUST_EXIST   = 0x0010;
-        public const int wxMULTIPLE          = 0x0020;
-        public const int wxCHANGE_DIR        = 0x0040;
+        public static const int wxOPEN              = 0x0001;
+        public static const int wxSAVE              = 0x0002;
+        public static const int wxOVERWRITE_PROMPT  = 0x0004;
+        public static const int wxHIDE_READONLY     = 0x0008;
+        public static const int wxFILE_MUST_EXIST   = 0x0010;
+        public static const int wxMULTIPLE          = 0x0020;
+        public static const int wxCHANGE_DIR        = 0x0040;
 
-	public const string wxFileSelectorPromptStr = "Select a file";
+	public static const string wxFileSelectorPromptStr = "Select a file";
 	version(__WXMSW__) {
-		public const string wxFileSelectorDefaultWildcardStr = "*.*";
+		public static const string wxFileSelectorDefaultWildcardStr = "*.*";
 	} else {
-		public const string wxFileSelectorDefaultWildcardStr = "*";
+		public static const string wxFileSelectorDefaultWildcardStr = "*";
 	}
 
         public this(IntPtr wxobj)

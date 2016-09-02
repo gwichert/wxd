@@ -422,166 +422,166 @@ public import wx.CommandEvent;
 
         //-----------------------------------------------------------------------------
 
-        public const int wxSTC_INVALID_POSITION = -1;
+        public static const int wxSTC_INVALID_POSITION = -1;
 
         // Define start of Scintilla messages to be greater than all edit (EM_*) messages
         // as many EM_ messages can be used although that use is deprecated.
-        public const int wxSTC_START = 2000;
-        public const int wxSTC_OPTIONAL_START = 3000;
-        public const int wxSTC_LEXER_START = 4000;
-        public const int wxSTC_WS_INVISIBLE = 0;
-        public const int wxSTC_WS_VISIBLEALWAYS = 1;
-        public const int wxSTC_WS_VISIBLEAFTERINDENT = 2;
-        public const int wxSTC_EOL_CRLF = 0;
-        public const int wxSTC_EOL_CR = 1;
-        public const int wxSTC_EOL_LF = 2;
+        public static const int wxSTC_START = 2000;
+        public static const int wxSTC_OPTIONAL_START = 3000;
+        public static const int wxSTC_LEXER_START = 4000;
+        public static const int wxSTC_WS_INVISIBLE = 0;
+        public static const int wxSTC_WS_VISIBLEALWAYS = 1;
+        public static const int wxSTC_WS_VISIBLEAFTERINDENT = 2;
+        public static const int wxSTC_EOL_CRLF = 0;
+        public static const int wxSTC_EOL_CR = 1;
+        public static const int wxSTC_EOL_LF = 2;
 
         // The SC_CP_UTF8 value can be used to enter Unicode mode.
         // This is the same value as CP_UTF8 in Windows
-        public const int wxSTC_CP_UTF8 = 65001;
+        public static const int wxSTC_CP_UTF8 = 65001;
 
         // The SC_CP_DBCS value can be used to indicate a DBCS mode for GTK+.
-        public const int wxSTC_CP_DBCS = 1;
-        public const int wxSTC_MARKER_MAX = 31;
-        public const int wxSTC_MARK_CIRCLE = 0;
-        public const int wxSTC_MARK_ROUNDRECT = 1;
-        public const int wxSTC_MARK_ARROW = 2;
-        public const int wxSTC_MARK_SMALLRECT = 3;
-        public const int wxSTC_MARK_SHORTARROW = 4;
-        public const int wxSTC_MARK_EMPTY = 5;
-        public const int wxSTC_MARK_ARROWDOWN = 6;
-        public const int wxSTC_MARK_MINUS = 7;
-        public const int wxSTC_MARK_PLUS = 8;
+        public static const int wxSTC_CP_DBCS = 1;
+        public static const int wxSTC_MARKER_MAX = 31;
+        public static const int wxSTC_MARK_CIRCLE = 0;
+        public static const int wxSTC_MARK_ROUNDRECT = 1;
+        public static const int wxSTC_MARK_ARROW = 2;
+        public static const int wxSTC_MARK_SMALLRECT = 3;
+        public static const int wxSTC_MARK_SHORTARROW = 4;
+        public static const int wxSTC_MARK_EMPTY = 5;
+        public static const int wxSTC_MARK_ARROWDOWN = 6;
+        public static const int wxSTC_MARK_MINUS = 7;
+        public static const int wxSTC_MARK_PLUS = 8;
 
         // Shapes used for outlining column.
-        public const int wxSTC_MARK_VLINE = 9;
-        public const int wxSTC_MARK_LCORNER = 10;
-        public const int wxSTC_MARK_TCORNER = 11;
-        public const int wxSTC_MARK_BOXPLUS = 12;
-        public const int wxSTC_MARK_BOXPLUSCONNECTED = 13;
-        public const int wxSTC_MARK_BOXMINUS = 14;
-        public const int wxSTC_MARK_BOXMINUSCONNECTED = 15;
-        public const int wxSTC_MARK_LCORNERCURVE = 16;
-        public const int wxSTC_MARK_TCORNERCURVE = 17;
-        public const int wxSTC_MARK_CIRCLEPLUS = 18;
-        public const int wxSTC_MARK_CIRCLEPLUSCONNECTED = 19;
-        public const int wxSTC_MARK_CIRCLEMINUS = 20;
-        public const int wxSTC_MARK_CIRCLEMINUSCONNECTED = 21;
+        public static const int wxSTC_MARK_VLINE = 9;
+        public static const int wxSTC_MARK_LCORNER = 10;
+        public static const int wxSTC_MARK_TCORNER = 11;
+        public static const int wxSTC_MARK_BOXPLUS = 12;
+        public static const int wxSTC_MARK_BOXPLUSCONNECTED = 13;
+        public static const int wxSTC_MARK_BOXMINUS = 14;
+        public static const int wxSTC_MARK_BOXMINUSCONNECTED = 15;
+        public static const int wxSTC_MARK_LCORNERCURVE = 16;
+        public static const int wxSTC_MARK_TCORNERCURVE = 17;
+        public static const int wxSTC_MARK_CIRCLEPLUS = 18;
+        public static const int wxSTC_MARK_CIRCLEPLUSCONNECTED = 19;
+        public static const int wxSTC_MARK_CIRCLEMINUS = 20;
+        public static const int wxSTC_MARK_CIRCLEMINUSCONNECTED = 21;
 
         // Invisible mark that only sets the line background color.
-        public const int wxSTC_MARK_BACKGROUND = 22;
-        public const int wxSTC_MARK_DOTDOTDOT = 23;
-        public const int wxSTC_MARK_ARROWS = 24;
-        public const int wxSTC_MARK_PIXMAP = 25;
-        public const int wxSTC_MARK_CHARACTER = 10000;
+        public static const int wxSTC_MARK_BACKGROUND = 22;
+        public static const int wxSTC_MARK_DOTDOTDOT = 23;
+        public static const int wxSTC_MARK_ARROWS = 24;
+        public static const int wxSTC_MARK_PIXMAP = 25;
+        public static const int wxSTC_MARK_CHARACTER = 10000;
 
         // Markers used for outlining column.
-        public const int wxSTC_MARKNUM_FOLDEREND = 25;
-        public const int wxSTC_MARKNUM_FOLDEROPENMID = 26;
-        public const int wxSTC_MARKNUM_FOLDERMIDTAIL = 27;
-        public const int wxSTC_MARKNUM_FOLDERTAIL = 28;
-        public const int wxSTC_MARKNUM_FOLDERSUB = 29;
-        public const int wxSTC_MARKNUM_FOLDER = 30;
-        public const int wxSTC_MARKNUM_FOLDEROPEN = 31;
-        public const int wxSTC_MASK_FOLDERS = -1;
-        public const int wxSTC_MARGIN_SYMBOL = 0;
-        public const int wxSTC_MARGIN_NUMBER = 1;
+        public static const int wxSTC_MARKNUM_FOLDEREND = 25;
+        public static const int wxSTC_MARKNUM_FOLDEROPENMID = 26;
+        public static const int wxSTC_MARKNUM_FOLDERMIDTAIL = 27;
+        public static const int wxSTC_MARKNUM_FOLDERTAIL = 28;
+        public static const int wxSTC_MARKNUM_FOLDERSUB = 29;
+        public static const int wxSTC_MARKNUM_FOLDER = 30;
+        public static const int wxSTC_MARKNUM_FOLDEROPEN = 31;
+        public static const int wxSTC_MASK_FOLDERS = -1;
+        public static const int wxSTC_MARGIN_SYMBOL = 0;
+        public static const int wxSTC_MARGIN_NUMBER = 1;
 
         // Styles in range 32..37 are predefined for parts of the UI and are not used as normal styles.
         // Styles 38 and 39 are for future use.
-        public const int wxSTC_STYLE_DEFAULT = 32;
-        public const int wxSTC_STYLE_LINENUMBER = 33;
-        public const int wxSTC_STYLE_BRACELIGHT = 34;
-        public const int wxSTC_STYLE_BRACEBAD = 35;
-        public const int wxSTC_STYLE_CONTROLCHAR = 36;
-        public const int wxSTC_STYLE_INDENTGUIDE = 37;
-        public const int wxSTC_STYLE_LASTPREDEFINED = 39;
-        public const int wxSTC_STYLE_MAX = 127;
+        public static const int wxSTC_STYLE_DEFAULT = 32;
+        public static const int wxSTC_STYLE_LINENUMBER = 33;
+        public static const int wxSTC_STYLE_BRACELIGHT = 34;
+        public static const int wxSTC_STYLE_BRACEBAD = 35;
+        public static const int wxSTC_STYLE_CONTROLCHAR = 36;
+        public static const int wxSTC_STYLE_INDENTGUIDE = 37;
+        public static const int wxSTC_STYLE_LASTPREDEFINED = 39;
+        public static const int wxSTC_STYLE_MAX = 127;
 
         // Character set identifiers are used in StyleSetCharacterSet.
         // The values are the same as the Windows *_CHARSET values.
-        public const int wxSTC_CHARSET_ANSI = 0;
-        public const int wxSTC_CHARSET_DEFAULT = 1;
-        public const int wxSTC_CHARSET_BALTIC = 186;
-        public const int wxSTC_CHARSET_CHINESEBIG5 = 136;
-        public const int wxSTC_CHARSET_EASTEUROPE = 238;
-        public const int wxSTC_CHARSET_GB2312 = 134;
-        public const int wxSTC_CHARSET_GREEK = 161;
-        public const int wxSTC_CHARSET_HANGUL = 129;
-        public const int wxSTC_CHARSET_MAC = 77;
-        public const int wxSTC_CHARSET_OEM = 255;
-        public const int wxSTC_CHARSET_RUSSIAN = 204;
-        public const int wxSTC_CHARSET_SHIFTJIS = 128;
-        public const int wxSTC_CHARSET_SYMBOL = 2;
-        public const int wxSTC_CHARSET_TURKISH = 162;
-        public const int wxSTC_CHARSET_JOHAB = 130;
-        public const int wxSTC_CHARSET_HEBREW = 177;
-        public const int wxSTC_CHARSET_ARABIC = 178;
-        public const int wxSTC_CHARSET_VIETNAMESE = 163;
-        public const int wxSTC_CHARSET_THAI = 222;
-        public const int wxSTC_CASE_MIXED = 0;
-        public const int wxSTC_CASE_UPPER = 1;
-        public const int wxSTC_CASE_LOWER = 2;
-        public const int wxSTC_INDIC_MAX = 7;
-        public const int wxSTC_INDIC_PLAIN = 0;
-        public const int wxSTC_INDIC_SQUIGGLE = 1;
-        public const int wxSTC_INDIC_TT = 2;
-        public const int wxSTC_INDIC_DIAGONAL = 3;
-        public const int wxSTC_INDIC_STRIKE = 4;
-        public const int wxSTC_INDIC0_MASK = 0x20;
-        public const int wxSTC_INDIC1_MASK = 0x40;
-        public const int wxSTC_INDIC2_MASK = 0x80;
-        public const int wxSTC_INDICS_MASK = 0xE0;
+        public static const int wxSTC_CHARSET_ANSI = 0;
+        public static const int wxSTC_CHARSET_DEFAULT = 1;
+        public static const int wxSTC_CHARSET_BALTIC = 186;
+        public static const int wxSTC_CHARSET_CHINESEBIG5 = 136;
+        public static const int wxSTC_CHARSET_EASTEUROPE = 238;
+        public static const int wxSTC_CHARSET_GB2312 = 134;
+        public static const int wxSTC_CHARSET_GREEK = 161;
+        public static const int wxSTC_CHARSET_HANGUL = 129;
+        public static const int wxSTC_CHARSET_MAC = 77;
+        public static const int wxSTC_CHARSET_OEM = 255;
+        public static const int wxSTC_CHARSET_RUSSIAN = 204;
+        public static const int wxSTC_CHARSET_SHIFTJIS = 128;
+        public static const int wxSTC_CHARSET_SYMBOL = 2;
+        public static const int wxSTC_CHARSET_TURKISH = 162;
+        public static const int wxSTC_CHARSET_JOHAB = 130;
+        public static const int wxSTC_CHARSET_HEBREW = 177;
+        public static const int wxSTC_CHARSET_ARABIC = 178;
+        public static const int wxSTC_CHARSET_VIETNAMESE = 163;
+        public static const int wxSTC_CHARSET_THAI = 222;
+        public static const int wxSTC_CASE_MIXED = 0;
+        public static const int wxSTC_CASE_UPPER = 1;
+        public static const int wxSTC_CASE_LOWER = 2;
+        public static const int wxSTC_INDIC_MAX = 7;
+        public static const int wxSTC_INDIC_PLAIN = 0;
+        public static const int wxSTC_INDIC_SQUIGGLE = 1;
+        public static const int wxSTC_INDIC_TT = 2;
+        public static const int wxSTC_INDIC_DIAGONAL = 3;
+        public static const int wxSTC_INDIC_STRIKE = 4;
+        public static const int wxSTC_INDIC0_MASK = 0x20;
+        public static const int wxSTC_INDIC1_MASK = 0x40;
+        public static const int wxSTC_INDIC2_MASK = 0x80;
+        public static const int wxSTC_INDICS_MASK = 0xE0;
 
         // PrintColourMode - use same colours as screen.
-        public const int wxSTC_PRINT_NORMAL = 0;
+        public static const int wxSTC_PRINT_NORMAL = 0;
 
         // PrintColourMode - invert the light value of each style for printing.
-        public const int wxSTC_PRINT_INVERTLIGHT = 1;
+        public static const int wxSTC_PRINT_INVERTLIGHT = 1;
 
         // PrintColourMode - force black text on white background for printing.
-        public const int wxSTC_PRINT_BLACKONWHITE = 2;
+        public static const int wxSTC_PRINT_BLACKONWHITE = 2;
 
         // PrintColourMode - text stays coloured, but all background is forced to be white for printing.
-        public const int wxSTC_PRINT_COLOURONWHITE = 3;
+        public static const int wxSTC_PRINT_COLOURONWHITE = 3;
 
         // PrintColourMode - only the default-background is forced to be white for printing.
-        public const int wxSTC_PRINT_COLOURONWHITEDEFAULTBG = 4;
-        public const int wxSTC_FIND_WHOLEWORD = 2;
-        public const int wxSTC_FIND_MATCHCASE = 4;
-        public const int wxSTC_FIND_WORDSTART = 0x00100000;
-        public const int wxSTC_FIND_REGEXP = 0x00200000;
-        public const int wxSTC_FIND_POSIX = 0x00400000;
-        public const int wxSTC_FOLDLEVELBASE = 0x400;
-        public const int wxSTC_FOLDLEVELWHITEFLAG = 0x1000;
-        public const int wxSTC_FOLDLEVELHEADERFLAG = 0x2000;
-        public const int wxSTC_FOLDLEVELBOXHEADERFLAG = 0x4000;
-        public const int wxSTC_FOLDLEVELBOXFOOTERFLAG = 0x8000;
-        public const int wxSTC_FOLDLEVELCONTRACTED = 0x10000;
-        public const int wxSTC_FOLDLEVELUNINDENT = 0x20000;
-        public const int wxSTC_FOLDLEVELNUMBERMASK = 0x0FFF;
-        public const int wxSTC_FOLDFLAG_LINEBEFORE_EXPANDED = 0x0002;
-        public const int wxSTC_FOLDFLAG_LINEBEFORE_CONTRACTED = 0x0004;
-        public const int wxSTC_FOLDFLAG_LINEAFTER_EXPANDED = 0x0008;
-        public const int wxSTC_FOLDFLAG_LINEAFTER_CONTRACTED = 0x0010;
-        public const int wxSTC_FOLDFLAG_LEVELNUMBERS = 0x0040;
-        public const int wxSTC_FOLDFLAG_BOX = 0x0001;
-        public const int wxSTC_TIME_FOREVER = 10000000;
-        public const int wxSTC_WRAP_NONE = 0;
-        public const int wxSTC_WRAP_WORD = 1;
-        public const int wxSTC_CACHE_NONE = 0;
-        public const int wxSTC_CACHE_CARET = 1;
-        public const int wxSTC_CACHE_PAGE = 2;
-        public const int wxSTC_CACHE_DOCUMENT = 3;
-        public const int wxSTC_EDGE_NONE = 0;
-        public const int wxSTC_EDGE_LINE = 1;
-        public const int wxSTC_EDGE_BACKGROUND = 2;
-        public const int wxSTC_CURSORNORMAL = -1;
-        public const int wxSTC_CURSORWAIT = 4;
+        public static const int wxSTC_PRINT_COLOURONWHITEDEFAULTBG = 4;
+        public static const int wxSTC_FIND_WHOLEWORD = 2;
+        public static const int wxSTC_FIND_MATCHCASE = 4;
+        public static const int wxSTC_FIND_WORDSTART = 0x00100000;
+        public static const int wxSTC_FIND_REGEXP = 0x00200000;
+        public static const int wxSTC_FIND_POSIX = 0x00400000;
+        public static const int wxSTC_FOLDLEVELBASE = 0x400;
+        public static const int wxSTC_FOLDLEVELWHITEFLAG = 0x1000;
+        public static const int wxSTC_FOLDLEVELHEADERFLAG = 0x2000;
+        public static const int wxSTC_FOLDLEVELBOXHEADERFLAG = 0x4000;
+        public static const int wxSTC_FOLDLEVELBOXFOOTERFLAG = 0x8000;
+        public static const int wxSTC_FOLDLEVELCONTRACTED = 0x10000;
+        public static const int wxSTC_FOLDLEVELUNINDENT = 0x20000;
+        public static const int wxSTC_FOLDLEVELNUMBERMASK = 0x0FFF;
+        public static const int wxSTC_FOLDFLAG_LINEBEFORE_EXPANDED = 0x0002;
+        public static const int wxSTC_FOLDFLAG_LINEBEFORE_CONTRACTED = 0x0004;
+        public static const int wxSTC_FOLDFLAG_LINEAFTER_EXPANDED = 0x0008;
+        public static const int wxSTC_FOLDFLAG_LINEAFTER_CONTRACTED = 0x0010;
+        public static const int wxSTC_FOLDFLAG_LEVELNUMBERS = 0x0040;
+        public static const int wxSTC_FOLDFLAG_BOX = 0x0001;
+        public static const int wxSTC_TIME_FOREVER = 10000000;
+        public static const int wxSTC_WRAP_NONE = 0;
+        public static const int wxSTC_WRAP_WORD = 1;
+        public static const int wxSTC_CACHE_NONE = 0;
+        public static const int wxSTC_CACHE_CARET = 1;
+        public static const int wxSTC_CACHE_PAGE = 2;
+        public static const int wxSTC_CACHE_DOCUMENT = 3;
+        public static const int wxSTC_EDGE_NONE = 0;
+        public static const int wxSTC_EDGE_LINE = 1;
+        public static const int wxSTC_EDGE_BACKGROUND = 2;
+        public static const int wxSTC_CURSORNORMAL = -1;
+        public static const int wxSTC_CURSORWAIT = 4;
 
         // Constants for use with SetVisiblePolicy, similar to SetCaretPolicy.
-        public const int wxSTC_VISIBLE_SLOP = 0x01;
-        public const int wxSTC_VISIBLE_STRICT = 0x04;
+        public static const int wxSTC_VISIBLE_SLOP = 0x01;
+        public static const int wxSTC_VISIBLE_STRICT = 0x04;
 
         // Caret policy, used by SetXCaretPolicy and SetYCaretPolicy.
         // If CARET_SLOP is set, we can define a slop value: caretSlop.
@@ -592,804 +592,804 @@ public import wx.CommandEvent;
         // so it is likely that the identifier that the caret is on can be completely seen,
         // and that the current line is seen with some of the lines following it which are
         // often dependent on that line.
-        public const int wxSTC_CARET_SLOP = 0x01;
+        public static const int wxSTC_CARET_SLOP = 0x01;
 
         // If CARET_STRICT is set, the policy is enforced... strictly.
         // The caret is centred on the display if slop is not set,
         // and cannot go in the UZ if slop is set.
-        public const int wxSTC_CARET_STRICT = 0x04;
+        public static const int wxSTC_CARET_STRICT = 0x04;
 
         // If CARET_JUMPS is set, the display is moved more energetically
         // so the caret can move in the same direction longer before the policy is applied again.
-        public const int wxSTC_CARET_JUMPS = 0x10;
+        public static const int wxSTC_CARET_JUMPS = 0x10;
 
         // If CARET_EVEN is not set, instead of having symmetrical UZs,
         // the left and bottom UZs are extended up to right and top UZs respectively.
         // This way, we favour the displaying of useful information: the begining of lines,
         // where most code reside, and the lines after the caret, eg. the body of a function.
-        public const int wxSTC_CARET_EVEN = 0x08;
+        public static const int wxSTC_CARET_EVEN = 0x08;
 
         // Notifications
         // Type of modification and the action which caused the modification.
         // These are defined as a bit mask to make it easy to specify which notifications are wanted.
         // One bit is set from each of SC_MOD_* and SC_PERFORMED_*.
-        public const int wxSTC_MOD_INSERTTEXT = 0x1;
-        public const int wxSTC_MOD_DELETETEXT = 0x2;
-        public const int wxSTC_MOD_CHANGESTYLE = 0x4;
-        public const int wxSTC_MOD_CHANGEFOLD = 0x8;
-        public const int wxSTC_PERFORMED_USER = 0x10;
-        public const int wxSTC_PERFORMED_UNDO = 0x20;
-        public const int wxSTC_PERFORMED_REDO = 0x40;
-        public const int wxSTC_LASTSTEPINUNDOREDO = 0x100;
-        public const int wxSTC_MOD_CHANGEMARKER = 0x200;
-        public const int wxSTC_MOD_BEFOREINSERT = 0x400;
-        public const int wxSTC_MOD_BEFOREDELETE = 0x800;
-        public const int wxSTC_MODEVENTMASKALL = 0xF77;
+        public static const int wxSTC_MOD_INSERTTEXT = 0x1;
+        public static const int wxSTC_MOD_DELETETEXT = 0x2;
+        public static const int wxSTC_MOD_CHANGESTYLE = 0x4;
+        public static const int wxSTC_MOD_CHANGEFOLD = 0x8;
+        public static const int wxSTC_PERFORMED_USER = 0x10;
+        public static const int wxSTC_PERFORMED_UNDO = 0x20;
+        public static const int wxSTC_PERFORMED_REDO = 0x40;
+        public static const int wxSTC_LASTSTEPINUNDOREDO = 0x100;
+        public static const int wxSTC_MOD_CHANGEMARKER = 0x200;
+        public static const int wxSTC_MOD_BEFOREINSERT = 0x400;
+        public static const int wxSTC_MOD_BEFOREDELETE = 0x800;
+        public static const int wxSTC_MODEVENTMASKALL = 0xF77;
 
         // Symbolic key codes and modifier flags.
         // ASCII and other printable characters below 256.
         // Extended keys above 300.
-        public const int wxSTC_KEY_DOWN = 300;
-        public const int wxSTC_KEY_UP = 301;
-        public const int wxSTC_KEY_LEFT = 302;
-        public const int wxSTC_KEY_RIGHT = 303;
-        public const int wxSTC_KEY_HOME = 304;
-        public const int wxSTC_KEY_END = 305;
-        public const int wxSTC_KEY_PRIOR = 306;
-        public const int wxSTC_KEY_NEXT = 307;
-        public const int wxSTC_KEY_DELETE = 308;
-        public const int wxSTC_KEY_INSERT = 309;
-        public const int wxSTC_KEY_ESCAPE = 7;
-        public const int wxSTC_KEY_BACK = 8;
-        public const int wxSTC_KEY_TAB = 9;
-        public const int wxSTC_KEY_RETURN = 13;
-        public const int wxSTC_KEY_ADD = 310;
-        public const int wxSTC_KEY_SUBTRACT = 311;
-        public const int wxSTC_KEY_DIVIDE = 312;
-        public const int wxSTC_SCMOD_SHIFT = 1;
-        public const int wxSTC_SCMOD_CTRL = 2;
-        public const int wxSTC_SCMOD_ALT = 4;
+        public static const int wxSTC_KEY_DOWN = 300;
+        public static const int wxSTC_KEY_UP = 301;
+        public static const int wxSTC_KEY_LEFT = 302;
+        public static const int wxSTC_KEY_RIGHT = 303;
+        public static const int wxSTC_KEY_HOME = 304;
+        public static const int wxSTC_KEY_END = 305;
+        public static const int wxSTC_KEY_PRIOR = 306;
+        public static const int wxSTC_KEY_NEXT = 307;
+        public static const int wxSTC_KEY_DELETE = 308;
+        public static const int wxSTC_KEY_INSERT = 309;
+        public static const int wxSTC_KEY_ESCAPE = 7;
+        public static const int wxSTC_KEY_BACK = 8;
+        public static const int wxSTC_KEY_TAB = 9;
+        public static const int wxSTC_KEY_RETURN = 13;
+        public static const int wxSTC_KEY_ADD = 310;
+        public static const int wxSTC_KEY_SUBTRACT = 311;
+        public static const int wxSTC_KEY_DIVIDE = 312;
+        public static const int wxSTC_SCMOD_SHIFT = 1;
+        public static const int wxSTC_SCMOD_CTRL = 2;
+        public static const int wxSTC_SCMOD_ALT = 4;
 
         // For SciLexer.h
-        public const int wxSTC_LEX_CONTAINER = 0;
-        public const int wxSTC_LEX_NULL = 1;
-        public const int wxSTC_LEX_PYTHON = 2;
-        public const int wxSTC_LEX_CPP = 3;
-        public const int wxSTC_LEX_HTML = 4;
-        public const int wxSTC_LEX_XML = 5;
-        public const int wxSTC_LEX_PERL = 6;
-        public const int wxSTC_LEX_SQL = 7;
-        public const int wxSTC_LEX_VB = 8;
-        public const int wxSTC_LEX_PROPERTIES = 9;
-        public const int wxSTC_LEX_ERRORLIST = 10;
-        public const int wxSTC_LEX_MAKEFILE = 11;
-        public const int wxSTC_LEX_BATCH = 12;
-        public const int wxSTC_LEX_XCODE = 13;
-        public const int wxSTC_LEX_LATEX = 14;
-        public const int wxSTC_LEX_LUA = 15;
-        public const int wxSTC_LEX_DIFF = 16;
-        public const int wxSTC_LEX_CONF = 17;
-        public const int wxSTC_LEX_PASCAL = 18;
-        public const int wxSTC_LEX_AVE = 19;
-        public const int wxSTC_LEX_ADA = 20;
-        public const int wxSTC_LEX_LISP = 21;
-        public const int wxSTC_LEX_RUBY = 22;
-        public const int wxSTC_LEX_EIFFEL = 23;
-        public const int wxSTC_LEX_EIFFELKW = 24;
-        public const int wxSTC_LEX_TCL = 25;
-        public const int wxSTC_LEX_NNCRONTAB = 26;
-        public const int wxSTC_LEX_BULLANT = 27;
-        public const int wxSTC_LEX_VBSCRIPT = 28;
-        public const int wxSTC_LEX_ASP = 29;
-        public const int wxSTC_LEX_PHP = 30;
-        public const int wxSTC_LEX_BAAN = 31;
-        public const int wxSTC_LEX_MATLAB = 32;
-        public const int wxSTC_LEX_SCRIPTOL = 33;
-        public const int wxSTC_LEX_ASM = 34;
-        public const int wxSTC_LEX_CPPNOCASE = 35;
-        public const int wxSTC_LEX_FORTRAN = 36;
-        public const int wxSTC_LEX_F77 = 37;
-        public const int wxSTC_LEX_CSS = 38;
-        public const int wxSTC_LEX_POV = 39;
+        public static const int wxSTC_LEX_CONTAINER = 0;
+        public static const int wxSTC_LEX_NULL = 1;
+        public static const int wxSTC_LEX_PYTHON = 2;
+        public static const int wxSTC_LEX_CPP = 3;
+        public static const int wxSTC_LEX_HTML = 4;
+        public static const int wxSTC_LEX_XML = 5;
+        public static const int wxSTC_LEX_PERL = 6;
+        public static const int wxSTC_LEX_SQL = 7;
+        public static const int wxSTC_LEX_VB = 8;
+        public static const int wxSTC_LEX_PROPERTIES = 9;
+        public static const int wxSTC_LEX_ERRORLIST = 10;
+        public static const int wxSTC_LEX_MAKEFILE = 11;
+        public static const int wxSTC_LEX_BATCH = 12;
+        public static const int wxSTC_LEX_XCODE = 13;
+        public static const int wxSTC_LEX_LATEX = 14;
+        public static const int wxSTC_LEX_LUA = 15;
+        public static const int wxSTC_LEX_DIFF = 16;
+        public static const int wxSTC_LEX_CONF = 17;
+        public static const int wxSTC_LEX_PASCAL = 18;
+        public static const int wxSTC_LEX_AVE = 19;
+        public static const int wxSTC_LEX_ADA = 20;
+        public static const int wxSTC_LEX_LISP = 21;
+        public static const int wxSTC_LEX_RUBY = 22;
+        public static const int wxSTC_LEX_EIFFEL = 23;
+        public static const int wxSTC_LEX_EIFFELKW = 24;
+        public static const int wxSTC_LEX_TCL = 25;
+        public static const int wxSTC_LEX_NNCRONTAB = 26;
+        public static const int wxSTC_LEX_BULLANT = 27;
+        public static const int wxSTC_LEX_VBSCRIPT = 28;
+        public static const int wxSTC_LEX_ASP = 29;
+        public static const int wxSTC_LEX_PHP = 30;
+        public static const int wxSTC_LEX_BAAN = 31;
+        public static const int wxSTC_LEX_MATLAB = 32;
+        public static const int wxSTC_LEX_SCRIPTOL = 33;
+        public static const int wxSTC_LEX_ASM = 34;
+        public static const int wxSTC_LEX_CPPNOCASE = 35;
+        public static const int wxSTC_LEX_FORTRAN = 36;
+        public static const int wxSTC_LEX_F77 = 37;
+        public static const int wxSTC_LEX_CSS = 38;
+        public static const int wxSTC_LEX_POV = 39;
 
         // When a lexer specifies its language as SCLEX_AUTOMATIC it receives a
         // value assigned in sequence from SCLEX_AUTOMATIC+1.
-        public const int wxSTC_LEX_AUTOMATIC = 1000;
+        public static const int wxSTC_LEX_AUTOMATIC = 1000;
 
         // Lexical states for SCLEX_PYTHON
-        public const int wxSTC_P_DEFAULT = 0;
-        public const int wxSTC_P_COMMENTLINE = 1;
-        public const int wxSTC_P_NUMBER = 2;
-        public const int wxSTC_P_STRING = 3;
-        public const int wxSTC_P_CHARACTER = 4;
-        public const int wxSTC_P_WORD = 5;
-        public const int wxSTC_P_TRIPLE = 6;
-        public const int wxSTC_P_TRIPLEDOUBLE = 7;
-        public const int wxSTC_P_CLASSNAME = 8;
-        public const int wxSTC_P_DEFNAME = 9;
-        public const int wxSTC_P_OPERATOR = 10;
-        public const int wxSTC_P_IDENTIFIER = 11;
-        public const int wxSTC_P_COMMENTBLOCK = 12;
-        public const int wxSTC_P_STRINGEOL = 13;
+        public static const int wxSTC_P_DEFAULT = 0;
+        public static const int wxSTC_P_COMMENTLINE = 1;
+        public static const int wxSTC_P_NUMBER = 2;
+        public static const int wxSTC_P_STRING = 3;
+        public static const int wxSTC_P_CHARACTER = 4;
+        public static const int wxSTC_P_WORD = 5;
+        public static const int wxSTC_P_TRIPLE = 6;
+        public static const int wxSTC_P_TRIPLEDOUBLE = 7;
+        public static const int wxSTC_P_CLASSNAME = 8;
+        public static const int wxSTC_P_DEFNAME = 9;
+        public static const int wxSTC_P_OPERATOR = 10;
+        public static const int wxSTC_P_IDENTIFIER = 11;
+        public static const int wxSTC_P_COMMENTBLOCK = 12;
+        public static const int wxSTC_P_STRINGEOL = 13;
 
         // Lexical states for SCLEX_CPP
-        public const int wxSTC_C_DEFAULT = 0;
-        public const int wxSTC_C_COMMENT = 1;
-        public const int wxSTC_C_COMMENTLINE = 2;
-        public const int wxSTC_C_COMMENTDOC = 3;
-        public const int wxSTC_C_NUMBER = 4;
-        public const int wxSTC_C_WORD = 5;
-        public const int wxSTC_C_STRING = 6;
-        public const int wxSTC_C_CHARACTER = 7;
-        public const int wxSTC_C_UUID = 8;
-        public const int wxSTC_C_PREPROCESSOR = 9;
-        public const int wxSTC_C_OPERATOR = 10;
-        public const int wxSTC_C_IDENTIFIER = 11;
-        public const int wxSTC_C_STRINGEOL = 12;
-        public const int wxSTC_C_VERBATIM = 13;
-        public const int wxSTC_C_REGEX = 14;
-        public const int wxSTC_C_COMMENTLINEDOC = 15;
-        public const int wxSTC_C_WORD2 = 16;
-        public const int wxSTC_C_COMMENTDOCKEYWORD = 17;
-        public const int wxSTC_C_COMMENTDOCKEYWORDERROR = 18;
+        public static const int wxSTC_C_DEFAULT = 0;
+        public static const int wxSTC_C_COMMENT = 1;
+        public static const int wxSTC_C_COMMENTLINE = 2;
+        public static const int wxSTC_C_COMMENTDOC = 3;
+        public static const int wxSTC_C_NUMBER = 4;
+        public static const int wxSTC_C_WORD = 5;
+        public static const int wxSTC_C_STRING = 6;
+        public static const int wxSTC_C_CHARACTER = 7;
+        public static const int wxSTC_C_UUID = 8;
+        public static const int wxSTC_C_PREPROCESSOR = 9;
+        public static const int wxSTC_C_OPERATOR = 10;
+        public static const int wxSTC_C_IDENTIFIER = 11;
+        public static const int wxSTC_C_STRINGEOL = 12;
+        public static const int wxSTC_C_VERBATIM = 13;
+        public static const int wxSTC_C_REGEX = 14;
+        public static const int wxSTC_C_COMMENTLINEDOC = 15;
+        public static const int wxSTC_C_WORD2 = 16;
+        public static const int wxSTC_C_COMMENTDOCKEYWORD = 17;
+        public static const int wxSTC_C_COMMENTDOCKEYWORDERROR = 18;
 
         // Lexical states for SCLEX_HTML, SCLEX_XML
-        public const int wxSTC_H_DEFAULT = 0;
-        public const int wxSTC_H_TAG = 1;
-        public const int wxSTC_H_TAGUNKNOWN = 2;
-        public const int wxSTC_H_ATTRIBUTE = 3;
-        public const int wxSTC_H_ATTRIBUTEUNKNOWN = 4;
-        public const int wxSTC_H_NUMBER = 5;
-        public const int wxSTC_H_DOUBLESTRING = 6;
-        public const int wxSTC_H_SINGLESTRING = 7;
-        public const int wxSTC_H_OTHER = 8;
-        public const int wxSTC_H_COMMENT = 9;
-        public const int wxSTC_H_ENTITY = 10;
+        public static const int wxSTC_H_DEFAULT = 0;
+        public static const int wxSTC_H_TAG = 1;
+        public static const int wxSTC_H_TAGUNKNOWN = 2;
+        public static const int wxSTC_H_ATTRIBUTE = 3;
+        public static const int wxSTC_H_ATTRIBUTEUNKNOWN = 4;
+        public static const int wxSTC_H_NUMBER = 5;
+        public static const int wxSTC_H_DOUBLESTRING = 6;
+        public static const int wxSTC_H_SINGLESTRING = 7;
+        public static const int wxSTC_H_OTHER = 8;
+        public static const int wxSTC_H_COMMENT = 9;
+        public static const int wxSTC_H_ENTITY = 10;
 
         // XML and ASP
-        public const int wxSTC_H_TAGEND = 11;
-        public const int wxSTC_H_XMLSTART = 12;
-        public const int wxSTC_H_XMLEND = 13;
-        public const int wxSTC_H_SCRIPT = 14;
-        public const int wxSTC_H_ASP = 15;
-        public const int wxSTC_H_ASPAT = 16;
-        public const int wxSTC_H_CDATA = 17;
-        public const int wxSTC_H_QUESTION = 18;
+        public static const int wxSTC_H_TAGEND = 11;
+        public static const int wxSTC_H_XMLSTART = 12;
+        public static const int wxSTC_H_XMLEND = 13;
+        public static const int wxSTC_H_SCRIPT = 14;
+        public static const int wxSTC_H_ASP = 15;
+        public static const int wxSTC_H_ASPAT = 16;
+        public static const int wxSTC_H_CDATA = 17;
+        public static const int wxSTC_H_QUESTION = 18;
 
         // More HTML
-        public const int wxSTC_H_VALUE = 19;
+        public static const int wxSTC_H_VALUE = 19;
 
         // X-Code
-        public const int wxSTC_H_XCCOMMENT = 20;
+        public static const int wxSTC_H_XCCOMMENT = 20;
 
         // SGML
-        public const int wxSTC_H_SGML_DEFAULT = 21;
-        public const int wxSTC_H_SGML_COMMAND = 22;
-        public const int wxSTC_H_SGML_1ST_PARAM = 23;
-        public const int wxSTC_H_SGML_DOUBLESTRING = 24;
-        public const int wxSTC_H_SGML_SIMPLESTRING = 25;
-        public const int wxSTC_H_SGML_ERROR = 26;
-        public const int wxSTC_H_SGML_SPECIAL = 27;
-        public const int wxSTC_H_SGML_ENTITY = 28;
-        public const int wxSTC_H_SGML_COMMENT = 29;
-        public const int wxSTC_H_SGML_1ST_PARAM_COMMENT = 30;
-        public const int wxSTC_H_SGML_BLOCK_DEFAULT = 31;
+        public static const int wxSTC_H_SGML_DEFAULT = 21;
+        public static const int wxSTC_H_SGML_COMMAND = 22;
+        public static const int wxSTC_H_SGML_1ST_PARAM = 23;
+        public static const int wxSTC_H_SGML_DOUBLESTRING = 24;
+        public static const int wxSTC_H_SGML_SIMPLESTRING = 25;
+        public static const int wxSTC_H_SGML_ERROR = 26;
+        public static const int wxSTC_H_SGML_SPECIAL = 27;
+        public static const int wxSTC_H_SGML_ENTITY = 28;
+        public static const int wxSTC_H_SGML_COMMENT = 29;
+        public static const int wxSTC_H_SGML_1ST_PARAM_COMMENT = 30;
+        public static const int wxSTC_H_SGML_BLOCK_DEFAULT = 31;
 
         // Embedded Javascript
-        public const int wxSTC_HJ_START = 40;
-        public const int wxSTC_HJ_DEFAULT = 41;
-        public const int wxSTC_HJ_COMMENT = 42;
-        public const int wxSTC_HJ_COMMENTLINE = 43;
-        public const int wxSTC_HJ_COMMENTDOC = 44;
-        public const int wxSTC_HJ_NUMBER = 45;
-        public const int wxSTC_HJ_WORD = 46;
-        public const int wxSTC_HJ_KEYWORD = 47;
-        public const int wxSTC_HJ_DOUBLESTRING = 48;
-        public const int wxSTC_HJ_SINGLESTRING = 49;
-        public const int wxSTC_HJ_SYMBOLS = 50;
-        public const int wxSTC_HJ_STRINGEOL = 51;
-        public const int wxSTC_HJ_REGEX = 52;
+        public static const int wxSTC_HJ_START = 40;
+        public static const int wxSTC_HJ_DEFAULT = 41;
+        public static const int wxSTC_HJ_COMMENT = 42;
+        public static const int wxSTC_HJ_COMMENTLINE = 43;
+        public static const int wxSTC_HJ_COMMENTDOC = 44;
+        public static const int wxSTC_HJ_NUMBER = 45;
+        public static const int wxSTC_HJ_WORD = 46;
+        public static const int wxSTC_HJ_KEYWORD = 47;
+        public static const int wxSTC_HJ_DOUBLESTRING = 48;
+        public static const int wxSTC_HJ_SINGLESTRING = 49;
+        public static const int wxSTC_HJ_SYMBOLS = 50;
+        public static const int wxSTC_HJ_STRINGEOL = 51;
+        public static const int wxSTC_HJ_REGEX = 52;
 
         // ASP Javascript
-        public const int wxSTC_HJA_START = 55;
-        public const int wxSTC_HJA_DEFAULT = 56;
-        public const int wxSTC_HJA_COMMENT = 57;
-        public const int wxSTC_HJA_COMMENTLINE = 58;
-        public const int wxSTC_HJA_COMMENTDOC = 59;
-        public const int wxSTC_HJA_NUMBER = 60;
-        public const int wxSTC_HJA_WORD = 61;
-        public const int wxSTC_HJA_KEYWORD = 62;
-        public const int wxSTC_HJA_DOUBLESTRING = 63;
-        public const int wxSTC_HJA_SINGLESTRING = 64;
-        public const int wxSTC_HJA_SYMBOLS = 65;
-        public const int wxSTC_HJA_STRINGEOL = 66;
-        public const int wxSTC_HJA_REGEX = 67;
+        public static const int wxSTC_HJA_START = 55;
+        public static const int wxSTC_HJA_DEFAULT = 56;
+        public static const int wxSTC_HJA_COMMENT = 57;
+        public static const int wxSTC_HJA_COMMENTLINE = 58;
+        public static const int wxSTC_HJA_COMMENTDOC = 59;
+        public static const int wxSTC_HJA_NUMBER = 60;
+        public static const int wxSTC_HJA_WORD = 61;
+        public static const int wxSTC_HJA_KEYWORD = 62;
+        public static const int wxSTC_HJA_DOUBLESTRING = 63;
+        public static const int wxSTC_HJA_SINGLESTRING = 64;
+        public static const int wxSTC_HJA_SYMBOLS = 65;
+        public static const int wxSTC_HJA_STRINGEOL = 66;
+        public static const int wxSTC_HJA_REGEX = 67;
 
         // Embedded VBScript
-        public const int wxSTC_HB_START = 70;
-        public const int wxSTC_HB_DEFAULT = 71;
-        public const int wxSTC_HB_COMMENTLINE = 72;
-        public const int wxSTC_HB_NUMBER = 73;
-        public const int wxSTC_HB_WORD = 74;
-        public const int wxSTC_HB_STRING = 75;
-        public const int wxSTC_HB_IDENTIFIER = 76;
-        public const int wxSTC_HB_STRINGEOL = 77;
+        public static const int wxSTC_HB_START = 70;
+        public static const int wxSTC_HB_DEFAULT = 71;
+        public static const int wxSTC_HB_COMMENTLINE = 72;
+        public static const int wxSTC_HB_NUMBER = 73;
+        public static const int wxSTC_HB_WORD = 74;
+        public static const int wxSTC_HB_STRING = 75;
+        public static const int wxSTC_HB_IDENTIFIER = 76;
+        public static const int wxSTC_HB_STRINGEOL = 77;
 
         // ASP VBScript
-        public const int wxSTC_HBA_START = 80;
-        public const int wxSTC_HBA_DEFAULT = 81;
-        public const int wxSTC_HBA_COMMENTLINE = 82;
-        public const int wxSTC_HBA_NUMBER = 83;
-        public const int wxSTC_HBA_WORD = 84;
-        public const int wxSTC_HBA_STRING = 85;
-        public const int wxSTC_HBA_IDENTIFIER = 86;
-        public const int wxSTC_HBA_STRINGEOL = 87;
+        public static const int wxSTC_HBA_START = 80;
+        public static const int wxSTC_HBA_DEFAULT = 81;
+        public static const int wxSTC_HBA_COMMENTLINE = 82;
+        public static const int wxSTC_HBA_NUMBER = 83;
+        public static const int wxSTC_HBA_WORD = 84;
+        public static const int wxSTC_HBA_STRING = 85;
+        public static const int wxSTC_HBA_IDENTIFIER = 86;
+        public static const int wxSTC_HBA_STRINGEOL = 87;
 
         // Embedded Python
-        public const int wxSTC_HP_START = 90;
-        public const int wxSTC_HP_DEFAULT = 91;
-        public const int wxSTC_HP_COMMENTLINE = 92;
-        public const int wxSTC_HP_NUMBER = 93;
-        public const int wxSTC_HP_STRING = 94;
-        public const int wxSTC_HP_CHARACTER = 95;
-        public const int wxSTC_HP_WORD = 96;
-        public const int wxSTC_HP_TRIPLE = 97;
-        public const int wxSTC_HP_TRIPLEDOUBLE = 98;
-        public const int wxSTC_HP_CLASSNAME = 99;
-        public const int wxSTC_HP_DEFNAME = 100;
-        public const int wxSTC_HP_OPERATOR = 101;
-        public const int wxSTC_HP_IDENTIFIER = 102;
+        public static const int wxSTC_HP_START = 90;
+        public static const int wxSTC_HP_DEFAULT = 91;
+        public static const int wxSTC_HP_COMMENTLINE = 92;
+        public static const int wxSTC_HP_NUMBER = 93;
+        public static const int wxSTC_HP_STRING = 94;
+        public static const int wxSTC_HP_CHARACTER = 95;
+        public static const int wxSTC_HP_WORD = 96;
+        public static const int wxSTC_HP_TRIPLE = 97;
+        public static const int wxSTC_HP_TRIPLEDOUBLE = 98;
+        public static const int wxSTC_HP_CLASSNAME = 99;
+        public static const int wxSTC_HP_DEFNAME = 100;
+        public static const int wxSTC_HP_OPERATOR = 101;
+        public static const int wxSTC_HP_IDENTIFIER = 102;
 
         // ASP Python
-        public const int wxSTC_HPA_START = 105;
-        public const int wxSTC_HPA_DEFAULT = 106;
-        public const int wxSTC_HPA_COMMENTLINE = 107;
-        public const int wxSTC_HPA_NUMBER = 108;
-        public const int wxSTC_HPA_STRING = 109;
-        public const int wxSTC_HPA_CHARACTER = 110;
-        public const int wxSTC_HPA_WORD = 111;
-        public const int wxSTC_HPA_TRIPLE = 112;
-        public const int wxSTC_HPA_TRIPLEDOUBLE = 113;
-        public const int wxSTC_HPA_CLASSNAME = 114;
-        public const int wxSTC_HPA_DEFNAME = 115;
-        public const int wxSTC_HPA_OPERATOR = 116;
-        public const int wxSTC_HPA_IDENTIFIER = 117;
+        public static const int wxSTC_HPA_START = 105;
+        public static const int wxSTC_HPA_DEFAULT = 106;
+        public static const int wxSTC_HPA_COMMENTLINE = 107;
+        public static const int wxSTC_HPA_NUMBER = 108;
+        public static const int wxSTC_HPA_STRING = 109;
+        public static const int wxSTC_HPA_CHARACTER = 110;
+        public static const int wxSTC_HPA_WORD = 111;
+        public static const int wxSTC_HPA_TRIPLE = 112;
+        public static const int wxSTC_HPA_TRIPLEDOUBLE = 113;
+        public static const int wxSTC_HPA_CLASSNAME = 114;
+        public static const int wxSTC_HPA_DEFNAME = 115;
+        public static const int wxSTC_HPA_OPERATOR = 116;
+        public static const int wxSTC_HPA_IDENTIFIER = 117;
 
         // PHP
-        public const int wxSTC_HPHP_DEFAULT = 118;
-        public const int wxSTC_HPHP_HSTRING = 119;
-        public const int wxSTC_HPHP_SIMPLESTRING = 120;
-        public const int wxSTC_HPHP_WORD = 121;
-        public const int wxSTC_HPHP_NUMBER = 122;
-        public const int wxSTC_HPHP_VARIABLE = 123;
-        public const int wxSTC_HPHP_COMMENT = 124;
-        public const int wxSTC_HPHP_COMMENTLINE = 125;
-        public const int wxSTC_HPHP_HSTRING_VARIABLE = 126;
-        public const int wxSTC_HPHP_OPERATOR = 127;
+        public static const int wxSTC_HPHP_DEFAULT = 118;
+        public static const int wxSTC_HPHP_HSTRING = 119;
+        public static const int wxSTC_HPHP_SIMPLESTRING = 120;
+        public static const int wxSTC_HPHP_WORD = 121;
+        public static const int wxSTC_HPHP_NUMBER = 122;
+        public static const int wxSTC_HPHP_VARIABLE = 123;
+        public static const int wxSTC_HPHP_COMMENT = 124;
+        public static const int wxSTC_HPHP_COMMENTLINE = 125;
+        public static const int wxSTC_HPHP_HSTRING_VARIABLE = 126;
+        public static const int wxSTC_HPHP_OPERATOR = 127;
 
         // Lexical states for SCLEX_PERL
-        public const int wxSTC_PL_DEFAULT = 0;
-        public const int wxSTC_PL_ERROR = 1;
-        public const int wxSTC_PL_COMMENTLINE = 2;
-        public const int wxSTC_PL_POD = 3;
-        public const int wxSTC_PL_NUMBER = 4;
-        public const int wxSTC_PL_WORD = 5;
-        public const int wxSTC_PL_STRING = 6;
-        public const int wxSTC_PL_CHARACTER = 7;
-        public const int wxSTC_PL_PUNCTUATION = 8;
-        public const int wxSTC_PL_PREPROCESSOR = 9;
-        public const int wxSTC_PL_OPERATOR = 10;
-        public const int wxSTC_PL_IDENTIFIER = 11;
-        public const int wxSTC_PL_SCALAR = 12;
-        public const int wxSTC_PL_ARRAY = 13;
-        public const int wxSTC_PL_HASH = 14;
-        public const int wxSTC_PL_SYMBOLTABLE = 15;
-        public const int wxSTC_PL_REGEX = 17;
-        public const int wxSTC_PL_REGSUBST = 18;
-        public const int wxSTC_PL_LONGQUOTE = 19;
-        public const int wxSTC_PL_BACKTICKS = 20;
-        public const int wxSTC_PL_DATASECTION = 21;
-        public const int wxSTC_PL_HERE_DELIM = 22;
-        public const int wxSTC_PL_HERE_Q = 23;
-        public const int wxSTC_PL_HERE_QQ = 24;
-        public const int wxSTC_PL_HERE_QX = 25;
-        public const int wxSTC_PL_STRING_Q = 26;
-        public const int wxSTC_PL_STRING_QQ = 27;
-        public const int wxSTC_PL_STRING_QX = 28;
-        public const int wxSTC_PL_STRING_QR = 29;
-        public const int wxSTC_PL_STRING_QW = 30;
+        public static const int wxSTC_PL_DEFAULT = 0;
+        public static const int wxSTC_PL_ERROR = 1;
+        public static const int wxSTC_PL_COMMENTLINE = 2;
+        public static const int wxSTC_PL_POD = 3;
+        public static const int wxSTC_PL_NUMBER = 4;
+        public static const int wxSTC_PL_WORD = 5;
+        public static const int wxSTC_PL_STRING = 6;
+        public static const int wxSTC_PL_CHARACTER = 7;
+        public static const int wxSTC_PL_PUNCTUATION = 8;
+        public static const int wxSTC_PL_PREPROCESSOR = 9;
+        public static const int wxSTC_PL_OPERATOR = 10;
+        public static const int wxSTC_PL_IDENTIFIER = 11;
+        public static const int wxSTC_PL_SCALAR = 12;
+        public static const int wxSTC_PL_ARRAY = 13;
+        public static const int wxSTC_PL_HASH = 14;
+        public static const int wxSTC_PL_SYMBOLTABLE = 15;
+        public static const int wxSTC_PL_REGEX = 17;
+        public static const int wxSTC_PL_REGSUBST = 18;
+        public static const int wxSTC_PL_LONGQUOTE = 19;
+        public static const int wxSTC_PL_BACKTICKS = 20;
+        public static const int wxSTC_PL_DATASECTION = 21;
+        public static const int wxSTC_PL_HERE_DELIM = 22;
+        public static const int wxSTC_PL_HERE_Q = 23;
+        public static const int wxSTC_PL_HERE_QQ = 24;
+        public static const int wxSTC_PL_HERE_QX = 25;
+        public static const int wxSTC_PL_STRING_Q = 26;
+        public static const int wxSTC_PL_STRING_QQ = 27;
+        public static const int wxSTC_PL_STRING_QX = 28;
+        public static const int wxSTC_PL_STRING_QR = 29;
+        public static const int wxSTC_PL_STRING_QW = 30;
 
         // Lexical states for SCLEX_VB, SCLEX_VBSCRIPT
-        public const int wxSTC_B_DEFAULT = 0;
-        public const int wxSTC_B_COMMENT = 1;
-        public const int wxSTC_B_NUMBER = 2;
-        public const int wxSTC_B_KEYWORD = 3;
-        public const int wxSTC_B_STRING = 4;
-        public const int wxSTC_B_PREPROCESSOR = 5;
-        public const int wxSTC_B_OPERATOR = 6;
-        public const int wxSTC_B_IDENTIFIER = 7;
-        public const int wxSTC_B_DATE = 8;
+        public static const int wxSTC_B_DEFAULT = 0;
+        public static const int wxSTC_B_COMMENT = 1;
+        public static const int wxSTC_B_NUMBER = 2;
+        public static const int wxSTC_B_KEYWORD = 3;
+        public static const int wxSTC_B_STRING = 4;
+        public static const int wxSTC_B_PREPROCESSOR = 5;
+        public static const int wxSTC_B_OPERATOR = 6;
+        public static const int wxSTC_B_IDENTIFIER = 7;
+        public static const int wxSTC_B_DATE = 8;
 
         // Lexical states for SCLEX_PROPERTIES
-        public const int wxSTC_PROPS_DEFAULT = 0;
-        public const int wxSTC_PROPS_COMMENT = 1;
-        public const int wxSTC_PROPS_SECTION = 2;
-        public const int wxSTC_PROPS_ASSIGNMENT = 3;
-        public const int wxSTC_PROPS_DEFVAL = 4;
+        public static const int wxSTC_PROPS_DEFAULT = 0;
+        public static const int wxSTC_PROPS_COMMENT = 1;
+        public static const int wxSTC_PROPS_SECTION = 2;
+        public static const int wxSTC_PROPS_ASSIGNMENT = 3;
+        public static const int wxSTC_PROPS_DEFVAL = 4;
 
         // Lexical states for SCLEX_LATEX
-        public const int wxSTC_L_DEFAULT = 0;
-        public const int wxSTC_L_COMMAND = 1;
-        public const int wxSTC_L_TAG = 2;
-        public const int wxSTC_L_MATH = 3;
-        public const int wxSTC_L_COMMENT = 4;
+        public static const int wxSTC_L_DEFAULT = 0;
+        public static const int wxSTC_L_COMMAND = 1;
+        public static const int wxSTC_L_TAG = 2;
+        public static const int wxSTC_L_MATH = 3;
+        public static const int wxSTC_L_COMMENT = 4;
 
         // Lexical states for SCLEX_LUA
-        public const int wxSTC_LUA_DEFAULT = 0;
-        public const int wxSTC_LUA_COMMENT = 1;
-        public const int wxSTC_LUA_COMMENTLINE = 2;
-        public const int wxSTC_LUA_COMMENTDOC = 3;
-        public const int wxSTC_LUA_NUMBER = 4;
-        public const int wxSTC_LUA_WORD = 5;
-        public const int wxSTC_LUA_STRING = 6;
-        public const int wxSTC_LUA_CHARACTER = 7;
-        public const int wxSTC_LUA_LITERALSTRING = 8;
-        public const int wxSTC_LUA_PREPROCESSOR = 9;
-        public const int wxSTC_LUA_OPERATOR = 10;
-        public const int wxSTC_LUA_IDENTIFIER = 11;
-        public const int wxSTC_LUA_STRINGEOL = 12;
-        public const int wxSTC_LUA_WORD2 = 13;
-        public const int wxSTC_LUA_WORD3 = 14;
-        public const int wxSTC_LUA_WORD4 = 15;
-        public const int wxSTC_LUA_WORD5 = 16;
-        public const int wxSTC_LUA_WORD6 = 17;
+        public static const int wxSTC_LUA_DEFAULT = 0;
+        public static const int wxSTC_LUA_COMMENT = 1;
+        public static const int wxSTC_LUA_COMMENTLINE = 2;
+        public static const int wxSTC_LUA_COMMENTDOC = 3;
+        public static const int wxSTC_LUA_NUMBER = 4;
+        public static const int wxSTC_LUA_WORD = 5;
+        public static const int wxSTC_LUA_STRING = 6;
+        public static const int wxSTC_LUA_CHARACTER = 7;
+        public static const int wxSTC_LUA_LITERALSTRING = 8;
+        public static const int wxSTC_LUA_PREPROCESSOR = 9;
+        public static const int wxSTC_LUA_OPERATOR = 10;
+        public static const int wxSTC_LUA_IDENTIFIER = 11;
+        public static const int wxSTC_LUA_STRINGEOL = 12;
+        public static const int wxSTC_LUA_WORD2 = 13;
+        public static const int wxSTC_LUA_WORD3 = 14;
+        public static const int wxSTC_LUA_WORD4 = 15;
+        public static const int wxSTC_LUA_WORD5 = 16;
+        public static const int wxSTC_LUA_WORD6 = 17;
 
         // Lexical states for SCLEX_ERRORLIST
-        public const int wxSTC_ERR_DEFAULT = 0;
-        public const int wxSTC_ERR_PYTHON = 1;
-        public const int wxSTC_ERR_GCC = 2;
-        public const int wxSTC_ERR_MS = 3;
-        public const int wxSTC_ERR_CMD = 4;
-        public const int wxSTC_ERR_BORLAND = 5;
-        public const int wxSTC_ERR_PERL = 6;
-        public const int wxSTC_ERR_NET = 7;
-        public const int wxSTC_ERR_LUA = 8;
-        public const int wxSTC_ERR_CTAG = 9;
-        public const int wxSTC_ERR_DIFF_CHANGED = 10;
-        public const int wxSTC_ERR_DIFF_ADDITION = 11;
-        public const int wxSTC_ERR_DIFF_DELETION = 12;
-        public const int wxSTC_ERR_DIFF_MESSAGE = 13;
-        public const int wxSTC_ERR_PHP = 14;
-        public const int wxSTC_ERR_ELF = 15;
-        public const int wxSTC_ERR_IFC = 16;
+        public static const int wxSTC_ERR_DEFAULT = 0;
+        public static const int wxSTC_ERR_PYTHON = 1;
+        public static const int wxSTC_ERR_GCC = 2;
+        public static const int wxSTC_ERR_MS = 3;
+        public static const int wxSTC_ERR_CMD = 4;
+        public static const int wxSTC_ERR_BORLAND = 5;
+        public static const int wxSTC_ERR_PERL = 6;
+        public static const int wxSTC_ERR_NET = 7;
+        public static const int wxSTC_ERR_LUA = 8;
+        public static const int wxSTC_ERR_CTAG = 9;
+        public static const int wxSTC_ERR_DIFF_CHANGED = 10;
+        public static const int wxSTC_ERR_DIFF_ADDITION = 11;
+        public static const int wxSTC_ERR_DIFF_DELETION = 12;
+        public static const int wxSTC_ERR_DIFF_MESSAGE = 13;
+        public static const int wxSTC_ERR_PHP = 14;
+        public static const int wxSTC_ERR_ELF = 15;
+        public static const int wxSTC_ERR_IFC = 16;
 
         // Lexical states for SCLEX_BATCH
-        public const int wxSTC_BAT_DEFAULT = 0;
-        public const int wxSTC_BAT_COMMENT = 1;
-        public const int wxSTC_BAT_WORD = 2;
-        public const int wxSTC_BAT_LABEL = 3;
-        public const int wxSTC_BAT_HIDE = 4;
-        public const int wxSTC_BAT_COMMAND = 5;
-        public const int wxSTC_BAT_IDENTIFIER = 6;
-        public const int wxSTC_BAT_OPERATOR = 7;
+        public static const int wxSTC_BAT_DEFAULT = 0;
+        public static const int wxSTC_BAT_COMMENT = 1;
+        public static const int wxSTC_BAT_WORD = 2;
+        public static const int wxSTC_BAT_LABEL = 3;
+        public static const int wxSTC_BAT_HIDE = 4;
+        public static const int wxSTC_BAT_COMMAND = 5;
+        public static const int wxSTC_BAT_IDENTIFIER = 6;
+        public static const int wxSTC_BAT_OPERATOR = 7;
 
         // Lexical states for SCLEX_MAKEFILE
-        public const int wxSTC_MAKE_DEFAULT = 0;
-        public const int wxSTC_MAKE_COMMENT = 1;
-        public const int wxSTC_MAKE_PREPROCESSOR = 2;
-        public const int wxSTC_MAKE_IDENTIFIER = 3;
-        public const int wxSTC_MAKE_OPERATOR = 4;
-        public const int wxSTC_MAKE_TARGET = 5;
-        public const int wxSTC_MAKE_IDEOL = 9;
+        public static const int wxSTC_MAKE_DEFAULT = 0;
+        public static const int wxSTC_MAKE_COMMENT = 1;
+        public static const int wxSTC_MAKE_PREPROCESSOR = 2;
+        public static const int wxSTC_MAKE_IDENTIFIER = 3;
+        public static const int wxSTC_MAKE_OPERATOR = 4;
+        public static const int wxSTC_MAKE_TARGET = 5;
+        public static const int wxSTC_MAKE_IDEOL = 9;
 
         // Lexical states for SCLEX_DIFF
-        public const int wxSTC_DIFF_DEFAULT = 0;
-        public const int wxSTC_DIFF_COMMENT = 1;
-        public const int wxSTC_DIFF_COMMAND = 2;
-        public const int wxSTC_DIFF_HEADER = 3;
-        public const int wxSTC_DIFF_POSITION = 4;
-        public const int wxSTC_DIFF_DELETED = 5;
-        public const int wxSTC_DIFF_ADDED = 6;
+        public static const int wxSTC_DIFF_DEFAULT = 0;
+        public static const int wxSTC_DIFF_COMMENT = 1;
+        public static const int wxSTC_DIFF_COMMAND = 2;
+        public static const int wxSTC_DIFF_HEADER = 3;
+        public static const int wxSTC_DIFF_POSITION = 4;
+        public static const int wxSTC_DIFF_DELETED = 5;
+        public static const int wxSTC_DIFF_ADDED = 6;
 
         // Lexical states for SCLEX_CONF (Apache Configuration Files Lexer)
-        public const int wxSTC_CONF_DEFAULT = 0;
-        public const int wxSTC_CONF_COMMENT = 1;
-        public const int wxSTC_CONF_NUMBER = 2;
-        public const int wxSTC_CONF_IDENTIFIER = 3;
-        public const int wxSTC_CONF_EXTENSION = 4;
-        public const int wxSTC_CONF_PARAMETER = 5;
-        public const int wxSTC_CONF_STRING = 6;
-        public const int wxSTC_CONF_OPERATOR = 7;
-        public const int wxSTC_CONF_IP = 8;
-        public const int wxSTC_CONF_DIRECTIVE = 9;
+        public static const int wxSTC_CONF_DEFAULT = 0;
+        public static const int wxSTC_CONF_COMMENT = 1;
+        public static const int wxSTC_CONF_NUMBER = 2;
+        public static const int wxSTC_CONF_IDENTIFIER = 3;
+        public static const int wxSTC_CONF_EXTENSION = 4;
+        public static const int wxSTC_CONF_PARAMETER = 5;
+        public static const int wxSTC_CONF_STRING = 6;
+        public static const int wxSTC_CONF_OPERATOR = 7;
+        public static const int wxSTC_CONF_IP = 8;
+        public static const int wxSTC_CONF_DIRECTIVE = 9;
 
         // Lexical states for SCLEX_AVE, Avenue
-        public const int wxSTC_AVE_DEFAULT = 0;
-        public const int wxSTC_AVE_COMMENT = 1;
-        public const int wxSTC_AVE_NUMBER = 2;
-        public const int wxSTC_AVE_WORD = 3;
-        public const int wxSTC_AVE_STRING = 6;
-        public const int wxSTC_AVE_ENUM = 7;
-        public const int wxSTC_AVE_STRINGEOL = 8;
-        public const int wxSTC_AVE_IDENTIFIER = 9;
-        public const int wxSTC_AVE_OPERATOR = 10;
-        public const int wxSTC_AVE_WORD1 = 11;
-        public const int wxSTC_AVE_WORD2 = 12;
-        public const int wxSTC_AVE_WORD3 = 13;
-        public const int wxSTC_AVE_WORD4 = 14;
-        public const int wxSTC_AVE_WORD5 = 15;
-        public const int wxSTC_AVE_WORD6 = 16;
+        public static const int wxSTC_AVE_DEFAULT = 0;
+        public static const int wxSTC_AVE_COMMENT = 1;
+        public static const int wxSTC_AVE_NUMBER = 2;
+        public static const int wxSTC_AVE_WORD = 3;
+        public static const int wxSTC_AVE_STRING = 6;
+        public static const int wxSTC_AVE_ENUM = 7;
+        public static const int wxSTC_AVE_STRINGEOL = 8;
+        public static const int wxSTC_AVE_IDENTIFIER = 9;
+        public static const int wxSTC_AVE_OPERATOR = 10;
+        public static const int wxSTC_AVE_WORD1 = 11;
+        public static const int wxSTC_AVE_WORD2 = 12;
+        public static const int wxSTC_AVE_WORD3 = 13;
+        public static const int wxSTC_AVE_WORD4 = 14;
+        public static const int wxSTC_AVE_WORD5 = 15;
+        public static const int wxSTC_AVE_WORD6 = 16;
 
         // Lexical states for SCLEX_ADA
-        public const int wxSTC_ADA_DEFAULT = 0;
-        public const int wxSTC_ADA_WORD = 1;
-        public const int wxSTC_ADA_IDENTIFIER = 2;
-        public const int wxSTC_ADA_NUMBER = 3;
-        public const int wxSTC_ADA_DELIMITER = 4;
-        public const int wxSTC_ADA_CHARACTER = 5;
-        public const int wxSTC_ADA_CHARACTEREOL = 6;
-        public const int wxSTC_ADA_STRING = 7;
-        public const int wxSTC_ADA_STRINGEOL = 8;
-        public const int wxSTC_ADA_LABEL = 9;
-        public const int wxSTC_ADA_COMMENTLINE = 10;
-        public const int wxSTC_ADA_ILLEGAL = 11;
+        public static const int wxSTC_ADA_DEFAULT = 0;
+        public static const int wxSTC_ADA_WORD = 1;
+        public static const int wxSTC_ADA_IDENTIFIER = 2;
+        public static const int wxSTC_ADA_NUMBER = 3;
+        public static const int wxSTC_ADA_DELIMITER = 4;
+        public static const int wxSTC_ADA_CHARACTER = 5;
+        public static const int wxSTC_ADA_CHARACTEREOL = 6;
+        public static const int wxSTC_ADA_STRING = 7;
+        public static const int wxSTC_ADA_STRINGEOL = 8;
+        public static const int wxSTC_ADA_LABEL = 9;
+        public static const int wxSTC_ADA_COMMENTLINE = 10;
+        public static const int wxSTC_ADA_ILLEGAL = 11;
 
         // Lexical states for SCLEX_BAAN
-        public const int wxSTC_BAAN_DEFAULT = 0;
-        public const int wxSTC_BAAN_COMMENT = 1;
-        public const int wxSTC_BAAN_COMMENTDOC = 2;
-        public const int wxSTC_BAAN_NUMBER = 3;
-        public const int wxSTC_BAAN_WORD = 4;
-        public const int wxSTC_BAAN_STRING = 5;
-        public const int wxSTC_BAAN_PREPROCESSOR = 6;
-        public const int wxSTC_BAAN_OPERATOR = 7;
-        public const int wxSTC_BAAN_IDENTIFIER = 8;
-        public const int wxSTC_BAAN_STRINGEOL = 9;
-        public const int wxSTC_BAAN_WORD2 = 10;
+        public static const int wxSTC_BAAN_DEFAULT = 0;
+        public static const int wxSTC_BAAN_COMMENT = 1;
+        public static const int wxSTC_BAAN_COMMENTDOC = 2;
+        public static const int wxSTC_BAAN_NUMBER = 3;
+        public static const int wxSTC_BAAN_WORD = 4;
+        public static const int wxSTC_BAAN_STRING = 5;
+        public static const int wxSTC_BAAN_PREPROCESSOR = 6;
+        public static const int wxSTC_BAAN_OPERATOR = 7;
+        public static const int wxSTC_BAAN_IDENTIFIER = 8;
+        public static const int wxSTC_BAAN_STRINGEOL = 9;
+        public static const int wxSTC_BAAN_WORD2 = 10;
 
         // Lexical states for SCLEX_LISP
-        public const int wxSTC_LISP_DEFAULT = 0;
-        public const int wxSTC_LISP_COMMENT = 1;
-        public const int wxSTC_LISP_NUMBER = 2;
-        public const int wxSTC_LISP_KEYWORD = 3;
-        public const int wxSTC_LISP_STRING = 6;
-        public const int wxSTC_LISP_STRINGEOL = 8;
-        public const int wxSTC_LISP_IDENTIFIER = 9;
-        public const int wxSTC_LISP_OPERATOR = 10;
+        public static const int wxSTC_LISP_DEFAULT = 0;
+        public static const int wxSTC_LISP_COMMENT = 1;
+        public static const int wxSTC_LISP_NUMBER = 2;
+        public static const int wxSTC_LISP_KEYWORD = 3;
+        public static const int wxSTC_LISP_STRING = 6;
+        public static const int wxSTC_LISP_STRINGEOL = 8;
+        public static const int wxSTC_LISP_IDENTIFIER = 9;
+        public static const int wxSTC_LISP_OPERATOR = 10;
 
         // Lexical states for SCLEX_EIFFEL and SCLEX_EIFFELKW
-        public const int wxSTC_EIFFEL_DEFAULT = 0;
-        public const int wxSTC_EIFFEL_COMMENTLINE = 1;
-        public const int wxSTC_EIFFEL_NUMBER = 2;
-        public const int wxSTC_EIFFEL_WORD = 3;
-        public const int wxSTC_EIFFEL_STRING = 4;
-        public const int wxSTC_EIFFEL_CHARACTER = 5;
-        public const int wxSTC_EIFFEL_OPERATOR = 6;
-        public const int wxSTC_EIFFEL_IDENTIFIER = 7;
-        public const int wxSTC_EIFFEL_STRINGEOL = 8;
+        public static const int wxSTC_EIFFEL_DEFAULT = 0;
+        public static const int wxSTC_EIFFEL_COMMENTLINE = 1;
+        public static const int wxSTC_EIFFEL_NUMBER = 2;
+        public static const int wxSTC_EIFFEL_WORD = 3;
+        public static const int wxSTC_EIFFEL_STRING = 4;
+        public static const int wxSTC_EIFFEL_CHARACTER = 5;
+        public static const int wxSTC_EIFFEL_OPERATOR = 6;
+        public static const int wxSTC_EIFFEL_IDENTIFIER = 7;
+        public static const int wxSTC_EIFFEL_STRINGEOL = 8;
 
         // Lexical states for SCLEX_NNCRONTAB (nnCron crontab Lexer)
-        public const int wxSTC_NNCRONTAB_DEFAULT = 0;
-        public const int wxSTC_NNCRONTAB_COMMENT = 1;
-        public const int wxSTC_NNCRONTAB_TASK = 2;
-        public const int wxSTC_NNCRONTAB_SECTION = 3;
-        public const int wxSTC_NNCRONTAB_KEYWORD = 4;
-        public const int wxSTC_NNCRONTAB_MODIFIER = 5;
-        public const int wxSTC_NNCRONTAB_ASTERISK = 6;
-        public const int wxSTC_NNCRONTAB_NUMBER = 7;
-        public const int wxSTC_NNCRONTAB_STRING = 8;
-        public const int wxSTC_NNCRONTAB_ENVIRONMENT = 9;
-        public const int wxSTC_NNCRONTAB_IDENTIFIER = 10;
+        public static const int wxSTC_NNCRONTAB_DEFAULT = 0;
+        public static const int wxSTC_NNCRONTAB_COMMENT = 1;
+        public static const int wxSTC_NNCRONTAB_TASK = 2;
+        public static const int wxSTC_NNCRONTAB_SECTION = 3;
+        public static const int wxSTC_NNCRONTAB_KEYWORD = 4;
+        public static const int wxSTC_NNCRONTAB_MODIFIER = 5;
+        public static const int wxSTC_NNCRONTAB_ASTERISK = 6;
+        public static const int wxSTC_NNCRONTAB_NUMBER = 7;
+        public static const int wxSTC_NNCRONTAB_STRING = 8;
+        public static const int wxSTC_NNCRONTAB_ENVIRONMENT = 9;
+        public static const int wxSTC_NNCRONTAB_IDENTIFIER = 10;
 
         // Lexical states for SCLEX_MATLAB
-        public const int wxSTC_MATLAB_DEFAULT = 0;
-        public const int wxSTC_MATLAB_COMMENT = 1;
-        public const int wxSTC_MATLAB_COMMAND = 2;
-        public const int wxSTC_MATLAB_NUMBER = 3;
-        public const int wxSTC_MATLAB_KEYWORD = 4;
-        public const int wxSTC_MATLAB_STRING = 5;
-        public const int wxSTC_MATLAB_OPERATOR = 6;
-        public const int wxSTC_MATLAB_IDENTIFIER = 7;
+        public static const int wxSTC_MATLAB_DEFAULT = 0;
+        public static const int wxSTC_MATLAB_COMMENT = 1;
+        public static const int wxSTC_MATLAB_COMMAND = 2;
+        public static const int wxSTC_MATLAB_NUMBER = 3;
+        public static const int wxSTC_MATLAB_KEYWORD = 4;
+        public static const int wxSTC_MATLAB_STRING = 5;
+        public static const int wxSTC_MATLAB_OPERATOR = 6;
+        public static const int wxSTC_MATLAB_IDENTIFIER = 7;
 
         // Lexical states for SCLEX_SCRIPTOL
-        public const int wxSTC_SCRIPTOL_DEFAULT = 0;
-        public const int wxSTC_SCRIPTOL_COMMENT = 1;
-        public const int wxSTC_SCRIPTOL_COMMENTLINE = 2;
-        public const int wxSTC_SCRIPTOL_COMMENTDOC = 3;
-        public const int wxSTC_SCRIPTOL_NUMBER = 4;
-        public const int wxSTC_SCRIPTOL_WORD = 5;
-        public const int wxSTC_SCRIPTOL_STRING = 6;
-        public const int wxSTC_SCRIPTOL_CHARACTER = 7;
-        public const int wxSTC_SCRIPTOL_UUID = 8;
-        public const int wxSTC_SCRIPTOL_PREPROCESSOR = 9;
-        public const int wxSTC_SCRIPTOL_OPERATOR = 10;
-        public const int wxSTC_SCRIPTOL_IDENTIFIER = 11;
-        public const int wxSTC_SCRIPTOL_STRINGEOL = 12;
-        public const int wxSTC_SCRIPTOL_VERBATIM = 13;
-        public const int wxSTC_SCRIPTOL_REGEX = 14;
-        public const int wxSTC_SCRIPTOL_COMMENTLINEDOC = 15;
-        public const int wxSTC_SCRIPTOL_WORD2 = 16;
-        public const int wxSTC_SCRIPTOL_COMMENTDOCKEYWORD = 17;
-        public const int wxSTC_SCRIPTOL_COMMENTDOCKEYWORDERROR = 18;
-        public const int wxSTC_SCRIPTOL_COMMENTBASIC = 19;
+        public static const int wxSTC_SCRIPTOL_DEFAULT = 0;
+        public static const int wxSTC_SCRIPTOL_COMMENT = 1;
+        public static const int wxSTC_SCRIPTOL_COMMENTLINE = 2;
+        public static const int wxSTC_SCRIPTOL_COMMENTDOC = 3;
+        public static const int wxSTC_SCRIPTOL_NUMBER = 4;
+        public static const int wxSTC_SCRIPTOL_WORD = 5;
+        public static const int wxSTC_SCRIPTOL_STRING = 6;
+        public static const int wxSTC_SCRIPTOL_CHARACTER = 7;
+        public static const int wxSTC_SCRIPTOL_UUID = 8;
+        public static const int wxSTC_SCRIPTOL_PREPROCESSOR = 9;
+        public static const int wxSTC_SCRIPTOL_OPERATOR = 10;
+        public static const int wxSTC_SCRIPTOL_IDENTIFIER = 11;
+        public static const int wxSTC_SCRIPTOL_STRINGEOL = 12;
+        public static const int wxSTC_SCRIPTOL_VERBATIM = 13;
+        public static const int wxSTC_SCRIPTOL_REGEX = 14;
+        public static const int wxSTC_SCRIPTOL_COMMENTLINEDOC = 15;
+        public static const int wxSTC_SCRIPTOL_WORD2 = 16;
+        public static const int wxSTC_SCRIPTOL_COMMENTDOCKEYWORD = 17;
+        public static const int wxSTC_SCRIPTOL_COMMENTDOCKEYWORDERROR = 18;
+        public static const int wxSTC_SCRIPTOL_COMMENTBASIC = 19;
 
         // Lexical states for SCLEX_ASM
-        public const int wxSTC_ASM_DEFAULT = 0;
-        public const int wxSTC_ASM_COMMENT = 1;
-        public const int wxSTC_ASM_NUMBER = 2;
-        public const int wxSTC_ASM_STRING = 3;
-        public const int wxSTC_ASM_OPERATOR = 4;
-        public const int wxSTC_ASM_IDENTIFIER = 5;
-        public const int wxSTC_ASM_CPUINSTRUCTION = 6;
-        public const int wxSTC_ASM_MATHINSTRUCTION = 7;
-        public const int wxSTC_ASM_REGISTER = 8;
-        public const int wxSTC_ASM_DIRECTIVE = 9;
-        public const int wxSTC_ASM_DIRECTIVEOPERAND = 10;
+        public static const int wxSTC_ASM_DEFAULT = 0;
+        public static const int wxSTC_ASM_COMMENT = 1;
+        public static const int wxSTC_ASM_NUMBER = 2;
+        public static const int wxSTC_ASM_STRING = 3;
+        public static const int wxSTC_ASM_OPERATOR = 4;
+        public static const int wxSTC_ASM_IDENTIFIER = 5;
+        public static const int wxSTC_ASM_CPUINSTRUCTION = 6;
+        public static const int wxSTC_ASM_MATHINSTRUCTION = 7;
+        public static const int wxSTC_ASM_REGISTER = 8;
+        public static const int wxSTC_ASM_DIRECTIVE = 9;
+        public static const int wxSTC_ASM_DIRECTIVEOPERAND = 10;
 
         // Lexical states for SCLEX_FORTRAN
-        public const int wxSTC_F_DEFAULT = 0;
-        public const int wxSTC_F_COMMENT = 1;
-        public const int wxSTC_F_NUMBER = 2;
-        public const int wxSTC_F_STRING1 = 3;
-        public const int wxSTC_F_STRING2 = 4;
-        public const int wxSTC_F_STRINGEOL = 5;
-        public const int wxSTC_F_OPERATOR = 6;
-        public const int wxSTC_F_IDENTIFIER = 7;
-        public const int wxSTC_F_WORD = 8;
-        public const int wxSTC_F_WORD2 = 9;
-        public const int wxSTC_F_WORD3 = 10;
-        public const int wxSTC_F_PREPROCESSOR = 11;
-        public const int wxSTC_F_OPERATOR2 = 12;
-        public const int wxSTC_F_LABEL = 13;
-        public const int wxSTC_F_CONTINUATION = 14;
+        public static const int wxSTC_F_DEFAULT = 0;
+        public static const int wxSTC_F_COMMENT = 1;
+        public static const int wxSTC_F_NUMBER = 2;
+        public static const int wxSTC_F_STRING1 = 3;
+        public static const int wxSTC_F_STRING2 = 4;
+        public static const int wxSTC_F_STRINGEOL = 5;
+        public static const int wxSTC_F_OPERATOR = 6;
+        public static const int wxSTC_F_IDENTIFIER = 7;
+        public static const int wxSTC_F_WORD = 8;
+        public static const int wxSTC_F_WORD2 = 9;
+        public static const int wxSTC_F_WORD3 = 10;
+        public static const int wxSTC_F_PREPROCESSOR = 11;
+        public static const int wxSTC_F_OPERATOR2 = 12;
+        public static const int wxSTC_F_LABEL = 13;
+        public static const int wxSTC_F_CONTINUATION = 14;
 
         // Lexical states for SCLEX_CSS
-        public const int wxSTC_CSS_DEFAULT = 0;
-        public const int wxSTC_CSS_TAG = 1;
-        public const int wxSTC_CSS_CLASS = 2;
-        public const int wxSTC_CSS_PSEUDOCLASS = 3;
-        public const int wxSTC_CSS_UNKNOWN_PSEUDOCLASS = 4;
-        public const int wxSTC_CSS_OPERATOR = 5;
-        public const int wxSTC_CSS_IDENTIFIER = 6;
-        public const int wxSTC_CSS_UNKNOWN_IDENTIFIER = 7;
-        public const int wxSTC_CSS_VALUE = 8;
-        public const int wxSTC_CSS_COMMENT = 9;
-        public const int wxSTC_CSS_ID = 10;
-        public const int wxSTC_CSS_IMPORTANT = 11;
-        public const int wxSTC_CSS_DIRECTIVE = 12;
-        public const int wxSTC_CSS_DOUBLESTRING = 13;
-        public const int wxSTC_CSS_SINGLESTRING = 14;
+        public static const int wxSTC_CSS_DEFAULT = 0;
+        public static const int wxSTC_CSS_TAG = 1;
+        public static const int wxSTC_CSS_CLASS = 2;
+        public static const int wxSTC_CSS_PSEUDOCLASS = 3;
+        public static const int wxSTC_CSS_UNKNOWN_PSEUDOCLASS = 4;
+        public static const int wxSTC_CSS_OPERATOR = 5;
+        public static const int wxSTC_CSS_IDENTIFIER = 6;
+        public static const int wxSTC_CSS_UNKNOWN_IDENTIFIER = 7;
+        public static const int wxSTC_CSS_VALUE = 8;
+        public static const int wxSTC_CSS_COMMENT = 9;
+        public static const int wxSTC_CSS_ID = 10;
+        public static const int wxSTC_CSS_IMPORTANT = 11;
+        public static const int wxSTC_CSS_DIRECTIVE = 12;
+        public static const int wxSTC_CSS_DOUBLESTRING = 13;
+        public static const int wxSTC_CSS_SINGLESTRING = 14;
 
         // Lexical states for SCLEX_POV
-        public const int wxSTC_POV_DEFAULT = 0;
-        public const int wxSTC_POV_COMMENT = 1;
-        public const int wxSTC_POV_COMMENTLINE = 2;
-        public const int wxSTC_POV_COMMENTDOC = 3;
-        public const int wxSTC_POV_NUMBER = 4;
-        public const int wxSTC_POV_WORD = 5;
-        public const int wxSTC_POV_STRING = 6;
-        public const int wxSTC_POV_OPERATOR = 7;
-        public const int wxSTC_POV_IDENTIFIER = 8;
-        public const int wxSTC_POV_BRACE = 9;
-        public const int wxSTC_POV_WORD2 = 10;
+        public static const int wxSTC_POV_DEFAULT = 0;
+        public static const int wxSTC_POV_COMMENT = 1;
+        public static const int wxSTC_POV_COMMENTLINE = 2;
+        public static const int wxSTC_POV_COMMENTDOC = 3;
+        public static const int wxSTC_POV_NUMBER = 4;
+        public static const int wxSTC_POV_WORD = 5;
+        public static const int wxSTC_POV_STRING = 6;
+        public static const int wxSTC_POV_OPERATOR = 7;
+        public static const int wxSTC_POV_IDENTIFIER = 8;
+        public static const int wxSTC_POV_BRACE = 9;
+        public static const int wxSTC_POV_WORD2 = 10;
 
 
         //-----------------------------------------
         // Commands that can be bound to keystrokes
 
         // Redoes the next action on the undo history.
-        public const int wxSTC_CMD_REDO = 2011;
+        public static const int wxSTC_CMD_REDO = 2011;
 
         // Select all the text in the document.
-        public const int wxSTC_CMD_SELECTALL = 2013;
+        public static const int wxSTC_CMD_SELECTALL = 2013;
 
         // Undo one action in the undo history.
-        public const int wxSTC_CMD_UNDO = 2176;
+        public static const int wxSTC_CMD_UNDO = 2176;
 
         // Cut the selection to the clipboard.
-        public const int wxSTC_CMD_CUT = 2177;
+        public static const int wxSTC_CMD_CUT = 2177;
 
         // Copy the selection to the clipboard.
-        public const int wxSTC_CMD_COPY = 2178;
+        public static const int wxSTC_CMD_COPY = 2178;
 
         // Paste the contents of the clipboard into the document replacing the selection.
-        public const int wxSTC_CMD_PASTE = 2179;
+        public static const int wxSTC_CMD_PASTE = 2179;
 
         // Clear the selection.
-        public const int wxSTC_CMD_CLEAR = 2180;
+        public static const int wxSTC_CMD_CLEAR = 2180;
 
         // Move caret down one line.
-        public const int wxSTC_CMD_LINEDOWN = 2300;
+        public static const int wxSTC_CMD_LINEDOWN = 2300;
 
         // Move caret down one line extending selection to new caret position.
-        public const int wxSTC_CMD_LINEDOWNEXTEND = 2301;
+        public static const int wxSTC_CMD_LINEDOWNEXTEND = 2301;
 
         // Move caret up one line.
-        public const int wxSTC_CMD_LINEUP = 2302;
+        public static const int wxSTC_CMD_LINEUP = 2302;
 
         // Move caret up one line extending selection to new caret position.
-        public const int wxSTC_CMD_LINEUPEXTEND = 2303;
+        public static const int wxSTC_CMD_LINEUPEXTEND = 2303;
 
         // Move caret left one character.
-        public const int wxSTC_CMD_CHARLEFT = 2304;
+        public static const int wxSTC_CMD_CHARLEFT = 2304;
 
         // Move caret left one character extending selection to new caret position.
-        public const int wxSTC_CMD_CHARLEFTEXTEND = 2305;
+        public static const int wxSTC_CMD_CHARLEFTEXTEND = 2305;
 
         // Move caret right one character.
-        public const int wxSTC_CMD_CHARRIGHT = 2306;
+        public static const int wxSTC_CMD_CHARRIGHT = 2306;
 
         // Move caret right one character extending selection to new caret position.
-        public const int wxSTC_CMD_CHARRIGHTEXTEND = 2307;
+        public static const int wxSTC_CMD_CHARRIGHTEXTEND = 2307;
 
         // Move caret left one word.
-        public const int wxSTC_CMD_WORDLEFT = 2308;
+        public static const int wxSTC_CMD_WORDLEFT = 2308;
 
         // Move caret left one word extending selection to new caret position.
-        public const int wxSTC_CMD_WORDLEFTEXTEND = 2309;
+        public static const int wxSTC_CMD_WORDLEFTEXTEND = 2309;
 
         // Move caret right one word.
-        public const int wxSTC_CMD_WORDRIGHT = 2310;
+        public static const int wxSTC_CMD_WORDRIGHT = 2310;
 
         // Move caret right one word extending selection to new caret position.
-        public const int wxSTC_CMD_WORDRIGHTEXTEND = 2311;
+        public static const int wxSTC_CMD_WORDRIGHTEXTEND = 2311;
 
         // Move caret to first position on line.
-        public const int wxSTC_CMD_HOME = 2312;
+        public static const int wxSTC_CMD_HOME = 2312;
 
         // Move caret to first position on line extending selection to new caret position.
-        public const int wxSTC_CMD_HOMEEXTEND = 2313;
+        public static const int wxSTC_CMD_HOMEEXTEND = 2313;
 
         // Move caret to last position on line.
-        public const int wxSTC_CMD_LINEEND = 2314;
+        public static const int wxSTC_CMD_LINEEND = 2314;
 
         // Move caret to last position on line extending selection to new caret position.
-        public const int wxSTC_CMD_LINEENDEXTEND = 2315;
+        public static const int wxSTC_CMD_LINEENDEXTEND = 2315;
 
         // Move caret to first position in document.
-        public const int wxSTC_CMD_DOCUMENTSTART = 2316;
+        public static const int wxSTC_CMD_DOCUMENTSTART = 2316;
 
         // Move caret to first position in document extending selection to new caret position.
-        public const int wxSTC_CMD_DOCUMENTSTARTEXTEND = 2317;
+        public static const int wxSTC_CMD_DOCUMENTSTARTEXTEND = 2317;
 
         // Move caret to last position in document.
-        public const int wxSTC_CMD_DOCUMENTEND = 2318;
+        public static const int wxSTC_CMD_DOCUMENTEND = 2318;
 
         // Move caret to last position in document extending selection to new caret position.
-        public const int wxSTC_CMD_DOCUMENTENDEXTEND = 2319;
+        public static const int wxSTC_CMD_DOCUMENTENDEXTEND = 2319;
 
         // Move caret one page up.
-        public const int wxSTC_CMD_PAGEUP = 2320;
+        public static const int wxSTC_CMD_PAGEUP = 2320;
 
         // Move caret one page up extending selection to new caret position.
-        public const int wxSTC_CMD_PAGEUPEXTEND = 2321;
+        public static const int wxSTC_CMD_PAGEUPEXTEND = 2321;
 
         // Move caret one page down.
-        public const int wxSTC_CMD_PAGEDOWN = 2322;
+        public static const int wxSTC_CMD_PAGEDOWN = 2322;
 
         // Move caret one page down extending selection to new caret position.
-        public const int wxSTC_CMD_PAGEDOWNEXTEND = 2323;
+        public static const int wxSTC_CMD_PAGEDOWNEXTEND = 2323;
 
         // Switch from insert to overtype mode or the reverse.
-        public const int wxSTC_CMD_EDITTOGGLEOVERTYPE = 2324;
+        public static const int wxSTC_CMD_EDITTOGGLEOVERTYPE = 2324;
 
         // Cancel any modes such as call tip or auto-completion list display.
-        public const int wxSTC_CMD_CANCEL = 2325;
+        public static const int wxSTC_CMD_CANCEL = 2325;
 
         // Delete the selection or if no selection, the character before the caret.
-        public const int wxSTC_CMD_DELETEBACK = 2326;
+        public static const int wxSTC_CMD_DELETEBACK = 2326;
 
         // If selection is empty or all on one line replace the selection with a tab character.
         // If more than one line selected, indent the lines.
-        public const int wxSTC_CMD_TAB = 2327;
+        public static const int wxSTC_CMD_TAB = 2327;
 
         // Dedent the selected lines.
-        public const int wxSTC_CMD_BACKTAB = 2328;
+        public static const int wxSTC_CMD_BACKTAB = 2328;
 
         // Insert a new line, may use a CRLF, CR or LF depending on EOL mode.
-        public const int wxSTC_CMD_NEWLINE = 2329;
+        public static const int wxSTC_CMD_NEWLINE = 2329;
 
         // Insert a Form Feed character.
-        public const int wxSTC_CMD_FORMFEED = 2330;
+        public static const int wxSTC_CMD_FORMFEED = 2330;
 
         // Move caret to before first visible character on line.
         // If already there move to first character on line.
-        public const int wxSTC_CMD_VCHOME = 2331;
+        public static const int wxSTC_CMD_VCHOME = 2331;
 
         // Like VCHome but extending selection to new caret position.
-        public const int wxSTC_CMD_VCHOMEEXTEND = 2332;
+        public static const int wxSTC_CMD_VCHOMEEXTEND = 2332;
 
         // Magnify the displayed text by increasing the sizes by 1 point.
-        public const int wxSTC_CMD_ZOOMIN = 2333;
+        public static const int wxSTC_CMD_ZOOMIN = 2333;
 
         // Make the displayed text smaller by decreasing the sizes by 1 point.
-        public const int wxSTC_CMD_ZOOMOUT = 2334;
+        public static const int wxSTC_CMD_ZOOMOUT = 2334;
 
         // Delete the word to the left of the caret.
-        public const int wxSTC_CMD_DELWORDLEFT = 2335;
+        public static const int wxSTC_CMD_DELWORDLEFT = 2335;
 
         // Delete the word to the right of the caret.
-        public const int wxSTC_CMD_DELWORDRIGHT = 2336;
+        public static const int wxSTC_CMD_DELWORDRIGHT = 2336;
 
         // Cut the line containing the caret.
-        public const int wxSTC_CMD_LINECUT = 2337;
+        public static const int wxSTC_CMD_LINECUT = 2337;
 
         // Delete the line containing the caret.
-        public const int wxSTC_CMD_LINEDELETE = 2338;
+        public static const int wxSTC_CMD_LINEDELETE = 2338;
 
         // Switch the current line with the previous.
-        public const int wxSTC_CMD_LINETRANSPOSE = 2339;
+        public static const int wxSTC_CMD_LINETRANSPOSE = 2339;
 
         // Duplicate the current line.
-        public const int wxSTC_CMD_LINEDUPLICATE = 2404;
+        public static const int wxSTC_CMD_LINEDUPLICATE = 2404;
 
         // Transform the selection to lower case.
-        public const int wxSTC_CMD_LOWERCASE = 2340;
+        public static const int wxSTC_CMD_LOWERCASE = 2340;
 
         // Transform the selection to upper case.
-        public const int wxSTC_CMD_UPPERCASE = 2341;
+        public static const int wxSTC_CMD_UPPERCASE = 2341;
 
         // Scroll the document down, keeping the caret visible.
-        public const int wxSTC_CMD_LINESCROLLDOWN = 2342;
+        public static const int wxSTC_CMD_LINESCROLLDOWN = 2342;
 
         // Scroll the document up, keeping the caret visible.
-        public const int wxSTC_CMD_LINESCROLLUP = 2343;
+        public static const int wxSTC_CMD_LINESCROLLUP = 2343;
 
         // Delete the selection or if no selection, the character before the caret.
         // Will not delete the character before at the start of a line.
-        public const int wxSTC_CMD_DELETEBACKNOTLINE = 2344;
+        public static const int wxSTC_CMD_DELETEBACKNOTLINE = 2344;
 
         // Move caret to first position on display line.
-        public const int wxSTC_CMD_HOMEDISPLAY = 2345;
+        public static const int wxSTC_CMD_HOMEDISPLAY = 2345;
 
         // Move caret to first position on display line extending selection to
         // new caret position.
-        public const int wxSTC_CMD_HOMEDISPLAYEXTEND = 2346;
+        public static const int wxSTC_CMD_HOMEDISPLAYEXTEND = 2346;
 
         // Move caret to last position on display line.
-        public const int wxSTC_CMD_LINEENDDISPLAY = 2347;
+        public static const int wxSTC_CMD_LINEENDDISPLAY = 2347;
 
         // Move caret to last position on display line extending selection to new
         // caret position.
-        public const int wxSTC_CMD_LINEENDDISPLAYEXTEND = 2348;
+        public static const int wxSTC_CMD_LINEENDDISPLAYEXTEND = 2348;
 
         // These are like their namesakes Home(Extend)?, LineEnd(Extend)?, VCHome(Extend)?
         // except they behave differently when word-wrap is enabled:
         // They go first to the start / end of the display line, like (Home|LineEnd)Display
         // The difference is that, the cursor is already at the point, it goes on to the start
         // or end of the document line, as appropriate for (Home|LineEnd|VCHome)Extend.
-        public const int wxSTC_CMD_HOMEWRAP = 2349;
-        public const int wxSTC_CMD_HOMEWRAPEXTEND = 2450;
-        public const int wxSTC_CMD_LINEENDWRAP = 2451;
-        public const int wxSTC_CMD_LINEENDWRAPEXTEND = 2452;
-        public const int wxSTC_CMD_VCHOMEWRAP = 2453;
-        public const int wxSTC_CMD_VCHOMEWRAPEXTEND = 2454;
+        public static const int wxSTC_CMD_HOMEWRAP = 2349;
+        public static const int wxSTC_CMD_HOMEWRAPEXTEND = 2450;
+        public static const int wxSTC_CMD_LINEENDWRAP = 2451;
+        public static const int wxSTC_CMD_LINEENDWRAPEXTEND = 2452;
+        public static const int wxSTC_CMD_VCHOMEWRAP = 2453;
+        public static const int wxSTC_CMD_VCHOMEWRAPEXTEND = 2454;
 
         // Move to the previous change in capitalisation.
-        public const int wxSTC_CMD_WORDPARTLEFT = 2390;
+        public static const int wxSTC_CMD_WORDPARTLEFT = 2390;
 
         // Move to the previous change in capitalisation extending selection
         // to new caret position.
-        public const int wxSTC_CMD_WORDPARTLEFTEXTEND = 2391;
+        public static const int wxSTC_CMD_WORDPARTLEFTEXTEND = 2391;
 
         // Move to the change next in capitalisation.
-        public const int wxSTC_CMD_WORDPARTRIGHT = 2392;
+        public static const int wxSTC_CMD_WORDPARTRIGHT = 2392;
 
         // Move to the next change in capitalisation extending selection
         // to new caret position.
-        public const int wxSTC_CMD_WORDPARTRIGHTEXTEND = 2393;
+        public static const int wxSTC_CMD_WORDPARTRIGHTEXTEND = 2393;
 
         // Delete back from the current position to the start of the line.
-        public const int wxSTC_CMD_DELLINELEFT = 2395;
+        public static const int wxSTC_CMD_DELLINELEFT = 2395;
 
         // Delete forwards from the current position to the end of the line.
-        public const int wxSTC_CMD_DELLINERIGHT = 2396;
+        public static const int wxSTC_CMD_DELLINERIGHT = 2396;
 
         // Move caret between paragraphs (delimited by empty lines)
-        public const int wxSTC_CMD_PARADOWN = 2413;
-        public const int wxSTC_CMD_PARADOWNEXTEND = 2414;
-        public const int wxSTC_CMD_PARAUP = 2415;
-        public const int wxSTC_CMD_PARAUPEXTEND = 2416;
+        public static const int wxSTC_CMD_PARADOWN = 2413;
+        public static const int wxSTC_CMD_PARADOWNEXTEND = 2414;
+        public static const int wxSTC_CMD_PARAUP = 2415;
+        public static const int wxSTC_CMD_PARAUPEXTEND = 2416;
 
         //-----------------------------------------------------------------------------
 
@@ -1451,7 +1451,7 @@ public import wx.CommandEvent;
         }
 
         //-----------------------------------------------------------------------------
-	public const string wxSTCNameStr = "stcwindow";
+	public static const string wxSTCNameStr = "stcwindow";
 
         public this(IntPtr wxobj) 
             { super (wxobj); }

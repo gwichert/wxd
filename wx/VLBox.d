@@ -60,7 +60,7 @@ public import wx.VScroll;
 		
 	public abstract class VListBox : VScrolledWindow
 	{
-		const string wxVListBoxNameStr = "wxVListBox";
+		const static string wxVListBoxNameStr = "wxVListBox";
 	
 		public this(IntPtr wxobj)
 			{ super(wxobj);}

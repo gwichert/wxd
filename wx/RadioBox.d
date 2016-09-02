@@ -57,7 +57,7 @@ public import wx.Control;
 			wxRA_VERTICAL       = Orientation.wxVERTICAL,
 		}
 
-		public const string wxRadioBoxNameStr = "radioBox";
+		public static const string wxRadioBoxNameStr = "radioBox";
 		//---------------------------------------------------------------------
         
 		public this(IntPtr wxobj)

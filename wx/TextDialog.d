@@ -33,7 +33,7 @@ public import wx.Dialog;
     	enum {
         wxTextEntryDialogStyle = (wxOK | wxCANCEL | wxCENTRE),
 	}
-	public const string wxGetTextFromUserPromptStr = "Input Text";
+	public static const string wxGetTextFromUserPromptStr = "Input Text";
 
         public this(IntPtr wxobj)
             { super(wxobj);}

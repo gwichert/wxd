@@ -402,9 +402,9 @@ public import wx.ToolTip;
 
 		//---------------------------------------------------------------------
 
-		public const Point wxDefaultPosition = {X:-1, Y:-1};
-		public const Size  wxDefaultSize     = {Width:-1, Height:-1};
-		const string wxPanelNameStr = "panel";
+		public static const Point wxDefaultPosition = {X:-1, Y:-1};
+		public static const Size  wxDefaultSize     = {Width:-1, Height:-1};
+		const static string wxPanelNameStr = "panel";
 
 		//---------------------------------------------------------------------
 

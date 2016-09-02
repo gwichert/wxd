@@ -67,7 +67,7 @@ public import wx.ClientData;
 			wxLB_INT_HEIGHT       = 0x0800,
 		}
 	
-		public const string wxListBoxNameStr = "listBox";
+		public static const string wxListBoxNameStr = "listBox";
 		//---------------------------------------------------------------------
 		
 		public this(IntPtr wxobj) 
@@ -293,7 +293,7 @@ public import wx.ClientData;
 	alias CheckListBox wxCheckListBox;
 	public class CheckListBox : ListBox
 	{
-		const string wxListBoxNameStr = "listBox";
+		const static string wxListBoxNameStr = "listBox";
 
 		//---------------------------------------------------------------------
 	

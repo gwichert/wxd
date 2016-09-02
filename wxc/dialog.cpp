@@ -135,3 +135,17 @@ int wxDialog_ShowModal(wxDialog* self)
 }
 
 //-----------------------------------------------------------------------------
+
+extern "C" WXEXPORT
+wxSizer* wxDialog_CreateButtonSizer(wxDialog* self, long flags)
+{
+	return self->CreateButtonSizer( flags);
+}
+
+extern "C" WXEXPORT
+wxSizer* wxDialog_CreateSeparatedButtonSizer(wxDialog* self, long flags)
+{
+	return self->CreateSeparatedButtonSizer( flags);
+}
+
+//-----------------------------------------------------------------------------

@@ -371,23 +371,23 @@ else // D_Version1
 	alias TreeCtrl wxTreeCtrl;
 	public class TreeCtrl : Control
 	{
-		public const int wxTR_NO_BUTTONS                = 0x0000;
-		public const int wxTR_HAS_BUTTONS                = 0x0001;
-		public const int wxTR_TWIST_BUTTONS            = 0x0010;
-		public const int wxTR_NO_LINES                    = 0x0004;
-		public const int wxTR_LINES_AT_ROOT             = 0x0008;
-		public const int wxTR_MAC_BUTTONS                = 0; // deprecated
-		public const int wxTR_AQUA_BUTTONS                = 0; // deprecated
+		public static const int wxTR_NO_BUTTONS                = 0x0000;
+		public static const int wxTR_HAS_BUTTONS                = 0x0001;
+		public static const int wxTR_TWIST_BUTTONS            = 0x0010;
+		public static const int wxTR_NO_LINES                    = 0x0004;
+		public static const int wxTR_LINES_AT_ROOT             = 0x0008;
+		public static const int wxTR_MAC_BUTTONS                = 0; // deprecated
+		public static const int wxTR_AQUA_BUTTONS                = 0; // deprecated
 
-		public const int wxTR_SINGLE                    = 0x0000;
-		public const int wxTR_MULTIPLE                    = 0x0020;
-		public const int wxTR_EXTENDED                    = 0x0040;
-		public const int wxTR_FULL_ROW_HIGHLIGHT         = 0x2000;
+		public static const int wxTR_SINGLE                    = 0x0000;
+		public static const int wxTR_MULTIPLE                    = 0x0020;
+		public static const int wxTR_EXTENDED                    = 0x0040;
+		public static const int wxTR_FULL_ROW_HIGHLIGHT         = 0x2000;
 
-		public const int wxTR_EDIT_LABELS                = 0x0200;
-		public const int wxTR_ROW_LINES                = 0x0400;
-		public const int wxTR_HIDE_ROOT                = 0x0800;
-		public const int wxTR_HAS_VARIABLE_ROW_HEIGHT    = 0x0080;
+		public static const int wxTR_EDIT_LABELS                = 0x0200;
+		public static const int wxTR_ROW_LINES                = 0x0400;
+		public static const int wxTR_HIDE_ROOT                = 0x0800;
+		public static const int wxTR_HAS_VARIABLE_ROW_HEIGHT    = 0x0080;
 
 		public static /*readonly*/ int wxTR_DEFAULT_STYLE;
 
@@ -398,23 +398,23 @@ else // D_Version1
 
 		//-----------------------------------------------------------------------------
 
-		public const int wxTREE_HITTEST_ABOVE           = 0x0001;
-		public const int wxTREE_HITTEST_BELOW           = 0x0002;
-		public const int wxTREE_HITTEST_NOWHERE         = 0x0004;
-		public const int wxTREE_HITTEST_ONITEMBUTTON    = 0x0008;
-		public const int wxTREE_HITTEST_ONITEMICON      = 0x0010;
-		public const int wxTREE_HITTEST_ONITEMINDENT    = 0x0020;
-		public const int wxTREE_HITTEST_ONITEMLABEL     = 0x0040;
-		public const int wxTREE_HITTEST_ONITEMRIGHT     = 0x0080;
-		public const int wxTREE_HITTEST_ONITEMSTATEICON = 0x0100;
-		public const int wxTREE_HITTEST_TOLEFT          = 0x0200;
-		public const int wxTREE_HITTEST_TORIGHT         = 0x0400;
-		public const int wxTREE_HITTEST_ONITEMUPPERPART = 0x0800;
-		public const int wxTREE_HITTEST_ONITEMLOWERPART = 0x1000;
+		public static const int wxTREE_HITTEST_ABOVE           = 0x0001;
+		public static const int wxTREE_HITTEST_BELOW           = 0x0002;
+		public static const int wxTREE_HITTEST_NOWHERE         = 0x0004;
+		public static const int wxTREE_HITTEST_ONITEMBUTTON    = 0x0008;
+		public static const int wxTREE_HITTEST_ONITEMICON      = 0x0010;
+		public static const int wxTREE_HITTEST_ONITEMINDENT    = 0x0020;
+		public static const int wxTREE_HITTEST_ONITEMLABEL     = 0x0040;
+		public static const int wxTREE_HITTEST_ONITEMRIGHT     = 0x0080;
+		public static const int wxTREE_HITTEST_ONITEMSTATEICON = 0x0100;
+		public static const int wxTREE_HITTEST_TOLEFT          = 0x0200;
+		public static const int wxTREE_HITTEST_TORIGHT         = 0x0400;
+		public static const int wxTREE_HITTEST_ONITEMUPPERPART = 0x0800;
+		public static const int wxTREE_HITTEST_ONITEMLOWERPART = 0x1000;
 
-		public const int wxTREE_HITTEST_ONITEM = wxTREE_HITTEST_ONITEMICON | wxTREE_HITTEST_ONITEMLABEL;
+		public static const int wxTREE_HITTEST_ONITEM = wxTREE_HITTEST_ONITEMICON | wxTREE_HITTEST_ONITEMLABEL;
 		
-		public const string wxTreeCtrlNameStr = "treeCtrl";
+		public static const string wxTreeCtrlNameStr = "treeCtrl";
 		//-----------------------------------------------------------------------------
 		
 		public this(IntPtr wxobj)

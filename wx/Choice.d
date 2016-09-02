@@ -76,7 +76,7 @@ public import wx.ArrayString;
 	alias Choice wxChoice;
 	public class Choice : Control , IControlWithItems
 	{
-		public const string wxChoiceNameStr = "choice";
+		public static const string wxChoiceNameStr = "choice";
 	
 		public this(IntPtr wxobj) 
 			{ super(wxobj);}

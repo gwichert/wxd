@@ -30,12 +30,12 @@ public import wx.Dialog;
     alias ProgressDialog wxProgressDialog;
     public class ProgressDialog : Dialog
     {
-        public const int wxPD_CAN_ABORT      = 0x0001;
-        public const int wxPD_APP_MODAL      = 0x0002;
-        public const int wxPD_AUTO_HIDE      = 0x0004;
-        public const int wxPD_ELAPSED_TIME   = 0x0008;
-        public const int wxPD_ESTIMATED_TIME = 0x0010;
-        public const int wxPD_REMAINING_TIME = 0x0040;
+        public static const int wxPD_CAN_ABORT      = 0x0001;
+        public static const int wxPD_APP_MODAL      = 0x0002;
+        public static const int wxPD_AUTO_HIDE      = 0x0004;
+        public static const int wxPD_ELAPSED_TIME   = 0x0008;
+        public static const int wxPD_ESTIMATED_TIME = 0x0010;
+        public static const int wxPD_REMAINING_TIME = 0x0040;
 	
 		//---------------------------------------------------------------------
 

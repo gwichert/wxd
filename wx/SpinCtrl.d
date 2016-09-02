@@ -34,10 +34,10 @@ public import wx.Control;
 	public class SpinCtrl : Control 
 	{
 		// These are duplicated in SpinButton.cs (for easier access)
-		public const int wxSP_HORIZONTAL       = Orientation.wxHORIZONTAL;
-		public const int wxSP_VERTICAL         = Orientation.wxVERTICAL;
-		public const int wxSP_ARROW_KEYS       = 0x1000;
-		public const int wxSP_WRAP             = 0x2000;
+		public static const int wxSP_HORIZONTAL       = Orientation.wxHORIZONTAL;
+		public static const int wxSP_VERTICAL         = Orientation.wxVERTICAL;
+		public static const int wxSP_ARROW_KEYS       = 0x1000;
+		public static const int wxSP_WRAP             = 0x2000;
 	
 		//---------------------------------------------------------------------
 		

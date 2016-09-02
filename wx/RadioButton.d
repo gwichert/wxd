@@ -27,10 +27,10 @@ public import wx.Control;
 	alias RadioButton wxRadioButton;
 	public class RadioButton : Control 
 	{
-		public const int wxRB_GROUP     = 0x0004;
-		public const int wxRB_SINGLE    = 0x0008;
+		public static const int wxRB_GROUP     = 0x0004;
+		public static const int wxRB_SINGLE    = 0x0008;
 		
-		public const string wxRadioButtonNameStr = "radioButton";
+		public static const string wxRadioButtonNameStr = "radioButton";
 		//---------------------------------------------------------------------
 	
 		public this(IntPtr wxobj) 

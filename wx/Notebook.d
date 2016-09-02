@@ -112,14 +112,14 @@ public import wx.ImageList;
 	alias Notebook wxNotebook;
 	public class Notebook : Control
 	{
-		public const int wxNB_FIXEDWIDTH       = 0x0010;
-		public const int wxNB_TOP              = 0x0000;
-		public const int wxNB_LEFT             = 0x0020;
-		public const int wxNB_RIGHT            = 0x0040;
-		public const int wxNB_BOTTOM           = 0x0080;
-		public const int wxNB_MULTILINE        = 0x0100;
+		public static const int wxNB_FIXEDWIDTH       = 0x0010;
+		public static const int wxNB_TOP              = 0x0000;
+		public static const int wxNB_LEFT             = 0x0020;
+		public static const int wxNB_RIGHT            = 0x0040;
+		public static const int wxNB_BOTTOM           = 0x0080;
+		public static const int wxNB_MULTILINE        = 0x0100;
 	
-		public const string wxNOTEBOOK_NAME = "notebook";
+		public static const string wxNOTEBOOK_NAME = "notebook";
 		//-----------------------------------------------------------------------------
 
 		public this(IntPtr wxobj) 

@@ -25,7 +25,7 @@ public import wx.Dialog;
     alias NumberEntryDialog wxNumberEntryDialog;
     public class NumberEntryDialog : Dialog
     {
-        public const int wxNumberEntryDialogStyle = (Dialog.wxOK | Dialog.wxCANCEL | Dialog.wxCENTRE );
+        public static const int wxNumberEntryDialogStyle = (Dialog.wxOK | Dialog.wxCANCEL | Dialog.wxCENTRE );
 
         public this(IntPtr wxobj)
             { super(wxobj);}

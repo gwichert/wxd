@@ -55,10 +55,10 @@ public import wx.DC;
 	alias ImageList wxImageList;
 	public class ImageList : wxObject
 	{
-		public const int wxIMAGELIST_DRAW_NORMAL	= 0x0001;
-		public const int wxIMAGELIST_DRAW_TRANSPARENT	= 0x0002;
-		public const int wxIMAGELIST_DRAW_SELECTED	= 0x0004;
-		public const int wxIMAGELIST_DRAW_FOCUSED	= 0x0008;
+		public static const int wxIMAGELIST_DRAW_NORMAL	= 0x0001;
+		public static const int wxIMAGELIST_DRAW_TRANSPARENT	= 0x0002;
+		public static const int wxIMAGELIST_DRAW_SELECTED	= 0x0004;
+		public static const int wxIMAGELIST_DRAW_FOCUSED	= 0x0008;
 		
 		//---------------------------------------------------------------------
 	

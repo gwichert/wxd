@@ -29,7 +29,7 @@ public import wx.Control;
 	alias StaticBitmap wxStaticBitmap;
 	public class StaticBitmap : Control
 	{
-		public const string wxStaticBitmapNameStr = "message";
+		public static const string wxStaticBitmapNameStr = "message";
 
 		public this()
 			{ super(wxStaticBitmap_ctor()); }

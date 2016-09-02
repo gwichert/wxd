@@ -16,12 +16,12 @@ public import wx.common;
 public import wx.Window;
 
 
-		public const int wxST_SIZEGRIP         = 0x0010;
-		public const int wxST_NO_AUTORESIZE    = 0x0001;
+		public static const int wxST_SIZEGRIP         = 0x0010;
+		public static const int wxST_NO_AUTORESIZE    = 0x0001;
 		
-		public const int wxSB_NORMAL	= 0x000;
-		public const int wxSB_FLAT	= 0x001;
-		public const int wxSB_RAISED	= 0x002; 
+		public static const int wxSB_NORMAL	= 0x000;
+		public static const int wxSB_FLAT	= 0x001;
+		public static const int wxSB_RAISED	= 0x002; 
 	
 		//-----------------------------------------------------------------------------
 	

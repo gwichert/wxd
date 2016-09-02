@@ -1435,9 +1435,9 @@ public import wx.MouseEvent;
 	alias HtmlEasyPrinting wxHtmlEasyPrinting;
 	public class HtmlEasyPrinting : wxObject
 	{
-		public const int wxPAGE_ODD	= 0;
-		public const int wxPAGE_EVEN	= 1;
-		public const int wxPAGE_ALL	= 2;
+		public static const int wxPAGE_ODD	= 0;
+		public static const int wxPAGE_EVEN	= 1;
+		public static const int wxPAGE_ALL	= 2;
 		
 		//-----------------------------------------------------------------------------
 	
@@ -1635,9 +1635,9 @@ public import wx.MouseEvent;
 	alias HtmlWindow wxHtmlWindow;
 	public class HtmlWindow : ScrolledWindow
 	{
-		public const int wxHW_SCROLLBAR_NEVER   = 0x0002;
-		public const int wxHW_SCROLLBAR_AUTO    = 0x0004;
-		public const int wxHW_NO_SELECTION      = 0x0008;
+		public static const int wxHW_SCROLLBAR_NEVER   = 0x0002;
+		public static const int wxHW_SCROLLBAR_AUTO    = 0x0004;
+		public static const int wxHW_NO_SELECTION      = 0x0008;
 
 		//-----------------------------------------------------------------------------
 

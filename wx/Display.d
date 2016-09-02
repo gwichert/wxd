@@ -64,7 +64,7 @@ public import wx.Window;
 		// integer on success as failure indicator. While this is global in
 		// wxWidgets it makes more sense to be in each class that uses it??? 
 		// Or maybe move it to Window.cs.
-		public const int wxNOT_FOUND = -1;
+		public static const int wxNOT_FOUND = -1;
 		
 		//------------------------------------------------------------------------
 		

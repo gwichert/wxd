@@ -34,7 +34,7 @@ public import wx.Control;
 			wxLI_VERTICAL		= Orientation.wxVERTICAL,
 		}
 		
-		public const string wxStaticTextNameStr = "message";
+		public static const string wxStaticTextNameStr = "message";
 		//---------------------------------------------------------------------
 		
 		public this(IntPtr wxobj) 

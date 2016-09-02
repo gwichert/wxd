@@ -40,8 +40,8 @@ public import wx.Dialog;
 	enum {  wxDD_NEW_DIR_BUTTON  = 0x0080 }
 	enum {  wxDD_DEFAULT_STYLE = (wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER | wxDD_NEW_DIR_BUTTON) }
 
-	public const string wxDirSelectorPromptStr = "Select a directory";
-	public const string wxDirDialogNameStr = "DirDialog";
+	public static const string wxDirSelectorPromptStr = "Select a directory";
+	public static const string wxDirDialogNameStr = "DirDialog";
 	
         public this(IntPtr wxobj) 
             { super(wxobj); }

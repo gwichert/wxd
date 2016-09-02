@@ -111,12 +111,12 @@ public import wx.ImageList;
 	alias Listbook wxListbook;
 	public class Listbook : Control
 	{
-		public const int wxLB_DEFAULT		= 0;
-		public const int wxLB_TOP		= 0x1;
-		public const int wxLB_BOTTOM		= 0x2;
-		public const int wxLB_LEFT		= 0x4;
-		public const int wxLB_RIGHT		= 0x8;
-		public const int wxLB_ALIGN_MASK	= 0xf;
+		public static const int wxLB_DEFAULT    = 0;
+		public static const int wxLB_TOP		= 0x1;
+		public static const int wxLB_BOTTOM		= 0x2;
+		public static const int wxLB_LEFT		= 0x4;
+		public static const int wxLB_RIGHT		= 0x8;
+		public static const int wxLB_ALIGN_MASK	= 0xf;
 		
 		//-----------------------------------------------------------------------------
 

@@ -318,66 +318,66 @@ public import wx.ImageList;
 	alias ListCtrl wxListCtrl;
 	public class ListCtrl : Control
 	{
-		public const int wxLC_VRULES           = 0x0001;
-		public const int wxLC_HRULES           = 0x0002;
+		public static const int wxLC_VRULES           = 0x0001;
+		public static const int wxLC_HRULES           = 0x0002;
 	
-		public const int wxLC_ICON             = 0x0004;
-		public const int wxLC_SMALL_ICON       = 0x0008;
-		public const int wxLC_LIST             = 0x0010;
-		public const int wxLC_REPORT           = 0x0020;
+		public static const int wxLC_ICON             = 0x0004;
+		public static const int wxLC_SMALL_ICON       = 0x0008;
+		public static const int wxLC_LIST             = 0x0010;
+		public static const int wxLC_REPORT           = 0x0020;
 	
-		public const int wxLC_ALIGN_TOP        = 0x0040;
-		public const int wxLC_ALIGN_LEFT       = 0x0080;
-		public const int wxLC_AUTO_ARRANGE     = 0x0100;
-		public const int wxLC_VIRTUAL          = 0x0200;
-		public const int wxLC_EDIT_LABELS      = 0x0400;
-		public const int wxLC_NO_HEADER        = 0x0800;
-		public const int wxLC_NO_SORT_HEADER   = 0x1000;
-		public const int wxLC_SINGLE_SEL       = 0x2000;
-		public const int wxLC_SORT_ASCENDING   = 0x4000;
-		public const int wxLC_SORT_DESCENDING  = 0x8000;
+		public static const int wxLC_ALIGN_TOP        = 0x0040;
+		public static const int wxLC_ALIGN_LEFT       = 0x0080;
+		public static const int wxLC_AUTO_ARRANGE     = 0x0100;
+		public static const int wxLC_VIRTUAL          = 0x0200;
+		public static const int wxLC_EDIT_LABELS      = 0x0400;
+		public static const int wxLC_NO_HEADER        = 0x0800;
+		public static const int wxLC_NO_SORT_HEADER   = 0x1000;
+		public static const int wxLC_SINGLE_SEL       = 0x2000;
+		public static const int wxLC_SORT_ASCENDING   = 0x4000;
+		public static const int wxLC_SORT_DESCENDING  = 0x8000;
 	
-		public const int wxLC_MASK_TYPE        = (wxLC_ICON | wxLC_SMALL_ICON | wxLC_LIST | wxLC_REPORT);
-		public const int wxLC_MASK_ALIGN       = (wxLC_ALIGN_TOP | wxLC_ALIGN_LEFT);
-		public const int wxLC_MASK_SORT        = (wxLC_SORT_ASCENDING | wxLC_SORT_DESCENDING);
+		public static const int wxLC_MASK_TYPE        = (wxLC_ICON | wxLC_SMALL_ICON | wxLC_LIST | wxLC_REPORT);
+		public static const int wxLC_MASK_ALIGN       = (wxLC_ALIGN_TOP | wxLC_ALIGN_LEFT);
+		public static const int wxLC_MASK_SORT        = (wxLC_SORT_ASCENDING | wxLC_SORT_DESCENDING);
 	
-		public const int wxLIST_FORMAT_LEFT     = 0;
-		public const int wxLIST_FORMAT_RIGHT    = 1;
-		public const int wxLIST_FORMAT_CENTRE   = 2;
-		public const int wxLIST_FORMAT_CENTER   = wxLIST_FORMAT_CENTRE;
+		public static const int wxLIST_FORMAT_LEFT     = 0;
+		public static const int wxLIST_FORMAT_RIGHT    = 1;
+		public static const int wxLIST_FORMAT_CENTRE   = 2;
+		public static const int wxLIST_FORMAT_CENTER   = wxLIST_FORMAT_CENTRE;
 	
-		public const int wxLIST_MASK_STATE         = 0x0001;
-		public const int wxLIST_MASK_TEXT          = 0x0002;
-		public const int wxLIST_MASK_IMAGE         = 0x0004;
-		public const int wxLIST_MASK_DATA          = 0x0008;
-		public const int wxLIST_SET_ITEM           = 0x0010;
-		public const int wxLIST_MASK_WIDTH         = 0x0020;
-		public const int wxLIST_MASK_FORMAT        = 0x0040;
+		public static const int wxLIST_MASK_STATE         = 0x0001;
+		public static const int wxLIST_MASK_TEXT          = 0x0002;
+		public static const int wxLIST_MASK_IMAGE         = 0x0004;
+		public static const int wxLIST_MASK_DATA          = 0x0008;
+		public static const int wxLIST_SET_ITEM           = 0x0010;
+		public static const int wxLIST_MASK_WIDTH         = 0x0020;
+		public static const int wxLIST_MASK_FORMAT        = 0x0040;
 	
-		public const int wxLIST_NEXT_ABOVE     = 1;
-		public const int wxLIST_NEXT_ALL       = 2;
-		public const int wxLIST_NEXT_BELOW     = 3;
-		public const int wxLIST_NEXT_LEFT      = 4;
-		public const int wxLIST_NEXT_RIGHT     = 5;
+		public static const int wxLIST_NEXT_ABOVE     = 1;
+		public static const int wxLIST_NEXT_ALL       = 2;
+		public static const int wxLIST_NEXT_BELOW     = 3;
+		public static const int wxLIST_NEXT_LEFT      = 4;
+		public static const int wxLIST_NEXT_RIGHT     = 5;
 	
-		public const int wxLIST_STATE_DONTCARE     = 0x0000;
-		public const int wxLIST_STATE_DROPHILITED  = 0x0001;
-		public const int wxLIST_STATE_FOCUSED      = 0x0002;
-		public const int wxLIST_STATE_SELECTED     = 0x0004;
-		public const int wxLIST_STATE_CUT          = 0x0008;
+		public static const int wxLIST_STATE_DONTCARE     = 0x0000;
+		public static const int wxLIST_STATE_DROPHILITED  = 0x0001;
+		public static const int wxLIST_STATE_FOCUSED      = 0x0002;
+		public static const int wxLIST_STATE_SELECTED     = 0x0004;
+		public static const int wxLIST_STATE_CUT          = 0x0008;
 	
-		public const int wxLIST_HITTEST_ABOVE          = 0x0001;
-		public const int wxLIST_HITTEST_BELOW          = 0x0002;
-		public const int wxLIST_HITTEST_NOWHERE        = 0x0004;
-		public const int wxLIST_HITTEST_ONITEMICON     = 0x0020;
-		public const int wxLIST_HITTEST_ONITEMLABEL    = 0x0080;
-		public const int wxLIST_HITTEST_ONITEMRIGHT    = 0x0100;
-		public const int wxLIST_HITTEST_ONITEMSTATEICON= 0x0200;
-		public const int wxLIST_HITTEST_TOLEFT         = 0x0400;
-		public const int wxLIST_HITTEST_TORIGHT        = 0x0800;
+		public static const int wxLIST_HITTEST_ABOVE          = 0x0001;
+		public static const int wxLIST_HITTEST_BELOW          = 0x0002;
+		public static const int wxLIST_HITTEST_NOWHERE        = 0x0004;
+		public static const int wxLIST_HITTEST_ONITEMICON     = 0x0020;
+		public static const int wxLIST_HITTEST_ONITEMLABEL    = 0x0080;
+		public static const int wxLIST_HITTEST_ONITEMRIGHT    = 0x0100;
+		public static const int wxLIST_HITTEST_ONITEMSTATEICON= 0x0200;
+		public static const int wxLIST_HITTEST_TOLEFT         = 0x0400;
+		public static const int wxLIST_HITTEST_TORIGHT        = 0x0800;
 	
-		public const int wxLIST_AUTOSIZE			= -1;
-		public const int wxLIST_AUTOSIZE_USEHEADER	= -2;
+		public static const int wxLIST_AUTOSIZE			= -1;
+		public static const int wxLIST_AUTOSIZE_USEHEADER	= -2;
 		
 		//---------------------------------------------------------------------
 	

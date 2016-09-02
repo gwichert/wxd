@@ -93,7 +93,7 @@ public import wx.Control;
 			wxSP_WRAP             = 0x2000,
 		}
 	
-		public const string wxSPIN_BUTTON_NAME = "SpinButton";
+		public static const string wxSPIN_BUTTON_NAME = "SpinButton";
 		//---------------------------------------------------------------------
         
 		

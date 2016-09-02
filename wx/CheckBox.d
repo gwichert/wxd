@@ -44,10 +44,10 @@ public import wx.Control;
 	alias CheckBox wxCheckBox;
 	public class CheckBox : Control
 	{
-		public const int wxCHK_2STATE           = 0x0000;
-		public const int wxCHK_3STATE           = 0x1000;
-		public const int wxCHK_ALLOW_3RD_STATE_FOR_USER           = 0x2000;
-		public const string wxCheckBoxNameStr = "checkbox";
+		public static const int wxCHK_2STATE           = 0x0000;
+		public static const int wxCHK_3STATE           = 0x1000;
+		public static const int wxCHK_ALLOW_3RD_STATE_FOR_USER           = 0x2000;
+		public static const string wxCheckBoxNameStr = "checkbox";
 	
 		public this(IntPtr wxobj) 
 			{ super(wxobj);}

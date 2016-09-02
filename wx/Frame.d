@@ -71,18 +71,18 @@ public import wx.Icon;
 	/// A frame can contain any window that is not a frame or dialog.
 	public class Frame : Window
 	{
-		public const int wxFULLSCREEN_NOMENUBAR   = 0x0001;
-		public const int wxFULLSCREEN_NOTOOLBAR   = 0x0002;
-		public const int wxFULLSCREEN_NOSTATUSBAR = 0x0004;
-		public const int wxFULLSCREEN_NOBORDER    = 0x0008;
-		public const int wxFULLSCREEN_NOCAPTION   = 0x0010;
-		public const int wxFULLSCREEN_ALL         = 
+		public static const int wxFULLSCREEN_NOMENUBAR   = 0x0001;
+		public static const int wxFULLSCREEN_NOTOOLBAR   = 0x0002;
+		public static const int wxFULLSCREEN_NOSTATUSBAR = 0x0004;
+		public static const int wxFULLSCREEN_NOBORDER    = 0x0008;
+		public static const int wxFULLSCREEN_NOCAPTION   = 0x0010;
+		public static const int wxFULLSCREEN_ALL         = 
                     wxFULLSCREEN_NOMENUBAR | wxFULLSCREEN_NOTOOLBAR |
                     wxFULLSCREEN_NOSTATUSBAR | wxFULLSCREEN_NOBORDER |
                     wxFULLSCREEN_NOCAPTION;
 		    
 		//-----------------------------------------------------------------------------
-		const string wxFrameNameStr="frame";
+		const static string wxFrameNameStr="frame";
 
 		public this(IntPtr wxobj)
 			{ super(wxobj); }
